@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>scroller</keyword>
+<keyword>rich:Datascroller</keyword>
+<keyword>HtmlDatascroller</keyword>
+<keyword>tables</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.Datascroller</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlDatascroller</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.Datascroller</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.DatascrollerRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.DatascrollerTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create the simplest variant of <property>dataScroller</property> on a page, use the
+     following syntax:</para>
+    <programlisting role="XML"><![CDATA[...
+<h:dataTable id="table">
+...
+</h:dataTable>
+...
+<rich:datascroller for="table"/>
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Dynamical creation from Java code</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlDatascroller myScroll = new org.richfaces.component.html.HtmlDatascroller();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+    <para>The <emphasis role="bold"><property>&lt;rich:Datascroller&gt;</property></emphasis> component provides table scrolling functionality the same as 
+    tomahawk scroller but with AJAX requests usage.</para>
+    <para>The component should be placed into footer of the parent table or be bound to it with the
+    <emphasis role="italic"><property>&quot;for&quot;</property></emphasis> attribute.</para>
+    <para>The table should also have the defined <emphasis role="italic"><property>&quot;rows&quot;</property></emphasis> attribute limiting the quantity of inputted
+     table rows.</para>
+     <para>The scroller could limit the maximum quantity of rendered links on the table pages with the 
+     help of the <emphasis role="italic"><property>&quot;maxPages&quot;</property></emphasis> attribute.</para>
+     <para>Component  provides two controllers groups for switching:</para>
+     <itemizedlist>
+		<listitem>Page numbers for switching onto a particular page</listitem>
+		<listitem>The controls of fast switching:  &quot;first&quot;, &quot;last&quot;, &quot;next&quot;,
+		 &quot;previous&quot;, &quot;fastforward&quot;, &quot;fastrewind&quot;</listitem>
+		 </itemizedlist>
+		 <para>The controls of fast switching are created adding the facets component with the
+		  corresponding name:</para>
+		  <programlisting role="XML"><![CDATA[ 
+        <rich:datascroller for="table" maxPages="10">
+		<f:facet name="first">
+			<h:outputText value="First"/>
+		</f:facet>
+		<f:facet name="last">
+			<h:outputText value="Last"/>
+		</f:facet>
+	    </rich:Datascroller>
+]]></programlisting>
+<figure>
+        <title>Datascroller controls</title>    
+    <mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/datascroller2.gif"/>
+        </imageobject>
+    </mediaobject>
+    </figure>
+    <para>The screenshot shows one controller from each group.</para>
+    <para>For the <property>&quot;fastforward&quot;</property>/<property>&quot;rewind&quot;</property> controls customization the additional <emphasis role="italic"><property>&quot;fastStep&quot;</property></emphasis> attribute is used. 
+    The attribute indicates pages quantity to switch onto when fast scrolling is used. </para>
+		 </section>
+  <section>
+    <title>Look and Feel Customization</title>
+    <para>For skinnability implementation the components use a <emphasis 
+role="italic"><property>style class redefinition method</property>.</emphasis></para>
+    <para>Default style classes are mapped on <emphasis 
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<para>To redefine appearance of all dataScrollers at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the dataScroller to your page stylesheets</listitem>
+         </itemizedlist>
+  </section>
+  <section>
+    <title>Skin parameters redefinition</title>
+    <table>
+      <title>Skin Params for the wrapper element</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>tableBackgroundColor</entry>
+            <entry>background-color</entry>
+          </row>
+          <row>
+            <entry>panelBorderColor</entry>
+            <entry>border-color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    
+    <table>
+      <title>Skin Parameters for Button element</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>additionalBackgroundColor</entry>
+            <entry>background-color</entry>
+          </row>
+          <row>
+            <entry>panelBorderColor</entry>
+            <entry>border-color</entry>
+          </row>
+          <row>
+            <entry>generalFamilyFont</entry>
+            <entry>font-family</entry>
+          </row>
+          <row>
+            <entry>generalSizeFont</entry>
+            <entry>font-size</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    
+    <table>
+      <title>Skin Parameters for Active Button element</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>generalTextColor</entry>
+            <entry>border-top-color</entry>
+          </row>
+          <row>
+            <entry>generalTextColor</entry>
+            <entry>color</entry>
+          </row>
+          <row>
+            <entry>generalFamilyFont</entry>
+            <entry>font-family</entry>
+          </row>
+          <row>
+            <entry>generalSizeFont</entry>
+            <entry>font-size</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    
+    <table>
+      <title>Skin Parameters for Inactive Button element</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>headerBackgroundColor</entry>
+            <entry>border-top-color</entry>
+          </row>
+          <row>
+            <entry>headerBackgroundColor</entry>
+            <entry>color</entry>
+          </row>
+          <row>
+            <entry>generalFamilyFont</entry>
+            <entry>font-family</entry>
+          </row>
+          <row>
+            <entry>generalSizeFont</entry>
+            <entry>font-size</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    
+    <figure>
+      <title>Datascroller style classes</title>    
+      <mediaobject> 
+        <imageobject>
+          <imagedata fileref="img/datascroller3.gif"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    
+    <para>On the screenshot, there are classes names that define specified elements.</para>
+    
+    <table>
+      <title>Component skin class</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Class name</entry>
+            <entry>Class description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>rich-dtascroller-table</entry>
+            <entry>Wrapping class for component</entry>
+          </row>
+          <row>
+            <entry>Rich-datascr-button</entry>
+            <entry>Customization class for button</entry>
+          </row>
+        </tbody>
+        
+      </tgroup>
+    </table>
+    <table>
+      <title>Additional classes for buttons</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Class name</entry>
+            <entry>Class description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>Rich-datascr-act</entry>
+            <entry>Customization class for active button</entry>
+          </row>
+          <row>
+            <entry>Rich-datascr-inact</entry>
+            <entry>Customization class for inactive button</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <para>To redefine an appearance of all scrollers on a page, just redefine one of this classes</para>
+    <para>And to redefine the appearance of the particular scroller, one may use corresponding class attributes on the component.</para>
+  </section>
+  
+		 </section>
+    

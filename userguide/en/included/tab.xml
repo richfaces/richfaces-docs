@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>rich:tab</keyword>
+<keyword>HtmlTab</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.Tab</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlTab</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.Tab</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.TabRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.TabTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create it on a page, use the following syntax: </para>
+    <programlisting role="XML"><![CDATA[...
+	<rich:tabPanel>
+		<!--Set of Tabs inside-->
+		<rich:tab>
+		...
+		</rich:tab>
+	</rich:tabPanel>
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlTab myTab = new org.richfaces.component.html.HtmlTab();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+    <para>The main component function is to define a content group that is rendered and processed when the <property>tab</property> is active, i.e. click on a <property>tab</property> causes switching onto a <property>tab</property> containing content corresponded to this <property>tab</property>.</para>
+<para>A marker on a <property>tab</property> header defined with the <emphasis role="italic"><property>&quot;label&quot;</property></emphasis> attribute. Moreover, each <property>tab</property> could be disabled (switching on this <property>tab</property> is impossible) with the <emphasis role="italic"><property>&quot;disable&quot;</property></emphasis> attribute.</para>
+    <programlisting role="XML"><![CDATA[<rich:tabPanel width="20%"> 
+		<rich:tab label="Tab">
+			<h:outputText value="Active Tab content"/>
+		</rich:tab>
+		<rich:tab label="Disabled Tab" disabled="true">
+		...
+		</rich:tab>
+		<rich:tab label="Next Enabled Tab">
+		...
+		</rich:tab>
+	</rich:tabPanel>
+]]></programlisting>
+<para>With this example it&apos;s possible to generate the <property>tab panel</property>
+ with the second disabled and two active <property>tabs</property> (see the picture).</para>
+<figure>
+  <title>Tab Panel with disabled tab</title>
+<mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/tab2.gif"/>
+        </imageobject>
+</mediaobject>
+  </figure>
+<para>Switching mode could be defined not only for the whole panel <property>tab</property>, but also 
+for each particular <property>tab</property>, i.e. switching onto one <property>tab</property> could be
+ performed right on the client with the corresponding JavaScript and onto another 
+ <property>tab</property> with an AJAX request on the server. <property>Tab</property> switching modes
+  are the same as <property>tabPanel</property> ones.</para>
+<para>Each <property>tab</property> also has an attribute name (alias for <emphasis role="italic"><property>&quot;id&quot;</property></emphasis> attribute). Using this attribute value it&apos;s possible e.g. to set an active <property>tab</property> on a model level specifying this name in the corresponding attribute of the whole <property>tab</property>.</para>
+<para>Except the specific component attributes it has all necessary attributes for JavaScript event definition.</para>
+<itemizedlist>
+        <listitem>
+          onmouseover
+        </listitem>
+        <listitem>
+          onmouseout
+        </listitem>
+		<listitem>
+		  etc.
+		</listitem>
+      </itemizedlist>
+    </section>
+    <section>
+    <title>Look and Feel Customization</title>
+    <para>For skinnability implementation the components use <emphasis 
+
+role="italic"><property>style class redefinition method</property>.</emphasis> 
+Default style classes are mapped on <emphasis 
+
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<note><title>Note:</title>
+	A panel appearance and content is defined with a <property>tab</property> panel i.e. on the <property>tab</property> level it&apos;s possible to define only an appearance of this <property>tab</property> header. 
+	</note>
+	<para>To redefine appearance of all tabs at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the tab to your page stylesheets</listitem>
+         </itemizedlist>
+	  
+</section>
+    <section>
+    <title>Definition Custom Style Classes</title>
+       
+	<para>The style peculiarities of a particular <property>Tab</property> variant could be changed with specification of your
+	 own StyleClasses attributes.</para>
+	 <para>It&apos;s necessary to define a class according to the corresponding name, so as an 
+
+appearance of all slider on a page is changed at once.</para>
+	</section>
+</section>

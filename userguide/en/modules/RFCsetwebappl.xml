@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="SettingAWebApplication" xreflabel="SettingAWebApplication">
+  <?dbhtml filename="SettingAWebApplication.html" ?>
+
+  <chapterinfo>
+    <keywordset>
+      <keyword>Web Application</keyword>
+
+      <keyword>Rich Faces</keyword>
+
+      <keyword>Ajax4jsf</keyword>
+    </keywordset>
+  </chapterinfo>
+
+  <title>Setting Up a Web Application to Use Rich Faces</title>
+
+  <para>Using the Rich Faces library doesn&apos;t require a major change of
+  approach in how you set up a Web application, but a few steps are necessary,
+  mostly for setting up the Ajax4jsf framework. When you just add RichFaces
+  capability to an existing project, the behavior of the application doesn't
+  change.</para>
+
+  <section id="Installation">
+    <?dbhtml filename="Installation.html" ?>
+
+    <title>Installation</title>
+
+    <itemizedlist>
+      <listitem>
+         Copy the 
+
+        <emphasis
+        role="italic"><property>&quot;richfaces-3.0.x.jar&quot;</property></emphasis>
+
+         file into the 
+
+        <emphasis role="italic">
+          <property>&quot;WEB-INF/lib&quot;</property>
+        </emphasis>
+
+         folder of your application. 
+      </listitem>
+    </itemizedlist>
+
+    <para>Ajax4jsf is then set up as usual:</para>
+
+    <itemizedlist>
+      <listitem>
+         Copy the 
+
+        <emphasis role="italic"><property>&quot;ajax4jsf.jar&quot;</property></emphasis>
+
+         and 
+
+        <emphasis
+        role="italic"><property>&quot;oscache2.3.2.jar&quot;</property></emphasis>
+
+         files into the 
+
+        <emphasis role="italic">
+          <property>&quot;WEB-INF/lib&quot;</property>
+        </emphasis>
+
+         folder of your application. 
+      </listitem>
+
+      <listitem>
+         Insert this filter setting into the web.xml file for the application: 
+      </listitem>
+    </itemizedlist>
+
+    <programlisting role="XML">&lt;context-param&gt; 
+  &lt;param-name&gt;org.ajax4jsf.SKIN&lt;/param-name&gt; 
+  &lt;param-value&gt;blueSky&lt;/param-value&gt; 
+ &lt;/context-param&gt; 
+ &lt;filter&gt; 
+  &lt;display-name&gt;Ajax4jsf Filter&lt;/display-name&gt; 
+  &lt;filter-name&gt;ajax4jsf&lt;/filter-name&gt; 
+  &lt;filter-class&gt;org.ajax4jsf.Filter&lt;/filter-class&gt; 
+ &lt;/filter&gt; 
+ &lt;filter-mapping&gt; 
+  &lt;filter-name&gt;ajax4jsf&lt;/filter-name&gt; 
+   &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
+   &lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;
+   &lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;
+   &lt;dispatcher&gt;INCLUDE&lt;/dispatcher&gt;
+ &lt;/filter-mapping&gt;</programlisting>
+
+    <para>Then, for each page where you need to use a RichFaces component, add
+    the appropriate line to the top of the page.</para>
+
+    <itemizedlist>
+      <listitem>
+         For JSP pages: 
+      </listitem>
+    </itemizedlist>
+
+    <programlisting role="XML">  &lt;%@ taglib uri="http://richfaces.ajax4jsf.org/rich" prefix="rich"%&gt;</programlisting>
+
+    <itemizedlist>
+      <listitem>
+         For XHTML pages: 
+      </listitem>
+    </itemizedlist>
+
+    <programlisting role="XML">&lt;xmlns:rich="http://richfaces.ajax4jsf.org/rich"&gt;</programlisting>
+  </section>
+
+  &wadParams;
+</chapter>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+  <sectioninfo>
+    <keywordset>
+      <keyword>drag and drop</keyword>
+
+      <keyword>rich:dndParam</keyword>
+
+      <keyword>HtmlDndParam</keyword>
+
+      <keyword>drop Zone</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <section>
+    <table>
+      <title>Component identification parameters</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Name</entry>
+
+            <entry>Value</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+
+            <entry>org.richfaces.DndParam</entry>
+          </row>
+
+          <row>
+            <entry>component-class</entry>
+
+            <entry>org.richfaces.component.html.HtmlDndParam</entry>
+          </row>
+
+          <row>
+            <entry>tag-class</entry>
+
+            <entry>org.richfaces.taglib.DndParamTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+
+    <para>To create it on a page, place the component as nested to one of Drag
+    and Drop components.</para>
+
+    <programlisting role="XML">         ...
+	&lt;rich:dragSupport dragType="file"&gt;
+			&lt;rich:dndParam name="testDrag" value="testDragValue" 
+				type="dragLabel"/&gt;
+	&lt;/rich:dragSupport&gt;
+		...
+</programlisting>
+  </section>
+
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+
+    <programlisting role="JAVA">...
+org.richfaces.component.html.HtmlDndParam myDparam = new org.richfaces.component.html.HtmlDndParam();
+...
+</programlisting>
+  </section>
+
+  <section>
+    <title>Details of Usage</title>
+
+    <para><property>dndParam</property> is used during drag-and-drop
+    operations to pass parameters to an indicator. At first, a parameter type
+    is defined with the type attribute (to specify parameter functionality),
+    then a parameter name could be defined with the name and value attribute.
+    Although, it&apos;s possible to use nested content defined inside
+    <property>dndParam</property> for value definition, instead of the
+    attribute.</para>
+
+    <para>Variants of usage:</para>
+
+    <itemizedlist>
+      <listitem>Parameters passing for a drag icon when an indicator is in
+      drag.</listitem>
+    </itemizedlist>
+
+    <para>In this case, <property>dndParam</property> is of a dragMarker type
+    and is defined in the following way:</para>
+
+    <programlisting role="JSP">&lt;rich:dragSupport ...&gt; 
+  &lt;rich:dndParam type="dragMarker" name="dragging"&gt; 
+   &lt;h:graphicImage value="/img/product1_small.png"/&gt; 
+  &lt;/rich:dndParam&gt; 
+
+  &lt;h:graphicImage value="product1.png"/&gt; 
+&lt;/rich:dragSupport&gt;
+</programlisting>
+
+    <para>Here <property>dndParam</property> defines an icon that is used by
+    an indicator when a drag is on the place of a default icon (e.g. a
+    minimized image of a dragable element)</para>
+
+    <itemizedlist>
+      <listitem>Parameters passing for an indicator informational part during
+      a drag.</listitem>
+    </itemizedlist>
+
+    <para>In this case <property>dndParam</property> is of a dragLabel type
+    and is defined in the following way:</para>
+
+    <programlisting role="JSP">&lt;rich:dragSupport ...&gt; 
+          &lt;rich:dndParam type="dragLabel" name="label" value="#{msg.subj}"/&gt;
+            ...
+&lt;/rich:dragSupport&gt;
+</programlisting>
+
+    <para>The parameter is transmitted into an indicator for usage in an
+    informational part of the dragIndicator component (inside an indicator a
+    call to {label} happens)</para>
+
+    <itemizedlist>
+      <listitem>Parameters passing happens when dragged content is brought
+      onto some zone with dropSupport</listitem>
+    </itemizedlist>
+
+    <para>In this case <property>dndParam</property> is of a dropMarker and is
+    defined in the following way:</para>
+
+    <programlisting role="JSP">&lt;rich:dropSupport ...&gt; 
+        &lt;rich:dndParam type="dropMarker" name="comp" type="dropMarker"&gt; 
+               &lt;h:graphicImage height="16" width="16" value="/images/comp.png"/&gt; 
+        &lt;/rich:dndParam&gt;
+	      ...
+&lt;/rich:dropSupport &gt;
+</programlisting>
+
+    <para>Here, <property>dndParam</property> passes icons into an indicator,
+    if dragged content of a comp type is above the given drop zone that
+    processes it on the next drop event.</para>
+  </section>
+</section>

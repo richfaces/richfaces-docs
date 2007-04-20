@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>rich:columnGroup</keyword>
+<keyword>HtmlColumnGroup</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.ColumnGroup</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlColumnGroup</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.ColumnGroup</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.ColumnGroupRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.ColumnGroupTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create the simplest variant of <property>columnGroup</property> on a page which you can see at the screenshot, use the following syntax:</para>
+    <programlisting role="XML"><![CDATA[...
+<rich:dataTable value="#{capitalsBean.capitals}" var="capitals" 
+	ajaxKeys="#{bean.ajaxSet}" binding="#{bean.tabe}" id="table">
+       <!--...//Set of columns and header/footer facets-->
+	<rich:column colspan="3">
+	<f:facet name="header">State Flag</f:facet>
+	<h:graphicImage value="#{cap.stateFlag}"/>
+	</rich:column>
+	<rich:columnGroup>
+       <!--...//Set of columns and header/footer facets-->
+	</rich:columnGroup>	
+</rich:dataTable>
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Dynamical Creation from Java Code</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlColumnGroup myRow = new org.richfaces.component.html.HtmlColumnGroup();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+    <para>The <property>columnGroup</property> component combines columns set wrapping them into the <emphasis role="bold"><property>&lt;tr&gt;</property></emphasis> element and outputting them
+     into one row. Columns are combined in a group the same way as when the <emphasis role="italic"><property>&quot;breakBefore&quot;</property></emphasis> attribute is used for 
+     columns to add a moving to the next rows, but the first variant is clearer from a source code. Hence, the 
+     following simple examples are very same.</para>
+     <programlisting role="XML"><![CDATA[
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist"> 
+	<rich:column colspan="3">
+	<f:facet name="header">State Flag</f:facet>
+	<h:graphicImage value="#{cap.stateFlag}"/>
+	</rich:column>
+		<rich:columnGroup>
+			<rich:column> 
+			<h:outputText value="#{cap.state}"/>
+			</rich:column>
+			<rich:column >
+			<h:outputText value="#{cap.name}"/>
+			</rich:column>
+			<rich:column >
+			<h:outputText value="#{cap.timeZone}"/>
+			</rich:column>
+		</rich:columnGroup>	
+</rich:dataTable>
+]]></programlisting>
+<para>And representation without a grouping:</para>
+<programlisting role="XML"><![CDATA[
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist"> 
+	    <rich:column colspan="3">
+		<f:facet name="header">State Flag</f:facet>
+		<h:graphicImage value="#{cap.stateFlag}"/>
+	    </rich:column>
+	    <rich:column breakBefore="true">...</rich:column>
+		<rich:column >...</rich:column>
+		<rich:column >...</rich:column>
+</rich:dataTable>
+]]></programlisting>
+<para>The result is:</para>
+<figure>
+        <title>Generated columnGroup component</title>
+      <mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/columngroup2.gif"/>
+        </imageobject>
+    </mediaobject>
+    </figure>
+    <para>It&apos;s also possible to use the component for output of complex headers in a table. For example adding
+     of a complex header to a facet for the whole table looks the following way:</para>
+     <programlisting role="XML"><![CDATA[
+<f:facet name="header">
+	<rich:columnGroup>
+		<rich:column rowspan="2">
+		<h:outputText value="State Flag"/>
+		</rich:column>
+		<rich:column colspan="3">
+		<h:outputText value="State Info"/>
+		</rich:column>
+		<rich:column breakBefore="true">
+		<h:outputText value="State Name"/>
+		</rich:column>
+		<rich:column>
+		<h:outputText value="State Capital"/>
+		</rich:column>
+		<rich:column>
+		<h:outputText value="Time Zone"/>
+		</rich:column>
+	</rich:columnGroup>
+</f:facet>
+]]></programlisting>
+<para>Generated on a page as:</para>
+<figure>
+        <title>ColumnGroup with complex headers</title>
+      <mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/columngroup3.gif"/>
+        </imageobject>
+    </mediaobject>
+    </figure>     
+    </section>
+    <section>
+    <title>Look and Feel Customization</title>
+    <para>For skinnability implementation the components use a <emphasis 
+role="italic"><property>style class redefinition method</property></emphasis>.</para>
+    <para>Default style classes are mapped on <emphasis 
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<para>To redefine appearance of all columnGroups at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the columnGroup to your page stylesheets</listitem>
+         </itemizedlist>
+	  </section>
+    <section>
+    <title>Definition custom style classes</title>
+	    <para>On the screenshot there are classes names defining specified elements.</para>
+    
+	<para>To redefine an appearance of all <property>columnGroups</property> on a page, redefine the corresponding class in the 
+	CSS file used with the page.</para>
+	 <para>To redefine a style of a particular page, use component class attributes which list is the same 
+	 as the columnGroup one and is known to you.</para>
+	</section>
+</section>

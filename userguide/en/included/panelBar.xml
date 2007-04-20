@@ -1,0 +1,174 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>bar</keyword>
+<keyword>rich:panelbar</keyword>
+<keyword>HtmlPanelBar</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.PanelBar</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlPanelBar</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.PanelBar</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.PanelBarRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.PanelBarTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create it on a page, use the following syntax: </para>
+    <programlisting role="XML"><![CDATA[...
+	<rich:panelBar>
+			<!--//………… -->
+			<rich:panelBarItem label="Canon">
+				...
+			</rich:panelBarItem>
+			<rich:panelBarItem label="Nikon">
+				...
+			</rich:panelBarItem>
+	</rich:panelBar>
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlPanelBar myBar = new org.richfaces.component.html.HtmlPanelBar();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+	<para>As it was mentioned above, <property>panelBar</property> is used for grouping any content on the client, thus its customization deals only with specification of sizes and styles for rendering.</para>
+    <para><emphasis 
+
+role="italic"><property>&quot;width&quot;</property></emphasis> and <emphasis 
+
+role="italic"><property>&quot;height&quot;</property></emphasis> (both are 100% on default) attributes stand apart.</para>
+	<para>Style attributes are described further.</para>
+    <para><property>panelBar</property> could contain any number of child <property>panelBarItem</property> components inside, which content is uploaded onto the client and headers are controls to open the corresponding child element.</para>
+  </section>
+    <section>
+    <title>Look and Feel Customization</title>
+    <para>For skinnability implementation the components use a <emphasis 
+role="italic"><property>style class redefinition method</property>.</emphasis></para>
+    <para>Default style classes are mapped on <emphasis 
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<para>To redefine appearance of all panelBars at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the panelBar to your page stylesheets (<property>PanelBar</property>
+ itself has no properties mapped on a skin, it&apos;s described for its children).</listitem>
+</itemizedlist>
+	</section>
+	<section>
+    <title>Definition custom style classes:</title>
+	<para>There is one predefined class for the <property>panelBar</property>, which is applicable
+	to the whole component, specifying paddings, borders, and etc.</para>
+	  <figure>
+	    <title>Custom style class of panelBar</title>
+	  
+	<mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/panelBar2.gif"/>
+        </imageobject>
+	</mediaobject>
+	  </figure>
+	<table>
+	  <title>Predefined component skin class</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Class name</entry>
+                  <entry>Class description</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>rich-panelbar</entry>
+            <entry>applicable for the whole panelBar (padding, border)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+	<para>Other classes responsible for elements rendering  are described for child 
+	panelBarItem elements and could be found in the components chapters.</para>
+	<para>To change style peculiarities of the particular <property>panelBar</property>
+	 and child elements, define your own style classes in the corresponding <property>panelBar</property> attributes.</para>
+<table>
+	  <title>Style component classes</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>A class attribute</entry>
+                  <entry>A component element defined by an attribute</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>styleClass</entry>
+            <entry>applicable to the whole panel together with headers</entry>
+          </row>
+		  <row>
+            <entry>headerClass</entry>
+            <entry>applicable to headers elements</entry>
+          </row>
+          <row>
+            <entry>contentClass</entry>
+            <entry>applicable to panels</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+	    <para><emphasis role="bold">Example:</emphasis></para>
+	<para>CSS code piece used on the page:</para>
+<programlisting role="HTML"><![CDATA[...
+	. rich-panelbar{
+		padding:10px;
+	}
+
+	.myClass{
+		font-style:italic;
+	}
+...]]></programlisting>
+<para>The component is defined in the following way:</para>
+<para><emphasis role="bold">Example:</emphasis></para>
+<programlisting role="XML"><![CDATA[<rich:panelBar contentClass="myClass">
+            <rich:panelBarItem>
+		             ...
+            </rich:panelBarItem>
+</rich:panelBar>
+]]></programlisting>
+<para>Hence, paddings for all <property>panelBars</property> are changed on a page as well as a 
+font for particular <property>panelBarItems</property> content.</para>
+</section>
+</section>

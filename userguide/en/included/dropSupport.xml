@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+  <sectioninfo>
+    <keywordset>
+      <keyword>rich:dropSupport</keyword>
+
+      <keyword>HtmlDropSupport</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <section>
+    <table>
+      <title>Component identification parameters</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Name</entry>
+
+            <entry>Value</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+
+            <entry>org.richfaces.DropSupport</entry>
+          </row>
+
+          <row>
+            <entry>component-class</entry>
+
+            <entry>org.richfaces.component.html.DropSupport</entry>
+          </row>
+
+          <row>
+            <entry>component-family</entry>
+
+            <entry>org.richfaces.DropSupport</entry>
+          </row>
+
+          <row>
+            <entry>renderer-type</entry>
+
+            <entry>org.richfaces.DropSupportRenderer</entry>
+          </row>
+
+          <row>
+            <entry>tag-class</entry>
+
+            <entry>org.richfaces.taglib.DropSupportTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+
+    <para>This simple example shows how to make a panel component a potential
+    drop target for drag-and-drop operations using "text" elements as the
+    dragged items.</para>
+
+    <programlisting role="XML">...
+    &lt;rich:panel&gt;
+		&lt;rich:dropSupport acceptedTypes="text"/&gt;
+	&lt;/rich:panel&gt;
+...
+</programlisting>
+  </section>
+
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+
+    <programlisting role="JAVA">...
+ org.richfaces.component.html.HtmlDropSupport myDragZone = new org.richfaces.component.html.HtmlDropSupport();
+...
+</programlisting>
+  </section>
+
+  <section>
+    <title>Details of Usage</title>
+
+    <para>As shown in the example, the key attribute for <emphasis role="bold">
+        <property>&lt;rich:dropSupport&gt;</property>
+      </emphasis> is <emphasis role="italic">
+        <property>"acceptedTypes"</property>
+      </emphasis>. This attribute defines the types of draggable items that
+    can be dropped onto the designated drop zone.</para>
+
+    <para>The second most important attribute for <emphasis role="bold">
+        <property>&lt;rich:dropSupport&gt;</property>
+      </emphasis> is <emphasis role="italic">
+        <property>"typeMapping"</property>
+      </emphasis>. This attribute maps a specific type among the acceptable
+    types for draggable items to a specific <emphasis role="bold">
+        <property>&lt;rich:dndParam&gt;</property>
+      </emphasis> child element under <emphasis role="bold">
+        <property>&lt;rich:dropSupport&gt;</property>
+      </emphasis>.</para>
+
+    <programlisting role="XML">...
+    &lt;rich:dropSupport acceptedTypes="[iconsDragged, textDragged]" typeMapping="{iconsDragged: DropIcon}"&gt; 
+        &lt;rich:dndParam name="DropIcon"&gt;
+                   &lt;h:graphicImage value="/images/drop-icon.png"/&gt;
+        &lt;/rich:dndParam&gt;
+...
+</programlisting>
+
+    <para>In this example, dropping a draggable item of an &quot;iconsDragged&quot; type
+    will trigger the use a parameter named &quot;DropIcon&quot; in the event processing
+    after a drop event. (Also, an AJAX request is sent, and the action and
+    dropListener defined for the component are called.)</para>
+
+    <para>Here is an example of moving records between tables. The example
+    describes all the pieces for drag-and-drop. (To get extra information on
+    these components, read the sections for these components.)</para>
+
+    <para>As draggable items, this table contains a list of such items
+    designated as being of type "text":</para>
+
+    <programlisting role="XML">...
+    &lt;rich:dataTable value="#{capitalsBean.capitals}" var="caps"&gt;
+		&lt;f:facet name="caption"&gt;Capitals List&lt;/f:facet&gt;
+		&lt;h:column&gt;
+		&lt;a4j:outputPanel&gt;
+			&lt;rich:dragSupport dragIndicator=":form:ind" dragType="text"&gt;
+				&lt;a4j:actionparam value="#{caps.name}" name="name"/&gt;
+			&lt;/rich:dragSupport&gt;
+			&lt;h:outputText value="#{caps.name}"/&gt; 
+		&lt;/a4j:outputPanel&gt;
+		&lt;/h:column&gt;
+	&lt;/rich:dataTable&gt;
+...
+</programlisting>
+
+    <para>As a drop zone, this panel will accept draggable items of type
+    "text" and then rerender an element with the ID of "box":</para>
+
+    <programlisting role="XML">...
+    &lt;rich:panel style="width:100px;height:100px;"&gt;
+		&lt;f:facet name="header"&gt;Drop Zone&lt;/f:facet&gt;
+		&lt;rich:dropSupport acceptedTypes="text" reRender="box" 
+			dropListener="#{capitalsBean.addCapital2}"/&gt;
+	&lt;/rich:panel&gt;
+...
+</programlisting>
+
+    <para>As a part of the page that can be updated in a partial page update,
+    this table has an ID of "box":</para>
+
+    <programlisting role="XML">...
+    &lt;rich:dataTable value="#{capitalsBean.capitals2}" var="cap2" id="box"&gt;
+		&lt;f:facet name="caption"&gt;Capitals chosen&lt;/f:facet&gt;
+		&lt;h:column&gt;
+			&lt;h:outputText value="#{cap2.name}"/&gt;
+		&lt;/h:column&gt;
+	&lt;/rich:dataTable&gt;
+...</programlisting>
+
+    <para>And finally, as a listener, this listener will implement the dropped
+    element:</para>
+
+    <programlisting role="JAVA">...
+ public void addCapital2(DropEvent event) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		Capital cap = new Capital();
+        cap.setName(context.getExternalContext().getRequestParameterMap().
+        get("name").toString());
+		capitals2.add(cap);
+	}
+...
+</programlisting>
+
+    <para>Here is the result after a few drops of items from the first
+    table:</para>
+
+    <figure>
+      <title>Results of drop actions</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/dropSupport2.gif"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>In this example, items are dragged element-by-element from the
+    rendered list in the first table and dropped on a panel in the middle.
+    After each drop, a drop event is generated and a common AJAX request is
+    performed that renders results in the third table.</para>
+
+    <para>As with every AJAX action component, <emphasis role="bold">
+        <property>&lt;rich:dropSupport&gt;</property>
+      </emphasis> has all the common attributes (<emphasis
+    role="italic"><property>"timeout"</property>,</emphasis> <emphasis
+    role="italic"><property>"limitToList"</property>,</emphasis> <emphasis
+    role="italic"><property>"reRender"</property>,</emphasis> etc.) for AJAX
+    request customization. To get detailed information on these attributes,
+    read the <ulink
+    url="http://labs.jboss.com/file-access/default/members/jbossajax4jsf/freezone/docs/devguide/index.html">Ajax4jsf
+    Developer Guide</ulink>.</para>
+
+    <para>Finally, the component has the following extra attributes for event
+    processing on the client:</para>
+
+    <itemizedlist>
+      <listitem>ondragenter</listitem>
+
+      <listitem>ondragexit</listitem>
+
+      <listitem>ondrop</listitem>
+
+      <listitem>ondropend</listitem>
+    </itemizedlist>
+
+    <para>Developers can use their own custom JavaScript functions to handle
+    these events.</para>
+  </section>
+
+  <section>
+    <title>Look and Feel Customization</title>
+
+    <para>The component doesn&apos;t have its own visual presentation.</para>
+  </section>
+</section>

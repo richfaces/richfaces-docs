@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>grid</keyword>
+<keyword>rich:dataGrid</keyword>
+<keyword>HtmlDataGrid</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+    <table>
+      <title>Component identification parameters </title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.DataGrid</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlDataGrid</entry>
+          </row>
+          <row>
+          <entry>component-family</entry>
+          <entry>org.richfaces.DataGrid</entry>
+          </row>
+          <row>
+          <entry>renderer-type</entry>
+          <entry>org.richfaces.DataGridRenderer</entry>
+          </row>          
+          <row>
+            <entry>tag-class</entry>
+            <entry>org.richfaces.taglib.DataGridTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create the simplest variant of <property>dataGrid</property> on a page, use the following syntax:</para>
+    <programlisting role="XML"><![CDATA[...
+	<rich:dataGrid value="#{bean.capitals}" var="caps" columns="4">
+      <h:outputText value="#{caps.name}"/>
+	</rich:dataGrid>
+...
+]]></programlisting>
+  </section>
+  <section>
+  <title>Dynamical Creation from Java Code</title>
+  <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlDataGrid myList = new org.richfaces.component.html.HtmlDataGrid();
+...
+]]></programlisting>
+</section>
+<section>
+<title>Details of Usage</title>
+<para>The component takes a list from a model and outputs it the same way as with <emphasis role="bold"><property>&lt;h:PanelGrid&gt;</property></emphasis>
+ for inline data. To define grid properties and styles, use the same definitions as for <emphasis role="bold"><property>&lt;h:panelGrid&gt;</property>.</emphasis>
+  The component also has similar to ordinary UIData components output ways.</para>
+<itemizedlist>
+<listitem>A header and footer output</listitem>
+<listitem>Limitation of the output elements (the  <emphasis role="italic"><property>&quot;elements&quot;</property></emphasis> attribute) and definition of the first
+ element</listitem>
+ <listitem>Binding to scrolling components of list pages</listitem>
+ </itemizedlist>
+ <para>The component is created basing on the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> component and as a result the component could
+  be partially updated with AJAX.</para>
+  <para>Here is an example for the first screenshot:</para>
+  <programlisting role="XML"><![CDATA[...
+    <rich:dataGrid value="#{bean.capitals}" var="caps" ajaxKeys="#{listBean.list}" 
+            binding="#{listBean.dataList}" id="grid" elements="20" columns="4">
+			<h:graphicImage value="#{cap.stateFlag}"/>
+			<h:outputText value="#{cap.name}"/>
+			<h:outputText value="#{cap.state}"/>
+			<h:outputText value="#{cap.timeZone}"/>
+	</rich:dataGrid>
+...
+<a4j:commandButton action"#{listBean.action}" reRender="grid" value="Submit"/>
+...
+]]></programlisting>
+<para>In the example there is an output of a grid with four columns and output limitation to 20 elements. 
+But when the action is processed the ajaxKeys set is composed and then update specified for the whole table
+ actually happens only for the chosen set of elements.</para>
+ </section>
+ <section>
+ <title>Look and Feel Customization</title>
+ <para>For skinnability implementation the components use a <emphasis 
+role="italic"><property>style class redefinition method</property></emphasis>.</para>
+    <para>Default style classes are mapped on <emphasis 
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<para>To redefine appearance of all dataGrids at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the dataGrid to your page stylesheets</listitem>
+         </itemizedlist>
+ 
+    </section>
+		 <section>
+		 <title>Definition custom style classes:</title>
+		 <para>On the screenshot there are classes names defining specified elements.</para>
+		 
+    
+          <para>To redefine an appearance of all <property>dataGrids</property> on a page, redefine the corresponding class in 
+          the CSS file used with the page.</para>
+          <para>To redefine a style of a particular table, use <emphasis role="italic"><property>&quot;component class&quot;</property></emphasis> attributes which list is the same
+           as the <property>dataTable</property> one and is known to you.</para>
+           </section>
+           </section>
+  

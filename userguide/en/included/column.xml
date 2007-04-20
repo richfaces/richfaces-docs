@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>rich:column</keyword>
+<keyword>colspan</keyword>
+<keyword>breakBefore</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+    <table>
+      <title>Component identification parameters </title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.Column</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlColumn</entry>
+          </row>
+          <row>
+          <entry>component-family</entry>
+          <entry>org.richfaces.Column</entry>
+          </row>
+          <row>
+          <entry>renderer-type</entry>
+          <entry>org.richfaces.ColumnRenderer</entry>
+          </row>          
+          <row>
+            <entry>tag-class</entry>
+            <entry>org.richfaces.taglib.ColumnTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create the simplest variant of <property>column</property> on a page, use the following syntax:</para>
+    <programlisting role="XML"><![CDATA[...
+	<rich:dataTable var="set">
+		<rich:column>
+	<h:outputText value="#{set.property1}"/>
+        </rich:column>
+        <!--Set of another columns and header/footer facets-->
+    </rich:dataTable>
+...
+]]></programlisting>
+  </section>
+  <section>
+  <title>Dynamical Creation from Java Code</title>
+  <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlColumn myColumn = new org.richfaces.component.html.HtmlColumn();
+...
+]]></programlisting>
+</section>
+<section>
+<title>Details of Usage</title>
+<para>To output a simple table, the <emphasis role="bold"><property>&lt;rich:column&gt;</property></emphasis> component is used the same way as the standard 
+<emphasis role="bold"><property>&lt;h:column&gt;</property></emphasis>, i.e. the following code on a page is used:</para>
+<programlisting role="XML"><![CDATA[
+ <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
+	<rich:column>
+		<f:facet name="header">State Flag</f:facet>
+		<h:graphicImage value="#{cap.stateFlag}"/>
+	</rich:column>
+	<rich:column>
+		<f:facet name="header">State Name</f:facet>
+		<h:outputText value="#{cap.state}"/>
+	</rich:column>
+	<rich:column >
+		<f:facet name="header">State Capital</f:facet>
+		<h:outputText value="#{cap.name}"/>
+	</rich:column>
+	<rich:column>
+		<f:facet name="header">Time Zone</f:facet>
+		<h:outputText value="#{cap.timeZone}"/>
+	</rich:column>
+ </rich:dataTable>
+]]></programlisting>
+ <para>The result is:</para>
+ <figure>
+        <title>Generated column component</title>
+      <mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/column2.gif"/>
+        </imageobject>
+    </mediaobject>
+    </figure>
+<para>Now, in order to group columns with text information into one row in one column with a flag, use
+ the <emphasis role="italic"><property>&quot;colspan&quot;</property></emphasis> attribute, which is similar to an HTML one, specifying that the first column contains 3 columns.
+  In addition, it&apos;s necessary to specify that the next column begins from the first row with the help of the
+   <emphasis role="italic"><property>&quot;breakBefore&quot;</property></emphasis> attribute = true.</para>
+   <programlisting role="XML"><![CDATA[
+  <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
+	<rich:column colspan="3">
+		<h:graphicImage value="#{cap.stateFlag}"/>
+	</rich:column>
+	<rich:column breakBefore="true"> 
+		<h:outputText value="#{cap.state}"/>
+	</rich:column>
+	<rich:column >
+		<h:outputText value="#{cap.name}"/>
+	</rich:column>
+	<rich:column>
+		<h:outputText value="#{cap.timeZone}"/>
+	</rich:column>
+  </rich:dataTable>
+]]></programlisting>
+<para>As a result the following structure is rendered:</para>
+<figure>
+        <title>Column modified with colspan and breakbefore attributes</title>
+      <mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/column3.gif"/>
+        </imageobject>
+    </mediaobject>
+    </figure>
+     <para>The same way is used for <property>columns</property> grouping with the <emphasis role="italic"><property>&quot;rowspan&quot;</property></emphasis> 
+    attribute that is similar to an HTML one responsible for rows quantity definition occupied with the 
+    current one. The only thing to add in the example is an instruction to move onto the next row for each next after the second column.</para>
+    <programlisting role="XML"><![CDATA[
+  <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
+		<rich:column rowspan="3">
+			<f:facet name="header">State Flag</f:facet>
+			<h:graphicImage value="#{cap.stateFlag}"/>
+		</rich:column>
+		<rich:column> 
+			<f:facet name="header">State Info</f:facet>
+			<h:outputText value="#{cap.state}"/>
+		</rich:column>
+		<rich:column breakBefore="true">
+			<h:outputText value="#{cap.name}"/>
+		</rich:column>
+		<rich:column breakBefore="true">
+			<h:outputText value="#{cap.timeZone}"/>
+		</rich:column>
+  </rich:dataTable>
+]]></programlisting>
+<para>As a result:</para>
+<figure>
+        <title>Column generated with rowspan attribute</title>
+      <mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/column4.gif"/>
+        </imageobject>
+    </mediaobject>
+    </figure>
+    <para>Hence, additionally to a standard output of a particular row provided with the <emphasis role="bold"><property>&lt;h:column&gt;</property></emphasis> 
+    component, it becomes possible to group easily the rows with special HTML attribute.</para>
+    <para>The columns also could be grouped in a particular way with the help of the <emphasis role="bold"><property>&lt;h:columnGroup&gt;</property></emphasis>
+     component that is described in <ulink url="columnGroup.html">the following chapter</ulink>.</para>
+ </section>
+ <section>
+ <title>Look and Feel Customization</title>
+ <para>For skinnability implementation the components use a <emphasis 
+role="italic"><property>style class redefinition method</property></emphasis>.</para>
+    <para>Default style classes are mapped on <emphasis 
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<para>To redefine appearance of all columns at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the column to your page stylesheets</listitem>
+         </itemizedlist>
+     </section>
+		 <section>
+		 <title>Definition Custom Style Classes:</title>
+		 		 
+    
+          <para>To redefine an appearance of all <property>columns</property> on a page, redefine the corresponding class in the CSS file used with the page.</para>
+          <para>To redefine a style of a particular page, use component class attributes which list is the same as the <property>column</property> one and is known to you.</para>
+           </section>
+           </section>
+  

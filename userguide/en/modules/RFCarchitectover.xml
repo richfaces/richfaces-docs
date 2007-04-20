@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="ArchitectureOverview" xreflabel="ArchitecturalOverview">
+  <?dbhtml filename="ArchitectureOverview.html"?>
+
+  <chapterinfo>
+    <keywordset>
+      <keyword>RichFaces</keyword>
+
+      <keyword>Ajax4jsf</keyword>
+
+      <keyword>CSS</keyword>
+
+      <keyword>skin</keyword>
+    </keywordset>
+  </chapterinfo>
+
+  <title>Architecture Overview</title>
+
+  <section id="AjaxProcessing"> 
+  <?dbhtml filename="AjaxProcessing.html"?>
+    <title>Ajax Processing</title>
+
+    <para>RichFaces is based on the Ajax4jsf framework, so
+    <property>AJAX</property> request support is performed with this
+    framework. This support is explained in the Architecure
+    Overview section of the Ajax4jsf Developers Guide found under the
+    <property><ulink
+    url="http://labs.jboss.com/portal/jbossajax4jsf">Ajax4jsf</ulink></property>
+    project. In this section, we will focus on the skinnability.</para>
+  </section>
+
+  <section id="Skinnability">
+    <?dbhtml filename="Skinnability.html"?>
+
+    <title>Skinnability</title>
+
+    <section id="WhySkinnability">
+    <?dbhtml filename="WhySkinnability.html"?>
+      <title>Why Skinnability</title>
+
+      <para>If you have a look at a CSS file in an enterprise application, for
+      example, the one you&apos;re working on now, you&apos;ll see how often the same
+      color is noted in it. Standard CSS has no way to define a particular
+      color abstractly for defining as a panel header color, a background
+      color of an active pop-up menu item, a separator color, etc. To define
+      common interface styles, you have to copy the same values over and over
+      again and the more interface elements you have the more copy-and-paste
+      activity that needs to be performed.</para>
+
+      <para>Hence, if you want to change the application palette, you have to
+      change all interrelating values, otherwise your interface can appear a
+      bit clumsy. The chances of such an interface coming about is very high,
+      as CSS editing usually becomes the duty of a general developer who
+      doesn't necessarily have much knowledge of user interface design.</para>
+
+      <para>Moreover, if a customer wishes to have an interface look-and-feel
+      that can be adjusted on-the-fly by an end user, your work is multiplied,
+      as you have to deal with several CSS files variants, each of which
+      contains the same values repeated numerous times.</para>
+
+      <para>These problems can be solved with the
+      <property>skinnability</property> system built into the Ajax4jsf project
+      and realized fully in RichFaces. Every named skin has some
+      skin-parameters for the definition of a palette and the other parameters
+      of the user interface. By changing just a few parameters, you can alter
+      the appearance of dozens of components in an application in a
+      synchronized fashion without messing up user interface
+      consistency.</para>
+
+      <para>The <property>skinnability</property> feature can't completely
+      replace standard CSS and certainly doesn't eliminate its usage.
+      <property>Skinnability</property> is a high-level extension of standard
+      CSS, which can be used together with regular CSS declarations. You can
+      also refer to skin parameters in CSS via JSF Expression Language. You
+      have the complete ability to synchronize the appearance of all the
+      elements in your pages.</para>
+    </section>
+
+    <section id="UsingSkinnability">
+    <?dbhtml filename="UsingSkinnability.html"?>
+      <title>Using Skinnability</title>
+
+      <para>RichFaces <property>skinnability</property> is designed for mixed
+      usage with:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Skin parameters defined in the Ajax4jsf framework</para>
+        </listitem>
+
+        <listitem>
+          <para>Predefined CSS classes for components</para>
+        </listitem>
+
+        <listitem>
+          <para>User style classes</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>The color scheme of the component can be applied to its elements
+      using any of three style classes:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>A default style class inserted into the framework</para>
+
+          <para>This contains style parameters linked to some constants from a
+          skin. It is defined for every component and specifies a default
+          representation level. Thus, an application interface could be
+          modified by changing the values of skin parameters.</para>
+        </listitem>
+
+        <listitem>
+          <para>A style class of skin extension</para>
+
+          <para>This class name is defined for every component element and
+          inserted into the framework to allow defining a class with the same
+          name into its CSS files. Hence, the appearance of all components
+          that use this class is extended.</para>
+        </listitem>
+
+        <listitem>
+          <para>User style class</para>
+
+          <para>It&apos;s possible to use one of the styleClass parameters for
+          component elements and define your own class in it. As a result, the
+          appearance of one particular component is changed according to a CSS
+          style parameter specified in the class.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="Example">
+      <title>Example</title>
+
+      <para>Here is a simple panel component:</para>
+
+      <programlisting role="XML">&lt;rich:panel&gt;
+...
+&lt;/rich:panel&gt;</programlisting>
+
+      <para>The code generates a panel component on a page, which consists of
+      two elements: a wrapper <emphasis
+      role="bold"><property>&lt;div&gt;</property></emphasis> element and a
+      <emphasis role="bold"><property>&lt;div&gt;</property></emphasis>
+      element for the panel body with the particular style properties. The
+      wrapper <emphasis
+      role="bold"><property>&lt;div&gt;</property></emphasis> element looks
+      like:</para>
+
+      <programlisting role="XML">&lt;div class="dr-pnl rich-panel"&gt;
+...
+&lt;/div&gt;</programlisting>
+
+      <para>dr-pnl is a CSS class specified in the framework via skin
+      parameters:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><property>background-color</property> is defined with
+          <property>generalBackgroundColor</property></para>
+        </listitem>
+
+        <listitem>
+          <para><property>border-color</property> is defined with
+          <property>panelBorderColor</property></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>It&apos;s possible to change all colors for all panels on all pages by
+      changing these skin parameters.</para>
+
+      <para>However, if a <emphasis
+      role="bold"><property>&lt;rich-panel&gt;</property></emphasis> class is
+      specified somewhere on the page, its parameters are also acquired by all
+      panels on this page.</para>
+
+      <para>A developer may also change the style properties for a particular
+      panel. The following definition:</para>
+
+      <programlisting role="XML">&lt;rich:panel styleClass="customClass"&gt;
+...
+&lt;/rich:panel&gt;</programlisting>
+
+      <para>could add some style properties from customClass to one particular
+      panel, as a result we get three styles:</para>
+
+      <programlisting role="XML">&lt;div class="dr_pnl rich-panel customClass"&gt;
+...
+&lt;/div&gt;</programlisting>
+    </section>
+
+    <section id="SkinParametersTablesInAjax4jsf">
+    <?dbhtml filename="SkinParametersTablesInAjax4jsf.html"?>
+    
+      <title>Skin Parameters Tables in Ajax4jsf</title>
+
+      <para>RichFaces provides eight predefined skin parameters (skins) at the
+      simplest level of common customization:</para>
+
+      <itemizedlist>
+        <listitem>
+          DEFAULT
+        </listitem>
+
+        <listitem>
+          emeraldTown
+        </listitem>
+
+        <listitem>
+          blueSky
+        </listitem>
+
+        <listitem>
+          wine
+        </listitem>
+
+        <listitem>
+          japanCherry
+        </listitem>
+
+        <listitem>
+          ruby
+        </listitem>
+
+        <listitem>
+          classic
+        </listitem>
+
+        <listitem>
+          deepMarine
+        </listitem>
+      </itemizedlist>
+
+      <para>To plug one in, it&apos;s necessary to specify a skin name in the
+      <emphasis role="italic"><property>&quot;org.ajax4jsf.SKIN&quot;</property></emphasis> context-param.</para>
+
+      <para>Here is an example of a table with values for one of the main
+      skins, <property>&quot;blueSky&quot;</property>.</para>
+
+      <table>
+        <title>Colors</title>
+
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>Parameter name</entry>
+
+              <entry>Default value</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>headerBackgroundColor</entry>
+
+              <entry>#BED6F8</entry>
+            </row>
+
+            <row>
+              <entry>headerGradientColor</entry>
+
+              <entry>#F2F7FF</entry>
+            </row>
+
+            <row>
+              <entry>headTextColor</entry>
+
+              <entry>#000000</entry>
+            </row>
+
+            <row>
+              <entry>headerWeightFont</entry>
+
+              <entry>bold</entry>
+            </row>
+
+            <row>
+              <entry>generalBackgroundColor</entry>
+
+              <entry>#FFFFFF</entry>
+            </row>
+
+            <row>
+              <entry>generalTextColor</entry>
+
+              <entry>#000000</entry>
+            </row>
+
+            <row>
+              <entry>generalSizeFont</entry>
+
+              <entry>11px</entry>
+            </row>
+
+            <row>
+              <entry>generalFamilyFont</entry>
+
+              <entry>Arial, Verdana, sans-serif</entry>
+            </row>
+
+            <row>
+              <entry>controlTextColor</entry>
+
+              <entry>#000000</entry>
+            </row>
+
+            <row>
+              <entry>controlBackgroundColor</entry>
+
+              <entry>#ffffff</entry>
+            </row>
+
+            <row>
+              <entry>additionalBackgroundColor</entry>
+
+              <entry>#ECF4FE</entry>
+            </row>
+
+            <row>
+              <entry>shadowBackgroundColor</entry>
+
+              <entry>#000000</entry>
+            </row>
+
+            <row>
+              <entry>shadowOpacity</entry>
+
+              <entry>1</entry>
+            </row>
+
+            <row>
+              <entry>panelBorderColor</entry>
+
+              <entry>#BED6F8</entry>
+            </row>
+
+            <row>
+              <entry>subBorderColor</entry>
+
+              <entry>#ffffff</entry>
+            </row>
+
+            <row>
+              <entry>tabBackgroundColor</entry>
+
+              <entry>#C6DEFF</entry>
+            </row>
+
+            <row>
+              <entry>tabDisabledTextColor</entry>
+
+              <entry>#8DB7F3</entry>
+            </row>
+
+            <row>
+              <entry>trimColor</entry>
+
+              <entry>#D6E6FB</entry>
+            </row>
+
+            <row>
+              <entry>tipBackgroundColor</entry>
+
+              <entry>#FAE6B0</entry>
+            </row>
+
+            <row>
+              <entry>tipBorderColor</entry>
+
+              <entry>#E5973E</entry>
+            </row>
+
+            <row>
+              <entry>selectControlColor</entry>
+
+              <entry>#E79A00</entry>
+            </row>
+
+            <row>
+              <entry>generalLinkColor</entry>
+
+              <entry>#0078D0</entry>
+            </row>
+
+            <row>
+              <entry>hoverLinkColor</entry>
+
+              <entry>#0090FF</entry>
+            </row>
+
+            <row>
+              <entry>visitedLinkColor</entry>
+
+              <entry>#0090FF</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <table>
+        <title>Fonts</title>
+
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>Parameter name</entry>
+
+              <entry>Default value</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>headerSizeFont</entry>
+
+              <entry>11px</entry>
+            </row>
+
+            <row>
+              <entry>headerFamilyFont</entry>
+
+              <entry>Arial, Verdana, sans-serif</entry>
+            </row>
+
+            <row>
+              <entry>tabSizeFont</entry>
+
+              <entry>11px</entry>
+            </row>
+
+            <row>
+              <entry>tabFamilyFont</entry>
+
+              <entry>Arial, Verdana, sans-serif</entry>
+            </row>
+
+            <row>
+              <entry>buttonSizeFont</entry>
+
+              <entry>11px</entry>
+            </row>
+
+            <row>
+              <entry>buttonFamilyFont</entry>
+
+              <entry>Arial, Verdana, sans-serif</entry>
+            </row>
+
+            <row>
+              <entry>tableBackgroundColor</entry>
+
+              <entry>#FFFFFF</entry>
+            </row>
+
+            <row>
+              <entry>tableFooterBackgroundColor</entry>
+
+              <entry>#cccccc</entry>
+            </row>
+
+            <row>
+              <entry>tableSubfooterBackgroundColor</entry>
+
+              <entry>#f1f1f1</entry>
+            </row>
+
+            <row>
+              <entry>tableBorderColor</entry>
+
+              <entry>#C0C0C0</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <para>To get detailed information on particular parameter possibilities,
+      see the <ulink url="Rich_Faces_Components_Library.html">chapter</ulink> where each component has skin parameters described
+      corresponding to its elements.</para>
+    </section>
+
+    <section id="CreatingAndUsingYourOwnSkinFile">
+    <?dbhtml filename="CreatingAndUsingYourOwnSkinFile.html"?>
+      <title>Creating and Using Your Own Skin File</title>
+
+      <para>In order to create your own skin whose constants are used by style
+      classes at the first level, do the following:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Create a file whose name follows the format of a skin file and
+          place it into the ClassPath for the application. (Any skin file
+          follows the naming format, <emphasis
+          role="italic"><property>&lt;name.skin.properties&gt;</property></emphasis>.)</para>
+        </listitem>
+
+        <listitem>
+          <para>Add a skin definition context-param element to the
+          application&apos;s web.xml file:</para>
+
+          <programlisting role="XML">&lt;context-param&gt;
+        &lt;param-name&gt;org.ajax4jsf.SKIN&lt;/param-name&gt;
+        &lt;param-value&gt;name&lt;/param-value&gt;
+&lt;/context-param&gt;</programlisting>
+        </listitem>
+
+        <listitem>
+          <para>In the skins file, specify your own values for skin constants
+          as described in the table.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+</chapter>

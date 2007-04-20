@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<section>
+  <sectioninfo>
+    <keywordset>
+      <keyword>rich:modalPanel</keyword>
+
+      <keyword>HtmlModalPanel</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <section>
+    <table>
+      <title>Component identification parameters</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Name</entry>
+
+            <entry>Value</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+
+            <entry>org.richfaces.ModalPanel</entry>
+          </row>
+
+          <row>
+            <entry>component-class</entry>
+
+            <entry>org.richfaces.component.html.ModalPanel</entry>
+          </row>
+
+          <row>
+            <entry>component-family</entry>
+
+            <entry>org.richfaces.ModalPanel</entry>
+          </row>
+
+          <row>
+            <entry>renderer-type</entry>
+
+            <entry>org.richfaces.ModalPanelRenderer</entry>
+          </row>
+
+          <row>
+            <entry>tag-class</entry>
+
+            <entry>org.richfaces.taglib.ModalPanelTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+
+    <para>To add it to a page, use the following syntax:</para>
+
+    <programlisting role="XML">...
+       &lt;rich:modalPanel id="panel"&gt;
+			&lt;f:facet name="header"&gt;
+				&lt;h:outputText value="header"&gt;
+			&lt;/f:facet&gt;
+			...
+			&lt;!--Any Content inside--&gt;
+			...
+			&lt;a href="javascript:RichFaces.hideModalPanel('form:panel')"&gt;Hide&lt;/a&gt;
+	   &lt;/rich:panel&gt;
+		...
+		&lt;a href="javascript:RichFaces.showModalPanel('form:panel')"&gt;Show&lt;/a&gt;
+...
+</programlisting>
+  </section>
+
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+
+    <programlisting role="JAVA">...
+ org.richfaces.component.html.HtmlModalPanel myPanel = new org.richfaces.component.html.HtmlModalPanel();
+...
+</programlisting>
+  </section>
+
+  <section>
+    <title>Details of Usage</title>
+
+    <para>The component is defined as a panel with some content inside that
+    displays its content as a modal dialog. To call it and to close it, the
+    client API for the window is used.</para>
+
+    <table>
+      <title>Functions description</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Function</entry>
+
+            <entry>Description</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>RichFaces.showModalPanel (client Id)</entry>
+
+            <entry>Opens a window with a specified client Id</entry>
+          </row>
+
+          <row>
+            <entry>RichFaces.hideModalPanel (client Id)</entry>
+
+            <entry>Closes a window with a specified client Id</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+<important><title>New:</title><para>In order to avoid a bug in IE, the root node of the dialog is moved on the top of a DOM tree. However, you should have a separate form inside the modal panel if you want to perform submits from this panel.
+</para></important>
+
+    <para>It&apos;s possible to add a &quot;header&quot; facet to the component to set the
+    content for the header.</para>
+
+    <programlisting role="XML">
+&lt;form jsfc="h:form" id="form"&gt;
+	&lt;rich:modalPanel id="panel" width="400" height="300"&gt;
+	&lt;f:facet name="header"&gt;
+		&lt;h:outputText value="Modal Panel"/&gt;
+	&lt;/f:facet&gt;
+	
+&lt;h:graphicImage value="/pages/california_large.gif"/&gt;
+	&lt;a href="javascript:Richfaces.hideModalPanel('form:panel')"&gt;Close&lt;/a&gt;
+
+&lt;/rich:modalPanel&gt;
+	&lt;a href="javascript:Richfaces.showModalPanel('form:panel');"&gt;Open&lt;/a&gt;
+&lt;/form&gt;
+</programlisting>
+
+    <para>This defines a window with a particular size and ID. It includes one
+    "Open" link. Clicking on this link makes the modal window content
+    appear.</para>
+
+    <figure>
+      <title>ModalPanel with links</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/modalpanel2.gif" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>A facet named &quot;controls&quot; can be added to the component to place
+    control elements on a header.</para>
+
+    <programlisting role="XML">
+&lt;rich:modalPanel id="panel"&gt;
+	&lt;f:facet name="header"&gt;&lt;h:outputText value="Modal Panel"/&gt;&lt;/f:facet&gt;
+	&lt;f:facet name="controls"&gt;
+		&lt;a href="javascript:Richfaces.hideModalPanel('form:panel')"&gt;X&lt;/a&gt;
+	&lt;/f:facet&gt;
+	&lt;h:graphicImage value="/pages/california_large.gif"/&gt;
+&lt;/rich:modalPanel&gt;
+</programlisting>
+
+    <para>The result displays like this:</para>
+
+    <figure>
+      <title>ModalPanel with control element</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/modalpanel3.gif" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>To manage the placement of inserted windows, use the <emphasis
+        role="italic">
+        <property>"zindex"</property>
+      </emphasis> attribute that is similar to the standard HTML attribute and
+    can specify window placement relative to the content.</para>
+
+    <para>To manage window placement relative to the component, there are
+    <emphasis role="italic">
+        <property>"left"</property>
+      </emphasis> and <emphasis role="italic">
+        <property>"top"</property>
+      </emphasis> attributes defining a window shifting relative to the
+    top-left corner of the window.</para>
+
+    <para>Modal windows can also support resize and move operations on the
+    client side. To allow or disallow these operations, set the <emphasis
+        role="italic">
+        <property>"resizeable"</property>
+      </emphasis> and <emphasis role="italic">
+        <property>"moveable"</property>
+      </emphasis> attributes to “true” or “false” values. Window resizing is
+    also limited by <emphasis role="italic">
+        <property>"minWidth"</property>
+      </emphasis> and <emphasis role="italic">
+        <property>"minHeight"</property>
+      </emphasis> attributes specifying the minimal window sizes.</para>
+  </section>
+
+  <section>
+    <title>Look and Feel Customization</title>
+
+    <para>For implementing skinnability the components use a <emphasis
+        role="italic">
+        <property>style class redefinition method</property>
+      </emphasis>. Default style classes are mapped on <emphasis
+    role="italic"><property>skin parameters</property>.</emphasis></para>
+
+    <para>There are two ways to redefine the appearance of all modal panels at
+    once:</para>
+
+    <itemizedlist>
+      <listitem>Redefine the corresponding skin parameters</listitem>
+
+      <listitem>Add <emphasis role="italic">
+          <property>style classes</property>
+        </emphasis> used by modalPanel to your page stylesheets</listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Skin Parameters Redefinition</title>
+
+    <table>
+      <title>Panel skin parameters</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Panel skin parameters</entry>
+
+            <entry>Properties corresponding to CSS parameter</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>generalBackgroundColor</entry>
+
+            <entry>background-color</entry>
+          </row>
+
+          <row>
+            <entry>panelBorderColor</entry>
+
+            <entry>border-color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>Header parameters</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Headers parameters</entry>
+
+            <entry>Properties corresponding to CSS parameter</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>headerBackgroundColor</entry>
+
+            <entry>background-color</entry>
+          </row>
+
+          <row>
+            <entry>headerBackgroundColor</entry>
+
+            <entry>border-color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>Header content parameters</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Headers content parameters</entry>
+
+            <entry>Properties corresponding to CSS parameter</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>headerSizeFont</entry>
+
+            <entry>background-color</entry>
+          </row>
+
+          <row>
+            <entry>headerTextColor</entry>
+
+            <entry>font-size</entry>
+          </row>
+
+          <row>
+            <entry>headerWeightFont</entry>
+
+            <entry>color</entry>
+          </row>
+
+          <row>
+            <entry>headerFamilyFont</entry>
+
+            <entry>font-family</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>Body parameters</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Body parameters</entry>
+
+            <entry>Properties corresponding to CSS parameter</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>generalSizeFont</entry>
+
+            <entry>font-size</entry>
+          </row>
+
+          <row>
+            <entry>generalTextColor</entry>
+
+            <entry>color</entry>
+          </row>
+
+          <row>
+            <entry>generalFamilyFont</entry>
+
+            <entry>font-family</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section>
+    <title>Definition custom style classes</title>
+
+    <figure>
+      <title>Modal Panel class names</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/modalpanel4.gif" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>The screenshot shows the classes names for defining different
+    elements.</para>
+
+    <table>
+      <title>Class names</title>
+
+      <tgroup cols="2">
+        <tbody>
+          <row>
+            <entry>rich-mpnl-pnl-h</entry>
+
+            <entry>This class defines the header style. It&apos;s applied to the
+            header elements of all panels.</entry>
+          </row>
+
+          <row>
+            <entry>rich-mpnl-pnl-text</entry>
+
+            <entry>This class defines the header content style. It&apos;s applied
+            to the header elements of all panels.</entry>
+          </row>
+
+          <row>
+            <entry>rich-mpnl-pnl-body</entry>
+
+            <entry>This class defines the style for the content inside a
+            panel. It&apos;s applied to the elements inside panels.</entry>
+          </row>
+
+          <row>
+            <entry>generalFamilyFont</entry>
+
+            <entry>font-family</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</section>

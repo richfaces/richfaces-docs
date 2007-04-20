@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>dragged element</keyword>
+<keyword>rich:dragIndicator</keyword>
+<keyword>HtmlDragIndicator</keyword>
+<keyword>dndParam</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.Draggable</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlDragIndicator</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.DragIndicator</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.DragIndicatorRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.DragIndicatorTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create it on a page, use the following syntax:</para>
+    <programlisting role="XML"><![CDATA[		 ...	
+		<dnd:dragIndicator  id="indicator">
+			<f:facet name="single">
+				<f:verbatim>
+					<b>Single item</b> {DragInfo}
+				</f:verbatim>
+			</f:facet>
+		</dnd:dragIndicator>
+		...
+<dnd:dragSupport dragType="text" dragIndicator="indicator">
+		...
+]]></programlisting>
+  </section>
+  <section>
+<title>Creating the Component Dynamically Using Java</title>
+ <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlDragIndicator myDragIndicator = new org.richfaces.component.html.HtmlDragIndicator();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+	<para>The component seems to be combined of two elements: an icon on the left and informational
+	 part on the right. The definition and usage is described further for each element.</para>
+	<section>
+	<title>Indicator informational part</title>
+	<para>Inside the component, the definition should present for two facets with single and multiple
+	 names providing templates for rendering during dragging one or several elements. The facets 
+	 define the right side of the <property>indicator</property> element.</para>
+	<para>The following elements on a page are obtained for a code defined in the example:</para>
+	<figure>
+	<title>DragIndicator informational part</title>
+ <mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/dragIndicator2.gif"/>
+        </imageobject>
+    </mediaobject>
+    </figure>
+<para>Hence, defining dndParam corresponding to drag areas, information transmitted into an
+ <property>indicator</property>
+ is defined.</para>
+	</section>
+	<section>
+	<title>Indicator icon element</title>
+	<para>Inside the component there also could be definitions for three faces with 
+	<emphasis role="italic"><property>&quot;accept&quot;</property>,</emphasis> 
+	<emphasis role="italic"><property>&quot;reject&quot;</property></emphasis> and
+	 <emphasis role="italic"><property>&quot;default&quot;</property></emphasis> names that specify icons on the left side according to states when an 
+	 <property>indicator</property> is above:</para>
+<itemizedlist>
+        <listitem>
+          a drop zone that processes the facets written in the 
+          <emphasis role="italic"><property>&quot;acceptedTypes&quot;</property></emphasis> attribute
+           of this drop zone
+        </listitem>
+        <listitem>
+          a drop zone that doesn&apos;t process the facets 
+        </listitem>
+		<listitem>
+		  not above any drop zone 
+		</listitem>
+      </itemizedlist>
+	  <para>Here is an example for an accept facet:</para>
+	  <programlisting role="XML"><![CDATA[<f:facet name="accept">
+			<h:graphicImage value="./images/1.gif"/>
+</f:facet>
+]]></programlisting>
+<para>Each of these three facets have a default structure for icons rendering on the left side.</para>
+<para>When it&apos;s necessary to define individual icons for dragged above elements of a <property>drop zone</property> from each
+ particular drag area, use a <property>drop zone</property> 
+ <emphasis role="italic"><property>&quot;typeMapping&quot;</property></emphasis> attribute for the
+  corresponding icons.</para>
+<programlisting role="XML"><![CDATA[<rich:dropSupport acceptedTypes="[iconsDragged, textDragged]" typeMapping="{iconsDragged: DropIcon}">
+	
+		<dnd:dndParam name="DropIcon">
+			<h:graphicImage value="/images/drop-icon.png"/>
+		</dnd:dndParam>
+...
+]]></programlisting>
+<para>Here, drag areas that are to be processed with this drop zone are of iconsDragged and 
+textDragged type. An icon is redefined for iconsDragged with the help of the drop zone 
+ <emphasis role="italic"><property>&quot;typeMapping&quot;</property></emphasis> attribute 
+ defined with the <emphasis role="bold"><property>&lt;rich:dndParam&gt;</property></emphasis>component.</para>
+	</section>
+    </section>
+</section>

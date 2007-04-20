@@ -1,0 +1,111 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>rich:subtable</keyword>
+<keyword>HtmlSubTable</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.SubTable</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlSubTable</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.SubTable</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.SubTableRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.SubTableTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create simplest variant of <property>subTable</property> on a page, use the following syntax:</para>
+    <programlisting role="XML"><![CDATA[...
+	<rich:dataTable value="#{capitalsBean.capitals}" var="capitals">
+        <!--...//Set of columns and header/footer facets-->
+        <rich:subTable value=#{capitals.details} var="detail">
+        	<!--...//Set of columns and header/footer facets-->
+        </rich:subTable>
+    </rich:dataTable>
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlSubTable mySubTable = new org.richfaces.component.html.HtmlSubTable();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+	<para>The <property>subtable</property> component is very similar to the custom JSF dataTable one, the only difference is that
+	 the component doesn&apos;t add the wrapping <emphasis role="bold"><property>&lt;table&gt;</property></emphasis> and <emphasis role="bold"><property>&lt;tbody&gt;</property></emphasis> tags. 
+	 Hence, it&apos;s possible to add a subtable structure different from the main one to organize tables
+	  of the master - details type. The component is also has common peculiarities of any rich component:</para>
+	   <itemizedlist>
+	   <listitem>Skin support. The table completely meets a three-class principle of Rich Faces skinnability</listitem>
+	   <listitem>Support of AJAX updates for a limited set of rows</listitem>
+	   </itemizedlist>
+	   <para>Skins support is described in the <ulink url="Skinnability.html">corresponding section</ulink>. AJAX support is
+	    possible because the component is created basing on the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> component and as a result the 
+	    component has its possibilities of AJAX updates for a limited set of rows. The component is implemented
+	     with the <emphasis role="italic"><property>&quot;ajaxKeys&quot;</property></emphasis> attribute for a table and in contrast to the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> outputs the standard HTML 
+	     structure for table rendering.</para>
+	     <programlisting role="XML"><![CDATA[...
+<rich:dataTable value="#{capitalsBean.capitals}" var="capitals" id="table">
+<!--...//Set of columns and header/footer facets-->
+
+	<rich:subTable value="#{capitals.details}" var="detail" ajaxKeys="#{bean.ajaxSet}" binding="#{bean.subtable}" >
+		<!--...//Set of columns and header/footer facets-->
+	</rich:subTable>
+
+</rich:dataTable>
+...
+<a4j:commandButton action="#{bean.someAction}" reRender="table"/>
+...
+]]></programlisting>
+<para>For such a table during someAction processing called with AJAX request when the key is pressed
+ it&apos;s possible to fill in lot&apos;s of ajaxKeys with strings indices that are to be updated. 
+ A resulting output on the client contains only required rows and they are updated in the tree, even 
+ when update is specified for the whole table.</para>
+      </section>
+    <section>
+    <title>Look and Feel Customization</title>
+    <para>For skinnability implementation the components use a <emphasis 
+role="italic"><property>style class redefinition method</property></emphasis>.</para>
+    <para>Default style classes are mapped on <emphasis 
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<para>To redefine appearance of all subTables at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the subTable to your page stylesheets</listitem>
+         </itemizedlist>
+	<para>To redefine a style of a particular page, use component class attributes which list is the same as the <property>subTable</property> one and is known to you.</para>
+</section>
+</section>

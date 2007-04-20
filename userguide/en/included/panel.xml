@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>rectangle</keyword>
+<keyword>rich:panel</keyword>
+<keyword>HtmlPanel</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.panel</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlPanel</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.PanelRenderer</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.PanelRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.PanelTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create it on a page, use the following syntax: </para>
+    <programlisting role="XML"><![CDATA[...
+		<rich:panel>
+			<f:facet name="header">
+				<h:outputText value="Panel Header"/>
+			</f:facet>
+			...
+			<!--Any Content inside-->
+			...
+		</rich:panel>
+]]></programlisting>
+  </section>
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlPanel myPanel = new org.richfaces.component.html.HtmlPanel();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+    <para><emphasis role="bold">
+<property>&lt;rich:panel&gt;</property>
+</emphasis> components are used to group page content pieces on similarly formatted rectangular <property>panels</property>.  
+</para>
+    <para><emphasis role="bold">Example:</emphasis></para>
+    <programlisting role="XML"><![CDATA[...
+<rich:panel>
+...
+</rich:panel>
+...
+]]></programlisting>
+	<para>It&apos;s generating on a page in the following way:</para>
+    <figure>
+      <title>Generated panel without header</title>
+    
+	<mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/panel.GIF"/>
+        </imageobject>
+	</mediaobject>
+    </figure>
+    </section>
+    <section>
+    <para>The example shows that similar rectangular areas are formed with a particular style.</para>
+<para>When creating a <property>panel</property> with a header element, one more <emphasis role="bold"><property>&lt;div&gt;</property></emphasis> element is added with content defined for a header.</para>
+    <para><emphasis role="bold">Example:</emphasis></para>
+    <programlisting role="XML"><![CDATA[<rich:panel>
+		<f:facet name="header">
+			<h:outputText value="Olympus EVOLT E-500 "/>
+		</f:facet>
+		...
+</rich:panel>
+]]></programlisting>
+<para>It&apos;s displayed on a page in the following way:</para>
+      <figure>
+        <title>Panel with header</title>
+      
+<mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/panel2.GIF"/>
+        </imageobject>
+</mediaobject>
+      </figure>
+    <para>As it has been mentioned above, the component is mostly used for a page style definition, 
+    hence the main attributes are style ones.</para>
+	<itemizedlist>
+        <listitem>
+          styleClass and style
+        </listitem>
+        <listitem>
+          headerClass and headerStyle
+        </listitem>
+		<listitem>
+		  bodyClass and bodyStyle
+		</listitem>
+      </itemizedlist>
+	  <para>Moreover, to add e.g. some JavaScript effects, events defined on it are used.</para>
+	  	<itemizedlist>
+        <listitem>
+          onmouseover
+        </listitem>
+        <listitem>
+          onclick
+        </listitem>
+		<listitem>
+		  onmouseout
+		</listitem>
+		<listitem>
+		  etc.
+		</listitem>
+      </itemizedlist>
+  </section>
+    <section>
+    <title>Look and Feel Customization</title>
+    <para>For skinnability implementation the components use a <emphasis 
+role="italic"><property>style class redefinition method</property>.</emphasis></para>
+    <para>Default style classes are mapped on <emphasis 
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<para>To redefine appearance of all panels at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the panel to your page stylesheets</listitem>
+         </itemizedlist>
+</section>
+<section>
+<title>Skin parameters redefinition</title>
+<table>
+	  <title>Skin parameters for the panel</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Skin parameters</entry>
+                  <entry>CSS properties</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>generalBackgroundColor</entry>
+            <entry>background-color</entry>
+          </row>
+          <row>
+            <entry>panelBorderColor</entry>
+            <entry>border-color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+	<table>
+	 <title>Parameters for a header element</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Skin parameters</entry>
+                  <entry>CSS properties</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>headerBackgroundColor</entry>
+            <entry>background-color</entry>
+          </row>
+          <row>
+            <entry>headerBackgroundColor</entry>
+            <entry>border-color</entry>
+          </row>
+          <row>
+            <entry>headerSizeFont</entry>
+            <entry>font-size </entry>
+          </row>
+		  <row>
+            <entry>headerTextColor</entry>
+            <entry>color</entry>
+          </row>
+		  <row>
+            <entry>headerWeightFont</entry>
+            <entry>font-weight</entry>
+          </row>
+		  <row>
+            <entry>headerFamilyFont</entry>
+            <entry>font-family</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+		<table>
+		 <title>Parameters for a body element</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Skin parameters</entry>
+                  <entry>CSS properties</entry>
+            </row>
+        </thead>
+        <tbody>
+		  <row>
+            <entry>generalSizeFont</entry>
+            <entry>font-size</entry>
+          </row>
+		  <row>
+            <entry>generalTextColor</entry>
+            <entry>color</entry>
+          </row>
+		  <row>
+            <entry>generalFamilyFont</entry>
+            <entry>font-family</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+</section>
+    <section>
+    <title>Definition custom style classes</title>
+      <figure>
+        <title>Style classes of panel</title>
+      
+	<mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/panel3.GIF"/>
+        </imageobject>
+	</mediaobject>
+      </figure>
+    <para>On the screenshot, there are classes names that define specified elements.</para>
+	<table>
+	  <title>Component skin class</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Class name</entry>
+                  <entry>Class description</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>rich-panel</entry>
+            <entry>The class defines a <property>panel</property> common style. It&apos;s used in the outside <emphasis role="bold">
+<property>&lt;div&gt;</property>
+</emphasis>element</entry>
+          </row>
+          <row>
+            <entry>rich-panel-header</entry>
+            <entry>The class defines a header style. It&apos;s applicable for header elements of all panels</entry>
+          </row>
+          <row>
+            <entry>rich-panel-body</entry>
+            <entry>The class defines a content style inside a panel. It&apos;s applicable for elements inside panels</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+		<para>To redefine an appearance of a particular panel, define your own CSS class. Then it&apos;s necessary just to define it in one of components class attributes modifying component style properties.</para>
+	    <para><emphasis role="bold">Example:</emphasis></para>
+	<para>CSS code piece used on the page:</para>
+<programlisting role="XML"><![CDATA[...
+	.rich-panel-header{
+		background-color:#F99;
+	}
+	.myClass{
+		font-style:italic;
+	}
+...
+]]></programlisting>
+<para>Hence, a header class is redefined for all <property>panels</property> (its color changed) of 
+this page and body class is extended with the custom style properties (font-style) for this particular
+ <property>panel</property>. As a result, the <property>panel</property> with a header redefined color and a text style in body is got.</para>
+	<figure>
+	  <title>Panel with redefined header and body text style</title>
+	
+      <mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/panel4.GIF"/>
+        </imageobject>
+      </mediaobject>
+	</figure>
+	</section>
+</section>

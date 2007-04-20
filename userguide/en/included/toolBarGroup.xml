@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>items</keyword>
+<keyword>rich:toolBarGroup</keyword>
+<keyword>HtmlToolBarGroup</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.ToolBarGroup</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlToolBarGroup</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.ToolBarGroup</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.ToolBarGroupRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.ToolBarGroupTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create it on a page, use the following syntax: </para>
+    <programlisting role="XML"><![CDATA[<rich:toolBar>
+		...
+		<rich:toolBarGroup>
+			<!--...Set of action or other JSF components-->
+		</rich:toolBarGroup>
+		...
+		<rich:toolBarGroup>
+			<!--...Set of action or other JSF components-->
+		</rich:toolBarGroup>
+		...
+</rich:toolBar>
+]]></programlisting>
+  </section>
+  <section>
+<title>Creating the Component Dynamically Using Java</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlToolBarGroup myToolBarGroup = new org.richfaces.component.html.HtmlToolBarGroup();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+	<para>A <property>toolBarGroup</property> is a wrapper component that groups <property>toolBar</property> content and facilitates creation of menu and tool bars. All components defined inside are located on a stylized bar with a possibility to group, arrange on the both bar sides, and place predefined separators between them.</para>
+	<para>Separators are located between components with the help of the <emphasis 
+
+role="italic"><property>&quot;itemSeparator&quot;</property></emphasis> attribute with four
+ predefined values:</para>
+	  	<itemizedlist>
+        <listitem>
+          none
+        </listitem>
+        <listitem>
+          line
+        </listitem>
+		<listitem>
+		  square
+		</listitem>
+		<listitem>
+		  disc
+		</listitem>
+      </itemizedlist>
+	  <para>To control the group location inside, use the <emphasis 
+
+role="italic"><property>&quot;location&quot;</property></emphasis> attribute with left (DEFAULT) and right values.</para>
+	  <para><emphasis role="bold">Example:</emphasis></para>
+    <programlisting role="XML"><![CDATA[<rich:toolBar itemSeparator="disc" width="500">
+		<rich:toolBarGroup itemSeparator="line">
+			<h:commandLink value="Command 1.1"/>
+			<h:commandLink value="Command 2.1"/>
+		</rich:toolBarGroup>
+		<rich:toolBarGroup itemSeparator="line" location="right">
+			<h:commandLink value="Command 1.2"/>
+			<h:commandLink value="Command 2.2"/>
+		</rich:toolBarGroup>
+	</rich:toolBar>
+]]></programlisting>
+<para>The code result is the following:</para>
+    <figure>
+      <title>Stylized toolBarGroup</title>
+<mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/toolBar3.gif"/>
+        </imageobject>
+</mediaobject>
+      </figure>
+  </section>
+    <section>
+    <title>Look and Feel Customization</title>
+    <para>For skinnability implementation the components use a <emphasis 
+role="italic"><property>style class redefinition method</property></emphasis>.</para>
+    <para>Default style classes are mapped on <emphasis 
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<para>To redefine appearance of all toolBarGroups at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the toolBarGroup to your page stylesheets</listitem>
+         </itemizedlist>
+    <table>
+	  <title>Skin parameters redefinition</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Skin parameters for the toolBarGroup component</entry>
+                  <entry>Corresponding CSS parameters</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>headerSizeFont</entry>
+            <entry>font-size</entry>
+          </row>
+		   <row>
+            <entry>headTextColor</entry>
+            <entry>color</entry>
+          </row>
+		   <row>
+            <entry>headerFamilyFont</entry>
+            <entry>font-family</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+	</section>
+	<section>
+    <title>Definition custom style classes</title>
+	<para>On generating, the component substitutes the default class rich-toolbar-interior into 
+	<emphasis 
+role="italic"><property>style class</property></emphasis> of a generated component, i.e. 
+to redefine at once all <property>toolBarGroups</property> appearance on a page, redefine this class in your CSS.</para>
+	<para>The component also has the standard attribute style and <emphasis 
+
+role="italic"><property>style class</property></emphasis> that could redefine an
+ appearance of particular component variants. 
+    </para>
+    <para>It&apos;s necessary to define a class according to the corresponding name, so as an 
+
+appearance of all <property>toolBarGroups</property> on a page is changed at once.</para>
+   </section>
+</section>

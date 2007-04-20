@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>rich:dataOrderedList</keyword>
+<keyword>HtmlDataOrderedList</keyword>
+<keyword>ordered list</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+    <table>
+      <title>Component identification parameters </title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.DataOrderedList</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlDataOrderedList</entry>
+          </row>
+          <row>
+          <entry>component-family</entry>
+          <entry>org.richfaces.DataOrderedList</entry>
+          </row>
+          <row>
+          <entry>renderer-type</entry>
+          <entry>org.richfaces.DataOrderedListRenderer</entry>
+          </row>          
+          <row>
+            <entry>tag-class</entry>
+            <entry>org.richfaces.taglib.DataOrderedListTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create the simplest variant of <property>dataOrderedList</property> on a page, use the following syntax:</para>
+    <programlisting role="XML"><![CDATA[...
+	<rich:dataOrderedList value="#{bean.capitals}" var="caps">
+			<h:outputText value="#{caps.name}"/>
+	</rich:dataOrderedList>
+...
+]]></programlisting>
+  </section>
+  <section>
+  <title>Dynamical Creation from Java Code</title>
+  <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlDataOrderedList myList = new org.richfaces.component.html.HtmlDataOrderedList();
+...
+]]></programlisting>
+</section>
+<section>
+<title>Details of Usage</title>
+<para>The component takes a list from a model and outputs it as an ordered list. The component also has 
+similar to ordinary UIData components output ways:</para>
+<itemizedlist>
+<listitem>A heeader and footer output</listitem>
+<listitem>Limitation of the output elements (the  <emphasis role="italic"><property>&quot;elements&quot;</property></emphasis> attribute) and definition of the first
+ element</listitem>
+ <listitem>Binding to scrolling components of list pages</listitem>
+ </itemizedlist>
+ <para>The componet has the <emphasis role="italic"><property>&quot;type&quot;</property></emphasis> attribute corresponding to the ul HTML element.</para>
+ <para>The component is created basing on the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> component and as a result the component could
+  be partially updated with AJAX.</para>
+  <programlisting role="XML"><![CDATA[...
+  <rich:dataOrderedList value="#{bean.capitals}" var="caps" ajaxKeys="#{listBean.list}" 
+   binding="#{listBean.dataList}" id="list">
+			<h:outputText value="#{caps.name}"/>
+  </rich:dataOrderedList>
+...
+<a4j:commandButton action"#{listBean.action}" reRender="list" value="Submit">
+...
+]]></programlisting>
+<para>Here during the action is processed the ajaxKeys set is composed into a list and then update
+ specified for the whole table actually happens only for the chosen set of rows.</para>
+ </section>
+ <section>
+ <title>Look and Feel Customization</title>
+ <para>For skinnability implementation the components use a <emphasis 
+role="italic"><property>style class redefinition method</property></emphasis>.</para>
+    <para>Default style classes are mapped on <emphasis 
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<para>To redefine appearance of all dataOrderedLists at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the dataOrderedList to your page stylesheets</listitem>
+         </itemizedlist>
+ 
+    </section>
+		 <section>
+		 <title>Definition custom style classes:</title>
+		   
+		   <figure>
+		     <title>DataOrderedList style classes</title>
+		     <mediaobject> 
+		       <imageobject>
+		         <imagedata fileref="images/dataorderedlist2.gif"/>
+		       </imageobject>
+		     </mediaobject>
+		   </figure>
+		   
+		 <para>On the screenshot there are classes names defining specified elements.</para>
+		 
+		   <table>
+		     <title>Component skin class</title>
+		     <tgroup cols="2">
+		       <thead>
+		         <row>
+		           <entry>Class name</entry>
+		           <entry>Class description</entry>
+		         </row>
+		       </thead>
+		       <tbody>
+		         <row>
+		           <entry>rich-datalist</entry>
+		           <entry>Wrapping class for component</entry>
+		         </row>
+		         <row>
+		           <entry>rich-list-item</entry>
+		           <entry>Customization class for string list</entry>
+		         </row>
+		       </tbody>
+		     </tgroup>
+		   </table>
+    
+		   <para>To redefine an appearance of all <property>dataOrderedLists</property> on a page,just redefine one of this classes.</para>
+		   <para>To redefine a style of a particular dataOrderedList, use corresponding class attributes on the component.</para>
+           </section>
+           </section>
+  

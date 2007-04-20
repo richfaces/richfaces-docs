@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>table</keyword>
+<keyword>rich:dataTable</keyword>
+<keyword>HtmlDataTable</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.DataTable</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlDataTable</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.DataTable</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.DataTableRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.DataTableTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create the simplest variant of <property>dataTable</property> on a page, use the
+     following syntax:</para>
+    <programlisting role="XML"><![CDATA[...
+        <rich:dataTable value="#{capitalsBean.capitals}" var="capitals">
+         <!--...//Set of columns and header/footer facets-->
+        </rich:dataTable>
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Dynamical creation from Java code</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlDataTable myTable = new org.richfaces.component.html.HtmlDataTable();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+    <para>The <property>table</property> component is very similar to the custom JSF dataTable one, except for the common
+     peculiarities of any rich component:</para>
+     <itemizedlist>
+     <listitem>Skin support. The <property>table</property> completely meets a three-class principle of Rich Faces skinnability</listitem>
+     <listitem>Support of AJAX updates for a limited set of strings</listitem>
+     </itemizedlist>
+     <para>Skins support is described in the <ulink url="Skinnability.html">corresponding section</ulink>.
+      AJAX support is possible because the component is created basing on the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> component and
+       as a result the component has its possibilities of AJAX updates for a limited set of strings. 
+       The component is implemented with the <emphasis role="italic"><property>&quot;ajaxKeys&quot;</property></emphasis> attribute for a <property>table</property> and in contrast to 
+       the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> outputs the standard HTML structure for table rendering.</para>
+       <programlisting role="XML"><![CDATA[
+		<rich:dataTable value="#{capitalsBean.capitals}" var="capitals" 
+	      ajaxKeys="#{bean.ajaxSet}" binding="#{bean.table}" id="table">
+          <!--Set of columns and header/footer facets-->
+        </rich:dataTable>
+        ...
+        <a4j:commandButton action="#{bean.someAction}" reRender="table"/>
+...
+]]></programlisting>
+<para>For such a table during <property>someAction</property> method processing called with AJAX request when the key is pressed it&apos;s possible to fill in
+ lot&apos;s of ajaxKeys with strings indices that are to be updated. A resulting output on the client
+  contains only required strings and they are updated in the tree, even when update is specified for 
+  the whole table.</para>
+  </section>
+  <section>
+		 <title>Look and Feel Customization</title>
+		 <para>For skinnability implementation the components use a <emphasis 
+role="italic"><property>style class redefinition method</property></emphasis>.</para>
+    <para>Default style classes are mapped on <emphasis 
+role="italic"><property>skin parameters</property>.</emphasis></para>
+	<para>To redefine appearance of all dataTables at once, there are two ways:</para>
+        <itemizedlist>
+        <listitem>to redefine corresponding skin parameters</listitem>
+        <listitem>to add <emphasis 
+role="italic"><property>style classes</property></emphasis> used by the dataTable to your page stylesheets</listitem>
+         </itemizedlist>
+		 </section>
+		 <section>
+		 <title>Definition custom Style Classes:</title>		 
+		 <figure>
+<title>DataTable class names</title>
+<mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/dataTable2.gif"/>
+        </imageobject>
+    </mediaobject>
+    </figure>       
+    <para>On the screenshot there are class names defining the marked elements.</para>
+    <title></title>
+    <table>
+    <title>Component skin classes</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+              <entry>Class name</entry>
+                  <entry>An element defined with a class</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>rich-table</entry>
+            <entry>Applied to the &quot;table&quot; element</entry>
+          </row>
+          <row>
+            <entry>rich-table-caption</entry>
+            <entry>Applied to facet=&quot;caption&quot;</entry>
+          </row>
+          <row>
+          <entry>rich-table-header</entry>
+          <entry>Applied to a whole header &quot;header&quot;</entry>
+          </row>
+          <row>
+          <entry>rich-table-headercell</entry>
+          <entry>Applied to a partiular cell of a header &quot;header&quot;</entry>
+          </row>
+          <row>
+          <entry>rich-table-subheader</entry>
+          <entry>Applied to the whole subheader &quot;header&quot;</entry>
+          </row>
+          <row>
+          <entry>rich-table-subheadercell</entry>
+          <entry>Applied to  a partiular cell of subheader &quot;header&quot;</entry>
+          </row>
+          <row>
+          <entry>rich-table-cell</entry>
+          <entry> Applied to  a partiular table cell</entry>
+          </row>
+          <row>
+          <entry>rich-table-row</entry>
+          <entry>Applied to the whole table row</entry>
+          </row>
+          <row>
+          <entry>rich-table-subfooter</entry>
+          <entry>Applied to the whole subheader &quot;footer&quot;</entry>
+          </row>
+          <row>
+          <entry>rich-table-subfootercell</entry>
+          <entry>Applied to a partiular subheader &quot;footer&quot;</entry>
+          </row>
+          <row>
+          <entry>rich-table-footer</entry>
+          <entry>Applied to the whole &quot;footer&quot;</entry>
+          </row>
+          <row>
+          <entry>rich-table- footercell</entry>
+          <entry>Applied to the specific of &quot;footer&quot;</entry>
+          </row>
+         </tbody>
+      </tgroup>
+    </table> 
+    <para>To redefine an appearance of all <property>tables</property> on a page, redefine the corresponding class in the 
+    CSS file used with the page.</para>
+    <para>To redefine a style of a particular page, use <emphasis role="italic"><property>&quot;component class&quot;</property></emphasis> attributes which list is the same 
+    as the <property>dataTable</property> one and is known to you.</para>
+    </section>
+   </section>
+    
+    
+		 
+     

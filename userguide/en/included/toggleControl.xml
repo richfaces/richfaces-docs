@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>control</keyword>
+<keyword>rich:toggleControl</keyword>
+<keyword>HtmlToggleControl</keyword>
+<keyword>switching</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters</title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.ToggleControl</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlToggleControl</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.ToggleControl</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.ToggleControlRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.ToggleControlTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create it on a page, use the following syntax: </para>
+    <programlisting role="XML"><![CDATA[<rich:toggleControl for="panel"/>
+...
+<rich:togglePanel id="panel" stateOrder="[facets order to be switched]">
+   <!--//Set of Facets-->
+</rich:togglePanel>
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlToggleControl myControl = new org.richfaces.component.html.HtmlToggleControl();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+    <para>As it was mentioned above, the <property>control</property> could be in any place in 
+    layout and linked to a switching panel that is managed with <emphasis 
+
+role="italic"><property>&quot;for&quot;</property></emphasis> attribute (in the <emphasis 
+
+role="italic"><property>&quot;for&quot;</property></emphasis> attribute the full component &quot;id&quot; is specified according to naming
+ containers).</para>
+<para>The <property>togglePanel</property> could be also switched from the side of the control instead of being strictly defined 
+in <emphasis 
+role="italic"><property>&quot;switchOrder&quot;</property></emphasis> attribute of <emphasis role="bold"><property>&lt;rich:togglePanel&gt;</property>.</emphasis></para>
+<para><emphasis role="bold">Example:</emphasis></para>
+    <programlisting role="XML"><![CDATA[<rich:togglePanel id="panel"
+	       initialState="empty" switchType="client">
+	<f:facet name="first">
+	<h:panelGroup>
+    <rich:toggleControl for="helloForm:panel" value="Empty " 
+           switchTo="empty"/>
+	<rich:toggleControl for="helloForm:panel" value=" Second" 
+           switchTo="second"/>
+	       ...//Some Content
+	</h:panelGroup>
+	</f:facet>
+	<f:facet name="second">
+	<h:panelGroup>
+	<rich:toggleControl for="helloForm:panel" value="Empty " 
+           switchTo="empty"/>
+	<rich:toggleControl for="helloForm:panel" value=" first" 
+           switchTo="first"/>
+	       ...//Some Content
+	</h:panelGroup>
+	</f:facet>
+	<f:facet name="empty">
+	<h:panelGroup>
+	<rich:toggleControl for="helloForm:panel" value="first " 
+           switchTo="first"/>
+	<rich:toggleControl for="helloForm:panel" value=" second" 
+	       switchTo="second"/>
+	</h:panelGroup>
+	</f:facet>
+</rich:togglePanel> 
+]]></programlisting>
+<para>In this example the switching is performed on facets specified in the <emphasis 
+role="italic"><property>&quot;switchTo&quot;</property></emphasis> attribute.</para>
+	</section>
+	<section>
+	<title>Look and Feel Customization</title>
+	<para>On component generation the framework substitutes the default 
+	class <emphasis role="italic"><property>rich-toggle-control</property></emphasis> into
+	 styleClass of a generated component, i.e. to redefine at once all <property>toggle controls</property> appearance on a 
+	 page, redefine this class in your CSS.</para>
+	 <para>To define a particular <property>toggle controls</property> appearance, write down your own CSS properties and
+	 classes in component style attributes (<emphasis 
+role="italic"><property>&quot;style&quot;</property>,</emphasis> <emphasis 
+role="italic"><property>&quot;styleClass&quot;</property></emphasis>)and the properties have been changed.</para>
+	</section>
+</section>

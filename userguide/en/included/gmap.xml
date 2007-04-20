@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>map</keyword>
+<keyword>gmapVar</keyword>
+<keyword>HtmlGmap</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.Gmap</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlGmap</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.Gmap</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.GmapRenderer</entry>
+		  </row>
+		  <row>
+			<entry>tag-class</entry>
+            <entry>org.richfaces.taglib.GmapTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create it on a page, use the following syntax: </para>
+    <programlisting role="XML"><![CDATA[...
+		<rich:gmap gmapKey="..."/>
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlGmap myMap = new org.richfaces.component.html.HtmlGmap();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+    <para>To use <emphasis role="italic"><property>Google Map</property></emphasis> in your 
+    application, generate a key on <ulink url="http://google.com/apis/maps">Google Map official resource</ulink>. One key could be used for one directory on 
+    the server.</para>
+	<para>Here are the main settings of initial rendering performed with a component 
+	<property>map</property> that are accessible with the following attributes:</para>
+	<itemizedlist>
+        <listitem>
+        <emphasis role="italic"><property>&quot;zoom&quot;</property></emphasis> defines an 
+        approximation size (boundary values 1-18)
+        </listitem>
+        <listitem>
+        <emphasis role="italic"><property>&quot;lat&quot;</property></emphasis> specifies an initial 
+        latitude coordinate in degrees, as a number between -90 and +90
+        </listitem>
+		<listitem>
+		<emphasis role="italic"><property>&quot;lng&quot;</property></emphasis> specifies an initial
+		 longitude coordinate in degrees, as a number between -180 and +180
+		</listitem>
+		<listitem>
+		<emphasis role="italic"><property>&quot;mapType&quot;</property></emphasis> specifies a type
+		 of a rendered map (G_NORMAL_MAP, G_SATELLITE_MAP (DEFAULT), G_HYBRID_MAP)
+		</listitem>
+      </itemizedlist>
+	  <para>For example, the city of Paris is shown after rendering with the following 
+	    initial settings: <emphasis role="italic"><property>&quot;lat&quot;</property></emphasis>= 48.44,
+	    <emphasis role="italic"><property>&quot;lng&quot;</property></emphasis>= 2.24 and 
+	   <emphasis role="italic"><property>&quot;zoom&quot;</property></emphasis>= 5.</para>
+<figure>
+  <title>Gmap initial rendering</title>
+ <mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/gmap1.gif"/>
+        </imageobject>
+</mediaobject>
+</figure>
+    <para>
+    It&apos;s also possible to set accessible controls on the <property>map</property> with the help
+     of the attributes:</para>
+     	<itemizedlist>
+        <listitem>
+        <emphasis role="italic"><property>&quot;showGMapTypeControl&quot;</property></emphasis> 
+        determines whether the controls for a map type definition  are switched on
+        </listitem>
+        <listitem>
+        <emphasis role="italic"><property>&quot;showGScaleControl&quot;</property></emphasis> 
+        determines whether the controls for scaling are switched on
+        </listitem>
+		<listitem>
+		<emphasis role="italic"><property>&quot;showGLargeMapControl&quot;</property></emphasis> 
+		determines whether the control for <property>map</property> scale rendering is  rendered  
+		</listitem>
+     	</itemizedlist>
+		<figure>
+      <title>Gmap accessible controls</title>
+<mediaobject> 
+        <imageobject>
+            <imagedata fileref="images/gmap3.gif"/>
+        </imageobject>
+</mediaobject>
+    </figure>
+<para>To set all these parameters and perform some activity (Zoom In/Out etc.) is possible with your 
+JavaScript, i.e. declare a name of an object on a <property>map</property> in the 
+<emphasis role="italic"><property>&quot;gmapVar&quot;</property></emphasis> attribute 
+and then call the object directly with API 
+<emphasis role="italic"><property>Google Map</property>.</emphasis></para>
+   <para>For example, to approximate a map for 
+   <emphasis role="italic"><property>&quot;gmapVar&quot;</property></emphasis>= <property>&quot;map&quot;</property> 
+   declared inside the component, call map.zoomIn() on an event.</para>
+   <para>Moreover, to add e.g. some JavaScript effects, events defined on it are used.</para>
+	<itemizedlist>
+        <listitem>
+         onmouseover
+        </listitem>
+        <listitem>
+         onclick
+        </listitem>
+		<listitem>
+		onmouseout
+		</listitem>
+		<listitem>
+		etc.
+		</listitem>
+      </itemizedlist>
+  </section>
+    <section>
+    <title>Look and Feel Customization</title>
+    <para><property>Gmap</property> component isn&apos;t tied to skin parameters, as there is no
+     additional elements on it, except the ones provided with 
+     <emphasis role="italic"><property>Google Map</property>.</emphasis></para>
+	</section>
+	<section>
+    <title>Definition custom style classes:</title>
+    <para>rich-gmap is a predefined style class for the map. It&apos;s possible to define some 
+    standard properties for all <property>maps</property> components on a page (padding, border, etc.)
+     with the definition of the component.</para>
+</section>
+</section>

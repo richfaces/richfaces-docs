@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+<sectioninfo>
+<keywordset>
+<keyword>draggable zone</keyword>
+<keyword>rich:draggable</keyword>
+<keyword>HtmlDraggable</keyword>
+<keyword>drop zone</keyword>
+</keywordset>
+</sectioninfo>
+  <section>
+    <table>
+      <title>Component identification parameters </title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.richfaces.Draggable</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.richfaces.component.html.HtmlDraggable</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.richfaces.Draggable</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.richfaces.DraggableRenderer</entry>
+          </row>
+          <row>
+            <entry>tag-class</entry>
+            <entry>org.richfaces.taglib.DraggableTag</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create it on a page, use the following syntax: </para>
+    <programlisting role="XML"><![CDATA[...
+  <rich:draggable dragType="file">
+   <!--Some Content to be Dragged-->
+  </rich:draggable>
+ ...
+</rich:toolBar>
+]]></programlisting>
+  </section>
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+    <programlisting role="JAVA"><![CDATA[...
+org.richfaces.component.html.HtmlDraggable myDragZone = new org.richfaces.component.html.HtmlDraggable();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+    <para>As it shown in the example, a key attribute is <emphasis role="italic"><property>&quot;dragType&quot;</property></emphasis>, where a name for an obtaining Drag-area is defined. Basing on this name, Drop-zones on a page decide whether to accept Drag-area content or not (with the help of Drag-areas lists accepted for processing that are defined in Drop-zones).</para>
+    <para><emphasis role="bold">Example:</emphasis></para>
+    <programlisting role="XML"><![CDATA[...
+ <rich:draggable dragType="dragTextBlocks">
+  <!--Some Components There-->
+ </rich:draggable>
+ <rich:draggable dragType="dragIcons">
+  <!--Some Components There-->
+ </rich:draggable>
+...
+ <rich:dropZone acceptedTypes="[dragIcons]">
+  <!--Some Content Representing DropZone-->
+ <rich:dropZone>
+]]></programlisting>
+    <para>The example shows that Drop zone calls the corresponding drop event processing in it, only 
+    if a drop is generated from the second drop zone. </para>
+    <para>Another important attribute for 
+    <emphasis role="bold"><property>&lt;rich:draggable&gt;</property></emphasis> is <emphasis role="italic"><property>&quot;dragIndicator&quot;</property></emphasis> where the 
+<emphasis role="bold"><property>&lt;rich:dragIndicator&gt;</property></emphasis> component id is defined for this drag area. If it isn&apos;t defined drag area 
+creates a default indicator for drag operation. Additional information on <emphasis role="bold">
+        <property>&lt;rich:dragIndicator&gt;</property>
+      </emphasis>and its usage with a drag, could be found on the following chapter<ulink url="ch06s04.html">
+ dragIndicator</ulink>.</para>
+    <para>Thus, it&apos;s necessary only to define the following:</para>
+    <para><emphasis role="bold">Example:</emphasis></para>
+    <programlisting role="XML"><![CDATA[<rich:draggable dragType="dragText">
+  <h:outputText value="Hello"></h:outputText>  
+</rich:draggable>
+]]></programlisting>
+    <para>in order to be able to drag this string on a page.</para>
+    <para>The component also provide important components for redefinition of the corresponding 
+    events called with the drag operations (ondragstart and ondragend), where it possible to define 
+    your own additional JavaScript functions that are called on the corresponding events.</para>
+  </section>
+  <section>
+    <title>Look and Feel Customization</title>
+    <para>As it has been mention above, the component defines components wrapper for drag areas, i.e. 
+    it doesn&apos;t has its own representation. Therefore, for customization of a wrapper 
+    <emphasis role="bold"><property>&lt;div&gt;</property></emphasis> element of the component it&apos;s 
+    possible to use a component attribute <emphasis role="italic"><property>&quot;styleClass&quot;</property></emphasis> or 
+     redefine rich-draggable class in your own CSS files that is added to all <property>draggable</property> components
+      style on default.</para>
+  </section>
+</section>
