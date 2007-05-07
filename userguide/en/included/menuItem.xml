@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+    <sectioninfo>
+         <keywordset>
+            <keyword>menuItem</keyword> 
+        </keywordset>
+    </sectioninfo>
+  
+     <table>
+        <title>Component identification parameters</title> 
+        <tgroup cols="2">
+             <thead>
+                 <row>
+                    <entry>Name</entry> 
+                    <entry>Value</entry> 
+                </row>
+            </thead>
+             <tbody>
+                 <row>
+                    <entry>component-type</entry> 
+                    <entry>org.richfaces.MenuItem</entry> 
+                </row>
+                 <row>
+                    <entry>component-class</entry>
+                    <entry>org.richfaces.component.html.HtmlMenuItem</entry>
+                </row>
+                 <row>
+                    <entry>component-family</entry>
+                    <entry>org.richfaces.DropDownMenu</entry>
+                </row>
+                 <row>
+                    <entry>renderer-type</entry>
+                    <entry>org.richfaces.MenuItemRenderer</entry>
+                </row>
+                 <row>
+                    <entry>tag-class</entry>
+                    <entry>org.richfaces.taglib.MenuItemTag</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    
+    <section>
+       <title>Creation on a page</title>
+        <para>To create the simplest variant on a page use the following syntax:</para>
+        <programlisting role="xml">
+            <![CDATA[
+           ...
+            <rich:dropDownMenu>
+               ...
+               <rich:menuItem value="Active"/>
+               ...
+            <rich:dropDownMenu>
+           ...
+            ]]>
+        </programlisting>
+    </section>
+    
+    <section>
+        <title>Dynamical Creation from Java Code</title>
+        <programlisting role="java">
+            <![CDATA[
+            ...
+            org.richfaces.component.html.HtmlMenuItem myItem = new org.richfaces.component.html.HtmlMenuItem ();
+            ...
+            ]]>
+        </programlisting>
+    </section>
+    
+    <section>
+        <title>Details of Usage</title>
+        <para>
+            The &quot;Value&quot; attribute defines representation text for the item element.
+        </para>
+        <para>
+            The &quot;Icon&quot; attribute defines icon. The &quot;IconDisabled&quot; attribute defines icon for disabled item. Also you can use the &quot;Icon&quot; and &quot;IconDisabled&quot; facets. If the facets are defined, corresponding of the &quot;Icon&quot; and &quot;IconDisabled&quot; attributes are ignored and facets content is shown as icon. You can use it for realization checkboxes for items.
+        </para>
+        <para>
+            Example.
+        </para>
+        <programlisting role="xml">
+            <![CDATA[
+            ...
+            <f:facet name="icon">
+               <h:selectBooleanCheckbox value="#{bean.property}"/>
+            </f:facet>
+            ...
+            ]]>
+        </programlisting>
+        
+        <para>
+            Switching mode could be chosen with the &lt;rich: menuItem&gt;  attribute &quot;Mode&quot; with three possible parameters.
+        </para>
+        <itemizedlist>
+            <listitem><para>Server (on default)</para></listitem>
+        </itemizedlist>
+        <para>
+            The common submission of the form is performed and a page is completely refreshed.
+        </para>
+        <itemizedlist>
+            <listitem><para>Ajax</para></listitem>
+        </itemizedlist>
+        <para>
+            Ajax form submission is performed additionally specified elements in the &quot;reRender&quot; attribute are reRendered.
+        </para>
+        <itemizedlist>
+            <listitem><para>None</para></listitem>
+        </itemizedlist>
+        <para>
+            &quot;Action&quot; and &quot;ActionListener&quot; item&apos;s attributes are ignored. Menu Items don&apos;t fire any submits itself. Behavior is fully defined by the components nested to items.
+        </para>
+        <para>
+            For example you can put any content into the item. In this case you should set the &quot;Mode&quot; attribute as &quot;none&quot;.  
+        </para>
+        <para>
+            Example.
+        </para>    
+        <programlisting role="xml">
+            <![CDATA[
+            ...
+            <rich:dropDownMenu>
+              ...
+               <rich:menuItem submitMode="none">
+                    <h:outputLink value=”www.jboss.org”/>
+               </rich:menuItem>
+              ...
+            <rich:dropDownMenu>
+            ...
+           ]]>
+        </programlisting>
+        <para>
+            You can use &quot;Disabled&quot; attribute to set item&apos;s state.
+        </para>
+         <para>
+            Example.
+        </para>    
+        <programlisting role="xml">
+            <![CDATA[
+           ...
+            <rich:dropDownMenu>
+               <rich:menuItem value="Disable" disabled="true"/>
+            <rich:dropDownMenu>
+           ...
+            ]]>
+        </programlisting>
+        </section>
+ </section>
