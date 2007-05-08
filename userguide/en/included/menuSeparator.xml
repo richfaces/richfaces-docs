@@ -43,27 +43,90 @@
     <section>
        <title>Creation on a page</title>
         <para>To create the simplest variant on a page use the following syntax:</para>
-        <programlisting role="xml">
-            <![CDATA[
-            ...
-            <rich:dropDownMenu/>
-               ...
-               <rich: menuSeparator/>
-               ...
-            <rich:dropDownMenu/>
-            ...
-            ]]>
-        </programlisting>
+        <programlisting role="xml"><![CDATA[...
+    <rich:dropDownMenu/>
+        ...
+        <rich: menuSeparator/>
+        ...
+    <rich:dropDownMenu/>
+...]]></programlisting>
     </section>
     
     <section>
         <title>Dynamical Creation from Java Code</title>
-        <programlisting role="java">
-            <![CDATA[
-            ...
-            org.richfaces.component.html.HtmlMenuSeparator mySep = new org.richfaces.component.html.HtmlMenuSeparator ();
-            ...
-            ]]>
-        </programlisting>
+        <programlisting role="java"><![CDATA[...
+    org.richfaces.component.html.HtmlMenuSeparator mySep = new org.richfaces.component.html.HtmlMenuSeparator ();
+...]]></programlisting>
+    </section>
+   
+    <section>
+        <title> Look and Feel Customization</title>
+            <para>
+                For skinnability implementation, the components use a style class redefinition method. Default style classes are mapped on skin parameters.
+            </para>   
+            <para>
+                There are two ways to redefine appearance of all menuSeparators  at once:     
+            </para>
+            <itemizedlist>
+                <listitem><para>Redefine corresponding skin parameters.</para></listitem>
+                <listitem><para>Add to user&apos;s stylesheets style classes used by a menuSeparator.</para></listitem>
+            </itemizedlist>
+        </section>
+        <section>
+            <title>Skin parameters redefinition</title>
+            <table>
+                <title>Label Skin parameters redefinition</title> 
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Skin parameters for item</entry> 
+                            <entry>CSS properties</entry> 
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>panelBorderColor</entry> 
+                            <entry>border-top-color</entry> 
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+    <section>
+        <title> Definition custom style classes </title>
+        <para>
+            On the screenshot, there are classes names that define separator element appearance.
+        </para>
+        <figure>
+            <title>Classes names</title> 
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/menuSeparator2.png" /> 
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <table>
+            <title>Classes names that define separator element appearance.</title> 
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry> 
+                        <entry>Description</entry> 
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Rich-menu-item</entry> 
+                        <entry>Defines the class for div element for separator</entry> 
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <para>
+            In order to redefine style for all menuSeparators on a page using CSS, it&apos;s enough to create classes with the same names and define the necessary properties in them.
+        </para>
+        <para>
+            To change style peculiarities of the particular menuSeparators define your own style classes in the corresponding simple menuSeparator attributes.
+        </para>
     </section>
 </section>

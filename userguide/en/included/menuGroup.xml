@@ -43,30 +43,22 @@
     <section>
        <title>Creation on a page</title>
         <para>To create the simplest variant on a page use the following syntax:</para>
-        <programlisting role="xml">
-            <![CDATA[
-           ...
-            <rich:dropDownMenu value="Active">
-             ...
-              <rich: menuGroup value="Active">
-                 <!—Nested menu components-->
-              </rich:menuGroup>
-             ...
-            </rich:dropDownMenu >
-           ...
-            ]]>
-        </programlisting>
+        <programlisting role="xml"><![CDATA[...
+    <rich:dropDownMenu value="Active">
+        ...
+        <rich: menuGroup value="Active">
+            <!--Nested menu components-->
+        </rich:menuGroup>
+        ...
+    </rich:dropDownMenu >
+...]]></programlisting>
     </section>
     
     <section>
         <title>Dynamical Creation from Java Code</title>
-        <programlisting role="java">
-            <![CDATA[
-            ...
-            org.richfaces.component.html.HtmlMenuGroup myGroup = new org.richfaces.component.html.HtmlMenuGroup ();
-            ...
-            ]]>
-        </programlisting>
+        <programlisting role="java"><![CDATA[...
+    org.richfaces.component.html.HtmlMenuGroup myGroup = new org.richfaces.component.html.HtmlMenuGroup ();
+...]]></programlisting>
     </section>
     
     <section>
@@ -80,14 +72,11 @@
         <para>
             Example.
         </para>
-        <programlisting role="xml">
-            <![CDATA[
-           ...
-           <f:facet name="icon">
-              <h:selectBooleanCheckbox value="#{bean.property}"/>
-           </f:facet>
-           ...
-            ]]>
+        <programlisting role="xml"><![CDATA[...
+    <f:facet name="icon">
+        <h:selectBooleanCheckbox value="#{bean.property}"/>
+    </f:facet>
+...]]>
         </programlisting>
         <para>
             The &quot;iconFolder&quot; and  &quot;iconFolderDisabled&quot; attributes are defined for using icons as a folder icon. The &quot;iconFolder&quot; and &quot;iconFolderDisabled&quot; facets use content as folder icon representation.
@@ -107,14 +96,11 @@
         <para>
             
         </para>
-        <programlisting role="xml">
-            <![CDATA[
-            ...
-            <rich:menuGroup value="Active" direction="left"
-               <!--Nested menu components-->
-            </rich:menuGroup>
-            ...
-            ]]>
+        <programlisting role="xml"><![CDATA[...
+    <rich:menuGroup value="Active" direction="left"
+        <!--Nested menu components-->
+    </rich:menuGroup>
+...]]>
         </programlisting>
         <para>
             As a result:
@@ -128,4 +114,155 @@
          </mediaobject>
          </figure>
     </section>  
- </section>
+
+   <section>
+    <title> Look and Feel Customization</title>
+        <para>
+            For skinnability implementation, the components use a style class redefinition method. Default style classes are mapped on skin parameters.
+        </para>   
+        <para>
+            There are two ways to redefine appearance of all menuGroups  at once:     
+        </para>
+        <itemizedlist>
+            <listitem><para>Redefine corresponding skin parameters.</para></listitem>
+            <listitem><para>Add to user&apos;s stylesheets style classes used by a menuGroup.</para></listitem>
+        </itemizedlist>
+       </section>
+       <section>
+           <title>Skin parameters redefinition</title>
+        <table>
+            <title>Label Skin parameters redefinition</title> 
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters for group</entry> 
+                        <entry>CSS properties</entry> 
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalFamilyFont</entry> 
+                        <entry>font-family</entry> 
+                    </row>
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <table>
+            <title>Label Skin parameters redefinition</title> 
+            <tgroup cols="2">
+                <thead>        
+                    <row>
+                        <entry>Skin parameters for disabled group</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>tabDisabledTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Label Skin parameters redefinition</title> 
+            <tgroup cols="2">
+                <thead>        
+                    <row>
+                        <entry>Skin parameters for text label</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>        
+</section>
+
+<section>
+    <title> Definition custom style classes </title>
+    <para>
+        On the screenshot, there are classes names that define group element appearance.
+    </para>
+    <figure>
+        <title>Classes names</title> 
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/menuGroup3.png" /> 
+            </imageobject>
+        </mediaobject>
+    </figure>
+    <table>
+        <title>Classes names that define group element appearance.</title> 
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Class name</entry> 
+                    <entry>Description</entry> 
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>Rich-menu-group</entry> 
+                    <entry>Defines the class for wrapping div element for the whole group</entry> 
+                </row>
+                <row>
+                    <entry>Rich-menu-item-label</entry>
+                    <entry>Defines properties for the text</entry>
+                </row>
+                <row>
+                    <entry>Rich-menu-item-icon</entry>
+                    <entry>Defines properties for the left icon element</entry>
+                </row>
+                <row>
+                    <entry>Rich-menu-item-folder</entry>
+                    <entry>Defines properties for the right icon element</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <para>
+        All listed elements except of general are defined for disabled mode.
+    </para>
+   <table>
+       <title>Classes names for disabled mode</title> 
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Class name</entry> 
+                    <entry>Description</entry> 
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>Rich-menu-item-label-disabled</entry> 
+                    <entry>Defines properties for the text</entry> 
+                </row>
+                <row>
+                    <entry>Rich-menu-item-icon-disabled</entry>
+                    <entry>Defines properties for the left icon element</entry>
+                </row>
+                <row>
+                    <entry>Rich-menu-item-folder-disabled</entry>
+                    <entry>Defines properties for the right icon element</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <para>
+        In order to redefine style for all menuGroups on a page using CSS, it&apos;s enough to create classes with the same names and define the necessary properties in them.
+    </para>
+    <para>
+        To change style peculiarities of the particular menuGroups define your own style classes in the corresponding simple menuGroup attributes.
+    </para>
+</section>
+</section>
