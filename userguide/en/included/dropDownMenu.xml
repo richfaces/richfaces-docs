@@ -67,432 +67,317 @@
   <section>
     <title>Creating the Component Dynamically Using Java</title>
 
-    <programlisting role="java">...
+    <programlisting role="java"><![CDATA[...
     org.richfaces.component.html.HtmlDropDownMenu myMenu = new org.richfaces.component.html.HtmlDropDownMenu();
-...</programlisting>
-  </section>
-
-  <section>
-    <title>Details of Usage</title>
-
-    <para>All attributes except "value" are optional. The "value" attribute
-    defines text to be represented. If you can use the "label" facet, you can
-    even not use the "value" attribute.</para>
-
-    <para>Here is an example:</para>
-
-    <programlisting role="xml">...
-    &lt;f:facet name="label"&gt;
-        &lt;h:graphicImage value="/images/img1.gif"/&gt;
-    &lt;/f:facet&gt;
-...</programlisting>
-
-    <para>Use the "event" attribute to define an event for the represented
-    element that triggers a menu appearance. An example of a menu appearance
-    on a click can be seen below.</para>
-
-    <programlisting role="xml">...
-    &lt;rich:dropDownMenu event="onclick" value="Item1"&gt;
-        &lt;!--Nested menu components--&gt;
-    &lt;/rich:dropDownMenu&gt;
-...</programlisting>
-
-    <para>The &lt;rich:dropDownMenu&gt; "mode" attribute can be set to three
-    possible parameters:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Server (default)</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>The standard form submission is performed and the page is completely
-    refreshed.</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Ajax</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>An AJAX form submission is performed, and specified elements in the
-    "reRender" attribute are rerendered.</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>None</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>The "action" and "actionListener" item's attributes are ignored.
-    Menu items don't fire any submits themselves. The behavior is fully
-    defined by the components nested inside items.</para>
-
-    <note><title>Note:</title> As the &lt;rich:dropDownMenu&gt; component
-    doesn't provide its own form, use it between &lt;h:form&gt; and
-    &lt;/h:form&gt; tags.</note>
-
-    <para>The "direction" and "jointPoint" attributes are used for defining
-    aspects of menu appearance.</para>
-
-    <para>Possible values for the "direction" attribute are:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>top-left - a menu attached to the top-right corner of the
-        label</para>
-      </listitem>
-
-      <listitem>
-        <para>top-right - a menu attached to the top-left corner of the
-        label</para>
-      </listitem>
-
-      <listitem>
-        <para>bottom-left - a menu attached to the bottom-right corner of the
-        label</para>
-      </listitem>
-
-      <listitem>
-        <para>bottom-right - a menu attached to the bottom-left corner of the
-        label</para>
-      </listitem>
-
-      <listitem>
-        <para>auto - a smart positioning activation</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>Possible values for the "jointPoint" attribute are:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>tr - top-right point of the label element</para>
-      </listitem>
-
-      <listitem>
-        <para>tl - top-left point of the label element</para>
-      </listitem>
-
-      <listitem>
-        <para>br - bottom-right point of the label element</para>
-      </listitem>
-
-      <listitem>
-        <para>bl - bottom-left point of the label element</para>
-      </listitem>
-
-      <listitem>
-        <para>auto - smart positioning activation</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>By default, the "direction" and "jointPoint" attributes are set to
-    "auto".</para>
-
-    <para>Here is an example:</para>
-
-    <programlisting role="xml">...
-    &lt;rich:dropDownMenu value="Item1" direction="bottom-right" jointPoint="tr"&gt;
-        &lt;!--Nested menu components--&gt;
-    &lt;/rich:dropDownMenu&gt;
-...</programlisting>
-
-    <para>This is the result:</para>
-
-    <figure>
-      <title>Using the "direction" and "joinPoint" attributes</title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/dropDownMenu2.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <para>You can correct an offset of the pop-up list relative to the label
-    using the following attributes: "horizontalOffset" and
-    "verticalOffset".</para>
-
-    <para>Here is an example:</para>
-
-    <programlisting role="xml">...
-    &lt;rich:dropDownMenu value="Item1" direction="bottom-right" jointPoint="tr" horizontalOffset="-15" verticalOffset="0"&gt;
-        &lt;!--Nested menu components--&gt;
-    &lt;/rich:dropDownMenu&gt;
-...
+...]]</programlisting>
+    </section>
+    
+    <section>
+        <title>Details of Usage</title>
+        <para>
+            All attributes except the &quot;value&quot; are not required. The &quot;value&quot; attribute defines a representation text.
+        </para>
+        <para>
+            Also instead of the &quot;value&quot; attribute you can use the &quot;label&quot; facet.
+        </para>
+        <para>
+            Example.
+        </para>
+        <programlisting role="xml"><![CDATA[...
+    <f:facet name="label">
+        <h:graphicImage value="/images/img1.gif"/>
+    </f:facet>
+...]]></programlisting>
+        <para>
+            Use the &quot;event&quot; attribute to define an event on the representation element that triggers a menu appearance. An example of a menu appearance on a click could be seen below.
+        </para>
+        <programlisting role="xml"><![CDATA[...
+    <rich:dropDownMenu event="onclick" value="Item1">
+        <!--Nested menu components-->
+    </rich:dropDownMenu>
+...]]></programlisting>
+        <para>
+            Switching mode could be chosen with the &lt;rich:dropDownMenu&gt;  attribute &quot;mode&quot; with three possible parameters.
+        </para>
+        <itemizedlist>
+            <listitem><para>Server (on default)</para></listitem>
+         </itemizedlist>
+        <para>
+            The common submission of a form is performed and a page is completely refreshed.
+        </para>
+        <itemizedlist>
+            <listitem><para>Ajax</para></listitem>
+        </itemizedlist>
+        <para>
+            Ajax form submission is performed, additionally specified elements in the &quot;reRender&quot; attribute are reRendered.
+        </para>
+        <itemizedlist>
+            <listitem><para>None</para></listitem>
+        </itemizedlist>
+        <para>
+            The&quot;action&quot; and &quot;actionListener&quot; item&apos;s attributes are ignored. Menu items don&apos;t fire any submits itself. Behavior is fully defined by the components nested into items.
+        </para>
+        <note><title>Note:</title>
+            As the &lt;rich:dropDownMenu&gt; component doesn&apos;t provide its own form, use it in &lt;form&gt;...&lt;/h:form&gt;.
+        </note>
+        <para>
+            The &quot;direction&quot; and &quot;jointPoint&quot; attributes are used for the definition ways of menu appearance as it&apos;s shown in the example below.
+        </para>    
+        <para>
+            Possible values for the &quot;direction&quot; attribute are:
+        </para>
+        <itemizedlist>
+            <listitem><para>top-left - a menu attached to the top-right corner of the label;</para></listitem>
+            <listitem><para>top-right - a menu attached to the top-left corner of the label;</para></listitem>
+            <listitem><para>bottom-left - a menu attached to the bottom-right corner of the label;</para></listitem>
+            <listitem><para>bottom-right - a menu attached to the bottom-left corner of the label;</para></listitem>
+            <listitem><para>auto - a smart positioning activation.</para></listitem>
+        </itemizedlist>
+        <para>
+            Possible values for the &quot;jointPoint&quot; attribute are:
+        </para>
+        <itemizedlist>
+            <listitem><para>tr - top-right point of the label element;</para></listitem>
+            <listitem><para>tl - top-left point of the label element;</para></listitem>
+            <listitem><para>br - bottom-right point of the label element;</para></listitem>
+            <listitem><para>bl - bottom-left point of the label element;</para></listitem>
+            <listitem><para>auto - smart positioning activation.</para></listitem>
+        </itemizedlist>
+        <para>
+            On default the &quot;direction&quot; and &quot;jointPoint&quot; attributes define as &quot;auto&quot;. 
+        </para>
+        <para>
+            Example.
+        </para>
+        <programlisting role="xml"><![CDATA[...
+    <rich:dropDownMenu value="Item1" direction="bottom-right" jointPoint="tr">
+        <!--Nested menu components-->
+    </rich:dropDownMenu>
+...]]></programlisting>
+        <para>
+            As a result:
+        </para>
+        <figure>
+           <title>Using the &quot;direction&quot; and &quot;joinPoint&quot; attributes</title> 
+           <mediaobject>
+                 <imageobject>
+                    <imagedata fileref="images/dropDownMenu2.png" /> 
+                </imageobject>
+           </mediaobject>
+         </figure>  
+        <para>
+            You can correct an offset of the popup list relatively to the label using following attributes: &quot;horizontalOffset&quot; and &quot;verticalOffset&quot;.
+        </para>
+        <para>
+            Example.
+        </para>
+        <programlisting role="xml"><![CDATA[...
+    <rich:dropDownMenu value="Item1" direction="bottom-right" jointPoint="tr" horizontalOffset="-15" verticalOffset="0">
+        <!--Nested menu components-->
+    </rich:dropDownMenu>
+...]]>
         </programlisting>
+        <para>
+            As a result:
+        </para>
+        <figure>
+            <title>Using the &quot;horizontalOffset&quot; and &quot;verticalOffset&quot; attributes</title> 
+            <mediaobject>
+             <imageobject>
+                <imagedata fileref="images/dropDownMenu3.png" /> 
+            </imageobject>
+         </mediaobject>
+        </figure>  
+    </section>
+   
+    <section>
+        <title> Look and Feel Customization</title>
+           <para>
+            For skinnability implementation, the components use a style class redefinition method. Default style classes are mapped on skin parameters.
+        </para>   
+      <para>
+          There are two ways to redefine appearance of all dropDownMenus at once:     
+      </para>
+        <itemizedlist>
+            <listitem><para>Redefine corresponding skin parameters.</para></listitem>
+            <listitem><para>Add to user&apos;s stylesheets style classes used by a dropDownMenu.</para></listitem>
+        </itemizedlist>
+        </section>
+        <section>
+            <title>Skin parameters redefinition</title>
+        <table>
+            <title>Label Skin parameters redefinition</title> 
+             <tgroup cols="2">
+                 <thead>
+                     <row>
+                        <entry>Skin parameters for label div element</entry> 
+                        <entry>CSS properties</entry> 
+                    </row>
+                </thead>
+                 <tbody>
+                     <row>
+                        <entry>generalFamilyFont</entry> 
+                        <entry>font-family</entry> 
+                    </row>
+                     <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                     </row>
+                 </tbody>
+             </tgroup>
+        </table>
+        <table>
+            <title>Label Skin parameters redefinition</title> 
+            <tgroup cols="2">
+                <thead>        
+                     <row>
+                        <entry>Skin parameters for selected label element</entry>
+                        <entry>CSS properties</entry>
+                     </row>
+                </thead>
+                <tbody>
+                      <row>
+                        <entry>panelBorderColor</entry>
+                        <entry>border-color</entry>
+                      </row>
+                     <row>
+                        <entry>controlBackgroundColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>background-colorcolor</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <table>
+            <title>Popup Skin parameters redefinition</title> 
+             <tgroup cols="2">
+                 <thead>
+                     <row>
+                        <entry>Skin parameters for border element</entry> 
+                        <entry>CSS properties</entry> 
+                    </row>
+                </thead>
+                 <tbody>
+                     <row>
+                        <entry>panelBorderColor</entry> 
+                        <entry>border-color</entry> 
+                    </row>
+                     <row>
+                        <entry>additionalBackgroundColor</entry>
+                        <entry>background-color</entry>
+                     </row>
+                 </tbody>
+             </tgroup>
+        </table>
+        <table>
+            <title>Popup Skin parameters redefinition</title> 
+            <tgroup cols="2">
+                <thead>
+                     <row>
+                        <entry>Skin parameters for background  element</entry>
+                        <entry>CSS properties</entry>
+                     </row>
+                </thead>
+                <tbody>
+                      <row>
+                        <entry>additionalBackgroundColor</entry>
+                        <entry>border-top-color</entry>
+                    </row>
+                     <row>
+                        <entry>additionalBackgroundColor</entry>
+                        <entry>border-left-color</entry>
+                    </row>
+                    <row>
+                        <entry>additionalBackgroundColor</entry>
+                        <entry>border-right-color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        </section>
+        <section>
+            <title> Definition custom style classes </title>
+            <para>
+                On the screenshot, there are classes names that define element label.
+            </para>
+            <figure>
+                <title>dropDownMenu class names</title> 
+             <mediaobject>
+                 <imageobject>
+                    <imagedata fileref="images/dropDownMenu4.png" /> 
+                </imageobject>
+             </mediaobject>
+             </figure>
+            <table>
+                <title>Classes names that define element label</title> 
+                 <tgroup cols="2">
+                     <thead>
+                         <row>
+                            <entry>Class name</entry> 
+                            <entry>Description</entry> 
+                        </row>
+                    </thead>
+                     <tbody>
+                         <row>
+                            <entry>Rich-label-text-decor</entry> 
+                            <entry>Defines the text style of a representation element</entry> 
+                        </row>
+                         <row>
+                            <entry>Rich-ddmenu-label</entry>
+                            <entry>Defines the class for wrapping div element of a representation element</entry>
+                        </row>
+                         <row>
+                            <entry>Rich-ddmenu-label-select</entry>
+                            <entry>Defines the class for wrapping div element of the selected representation element</entry>
+                        </row>
+                          <row>
+                            <entry>Rich-ddmenu-label-unselect</entry>
+                            <entry>Defines the class for wrapping div element of a representation element that isn&apos;t selected</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                On the screenshot, there are classes names that define element popup.
+            </para>
+            <figure>
+                <title>Classes names</title> 
+             <mediaobject>
+                 <imageobject>
+                    <imagedata fileref="images/dropDownMenu5.png" /> 
+                </imageobject>
+             </mediaobject>
+            </figure>
+            <table>
+                <title>Classes names that define element popup</title> 
+                 <tgroup cols="2">
+                     <thead>
+                         <row>
+                            <entry>Class name</entry> 
+                            <entry>Description</entry> 
+                        </row>
+                    </thead>
+                     <tbody>
+                         <row>
+                            <entry>Rich-menu-list-border</entry> 
+                            <entry>Defines a class for borders elements</entry> 
+                        </row>
+                         <row>
+                            <entry>Rich-menu-list-border</entry>
+                            <entry>Defines the class for a general background list</entry>
+                        </row>
+                   </tbody>
+                </tgroup>
+            </table>
+            <para>
+                In order to redefine style for all dropDownMenus on a page using CSS, it&apos;s enough to create classes with the same names and define the necessary properties in them.
+            </para>
+            <para>
+                To change style peculiarities of the particular dropDownMenus define your own style classes in the corresponding simple dropDownMenu attributes.
+            </para>
+        </section>
+    </section>
 
-    <para>This is the result:</para>
-
-    <figure>
-      <title>Using the "horizontalOffset" and "verticalOffset"
-      attributes</title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/dropDownMenu3.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-  </section>
-
-  <section>
-    <title>Look-and-Feel Customization</title>
-
-    <para>For skinability implementation, the components use a style class
-    redefinition method. Default style classes are mapped on skin
-    parameters.</para>
-
-    <para>There are two ways to redefine the appearance of all dropDownMenus
-    at once:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Redefine the corresponding skin parameters</para>
-      </listitem>
-
-      <listitem>
-        <para>Add to a user's stylesheets style classes used by a
-        dropDownMenu</para>
-      </listitem>
-    </itemizedlist>
-  </section>
-
-  <section>
-    <title> Redefinition of Skin Parameters</title>
-
-    <table>
-      <title>Label Skin parameters redefinition</title>
-
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Skin parameters for label div element</entry>
-
-            <entry>CSS properties</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>generalFamilyFont</entry>
-
-            <entry>font-family</entry>
-          </row>
-
-          <row>
-            <entry>generalSizeFont</entry>
-
-            <entry>font-size</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-
-    <table>
-      <title>Label Skin parameters redefinition</title>
-
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Skin parameters for selected label element</entry>
-
-            <entry>CSS properties</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>panelBorderColor</entry>
-
-            <entry>border-color</entry>
-          </row>
-
-          <row>
-            <entry>controlBackgroundColor</entry>
-
-            <entry>background-color</entry>
-          </row>
-
-          <row>
-            <entry>generalTextColor</entry>
-
-            <entry>background-colorcolor</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-
-    <table>
-      <title>Popup Skin parameters redefinition</title>
-
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Skin parameters for border element</entry>
-
-            <entry>CSS properties</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>panelBorderColor</entry>
-
-            <entry>border-color</entry>
-          </row>
-
-          <row>
-            <entry>additionalBackgroundColor</entry>
-
-            <entry>background-color</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-
-    <table>
-      <title>Popup Skin parameters redefinition</title>
-
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Skin parameters for background element</entry>
-
-            <entry>CSS properties</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>additionalBackgroundColor</entry>
-
-            <entry>border-top-color</entry>
-          </row>
-
-          <row>
-            <entry>additionalBackgroundColor</entry>
-
-            <entry>border-left-color</entry>
-          </row>
-
-          <row>
-            <entry>additionalBackgroundColor</entry>
-
-            <entry>border-right-color</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  </section>
-
-  <section>
-    <title>Definition of Custom Style Classes</title>
-
-    <para>In the screenshot, there are classes names that define the element
-    label.</para>
-
-    <figure>
-      <title>Classes names</title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/dropDownMenu4.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <table>
-      <title>Classes names that define element label</title>
-
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Class name</entry>
-
-            <entry>Description</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>Rich-label-text-decor</entry>
-
-            <entry>Defines the text style of a representation element</entry>
-          </row>
-
-          <row>
-            <entry>Rich-ddmenu-label</entry>
-
-            <entry>Defines the class for wrapping div element of a
-            representation element</entry>
-          </row>
-
-          <row>
-            <entry>Rich-ddmenu-label-select</entry>
-
-            <entry>Defines the class for wrapping div element of the selected
-            representation element</entry>
-          </row>
-
-          <row>
-            <entry>Rich-ddmenu-label-unselect</entry>
-
-            <entry>Defines the class for wrapping div element of a
-            representation element that isn't selected</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-
-    <para>In the screenshot, there are classes names that define an element
-    pop-up.</para>
-
-    <figure>
-      <title>Classes names</title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/dropDownMenu5.png" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <table>
-      <title>Classes names that define element popup</title>
-
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Class name</entry>
-
-            <entry>Description</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>Rich-menu-list-border</entry>
-
-            <entry>Defines a class for borders elements</entry>
-          </row>
-
-          <row>
-            <entry>Rich-menu-list-border</entry>
-
-            <entry>Defines the class for a general background list</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-
-    <para>In order to redefine the style for all drop-down menus on a page
-    using CSS, it's enough to create classes with the same names and define
-    the necessary properties in them.</para>
-
-    <para>To change the style peculiarities of the particular drop-down menus
-    define your own style classes in the corresponding dropDownMenu
-    attributes.</para>
-  </section>
-</section>
