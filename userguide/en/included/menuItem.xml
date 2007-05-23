@@ -41,8 +41,8 @@
     </table>
     
     <section>
-       <title>Creation on a page</title>
-        <para>To create the simplest variant on a page use the following syntax:</para>
+       <title>Creating the Component with a Page Tag</title>
+        <para>Here is a simple example as it might be used in a page:</para>
         <programlisting role="xml"><![CDATA[...
     <rich:dropDownMenu>
         ...
@@ -53,7 +53,7 @@
     </section>
     
     <section>
-        <title>Dynamical Creation from Java Code</title>
+        <title>Creating the Component Dynamically Using Java</title>
         <programlisting role="java"><![CDATA[...
     org.richfaces.component.html.HtmlMenuItem myItem = new org.richfaces.component.html.HtmlMenuItem ();
 ...]]></programlisting>
@@ -62,13 +62,13 @@
     <section>
         <title>Details of Usage</title>
         <para>
-            The &quot;value&quot; attribute defines text representation for an item element.
+            The &quot;value&quot; attribute defines the text representation for an item element.
         </para>
         <para>
-            The &quot;icon&quot; attribute defines an icon. The &quot;iconDisabled&quot; attribute defines an icon for a disabled item. Also you can use the &quot;icon&quot; and &quot;iconDisabled&quot; facets. If the facets are defined, the corresponding &quot;icon&quot; and &quot;iconDisabled&quot; attributes are ignored and the facets content is shown as an icon. It could be used for items checkboxes implementation.
+            There are two icon-related attributes. The &quot;icon&quot; attribute defines an icon. The &quot;iconDisabled&quot; attribute defines an icon for a disabled item. Also you can use the &quot;icon&quot; and &quot;iconDisabled&quot; facets. If the facets are defined, the corresponding &quot;icon&quot; and &quot;iconDisabled&quot; attributes are ignored and the facets content is shown as an icon. It could be used for an item check box implementation.
         </para>
         <para>
-            Example.
+            Here is an example:
         </para>
         <programlisting role="xml"><![CDATA[...
     <f:facet name="icon">
@@ -76,32 +76,41 @@
     </f:facet>
 ...]]></programlisting>
         
+        <para>The &lt;rich: menuItem&gt; "mode" attribute can be set to three
+    possible parameters:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Server (default)</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The standard form submission is performed and the page is completely
+    refreshed.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ajax</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>An AJAX form submission is performed, and specified elements in the
+    "reRender" attribute are rerendered.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>None</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The "action" and "actionListener" item's attributes are ignored.
+    Menu items don't fire any submits themselves. The behavior is fully
+    defined by the components nested inside items.</para>
         <para>
-            A switching mode could be chosen with the &lt;rich: menuItem&gt; attribute &quot;mode&quot; with three possible parameters.
+            For example, you can put any content into an item, but, in this case, you should set the &quot;mode&quot; attribute as &quot;none&quot;.  
         </para>
-        <itemizedlist>
-            <listitem><para>Server (on default)</para></listitem>
-        </itemizedlist>
         <para>
-            The common submission of the form is performed and a page is completely refreshed.
-        </para>
-        <itemizedlist>
-            <listitem><para>Ajax</para></listitem>
-        </itemizedlist>
-        <para>
-            Ajax form submission is performed, additionally specified elements in the &quot;reRender&quot; attribute are reRendered.
-        </para>
-        <itemizedlist>
-            <listitem><para>None</para></listitem>
-        </itemizedlist>
-        <para>
-            The &quot;action&quot; and &quot;actionListener&quot; items attributes are ignored. Menu items don&apos;t fire any submits itself. Behavior is fully defined by components nested to items.
-        </para>
-        <para>
-            For example, you can put any content into an item but in this case you should set the &quot;mode&quot; attribute as &quot;none&quot;.  
-        </para>
-        <para>
-            Example.
+           Here is an example:
         </para>    
         <programlisting role="xml"><![CDATA[...
     <rich:dropDownMenu>
@@ -113,10 +122,10 @@
        <rich:dropDownMenu>
 ...]]></programlisting>
         <para>
-            You can use the &quot;disabled&quot; attribute to set item state.
+            You can use the &quot;disabled&quot; attribute to set the item state.
         </para>
          <para>
-            Example.
+            Here is an example:
         </para>    
         <programlisting role="xml"><![CDATA[...
     <rich:dropDownMenu>
@@ -126,22 +135,22 @@
         </section>
 
     <section>
-        <title> Look and Feel Customization</title>
+        <title> Look-and-Feel Customization</title>
             <para>
-                For skinnability implementation, the components use a style class redefinition method. Default style classes are mapped on skin parameters.
+                For skinability implementation, the components use a style class redefinition method. Default style classes are mapped on skin parameters.
             </para>   
             <para>
-                There are two ways to redefine appearance of all menuItems  at once:     
+                There are two ways to redefine the appearance of all menuItems at once:     
             </para>
             <itemizedlist>
-                <listitem><para>Redefine corresponding skin parameters.</para></listitem>
-                <listitem><para>Add to user&apos;s stylesheets style classes used by a menuItem.</para></listitem>
+                <listitem><para>Redefine the corresponding skin parameters</para></listitem>
+                <listitem><para>Add to user&apos;s stylesheets style classes used by a menuItem</para></listitem>
             </itemizedlist>
         </section>
         <section>
             <title>Skin parameters redefinition</title>         
             <table>
-                <title>Label Skin parameters redefinition</title> 
+                <title>Label skin parameters redefinition</title> 
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -163,7 +172,7 @@
             </table>
           
             <table>
-                <title>Label Skin parameters redefinition</title> 
+                <title>Label skin parameters redefinition</title> 
                 <tgroup cols="2">
                     <thead>        
                         <row>
@@ -185,7 +194,7 @@
             </table>
             
             <table>
-                <title>Label Skin parameters redefinition</title> 
+                <title>Label skin parameters redefinition</title> 
                 <tgroup cols="2">
                     <thead>        
                         <row>
@@ -203,7 +212,7 @@
             </table>        
             
             <table>
-                <title>Label Skin parameters redefinition</title> 
+                <title>Label skin parameters redefinition</title> 
                 <tgroup cols="2">
                     <thead>        
                         <row>
@@ -222,12 +231,12 @@
     </section>
     
     <section>
-        <title> Definition custom style classes </title>
+        <title> Definition of Custom Style Classes </title>
         <para>
-            On the screenshot, there are classes names that define item element appearance.
+            In the screenshot, the classes names that define item element appearance are shown.
         </para>
         <figure>
-            <title>Classes names</title> 
+            <title>Class names</title> 
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="images/menuItem2.png" /> 
@@ -235,7 +244,7 @@
             </mediaobject>
         </figure>
         <table>
-            <title>Classes names that define item element appearance.</title> 
+            <title>Class names that define item element appearance.</title> 
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -260,10 +269,10 @@
             </tgroup>
         </table>
         <para>
-            All listed elements except of general are defined for disabled, enabled and hovered modes.
+            All listed elements except the general ones are defined for disabled, enabled, and hovered modes.
         </para>
         <table>
-            <title>Classes names for modes</title> 
+            <title>Class names for modes</title> 
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -306,17 +315,17 @@
                         <entry>Defines properties for the text</entry>
                     </row>
                     <row>
-                        <entry>Rich-menu-item-icon-selectedr</entry>
+                        <entry>Rich-menu-item-icon-selected</entry>
                         <entry>Defines properties for the left icon element</entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
         <para>
-            In order to redefine style  for all menuItems on a page using CSS, it&apos;s enough to create classes with the same names and define the necessary properties in them.
+            In order to redefine the style for all menuItems on a page using CSS, it&apos;s enough to create classes with the same names and define the necessary properties in them.
         </para>
         <para>
-            To change style peculiarities of the particular menuItems define your own style classes in the corresponding simple menuItem attributes.
+            To change the style of particular menuItems define your own style classes in the corresponding menuItem attributes.
         </para>
     </section>
 </section>
