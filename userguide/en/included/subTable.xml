@@ -45,10 +45,10 @@
     <title>Creating the Component with a Page Tag</title>
     <para>Here is a simple example as it might be used in a page:</para>
     <programlisting role="XML"><![CDATA[...
-	<rich:dataTable value="#{capitalsBean.capitals}" var="capitals">
+    <rich:dataTable value="#{capitalsBean.capitals}" var="capitals">
         <!--...//Set of columns and header/footer facets-->
         <rich:subTable value=#{capitals.details} var="detail">
-        	<!--...//Set of columns and header/footer facets-->
+            <!--...//Set of columns and header/footer facets-->
         </rich:subTable>
     </rich:dataTable>
 ...
@@ -78,16 +78,14 @@ HtmlSubTable mySubTable = new HtmlSubTable();
 	     with the <emphasis role="italic"><property>&quot;ajaxKeys&quot;</property></emphasis> attribute for a table and in contrast to the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> outputs the standard HTML 
 	     structure for table rendering.</para>
 	     <programlisting role="XML"><![CDATA[...
-<rich:dataTable value="#{capitalsBean.capitals}" var="capitals" id="table">
-<!--...//Set of columns and header/footer facets-->
-
-	<rich:subTable value="#{capitals.details}" var="detail" ajaxKeys="#{bean.ajaxSet}" binding="#{bean.subtable}" >
-		<!--...//Set of columns and header/footer facets-->
-	</rich:subTable>
-
-</rich:dataTable>
+    <rich:dataTable value="#{capitalsBean.capitals}" var="capitals" id="table">
+        <!--...//Set of columns and header/footer facets-->
+        <rich:subTable value="#{capitals.details}" var="detail" ajaxKeys="#{bean.ajaxSet}" binding="#{bean.subtable}" >
+            <!--...//Set of columns and header/footer facets-->
+        </rich:subTable>
+    </rich:dataTable>
 ...
-<a4j:commandButton action="#{bean.someAction}" reRender="table"/>
+    <a4j:commandButton action="#{bean.someAction}" reRender="table"/>
 ...
 ]]></programlisting>
 <para>For such a table during someAction processing called with AJAX request when the key is pressed

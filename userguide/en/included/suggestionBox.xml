@@ -46,23 +46,23 @@
     <title>Creating the Component with a Page Tag</title>
     <para>Here is a simple example as it might be used in a page: </para>
     <programlisting role="XML"><![CDATA[...
-		<h:inputText value="#{bean.property}" id="suggest"/>
-         <rich:suggestionbox for="suggest" suggestionAction="#{bean.autocomplete}" 
-           var="suggest">
-		   <h:column>
-		   <h:outputText value="#{suggest.text}"/>	
-		   </h:column>
-		 </rich:suggestionbox>
+    <h:inputText value="#{bean.property}" id="suggest"/>
+    <rich:suggestionbox for="suggest" suggestionAction="#{bean.autocomplete}" 
+                        var="suggest">
+        <h:column>
+            <h:outputText value="#{suggest.text}"/>	
+        </h:column>
+    </rich:suggestionbox>
 ...
 ]]></programlisting>
 <para>Here is the <emphasis role="italic"><property>bean.autocomplete</property></emphasis>
  method that returns the collection to pop up:</para>
 <programlisting role="JAVA"><![CDATA[public List autocomplete(Object event) {
-		String pref = event.toString();
-		//collecting some data that begins with "pref" letters.
+    String pref = event.toString();
+    //collecting some data that begins with "pref" letters.
         ...
-		return result;
-	}
+        return result;
+    }
 ]]></programlisting>
   </section>
   <section>
@@ -99,15 +99,17 @@ role="italic"><property>&quot;width&quot;</property></emphasis> and <emphasis
 
 role="italic"><property>&quot;height&quot;</property></emphasis>) that are obligatory for the suggestion component. The attributes have initial Defaults but should be specified manually in order to be changed.</para>
 <para>The <property>suggestionBox</property> component, as it is shown on the screenshot, could get any collection for an output and outputs it in a tooltip window the same as a custom dataTable (in several columns)</para>
-<programlisting role="XML"><![CDATA[<rich:suggestionbox for="test"
-        suggestionAction="#{bean.autocomplete}" var="cit" fetchValue="#{cit.text}">
-		<h:column>
-			<h:outputText value="#{cit.label}"/>
-		</h:column>
-		<h:column>
-			<h:outputText value="#{cit.text}"/>
-		</h:column>
-</rich:suggestionbox>
+<programlisting role="XML"><![CDATA[...
+    <rich:suggestionbox for="test"
+                        suggestionAction="#{bean.autocomplete}" var="cit" fetchValue="#{cit.text}">
+        <h:column>
+            <h:outputText value="#{cit.label}"/>
+        </h:column>
+        <h:column>
+            <h:outputText value="#{cit.text}"/>
+        </h:column>
+    </rich:suggestionbox>
+...
 ]]></programlisting>
 <para>It looks on the page in the following way:</para>
     <figure>
@@ -124,12 +126,12 @@ role="italic"><property>&quot;height&quot;</property></emphasis>) that are oblig
 role="italic"><property>&quot;tokens&quot;</property></emphasis> that specifies separators after which a set of some characters sequence is defined as a new prefix beginning from this separator and not from the string beginning.</para>
 	<para><emphasis role="bold">Example:</emphasis></para>
     <programlisting role="XML"><![CDATA[...
-	<rich:suggestiobox for="test" suggestionAction="#{bean.autocomplete}" var="cit" 
-	    selfRendered="true" tokens=","> 
-		<h:column>
-		<h:outputText value="#{cit.text}"/>
-		</h:column>
-	</rich:suggestionbox>
+    <rich:suggestiobox for="test" suggestionAction="#{bean.autocomplete}" var="cit" 
+                        selfRendered="true" tokens=","> 
+        <h:column>
+            <h:outputText value="#{cit.text}"/>
+        </h:column>
+    </rich:suggestionbox>
 ...
 ]]></programlisting>
 <para>This example shows that when a city is chosen and a comma and first letter character are input,

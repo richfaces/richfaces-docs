@@ -43,17 +43,17 @@
     <title>Creating the Component with a Page Tag</title>
     <para>To create the simplest variant of <property>columnGroup</property> on a page which you can see at the screenshot, use the following syntax:</para>
     <programlisting role="XML"><![CDATA[...
-<rich:dataTable value="#{capitalsBean.capitals}" var="capitals" 
-	ajaxKeys="#{bean.ajaxSet}" binding="#{bean.tabe}" id="table">
-       <!--...//Set of columns and header/footer facets-->
-	<rich:column colspan="3">
-	<f:facet name="header">State Flag</f:facet>
-	<h:graphicImage value="#{cap.stateFlag}"/>
-	</rich:column>
-	<rich:columnGroup>
-       <!--...//Set of columns and header/footer facets-->
-	</rich:columnGroup>	
-</rich:dataTable>
+    <rich:dataTable value="#{capitalsBean.capitals}" var="capitals" 
+                        ajaxKeys="#{bean.ajaxSet}" binding="#{bean.tabe}" id="table">
+        <!--...//Set of columns and header/footer facets-->
+        <rich:column colspan="3">
+            <f:facet name="header">State Flag</f:facet>
+            <h:graphicImage value="#{cap.stateFlag}"/>
+        </rich:column>
+        <rich:columnGroup>
+            <!--...//Set of columns and header/footer facets-->
+        </rich:columnGroup>	
+    </rich:dataTable>
 ...
 ]]></programlisting>
   </section>
@@ -71,36 +71,38 @@ HtmlColumnGroup myRow = new HtmlColumnGroup();
      into one row. Columns are combined in a group the same way as when the <emphasis role="italic"><property>&quot;breakBefore&quot;</property></emphasis> attribute is used for 
      columns to add a moving to the next rows, but the first variant is clearer from a source code. Hence, the 
      following simple examples are very same.</para>
-     <programlisting role="XML"><![CDATA[
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist"> 
-	<rich:column colspan="3">
-	<f:facet name="header">State Flag</f:facet>
-	<h:graphicImage value="#{cap.stateFlag}"/>
-	</rich:column>
-		<rich:columnGroup>
-			<rich:column> 
-			<h:outputText value="#{cap.state}"/>
-			</rich:column>
-			<rich:column >
-			<h:outputText value="#{cap.name}"/>
-			</rich:column>
-			<rich:column >
-			<h:outputText value="#{cap.timeZone}"/>
-			</rich:column>
-		</rich:columnGroup>	
-</rich:dataTable>
+     <programlisting role="XML"><![CDATA[...
+    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist"> 
+        <rich:column colspan="3">
+            <f:facet name="header">State Flag</f:facet>
+            <h:graphicImage value="#{cap.stateFlag}"/>
+        </rich:column>
+        <rich:columnGroup>
+            <rich:column> 
+                <h:outputText value="#{cap.state}"/>
+            </rich:column>
+            <rich:column >
+                <h:outputText value="#{cap.name}"/>
+            </rich:column>
+            <rich:column >
+                <h:outputText value="#{cap.timeZone}"/>
+            </rich:column>
+        </rich:columnGroup>	
+    </rich:dataTable>
+...
 ]]></programlisting>
 <para>And representation without a grouping:</para>
-<programlisting role="XML"><![CDATA[
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist"> 
-	    <rich:column colspan="3">
-		<f:facet name="header">State Flag</f:facet>
-		<h:graphicImage value="#{cap.stateFlag}"/>
-	    </rich:column>
-	    <rich:column breakBefore="true">...</rich:column>
-		<rich:column >...</rich:column>
-		<rich:column >...</rich:column>
-</rich:dataTable>
+<programlisting role="XML"><![CDATA[...
+    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist"> 
+        <rich:column colspan="3">
+            <f:facet name="header">State Flag</f:facet>
+            <h:graphicImage value="#{cap.stateFlag}"/>
+        </rich:column>
+        <rich:column breakBefore="true">...</rich:column>
+        <rich:column >...</rich:column>
+        <rich:column >...</rich:column>
+    </rich:dataTable>
+....
 ]]></programlisting>
 <para>The result is:</para>
 <figure>
@@ -113,26 +115,27 @@ HtmlColumnGroup myRow = new HtmlColumnGroup();
     </figure>
     <para>It&apos;s also possible to use the component for output of complex headers in a table. For example adding
      of a complex header to a facet for the whole table looks the following way:</para>
-     <programlisting role="XML"><![CDATA[
-<f:facet name="header">
-	<rich:columnGroup>
-		<rich:column rowspan="2">
-		<h:outputText value="State Flag"/>
-		</rich:column>
-		<rich:column colspan="3">
-		<h:outputText value="State Info"/>
-		</rich:column>
-		<rich:column breakBefore="true">
-		<h:outputText value="State Name"/>
-		</rich:column>
-		<rich:column>
-		<h:outputText value="State Capital"/>
-		</rich:column>
-		<rich:column>
-		<h:outputText value="Time Zone"/>
-		</rich:column>
-	</rich:columnGroup>
-</f:facet>
+     <programlisting role="XML"><![CDATA[...
+    <f:facet name="header">
+        <rich:columnGroup>
+            <rich:column rowspan="2">
+                <h:outputText value="State Flag"/>
+            </rich:column>
+            <rich:column colspan="3">
+                <h:outputText value="State Info"/>
+            </rich:column>
+            <rich:column breakBefore="true">
+                <h:outputText value="State Name"/>
+            </rich:column>
+            <rich:column>
+                <h:outputText value="State Capital"/>
+            </rich:column>
+            <rich:column>
+                <h:outputText value="Time Zone"/>
+            </rich:column>
+        </rich:columnGroup>
+    </f:facet>
+...
 ]]></programlisting>
 <para>Generated on a page as:</para>
 <figure>

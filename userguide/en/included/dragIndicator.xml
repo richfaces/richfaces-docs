@@ -46,17 +46,17 @@
   <section>
     <title>Creating the Component with a Page Tag</title>
     <para>Here is a simple example as it might be used in a page:</para>
-    <programlisting role="XML"><![CDATA[		 ...	
-		<dnd:dragIndicator  id="indicator">
-			<f:facet name="single">
-				<f:verbatim>
-					<b>Single item</b> {DragInfo}
-				</f:verbatim>
-			</f:facet>
-		</dnd:dragIndicator>
-		...
-<dnd:dragSupport dragType="text" dragIndicator="indicator">
-		...
+    <programlisting role="XML"><![CDATA[...	
+    <dnd:dragIndicator  id="indicator">
+        <f:facet name="single">
+            <f:verbatim>
+                <b>Single item</b> {DragInfo}
+            </f:verbatim>
+        </f:facet>
+    </dnd:dragIndicator>
+    ...
+    <dnd:dragSupport dragType="text" dragIndicator="indicator">
+...
 ]]></programlisting>
   </section>
   <section>
@@ -110,20 +110,23 @@ HtmlDragIndicator myDragIndicator = new HtmlDragIndicator();
 		</listitem>
       </itemizedlist>
 	  <para>Here is an example for an accept facet:</para>
-	  <programlisting role="XML"><![CDATA[<f:facet name="accept">
-			<h:graphicImage value="./images/1.gif"/>
-</f:facet>
+	  <programlisting role="XML"><![CDATA[...
+    <f:facet name="accept">
+        <h:graphicImage value="./images/1.gif"/>
+    </f:facet>
+...
 ]]></programlisting>
 <para>Each of these three facets have a default structure for icons rendering on the left side.</para>
 <para>When it&apos;s necessary to define individual icons for dragged above elements of a <property>drop zone</property> from each
  particular drag area, use a <property>drop zone</property> 
  <emphasis role="italic"><property>&quot;typeMapping&quot;</property></emphasis> attribute for the
   corresponding icons.</para>
-<programlisting role="XML"><![CDATA[<rich:dropSupport acceptedTypes="[iconsDragged, textDragged]" typeMapping="{iconsDragged: DropIcon}">
-	
-		<dnd:dndParam name="DropIcon">
-			<h:graphicImage value="/images/drop-icon.png"/>
-		</dnd:dndParam>
+<programlisting role="XML"><![CDATA[...
+    <rich:dropSupport acceptedTypes="[iconsDragged, textDragged]" typeMapping="{iconsDragged: DropIcon}">
+        <dnd:dndParam name="DropIcon">
+            <h:graphicImage value="/images/drop-icon.png"/>
+        </dnd:dndParam>
+    <rich:dropSupport/>
 ...
 ]]></programlisting>
 <para>Here, drag areas that are to be processed with this drop zone are of iconsDragged and 

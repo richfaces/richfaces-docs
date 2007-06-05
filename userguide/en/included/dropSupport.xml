@@ -65,8 +65,8 @@
 
     <programlisting role="XML">...
     &lt;rich:panel&gt;
-		&lt;rich:dropSupport acceptedTypes="text"/&gt;
-	&lt;/rich:panel&gt;
+        &lt;rich:dropSupport acceptedTypes="text"/&gt;
+    &lt;/rich:panel&gt;
 ...
 </programlisting>
   </section>
@@ -105,8 +105,8 @@ HtmlDropSupport myDragZone = new HtmlDropSupport();
     <programlisting role="XML">...
     &lt;rich:dropSupport acceptedTypes="[iconsDragged, textDragged]" typeMapping="{iconsDragged: DropIcon}"&gt; 
         &lt;rich:dndParam name="DropIcon"&gt;
-                   &lt;h:graphicImage value="/images/drop-icon.png"/&gt;
-        &lt;/rich:dndParam&gt;
+            &lt;h:graphicImage value="/images/drop-icon.png"/&gt;
+    &lt;/rich:dndParam&gt;
 ...
 </programlisting>
 
@@ -124,16 +124,16 @@ HtmlDropSupport myDragZone = new HtmlDropSupport();
 
     <programlisting role="XML">...
     &lt;rich:dataTable value="#{capitalsBean.capitals}" var="caps"&gt;
-		&lt;f:facet name="caption"&gt;Capitals List&lt;/f:facet&gt;
-		&lt;h:column&gt;
-		&lt;a4j:outputPanel&gt;
-			&lt;rich:dragSupport dragIndicator=":form:ind" dragType="text"&gt;
-				&lt;a4j:actionparam value="#{caps.name}" name="name"/&gt;
-			&lt;/rich:dragSupport&gt;
-			&lt;h:outputText value="#{caps.name}"/&gt; 
-		&lt;/a4j:outputPanel&gt;
-		&lt;/h:column&gt;
-	&lt;/rich:dataTable&gt;
+        &lt;f:facet name="caption"&gt;Capitals List&lt;/f:facet&gt;
+        &lt;h:column&gt;
+        &lt;a4j:outputPanel&gt;
+            &lt;rich:dragSupport dragIndicator=":form:ind" dragType="text"&gt;
+                &lt;a4j:actionparam value="#{caps.name}" name="name"/&gt;
+            &lt;/rich:dragSupport&gt;
+            &lt;h:outputText value="#{caps.name}"/&gt; 
+        &lt;/a4j:outputPanel&gt;
+        &lt;/h:column&gt;
+    &lt;/rich:dataTable&gt;
 ...
 </programlisting>
 
@@ -142,10 +142,10 @@ HtmlDropSupport myDragZone = new HtmlDropSupport();
 
     <programlisting role="XML">...
     &lt;rich:panel style="width:100px;height:100px;"&gt;
-		&lt;f:facet name="header"&gt;Drop Zone&lt;/f:facet&gt;
-		&lt;rich:dropSupport acceptedTypes="text" reRender="box" 
-			dropListener="#{capitalsBean.addCapital2}"/&gt;
-	&lt;/rich:panel&gt;
+        &lt;f:facet name="header"&gt;Drop Zone&lt;/f:facet&gt;
+        &lt;rich:dropSupport acceptedTypes="text" reRender="box" 
+                        dropListener="#{capitalsBean.addCapital2}"/&gt;
+    &lt;/rich:panel&gt;
 ...
 </programlisting>
 
@@ -154,24 +154,23 @@ HtmlDropSupport myDragZone = new HtmlDropSupport();
 
     <programlisting role="XML">...
     &lt;rich:dataTable value="#{capitalsBean.capitals2}" var="cap2" id="box"&gt;
-		&lt;f:facet name="caption"&gt;Capitals chosen&lt;/f:facet&gt;
-		&lt;h:column&gt;
-			&lt;h:outputText value="#{cap2.name}"/&gt;
-		&lt;/h:column&gt;
-	&lt;/rich:dataTable&gt;
+        &lt;f:facet name="caption"&gt;Capitals chosen&lt;/f:facet&gt;
+        &lt;h:column&gt;
+            &lt;h:outputText value="#{cap2.name}"/&gt;
+        &lt;/h:column&gt;
+    &lt;/rich:dataTable&gt;
 ...</programlisting>
 
     <para>And finally, as a listener, this listener will implement the dropped
     element:</para>
 
     <programlisting role="JAVA">...
- public void addCapital2(DropEvent event) {
-		FacesContext context = FacesContext.getCurrentInstance();
-		Capital cap = new Capital();
-        cap.setName(context.getExternalContext().getRequestParameterMap().
-        get("name").toString());
-		capitals2.add(cap);
-	}
+    public void addCapital2(DropEvent event) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Capital cap = new Capital();
+        cap.setName(context.getExternalContext().getRequestParameterMap().get("name").toString());
+        capitals2.add(cap);
+    }
 ...
 </programlisting>
 

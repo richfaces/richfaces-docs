@@ -47,11 +47,12 @@
     <title>Creating the Component with a Page Tag</title>
     <para>Here is a simple example as it might be used in a page: </para>
     <programlisting role="XML"><![CDATA[...
-  <rich:draggable dragType="file">
-   <!--Some Content to be Dragged-->
-  </rich:draggable>
- ...
-</rich:toolBar>
+    <rich:toolBar>
+        <rich:draggable dragType="file">
+            <!--Some Content to be Dragged-->
+        </rich:draggable>
+        ...
+    </rich:toolBar>
 ]]></programlisting>
   </section>
   <section>
@@ -66,16 +67,17 @@ org.richfaces.component.html.HtmlDraggable myDragZone = new org.richfaces.compon
     <para>As it shown in the example, a key attribute is <emphasis role="italic"><property>&quot;dragType&quot;</property></emphasis>, where a name for an obtaining Drag-area is defined. Basing on this name, Drop-zones on a page decide whether to accept Drag-area content or not (with the help of Drag-areas lists accepted for processing that are defined in Drop-zones).</para>
     <para><emphasis role="bold">Example:</emphasis></para>
     <programlisting role="XML"><![CDATA[...
- <rich:draggable dragType="dragTextBlocks">
-  <!--Some Components There-->
- </rich:draggable>
- <rich:draggable dragType="dragIcons">
-  <!--Some Components There-->
- </rich:draggable>
+    <rich:draggable dragType="dragTextBlocks">
+        <!--Some Components There-->
+    </rich:draggable>
+    <rich:draggable dragType="dragIcons">
+        <!--Some Components There-->
+    </rich:draggable>
+    ...
+    <rich:dropZone acceptedTypes="[dragIcons]">
+         <!--Some Content Representing DropZone-->
+    <rich:dropZone>
 ...
- <rich:dropZone acceptedTypes="[dragIcons]">
-  <!--Some Content Representing DropZone-->
- <rich:dropZone>
 ]]></programlisting>
     <para>The example shows that Drop zone calls the corresponding drop event processing in it, only 
     if a drop is generated from the second drop zone. </para>
@@ -88,9 +90,11 @@ creates a default indicator for drag operation. Additional information on <empha
  dragIndicator</ulink>.</para>
     <para>Thus, it&apos;s necessary only to define the following:</para>
     <para><emphasis role="bold">Example:</emphasis></para>
-    <programlisting role="XML"><![CDATA[<rich:draggable dragType="dragText">
-  <h:outputText value="Hello"></h:outputText>  
-</rich:draggable>
+    <programlisting role="XML"><![CDATA[...
+    <rich:draggable dragType="dragText">
+        <h:outputText value="Hello"></h:outputText>  
+    </rich:draggable>
+...
 ]]></programlisting>
     <para>in order to be able to drag this string on a page.</para>
     <para>The component also provide important components for redefinition of the corresponding 

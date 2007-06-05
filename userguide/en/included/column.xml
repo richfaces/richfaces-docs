@@ -45,9 +45,9 @@
     <title>Creating the Component with a Page Tag</title>
     <para>To create the simplest variant of <property>column</property> on a page, use the following syntax:</para>
     <programlisting role="XML"><![CDATA[...
-	<rich:dataTable var="set">
-		<rich:column>
-	<h:outputText value="#{set.property1}"/>
+    <rich:dataTable var="set">
+        <rich:column>
+            <h:outputText value="#{set.property1}"/>
         </rich:column>
         <!--Set of another columns and header/footer facets-->
     </rich:dataTable>
@@ -66,25 +66,26 @@ HtmlColumn myColumn = new HtmlColumn();
 <title>Details of Usage</title>
 <para>To output a simple table, the <emphasis role="bold"><property>&lt;rich:column&gt;</property></emphasis> component is used the same way as the standard 
 <emphasis role="bold"><property>&lt;h:column&gt;</property></emphasis>, i.e. the following code on a page is used:</para>
-<programlisting role="XML"><![CDATA[
- <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
-	<rich:column>
-		<f:facet name="header">State Flag</f:facet>
-		<h:graphicImage value="#{cap.stateFlag}"/>
-	</rich:column>
-	<rich:column>
-		<f:facet name="header">State Name</f:facet>
-		<h:outputText value="#{cap.state}"/>
-	</rich:column>
-	<rich:column >
-		<f:facet name="header">State Capital</f:facet>
-		<h:outputText value="#{cap.name}"/>
-	</rich:column>
-	<rich:column>
-		<f:facet name="header">Time Zone</f:facet>
-		<h:outputText value="#{cap.timeZone}"/>
-	</rich:column>
- </rich:dataTable>
+<programlisting role="XML"><![CDATA[...
+    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
+        <rich:column>
+            <f:facet name="header">State Flag</f:facet>
+            <h:graphicImage value="#{cap.stateFlag}"/>
+        </rich:column>
+        <rich:column>
+            <f:facet name="header">State Name</f:facet>
+            <h:outputText value="#{cap.state}"/>
+        </rich:column>
+        <rich:column >
+            <f:facet name="header">State Capital</f:facet>
+            <h:outputText value="#{cap.name}"/>
+        </rich:column>
+        <rich:column>
+        <f:facet name="header">Time Zone</f:facet>
+            <h:outputText value="#{cap.timeZone}"/>
+        </rich:column>
+    </rich:dataTable>
+...
 ]]></programlisting>
  <para>The result is:</para>
  <figure>
@@ -99,21 +100,22 @@ HtmlColumn myColumn = new HtmlColumn();
  the <emphasis role="italic"><property>&quot;colspan&quot;</property></emphasis> attribute, which is similar to an HTML one, specifying that the first column contains 3 columns.
   In addition, it&apos;s necessary to specify that the next column begins from the first row with the help of the
    <emphasis role="italic"><property>&quot;breakBefore&quot;</property></emphasis> attribute = true.</para>
-   <programlisting role="XML"><![CDATA[
-  <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
-	<rich:column colspan="3">
-		<h:graphicImage value="#{cap.stateFlag}"/>
-	</rich:column>
-	<rich:column breakBefore="true"> 
-		<h:outputText value="#{cap.state}"/>
-	</rich:column>
-	<rich:column >
-		<h:outputText value="#{cap.name}"/>
-	</rich:column>
-	<rich:column>
-		<h:outputText value="#{cap.timeZone}"/>
-	</rich:column>
-  </rich:dataTable>
+   <programlisting role="XML"><![CDATA[...
+     <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
+        <rich:column colspan="3">
+            <h:graphicImage value="#{cap.stateFlag}"/>
+        </rich:column>
+        <rich:column breakBefore="true"> 
+            <h:outputText value="#{cap.state}"/>
+        </rich:column>
+        <rich:column >
+            <h:outputText value="#{cap.name}"/>
+        </rich:column>
+        <rich:column>
+            <h:outputText value="#{cap.timeZone}"/>
+        </rich:column>
+    </rich:dataTable>
+...
 ]]></programlisting>
 <para>As a result the following structure is rendered:</para>
 <figure>
@@ -127,23 +129,24 @@ HtmlColumn myColumn = new HtmlColumn();
      <para>The same way is used for <property>columns</property> grouping with the <emphasis role="italic"><property>&quot;rowspan&quot;</property></emphasis> 
     attribute that is similar to an HTML one responsible for rows quantity definition occupied with the 
     current one. The only thing to add in the example is an instruction to move onto the next row for each next after the second column.</para>
-    <programlisting role="XML"><![CDATA[
-  <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
-		<rich:column rowspan="3">
-			<f:facet name="header">State Flag</f:facet>
-			<h:graphicImage value="#{cap.stateFlag}"/>
-		</rich:column>
-		<rich:column> 
-			<f:facet name="header">State Info</f:facet>
-			<h:outputText value="#{cap.state}"/>
-		</rich:column>
-		<rich:column breakBefore="true">
-			<h:outputText value="#{cap.name}"/>
-		</rich:column>
-		<rich:column breakBefore="true">
-			<h:outputText value="#{cap.timeZone}"/>
-		</rich:column>
-  </rich:dataTable>
+    <programlisting role="XML"><![CDATA[...
+    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
+        <rich:column rowspan="3">
+            <f:facet name="header">State Flag</f:facet>
+            <h:graphicImage value="#{cap.stateFlag}"/>
+        </rich:column>
+        <rich:column> 
+            <f:facet name="header">State Info</f:facet>
+            <h:outputText value="#{cap.state}"/>
+        </rich:column>
+        <rich:column breakBefore="true">
+            <h:outputText value="#{cap.name}"/>
+        </rich:column>
+        <rich:column breakBefore="true">
+            <h:outputText value="#{cap.timeZone}"/>
+        </rich:column>
+    </rich:dataTable>
+...
 ]]></programlisting>
 <para>As a result:</para>
 <figure>
