@@ -7,6 +7,7 @@
     
     <xsl:template match="javaee:taglib | taglib">
         <xsl:variable name="excluded-tag-names">header2,header3,header4,header5,header6</xsl:variable>
+        
        <xsl:for-each select="javaee:tag | tag">
 	       <xsl:sort select="name" />
 		   <xsl:sort select="javaee:name" />
@@ -34,9 +35,7 @@
 		</xsl:variable>
        
        <section id="tag_name">
-	  <xsl:attribute name="id"><xsl:value-of select="$tag_name"/></xsl:attribute>
-                  <xsl:attribute name="xreflang"><xsl:value-of select="concat($tag_name,'Chapter')"/></xsl:attribute>
-           
+        	<xsl:attribute name="id"><xsl:value-of select="$tag_name"/></xsl:attribute>
 	   <xsl:processing-instruction name="dbhtml">
 	   		<xsl:text>filename="</xsl:text><xsl:value-of select="$tag_name" /><xsl:text>.html" </xsl:text>
 	   </xsl:processing-instruction>
