@@ -3,7 +3,7 @@
 <dirname property="support.startdir" file="${ant.file.DocSupport}"/>
 
 	<property file="${support.startdir}/support.properties" />
-	<property name="support.basedir" value="${support.startdir}/../../../jbosstools/trunk/documentation/resources"/>
+	<property name="support.basedir" value="${support.startdir}"/>
 
 
 	<!-- Set build directories for all formats. -->
@@ -98,16 +98,19 @@
     </target>
 
 	<target name="collect-tld">
-	    <mkdir dir="../build/generated/${lang}" />
-		<copy flatten="yes" todir="../build/generated/${lang}">
+	    <mkdir dir="${basedir}/${lang}/target/generated" />
+		<copy flatten="yes" todir="${basedir}/${lang}/target/generated">
 			<fileset dir="${richfaces.location}">
 				<include name="richfaces/*/target/generated-component/resources/META-INF/*.tld"/>
+				<include name="richfaces/assembly/target/classes/META-INF/*.tld"/>
+				<!--
 				<exclude name="richfaces/assembly" />
+				-->
 			</fileset>	
 
 		</copy>
 	  <touch>
-	    <fileset dir="../build/generated/${lang}">
+	    <fileset dir="${basedir}/${lang}/target/generated">
 			<include name="*.tld" />
 		</fileset>
 	  </touch>
@@ -119,12 +122,12 @@
     <target name="tld2docbook" depends="collect-tld">
 		<!--Target must be started for every component in library till 
 		the one tld file for all the components isn't present-->
-    	<xslt classpathref="lib.classpath" style="f.xsl" basedir="../build/generated/${lang}" destdir="../build/generated/${lang}">
+    	<xslt classpathref="lib.classpath" style="f.xsl" basedir="${basedir}/${lang}/target/generated" destdir="${basedir}/${lang}/target/generated">
 			<include name="*.tld"/>
     		
-    		<mapper type="glob" from="*.tld" to="*_table.xml" />
+    		<mapper type="glob" from="*.tld" to="*.xml" />
     
-    		<param name="lang" expression="${lang}"/>
+    		<param name="lang" expression="${lang}/src/main/docbook"/>
     	</xslt>
 		<!--End of the tld process-->
     </target>
@@ -146,7 +149,7 @@
         <!-- Copy all the images to the output location, 
              will be removed later. -->
         <copy todir="${build.dir}/${lang}/pdf/images">
-            <fileset dir="${basedir}/${lang}/images">
+            <fileset dir="${basedir}/${lang}/src/main/resources/images">
                 <include name="**/*.png"/>
                 <include name="**/*.svg"/>
                 <include name="**/*.gif"/>
@@ -162,7 +165,7 @@
             <classpath refid="lib.classpath"/>
             <arg value="-o" />
             <arg value="${build.dir}/${lang}/pdf/docbook_fop.tmp"/>
-            <arg value="${basedir}/${lang}/master.xml"/>
+            <arg value="${basedir}/${lang}/src/main/docbook/master.xml"/>
             <arg value="${styles.dir}/${lang}/${db.style.fopdf}"/>
         </java>
 
@@ -193,7 +196,7 @@
 
         <!-- Copy all the images to the output location -->
         <copy todir="${build.dir}/${lang}/html/images">
-            <fileset dir="${basedir}/${lang}/images">
+            <fileset dir="${basedir}/${lang}/src/main/resources/images">
                 <include name="**/*.png"/>
                 <include name="**/*.gif"/>
                 <include name="**/*.jpg"/>
@@ -208,7 +211,7 @@
         <java classname="com.icl.saxon.StyleSheet"
               fork="true" dir="${build.dir}/${lang}/html">
             <classpath refid="lib.classpath"/>
-            <arg value="${basedir}/${lang}/master.xml"/>
+            <arg value="${basedir}/${lang}/src/main/docbook/master.xml"/>
             <arg value="${styles.dir}/${lang}/${db.style.html}"/>
         </java>
     </target>
@@ -218,7 +221,7 @@
 
         <!-- Copy all the images to the output location -->
         <copy todir="${build.dir}/${lang}/html_single/images">
-            <fileset dir="${basedir}/${lang}/images">
+            <fileset dir="${basedir}/${lang}/src/main/resources/images">
                 <include name="**/*.png"/>
                 <include name="**/*.gif"/>
                 <include name="**/*.jpg"/>
@@ -235,7 +238,7 @@
             <classpath refid="lib.classpath"/>
             <arg value="-o"/>
             <arg value="${build.dir}/${lang}/html_single/index.html"/>
-            <arg value="${basedir}/${lang}/master.xml"/>
+            <arg value="${basedir}/${lang}/src/main/docbook/master.xml"/>
             <arg value="${styles.dir}/${lang}/${db.style.htmlsingle}"/>
         </java>
     </target>
