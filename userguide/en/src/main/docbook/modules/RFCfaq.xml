@@ -161,9 +161,9 @@
 
         <section>
                 <?dbhtml filename="HowtousesuggestionBox"?>
-                <title>How to use &lt;rich:suggestionBox&gt; inside the
-                        &lt;rich:modalPanel&gt; content? When I use it the popup suggestion
-                        list doesn&apos;t show since it is behind the modalPanel.</title>
+                <title>How to use suggestionBox inside the modalPanel content? When I use it the
+                        popup suggestion list doesn&apos;t show since it is behind the
+                        modalPanel.</title>
                 <para>First of all to solve this problem you should use the latest versions of
                         Ajax4JSF 1.1.2-SNAPSHOT and Richfaces 3.0.2-SNAPSHOT.</para>
                 <para> Nightly builds are available <ulink
@@ -219,7 +219,7 @@
                 <?dbhtml filename="Isitpossibletocreatedynamicmenu"?>
                 <title>Is it possible to create dynamic menu using &lt;rich:dropDownMenu&gt;
                         component?</title>
-                <para><emphasis role="bold">&lt;rich:dropDown&gt;</emphasis> menu is a
+                <para><emphasis role="bold">&lt;rich:dropDownMenu&gt;</emphasis> is a
                         standard JSF component. So, creation the menu dynamically from the Java
                         Script code is the same as for any other jsf component.</para>
         </section>
@@ -237,8 +237,7 @@
 
         <section>
                 <?dbhtml filename="HowtocustomizesimpleTogglePanel"?>
-                <title>How to customize &lt;rich:simpleTogglePanel&gt;? I need to change
-                        icon for toggler.</title>
+                <title>How to customize simpleTogglePanel? I need to change icon for toggler.</title>
                 <para>To customize icon for toggler use &quot;openMarker&quot; and
                         &quot;closeMarker&quot; facets.</para>
         </section>
@@ -262,7 +261,8 @@
 ...
 ]]></programlisting>
                 <para>Also online demo of using <emphasis role="bold"
-                                >&lt;rich:dropDownMenu&gt;</emphasis> is available <ulink
+                                >&lt;rich:dropDownMenu&gt;</emphasis> component is available
+                                <ulink
                                 url="http://livedemo.exadel.com/richfaces-demo/richfaces/dropDownMenu.jsf"
                                 >here</ulink>.</para>
         </section>
@@ -305,6 +305,76 @@
                 <para>It&apos;s not possible to place tabs upright in the tabPanel. For this
                         purporse it&apos;s necessary to use togglePanel. Toggle controls can be
                         placed anywhere in the layout.</para>
+        </section>
+
+        <section>
+                <?dbhtml filename="HowtogetaacommandButton"?>
+                <title>How to get a commandButton working within the modalPanel?</title>
+                <para>Simple code is placed below:</para>
+                <programlisting role="XML"><![CDATA[...
+        <rich:modalPanel> 
+                <f:facet name="header"> 
+                        <h:outputText value="Test" /> 
+                </f:facet> 
+                <f:facet name="controls"> 
+                        <h:commandLink value="Close" style="cursor:pointer" onclick="Richfaces.hideModalPanel('mp')" /> 
+                </f:facet> 
+                <h:form> 
+                        <t:commandButton value="Test" action="#{TESTCONTROLLER.test}" /> 
+                </h:form> 
+        </rich:modalPanel>
+...
+]]></programlisting>
+        </section>
+
+        <section>
+                <?dbhtml filename="Howtoremembercurrentselectedtab"?>
+                <title>How to remember current selected tab?</title>
+                <para>To implement this feature use the &quot;action&quot; attribute of
+                                <emphasis role="bold">&lt;rich:tab&gt;</emphasis> and
+                        &quot;selectedTab&quot; of the <emphasis role="bold"
+                                >&lt;rich:tabPanel&gt;</emphasis>. Simple code is placed below:</para>
+                <programlisting role="XML"><![CDATA[...
+        <rich:tab label="MyName" id="MyName" action="#{MySessionBean.activateSecuritySettingsTab}" > 
+                ...
+                <rich:tabPanel id="tblPnl" selectedTab="#{MySessionBean.activeTabName}">
+                        ...
+                </rich:tabPanel>
+        </rich:tab>
+...
+]]></programlisting>
+        </section>
+
+        <section>
+                <?dbhtml filename="Howtoretrievethecurrentvalue"?>
+                <title>How to retrieve the current value from the inputNumberSlider?</title>
+                <para>To catch the value of the inputNumberSlider from the JavaScript you can use
+                        the following approach:</para>
+                <programlisting role="XML"><![CDATA[...
+        <rich:inputNumberSlider width="500" step="20" 
+                                onchange="someFunctionCall(this.input.value)"
+                                minValue="0"
+                                maxValue="500"
+                                value="0"
+                                showInput="false"
+                                showToolTip="false"
+                                showBoundaryValues="false"/>	
+        ...
+        <script>
+                function someFunctionCall(value) {
+                         alert(value);
+                }
+        </script>
+...
+]]></programlisting>
+        </section>
+
+        <section>
+                <?dbhtml filename="Howtoretrievethecurrentvalue"?>
+                <title>How to apply skins to the standard input components?</title>
+                <para>The answer could be found <ulink
+                                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=103494"
+                                >here</ulink>.</para>
         </section>
 
 </chapter>
