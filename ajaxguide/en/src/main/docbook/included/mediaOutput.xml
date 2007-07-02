@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.ajax4jsf.MediaOutput</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.ajax4jsf.Resource</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.ajax4jsf.ajax.html.MediaOutput</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.ajax4jsf.MediaOutputRenderer</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  
+  <section>
+    <title>Creating on a page</title>
+    <para>To use the component it&apos;s necessary to define it on a page and set Java methods for data keeping and data transmission to output stream. </para>
+	<para>Component definition on a page for graphical data output</para>
+    <programlisting role="XML"><![CDATA[...
+<a4j:mediaOutput element="img" cacheable="false" session="true"
+    createContent="#{paintBean.paint}" value="#{paintData}"
+    mimeType="image/jpeg"/>
+...
+]]></programlisting>
+<para>Here is the content of paintData that is a bean containing output data</para>
+<programlisting role="JAVA"><![CDATA[package demo;
+
+public class PaintData implements Serializable{
+        private static final long serialVersionUID = 1L;
+        Integer width=100;
+        Integer weight=50;
+...
+]]></programlisting>
+<para>The Paint method of the  paintBean class is a method transmitting graphical data into output stream.</para>
+<programlisting role="JAVA"><![CDATA[public void paint(OutputStream out, Object data) throws IOException{
+	<!--...Some code that puts binary data to "out" Stream-->
+        }
+]]></programlisting>
+  </section>
+  <section>
+    <title>Dynamical creation of a component from Java code</title>
+    <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.ajax.html.MediaOutput;
+...
+MediaOutput myMedia = new MediaOutput ();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Key attributes and ways of usage</title>
+    <para>As it was shown in the example above there are two main components:</para>
+    <itemizedlist>
+        <listitem>
+          createContent specifies a method accepting 2 parameters. The first (of java.io.OutputStream type) defines a stream, where any binary data is output. The second (of java.lang.Object type) contains deserialized object with data specified in the <emphasis role="italic">
+        <property>&quot;value&quot;</property>
+      </emphasis> attribute.
+		</listitem>
+        <listitem>
+          Value specifies a bean class keeping data for transmitting into a method that transmits it into a stream.
+        </listitem>
+      </itemizedlist>
+	  <note><title>Note:</title>A bean class transmitted into value should implement Serializable interface.
+	  </note>
+	  <para>Hence, when using the component it's possible to output user data of any type on a page with AJAX requests.</para>
+      </section>
+</chapter>

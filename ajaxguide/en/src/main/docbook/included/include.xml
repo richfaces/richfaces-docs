@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter>
+  
+     <para><table frame="all">
+         <title>Component identification parameters</title>
+        <tgroup cols="2">
+	  <thead>
+            <row>
+                <entry>Name</entry>
+                <entry>Value</entry>
+            </row>
+        </thead>
+          <tbody>
+            <row>
+              <entry>component-type</entry>
+              <entry>org.ajax4jsf.ajax.Include</entry>
+            </row>
+            <row>
+              <entry>component-family</entry>
+              <entry>org.ajax4jsf.ajax.Output</entry>
+            </row>
+            <row>
+              <entry>component-class</entry>
+              <entry>org.ajax4jsf.ajax.html.Include</entry>
+            </row>
+            <row>
+              <entry>renderer-type</entry>
+              <entry>org.ajax4jsf.AjaxIncludeRenderer</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table></para>
+  
+  <section>
+    <title>Creating on a page</title>
+    <para>To use the component, it&apos;s necessary to place the following strings on a page:</para>
+     <programlisting role="XML"><![CDATA[<h:panelGroup id="wizard">
+		<a4j:include  viewId="/pages/include/first.xhtml" />
+</h:panelGroup>
+]]></programlisting>
+<para>For navigation inside a page defined in viewId any components responsible for AJAX requests to the server generation are used.</para>
+<para>For example, the following component on the page &quot;/pages/include/first.xhtml&quot;</para>
+<programlisting role="XML"><![CDATA[...
+<a4j:commandButton action="next" reRender="wizard"/>
+...
+]]></programlisting>
+<para>And in faces-config it's defined:</para>
+<programlisting role="XML"><![CDATA[<navigation-rule>
+  <from-view-id>/pages/include/first.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>next</from-outcome>
+   <to-view-id>/pages/include/second.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+]]></programlisting>
+<para>In this case after a click on a button defined inside &quot;first.xhtml&quot; view, navigation is performed after an AJAX request (the same as standard JSF one) only inside this view.</para>
+ </section>
+  <section>
+    <title>Dynamical creation of a component from Java code</title>
+	<programlisting role="XML"><![CDATA[<a4j:outputPanel ajaxRendered="true">
+	<a4j:include  viewId="/pages/include/first.xhtml"/>
+</a4j:outputPanel>
+]]></programlisting>
+<para>If <emphasis role="bold">
+        <property>&lt;a4j:include&gt;</property>
+      </emphasis> is defined this way, any AJAX request returning outcome inside generates navigation with this <emphasis role="bold">
+        <property>&lt;a4j:include&gt;</property>
+      </emphasis>.</para>
+<para>Ajax Action for navigation implementation inside view must be placed inside <emphasis role="bold">
+        <property>&lt;a4j:include&gt;</property>
+      </emphasis> pages. Navigation defined by these pages is applied to the <emphasis role="bold">
+        <property>&lt;a4j:include&gt;</property>
+      </emphasis> element current for them.</para>
+<para>As in the general case for Ajax Action component, if the <emphasis role="bold">
+        <property>&lt;a4j:action&gt;</property>
+      </emphasis>component inside <emphasis role="bold">
+        <property>&lt;a4j:include&gt;</property>
+      </emphasis>returns outcome defined as <emphasis role="bold">
+        <property>&lt;redirect/&gt;</property>,
+      </emphasis> AJAX submit is performed with navigation of the whole page and not only of the current view. 
+</para>
+<para> 
+Some additional information you can find here: <ulink url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=104158">Ajax4Jsf Users Forum.</ulink>
+</para>
+</section>
+</chapter>

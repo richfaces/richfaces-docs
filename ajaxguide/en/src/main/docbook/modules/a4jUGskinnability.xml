@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="Built-inSkinnabilityInAjax4jsf"  xreflabel="Built-inSkinnabilityInAjax4jsf">
+  <?dbhtml filename="Built-inSkinnabilityInAjax4jsf.html"?>
+
+  <chapterinfo>
+    <keywordset>
+      <keyword>Skinnability</keyword>
+
+      <keyword>skins</keyword>
+
+      <keyword>custom skin</keyword>
+    </keywordset>
+  </chapterinfo>
+
+  <title>Built-in skinnability in Ajax4jsf</title>
+  <para>Ajax4jsf gives an opportunity to incorporate <property>skinnability</property> into UI
+  design. With this framework you can easily use named skin parameters in
+  properties files to control the appearance of the skins that are applied
+  consistently to a whole set of components. You can look at examples of
+  predefined skins at:</para>
+  <simplelist>
+    <member>
+      <ulink url="http://livedemo.exadel.com/richfaces-demo/">http://livedemo.exadel.com/richfaces-demo/</ulink>
+    </member>
+  </simplelist>
+  <para>
+    You may simply control the look-and-feel of your application by using the <property>skinnability</property> service 
+    of the Ajax4jsf framework. With the means of this service you can define the same style for rendering 
+    standard JSF components and custom JSF components built with the help of Ajax4jsf.
+  </para>
+  <para>To find out more on  <property>skinnability</property> possibilities, follow these
+  steps:</para>
+   <itemizedlist>
+    <listitem>
+      Create a custom render kit and register it in the faces-config.xml
+      like this:
+      <programlisting role="XML"><![CDATA[<render-kit>
+        <render-kit-id>NEW_SKIN</render-kit-id>
+        <render-kit-class> 
+            org.ajax4jsf.framework.renderer.ChameleonRenderKitImpl
+        </render-kit-class>
+</render-kit>]]></programlisting>
+    </listitem>
+    <listitem>
+      Then you need to create and register custom renderers for the
+      component based on the look-and-feel predefined variables:
+      <programlisting role="XML"><![CDATA[<renderer>
+        <component-family>javax.faces.Command</component-family> 
+        <renderer-type>javax.faces.Link</renderer-type> 
+        <renderer-class>
+           newskin.HtmlCommandLinkRenderer
+        </renderer-class> 
+</renderer>]]></programlisting>
+    </listitem>
+    <listitem>
+      Finally, you need to place a properties file with skin parameters
+      into the class path root. There are two requirements for the properties
+      file:
+      <itemizedlist>
+        <listitem>
+          The file must be named <emphasis role="bold"><property>&lt;skinName&gt;</property></emphasis>.skin.properties, in this case, it would be called
+          <filename>newskin.skin.properties</filename>.
+        </listitem>
+        <listitem>
+          The first line in this file should be render.kit=
+          <emphasis role="bold"><property>&lt;render-kit-id&gt;</property>,</emphasis> in this case, it would be called
+          render.kit=NEW_SKIN.
+        </listitem>
+      </itemizedlist>
+    </listitem>
+   </itemizedlist>
+  <para>Extra information on custom renderers creation can be found
+  at:</para>
+  <simplelist>
+    <member>
+      <ulink url="http://java.sun.com/javaee/javaserverfaces/reference/docs/index.html">http://java.sun.com/javaee/javaserverfaces/reference/docs/index.html</ulink>
+    </member>
+  </simplelist>
+</chapter>

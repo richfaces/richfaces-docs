@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter> 
+      <para><table frame="all">
+ <title>Component identification parameters</title>
+        <tgroup cols="2">
+	  <thead>
+            <row>
+                <entry>Name</entry>
+                <entry>Value</entry>
+            </row>
+       </thead>
+          <tbody>
+            <row>
+              <entry>component-type</entry>
+              <entry>org.ajax4jsf.ajax.CommandButton</entry>
+            </row>
+            <row>
+              <entry>component-family</entry>
+              <entry>javax.faces.Command </entry>
+            </row>
+            <row>
+              <entry>component-class</entry>
+              <entry>org.ajax4jsf.ajax.html.HtmlCommandButton</entry>
+            </row>
+            <row>
+              <entry>renderer-type</entry>
+              <entry>org.ajax4jsf.components.AjaxCommandButtonRenderer </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table></para>
+        <section>
+      <title>Creating on a page</title>
+      <para><emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis> is used in the same way as <emphasis role="bold"><property>&lt;h:commandButton&gt;</property></emphasis>, but with definition of the area that is updated after the response comes back from the server.</para>
+			<programlisting role="XML"><![CDATA[<a4j:commandButton reRender="someData" action="#{bean.action1}" value="Link"/>]]></programlisting>
+            <para>This definition of the component provides a link, a click on the link causes an AJAX form submit on the server, &quot;action1&quot; method performance, and rendering of the component with &quot;someData&quot; id after the response comes back from the server.</para>
+    </section>
+	  <section>
+      <title>Dynamical creation of a component from Java code</title>
+      <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.ajax.html.HtmlAjaxCommandButton;
+...
+HtmlAjaxCommandButton myButton = new HtmlAjaxCommandButton();
+...
+]]></programlisting>
+    </section>
+    <section>
+      <title>Key attributes and ways of usage</title>
+      <para>The component <emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis> placed on a page generates the following HTML code:</para>
+	  <programlisting role="XHTML"><![CDATA[<input type="submit" onclick="A4J.AJAX.Submit(...request parameters);return false;" value="sort"/>
+]]></programlisting>
+      <para>Hence, the utility method &quot;A4J.AJAX.Submit&quot; is called on a click, the method performs AJAX request as the <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> component</para>
+	 <note>
+      <title>Note:</title>
+      <para>AJAX support is built in and it&apos;s not necessary to add nested <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> to the component.</para>
+	  </note>
+	  <para>Common JSF navigation could be performed after an AJAX submit and partial rendering, but Navigation Case must be defined as <emphasis role="bold"><property>&lt;redirect/&gt;</property></emphasis> in order to avoid problems with some browsers.</para>
+	  <para>As any Ajax4jsf component sending AJAX requests and processing server responses <emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis> has all attributes described above (see <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> chapter) that provide the required behavior of requests sending (delay, limitation of submit area and rendering, and etc.)</para>
+    </section>
+</chapter>

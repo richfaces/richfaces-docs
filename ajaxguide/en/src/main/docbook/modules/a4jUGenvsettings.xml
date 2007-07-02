@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter id="SettingsForDifferentEnvironments" xreflabel="SettingsForDifferentEnvironments">
+  <?dbhtml filename="SettingsForDifferentEnvironments.html"?>
+<chapterinfo>
+    <keywordset>
+      <keyword>MyFaces</keyword>
+
+      <keyword>JSF</keyword>
+
+      <keyword>Ajax4jsf</keyword>
+      <keyword>AjaxViewHandler</keyword>
+    </keywordset>
+  </chapterinfo>
+
+  <title>Settings for different environments</title>
+  <para>Ajax4jsf comes with support for all tags (components) included in the
+  JavaServer Faces specification. To add Ajax4jsf capabilities to an existing
+  JSF project you should just put the Ajax4jsf libraries into the lib folder of
+  the project and add filter mapping. The behavior of the existing project
+  doesn&apos;t change just because of  Ajax4jsf.</para>
+&wadParams;
+<section id="SunJSFRI">
+<?dbhtml filename="SunJSFRI.html"?>
+    <title>Sun JSF RI</title>
+    <para>Ajax4jsf works with any implementation of <property>JSF</property> (both JSF 1.1 and
+      JSF 1.2) and with most <property>JSF</property> component libraries without any additional settings. 
+      For more information look at:</para>
+    
+<simplelist>
+<member>
+      <ulink url="http://java.sun.com/javaee/javaserverfaces/">java.sun.com</ulink>
+</member>
+</simplelist>
+    
+  </section>
+  <section id="ApacheMyFaces">
+  <?dbhtml filename="ApacheMyFaces.html"?>
+    <title>Apache MyFaces</title>
+    <para>Ajax4jsf works with all <property>Apache MyFaces</property> versions (1.1.1 - 1.1.5)
+    including specific libraries like Tomahawk Sandbox and 
+    Trinidad (the previous ADF Faces). However, there are some considerations
+    to take into account for configuring applications to work with <property>MyFaces</property> and
+    Ajax4jsf.</para>
+    <para>There are some problems with different filters defined in
+    the web.xml file clashing. To avoid these problems, the Ajax4jsf filter
+    must be the first one among other filters in the web.xml configuration
+    file.</para>
+    <para>For more information look at:<ulink url="http://myfaces.apache.org">http://myfaces.apache.org</ulink></para>
+    <para>
+      There&apos;s one more problem while using <property>MyFaces + Seam</property>. If you use this combination you should use 
+      <emphasis role="bold">
+        <property>&lt;a4j:page&gt;</property>
+      </emphasis> inside<emphasis role="bold">
+         <property>&lt;f:view&gt;</property>
+      </emphasis>(right after it in your code) wrapping another content
+      inside your pages because of some problems in realization of <emphasis role="bold">
+        <property>&lt;f:view&gt;</property>
+      </emphasis> in myFaces. 
+    </para>
+    <para>The problem is to be overcome in the nearest future.</para>
+  </section>
+  <section id="FaceletsSupport">
+  <?dbhtml filename="FaceletsSupport.html"?>
+    <title>Facelets Support</title>
+    <para>A high-level support for <property>Facelets</property> is one of our main support
+    features. When working with Ajax4jsf, there is no difference what release
+    of <property>Facelets</property> is used. </para>
+    <para>You should also take into account that some JSF frameworks such as <property>Facelets</property> use their own
+    ViewHandler and need to have it first in the chain of ViewHandlers and the
+    Ajax4jsf AjaxViewHandler is not an exception. At first Ajax4jsf installs its ViewHandler in any case, so in case of two frameworks, for example Ajax4jsf + Facelets, no changes in settings are required. Although, when more then one framework (except Ajax4jsf) is used, it's possible to use the VIEW_HANDLERS parameter defining these frameworks view handlers according to its usage order in it. 
+    For example, the
+    declaration:</para>
+    <programlisting role="XML">    &lt;context-param&gt;
+      &lt;param-name&gt;org.ajax4jsf.VIEW_HANDLERS&lt;/param-name&gt;
+      &lt;param-value&gt;com.sun.facelets.FaceletViewHandler&lt;/param-value&gt;
+    &lt;/context-param&gt;</programlisting>
+    <para>says that <property>Facelets</property> will officially be the first, however AjaxViewHandler
+    will be a little ahead temporarily to do some small, but very
+    important job. </para>
+    <note>
+        <title>Note:</title>
+        <para>In this case you don&apos;t have to define <property>FaceletViewHandler</property> in the
+    WEB-INF/faces-config.xml.</para>
+      </note>
+  </section>
+  <section id="JBossSeamSupport">
+  <?dbhtml filename="JBossSeamSupport.html"?>
+    <title>JBoss Seam Support</title>
+    <para>Ajax4jsf 1.1 now works out-of-the-box with <property>JBoss Seam </property>and Facelets running inside JBoss AS 4.0.4 and higher.
+      There is no more shared JAR files needed. You just have to package the Ajax4jsf library with your application.
+    </para>
+    <para>
+          Your web.xml still must be like this:
+        </para>
+    <programlisting role="XML"><![CDATA[web-app version="2.4" 
+    xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+   <!-- Seam -->
+   <listener>
+       <listener-class>org.jboss.seam.servlet.SeamListener</listener-class>
+   </listener>
+
+   <!--  ajax4jsf -->
+   <filter>
+       <display-name>Ajax4jsf Filter</display-name>
+       <filter-name>ajax4jsf</filter-name>
+       <filter-class>org.ajax4jsf.Filter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>ajax4jsf</filter-name>
+      <url-pattern>*.seam</url-pattern>
+   </filter-mapping>
+
+   <!-- Propagate conversations across redirects -->
+   <filter>
+       <filter-name>Seam Redirect Filter</filter-name>
+       <filter-class>org.jboss.seam.servlet.SeamRedirectFilter</filter-class>
+   </filter>
+   <filter-mapping>
+       <filter-name>Seam Redirect Filter</filter-name>
+       <url-pattern>*.seam</url-pattern>
+   </filter-mapping>
+   
+  <filter>
+    <filter-name>Seam Exception Filter</filter-name>
+    <filter-class>org.jboss.seam.servlet.SeamExceptionFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+      <filter-name>Seam Exception Filter</filter-name>
+      <url-pattern>*.jsf</url-pattern>
+  </filter-mapping>
+  
+  <!-- JSF --> 
+  <context-param>
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>client</param-value>
+   </context-param> 
+     
+  <context-param>
+  <param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
+  <param-value>com.sun.facelets.FaceletViewHandler</param-value>
+  </context-param>
+  
+  <context-param>
+    <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+    <param-value>.xhtml</param-value>
+  </context-param>
+  <context-param>
+    <param-name>facelets.REFRESH_PERIOD</param-name>
+    <param-value>2</param-value>
+  </context-param>
+  <context-param>
+    <param-name>facelets.DEVELOPMENT</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>com.sun.faces.validateXml</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>com.sun.faces.verifyObjects</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <context-param>
+    <param-name>org.ajax4jsf.SKIN</param-name>
+    <param-value>DEFAULT</param-value>
+  </context-param>
+  
+  <servlet>
+      <servlet-name>Faces Servlet</servlet-name>
+      <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+      <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!-- Faces Servlet Mapping -->
+  <servlet-mapping>
+      <servlet-name>Faces Servlet</servlet-name>
+      <url-pattern>*.seam</url-pattern>
+  </servlet-mapping>
+
+  <!-- MyFaces -->
+  <listener>
+      <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+  </listener>    
+</web-app>]]>      </programlisting>
+    <para>Only one issue still persists while using <property>Seam</property> with MyFaces. Look at myFaces part of this section.</para>
+  </section>
+  <section id="Portlet Support">
+    <title>Portlet Support</title>
+    <para><property>Portlets</property> have support since version Ajax4jsf 1.1.1. Provide your feedback on compatible with Ajax4jsf if you face some problems.</para>
+  </section>
+  <section id="Sybase EAServer">
+    <title>Sybase EAServer</title>
+    <para>The load-on-startup for the Faces Servlet had to be set to 0 in web.xml.</para>
+    <programlisting role="XML"><![CDATA[...
+      <servlet>
+          <servlet-name>Faces Servlet</servlet-name>
+          <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+          <load-on-startup>0</load-on-startup>
+    </servlet>
+...
+]]></programlisting>
+    <para> This is because, EAServer calls servlet init() before the ServletContextInitializer. Not an EAServer bug, this is in Servlet 2.3 spec.</para>
+  </section>
+</chapter>
