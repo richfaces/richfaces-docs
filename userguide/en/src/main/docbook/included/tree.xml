@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
-<sectioninfo>
-<keywordset>
-<keyword>presentation of data</keyword>
-<keyword>rich:tree</keyword>
-<keyword>HtmlTree</keyword>
-</keywordset>
-</sectioninfo>
-  
-     <table>
-	  <title>Component identification parameters </title>
-      <tgroup cols="2">
-	  <thead>
-            <row>
-                  <entry>Name</entry>
-                  <entry>Value</entry>
-            </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry>component-type</entry>
-            <entry>org.richfaces.Tree</entry>
-          </row>
-          <row>
-            <entry>component-class</entry>
-            <entry>org.richfaces.component.html.HtmlTree</entry>
-          </row>
-          <row>
-            <entry>component-family</entry>
-            <entry>org.richfaces.Tree</entry>
-          </row>
-          <row>
-            <entry>renderer-type</entry>
-            <entry>org.richfaces.TreeRenderer</entry>
-		  </row>
-		  <row>
-			<entry>tag-class</entry>
-            <entry>org.richfaces.taglib.TreeTag</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  
+  <sectioninfo>
+    <keywordset>
+      <keyword>presentation of data</keyword>
+      <keyword>rich:tree</keyword>
+      <keyword>HtmlTree</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <table>
+    <title>Component identification parameters </title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+          <entry>Value</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+          <entry>org.richfaces.Tree</entry>
+        </row>
+        <row>
+          <entry>component-class</entry>
+          <entry>org.richfaces.component.html.HtmlTree</entry>
+        </row>
+        <row>
+          <entry>component-family</entry>
+          <entry>org.richfaces.Tree</entry>
+        </row>
+        <row>
+          <entry>renderer-type</entry>
+          <entry>org.richfaces.TreeRenderer</entry>
+        </row>
+        <row>
+          <entry>tag-class</entry>
+          <entry>org.richfaces.taglib.TreeTag</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
   <section>
     <title>Creating the Component with a Page Tag</title>
     <para>Here is a simple example as it might be used in a page: </para>
@@ -63,58 +63,65 @@ HtmlTree myPanel = new HtmlTree();
   <section>
     <title>Details of Usage</title>
     <para>As it has been mentioned above the tree component allows to render any tree-like structure
-     of data.</para>
-     <para>A bean property is passed into a tree <property>value</property> attribute. The property keeps the 
-     structure of a org.richfaces.component.TreeNode type. (You could have a look at this interface description in the API document) The default classes for lists building of a TreeNodeImpl type (it
-      implements a TreeNode interface) for an XML structure XmlNodeData and XmlTreeDataBuilder are 
-      implemented in the tree component. Hence, in order to provide your own class for TreeNode, it&apos;s 
-      necessary only to implement this interface, i.e. the <emphasis ><property>&quot;var&quot;</property></emphasis> attribute contains 
-      a name providing an access to data defined with value. </para>
-      <para>For data output, named <property>tree</property> nodes elements are used. Each element, for
-       example depending on its definition, could be rendered with markup defined in one of 
-       <property>tree</property> nodes. It&apos;s defined with the 
-       <emphasis ><property>&quot;nodeFace&quot;</property></emphasis>
-       attribute that contains treeNode name for elements rendering. </para>
-       <para>On the screenshot there are examples of nodes defined with different templates on the
-        following conditions</para>
-       <programlisting role="JAVA"><![CDATA[nodeFace="#{data.name != 'param-value' ? 'input' : 'text'}"
+      of data.</para>
+    <para>A bean property is passed into a tree <property>value</property> attribute. The property
+      keeps the structure of a org.richfaces.component.TreeNode type. (You could have a look at this
+      interface description in the API document) The default classes for lists building of a
+      TreeNodeImpl type (it implements a TreeNode interface) for an XML structure XmlNodeData and
+      XmlTreeDataBuilder are implemented in the tree component. Hence, in order to provide your own
+      class for TreeNode, it&apos;s necessary only to implement this interface, i.e. the <emphasis>
+        <property>&quot;var&quot;</property>
+      </emphasis> attribute contains a name providing an access to data defined with value. </para>
+    <para>For data output, named <property>tree</property> nodes elements are used. Each element,
+      for example depending on its definition, could be rendered with markup defined in one of
+        <property>tree</property> nodes. It&apos;s defined with the <emphasis>
+        <property>&quot;nodeFace&quot;</property>
+      </emphasis> attribute that contains treeNode name for elements rendering. </para>
+    <para>On the screenshot there are examples of nodes defined with different templates on the
+      following conditions</para>
+    <programlisting role="JAVA"><![CDATA[nodeFace="#{data.name != 'param-value' ? 'input' : 'text'}"
 ]]></programlisting>
-<figure>
-        <title>Different nodes of tree</title>
-    
-    <mediaobject> 
-        <imageobject>
-            <imagedata fileref="images/tree2.gif"/>
-        </imageobject>
-    </mediaobject>
-    </figure>
-    <para>Switching on nodes opening/closing (expanded/collapsed) could be implemented in three modes. It could be specified 
-    in the <emphasis ><property>&quot;switchType&quot;</property></emphasis> attribute. </para>
-    <itemizedlist>
-		<listitem>AJAX - request onto the server is used for switching </listitem>
-		<listitem>Server - custom requests onto the server are used for switching</listitem>
-		<listitem>Client - all data is uploaded onto the server, the switching is implemented with a
-		 client script</listitem>
-	</itemizedlist>
-	<para>Common selecting allows also to activate AJAX requests with the 
-	<emphasis ><property>&quot;ajaxSubmitSelection&quot;</property></emphasis> 
-	attribute (true/false).</para>
-	<para>To set a model saving during requests, use the  
-	<emphasis ><property>&quot;preserveModel&quot;</property></emphasis>attribute with
-	 state, request (default) and none values. The attribute is used for cashing data between requests
-	  in a state or request. The 
-	  <emphasis ><property>&quot;treeDataLocator&quot;</property></emphasis> attribute 
-	  defines a class providing an access to cashed data according to the ids saved in state/request
-	   on recovery or cashing data saving the Id on caching.</para>
+    <figure>
+      <title>Different nodes of tree</title>
 
-	<para>
-	The <emphasis ><property>&quot;icon&quot;</property></emphasis>,
-	<emphasis ><property>&quot;iconCollapsed&quot;</property></emphasis>,
-	<emphasis ><property>&quot;iconExpanded&quot;</property></emphasis>,
-	<emphasis ><property>&quot;iconLeaf&quot;</property></emphasis>
-	attributes define icons for the component. Also you can define icons using facets with the same names. If the facets are defined,
-	the corresponding attributes are ignored and facets contents are used as icons. The width of a rendered facet area is 16px.
-<programlisting role="JAVA"><![CDATA[...
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/tree2.gif"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>Switching on nodes opening/closing (expanded/collapsed) could be implemented in three
+      modes. It could be specified in the <emphasis>
+        <property>&quot;switchType&quot;</property>
+      </emphasis> attribute. </para>
+    <itemizedlist>
+      <listitem>AJAX - request onto the server is used for switching </listitem>
+      <listitem>Server - custom requests onto the server are used for switching</listitem>
+      <listitem>Client - all data is uploaded onto the server, the switching is implemented with a
+        client script</listitem>
+    </itemizedlist>
+    <para>Common selecting allows also to activate AJAX requests with the <emphasis>
+        <property>&quot;ajaxSubmitSelection&quot;</property>
+      </emphasis> attribute (true/false).</para>
+    <para>To set a model saving during requests, use the <emphasis>
+        <property>&quot;preserveModel&quot;</property>
+      </emphasis>attribute with state, request (default) and none values. The attribute is used for
+      cashing data between requests in a state or request. The <emphasis>
+        <property>&quot;treeDataLocator&quot;</property>
+      </emphasis> attribute defines a class providing an access to cashed data according to the ids
+      saved in state/request on recovery or cashing data saving the Id on caching.</para>
+
+    <para> The <emphasis>
+        <property>&quot;icon&quot;</property>
+      </emphasis>, <emphasis>
+        <property>&quot;iconCollapsed&quot;</property>
+      </emphasis>, <emphasis>
+        <property>&quot;iconExpanded&quot;</property>
+      </emphasis>, <emphasis>
+        <property>&quot;iconLeaf&quot;</property>
+      </emphasis> attributes define icons for the component. Also you can define icons using facets
+      with the same names. If the facets are defined, the corresponding attributes are ignored and
+      facets contents are used as icons. The width of a rendered facet area is 16px. <programlisting role="JAVA"><![CDATA[...
     <rich:tree ....>
         ...
         <f:facet name="icon">
@@ -133,29 +140,27 @@ HtmlTree myPanel = new HtmlTree();
     </rich:tree>
 ...
 ]]></programlisting></para>
-    <para>
-      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/tree.jsf?c=tree">Here</ulink> you can see the example of <emphasis role="bold">&lt;rich:tree&gt;</emphasis> usage and sources for the given example.
-    </para>
-	   </section>
-	   <section>
-	   <title>Built-In Drag and Drop</title>
-	   <para>The tree component functionality provides a built-in support for Drag and Drop operations. 
-	   The main usage principles are the same as for Rich Faces Drag and Drop wrapper components. Hence,
-	    to get additional information on the topic, read the corresponding chapters:
-	     <link linkend="dndParam">&quot;rich:dndParam&quot;</link>
-	     <link linkend="dragSupport">&quot;rich:dragSupport&quot;</link>
-	     <link linkend="dragIndicator">&quot;rich:dragIndicator&quot;</link>
-	     <link linkend="dropSupport">&quot;rich:dropSupport&quot;</link>  
-	    <property>Tree nodes</property> could be drag or drop elements, so tree has both attributes 
-	    groups.</para>
-	    <table>
-  <title>Drag attributes description</title>
+
+  </section>
+  <section>
+    <title>Built-In Drag and Drop</title>
+    <para>The tree component functionality provides a built-in support for Drag and Drop operations.
+      The main usage principles are the same as for Rich Faces Drag and Drop wrapper components.
+      Hence, to get additional information on the topic, read the corresponding chapters: <link
+        linkend="dndParam">&quot;rich:dndParam&quot;</link>
+      <link linkend="dragSupport">&quot;rich:dragSupport&quot;</link>
+      <link linkend="dragIndicator">&quot;rich:dragIndicator&quot;</link>
+      <link linkend="dropSupport">&quot;rich:dropSupport&quot;</link>
+      <property>Tree nodes</property> could be drag or drop elements, so tree has both attributes
+      groups.</para>
+    <table>
+      <title>Drag attributes description</title>
       <tgroup cols="2">
-	  <thead>
-            <row>
-              <entry>dragValue</entry>
-                  <entry>Element value drag passing into processing after a Drop event.</entry>
-            </row>
+        <thead>
+          <row>
+            <entry>dragValue</entry>
+            <entry>Element value drag passing into processing after a Drop event.</entry>
+          </row>
         </thead>
         <tbody>
           <row>
@@ -164,20 +169,20 @@ HtmlTree myPanel = new HtmlTree();
           </row>
           <row>
             <entry>dragType</entry>
-            <entry>A drag zone name used to define whether processing is necessary with a Drop zone or 
-            not.</entry>
+            <entry>A drag zone name used to define whether processing is necessary with a Drop zone
+              or not.</entry>
           </row>
         </tbody>
       </tgroup>
     </table>
     <table>
-  <title>Drop attributes description</title>
+      <title>Drop attributes description</title>
       <tgroup cols="2">
-	  <thead>
-            <row>
-              <entry>dropValue</entry>
-                  <entry>Element value drop passed into processing after Drop events .</entry>
-            </row>
+        <thead>
+          <row>
+            <entry>dropValue</entry>
+            <entry>Element value drop passed into processing after Drop events .</entry>
+          </row>
         </thead>
         <tbody>
           <row>
@@ -189,75 +194,89 @@ HtmlTree myPanel = new HtmlTree();
             <entry>Drag zone names allowed to be processed with a drop zone.</entry>
           </row>
           <row>
-          <entry>typeMapping</entry>
-          <entry>Drag zones names mapping on the corresponding drop zone parameters.</entry>
+            <entry>typeMapping</entry>
+            <entry>Drag zones names mapping on the corresponding drop zone parameters.</entry>
           </row>
         </tbody>
       </tgroup>
     </table>
-	   </section>
-	   <section>
-	   <title>Events handling</title>
-	   <para>Listeners classes that process events on server side are defined with the help:</para>
-	   <itemizedlist>
-		<listitem>nodeSelectListener is called during request sending on a node selecting event (if request sending on this
-		 event is defined)</listitem>
-		<listitem>dropListener processes Drop event</listitem>
-		<listitem>changeExpandListener processes expand/collapse event of a tree node</listitem>
-	</itemizedlist>
-	<para>Moreover, to add e.g. some JavaScript effects, client events defined on it are used:</para>
-	<itemizedlist>
-		<listitem>onexpand - expands a node event</listitem>
-		<listitem>oncollapse - collapses a node event</listitem>
-		<listitem>ondragexit - element passing out from a tree zone event</listitem>	
-		<listitem>ondragstart - drags a start event</listitem>
-		<listitem>ondragend - drags an end event (a drop event)</listitem>
-		<listitem>ondragenter - drags an element appearing on a tree event</listitem>	
-	</itemizedlist>
-	    
-	     
-	   </section>
-	   <section>
-	   <title>Look-and-Feel Customization</title>
-	   <para>For skinnability implementation the components use a <emphasis 
-><property>style class redefinition method</property></emphasis>.</para>
-    <para>Default style classes are mapped on <emphasis 
-><property>skin parameters</property>.</emphasis></para>
-	<para>To redefine an appearance of all trees at once, there are two ways:</para>
-        <itemizedlist>
-        <listitem>to redefine corresponding skin parameters</listitem>
-        <listitem>to add <emphasis 
-><property>style classes</property></emphasis> used by the tree to your page style sheets</listitem>
-         </itemizedlist>
-	   </section>
-	   <section>
-	   <title>Skin parameters redefinition:</title>
-	   <para>There is only one skin parameter for the <property>tree</property> since 
-	   <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> 
-	   itself is a wrapper component for <property>tree</property> nodes. Look and feel is
-	     described in details in the  <link linkend="treeNode">&quot;treeNode&quot; chapter</link>.</para>
-	   <table>
-  <title>Skin parameters for wrapper element</title>
+  </section>
+  <section>
+    <title>Events handling</title>
+    <para>Listeners classes that process events on server side are defined with the help:</para>
+    <itemizedlist>
+      <listitem>nodeSelectListener is called during request sending on a node selecting event (if
+        request sending on this event is defined)</listitem>
+      <listitem>dropListener processes Drop event</listitem>
+      <listitem>changeExpandListener processes expand/collapse event of a tree node</listitem>
+    </itemizedlist>
+    <para>Moreover, to add e.g. some JavaScript effects, client events defined on it are used:</para>
+    <itemizedlist>
+      <listitem>onexpand - expands a node event</listitem>
+      <listitem>oncollapse - collapses a node event</listitem>
+      <listitem>ondragexit - element passing out from a tree zone event</listitem>
+      <listitem>ondragstart - drags a start event</listitem>
+      <listitem>ondragend - drags an end event (a drop event)</listitem>
+      <listitem>ondragenter - drags an element appearing on a tree event</listitem>
+    </itemizedlist>
+
+
+  </section>
+  <section>
+    <title>Look-and-Feel Customization</title>
+    <para>For skinnability implementation the components use a <emphasis>
+        <property>style class redefinition method</property>
+      </emphasis>.</para>
+    <para>Default style classes are mapped on <emphasis><property>skin
+      parameters</property>.</emphasis></para>
+    <para>To redefine an appearance of all trees at once, there are two ways:</para>
+    <itemizedlist>
+      <listitem>to redefine corresponding skin parameters</listitem>
+      <listitem>to add <emphasis>
+          <property>style classes</property>
+        </emphasis> used by the tree to your page style sheets</listitem>
+    </itemizedlist>
+  </section>
+  <section>
+    <title>Skin parameters redefinition:</title>
+    <para>There is only one skin parameter for the <property>tree</property> since <emphasis
+        role="bold">
+        <property>&lt;rich:tree&gt;</property>
+      </emphasis> itself is a wrapper component for <property>tree</property> nodes. Look and feel
+      is described in details in the <link linkend="treeNode">&quot;treeNode&quot;
+      chapter</link>.</para>
+    <table>
+      <title>Skin parameters for wrapper element</title>
       <tgroup cols="2">
-	  <thead>
-            <row>
-              <entry>Skin parameters for wrapper element</entry>
-                  <entry>Properties corresponding to CSS parameter</entry>
-            </row>
+        <thead>
+          <row>
+            <entry>Skin parameters for wrapper element</entry>
+            <entry>Properties corresponding to CSS parameter</entry>
+          </row>
         </thead>
         <tbody>
           <row>
             <entry>overAllBackground</entry>
             <entry>background-color </entry>
           </row>
-       </tbody>
+        </tbody>
       </tgroup>
     </table>
-	   </section>
-	   <section>
-	   <title>Definition custom style classes:</title>
-	   <para>The <property>tree</property> also has only one predefined Style Class responsible
-	   for displaying a wrapper element of the <property>tree</property> - <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> 
-	   redefining of which will change look and feel of all <property>trees</property> on the page.</para>
-	   </section>
-	   </section>
+  </section>
+  <section>
+    <title>Definition custom style classes:</title>
+    <para>The <property>tree</property> also has only one predefined Style Class responsible for
+      displaying a wrapper element of the <property>tree</property> - <emphasis role="bold">
+        <property>&lt;rich:tree&gt;</property>
+      </emphasis> redefining of which will change look and feel of all <property>trees</property> on
+      the page.</para>
+  </section>
+  <section>
+    <title>Relevant resources links</title>
+    <para>
+      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/tree.jsf?c=tree">Here</ulink>
+      you can see the example of <emphasis role="bold">&lt;rich:tree&gt;</emphasis> usage
+      and sources for the given example. </para>
+  </section>
+
+</section>
