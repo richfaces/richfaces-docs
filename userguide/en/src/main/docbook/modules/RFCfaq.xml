@@ -112,101 +112,87 @@
         </section>
 
         <section id="Organizewizards">
-                <?dbhtml filename="Howtoorganizewizards"?>
+                <?dbhtml filename="Organizewizards"?>
                 <title>How to organize wizards using the &lt;rich:modalPanel&gt; component?</title>
                 <para>It&apos;s necessary to put <emphasis role="bold"
-                                >&lt;a4j:include&gt;</emphasis> inside the <emphasis
+                        >&lt;a4j:include&gt;</emphasis> inside the <emphasis
                                 role="bold">&lt;rich:modalPanel&gt;</emphasis> and perform
                         navigation inside it, as it&apos;s shown in the example below:</para>
                 <programlisting role="XML"><![CDATA[...
-        <rich:modalPanel id="mp" minHeight="200" minWidth="450" height="200" width="500" zindex="2000">
-                <f:facet name="header">
-                        <h:outputText value="Modal Panel Title" />
-                </f:facet>
-                <a4j:include  viewId="/pages/include/first.xhtml"/>
-                <a href="javascript:Richfaces.hideModalPanel('mp')">hide this panel</a>
+        <f:verbatim>
+                <a href="javascript:Richfaces.showModalPanel('_panel',{left:'auto', top:'auto'})">Show Modal Panel</a>
+        </f:verbatim>
+        <rich:modalPanel id="_panel">
+                <a4j:outputPanel id="view" >
+                        <a4j:include viewId="/pages/included1.xhtml"></a4j:include>
+                </a4j:outputPanel>
         </rich:modalPanel>
 ...
+
+faces-config.xml:
+...
+
+        <navigation-rule>
+                <from-view-id>/pages/included1.xhtml</from-view-id>
+                <navigation-case>
+                        <from-outcome>included2</from-outcome>
+                        <to-view-id>/pages/included2.xhtml</to-view-id>
+                </navigation-case>
+        </navigation-rule>
+...
+
+included1.xhtml:
+...
+        <h:form>
+                <h:outputText value="Go to the step 2"/>
+                <a4j:commandButton value="next" action="included2" reRender="view"/>
+        </h:form>
+...
+
+included2.xhtml
+
+...
+        <h:form>
+                <h:outputText value="Close window"/>
+                <h:commandButton type="button" value="Close" onclick="javascript:Richfaces.hideModalPanel('_panel')"/>
+        </h:form>
+...
+
 ]]></programlisting>
-                <para>For more information, follow the <ulink
-                                url="http://labs.jboss.com/wiki/ModalPanelWizards"
-                >link</ulink>.</para>
+                <para>For information, follow the <ulink
+                        url="http://labs.jboss.com/wiki/ModalPanelWizards"
+                        >link</ulink>.</para>
         </section>
 
         <section>
                 <?dbhtml filename="Howtopreventmodalpanelfromclosure"?>
                 <title>How to prevent modalPanel from closing when the validation inside fails?</title>
-                <para>Simple code is placed below to provide such kind of behavior.</para>
-                <programlisting role="XML"><![CDATA[...
-        <ui:define name="body">
-                <f:verbatim>
-                        <a href="javascript:Richfaces.showModalPanel('_panel',{left:'auto', top:'auto'})">Show Modal Panel</a>
-                </f:verbatim>
-                <rich:modalPanel id="_panel">
-                        <f:facet name="header">
-                                <h:outputText value="test"></h:outputText>
-                        </f:facet>
-                        <h:form id="mpform">
-                                <a4j:outputPanel ajaxRendered="true">
-                                        <h:messages id="error"></h:messages>
-                                </a4j:outputPanel>
-                                <h:inputText value="#{bean.property}" required="true"></h:inputText>
-                                <a4j:commandLink value="click" oncomplete="windowclose();" reRender="test" />
-                        </h:form>
-                </rich:modalPanel>
-                <script type="text/javascript">
-                        ...
-                </script>
-        </ui:define>
-...
-]]></programlisting>
+                <para>The answer could be found <ulink
+                                url="http://labs.jboss.com/wiki/ModalPanelValidation"
+                >here</ulink>.</para>
         </section>
 
         <section>
                 <?dbhtml filename="HowtousesuggestionBox"?>
-                <title>How to use suggestionBox inside the modalPanel content? When I use it the
-                        popup suggestion list doesn&apos;t show since it is behind the
-                        modalPanel.</title>
-                <para>First of all to solve this problem you should use the latest versions of
-                        Ajax4JSF 1.1.2-SNAPSHOT and Richfaces 3.0.2-SNAPSHOT.</para>
+                <title>Why when I use suggestionBox inside the modalPanel content the popup
+                        suggestion list doesn&apos;t show since it is behind the modalPanel.</title>
+                <para>To solve this problem you should use the latest versions of Ajax4JSF
+                        1.1.2-SNAPSHOT and Richfaces 3.0.2-SNAPSHOT.</para>
                 <para> Nightly builds are available <ulink
                                 url="http://maven.exadel.com/org/richfaces/richfaces/3.0.2-SNAPSHOT/"
                                 >here</ulink> for RichFaces and <ulink
                                 url="http://maven.exadel.com/org/ajax4jsf/ajax4jsf/1.1.2-SNAPSHOT/"
                                 >here</ulink> for Ajax.</para>
-                <para>Also the example of using <emphasis role="bold"
-                                >&lt;rich:suggestionBox&gt;</emphasis> inside the <emphasis
-                                role="bold">&lt;rich:modalPanel&gt;</emphasis> content is
-                        placed below.</para>
-                <programlisting role="XML"><![CDATA[...
-        <ui:define name="body">
-                <a href="javascript:Richfaces.showModalPanel('panel',{left:'auto', top:'auto'})">Show</a>
-                <rich:modalPanel id="panel">
-                        <h:form>
-                                <h:inputText value="#{bean.property}" id="test" size="50" required="true"></h:inputText>
-                                <rich:suggestionbox width="200" height="200" for="test"
-                                            suggestionAction="#{bean.autocomplete}" var="cap"  ajaxSingle="false" limitToList="false" reRender="panel1">
-                                        <h:column>
-                                                <h:outputText value="#{cap.text}"></h:outputText>
-                                        </h:column>
-                                </rich:suggestionbox>
-                                <a4j:log>....</a4j:log>
-                        </h:form>
-                </rich:modalPanel>
-        </ui:define>
-...
-]]></programlisting>
-                <para>In this case the popup suggestion list is above the modalPanel.</para>
         </section>
 
         <section>
                 <?dbhtml filename="DoesRichFacesworkwithfacelets"?>
                 <title>Does RichFaces work with facelets?</title>
                 <para>Main <ulink url="http://livedemo.exadel.com/richfaces-demo/"> demo</ulink> of
-                        RichFaces is a facelets based application. So, the answer is yes.</para>
+                        RichFaces is a facelets based application. Full Facelets support is one of the main features. So, the answer is yes.</para>
         </section>
 
-       <!-- <section>
+        <!-- <section>
                 <?dbhtml filename="RerenderingPartPage.html"?>
                 <title>How to reRender only particular row(s) of dataTable?</title>
                 <para> If you use <emphasis role="bold">&lt;rich:dataTable&gt;</emphasis>
@@ -231,23 +217,38 @@
                 <?dbhtml filename="Isitpossibletocustomizelookofdatascroller"?>
                 <title>Is it possible to customize the look of dataScroller (the forward/back
                         buttons) and replace them with an images?</title>
-                <para>The answer is yes. Use facets: &quot;first_disabled&quot;,
-                        &quot;last_disabled&quot;, &quot;next_disabled&quot;,
-                        &quot;previous_disabled&quot;,
+                <para>The answer is yes. </para>
+                <para>Component provides two controllers groups for switching:</para>
+                <itemizedlist>
+                        <listitem>Page numbers for switching onto a particular page</listitem>
+                        <listitem>The controls of fast switching: &quot;first&quot;,
+                                &quot;last&quot;, &quot;next&quot;,
+                                &quot;previous&quot;, &quot;fastforward&quot;,
+                                &quot;fastrewind&quot;</listitem>
+                </itemizedlist>
+                <para>The controls of fast switching are created adding the facets component with
+                        the corresponding name:</para>
+                <programlisting role="XML"><![CDATA[ ...
+    <rich:datascroller for="table" maxPages="10">
+        <f:facet name="first">
+            <h:outputText value="First"/>
+        </f:facet>
+        <f:facet name="last">
+            <h:outputText value="Last"/>
+        </f:facet>
+    </rich:datascroller>
+...
+]]></programlisting>
+                <para> There are also facets used to create the disabled states:
+                        &quot;first_disabled&quot;, &quot;last_disabled&quot;,
+                        &quot;next_disabled&quot;, &quot;previous_disabled&quot;,
                         &quot;fastforward_disabled&quot;,
-                        &quot;fastrewind_disabled&quot;.</para>
-        </section>
-
-        <section>
-                <?dbhtml filename="HowtocustomizesimpleTogglePanel"?>
-                <title>How to customize simpleTogglePanel? I need to change an icon for a toggler.</title>
-                <para>To customize an icon for a toggler, use &quot;openMarker&quot; and
-                        &quot;closeMarker&quot; facets.</para>
+                        &quot;fastrewind_disabled&quot;. </para>
         </section>
 
         <section>
                 <?dbhtml filename="Howtoredirecttoanotherpage"?>
-                <title>&lt;rich:dropDown&gt; component: How to redirect to another page?</title>
+                <title>How to place a simple links inside menu?</title>
                 <para>If you want to navigate outside, when application uses an external URL, you
                         should use the following approach:</para>
                 <programlisting role="XML"><![CDATA[...
@@ -264,15 +265,14 @@
 ...
 ]]></programlisting>
                 <para>Also online demo <emphasis role="bold"
-                                >&lt;rich:dropDownMenu&gt;</emphasis> component is available
-                                <ulink
+                        >&lt;rich:dropDownMenu&gt;</emphasis> component is available <ulink
                                 url="http://livedemo.exadel.com/richfaces-demo/richfaces/dropDownMenu.jsf"
                                 >here</ulink>.</para>
         </section>
 
         <section>
                 <?dbhtml filename="CanthedropDownMenubeincludedintreenodes"?>
-                <title>Can dropDownMenu be included in tree nodes?</title>
+                <title>Can I use dropDownMenu as context menu?</title>
                 <para>The <emphasis role="bold">&lt;rich:dropDownMenu&gt;</emphasis> is
                         designed keeping in mind that it should not be used for a contextMenu
                         purpose. We have a <emphasis role="bold"
@@ -290,14 +290,19 @@
 
         <section>
                 <?dbhtml filename="Howtoaddalinktothetreenode"?>
-                <title>How to add a link to the tree node?</title>
+                <title>How to add a simple link to the tree node?</title>
                 <para>Simple code is placed below:</para>
                 <programlisting role="XML"><![CDATA[...
-        <rich:tree value="#{bean.data}" var="data">
-                <rich:treeNode type="text" nodeClass="customNode" acceptedTypes="file2" onselected="return false;">
-                        <h:commandLink value="#{data.linkValue}" action="#{data.someAction}"/>
-                </rich:treeNode>
-        </rich:tree>
+        <rich:tree …> 
+                …
+                <rich:treeNode submitMode="none" 
+                                                onclick="document.location.href='http://labs.jboss.com/jbossrichfaces/'">
+                        <h:outputLink value="http://labs.jboss.com/jbossrichfaces/">
+                                <h:outputText value="RichFaces Home Page"></h:outputText>
+                        </h:outputLink>
+                </rich: treeNode>
+                …
+</rich:tree …> 
 ...
 ]]></programlisting>
         </section>
@@ -306,8 +311,8 @@
                 <?dbhtml filename="Isitpossibletoplacetabsvertically"?>
                 <title>Is it possible to place tabs upright in the tabPanel?</title>
                 <para>It&apos;s not possible to place tabs upright in the tabPanel. For this
-                        purporse it&apos;s necessary to use togglePanel. Toggle controls can be
-                        placed anywhere in the layout.</para>
+                        purporse use togglePanel. Toggle controls can be placed anywhere in the
+                        layout.</para>
         </section>
 
         <section>
@@ -332,7 +337,7 @@
 
         <section>
                 <?dbhtml filename="Howtoremembercurrentselectedtab"?>
-                <title>How to remember the current selected tab?</title>
+                <title>How to define the currently selected tab?</title>
                 <para> Simple code is placed below:</para>
                 <programlisting role="XML"><![CDATA[...
         <rich:tabPanel selectedTab="t2">
@@ -381,18 +386,20 @@
                                 url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=103494"
                                 >here</ulink>.</para>
         </section>
-        
+
         <section>
                 <?dbhtml filename="Isthereawaytocapturetherowdata"?>
                 <title>Is there a way to capture the rowdata of dataTable and subTable?</title>
-                <para> For necessary information you can see discussion about this problem on the <ulink
-                        url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=111965"
-                        >RichFaces Users Forum</ulink></para>
+                <para> For necessary information you can see discussion about this problem on the
+                                <ulink
+                                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=111965"
+                                >RichFaces Users Forum</ulink></para>
         </section>
-        
+
         <section>
                 <?dbhtml filename="Isitpossibletouse thedatascroller"?>
-                <title>Is it possible to use datascroller without its table border and styles (to show only links)?</title>
+                <title>Is it possible to use datascroller without its table border and styles (to
+                        show only links)?</title>
                 <para> It&apos; necessary to redefine rich* classes for example like this:</para>
                 <programlisting role="JAVA"><![CDATA[.rich-datascr-button { 
 border: 0px; 
@@ -408,7 +415,7 @@ background-color: transparent;
                 <?dbhtml filename="subTableincombinationwithdataTable"?>
                 <title>How to use subTable in combination with dataTable?</title>
                 <para>The answer could be found <ulink
-                        url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4059044#4059044"
-                        >here</ulink>.</para>
+                                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4059044#4059044"
+                                >here</ulink>.</para>
         </section>
-</chapter>
+ </chapter>
