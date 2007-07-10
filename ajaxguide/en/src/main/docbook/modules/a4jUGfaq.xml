@@ -28,7 +28,7 @@
 
         <title>How to check sending request conditions? Custom JavaScript before request
             &quot;OnSubmit&quot; attribute.</title>
-        <para> To check on the client some terms of request sending, the <emphasis role="italic">
+        <para> To check on the client some terms of request sending, the <emphasis >
                 <property>&quot;onSubmit</property>
             </emphasis>&quot; attribute is added to all components, which may cause the request. </para>
         <para>
@@ -37,17 +37,17 @@
         <programlisting role="XML"><![CDATA[<h:inputText id="i" value="#{beanText.kennung}">
             <a4j:support event="onfocus" onsubmit="doSomething();" reRender="panelToReRender"/>
 </h:inputText>]]></programlisting>
-        <para> So in this case &quot;<emphasis role="italic"
+        <para> So in this case &quot;<emphasis 
                 ><property>doSomething()</property>&quot;</emphasis> function is executed before
             the AJAX request. </para>
         <para> Besides, if this function returns &quot;false&quot;, AJAX request
             isn&apos;t fired. </para>
         <note>
             <title>Note:</title>
-            <para>Behavior of our <emphasis role="italic">
+            <para>Behavior of our <emphasis >
                     <property>&quot;onsubmit&quot;</property>
                 </emphasis>slightly differs from the standard one. Do not return <emphasis
-                    role="italic">
+                    >
                     <property>&quot;true&quot;</property>
                 </emphasis> if you want to fire the request - because <emphasis role="bold">
                     <property>&lt;xxx&gt;&lt;a4j:support
@@ -56,7 +56,7 @@
                 </emphasis> is transformed into &lt;xxx onclick=&quot;return true;
                 A4J.Submit(.... );&quot; &gt; and the request isn&apos;t fired also in
                 this case (but the standard event processing fired). You must only return <emphasis
-                    role="italic">
+                    >
                     <property>&quot;false&quot;</property>
                 </emphasis> if your conditions weren&apos;t completed or perform some actions
                 (if needed) without any returns in case you need to fire it. </para>
@@ -70,15 +70,15 @@
             (..oncomplete :anotherFunction(this)..), it places (oncomplete:
             function(){anotherFunction(this);}..) in anonymous function, to allow put
             &quot;chain&quot; of statements in attribute. </para>
-        <para> Since, <emphasis role="italic">
+        <para> Since, <emphasis >
                 <property>&quot;this&quot;</property>
             </emphasis> keyword will point to a parameters map instead of a control element as it
-            was before. You may use <emphasis role="italic">
+            was before. You may use <emphasis >
                 <property>document.findElementById()</property>
             </emphasis>to get references to this object after a request is processed as when a page
             is updated in AJAX you will have reference to a control, removed from a DOM tree. </para>
         <para> Or, if you are sure that your element is not updated, you can add <emphasis
-                role="italic">
+                >
                 <property>&quot;onsubmit&quot;</property>
             </emphasis> in <emphasis role="bold">
                 <property>&lt;a4j:support&gt;</property>
@@ -103,13 +103,13 @@
     <section id="InvokeOnComponentUsingWithJSF1.2">
         <?dbhtml filename="InvokeOnComponentUsingWithJSF1.2.html"?>
         <title>Is it possible to use InvokeOnComponent with JSF 1.2?</title>
-        <para> Ajax4jsf currently does not use <emphasis role="italic">invokeOnComponent</emphasis>
+        <para> Ajax4jsf currently does not use <emphasis >invokeOnComponent</emphasis>
             because of the 2 reasons: </para>
         <itemizedlist>
             <listitem> Compatibility with JSF 1.1 and MyFaces applications is kept, due to a big
                 amount of code used in corporate applications. </listitem>
             <listitem>
-                <emphasis role="italic"> InvokeOnComponent</emphasis> works with already known
+                <emphasis > InvokeOnComponent</emphasis> works with already known
                 clientId, and works fine for communication between widget and backed component, or
                 updates content of already rendered component. But there are some troubles to use
                 this method for more complex use-cases implemented in Ajax4jsf, as there is a choice
@@ -216,14 +216,14 @@
         <?dbhtml filename="IgnoreDupResponsesAndRequestDelay.html"?>
 
         <title>How to use IgnoreDupResponses and requestDelay?</title>
-        <para>The <emphasis role="italic">
+        <para>The <emphasis >
                 <property>&quot;IgnoreDupResponses&quot;</property>
             </emphasis> attribute appeared from 1.0.4 RC1 version and is used on the client for
             response ignoring after an AJAX request if a newer request has been already sent. <para>
-                The additional information could be found on the<ulink
+                The additional information could be found <ulink
                     url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=105766"
                     >here</ulink>. </para>
-            <emphasis role="italic">
+            <emphasis >
                 <property>&quot;RequestDelay&quot;</property>
             </emphasis> attribute also defines the client behavior. It sets the time delay, after
             which another request could be sent, all other requests are taken away from a queue
@@ -245,7 +245,7 @@
     <section id="EventQueueUsage">
         <?dbhtml filename="EventQueueUsage.html"?>
         <title>How to use &quot;EventQueue&quot; attribute?</title>
-        <para>The <emphasis role="italic">
+        <para>The <emphasis >
                 <property>&quot;EventQueue&quot;</property>
             </emphasis> attribute defines the query name where the requests are saved before their
             sending to the server. The queue is created for redundant requests deleting during
@@ -282,7 +282,7 @@
             <emphasis role="bold">&lt;a4j:region&gt;</emphasis> can&apos;t work inside
             iteration components like <emphasis role="bold">&lt;h:dataTable&gt;</emphasis>
             and <emphasis role="bold">&lt;a4j:repeat&gt;</emphasis>. </para>
-        <para>The details  could be found on the <ulink
+        <para>The details  could be found <ulink
                 url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=109080"
                 >here. </ulink>
         </para>
