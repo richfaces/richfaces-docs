@@ -106,20 +106,20 @@ To speed up the performance, Ajax4jsf updates only a component tree. <emphasis r
   </h:panelGrid>
 </a4j:outputPanel>
 ]]></programlisting>
-    <para>As you see, the code is very similar to the one shown above, but <emphasis role="italic"><property>&quot;reRender &quot;</property></emphasis> attribute refers directly to the updating panelGrid and not to the framing outputPanel, and it&apos;s more semantically correct.</para>
+    <para>As you see, the code is very similar to the one shown above, but <emphasis ><property>&quot;reRender &quot;</property></emphasis> attribute refers directly to the updating panelGrid and not to the framing outputPanel, and it&apos;s more semantically correct.</para>
     <para><emphasis role="bold"><property>&lt;a4j:outPanel&gt;</property></emphasis> should be used for non-JSF component part framing, which is to be updated on Ajax response, as Ajax4jsf specifies the list of updating areas as a list of an existing JSF component. </para>
     <para>On default non-JSF context isn&apos;t saved in a component tree, but is rendered anew every time. To accelerate the processing speed and Ajax response input speed, Ajax4jsf saves non-JSF context in a component tree on default. This option could be canceled by keepTransient attribute that cancels transient flag forced setting for child components. This flag setting keeps the current value set by child components.</para>
     <para>Note: In JSF 1.1 implementation and lower, where non-JSF context should be framed with the &quot;f:verbatim&quot; attribute,  <emphasis role="bold">
         <property>&lt;a4j:outputPanel&gt;</property>
       </emphasis> doesn&apos;t improve this JSF implementation option in any way, so you still have to use this tag where it&apos;s necessary without Ajax4jsf usage. </para>
-    <para>Ajax4jsf allows setting Ajax responses rendering directly basing on component tree nodes without referring to the JSP (XHTML) page code. It could be defined by selfRendered attribute setting to <emphasis role="italic">
+    <para>Ajax4jsf allows setting Ajax responses rendering directly basing on component tree nodes without referring to the JSP (XHTML) page code. It could be defined by selfRendered attribute setting to <emphasis >
         <property>&quot;true&quot;</property>
       </emphasis> 
  on <emphasis role="bold">
         <property>&lt;a4j:region&gt;</property>
       </emphasis> and could help considerably speed up a response output. However, if a transient flag is kept as it is, this rapid processing could cause missing of transient components that present on view and don’t come into a component tree. Hence, for any particular case you could choose a way for you application optimization: speed up processing or redundant memory for keeping tree part earlier defined a transient. </para>
 <para>
-Some additional information about usage of component you can find <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4052203#4052203">here</ulink>.
+Some additional information about usage of component can be found <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4052203#4052203">here</ulink>.
 </para>	  
   </section>
 </chapter>
