@@ -241,7 +241,30 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
     </para>
     <programlisting role="JAVA">onshow="alert(event.parameters.param1)"</programlisting>
     <para> Here, during modalPanel opening the value of a passing parameter is output. </para>
-
+	<para>
+		There is a possibility to restore of the previous component state on a page (including position on the screen) after submitting and reloading.
+		The modalPanel has some special attributes like 'showWhenRendered' and 'keepVisualState'.
+	</para>
+	<para>	
+		showWhenRendered - This boolean attribute is used if modalPanel should be rendered after first page loading.  
+	</para>
+	<para>	
+		keepVisualState - Used if modalPanel should save state after submission.
+		If keepVisualState=true then parameters which modalPanel has during opening should be submitted and passed to new page.
+	</para>	
+	
+	<para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+	
+    <programlisting role="JAVA"><![CDATA[...
+<a href="javascript:Richfaces.showModalPanel('_panel', {top:'10px', left:'10px', height:'400'});">Show</a>
+...
+	]]></programlisting>
+    <para>
+	Here, if user opens  modal dialog window using current link and after submits data then modalPanel destination and height on new loaded page will be restored.
+	</para>
+	
   </section>
 
   <section>
