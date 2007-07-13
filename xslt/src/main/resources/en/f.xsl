@@ -5,6 +5,7 @@
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
      <xsl:param name="lang" />
      <xsl:param name="title" />
+     <xsl:param name="separator" />
     
     <xsl:template match="javaee:taglib | taglib">
         <xsl:variable name="excluded-tag-names">header2,header3,header4,header5,header6</xsl:variable>
@@ -47,7 +48,7 @@
 			
         	<xsl:attribute name="id"><xsl:value-of select="$tag_name"/></xsl:attribute>
             <title>&lt;<xsl:value-of select="concat($prefix,':', $tag_name)" />&gt;</title>
-			<xsl:for-each select="document(concat($lang, '/included/',$tag_name, '.desc.xml'))/*">
+			<xsl:for-each select="document(concat('file:/',$lang, $separator,'included',$separator,$tag_name, '.desc.xml'))/*">
                 <xsl:copy-of select="./*"/>
             </xsl:for-each>
             <table>
@@ -75,7 +76,7 @@
                 </tbody>
                 </tgroup>
             </table>
- 			<xsl:for-each select="document(concat($lang,'/included/',$tag_name, '.xml'))/*">
+ 			<xsl:for-each select="document(concat('file:/',$lang, $separator,'included',$separator,$tag_name, '.xml'))/*">
                 <xsl:copy-of select="./*"/>
             </xsl:for-each>
         </section>
