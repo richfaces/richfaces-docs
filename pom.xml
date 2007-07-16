@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>root</artifactId>
 		<groupId>org.richfaces</groupId>
@@ -10,6 +12,63 @@
 	<artifactId>docs</artifactId>
 	<name>Project documentation</name>
 	<packaging>pom</packaging>
+	<!-- setup repositories, to build documentation separate from Java projects -->
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+			<id>repository.jboss.com</id>
+			<name>Jboss Repository for Maven</name>
+			<url>http://repository.jboss.com/maven2/</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<id>maven2-snapshots.exadel.com</id>
+			<name>Exadel Repository for Maven Snapshots</name>
+			<url>http://maven.exadel.com/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven2-snapshots.exadel.com</id>
+			<name>Exadel Repository for Maven Snapshots</name>
+			<url>http://maven.exadel.com/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+			<id>repository.jboss.com</id>
+			<name>Jboss Repository for Maven</name>
+			<url>http://repository.jboss.com/maven2/</url>
+			<layout>default</layout>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<modules>
 		<module>xslt</module>
 		<!--
@@ -18,6 +77,5 @@
 		-->
 		<module>userguide</module>
 		<module>ajaxguide</module>
-    <module>maven-transform-plugin</module>
-  </modules>
+	</modules>
 </project>

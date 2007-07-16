@@ -11,6 +11,7 @@
 	<groupId>org.richfaces.docs</groupId>
 	<artifactId>ajaxguide</artifactId>
 	<packaging>pom</packaging>
+	<name>Ajax4jsf user guide</name>
 	<description>Ajax4jsf user guide</description>
 	<pluginRepositories>
 		<pluginRepository>
@@ -58,11 +59,13 @@
 									</artifactItem>
 									<artifactItem>
 										<groupId>
-											org.richfaces.docs
+											org.richfaces.docs.xslt
 										</groupId>
-										<artifactId>xslt</artifactId>
+										<artifactId>
+											${translation}
+										</artifactId>
 										<version>
-											${project.version}
+											3.1.0-SNAPSHOT
 										</version>
 										<type>jar</type>
 										<overWrite>true</overWrite>
@@ -116,7 +119,7 @@
 									${project.build.directory}/generated/
 								</outputDir>
 								<stylesheet>
-									${project.build.directory}/xslt/${translation}/f.xsl
+									${project.build.directory}/xslt/xslt/f.xsl
 								</stylesheet>
 								<fileMappers>
 									<fileMapper
@@ -152,31 +155,12 @@
 					<artifactId>maven-jdocbook-plugin</artifactId>
 					<version>2.0.0</version>
 					<extensions>true</extensions>
-					<executions>
-						<execution>
-							<id>generate</id>
-							<!--
-								<phase>compile</phase>
-							-->
-							<goals>
-								<goal>generate</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>resources</id>
-							<!--
-								<phase>compile</phase>
-							-->
-							<goals>
-								<goal>resources</goal>
-							</goals>
-						</execution>
-					</executions>
 					<dependencies>
 						<dependency>
-							<groupId>org.richfaces.docs</groupId>
-							<artifactId>xslt</artifactId>
-							<version>${project.version}</version>
+							<groupId>org.richfaces.docs.xslt</groupId>
+							<artifactId>${translation}</artifactId>
+							<version>3.1.0-SNAPSHOT</version>
+							<type>jar</type>
 						</dependency>
 					</dependencies>
 					<configuration>
@@ -184,10 +168,17 @@
 							${basedir}/src/main/docbook
 						</sourceDirectory>
 						<imageResource>
-						   <directory>${basedir}/src/main/resources/images</directory>
+							<directory>
+								${basedir}/src/main/resources
+							</directory>
+							<!--
+								<directory>${project.build.directory}/xslt/images</directory>
+							-->
 						</imageResource>
 						<cssResource>
-						  <directory>${basedir}/src/main/resources/css</directory>
+							<directory>
+								${project.build.directory}/xslt/css
+							</directory>
 						</cssResource>
 						<!--
 							<targetDirectory>
@@ -201,27 +192,36 @@
 							<format>
 								<formatName>html_single</formatName>
 								<stylesheetResource>
-									/${translation}/html.xsl
+									/xslt/html.xsl
 								</stylesheetResource>
 								<finalName>
 									ajax4jsf_reference.html
 								</finalName>
+								<imageCopyingRequired>
+									true
+								</imageCopyingRequired>
 							</format>
 							<format>
 								<formatName>html</formatName>
 								<stylesheetResource>
-									/${translation}/html_chunk.xsl
+									/xslt/html_chunk.xsl
 								</stylesheetResource>
 								<finalName>index.html</finalName>
+								<imageCopyingRequired>
+									true
+								</imageCopyingRequired>
 							</format>
 							<format>
 								<formatName>pdf</formatName>
 								<stylesheetResource>
-									/${translation}/fopdf.xsl
+									/xslt/fopdf.xsl
 								</stylesheetResource>
 								<finalName>
 									ajax4jsf_reference.pdf
 								</finalName>
+								<imagePathSettingRequired>
+									true
+								</imagePathSettingRequired>
 							</format>
 						</formats>
 						<xincludeSupported>true</xincludeSupported>
@@ -240,6 +240,7 @@
 								</property>
 								</transformerParameters>
 							-->
+							<docbookVersion>1.72.0</docbookVersion>
 						</options>
 					</configuration>
 
