@@ -242,32 +242,56 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
     <programlisting role="JAVA">onshow="alert(event.parameters.param1)"</programlisting>
     <para> Here, during modalPanel opening the value of a passing parameter is output. </para>
     <para> More information about this problem could be found on the <ulink
-      url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=111804"
-      >RichFaces Development Forum</ulink>.</para>
-	<para>
-		There is a possibility to restore of the previous component state on a page (including position on the screen) after submitting and reloading.
-		The modalPanel has some special attributes like 'showWhenRendered' and 'keepVisualState'.
-	</para>
-	<para>	
-		showWhenRendered - This boolean attribute is used if modalPanel should be rendered after first page loading.  
-	</para>
-	<para>	
-		keepVisualState - Used if modalPanel should save state after submission.
-		If keepVisualState=true then parameters which modalPanel has during opening should be submitted and passed to new page.
-	</para>	
-	
-	<para>
+        url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=111804"
+        >RichFaces Development Forum</ulink>.</para>
+    <para> There is a possibility to restore of the previous component state on a page (including
+      position on the screen) after submitting and reloading. The modalPanel has some special
+      attributes like 'showWhenRendered' and 'keepVisualState'. </para>
+    <para> showWhenRendered - This boolean attribute is used if modalPanel should be rendered after
+      first page loading. </para>
+    <para> keepVisualState - Used if modalPanel should save state after submission. If
+      keepVisualState=true then parameters which modalPanel has during opening should be submitted
+      and passed to new page. </para>
+
+    <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-	
+
     <programlisting role="JAVA"><![CDATA[...
 <a href="javascript:Richfaces.showModalPanel('_panel', {top:'10px', left:'10px', height:'400'});">Show</a>
 ...
 	]]></programlisting>
+    <para> Here, if user opens modal dialog window using current link and after submits data then
+      modalPanel destination and height on new loaded page will be restored. </para>
+    <para>You can use input or/and command components inside modalPanel. Simple example of using
+      commandButton within modalPanel is placed below.</para>
+    <emphasis role="bold">Example:</emphasis>
+    <programlisting role="XML"><![CDATA[...
+        <rich:modalPanel> 
+                <f:facet name="header"> 
+                        <h:outputText value="Test" /> 
+                </f:facet> 
+                <f:facet name="controls"> 
+                        <h:commandLink value="Close" style="cursor:pointer" onclick="Richfaces.hideModalPanel('mp')" /> 
+                </f:facet> 
+                <h:form> 
+                        <t:commandButton value="Test" action="#{TESTCONTROLLER.test}" /> 
+                </h:form> 
+        </rich:modalPanel>
+...
+]]></programlisting>
     <para>
-	Here, if user opens  modal dialog window using current link and after submits data then modalPanel destination and height on new loaded page will be restored.
-	</para>
-	
+      <note>
+        <title>Note:</title>Two rules are important for modalPanel: <itemizedlist>
+          <listitem>modalPanel must have its own form if it has form elements (input or/and command
+            components) inside (as it was shown in the example above) </listitem>
+          <listitem>modalPanel must not be included into the form (on any level up) if it has the
+            form inside.</listitem>
+        </itemizedlist></note>
+    </para>
+    <para>See also <ulink
+      url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4064191"
+      >RichFaces Users Forum</ulink>.</para>
   </section>
 
   <section>
