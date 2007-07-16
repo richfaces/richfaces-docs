@@ -18,8 +18,8 @@
     xmlns:fo="http://www.w3.org/1999/XSL/Format" exclude-result-prefixes="#default">
     
     
-    <!-- import the main docbook.xsl before we apply our overrides -->
-    <xsl:import href="&db_xsl_path;/fo/docbook.xsl"/>
+    <!-- assume catalog-based resolution... -->
+    <xsl:import href="http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl" />
     
    
     <!-- ########## XRef -->

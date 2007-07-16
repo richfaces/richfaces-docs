@@ -23,7 +23,7 @@
                 xmlns="http://www.w3.org/TR/xhtml1/transitional"
                 exclude-result-prefixes="#default">
                 
-<xsl:import href="&db_xsl_path;/html/docbook.xsl"/>
+<xsl:import href="http://docbook.sourceforge.net/release/xsl/current/html/docbook.xsl"/>
 
 <!--###################################################
                      HTML Settings

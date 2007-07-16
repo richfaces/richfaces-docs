@@ -2,7 +2,7 @@
 <xsl:transform xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                xmlns:javaee="http://java.sun.com/JSP/TagLibraryDescriptor"
                version="1.0" exclude-result-prefixes="javaee">
-    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" omit-xml-declaration="yes"/>
      <xsl:param name="lang" />
      <xsl:param name="title" />
      <xsl:param name="separator" />
@@ -48,7 +48,7 @@
 			
         	<xsl:attribute name="id"><xsl:value-of select="$tag_name"/></xsl:attribute>
             <title>&lt;<xsl:value-of select="concat($prefix,':', $tag_name)" />&gt;</title>
-			<xsl:for-each select="document(concat('file:/',$lang, $separator,'included',$separator,$tag_name, '.desc.xml'))/*">
+			<xsl:for-each select="document(concat($lang, $separator,'included',$separator,$tag_name, '.desc.xml'))/*">
                 <xsl:copy-of select="./*"/>
             </xsl:for-each>
             <table>
@@ -76,7 +76,7 @@
                 </tbody>
                 </tgroup>
             </table>
- 			<xsl:for-each select="document(concat('file:/',$lang, $separator,'included',$separator,$tag_name, '.xml'))/*">
+ 			<xsl:for-each select="document(concat($lang, $separator,'included',$separator,$tag_name, '.xml'))/*">
                 <xsl:copy-of select="./*"/>
             </xsl:for-each>
         </section>
