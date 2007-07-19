@@ -75,6 +75,99 @@ HtmlDragIndicator myDragIndicator = new HtmlDragIndicator();
 ...
 ]]></programlisting>
   </section>
+
+  <section>
+    <title>Details of Usage</title>
+    <para> In the simplest way the component could be defined empty - in that case a default
+      indicator will be shown like this: </para>
+    <figure>
+      <title>Simplest dragIndicator </title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/dragIndicator3.gif"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>For indicator customization you need to define one of the following facets:</para>
+    <itemizedlist>
+      <listitem>single</listitem>
+    </itemizedlist>
+    <para>Indicator shown when dragging a single element.</para>
+    <itemizedlist>
+      <listitem>multy</listitem>
+    </itemizedlist>
+    <para>Indicator shown when dragging several components (for future components that will support
+      multiple selection).</para>
+    <para>Thus for specify a look-and-feel you have to define one of these facets and include into
+      it a content that should be shown in indicator.</para>
+    <section>
+      <title>Macro generations</title>
+      <para>To place some data from drag or drop zones into component you can use macro generations.
+        They are being defining in the following way:</para>
+      <itemizedlist>
+        <listitem>
+          <emphasis role="bold">
+            <property>&lt;rich:dndParam&gt;</property>
+          </emphasis> component with a specific name and value is being included into a drag/drop
+          support component (an image can be defined as placed inside <emphasis role="bold">
+            <property>&lt;rich:dndParam&gt;</property>
+          </emphasis> without defining a value). </listitem>
+        <listitem> in needed place a parameter value is included into the marking of indicator using
+          syntax (name of parameter)</listitem>
+      </itemizedlist>
+      <para> For instance, this:</para>
+      <programlisting role="XML"><![CDATA[...	
+    <dnd:dropSupport…>
+        <dnd:dndParam name="testDrop">
+            <h:graphicImage value="/images/file-manager.png" />
+        </dnd:dndParam>
+    </dnd:dropSupport>
+...
+]]></programlisting>
+      <para>..Is placed into indicator as follows:</para>
+      <programlisting role="XML"><![CDATA[...	
+    <f:facet name="single">
+        {testDrop}
+    </f:facet>
+...
+]]></programlisting>
+    </section>
+    <section>
+      <title>Predefined macro generations</title>
+      <para> Indicator can accept two default macro generations:</para>
+      <itemizedlist>
+        <listitem>marker</listitem>
+        <listitem>label</listitem>
+      </itemizedlist>
+      <para>Thus including one of these elements in the marking of indicator, in other words after
+        setting up appropriate parameters in DnD components and defining only default indicator -
+        without specifying facets - a developer gets these parameters values displayed in indicator
+        in the order &quot;marker - label&quot;.</para>
+    </section>
+
+    <section>
+      <title>Marker customization</title>
+      <para>The macro generation &quot;marker&quot; can be customized depending on what a
+        draggable element is located over. For that you should define one of these three parameters
+        (specify a parameter with one of three names):</para>
+      <itemizedlist>
+        <listitem>accept </listitem>
+      </itemizedlist>
+      <para>Parameter will be set instead of {marker} into indicator when a draggable element is positioned over drop zone that accept this type of elements</para>
+
+      <itemizedlist>
+        <listitem>reject</listitem>
+      </itemizedlist>
+      <para>Parameter will be set instead of {marker} into indicator when a draggable element is positioned over drop zone that doesn&apos;t accept this type of elements </para>
+
+      <itemizedlist>
+        <listitem>default</listitem>
+      </itemizedlist>
+      <para>Parameter will be set instead of {marker} into indicator when a draggable element is positioned over all the rest of page elements</para>
+    </section>
+
+  </section>
+
   <!--section>
     <title>Details of Usage</title>
     <para>The component seems to be combined of two elements: an icon on the left and informational
@@ -152,7 +245,9 @@ HtmlDragIndicator myDragIndicator = new HtmlDragIndicator();
 
     </section>
   </section-->
-  <section>
+  
+    
+    <section>
     <title>Relevant resources links</title>
     <para>
       <ulink
