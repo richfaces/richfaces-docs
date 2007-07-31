@@ -263,7 +263,14 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
 	]]></programlisting>
     <para> Here, if user opens modal dialog window using current link and after submits data then
       modalPanel destination and height on new loaded page will be restored. </para>
-    <para>You can use input or/and command components inside modalPanel. Simple example of using
+    <para>if you need the content of the modalPanel to be submitted - you need to remember two important rules: </para>
+      <itemizedlist>
+      <listitem>modalPanel must have its own form if it has form elements (input or/and command
+        components) inside (as it was shown in the example above) </listitem>
+      <listitem>modalPanel must not be included into the form (on any level up) if it has the
+        form inside.</listitem>
+    </itemizedlist> 
+      <para>Simple example of using
       commandButton within modalPanel is placed below.</para>
     <emphasis role="bold">Example:</emphasis>
     <programlisting role="XML"><![CDATA[...
@@ -278,18 +285,13 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                         <t:commandButton value="Test" action="#{TESTCONTROLLER.test}" /> 
                 </h:form> 
         </rich:modalPanel>
-...
+        ...
+        <h:form> 
+                <!--Some other Page content--> 
+        </h:form>
+...        
 ]]></programlisting>
-    <para>
-      <note>
-        <title>Note:</title>Two rules are important for modalPanel: <itemizedlist>
-          <listitem>modalPanel must have its own form if it has form elements (input or/and command
-            components) inside (as it was shown in the example above) </listitem>
-          <listitem>modalPanel must not be included into the form (on any level up) if it has the
-            form inside.</listitem>
-        </itemizedlist></note>
-    </para>
-    <para>See also <ulink
+   <para>See also discussion about this problem on the <ulink
       url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4064191"
       >RichFaces Users Forum</ulink>.</para>
   </section>
