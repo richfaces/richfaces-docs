@@ -421,7 +421,50 @@ HtmlSuggestionBox myList = new HtmlSuggestionBox();
         
         <para>To change the style of particular suggestionbox components define your own style classes in the corresponding suggestionbox attributes. </para>
     </section>
-        
+
+	<section>
+	<para>
+There is possibility to define what be shown if the autocomplete returns empty list.
+Attribute "nothingLabel" or facet with the same name could be used for it.
+	</para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>				
+        <programlisting role="XML"><![CDATA[...
+    <rich:suggestiobox nothingLabel="Empty" for="test" suggestionAction="#{bean.autocomplete}" var="cit"> 
+        <h:column>
+            <h:outputText value="#{cit.text}"/>
+        </h:column>
+    </rich:suggestionbox>
+...
+]]></programlisting>
+		<para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:suggestiobox for="test" suggestionAction="#{bean.autocomplete}" var="cit"> 
+	<facet name="nothingLabel">
+		<h:outputText value="Empty"/>
+	</facet>		
+	<h:column>
+		<h:outputText value="#{cit.text}"/>
+	</h:column>
+</rich:suggestionbox>
+...
+]]></programlisting>				
+	</section>
+	
+    <para>It looks on the page in the following way:</para>       
+
+	<figure>
+            <title>SuggestionBox with empty list</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/suggestionbox5.gif"/>
+                </imageobject>
+            </mediaobject>
+        </figure>	
+	
     <section>
         <title>Relevant resources links</title>
         <para>
