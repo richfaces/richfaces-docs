@@ -67,6 +67,18 @@
   </xsl:choose>
 </xsl:template>
 
+  <xsl:template match="programlisting[@role='XML']|programlisting[@role='JAVA']|programlisting[@role='XHTML']|programlisting[@role='JSP']">
+    <xsl:variable name="kidz">
+      <xsl:apply-templates></xsl:apply-templates>
+    </xsl:variable>
+    <pre class="{@role}">
+      <xsl:value-of 
+        select="javahl:highlight(string($kidz), attribute::role)"
+        xmlns:javahl="java:com.exadel.docbook.colorer.HighLighter"
+        disable-output-escaping="yes"/>
+    </pre>
+  </xsl:template>
+
 <xsl:template match="literallayout">
   <xsl:param name="suppress-numbers" select="'0'"/>
 
