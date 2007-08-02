@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+  <sectioninfo>
+    <keywordset>
+      <keyword>dropDownMenu</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <table>
+    <title>Component identification parameters</title>
+
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+
+          <entry>Value</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+
+          <entry>org.richfaces.PanelMenu</entry>
+        </row>
+
+        <row>
+          <entry>component-class</entry>
+
+          <entry>org.richfaces.component.html.HtmlPanelMenu</entry>
+        </row>
+
+        <row>
+          <entry>component-family</entry>
+
+          <entry>org.richfaces.PanelMenu</entry>
+        </row>
+
+        <row>
+          <entry>renderer-type</entry>
+
+          <entry>org.richfaces.PanelMenuRenderer</entry>
+        </row>
+
+        <row>
+          <entry>tag-class</entry>
+
+          <entry>org.richfaces.taglib.PanelMenuTag</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+
+    <para>To create the simplest variant on the page use the following syntax:</para>
+
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="xml">...
+      &lt;rich:panelMenu event="onmouseover"&gt;
+            &lt;!--Nested panelMenu components--&gt;
+      &lt;/rich:panelMenu&gt;
+...</programlisting>
+  </section>
+
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="java">...
+      org.richfaces.component.html.HtmlpanelMenu mypanelMenu = new  org.richfaces.component.html.HtmlpanelMenu();
+...</programlisting>
+  </section>
+
+  <section>
+    <title>Details of Usage</title>
+
+    <para>All attributes are not required.</para>
+    <para>Use &quot;event&quot; attribute to define an event for appearance of
+      collapsing/expanding sublevels. Default value is &quot;onclick&quot;. An example could
+      be seen below.</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="xml">...
+      &lt;rich:panelMenu event="onmouseover"&gt;
+            &lt;!--Nested panelMenu components--&gt;
+      &lt;/rich:panelMenu&gt;
+...</programlisting>
+
+    <para>Switching mode could be chosen with the &quot;mode&quot; attribute for all
+      panelMenu items except ones where this attribute was redefined. By default all items send
+      traditional request. </para>
+    <para>The &quot;expandMode&quot; attribute defines the submission modes for all
+      collapsing/expanding panelMenu groups except ones where this attribute was redefined. </para>
+    <para>The &quot;mode&quot; and &quot;expandMode&quot; attributes could be used
+      with three possible parameters.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Server (default)</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The common submission of the form is performed and a page is completely refreshed.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ajax</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>An Ajax form submission is performed additionally specified elements in the
+      &quot;reRender&quot; attribute are reRendered.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>None</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>&quot;Action&quot; and &quot;ActionListener&quot; attributes are ignored.
+      Items don&apos;t fire any submits itself. Behavior is fully defined by the components
+      nested to items. Groups expand on the client side.</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="xml">...
+      &lt;rich:panelMenu event="onclick" submitMode="none"&gt;
+            &lt; rich:panelMenuItem label="Link to external page"&gt;
+                  &lt;h:outputLink ... &gt;
+            &lt;rich:panelMenuItem&gt;
+      &lt;/rich:panelMenu&gt;
+...</programlisting>
+
+    <note><title>Note:</title> As the <emphasis role="bold">
+        <property>&lt;rich:panelMenu&gt;</property>
+      </emphasis> component doesn&apos;t provide its own form, use it between
+      &lt;h:form&gt; and &lt;/h:form&gt; tags.</note>
+
+    <para>The &quot;expandSingle&quot; attribute is defined for expanding more than one
+      submenu on the same level. The default value is &quot;false&quot;. If it&apos;s
+      true the previously opened group on the top level closes before opening another one. See the
+      picture below.</para>
+
+    <figure>
+      <title>Using the &quot;expandSingle&quot; attribute</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/panelMenu1.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>The &quot;selectedChild&quot; attribute is used for defining the name of the
+      selected group or item. An example for group is placed below:</para>
+
+    <para>Here is an example:</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="xml">...
+      &lt;rich:panelMenu selectedChild="thisChild"&gt;
+        &lt;rich:panelMenuGroup label="Group1" name="thisChild"&gt;
+          &lt;!--Nested panelMenu components--&gt;
+        &lt;/rich:panelMenuGroup&gt;
+      &lt;/rich:panelMenu&gt;
+...</programlisting>
+  </section>
+
+  <section>
+    <title>JavaScript API</title>
+    <para>In Java Script code for expanding/collapsing group element creation it’s necessary to use
+      doExpand()/doCollapse() function.</para>
+
+    <table>
+      <title>JavaScript API</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Function</entry>
+
+            <entry>Description</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>doExpand()</entry>
+
+            <entry>Expand group element</entry>
+          </row>
+
+          <row>
+            <entry>doCollapse()</entry>
+
+            <entry>Collapse group element</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+  </section>
+
+
+  <section>
+    <title>Look-and-Feel Customization</title>
+
+    <para>As this component is just a wrapper for its children its provide the only &quot;rich-panel-menu&quot;
+      class for wrapper div element. To redefine appearance of particular panel menus, it&apos;s possible
+      to define your own CSS class. And then just define it in the components class attribute. </para>
+   
+  </section>
+
+</section>
