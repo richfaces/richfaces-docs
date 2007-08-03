@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+  <sectioninfo>
+    <keywordset>
+      <keyword>panelMenuItem</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <table>
+    <title>Component identification parameters</title>
+
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+
+          <entry>Value</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+
+          <entry>org.richfaces.PanelMenuItem</entry>
+        </row>
+
+        <row>
+          <entry>component-class</entry>
+
+          <entry>org.richfaces.component.html.HtmlPanelMenuItem</entry>
+        </row>
+
+        <row>
+          <entry>component-family</entry>
+
+          <entry>org.richfaces.PanelMenuItem</entry>
+        </row>
+
+        <row>
+          <entry>renderer-type</entry>
+
+          <entry>org.richfaces.PanelMenuItemRenderer</entry>
+        </row>
+
+        <row>
+          <entry>tag-class</entry>
+
+          <entry>org.richfaces.taglib.PanelMenuItemTag</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+
+    <para>To create the simplest variant on the page use the following syntax:</para>
+
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="xml">...
+      &lt;rich:panelMenu&gt;
+             …
+            &lt;rich:panelMenuItem value="Item1"/&gt;
+            …	
+      &lt;/rich:panelMenu&gt;
+...</programlisting>
+  </section>
+
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="java">...
+      org.richfaces.component.html.HtmlPanelMenuItem mypanelMenuItem = new  org.richfaces.component.html.HtmlPanelMenuItem();
+...</programlisting>
+  </section>
+
+  <section>
+    <title>Details of Usage</title>
+
+    <para>All attributes except &quot;label&quot; are optional. The
+      &quot;label&quot; attribute defines text to be represented.</para>
+    <para>The &quot;mode&quot; attribute could be used with three possible parameters:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Server (default)</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The common submission of the form is performed and a page is completely refreshed.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ajax</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Ajax form submission is performed additionally specified elements in the
+      &quot;reRender&quot; attribute are reRendered.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>None</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>&quot;Action&quot; and &quot;ActionListener&quot; attributes are ignored.
+      Items don&apos;t fire any submits itself. Behavior is fully defined by the components
+      nested to items.</para>
+
+    <para>Here is an example for value &quot;none&quot;:</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="xml">...
+      &lt;rich:panelMenu&gt;
+            …
+            &lt;rich:panelMenuItem submitMode="none" onclick="document.location.href='http://labs.jboss.com/jbossrichfaces/"&gt;
+                  &lt;h:outputLink value="http://labs.jboss.com/jbossrichfaces/"&gt;
+                        &lt;h:outputText value="RichFaces Home Page"&gt;&lt;/h:outputText&gt;
+                  &lt;/h:outputLink&gt;
+            &lt;/rich:panelMenuItem&gt;
+            …
+      &lt;/rich:panelMenu&gt;
+...</programlisting>
+
+    <para>There are two icon-related attributes. The &quot;icon&quot; attribute defines an
+      icon. The &quot;iconDisabled&quot; attribute defines an icon for a disabled item.</para>
+
+    <para>Default icons are shown on the picture below:</para>
+
+    <figure>
+      <title>Default icons</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/panelMenuGroup_icons.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Here is an example:</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="xml">...
+      &lt;rich:panelMenu&gt;
+            …
+            &lt;rich:panelMenuItem ="Item 1.1" icon="chevronUp" /&gt;
+            …	
+      &lt;/rich:panelMenu&gt;
+...</programlisting>
+    <para> As the result the picture is shown below:</para>
+
+    <figure>
+      <title>Using an &quot;icon&quot; attribute</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/panelmenugroup_exp.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>It&apos;s also possible to define a path to the icon. Simple code is placed below.</para>
+
+    <programlisting role="xml">...
+      &quot;rich:panelMenu&quot;
+            …
+            &quot;rich:panelMenuItem ="Item 1.1" icon="\images\img1.gif" /&quot;
+            …	
+      &quot;/rich:panelMenu&quot;
+...</programlisting>
+
+  </section>
+
+  <section>
+    <title>JavaScript API</title>
+    <para>In Java Script code for expanding/collapsing group element creation it&apos;s
+      necessary to use doExpand()/doCollapse() function.</para>
+
+    <table>
+      <title>JavaScript API</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Function</entry>
+
+            <entry>Description</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>doExpand()</entry>
+
+            <entry>Expand group element</entry>
+          </row>
+
+          <row>
+            <entry>doCollapse()</entry>
+
+            <entry>Collapse group element</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+  </section>
+
+
+  <section>
+    <title>Look-and-Feel Customization</title>
+
+    <para>For skinnability implementation, the components use a style class redefinition method.
+      Default style classes are mapped on skin parameters.</para>
+
+    <para>There are two ways to redefine the appearance of all panel menu items at once:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Redefine the corresponding skin parameters</para>
+      </listitem>
+
+      <listitem>
+        <para>Add to a user&apos;s style sheets style classes used by a panel menu item</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title> Skin parameters redefinition</title>
+
+    <table>
+      <title>Skin parameters redefinition for table element item of first level</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Parameters for table element item of first level</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>generalFamilyFont</entry>
+
+            <entry>font-family</entry>
+          </row>
+
+          <row>
+            <entry>generalWeightFont</entry>
+
+            <entry>font-weight</entry>
+          </row>
+
+          <row>
+            <entry>generalSizeFont</entry>
+
+            <entry>font-size</entry>
+          </row>
+
+          <row>
+            <entry>generalTextColor</entry>
+
+            <entry>color</entry>
+          </row>
+
+          <row>
+            <entry>panelBorderColor</entry>
+
+            <entry>border-top-color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>General skin parameter redefinition for disabled item </title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Parameter for disabled item</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>panelBorderColor</entry>
+
+            <entry>color</entry>
+          </row>
+
+        </tbody>
+      </tgroup>
+    </table>
+
+  </section>
+
+  <section>
+    <title>Definition of Custom Style Classes</title>
+
+    <figure>
+      <title>Classes names</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/panelmenuitem.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>On the screenshot, there are classes names defining specified elements.</para>
+
+    <table>
+      <title>Component skin class</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Class name</entry>
+
+            <entry>Description</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>rich-pmenu-item</entry>
+
+            <entry>Defines panel menu item common styleClass</entry>
+          </row>
+
+          <row>
+            <entry>rich-pmenu-item-icon</entry>
+
+            <entry>Defines panel menu item icon</entry>
+          </row>
+
+          <row>
+            <entry>rich-pmenu-item-label</entry>
+
+            <entry>Defines panel menu item label element</entry>
+          </row>
+
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>This classes set is related to the second and all other lower levels of items. For all
+      items starting from the first level there are similar classes:</para>
+
+    <itemizedlist>
+      <listitem>rich-pmenu-top-item</listitem>
+      <listitem>rich-pmenu-top-item-icon</listitem>
+      <listitem>rich-pmenu-top-item-label</listitem>
+    </itemizedlist>
+
+    <para>In order to redefine the style for all panel menu items on a page using CSS,
+      it&apos;s enough to create classes with the same names and define the necessary properties
+      in them.</para>
+
+    <para>To change the style of particular panel menu items components define your own style
+      classes in the corresponding panelMenuItem attributes.</para>
+  </section>
+
+</section>

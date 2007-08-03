@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+  <sectioninfo>
+    <keywordset>
+      <keyword>panelMenuGroup</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <table>
+    <title>Component identification parameters</title>
+
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+
+          <entry>Value</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+
+          <entry>org.richfaces.PanelMenuGroup</entry>
+        </row>
+
+        <row>
+          <entry>component-class</entry>
+
+          <entry>org.richfaces.component.html.HtmlPanelMenuGroup</entry>
+        </row>
+
+        <row>
+          <entry>component-family</entry>
+
+          <entry>org.richfaces.PanelMenuGroup</entry>
+        </row>
+
+        <row>
+          <entry>renderer-type</entry>
+
+          <entry>org.richfaces.PanelMenuGroupRenderer</entry>
+        </row>
+
+        <row>
+          <entry>tag-class</entry>
+
+          <entry>org.richfaces.taglib.PanelMenuGroupTag</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+
+    <para>To create the simplest variant on the page use the following syntax:</para>
+
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="xml">...
+      &lt;rich:panelMenu&gt;
+            &lt;rich:panelMenuGroup label="Group1"&gt;
+                  &lt;!--Nested panelMenu components--&gt;
+            &lt;/rich:panelMenuGroup&gt;
+      &lt;/rich:panelMenu&gt;
+...</programlisting>
+  </section>
+
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="java">...
+      org.richfaces.component.html.HtmlPanelMenuGroup mypanelMenuGroup = new  org.richfaces.component.html.HtmlPanelMenuGroup();
+...</programlisting>
+  </section>
+
+  <section>
+    <title>Details of Usage</title>
+
+    <para>All attributes except &quot;label&quot; are optional. The
+      &quot;label&quot; attribute defines text to be represented.</para>
+    <para>Switching mode could be chosen with the &quot;expandMode&quot; attribute for the
+      concrete panelMenu group.</para>
+    <para>The &quot;expandMode&quot; attribute could be used with three possible parameters:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Server (default)</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The common submission of the form is performed and a page is completely refreshed.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ajax</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Ajax form submission is performed additionally specified elements in the
+      &quot;reRender&quot; attribute are reRendered.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>None</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>&quot;Action&quot; and &quot;ActionListener&quot; attributes are ignored.
+      Items don&apos;t fire any submits itself. Behavior is fully defined by the components
+      nested to items.</para>
+
+    <para>There are three icon-related attributes. The &quot;iconExpanded&quot; attribute
+      defines an icon for an expanded state. The &quot;iconCollapsed&quot; attribute defines
+      an icon for a collapsed state. The &quot;iconDisabled&quot; attribute defines an icon
+      for a disabled state.</para>
+
+    <para>Default icons are shown on the picture below:</para>
+
+    <figure>
+      <title>Default icons</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/panelMenuGroup_icons.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Here is an example:</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="xml">...
+      &lt;rich:panelMenu&gt;
+            &lt;rich:panelMenuGroup label="Group1" iconExpanded="disc" iconCollapsed="chevron"&gt;
+                  &lt;!--Nested panelMenu components--&gt;
+            &lt;/rich:panelMenuGroup&gt;
+      &lt;/rich:panelMenu&gt;
+...</programlisting>
+    <para> As the result the pictures are shown below. The first one represents the collapsed state,
+      the second one - expanded state:</para>
+
+    <figure>
+      <title>Collapsed state</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/panelmenugroup_col.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <figure>
+      <title>Expanded state</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/panelmenugroup_exp.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>It&apos;s also possible to define a path to the icon. Simple code is placed below.</para>
+
+    <programlisting role="xml">...
+      &lt;rich:panelMenu&gt;
+            &lt;rich:panelMenuGroup label="Group1" iconExpanded="\images\img1.gif" iconCollapsed=""\images\img2.gif""&gt;
+                  &lt;!--Nested menu components--&gt;
+            &lt;/rich:panelMenuGroup&gt;
+      &lt;/rich:panelMenu&gt;
+...</programlisting>
+
+  </section>
+
+  <section>
+    <title>JavaScript API</title>
+    <para>In Java Script code for expanding/collapsing group element creation it&apos;s
+      necessary to use doExpand()/doCollapse() function.</para>
+
+    <table>
+      <title>JavaScript API</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Function</entry>
+
+            <entry>Description</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>doExpand()</entry>
+
+            <entry>Expand group element</entry>
+          </row>
+
+          <row>
+            <entry>doCollapse()</entry>
+
+            <entry>Collapse group element</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+  </section>
+
+
+  <section>
+    <title>Look-and-Feel Customization</title>
+
+    <para>For skinnability implementation, the components use a style class redefinition method.
+      Default style classes are mapped on skin parameters.</para>
+
+    <para>There are two ways to redefine the appearance of all panel menu groups at once:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Redefine the corresponding skin parameters</para>
+      </listitem>
+
+      <listitem>
+        <para>Add to a user&apos;s style sheets style classes used by a panel menu group</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title> Skin parameters redefinition</title>
+
+    <table>
+      <title>Skin parameters redefinition for table element of the first level group</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Parameters for table element of the first level group</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>headerWeightFont</entry>
+
+            <entry>font-weight</entry>
+          </row>
+
+          <row>
+            <entry>generalFamilyFont</entry>
+
+            <entry>font-family</entry>
+          </row>
+
+          <row>
+            <entry>headerSizeFont</entry>
+
+            <entry>font-size</entry>
+          </row>
+
+          <row>
+            <entry>headerTextColor</entry>
+
+            <entry>color</entry>
+          </row>
+
+          <row>
+            <entry>headerBackgroundColor</entry>
+
+            <entry>background-color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>Skin parameters redefinition for table element of the second and next levels groups</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Parameters for table element of the second and next levels groups</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>headerWeightFont</entry>
+
+            <entry>font-weight</entry>
+          </row>
+
+          <row>
+            <entry>headerFamilyFont</entry>
+
+            <entry>font-family</entry>
+          </row>
+
+          <row>
+            <entry>headerSizeFont</entry>
+
+            <entry>font-size</entry>
+          </row>
+
+          <row>
+            <entry>generalTextColor</entry>
+
+            <entry>color</entry>
+          </row>
+
+          <row>
+            <entry>tableBorderColor</entry>
+
+            <entry>border-top-color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>Skin parameter redefinition for wrapped div element of the first level group</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Parameter for wrapped div element of the first level group</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>panelBorderColor</entry>
+
+            <entry>border-color</entry>
+          </row>
+
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section>
+    <title>Definition of Custom Style Classes</title>
+
+    <figure>
+      <title>Classes names</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/panelmenugroup1.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>On the screenshot, there are classes names defining specified elements.</para>
+
+    <table>
+      <title>Component skin class</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Class name</entry>
+
+            <entry>Description</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>rich-pmenu-top-group-div</entry>
+
+            <entry>Defines top panel menu group common styleClass. It&apos;s used in the outside
+              &lt;div&gt; element</entry>
+          </row>
+
+          <row>
+            <entry>rich-pmenu-top-group</entry>
+
+            <entry>Defines top panel menu group wrapper table element</entry>
+          </row>
+
+          <row>
+            <entry>rich-pmenu-top-group-self-icon</entry>
+
+            <entry>Defines top panel menu group icon element</entry>
+          </row>
+
+          <row>
+            <entry>rich-pmenu-top-group-self-label</entry>
+
+            <entry>Defines top panel menu group label element</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>This classes set is related to upper level of nodes. For all nodes starting with the
+      second level there are similar classes:</para>
+
+    <itemizedlist>
+      <listitem>rich-pmenu-group-div</listitem>
+      <listitem>rich-pmenu-group</listitem>
+      <listitem>rich-pmenu-group-self-icon</listitem>
+      <listitem>rich-pmenu-group-self-label</listitem>
+    </itemizedlist>
+
+    <para>In order to redefine the style for all panel menu groups on a page using CSS,
+      it&apos;s enough to create classes with the same names and define the necessary properties
+      in them.</para>
+
+    <para>To change the style of particular panel menu groups components define your own style
+      classes in the corresponding panelMenuGroup attributes. </para>
+  </section>
+
+</section>
