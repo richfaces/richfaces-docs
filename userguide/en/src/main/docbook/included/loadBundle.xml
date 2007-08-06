@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.ajax4jsf.Bundle</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.ajax4jsf.Bundle</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.ajax4jsf.component.html.AjaxLoadBundle</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  
+  <section>
+    <title>Creating on a page</title>
+
+    <para>Simple component definition on a page:</para>
+
+	  <para>
+		  <emphasis role="bold">Example:</emphasis>
+		<programlisting role="XML"><![CDATA[<a4j:loadBundle baseName="demo.bundle.Messages" var="Message"/>]]></programlisting>
+	  </para>
+  </section>
+  
+  <section>
+    <title>Dynamical creation of a component from Java code</title>
+
+	  <para>
+		  <emphasis role="bold">Example:</emphasis>
+	  <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.AjaxLoadBundle;
+...
+LoadBundle myBundle = new LoadBundle();
+...
+		]]></programlisting>
+	  </para>		
+  </section>
+
+  <section>
+    <title>Key attributes and ways of usage</title>
+	<para>
+
+	<emphasis role="bold"><property>&lt;a4j:loadBundle&gt;</property>
+	</emphasis>allows to use reference to bundle messages during the Ajax re-rendering. 
+<emphasis role="bold"><property>&lt;a4j:loadBundle&gt;</property>
+	</emphasis> is a substitute for the
+<emphasis role="bold"><property>&lt;f:loadBundle&gt;</property>
+	</emphasis> in JSF 1.1 which is not a JSF component originally. 
+
+<emphasis role="bold"><property>&lt;f:loadBundle&gt;</property>
+	</emphasis>	 is a jsp tag that load the bundle messages into the request scope when page is rendered. As soon as each Ajax request
+works in own request scope, the bundles loaded with 
+<emphasis role="bold"><property>&lt;f:loadBundle&gt;</property>
+	</emphasis> are unavailable. 
+Instead of 
+<emphasis role="bold"><property>&lt;f:loadBundle&gt;</property>
+	</emphasis> that might be located anywhere on the page, the 
+
+	<emphasis role="bold"><property>&lt;a4j:loadBundle&gt;</property>
+	</emphasis> should be declared inside the  
+
+	<emphasis role="bold"><property>&lt;f:view&gt;</property>
+	</emphasis>	(this does not matter in case on using Facelets) 
+JSF 1.2 introduces the bundle registered in the faces-config.xml. This fixed the problem with 
+	<emphasis role="bold"><property>&lt;f:loadBundle&gt;</property>
+	</emphasis>. 
+Therefore, you can use this JSF 1.2 way to declare your bundles. 
+
+	</para>
+  </section>
+</chapter>   

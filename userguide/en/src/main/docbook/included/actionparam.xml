@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter>
+    <para>
+        <table frame="all">
+            <title>Component identification parameters</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Value</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>component-type</entry>
+                        <entry>org.ajax4jsf.ajax.ActionParameter</entry>
+                    </row>
+                    <row>
+                        <entry>component-family</entry>
+                        <entry> </entry>
+                    </row>
+                    <row>
+                        <entry>component-class</entry>
+                        <entry>org.ajax4jsf.ajax.html.HtmlActionParameter</entry>
+                    </row>
+                    <row>
+                        <entry>renderer-type</entry>
+                        <entry> </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </para>
+    <section>
+        <title>Creating on a page</title>
+        <para>Simple component definition example:</para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[<a4j:actionParam noEscape="true" name="param1" value="getMyValue()" assignTo="#{bean.prop1}" />]]></programlisting>
+    </section>
+    <section>
+        <title>Dynamical creation of a component from Java code</title>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.ajax.html.HtmlActionParameter;
+...
+HtmlActionParameter myActionParameter = new HtmlActionParameter();
+...
+]]></programlisting>
+    </section>
+    <section>
+        <title>Key attributes and ways of usage</title>
+        <para>The component <emphasis role="bold">
+                <property>&lt;a4j:actionparam&gt;</property>
+            </emphasis> is a combination of the functionality of two JSF tags: <emphasis role="bold">
+                <property>&lt;f:param&gt;</property>
+            </emphasis> and <emphasis role="bold">
+                <property>&lt;f:actionListener&gt;</property>
+            </emphasis>.</para>
+        <para>At the render phase, it's decoded by parent component (<emphasis role="bold">
+                <property>&lt;h:commandLink&gt;</property>
+            </emphasis> or like) as usual. At the process request phase, if the parent component
+            performs an action event, update the value specified in the &quot;assignTo&quot;
+            attribute as its value. If a converter attribute is specified, use it to encode and
+            decode the value to a string stored in the html parameter.</para>
+        <para><emphasis role="bold">
+                <property>&lt;a4j:actionparam&gt;</property>
+            </emphasis>has a &quot;noEscape&quot; attribute. If it is set to
+            &quot;true&quot;, the value will be evaluated as a JavaScript code. </para>
+        <emphasis role="bold">Example:</emphasis>
+        <programlisting role="XML"><![CDATA[...
+        <script>
+            ...
+             var foo = "bar";
+            ...
+        </script>
+        ...
+        <a4j:actionParam noEscape="true" name="param1" value="foo" assignTo="#{bean.prop1}" />
+...]]></programlisting>
+	<para>
+		The <emphasis role="bold"><property>&lt;a4j:param&gt;</property></emphasis> extends 
+		<emphasis role="bold"><property>&lt;f:param&gt;</property></emphasis>, so the "name" attribute is mandatory.
+		Otherwise, the value will be missing due missing the request parameter name for it.
+	</para>	
+    </section>
+  
+  <section>
+    <title>Relevant resources links</title>
+	<para>More information can be found on the <ulink
+				url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4063764"
+				>Ajax4JSF Users Forum</ulink>.</para>	  
+  </section> 	
+</chapter>

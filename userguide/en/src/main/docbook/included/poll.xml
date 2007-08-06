@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<chapter>
+  
+      <table>
+      <title>Component identification parameters </title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Name</entry>
+            <entry>Value</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>component-type</entry>
+            <entry>org.ajax4jsf.components.Poll</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.ajax4jsf.components.AjaxPoll</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.ajax4jsf.components.AjaxPoll</entry>
+          </row>
+          <row>
+            <entry>renderer-type</entry>
+            <entry>org.ajax4jsf.components.AjaxPollRenderer</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  
+  <section>
+    <title>Creating on a page</title>
+    <para>To use this component it&apos;s necessary only to set an update interval.</para>
+
+  <para>
+      <emphasis role="bold">Example:</emphasis>
+ </para>
+    <programlisting role="XML"><![CDATA[<a4j:poll interval="1000" reRender="someDataTable" action="#{bean.action1}"/>
+]]></programlisting>
+    <para>The <emphasis role="bold">
+        <property>&lt;a4j:poll&gt;</property>
+      </emphasis> component defined this way every second submits AJAX form onto the server, performs the corresponding action and renders a components with the <emphasis >
+        <property>&quot;someDataTable&quot;</property>
+      </emphasis> id after a response comes back.</para>
+  </section>
+  <section>
+    <title>Dynamical creation of a component from Java code</title>
+
+  <para>
+      <emphasis role="bold">Example:</emphasis>
+ </para>
+    <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.ajax.html.AjaxPoll;
+...
+AjaxPoll myPoll = new AjaxPoll();
+...
+]]></programlisting>
+  </section>
+  <section>
+    <title>Key attributes and ways of usage</title>
+    <para>The component decodes all necessary JavaScript for time count and on the expiry of some interval for calling of a Ajax4jsf utility  method for Ajax request sending (A4J.AJAX.Submit (Some request parameters)).
+	 </para>
+	 <para>
+	 The timer could be stopped or started in any time. The current state is controlled on the component with the <emphasis >
+        <property>"enabled"</property>
+      </emphasis> attribute:
+	 </para>
+	 <programlisting role="XML"><![CDATA[<a4j:poll interval="1000" enabled="#{bean.boolProperty}"/>
+]]></programlisting>
+<para>As any Ajax4jsf Action component, <emphasis role="bold">
+        <property>&lt;a4j:poll&gt;</property>
+      </emphasis> has all described in the <emphasis role="bold">
+        <property><ulink url="index.html#support">&lt;a4j:support&gt;</ulink></property>
+      </emphasis> chapter attributes to provide the necessary behavior of request sending (delay, limitation of a submit and render area, requests frequency, and etc.). For detailed information on these attributes see again the <emphasis role="bold">
+        <property><ulink url="index.html#support">&lt;a4j:support&gt;</ulink></property></emphasis> component description.
+ </para>
+
+  </section>
+  
+  <section>
+    <title>Relevant resources links</title>
+	<para>
+	The aditional information about component usage you can find here:<ulink url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=103909">Ajax4Jsf Users Forum.
+	</ulink>
+	</para>
+  </section>
+
+</chapter>

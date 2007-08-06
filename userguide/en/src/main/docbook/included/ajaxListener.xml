@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+		
+          <row>
+            <entry>component-type</entry>
+            <entry>org.ajax4jsf.Listener</entry>
+          </row>
+          <row>
+            <entry>component-family</entry>
+            <entry>org.ajax4jsf.Listener</entry>
+          </row>
+          <row>
+            <entry>component-class</entry>
+            <entry>org.ajax4jsf.component.html.AjaxListener</entry>
+          </row>
+		  
+        </tbody>
+      </tgroup>
+    </table>
+	
+  <!--
+  <section>
+    <title>Creating on a page</title>
+    <para>Simple Component definition on a page:</para>
+
+  <para>
+      <emphasis role="bold">Example:</emphasis>
+ </para>
+
+    <programlisting role="XML"><![CDATA[<a4j:ajaxListenet type=""/>
+]]></programlisting> 
+  </section>
+   -->
+   
+  <section>
+    <title>Dynamical creation of a component from Java code</title>
+
+	  <para>
+		  <emphasis role="bold">Example:</emphasis>
+	  <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.AjaxListener;
+...
+AjaxListener myListener = new AjaxListener();
+...
+		]]></programlisting>
+	  </para>		
+  </section>
+
+  <section>
+    <title>Key attributes and ways of usage</title>
+	<para>
+Additional to the listeners provided by JSF specification, RichFaces add one more: Ajax Listener (
+	<emphasis role="bold"><property>&lt;a4j:ajaxListener&gt;</property>
+	</emphasis>).
+Ajax Listener is invoked before the Render Response phase. Instead of Action Listener of Value Change Listener which are not
+invoked when Validation of Update Model phases failed, Ajax Listener is guarantied to be invoked for each Ajax response. So, it is
+a good place for update the list of re-rendered components, for example.
+Ajax Listener is not invoked for non-Ajax request and when RichFaces works in "Ajax Request generates 
+Non-Ajax Response" mode. Therefore, Ajax Listener invocation is a good indicator that Ajax response is going to be processed. 
+Attribute 'type' defines the fully qualified Java class name for listener. This class should implement org.ajax4jsf.events.AjaxListener interface.
+You can access to the source of the event (Ajax component) using event.getSource() call. 
+	</para>
+
+  </section>
+</chapter>
