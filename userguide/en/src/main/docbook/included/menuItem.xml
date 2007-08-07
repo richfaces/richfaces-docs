@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
     <sectioninfo>
-         <keywordset>
-            <keyword>menuItem</keyword> 
+        <keywordset>
+            <keyword>menuItem</keyword>
         </keywordset>
     </sectioninfo>
-  
-     <table>
-        <title>Component identification parameters</title> 
+
+    <table>
+        <title>Component identification parameters</title>
         <tgroup cols="2">
-             <thead>
-                 <row>
-                    <entry>Name</entry> 
-                    <entry>Value</entry> 
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Value</entry>
                 </row>
             </thead>
-             <tbody>
-                 <row>
-                    <entry>component-type</entry> 
-                    <entry>org.richfaces.MenuItem</entry> 
+            <tbody>
+                <row>
+                    <entry>component-type</entry>
+                    <entry>org.richfaces.MenuItem</entry>
                 </row>
-                 <row>
+                <row>
                     <entry>component-class</entry>
                     <entry>org.richfaces.component.html.HtmlMenuItem</entry>
                 </row>
-                 <row>
+                <row>
                     <entry>component-family</entry>
                     <entry>org.richfaces.DropDownMenu</entry>
                 </row>
-                 <row>
+                <row>
                     <entry>renderer-type</entry>
                     <entry>org.richfaces.MenuItemRenderer</entry>
                 </row>
-                 <row>
+                <row>
                     <entry>tag-class</entry>
                     <entry>org.richfaces.taglib.MenuItemTag</entry>
                 </row>
             </tbody>
         </tgroup>
     </table>
-    
+
     <section>
-       <title>Creating the Component with a Page Tag</title>
+        <title>Creating the Component with a Page Tag</title>
         <para>Here is a simple example as it might be used in a page:</para>
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
         <programlisting role="xml"><![CDATA[...
     <rich:dropDownMenu>
         ...
@@ -56,72 +56,89 @@
 ...
 ]]></programlisting>
     </section>
-    
+
     <section>
         <title>Creating the Component Dynamically Using Java</title>
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
         <programlisting role="java"><![CDATA[...
 org.richfaces.component.html.HtmlMenuItem myItem = new org.richfaces.component.html.HtmlMenuItem ();
 ...]]></programlisting>
     </section>
-    
+
     <section>
         <title>Details of Usage</title>
-        <para>
-            The &quot;value&quot; attribute defines the text representation for an item element.
-        </para>
-        <para>
-            There are two icon-related attributes. The &quot;icon&quot; attribute defines an icon. The &quot;iconDisabled&quot; attribute defines an icon for a disabled item. Also you can use the &quot;icon&quot; and &quot;iconDisabled&quot; facets. If the facets are defined, the corresponding &quot;icon&quot; and &quot;iconDisabled&quot; attributes are ignored and the facets content is shown as an icon. It could be used for an item check box implementation.
-        </para>
-        <para>
-            Here is an example:
-        </para>
+        <para> The <emphasis>
+                <property>&quot;value&quot;</property>
+            </emphasis> attribute defines the text representation for an item element. </para>
+        <para> There are two icon-related attributes. The <emphasis>
+                <property>&quot;icon&quot;</property>
+            </emphasis> attribute defines an icon. The <emphasis>
+                <property>&quot;iconDisabled&quot;</property>
+            </emphasis> attribute defines an icon for a disabled item. Also you can use the <emphasis>
+                <property>&quot;icon&quot;</property>
+            </emphasis> and <emphasis>
+                <property>&quot;iconDisabled&quot;</property>
+            </emphasis> facets. If the facets are defined, the corresponding <emphasis>
+                <property>&quot;icon&quot;</property>
+            </emphasis> and <emphasis>
+                <property>&quot;iconDisabled&quot;</property>
+            </emphasis> attributes are ignored and the facets content is shown as an icon. It could
+            be used for an item check box implementation. </para>
+        <para> Here is an example: </para>
         <programlisting role="xml"><![CDATA[...
     <f:facet name="icon">
         <h:selectBooleanCheckbox value="#{bean.property}"/>
     </f:facet>
 ...
 ]]></programlisting>
-        
-        <para>The <emphasis role="bold"><property>&lt;rich: menuItem&gt;</property></emphasis> "mode" attribute can be set to three
-    possible parameters:</para>
 
-    <itemizedlist>
-      <listitem>
-        <para>Server (default)</para>
-      </listitem>
-    </itemizedlist>
+        <para>The <emphasis role="bold">
+                <property>&lt;rich: menuItem&gt;</property>
+            </emphasis>
+            <emphasis>
+                <property>&quot;mode&quot;</property>
+            </emphasis> attribute can be set to three possible parameters:</para>
 
-    <para>The standard form submission is performed and the page is completely
-    refreshed.</para>
+        <itemizedlist>
+            <listitem>
+                <para>Server (default)</para>
+            </listitem>
+        </itemizedlist>
 
-    <itemizedlist>
-      <listitem>
-        <para>Ajax</para>
-      </listitem>
-    </itemizedlist>
+        <para>The standard form submission is performed and the page is completely refreshed.</para>
 
-    <para>An AJAX form submission is performed, and specified elements in the
-    "reRender" attribute are rerendered.</para>
+        <itemizedlist>
+            <listitem>
+                <para>Ajax</para>
+            </listitem>
+        </itemizedlist>
 
-    <itemizedlist>
-      <listitem>
-        <para>None</para>
-      </listitem>
-    </itemizedlist>
+        <para>An AJAX form submission is performed, and specified elements in the <emphasis>
+                <property>"reRender"</property>
+            </emphasis> attribute are rerendered.</para>
 
-    <para>The "action" and "actionListener" item's attributes are ignored.
-    Menu items don't fire any submits themselves. The behavior is fully
-    defined by the components nested inside items.</para>
-        <para>
-            For example, you can put any content into an item, but, in this case, you should set the &quot;mode&quot; attribute as &quot;none&quot;.  
-        </para>
-        <para>
-           Here is an example:
-        </para>    
+        <itemizedlist>
+            <listitem>
+                <para>None</para>
+            </listitem>
+        </itemizedlist>
+
+        <para>The <emphasis>
+                <property>"action"</property>
+            </emphasis> and <emphasis>
+                <property>"actionListener"</property>
+            </emphasis> item's attributes are ignored. Menu items don't fire any submits themselves.
+            The behavior is fully defined by the components nested inside items.</para>
+        <para> For example, you can put any content into an item, but, in this case, you should set
+            the <emphasis>
+                <property>&quot;mode&quot;</property>
+            </emphasis> attribute as <emphasis>
+                <property>&quot;none&quot;</property>
+            </emphasis>. </para>
+        <para> Here is an example: </para>
         <programlisting role="xml"><![CDATA[...
     <rich:dropDownMenu>
         ...
@@ -132,142 +149,139 @@ org.richfaces.component.html.HtmlMenuItem myItem = new org.richfaces.component.h
     <rich:dropDownMenu>
 ...
 ]]></programlisting>
-        <para>
-            You can use the &quot;disabled&quot; attribute to set the item state.
-        </para>
-         <para>
-            Here is an example:
-        </para>    
+        <para> You can use the <emphasis>
+                <property>&quot;disabled&quot;</property>
+            </emphasis> attribute to set the item state. </para>
+        <para> Here is an example: </para>
         <programlisting role="xml"><![CDATA[...
     <rich:dropDownMenu>
         <rich:menuItem value="Disable" disabled="true"/>
     <rich:dropDownMenu>
 ...
 ]]></programlisting>
-        </section>
+    </section>
 
     <section>
         <title> Look-and-Feel Customization</title>
-            <para>
-                For skinnability implementation, the components use a style class redefinition method. Default style classes are mapped on skin parameters.
-            </para>   
-            <para>
-                There are two ways to redefine the appearance of all menuItems at once:     
-            </para>
-            <itemizedlist>
-                <listitem><para>Redefine the corresponding skin parameters</para></listitem>
-                <listitem><para>Add to user&apos;s style sheets style classes used by a menuItem</para></listitem>
-            </itemizedlist>
-        </section>
-        <section>
-            <title>Skin parameters redefinition</title>         
-            <table>
-                <title>Label skin parameters redefinition</title> 
-                <tgroup cols="2">
-                    <thead>
-                        <row>
-                            <entry>Skin parameters for item</entry> 
-                            <entry>CSS properties</entry> 
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry>generalFamilyFont</entry> 
-                            <entry>font-family</entry> 
-                        </row>
-                        <row>
-                            <entry>generalSizeFont</entry>
-                            <entry>font-size</entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
-          
-            <table>
-                <title>Label skin parameters redefinition</title> 
-                <tgroup cols="2">
-                    <thead>        
-                        <row>
-                            <entry>Skin parameters for hovered item</entry>
-                            <entry>CSS properties</entry>
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry>tipBorderColor</entry>
-                            <entry>border-color</entry>
-                        </row>
-                        <row>
-                            <entry>tipBackgroundColor</entry>
-                            <entry>background-color</entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
-            
-            <table>
-                <title>Label skin parameters redefinition</title> 
-                <tgroup cols="2">
-                    <thead>        
-                        <row>
-                            <entry>Skin parameters for disabled item</entry>
-                            <entry>CSS properties</entry>
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry>tabDisabledTextColor</entry>
-                            <entry>color</entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>        
-            
-            <table>
-                <title>Label skin parameters redefinition</title> 
-                <tgroup cols="2">
-                    <thead>        
-                        <row>
-                            <entry>Skin parameters for text element label</entry>
-                            <entry>CSS properties</entry>
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry>generalTextColor</entry>
-                            <entry>color</entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>        
+        <para> For skinnability implementation, the components use a style class redefinition
+            method. Default style classes are mapped on skin parameters. </para>
+        <para> There are two ways to redefine the appearance of all menuItems at once: </para>
+        <itemizedlist>
+            <listitem>
+                <para>Redefine the corresponding skin parameters</para>
+            </listitem>
+            <listitem>
+                <para>Add to user&apos;s style sheets style classes used by a menuItem</para>
+            </listitem>
+        </itemizedlist>
     </section>
-    
     <section>
-        <title> Definition of Custom Style Classes </title>
-        <para>
-            In the screenshot, the classes names that define item element appearance are shown.
-        </para>
-        <figure>
-            <title>Class names</title> 
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/menuItem2.png" /> 
-                </imageobject>
-            </mediaobject>
-        </figure>
+        <title>Skin parameters redefinition</title>
         <table>
-            <title>Class names that define item element appearance.</title> 
+            <title>Label skin parameters redefinition</title>
             <tgroup cols="2">
                 <thead>
                     <row>
-                        <entry>Class name</entry> 
-                        <entry>Description</entry> 
+                        <entry>Skin parameters for item</entry>
+                        <entry>CSS properties</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
-                        <entry>Rich-menu-item</entry> 
-                        <entry>Defines the class for wrapping div element for the whole item</entry> 
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Label skin parameters redefinition</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters for hovered item</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>tipBorderColor</entry>
+                        <entry>border-color</entry>
+                    </row>
+                    <row>
+                        <entry>tipBackgroundColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Label skin parameters redefinition</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters for disabled item</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>tabDisabledTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Label skin parameters redefinition</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters for text element label</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </section>
+
+    <section>
+        <title> Definition of Custom Style Classes </title>
+        <para> In the screenshot, the classes names that define item element appearance are shown. </para>
+        <figure>
+            <title>Class names</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/menuItem2.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <table>
+            <title>Class names that define item element appearance.</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Rich-menu-item</entry>
+                        <entry>Defines the class for wrapping div element for the whole item</entry>
                     </row>
                     <row>
                         <entry>Rich-menu-item-label</entry>
@@ -280,22 +294,21 @@ org.richfaces.component.html.HtmlMenuItem myItem = new org.richfaces.component.h
                 </tbody>
             </tgroup>
         </table>
-        <para>
-            All listed elements except the general ones are defined for disabled, enabled, and hovered modes.
-        </para>
+        <para> All listed elements except the general ones are defined for disabled, enabled, and
+            hovered modes. </para>
         <table>
-            <title>Class names for modes</title> 
+            <title>Class names for modes</title>
             <tgroup cols="2">
                 <thead>
                     <row>
-                        <entry>Class name</entry> 
-                        <entry>Description</entry> 
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
-                        <entry>Rich-menu-item-disabled</entry> 
-                        <entry>Defines the class for wrapping div element for the whole item</entry> 
+                        <entry>Rich-menu-item-disabled</entry>
+                        <entry>Defines the class for wrapping div element for the whole item</entry>
                     </row>
                     <row>
                         <entry>Rich-menu-item-enabled</entry>
@@ -305,7 +318,7 @@ org.richfaces.component.html.HtmlMenuItem myItem = new org.richfaces.component.h
                         <entry>Rich-menu-item-hover</entry>
                         <entry>Defines the class for wrapping div element for the whole item</entry>
                     </row>
-                    
+
                     <row>
                         <entry>Rich-menu-item-label-disabled</entry>
                         <entry>Defines properties for the text</entry>
@@ -333,12 +346,10 @@ org.richfaces.component.html.HtmlMenuItem myItem = new org.richfaces.component.h
                 </tbody>
             </tgroup>
         </table>
-        <para>
-            In order to redefine the style for all menuItems on a page using CSS, it&apos;s enough to create classes with the same names and define the necessary properties in them.
-        </para>
-        <para>
-            To change the style of particular menuItems define your own style classes in the corresponding menuItem attributes.
-        </para>
+        <para> In order to redefine the style for all menuItems on a page using CSS, it&apos;s
+            enough to create classes with the same names and define the necessary properties in
+            them. </para>
+        <para> To change the style of particular menuItems define your own style classes in the
+            corresponding menuItem attributes. </para>
     </section>
 </section>
-
