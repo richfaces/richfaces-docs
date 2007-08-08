@@ -161,6 +161,17 @@
 											org.richfaces.ui
 										</groupId>
 										<artifactId>
+											message
+										</artifactId>
+										<version>
+											3.1.0-SNAPSHOT
+										</version>
+									</artifactItem>
+									<artifactItem>
+										<groupId>
+											org.richfaces.ui
+										</groupId>
+										<artifactId>
 											panelmenu
 										</artifactId>
 										<version>
@@ -345,6 +356,9 @@
 								<includes>
 									<include>*.tld</include>
 								</includes>
+								<excludes>
+									<exclude>a4j.*</exclude>
+								</excludes>
 								<outputDir>
 									${project.build.directory}/generated/
 								</outputDir>
@@ -376,6 +390,50 @@
 									<parameter>
 										<name>prefix</name>
 										<value>rich</value>
+									</parameter>
+								</parameters>
+							</transformationSet>
+							<transformationSet>
+								<dir>
+									${project.build.directory}/library/META-INF
+								</dir>
+								<includes>
+									<include>a4j.*</include>
+								</includes>
+								<excludes>
+									<exclude>*.xml</exclude>
+								</excludes>
+								<outputDir>
+									${project.build.directory}/generated/
+								</outputDir>
+								<stylesheet>
+									${project.build.directory}/xslt/xslt/f.xsl
+								</stylesheet>
+								<fileMappers>
+									<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+										<targetExtension>
+											xml
+										</targetExtension>
+									</fileMapper>
+								</fileMappers>
+								<parameters>
+									<parameter>
+										<name>lang</name>
+										<value>
+											..${file.separator}..${file.separator}..${file.separator}src${file.separator}main${file.separator}docbook
+										</value>
+									</parameter>
+									<parameter>
+										<name>title</name>
+										<value>${project.name}</value>
+									</parameter>
+									<parameter>
+										<name>separator</name>
+										<value>${file.separator}</value>
+									</parameter>
+									<parameter>
+										<name>prefix</name>
+										<value>a4j</value>
 									</parameter>
 								</parameters>
 							</transformationSet>
