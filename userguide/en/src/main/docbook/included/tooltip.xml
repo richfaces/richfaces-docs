@@ -72,16 +72,14 @@ HtmlToolTip myToolTip = new  HtmlToolTip();
 <title>Details of Usage</title>
 <para>
 <property>Tooltip</property> main area is a simple rectangle area with any information inside. The content may be defined via
-"value" attribute as text or through any nested content. In case if both defined - value displayed as text and nested content after the text.
-<property>Tooltip</property> stretches if the content more than the <property>tooltip</property> sizes.
+&quot;value&quot; attribute as text or through any nested content. In case if both defined - value displayed as text and nested content
+after the text. <property>Tooltip</property> stretches if the content more than the <property>tooltip</property> sizes.
 </para>
-
 <para>
-There is possibility to define a facet with name "defaultContent." This facet provides default content to be
+There is possibility to define a facet with name &quot;defaultContent&quot;. This facet provides default content to be
 displayed while main content loaded to the page in Ajax mode. So after <property>tooltip</property> called in Ajax mode - it
 appeared with the content defined in the facet and after loading complete content changes to loaded one.
 </para>
-
 <para>
 	Here is an example: 
 </para>
@@ -90,12 +88,12 @@ appeared with the content defined in the facet and after loading complete conten
     </para>
     <programlisting role="XML"><![CDATA[...
 <h:commandLink value="Simple Link">
-<rich:toolTip followMouse="true" direction="top-right" mode="ajax" value="#{bean.toolTipContent}" horizontalOffset="5" 
-verticalOffset="5" layout="block">
-<f:facet name="defaultContent">
-<f:verbatim>DEFAULT TOOLTIP CONTENT</f:verbatim>
-</f:facet>
-</rich:toolTip>
+	<rich:toolTip followMouse="true" direction="top-right" mode="ajax" value="#{bean.toolTipContent}" horizontalOffset="5" 
+		verticalOffset="5" layout="block">
+		<f:facet name="defaultContent">
+			<f:verbatim>DEFAULT TOOLTIP CONTENT</f:verbatim>
+		</f:facet>
+	</rich:toolTip>
 </h:commandLink>
 ...
 ]]></programlisting>
@@ -112,7 +110,7 @@ This is the result:
     </mediaobject>
     </figure>
 <para>
-And after tooltip loaded it will be changed to next one:
+And after <property>tooltip</property> loaded it will be changed to next one:
 </para>
     <figure>
         <title>Tooltip component with loaded content</title>
@@ -124,33 +122,26 @@ And after tooltip loaded it will be changed to next one:
     </figure>
 <para>
 By default, <property>tooltip</property> appears smart positioned. But as you can see from the previous example - developer
-can define appearance direction through the corresponding attribute "direction". And also it's possible to define vertical and horizontal
+can define appearance direction through the corresponding attribute &quot;direction&quot;. And also it's possible to define vertical and horizontal
 offsets relatively to mouse position. 
 </para>
-
-
-
-
 <para>
-<property>Tooltip</property> appears attached to the corner dependent on "direction" attribute. By default it is positioned bottom-right.
+<property>Tooltip</property> appears attached to the corner dependent on &quot;direction&quot; attribute. By default it is positioned bottom-right.
 <property>Tooltip</property> activation occurs after defined event (default=mouseover) on the parent component taking into consideration
-"delay" attribute (default=0) or after calling JS API function doShow(). <property>Tooltip</property> deactivation occurs after mouseout event
+&quot;delay&quot; attribute (default=0) or after calling JS API function doShow(). <property>Tooltip</property> deactivation occurs after mouseout event
 on the parent component (except mouse hovered the <property>tooltip</property> itself) or after calling JS API function doHide().
 </para>
-
 <para>
-The "mode" attribute is provided to developer to control the way of data loading to <property>tooltip</property> and has following values:
+The &quot;mode&quot; attribute is provided to developer to control the way of data loading to <property>tooltip</property> and has following values:
     <itemizedlist>
 		<listitem>Client</listitem>
 		<listitem>Ajax</listitem>
 	</itemizedlist>  
 </para>
-
 <para>
 In client mode <property>tooltip</property> content is rendered once on server and could be reRendered only through external submit.
 In Ajax mode <property>tooltip</property> content will be requested from server every activation.
 </para>
-
 <para>
 Special JS API is provided to control of component behaviour:
     <itemizedlist>
@@ -160,7 +151,6 @@ Special JS API is provided to control of component behaviour:
 		<listitem>doDisable() - Disable corresponding tooltip</listitem>
 	</itemizedlist>
 </para>
-	
 <para>
 Disabled <property>tooltip</property> will be rendered to the page as usual but JS that responds for its activation will be
 disabled until doEnable() will called.
@@ -168,7 +158,8 @@ disabled until doEnable() will called.
 <para>
 Moreover, to add  some JavaScript effects, client events defined on it are used:
 </para>
-    <title>Standart:</title> 
+<para>
+    Standart:
     <itemizedlist>
 		<listitem>onclick</listitem>
 		<listitem>ondblclick</listitem>
@@ -176,21 +167,19 @@ Moreover, to add  some JavaScript effects, client events defined on it are used:
 		<listitem>onmousemove</listitem>
 		<listitem>onmouseover</listitem>
     </itemizedlist>  
-    <title>Special:</title> 
+</para>	
+<para>
+    Special:
     <itemizedlist>
-		<listitem>onshow - Called after the <property>tooltip</property> called (some element overed) but before its requesting
+		<listitem>onshow - Called after the tooltip called (some element overed) but before its requesting
 		</listitem>
-		<listitem>oncomplete - Called just after the <property>tooltip</property> shown
+		<listitem>oncomplete - Called just after the tooltip shown
 		</listitem>
-		<listitem>onhide - Called after the <property>tooltip</property> hidden
+		<listitem>onhide - Called after the tooltip hidden
 		</listitem>
     </itemizedlist> 
+</para>
 </section>
-
-
-
-
-
 
  <section>
  <title>Look-and-Feel Customization</title>
@@ -203,12 +192,49 @@ Moreover, to add  some JavaScript effects, client events defined on it are used:
 			<listitem>to redefine corresponding skin parameters</listitem>
 			<listitem>to add to a user's style sheets style classes used by a <property>tooltip</property></listitem>
          </itemizedlist>
- </section>
+
+	 <para>
+    <table>
+      <title>Skin parameters redefinition</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters for the tooltip component</entry>
+            <entry>Corresponding CSS parameters</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>tipBackgroundColor</entry>
+            <entry>background-color</entry>
+          </row>
+          <row>
+            <entry>tipBorderColor</entry>
+            <entry>border-color</entry>
+          </row>
+          <row>
+            <entry>generalSizeFont</entry>
+            <entry>font-size</entry>
+          </row>
+          <row>
+            <entry>generalFamilyFont</entry>
+            <entry>font-family</entry>
+          </row>
+          <row>
+            <entry>generalFontColor</entry>
+            <entry>color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>		 
+	</para>
+</section>
+
 	
  <section>
 	 <title>Definition custom style classes:</title>
 	 <para>
-		<property>Tooltip</property> provides one class 'rich-tool-tip' which applies to wrapper element 'span' or 'div'
+		<property>Tooltip</property> provides one class &quot;rich-tool-tip&quot; which applies to wrapper element &quot;span&quot; or &quot;div&quot;
 		dependently to <property>tooltip</property> layout. In order to redefine style for all <property>tooltips</property>
 		on the page with using CSS it's enough to create classes with this name and define in it necessary properties.
 		To change style peculiarities of the particular <property>tooltips</property>, define your own style classes in the corresponding
