@@ -44,9 +44,8 @@
         <section>
                 <?dbhtml filename="HowtobuildRichFacessnapshotmanually.html"?>
                 <title>How to build RichFaces snapshot manually?</title>
-                <para>As it was mentioned <link linkend="Wherearethesnapshots">
-                        before</link> you can download the snapshots or you can build them
-                        manually. This <ulink
+                <para>As it was mentioned <link linkend="Wherearethesnapshots"> before</link> you
+                        can download the snapshots or you can build them manually. This <ulink
                                 url="http://labs.jboss.com/wiki/HowToBuildRichFacesSnapshotManually"
                                 > wiki article</ulink> helps you.</para>
         </section>
@@ -81,8 +80,8 @@
                                 url="http://anonsvn.jboss.org/repos/richfaces/trunk/samples/richfaces-demo/"
                                 >here</ulink>.</para>
                 <para>See also <ulink
-                        url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=113454"
-                        >how to prevent richfaces-demo deployment failed</ulink>.</para>
+                                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=113454"
+                                >how to prevent richfaces-demo deployment failed</ulink>.</para>
         </section>
 
         <section>
@@ -356,11 +355,13 @@ included2.xhtml
 ]]></programlisting>
                 <para>
                         <note>
-                                <title>Note:</title>Two rules are important for modalPanel:
-                        <itemizedlist>
-                                <listitem>modalPanel must have its own form if it has form elements (input or/and command components) inside (as it was shown in the example above) </listitem>
-                                <listitem>modalPanel must not be included into the form (on any level up) if it has the form inside.</listitem>
-                        </itemizedlist></note>
+                                <title>Note:</title>Two rules are important for modalPanel: <itemizedlist>
+                                        <listitem>modalPanel must have its own form if it has form
+                                                elements (input or/and command components) inside
+                                                (as it was shown in the example above) </listitem>
+                                        <listitem>modalPanel must not be included into the form (on
+                                                any level up) if it has the form inside.</listitem>
+                                </itemizedlist></note>
                 </para>
         </section>
 
@@ -387,12 +388,12 @@ included2.xhtml
 ...
 ]]></programlisting>
         </section>
-        
+
         <section>
                 <?dbhtml filename="Howtoremembercurrentselectedtab.html"?>
                 <title>How to remember the current selected tab?</title>
                 <para> For necessary information you can see discussion about this problem on the
-                        <ulink
+                                <ulink
                                 url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=111761"
                                 >RichFaces Users Forum</ulink>.</para>
         </section>
@@ -510,170 +511,187 @@ background-color: transparent;
 
         </section>
 
-    <section id="DecidingWhatToChangeOnTheServerSide">
-        <?dbhtml filename="DecidingWhatToChangeOnTheServerSide.html"?>
-        <title>What should I change on the server side?</title>
-        <para> As it was mentioned <ulink url="index.html#DecideWhatToChange">before</ulink>, the
-            list of zones to be reRendered can be specified as EL expression. But there is a
-            question that must be specified more exactly. </para>
-        <para> The list of Ids is formed during beforePhase of RENDER_RESPONSE. Therefore, in this
-            case one can point reRender to the Set type Bean&apos;s property and fill the Set
-            during a tracking request. </para>
-        <para> It&apos;s the way to form a list of updatable areas dynamically. </para>
-    </section>
-    <section id="CheckSendingRequestConditions.CustomJavaScriptBeforeRequest.OnSubmitAttribute">
-        <?dbhtml filename="CheckSendingRequestConditions.CustomJavaScriptBeforeRequest.OnSubmitAttribute.html"?>
+        <section>
+                <?dbhtml filename="HowtoExpand/CollapseTreeNodesfromcode.html"?>
+                <title>How to Expand/Collapse Tree Nodes from code?</title>
+                <para>The answer could be found <ulink
+                                url="http://labs.jboss.com/wiki/ExpandCollapseTreeNodes"
+                        >here</ulink>.</para>
+        </section>
 
-        <title>How to check sending request conditions? Custom JavaScript before request
-            &quot;OnSubmit&quot; attribute.</title>
-        <para> To check on the client some terms of request sending, the <emphasis >
-                <property>&quot;onSubmit</property>
-            </emphasis>&quot; attribute is added to all components, which may cause the request. </para>
-        <para>
-            <emphasis role="bold">Example: </emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[<h:inputText id="i" value="#{beanText.kennung}">
+        <section id="DecidingWhatToChangeOnTheServerSide">
+                <?dbhtml filename="DecidingWhatToChangeOnTheServerSide.html"?>
+                <title>What should I change on the server side?</title>
+                <para> As it was mentioned <ulink url="index.html#DecideWhatToChange"
+                        >before</ulink>, the list of zones to be reRendered can be specified as EL
+                        expression. But there is a question that must be specified more exactly. </para>
+                <para> The list of Ids is formed during beforePhase of RENDER_RESPONSE. Therefore,
+                        in this case one can point reRender to the Set type Bean&apos;s property
+                        and fill the Set during a tracking request. </para>
+                <para> It&apos;s the way to form a list of updatable areas dynamically. </para>
+        </section>
+        <section id="CheckSendingRequestConditions.CustomJavaScriptBeforeRequest.OnSubmitAttribute">
+                <?dbhtml filename="CheckSendingRequestConditions.CustomJavaScriptBeforeRequest.OnSubmitAttribute.html"?>
+
+                <title>How to check sending request conditions? Custom JavaScript before request
+                        &quot;OnSubmit&quot; attribute.</title>
+                <para> To check on the client some terms of request sending, the <emphasis>
+                                <property>&quot;onSubmit</property>
+                        </emphasis>&quot; attribute is added to all components, which may cause
+                        the request. </para>
+                <para>
+                        <emphasis role="bold">Example: </emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[<h:inputText id="i" value="#{beanText.kennung}">
             <a4j:support event="onfocus" onsubmit="doSomething();" reRender="panelToReRender"/>
 </h:inputText>]]></programlisting>
-        <para> So in this case &quot;<emphasis 
-                ><property>doSomething()</property>&quot;</emphasis> function is executed before
-            the AJAX request. </para>
-        <para> Besides, if this function returns &quot;false&quot;, AJAX request
-            isn&apos;t fired. </para>
-        <note>
-            <title>Note:</title>
-            <para>Behavior of our <emphasis >
-                    <property>&quot;onsubmit&quot;</property>
-                </emphasis>slightly differs from the standard one. Do not return <emphasis
-                    >
-                    <property>&quot;true&quot;</property>
-                </emphasis> if you want to fire the request - because <emphasis role="bold">
-                    <property>&lt;xxx&gt;&lt;a4j:support
-                        event=&quot;onclick&quot; onsubmit=&quot;return
-                        true;&quot;&gt;</property>
-                </emphasis> is transformed into &lt;xxx onclick=&quot;return true;
-                A4J.Submit(.... );&quot; &gt; and the request isn&apos;t fired also in
-                this case (but the standard event processing fired). You must only return <emphasis
-                    >
-                    <property>&quot;false&quot;</property>
-                </emphasis> if your conditions weren&apos;t completed or perform some actions
-                (if needed) without any returns in case you need to fire it. </para>
-        </note>
-    </section>
-    <section id="onCompleteAttribute.DifferencesAfterRelease1.0">
-        <?dbhtml filename="onCompleteAttribute.DifferencesAfterRelease1.0.html"?>
-        <title> What is differences of &quot;onCompelete&quot; attribute after release 1.0?</title>
-        <para> To avoid differences with other JavaScript attributes, a function placement in a
-            JavaScript call is changed, instead of simple inserting of attribute content
-            (..oncomplete :anotherFunction(this)..), it places (oncomplete:
-            function(){anotherFunction(this);}..) in anonymous function, to allow put
-            &quot;chain&quot; of statements in attribute. </para>
-        <para> Since, <emphasis >
-                <property>&quot;this&quot;</property>
-            </emphasis> keyword will point to a parameters map instead of a control element as it
-            was before. You may use <emphasis >
-                <property>document.findElementById()</property>
-            </emphasis>to get references to this object after a request is processed as when a page
-            is updated in AJAX you will have reference to a control, removed from a DOM tree. </para>
-        <para> Or, if you are sure that your element is not updated, you can add <emphasis
-                >
-                <property>&quot;onsubmit&quot;</property>
-            </emphasis> in <emphasis role="bold">
-                <property>&lt;a4j:support&gt;</property>
-            </emphasis> (or onclick in <emphasis role="bold">
-                <property>&lt;a4j:commandLink/Button&gt;</property>
-            </emphasis>) to place reference to known variable (<emphasis role="bold">
-                <property>&lt;a4j:commandLink onclick="var myControl=this;"
-                    oncomplete="anotherFunction(myControl)"/&gt;</property>
-            </emphasis>). </para>
-        <important>
-            <title>New:</title>
-            <para> The onComplete syntax now is: </para>
-            <programlisting role="XML">
+                <para> So in this case
+                                &quot;<emphasis><property>doSomething()</property>&quot;</emphasis>
+                        function is executed before the AJAX request. </para>
+                <para> Besides, if this function returns &quot;false&quot;, AJAX request
+                        isn&apos;t fired. </para>
+                <note>
+                        <title>Note:</title>
+                        <para>Behavior of our <emphasis>
+                                        <property>&quot;onsubmit&quot;</property>
+                                </emphasis>slightly differs from the standard one. Do not return <emphasis>
+                                        <property>&quot;true&quot;</property>
+                                </emphasis> if you want to fire the request - because <emphasis
+                                        role="bold">
+                                        <property>&lt;xxx&gt;&lt;a4j:support
+                                                event=&quot;onclick&quot;
+                                                onsubmit=&quot;return
+                                        true;&quot;&gt;</property>
+                                </emphasis> is transformed into &lt;xxx onclick=&quot;return
+                                true; A4J.Submit(.... );&quot; &gt; and the request
+                                isn&apos;t fired also in this case (but the standard event
+                                processing fired). You must only return <emphasis>
+                                        <property>&quot;false&quot;</property>
+                                </emphasis> if your conditions weren&apos;t completed or perform
+                                some actions (if needed) without any returns in case you need to
+                                fire it. </para>
+                </note>
+        </section>
+        <section id="onCompleteAttribute.DifferencesAfterRelease1.0">
+                <?dbhtml filename="onCompleteAttribute.DifferencesAfterRelease1.0.html"?>
+                <title> What is differences of &quot;onCompelete&quot; attribute after
+                        release 1.0?</title>
+                <para> To avoid differences with other JavaScript attributes, a function placement
+                        in a JavaScript call is changed, instead of simple inserting of attribute
+                        content (..oncomplete :anotherFunction(this)..), it places (oncomplete:
+                        function(){anotherFunction(this);}..) in anonymous function, to allow put
+                        &quot;chain&quot; of statements in attribute. </para>
+                <para> Since, <emphasis>
+                                <property>&quot;this&quot;</property>
+                        </emphasis> keyword will point to a parameters map instead of a control
+                        element as it was before. You may use <emphasis>
+                                <property>document.findElementById()</property>
+                        </emphasis>to get references to this object after a request is processed as
+                        when a page is updated in AJAX you will have reference to a control, removed
+                        from a DOM tree. </para>
+                <para> Or, if you are sure that your element is not updated, you can add <emphasis>
+                                <property>&quot;onsubmit&quot;</property>
+                        </emphasis> in <emphasis role="bold">
+                                <property>&lt;a4j:support&gt;</property>
+                        </emphasis> (or onclick in <emphasis role="bold">
+                                <property>&lt;a4j:commandLink/Button&gt;</property>
+                        </emphasis>) to place reference to known variable (<emphasis role="bold">
+                                <property>&lt;a4j:commandLink onclick="var myControl=this;"
+                                        oncomplete="anotherFunction(myControl)"/&gt;</property>
+                        </emphasis>). </para>
+                <important>
+                        <title>New:</title>
+                        <para> The onComplete syntax now is: </para>
+                        <programlisting role="XML">
 	<![CDATA[<someAjaxActionComponent ...oncomplete="myFunc(req,event,data)".../>]]>
             </programlisting>
-            <para> where the <property>event</property> is a variable where the JS event copy that
-                fires the request is placed into. One may use it to get the element instead of this.
-                and <property>data</property> is a variable that contains deserialized value from
-                the <property>data</property> attribute. </para>
-        </important>
-    </section>
-    <section id="InvokeOnComponentUsingWithJSF1.2">
-        <?dbhtml filename="InvokeOnComponentUsingWithJSF1.2.html"?>
-        <title>Is it possible to use InvokeOnComponent with JSF 1.2?</title>
-        <para> Ajax4jsf currently does not use <emphasis >invokeOnComponent</emphasis>
-            because of the 2 reasons: </para>
-        <itemizedlist>
-            <listitem> Compatibility with JSF 1.1 and MyFaces applications is kept, due to a big
-                amount of code used in corporate applications. </listitem>
-            <listitem>
-                <emphasis > InvokeOnComponent</emphasis> works with already known
-                clientId, and works fine for communication between widget and backed component, or
-                updates content of already rendered component. But there are some troubles to use
-                this method for more complex use-cases implemented in Ajax4jsf, as there is a choice
-                for updatable components in application logic, where it&apos;s necessary to
-                navigate in a components tree by the native id, with
-                <property>findComponent()</property> methods. </listitem>
-        </itemizedlist>
-        <para> Thus, for example, only entire dataTable can be updated in response (but all AJAX
-            action components inside table work properly). </para>
-    </section>
-    <!--<section id="RegionsInDataTables">
+                        <para> where the <property>event</property> is a variable where the JS event
+                                copy that fires the request is placed into. One may use it to get
+                                the element instead of this. and <property>data</property> is a
+                                variable that contains deserialized value from the
+                                <property>data</property> attribute. </para>
+                </important>
+        </section>
+        <section id="InvokeOnComponentUsingWithJSF1.2">
+                <?dbhtml filename="InvokeOnComponentUsingWithJSF1.2.html"?>
+                <title>Is it possible to use InvokeOnComponent with JSF 1.2?</title>
+                <para> Ajax4jsf currently does not use <emphasis>invokeOnComponent</emphasis>
+                        because of the 2 reasons: </para>
+                <itemizedlist>
+                        <listitem> Compatibility with JSF 1.1 and MyFaces applications is kept, due
+                                to a big amount of code used in corporate applications. </listitem>
+                        <listitem>
+                                <emphasis> InvokeOnComponent</emphasis> works with already known
+                                clientId, and works fine for communication between widget and backed
+                                component, or updates content of already rendered component. But
+                                there are some troubles to use this method for more complex
+                                use-cases implemented in Ajax4jsf, as there is a choice for
+                                updatable components in application logic, where it&apos;s
+                                necessary to navigate in a components tree by the native id, with
+                                        <property>findComponent()</property> methods. </listitem>
+                </itemizedlist>
+                <para> Thus, for example, only entire dataTable can be updated in response (but all
+                        AJAX action components inside table work properly). </para>
+        </section>
+        <!--<section id="RegionsInDataTables">
       <?dbhtml filename="RegionsInDataTables.html"?>
     <title>Regions in Data Tables</title>
     <para>The regions in Data Tables aren&apos;t supported now, but the feature will be implemented in a new Ajax4jsf version for JSF 1.2.</para>
   </section>-->
-    <section id="keepAliveComponentGeneratesException">
-        <?dbhtml filename="keepAliveComponentGeneratesException.html"?>
-        <title>How to avoid generating exception for &quot;keepAlive&quot; component?</title>
-        <para>To avoid exception, don&apos;t forget that the component stores beans in
-            serialized view, but your bean should implement java.io.Serializable.</para>
-    </section>
-    <section id="FilterUsageDamagesAnApplicationLayout">
-        <?dbhtml filename="FilterUsageDamagesAnApplicationLayout.html"?>
-        <title>Why does filter usage damage an application layout?</title>
-        <para>Ajax4jsf uses <property>filters</property> for correction of xhtml code received on an
-            AJAX response, because when a response is recieved from the server, Ajax4jsf makes
-            direct changes in DOM tree and browser doesn&apos;t make any corrections in
-            generated xhtml. There are two ways for setting <property>filters</property> that could
-            be used in an Ajax4jsf-based application.</para>
-        <para> The first one:</para>
+        <section id="keepAliveComponentGeneratesException">
+                <?dbhtml filename="keepAliveComponentGeneratesException.html"?>
+                <title>How to avoid generating exception for &quot;keepAlive&quot;
+                        component?</title>
+                <para>To avoid exception, don&apos;t forget that the component stores beans in
+                        serialized view, but your bean should implement java.io.Serializable.</para>
+        </section>
+        <section id="FilterUsageDamagesAnApplicationLayout">
+                <?dbhtml filename="FilterUsageDamagesAnApplicationLayout.html"?>
+                <title>Why does filter usage damage an application layout?</title>
+                <para>Ajax4jsf uses <property>filters</property> for correction of xhtml code
+                        received on an AJAX response, because when a response is recieved from the
+                        server, Ajax4jsf makes direct changes in DOM tree and browser
+                        doesn&apos;t make any corrections in generated xhtml. There are two ways
+                        for setting <property>filters</property> that could be used in an
+                        Ajax4jsf-based application.</para>
+                <para> The first one:</para>
 
-  <para>
-      <emphasis role="bold">Example:</emphasis>
- </para>
-        <programlisting role="XML"><![CDATA[<context-param filter>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[<context-param filter>
   <display-name>Ajax4jsf Filter</display-name>
   <filter-name>ajax4jsf</filter-name>
   <filter-class>org.ajax4jsf.Filter</filter-class>
 </filter>]]></programlisting>
-        <para>This <property>filter</property> is based on Tidy Filter usage and recommended for
-            applications with complicated or non-standard markup, as all the necessary xhtml code
-            corrections are made by the filter when a response comes from the server.</para>
-        <para> Anyway, some obvious errors could damage a layout, if it happens, make sure that the
-            markup corresponds to the xhtml-strict specification. </para>
-        <para>The second one:</para>
+                <para>This <property>filter</property> is based on Tidy Filter usage and recommended
+                        for applications with complicated or non-standard markup, as all the
+                        necessary xhtml code corrections are made by the filter when a response
+                        comes from the server.</para>
+                <para> Anyway, some obvious errors could damage a layout, if it happens, make sure
+                        that the markup corresponds to the xhtml-strict specification. </para>
+                <para>The second one:</para>
 
-  <para>
-      <emphasis role="bold">Example:</emphasis>
- </para>
-        <programlisting role="XML"><![CDATA[<filter>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[<filter>
   <display-name>org.ajax4jsf.FastFilter</display-name>
   <filter-name>ajax4jsf</filter-name>
   <filter-class>org.ajax4jsf.FastFilter</filter-class>
 </filter>]]></programlisting>
-        <para>This <property>filter</property> is based on the Nekko pacer. In this case an output
-            xhtml code isn&apos;t strictly verified and it also could cause lot&apos;s of
-            errors and corrupt a layout as a result. Though if you sure that your application markup
-            is really strict for this filter, the filter considerably accelerates all AJAX requests
-            processing. </para>
-        <para><emphasis role="bold">Extra information</emphasis>. </para>
-        <para>forceParcer parameters setting for <property>filters</property>:</para>
+                <para>This <property>filter</property> is based on the Nekko pacer. In this case an
+                        output xhtml code isn&apos;t strictly verified and it also could cause
+                        lot&apos;s of errors and corrupt a layout as a result. Though if you
+                        sure that your application markup is really strict for this filter, the
+                        filter considerably accelerates all AJAX requests processing. </para>
+                <para><emphasis role="bold">Extra information</emphasis>. </para>
+                <para>forceParcer parameters setting for <property>filters</property>:</para>
 
-  <para>
-      <emphasis role="bold">Example:</emphasis>
- </para>
-        <programlisting role="XML"><![CDATA[<filter>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[<filter>
 ...
 <init-param>
 <param-name>forceparser</param-name>
@@ -681,186 +699,191 @@ background-color: transparent;
 </init-param>
 ...
 </filter>]]></programlisting>
-        <para>The &quot;false&quot; setting for initialization parameter switches off
-            application of filters for non-AJAX requests, if &quot;true&quot; is chosen, the
-            filter checks all requests. <important>
-                <title>Changes for Ajax4jsf 1.1.0</title>
-                <property>forceparser parameter</property> default value is false from this version.
-            </important>
-        </para>
-    </section>
-    <section id="AFormIsNotSubmittedOrASetterIsNotCalledAfterAJAXrequest">
-        <?dbhtml filename="AFormIsNotSubmittedOrASetterIsNotCalledAfterAJAXrequest.html"?>
-        <title>Why form isn&apos;t submitted or setter isn&apos;t called after AJAX request?</title>
-        <para>This situation could happen because of conversion/validation errors on form
-            submission. In order to verify this, it&apos;s necessary to place this updating via
-            an AJAX error message inside a form:</para>
+                <para>The &quot;false&quot; setting for initialization parameter switches
+                        off application of filters for non-AJAX requests, if
+                        &quot;true&quot; is chosen, the filter checks all requests. <important>
+                                <title>Changes for Ajax4jsf 1.1.0</title>
+                                <property>forceparser parameter</property> default value is false
+                                from this version. </important>
+                </para>
+        </section>
+        <section id="AFormIsNotSubmittedOrASetterIsNotCalledAfterAJAXrequest">
+                <?dbhtml filename="AFormIsNotSubmittedOrASetterIsNotCalledAfterAJAXrequest.html"?>
+                <title>Why form isn&apos;t submitted or setter isn&apos;t called after AJAX
+                        request?</title>
+                <para>This situation could happen because of conversion/validation errors on form
+                        submission. In order to verify this, it&apos;s necessary to place this
+                        updating via an AJAX error message inside a form:</para>
 
-  <para>
-      <emphasis role="bold">Example:</emphasis>
- </para>
-        <programlisting role="XML"><![CDATA[<a4j:outputPanel ajaxRendered="true">
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[<a4j:outputPanel ajaxRendered="true">
    <h:messages/>
 </a4j:outpurPanel>]]></programlisting>
-    </section>
+        </section>
 
-    <section id="DelayedRenderZone">
-        <?dbhtml filename="DelayedRenderZone.html"?>
-        <title>How to create &quot;a4j delayed render zone&quot;?</title>
-        <para>The <emphasis role="bold">&lt;a4j:support&gt;</emphasis> component has a
-            &quot;requestDelay&quot; attribute where you can define the delay.</para>
-        <para>More information about this problem could be found on the <ulink
-                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=104969"
-                >Ajax4Jsf Users Forum.</ulink>
-        </para>
-    </section>
-
-
-    <section id="HowToStopPoll">
-        <?dbhtml filename="HowToStopPoll.html"?>
-        <title>How to stop &quot;a4j:poll&quot;?</title>
-        <para>More information about this problem could be found on the <ulink
-                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=104951"
-                >Ajax4Jsf Users Forum. </ulink>
-        </para>
-    </section>
+        <section id="DelayedRenderZone">
+                <?dbhtml filename="DelayedRenderZone.html"?>
+                <title>How to create &quot;a4j delayed render zone&quot;?</title>
+                <para>The <emphasis role="bold">&lt;a4j:support&gt;</emphasis> component has
+                        a &quot;requestDelay&quot; attribute where you can define the delay.</para>
+                <para>More information about this problem could be found on the <ulink
+                                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=104969"
+                                >Ajax4Jsf Users Forum.</ulink>
+                </para>
+        </section>
 
 
-    <section id="IgnoreDupResponsesAndRequestDelay">
-        <?dbhtml filename="IgnoreDupResponsesAndRequestDelay.html"?>
-
-        <title>How to use IgnoreDupResponses and requestDelay?</title>
-        <para>The <emphasis >
-                <property>&quot;IgnoreDupResponses&quot;</property>
-            </emphasis> attribute appeared from 1.0.4 RC1 version and is used on the client for
-            response ignoring after an AJAX request if a newer request has been already sent. <para>
-                The additional information could be found <ulink
-                    url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=105766"
-                    >here</ulink>. </para>
-            <emphasis >
-                <property>&quot;RequestDelay&quot;</property>
-            </emphasis> attribute also defines the client behavior. It sets the time delay, after
-            which another request could be sent, all other requests are taken away from a queue
-            except the last one. </para>
-    </section>
+        <section id="HowToStopPoll">
+                <?dbhtml filename="HowToStopPoll.html"?>
+                <title>How to stop &quot;a4j:poll&quot;?</title>
+                <para>More information about this problem could be found on the <ulink
+                                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=104951"
+                                >Ajax4Jsf Users Forum. </ulink>
+                </para>
+        </section>
 
 
-    <section id="RefreshImage">
-        <?dbhtml filename="RefreshImage.html"?>
-        <title>How to refresh an image using &lt;a4j:support&gt; component?</title>
-        <para>More information about this problem could be found on the <ulink
-                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=105995"
-                >Ajax4Jsf Users Forum. </ulink>
-        </para>
-    </section>
+        <section id="IgnoreDupResponsesAndRequestDelay">
+                <?dbhtml filename="IgnoreDupResponsesAndRequestDelay.html"?>
+
+                <title>How to use IgnoreDupResponses and requestDelay?</title>
+                <para>The <emphasis>
+                                <property>&quot;IgnoreDupResponses&quot;</property>
+                        </emphasis> attribute appeared from 1.0.4 RC1 version and is used on the
+                        client for response ignoring after an AJAX request if a newer request has
+                        been already sent. <para> The additional information could be found <ulink
+                                        url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=105766"
+                                        >here</ulink>. </para>
+                        <emphasis>
+                                <property>&quot;RequestDelay&quot;</property>
+                        </emphasis> attribute also defines the client behavior. It sets the time
+                        delay, after which another request could be sent, all other requests are
+                        taken away from a queue except the last one. </para>
+        </section>
+
+
+        <section id="RefreshImage">
+                <?dbhtml filename="RefreshImage.html"?>
+                <title>How to refresh an image using &lt;a4j:support&gt; component?</title>
+                <para>More information about this problem could be found on the <ulink
+                                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=105995"
+                                >Ajax4Jsf Users Forum. </ulink>
+                </para>
+        </section>
 
 
 
-    <section id="EventQueueUsage">
-        <?dbhtml filename="EventQueueUsage.html"?>
-        <title>How to use &quot;EventQueue&quot; attribute?</title>
-        <para>The <emphasis >
-                <property>&quot;EventQueue&quot;</property>
-            </emphasis> attribute defines the query name where the requests are saved before their
-            sending to the server. The queue is created for redundant requests deleting during
-            frequent events, which call several requests forming one after another. The queue cuts
-            redundant requests and send only the last one. The queue is created in any case and
-            named on default, the attribute usage only re-defines this name. </para>
-    </section>
+        <section id="EventQueueUsage">
+                <?dbhtml filename="EventQueueUsage.html"?>
+                <title>How to use &quot;EventQueue&quot; attribute?</title>
+                <para>The <emphasis>
+                                <property>&quot;EventQueue&quot;</property>
+                        </emphasis> attribute defines the query name where the requests are saved
+                        before their sending to the server. The queue is created for redundant
+                        requests deleting during frequent events, which call several requests
+                        forming one after another. The queue cuts redundant requests and send only
+                        the last one. The queue is created in any case and named on default, the
+                        attribute usage only re-defines this name. </para>
+        </section>
 
-    <section id="PageRequiredOrNot">
-        <?dbhtml filename="PageRequiredOrNot.html"?>
-        <title>Is &lt;a4j:page&gt; component required or not?</title>
-        <para>
-            <emphasis role="bold">&lt;4j:page&gt;</emphasis> is a component used for solving
-            of incompatibility problems in early Ajax4jsf and MyFaces versions. The component
-            encodes the full html page structure. </para>
-        <para>More information about this problem could be found on the <ulink
-                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=106849&amp;postdays=0&amp;postorder=asc&amp;start=0"
-                >Ajax4Jsf Users Forum. </ulink>
-        </para>
-    </section>
+        <section id="PageRequiredOrNot">
+                <?dbhtml filename="PageRequiredOrNot.html"?>
+                <title>Is &lt;a4j:page&gt; component required or not?</title>
+                <para>
+                        <emphasis role="bold">&lt;4j:page&gt;</emphasis> is a component used
+                        for solving of incompatibility problems in early Ajax4jsf and MyFaces
+                        versions. The component encodes the full html page structure. </para>
+                <para>More information about this problem could be found on the <ulink
+                                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=106849&amp;postdays=0&amp;postorder=asc&amp;start=0"
+                                >Ajax4Jsf Users Forum. </ulink>
+                </para>
+        </section>
 
-    <section id="SeveralStatusOnPage">
-        <?dbhtml filename="SeveralStatusOnPage.html"?>
-        <title>Can I have several &lt;a4j:status&gt; components on one page?</title>
-        <para>Yes, you can. More information about this problem could be found on the <ulink
-                url="http://livedemo.exadel.com/a4j-status/">JBoss Ajax4jsf Online Demos</ulink>.
-        </para>
-    </section>
+        <section id="SeveralStatusOnPage">
+                <?dbhtml filename="SeveralStatusOnPage.html"?>
+                <title>Can I have several &lt;a4j:status&gt; components on one page?</title>
+                <para>Yes, you can. More information about this problem could be found on the <ulink
+                                url="http://livedemo.exadel.com/a4j-status/">JBoss Ajax4jsf Online
+                                Demos</ulink>. </para>
+        </section>
 
-    <section id="SomeProblemsWithRendering">
-        <?dbhtml filename="SomeProblemsWithRendering.html"?>
-        <title>Can I use &lt;a4j:region&gt; within &lt;a4j:repeat&gt;?</title>
-        <para>
-            <emphasis role="bold">&lt;a4j:region&gt;</emphasis> can&apos;t work inside
-            iteration components like <emphasis role="bold">&lt;h:dataTable&gt;</emphasis>
-            and <emphasis role="bold">&lt;a4j:repeat&gt;</emphasis>. </para>
-        <para>The details  could be found <ulink
-                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=109080"
-                >here. </ulink>
-        </para>
-    </section>
+        <section id="SomeProblemsWithRendering">
+                <?dbhtml filename="SomeProblemsWithRendering.html"?>
+                <title>Can I use &lt;a4j:region&gt; within &lt;a4j:repeat&gt;?</title>
+                <para>
+                        <emphasis role="bold">&lt;a4j:region&gt;</emphasis> can&apos;t
+                        work inside iteration components like <emphasis role="bold"
+                                >&lt;h:dataTable&gt;</emphasis> and <emphasis role="bold"
+                                >&lt;a4j:repeat&gt;</emphasis>. </para>
+                <para>The details could be found <ulink
+                                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=109080"
+                                >here. </ulink>
+                </para>
+        </section>
 
-    <section id="CustomAjaxRequest">
-        <?dbhtml filename="CustomAjaxRequest.html"?>
-        <title>Why custom AJAX request does not work?</title>
-        <para>More information about this problem could be found on the <ulink
-                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=114025"
-                >Ajax4Jsf Users Forum.</ulink>
-        </para>
-    </section>	
-	
-	
-    <section id="RerederingSingleDataTableColumn">
-        <?dbhtml filename="RerederingSingleDataTableColumn.html"?>
-        <title>How to reRender single dataTable column?</title>
-        <para>More information about this problem could be found on the <ulink
-                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=105725"
-                >Ajax4Jsf Users Forum. </ulink>
-        </para>
-    </section>
+        <section id="CustomAjaxRequest">
+                <?dbhtml filename="CustomAjaxRequest.html"?>
+                <title>Why custom AJAX request does not work?</title>
+                <para>More information about this problem could be found on the <ulink
+                                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=114025"
+                                >Ajax4Jsf Users Forum.</ulink>
+                </para>
+        </section>
 
-    <section id="DisableSkins">
-        <?dbhtml filename="DisableSkins.html"?>
-        <title>How to disable skinability?</title>
-		There is possibility to use special skin with name "plain". It doesn't have any parameters. 
-		It's necessary for embedding RichFaces components into existing projecst which have its own styles.
-        <para>For information you can see discussion about this problem on the <ulink
-				url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4066340#4066340"
-                >Ajax4Jsf Users Forum. </ulink>
-        </para>
-    </section>	
-	
-    <section id="reRenderingfailed">
-        <?dbhtml filename="reRenderingfailed.html"?>
-        <title>Why does reRendering fail? Hide/Show components using rendered.</title>
-        <para> During &quot;show/hide&quot; functionality implementation the main error
-            happens because of the &quot;reRender&quot; attribute of some AJAX Action
-            Component is set on a component that depends on rendered properties, i.e. a component
-            that is to be hidden/rendered is tried to be updated. The problem is that if
-            rendered=&quot;false&quot; in this moment, the component isn&apos;t in the
-            DOM tree and can&apos;t be updated because of the general limitations described in
-            the Ajax Processing chapter. </para>
-        <para>The correct variant of functionality implantation:</para>
 
-        <orderedlist>
-            <listitem>
-                <para>With the rendered attribute wrap the component that is to be hidden or
-                    rendered on AJAX in a wrapper component (e.g. a4j:outputPanel)</para>
-            </listitem>
+        <section id="RerederingSingleDataTableColumn">
+                <?dbhtml filename="RerederingSingleDataTableColumn.html"?>
+                <title>How to reRender single dataTable column?</title>
+                <para>More information about this problem could be found on the <ulink
+                                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=105725"
+                                >Ajax4Jsf Users Forum. </ulink>
+                </para>
+        </section>
 
-            <listitem>
-                <para>Set reRender of an AJAX Action component on this wrapper component instead of
-                    the component itself.</para>
-            </listitem>
-        </orderedlist>
+        <section id="DisableSkins">
+                <?dbhtml filename="DisableSkins.html"?>
+                <title>How to disable skinability?</title> There is possibility to use special skin
+                with name "plain". It doesn't have any parameters. It's necessary for embedding
+                RichFaces components into existing projecst which have its own styles. <para>For
+                        information you can see discussion about this problem on the <ulink
+                                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4066340#4066340"
+                                >Ajax4Jsf Users Forum. </ulink>
+                </para>
+        </section>
 
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
+        <section id="reRenderingfailed">
+                <?dbhtml filename="reRenderingfailed.html"?>
+                <title>Why does reRendering fail? Hide/Show components using rendered.</title>
+                <para> During &quot;show/hide&quot; functionality implementation the main
+                        error happens because of the &quot;reRender&quot; attribute of some
+                        AJAX Action Component is set on a component that depends on rendered
+                        properties, i.e. a component that is to be hidden/rendered is tried to be
+                        updated. The problem is that if rendered=&quot;false&quot; in this
+                        moment, the component isn&apos;t in the DOM tree and can&apos;t be
+                        updated because of the general limitations described in the Ajax Processing
+                        chapter. </para>
+                <para>The correct variant of functionality implantation:</para>
 
-        <programlisting role="XML"><![CDATA[...
+                <orderedlist>
+                        <listitem>
+                                <para>With the rendered attribute wrap the component that is to be
+                                        hidden or rendered on AJAX in a wrapper component (e.g.
+                                        a4j:outputPanel)</para>
+                        </listitem>
+
+                        <listitem>
+                                <para>Set reRender of an AJAX Action component on this wrapper
+                                        component instead of the component itself.</para>
+                        </listitem>
+                </orderedlist>
+
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+
+                <programlisting role="XML"><![CDATA[...
 <a4j:outputPanel id="panel"> 
 	<h:panelGroup rendered="#{bean.rendered}">
 		<!--Some nested content to be hidden/shown depending on bean.rendered -->
@@ -871,47 +894,47 @@ background-color: transparent;
 ...
 ]]></programlisting>
 
-        <para>In this case the wrapper component always presents in the DOM tree and its inner
-            content could be updated dynamically on AJAX.</para>
-    </section>
+                <para>In this case the wrapper component always presents in the DOM tree and its
+                        inner content could be updated dynamically on AJAX.</para>
+        </section>
 
-    <section id="PreventDupRerenderingPoll">
-        <?dbhtml filename="PreventDupRerenderingPoll.html"?>
-        <title>How to prevent duplicate reRendering when using &lt;a4j:poll&gt;?</title>
-        <para>For information you can see discussion about this problem on the <ulink
-		url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4059731#4059731"
-		>Ajax4Jsf Users Forum. </ulink>
-        </para>
-    </section>	
-	
-    <section id="JSCallPropblemsInInclude">
-        <?dbhtml filename="JSCallPropblemsInInclude.html"?>
-        <title>Why does JavaScript call don&apos;t work in &lt;a4j:include&gt;?</title>
-        <para>More information about this problem could be found on the <ulink
-                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=104317"
-                >Ajax4Jsf Users Forum. </ulink>
-        </para>
-    </section>
+        <section id="PreventDupRerenderingPoll">
+                <?dbhtml filename="PreventDupRerenderingPoll.html"?>
+                <title>How to prevent duplicate reRendering when using &lt;a4j:poll&gt;?</title>
+                <para>For information you can see discussion about this problem on the <ulink
+                                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4059731#4059731"
+                                >Ajax4Jsf Users Forum. </ulink>
+                </para>
+        </section>
 
-    <section id="IncludeAndNavRules">
-        <?dbhtml filename="IncludeAndNavRules.html"?>
-        <title>How to use &lt;a4j:include&gt; and navigation rules?</title>
-        <para>For information you can see discussion about this problem on the <ulink
-				url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4062036#4062036"
-                >Ajax4Jsf Users Forum. </ulink>
-        </para>
-    </section>	
-	
-    <section id="ResourceNotRegisteredException">
-        <?dbhtml filename="ResourceNotRegisteredException.html"?>
-        <title>What does ResourceNotRegistered Exception mean?</title>
+        <section id="JSCallPropblemsInInclude">
+                <?dbhtml filename="JSCallPropblemsInInclude.html"?>
+                <title>Why does JavaScript call don&apos;t work in &lt;a4j:include&gt;?</title>
+                <para>More information about this problem could be found on the <ulink
+                                url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=104317"
+                                >Ajax4Jsf Users Forum. </ulink>
+                </para>
+        </section>
 
-        <para>Ajax4jsf registers its resources (scripts, images) after an application is accessed
-            and then accesses it via a generated URL. During an application development when a
-            developer constantly updates it on the server, it could happen that Ajax4jsf
-            re-registers its resources after every server restart and a browser tries to access them
-            via cashed URL.</para>
+        <section id="IncludeAndNavRules">
+                <?dbhtml filename="IncludeAndNavRules.html"?>
+                <title>How to use &lt;a4j:include&gt; and navigation rules?</title>
+                <para>For information you can see discussion about this problem on the <ulink
+                                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4062036#4062036"
+                                >Ajax4Jsf Users Forum. </ulink>
+                </para>
+        </section>
 
-        <para>The problem is solved with browser cash update (e.g. CTRL+F5).</para>
-    </section>
+        <section id="ResourceNotRegisteredException">
+                <?dbhtml filename="ResourceNotRegisteredException.html"?>
+                <title>What does ResourceNotRegistered Exception mean?</title>
+
+                <para>Ajax4jsf registers its resources (scripts, images) after an application is
+                        accessed and then accesses it via a generated URL. During an application
+                        development when a developer constantly updates it on the server, it could
+                        happen that Ajax4jsf re-registers its resources after every server restart
+                        and a browser tries to access them via cashed URL.</para>
+
+                <para>The problem is solved with browser cash update (e.g. CTRL+F5).</para>
+        </section>
 </chapter>
