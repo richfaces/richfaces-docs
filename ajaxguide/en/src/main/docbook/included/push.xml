@@ -61,7 +61,9 @@ AjaxPush myPush = new AjaxPush();
 'interval' - Interval (in ms) for call push requests. Default value 1000 (1 sec).
 <!-- If "0" a connection is permanent. Also user can set different value for parameter 'timeout'. -->
 </para>
+<para>
 Code for registration of listener:
+</para>
     <programlisting role="JAVA"><![CDATA[
 public void addListener(EventListener listener) {
 synchronized (listener) {
@@ -70,16 +72,26 @@ synchronized (listener) {
 }
 ]]></programlisting>
    
-   
+<para>   
 Component can get message using current code:
+</para>
     <programlisting role="JAVA"><![CDATA[
 System.out.println("event occurs");
 synchronized (listener) {
 	listener.onEvent(new EventObject(this));
 }
 ]]></programlisting>
-
+<para>
 Thus, component 'push' uses asynchronous model instead of polls.
-
+</para>
   </section>
+  <!--
+  <section>
+    <title>Relevant resources links</title>
+	<para>
+	  Some additional information about usage of component can be found
+	  <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/push.jsf?c=push">here.
+	</ulink>
+	</para>
+  </section> -->
 </chapter>
