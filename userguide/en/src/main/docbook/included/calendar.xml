@@ -77,125 +77,167 @@
 ...</programlisting>
   </section>
 
-  <!--section>
+  <section>
     <title>Details of Usage</title>
-
-    <para>All attributes are not required.</para>
-    <para>Use <emphasis>
-        <property>&quot;event&quot;</property>
-      </emphasis> attribute to define an event for appearance of collapsing/expanding sublevels.
-      Default value is <emphasis>
-        <property>&quot;onclick&quot;</property>
-      </emphasis>. An example could be seen below.</para>
-
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="xml">...
-      &lt;rich:panelMenu event="onmouseover"&gt;
-            <&lt;Nested panelMenu components&gt;
-      &lt;/rich:panelMenu&gt;
-...</programlisting>
-
-    <para>Switching mode could be chosen with the <emphasis>
-        <property>&quot;mode&quot;</property>
-      </emphasis> attribute for all panelMenu items except ones where this attribute was redefined.
-      By default all items send traditional request. </para>
     <para>The <emphasis>
-        <property>&quot;expandMode&quot;</property>
-      </emphasis> attribute defines the submission modes for all collapsing/expanding panelMenu
-      groups except ones where this attribute was redefined. </para>
-    <para>The <emphasis>
-        <property>&quot;mode&quot;</property>
-      </emphasis> and <emphasis>
-        <property>&quot;expandMode&quot;</property>
-      </emphasis> attributes could be used with three possible parameters.</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Server (default)</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>The common submission of the form is performed and a page is completely refreshed.</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Ajax</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>An Ajax form submission is performed additionally specified elements in the <emphasis>
-        <property>&quot;reRender&quot;</property>
-      </emphasis> attribute are reRendered.</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>None</para>
-      </listitem>
-    </itemizedlist>
-
-    <para><emphasis>
-        <property>&quot;Action&quot;</property>
-      </emphasis> and <emphasis>
-        <property>&quot;ActionListener&quot;</property>
-      </emphasis> attributes are ignored. Items don&apos;t fire any submits itself. Behavior is
-      fully defined by the components nested to items. Groups expand on the client side.</para>
-
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="xml">...
-      &lt;rich:panelMenu event="onclick" submitMode="none"&gt;
-            &lt; rich:panelMenuItem label="Link to external page"&gt;
-                  &lt;h:outputLink ... &gt;
-            &lt;rich:panelMenuItem&gt;
-      &lt;/rich:panelMenu&gt;
-...</programlisting>
-
-    <note><title>Note:</title> As the <emphasis role="bold">
-        <property>&lt;rich:panelMenu&gt;</property>
-      </emphasis> component doesn&apos;t provide its own form, use it between
-      &lt;h:form&gt; and &lt;/h:form&gt; tags.</note>
-
-    <para>The <emphasis>
-        <property>&quot;expandSingle&quot;</property>
-      </emphasis> attribute is defined for expanding more than one submenu on the same level. The
-      default value is <emphasis>
-        <property>&quot;false&quot;</property>
-      </emphasis>. If it&apos;s true the previously opened group on the top level closes before
-      opening another one. See the picture below.</para>
-
+        <property>&quot;popup&quot;</property>
+      </emphasis> attribute defines calendar representation mode on a page. Default value for the <emphasis>
+        <property>&quot;popup&quot;</property>
+      </emphasis> attribute is &quot;false&quot;. If it&apos;s &quot;true&quot;
+      the calendar is represented on a page as an input field and a button. Clicking on the button
+      calls the calendar popup as it&apos;s shown on the picture below. </para>
     <figure>
-      <title>Using the &quot;expandSingle&quot; attribute</title>
+      <title>Using the &quot;popup&quot; attribute</title>
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="images/panelMenu1.png"/>
+          <imagedata fileref="images/calendar.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-
+    <para>There are three button-related attributes:</para>
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>
+            <property>&quot;buttonLabel&quot;</property>
+          </emphasis> defines a label for the button</para>
+      </listitem>
+    </itemizedlist>
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>
+            <property>&quot;buttonIcon&quot;</property>
+          </emphasis> defines an icon for the button</para>
+      </listitem>
+    </itemizedlist>
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>
+            <property>&quot;buttonIconDisabled&quot;</property>
+          </emphasis> defines an icon for the disabled state of the button</para>
+      </listitem>
+    </itemizedlist>
     <para>The <emphasis>
-        <property>&quot;selectedChild&quot;</property>
-      </emphasis> attribute is used for defining the name of the selected group or item. An example
-      for group is placed below:</para>
-
-    <para>Here is an example:</para>
-
+        <property>&quot;direction&quot;</property>
+      </emphasis> and <emphasis>
+        <property>&quot;jointPoint&quot;</property>
+      </emphasis> attributes are used for defining aspects of calendar appearance.</para>
+    <para>The possible values for the <emphasis>
+        <property>&quot;direction&quot;</property>
+      </emphasis> are: </para>
+    <itemizedlist>
+      <listitem>top-left - a calendar drops to the top and left</listitem>
+      <listitem>top-right - a calendar drops to the top and right</listitem>
+      <listitem>bottom-left - a calendar drops to the bottom and left</listitem>
+      <listitem>bottom-right - a calendar drops to the bottom and right</listitem>
+      <listitem>auto - smart positioning activation</listitem>
+    </itemizedlist>
+    <para> By default, the <emphasis>
+        <property>&quot;direction&quot;</property>
+      </emphasis> attribute is set to &quot;auto&quot;.</para>
+    <para>The <emphasis>
+        <property>&quot;direction&quot;</property>
+      </emphasis> and <emphasis>
+        <property>&quot;jointPoint&quot;</property>
+      </emphasis> attributes are used for defining aspects of calendar appearance.</para>
+    <para>The possible values for the <emphasis>
+        <property>&quot;jointPoint&quot;</property>
+      </emphasis> are: </para>
+    <itemizedlist>
+      <listitem>top-left - a calendar docked to the top-left point of the button element</listitem>
+      <listitem>topright - a calendar docked to the top-right point of the button element</listitem>
+      <listitem>bottom-left - a calendar docked to the bottom-left point of the button element</listitem>
+      <listitem>bottom-right - a calendar docked to the bottom-right point of the button element</listitem>
+      <listitem>auto - smart positioning activation</listitem>
+    </itemizedlist>
+    <para> By default, the <emphasis>
+        <property>&quot;jointPoint&quot;</property>
+      </emphasis> attribute is set to &quot;auto&quot;.</para>
+    <para>The <emphasis role="bold">
+        <property>&lt;rich:calendar&gt;</property>
+      </emphasis> component provides to use <emphasis>
+        <property>&quot;header&quot;</property>
+      </emphasis> facet. For example, you can add following scrolling elements to the facet:
+      {currentMonthControl}, {nextMonthControl}, {nextYearControl}, {previousYearControl},
+      {previousMonthControl}.</para>
+    <para>Simple example is placed below.</para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="xml">...
-      &lt;rich:panelMenu selectedChild="thisChild"&gt;
-        &lt;rich:panelMenuGroup label="Group1" name="thisChild"&gt;
-          &lt;!ested panelMenu components&gt;
-        &lt;/rich:panelMenuGroup&gt;
-      &lt;/rich:panelMenu&gt;
+      &lt;f:facet name="header"&gt;
+            &lt;f:verbatim&gt;
+                  {previousMonthControl} | {nextMonthControl}					
+            &lt;/f:verbatim&gt;
+      &lt;/f:facet&gt;
 ...</programlisting>
+    <para>It&apos;s possible to define <emphasis>
+        <property>&quot;footer&quot;</property>
+      </emphasis> facet and replace in it (in the same way how it was described for <emphasis>
+        <property>&quot;header&quot;</property>
+      </emphasis> facet), for example, following today bar elements: {todayControl},
+      {selectedDateControl}, {helpControl}.</para>
+    <para>Also you can use <emphasis>
+        <property>&quot;optionalHeader&quot;</property>
+      </emphasis> and <emphasis>
+        <property>&quot;optionalFooter&quot;</property>
+      </emphasis> facets. These facets define the top and the bottom elements of the calendar. They
+      are not attached to the control parts of the calendar. You can replace in them any content.</para>
+    <para>The <emphasis role="bold">
+        <property>&lt;rich:calendar&gt;</property>
+      </emphasis> component provides the possibility to use <emphasis>
+        <property>&quot;weekNumber&quot;</property>
+      </emphasis> and <emphasis>
+        <property>&quot;weekDay&quot;</property>
+      </emphasis> facets. For example, using these facets you can change text style for the elements
+      of the calendar as it&apos;s shown in the example below:</para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="xml">...
+      &lt;f:facet name="weekNumber"&gt;
+            &lt;h:outputText style="font-weight: bold;" value="{weekNumber}" /&gt;
+      &lt;/f:facet&gt;
+...</programlisting>
+
+    <para>The <emphasis role="bold">
+        <property>&lt;rich:calendar&gt;</property>
+      </emphasis> component provides the possibility to use a special data model to define data for
+      element rendering. Data model includes two major interfaces: </para>
+
+    <itemizedlist>
+      <listitem>CalendarDataModel</listitem>
+      <listitem>CalendarDataModelItem</listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">CalendarDataModel</emphasis> provides the following function:</para>
+    <itemizedlist>
+      <listitem>CalendarDataModelItem[] getData(Date[]);</listitem>
+    </itemizedlist>
+
+    <para>This method is called when it&apos;s necessary to represent the next block of
+      CalendarDataItems. It happens during navigation to the next (previous) month or in any other
+      case when calendar renders. This method is called in &quot;Ajax&quot; mode when the
+      calendar renders a new page. </para>
+
+    <para><emphasis role="bold">CalendarDataModelItem</emphasis> provides the following function:</para>
+    <itemizedlist>
+      <listitem>Date getDate() - returns date from the item. Default implementation returns date.</listitem>
+      <listitem>Boolean isEnabled() - returns &quot;true&quot; if date is
+        &quot;selectable&quot; on the calendar. Default implementation returns
+        &quot;true&quot;.</listitem>
+      <listitem>String getStyleClass() - returns string appended to the style class for the date
+        span. For example it could be &quot;relevant holyday&quot;. It means that the class
+        could be defined like the &quot;rich-cal-day-relevant-holyday&quot; one. Default
+        implementation returns empty string.</listitem>
+      <listitem>Object getData() - returns any additional payload that must be JSON-serializable
+        object. It could be used in the custom date representation on the calendar (inside the
+        custom facet).</listitem>
+    </itemizedlist>
+
   </section>
 
-  <section>
+  <!--section>
     <title>JavaScript API</title>
     <para>In Java Script code for expanding/collapsing group element creation it&apos;s
       necessary to use doExpand()/doCollapse() function.</para>
