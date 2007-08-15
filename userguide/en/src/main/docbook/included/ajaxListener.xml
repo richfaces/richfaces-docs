@@ -28,7 +28,7 @@
       </tgroup>
     </table>
 	
-  <!--
+
   <section>
     <title>Creating on a page</title>
     <para>Simple Component definition on a page:</para>
@@ -37,14 +37,14 @@
       <emphasis role="bold">Example:</emphasis>
  </para>
 
-    <programlisting role="XML"><![CDATA[<a4j:ajaxListenet type=""/>
+	<programlisting role="XML"><![CDATA[...
+	<a4j:ajaxListener type="demo.Bean"/>
+...
 ]]></programlisting> 
   </section>
-   -->
-   
+  
   <section>
     <title>Dynamical creation of a component from Java code</title>
-
 	  <para>
 		  <emphasis role="bold">Example:</emphasis>
 	  <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.AjaxListener;
@@ -66,9 +66,51 @@ invoked when Validation of Update Model phases failed, Ajax Listener is guaranti
 a good place for update the list of re-rendered components, for example.
 Ajax Listener is not invoked for non-Ajax request and when RichFaces works in "Ajax Request generates 
 Non-Ajax Response" mode. Therefore, Ajax Listener invocation is a good indicator that Ajax response is going to be processed. 
-Attribute 'type' defines the fully qualified Java class name for listener. This class should implement org.ajax4jsf.events.AjaxListener interface.
-You can access to the source of the event (Ajax component) using event.getSource() call. 
+Attribute 'type' defines the fully qualified Java class name for listener. This class should implement org.ajax4jsf.framework.ajax.AjaxListener
+interface. You can access to the source of the event (Ajax component) using event.getSource() call. 
 	</para>
 
+ </section>
+ <section>
+  <para>
+      <emphasis role="bold">Example:</emphasis>
+ </para>
+
+    <programlisting role="XML"><![CDATA[...
+	
+	<a4j:commandLink id="cLink" value="Click it To Send Ajax Request">
+		<a4j:ajaxListener type="demo.Bean"/>
+	</a4j:commandLink>
+...
+]]></programlisting> 
+
+<para>
+      <emphasis role="bold">Example:</emphasis>
+ </para>
+
+    <programlisting role="XML"><![CDATA[
+package demo;
+
+import org.ajax4jsf.framework.ajax.AjaxEvent;
+
+public class Bean implements org.ajax4jsf.framework.ajax.AjaxListener{
+	
+...	
+	public void processAjax(AjaxEvent arg0){
+		//Custom Developer Code 
+	}
+...
+}
+]]></programlisting> 
+  </section>  
+
+  <section>
+    <title>Relevant resources links</title>
+	<para>
+	  Some additional information about usage of component can be found 
+	  <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/ajaxListener.jsf?c=ajaxListener">here.
+	</ulink>
+	</para>
   </section>
+  
 </chapter>
