@@ -36,7 +36,7 @@
     <para>To use a component, place <emphasis role="bold">
           <property>&lt;a4j:support&gt;</property>
         </emphasis> as nested to the component requesting AJAX functionality and specify an event of a
-         parent component that generates AJAX request and the components to be rerendered after a response
+         parent component that generates Ajax request and the components to be rerendered after a response
           from the server.</para>
     <para><emphasis role="bold">Example:</emphasis></para>
     <programlisting role="XML"><![CDATA[<h:inputText value="#{bean.text}">
@@ -85,7 +85,7 @@ event calls a utility ajax4jsf method that submit a form creating a special mark
     </note>
     <para>With the help of <emphasis >
         <property>&quot;onsubmit&quot;</property></emphasis> and <emphasis >
-        <property>&quot;oncomplete&quot;</property></emphasis> attributes the component allows using JavaScript before (for request sending conditions checking) and after an AJAX response processing termination (for performance of user-defined activities on the client) </para>
+        <property>&quot;oncomplete&quot;</property></emphasis> attributes the component allows using JavaScript before (for request sending conditions checking) and after an Ajax response processing termination (for performance of user-defined activities on the client) </para>
     <para><emphasis role="bold">Example:</emphasis></para>
 	<programlisting role="XML"><![CDATA[<h:selectOneMenu value="#{bean.text}">
 	<f:selectItem itemValue="First Item " itemLabel="First Item"/>
@@ -95,7 +95,7 @@ event calls a utility ajax4jsf method that submit a form creating a special mark
 					{form.reset(); return false;}" oncomplete="alert('Value succesfully stored')"/>
 </h:selectOneMenu>]]></programlisting>
     <para>In example there is the condition checking (confirm) is used before request sending and message printing after the request processing is over. </para>
-    <para>The components allows different AJAX request managing ways for its various optimization in particular conditions such as: 
+    <para>The components allows different Ajax request managing ways for its various optimization in particular conditions such as: 
 <itemizedlist>
         <listitem>
           <emphasis role="bold">Limitation of the submit area and updating area for the request.</emphasis>
@@ -123,7 +123,7 @@ event calls a utility ajax4jsf method that submit a form creating a special mark
 	</h:inputText>
 	<h:outputText value="#{person.name}" id="test"/>
 </form>]]></programlisting>
-    <para>In this example the component &quot;h:messages&quot; is always updated (as it capturing all AJAX requests, located in ajaxRendered <emphasis role="bold"><property>&lt;a4j:outputPanel&gt;</property></emphasis>), except the case when a response is sent from the input component from the example. On sending this component marks that updating area is limited to the defined in it components, it means that on its usage with &quot;limitToList&quot;=&quot;true&quot;  the only component updated is the one with &quot;d&quot;=&quot;test&quot;.</para>
+    <para>In this example the component &quot;h:messages&quot; is always updated (as it capturing all Ajax requests, located in ajaxRendered <emphasis role="bold"><property>&lt;a4j:outputPanel&gt;</property></emphasis>), except the case when a response is sent from the input component from the example. On sending this component marks that updating area is limited to the defined in it components, it means that on its usage with &quot;limitToList&quot;=&quot;true&quot;  the only component updated is the one with &quot;d&quot;=&quot;test&quot;.</para>
 	<itemizedlist>
         <listitem>
           <emphasis role="bold">Limitation of requests frequency and updates quantity after the responses. </emphasis>
@@ -133,7 +133,7 @@ event calls a utility ajax4jsf method that submit a form creating a special mark
           <para><emphasis ><property>&quot;eventQueue&quot;</property></emphasis> is an attribute for naming of the queue where the next response is kept in till its processing, but if the next event comes in till this time is over, the waiting event is taken away, replacing with a new one. 
 
 </para>
-          <para><emphasis ><property>&quot;ignoreDupResponces&quot;</property></emphasis> is an attribute that allows to disable any updates on the client after an AJAX request if another AJAX request is already sent. 
+          <para><emphasis ><property>&quot;ignoreDupResponces&quot;</property></emphasis> is an attribute that allows to disable any updates on the client after an Ajax request if another Ajax request is already sent. 
 </para>
           <para><emphasis ><property>&quot;timeout&quot;</property></emphasis> is an attribute that allows to set a time interval in millisecond to define a maximum time period of response wait time. In case of the interval interaction, a new request is sent and the previous one is canceled. Postprocessing of a response isn't performed.
 </para>
