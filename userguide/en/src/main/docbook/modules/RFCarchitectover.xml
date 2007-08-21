@@ -17,12 +17,12 @@
   <section id="introToBasics">
   <?dbhtml filename="introToBasics.html"?>
     <title>Introduction</title>
-    <para>The framework is implemented as a component library which adds AJAX capability into existing 
+    <para>The framework is implemented as a component library which adds Ajax capability into existing 
       pages, so you don&apos;t need to write any JavaScript code or to replace existing 
-      components with new AJAX widgets. <property>Ajax4jsf</property> enables page-wide AJAX support instead of the 
+      components with new Ajax widgets. <property>Ajax4jsf</property> enables page-wide Ajax support instead of the 
       traditional component-wide support. So, you can define the event on the page that 
-      invokes an AJAX request and the areas of the page that should be synchronized with the JSF 
-      Component Tree after the AJAX request changes the data on the server according to the 
+      invokes an Ajax request and the areas of the page that should be synchronized with the JSF 
+      Component Tree after the Ajax request changes the data on the server according to the 
       events fired on the client.</para>
     <para>Next Figure shows how it works:</para>
     <figure>
@@ -34,7 +34,7 @@
       </imageobject>
     </mediaobject>
     <para><property>Ajax4jsf</property> allows to define (by means of JSF tags) different parts of a JSF page you 
-      wish to update with  an AJAX request and provide a few options to send AJAX requests to 
+      wish to update with  an Ajax request and provide a few options to send Ajax requests to 
       the server. Also  JSF page doesn&apos;t change from a &quot;regular&quot; JSF 
       page and you don&apos;t need to write  any JavaScript  or XMLHttpRequest objects by hands, everything is done automatically.</para>
   </section>
@@ -43,7 +43,7 @@
     <title>Ajax4jsf Architecture Overview</title>
     <para>Next figure lists several important elements of the <property>Ajax4jsf</property> framework</para>
     <figure>
-      <title>Ajax4jsf component structure</title>
+      <title>Core Ajax component structure</title>
     </figure>
     <mediaobject>
       <imageobject>
@@ -52,14 +52,14 @@
     </mediaobject>
     <formalpara>
       <title>Ajax Filter.</title>
-      <para>To get all benefits of  <property>Ajax4jsf</property>, you should  register an AJAX Filter in web.xml 
-      file of your application.The AJAX Filter recognizes multiple request types. The sequence diagram on Figure 3 
-      shows the difference in processing of a &quot;regular&quot; JSF request and an AJAX request.</para>
+      <para>To get all benefits of  <property>Ajax4jsf</property>, you should  register an Ajax Filter in web.xml 
+      file of your application.The Ajax Filter recognizes multiple request types. The sequence diagram on Figure 3 
+      shows the difference in processing of a &quot;regular&quot; JSF request and an Ajax request.</para>
     </formalpara>
     <para>In the first case the whole JSF tree will be encoded,
-      in the second one option it depends on the &quot;size&quot; of the AJAX region (you can define AJAX region 
+      in the second one option it depends on the &quot;size&quot; of the Ajax region (you can define Ajax region 
       by using the <emphasis role="bold"><property>&lt;a4j:region&gt;</property></emphasis>). As you can see, in the second case the filter parses 
-      the content of an AJAX response before sending it to the client side.</para>
+      the content of an Ajax response before sending it to the client side.</para>
     <para>Have a look at the next picture to understand these two ways:</para>
     <figure>
       <title>Request Processing sequence diagram</title>
@@ -71,10 +71,10 @@
     </mediaobject>
     <para>In both cases, the information about required static or dynamic resources that your application 
       requests is registered in the ResourseBuilder class.</para>
-    <para>When a request for a resource comes (Figure 4), the AJAX filter checks the Resource Cache 
+    <para>When a request for a resource comes (Figure 4), the Ajax filter checks the Resource Cache 
       for this resource and if it is there, the resource is sent to the client. Otherwise, 
       the filter searches for the resource among those that are registered by the 
-      ResourceBuilder. If the resource is registered, the AJAX filter will send a request to the 
+      ResourceBuilder. If the resource is registered, the Ajax filter will send a request to the 
       ResourceBuilder to create (deliver) the resource.</para>
     <para>Next Figure shows the ways of  resource request processing.</para>
     <figure>
@@ -88,15 +88,15 @@
     <formalpara>
       <title>AJAX Action Components</title>
       <para>
-      There are four AJAX Action Components: AjaxCommandButton,  AjaxCommandLink, AjaxPoll and AjaxSupport. 
-      You can use them to send AJAX requests from the client side. 
+      There are four Ajax Action Components: AjaxCommandButton,  AjaxCommandLink, AjaxPoll and AjaxSupport. 
+      You can use them to send Ajax requests from the client side. 
     </para>
     </formalpara>
     <formalpara>
       <title>AJAX Containers</title>
       <para>
       AjaxContainer is an interface that describes an area on your JSF page that should be decoded 
-      during an AJAX request. AjaxViewRoot and AjaxRegion are implementations of this interface.      
+      during an Ajax request. AjaxViewRoot and AjaxRegion are implementations of this interface.      
     </para>
     </formalpara>
     <formalpara>
@@ -113,7 +113,7 @@
     <para>In order to create AJAX4JSF applications properly,  keep the following points in mind:</para>
     <itemizedlist>
       <listitem>
-        The AJAX framework should not append or delete, but only replace elements on the page. For successful updates, an element with the same ID as in the response must exist on the page. If you&apos;d like to append any code to a page, put in a placeholder for it (any empty element). For the same reason, it&apos;s recommended to place messages in the<emphasis >
+        The Ajax framework should not append or delete, but only replace elements on the page. For successful updates, an element with the same ID as in the response must exist on the page. If you&apos;d like to append any code to a page, put in a placeholder for it (any empty element). For the same reason, it&apos;s recommended to place messages in the<emphasis >
             <property>&quot;AjaxOutput&quot;</property>
           </emphasis> component (as no messages is also a message).
       </listitem>
@@ -123,7 +123,7 @@
           </emphasis>  for self-rendered containers, since this component is transient and not saved in the tree.
       </listitem>
       <listitem>
-        AJAX requests are made by XMLHttpRequest functions in XML format, but this XML bypasses most validations and the corrections that might be made in a browser. So, create only a strict standards-compliant code for HTML and XHTML, without skipping any required elements or attributes. Any necessary XML corrections are automatically made by the XML filter on the server, but lot&apos;s of  unexpected effects can be produced by an  incorrect HTML code.
+        Ajax requests are made by XMLHttpRequest functions in XML format, but this XML bypasses most validations and the corrections that might be made in a browser. So, create only a strict standards-compliant code for HTML and XHTML, without skipping any required elements or attributes. Any necessary XML corrections are automatically made by the XML filter on the server, but lot&apos;s of  unexpected effects can be produced by an  incorrect HTML code.
       </listitem>
     </itemizedlist>
   </section>
@@ -132,8 +132,8 @@
     <title>How To...</title>
     <section id="SendAnAJAXRequest">
     <?dbhtml filename="SendAnAJAXRequest.html"?>
-      <title>Send an AJAX request</title>
-      <para>There are different ways to send AJAX requests from your JSF page. You may use 
+      <title>Send an Ajax request</title>
+      <para>There are different ways to send Ajax requests from your JSF page. You may use 
           <emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis>, <emphasis role="bold">
           <property>&lt;a4j:commandLink&gt;</property>, <emphasis role="bold"><property>&lt;a4j:poll&gt;</property></emphasis>
         </emphasis> or <emphasis role="bold">
@@ -141,8 +141,8 @@
         </emphasis> tags.           
         </para>
       <para>All these tags hide the usual JavaScript activities that are required for an XMHttpRequest 
-          object building and  an AJAX request sending. Also, they allow you to decide which components of 
-          your JSF page are to be re-rendered as a result of the AJAX response (you can list the 
+          object building and  an Ajax request sending. Also, they allow you to decide which components of 
+          your JSF page are to be re-rendered as a result of the Ajax response (you can list the 
           IDs of these components in the &quot;reRender&quot; attribute).
         </para>
       <para>
@@ -150,28 +150,28 @@
           <property>&lt;a4j:commandButton&gt;</property>
         </emphasis> and <emphasis role="bold">
           <property>&lt;a4j:commandLink&gt;</property>
-        </emphasis> tags are used to send an AJAX 
+        </emphasis> tags are used to send an Ajax 
           request on &quot;onclick&quot; JavaScript event. 
         </para>
       <para>
           <emphasis role="bold">
           <property>&lt;a4j:poll&gt;</property>
-        </emphasis> tag is used to send an AJAX 
+        </emphasis> tag is used to send an Ajax 
           request periodically using a timer. 
         </para>
       <para>The <emphasis role="bold">
           <property>&lt;a4j:support&gt;</property>
-        </emphasis> tag allows you to add AJAX functionality to standard JSF components 
-          and send AJAX request onto a chosen JavaScript event: &quot;onkeyup&quot;, &quot;onmouseover&quot;, 
+        </emphasis> tag allows you to add Ajax functionality to standard JSF components 
+          and send Ajax request onto a chosen JavaScript event: &quot;onkeyup&quot;, &quot;onmouseover&quot;, 
           etc.
         </para>
-      <para>Most important attributes of components that provide AJAX request calling features are:</para>
+      <para>Most important attributes of components that provide Ajax request calling features are:</para>
       <itemizedlist>
         <listitem>
               <emphasis >
               <property>&quot;reRender&quot;</property>
             </emphasis>attribute as it was mentioned  <link linkend="SendAnAJAXRequest">before</link> specifies components to be reRendered 
-              after AJAX response. The attribute can be specified using EL expression and formed dynamicaly on the
+              after Ajax response. The attribute can be specified using EL expression and formed dynamicaly on the
               server side (see <ulink url="index.html#FAQ">FAQ chapter</ulink>).
 		</listitem>
         <listitem>
@@ -212,24 +212,24 @@
       <title>Decide What to Send</title>
       <para>You may describe a region on the page you wish to send to the server, in this way you  can 
           control what part of the JSF View is decoded on the server side when you send an 
-          AJAX request.  
+          Ajax request.  
         </para>
-      <para>The easiest way to describe an AJAX region on your JSF page is to do nothing, 
+      <para>The easiest way to describe an Ajax region on your JSF page is to do nothing, 
           because the content between the <emphasis role="bold">
           <property>&lt;f:view&gt;</property>
         </emphasis> and <emphasis role="bold">
           <property>&lt;/f:view&gt;</property>
         </emphasis> tags is considered 
-          the default AJAX region.
+          the default Ajax region.
         </para>
-      <para>You may define multiple AJAX regions on the JSF page (they can even be nested) by using 
+      <para>You may define multiple Ajax regions on the JSF page (they can even be nested) by using 
           the <emphasis role="bold">
           <property>&lt;a4j:region&gt;</property>
         </emphasis> tag. 
         </para>
-      <para>If you wish to render the content of an AJAX response outside of the active region then 
+      <para>If you wish to render the content of an Ajax response outside of the active region then 
           the value of the &quot;renderRegionOnly&quot; attribute should be set to &quot;false&quot;. Otherwise, your 
-          AJAX updates are limited to elements of the active region.
+          Ajax updates are limited to elements of the active region.
         </para>
     </section>
     <section id="DecideWhatToChange">
@@ -239,7 +239,7 @@
           many  cases. 
         </para>
       <para>But you can not use this approach if your page contains, e.g. a <emphasis role="bold"><property>&lt;f:verbatim&gt;</property></emphasis>
-          tag and you wish to update its content on an AJAX response.
+          tag and you wish to update its content on an Ajax response.
         </para>
       <para>The problem with the <emphasis role="bold">
           <property>&lt;f:verbatim/&gt;</property>
@@ -254,7 +254,7 @@
           tag inside of the output panel, then the content of the <emphasis role="bold">
           <property>&lt;f:verbatim/&gt;</property>
         </emphasis> tag and content of 
-          other panel&apos;s child tags could be updated on AJAX response. There are two ways to 
+          other panel&apos;s child tags could be updated on Ajax response. There are two ways to 
           control this:
           <itemizedlist>
           <listitem> 
@@ -274,7 +274,7 @@
   <section id="RequestErrorsHandling">
   <?dbhtml filename="RequestErrorsHandling.html"?>
     <title>Request Errors Handling</title>
-    <para>To execute your own code on the client in case of an error during AJAX request, it's necessary to redefine the standard "A4J.AJAX.onError " method:</para>
+    <para>To execute your own code on the client in case of an error during Ajax request, it's necessary to redefine the standard "A4J.AJAX.onError " method:</para>
 	<programlisting role="JAVA"><![CDATA[A4J.AJAX.onError = function(req,status,message) { 
           // Custom Developer Code 
 };]]></programlisting>

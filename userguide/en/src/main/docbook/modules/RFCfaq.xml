@@ -532,8 +532,8 @@ background-color: transparent;
 </h:inputText>]]></programlisting>
                 <para> So in this case
                                 &quot;<emphasis><property>doSomething()</property>&quot;</emphasis>
-                        function is executed before the AJAX request. </para>
-                <para> Besides, if this function returns &quot;false&quot;, AJAX request
+                        function is executed before the Ajax request. </para>
+                <para> Besides, if this function returns &quot;false&quot;, Ajax request
                         isn&apos;t fired. </para>
                 <note>
                         <title>Note:</title>
@@ -572,7 +572,7 @@ background-color: transparent;
                         element as it was before. You may use <emphasis>
                                 <property>document.findElementById()</property>
                         </emphasis>to get references to this object after a request is processed as
-                        when a page is updated in AJAX you will have reference to a control, removed
+                        when a page is updated in Ajax you will have reference to a control, removed
                         from a DOM tree. </para>
                 <para> Or, if you are sure that your element is not updated, you can add <emphasis>
                                 <property>&quot;onsubmit&quot;</property>
@@ -616,7 +616,7 @@ background-color: transparent;
                                         <property>findComponent()</property> methods. </listitem>
                 </itemizedlist>
                 <para> Thus, for example, only entire dataTable can be updated in response (but all
-                        AJAX action components inside table work properly). </para>
+                        Ajax action components inside table work properly). </para>
         </section>
         <!--<section id="RegionsInDataTables">
       <?dbhtml filename="RegionsInDataTables.html"?>
@@ -634,7 +634,7 @@ background-color: transparent;
                 <?dbhtml filename="FilterUsageDamagesAnApplicationLayout.html"?>
                 <title>Why does filter usage damage an application layout?</title>
                 <para>Ajax4jsf uses <property>filters</property> for correction of xhtml code
-                        received on an AJAX response, because when a response is recieved from the
+                        received on an Ajax response, because when a response is recieved from the
                         server, Ajax4jsf makes direct changes in DOM tree and browser
                         doesn&apos;t make any corrections in generated xhtml. There are two ways
                         for setting <property>filters</property> that could be used in an
@@ -669,7 +669,7 @@ background-color: transparent;
                         output xhtml code isn&apos;t strictly verified and it also could cause
                         lot&apos;s of errors and corrupt a layout as a result. Though if you
                         sure that your application markup is really strict for this filter, the
-                        filter considerably accelerates all AJAX requests processing. </para>
+                        filter considerably accelerates all Ajax requests processing. </para>
                 <para><emphasis role="bold">Extra information</emphasis>. </para>
                 <para>forceParcer parameters setting for <property>filters</property>:</para>
 
@@ -685,7 +685,7 @@ background-color: transparent;
 ...
 </filter>]]></programlisting>
                 <para>The &quot;false&quot; setting for initialization parameter switches
-                        off application of filters for non-AJAX requests, if
+                        off application of filters for non-Ajax requests, if
                         &quot;true&quot; is chosen, the filter checks all requests. <important>
                                 <title>Changes for Ajax4jsf 1.1.0</title>
                                 <property>forceparser parameter</property> default value is false
@@ -698,7 +698,7 @@ background-color: transparent;
                         request?</title>
                 <para>This situation could happen because of conversion/validation errors on form
                         submission. In order to verify this, it&apos;s necessary to place this
-                        updating via an AJAX error message inside a form:</para>
+                        updating via an Ajax error message inside a form:</para>
 
                 <para>
                         <emphasis role="bold">Example:</emphasis>
@@ -737,7 +737,7 @@ background-color: transparent;
                 <para>The <emphasis>
                                 <property>&quot;IgnoreDupResponses&quot;</property>
                         </emphasis> attribute appeared from 1.0.4 RC1 version and is used on the
-                        client for response ignoring after an AJAX request if a newer request has
+                        client for response ignoring after an Ajax request if a newer request has
                         been already sent. <para> The additional information could be found <ulink
                                         url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=105766"
                                         >here</ulink>. </para>
@@ -810,7 +810,7 @@ background-color: transparent;
 
         <section id="CustomAjaxRequest">
                 <?dbhtml filename="CustomAjaxRequest.html"?>
-                <title>Why custom AJAX request does not work?</title>
+                <title>Why custom Ajax request does not work?</title>
                 <para>More information about this problem could be found on the <ulink
                                 url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=114025"
                                 >Ajax4Jsf Users Forum.</ulink>
@@ -844,7 +844,7 @@ background-color: transparent;
                 <title>Why does reRendering fail? Hide/Show components using rendered.</title>
                 <para> During &quot;show/hide&quot; functionality implementation the main
                         error happens because of the &quot;reRender&quot; attribute of some
-                        AJAX Action Component is set on a component that depends on rendered
+                        Ajax Action Component is set on a component that depends on rendered
                         properties, i.e. a component that is to be hidden/rendered is tried to be
                         updated. The problem is that if rendered=&quot;false&quot; in this
                         moment, the component isn&apos;t in the DOM tree and can&apos;t be
@@ -855,12 +855,12 @@ background-color: transparent;
                 <orderedlist>
                         <listitem>
                                 <para>With the rendered attribute wrap the component that is to be
-                                        hidden or rendered on AJAX in a wrapper component (e.g.
+                                        hidden or rendered on Ajax in a wrapper component (e.g.
                                         a4j:outputPanel)</para>
                         </listitem>
 
                         <listitem>
-                                <para>Set reRender of an AJAX Action component on this wrapper
+                                <para>Set reRender of an Ajax Action component on this wrapper
                                         component instead of the component itself.</para>
                         </listitem>
                 </orderedlist>
