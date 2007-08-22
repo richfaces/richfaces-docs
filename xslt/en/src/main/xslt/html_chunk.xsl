@@ -25,6 +25,9 @@
                 
 <xsl:import href="http://docbook.sourceforge.net/release/xsl/current/html/chunk.xsl"/>
 
+<xsl:include href="./collapsing-navigation.xsl"></xsl:include>
+
+
 <!--###################################################
                      HTML Settings
     ################################################### -->   

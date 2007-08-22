@@ -22,6 +22,7 @@
                 version="1.0"
                 xmlns="http://www.w3.org/TR/xhtml1/transitional"
                 exclude-result-prefixes="#default">
+
 <xsl:import href="http://docbook.sourceforge.net/release/xsl/current/html/docbook.xsl"/>
 <xsl:include href="./collapsing-navigation.xsl"></xsl:include>
 
