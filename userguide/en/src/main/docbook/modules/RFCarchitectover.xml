@@ -6,20 +6,18 @@
     <keywordset>
       <keyword>RichFaces</keyword>
 
-      <keyword>Ajax4jsf</keyword>
-
-      <keyword>CSS</keyword>
+     <keyword>CSS</keyword>
 
       <keyword>skin</keyword>
     </keywordset>
   </chapterinfo>
-<title>Basic concepts of the Ajax4jsf Framework</title>
+<title>Basic concepts of the RichFaces Framework</title>
   <section id="introToBasics">
   <?dbhtml filename="introToBasics.html"?>
     <title>Introduction</title>
     <para>The framework is implemented as a component library which adds Ajax capability into existing 
       pages, so you don&apos;t need to write any JavaScript code or to replace existing 
-      components with new Ajax widgets. <property>Ajax4jsf</property> enables page-wide Ajax support instead of the 
+      components with new Ajax widgets. <property>RichFaces</property> enables page-wide Ajax support instead of the 
       traditional component-wide support. So, you can define the event on the page that 
       invokes an Ajax request and the areas of the page that should be synchronized with the JSF 
       Component Tree after the Ajax request changes the data on the server according to the 
@@ -33,15 +31,15 @@
         <imagedata fileref="images/newpic1.jpg"/>
       </imageobject>
     </mediaobject>
-    <para><property>Ajax4jsf</property> allows to define (by means of JSF tags) different parts of a JSF page you 
+    <para><property>RichFaces</property> allows to define (by means of JSF tags) different parts of a JSF page you 
       wish to update with  an Ajax request and provide a few options to send Ajax requests to 
       the server. Also  JSF page doesn&apos;t change from a &quot;regular&quot; JSF 
       page and you don&apos;t need to write  any JavaScript  or XMLHttpRequest objects by hands, everything is done automatically.</para>
   </section>
-  <section id="Ajax4jsfArchitectureOverview">
-  <?dbhtml filename="Ajax4jsfArchitectureOverview.html"?>
-    <title>Ajax4jsf Architecture Overview</title>
-    <para>Next figure lists several important elements of the <property>Ajax4jsf</property> framework</para>
+  <section id="RichFacesArchitectureOverview">
+  <?dbhtml filename="RichFacesArchitectureOverview.html"?>
+    <title>RichFaces Architecture Overview</title>
+    <para>Next figure lists several important elements of the <property>RichFaces</property> framework</para>
     <figure>
       <title>Core Ajax component structure</title>
     </figure>
@@ -52,7 +50,7 @@
     </mediaobject>
     <formalpara>
       <title>Ajax Filter.</title>
-      <para>To get all benefits of  <property>Ajax4jsf</property>, you should  register an Ajax Filter in web.xml 
+      <para>To get all benefits of  <property>RichFaces</property>, you should  register an Ajax Filter in web.xml 
       file of your application.The Ajax Filter recognizes multiple request types. The sequence diagram on Figure 3 
       shows the difference in processing of a &quot;regular&quot; JSF request and an Ajax request.</para>
     </formalpara>
@@ -101,7 +99,7 @@
     </formalpara>
     <formalpara>
       <title>JavaScript Engine</title>
-      <para><property> Ajax4jsf</property> JavaScript Engine runs on the client-side. It knows how to update different areas 
+      <para><property>RichFaces</property> JavaScript Engine runs on the client-side. It knows how to update different areas 
       on your JSF page based on the information from the Ajax response. Do 
       not use this JavaScript code directly, as it is available automatically.      
     </para>
@@ -110,7 +108,7 @@
   <section id="LimitationsAndRules">
   <?dbhtml filename="LimitationAndRules.html"?>
     <title>Limitations and Rules</title>
-    <para>In order to create AJAX4JSF applications properly,  keep the following points in mind:</para>
+    <para>In order to create RichFaces applications properly,  keep the following points in mind:</para>
     <itemizedlist>
       <listitem>
         The Ajax framework should not append or delete, but only replace elements on the page. For successful updates, an element with the same ID as in the response must exist on the page. If you&apos;d like to append any code to a page, put in a placeholder for it (any empty element). For the same reason, it&apos;s recommended to place messages in the<emphasis >
@@ -247,7 +245,7 @@
           value of the transientFlag of JSF components. If the value of this flag is true, the 
           component must not participate in state saving or restoring of process.
         </para>
-      <para>In order to provide a solution to this kind of problems, Ajax4jsf uses the concept of 
+      <para>In order to provide a solution to this kind of problems, RichFaces uses the concept of 
           an output panel that is defined by the <emphasis role="bold">
           <property>&lt;a4j:outputPanel&gt;</property>
         </emphasis> tag. If you put a <emphasis role="bold"><property>&lt;f:verbatim&gt;</property></emphasis>
@@ -270,7 +268,7 @@
   <section id="RequestErrorsAndSessionExpirationHandling">
   <?dbhtml filename="RequestErrorsAndSessionExpirationHandling.html"?>
   <title>Request Errors and Session Expiration Handling</title>
-  <para>Ajax4jsf allows to redefine standard handlers responsible for processing of different exceptional situations. It helps to define own JavaScript, which is executed when this situations occur.</para>
+  <para>RichFaces allows to redefine standard handlers responsible for processing of different exceptional situations. It helps to define own JavaScript, which is executed when this situations occur.</para>
   <section id="RequestErrorsHandling">
   <?dbhtml filename="RequestErrorsHandling.html"?>
     <title>Request Errors Handling</title>
@@ -289,7 +287,7 @@
   <section id="SessionExpiredHandling">
   <?dbhtml filename="SessionExpiredHandling.html"?>
     <title>Session Expired Handling</title>
-    <para>Beginning with Ajax4jsf version 1.0.5 it&apos;s possible to redefine also the <emphasis >
+    <para>It&apos;s possible to redefine also the <emphasis >
      <property>&quot;onExpired&quot;</property>
      </emphasis> framework method that is called on the <emphasis >
      <property>&quot;Session Expiration&quot;</property>
@@ -310,15 +308,15 @@
      <property>&quot;Session Expiration&quot;</property>
      </emphasis>event.</listitem>
     </itemizedlist>	 
-<note>
+<!--note>
 <title>Note:</title>
 Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
      <property>&quot;Session Expiration&quot;</property>,
      </emphasis> a confirmation dialog with a request for view reloading was always called.
-</note>
+</note-->
   </section>
 </section>
-&FAQ;
+
 
 
  <section>
@@ -350,7 +348,7 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
       contains the same values repeated numerous times.</para>
 
       <para>These problems can be solved with the
-      <property>skinnability</property> system built into the Ajax4jsf project
+      <property>skinnability</property> system built into theRichFaces project
       and realized fully in RichFaces. Every named skin has some
       skin-parameters for the definition of a palette and the other parameters
       of the user interface. By changing just a few parameters, you can alter
@@ -376,7 +374,7 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
 
       <itemizedlist>
         <listitem>
-          <para>Skin parameters defined in the Ajax4jsf framework</para>
+          <para>Skin parameters defined in the RichFaces framework</para>
         </listitem>
 
         <listitem>
@@ -497,10 +495,10 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
 &lt;/div&gt;</programlisting>
     </section>
 
-    <section id="SkinParametersTablesInAjax4jsf">
-    <?dbhtml filename="SkinParametersTablesInAjax4jsf.html"?>
+    <section id="SkinParametersTablesInRichFaces">
+    <?dbhtml filename="SkinParametersTablesInRichFaces.html"?>
     
-      <title>Skin Parameters Tables in Ajax4jsf</title>
+      <title>Skin Parameters Tables in RichFaces</title>
 
       <para>RichFaces provides eight predefined skin parameters (skins) at the
       simplest level of common customization:</para>
@@ -544,7 +542,7 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
       </itemizedlist>
 
       <para>To plug one in, it&apos;s necessary to specify a skin name in the
-      <emphasis ><property>&quot;org.ajax4jsf.SKIN&quot;</property></emphasis> context-param.</para>
+      <emphasis ><property>&quot;org.richfaces.SKIN&quot;</property></emphasis> context-param.</para>
 
       <para>Here is an example of a table with values for one of the main
       skins, <property>&quot;blueSky&quot;</property>.</para>
@@ -819,7 +817,7 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
       <emphasis role="bold">Example:</emphasis>
     </para>
           <programlisting role="XML">&lt;context-param&gt;
-        &lt;param-name&gt;org.ajax4jsf.SKIN&lt;/param-name&gt;
+        &lt;param-name&gt;org.richfaces.SKIN&lt;/param-name&gt;
         &lt;param-value&gt;name&lt;/param-value&gt;
 &lt;/context-param&gt;</programlisting>
         </listitem>
@@ -831,8 +829,8 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
       </itemizedlist>
     </section>
 <section>
-<title>Built-in skinnability in Ajax4jsf</title>
-  <para>Ajax4jsf gives an opportunity to incorporate <property>skinnability</property> into UI
+<title>Built-in skinnability in RichFaces</title>
+  <para>RichFaces gives an opportunity to incorporate <property>skinnability</property> into UI
   design. With this framework you can easily use named skin parameters in
   properties files to control the appearance of the skins that are applied
   consistently to a whole set of components. You can look at examples of
@@ -844,8 +842,8 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
   </simplelist>
   <para>
     You may simply control the look-and-feel of your application by using the <property>skinnability</property> service 
-    of the Ajax4jsf framework. With the means of this service you can define the same style for rendering 
-    standard JSF components and custom JSF components built with the help of Ajax4jsf.
+    of the RichFaces framework. With the means of this service you can define the same style for rendering 
+    standard JSF components and custom JSF components built with the help of RichFaces.
   </para>
   <para>To find out more on  <property>skinnability</property> possibilities, follow these
   steps:</para>
@@ -899,10 +897,10 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
 
   </section>
 
-<section id="OtherRelevantResources">
+<!--section id="OtherRelevantResources">
   <title>Other Relevant Resources</title>
   <para><ulink url="http://jsf.javabeat.net/articles/2007/06/introduction-to-ajax4jsf/">Introduction to Ajax4Jsf</ulink> by Shunmuga Raja</para>
    
-</section>
+</section-->
 
 </chapter>

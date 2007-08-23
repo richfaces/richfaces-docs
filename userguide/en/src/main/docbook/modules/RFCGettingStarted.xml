@@ -12,8 +12,8 @@
     </keywordset>
   </chapterinfo>
   <title>Getting Started with RichFaces</title>
-  <section id="DownloadingAjax4jsf">
-    <?dbhtml filename="DownloadingAjax4jsf.html" ?>
+  <section id="DownloadingRichFaces">
+    <?dbhtml filename="DownloadingRichFaces.html" ?>
     <title>Downloading RichFaces 3.1.0</title>
     <para>The latest release of <property>RichFaces</property> is available for download at:<simplelist>
         <member>
@@ -27,50 +27,60 @@
     <title>Installation</title>
     <itemizedlist>
       <listitem> Unzip <emphasis>
-          <property>&quot;ajax4jsf.zip&quot;</property>
+          <property>&quot;richfaces-ui-3.1.0-bin.zip&quot;</property>
         </emphasis> file to the chosen folder. </listitem>
       <listitem> Copy <emphasis>
-          <property>&quot;ajax4jsf.jar&quot;</property>
-        </emphasis> and <emphasis>
-          <property>&quot;oscache-2.3.2.jar&quot;</property>
-        </emphasis> files into the <emphasis>
+          <property>&quot;richfaces-api-3.1.0.jar&quot;</property>
+        </emphasis>, <emphasis>
+          <property>&quot;richfaces-impl-3.1.0.jar&quot;</property>
+        </emphasis>,<emphasis>
+          <property>&quot;richfaces-ui-3.1.0.jar&quot;</property>
+        </emphasis>files into the <emphasis>
           <property>&quot;WEB-INF/lib&quot;</property>
         </emphasis> folder of your application. </listitem>
-      <note>
+      <!--note>
         <title>Note:</title>
         <para>Starting from Ajax4jsf 1.1.1, the oscache library is not required to be in the
           classpath anymore. </para>
-      </note>
+      </note-->
       <listitem> Add the following content into the <emphasis>
           <property>&quot;WEB-INF/web.xml&quot;</property>
-        </emphasis> file of your application: <programlisting role="XML"><![CDATA[<filter> 
-  <display-name>Ajax4jsf Filter</display-name> 
-  <filter-name>ajax4jsf</filter-name> 
-  <filter-class>org.ajax4jsf.Filter</filter-class> 
- </filter> 
- <filter-mapping> 
-  <filter-name>ajax4jsf</filter-name> 
-   <servlet-name>Faces Servlet</servlet-name>
-   <dispatcher>REQUEST</dispatcher>
-   <dispatcher>FORWARD</dispatcher>
-   <dispatcher>INCLUDE</dispatcher>
- </filter-mapping>]]></programlisting>
-        <note>
+        </emphasis> file of your application: <programlisting role="XML"><![CDATA[
+    <filter> 
+        <display-name>RichFaces Filter</display-name> 
+        <filter-name>richfaces</filter-name> 
+        <filter-class>org.ajax4jsf.Filter</filter-class> 
+    </filter> 
+    <filter-mapping> 
+        <filter-name>richfaces</filter-name> 
+        <servlet-name>Faces Servlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>]]></programlisting>
+        <!--note>
           <title>Note:</title>
           <para>You can copy and paste the above text from the <emphasis>
               <property>&quot;README.txt&quot;</property>
             </emphasis> file.</para>
-        </note>
+        </note-->
       </listitem>
+
       <listitem>
 
-        <para>Add the following line for each JSP page of your application where you are going to
-          bring in Ajax functionality.</para>
-        <programlisting role="XML">  <![CDATA[<%@ taglib uri="https://ajax4jsf.dev.java.net/ajax" prefix="a4j"%>]]></programlisting>
+        <para>Add the following lines for each JSP page of your application.</para>
+        <programlisting role="XML"><![CDATA[<%@ taglib uri="http://richfaces.org/a4j" prefix="a4j"%>
+<%@ taglib uri="http://richfaces.org/rich" prefix="rich"%> ]]></programlisting>
         <para>For XHTML pages:</para>
-        <programlisting role="XML">&lt;xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"&gt;</programlisting>
+        <programlisting role="XML"><![CDATA[<xmlns:a4j="http://richfaces.org/a4j">
+<xmlns:a4j="http://richfaces.org/rich">]]></programlisting>
       </listitem>
     </itemizedlist>
+    <note>
+      <title>Note:</title>
+      <para>The previous URIs (https://ajax4jsf.dev.java.net/ajax and
+        http://richfaces.ajax4jsf.org/rich) are also available for backward compatibility.</para>
+    </note>
   </section>
   <section id="SimpleAJAXEchoProject">
     <?dbhtml filename="SimpleAJAXEchoProject.html" ?>
@@ -91,7 +101,7 @@
       <?dbhtml filename="JSPPage.html"?>
       <title>JSP Page</title>
       <para>Here is the necessary page (echo.jsp):</para>
-      <programlisting role="JSP">    <![CDATA[<%@ taglib uri="https://ajax4jsf.dev.java.net/ajax" prefix="a4j"%>
+      <programlisting role="JSP">    <![CDATA[<%@ taglib uri="http://richfaces.org/a4j" prefix="a4j"%>
     <%@ taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
     <%@ taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
     <html>
@@ -170,7 +180,7 @@
       <para>
         <note>
           <title>Note:</title>
-          <para>Nothing that relates directly to Ajax4jsf is required in the configuration
+          <para>Nothing that relates directly to RichFaces is required in the configuration
           file.</para>
         </note>
       </para>
@@ -178,54 +188,49 @@
     <section id="Web.xml">
       <?dbhtml filename="Web.xml.html"?>
       <title>Web.xml</title>
-      <para>It is also necessary to add jar files (see <ulink
-          url="GettingStartedWithAjax4jsf.html#Installation">installation chapter</ulink>) and
-        modify the &quot;web.xml&quot; file: </para>
+      <para>It is also necessary to add jar files (see <link linkend="Installation"
+          >installation chapter</link>) and modify the &quot;web.xml&quot; file: </para>
       <programlisting role="XML">    <![CDATA[<?xml version="1.0"?>
     <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
       
-      <display-name>a4jEchoText</display-name>
-      <context-param>
+    <display-name>a4jEchoText</display-name>
+    <context-param>
         <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
         <param-value>server</param-value>
-      </context-param>
-      <filter> 
-		<display-name>Ajax4jsf Filter</display-name> 
-		<filter-name>ajax4jsf</filter-name> 
-		<filter-class>org.ajax4jsf.Filter</filter-class> 
-	  </filter> 
-	  <filter-mapping> 
-	    <filter-name>ajax4jsf</filter-name> 
-		<servlet-name>Faces Servlet</servlet-name>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>INCLUDE</dispatcher>
-	   </filter-map>
-       <listener>
-        <listener-class>
-          com.sun.faces.config.ConfigureListener
-        </listener-class>
-      </listener>
-      
-      <!-- Faces Servlet -->
-      <servlet>
+    </context-param>
+    <filter> 
+        <display-name>RichFaces Filter</display-name> 
+        <filter-name>richfaces</filter-name> 
+        <filter-class>org.ajax4jsf.Filter</filter-class> 
+    </filter> 
+    <filter-mapping> 
+        <filter-name>richfaces</filter-name> 
         <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>
-          javax.faces.webapp.FacesServlet
-        </servlet-class>
-        <load-on-startup>1</load-on-startup>
-      </servlet>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-map>
+    <listener>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+    </listener>
       
-      <!-- Faces Servlet Mapping -->
-      <servlet-mapping>
+    <!-- Faces Servlet -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+      
+    <!-- Faces Servlet Mapping -->
+    <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
-      </servlet-mapping>
-      <login-config>
+    </servlet-mapping>
+    <login-config>
         <auth-method>BASIC</auth-method>
-      </login-config>
+    </login-config>
     </web-app>]]></programlisting>
       <para>Now your application should work.</para>
     </section>
