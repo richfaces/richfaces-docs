@@ -25,7 +25,7 @@
 
 <xsl:import href="http://docbook.sourceforge.net/release/xsl/current/html/docbook.xsl"/>
 <xsl:include href="./collapsing-navigation.xsl"></xsl:include>
-<xsl:include href="./code-highlight.xsl"></xsl:include>
+<!--xsl:include href="./code-highlight.xsl"></xsl:include-->
 
 <!--###################################################
                      HTML Settings
