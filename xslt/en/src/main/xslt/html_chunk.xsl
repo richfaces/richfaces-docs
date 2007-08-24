@@ -27,6 +27,8 @@
 
 <xsl:include href="./collapsing-navigation.xsl"></xsl:include>
 
+<xsl:include href="./code-highlight.xsl"></xsl:include>
+
 
 <!--###################################################
                      HTML Settings
