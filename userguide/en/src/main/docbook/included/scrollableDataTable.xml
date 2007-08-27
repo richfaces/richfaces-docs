@@ -67,6 +67,70 @@ HtmlScrollableDataTable myScrollableDataTable = new HtmlScrollableDataTable();
 ...
 ]]></programlisting>
   </section>
+  
+   <section>
+    <title>Details of Usage</title>
+	<para>
+	The component represents on a page as a scrollable table with some fixed (non-scrollable) rows (header, footer) and columns.
+	Columns of the table are optionally resizable. Resizing is available using "drag and drop" of the column vertical borders.
+	There is possibility to expand or collapse the columns through JS API on the client side.
+	User can define the number of the fixed columns  from the left side using attribute <emphasis><property>&quot;frozenColCount&quot;</property></emphasis> that will not be scrolled
+	via horizontal scroll.
+	</para>
+
+	<para>
+	It's possible to select the whole row with onclick on the row or some set of rows. Selection is optional and availability of such feature
+	is defined on the component.
+	There are two ways to select a few rows:
+	<itemizedlist>
+			<listitem>Just clicking the columns one by one.</listitem>
+			<listitem>Clicking some row with the SHIFT button hold.
+	In this case all the rows starting from last selected up to clicked should be selected.</listitem>
+	</itemizedlist>
+	</para>
+	
+	<para>
+	The columns provides the possibility of expanding/collapsing on the client side through the next JS API:
+	
+	<itemizedlist>
+			<listitem>doCollapse(columnId) - Performs the collapse action for the column with the corresponding id</listitem>
+	</itemizedlist>
+
+	It's possible to sort the table content after clicks on the header. The feature is optional.
+	Every column should be pointed to the comparator method that will be used for sorting the table.
+	
+	In case the <property>&lt;rich:scrollableDataTable&gt;</property> is already sorted by some
+	column and the header of this column has been clicked again - the sorting will be
+	reversed.
+	</para>
+	
+<para>
+      <emphasis role="bold">Those a the typical variants of using:</emphasis>
+</para>
+    <programlisting role="XML"><![CDATA[...
+<rich:scrollableDataTable value="#{modelBuilder.model}" var="issues"
+			frozenColCount="1"
+			first="0"
+			rows="40" 
+			width="300px"
+			height="396px">
+		
+	<rich:column width="100px">
+		<f:facet name="header" >
+			<h:outputText value="State"/>
+		</f:facet>
+		<h:outputText value="#{issues.cell1}"/>
+		<f:facet name="footer">
+			<h:outputText value="State"/>
+		</f:facet>
+	</rich:column>		
+	<!--...//Set of columns and header/footer facets-->
+</rich:scrollableDataTable>
+...
+]]></programlisting>
+	
+   </section>  
+   
   <!--section>
     <title>Details of Usage</title>
     <para>The <property>table</property> component is very similar to the custom JSF dataTable one,
