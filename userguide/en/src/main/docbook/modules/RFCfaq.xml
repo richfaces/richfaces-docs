@@ -503,6 +503,31 @@ background-color: transparent;
                                 url="http://labs.jboss.com/wiki/ExpandCollapseTreeNodes"
                         >here</ulink>.</para>
         </section>
+        
+        <section>
+                <?dbhtml filename="HowtouseJavaScriptAPI.html"?>
+                <title>How to use JavaScript API?</title>
+                <para>The simple code is placed below:</para> 
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+         <a4j:form id="form">
+                <h:panelGroup id="test" columns="2" style="width: 300px">
+                        <h:selectBooleanCheckbox value="#{bean.check}">
+                                <a4j:support event="onchange" reRender="test" />
+                                <f:selectItem itemValue="true" itemLabel="Show" />
+                                <f:selectItem itemValue="false" itemLabel="Hide" />
+                        </h:selectBooleanCheckbox>
+                        <rich:calendar popup="true"
+                                        rendered="#{!bean.check}" value="#{bean.date}" id="c"/>
+                                <a onclick="$('form:c').component.doExpand()" href="#">Show</a>	
+                </h:panelGroup>
+        </a4j:form>
+...
+]]></programlisting>
+        </section>
+        
 
         <section id="DecidingWhatToChangeOnTheServerSide">
                 <?dbhtml filename="DecidingWhatToChangeOnTheServerSide.html"?>
