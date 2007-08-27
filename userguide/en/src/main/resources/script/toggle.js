@@ -40,4 +40,4 @@ var toc = {
 	show: function(node) {
 		node.style.display = "";
 	}
-};
+}; 
