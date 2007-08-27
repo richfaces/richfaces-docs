@@ -83,11 +83,13 @@ HtmlCalendar myCalendar = new HtmlCalendar();
     <title>Details of Usage</title>
     <para>The <emphasis>
         <property>&quot;popup&quot;</property>
-      </emphasis> attribute defines calendar representation mode on a page. If it&apos;s &quot;true&quot;
-      the calendar is represented on a page as an input field and a button. Clicking on the button
-      calls the calendar popup as it&apos;s shown on the picture below. </para>
+      </emphasis> attribute defines calendar representation mode on a page. If it&apos;s
+      &quot;true&quot; the calendar is represented on a page as an input field and a button.
+      Clicking on the button calls the calendar popup as it&apos;s shown on the picture below. </para>
     <figure>
-      <title>Using the <emphasis><property>&quot;popup&quot;</property></emphasis> attribute</title>
+      <title>Using the <emphasis>
+          <property>&quot;popup&quot;</property>
+        </emphasis> attribute</title>
 
       <mediaobject>
         <imageobject>
@@ -134,7 +136,7 @@ HtmlCalendar myCalendar = new HtmlCalendar();
     </itemizedlist>
     <para> By default, the <emphasis>
         <property>&quot;direction&quot;</property>
-    </emphasis> attribute is set to &quot;bottom-right&quot;.</para>
+      </emphasis> attribute is set to &quot;bottom-right&quot;.</para>
     <para>The possible values for the <emphasis>
         <property>&quot;jointPoint&quot;</property>
       </emphasis> are: </para>
@@ -147,7 +149,7 @@ HtmlCalendar myCalendar = new HtmlCalendar();
     </itemizedlist>
     <para> By default, the <emphasis>
         <property>&quot;jointPoint&quot;</property>
-    </emphasis> attribute is set to &quot;bottom-left&quot;.</para>
+      </emphasis> attribute is set to &quot;bottom-left&quot;.</para>
     <para>The <emphasis role="bold">
         <property>&lt;rich:calendar&gt;</property>
       </emphasis> component provides to use <emphasis>
@@ -195,6 +197,31 @@ HtmlCalendar myCalendar = new HtmlCalendar();
       &lt;/f:facet&gt;
 ...</programlisting>
 
+    <para>The example of using JavaScript API is placed below:</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+         <a4j:form id="form">
+                <h:panelGroup id="test" columns="2" style="width: 300px">
+                        <h:selectBooleanCheckbox value="#{bean.check}">
+                                <a4j:support event="onchange" reRender="test" />
+                                <f:selectItem itemValue="true" itemLabel="Show" />
+                                <f:selectItem itemValue="false" itemLabel="Hide" />
+                        </h:selectBooleanCheckbox>
+                        <rich:calendar popup="true"
+                                        rendered="#{!bean.check}" value="#{bean.date}" id="c"/>
+                                <a onclick="$('form:c').component.doExpand()" href="#">Show</a>	
+                </h:panelGroup>
+        </a4j:form>
+...
+]]></programlisting>
+
+    <para>Also the discussion about this problem can be fobnd on the <ulink
+        url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4078301#4078301"
+        >RichFaces Users Forum</ulink>.</para>
+
     <para>The <emphasis role="bold">
         <property>&lt;rich:calendar&gt;</property>
       </emphasis> component provides the possibility to use a special data model to define data for
@@ -212,15 +239,18 @@ HtmlCalendar myCalendar = new HtmlCalendar();
 
     <para>This method is called when it&apos;s necessary to represent the next block of
       CalendarDataItems. It happens during navigation to the next (previous) month or in any other
-      case when calendar renders. This method is called in <emphasis><property>&quot;Ajax&quot;</property></emphasis> mode when the
-      calendar renders a new page. </para>
+      case when calendar renders. This method is called in <emphasis>
+        <property>&quot;Ajax&quot;</property>
+      </emphasis> mode when the calendar renders a new page. </para>
 
     <para><emphasis role="bold">CalendarDataModelItem</emphasis> provides the following function:</para>
     <itemizedlist>
       <listitem>Date getDate() - returns date from the item. Default implementation returns date.</listitem>
-      <listitem>Boolean isEnabled() - returns <emphasis><property>&quot;true&quot;</property></emphasis> if date is
-        <emphasis><property>&quot;selectable&quot;</property></emphasis> on the calendar. Default implementation returns
-        &quot;true&quot;.</listitem>
+      <listitem>Boolean isEnabled() - returns <emphasis>
+          <property>&quot;true&quot;</property>
+        </emphasis> if date is <emphasis>
+          <property>&quot;selectable&quot;</property>
+        </emphasis> on the calendar. Default implementation returns &quot;true&quot;.</listitem>
       <listitem>String getStyleClass() - returns string appended to the style class for the date
         span. For example it could be &quot;relevant holyday&quot;. It means that the class
         could be defined like the &quot;rich-cal-day-relevant-holyday&quot; one. Default
@@ -247,113 +277,114 @@ HtmlCalendar myCalendar = new HtmlCalendar();
         </thead>
 
         <tbody>
-          
+
           <row>
             <entry>selectDate(date)</entry>
-            
-            <entry>Select the date specified.  If the date isn&apos;t in current month - performs request to select</entry>
+
+            <entry>Select the date specified. If the date isn&apos;t in current month - performs
+              request to select</entry>
           </row>
-          
+
           <row>
             <entry>isDateEnabled(date)</entry>
-            
+
             <entry>Check if given date is selectable</entry>
           </row>
-          
+
           <row>
             <entry>enableDate(date)</entry>
-            
+
             <entry>Enables date cell control on the calendar</entry>
           </row>
-          
+
           <row>
             <entry>disableDate(date)</entry>
-            
+
             <entry>Disables date cell control on the calendar</entry>
           </row>
-          
+
           <row>
             <entry>enableDates(date[])</entry>
-            
+
             <entry>Enables dates cell controls set on the calendar</entry>
           </row>
-          
+
           <row>
             <entry>disableDates(date[])</entry>
-            
+
             <entry>Disables dates cell controls set on the calendar</entry>
           </row>
-          
+
           <row>
             <entry>nextMonth()</entry>
-            
+
             <entry>Navigate to next month</entry>
           </row>
-          
+
           <row>
             <entry>nextYear()</entry>
-            
+
             <entry>Navigate to next year</entry>
           </row>
-          
+
           <row>
             <entry>prevMonth()</entry>
-            
+
             <entry>Navigate to previous month </entry>
           </row>
-          
+
           <row>
             <entry>prevYear()</entry>
-            
+
             <entry>Navigate to previous year</entry>
           </row>
-          
+
           <row>
             <entry>today()</entry>
-            
+
             <entry>Select today date</entry>
           </row>
-          
+
           <row>
             <entry>getSelectedDate()</entry>
-            
+
             <entry>Return currently selected date</entry>
           </row>
-          
+
           <row>
             <entry>Object getData()</entry>
-            
+
             <entry>Return additional data for the date</entry>
           </row>
-          
+
           <row>
             <entry>enable()</entry>
-            
+
             <entry>enables calendar</entry>
           </row>
-          
+
           <row>
             <entry>disable()</entry>
-            
+
             <entry>disables calendar</entry>
           </row>
-          
+
           <row>
             <entry>getCurrentMonth()</entry>
-            
+
             <entry>Returns number of the month currently being viewed</entry>
           </row>
-          
+
           <row>
             <entry>getCurrentYear()</entry>
-            
+
             <entry>Returns number of the year currently being viewed</entry>
           </row>
-          
+
           <row>
             <entry>doCollapse()</entry>
 
-            <entry>Collapse calendar  element</entry>
+            <entry>Collapse calendar element</entry>
           </row>
 
           <row>
@@ -377,5 +408,15 @@ HtmlCalendar myCalendar = new HtmlCalendar();
       define it in the components class attribute. </para>
 
   </section-->
+
+  <section>
+    <title>Relevant resources links</title>
+    <para><ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/calendar.jsf?c=calendar"
+        >Here</ulink> you can see the example of <emphasis role="bold"
+      >&lt;rich:calendar&gt;</emphasis> usage and sources for the given example. </para>
+    <para>How to use JavaScript API see on the <ulink
+        url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4078301#4078301"
+        >RichFaces Users Forum</ulink>.</para>
+  </section>
 
 </section>
