@@ -50,13 +50,12 @@
     </mediaobject>
     <formalpara>
       <title>Ajax Filter.</title>
-      <para>To get all benefits of  <property>RichFaces</property>, you should  register an Ajax Filter in web.xml 
-      file of your application.The Ajax Filter recognizes multiple request types. The sequence diagram on Figure 3 
+      <para>To get all benefits of  <property>RichFaces</property>, you should  register a Filter in web.xml 
+      file of your application. The Filter recognizes multiple request types. The sequence diagram on Figure 3 
       shows the difference in processing of a &quot;regular&quot; JSF request and an Ajax request.</para>
     </formalpara>
     <para>In the first case the whole JSF tree will be encoded,
-      in the second one option it depends on the &quot;size&quot; of the Ajax region (you can define Ajax region 
-      by using the <emphasis role="bold"><property>&lt;a4j:region&gt;</property></emphasis>). As you can see, in the second case the filter parses 
+      in the second one option it depends on the &quot;size&quot; of the Ajax region. As you can see, in the second case the filter parses 
       the content of an Ajax response before sending it to the client side.</para>
     <para>Have a look at the next picture to understand these two ways:</para>
     <figure>
@@ -69,10 +68,10 @@
     </mediaobject>
     <para>In both cases, the information about required static or dynamic resources that your application 
       requests is registered in the ResourseBuilder class.</para>
-    <para>When a request for a resource comes (Figure 4), the Ajax filter checks the Resource Cache 
+    <para>When a request for a resource comes (Figure 4), the RichFaces filter checks the Resource Cache 
       for this resource and if it is there, the resource is sent to the client. Otherwise, 
       the filter searches for the resource among those that are registered by the 
-      ResourceBuilder. If the resource is registered, the Ajax filter will send a request to the 
+      ResourceBuilder. If the resource is registered, the RichFaces filter will send a request to the 
       ResourceBuilder to create (deliver) the resource.</para>
     <para>Next Figure shows the ways of  resource request processing.</para>
     <figure>
@@ -86,7 +85,7 @@
     <formalpara>
       <title>AJAX Action Components</title>
       <para>
-      There are four Ajax Action Components: AjaxCommandButton,  AjaxCommandLink, AjaxPoll and AjaxSupport. 
+      There are Ajax Action Components: AjaxCommandButton,  AjaxCommandLink, AjaxPoll and AjaxSupport and etc. 
       You can use them to send Ajax requests from the client side. 
     </para>
     </formalpara>
@@ -111,7 +110,7 @@
     <para>In order to create RichFaces applications properly,  keep the following points in mind:</para>
     <itemizedlist>
       <listitem>
-        The Ajax framework should not append or delete, but only replace elements on the page. For successful updates, an element with the same ID as in the response must exist on the page. If you&apos;d like to append any code to a page, put in a placeholder for it (any empty element). For the same reason, it&apos;s recommended to place messages in the<emphasis >
+        Any Ajax framework should not append or delete, but only replace elements on the page. For successful updates, an element with the same ID as in the response must exist on the page. If you&apos;d like to append any code to a page, put in a placeholder for it (any empty element). For the same reason, it&apos;s recommended to place messages in the<emphasis >
             <property>&quot;AjaxOutput&quot;</property>
           </emphasis> component (as no messages is also a message).
       </listitem>
@@ -131,12 +130,12 @@
     <section id="SendAnAJAXRequest">
     <?dbhtml filename="SendAnAJAXRequest.html"?>
       <title>Send an Ajax request</title>
-      <para>There are different ways to send Ajax requests from your JSF page. You may use 
+      <para>There are different ways to send Ajax requests from your JSF page. For example you can use 
           <emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis>, <emphasis role="bold">
           <property>&lt;a4j:commandLink&gt;</property>, <emphasis role="bold"><property>&lt;a4j:poll&gt;</property></emphasis>
         </emphasis> or <emphasis role="bold">
           <property>&lt;a4j:support&gt;</property>
-        </emphasis> tags.           
+        </emphasis> tags or any other.           
         </para>
       <para>All these tags hide the usual JavaScript activities that are required for an XMHttpRequest 
           object building and  an Ajax request sending. Also, they allow you to decide which components of 
@@ -202,8 +201,18 @@
             </emphasis> attributes specify regions to be sent with a request, 
               if &quot;false&quot; it is a full region, in other case it&apos;s is only a control caused 
               event.
-</listitem>
-      </itemizedlist>
+        </listitem>
+        
+          <listitem> <emphasis >
+            <property>&quot;timeout&quot;</property>
+          </emphasis>attribute is used for response waiting time on a particular request. If a response is not received during this time, the request is aborted.
+          </listitem>
+         
+          <listitem> <emphasis >
+            <property>&quot;ignoreDupResponses&quot;</property>
+          </emphasis> is used to abort  unfinished request on new event.
+           </listitem>
+       </itemizedlist>
     </section>
     <section id="DecideWhatToSend">
     <?dbhtml filename="DecideWhatToSend.html"?>
@@ -226,7 +235,7 @@
         </emphasis> tag. 
         </para>
       <para>If you wish to render the content of an Ajax response outside of the active region then 
-          the value of the &quot;renderRegionOnly&quot; attribute should be set to &quot;false&quot;. Otherwise, your 
+        the value of the &quot;renderRegionOnly&quot; attribute should be set to &quot;false&quot; (&quot;false&quot; is default value). Otherwise, your 
           Ajax updates are limited to elements of the active region.
         </para>
     </section>

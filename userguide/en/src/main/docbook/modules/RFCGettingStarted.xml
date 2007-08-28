@@ -45,7 +45,11 @@
       </note-->
       <listitem> Add the following content into the <emphasis>
           <property>&quot;WEB-INF/web.xml&quot;</property>
-        </emphasis> file of your application: <programlisting role="XML"><![CDATA[
+        </emphasis> file of your application: <programlisting role="XML"><![CDATA[...
+    <context-param>
+        <param-name>org.richfaces.SKIN</param-name>
+        <param-value>blueSky</param-value>
+    </context-param>
     <filter> 
         <display-name>RichFaces Filter</display-name> 
         <filter-name>richfaces</filter-name> 
@@ -73,12 +77,12 @@
 <%@ taglib uri="http://richfaces.org/rich" prefix="rich"%> ]]></programlisting>
         <para>For XHTML pages:</para>
         <programlisting role="XML"><![CDATA[<xmlns:a4j="http://richfaces.org/a4j">
-<xmlns:a4j="http://richfaces.org/rich">]]></programlisting>
+<xmlns:rich="http://richfaces.org/rich">]]></programlisting>
       </listitem>
     </itemizedlist>
     <note>
       <title>Note:</title>
-      <para>The previous URIs (https://ajax4jsf.dev.java.net/ajax and
+      <para>The previous namespaces URIs (https://ajax4jsf.dev.java.net/ajax and
         http://richfaces.ajax4jsf.org/rich) are also available for backward compatibility.</para>
     </note>
   </section>
@@ -111,17 +115,31 @@
       <body>
         <f:view>
           <h:form>
-            <h:inputText size="50" value="#{bean.text}" > 
-              <a4j:support event="onkeyup" reRender="rep"/>
-            </h:inputText>
-            <h:outputText value="#{bean.text}" id="rep"/>
+              <rich:panel header="Simple Echo">
+                <h:inputText size="50" value="#{bean.text}" > 
+                  <a4j:support event="onkeyup" reRender="rep"/>
+                </h:inputText>
+                <h:outputText value="#{bean.text}" id="rep"/>
+              </rich:panel>
           </h:form>
         </f:view>
       </body>
     </html>]]></programlisting>
-      <para>The only line that distinguishes this page from a &quot;regular&quot; JSF one is</para>
-      <programlisting role="XML"><![CDATA[<a4j:support event="onkeyup" reRender="rep"/>]]></programlisting>
-      <para>The line adds an Ajax support to the parent <emphasis role="bold">
+      <para>Only two tags distinguish this page from a &quot;regular&quot; JSF
+        one. There are <emphasis role="bold">
+          <property>&lt;rich:panel&gt;</property>
+        </emphasis> and <emphasis role="bold">
+          <property>&lt;a4j:support&gt;</property>
+        </emphasis>.</para>
+
+      <para>The <emphasis role="bold">
+          <property>&lt;rich:panel&gt;</property>
+      </emphasis>allows to place the page elements in rectangle panel that can be skinned.</para>
+
+      <para>The <emphasis role="bold">
+          <property>&lt;a4j:support&gt;</property>
+        </emphasis> with corresponding attributes (as it was shown in the previous example) adds an
+        Ajax support to the parent <emphasis role="bold">
           <property>&lt;h:inputText&gt;</property>
         </emphasis> tag. This support is bound to &quot;onkeyup&quot; JavaScript event, so
         that each time when this event is fired on the parent tag, our application sends an Ajax
@@ -188,14 +206,17 @@
     <section id="Web.xml">
       <?dbhtml filename="Web.xml.html"?>
       <title>Web.xml</title>
-      <para>It is also necessary to add jar files (see <link linkend="Installation"
-          >installation chapter</link>) and modify the &quot;web.xml&quot; file: </para>
+      <para>It is also necessary to add jar files (see <link linkend="Installation">installation
+          chapter</link>) and modify the &quot;web.xml&quot; file: </para>
       <programlisting role="XML">    <![CDATA[<?xml version="1.0"?>
     <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-      
     <display-name>a4jEchoText</display-name>
+    <context-param>
+        <param-name>org.richfaces.SKIN</param-name>
+        <param-value>blueSky</param-value>
+    </context-param>
     <context-param>
         <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
         <param-value>server</param-value>
