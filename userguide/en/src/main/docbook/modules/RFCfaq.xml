@@ -165,8 +165,7 @@ included2.xhtml
                 <?dbhtml filename="HowtousesuggestionBox.html"?>
                 <title>Why when I use suggestionBox inside the modalPanel content the popup
                         suggestion list doesn&apos;t show since it is behind the modalPanel.</title>
-                <para>To solve this problem you should use the latest versions of Ajax4JSF
-                        1.1.2-SNAPSHOT and Richfaces 3.0.2-SNAPSHOT.</para>
+                <para>To solve this problem you should use the latest versions of RichFaces.</para>
                 <para> Nightly builds are available <ulink
                                 url="http://maven.exadel.com/org/richfaces/richfaces/3.0.2-SNAPSHOT/"
                                 >here</ulink> for RichFaces and <ulink
@@ -467,7 +466,7 @@ background-color: transparent;
                 <title>How to reRender only particular row(s) of dataTable?</title>
                 <para> If you use dataTable then you may use ajaxKeys attribute to bind the rowKeys
                         to be reRendered there. After you need to point reRender on the whole table
-                        and only specified rows will be reRedered.
+                        and only specified rows will be reRendered.
                         <!--
 			Also the example of usage of <emphasis role="bold"
                 >&lt;a4j:repeat&gt;</emphasis> component are available <ulink
@@ -625,7 +624,7 @@ background-color: transparent;
         <section id="InvokeOnComponentUsingWithJSF1.2">
                 <?dbhtml filename="InvokeOnComponentUsingWithJSF1.2.html"?>
                 <title>Is it possible to use InvokeOnComponent with JSF 1.2?</title>
-                <para> Ajax4jsf currently does not use <emphasis>invokeOnComponent</emphasis>
+                <para> RichFaces currently does not use <emphasis>invokeOnComponent</emphasis>
                         because of the 2 reasons: </para>
                 <itemizedlist>
                         <listitem> Compatibility with JSF 1.1 and MyFaces applications is kept, due
@@ -635,13 +634,13 @@ background-color: transparent;
                                 clientId, and works fine for communication between widget and backed
                                 component, or updates content of already rendered component. But
                                 there are some troubles to use this method for more complex
-                                use-cases implemented in Ajax4jsf, as there is a choice for
+                                use-cases implemented in RichFaces, as there is a choice for
                                 updatable components in application logic, where it&apos;s
                                 necessary to navigate in a components tree by the native id, with
                                         <property>findComponent()</property> methods. </listitem>
                 </itemizedlist>
                 <para> Thus, for example, only entire dataTable can be updated in response (but all
-                        Ajax action components inside table work properly). </para>
+                        Ajax core action components inside table work properly). </para>
         </section>
         <!--<section id="RegionsInDataTables">
       <?dbhtml filename="RegionsInDataTables.html"?>
@@ -658,20 +657,20 @@ background-color: transparent;
         <section id="FilterUsageDamagesAnApplicationLayout">
                 <?dbhtml filename="FilterUsageDamagesAnApplicationLayout.html"?>
                 <title>Why does filter usage damage an application layout?</title>
-                <para>Ajax4jsf uses <property>filters</property> for correction of xhtml code
+                <para>RichFaces uses <property>filters</property> for correction of xhtml code
                         received on an Ajax response, because when a response is recieved from the
-                        server, Ajax4jsf makes direct changes in DOM tree and browser
+                        server, RichFaces makes direct changes in DOM tree and browser
                         doesn&apos;t make any corrections in generated xhtml. There are two ways
                         for setting <property>filters</property> that could be used in an
-                        Ajax4jsf-based application.</para>
+                        RichFaces-based application.</para>
                 <para> The first one:</para>
 
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
                 <programlisting role="XML"><![CDATA[<context-param filter>
-  <display-name>Ajax4jsf Filter</display-name>
-  <filter-name>ajax4jsf</filter-name>
+  <display-name>RichFaces Filter</display-name>
+  <filter-name>richfaces</filter-name>
   <filter-class>org.ajax4jsf.Filter</filter-class>
 </filter>]]></programlisting>
                 <para>This <property>filter</property> is based on Tidy Filter usage and recommended
@@ -686,8 +685,8 @@ background-color: transparent;
                         <emphasis role="bold">Example:</emphasis>
                 </para>
                 <programlisting role="XML"><![CDATA[<filter>
-  <display-name>org.ajax4jsf.FastFilter</display-name>
-  <filter-name>ajax4jsf</filter-name>
+  <display-name>RichFaces FastFilter</display-name>
+  <filter-name>richfaces</filter-name>
   <filter-class>org.ajax4jsf.FastFilter</filter-class>
 </filter>]]></programlisting>
                 <para>This <property>filter</property> is based on the Neko parser. In this case an
@@ -869,7 +868,7 @@ background-color: transparent;
                 <title>Why does reRendering fail? Hide/Show components using rendered.</title>
                 <para> During &quot;show/hide&quot; functionality implementation the main
                         error happens because of the &quot;reRender&quot; attribute of some
-                        Ajax Action Component is set on a component that depends on rendered
+                        Ajax core Action Component is set on a component that depends on rendered
                         properties, i.e. a component that is to be hidden/rendered is tried to be
                         updated. The problem is that if rendered=&quot;false&quot; in this
                         moment, the component isn&apos;t in the DOM tree and can&apos;t be
@@ -885,7 +884,7 @@ background-color: transparent;
                         </listitem>
 
                         <listitem>
-                                <para>Set reRender of an Ajax Action component on this wrapper
+                                <para>Set reRender of an Ajax core Action component on this wrapper
                                         component instead of the component itself.</para>
                         </listitem>
                 </orderedlist>
@@ -940,10 +939,10 @@ background-color: transparent;
                 <?dbhtml filename="ResourceNotRegisteredException.html"?>
                 <title>What does ResourceNotRegistered Exception mean?</title>
 
-                <para>Ajax4jsf registers its resources (scripts, images) after an application is
+                <para>RichFaces registers its resources (scripts, images) after an application is
                         accessed and then accesses it via a generated URL. During an application
                         development when a developer constantly updates it on the server, it could
-                        happen that Ajax4jsf re-registers its resources after every server restart
+                        happen that RichFaces re-registers its resources after every server restart
                         and a browser tries to access them via cashed URL.</para>
 
                 <para>The problem is solved with browser cash update (e.g. CTRL+F5).</para>
