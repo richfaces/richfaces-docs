@@ -80,18 +80,16 @@
 						</row>
 					</thead>
 					<tbody>
-						<xsl:for-each
-							select="javaee:attribute | attribute">
+						<xsl:for-each select="javaee:attribute | attribute">
+							<xsl:sort select="javaee:name|name" />
 							<row>
 								<entry>
-									<xsl:value-of select="javaee:name" />
-									<xsl:value-of select="name" />
+									<xsl:value-of select="javaee:name"/>
+									<xsl:value-of select="name"/>
 								</entry>
 								<entry>
-									<xsl:value-of
-										select="javaee:description" disable-output-escaping="yes" />
-									<xsl:value-of select="description"
-										disable-output-escaping="yes" />
+									<xsl:value-of select="javaee:description" disable-output-escaping="yes"/>
+									<xsl:value-of select="description" disable-output-escaping="yes"/>
 								</entry>
 							</row>
 						</xsl:for-each>
