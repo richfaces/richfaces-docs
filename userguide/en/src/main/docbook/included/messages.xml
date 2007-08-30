@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+  <sectioninfo>
+    <keywordset>
+      <keyword>messages</keyword>
+      <keyword>rich:messages</keyword>
+      <keyword>HtmlMessages</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <table>
+    <title>Component identification parameters </title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+          <entry>Value</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+          <entry>org.richfaces.component.RichMessages</entry>
+        </row>
+        <row>
+          <entry>component-class</entry>
+          <entry>org.richfaces.component.html.HtmlRichMessages</entry>
+        </row>
+        <row>
+          <entry>component-family</entry>
+          <entry>org.richfaces.component.RichMessages</entry>
+        </row>
+        <row>
+          <entry>renderer-type</entry>
+          <entry>org.richfaces.renderkit.html.HtmlRichMessagesRendere</entry>
+        </row>
+        <row>
+          <entry>tag-class</entry>
+          <entry>org.richfaces.taglib.RichMessagesTag</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create the simplest variant of <property>message</property> on a page, use the
+      following syntax:</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+ 	<rich:messages/>
+...
+]]></programlisting>
+  </section>
+
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="JAVA"><![CDATA[import  org.richfaces.component.html.HtmlRichMessages;
+...
+HtmlRichMessages myMessages = new HtmlRichMessages();
+...
+]]></programlisting>
+  </section>
+
+  <section>
+    <title>Details of Usage</title>
+    <para> The component has the same behavior as standard <emphasis role="bold">
+        <property>&lt;h:message&gt;</property>
+      </emphasis>component except next features: <itemizedlist>
+        <listitem>It&apos;s ajaxRendered. It means that the component is reRendered after Ajax
+          request automatically without outputPanel usage.</listitem>
+        <listitem>The component optionally provides &quot;passed&quot; state which will be
+          shown if no message to be displayed.</listitem>
+        <listitem>Provides possibility to add some marker to message. By default marker element
+          isn&apos;t shown.</listitem>
+      </itemizedlist>
+    </para>
+    <para>Component provides three parts to be optionally defined: marker, informational label
+      before the marker for the every message and header element placed before the messages list.
+      Header and marker are optional. They don&apos;t present by default for compatibility with standard
+      messages. Labels are displayed for errors and one passed label is displayed optionally (if it&apos;s
+      defined) when no errors occured.</para>
+    <para> Set of facet which can be used for marker defining: <itemizedlist>
+      <listitem>header. This facet defines additional content to be displayed near the list. Header is positioned on top of the messages component.</listitem>
+      <listitem>passedHeader. This facet is provided to allow end developer set a header content to be displayed if there are no messages.</listitem>
+      <listitem>passedMarker. This facet is provided to allow set a marker to be displayed if there is no message.</listitem>
+      <listitem>errorMarker. This facet is provided to allow set a marker to be displayed if there is a message with a severity class of &quot;ERROR&quot;.</listitem>
+      <listitem>fatalMarker. This facet is provided to allow set a marker to be displayed if there is a message with a severity class of &quot;FATAL&quot;.</listitem>
+      <listitem>infoMarker. This facet is provided to allow set a marker to be displayed if there is a message with a severity class of &quot;INFO&quot;.</listitem>
+      <listitem>warnMarker. This facet is provided to allow set a marker to be displayed if there is an message with a severity class of &quot;WARN&quot;.</listitem>
+      </itemizedlist>
+    </para>
+
+    <para>The following example shows different variants of customization of the component.</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+    <rich:messages layout="table" tooltip="true" showDetail="false" showSummary="true" passedLabel="No Errors" var="messages">
+        <f:facet name="header">
+            <h:outputText value="Messages:"/>
+        </f:facet>
+        <f:facet name="passedHeader">
+            <h:outputText value="No errors"/>
+        </f:facet>
+        <f:facet name="errorMarker">
+            <h:graphicImage url="/image/error.gif"/>
+        </f:facet>
+        <f:facet name="infoMarker">
+            <h:graphicImage url="/image/info.gif"/>
+        </f:facet>
+        <f:facet name="passedMarker">
+            <h:graphicImage url="/image/passed.gif"/>
+        </f:facet> 
+    </rich:messages>
+...
+]]></programlisting>
+
+  </section>
+
+  <section>
+    <title>Look-and-Feel Customization</title>
+
+    <para>For skinnability implementation, the components use a style class redefinition method.
+      Default style classes are mapped on skin parameters.</para>
+
+    <para>To redefine appearance of all <emphasis role="bold">
+        <property>&lt;rich:messages&gt;</property>
+      </emphasis> components, you may define the properties of the predefined style classes in the
+      common CSS style sheet used on the page (there are no skin parameters and predefined values by
+      default to make it compatible with the standard message component). </para>
+  </section>
+
+  <section>
+    <title>Definition of Custom Style Classes</title>
+
+    <figure>
+      <title>Classes names</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/messages1.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>On the screenshot, there are classes names defining specified elements.</para>
+
+    <table>
+      <title>Component skin class</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Class name</entry>
+
+            <entry>Description</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>rich-messages</entry>
+
+            <entry>Defines styles for outer element</entry>
+          </row>
+
+          <row>
+            <entry>rich-messages-marker</entry>
+
+            <entry>Defines styles for icon element</entry>
+          </row>
+
+          <row>
+            <entry>rich-messages-label</entry>
+
+            <entry>Defines styles for informational label element</entry>
+          </row>
+          
+          <row>
+            <entry>rich-messages-header</entry>
+            
+            <entry>Defines styles for header element</entry>
+          </row>
+          
+          <row>
+            <entry>rich-passed</entry>
+            
+            <entry>Defines styles for all messages elements (marker, label, header)</entry>
+          </row>
+
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>In order to redefine the style for <emphasis role="bold">
+        <property>&lt;rich:message&gt;</property>
+      </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
+      same names and define the necessary properties in them.</para>
+
+    <para>To change the style of particular <emphasis role="bold">
+        <property>&lt;rich:messages&gt;</property>
+    </emphasis> components define your own style classes in the corresponding <emphasis role="bold">
+      <property>&lt;rich:messages&gt;</property>
+    </emphasis> attributes.
+    </para>
+  </section>
+</section>
