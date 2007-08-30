@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+  <sectioninfo>
+    <keywordset>
+      <keyword>treeNodes</keyword>
+      <keyword>rich:treeNodes</keyword>
+      <keyword>HtmlTreeNodes</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <table>
+    <title>Component identification parameters </title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+          <entry>Value</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+          <entry>org.richfaces.TreeNodes</entry>
+        </row>
+        <row>
+          <entry>component-class</entry>
+          <entry>org.richfaces.component.html.HtmlTreeNodes</entry>
+        </row>
+        <row>
+          <entry>component-family</entry>
+          <entry>org.richfaces.TreeNodes</entry>
+        </row>
+        <!--
+		<row>
+          <entry>renderer-type</entry>
+          <entry>org.richfaces.EffectRenderer</entry>
+        </row>
+		-->
+        <row>
+          <entry>tag-class</entry>
+          <entry>org.richfaces.taglib.TreeNodesTag</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+    <para>To create the simplest variant of <property>rich:treeNodes</property> on a page, use the
+      following syntax:</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+<rich:treeNodes var="issue" nodes="#{model.issues}">
+	...
+	<rich:treeNode>
+		<!-- node content -->							
+	</rich:treeNode>
+	... 
+	<!-- Others nodes -->							
+	...
+</rich:treeNodes>
+...
+]]></programlisting>
+  </section>
+
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlTreeNodes;
+...
+HtmlTreeNodes myTreeNodes = new HtmlTreeNodes();
+...
+]]></programlisting>
+  </section>
+<!--
+  <section>
+    <title>Details of Usage</title>
+<para>	
+	It is possible to use <property>&lt;rich:effect&gt;</property> in two modes: 
+<itemizedlist>
+        <listitem>attached to the JSF components or html tags and triggered by particular event.
+		Wiring effect with JSF components might be occurs on the server or client.
+		Wiring with html tag is possible only on the client side </listitem>
+        <listitem>invoking from the javascript code by effect name.
+		During the rendering, <property>rich:effect</property> generates the javascript function with defined name. When the function is called,
+		the effect is applied </listitem>
+</itemizedlist>
+</para>
+    <para>
+      <emphasis role="bold">Those a the typical variants of using:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+
+<rich:panel>
+	<rich:effect event="onmouseout" type="Opacity" params="duration:0.8,from:1.0,to:0.3" />
+    .... panel content ....
+</rich:panel>
+...
+
+
+<div id="contentDiv">
+  ..... div content ......
+</div>
+
+<input type="button" onclick="hideDiv({duration:0.7})" value="Hide" />
+<input type="button" onclick="showDiv()" value="Show" />
+
+<rich:effect  name="hideDiv"  for="contentDiv" type="Fade" />
+<rich:effect  name="showDiv"  for="contentDiv" type="Appear" />
+
+
+<rich:effect for="window" event="onload" type="Appear" params="id:'contentDiv',duration:0.8,from:0.3,to:1.0" />
+...
+]]></programlisting>
+
+    <figure>
+      <title>Initial:</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/effect1.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+	
+	<figure>
+      <title>When the mouse cursor is over:</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/effect0.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+<para>
+<emphasis><property>&quot;name&quot;</property></emphasis> attribute defines the name of the javascript function will
+be generated on the page when the component is rendered. You can invoke this function to activate the effect. The function access one parameter.
+It is a set of effect options in JSON format. 
+</para> 
+
+<para>
+<emphasis><property>&quot;type&quot;</property></emphasis> attribute defines the type of effect. For example, "Fade", "Blind", "Opacity". Take a look at scriptaculous documentation
+for set of available effect. 
+</para>
+
+<para>
+<emphasis><property>&quot;for&quot;</property></emphasis> attribute defines the id of the component or html tag, the effect will be attached to.
+Richfaces converts the <emphasis><property>&quot;for&quot;</property></emphasis> attribute value to the client id of the component if such component is found. If not, the value is left as is for possible
+wiring with on the DOM element's id on the client side.
+By default, the target of the effect is the same element that effect pointed to. However, the target element
+is might be overridden with <emphasis><property>&quot;effectId&quot;</property></emphasis> option passed with <emphasis><property>&quot;params&quot;</property></emphasis>
+attribute of with function paramenter.
+</para>
+
+<para>
+<emphasis><property>&quot;params&quot;</property></emphasis> attribute allows to define the set of options possible for particurar effect.
+For example, 'duration', 'delay', 'from', 'to'. Additionally to the options used by the effect itself, there are two option that might override
+the <property>rich:effect</property> attribute. Those are: 
+<itemizedlist>
+        <listitem><emphasis><property>&quot;effectId&quot;</property></emphasis> allows to re-define the target of effect.
+		The option is overrire the value of <emphasis><property>&quot;for&quot;</property></emphasis> attribute</listitem>
+        <listitem><emphasis><property>&quot;effectType&quot;</property></emphasis> defines the effect type.
+		The option is overrire the value of <emphasis><property>&quot;type&quot;</property></emphasis> attribute</listitem>
+</itemizedlist>
+</para>
+	
+ </section>
+   <section>
+    <title>Relevant resources links</title>
+    <para>
+      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/effect.jsf?c=effect">Here</ulink>
+      you can see the example of <emphasis role="bold">&lt;rich:effect&gt;</emphasis> usage. </para>
+  </section>
+  
+  -->
+</section>
