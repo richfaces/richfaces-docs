@@ -82,14 +82,9 @@ HtmlRichMessages myMessages = new HtmlRichMessages();
           isn&apos;t shown.</listitem>
       </itemizedlist>
     </para>
-    <para>The component provides three parts to be optionally defined: marker, informational label
-      before the marker for every message and header element placed before the messages list.
-      Header and marker are optional. They don&apos;t present by default for compatibility with standard
-      messages. Labels are displayed for errors and one passed label is displayed optionally (if it&apos;s
-      defined) when no errors occured.</para>
+    <para>The component provides two parts to be optionally defined: marker and informational label
+      before the marker for every message.</para>
     <para> Set of facet which can be used for a marker defining: <itemizedlist>
-      <listitem>header. This facet defines additional content to be displayed near the list. Header is positioned on top of the messages component.</listitem>
-      <listitem>passedHeader. This facet is provided to allow an end developer setting a header content to be displayed if there are no messages.</listitem>
       <listitem>passedMarker. This facet is provided to allow setting a marker to be displayed if there is no message.</listitem>
       <listitem>errorMarker. This facet is provided to allow setting a marker to be displayed if there is a message with a severity class of &quot;ERROR&quot;.</listitem>
       <listitem>fatalMarker. This facet is provided to allow setting a marker to be displayed if there is a message with a severity class of &quot;FATAL&quot;.</listitem>
@@ -105,12 +100,6 @@ HtmlRichMessages myMessages = new HtmlRichMessages();
     </para>
     <programlisting role="XML"><![CDATA[...
     <rich:messages layout="table" tooltip="true" showDetail="false" showSummary="true" passedLabel="No Errors" var="messages">
-        <f:facet name="header">
-            <h:outputText value="Messages:"/>
-        </f:facet>
-        <f:facet name="passedHeader">
-            <h:outputText value="No errors"/>
-        </f:facet>
         <f:facet name="errorMarker">
             <h:graphicImage url="/image/error.gif"/>
         </f:facet>
@@ -134,7 +123,7 @@ HtmlRichMessages myMessages = new HtmlRichMessages();
 
     <para>To redefine appearance of all <emphasis role="bold">
         <property>&lt;rich:messages&gt;</property>
-      </emphasis> components, you may define the properties of the predefined style classes in the
+      </emphasis> components, you can define the properties of the predefined style classes in the
       common CSS style sheet used on a page (there are no skin parameters and predefined values by
       default to make it compatible with the standard message component). </para>
   </section>
@@ -185,7 +174,7 @@ HtmlRichMessages myMessages = new HtmlRichMessages();
             <entry>Defines styles for informational label element</entry>
           </row>
           
-          <row>
+          <!--row>
             <entry>rich-messages-header</entry>
             
             <entry>Defines styles for header element</entry>
@@ -195,7 +184,7 @@ HtmlRichMessages myMessages = new HtmlRichMessages();
             <entry>rich-passed</entry>
             
             <entry>Defines styles for all messages elements (marker, label, header)</entry>
-          </row>
+          </row-->
 
         </tbody>
       </tgroup>
@@ -206,7 +195,7 @@ HtmlRichMessages myMessages = new HtmlRichMessages();
       </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
       same names and define the necessary properties in them.</para>
 
-    <para>To change the style of a particular <emphasis role="bold">
+    <para>To change the style of particular <emphasis role="bold">
         <property>&lt;rich:messages&gt;</property>
     </emphasis> components define your own style classes in the corresponding <emphasis role="bold">
       <property>&lt;rich:messages&gt;</property>
