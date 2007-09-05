@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter>
+     <table>
+	  <title>Component identification parameters </title>
+      <tgroup cols="2">
+	  <thead>
+            <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+            </row>
+        </thead>
+        <tbody>
+		
+          <row>
+            <entry>listener-class</entry>
+            <entry>org.richfaces.event.NodeExpandedListener</entry>
+          </row>
+		  <row>
+            <entry>event-class</entry>
+            <entry>org.richfaces.event.NodeExpandedEvent</entry>
+          </row>
+          
+          <row>
+            <entry>tag-class</entry>
+            <entry>org.richfaces.taglib.ChangeExpandListenerTag</entry>
+          </row>
+		  
+        </tbody>
+      </tgroup>
+    </table>
+	
+
+  <section>
+    <title>Creating on a page</title>
+    <para>Simple Component definition on a page:</para>
+
+  <para>
+      <emphasis role="bold">Example:</emphasis>
+ </para>
+
+	<programlisting role="XML"><![CDATA[...
+	<rich:changeExpandListener type="demo.Bean"/>
+...
+]]></programlisting> 
+  </section>
+  
+  <section>
+    <title>Dynamical creation of a component from Java code</title>
+	  <para>
+		  <emphasis role="bold">Example:</emphasis></para>		
+	  <programlisting role="JAVA"><![CDATA[package demo;
+	  
+public class ImplBean implements org.richfaces.event.NodeExpandedListener{
+	...
+}
+]]></programlisting>
+
+	  <programlisting role="JAVA"><![CDATA[
+import demo.ImplBean;
+...
+ImplBean myListener = new ImplBean();
+...
+]]></programlisting>
+		
+  </section>
+
+  <section>
+    <title>Key attributes and ways of usage</title>
+
+<para>
+The <property>&lt;rich:changeExpandListener&gt;</property> is used as nested tag with <property>&lt;rich:tree&gt;</property>
+and <property>&lt;rich:treeNode&gt;</property> components.
+</para>
+<para>
+Attribute <emphasis><property>&quot;type&quot;</property></emphasis> defines the fully qualified Java class name for listener.
+This class should implement org.richfaces.event.NodeExpandedListener interface.
+</para>
+	
+  <para>
+      <emphasis role="bold">The typical variant of using:</emphasis>
+ </para>
+
+    <programlisting role="XML"><![CDATA[...
+<rich:tree switchType="server" value="#{project.data}" var="item" nodeFace="#{item.type}">
+	<rich:changeExpandListener type="demo.ListenerBean"/>
+	...
+	<!-- Tree nodes -->	
+	...
+</rich:tree>
+...
+]]></programlisting> 
+
+  <para>
+      <emphasis role="bold">Java bean source:</emphasis>
+ </para>
+
+    <programlisting role="JAVA"><![CDATA[package demo;
+
+import org.richfaces.event.NodeExpandedEvent;
+
+public class ListenerBean implements org.richfaces.event.NodeExpandedListener{
+...	
+	public void processExpansion(NodeExpandedEvent arg0){
+		//Custom Developer Code 
+	}
+...
+}
+]]></programlisting> 
+  </section>  
+  
+</chapter>
