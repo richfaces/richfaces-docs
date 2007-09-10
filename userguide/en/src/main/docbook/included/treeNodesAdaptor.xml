@@ -2,9 +2,9 @@
 <section>
   <sectioninfo>
     <keywordset>
-      <keyword>treeNodes</keyword>
-      <keyword>rich:treeNodes</keyword>
-      <keyword>HtmlTreeNodes</keyword>
+      <keyword>treeNodesAdaptor</keyword>
+      <keyword>rich:treeNodesAdaptor</keyword>
+      <keyword>HtmltreeNodesAdaptor</keyword>
     </keywordset>
   </sectioninfo>
 
@@ -20,15 +20,15 @@
       <tbody>
         <row>
           <entry>component-type</entry>
-          <entry>org.richfaces.TreeNodes</entry>
+          <entry>org.richfaces.TreeNodesAdaptor</entry>
         </row>
         <row>
           <entry>component-class</entry>
-          <entry>org.richfaces.component.html.HtmlTreeNodes</entry>
+          <entry>org.richfaces.component.html.HtmlTreeNodesAdaptor</entry>
         </row>
         <row>
           <entry>component-family</entry>
-          <entry>org.richfaces.TreeNodes</entry>
+          <entry>org.richfaces.TreeNodesAdaptor</entry>
         </row>
         <!--
 		<row>
@@ -38,7 +38,7 @@
 		-->
         <row>
           <entry>tag-class</entry>
-          <entry>org.richfaces.taglib.TreeNodesTag</entry>
+          <entry>org.richfaces.taglib.TreeNodesAdaptorTag</entry>
         </row>
       </tbody>
     </tgroup>
@@ -46,14 +46,14 @@
 
   <section>
     <title>Creating the Component with a Page Tag</title>
-    <para>To create the simplest variant of <property>rich:treeNodes</property> on a page, use the
+    <para>To create the simplest variant of <property>rich:treeNodesAdaptor</property> on a page, use the
       following syntax:</para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-<rich:treeNodes var="issue" nodes="#{model.issues}">
+<rich:treeNodesAdaptor var="issue" nodes="#{model.issues}">
 	...
 	<rich:treeNode>
 		<!-- node content -->							
@@ -61,7 +61,7 @@
 	... 
 	<!-- Others nodes -->							
 	...
-</rich:treeNodes>
+</rich:treeNodesAdaptor>
 ...
 ]]></programlisting>
   </section>
@@ -72,9 +72,9 @@
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlTreeNodes;
+    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlTreeNodesAdaptor;
 ...
-HtmlTreeNodes myTreeNodes = new HtmlTreeNodes();
+HtmlTreeNodesAdaptor myTreeNodesAdaptor = new HtmlTreeNodesAdaptor();
 ...
 ]]></programlisting>
   </section>
@@ -86,26 +86,26 @@ HtmlTreeNodes myTreeNodes = new HtmlTreeNodes();
     </para>
     <programlisting role="XML"><![CDATA[...
 	<rich:tree adviseNodeOpened="#{treeModelBean.adviseNodeOpened}" switchType="client">
-		<rich:treeNodes id="project" nodes="#{loaderBean.projects}" var="project">
+		<rich:treeNodesAdaptor id="project" nodes="#{loaderBean.projects}" var="project">
 			<rich:treeNode>
 				<h:commandLink action="#{project.click}" value="Project: #{project.name}" />
 			</rich:treeNode>
-			<rich:treeNodes id="srcDir" var="srcDir" nodes="#{project.srcDirs}">
+			<rich:treeNodesAdaptor id="srcDir" var="srcDir" nodes="#{project.srcDirs}">
 				<rich:treeNode>
 					<h:commandLink action="#{srcDir.click}" value="Source directory: #{srcDir.name}" />
 				</rich:treeNode>
-				<rich:treeNodes id="pkg" var="pkg" nodes="#{srcDir.packages}">
+				<rich:treeNodesAdaptor id="pkg" var="pkg" nodes="#{srcDir.packages}">
 					<rich:treeNode>
 						<h:commandLink action="#{pkg.click}" value="Package: #{pkg.name}" />
 					</rich:treeNode>
-					<rich:treeNodes id="class" var="class" nodes="#{pkg.classes}">
+					<rich:treeNodesAdaptor id="class" var="class" nodes="#{pkg.classes}">
 						<rich:treeNode>
 							<h:commandLink action="#{class.click}" value="Class: #{class.name}" />
 						</rich:treeNode>
-					</rich:treeNodes>	
-				</rich:treeNodes>
-			</rich:treeNodes>
-		</rich:treeNodes>
+					</rich:treeNodesAdaptor>	
+				</rich:treeNodesAdaptor>
+			</rich:treeNodesAdaptor>
+		</rich:treeNodesAdaptor>
 	</rich:tree>
 ...
 ]]></programlisting>
