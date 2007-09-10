@@ -12,16 +12,17 @@
         <tbody>
 		
           <row>
-            <entry>component-type</entry>
-            <entry>org.ajax4jsf.Listener</entry>
+            <entry>listener-class</entry>
+            <entry>org.ajax4jsf.framework.ajax.AjaxListener</entry>
           </row>
-          <row>
-            <entry>component-family</entry>
-            <entry>org.ajax4jsf.Listener</entry>
+		  <row>
+            <entry>event-class</entry>
+            <entry>org.ajax4jsf.framework.ajax.AjaxEvent</entry>
           </row>
+          
           <row>
-            <entry>component-class</entry>
-            <entry>org.ajax4jsf.component.html.AjaxListener</entry>
+            <entry>tag-class</entry>
+            <entry>org.ajax4jsf.taglib.html.jsp.AjaxListenerTag</entry>
           </row>
 		  
         </tbody>
@@ -42,19 +43,27 @@
 ...
 ]]></programlisting> 
   </section>
-  
+ 
   <section>
     <title>Dynamical creation of a component from Java code</title>
 	  <para>
 		  <emphasis role="bold">Example:</emphasis></para>		
-	  <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.AjaxListener;
-...
-AjaxListener myListener = new AjaxListener();
-...
-		]]></programlisting>
-	
-  </section>
+	  <programlisting role="JAVA"><![CDATA[package demo;
+	  
+public class ImplBean implements import org.ajax4jsf.component.html.AjaxListener{
+	...
+}
+]]></programlisting>
 
+	  <programlisting role="JAVA"><![CDATA[
+import demo.ImplBean;
+...
+ImplBean myListener = new ImplBean();
+...
+]]></programlisting>
+		
+  </section>  
+  
   <section>
     <title>Key attributes and ways of usage</title>
 	<para>
@@ -77,7 +86,6 @@ interface. You can access to the source of the event (Ajax component) using even
  </para>
 
     <programlisting role="XML"><![CDATA[...
-	
 	<a4j:commandLink id="cLink" value="Click it To Send Ajax Request">
 		<a4j:ajaxListener type="demo.Bean"/>
 	</a4j:commandLink>
@@ -88,13 +96,11 @@ interface. You can access to the source of the event (Ajax component) using even
       <emphasis role="bold">Example:</emphasis>
  </para>
 
-    <programlisting role="JAVA"><![CDATA[
-package demo;
+    <programlisting role="JAVA"><![CDATA[package demo;
 
 import org.ajax4jsf.framework.ajax.AjaxEvent;
 
 public class Bean implements org.ajax4jsf.framework.ajax.AjaxListener{
-	
 ...	
 	public void processAjax(AjaxEvent arg0){
 		//Custom Developer Code 
