@@ -86,7 +86,7 @@ HtmlRecursiveTreeNodesAdaptor myRecursiveTreeNodesAdaptor = new HtmlRecursiveTre
     </para>
     <programlisting role="XML"><![CDATA[...
 <rich:tree adviseNodeOpened="#{treeModelBean.adviseNodeOpened}" switchType="client">
-	<rich:treeNodes id="project" nodes="#{loaderBean.projects}" var="project">
+	<rich:treeNodesAdaptor id="project" nodes="#{loaderBean.projects}" var="project">
 		
 		<rich:treeNode>
 			<h:commandLink action="#{project.click}" value="Project: #{project.name}" />
@@ -98,17 +98,17 @@ HtmlRecursiveTreeNodesAdaptor myRecursiveTreeNodesAdaptor = new HtmlRecursiveTre
 				<h:commandLink action="#{dir.click}" value="Directory: #{dir.name}" />
 			</rich:treeNode>
 			
-			<rich:treeNodes id="file" var="file" nodes="#{dir.files}">
+			<rich:treeNodesAdaptor id="file" var="file" nodes="#{dir.files}">
 				<rich:treeNode>
 					<h:commandLink action="#{file.click}" value="File: #{file.name}" />
 				</rich:treeNode>
-			</rich:treeNodes>
+			</rich:treeNodesAdaptor>
 			
-			<rich:treeNodes id="file1" var="file" nodes="#{dir.files}">
+			<rich:treeNodesAdaptor id="file1" var="file" nodes="#{dir.files}">
 				<rich:treeNode>
 					<h:commandLink action="#{file.click}" value="File1: #{file.name}" />
 				</rich:treeNode>
-			</rich:treeNodes>
+			</rich:treeNodesAdaptor>
 
 			<rich:recursiveTreeNodesAdaptor id="archiveEntry" var="archiveEntry"
 				roots="#{dir.files}" nodes="#{archiveEntry.archiveEntries}" 
@@ -122,7 +122,7 @@ HtmlRecursiveTreeNodesAdaptor myRecursiveTreeNodesAdaptor = new HtmlRecursiveTre
 			</rich:recursiveTreeNodesAdaptor>
 			
 		</rich:recursiveTreeNodesAdaptor>
-	</rich:treeNodes>
+	</rich:treeNodesAdaptor>
 </rich:tree>
 ...
 ]]></programlisting>
