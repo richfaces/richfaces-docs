@@ -20,7 +20,6 @@
     
     <!-- assume catalog-based resolution... -->
     <xsl:import href="http://docbook.sourceforge.net/release/xsl/current/fo/docbook.xsl" />
-    
    
     <!-- ########## XRef -->
     <!-- this controls whether xrefs have the title in it.  We 
@@ -284,7 +283,19 @@
     <xsl:param name="table.frame.border.thickness">0.1pt</xsl:param>
     <xsl:param name="table.cell.border.thickness">0.1pt</xsl:param>
     
+    <xsl:attribute-set name="table.table.properties">
+	    <xsl:attribute name="keep-together.within-column">auto</xsl:attribute>
+    </xsl:attribute-set>
+    <xsl:attribute-set name="table.properties">
+	    <xsl:attribute name="keep-together.within-column">auto</xsl:attribute>
+    </xsl:attribute-set>
     
+
+    <!--###################################################
+                             Images
+        ################################################### -->
+
+
     
     <!--###################################################
                              Labels
@@ -455,16 +466,19 @@
         <xsl:attribute name="padding-left">0.5em</xsl:attribute>
         <xsl:attribute name="padding-right">0.5em</xsl:attribute>
         <xsl:attribute name="padding-bottom">0.5em</xsl:attribute>
-        <xsl:attribute name="margin-left">0.5em</xsl:attribute>
-        <xsl:attribute name="margin-right">0.5em</xsl:attribute>
+        <xsl:attribute name="margin-left">0em</xsl:attribute>
+        <xsl:attribute name="margin-right">0em</xsl:attribute>
     </xsl:attribute-set>
     <!-- Shade (background) programlistings -->
     <xsl:param name="shade.verbatim">1</xsl:param>
+    <xsl:param name="verbatim.margin.left">0pt</xsl:param>
     <xsl:attribute-set name="shade.verbatim.style">
         <xsl:attribute name="background-color">#F0F0F0</xsl:attribute>
     </xsl:attribute-set>
     
-    
+    <xsl:attribute-set name="monospace.verbatim.properties">
+    	<xsl:attribute name="wrap-option">wrap</xsl:attribute>
+	</xsl:attribute-set>
     
     <!--###################################################
                              Callouts
@@ -539,5 +553,6 @@
          attribute, don't.
     -->
     <xsl:param name="draft.mode" select="'no'"/>
+    
 
 </xsl:stylesheet>
