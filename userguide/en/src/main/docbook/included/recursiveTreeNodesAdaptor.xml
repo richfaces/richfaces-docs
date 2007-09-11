@@ -2,9 +2,9 @@
 <section>
   <sectioninfo>
     <keywordset>
-      <keyword>recursiveTreeNodes</keyword>
-      <keyword>rich:recursiveTreeNodes</keyword>
-      <keyword>HtmlRecursiveTreeNodes</keyword>
+      <keyword>recursiveTreeNodesAdaptor</keyword>
+      <keyword>rich:recursiveTreeNodesAdaptor</keyword>
+      <keyword>HtmlrecursiveTreeNodesAdaptor</keyword>
     </keywordset>
   </sectioninfo>
 
@@ -20,15 +20,15 @@
       <tbody>
         <row>
           <entry>component-type</entry>
-          <entry>org.richfaces.RecursiveTreeNodes</entry>
+          <entry>org.richfaces.RecursiveTreeNodesAdaptor</entry>
         </row>
         <row>
           <entry>component-class</entry>
-          <entry>org.richfaces.component.html.HtmlRecursiveTreeNodes</entry>
+          <entry>org.richfaces.component.html.HtmlRecursiveTreeNodesAdaptor</entry>
         </row>
         <row>
           <entry>component-family</entry>
-          <entry>org.richfaces.RecursiveTreeNodes</entry>
+          <entry>org.richfaces.RecursiveTreeNodesAdaptor</entry>
         </row>
         <!--
 		<row>
@@ -38,7 +38,7 @@
 		-->
         <row>
           <entry>tag-class</entry>
-          <entry>org.richfaces.taglib.RecursiveTreeNodesTag</entry>
+          <entry>org.richfaces.taglib.RecursiveTreeNodesAdaptorTag</entry>
         </row>
       </tbody>
     </tgroup>
@@ -46,14 +46,14 @@
 
   <section>
     <title>Creating the Component with a Page Tag</title>
-    <para>To create the simplest variant of <property>rich:recursiveTreeNodes</property> on a page, use the
+    <para>To create the simplest variant of <property>rich:recursiveTreeNodesAdaptor</property> on a page, use the
       following syntax:</para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-	<rich:recursiveTreeNodes var="issue" root="#{project.root}" nodes="#{model.issues}">
+	<rich:recursiveTreeNodesAdaptor var="issue" root="#{project.root}" nodes="#{model.issues}">
 		...
 		<rich:treeNode>
 			 <!-- node content -->
@@ -61,7 +61,7 @@
 		
 		<!-- Others nodes -->   
 		...
-	</rich:recursiveTreeNodes>
+	</rich:recursiveTreeNodesAdaptor>
 ...
 ]]></programlisting>
   </section>
@@ -72,9 +72,9 @@
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlRecursiveTreeNodes;
+    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlRecursiveTreeNodesAdaptor;
 ...
-HtmlRecursiveTreeNodes myRecursiveTreeNodes = new HtmlRecursiveTreeNodes();
+HtmlRecursiveTreeNodesAdaptor myRecursiveTreeNodesAdaptor = new HtmlRecursiveTreeNodesAdaptor();
 ...
 ]]></programlisting>
   </section>
@@ -92,7 +92,7 @@ HtmlRecursiveTreeNodes myRecursiveTreeNodes = new HtmlRecursiveTreeNodes();
 			<h:commandLink action="#{project.click}" value="Project: #{project.name}" />
 		</rich:treeNode>
 
-		<rich:recursiveTreeNodes id="dir" var="dir" root="#{project.dirs}" nodes="#{dir.directories}">
+		<rich:recursiveTreeNodesAdaptor id="dir" var="dir" root="#{project.dirs}" nodes="#{dir.directories}">
 			
 			<rich:treeNode>
 				<h:commandLink action="#{dir.click}" value="Directory: #{dir.name}" />
@@ -110,7 +110,7 @@ HtmlRecursiveTreeNodes myRecursiveTreeNodes = new HtmlRecursiveTreeNodes();
 				</rich:treeNode>
 			</rich:treeNodes>
 
-			<rich:recursiveTreeNodes id="archiveEntry" var="archiveEntry"
+			<rich:recursiveTreeNodesAdaptor id="archiveEntry" var="archiveEntry"
 				roots="#{dir.files}" nodes="#{archiveEntry.archiveEntries}" 
 				includedRoot="#{archiveEntry.class.simpleName == 'ArchiveFile'}"
 				includedNode="#{archiveEntry.class.simpleName == 'ArchiveEntry'}">
@@ -119,9 +119,9 @@ HtmlRecursiveTreeNodes myRecursiveTreeNodes = new HtmlRecursiveTreeNodes();
 					<h:commandLink action="#{archiveEntry.click}" value="Archive entry: #{archiveEntry.name}" />
 				</rich:treeNode>
 				
-			</rich:recursiveTreeNodes>
+			</rich:recursiveTreeNodesAdaptor>
 			
-		</rich:recursiveTreeNodes>
+		</rich:recursiveTreeNodesAdaptor>
 	</rich:treeNodes>
 </rich:tree>
 ...
