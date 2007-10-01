@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter id="ArchitectureOverview" xreflabel="ArchitecturalOverview">
-<?dbhtml filename="ArchitectureOverview.html"?>
+  <?dbhtml filename="ArchitectureOverview.html"?>
 
   <chapterinfo>
     <keywordset>
       <keyword>RichFaces</keyword>
 
-     <keyword>CSS</keyword>
+      <keyword>CSS</keyword>
 
       <keyword>skin</keyword>
     </keywordset>
   </chapterinfo>
-<title>Basic concepts of the RichFaces Framework</title>
+  <title>Basic concepts of the RichFaces Framework</title>
   <section id="introToBasics">
-  <?dbhtml filename="introToBasics.html"?>
+    <?dbhtml filename="introToBasics.html"?>
     <title>Introduction</title>
-    <para>The framework is implemented as a component library which adds Ajax capability into existing 
-      pages, so you don&apos;t need to write any JavaScript code or to replace existing 
-      components with new Ajax widgets. <property>RichFaces</property> enables page-wide Ajax support instead of the 
-      traditional component-wide support. Hence, you can define the event on the page that 
-      invokes an Ajax request and the areas of the page that should be synchronized with the JSF 
-      Component Tree after the Ajax request changes the data on the server according to the 
-      events fired on the client.</para>
+    <para>The framework is implemented as a component library which adds Ajax capability into
+      existing pages, so you don&apos;t need to write any JavaScript code or to replace existing
+      components with new Ajax widgets. <property>RichFaces</property> enables page-wide Ajax
+      support instead of the traditional component-wide support. Hence, you can define the event on
+      the page that invokes an Ajax request and the areas of the page that should be synchronized
+      with the JSF Component Tree after the Ajax request changes the data on the server according to
+      the events fired on the client.</para>
     <para>Next Figure shows how it works:</para>
     <figure>
       <title>Request Processing flow</title>
@@ -31,15 +31,17 @@
         <imagedata fileref="images/newpic1.jpg" scalefit="1"/>
       </imageobject>
     </mediaobject>
-    <para><property>RichFaces</property> allows to define (by means of JSF tags) different parts of a JSF page you 
-      wish to update with  an Ajax request and provide a few options to send Ajax requests to 
-      the server. Also  JSF page doesn&apos;t change from a &quot;regular&quot; JSF 
-      page and you don&apos;t need to write  any JavaScript  or XMLHttpRequest objects by hands, everything is done automatically.</para>
+    <para><property>RichFaces</property> allows to define (by means of JSF tags) different parts of
+      a JSF page you wish to update with an Ajax request and provide a few options to send Ajax
+      requests to the server. Also JSF page doesn&apos;t change from a
+      &quot;regular&quot; JSF page and you don&apos;t need to write any JavaScript or
+      XMLHttpRequest objects by hands, everything is done automatically.</para>
   </section>
   <section id="RichFacesArchitectureOverview">
-  <?dbhtml filename="RichFacesArchitectureOverview.html"?>
+    <?dbhtml filename="RichFacesArchitectureOverview.html"?>
     <title>RichFaces Architecture Overview</title>
-    <para>Next figure lists several important elements of the <property>RichFaces</property> framework</para>
+    <para>Next figure lists several important elements of the <property>RichFaces</property>
+      framework</para>
     <figure>
       <title>Core Ajax component structure</title>
     </figure>
@@ -50,13 +52,14 @@
     </mediaobject>
     <formalpara>
       <title>Ajax Filter.</title>
-      <para>To get all benefits of  <property>RichFaces</property>, you should  register a Filter in web.xml 
-      file of your application. The Filter recognizes multiple request types. The sequence diagram on Figure 3 
-      shows the difference in processing of a &quot;regular&quot; JSF request and an Ajax request.</para>
+      <para>To get all benefits of <property>RichFaces</property>, you should register a Filter in
+        web.xml file of your application. The Filter recognizes multiple request types. The sequence
+        diagram on Figure 3 shows the difference in processing of a &quot;regular&quot; JSF
+        request and an Ajax request.</para>
     </formalpara>
-    <para>In the first case the whole JSF tree will be encoded,
-      in the second one option it depends on the &quot;size&quot; of the Ajax region. As you can see, in the second case the filter parses 
-      the content of an Ajax response before sending it to the client side.</para>
+    <para>In the first case the whole JSF tree will be encoded, in the second one option it depends
+      on the &quot;size&quot; of the Ajax region. As you can see, in the second case the
+      filter parses the content of an Ajax response before sending it to the client side.</para>
     <para>Have a look at the next picture to understand these two ways:</para>
     <figure>
       <title>Request Processing sequence diagram</title>
@@ -66,14 +69,14 @@
         <imagedata fileref="images/newpic3.jpg" scalefit="1"/>
       </imageobject>
     </mediaobject>
-    <para>In both cases, the information about required static or dynamic resources that your application 
-      requests is registered in the ResourseBuilder class.</para>
-    <para>When a request for a resource comes (Figure 4), the RichFaces filter checks the Resource Cache 
-      for this resource and if it is there, the resource is sent to the client. Otherwise, 
-      the filter searches for the resource among those that are registered by the 
-      ResourceBuilder. If the resource is registered, the RichFaces filter will send a request to the 
-      ResourceBuilder to create (deliver) the resource.</para>
-    <para>Next Figure shows the ways of  resource request processing.</para>
+    <para>In both cases, the information about required static or dynamic resources that your
+      application requests is registered in the ResourseBuilder class.</para>
+    <para>When a request for a resource comes (Figure 4), the RichFaces filter checks the Resource
+      Cache for this resource and if it is there, the resource is sent to the client. Otherwise, the
+      filter searches for the resource among those that are registered by the ResourceBuilder. If
+      the resource is registered, the RichFaces filter will send a request to the ResourceBuilder to
+      create (deliver) the resource.</para>
+    <para>Next Figure shows the ways of resource request processing.</para>
     <figure>
       <title>Resource request sequence diagram</title>
     </figure>
@@ -84,303 +87,286 @@
     </mediaobject>
     <formalpara>
       <title>AJAX Action Components</title>
-      <para>
-      There are Ajax Action Components: AjaxCommandButton,  AjaxCommandLink, AjaxPoll and AjaxSupport and etc. 
-      You can use them to send Ajax requests from the client side. 
-    </para>
+      <para> There are Ajax Action Components: AjaxCommandButton, AjaxCommandLink, AjaxPoll and
+        AjaxSupport and etc. You can use them to send Ajax requests from the client side. </para>
     </formalpara>
     <formalpara>
       <title>AJAX Containers</title>
-      <para>
-      AjaxContainer is an interface that describes an area on your JSF page that should be decoded 
-      during an Ajax request. AjaxViewRoot and AjaxRegion are implementations of this interface.      
-    </para>
+      <para> AjaxContainer is an interface that describes an area on your JSF page that should be
+        decoded during an Ajax request. AjaxViewRoot and AjaxRegion are implementations of this
+        interface. </para>
     </formalpara>
     <formalpara>
       <title>JavaScript Engine</title>
-      <para><property>RichFaces</property> JavaScript Engine runs on the client-side. It knows how to update different areas 
-      on your JSF page based on the information from the Ajax response. Do 
-      not use this JavaScript code directly, as it is available automatically.      
-    </para>
+      <para><property>RichFaces</property> JavaScript Engine runs on the client-side. It knows how
+        to update different areas on your JSF page based on the information from the Ajax response.
+        Do not use this JavaScript code directly, as it is available automatically. </para>
     </formalpara>
   </section>
   <section id="LimitationsAndRules">
-  <?dbhtml filename="LimitationAndRules.html"?>
+    <?dbhtml filename="LimitationAndRules.html"?>
     <title>Limitations and Rules</title>
-    <para>In order to create RichFaces applications properly,  keep the following points in mind:</para>
+    <para>In order to create RichFaces applications properly, keep the following points in mind:</para>
     <itemizedlist>
-      <listitem>
-        Any Ajax framework should not append or delete, but only replace elements on the page. For successful updates, an element with the same ID as in the response must exist on the page. If you&apos;d like to append any code to a page, put in a placeholder for it (any empty element). For the same reason, it&apos;s recommended to place messages in the<emphasis >
-            <property>&quot;AjaxOutput&quot;</property>
-          </emphasis> component (as no messages is also a message).
-      </listitem>
-      <listitem>
-        Don&apos;t use <emphasis role="bold">
-            <property>&lt;f:verbatim&gt;</property>
-          </emphasis>  for self-rendered containers, since this component is transient and not saved in the tree.
-      </listitem>
-      <listitem>
-        Ajax requests are made by XMLHttpRequest functions in XML format, but this XML bypasses most validations and the corrections that might be made in a browser. Thus, create only a strict standards-compliant code for HTML and XHTML, without skipping any required elements or attributes. Any necessary XML corrections are automatically made by the XML filter on the server, but lot&apos;s of  unexpected effects can be produced by an  incorrect HTML code.
-      </listitem>
+      <listitem> Any Ajax framework should not append or delete, but only replace elements on the
+        page. For successful updates, an element with the same ID as in the response must exist on
+        the page. If you&apos;d like to append any code to a page, put in a placeholder for it
+        (any empty element). For the same reason, it&apos;s recommended to place messages in the<emphasis>
+          <property>&quot;AjaxOutput&quot;</property>
+        </emphasis> component (as no messages is also a message). </listitem>
+      <listitem> Don&apos;t use <emphasis role="bold">
+          <property>&lt;f:verbatim&gt;</property>
+        </emphasis> for self-rendered containers, since this component is transient and not saved in
+        the tree. </listitem>
+      <listitem> Ajax requests are made by XMLHttpRequest functions in XML format, but this XML
+        bypasses most validations and the corrections that might be made in a browser. Thus, create
+        only a strict standards-compliant code for HTML and XHTML, without skipping any required
+        elements or attributes. Any necessary XML corrections are automatically made by the XML
+        filter on the server, but lot&apos;s of unexpected effects can be produced by an
+        incorrect HTML code. </listitem>
     </itemizedlist>
   </section>
   <section id="HowTo...">
-  <?dbhtml filename="HowTo.html"?>
+    <?dbhtml filename="HowTo.html"?>
     <title>How To...</title>
     <section id="SendAnAJAXRequest">
-    <?dbhtml filename="SendAnAJAXRequest.html"?>
+      <?dbhtml filename="SendAnAJAXRequest.html"?>
       <title>Send an Ajax request</title>
-      <para>There are different ways to send Ajax requests from your JSF page. For example you can use 
-          <emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis>, <emphasis role="bold">
-          <property>&lt;a4j:commandLink&gt;</property>, <emphasis role="bold"><property>&lt;a4j:poll&gt;</property></emphasis>
+      <para>There are different ways to send Ajax requests from your JSF page. For example you can
+        use <emphasis role="bold">
+          <property>&lt;a4j:commandButton&gt;</property>
+        </emphasis>, <emphasis role="bold">
+          <property>&lt;a4j:commandLink&gt;</property>, <emphasis role="bold">
+            <property>&lt;a4j:poll&gt;</property>
+          </emphasis>
         </emphasis> or <emphasis role="bold">
           <property>&lt;a4j:support&gt;</property>
-        </emphasis> tags or any other.           
-        </para>
-      <para>All these tags hide the usual JavaScript activities that are required for an XMHttpRequest 
-          object building and  an Ajax request sending. Also, they allow you to decide which components of 
-          your JSF page are to be re-rendered as a result of the Ajax response (you can list the 
-          IDs of these components in the &quot;reRender&quot; attribute).
-        </para>
+        </emphasis> tags or any other. </para>
+      <para>All these tags hide the usual JavaScript activities that are required for an
+        XMHttpRequest object building and an Ajax request sending. Also, they allow you to decide
+        which components of your JSF page are to be re-rendered as a result of the Ajax response
+        (you can list the IDs of these components in the &quot;reRender&quot; attribute). </para>
       <para>
-          <emphasis role="bold">
+        <emphasis role="bold">
           <property>&lt;a4j:commandButton&gt;</property>
         </emphasis> and <emphasis role="bold">
           <property>&lt;a4j:commandLink&gt;</property>
-        </emphasis> tags are used to send an Ajax 
-          request on &quot;onclick&quot; JavaScript event. 
-        </para>
+        </emphasis> tags are used to send an Ajax request on &quot;onclick&quot; JavaScript
+        event. </para>
       <para>
-          <emphasis role="bold">
+        <emphasis role="bold">
           <property>&lt;a4j:poll&gt;</property>
-        </emphasis> tag is used to send an Ajax 
-          request periodically using a timer. 
-        </para>
+        </emphasis> tag is used to send an Ajax request periodically using a timer. </para>
       <para>The <emphasis role="bold">
           <property>&lt;a4j:support&gt;</property>
-        </emphasis> tag allows you to add Ajax functionality to standard JSF components 
-          and send Ajax request onto a chosen JavaScript event: &quot;onkeyup&quot;, &quot;onmouseover&quot;, 
-          etc.
-        </para>
+        </emphasis> tag allows you to add Ajax functionality to standard JSF components and send
+        Ajax request onto a chosen JavaScript event: &quot;onkeyup&quot;,
+        &quot;onmouseover&quot;, etc. </para>
       <para>Most important attributes of components that provide Ajax request calling features are:</para>
       <itemizedlist>
         <listitem>
-              <emphasis >
-              <property>&quot;reRender&quot;</property>
-            </emphasis>attribute as it was mentioned  <link linkend="SendAnAJAXRequest">before</link> specifies components to be reRendered 
-              after Ajax response. The attribute can be specified using EL expression and formed dynamicaly on the
-              server side (see <ulink url="index.html#FAQ">FAQ chapter</ulink>).
-		</listitem>
+          <emphasis>
+            <property>&quot;reRender&quot;</property>
+          </emphasis>attribute as it was mentioned <link linkend="SendAnAJAXRequest">before</link>
+          specifies components to be reRendered after Ajax response. The attribute can be specified
+          using EL expression and formed dynamicaly on the server side (see <ulink
+            url="index.html#FAQ">FAQ chapter</ulink>). </listitem>
         <listitem>
-             <emphasis >
-              <property>&quot;RequestDelay&quot;</property>
-            </emphasis> attribute is used for a requests frequency regulation.
-		</listitem>
-        </itemizedlist>
-          <programlisting role="XML"><![CDATA[<h:inputText size="50" value="#{bean.text}">
+          <emphasis>
+            <property>&quot;RequestDelay&quot;</property>
+          </emphasis> attribute is used for a requests frequency regulation. </listitem>
+      </itemizedlist>
+      <programlisting role="XML"><![CDATA[<h:inputText size="50" value="#{bean.text}">
         <a4j:support event="onkeyup" RequestDelay="3"/>
 </h:inputText>]]></programlisting>
-          <para>So every next request from the frequent keyboard events will be delayed 
-              on 3 ms to reduce the number of requests.
-            </para>
-        <itemizedlist>
+      <para>So every next request from the frequent keyboard events will be delayed on 3 ms to
+        reduce the number of requests. </para>
+      <itemizedlist>
         <listitem>
-               <emphasis >
-              <property>&quot;EventsQueue&quot;</property>
-            </emphasis> is a queue that stores the next request. 
-		</listitem>
-		<listitem>
-             <emphasis >
-              <property>&quot;LimitToList&quot;</property>
-            </emphasis> attribute is used to regulate updatable regions. Setting 
-              it to true limits the updatable areas only to ones specified in a
-              reRender list, in other case all Output Panels of the region are updated.
-   </listitem>
-        <listitem> <emphasis >
-              <property>&quot;ajaxSingle&quot;</property>
-            </emphasis> attributes specify regions to be sent with a request, 
-              if &quot;false&quot; it is a full region, in other case it&apos;s is only a control caused 
-              event.
-        </listitem>
-        
-          <listitem> <emphasis >
+          <emphasis>
+            <property>&quot;EventsQueue&quot;</property>
+          </emphasis> is a queue that stores the next request. </listitem>
+        <listitem>
+          <emphasis>
+            <property>&quot;LimitToList&quot;</property>
+          </emphasis> attribute is used to regulate updatable regions. Setting it to true limits the
+          updatable areas only to ones specified in a reRender list, in other case all Output Panels
+          of the region are updated. </listitem>
+        <listitem>
+          <emphasis>
+            <property>&quot;ajaxSingle&quot;</property>
+          </emphasis> attributes specify regions to be sent with a request, if
+          &quot;false&quot; it is a full region, in other case it&apos;s is only a
+          control caused event. </listitem>
+
+        <listitem>
+          <emphasis>
             <property>&quot;timeout&quot;</property>
-          </emphasis>attribute is used for response waiting time on a particular request. If a response is not received during this time, the request is aborted.
-          </listitem>
-         
-          <listitem> <emphasis >
+          </emphasis>attribute is used for response waiting time on a particular request. If a
+          response is not received during this time, the request is aborted. </listitem>
+
+        <listitem>
+          <emphasis>
             <property>&quot;ignoreDupResponses&quot;</property>
-          </emphasis> is used to abort  unfinished request on new event.
-           </listitem>
-       </itemizedlist>
+          </emphasis> is used to abort unfinished request on new event. </listitem>
+      </itemizedlist>
     </section>
     <section id="DecideWhatToSend">
-    <?dbhtml filename="DecideWhatToSend.html"?>
+      <?dbhtml filename="DecideWhatToSend.html"?>
       <title>Decide What to Send</title>
-      <para>You may describe a region on the page you wish to send to the server, in this way you  can 
-          control what part of the JSF View is decoded on the server side when you send an 
-          Ajax request.  
-        </para>
-      <para>The easiest way to describe an Ajax region on your JSF page is to do nothing, 
-          because the content between the <emphasis role="bold">
+      <para>You may describe a region on the page you wish to send to the server, in this way you
+        can control what part of the JSF View is decoded on the server side when you send an Ajax
+        request. </para>
+      <para>The easiest way to describe an Ajax region on your JSF page is to do nothing, because
+        the content between the <emphasis role="bold">
           <property>&lt;f:view&gt;</property>
         </emphasis> and <emphasis role="bold">
           <property>&lt;/f:view&gt;</property>
-        </emphasis> tags is considered 
-          the default Ajax region.
-        </para>
-      <para>You may define multiple Ajax regions on the JSF page (they can even be nested) by using 
-          the <emphasis role="bold">
+        </emphasis> tags is considered the default Ajax region. </para>
+      <para>You may define multiple Ajax regions on the JSF page (they can even be nested) by using
+        the <emphasis role="bold">
           <property>&lt;a4j:region&gt;</property>
-        </emphasis> tag. 
-        </para>
-      <para>If you wish to render the content of an Ajax response outside of the active region then 
-        the value of the &quot;renderRegionOnly&quot; attribute should be set to &quot;false&quot; (&quot;false&quot; is default value). Otherwise, your 
-          Ajax updates are limited to elements of the active region.
-        </para>
+        </emphasis> tag. </para>
+      <para>If you wish to render the content of an Ajax response outside of the active region then
+        the value of the &quot;renderRegionOnly&quot; attribute should be set to
+        &quot;false&quot; (&quot;false&quot; is default value). Otherwise, your Ajax
+        updates are limited to elements of the active region. </para>
     </section>
     <section id="DecideWhatToChange">
-    <?dbhtml filename="DecideWhatToChange.html"?>
+      <?dbhtml filename="DecideWhatToChange.html"?>
       <title>Decide What to Change</title>
-      <para>Using IDs in the &quot;reRender&quot; attribute to define &quot;AJAX zones&quot; for update works fine in 
-          many  cases. 
-        </para>
-      <para>But you can not use this approach if your page contains, e.g. a <emphasis role="bold"><property>&lt;f:verbatim&gt;</property></emphasis>
-          tag and you wish to update its content on an Ajax response.
-        </para>
+      <para>Using IDs in the &quot;reRender&quot; attribute to define &quot;AJAX
+        zones&quot; for update works fine in many cases. </para>
+      <para>But you can not use this approach if your page contains, e.g. a <emphasis role="bold">
+          <property>&lt;f:verbatim&gt;</property>
+        </emphasis> tag and you wish to update its content on an Ajax response. </para>
       <para>The problem with the <emphasis role="bold">
           <property>&lt;f:verbatim/&gt;</property>
-        </emphasis> tag as described above is related to the 
-          value of the transientFlag of JSF components. If the value of this flag is true, the 
-          component must not participate in state saving or restoring of process.
-        </para>
-      <para>In order to provide a solution to this kind of problems, RichFaces uses the concept of 
-          an output panel that is defined by the <emphasis role="bold">
+        </emphasis> tag as described above is related to the value of the transientFlag of JSF
+        components. If the value of this flag is true, the component must not participate in state
+        saving or restoring of process. </para>
+      <para>In order to provide a solution to this kind of problems, RichFaces uses the concept of
+        an output panel that is defined by the <emphasis role="bold">
           <property>&lt;a4j:outputPanel&gt;</property>
-        </emphasis> tag. If you put a <emphasis role="bold"><property>&lt;f:verbatim&gt;</property></emphasis>
-          tag inside of the output panel, then the content of the <emphasis role="bold">
+        </emphasis> tag. If you put a <emphasis role="bold">
+          <property>&lt;f:verbatim&gt;</property>
+        </emphasis> tag inside of the output panel, then the content of the <emphasis role="bold">
           <property>&lt;f:verbatim/&gt;</property>
-        </emphasis> tag and content of 
-          other panel&apos;s child tags could be updated on Ajax response. There are two ways to 
-          control this:
-          <itemizedlist>
-          <listitem> 
-                By setting the &quot;ajaxRendered&quot; attribute value to &quot;true&quot;.
-</listitem>
-          <listitem>
-                By setting the &quot;reRender&quot; attribute value of an Action Component to the output panel ID.
-</listitem>
-        </itemizedlist>          
-        </para>
+        </emphasis> tag and content of other panel&apos;s child tags could be updated on Ajax
+        response. There are two ways to control this: <itemizedlist>
+          <listitem> By setting the &quot;ajaxRendered&quot; attribute value to
+            &quot;true&quot;. </listitem>
+          <listitem> By setting the &quot;reRender&quot; attribute value of an Action
+            Component to the output panel ID. </listitem>
+        </itemizedlist>
+      </para>
     </section>
   </section>
   <section id="RequestErrorsAndSessionExpirationHandling">
-  <?dbhtml filename="RequestErrorsAndSessionExpirationHandling.html"?>
-  <title>Request Errors and Session Expiration Handling</title>
-  <para>RichFaces allows to redefine standard handlers responsible for processing of different exceptional situations. It helps to define own JavaScript, which is executed when these situations occur.</para>
-  <section id="RequestErrorsHandling">
-  <?dbhtml filename="RequestErrorsHandling.html"?>
-    <title>Request Errors Handling</title>
-    <para>To execute your own code on the client in case of an error during Ajax request, it&apos;s necessary to redefine the standard &quot;A4J.AJAX.onError&quot; method:</para>
-	<programlisting role="JAVA"><![CDATA[A4J.AJAX.onError = function(req,status,message) { 
+    <?dbhtml filename="RequestErrorsAndSessionExpirationHandling.html"?>
+    <title>Request Errors and Session Expiration Handling</title>
+    <para>RichFaces allows to redefine standard handlers responsible for processing of different
+      exceptional situations. It helps to define own JavaScript, which is executed when these
+      situations occur.</para>
+    <section id="RequestErrorsHandling">
+      <?dbhtml filename="RequestErrorsHandling.html"?>
+      <title>Request Errors Handling</title>
+      <para>To execute your own code on the client in case of an error during Ajax request,
+        it&apos;s necessary to redefine the standard &quot;A4J.AJAX.onError&quot;
+        method:</para>
+      <programlisting role="JAVA"><![CDATA[A4J.AJAX.onError = function(req,status,message) { 
           // Custom Developer Code 
 };]]></programlisting>
-    <para>The function defined this way accepts as parameters:</para>
-	 <itemizedlist>
-      <listitem>req - a params string of a request that calls an error</listitem>
-      <listitem>status - the number of an error returned by the server</listitem>
-      <listitem>message - a default message for the given error</listitem>
-	 </itemizedlist>
- <para>Thus, it&apos;s possible to create your own handler that is called on timeouts, inner server errors, and etc.</para>
-  </section>
-  <section id="SessionExpiredHandling">
-  <?dbhtml filename="SessionExpiredHandling.html"?>
-    <title>Session Expired Handling</title>
-    <para>It&apos;s possible to redefine also the <emphasis >
-     <property>&quot;onExpired&quot;</property>
-     </emphasis> framework method that is called on the <emphasis >
-     <property>&quot;Session Expiration&quot;</property>
-     </emphasis> event.</para>
+      <para>The function defined this way accepts as parameters:</para>
+      <itemizedlist>
+        <listitem>req - a params string of a request that calls an error</listitem>
+        <listitem>status - the number of an error returned by the server</listitem>
+        <listitem>message - a default message for the given error</listitem>
+      </itemizedlist>
+      <para>Thus, it&apos;s possible to create your own handler that is called on timeouts,
+        inner server errors, and etc.</para>
+    </section>
+    <section id="SessionExpiredHandling">
+      <?dbhtml filename="SessionExpiredHandling.html"?>
+      <title>Session Expired Handling</title>
+      <para>It&apos;s possible to redefine also the <emphasis>
+          <property>&quot;onExpired&quot;</property>
+        </emphasis> framework method that is called on the <emphasis>
+          <property>&quot;Session Expiration&quot;</property>
+        </emphasis> event.</para>
 
-  <para>
-      <emphasis role="bold">Example:</emphasis>
- </para>
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>
 
- <programlisting role="JAVA"><![CDATA[A4J.AJAX.onExpired = function(loc,expiredMsg){ 
+      <programlisting role="JAVA"><![CDATA[A4J.AJAX.onExpired = function(loc,expiredMsg){ 
           // Custom Developer Code 
 };
 ]]></programlisting>
 
-<para>Here the function receives in params:</para>
-    <itemizedlist>
-      <listitem>loc - URL of the current page (on demand can be updated) </listitem>
-      <listitem>expiredMsg - a default message on <emphasis >
-     <property>&quot;Session Expiration&quot;</property>
-     </emphasis>event.</listitem>
-    </itemizedlist>	 
-<!--note>
+      <para>Here the function receives in params:</para>
+      <itemizedlist>
+        <listitem>loc - URL of the current page (on demand can be updated) </listitem>
+        <listitem>expiredMsg - a default message on <emphasis>
+            <property>&quot;Session Expiration&quot;</property>
+          </emphasis>event.</listitem>
+      </itemizedlist>
+      <!--note>
 <title>Note:</title>
 Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
      <property>&quot;Session Expiration&quot;</property>,
      </emphasis> a confirmation dialog with a request for view reloading was always called.
 </note-->
+    </section>
   </section>
-</section>
 
 
 
- <section>
-
-     <title>Skinnability</title>
+  <section id="Skinnability">
+    <?dbhtml filename="Skinnability.html"?>
+    <title>Skinnability</title>
 
     <section id="WhySkinnability">
-    <?dbhtml filename="WhySkinnability.html"?>
+      <?dbhtml filename="WhySkinnability.html"?>
       <title>Why Skinnability</title>
 
-      <para>If you have a look at a CSS file in an enterprise application, for
-      example, the one you&apos;re working on now, you&apos;ll see how often the same
-      color is noted in it. Standard CSS has no way to define a particular
-      color abstractly for defining as a panel header color, a background
-      color of an active pop-up menu item, a separator color, etc. To define
-      common interface styles, you have to copy the same values over and over
-      again and the more interface elements you have the more copy-and-paste
-      activity that needs to be performed.</para>
+      <para>If you have a look at a CSS file in an enterprise application, for example, the one
+        you&apos;re working on now, you&apos;ll see how often the same color is noted in it.
+        Standard CSS has no way to define a particular color abstractly for defining as a panel
+        header color, a background color of an active pop-up menu item, a separator color, etc. To
+        define common interface styles, you have to copy the same values over and over again and the
+        more interface elements you have the more copy-and-paste activity that needs to be
+        performed.</para>
 
-      <para>Hence, if you want to change the application palette, you have to
-      change all interrelating values, otherwise your interface can appear a
-      bit clumsy. The chances of such an interface coming about is very high,
-      as CSS editing usually becomes the duty of a general developer who
-      doesn&apos;t necessarily have much knowledge of user interface design.</para>
+      <para>Hence, if you want to change the application palette, you have to change all
+        interrelating values, otherwise your interface can appear a bit clumsy. The chances of such
+        an interface coming about is very high, as CSS editing usually becomes the duty of a general
+        developer who doesn&apos;t necessarily have much knowledge of user interface design.</para>
 
-      <para>Moreover, if a customer wishes to have an interface look-and-feel
-      that can be adjusted on-the-fly by an end user, your work is multiplied,
-      as you have to deal with several CSS files variants, each of which
-      contains the same values repeated numerous times.</para>
+      <para>Moreover, if a customer wishes to have an interface look-and-feel that can be adjusted
+        on-the-fly by an end user, your work is multiplied, as you have to deal with several CSS
+        files variants, each of which contains the same values repeated numerous times.</para>
 
-      <para>These problems can be solved with the
-      <property>skinnability</property> system built into theRichFaces project
-      and realized fully in RichFaces. Every named skin has some
-      skin-parameters for the definition of a palette and the other parameters
-      of the user interface. By changing just a few parameters, you can alter
-      the appearance of dozens of components in an application in a
-      synchronized fashion without messing up user interface
-      consistency.</para>
+      <para>These problems can be solved with the <property>skinnability</property> system built
+        into theRichFaces project and realized fully in RichFaces. Every named skin has some
+        skin-parameters for the definition of a palette and the other parameters of the user
+        interface. By changing just a few parameters, you can alter the appearance of dozens of
+        components in an application in a synchronized fashion without messing up user interface
+        consistency.</para>
 
-      <para>The <property>skinnability</property> feature can&apos;t completely
-      replace standard CSS and certainly doesn&apos;t eliminate its usage.
-      <property>Skinnability</property> is a high-level extension of standard
-      CSS, which can be used together with regular CSS declarations. You can
-      also refer to skin parameters in CSS via JSF Expression Language. You
-      have the complete ability to synchronize the appearance of all the
-      elements in your pages.</para>
+      <para>The <property>skinnability</property> feature can&apos;t completely replace standard
+        CSS and certainly doesn&apos;t eliminate its usage. <property>Skinnability</property> is
+        a high-level extension of standard CSS, which can be used together with regular CSS
+        declarations. You can also refer to skin parameters in CSS via JSF Expression Language. You
+        have the complete ability to synchronize the appearance of all the elements in your
+      pages.</para>
     </section>
 
     <section id="UsingSkinnability">
-    <?dbhtml filename="UsingSkinnability.html"?>
+      <?dbhtml filename="UsingSkinnability.html"?>
       <title>Using Skinnability</title>
 
-      <para>RichFaces <property>skinnability</property> is designed for mixed
-      usage with:</para>
+      <para>RichFaces <property>skinnability</property> is designed for mixed usage with:</para>
 
       <itemizedlist>
         <listitem>
@@ -396,35 +382,32 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
         </listitem>
       </itemizedlist>
 
-      <para>The color scheme of the component can be applied to its elements
-      using any of three style classes:</para>
+      <para>The color scheme of the component can be applied to its elements using any of three
+        style classes:</para>
 
       <itemizedlist>
         <listitem>
           <para>A default style class inserted into the framework</para>
 
-          <para>This contains style parameters linked to some constants from a
-          skin. It is defined for every component and specifies a default
-          representation level. Thus, an application interface could be
-          modified by changing the values of skin parameters.</para>
+          <para>This contains style parameters linked to some constants from a skin. It is defined
+            for every component and specifies a default representation level. Thus, an application
+            interface could be modified by changing the values of skin parameters.</para>
         </listitem>
 
         <listitem>
           <para>A style class of skin extension</para>
 
-          <para>This class name is defined for every component element and
-          inserted into the framework to allow defining a class with the same
-          name into its CSS files. Hence, the appearance of all components
-          that use this class is extended.</para>
+          <para>This class name is defined for every component element and inserted into the
+            framework to allow defining a class with the same name into its CSS files. Hence, the
+            appearance of all components that use this class is extended.</para>
         </listitem>
 
         <listitem>
           <para>User style class</para>
 
-          <para>It&apos;s possible to use one of the styleClass parameters for
-          component elements and define your own class in it. As a result, the
-          appearance of one particular component is changed according to a CSS
-          style parameter specified in the class.</para>
+          <para>It&apos;s possible to use one of the styleClass parameters for component
+            elements and define your own class in it. As a result, the appearance of one particular
+            component is changed according to a CSS style parameter specified in the class.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -435,127 +418,110 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
       <para>Here is a simple panel component:</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>
       <programlisting role="XML">&lt;rich:panel&gt;
 ...
 &lt;/rich:panel&gt;</programlisting>
 
-      <para>The code generates a panel component on a page, which consists of
-      two elements: a wrapper <emphasis
-      role="bold"><property>&lt;div&gt;</property></emphasis> element and a
-      <emphasis role="bold"><property>&lt;div&gt;</property></emphasis>
-      element for the panel body with the particular style properties. The
-      wrapper <emphasis
-      role="bold"><property>&lt;div&gt;</property></emphasis> element looks
-      like:</para>
+      <para>The code generates a panel component on a page, which consists of two elements: a
+        wrapper <emphasis role="bold">
+          <property>&lt;div&gt;</property>
+        </emphasis> element and a <emphasis role="bold">
+          <property>&lt;div&gt;</property>
+        </emphasis> element for the panel body with the particular style properties. The wrapper
+          <emphasis role="bold">
+          <property>&lt;div&gt;</property>
+        </emphasis> element looks like:</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>
       <programlisting role="XML">&lt;div class="dr-pnl rich-panel"&gt;
 ...
 &lt;/div&gt;</programlisting>
 
-      <para>dr-pnl is a CSS class specified in the framework via skin
-      parameters:</para>
+      <para>dr-pnl is a CSS class specified in the framework via skin parameters:</para>
 
       <itemizedlist>
         <listitem>
           <para><property>background-color</property> is defined with
-          <property>generalBackgroundColor</property></para>
+              <property>generalBackgroundColor</property></para>
         </listitem>
 
         <listitem>
           <para><property>border-color</property> is defined with
-          <property>panelBorderColor</property></para>
+            <property>panelBorderColor</property></para>
         </listitem>
       </itemizedlist>
 
-      <para>It&apos;s possible to change all colors for all panels on all pages by
-      changing these skin parameters.</para>
+      <para>It&apos;s possible to change all colors for all panels on all pages by changing
+        these skin parameters.</para>
 
-      <para>However, if a <emphasis
-      role="bold"><property>&lt;rich-panel&gt;</property></emphasis> class is
-      specified somewhere on the page, its parameters are also acquired by all
-      panels on this page.</para>
+      <para>However, if a <emphasis role="bold">
+          <property>&lt;rich-panel&gt;</property>
+        </emphasis> class is specified somewhere on the page, its parameters are also acquired by
+        all panels on this page.</para>
 
-      <para>A developer may also change the style properties for a particular
-      panel. The following definition:</para>
+      <para>A developer may also change the style properties for a particular panel. The following
+        definition:</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>
       <programlisting role="XML">&lt;rich:panel styleClass="customClass"&gt;
 ...
 &lt;/rich:panel&gt;</programlisting>
 
-      <para>could add some style properties from customClass to one particular
-      panel, as a result we get three styles:</para>
+      <para>could add some style properties from customClass to one particular panel, as a result we
+        get three styles:</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>
       <programlisting role="XML">&lt;div class="dr_pnl rich-panel customClass"&gt;
 ...
 &lt;/div&gt;</programlisting>
     </section>
 
     <section id="SkinParametersTablesInRichFaces">
-    <?dbhtml filename="SkinParametersTablesInRichFaces.html"?>
-    
+      <?dbhtml filename="SkinParametersTablesInRichFaces.html"?>
+
       <title>Skin Parameters Tables in RichFaces</title>
 
-      <para>RichFaces provides eight predefined skin parameters (skins) at the
-      simplest level of common customization:</para>
+      <para>RichFaces provides eight predefined skin parameters (skins) at the simplest level of
+        common customization:</para>
 
       <itemizedlist>
-        <listitem>
-          DEFAULT
-        </listitem>
-		
-		<listitem>
-          plain
-        </listitem>
-		
-        <listitem>
-          emeraldTown
-        </listitem>
+        <listitem> DEFAULT </listitem>
 
-        <listitem>
-          blueSky
-        </listitem>
+        <listitem> plain </listitem>
 
-        <listitem>
-          wine
-        </listitem>
+        <listitem> emeraldTown </listitem>
 
-        <listitem>
-          japanCherry
-        </listitem>
+        <listitem> blueSky </listitem>
 
-        <listitem>
-          ruby
-        </listitem>
+        <listitem> wine </listitem>
 
-        <listitem>
-          classic
-        </listitem>
+        <listitem> japanCherry </listitem>
 
-        <listitem>
-          deepMarine
-        </listitem>
+        <listitem> ruby </listitem>
+
+        <listitem> classic </listitem>
+
+        <listitem> deepMarine </listitem>
       </itemizedlist>
 
-      <para>To plug one in, it&apos;s necessary to specify a skin name in the
-      <emphasis ><property>&quot;org.richfaces.SKIN&quot;</property></emphasis> context-param.</para>
+      <para>To plug one in, it&apos;s necessary to specify a skin name in the <emphasis>
+          <property>&quot;org.richfaces.SKIN&quot;</property>
+        </emphasis> context-param.</para>
 
-      <para>Here is an example of a table with values for one of the main
-      skins, <property>&quot;blueSky&quot;</property>.</para>
+      <para>Here is an example of a table with values for one of the main skins,
+          <property>&quot;blueSky&quot;</property>.</para>
 
       <table>
         <title>Colors</title>
@@ -792,40 +758,39 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
           </tbody>
         </tgroup>
       </table>
-		
-		<para>
-		Skin "plain" was added from 3.0.2 version.
-		It doesn't have any parameters. It's necessary for embedding RichFaces components into existing projecst which have its own styles.
-		</para>
-	  
-      <para>To get detailed information on particular parameter possibilities,
-        see the <link linkend="RichFacesComponentsLibrary">chapter</link> where each component has skin parameters described
-      corresponding to its elements.</para>
+
+      <para> Skin "plain" was added from 3.0.2 version. It doesn't have any parameters. It's
+        necessary for embedding RichFaces components into existing projecst which have its own
+        styles. </para>
+
+      <para>To get detailed information on particular parameter possibilities, see the <link
+          linkend="RichFacesComponentsLibrary">chapter</link> where each component has skin
+        parameters described corresponding to its elements.</para>
     </section>
 
     <section id="CreatingAndUsingYourOwnSkinFile">
-    <?dbhtml filename="CreatingAndUsingYourOwnSkinFile.html"?>
+      <?dbhtml filename="CreatingAndUsingYourOwnSkinFile.html"?>
       <title>Creating and Using Your Own Skin File</title>
 
-      <para>In order to create your own skin whose constants are used by style
-      classes at the first level, do the following:</para>
+      <para>In order to create your own skin whose constants are used by style classes at the first
+        level, do the following:</para>
 
       <itemizedlist>
         <listitem>
-          <para>Create a file whose name follows the format of a skin file and
-          place it into the ClassPath for the application. (Any skin file
-          follows the naming format, <emphasis
-          ><property>&lt;name.skin.properties&gt;</property></emphasis>.)</para>
+          <para>Create a file whose name follows the format of a skin file and place it into the
+            ClassPath for the application. (Any skin file follows the naming format, <emphasis>
+              <property>&lt;name.skin.properties&gt;</property>
+            </emphasis>.)</para>
         </listitem>
 
         <listitem>
-          <para>Add a skin definition context-param element to the
-          application&apos;s web.xml file:</para>
+          <para>Add a skin definition context-param element to the application&apos;s web.xml
+            file:</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
+          <para>
+            <emphasis role="bold">Example:</emphasis>
+          </para>
           <programlisting role="XML">&lt;context-param&gt;
         &lt;param-name&gt;org.richfaces.SKIN&lt;/param-name&gt;
         &lt;param-value&gt;name&lt;/param-value&gt;
@@ -833,81 +798,69 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
         </listitem>
 
         <listitem>
-          <para>In the skins file, specify your own values for skin constants
-          as described in the table.</para>
+          <para>In the skins file, specify your own values for skin constants as described in the
+            table.</para>
         </listitem>
       </itemizedlist>
     </section>
-<section>
-<title>Built-in skinnability in RichFaces</title>
-  <para>RichFaces gives an opportunity to incorporate <property>skinnability</property> into UI
-  design. With this framework you can easily use named skin parameters in
-  properties files to control the appearance of the skins that are applied
-  consistently to a whole set of components. You can look at examples of
-  predefined skins at:</para>
-  <simplelist>
-    <member>
-      <ulink url="http://livedemo.exadel.com/richfaces-demo/">http://livedemo.exadel.com/richfaces-demo/</ulink>
-    </member>
-  </simplelist>
-  <para>
-    You may simply control the look-and-feel of your application by using the <property>skinnability</property> service 
-    of the RichFaces framework. With the means of this service you can define the same style for rendering 
-    standard JSF components and custom JSF components built with the help of RichFaces.
-  </para>
-  <para>To find out more on  <property>skinnability</property> possibilities, follow these
-  steps:</para>
-   <itemizedlist>
-    <listitem>
-      Create a custom render kit and register it in the faces-config.xml
-      like this:
-      <programlisting role="XML"><![CDATA[<render-kit>
+    <section>
+      <title>Built-in skinnability in RichFaces</title>
+      <para>RichFaces gives an opportunity to incorporate <property>skinnability</property> into UI
+        design. With this framework you can easily use named skin parameters in properties files to
+        control the appearance of the skins that are applied consistently to a whole set of
+        components. You can look at examples of predefined skins at:</para>
+      <simplelist>
+        <member>
+          <ulink url="http://livedemo.exadel.com/richfaces-demo/"
+            >http://livedemo.exadel.com/richfaces-demo/</ulink>
+        </member>
+      </simplelist>
+      <para> You may simply control the look-and-feel of your application by using the
+          <property>skinnability</property> service of the RichFaces framework. With the means of
+        this service you can define the same style for rendering standard JSF components and custom
+        JSF components built with the help of RichFaces. </para>
+      <para>To find out more on <property>skinnability</property> possibilities, follow these steps:</para>
+      <itemizedlist>
+        <listitem> Create a custom render kit and register it in the faces-config.xml like this: <programlisting role="XML"><![CDATA[<render-kit>
         <render-kit-id>NEW_SKIN</render-kit-id>
         <render-kit-class> 
             org.ajax4jsf.framework.renderer.ChameleonRenderKitImpl
         </render-kit-class>
 </render-kit>]]></programlisting>
-    </listitem>
-    <listitem>
-      Then you need to create and register custom renderers for the
-      component based on the look-and-feel predefined variables:
-      <programlisting role="XML"><![CDATA[<renderer>
+        </listitem>
+        <listitem> Then you need to create and register custom renderers for the component based on
+          the look-and-feel predefined variables: <programlisting role="XML"><![CDATA[<renderer>
         <component-family>javax.faces.Command</component-family> 
         <renderer-type>javax.faces.Link</renderer-type> 
         <renderer-class>
            newskin.HtmlCommandLinkRenderer
         </renderer-class> 
 </renderer>]]></programlisting>
-    </listitem>
-    <listitem>
-      Finally, you need to place a properties file with skin parameters
-      into the class path root. There are two requirements for the properties
-      file:
-      <itemizedlist>
-        <listitem>
-          The file must be named <emphasis role="bold"><property>&lt;skinName&gt;</property></emphasis>.skin.properties, in this case, it would be called
-          <filename>newskin.skin.properties</filename>.
         </listitem>
-        <listitem>
-          The first line in this file should be render.kit=
-          <emphasis role="bold"><property>&lt;render-kit-id&gt;</property>,</emphasis> in this case, it would be called
-          render.kit=NEW_SKIN.
+        <listitem> Finally, you need to place a properties file with skin parameters into the class
+          path root. There are two requirements for the properties file: <itemizedlist>
+            <listitem> The file must be named <emphasis role="bold">
+                <property>&lt;skinName&gt;</property>
+              </emphasis>.skin.properties, in this case, it would be called
+                <filename>newskin.skin.properties</filename>. </listitem>
+            <listitem> The first line in this file should be render.kit= <emphasis role="bold"
+                  ><property>&lt;render-kit-id&gt;</property>,</emphasis> in this case, it
+              would be called render.kit=NEW_SKIN. </listitem>
+          </itemizedlist>
         </listitem>
       </itemizedlist>
-    </listitem>
-   </itemizedlist>
-  <para>Extra information on custom renderers creation can be found
-  at:</para>
-  <simplelist>
-    <member>
-      <ulink url="http://java.sun.com/javaee/javaserverfaces/reference/docs/index.html">http://java.sun.com/javaee/javaserverfaces/reference/docs/index.html</ulink>
-    </member>
-  </simplelist>
-  </section>
+      <para>Extra information on custom renderers creation can be found at:</para>
+      <simplelist>
+        <member>
+          <ulink url="http://java.sun.com/javaee/javaserverfaces/reference/docs/index.html"
+            >http://java.sun.com/javaee/javaserverfaces/reference/docs/index.html</ulink>
+        </member>
+      </simplelist>
+    </section>
 
   </section>
 
-<!--section id="OtherRelevantResources">
+  <!--section id="OtherRelevantResources">
   <title>Other Relevant Resources</title>
   <para><ulink url="http://jsf.javabeat.net/articles/2007/06/introduction-to-ajax4jsf/">Introduction to Ajax4Jsf</ulink> by Shunmuga Raja</para>
    
