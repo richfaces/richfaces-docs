@@ -53,9 +53,11 @@
     <formalpara>
       <title>Ajax Filter.</title>
       <para>To get all benefits of <property>RichFaces</property>, you should register a Filter in
-        web.xml file of your application. The Filter recognizes multiple request types. The sequence
-        diagram on Figure 3 shows the difference in processing of a &quot;regular&quot; JSF
-        request and an Ajax request.</para>
+        web.xml file of your application. The Filter recognizes multiple request types. Necessary
+        information about Filter configuration can be found in the <link
+          linkend="FilterConfiguration">&quot;Filter configuration&quot;</link> section. The
+        sequence diagram on Figure 3 shows the difference in processing of a
+        &quot;regular&quot; JSF request and an Ajax request.</para>
     </formalpara>
     <para>In the first case the whole JSF tree will be encoded, in the second one option it depends
       on the &quot;size&quot; of the Ajax region. As you can see, in the second case the
@@ -262,6 +264,122 @@
       </para>
     </section>
   </section>
+
+  <section id="FilterConfiguration">
+    <?dbhtml filename="FilterConfiguration.html"?>
+    <title>Filter Configuration</title>
+    <para>RichFaces uses filters for a correction of code received on an Ajax request. In case of a
+      &quot;regular&quot; JSF request a browser makes correction independently. In case of
+      Ajax request in order to prevent layout destruction it&apos;s needed to use filters,
+      because a received code could differ from a code validated by a browser and a browser doesn't
+      make any corrections.</para>
+
+    <para>In RichFaces 3.1 filter configuration becomes more flexible. There is no need to select
+      between two different filters (Filter or Fast Filter) for the whole application as it was
+      earlier. Now it&apos;s possible to configure different filters for different sets of pages
+      for the same application. The previous variants of configuration for the Filter and Fast
+      Filter are also available for backward compatibility (examples are placed below). </para>
+
+    <para>The first one:</para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+
+    <programlisting role="XML"><![CDATA[...
+    <filter>
+        <display-name>RichFaces Filter</display-name>
+        <filter-name>richfaces</filter-name>
+        <filter-class>org.ajax4jsf.Filter</filter-class>
+    </filter>
+...
+]]></programlisting>
+
+    <para>The second one:</para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+
+    <programlisting role="XML"><![CDATA[...
+    <filter>
+        <display-name>RichFaces FastFilter</display-name>
+        <filter-name>richfaces</filter-name>
+        <filter-class>org.ajax4jsf.FastFilter</filter-class>
+    </filter>
+...
+]]></programlisting>
+
+    <para>In RichFaces 3.1 the possible filter types are:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>TIDY</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Tidy filter corresponds to the former &quot;Filter&quot;. This filter is
+      recommended for applications with complicated or non-standard markup when all necessary code
+      corrections are made by the filter when a response comes from the server.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>NEKO</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Neko filter corresponds to the former &quot;Fast Filter&quot;. In case of using
+      this filter code isn&apos;t strictly verified. Use this one if you are sure that your
+      application markup is really strict for this filter. Otherwise it could cause lot&apos;s
+      of errors and corrupt a layout as a result. This filter considerably accelerates all Ajax
+      requests processing.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>NONE</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>No correction.</para>
+
+    <para>An example of configuration is placed below.</para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+
+    <programlisting role="XML"><![CDATA[...
+    <context-param>
+        <param-name>org.ajax4jsf.xmlparser.ORDER</param-name>
+        <param-value>NONE,NEKO,TIDY</param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>org.ajax4jsf.xmlparser.NONE</param-name>
+        <param-value>/pages/performance\.xhtml,/pages/default.*\.xhtml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>org.ajax4jsf.xmlparser.NEKO</param-name>
+        <param-value>/pages/repeat\.xhtml</param-value>
+    </context-param>
+    
+    <filter> 
+        <display-name>RichFaces Filter</display-name> 
+        <filter-name>richfaces</filter-name> 
+        <filter-class>org.ajax4jsf.Filter</filter-class> 
+    </filter>
+    
+    <filter-mapping> 
+        <filter-name>richfaces</filter-name> 
+        <servlet-name>Faces Servlet</servlet-name>
+        <dispatcher>FORWARD</dispatcher> 
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>INCLUDE</dispatcher> 
+    </filter-mapping>
+...
+]]></programlisting>
+
+  </section>
+
+
   <section id="RequestErrorsAndSessionExpirationHandling">
     <?dbhtml filename="RequestErrorsAndSessionExpirationHandling.html"?>
     <title>Request Errors and Session Expiration Handling</title>
