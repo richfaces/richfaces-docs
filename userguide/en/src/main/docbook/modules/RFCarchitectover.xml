@@ -316,9 +316,10 @@
       </listitem>
     </itemizedlist>
 
-    <para>Tidy filter corresponds to the former &quot;Filter&quot;. This filter is
-      recommended for applications with complicated or non-standard markup when all necessary code
-      corrections are made by the filter when a response comes from the server.</para>
+    <para>Tidy filter corresponds to the former &quot;Filter&quot; and it's based on the
+      Tidy parser. This filter is recommended for applications with complicated or non-standard
+      markup when all necessary code corrections are made by the filter when a response comes from
+      the server.</para>
 
     <itemizedlist>
       <listitem>
@@ -326,11 +327,11 @@
       </listitem>
     </itemizedlist>
 
-    <para>Neko filter corresponds to the former &quot;Fast Filter&quot;. In case of using
-      this filter code isn&apos;t strictly verified. Use this one if you are sure that your
-      application markup is really strict for this filter. Otherwise it could cause lot&apos;s
-      of errors and corrupt a layout as a result. This filter considerably accelerates all Ajax
-      requests processing.</para>
+    <para>Neko filter corresponds to the former &quot;Fast Filter&quot; and it's based on
+      the Neko parser. In case of using this filter code isn&apos;t strictly verified. Use this
+      one if you are sure that your application markup is really strict for this filter. Otherwise
+      it could cause lot&apos;s of errors and corrupt a layout as a result. This filter
+      considerably accelerates all Ajax requests processing.</para>
 
     <itemizedlist>
       <listitem>
@@ -377,6 +378,31 @@
 ...
 ]]></programlisting>
 
+    <para>The example shows that ORDER parameter defines the order in which particular filter types
+      are used for pages code correction. </para>
+    <para> First of all &quot;NONE&quot; value is specified for the filter. Then 2 different
+      sets of pages are defined for which two filter types (NONE and NEKO) are used correspondingly.
+      If a page relates to the first set that is defined in the following way: </para>
+
+    <programlisting role="XML"><![CDATA[<param-value>/pages/performance\.xhtml,/pages/default.*\.xhtml</param-value>,
+]]></programlisting>
+
+    <para> it&apos;s not corrected, because filter value for this page is defined as
+      &quot;NONE&quot;. If a page is not from the first set, then &quot;NEKO&quot;
+      value is set.</para>
+    <para>If a page relates to the second set that is defined in the following way:</para>
+
+    <programlisting role="XML"><![CDATA[<param-value>/pages/repeat\.xhtml</param-value>,
+]]></programlisting>
+
+    <para>then Neko filter is used for correction. If it&apos;s not related to the second set,
+      &quot;TIDY&quot; value is set for the filter (Tidy filter is used for code
+      correction). </para>
+
+    <note>
+      <title>Note:</title> It&apos;s possible to configure different types (NONE, NEKO and TIDY)
+      only for Filter. Fast Filter doesn&apos;t support this functionality. It&apos;s
+      available for backward compatibility with previous RichFaces versions. </note>
   </section>
 
 
