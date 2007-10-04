@@ -268,19 +268,14 @@
   <section id="FilterConfiguration">
     <?dbhtml filename="FilterConfiguration.html"?>
     <title>Filter Configuration</title>
-    <para>RichFaces uses filters for a correction of code received on an Ajax request. In case of a
+    <para>RichFaces uses a filter for a correction of code received on an Ajax request. In case of a
       &quot;regular&quot; JSF request a browser makes correction independently. In case of
-      Ajax request in order to prevent layout destruction it&apos;s needed to use filters,
+      Ajax request in order to prevent layout destruction it&apos;s needed to use a filter,
       because a received code could differ from a code validated by a browser and a browser doesn't
       make any corrections.</para>
 
-    <para>In RichFaces 3.1 filter configuration becomes more flexible. There is no need to select
-      between two different filters (Filter or Fast Filter) for the whole application as it was
-      earlier. Now it&apos;s possible to configure different filters for different sets of pages
-      for the same application. The previous variants of configuration for the Filter and Fast
-      Filter are also available for backward compatibility (examples are placed below). </para>
+    <para>An example of how to set a Filter in a web.xml file of your application is placed below.</para>
 
-    <para>The first one:</para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
@@ -294,21 +289,15 @@
 ...
 ]]></programlisting>
 
-    <para>The second one:</para>
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
+    <note>
+      <title>Note:</title>Fast Filter is deprecated and available only for backward compatibility
+      with previous RichFaces versions. Fast Filter usage isn&apos;t recomended, because there
+      is another way to use its functionality by means of <link linkend="Neko">Neko filter type</link>.</note>
 
-    <programlisting role="XML"><![CDATA[...
-    <filter>
-        <display-name>RichFaces FastFilter</display-name>
-        <filter-name>richfaces</filter-name>
-        <filter-class>org.ajax4jsf.FastFilter</filter-class>
-    </filter>
-...
-]]></programlisting>
+    <para>In RichFaces 3.1 filter configuration becomes more flexible. It&apos;s possible to
+      configure different filters for different sets of pages for the same application.</para>
 
-    <para>In RichFaces 3.1 the possible filter types are:</para>
+    <para>The possible filter types are:</para>
 
     <itemizedlist>
       <listitem>
@@ -316,22 +305,21 @@
       </listitem>
     </itemizedlist>
 
-    <para>Tidy filter corresponds to the former &quot;Filter&quot; and it's based on the
-      Tidy parser. This filter is recommended for applications with complicated or non-standard
-      markup when all necessary code corrections are made by the filter when a response comes from
-      the server.</para>
+    <para>&quot;TIDY&quot; filter type based on the Tidy parser. This filter is recommended for applications with
+      complicated or non-standard markup when all necessary code corrections are made by the filter
+      when a response comes from the server.</para>
 
     <itemizedlist>
       <listitem>
-        <para>NEKO</para>
+        <para id="Neko">NEKO</para>
       </listitem>
     </itemizedlist>
 
-    <para>Neko filter corresponds to the former &quot;Fast Filter&quot; and it's based on
-      the Neko parser. In case of using this filter code isn&apos;t strictly verified. Use this
-      one if you are sure that your application markup is really strict for this filter. Otherwise
-      it could cause lot&apos;s of errors and corrupt a layout as a result. This filter
-      considerably accelerates all Ajax requests processing.</para>
+    <para>&quot;NEKO&quot; filter type corresponds to the former &quot;Fast Filter&quot; and it&apos;s
+      based on the Neko parser. In case of using this filter code isn&apos;t strictly verified.
+      Use this one if you are sure that your application markup is really strict for this filter.
+      Otherwise it could cause lot&apos;s of errors and corrupt a layout as a result. This
+      filter considerably accelerates all Ajax requests processing.</para>
 
     <itemizedlist>
       <listitem>
@@ -380,29 +368,25 @@
 
     <para>The example shows that ORDER parameter defines the order in which particular filter types
       are used for pages code correction. </para>
-    <para> First of all &quot;NONE&quot; value is specified for the filter. Then 2 different
+    <para> First of all &quot;NONE&quot; type is specified for the filter. Then two different
       sets of pages are defined for which two filter types (NONE and NEKO) are used correspondingly.
       If a page relates to the first set that is defined in the following way: </para>
 
     <programlisting role="XML"><![CDATA[<param-value>/pages/performance\.xhtml,/pages/default.*\.xhtml</param-value>,
 ]]></programlisting>
 
-    <para> it&apos;s not corrected, because filter value for this page is defined as
+    <para> it&apos;s not corrected, because filter type for this page is defined as
       &quot;NONE&quot;. If a page is not from the first set, then &quot;NEKO&quot;
-      value is set.</para>
+      type is set.</para>
     <para>If a page relates to the second set that is defined in the following way:</para>
 
     <programlisting role="XML"><![CDATA[<param-value>/pages/repeat\.xhtml</param-value>,
 ]]></programlisting>
 
-    <para>then Neko filter is used for correction. If it&apos;s not related to the second set,
-      &quot;TIDY&quot; value is set for the filter (Tidy filter is used for code
+    <para>then &quot;NEKO&quot; filter type is used for correction. If it&apos;s not related to the second set,
+      &quot;TIDY&quot; type is set for the filter (&quot;TIDY&quot; filter type is used for code
       correction). </para>
 
-    <note>
-      <title>Note:</title> It&apos;s possible to configure different types (NONE, NEKO and TIDY)
-      only for Filter. Fast Filter doesn&apos;t support this functionality. It&apos;s
-      available for backward compatibility with previous RichFaces versions. </note>
   </section>
 
 
