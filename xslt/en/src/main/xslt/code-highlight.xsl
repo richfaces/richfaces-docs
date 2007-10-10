@@ -8,9 +8,10 @@
                 version="1.0"
                 xmlns="http://www.w3.org/TR/xhtml1/transitional"
                 exclude-result-prefixes="#default"
+                xmlns:rf="java:org.richfaces.highlight.XhtmlRendererFactory"
                 >
 
-	<xsl:template match="programlisting[@role='XML']|programlisting[@role='JAVA']|programlisting[@role='XHTML']|programlisting[@role='JSP']">
+	<xsl:template match="programlisting[@role='XML']|programlisting[@role='JAVA']|programlisting[@role='XHTML']|programlisting[@role='JSP']|programlisting[@role='CSS']">
 		
 		<xsl:variable name="role">
 			<xsl:value-of select="s:toUpperCase(string(@role))" xmlns:s="java:java.lang.String"/>
@@ -18,8 +19,8 @@
 		<xsl:variable name="child.content">
 			<xsl:apply-templates/>
 		</xsl:variable>
-		
-		<xsl:variable name="hiliter" select="jhl:getRenderer(string($role))" xmlns:jhl="java:com.uwyn.jhighlight.renderer.XhtmlRendererFactory"/>
+		<xsl:variable name="factory" select="rf:instance()"/>
+		<xsl:variable name="hiliter" select="rf:getRenderer($factory, string($role))"/>
 		<pre class="{$role}">	
 			<xsl:choose>
 				<xsl:when test="$hiliter">
