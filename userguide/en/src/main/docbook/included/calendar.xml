@@ -130,12 +130,44 @@ HtmlCalendar myCalendar = new HtmlCalendar();
 
     <note>
       <title>Note:</title><emphasis>
-      <property>&quot;preloadDateRangeBegin&quot;</property>
-      </emphasis> and
-       <emphasis>
-      <property>&quot;preloadDateRangeEnd&quot;</property>
+        <property>&quot;preloadDateRangeBegin&quot;</property>
+      </emphasis> and <emphasis>
+        <property>&quot;preloadDateRangeEnd&quot;</property>
       </emphasis> attributes was designed only for the
       <property>&quot;client&quot;</property> mode to load some data initially.</note>
+
+    <para><emphasis>
+      <property>&quot;ondataselect&quot;</property>
+    </emphasis> attribute is used to define an event that is triggered
+      before date selection.</para>
+    <para><emphasis>
+      <property>&quot;ondateselected&quot;</property>
+    </emphasis> attribute is used to define an event that is triggered
+      after date selection. </para>
+    <para>For example, to fire some event after date selection you should use <emphasis role="bold">
+        <property>&lt;a4j:support&gt;</property>
+    </emphasis>. And it should be bound to <emphasis>
+      <property>&quot;ondateselected&quot;</property>
+    </emphasis> event as
+      it&apos;s shown in the example below:</para>
+    
+    <programlisting role="XML"><![CDATA[...
+    <rich:calendar id="date" value="#{bean.dateTest}">
+        <a:support event="ondateselected" reRender="mainTable"/>                     
+    </rich:calendar>
+...]]></programlisting>
+
+    <para><emphasis>
+      <property>&quot;ondataselect&quot;</property>
+    </emphasis> could be used for possibility of date selection canceling. See an example below:</para>
+    
+    <programlisting role="XML"><![CDATA[...
+    <rich:calendar id="date" value="#{bean.dateTest}" ondateselect="if (!confirm('Are you sure to change date?')){return false;}"/>
+...]]></programlisting>
+
+    <para>How to use these attributes see also on the <ulink
+      url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4092275#4092275"
+      >RichFaces Users Forum</ulink>.</para>
 
     <para>There are three button-related attributes:</para>
     <itemizedlist>
@@ -950,7 +982,7 @@ HtmlCalendar myCalendar = new HtmlCalendar();
         <tbody>
           <row>
             <entry>rich-calendar-popup</entry>
-            
+
             <entry>Defines styles for a popup element</entry>
           </row>
           <row>
