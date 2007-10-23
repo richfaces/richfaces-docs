@@ -164,7 +164,7 @@
         </emphasis> tag allows you to add Ajax functionality to standard JSF components and send
         Ajax request onto a chosen JavaScript event: &quot;onkeyup&quot;,
         &quot;onmouseover&quot;, etc. </para>
-      <para>Most important attributes of components that provide Ajax request calling features are:</para>
+      <!--para>Most important attributes of components that provide Ajax request calling features are:</para>
       <itemizedlist>
         <listitem>
           <emphasis>
@@ -211,8 +211,143 @@
           <emphasis>
             <property>&quot;ignoreDupResponses&quot;</property>
           </emphasis> is used to abort unfinished request on new event. </listitem>
-      </itemizedlist>
+      </itemizedlist-->
     </section>
+
+    <section id="AjaxRequestOptimization">
+      <?dbhtml filename="AjaxRequestOptimization"?>
+      <title>Ajax Request Optimization</title>
+      <section id="Re-Rendering">
+        <?dbhtml filename="Re-Rendering"?>
+        <title>Re-Rendering</title>
+        <para>Ajax attributes are common for Ajax components such as <emphasis role="bold">
+            <property>&lt;a4j:support&gt;</property>
+          </emphasis>, <emphasis role="bold">
+            <property>&lt;a4j:commandButton&gt;</property>
+          </emphasis>, <emphasis role="bold">
+            <property>&lt;a4j:jsFunction&gt;</property>
+          </emphasis>, <emphasis role="bold">
+            <property>&lt;a4j:poll&gt;</property>
+          </emphasis>, <emphasis role="bold">
+            <property>&lt;a4j:push&gt;</property>
+          </emphasis> and so on. Also, most RichFaces components with built-in Ajax support have
+          these attributes for a similar purpose. Ajax components attributes help RichFaces to
+          expose its features. Most of the attributes have default values. Thus, you can start
+          working with RichFaces without knowing the usage of these attribute. However, their usage
+          allows to tune the required Ajax behavior very smoothly.</para>
+
+        <para><emphasis>
+            <property>&quot;reRender&quot;</property>
+          </emphasis> is a key attribute. The attribute allows to point to area(s) on a page that
+          should be updated as a response on Ajax interaction. The value of the <emphasis>
+            <property>&quot;reRender&quot;</property>
+          </emphasis> attribute is an id of the JSF component or an id list. </para>
+        <para>A simple example is placed below:</para>
+
+        <programlisting role="XML"><![CDATA[...
+        <a4j:commandButton value="update" reRender="infoBlock"/>
+            ...
+        <h:panelGrid id="infoBlock">
+            ...
+        </h:panelGrid>
+...
+]]></programlisting>
+
+        <para>The value of <emphasis>
+            <property>&quot;reRender&quot;</property>
+          </emphasis> attribute of the <emphasis role="bold">
+            <property>&lt;a4j:commandButton&gt;</property>
+          </emphasis> tag defines which part(s) of your page is (are) to be updated. In this case,
+          the only part of the page to update is the <emphasis role="bold">
+            <property>&lt;h:panelGrid&gt;</property>
+          </emphasis> tag because its ID value matches to the value of <emphasis>
+            <property>&quot;reRender&quot;</property>
+          </emphasis> attribute. As you see, it&apos;s not difficult to update multiple elements
+          on the page, only list their IDs as the value of <emphasis>
+            <property>&quot;reRender&quot;</property>
+          </emphasis>.</para>
+
+        <para><emphasis>
+            <property>&quot;reRender&quot;</property>
+          </emphasis> uses <ulink
+            url="http://java.sun.com/javaee/javaserverfaces/1.2_MR1/docs/api/javax/faces/component/UIComponent.html#findComponent(java.lang.String)"
+            >UIComponent.findComponent() algorithm</ulink> (with some additional exceptions) to find
+          the component in the component tree. As can you see, the algorithm presumes several steps.
+          Each other step is used if the previous step is not successful. Therefore, you can define
+          how fast the component is found mentioning it more precisely. The following example shows
+          the difference in approaches (both buttons will work successfully):</para>
+
+        <programlisting role="XML"><![CDATA[...
+    <h:form id="form1">
+        ...
+        <a4j: commandButton value="Usual Way" reRender="infoBlock, infoBlock2" />
+        <a4j:commandButton value="Shortcut" reRender=":infoBlockl,:sv:infoBlock2" />
+        ...
+    </h:form>
+    <h:panelGrid id="infoBlock">
+        ...
+    </h:panelGrid>
+    ...
+    <f:subview id="sv">
+      <h:panelGrid id="infoBlock2">
+        ...
+      </h:panelGrid>
+      ...
+    </f:subview>
+...
+]]></programlisting>
+
+        <para>It&apos;s also possible to use JSF EL expression as a value of the reRender
+          attribute. It might be a property of types Set, Collection, Array or simple String. The EL
+          for reRender is resolved right before the Render Response phase. Hence, you can calculate
+          what should be re-rendered on any previous phase during the Ajax request processing.</para>
+
+        <para>Most common problem with using reRender is pointing it to the component that has a <emphasis>
+            <property>&quot;reRender&quot;</property>
+          </emphasis> attribute. Note, that JSF does not mark the place in the browser DOM where the
+          outcome of the component should be placed in case the <emphasis>
+            <property>&quot;rendered&quot;</property>
+          </emphasis> condition returns false. Therefore, after the component becomes rendered
+          during the Ajax request, RichFaces delivers the rendered code to the client, but does not
+          update a page, because the place for update is unknown. You need to point to one of the
+          parent components that has no <emphasis>
+            <property>&quot;rendered&quot;</property>
+          </emphasis> attribute. As an alternative, you can wrap the component with <emphasis role="bold">
+            <property>&lt;a4j:outputPanel&gt;</property>
+          </emphasis> layout=<property>&quot;none&quot;</property>.</para>
+
+        <para><emphasis>
+            <property>&quot;ajaxRendered&quot; </property>
+          </emphasis> attribute of the <emphasis role="bold">
+            <property>&lt;a4j:outputPanel&gt;</property>
+          </emphasis> set to <property>&quot;true&quot;</property> allows to define the area
+          of the page that will be re-rendered even if it is not pointed in the reRender attribute
+          explicitly. It might be useful if you have an area on a page that should be updated as a
+          response on any Ajax request. For example, the following code allows to output error
+          messages regardless of what Ajax request causes the Validation phase failed. </para>
+        <programlisting role="XML"><![CDATA[...
+     <a4j:outputPanel ajaxRendered="true">
+        <h:messages />
+    </a4j:outputPanel>
+...
+]]></programlisting>
+
+        <para><emphasis>
+            <property>&quot;limitToList&quot;</property>
+          </emphasis> attribute allows to dismiss the behavior of the <emphasis role="bold">
+            <property>&lt;a4j:outputPanel&gt;</property>
+          </emphasis>
+          <emphasis>
+            <property>&quot;ajaxRendered&quot; </property>
+          </emphasis> attribute. limitToList = <property>&quot;false&quot;</property> means
+          to update only the area(s) that mentioned in the
+          <emphasis/>&quot;reRender&quot;<property/> attribute explicitly. All output panels
+          with ajaxRendered=<property>&quot;true&quot;</property> will be ignored.</para>
+      </section>
+      
+      
+    </section>
+
     <section id="DecideWhatToSend">
       <?dbhtml filename="DecideWhatToSend.html"?>
       <title>Decide What to Send</title>
@@ -234,6 +369,8 @@
         &quot;false&quot; (&quot;false&quot; is default value). Otherwise, your Ajax
         updates are limited to elements of the active region. </para>
     </section>
+
+
     <section id="DecideWhatToChange">
       <?dbhtml filename="DecideWhatToChange.html"?>
       <title>Decide What to Change</title>
@@ -292,7 +429,8 @@
     <note>
       <title>Note:</title>Fast Filter is deprecated and available only for backward compatibility
       with previous RichFaces versions. Fast Filter usage isn&apos;t recomended, because there
-      is another way to use its functionality by means of <link linkend="Neko">Neko filter type</link>.</note>
+      is another way to use its functionality by means of <link linkend="Neko">Neko filter
+      type</link>.</note>
 
     <para>In RichFaces 3.1 filter configuration becomes more flexible. It&apos;s possible to
       configure different filters for different sets of pages for the same application.</para>
@@ -305,9 +443,9 @@
       </listitem>
     </itemizedlist>
 
-    <para>&quot;TIDY&quot; filter type based on the Tidy parser. This filter is recommended for applications with
-      complicated or non-standard markup when all necessary code corrections are made by the filter
-      when a response comes from the server.</para>
+    <para>&quot;TIDY&quot; filter type based on the Tidy parser. This filter is recommended
+      for applications with complicated or non-standard markup when all necessary code corrections
+      are made by the filter when a response comes from the server.</para>
 
     <itemizedlist>
       <listitem>
@@ -315,11 +453,11 @@
       </listitem>
     </itemizedlist>
 
-    <para>&quot;NEKO&quot; filter type corresponds to the former &quot;Fast Filter&quot; and it&apos;s
-      based on the Neko parser. In case of using this filter code isn&apos;t strictly verified.
-      Use this one if you are sure that your application markup is really strict for this filter.
-      Otherwise it could cause lot&apos;s of errors and corrupt a layout as a result. This
-      filter considerably accelerates all Ajax requests processing.</para>
+    <para>&quot;NEKO&quot; filter type corresponds to the former &quot;Fast
+      Filter&quot; and it&apos;s based on the Neko parser. In case of using this filter code
+      isn&apos;t strictly verified. Use this one if you are sure that your application markup is
+      really strict for this filter. Otherwise it could cause lot&apos;s of errors and corrupt a
+      layout as a result. This filter considerably accelerates all Ajax requests processing.</para>
 
     <itemizedlist>
       <listitem>
@@ -368,9 +506,9 @@
 
     <para>The example shows that ORDER parameter defines the order in which particular filter types
       are used for pages code correction. </para>
-    <para> First of all &quot;NONE&quot; type is specified for the filter. Then two different
-      sets of pages are defined for which two filter types (NONE and NEKO) are used correspondingly.
-      If a page relates to the first set that is defined in the following way: </para>
+    <para> First of all &quot;NONE&quot; type is specified for the filter. Then two
+      different sets of pages are defined for which two filter types (NONE and NEKO) are used
+      correspondingly. If a page relates to the first set that is defined in the following way: </para>
 
     <programlisting role="XML"><![CDATA[<param-value>/pages/performance\.xhtml,/pages/default.*\.xhtml</param-value>,
 ]]></programlisting>
@@ -383,9 +521,9 @@
     <programlisting role="XML"><![CDATA[<param-value>/pages/repeat\.xhtml</param-value>,
 ]]></programlisting>
 
-    <para>then &quot;NEKO&quot; filter type is used for correction. If it&apos;s not related to the second set,
-      &quot;TIDY&quot; type is set for the filter (&quot;TIDY&quot; filter type is used for code
-      correction). </para>
+    <para>then &quot;NEKO&quot; filter type is used for correction. If it&apos;s not
+      related to the second set, &quot;TIDY&quot; type is set for the filter
+      (&quot;TIDY&quot; filter type is used for code correction). </para>
 
   </section>
 
