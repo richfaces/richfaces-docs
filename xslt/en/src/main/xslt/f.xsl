@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:transform xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:javaee="http://java.sun.com/JSP/TagLibraryDescriptor"
+	xmlns:javaee="http://java.sun.com/xml/ns/javaee"
 	version="1.0" exclude-result-prefixes="javaee">
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
 		omit-xml-declaration="yes" />
