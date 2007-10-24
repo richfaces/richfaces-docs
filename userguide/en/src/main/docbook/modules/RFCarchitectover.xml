@@ -215,10 +215,10 @@
     </section>
 
     <section id="AjaxRequestOptimization">
-      <?dbhtml filename="AjaxRequestOptimization"?>
+      <?dbhtml filename="AjaxRequestOptimization.html"?>
       <title>Ajax Request Optimization</title>
       <section id="Re-Rendering">
-        <?dbhtml filename="Re-Rendering"?>
+        <?dbhtml filename="Re-Rendering.html"?>
         <title>Re-Rendering</title>
         <para>Ajax attributes are common for Ajax components such as <emphasis role="bold">
             <property>&lt;a4j:support&gt;</property>
@@ -312,7 +312,8 @@
           update a page, because the place for update is unknown. You need to point to one of the
           parent components that has no <emphasis>
             <property>&quot;rendered&quot;</property>
-          </emphasis> attribute. As an alternative, you can wrap the component with <emphasis role="bold">
+          </emphasis> attribute. As an alternative, you can wrap the component with <emphasis
+            role="bold">
             <property>&lt;a4j:outputPanel&gt;</property>
           </emphasis> layout=<property>&quot;none&quot;</property>.</para>
 
@@ -339,13 +340,243 @@
           </emphasis>
           <emphasis>
             <property>&quot;ajaxRendered&quot; </property>
-          </emphasis> attribute. limitToList = <property>&quot;false&quot;</property> means
-          to update only the area(s) that mentioned in the
-          <emphasis/>&quot;reRender&quot;<property/> attribute explicitly. All output panels
-          with ajaxRendered=<property>&quot;true&quot;</property> will be ignored.</para>
+          </emphasis> attribute. &quot;limitToList&quot; =
+            <property>&quot;false&quot;</property> means to update only the area(s) that
+          mentioned in the <emphasis/>&quot;reRender&quot;<property/> attribute explicitly.
+          All output panels with
+          &quot;ajaxRendered&quot;=<property>&quot;true&quot;</property> will be
+          ignored.</para>
       </section>
-      
-      
+
+      <section id="QueueandTrafficFloodProtection">
+        <?dbhtml filename="QueueandTrafficFloodProtection.html"?>
+        <title>Queue and Traffic Flood Protection</title>
+        <para><emphasis>
+            <property>&quot;eventsQueue&quot;</property>
+          </emphasis> attribute defines the name of the queue that will be used to order upcoming
+          Ajax requests. By default, RichFaces does not queue Ajax requests. If events are produced
+          simultaneously, they will come to the server simultaneously. JSF implementations
+          (especially, the very first ones) does not guaranty that the request that comes first will
+          be served or passed into the JSF lifecycle first. The order how the server side data will
+          be modified in case of simultaneous request might be unpredictable. Usage of eventsQueue
+          attribute allows to avoid possible mess. Define the queue name explicitly, if you expect
+          intensive Ajax traffic in your application.</para>
+        <para>The next request posted in the same queue will wait until the previos one is not
+          processed and Ajax Response is returned back if the <emphasis>
+            <property>&quot;eventsQueue&quot;</property>
+          </emphasis> attribute is defined. In addition, Richfaces starts to remove from the queue
+          &quot;similar&quot; requests. &quot;Similar'&quot;requests are the
+          requests produced by the same event. For example, according to the following code, only
+          the newest request will be sent to the server if a user types very fast and has typed the
+          several characters already before the previous Ajax Response is back.</para>
+
+        <programlisting role="XML"><![CDATA[...
+    <h:inputText value="#{userBean.name}">
+        <a4j:support event="onkeyup" eventsQueue="foo" reRender="bar" />
+    </h:inputText>
+...
+]]></programlisting>
+
+        <para><emphasis>
+            <property>&quot;requestDelay&quot;</property>
+          </emphasis> attribute defines the time (in ms) that the request will be wait in the queue
+          before it is ready to send. When the delay time is over, the request will be sent to the
+          server or removed if the newest &quot;similar&quot; request is in a queue already
+          .</para>
+        <para><emphasis>
+            <property>&quot;ignoreDupResponses&quot;</property>
+          </emphasis> attribute orders to ignore the Ajax Response produced by the request if the
+          newest &quot;similar&quot; request is in a queue already.
+            &quot;ignoreDupResponses&quot;=<property>&quot;true&quot;</property>
+          does not cancel the request while it is processed on the server, but just allows to avoid
+          unnecessary updates on the client side if the response loses the actuality.</para>
+        <para>Defining the <emphasis>
+            <property>&quot;eventsQueue&quot;</property>
+          </emphasis> along with <emphasis>
+            <property>&quot;requestDelay&quot;</property>
+          </emphasis> allows to protect against unnecessary traffic flood and synchronizes Ajax
+          requests order. If you have several sources of Ajax requests, you can define the same
+          queue name there. This might be very helpful if you have Ajax components that invoke
+          request asynchronously from the ones produced by events from users. For example, <emphasis
+            role="bold">
+            <property>&lt;a4j:poll&gt;</property>
+          </emphasis> or <emphasis role="bold">
+            <property>&lt;a4j:push&gt;</property>
+          </emphasis>. In case the requests from such components modify the same data, the
+          synchronization might be very helpful.</para>
+
+        <para>More information can be found on the <ulink
+            url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=105766"
+            >RichFaces Users Forum</ulink>.</para>
+      </section>
+
+      <section id="DataProcessingOptions">
+        <?dbhtml filename="DataProcessingOptions.html"?>
+        <title>Data Processing Options</title>
+        <para>RichFaces uses form based approach for Ajax request sending. This means each time,
+          when a user click an Ajax button or <emphasis role="bold">
+            <property>&lt;a4j:poll&gt;</property>
+          </emphasis> produces an asynchronous request, the data from the closest JSF form is
+          submitted with the XMLHTTPRequest object. The form data contains the values from the form
+          input element and auxiliary information such as state saving data.</para>
+        <para>When <emphasis>
+            <property>&quot;ajaxSingle&quot;</property>
+          </emphasis> attribute value is <property>&quot;true&quot;</property>, it orders to
+          include only a value of the current component (along with <emphasis role="bold">
+            <property>&lt;f:param&gt;</property>
+          </emphasis> or <emphasis role="bold">
+            <property>&lt;a4j:action&gt;</property>
+          </emphasis> param values if any) to the request map. In case of <emphasis role="bold">
+            <property>a4j:support</property>
+          </emphasis>, it will be a value of the parent component.</para>
+        <para>Note, that
+          &quot;ajaxSingle&quot;=<property>&quot;true&quot;</property> reduces the
+          upcoming traffic, but does not prevent decoding other input components on the server side.
+          Some JSF components, such as <emphasis role="bold">
+            <property>&lt;h:selectOneMenu&gt;</property>
+          </emphasis> do recognize the missing data in the request map value as a null value and try
+          to pass the validation process with a failed result. Thus, use <emphasis role="bold">
+            <property>&lt;a4j:region&gt;</property>
+          </emphasis> to limit a part of the component tree that will be processed on the server
+          side when it is required.</para>
+        <para><emphasis>
+            <property>&quot;immediate&quot;</property>
+          </emphasis> attribute has the same purpose as any other non-JSF component. The default <emphasis>
+            <property>&quot;ActionListener&quot;</property>
+          </emphasis> should be executed immediately (i.e. during the Apply Request Values phase of
+          a request processing lifecycle), rather than waiting until the Invoke Application phase.
+          Using immediate=<property>&quot;true&quot;</property> is one of the ways to have
+          some data model values updated when other cannot be updated because of a problem with
+          passing the Validation phase successfully. This might be important inside the <emphasis
+            role="bold">
+            <property>&lt;h:dataTable&gt;</property>
+          </emphasis> like components where using <emphasis role="bold">
+            <property>&lt;a4j:region&gt;</property>
+          </emphasis> is impossible due to the <emphasis role="bold">
+            <property>&lt;h:dataTable&gt;</property>
+          </emphasis> component architecture.</para>
+
+        <para><emphasis>
+            <property>&quot;bypassUpdates&quot;</property>
+          </emphasis> attribute allows to bypass the Update Model phase. It might be useful if you
+          need to check user input against the available validator, but not to update the model with
+          those data. Note, that an action will be invoked at the end of the Validation phase only
+          if the Validation phase is passed successfully. The listeners of the Application phase
+          will not be invoked in any case.</para>
+      </section>
+
+      <section id="ActionandNavigation">
+        <?dbhtml filename="ActionandNavigation.html"?>
+        <title>Action and Navigation</title>
+        <para>Ajax component is similar to any other non-Ajax JSF component like <emphasis
+            role="bold">
+            <property>&lt;h:commandButton&gt;</property>
+          </emphasis>. It allows to submit the form. You can use <emphasis>
+            <property>&quot;action&quot;</property>
+          </emphasis> and <emphasis>
+            <property>&quot;actionListener&quot;</property>
+          </emphasis> attribute to invoke the action method and define the action event.</para>
+        <para><emphasis>
+            <property>&quot;action&quot;</property>
+          </emphasis> method must return null if you want to have an Ajax Response with a partual
+          page update. This is regular mode called "Ajax request generates Ajax Response". In case
+          of action does not return null, but the action outcome that matches one of navigation
+          rules, RichFaces starts to work in "Ajax request generates Non-Ajax Response" mode. This
+          mode might be helpful in two major cases:</para>
+        <itemizedlist>
+          <listitem>RichFaces allows to organize a page flow inside the <emphasis role="bold">
+              <property>&lt;a4j:include&gt;</property>
+            </emphasis> component. This is a typical scenario for Wizard like behavior. The new
+            content is rendered inside the <emphasis role="bold">
+              <property>&lt;a4j:include&gt;</property>
+            </emphasis> area. The content is taken from the navigation rule of the faces
+            configuration file (usually, the faces-config.xml). Note, that the content of the
+            "wizard" is not isolated from the rest of the page. The included page should not have
+            own <emphasis role="bold">
+              <property>&lt;f:view&gt;</property>
+            </emphasis> (it does not matter if you use facelets). You need to have an Ajax component
+            inside the <emphasis role="bold">
+              <property>&lt;a4j:include&gt;</property>
+            </emphasis> to navigate between the wizard pages. Otherwize, the whole page update will
+            be performed.</listitem>
+          <listitem>If you want to involve the server side validators and navigate to the next page
+            only if the Validation phase is passed successfully, you can replace <emphasis
+              role="bold">
+              <property>&lt;h:commandButton&gt;</property>
+            </emphasis> with <emphasis role="bold">
+              <property>&lt;a4j:commandButton&gt;</property>
+            </emphasis> and point to the action method that navigates to the next page. If
+            Validation process fails, the partial page update will occur and a user will see an
+            error message. Otherwize, the application proceeds to the next page. Make sure, you
+            define &lt;redirect/&gt; option for the navigation rule to avoid memory
+          leaks.</listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="JavascriptInteractions">
+        <?dbhtml filename="JavascriptInteractions.html"?>
+        <title>JavaScript Interactions</title>
+        <para>RichFaces allows writing Ajax-enabled JSF application without writing any Javascript
+          code. However, you can still invoke the javascript code if you need. There are several
+          ajax attributes that helps to do it.</para>
+        <para><emphasis>
+            <property>&quot;onsubmit&quot;</property>
+          </emphasis> attribute allows to invoke JavaScript code before an Ajax request is sent. If <emphasis>
+            <property>&quot;onsubmit&quot;</property>
+          </emphasis> returns <property>&quot;false&quot;</property>, the Ajax request is
+          canceled. The code of <emphasis>
+            <property>&quot;onsubmit&quot;</property>
+          </emphasis> is inserted before the RichFaces Ajax call. Hence, the <emphasis>
+            <property>&quot;onsubmit&quot;</property>
+          </emphasis> should not has a &quot;return&quot; statement if you want the Ajax
+          request to be sent. If you are going to invoke a JavaScript function that returns
+            <property>&quot;true&quot;</property> or
+          <property>&quot;false&quot;</property>, use the conditional statement to return
+          something only when you need to cancel the request. For example: </para>
+        <programlisting role="XML"><![CDATA[...
+    onsubmit="if (mynosendfunct()==false){return false}"
+...
+]]></programlisting>
+
+        <para><emphasis>
+            <property>&quot;onclick&quot;</property>
+          </emphasis> attribute is similar to the <emphasis>
+            <property>&quot;onsubmit&quot;</property>
+          </emphasis>, but for clickable components such as <emphasis role="bold">
+            <property>&lt;a4j:commandLink&gt;</property>
+          </emphasis> and <emphasis role="bold">
+            <property>&lt;a4j:commandButton&gt;</property>
+          </emphasis>. If it returns <property>&quot;false&quot;</property>, the Ajax
+          request is canceled also.</para>
+        <para><emphasis>
+            <property>&quot;oncomplete&quot;</property>
+          </emphasis> attribute allows to invoke the JavaScript code right after the Ajax Response
+          is returned back and the DOM tree of the browser is updated. Richfaces registers the code
+          for further invocation of XMLHTTP request object before an Ajax request is sent. This
+          means the code will not be changed during processing of the request on the server if you
+          use JSF EL value binding. Also, you cannot use &quot;this'&quot; inside the code,
+          because it will not point the component where Ajax request was initiated.</para>
+
+        <para><emphasis>
+            <property>&quot;data&quot;</property>
+          </emphasis> attribute allows to get the additional data from the server during an Ajax
+          call. You can use JSF EL to point the property of the managed bean and its value will be
+          serialized in JSON format and be available on the client side. You can refer to it using
+          the <emphasis>
+            <property>&quot;data&quot;</property>
+          </emphasis> variable. For example:</para>
+        <programlisting role="XML"><![CDATA[...
+    <a4j:commandButton value="Update" data="#{userBean.name}" oncomplete="showTheName(data.name)" />
+...
+]]></programlisting>
+
+        <para>Richfaces allows to serialize not only primitive types into JSON format, but also
+          complex types including arrays and collections. The beans should be serializable to be
+          refered with <emphasis>
+            <property>&quot;data&quot;</property>
+          </emphasis>.</para>
+      </section>
+
     </section>
 
     <section id="DecideWhatToSend">
