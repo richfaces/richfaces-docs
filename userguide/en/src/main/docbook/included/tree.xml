@@ -89,10 +89,10 @@ HtmlTree myPanel = new HtmlTree();
   </section>
   <section>
     <title>Details of Usage</title>
-    <para>As it has been mentioned above the tree component allows rendering any tree-like structure
-      of data.</para>
-    <para>A bean property is passed into a tree <property>&quot;value&quot;</property>
-      attribute. The property keeps a structure of an<ulink
+    <para>As it has been mentioned <link linked="tree">above</link> the tree component allows
+      rendering any tree-like structure of data.</para>
+    <para>A bean property is passed into a tree <emphasis><property>&quot;value&quot;</property></emphasis>
+      attribute. The property keeps a structure of an <ulink
         url="http://labs.jboss.com/file-access/default/members/jbossrichfaces/freezone/docs/apidoc/org/richfaces/component/TreeNode.html"
         >org.richfaces.component.TreeNode</ulink> type.</para>
     <para>There is a default class TreeNodeImpl which is used for treeNode interface implementation.
@@ -101,19 +101,19 @@ HtmlTree myPanel = new HtmlTree();
     <para><emphasis role="bold">
         <property>&lt;rich:treeNode&gt;</property>
       </emphasis> has getValue method which is available in a request scope variable with name that
-      is defined by <property>&quot;var&quot;</property> attribute of tree component. </para>
-    
+      is defined by <emphasis><property>&quot;var&quot;</property></emphasis> attribute of tree component. </para>
+
     <para>For particular visual representation of data <emphasis role="bold">
         <property>&lt;rich:tree&gt;</property>
       </emphasis> selects by type one of the children treeNode components. The type is defined with
-      the <property>&quot;nodeFace&quot;</property> attribute that contains value of
-        <property>&quot;type&quot;</property> attribute for treeNode. An example of
-        definition is placed below: </para>
-    
+      the <emphasis><property>&quot;nodeFace&quot;</property></emphasis> attribute that contains value of
+      <emphasis><property>&quot;type&quot;</property></emphasis> attribute for treeNode. An example of
+      definition is placed below: </para>
+
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    
+
     <programlisting role="JAVA"><![CDATA[...
       <h:form>    
         <rich:tree style="width:300px" value="#{library.data}" var="item" nodeFace="#{item.type}">
@@ -130,10 +130,9 @@ HtmlTree myPanel = new HtmlTree();
 </h:form>
 ...
     ]]></programlisting>
-    
-    <para>This is a result:
-    </para>
-    
+
+    <para>This is a result: </para>
+
     <figure>
       <title>Expanded tree with child elements of different types</title>
       <mediaobject>
@@ -142,57 +141,105 @@ HtmlTree myPanel = new HtmlTree();
         </imageobject>
       </mediaobject>
     </figure>
-    
-    <para>For data output, named <property>tree</property> nodes elements are used. Each element,
-      for example depending on its definition, could be rendered with markup defined in one of
-        <property>tree</property> nodes. It&apos;s defined with the <emphasis>
+
+    <para>In case when <emphasis>
         <property>&quot;nodeFace&quot;</property>
-      </emphasis> attribute that contains treeNode name for elements rendering. It&apos;s not
-      necessary to define <emphasis>
-        <property>&quot;nodeFace&quot;</property>
-      </emphasis> attribute. In case when <emphasis>
-        <property>&quot;nodeFace&quot;</property>
-      </emphasis> is undefined the first node inside the tree will be use by default (attributes <emphasis>
-        <property>&quot;rendered</property>
-      </emphasis> and <emphasis>
+      </emphasis> attribute isn&apos;t defined or defined but its value isn&amp;t equal to
+      any type of all children treeNode components or this value is equal to some type, but the
+      value of <emphasis>
+        <property>&quot;rendered&quot;</property>
+      </emphasis> attribute for this treeNode is not defined then default treeNode is used. </para>
+
+    <para> Default treeNode is the first node (with not defined <emphasis>
         <property>&quot;type&quot;</property>
-      </emphasis> for this node should not be defined). </para>
+      </emphasis> attribute and defined <emphasis>
+        <property>&quot;rendered&quot;</property>
+      </emphasis> attribute) from all children nodes of tree component. If such treeNode
+      wasn&apos;t found, following default interior presentation is used: </para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="JAVA"><![CDATA[nodeFace="#{data.name != 'param-value' ? 'input' : 'text'}"
+
+    <programlisting role="JAVA"><![CDATA[<h: outputText value="#{varAttributeName}">
     ]]></programlisting>
-    <para>On the screenshot there are examples of nodes defined with different templates on the
-      following conditions.</para>
+
+    <para> varAttributeName is a value for <emphasis>
+        <property>&quot;var&quot;</property>
+      </emphasis> attribute. </para>
+
+    <para> It&amp;s possible to define several treeNode components with equal values of <emphasis>
+        <property>&quot;type&quot;</property>
+      </emphasis> attribute and different values of <emphasis>
+        <property>&quot;rendered&quot;</property>
+      </emphasis> attribute. It provides the possibility to define different markup for the same
+      treeNode components type. An example is placed below. </para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+
+    <programlisting role="JAVA"><![CDATA[...
+      <h:form>    
+        <rich:tree style="width:300px" value="#{library.data}" var="item" nodeFace="#{item.type}">
+            <rich:treeNode type="artist" iconLeaf="/images/tree/singer.gif" icon="/images/tree/singer.gif"
+rendered=”#{item.exist}”>
+                <h:outputText value="#{item.name}" />
+            </rich:treeNode>
+          <rich:treeNode type="artist" iconLeaf="/images/tree/singer.gif" icon="/images/tree/singer_absent.gif"
+rendered=”#{not item.exist}”>
+                <h:outputText value="#{item.name}" />
+            </rich:treeNode>
+	…
+        </rich:tree>
+</h:form>
+...
+    ]]></programlisting>
+
+    <para> The example represents definition of two different treeNode components. The first
+      specifies the album that&apos;s available for sale, the other specifies the album that is
+      not available. The result is shown on the following screenshot: </para>
+
     <figure>
-      <title>Different nodes of tree</title>
+      <title> Using the <emphasis>
+        <property>&quot;type&quot;</property>
+      </emphasis> and the <emphasis>
+        <property>&quot;rendered&quot;</property>
+      </emphasis> attributes</title>
       <mediaobject>
         <imageobject>
-          <imagedata fileref="images/tree2.gif"/>
+          <imagedata fileref="images/tree4.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>Switching on nodes opening/closing (expanded/collapsed) could be implemented in three
-      modes. It could be specified in the <emphasis>
+
+    <para> You can define an EL-expression for <emphasis>
+        <property>&quot;nodeFace&quot;</property>
+      </emphasis> attribute. See an example: </para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+
+    <programlisting role="JAVA"><![CDATA[nodeFace="#{data.name != 'param-value' ? 'artist' : 'album'}"
+    ]]></programlisting>
+
+    <para> Switching on treeNode could be performed in three modes. Modes could be specified with <emphasis>
         <property>&quot;switchType&quot;</property>
       </emphasis> attribute. </para>
+
     <itemizedlist>
-      <listitem>AJAX - request onto the server is used for switching </listitem>
-      <listitem>Server - custom requests onto the server are used for switching</listitem>
-      <listitem>Client - all data is uploaded onto the server, the switching is implemented with a
-        client script</listitem>
+      <listitem>Ajax - Ajax submission is used for switching </listitem>
+      <listitem>Server - regular form submition request is used</listitem>
+      <listitem>Client - switching is done as a whole on a client, server iteration is
+      absent</listitem>
     </itemizedlist>
-    <para>Common selecting allows also to activate Ajax requests with the <emphasis>
+
+    <para>If <emphasis>
         <property>&quot;ajaxSubmitSelection&quot;</property>
-      </emphasis> attribute (true/false).</para>
-    <para>To set a model saving during requests, use the <emphasis>
-        <property>&quot;preserveModel&quot;</property>
-      </emphasis>attribute with state, request (default) and none values. The attribute is used for
-      cashing data between requests in a state or request. The <emphasis>
-        <property>&quot;treeDataLocator&quot;</property>
-      </emphasis> attribute defines a class providing an access to cashed data according to the ids
-      saved in state/request on recovery or cashing data saving the Id on caching.</para>
+      </emphasis> attribute value set to <emphasis>
+        <property>&quot;true&quot;</property>
+      </emphasis> than any change in selection initiates Ajax request to server.</para>
 
     <para> The <emphasis>
         <property>&quot;icon&quot;</property>
@@ -204,42 +251,60 @@ HtmlTree myPanel = new HtmlTree();
         <property>&quot;iconLeaf&quot;</property>
       </emphasis> attributes define icons for the component. Also you can define icons using facets
       with the same names. If the facets are defined, the corresponding attributes are ignored and
-      facets contents are used as icons. The width of a rendered facet area is 16px. </para>
+      facets contents are used as icons. By default the width of a rendered facet area is 16px. </para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
 
     <programlisting role="JAVA"><![CDATA[...
     <rich:tree ....>
         ...
         <f:facet name="icon">
-            <hutputText value="A"/>
+            <h:graphicImage value="/images/tree/singer.gif "/>
         </f:facet>
         <f:facet name="iconCollapsed">
-            <hutputText value="B"/>
-        </f:facet>		
+            <h:graphicImage value="/images/tree/singer.gif " />
+        </f:facet>      
         <f:facet name="iconExpanded">
-            <hutputText value="C"/>
+            <h:graphicImage value="/images/tree/singer.gif " />
         </f:facet>
         <f:facet name="iconLeaf">
-            <hutputText value="D"/>
+            <h:graphicImage value="/images/tree/song.gif " />
         </f:facet>
+
         ...
     </rich:tree>
 ...
 ]]></programlisting>
 
+    <para> The <emphasis role="bold">
+        <property>&lt;rich: tree&gt;</property>
+      </emphasis> component can be used together with <emphasis role="bold">
+        <property>&lt;rich: treeNodeAdaptor&gt;</property>
+      </emphasis>. In this case there is no need to specify the attributes <emphasis>
+        <property>&quot;value&quot;</property>
+      </emphasis> and <emphasis>
+        <property>&quot;var&quot;</property>
+      </emphasis>. Besides, visual representation shouldn’t be defined right in the tree. There is
+      possibility to use common attributes such as <emphasis>
+        <property>&quot;ajaxSubmitSelection&quot;</property>
+      </emphasis>, for instance. </para>
+
   </section>
   <section>
     <title>Built-In Drag and Drop</title>
     <para>The tree component functionality provides a built-in support for Drag and Drop operations.
-      The main usage principles are the same as for Rich Faces Drag and Drop wrapper components.
+      The main usage principles are the same as for RichFaces DnD wrapper components.
       Hence, to get additional information on the topic, read the corresponding chapters:<link
         linkend="dndParam">&quot;rich:dndParam&quot;</link>
       <link linkend="dragSupport">&quot;rich:dragSupport&quot;</link>
       <link linkend="dragIndicator">&quot;rich:dragIndicator&quot;</link>
       <link linkend="dropSupport">&quot;rich:dropSupport&quot;</link>
-      <property>Tree nodes</property> could be drag or drop elements, so tree has both attributes
+      <property>Tree nodes</property> could be Drag, Drop or DnD elements, so tree has both attributes
       groups.</para>
     <table>
-      <title>Drag attributes description</title>
+      <title>Drag attributes group</title>
       <tgroup cols="2">
         <thead>
           <row>
@@ -261,7 +326,7 @@ HtmlTree myPanel = new HtmlTree();
       </tgroup>
     </table>
     <table>
-      <title>Drop attributes description</title>
+      <title>Drop attributes group</title>
       <tgroup cols="2">
         <thead>
           <row>
@@ -293,9 +358,12 @@ HtmlTree myPanel = new HtmlTree();
       <listitem>nodeSelectListener is called during request sending on a node selecting event (if
         request sending on this event is defined)</listitem>
       <listitem>dropListener processes Drop event</listitem>
+      <listitem>dragListener processes Drug event</listitem>
       <listitem>changeExpandListener processes expand/collapse event of a tree node</listitem>
     </itemizedlist>
-    <para>Moreover, to add e.g. some JavaScript effects, client events defined on it are used:</para>
+    
+    <para>Listener methods can be defined using the <link linked="treeNode">following attributes</link> or using nested tags.</para>
+    <para>Client event attributes are:</para>
     <itemizedlist>
       <listitem>onexpand - expands a node event</listitem>
       <listitem>oncollapse - collapses a node event</listitem>
@@ -305,7 +373,15 @@ HtmlTree myPanel = new HtmlTree();
       <listitem>ondragenter - drags an element appearing on a tree event</listitem>
     </itemizedlist>
 
-    <para> Also standart HTML event attributes like "onclick", "onmousedown", "onmouseover" and etc.
+    <para>They can be used to add some JavaScript effects.</para>
+    
+    <para> Also standart HTML event attributes like<emphasis>
+      <property>&quot;onclick&quot;</property>
+    </emphasis>, <emphasis>
+      <property>&quot;onmousedown&quot;</property>
+    </emphasis>, <emphasis>
+      <property>&quot;onmouseover&quot;</property>
+    </emphasis> and etc.
       could be used. Event handlers of a tree component capture events occured on any tree part. But
       event handlers of treeNode capture events occured on treeNode only, except for children
       events. </para>
