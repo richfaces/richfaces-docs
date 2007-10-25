@@ -128,93 +128,8 @@
         incorrect HTML code. </listitem>
     </itemizedlist>
   </section>
-  <section id="HowTo...">
-    <?dbhtml filename="HowTo.html"?>
-    <title>How To...</title>
-    <section id="SendAnAJAXRequest">
-      <?dbhtml filename="SendAnAJAXRequest.html"?>
-      <title>Send an Ajax request</title>
-      <para>There are different ways to send Ajax requests from your JSF page. For example you can
-        use <emphasis role="bold">
-          <property>&lt;a4j:commandButton&gt;</property>
-        </emphasis>, <emphasis role="bold">
-          <property>&lt;a4j:commandLink&gt;</property>, <emphasis role="bold">
-            <property>&lt;a4j:poll&gt;</property>
-          </emphasis>
-        </emphasis> or <emphasis role="bold">
-          <property>&lt;a4j:support&gt;</property>
-        </emphasis> tags or any other. </para>
-      <para>All these tags hide the usual JavaScript activities that are required for an
-        XMHttpRequest object building and an Ajax request sending. Also, they allow you to decide
-        which components of your JSF page are to be re-rendered as a result of the Ajax response
-        (you can list the IDs of these components in the &quot;reRender&quot; attribute). </para>
-      <para>
-        <emphasis role="bold">
-          <property>&lt;a4j:commandButton&gt;</property>
-        </emphasis> and <emphasis role="bold">
-          <property>&lt;a4j:commandLink&gt;</property>
-        </emphasis> tags are used to send an Ajax request on &quot;onclick&quot; JavaScript
-        event. </para>
-      <para>
-        <emphasis role="bold">
-          <property>&lt;a4j:poll&gt;</property>
-        </emphasis> tag is used to send an Ajax request periodically using a timer. </para>
-      <para>The <emphasis role="bold">
-          <property>&lt;a4j:support&gt;</property>
-        </emphasis> tag allows you to add Ajax functionality to standard JSF components and send
-        Ajax request onto a chosen JavaScript event: &quot;onkeyup&quot;,
-        &quot;onmouseover&quot;, etc. </para>
-      <!--para>Most important attributes of components that provide Ajax request calling features are:</para>
-      <itemizedlist>
-        <listitem>
-          <emphasis>
-            <property>&quot;reRender&quot;</property>
-          </emphasis>attribute as it was mentioned <link linkend="SendAnAJAXRequest">before</link>
-          specifies components to be reRendered after Ajax response. The attribute can be specified
-          using EL expression and formed dynamicaly on the server side (see <ulink
-            url="index.html#FAQ">FAQ chapter</ulink>). </listitem>
-        <listitem>
-          <emphasis>
-            <property>&quot;RequestDelay&quot;</property>
-          </emphasis> attribute is used for a requests frequency regulation. </listitem>
-      </itemizedlist>
-      <programlisting role="XML"><![CDATA[<h:inputText size="50" value="#{bean.text}">
-        <a4j:support event="onkeyup" RequestDelay="3"/>
-</h:inputText>]]></programlisting>
-      <para>So every next request from the frequent keyboard events will be delayed on 3 ms to
-        reduce the number of requests. </para>
-      <itemizedlist>
-        <listitem>
-          <emphasis>
-            <property>&quot;EventsQueue&quot;</property>
-          </emphasis> is a queue that stores the next request. </listitem>
-        <listitem>
-          <emphasis>
-            <property>&quot;LimitToList&quot;</property>
-          </emphasis> attribute is used to regulate updatable regions. Setting it to true limits the
-          updatable areas only to ones specified in a reRender list, in other case all Output Panels
-          of the region are updated. </listitem>
-        <listitem>
-          <emphasis>
-            <property>&quot;ajaxSingle&quot;</property>
-          </emphasis> attributes specify regions to be sent with a request, if
-          &quot;false&quot; it is a full region, in other case it&apos;s is only a
-          control caused event. </listitem>
-
-        <listitem>
-          <emphasis>
-            <property>&quot;timeout&quot;</property>
-          </emphasis>attribute is used for response waiting time on a particular request. If a
-          response is not received during this time, the request is aborted. </listitem>
-
-        <listitem>
-          <emphasis>
-            <property>&quot;ignoreDupResponses&quot;</property>
-          </emphasis> is used to abort unfinished request on new event. </listitem>
-      </itemizedlist-->
-    </section>
-
-    <section id="AjaxRequestOptimization">
+  
+  <section id="AjaxRequestOptimization">
       <?dbhtml filename="AjaxRequestOptimization.html"?>
       <title>Ajax Request Optimization</title>
       <section id="Re-Rendering">
@@ -578,6 +493,94 @@
       </section>
 
     </section>
+  
+  <section id="HowTo...">
+    <?dbhtml filename="HowTo.html"?>
+    <title>How To...</title>
+    <section id="SendAnAJAXRequest">
+      <?dbhtml filename="SendAnAJAXRequest.html"?>
+      <title>Send an Ajax request</title>
+      <para>There are different ways to send Ajax requests from your JSF page. For example you can
+        use <emphasis role="bold">
+          <property>&lt;a4j:commandButton&gt;</property>
+        </emphasis>, <emphasis role="bold">
+          <property>&lt;a4j:commandLink&gt;</property>, <emphasis role="bold">
+            <property>&lt;a4j:poll&gt;</property>
+          </emphasis>
+        </emphasis> or <emphasis role="bold">
+          <property>&lt;a4j:support&gt;</property>
+        </emphasis> tags or any other. </para>
+      <para>All these tags hide the usual JavaScript activities that are required for an
+        XMHttpRequest object building and an Ajax request sending. Also, they allow you to decide
+        which components of your JSF page are to be re-rendered as a result of the Ajax response
+        (you can list the IDs of these components in the &quot;reRender&quot; attribute). </para>
+      <para>
+        <emphasis role="bold">
+          <property>&lt;a4j:commandButton&gt;</property>
+        </emphasis> and <emphasis role="bold">
+          <property>&lt;a4j:commandLink&gt;</property>
+        </emphasis> tags are used to send an Ajax request on &quot;onclick&quot; JavaScript
+        event. </para>
+      <para>
+        <emphasis role="bold">
+          <property>&lt;a4j:poll&gt;</property>
+        </emphasis> tag is used to send an Ajax request periodically using a timer. </para>
+      <para>The <emphasis role="bold">
+          <property>&lt;a4j:support&gt;</property>
+        </emphasis> tag allows you to add Ajax functionality to standard JSF components and send
+        Ajax request onto a chosen JavaScript event: &quot;onkeyup&quot;,
+        &quot;onmouseover&quot;, etc. </para>
+      <!--para>Most important attributes of components that provide Ajax request calling features are:</para>
+      <itemizedlist>
+        <listitem>
+          <emphasis>
+            <property>&quot;reRender&quot;</property>
+          </emphasis>attribute as it was mentioned <link linkend="SendAnAJAXRequest">before</link>
+          specifies components to be reRendered after Ajax response. The attribute can be specified
+          using EL expression and formed dynamicaly on the server side (see <ulink
+            url="index.html#FAQ">FAQ chapter</ulink>). </listitem>
+        <listitem>
+          <emphasis>
+            <property>&quot;RequestDelay&quot;</property>
+          </emphasis> attribute is used for a requests frequency regulation. </listitem>
+      </itemizedlist>
+      <programlisting role="XML"><![CDATA[<h:inputText size="50" value="#{bean.text}">
+        <a4j:support event="onkeyup" RequestDelay="3"/>
+</h:inputText>]]></programlisting>
+      <para>So every next request from the frequent keyboard events will be delayed on 3 ms to
+        reduce the number of requests. </para>
+      <itemizedlist>
+        <listitem>
+          <emphasis>
+            <property>&quot;EventsQueue&quot;</property>
+          </emphasis> is a queue that stores the next request. </listitem>
+        <listitem>
+          <emphasis>
+            <property>&quot;LimitToList&quot;</property>
+          </emphasis> attribute is used to regulate updatable regions. Setting it to true limits the
+          updatable areas only to ones specified in a reRender list, in other case all Output Panels
+          of the region are updated. </listitem>
+        <listitem>
+          <emphasis>
+            <property>&quot;ajaxSingle&quot;</property>
+          </emphasis> attributes specify regions to be sent with a request, if
+          &quot;false&quot; it is a full region, in other case it&apos;s is only a
+          control caused event. </listitem>
+
+        <listitem>
+          <emphasis>
+            <property>&quot;timeout&quot;</property>
+          </emphasis>attribute is used for response waiting time on a particular request. If a
+          response is not received during this time, the request is aborted. </listitem>
+
+        <listitem>
+          <emphasis>
+            <property>&quot;ignoreDupResponses&quot;</property>
+          </emphasis> is used to abort unfinished request on new event. </listitem>
+      </itemizedlist-->
+    </section>
+
+    
 
     <section id="DecideWhatToSend">
       <?dbhtml filename="DecideWhatToSend.html"?>
