@@ -44,8 +44,10 @@
 
   <section>
     <title>Creating the Component with a Page Tag</title>
-    <para>There are two cases for a tree definition: without adapters and with adapters. In the
-      first case, it&apos;s necessary to define it with <emphasis>
+    <para>There are two cases for a tree definition: together with <emphasis role="bold">
+      <property>&lt;rich:recursiveTreeNodesAdaptor&gt;</property>
+    </emphasis>
+      and without it. In the first case, it’s possible to define it without <emphasis>
         <property>&quot;value&quot;</property>
       </emphasis> and <emphasis>
         <property>&quot;var&quot;</property>
@@ -54,23 +56,27 @@
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="XML"><![CDATA[...
-    <rich:tree value="#{library.data}" var="item" >
-        <!--Set of the Tree nodes-->
-    </rich:tree>
-...
-]]></programlisting>
-
-    <para>In the second case, it’s possible to define it without these attributes as it’s shown
-      below. </para>
-
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
 
     <programlisting role="XML"><![CDATA[...
     <rich:tree>
         <rich:recursiveTreeNodesAdaptor roots="#{fileSystemBean.sourceRoots}" var="item" nodes="#{item.nodes}" />
+    </rich:tree>
+...
+]]></programlisting>
+
+
+    <para> In the second case, it&apos;s necessary to define it with these attributes as it’s
+      shown below: </para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+    <rich:tree value="#{library.data}" var="item" >
+           <rich:treeNode  icon="/images/tree/singer.png" >
+                <h:outputText value="#{item.name}" />
+            </rich:treeNode>
+             ...
     </rich:tree>
 ...
 ]]></programlisting>
@@ -91,8 +97,9 @@ HtmlTree myPanel = new HtmlTree();
     <title>Details of Usage</title>
     <para>As it has been mentioned <link linked="tree">above</link> the tree component allows
       rendering any tree-like structure of data.</para>
-    <para>A bean property is passed into a tree <emphasis><property>&quot;value&quot;</property></emphasis>
-      attribute. The property keeps a structure of an <ulink
+    <para>A bean property is passed into a tree <emphasis>
+        <property>&quot;value&quot;</property>
+      </emphasis> attribute. The property keeps a structure of an <ulink
         url="http://labs.jboss.com/file-access/default/members/jbossrichfaces/freezone/docs/apidoc/org/richfaces/component/TreeNode.html"
         >org.richfaces.component.TreeNode</ulink> type.</para>
     <para>There is a default class TreeNodeImpl which is used for treeNode interface implementation.
@@ -101,14 +108,18 @@ HtmlTree myPanel = new HtmlTree();
     <para><emphasis role="bold">
         <property>&lt;rich:treeNode&gt;</property>
       </emphasis> has getValue method which is available in a request scope variable with name that
-      is defined by <emphasis><property>&quot;var&quot;</property></emphasis> attribute of tree component. </para>
+      is defined by <emphasis>
+        <property>&quot;var&quot;</property>
+      </emphasis> attribute of tree component. </para>
 
     <para>For particular visual representation of data <emphasis role="bold">
         <property>&lt;rich:tree&gt;</property>
       </emphasis> selects by type one of the children treeNode components. The type is defined with
-      the <emphasis><property>&quot;nodeFace&quot;</property></emphasis> attribute that contains value of
-      <emphasis><property>&quot;type&quot;</property></emphasis> attribute for treeNode. An example of
-      definition is placed below: </para>
+      the <emphasis>
+        <property>&quot;nodeFace&quot;</property>
+      </emphasis> attribute that contains value of <emphasis>
+        <property>&quot;type&quot;</property>
+      </emphasis> attribute for treeNode. An example of definition is placed below: </para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
@@ -137,7 +148,7 @@ HtmlTree myPanel = new HtmlTree();
       <title>Expanded tree with child elements of different types</title>
       <mediaobject>
         <imageobject>
-          <imagedata fileref="images/tree3.png"/>
+          <imagedata fileref="images/tree2.png"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -202,10 +213,10 @@ rendered=”#{not item.exist}”>
 
     <figure>
       <title> Using the <emphasis>
-        <property>&quot;type&quot;</property>
-      </emphasis> and the <emphasis>
-        <property>&quot;rendered&quot;</property>
-      </emphasis> attributes</title>
+          <property>&quot;type&quot;</property>
+        </emphasis> and the <emphasis>
+          <property>&quot;rendered&quot;</property>
+        </emphasis> attributes</title>
       <mediaobject>
         <imageobject>
           <imagedata fileref="images/tree4.png"/>
@@ -295,14 +306,14 @@ rendered=”#{not item.exist}”>
   <section>
     <title>Built-In Drag and Drop</title>
     <para>The tree component functionality provides a built-in support for Drag and Drop operations.
-      The main usage principles are the same as for RichFaces DnD wrapper components.
-      Hence, to get additional information on the topic, read the corresponding chapters:<link
-        linkend="dndParam">&quot;rich:dndParam&quot;</link>
+      The main usage principles are the same as for RichFaces DnD wrapper components. Hence, to get
+      additional information on the topic, read the corresponding chapters:<link linkend="dndParam"
+        >&quot;rich:dndParam&quot;</link>
       <link linkend="dragSupport">&quot;rich:dragSupport&quot;</link>
       <link linkend="dragIndicator">&quot;rich:dragIndicator&quot;</link>
       <link linkend="dropSupport">&quot;rich:dropSupport&quot;</link>
-      <property>Tree nodes</property> could be Drag, Drop or DnD elements, so tree has both attributes
-      groups.</para>
+      <property>Tree nodes</property> could be Drag, Drop or DnD elements, so tree has both
+      attributes groups.</para>
     <table>
       <title>Drag attributes group</title>
       <tgroup cols="2">
@@ -361,8 +372,9 @@ rendered=”#{not item.exist}”>
       <listitem>dragListener processes Drug event</listitem>
       <listitem>changeExpandListener processes expand/collapse event of a tree node</listitem>
     </itemizedlist>
-    
-    <para>Listener methods can be defined using the <link linked="treeNode">following attributes</link> or using nested tags.</para>
+
+    <para>Listener methods can be defined using the <link linkend="treeNode">following
+      attributes</link> or using nested tags.</para>
     <para>Client event attributes are:</para>
     <itemizedlist>
       <listitem>onexpand - expands a node event</listitem>
@@ -374,17 +386,16 @@ rendered=”#{not item.exist}”>
     </itemizedlist>
 
     <para>They can be used to add some JavaScript effects.</para>
-    
+
     <para> Also standart HTML event attributes like<emphasis>
-      <property>&quot;onclick&quot;</property>
-    </emphasis>, <emphasis>
-      <property>&quot;onmousedown&quot;</property>
-    </emphasis>, <emphasis>
-      <property>&quot;onmouseover&quot;</property>
-    </emphasis> and etc.
-      could be used. Event handlers of a tree component capture events occured on any tree part. But
-      event handlers of treeNode capture events occured on treeNode only, except for children
-      events. </para>
+        <property>&quot;onclick&quot;</property>
+      </emphasis>, <emphasis>
+        <property>&quot;onmousedown&quot;</property>
+      </emphasis>, <emphasis>
+        <property>&quot;onmouseover&quot;</property>
+      </emphasis> and etc. could be used. Event handlers of a tree component capture events occured
+      on any tree part. But event handlers of treeNode capture events occured on treeNode only,
+      except for children events. </para>
   </section>
   <section>
     <title>Look-and-Feel Customization</title>
