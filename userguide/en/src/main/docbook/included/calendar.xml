@@ -112,22 +112,18 @@ HtmlCalendar myCalendar = new HtmlCalendar();
         <para>Ajax</para>
       </listitem>
     </itemizedlist>
-
     <para>Calendar requests portions of data from Data Model for a page rendering. If <emphasis>
         <property>&quot;dataModel&quot;</property>
       </emphasis> attribute has <property>&quot;null&quot;</property> value, data requests
       are not sent. In this case the &quot;ajax&quot; mode is equal to the
       &quot;client&quot;. </para>
-
     <itemizedlist>
       <listitem>
         <para>Client</para>
       </listitem>
     </itemizedlist>
-
     <para>Calendar loads an initial portion of data in a specified range and use this data to render
       months. Additional data requests are not sent.</para>
-
     <note>
       <title>Note:</title><emphasis>
         <property>&quot;preloadDateRangeBegin&quot;</property>
@@ -135,40 +131,31 @@ HtmlCalendar myCalendar = new HtmlCalendar();
         <property>&quot;preloadDateRangeEnd&quot;</property>
       </emphasis> attributes was designed only for the
       <property>&quot;client&quot;</property> mode to load some data initially.</note>
-
     <para><emphasis>
-      <property>&quot;ondataselect&quot;</property>
-    </emphasis> attribute is used to define an event that is triggered
-      before date selection.</para>
+        <property>&quot;ondataselect&quot;</property>
+      </emphasis> attribute is used to define an event that is triggered before date selection.</para>
     <para><emphasis>
-      <property>&quot;ondateselected&quot;</property>
-    </emphasis> attribute is used to define an event that is triggered
-      after date selection. </para>
+        <property>&quot;ondateselected&quot;</property>
+      </emphasis> attribute is used to define an event that is triggered after date selection. </para>
     <para>For example, to fire some event after date selection you should use <emphasis role="bold">
         <property>&lt;a4j:support&gt;</property>
-    </emphasis>. And it should be bound to <emphasis>
-      <property>&quot;ondateselected&quot;</property>
-    </emphasis> event as
-      it&apos;s shown in the example below:</para>
-    
+      </emphasis>. And it should be bound to <emphasis>
+        <property>&quot;ondateselected&quot;</property>
+      </emphasis> event as it&apos;s shown in the example below:</para>
     <programlisting role="XML"><![CDATA[...
     <rich:calendar id="date" value="#{bean.dateTest}">
         <a:support event="ondateselected" reRender="mainTable"/>                     
     </rich:calendar>
 ...]]></programlisting>
-
     <para><emphasis>
-      <property>&quot;ondataselect&quot;</property>
-    </emphasis> could be used for possibility of date selection canceling. See an example below:</para>
-    
+        <property>&quot;ondataselect&quot;</property>
+      </emphasis> could be used for possibility of date selection canceling. See an example below:</para>
     <programlisting role="XML"><![CDATA[...
     <rich:calendar id="date" value="#{bean.dateTest}" ondateselect="if (!confirm('Are you sure to change date?')){return false;}"/>
 ...]]></programlisting>
-
     <para>How to use these attributes see also on the <ulink
-      url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4092275#4092275"
-      >RichFaces Users Forum</ulink>.</para>
-
+        url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4092275#4092275"
+        >RichFaces Users Forum</ulink>.</para>
     <para>There are three button-related attributes:</para>
     <itemizedlist>
       <listitem>
@@ -225,53 +212,90 @@ HtmlCalendar myCalendar = new HtmlCalendar();
       </emphasis> attribute is set to &quot;bottom-left&quot;.</para>
     <para>The <emphasis role="bold">
         <property>&lt;rich:calendar&gt;</property>
-      </emphasis> component provides to use <emphasis>
+      </emphasis> component allows to use <emphasis>
         <property>&quot;header&quot;</property>
-      </emphasis> facet. For example, you can add following scrolling elements to the facet:
+      </emphasis>, <emphasis>
+        <property>&quot;footer&quot;</property>
+      </emphasis>, <emphasis>
+        <property>&quot;optionalHeader&quot;</property>
+      </emphasis>, <emphasis>
+        <property>&quot;optionalFooter&quot;</property>
+      </emphasis> facets. The following elements are available in these facets:
       {currentMonthControl}, {nextMonthControl}, {nextYearControl}, {previousYearControl},
-      {previousMonthControl}.</para>
+      {previousMonthControl}, {todayControl}, {selectedDateControl}.</para>
     <para>Simple example is placed below.</para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-      <f:facet name="header">
-            <f:verbatim>
-                  {previousMonthControl} | {nextMonthControl}					
-            </f:verbatim>
-      </f:facet>
+    <f:facet name="header">
+        <h:panelGrid columns="2" width="100%" columnClasses="talign,talign,talign">
+            <h:outputText value="{todayControl}"  style="font-weight:bold; text-align:left"/>
+            <h:outputText value="{selectedDateControl}" />
+        </h:panelGrid> 
+    </f:facet>
+    <f:facet name="footer">
+        <h:panelGrid columns="3" width="100%" columnClasses="talign, talign, talign">  
+            <h:outputText value="{previousMonthControl}" style="font-weight:bold;"/>
+            <h:outputText value="{currentMonthControl}" style="font-weight:bold;"/>
+            <h:outputText value="{nextMonthControl}" style="font-weight:bold;"/>
+    </h:panelGrid> 
+</f:facet>
+
 ...]]></programlisting>
-    <para>It&apos;s possible to define <emphasis>
-        <property>&quot;footer&quot;</property>
-      </emphasis> facet and replace in it (in the same way how it was described for <emphasis>
-        <property>&quot;header&quot;</property>
-      </emphasis> facet), for example, following today bar elements: {todayControl},
-      {selectedDateControl}, {helpControl}.</para>
+    <para>This is a result:</para>
+    <figure>
+      <title>Using <emphasis>
+          <property>&quot;header&quot;</property>
+        </emphasis> and <emphasis>
+          <property>&quot;footer&quot;</property>
+        </emphasis> facets</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/calendar2.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
     <para>Also you can use <emphasis>
-        <property>&quot;optionalHeader&quot;</property>
-      </emphasis> and <emphasis>
-        <property>&quot;optionalFooter&quot;</property>
-      </emphasis> facets. These facets define the top and the bottom elements of the calendar. They
-      are not attached to the control parts of the calendar. You can replace in them any content.</para>
-    <para>The <emphasis role="bold">
-        <property>&lt;rich:calendar&gt;</property>
-      </emphasis> component provides the possibility to use <emphasis>
         <property>&quot;weekNumber&quot;</property>
-      </emphasis> and <emphasis>
+      </emphasis> facet with available {weekNumber}, {elementId} elements and <emphasis>
         <property>&quot;weekDay&quot;</property>
-      </emphasis> facets. For example, using these facets you can change text style for the elements
-      of the calendar as it&apos;s shown in the example below:</para>
+      </emphasis> facet with {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber}, {isWeekend},
+      {elementId} elements. </para>
+
+    <para>Simple example is placed below.</para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-      <f:facet name="weekNumber">
-            <h:outputText style="font-weight: bold;" value="{weekNumber}" />
-      </f:facet>
+    <f:facet name="weekDay">
+        <h:panelGroup>
+            <h:outputText value="{weekDayLabel}|"/>
+        </h:panelGroup>
+    </f:facet>
+    <f:facet name="weekNumber">
+        <h:panelGroup>
+            <h:outputText value="{weekNumber}" style="color:red"/>
+        </h:panelGroup>
+    </f:facet>
 ...]]></programlisting>
+    <para>This is a result:</para>
+    <figure>
+      <title>Using <emphasis>
+          <property>&quot;weekNumber&quot;</property>
+        </emphasis> and <emphasis>
+          <property>&quot;weekDay&quot;</property>
+        </emphasis> facets</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/calendar3.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
 
     <para>The example of using JavaScript API is placed below:</para>
-
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
@@ -290,32 +314,26 @@ HtmlCalendar myCalendar = new HtmlCalendar();
         </a4j:form>
 ...
 ]]></programlisting>
-
     <para>Also the discussion about this problem can be found on the <ulink
         url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4078301#4078301"
         >RichFaces Users Forum</ulink>.</para>
-
     <para>The <emphasis role="bold">
         <property>&lt;rich:calendar&gt;</property>
       </emphasis> component provides the possibility to use a special Data Model to define data for
       element rendering. Data Model includes two major interfaces: </para>
-
     <itemizedlist>
       <listitem>CalendarDataModel</listitem>
       <listitem>CalendarDataModelItem</listitem>
     </itemizedlist>
-
     <para><property>CalendarDataModel</property> provides the following function:</para>
     <itemizedlist>
       <listitem>CalendarDataModelItem[] getData(Date[]);</listitem>
     </itemizedlist>
-
     <para>This method is called when it&apos;s necessary to represent the next block of
       CalendarDataItems. It happens during navigation to the next (previous) month or in any other
       case when calendar renders. This method is called in <emphasis>
         <property>&quot;Ajax&quot;</property>
       </emphasis> mode when the calendar renders a new page. </para>
-
     <para><property>CalendarDataModelItem</property> provides the following function:</para>
     <itemizedlist>
       <listitem>Date getDate() - returns date from the item. Default implementation returns date.</listitem>
@@ -332,7 +350,6 @@ HtmlCalendar myCalendar = new HtmlCalendar();
         object. It could be used in the custom date representation on the calendar (inside the
         custom facet).</listitem>
     </itemizedlist>
-
   </section>
 
   <section>
