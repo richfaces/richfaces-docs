@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+    <sectioninfo>
+        <keywordset>
+            <keyword>rich:orderingList</keyword>
+            <keyword>orderingList</keyword>
+        </keywordset>
+    </sectioninfo>
+    <section>
+        <title>Creating the Component with a Page Tag</title>
+        <para>Here is a simple example as it could be used on a page: </para>
+
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+               <rich:orderingList value=”#{bean.list}” var=”list”>
+	     <rich:column>
+		<h:outputText value=”#{list.text}”> 
+	     </rich:column>
+	<rich:orderingList>
+...
+]]></programlisting>
+    </section>
+    <section>
+        <title>Creating the Component Dynamically Using Java</title>
+
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.OrderingList;
+...	
+HtmlOrderingList myOrderingList = new HtmlOrderingList();
+...
+]]></programlisting>
+    </section>
+    <section>
+        <title>Details of Usage</title> 
+        <para>The <property>orderingList</property> component consists of <property>
+            <emphasis>Item list</emphasis></property> element, 
+            which displays a list of items. It has three different representations
+        for a single element: 
+            <itemizedlist>
+            <listitem>common</listitem>
+            <listitem>selected</listitem>
+            <listitem>active</listitem>
+            </itemizedlist> 
+            Combination of these states is possible 
+        </para>
+        
+        <para>
+            The
+            <property>&lt;rich:orderingList&gt;</property> component provides to use
+        <property>caption</property> facet defined with an end developer.
+        </para>
+        
+        <para>It&apos;s possible to define
+        <property><emphasis>&quot;header&quot;</emphasis>
+        </property> facet. It has two possible
+        types of representation: <itemizedlist>
+            <listitem>sortable</listitem>
+            <listitem>non-sortable</listitem>
+        </itemizedlist>
+        </para>
+        
+        <para>
+            <property>
+                IAlso you can use<property><emphasis>&quot;footer&quot;</emphasis></property>/ facet
+        </property> is an optional element defined with an end developer 
+        </para>
+        
+        <para>The   <property>&lt;rich:orderingList&gt;</property> component provides the possibility to use
+        <property>
+            <emphasis>&quot;ordering controls set&quot;</emphasis></property>, which performs reordering. Every control has possibility
+        to be disabled. All controls are disabled when the whole component is disabled. The
+        component has a possibility to hide any of the controls by pairs <itemizedlist>
+            <listitem>&quot;Up&quot; and &quot;Down&quot;</listitem>
+            <listitem>&quot;Top&quot; and &quot;Bottom&quot;</listitem>
+        </itemizedlist>
+        </para>
+        
+        <para> The <property>
+                <emphasis>&quot;value&quot;</emphasis>
+            </property> and <property>
+                <emphasis>&quot;var&quot;</emphasis>
+            </property> attributes are used to access the values of a list. Example of page
+            definition: <programlisting role="XML"><![CDATA[...
+    <rich:orderingList value=”#{bean.list}” var=”list”>
+            <f:facet name=header><h:outputText value=”Header1”/></f:facet>
+            <rich:column>
+                <h:outputText value=”#{list.text}”> 
+             </rich:column>
+    <rich:orderingList>
+...]]>
+            </programlisting>
+        </para>
+    </section>
+    <section>
+        <title>JavaScript API</title>
+        <para> Controls are accessible for developer on client-side using controls attribute of
+            JavaScript component instance. The value of the attribute is an associative array of
+            controls keyed by the following strings: <itemizedlist>
+                <listitem>&quot;top&quot;</listitem>
+                <listitem>&quot;up&quot;</listitem>
+                <listitem>&quot;down&quot;</listitem>
+                <listitem>&quot;bottom&quot;</listitem>
+            </itemizedlist>
+        </para>
+        <table>
+            <title>JavaScript API</title>
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>Function</entry>
+                        <entry>Description</entry>
+                        <entry>Element</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <!--Sorting API -->
+                    <row>
+                        <entry>doSortAscending()</entry>
+                        <entry>Invert current sorting</entry>
+                        <entry>Component</entry>
+                    </row>
+                    <row>
+                        <entry>doSortDescending()</entry>
+                        <entry/>
+                        <entry>Component</entry>
+                    </row>
+                    <row>
+                        <entry>doSort()</entry>
+                        <entry/>
+                        <entry>Component</entry>
+                    </row>
+                    <!--Controls common API -->
+                    <row>
+                        <entry>doHide()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <row>
+                        <entry>doShow()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <row>
+                        <entry>isShown()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <row>
+                        <entry>doEnable()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <row>
+                        <entry>doDisable()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <row>
+                        <entry>isEnabled()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <!--List managing API -->
+                    <row>
+                        <entry>moveUp()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>moveDown()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>moveTop()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>moveBottom()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>getSelection()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>getItems()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </section>
+    <section>
+        <title>Look-and-Feel Customization</title>
+        <para>For skinnability implementation, the components use a <emphasis>
+                <property>style class redefinition method.</property>
+            </emphasis> Default style classes are mapped on <emphasis>
+                <property>skin parameters.</property>
+            </emphasis></para>
+    </section>
+    <section>
+        <title>Definition of Custom Style Classes</title>
+
+        <para>On the screenshot there are classes names that define styles for component elements.</para>
+
+        <figure>
+            <title>Style classes</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="" scalefit="1"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <table>
+            <title>Classes names that define a rows representations</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-ordering-list-row</entry>
+                        <entry>Defines a default class for any item row</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-row-selected</entry>
+                        <entry>Defines class to be added to selected item rows</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-row-active</entry>
+                        <entry>Defines class to be added to active item rows</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-cell-disabled</entry>
+                        <entry>Defines a class for row in disabled state</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <table>
+            <title>Classes names that define a rows representations</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-ordering-list-item-cell</entry>
+                        <entry>Defines a default class for any item cell</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-item-cell-selected</entry>
+                        <entry>Defines class to be added to selected item cells</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-item-cell-active</entry>
+                        <entry>Defines class to be added to active item cells</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-cell-disabled</entry>
+                        <entry>Defines a class for cell in disabled state</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </section>
+</section>
