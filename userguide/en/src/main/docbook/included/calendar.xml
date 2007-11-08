@@ -144,7 +144,7 @@ HtmlCalendar myCalendar = new HtmlCalendar();
       </emphasis> event as it&apos;s shown in the example below:</para>
     <programlisting role="XML"><![CDATA[...
     <rich:calendar id="date" value="#{bean.dateTest}">
-        <a:support event="ondateselected" reRender="mainTable"/>                     
+        <a4j:support event="ondateselected" reRender="mainTable"/>                     
     </rich:calendar>
 ...]]></programlisting>
     <para><emphasis>
@@ -222,34 +222,62 @@ HtmlCalendar myCalendar = new HtmlCalendar();
         <property>&quot;optionalFooter&quot;</property>
       </emphasis> facets. The following elements are available in these facets:
       {currentMonthControl}, {nextMonthControl}, {nextYearControl}, {previousYearControl},
-      {previousMonthControl}, {todayControl}, {selectedDateControl}.</para>
+      {previousMonthControl}, {todayControl}, {selectedDateControl}. </para>
+    <para>Also you can use <emphasis>
+        <property>&quot;weekNumber&quot;</property>
+      </emphasis> facet with available {weekNumber}, {elementId} elements and <emphasis>
+        <property>&quot;weekDay&quot;</property>
+      </emphasis> facet with {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber}, {isWeekend},
+      {elementId} elements. {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber} elements could be
+      used for labels output, {isWeekend}, {elementId} - for additional processing in JavaScript
+      code.</para>
+
     <para>Simple example is placed below.</para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
+<style>
+    .width100{
+        width:100%;
+    }
+    .talign{
+        text-align:center;
+    }
+</style>
+   
+<rich:calendar id="myCalendar" popup="true" locale="#{calendarBean.locale}" value="#{bean.date}" 
+                            preloadRangeBegin="#{bean.date}" preloadRangeEnd="#{bean.date}" selectedDate="#{bean.date}" cellWidth="40px" cellHeight="40px">
     <f:facet name="header">
-        <h:panelGrid columns="2" width="100%" columnClasses="talign,talign,talign">
-            <h:outputText value="{todayControl}"  style="font-weight:bold; text-align:left"/>
+        <h:panelGrid columns="2" width="100%" columnClasses="width100, fake">
             <h:outputText value="{selectedDateControl}" />
+            <h:outputText value="{todayControl}"  style="font-weight:bold; text-align:left"/>
         </h:panelGrid> 
     </f:facet>
-    <f:facet name="footer">
-        <h:panelGrid columns="3" width="100%" columnClasses="talign, talign, talign">  
+    <f:facet name="weekDay">
+        <h:panelGroup style="width:60px; overflow:hidden;" layout="block">
+            <h:outputText value="{weekDayLabelShort}"/>
+        </h:panelGroup>
+    </f:facet>
+    <f:facet name="weekNumber">
+         <h:panelGroup>
+            <h:outputText value="{weekNumber}" style="color:red"/>
+        </h:panelGroup>
+     </f:facet>
+     <f:facet name="footer">
+        <h:panelGrid columns="3" width="100%" columnClasses="fake, width100 talign">  
             <h:outputText value="{previousMonthControl}" style="font-weight:bold;"/>
             <h:outputText value="{currentMonthControl}" style="font-weight:bold;"/>
             <h:outputText value="{nextMonthControl}" style="font-weight:bold;"/>
-    </h:panelGrid> 
-</f:facet>
-
+        </h:panelGrid> 
+    </f:facet>  
+    <h:outputText value="{day}"></h:outputText>
+</rich:calendar>
 ...]]></programlisting>
+
     <para>This is a result:</para>
     <figure>
-      <title>Using <emphasis>
-          <property>&quot;header&quot;</property>
-        </emphasis> and <emphasis>
-          <property>&quot;footer&quot;</property>
-        </emphasis> facets</title>
+      <title>Using facets </title>
 
       <mediaobject>
         <imageobject>
@@ -257,43 +285,16 @@ HtmlCalendar myCalendar = new HtmlCalendar();
         </imageobject>
       </mediaobject>
     </figure>
-    <para>Also you can use <emphasis>
-        <property>&quot;weekNumber&quot;</property>
-      </emphasis> facet with available {weekNumber}, {elementId} elements and <emphasis>
+
+    <para>As it&apos;s shown on the picture below {selectedDateControl}, {todayControl} elements
+      are placed in the <emphasis>
+        <property>&quot;header&quot;</property>
+      </emphasis> facet, {previousMonthControl}, {currentMonthControl}, {nextMonthControl} - in the <emphasis>
+        <property>&quot;footer&quot;</property>
+      </emphasis> facet, {weekDayLabelShort} - in the <emphasis>
         <property>&quot;weekDay&quot;</property>
-      </emphasis> facet with {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber}, {isWeekend},
-      {elementId} elements. </para>
-
-    <para>Simple example is placed below.</para>
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="XML"><![CDATA[...
-    <f:facet name="weekDay">
-        <h:panelGroup>
-            <h:outputText value="{weekDayLabel}|"/>
-        </h:panelGroup>
-    </f:facet>
-    <f:facet name="weekNumber">
-        <h:panelGroup>
-            <h:outputText value="{weekNumber}" style="color:red"/>
-        </h:panelGroup>
-    </f:facet>
-...]]></programlisting>
-    <para>This is a result:</para>
-    <figure>
-      <title>Using <emphasis>
-          <property>&quot;weekNumber&quot;</property>
-        </emphasis> and <emphasis>
-          <property>&quot;weekDay&quot;</property>
-        </emphasis> facets</title>
-
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/calendar3.png"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
+      </emphasis> facet, {nextYearControl}, {previousYearControl} are absent. Numbers of weeks are
+      red colored.</para>
 
     <para>The example of using JavaScript API is placed below:</para>
     <para>
