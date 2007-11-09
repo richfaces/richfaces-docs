@@ -14,11 +14,11 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-               <rich:orderingList value=”#{bean.list}” var=”list”>
-	     <rich:column>
-		<h:outputText value=”#{list.text}”> 
-	     </rich:column>
-	<rich:orderingList>
+<rich:orderingList value=”#{bean.list}” var=”list”>
+    <rich:column>
+        <h:outputText value=”#{list.text}”> 
+    </rich:column>
+<rich:orderingList>
 ...
 ]]></programlisting>
     </section>
@@ -35,65 +35,168 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
 ]]></programlisting>
     </section>
     <section>
-        <title>Details of Usage</title> 
-        <para>The <property>orderingList</property> component consists of <property>
-            <emphasis>Item list</emphasis></property> element, 
-            which displays a list of items. It has three different representations
-        for a single element: 
-            <itemizedlist>
-            <listitem>common</listitem>
-            <listitem>selected</listitem>
-            <listitem>active</listitem>
-            </itemizedlist> 
-            Combination of these states is possible 
+        <title>Details of Usage</title>
+        <!--maintenance of component  orderingList-->
+        <para>The <emphasis role="bold">
+                <property>&lt;rich:orderingList&gt;</property>
+            </emphasis> component consists of <property>
+                <emphasis>Item list</emphasis>
+            </property> element that displays a list of items. It has three different
+            representations for a single element: <itemizedlist>
+                <listitem>common</listitem>
+                <listitem>selected</listitem>
+                <listitem>active</listitem>
+            </itemizedlist> Combination of these states is possible </para>
+        <para> The <emphasis role="bold">
+                <property>&lt;rich:orderingList&gt;</property>
+            </emphasis> component provides to use <emphasis>
+                <property>&quot;optionalCaption&quot;</property>
+            </emphasis> facet.</para>
+        <para>It&apos;s possible to define <property>
+                <emphasis>&quot;optionalHeader&quot;</emphasis>
+            </property> facet. It has two possible types of representation: <itemizedlist>
+                <listitem>sortable</listitem>
+                <listitem>non-sortable</listitem>
+            </itemizedlist>
         </para>
-        
-        <para>
-            The
-            <property>&lt;rich:orderingList&gt;</property> component provides to use
-        <property>caption</property> facet defined with an end developer.
+        <para> Also you can use<property>
+                <emphasis>&quot;optionalFooter&quot;</emphasis>
+            </property> facet is an optional element.</para>
+
+        <!-- add simple and screenshot-->
+
+        <para>The <emphasis role="bold">
+                <property>&lt;rich:orderingList&gt;</property>
+            </emphasis> component provides the possibility to use <property>
+                <emphasis>&quot;ordering controls set&quot;</emphasis>
+            </property>, which performs reordering. Every control has possibility to be disabled.
+            The <emphasis role="bold">
+                <property>&lt;rich:orderingList&gt;</property>
+            </emphasis> component has a possibility to hide any of the controls by pairs:<itemizedlist>
+                <listitem>&quot;Up&quot; and &quot;Down&quot;</listitem>
+                <listitem>&quot;Top&quot; and &quot;Bottom&quot;</listitem>
+            </itemizedlist>
         </para>
-        
-        <para>It&apos;s possible to define
-        <property><emphasis>&quot;header&quot;</emphasis>
-        </property> facet. It has two possible
-        types of representation: <itemizedlist>
-            <listitem>sortable</listitem>
-            <listitem>non-sortable</listitem>
-        </itemizedlist>
-        </para>
-        
-        <para>
-            <property>
-                IAlso you can use<property><emphasis>&quot;footer&quot;</emphasis></property>/ facet
-        </property> is an optional element defined with an end developer 
-        </para>
-        
-        <para>The   <property>&lt;rich:orderingList&gt;</property> component provides the possibility to use
-        <property>
-            <emphasis>&quot;ordering controls set&quot;</emphasis></property>, which performs reordering. Every control has possibility
-        to be disabled. All controls are disabled when the whole component is disabled. The
-        component has a possibility to hide any of the controls by pairs <itemizedlist>
-            <listitem>&quot;Up&quot; and &quot;Down&quot;</listitem>
-            <listitem>&quot;Top&quot; and &quot;Bottom&quot;</listitem>
-        </itemizedlist>
-        </para>
-        
+        <para> &quot;topControl&quot;, &quot;topControlDisabled&quot;,
+            &quot;bottomControl&quot;, &quot;bottomControlDisabled&quot;,
+            &quot;upControl&quot;, &quot;upControlDisabled&quot;,
+            &quot;downControl&quot;, &quot;downControlDisabled&quot; facets are used
+            to replaces the default control with facets content. </para>
+
+        <!-- attributes of component  orderingList -->
+
         <para> The <property>
                 <emphasis>&quot;value&quot;</emphasis>
             </property> and <property>
                 <emphasis>&quot;var&quot;</emphasis>
             </property> attributes are used to access the values of a list. Example of page
             definition: <programlisting role="XML"><![CDATA[...
-    <rich:orderingList value=”#{bean.list}” var=”list”>
-            <f:facet name=header><h:outputText value=”Header1”/></f:facet>
-            <rich:column>
-                <h:outputText value=”#{list.text}”> 
-             </rich:column>
-    <rich:orderingList>
+<rich:orderingList value=”#{bean.list}” var=”list”>
+    <f:facet name=header><h:outputText value=”Header1”/></f:facet>
+        <rich:column>
+            <h:outputText value=”#{list.text}”> 
+        </rich:column>
+<rich:orderingList>
 ...]]>
             </programlisting>
         </para>
+
+        <para>The <property>
+                <emphasis>&quot;selection &quot;</emphasis>
+            </property> attribute is bound to a list, which stores a set of indexes for rows
+            selected. If the index from a set is out of bounds, it should be ignored. </para>
+        <para>Controls rendering is based on the <property>
+                <emphasis>&quot;controlsType&quot;</emphasis>
+            </property> attribute. Possible types are <itemizedlist>
+                <listitem>button</listitem>
+                <listitem>link</listitem>
+                <listitem>none</listitem>
+            </itemizedlist></para>
+    </section>
+     
+<para>Keyboard usage</para>
+        <table>
+            <title>Keyboard usage for elements selection TO DO</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Keys and combinations </entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <!--Sorting API -->
+                    <row>
+                        <entry>CTRL+click</entry>
+                        <entry>Described in selection behaviour requirement</entry>
+                    </row>
+                    <row>
+                        <entry>SHIFT+click</entry>
+                        <entry>Described in selection behaviour requirement</entry>
+                    </row>
+                    <row>
+                        <entry>CTRL+A</entry>
+                        <entry>Selects all elements inside the list if some active element is
+                            already present in a list</entry>
+                    </row>
+                    <row>
+                        <entry>Space</entry>
+                        <entry>Inverts selection on the active element</entry>
+                    </row>
+                    <row>
+                        <entry>Up, Down arrows</entry>
+                        <entry>Changes the active elements to the next or previous in a list</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+
+        <table>
+            <title>Keyboard usage for elements reordering</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Keys and combinations </entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <!--Sorting API -->
+                    <row>
+                        <entry>Top</entry>
+                        <entry>Moves selected set to the top of a list</entry>
+                    </row>
+                    <row>
+                        <entry>Bottom</entry>
+                        <entry>Moves selected set to the bottomof a list</entry>
+                    </row>
+                    <row>
+                        <entry>CTRL+Up arrow</entry>
+                        <entry>Moves selected item to one position uppert</entry>
+                    </row>
+                    <row>
+                        <entry>CTRL+Down arrow</entry>
+                        <entry>Moves selected item to one position lower</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>All the changes uses the same rules that defined in requirement for ordering with
+            controls.</para>
+
+    <section>
+        <title>Drag-and-Drop support in the list</title>
+        <para> It&apos;s possible to drag items and drop to the position needed. </para>
+        <para>In this case component <emphasis role="bold">
+                <property>&lt;rich:orderingList&gt;</property>
+            </emphasis> provides <property>
+                <emphasis>&quot;dragIndicator&quot;</emphasis>
+            </property> attribute. </para>
+
+        <!-- add an example!!! -->
+
     </section>
     <section>
         <title>JavaScript API</title>
@@ -199,6 +302,7 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             </tgroup>
         </table>
     </section>
+
     <section>
         <title>Look-and-Feel Customization</title>
         <para>For skinnability implementation, the components use a <emphasis>
