@@ -222,21 +222,34 @@ HtmlCalendar myCalendar = new HtmlCalendar();
         <property>&quot;optionalFooter&quot;</property>
       </emphasis> facets. The following elements are available in these facets:
       {currentMonthControl}, {nextMonthControl}, {nextYearControl}, {previousYearControl},
-      {previousMonthControl}, {todayControl}, {selectedDateControl}. </para>
+      {previousMonthControl}, {todayControl}, {selectedDateControl}. These elements could be used
+      for labels output.</para>
     <para>Also you can use <emphasis>
         <property>&quot;weekNumber&quot;</property>
       </emphasis> facet with available {weekNumber}, {elementId} elements and <emphasis>
         <property>&quot;weekDay&quot;</property>
       </emphasis> facet with {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber}, {isWeekend},
-      {elementId} elements. {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber} elements could be
+      {elementId} elements. {weekNumber}, {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber} elements could be
       used for labels output, {isWeekend}, {elementId} - for additional processing in JavaScript
       code.</para>
+    <para>These elements are shown on the picture below.</para>
+    
+    <figure>
+      <title>Available elements</title>
+      
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/calendar3.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
 
-    <para>Simple example is placed below.</para>
+    <para>Simple example of usage is placed below.</para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
+<!--Styles for cells -->
 <style>
     .width100{
         width:100%;
@@ -248,6 +261,8 @@ HtmlCalendar myCalendar = new HtmlCalendar();
    
 <rich:calendar id="myCalendar" popup="true" locale="#{calendarBean.locale}" value="#{bean.date}" 
                             preloadRangeBegin="#{bean.date}" preloadRangeEnd="#{bean.date}" selectedDate="#{bean.date}" cellWidth="40px" cellHeight="40px">
+
+<!-- Customization with usage of facets and accessible elements -->                            
     <f:facet name="header">
         <h:panelGrid columns="2" width="100%" columnClasses="width100, fake">
             <h:outputText value="{selectedDateControl}" />
