@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+    <sectioninfo>
+        <keywordset>
+            <keyword>rich:listShuttle</keyword>
+            <keyword>listShuttle</keyword>
+        </keywordset>
+    </sectioninfo>
+    <section>
+        <title>Creating the Component with a Page Tag</title>
+        <para>Here is a simple example as it could be used on a page: </para>
+
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:listShuttle value=”#{bean.list}” var=”list” selection=”#{value.resultList}”>
+    <f:facet name=header>
+       <h:outputText value=”Header1”/>
+    </f:facet>
+    <rich:column>
+        <h:outputText value=”#{list.text}”> 
+    </rich:column>
+<rich:listShuttle>
+...]]></programlisting>
+    </section>
+    <section>
+        <title>Creating the Component Dynamically Using Java</title>
+
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.listShuttle;
+...	
+HtmllistShuttle mylistShuttle = new HtmllistShuttle();
+...]]></programlisting>
+    </section>
+    <section>
+        <title>Details of Usage</title>
+
+        <para>The <emphasis role="bold">
+                <property>&lt;rich:listShuttle&gt;</property>
+            </emphasis> component is represented with the next tags: <itemizedlist>
+                <listitem><emphasis role="bold">
+                        <property>&lt;rich:listShuttle&gt;</property>
+                    </emphasis> - the tag defines all the component properties like list binding,
+                    sorting possibility, ordering controls set, move/copy controls set, behavioral
+                    and look and feel properties</listitem>
+                <listitem>facets with <emphasis>
+                        <property>&quot;source&quot;</property>
+                    </emphasis> and <emphasis>
+                        <property>&quot;target&quot;</property>
+                    </emphasis> names to build lists with different columns sets.</listitem>
+                <listitem><emphasis role="bold">
+                        <property>&lt;rich:column&gt;</property>
+                    </emphasis>, <emphasis role="bold">
+                        <property>&lt;h:column&gt;</property>
+                    </emphasis> is used to define columns for every row.</listitem>
+            </itemizedlist>
+        </para>
+    </section>
+    <section>
+        <title>JavaScript API</title>
+        <para> Controls are accessible for developer on client-side using controls attribute of
+            JavaScript component instance. The value of the attribute is an associative array of
+            controls keyed by the following strings: &quot;top&quot;,
+            &quot;up&quot;, &quot;down&quot;, &quot;bottom&quot;.</para>
+        <table>
+            <title>JavaScript API</title>
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>Function</entry>
+                        <entry>Description</entry>
+                        <entry>Element</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <!--Sorting API -->
+                    <row>
+                        <entry>doSortAscending()</entry>
+                        <entry>Invert current sorting</entry>
+                        <entry>Component</entry>
+                    </row>
+                    <row>
+                        <entry>doSortDescending()</entry>
+                        <entry/>
+                        <entry>Component</entry>
+                    </row>
+                    <row>
+                        <entry>doSort()</entry>
+                        <entry/>
+                        <entry>Component</entry>
+                    </row>
+                    <!--Controls common API -->
+                    <row>
+                        <entry>doHide()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <row>
+                        <entry>doShow()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <row>
+                        <entry>isShown()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <row>
+                        <entry>doEnable()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <row>
+                        <entry>doDisable()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <row>
+                        <entry>isEnabled()</entry>
+                        <entry/>
+                        <entry>Any Ordering control</entry>
+                    </row>
+                    <!--List managing API -->
+                    <row>
+                        <entry>moveUp()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>moveDown()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>moveTop()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>moveBottom()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>copy()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>remove()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>copyAll()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>removeAll()</entry>
+                        <entry/>
+                        <entry>Any Item</entry>
+                    </row>
+                    <row>
+                        <entry>getSelection()</entry>
+                        <entry/>
+                        <entry/>
+                    </row>
+                    <row>
+                        <entry>getItems()</entry>
+                        <entry/>
+                        <entry/>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </section>
+    <section>
+        <title>Look-and-Feel Customization</title>
+        <para>For skinnability implementation, the components use a <emphasis>
+                <property>style class redefinition method.</property>
+            </emphasis> Default style classes are mapped on <emphasis>
+                <property>skin parameters.</property>
+            </emphasis></para>
+        <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+                <property>&lt;rich:listShuttle&gt;</property>
+            </emphasis> components at once: <itemizedlist>
+                <listitem>Redefine the corresponding skin parameters</listitem>
+                <listitem> Add to your style sheets style classes used by a <emphasis role="bold">
+                        <property>&lt;rich:listShuttle&gt;</property>
+                    </emphasis> component</listitem>
+            </itemizedlist>
+        </para>
+    </section>
+    <section>
+        <title>Definition of Custom Style Classes</title>
+        
+        <para>On the screenshot there are classes names that define styles for component elements.</para>
+        
+        <!-- screenshot -->
+        
+        <figure>
+            <title>Style classes</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="" scalefit="1"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        
+        <!-- ADD ITEMS representations!!!-->
+        
+        <table>
+            <title>Classes names that define a caption representations in the source list</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-shuttle-source-caption</entry>
+                        <entry>Defines a class for caption customization</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <table>
+            <title>Classes names that define a caption representations in the target list</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-shuttle-target-caption</entry>
+                        <entry>Defines a class for caption customization</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <table>
+            <title>Classes names that define a rows representations in the source list</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-shuttle-source-row</entry>
+                        <entry>Defines a default class for any item row</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-row-source-selected</entry>
+                        <entry>Defines class to be additionally added to selected item rows</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-row-source-active</entry>
+                        <entry>Defines class to be additionally added to active item rows</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <table>
+            <title>Classes names that define a rows representations in the target list</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-shuttle-target -row</entry>
+                        <entry>Defines a default class for any item row</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-row-target -selected</entry>
+                        <entry>Defines class to be additionally added to selected item rows</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-row-target -active</entry>
+                        <entry>Defines class to be additionally added to active item rows</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <table>
+            <title>Classes names that define a cells representations in the source list</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-shuttle-source-cell</entry>
+                        <entry>Defines a default class for any item cell</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-source-cell-selected</entry>
+                        <entry>Defines class to be additionally added to selected item cells</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-source-cell-active</entry>
+                        <entry>Defines class to be additionally added to active item cells</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <table>
+            <title>Classes names that define a cells representations in the target  list</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-shuttle-target -cell</entry>
+                        <entry>Defines a default class for any item cell</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-target -cell-selected</entry>
+                        <entry>Defines class to be additionally added to selected item cells</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-target -cell-active</entry>
+                        <entry>Defines class to be additionally added to active item cells</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <table>
+            <title>Classes names that define controls representations</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-ordering-controls</entry>
+                        <entry>Could be applied to the whole group of the controls.</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-top</entry>
+                        <entry>Defines class for Top control</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-bottom</entry>
+                        <entry>Defines class for Bottom control</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-up</entry>
+                        <entry>Defines class for Up control</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-down</entry>
+                        <entry>Defines class for Down control</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>rich-shuttle-copy</entry>
+                        <entry>Defines class for Copy control</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>rich-shuttle-remove</entry>
+                        <entry>Defines class for Remove control</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>rich-shuttle-copyAll</entry>
+                        <entry>Defines class for copyAll control</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-removeAll</entry>
+                        <entry>Defines class for removeAll control</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-control-disabled</entry>
+                        <entry>Defines a class for any control in a disabled state</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </section>
+    </section>
