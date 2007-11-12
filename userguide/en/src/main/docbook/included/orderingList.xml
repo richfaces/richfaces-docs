@@ -14,9 +14,9 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:orderingList value=”#{bean.list}” var=”list”>
+<rich:orderingList value="#{bean.list}" var="list">
     <rich:column>
-        <h:outputText value=”#{list.text}”> 
+        <h:outputText value="#{list.text}"> 
     </rich:column>
 <rich:orderingList>
 ...
@@ -49,15 +49,13 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 <property>&lt;rich:orderingList&gt;</property>
             </emphasis> component provides to use <emphasis>
                 <property>&quot;optionalCaption&quot;</property>
-            </emphasis> facet.</para>
-        <para>It&apos;s possible to define <property>
+            </emphasis>, <property>
                 <emphasis>&quot;optionalHeader&quot;</emphasis>
-            </property> facet. It has two possible types of representation: sortable and
-            non-sortable. </para>
-        <para> Also you can use<property>
+            </property>(It&apos;s possible to define  facet. It has two possible types of representation: sortable and
+            non-sortable) and <property>
                 <emphasis>&quot;optionalFooter&quot;</emphasis>
-            </property> facet.</para>
-
+            </property> facets.
+         </para>
         <!-- add simple and screenshot-->
 
 
@@ -94,10 +92,10 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 <emphasis>&quot;var&quot;</emphasis>
             </property> attributes are used to access the values of a list. Example of page
             definition: <programlisting role="XML"><![CDATA[...
-<rich:orderingList value=”#{bean.list}” var=”list”>
-    <f:facet name=header><h:outputText value=”Header1”/></f:facet>
+<rich:orderingList value="#{bean.list}" var="list">
+    <f:facet name=header><h:outputText value="Header1"/></f:facet>
         <rich:column>
-            <h:outputText value=”#{list.text}”> 
+            <h:outputText value="#{list.text}"> 
         </rich:column>
 <rich:orderingList>
 ...]]>
@@ -105,7 +103,7 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
         </para>
 
         <para>The <property>
-                <emphasis>&quot;selection &quot;</emphasis>
+                <emphasis>&quot;selection&quot;</emphasis>
             </property> attribute is bound to a list, which stores a set of indexes for rows
             selected. If the index from a set is out of bounds, it should be ignored. </para>
         <para>Controls rendering is based on the <property>
@@ -113,9 +111,9 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             </property> attribute. Possible types are button, link, none.</para>
         <para>Example of page definition:</para>
         <programlisting role="XML"><![CDATA[...
-<rich:orderingList controlType=”button”>
-    <f:facet name=”Top”>
-        <h:outputText value=”Move to top”>
+<rich:orderingList controlType="button">
+    <f:facet name="Top">
+        <h:outputText value="Move to top">
     </f:facet>
 <rich:orderingList>
 ...
@@ -206,13 +204,13 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
         <programlisting role="XML"><![CDATA[...
             
 <rich:orderingList>
-    <h:panelGrid columns=”2” columnClasses=”class1 class2”>
-        <h:outputText value=”{list}”/>
+    <h:panelGrid columns="2" columnClasses="class1 class2">
+        <h:outputText value="{list}"/>
             <h:panelGroup>
-                <h:outputText value=”{topControl}”/>
-                <h:outputText value=”{upControl}”/>
-                <h:outputText value=”{downControl}”/>
-                <h:outputText value=”{bottomControl}”/>
+                <h:outputText value="{topControl}"/>
+                <h:outputText value="{upControl}"/>
+                <h:outputText value="{downControl}"/>
+                <h:outputText value="{bottomControl}"/>
             </h:panelGroup>
     </h:panelGrid>
 </rich:orderingList>
@@ -412,12 +410,22 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             </emphasis> Default style classes are mapped on <emphasis>
                 <property>skin parameters.</property>
             </emphasis></para>
+        <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+            <property>&lt;rich:orderingList&gt;</property>
+        </emphasis> components at once: <itemizedlist>
+            <listitem>Redefine the corresponding skin parameters</listitem>
+            <listitem> Add to your style sheets style classes used by a <emphasis role="bold">
+                <property>&lt;rich:orderingList&gt;</property>
+            </emphasis> component</listitem>
+        </itemizedlist>
+        </para>
     </section>
     <section>
         <title>Definition of Custom Style Classes</title>
 
         <para>On the screenshot there are classes names that define styles for component elements.</para>
-
+        
+<!-- screenshot -->
         <figure>
             <title>Style classes</title>
             <mediaobject>
@@ -457,7 +465,7 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             </tgroup>
         </table>
         <table>
-            <title>Classes names that define a rows representations</title>
+            <title>Classes names that define a cells representations</title>
             <tgroup cols="2">
                 <thead>
                     <row>
