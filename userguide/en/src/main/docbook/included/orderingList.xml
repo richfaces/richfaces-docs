@@ -42,11 +42,9 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             </emphasis> component consists of <property>
                 <emphasis>Item list</emphasis>
             </property> element that displays a list of items. It has three different
-            representations for a single element: <itemizedlist>
-                <listitem>common</listitem>
-                <listitem>selected</listitem>
-                <listitem>active</listitem>
-            </itemizedlist> Combination of these states is possible </para>
+            representations for a single element: common, selected, active. <para>Combination of
+                these states is possible</para>
+        </para>
         <para> The <emphasis role="bold">
                 <property>&lt;rich:orderingList&gt;</property>
             </emphasis> component provides to use <emphasis>
@@ -54,34 +52,39 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             </emphasis> facet.</para>
         <para>It&apos;s possible to define <property>
                 <emphasis>&quot;optionalHeader&quot;</emphasis>
-            </property> facet. It has two possible types of representation: <itemizedlist>
-                <listitem>sortable</listitem>
-                <listitem>non-sortable</listitem>
-            </itemizedlist>
-        </para>
+            </property> facet. It has two possible types of representation: sortable and
+            non-sortable. </para>
         <para> Also you can use<property>
                 <emphasis>&quot;optionalFooter&quot;</emphasis>
-            </property> facet is an optional element.</para>
+            </property> facet.</para>
 
         <!-- add simple and screenshot-->
 
+
+        <!-- ordering control set-->
         <para>The <emphasis role="bold">
                 <property>&lt;rich:orderingList&gt;</property>
             </emphasis> component provides the possibility to use <property>
                 <emphasis>&quot;ordering controls set&quot;</emphasis>
-            </property>, which performs reordering. Every control has possibility to be disabled.
-            The <emphasis role="bold">
-                <property>&lt;rich:orderingList&gt;</property>
-            </emphasis> component has a possibility to hide any of the controls by pairs:<itemizedlist>
-                <listitem>&quot;Up&quot; and &quot;Down&quot;</listitem>
-                <listitem>&quot;Top&quot; and &quot;Bottom&quot;</listitem>
-            </itemizedlist>
-        </para>
-        <para> &quot;topControl&quot;, &quot;topControlDisabled&quot;,
-            &quot;bottomControl&quot;, &quot;bottomControlDisabled&quot;,
-            &quot;upControl&quot;, &quot;upControlDisabled&quot;,
-            &quot;downControl&quot;, &quot;downControlDisabled&quot; facets are used
-            to replaces the default control with facets content. </para>
+            </property>, which performs reordering. Every control has possibility to be disabled. </para>
+        <para>
+            <property>
+                <emphasis>&quot;topControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;topControlDisabled&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;bottomControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;bottomControlDisabled&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;upControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;upControlDisabled&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;downControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;downControlDisabled&quot;</emphasis>
+            </property> facets are used to replaces the default control with facets content. </para>
 
         <!-- attributes of component  orderingList -->
 
@@ -107,84 +110,188 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             selected. If the index from a set is out of bounds, it should be ignored. </para>
         <para>Controls rendering is based on the <property>
                 <emphasis>&quot;controlsType&quot;</emphasis>
-            </property> attribute. Possible types are <itemizedlist>
-                <listitem>button</listitem>
-                <listitem>link</listitem>
-                <listitem>none</listitem>
-            </itemizedlist></para>
+            </property> attribute. Possible types are button, link, none.</para>
+        <para>Example of page definition:</para>
+        <programlisting role="XML"><![CDATA[...
+<rich:orderingList controlType=”button”>
+    <f:facet name=”Top”>
+        <h:outputText value=”Move to top”>
+    </f:facet>
+<rich:orderingList>
+...
+]]></programlisting>
+
+        <para>The position of the controls relatively to a list could be customized with <itemizedlist>
+                <listitem>
+                    <property>
+                        <emphasis>controlsPosition</emphasis>
+                    </property>attribute. Possible values: <itemizedlist>
+                        <listitem>left - controls could be rendered to the left side of a list</listitem>
+                        <listitem>right(default) controls could be rendered to the right side of a
+                            list </listitem>
+                        <listitem>top - controls could be rendered above the list </listitem>
+                        <listitem>bottom - controls could be rendered below the list </listitem>
+                    </itemizedlist>
+                </listitem>
+
+                <listitem><property>
+                        <emphasis>controlsHorizontalAlign</emphasis>
+                    </property>attribute. Possible values: <itemizedlist>
+                        <listitem>left - controls could be rendered to the left side of a list</listitem>
+                        <listitem>right(default) controls could be rendered to the right side of a
+                            list</listitem>
+                        <listitem>center - controls could be centered</listitem>
+
+                    </itemizedlist>
+                </listitem>
+
+                <listitem><property>
+                        <emphasis>controlsVerticalAlign </emphasis>
+                    </property>attribute. Possible values: <itemizedlist>
+                        <listitem>top - controls could be rendered aligned to top side of a list </listitem>
+                        <listitem>bottom - controls could be rendered aligned to bottom side of a
+                            list </listitem>
+                        <listitem>center(default) - controls could be rendered centered relatively
+                            to a list </listitem>
+
+                    </itemizedlist>
+                </listitem>
+
+                <listitem><property>
+                        <emphasis>controlsLayout </emphasis>
+                    </property>attribute. Possible values: <itemizedlist>
+                        <listitem>inline - controls defined one by one in line </listitem>
+                        <listitem>block - controls defined in column </listitem>
+                        <listitem/>
+                    </itemizedlist>
+                </listitem>
+
+            </itemizedlist>
+        </para>
+
+        <para>The <emphasis role="bold">
+                <property>&lt;rich:orderingList&gt;</property>
+            </emphasis> component has a possibility to hide any of the controls by pairs using
+            following attributes: <itemizedlist>
+                <listitem><property>
+                        <emphasis>&quot;orderControlsVisible&quot;</emphasis>
+                    </property>attribute may have two values: true or false. If false
+                    &quot;Up&quot; and &quot;Down&quot; controls couldn't be
+                    displayed.</listitem>
+                <listitem><property>
+                        <emphasis>&quot;fastOrderControlsVisible&quot;</emphasis>
+                    </property>attribute may have two values: true or false. If false
+                    &quot;Top&quot; and &quot;Bottom&quot; controls couldn't be
+                    displayed</listitem>
+            </itemizedlist>
+        </para>
+
+
+
+        <para>The <property>
+                <emphasis>&quot;captionLabel&quot;</emphasis>
+            </property>attribute defines the text placed inside a caption.</para>
+
+        <para>The <property>
+                <emphasis>&quot;disabled&quot;</emphasis>
+            </property>attribute disables the whole component.</para>
+
+        <para>The component provides possibility to be customized using templating. The
+            customization could be performed by a layout definition nested into the component. 5
+            elements are provided to be defined inside template: {list}, {topControl},
+            {bottomControl}, {downCotrol}, {upControl}. <para>Thus the markup defined in the initial
+                picture could be defined as in the example placed below.</para>
+        </para>
+        <para>Example:</para>
+        <programlisting role="XML"><![CDATA[...
+            
+<rich:orderingList>
+    <h:panelGrid columns=”2” columnClasses=”class1 class2”>
+        <h:outputText value=”{list}”/>
+            <h:panelGroup>
+                <h:outputText value=”{topControl}”/>
+                <h:outputText value=”{upControl}”/>
+                <h:outputText value=”{downControl}”/>
+                <h:outputText value=”{bottomControl}”/>
+            </h:panelGroup>
+    </h:panelGrid>
+</rich:orderingList>
+            
+ ...]]>
+        </programlisting>
     </section>
-     
-<para>Keyboard usage</para>
-        <table>
-            <title>Keyboard usage for elements selection TO DO</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Keys and combinations </entry>
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <!--Sorting API -->
-                    <row>
-                        <entry>CTRL+click</entry>
-                        <entry>Described in selection behaviour requirement</entry>
-                    </row>
-                    <row>
-                        <entry>SHIFT+click</entry>
-                        <entry>Described in selection behaviour requirement</entry>
-                    </row>
-                    <row>
-                        <entry>CTRL+A</entry>
-                        <entry>Selects all elements inside the list if some active element is
-                            already present in a list</entry>
-                    </row>
-                    <row>
-                        <entry>Space</entry>
-                        <entry>Inverts selection on the active element</entry>
-                    </row>
-                    <row>
-                        <entry>Up, Down arrows</entry>
-                        <entry>Changes the active elements to the next or previous in a list</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
+
+    <para>Keyboard usage</para>
+    <table>
+        <title>Keyboard usage for elements selection TO DO</title>
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Keys and combinations </entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <!--Sorting API -->
+                <row>
+                    <entry>CTRL+click</entry>
+                    <entry>Described in selection behaviour requirement</entry>
+                </row>
+                <row>
+                    <entry>SHIFT+click</entry>
+                    <entry>Described in selection behaviour requirement</entry>
+                </row>
+                <row>
+                    <entry>CTRL+A</entry>
+                    <entry>Selects all elements inside the list if some active element is already
+                        present in a list</entry>
+                </row>
+                <row>
+                    <entry>Space</entry>
+                    <entry>Inverts selection on the active element</entry>
+                </row>
+                <row>
+                    <entry>Up, Down arrows</entry>
+                    <entry>Changes the active elements to the next or previous in a list</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
 
 
-        <table>
-            <title>Keyboard usage for elements reordering</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Keys and combinations </entry>
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <!--Sorting API -->
-                    <row>
-                        <entry>Top</entry>
-                        <entry>Moves selected set to the top of a list</entry>
-                    </row>
-                    <row>
-                        <entry>Bottom</entry>
-                        <entry>Moves selected set to the bottomof a list</entry>
-                    </row>
-                    <row>
-                        <entry>CTRL+Up arrow</entry>
-                        <entry>Moves selected item to one position uppert</entry>
-                    </row>
-                    <row>
-                        <entry>CTRL+Down arrow</entry>
-                        <entry>Moves selected item to one position lower</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
+    <table>
+        <title>Keyboard usage for elements reordering</title>
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Keys and combinations </entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <!--Sorting API -->
+                <row>
+                    <entry>Top</entry>
+                    <entry>Moves selected set to the top of a list</entry>
+                </row>
+                <row>
+                    <entry>Bottom</entry>
+                    <entry>Moves selected set to the bottomof a list</entry>
+                </row>
+                <row>
+                    <entry>CTRL+Up arrow</entry>
+                    <entry>Moves selected item to one position uppert</entry>
+                </row>
+                <row>
+                    <entry>CTRL+Down arrow</entry>
+                    <entry>Moves selected item to one position lower</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
 
-        <para>All the changes uses the same rules that defined in requirement for ordering with
-            controls.</para>
+    <para>All the changes uses the same rules that defined in requirement for ordering with
+        controls.</para>
 
     <section>
         <title>Drag-and-Drop support in the list</title>
@@ -202,13 +309,8 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
         <title>JavaScript API</title>
         <para> Controls are accessible for developer on client-side using controls attribute of
             JavaScript component instance. The value of the attribute is an associative array of
-            controls keyed by the following strings: <itemizedlist>
-                <listitem>&quot;top&quot;</listitem>
-                <listitem>&quot;up&quot;</listitem>
-                <listitem>&quot;down&quot;</listitem>
-                <listitem>&quot;bottom&quot;</listitem>
-            </itemizedlist>
-        </para>
+            controls keyed by the following strings: &quot;top&quot;,
+            &quot;up&quot;, &quot;down&quot;, &quot;bottom&quot;.</para>
         <table>
             <title>JavaScript API</title>
             <tgroup cols="3">
@@ -379,6 +481,44 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                     <row>
                         <entry>rich-ordering-list-cell-disabled</entry>
                         <entry>Defines a class for cell in disabled state</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Classes names that define controls representations</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-ordering-controls</entry>
+                        <entry>Could be applied to the whole group of the controls.</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-control-top</entry>
+                        <entry>Defines class for Top control</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-control-bottom</entry>
+                        <entry>Defines class for Bottom control</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-control-up</entry>
+                        <entry>Defines class for Up control</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-control-down</entry>
+                        <entry>Defines class for Down control</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-control-disabled</entry>
+                        <entry>Defines a class for any control in a disabled state</entry>
                     </row>
                 </tbody>
             </tgroup>
