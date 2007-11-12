@@ -229,14 +229,14 @@ HtmlCalendar myCalendar = new HtmlCalendar();
       </emphasis> facet with available {weekNumber}, {elementId} elements and <emphasis>
         <property>&quot;weekDay&quot;</property>
       </emphasis> facet with {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber}, {isWeekend},
-      {elementId} elements. {weekNumber}, {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber} elements could be
-      used for labels output, {isWeekend}, {elementId} - for additional processing in JavaScript
-      code.</para>
+      {elementId} elements. {weekNumber}, {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber}
+      elements could be used for labels output, {isWeekend}, {elementId} - for additional processing
+      in JavaScript code.</para>
     <para>These elements are shown on the picture below.</para>
-    
+
     <figure>
       <title>Available elements</title>
-      
+
       <mediaobject>
         <imageobject>
           <imagedata fileref="images/calendar3.png"/>
@@ -301,7 +301,7 @@ HtmlCalendar myCalendar = new HtmlCalendar();
       </mediaobject>
     </figure>
 
-    <para>As it&apos;s shown on the picture below {selectedDateControl}, {todayControl} elements
+    <para>As it&apos;s shown on the picture above {selectedDateControl}, {todayControl} elements
       are placed in the <emphasis>
         <property>&quot;header&quot;</property>
       </emphasis> facet, {previousMonthControl}, {currentMonthControl}, {nextMonthControl} - in the <emphasis>
@@ -311,25 +311,20 @@ HtmlCalendar myCalendar = new HtmlCalendar();
       </emphasis> facet, {nextYearControl}, {previousYearControl} are absent. Numbers of weeks are
       red colored.</para>
 
-    <para>The example of using JavaScript API is placed below:</para>
+    <para>It&apos;s possible to program events for calendar from JavaScript code. A simplest example of
+      usage JavaScript API is placed below:</para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
          <a4j:form id="form">
-                <h:panelGroup id="test" columns="2" style="width: 300px">
-                        <h:selectBooleanCheckbox value="#{bean.check}">
-                                <a4j:support event="onchange" reRender="test" />
-                                <f:selectItem itemValue="true" itemLabel="Show" />
-                                <f:selectItem itemValue="false" itemLabel="Hide" />
-                        </h:selectBooleanCheckbox>
-                        <rich:calendar popup="true"
-                                        rendered="#{!bean.check}" value="#{bean.date}" id="c"/>
-                                <a onclick="$('form:c').component.doExpand()" href="#">Show</a>	
-                </h:panelGroup>
+                        <rich:calendar popup="true" rendered="#{!bean.check}" value="#{bean.date}" id="c"/>
+                        <!--The link which is used to call a calendar popup externally-->
+                        <a onclick="$('form:c').component.doExpand()" href="#">Show</a>
         </a4j:form>
 ...
 ]]></programlisting>
+    
     <para>Also the discussion about this problem can be found on the <ulink
         url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4078301#4078301"
         >RichFaces Users Forum</ulink>.</para>
