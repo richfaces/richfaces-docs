@@ -61,20 +61,21 @@ HtmlAjaxRepeat repeater = new HtmlAjaxRepeat ();
         <property>&quot;ajaxKeys&quot;</property>
        </emphasis> attribute. This attribute defines strings that are updated after an Ajax request. As a result it becomes easier to update several child components separately without updating the whole page.</para>
 
-<programlisting role="XML"><![CDATA[<a4j:poll intervall="1000" action="#{repeater.action}" reRender="list">
+      <programlisting role="XML"><![CDATA[...
+    <a4j:poll intervall="1000" action="#{repeater.action}" reRender="text">
+        <table>
+            <tbody>
+                <a4j:repeat value="#{bean.props}" var="detail" ajaxKeys="#{repeater.ajaxedRowsSet}">
+                    <tr>                
+                        <td>
+                            <h:outputText value="detail.someProperty" id="text"/>
+                        </td>                            
+                    </tr>
+                </a4j:repeat>
+            </tbody>
+        </table>
+    </a4j:poll>
 ...
-<table>
- <tbody>
-   <a4j:repeat value="#{bean.props}" var="detail" binding="#{repeater.myRepeat}"
-	 id="list" ajaxKeys="#{repeater.ajaxedRowsSet}">
-	 </tr>
-	   <td>
-	    <h:outputText value="detail.someProperty">
-	    </td>
-	  </tr>
-   </a4j:repeat>
-   <tbody>
-<table>
 ]]></programlisting>
 
       <para>Thus, a list with a table structure from <emphasis >
