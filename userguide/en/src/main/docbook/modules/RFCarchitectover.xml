@@ -259,8 +259,19 @@
         <property>&quot;false&quot;</property> means to update only the area(s) that
         mentioned in the <emphasis/>&quot;reRender&quot;<property/> attribute explicitly.
         All output panels with
-        &quot;ajaxRendered&quot;=<property>&quot;true&quot;</property> will be
-        ignored.</para>
+        &quot;ajaxRendered&quot;=<property>&quot;true&quot;</property>is ignored. An
+        example is placed below:</para>
+
+      <programlisting role="XML"><![CDATA[...
+    <h:form>
+       <h:inputText value="#{person.name}">
+            <a4j:support event="onkeyup" reRender="test" limitToList="true"/>
+        </h:inputText>
+        <h:outputText value="#{person.name}" id="test"/>
+    </form>
+...
+]]></programlisting>
+
     </section>
 
     <section id="QueueandTrafficFloodProtection">
@@ -322,6 +333,11 @@
       <para>More information can be found on the <ulink
           url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=105766"
           >RichFaces Users Forum</ulink>.</para>
+
+      <para><emphasis>
+          <property>&quot;timeout&quot;</property>
+        </emphasis> attribute is used for setting response waiting time on a particular request. If
+        a response is not received during this time, the request is aborted.</para>
     </section>
 
     <section id="DataProcessingOptions">
@@ -341,8 +357,21 @@
         </emphasis> or <emphasis role="bold">
           <property>&lt;a4j:action&gt;</property>
         </emphasis> param values if any) to the request map. In case of <emphasis role="bold">
-          <property>a4j:support</property>
-        </emphasis>, it will be a value of the parent component.</para>
+          <property>&lt;a4j:support&gt;</property>
+        </emphasis>, it is a value of the parent component. An example is placed below:</para>
+
+      <programlisting role="XML"><![CDATA[...
+    <h:form>
+        <h:inputText value="#{person.name}">
+            <a4j:support event="onkeyup" reRender="test" ajaxSingle="true"/>
+        </h:inputText>
+      <h:inputText value="#{person.middleName}"/>
+    </form>
+...
+]]></programlisting>
+      <para>In this example the request contains only the input component causes the request
+        generation, not all the components contained on a form, because of
+          &quot;ajaxSingle&quot;=<property>&quot;true&quot;</property> usage.</para>
       <para>Note, that &quot;ajaxSingle&quot;=<property>&quot;true&quot;</property>
         reduces the upcoming traffic, but does not prevent decoding other input components on the
         server side. Some JSF components, such as <emphasis role="bold">
@@ -420,6 +449,7 @@
           Otherwize, the application proceeds to the next page. Make sure, you define
           &lt;redirect/&gt; option for the navigation rule to avoid memory leaks.</listitem>
       </itemizedlist>
+      <para> </para>
     </section>
 
     <section id="JavascriptInteractions">
@@ -467,6 +497,11 @@
         will not point the component where Ajax request was initiated.</para>
 
       <para><emphasis>
+          <property>&quot;onbeforedomupdate&quot;</property>
+        </emphasis> attrubute defines JavaScript code for call after Ajax response receiving and
+        before updating DOM on a client side.</para>
+
+      <para><emphasis>
           <property>&quot;data&quot;</property>
         </emphasis> attribute allows to get the additional data from the server during an Ajax call.
         You can use JSF EL to point the property of the managed bean and its value will be
@@ -484,6 +519,39 @@
           <property>&quot;data&quot;</property>
         </emphasis>.</para>
     </section>
+
+    <section id="IterationcomponentsAjaxattributes">
+      <?dbhtml filename="IterationcomponentsAjaxattributes.html"?>
+      <title>Iteration components Ajax attributes</title>
+      <para><emphasis>
+          <property>&quot;ajaxKeys&quot;</property>
+        </emphasis> attribute defines strings that are updated after an Ajax request. It provides
+        possibility to update several child components separately without updating the whole page.</para>
+
+      <programlisting role="XML"><![CDATA[...
+    <a4j:poll intervall="1000" action="#{repeater.action}" reRender="text">
+        <table>
+            <tbody>
+                <a4j:repeat value="#{bean.props}" var="detail" ajaxKeys="#{repeater.ajaxedRowsSet}">
+                    <tr>                
+                        <td>
+                            <h:outputText value="detail.someProperty" id="text"/>
+                        </td>                            
+                    </tr>
+                </a4j:repeat>
+            </tbody>
+        </table>
+    </a4j:poll>
+...
+]]></programlisting>
+
+    </section>
+
+    <!--section id="Otherusefulattributes">
+      <?dbhtml filename="Otherusefulattributes.html"?>
+      <title>Other useful attributes</title>
+      
+    </section-->
 
   </section>
 
