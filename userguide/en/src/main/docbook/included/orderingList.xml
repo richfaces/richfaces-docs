@@ -6,6 +6,46 @@
             <keyword>orderingList</keyword>
         </keywordset>
     </sectioninfo>
+    <table>
+        <title>Component identification parameters</title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Name</entry>
+
+                    <entry>Value</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>component-type</entry>
+
+                    <entry>org.richfaces.OrderingList</entry>
+                </row>
+                <row>
+                    <entry>component-class</entry>
+
+                    <entry>org.richfaces.component.html.HtmlOrderingList</entry>
+                </row>
+                <row>
+                    <entry>component-family</entry>
+
+                    <entry>org.richfaces.OrderingList</entry>
+                </row>
+                <row>
+                    <entry>renderer-type</entry>
+
+                    <entry>org.richfaces.OrderingListRenderer</entry>
+                </row>
+                <row>
+                    <entry>tag-class</entry>
+
+                    <entry>org.richfaces.taglib.OrderingListTagHandler</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
     <section>
         <title>Creating the Component with a Page Tag</title>
         <para>Here is a simple example as it could be used on a page: </para>
@@ -16,7 +56,10 @@
         <programlisting role="XML"><![CDATA[...
 <rich:orderingList value="#{bean.list}" var="list">
     <rich:column>
-        <h:outputText value="#{list.text}"> 
+        <f:facet name="header">
+	<h:outputText value="Name" />
+        </f:facet>
+        <h:inputText value="#{item.name}" />
     </rich:column>
 <rich:orderingList>
 ...
@@ -36,28 +79,82 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
     </section>
     <section>
         <title>Details of Usage</title>
+
         <!--maintenance of component  orderingList-->
+
         <para>The <emphasis role="bold">
                 <property>&lt;rich:orderingList&gt;</property>
-            </emphasis> component consists of <property>
-                <emphasis>Item list</emphasis>
-            </property> element that displays a list of items. It has three different
-            representations for a single element: common, selected, active. <para>Combination of
-                these states is possible</para>
+            </emphasis> component consists of <itemizedlist>
+                <listitem><property>Item list</property> element that displays a list of items. It
+                    has three different representations for a single element: common, selected,
+                    active. Combination of these states is possible.</listitem>
+                <listitem>
+                    <property>ordering controls set</property>
+                </listitem>
+            </itemizedlist>
         </para>
+
+        <!-- attributes of component  orderingList -->
+
+        <para> The <property>
+                <emphasis>&quot;value&quot;</emphasis>
+            </property> and <property>
+                <emphasis>&quot;var&quot;</emphasis>
+            </property> attributes are used to access the values of a list. </para>
+
+        <para>The <property>
+                <emphasis>&quot;selection&quot;</emphasis>
+            </property> attribute is bound to a list, which stores a set of indexes for rows
+            selected. If the index from a set is out of bounds, it should be ignored. </para>
+        <para>Controls rendering is based on the<property>
+                <emphasis>&quot;controlsType&quot;</emphasis>
+            </property> attribute. Possible types are button, link, none.</para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:orderingList value="#{bean.simpleItems}" var="item" selection="#{bean.selection}" controlsType="link">
+    <rich:column>
+        <f:facet name="header">
+	<h:outputText value="Name" />
+        </f:facet>
+                <h:outputText value="#{item}" />
+    </rich:column>
+</rich:orderingList>
+...]]></programlisting>
+
         <para> The <emphasis role="bold">
                 <property>&lt;rich:orderingList&gt;</property>
-            </emphasis> component provides to use <emphasis>
-                <property>&quot;optionalCaption&quot;</property>
+            </emphasis> component provides to use optional<emphasis>
+                <property>&quot;caption&quot;</property>
             </emphasis>, <property>
-                <emphasis>&quot;optionalHeader&quot;</emphasis>
-            </property>(It&apos;s possible to define  facet. It has two possible types of representation: sortable and
-            non-sortable) and <property>
-                <emphasis>&quot;optionalFooter&quot;</emphasis>
-            </property> facets.
-         </para>
-        <!-- add simple and screenshot-->
+                <emphasis>&quot;header&quot;</emphasis>
+            </property>(It&apos;s possible to define facet. It has two possible types of
+            representation: sortable and non-sortable) and <property>
+                <emphasis>&quot;footer&quot;</emphasis>
+            </property> facets. </para>
 
+        <!-- add screenshot-->
+
+
+        <para>Simple example is placed below.</para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:orderingList value="#{bean.simpleItems}" var="item" controlsType="link">
+    <f:facet name="caption">
+        <h:outputText value="Caption" />
+    </f:facet>
+    <h:outputText value="#{item}" />
+    <rich:column>
+        <f:facet name="header">
+	<h:outputText value="Name" />
+        </f:facet>
+        <h:outputText value="#{item}" />
+    </rich:column>
+</rich:orderingList>
+...]]></programlisting>
 
         <!-- ordering control set-->
         <para>The <emphasis role="bold">
@@ -83,41 +180,32 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             </property>, <property>
                 <emphasis>&quot;downControlDisabled&quot;</emphasis>
             </property> facets are used to replaces the default control with facets content. </para>
-
-        <!-- attributes of component  orderingList -->
-
-        <para> The <property>
-                <emphasis>&quot;value&quot;</emphasis>
-            </property> and <property>
-                <emphasis>&quot;var&quot;</emphasis>
-            </property> attributes are used to access the values of a list. Example of page
-            definition: <programlisting role="XML"><![CDATA[...
-<rich:orderingList value="#{bean.list}" var="list">
-    <f:facet name=header><h:outputText value="Header1"/></f:facet>
-        <rich:column>
-            <h:outputText value="#{list.text}"> 
-        </rich:column>
-<rich:orderingList>
-...]]>
-            </programlisting>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
         </para>
-
-        <para>The <property>
-                <emphasis>&quot;selection&quot;</emphasis>
-            </property> attribute is bound to a list, which stores a set of indexes for rows
-            selected. If the index from a set is out of bounds, it should be ignored. </para>
-        <para>Controls rendering is based on the <property>
-                <emphasis>&quot;controlsType&quot;</emphasis>
-            </property> attribute. Possible types are button, link, none.</para>
-        <para>Example of page definition:</para>
-        <programlisting role="XML"><![CDATA[...
-<rich:orderingList controlType="button">
-    <f:facet name="Top">
+        <para>
+            <programlisting role="XML"><![CDATA[...
+<rich:orderingList value="#{demoBean.items}" var="item" selection="#{bean.selection}" controlType="button">
+    <f:facet name="topControl">
         <h:outputText value="Move to top">
+    </f:facet>
+        <f:facet name="upControl">
+        <h:outputText value="Move up">
+    </f:facet>
+        <f:facet name="downControl">
+        <h:outputText value="Move down">
+    </f:facet>
+        <f:facet name="bottomControl">
+        <h:outputText value="Move to bottom">
     </f:facet>
 <rich:orderingList>
 ...
 ]]></programlisting>
+        </para>
+
+
+
+
 
         <para>The position of the controls relatively to a list could be customized with <itemizedlist>
                 <listitem>
@@ -185,14 +273,6 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
         </para>
 
 
-
-        <para>The <property>
-                <emphasis>&quot;captionLabel&quot;</emphasis>
-            </property>attribute defines the text placed inside a caption.</para>
-
-        <para>The <property>
-                <emphasis>&quot;disabled&quot;</emphasis>
-            </property>attribute disables the whole component.</para>
 
         <para>The component provides possibility to be customized using templating. The
             customization could be performed by a layout definition nested into the component. 5
@@ -292,7 +372,7 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
         controls.</para>
 
     <section>
-        <title>Drag-and-Drop support in the list</title>
+        <title> Built-In Drag and Drop</title>
         <para> It&apos;s possible to drag items and drop to the position needed. </para>
         <para>In this case component <emphasis role="bold">
                 <property>&lt;rich:orderingList&gt;</property>
@@ -411,21 +491,21 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 <property>skin parameters.</property>
             </emphasis></para>
         <para>There are two ways to redefine the appearance of all <emphasis role="bold">
-            <property>&lt;rich:orderingList&gt;</property>
-        </emphasis> components at once: <itemizedlist>
-            <listitem>Redefine the corresponding skin parameters</listitem>
-            <listitem> Add to your style sheets style classes used by a <emphasis role="bold">
                 <property>&lt;rich:orderingList&gt;</property>
-            </emphasis> component</listitem>
-        </itemizedlist>
+            </emphasis> components at once: <itemizedlist>
+                <listitem>Redefine the corresponding skin parameters</listitem>
+                <listitem> Add to your style sheets style classes used by a <emphasis role="bold">
+                        <property>&lt;rich:orderingList&gt;</property>
+                    </emphasis> component</listitem>
+            </itemizedlist>
         </para>
     </section>
     <section>
         <title>Definition of Custom Style Classes</title>
 
         <para>On the screenshot there are classes names that define styles for component elements.</para>
-        
-<!-- screenshot -->
+
+        <!-- screenshot -->
         <figure>
             <title>Style classes</title>
             <mediaobject>
