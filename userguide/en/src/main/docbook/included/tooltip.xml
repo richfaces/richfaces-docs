@@ -136,6 +136,30 @@ the &quot;delay&quot; attribute (default=0) or after calling JS API function doS
 It is recommended to define parent component "id" for correction of <property>tooltip</property> work.
 </note>
 
+  <para>The attribute <emphasis><property>&quot;for&quot;</property></emphasis>   is used for defining the <emphasis><property>&quot;id&quot;</property></emphasis> of an element a tooltip should be attached to. Look at the example:
+</para>
+  
+  <para>
+    <emphasis role="bold">Example:</emphasis>
+  </para>
+  <programlisting role="XML"><![CDATA[...
+<div id="elementId">
+      <rich:toolTip for="elementId">Using a toolTip<rich:toolTip>
+       <p>The first simple example<p>
+</div>
+...
+<div id="elementId">
+        <p>The second simple example<p>
+</div>
+<rich:toolTip for="elementId">Using a toolTip<rich:toolTip>
+...
+]]></programlisting>
+  
+  <para>Here, the attribute <emphasis><property>&quot;for&quot;</property></emphasis> of a <emphasis role="bold">
+    <property>&lt;rich:tooltip&gt;</property>
+  </emphasis> component is required. Whithout it an example doesn’t work because HTML elements aren't presented in component tree built by facelets.
+  </para>
+  
 <para>
 The <emphasis><property>&quot;mode&quot;</property></emphasis> attribute is provided you to control the way of data loading to <property>tooltip</property>. It has following values:
     <itemizedlist>
