@@ -15,12 +15,12 @@
         </para>
         <programlisting role="XML"><![CDATA[...
 <rich:listShuttle value="#{bean.list}" var="list" selection="#{value.resultList}">
-    <f:facet name=header>
-       <h:outputText value="Header1"/>
-    </f:facet>
-    <rich:column>
-        <h:outputText value="#{list.text}"> 
-    </rich:column>
+        <f:facet name=header>
+             <h:outputText value="Header1"/>
+        </f:facet>
+        <rich:column>
+            <h:outputText value="#{list.text}"> 
+        </rich:column>
 <rich:listShuttle>
 ...]]></programlisting>
     </section>
@@ -37,28 +37,253 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
     </section>
     <section>
         <title>Details of Usage</title>
-
         <para>The <emphasis role="bold">
                 <property>&lt;rich:listShuttle&gt;</property>
-            </emphasis> component is represented with the next tags: <itemizedlist>
-                <listitem><emphasis role="bold">
-                        <property>&lt;rich:listShuttle&gt;</property>
-                    </emphasis> - the tag defines all the component properties like list binding,
-                    sorting possibility, ordering controls set, move/copy controls set, behavioral
-                    and look and feel properties</listitem>
-                <listitem>facets with <emphasis>
-                        <property>&quot;source&quot;</property>
-                    </emphasis> and <emphasis>
-                        <property>&quot;target&quot;</property>
-                    </emphasis> names to build lists with different columns sets.</listitem>
-                <listitem><emphasis role="bold">
-                        <property>&lt;rich:column&gt;</property>
-                    </emphasis>, <emphasis role="bold">
-                        <property>&lt;h:column&gt;</property>
-                    </emphasis> is used to define columns for every row.</listitem>
+            </emphasis> component consists of the following parts: <itemizedlist>
+                <listitem>two item lists (source and target). List consists of items; each item has
+                    three different representations: common, selected, active</listitem>
+                <listitem>optional caption, header (sorted and non-sorted), footer elements</listitem>
+                <listitem>copy/moving controls set, a set of controls, which performs moving/copying
+                    items between lists</listitem>
+                <listitem>optional ordering controls set, a set of controls that performs
+                reordering</listitem>
             </itemizedlist>
         </para>
-         
+        <para>The <emphasis role="bold">
+                <property>&lt;rich:listShuttle&gt;</property>
+            </emphasis> component provides to use <emphasis>
+                <property>&quot;source&quot;</property>
+            </emphasis> and <emphasis>
+                <property>&quot;target&quot;</property>
+            </emphasis> facets. It is possible to use the facets only together defined. In case the
+            facets definition skipped – both lists contain the columns defined nested to listShuttle
+            component.</para>
+        <para>Here is a simple example as it could be used on a page.</para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:listShuttle sourceValue="#{bean.list}" var="list" value="#{value.resultList}">
+        <f:facet name="source">
+            <rich:column>
+                <h:outputText value="#{list.text}"/> 
+            </rich:column>
+        </f:facet>
+        <f:facet name="target">
+            <rich:column>
+                <h:outputText value="#{list.text}"/> 
+            </rich:column>
+            <rich:column>
+                <h:outputText value="#{list.description}"/> 
+            </rich:column>
+        </f:facet>
+<rich:listShuttle>
+
+...]]></programlisting>
+        <!-- ADD SCREESHOT-->
+        <para>Captions could be added to a list only after it was defined as a <emphasis>
+                <property>sourceCaption</property>
+            </emphasis> and <emphasis>
+                <property>targetCaption</property>
+            </emphasis> named facets inside the component or defined with the <emphasis>
+                <property>sourceCaptionLabel</property>
+            </emphasis> and <emphasis>
+                <property>targetCaptionLabel</property>
+            </emphasis> attribute.</para>
+        <!-- ordering control set-->
+        <para>The <emphasis role="bold">
+                <property>&lt;rich:listShuttle&gt;</property>
+            </emphasis> component provides the possibility to use <property> &quot;ordering
+                controls set&quot; </property>, which performs reordering in the target item
+            list. Every control has possibility to be disabled. </para>
+        <para>
+            <property>
+                <emphasis>&quot;topControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;topControlDisabled&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;bottomControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;bottomControlDisabled&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;upControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;upControlDisabled&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;downControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;downControlDisabled&quot;</emphasis>
+            </property> facets are used to replaces the default control with facets content. </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <para>
+            <programlisting role="XML"><![CDATA[...
+<rich:orderingList value="#{demoBean.items}" var="item" controlType="button">
+        <f:facet name="topControl">
+            <h:outputText value="Move to top">
+        </f:facet>
+            <f:facet name="upControl">
+            <h:outputText value="Move up">
+        </f:facet>
+            <f:facet name="downControl">
+            <h:outputText value="Move down">
+        </f:facet>
+            <f:facet name="bottomControl">
+            <h:outputText value="Move to bottom">
+        </f:facet>
+<rich:orderingList>
+...
+]]></programlisting>
+        </para>
+        <!-- copy/move control set -->
+        <para>The <emphasis role="bold">
+                <property>&lt;rich:listShuttle&gt;</property>
+            </emphasis>component also provides 4 predefined controls in <property>
+                &quot;move/copy controls set&quot; </property> for moving or copying items
+            between source and target lists. Every control has possibility to be disabled. </para>
+        <para>
+            <property>
+                <emphasis>&quot;copyCotrol&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;copy_disabled&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;removeControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;remove_disabled&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;copyAllControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;copyAll_disabled&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;removeAllControl&quot;</emphasis>
+            </property>, <property>
+                <emphasis>&quot;removeAll_disabled&quot;</emphasis>
+            </property> facets are used to replaces the default control with facets content. </para>
+        <!-- attributes -->
+        <para> The <property>
+                <emphasis>&quot;sourceValue&quot;</emphasis>
+            </property> attribute defines the collection to be shown in source list.</para>
+        <para> The <property>
+                <emphasis>&quot;value&quot;</emphasis>
+            </property> attribute defines the collection to store the value from target list.</para>
+        <para> The <property>
+                <emphasis>&quot;var&quot;</emphasis>
+            </property> could be shared between both collections to defined lists on the page.</para>
+        <para>Controls rendering is based on the<property>
+                <emphasis>&quot;controlsType&quot;</emphasis>
+            </property> attribute. Possible types are button, link, none.</para> The position of the
+            <property>ordering controls set</property> relatively to list should be customized with <property>
+            <emphasis>&quot;orderControlsVerticalAlign&quot;</emphasis>
+        </property> attribute. The position of the <property>move/copy controls set</property>
+        relatively to lists should be customized with <property>
+            <emphasis>&quot;moveControlsVerticalAlign&quot;</emphasis>
+        </property> attribute. <!-- template -->
+        <para>The <emphasis role="bold">
+                <property>&lt;rich:listShuttle&gt;</property>
+            </emphasis> component provides the possibility to be customized using templating. The
+            customization could be performed by layout definition nested to component.</para>
+        <para>10 elements could be provided to be defined inside template (all standard controls
+            should also possible to use inside): sourceList, targetList, CopyControl, removeCotrol,
+            copyAllControl, removeAllControl, topcontrol, bottomControl, downCotrol, upControl.</para>
+        <para>The markup defined in the initial picture could be defined as in the following example.</para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+            <programlisting role="XML"><![CDATA[...
+<rich:listShuttle>
+		<!-- All the columns-->
+			...
+		<!-- All the columns-->
+		<h:panelGrid columns="4">
+			<h:outputText value="{sourceList}"/>
+			<h:panelGroup>
+				<h:outputText value="{copyAllControl}"/>
+				<h:outputText value="{copyControl}"/>
+				<h:outputText value="{removeControl}"/>
+				<h:outputText value="{removeAllControl}"/>
+			</h:panelGroup>
+			<h:outputText value="targetList"/>
+			<h:panelGroup>
+				<h:outputText value="{topControl}"/>
+				<h:outputText value="{upControl}"/>
+				<h:outputText value="{downControl}"/>
+				<h:outputText value="{bottomControl}"/>
+			</h:panelGroup>
+		</h:panelGrid>
+	</rich:listShuttle>
+
+...
+]]></programlisting>
+        
+        <para>Keyboard usage</para>
+        <table>
+            <title>Keyboard usage for elements selection</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Keys and combinations </entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <!--Sorting API -->
+                    <row>
+                        <entry>CTRL+click</entry>
+                        <entry>Described in selection behaviour requirement</entry>
+                    </row>
+                    <row>
+                        <entry>SHIFT+click</entry>
+                        <entry>Described in selection behaviour requirement</entry>
+                    </row>
+                    <row>
+                        <entry>CTRL+A</entry>
+                        <entry>Selects all elements inside the list if some active element is
+                            already present in a list</entry>
+                    </row>
+                    <row>
+                        <entry>Space</entry>
+                        <entry>Inverts selection on the active element</entry>
+                    </row>
+                    <row>
+                        <entry>Up, Down arrows</entry>
+                        <entry>Change the active element to the next or previous in a list and make
+                            it the only selected. Scroll should follow the selection to keep it
+                            visible</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <table>
+            <title>Keyboard usage for elements reordering</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Keys and combinations </entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <!--Sorting API -->
+                    <row>
+                        <entry>Home</entry>
+                        <entry>Moves selected set to the top of a list</entry>
+                    </row>
+                    <row>
+                        <entry>End</entry>
+                        <entry>Moves selected set to the bottomof a list</entry>
+                    </row>
+                    <row>
+                        <entry>CTRL+Up arrow</entry>
+                        <entry>Moves selected item to one position upper</entry>
+                    </row>
+                    <row>
+                        <entry>CTRL+Down arrow</entry>
+                        <entry>Moves selected item to one position lower</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
     </section>
     <section>
         <title>JavaScript API</title>
@@ -80,100 +305,100 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                     <!--Sorting API -->
                     <row>
                         <entry>doSortAscending()</entry>
-                        <entry>Invert current sorting</entry>
+                        <entry>Sort items in the list ascending</entry>
                         <entry>Component</entry>
                     </row>
                     <row>
                         <entry>doSortDescending()</entry>
-                        <entry/>
+                        <entry>Sort items in the list descending</entry>
                         <entry>Component</entry>
                     </row>
                     <row>
                         <entry>doSort()</entry>
-                        <entry/>
+                        <entry>Invert current sorting</entry>
                         <entry>Component</entry>
                     </row>
                     <!--Controls common API -->
                     <row>
                         <entry>doHide()</entry>
-                        <entry/>
+                        <entry>Hide ordering control</entry>
                         <entry>Any Ordering control</entry>
                     </row>
                     <row>
                         <entry>doShow()</entry>
-                        <entry/>
+                        <entry>Show ordering control</entry>
                         <entry>Any Ordering control</entry>
                     </row>
                     <row>
                         <entry>isShown()</entry>
-                        <entry/>
+                        <entry>Check if current control is shown</entry>
                         <entry>Any Ordering control</entry>
                     </row>
                     <row>
                         <entry>doEnable()</entry>
-                        <entry/>
+                        <entry>Enable ordering control</entry>
                         <entry>Any Ordering control</entry>
                     </row>
                     <row>
                         <entry>doDisable()</entry>
-                        <entry/>
+                        <entry>Disable ordering control</entry>
                         <entry>Any Ordering control</entry>
                     </row>
                     <row>
                         <entry>isEnabled()</entry>
-                        <entry/>
+                        <entry>Check if current control is enabled</entry>
                         <entry>Any Ordering control</entry>
                     </row>
                     <!--List managing API -->
                     <row>
                         <entry>moveUp()</entry>
-                        <entry/>
+                        <entry>Move up selected item in the list</entry>
                         <entry>Any Item</entry>
                     </row>
                     <row>
                         <entry>moveDown()</entry>
-                        <entry/>
+                        <entry>Move down selected item in the list</entry>
                         <entry>Any Item</entry>
                     </row>
                     <row>
                         <entry>moveTop()</entry>
-                        <entry/>
+                        <entry>Move top selected item in the list</entry>
                         <entry>Any Item</entry>
                     </row>
                     <row>
                         <entry>moveBottom()</entry>
-                        <entry/>
+                        <entry>Move bottom selected item in the list</entry>
                         <entry>Any Item</entry>
                     </row>
                     <row>
                         <entry>copy()</entry>
-                        <entry/>
+                        <entry>Copy selected item from the source list to the target list</entry>
                         <entry>Any Item</entry>
                     </row>
                     <row>
                         <entry>remove()</entry>
-                        <entry/>
+                        <entry>Remove selected item from the target list to the source list</entry>
                         <entry>Any Item</entry>
                     </row>
                     <row>
                         <entry>copyAll()</entry>
-                        <entry/>
+                        <entry>Copy all items from the source list to the target list</entry>
                         <entry>Any Item</entry>
                     </row>
                     <row>
                         <entry>removeAll()</entry>
-                        <entry/>
+                        <entry>Remove all items from the target list to the source list</entry>
                         <entry>Any Item</entry>
                     </row>
                     <row>
                         <entry>getSelection()</entry>
-                        <entry/>
-                        <entry/>
+                        <entry>Return currently selected item</entry>
+                        <entry>Any Item</entry>
                     </row>
                     <row>
                         <entry>getItems()</entry>
-                        <entry/>
-                        <entry/>
+                        <entry>Return the collection of all items</entry>
+                        <entry>Any Item</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -198,11 +423,11 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
     </section>
     <section>
         <title>Definition of Custom Style Classes</title>
-        
+
         <para>On the screenshot there are classes names that define styles for component elements.</para>
-        
+
         <!-- screenshot -->
-        
+
         <figure>
             <title>Style classes</title>
             <mediaobject>
@@ -211,9 +436,9 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                 </imageobject>
             </mediaobject>
         </figure>
-        
+
         <!-- ADD ITEMS representations!!!-->
-        
+
         <table>
             <title>Classes names that define a caption representations in the source list</title>
             <tgroup cols="2">
@@ -324,7 +549,7 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
             </tgroup>
         </table>
         <table>
-            <title>Classes names that define a cells representations in the target  list</title>
+            <title>Classes names that define a cells representations in the target list</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -378,17 +603,17 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                         <entry>rich-shuttle-down</entry>
                         <entry>Defines class for Down control</entry>
                     </row>
-                    
+
                     <row>
                         <entry>rich-shuttle-copy</entry>
                         <entry>Defines class for Copy control</entry>
                     </row>
-                    
+
                     <row>
                         <entry>rich-shuttle-remove</entry>
                         <entry>Defines class for Remove control</entry>
                     </row>
-                    
+
                     <row>
                         <entry>rich-shuttle-copyAll</entry>
                         <entry>Defines class for copyAll control</entry>
@@ -405,13 +630,14 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
             </tgroup>
         </table>
         <para>In order to redefine styles for all <emphasis role="bold">
-            <property>&lt;rich:listShuttle&gt;</property>
-        </emphasis> components on a page using CSS, it's enough to create classes with the same names and define necessary properties in them.
-        </para>
+                <property>&lt;rich:listShuttle&gt;</property>
+            </emphasis> components on a page using CSS, it's enough to create classes with the same
+            names and define necessary properties in them. </para>
         <para>To change styles of particular <emphasis role="bold">
-            <property>&lt;rich:listShuttle&gt;</property>
-        </emphasis> components,  define your own style classes in the corresponding <emphasis role="bold">
-            <property>&lt;rich:listShuttle&gt;</property>
-        </emphasis> component attributes.</para>
+                <property>&lt;rich:listShuttle&gt;</property>
+            </emphasis> components, define your own style classes in the corresponding <emphasis
+                role="bold">
+                <property>&lt;rich:listShuttle&gt;</property>
+            </emphasis> component attributes.</para>
     </section>
-    </section>
+</section>
