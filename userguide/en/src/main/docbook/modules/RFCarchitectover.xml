@@ -547,11 +547,75 @@
 
     </section>
 
-    <!--section id="Otherusefulattributes">
+    <section id="Otherusefulattributes">
       <?dbhtml filename="Otherusefulattributes.html"?>
       <title>Other useful attributes</title>
-      
-    </section-->
+      <para><emphasis>
+          <property>&quot;status&quot;</property>
+        </emphasis> attribute for Ajax components (such as <emphasis role="bold">
+          <property>&lt;a4j:commandButton&gt;</property>
+        </emphasis>, <emphasis role="bold">
+          <property>&lt;a4j:poll&gt;</property>
+        </emphasis>, etc.) points to an ID of <emphasis role="bold">
+          <property>&lt;a4j:status&gt;</property>
+        </emphasis> component. Use this attribute if you want to share <emphasis role="bold">
+          <property>&lt;a4j:status&gt;</property>
+        </emphasis> component between different Ajax components from different regions. The
+        following example shows it. </para>
+
+      <programlisting role="XML"><![CDATA[...
+    <a4j:region id="extr">
+        <h:form>
+            <h:outputText value="Status:" />
+            <a4j:status id="commonstatus" startText="In Progress...." stopText=""/>
+            <h:panelGrid columns="2">
+                <h:outputText value="Name"/>
+                <h:inputText id="name" value="#{userBean.name}">
+                    <a4j:support event="onkeyup" reRender="out" />
+                </h:inputText>
+                <h:outputText value="Job"/>
+                <a4j:region  id="intr">
+                    <h:inputText id="job" value="#{userBean.job}">
+                        <a4j:support event="onkeyup"  reRender="out" status="commonstatus"/>
+                   </h:inputText>
+                </a4j:region>
+            </h:panelGrid>
+
+            <a4j:region>
+                <h:outputText id="out" value="Name: #{userBean.name}, Job: #{userBean.job}" />
+                <br />
+                <a4j:commandButton ajaxSingle="true" value="Clean Up Form" reRender="name, job, out"  status="commonstatus">
+                    <a4j:actionparam name="n" value=""  assignTo="#{userBean.name}" />
+                    <a4j:actionparam name="j" value=""  assignTo="#{userBean.job}" />
+                </a4j:commandButton>
+            </a4j:region>
+        </h:form>
+    </a4j:region>
+...
+]]></programlisting>
+
+      <para>In the example <emphasis role="bold">
+          <property>&lt;a4j:support&gt;</property>
+        </emphasis> and <emphasis role="bold">
+          <property>&lt;a4j:commandButton&gt;</property>
+        </emphasis> are defined in different regions. Values of <emphasis>
+          <property>&quot;status&quot;</property>
+        </emphasis> attribute for these components points to an ID of <emphasis role="bold">
+          <property>&lt;a4j:support&gt;</property>
+        </emphasis>.Thus, the <emphasis role="bold">
+          <property>&lt;a4j:support&gt;</property>
+        </emphasis> component is shared between two components from different regions.</para>
+
+      <para>More information could be found <ulink
+          url="http://livedemo.exadel.com/richfaces-demo/richfaces/status.jsf?c=status"
+        >here</ulink>.</para>
+
+      <para>Other useful attribute is <emphasis>
+          <property>&quot;focus&quot;</property>
+        </emphasis>. It points to an ID of a component where focus will be set after an Ajax
+        request.</para>
+
+    </section>
 
   </section>
 
