@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+    <sectioninfo>
+        <keywordset>
+            <keyword>rich:contextMenu</keyword>
+            <keyword>contextMenu</keyword>
+        </keywordset>
+    </sectioninfo>
+    <section>
+        <title>Creating the Component with a Page Tag</title>
+        <para>Here is a simple example as it could be used on a page: </para>
+
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+    <rich:contextMenu value="Menu1">
+
+        <!--Nested menu components-->
+
+    </rich:contextMenu>
+...
+]]></programlisting>
+    </section>
+    <section>
+        <title>Creating the Component Dynamically Using Java</title>
+
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="JAVA"><![CDATA[
+import org.richfaces.component.html.HtmlContextMenu;   
+
+...
+
+HtmlContextMenu myContextMenu = new HtmlContextMenu();
+
+...
+]]></programlisting>
+    </section>
+    <section>
+        <title>Details of Usage</title>
+        <para>All attributes except <emphasis>
+                <property>&quot;value&quot;</property>
+            </emphasis> are optional. The <emphasis>
+                <property>&quot;value&quot;</property>
+            </emphasis> attribute defines text to be represented. For the same purpose you can also
+            use the <emphasis>
+                <property>&quot;label&quot;</property>
+            </emphasis> facet.</para>
+
+        <para> It&apos;s possible to define the direction for list appear in the <emphasis>
+                <property>&quot;direction&quot;</property>
+            </emphasis>attribute. If the accordance of the popup corner to corner of the label isn’t
+            set <emphasis>
+                <property>&quot;direction&quot;</property>
+            </emphasis> attribute must set next accordances: </para>
+        <itemizedlist>
+            <listitem>
+                <para>top-left - a menu drops to the top and left</para>
+            </listitem>
+
+            <listitem>
+                <para>top-right - a menu drops to the top and right</para>
+            </listitem>
+
+            <listitem>
+                <para>bottom-left - a menu drops to the bottom and left</para>
+            </listitem>
+
+            <listitem>
+                <para>bottom-right - a menu drops to the bottom and right</para>
+            </listitem>
+
+            <listitem>
+                <para>auto(default) - smart positioning activation</para>
+            </listitem>
+        </itemizedlist>
+        <para><emphasis role="bold">
+                <property>&lt;contextMenu&gt;</property>
+            </emphasis> provides <emphasis>
+                <property>&quot;jointPoint&quot;</property>
+            </emphasis> attribute to set the point on the label element to connect popup. Possible
+            values are:</para>
+
+        <itemizedlist>
+            <listitem>
+                <para>tr - a menu is attached to the top-right point of the button element</para>
+            </listitem>
+
+            <listitem>
+                <para>tl - a menu is attached to the top-left point of the button element</para>
+            </listitem>
+
+            <listitem>
+                <para>br - a menu is attached to the bottom-right point of the button element</para>
+            </listitem>
+
+            <listitem>
+                <para>bl - a menu is attached to the bottom-left point of the button element</para>
+            </listitem>
+
+            <listitem>
+                <para>auto(default) - smart positioning activation</para>
+            </listitem>
+        </itemizedlist>
+
+        <!--ADD EXAMPLE and SCREENSHOT -->
+
+        <para>In order to set the offset for the menu popup relatively to label, you can use <emphasis>
+                <property>&quot;horizontalOffset&quot;</property>
+            </emphasis> and <emphasis>
+                <property>&quot;verticalOffset&quot;</property>
+            </emphasis> attributes. Values can be negative.</para>
+
+        <para><property>menuItem</property> provides <emphasis>
+                <property>&quot;submitMode&quot;</property>
+            </emphasis> attribute to define the way of submission. Possible values : <itemizedlist>
+                <listitem>
+                    <para>Server (default)</para>
+                </listitem>
+            </itemizedlist>
+            <para>The standard form submission is performed and the page is completely refreshed.</para>
+            <itemizedlist>
+                <listitem>
+                    <para>Ajax</para>
+                </listitem>
+            </itemizedlist>
+            <para>An Ajax form submission is performed, and specified elements in the <emphasis>
+                    <property>&quot;reRender&quot;</property>
+                </emphasis> attribute are rerendered.</para>
+            <itemizedlist>
+                <listitem>
+                    <para>None</para>
+                </listitem>
+            </itemizedlist>
+            <para> The <emphasis>
+                    <property>&quot;action&quot;</property>
+                </emphasis> and <emphasis>
+                    <property>&quot;actionListener&quot;</property>
+                </emphasis> item's attributes are ignored. Menu items don't fire any submits
+                themselves. The behavior is fully defined by the components nested inside items.</para>
+            <!-- template
+        <para>emphasis role="bold">
+            <property>&lt;contextMenu&gt;</property>
+            </emphasis> could not be generated for every component where it&apos;s defined. Templating could
+            be used instead. So only representation data could be loaded from server. And markup
+            could be evaluated on client side. So it's should accept macrosubstitutions like
+            {value} </para>
+            
+        -->
+        </para>
+    </section>
+    <section>
+        <title>JavaScript API</title>
+        <table>
+            <title>JavaScript API</title>
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>Function</entry>
+                        <entry>Description</entry>
+                        <entry>Apply to</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <!--Sorting API -->
+                    <row>
+                        <entry>doHide()</entry>
+                        <entry>Hide component or group</entry>
+                        <entry>Component, group</entry>
+                    </row>
+                    <row>
+                        <entry>doShow()</entry>
+                        <entry>Show component or group</entry>
+                        <entry>Component, group</entry>
+                    </row>
+                    <row>
+                        <entry>doEnable()</entry>
+                        <entry>Enable component, item, group</entry>
+                        <entry>Component, Item, Group</entry>
+                    </row>
+                    <row>
+                        <entry>doDisable()</entry>
+                        <entry>Disable component, item or group</entry>
+                        <entry>Component, Item, Group</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </section>
+    <section>
+        <title>Look-and-Feel Customization</title>
+
+        <para>For skinnability implementation, the components use a <emphasis>
+                <property>style class redefinition method.</property>
+            </emphasis> Default style classes are mapped on <emphasis>
+                <property>skin parameters.</property>
+            </emphasis></para>
+
+        <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+                <property>&lt;rich:contextMenu&gt;</property>
+            </emphasis> components at once:</para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Redefine the corresponding skin parameters</para>
+            </listitem>
+
+            <listitem>
+                <para>Add to your style sheets <emphasis>
+                        <property>style classes</property>
+                    </emphasis> used by a <emphasis role="bold">
+                        <property>&lt;rich:contextMenu&gt;</property>
+                    </emphasis> component</para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>Skin Parameters Redefinition</title>
+    </section>
+    <section>
+        <title>Definition of Custom Style Classes</title>
+
+        <para>On the screenshot there are classes names that define styles for component elements.</para>
+
+        <figure>
+            <title>Classes names</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref=""/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <table>
+            <title>Classes names that define a label</title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry></entry>
+
+                        <entry></entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </section>
+</section>
