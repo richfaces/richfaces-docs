@@ -47,17 +47,14 @@
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-    <rich:dataTable value="#{capitalsBean.capitals}" var="capitals" 
-                        ajaxKeys="#{bean.ajaxSet}" binding="#{bean.tabe}" id="table">
-        <!--...//Set of columns and header/footer facets-->
-        <rich:column colspan="3">
-            <f:facet name="header">State Flag</f:facet>
-            <h:graphicImage value="#{cap.stateFlag}"/>
-        </rich:column>
         <rich:columnGroup>
-            <!--...//Set of columns and header/footer facets-->
-        </rich:columnGroup>	
-    </rich:dataTable>
+                <rich:column>
+                        <h:outputText value="Column1"/>
+                </rich:column>
+                <rich:column>
+                        <h:outputText value="Column2"/>
+                </rich:column>
+        </rich:columnGroup>
 ...
 ]]></programlisting>
   </section>
@@ -114,9 +111,15 @@ HtmlColumnGroup myRow = new HtmlColumnGroup();
             <f:facet name="header">State Flag</f:facet>
             <h:graphicImage value="#{cap.stateFlag}"/>
         </rich:column>
-        <rich:column breakBefore="true">...</rich:column>
-        <rich:column >...</rich:column>
-        <rich:column >...</rich:column>
+        <rich:column breakBefore="true">
+                <h:outputText value="#{cap.state}"/>
+        </rich:column>
+        <rich:column breakBefore="true">
+                <h:outputText value="#{cap.name}"/>
+        </rich:column>
+        <rich:column >
+                <h:outputText value="#{cap.timeZone}"/>
+        </rich:column>
     </rich:dataTable>
 ....
 ]]></programlisting>
