@@ -478,19 +478,6 @@ background-color: transparent;
                                 >here</ulink>.</para>
         </section>
 
-        <section id="RerenderingPartPage">
-                <?dbhtml filename="RerenderingPartPage.html"?>
-                <title>How to reRender only particular row(s) of dataTable?</title>
-                <para> If you use dataTable then you may use <emphasis>
-                                <property>&quot;ajaxKeys&quot;</property>
-                        </emphasis> attribute to bind the rowKeys to be reRendered there. After you
-                        need to point reRender on the specific rows. See also <link
-                                linkend="IterationcomponentsAjaxattributes"
-                                >&quot;Iteration components Ajax attributes section&quot;.</link>
-                </para>
-        </section>
-
-
         <section>
                 <?dbhtml filename="Howtomakehtmlscrollbars.html"?>
                 <title>How to make html scrollbars in modalPanel?</title>
@@ -610,6 +597,67 @@ background-color: transparent;
                                 <property>&quot;fetchvalue&quot;</property>
                         </emphasis> attribute.)</para>
         </section>
+
+        <section>
+                <?dbhtml filename="Howtosetrich:dataTableborder.html"?>
+                <title>How to set &lt;rich:dataTable&gt; border to 0px?</title>
+                <para>Add the following code to your css file:</para>
+                <programlisting role="CSS"><![CDATA[...
+                .rich-table, .rich-table-header,.rich-table-headercell, .rich-table-cell,
+                        .rich-subtable-cell, .rich-table-footercell, .rich-subtable-footercell {
+                                border-width:0px;
+                }
+...
+]]></programlisting>
+        </section>
+
+        <section>
+                <?dbhtml filename="Howtosetrich:dataTableborder.html"?>
+                <title>How to create &lt;rich:suggestionBox&gt; dynamically?</title>
+                <para>This is a working example:</para>
+                <programlisting role="JAVA"><![CDATA[...
+                org.apache.myfaces.component.html.ext.HtmlInputText searchBox = new org.apache.myfaces.component.html.ext.HtmlInputText();
+        searchBox.setId( "inputQuery" );
+        bar.getChildren().add( searchBox );
+
+        org.richfaces.component.html.HtmlSuggestionBox suggestions = new org.richfaces.component.html.HtmlSuggestionBox();
+        suggestions.setId( "sugg" );
+        suggestions.setFor( "inputQuery" );
+        suggestions.setTokens( ",[" );
+        suggestions.setRules( "none" );
+
+        javax.faces.el.MethodBinding mb = app.createMethodBinding( "#{suggestionBox.autocomplete}", new Class[] { Object.class } );
+        suggestions.setSuggestionAction( mb );
+        suggestions.setVar( "result" );
+
+        suggestions.setRows( 0 );
+        suggestions.setFirst( 0 );
+        suggestions.setMinChars( "#{suggestionBox.minchars}" );
+        suggestions.setShadowOpacity( "4" );
+        suggestions.setBorder( "1" );
+        suggestions.setWidth( "200" );
+        suggestions.setHeight( "150" );
+        suggestions.setShadowDepth( "4" );
+        suggestions.setCellpadding( "2" );
+
+            org.apache.myfaces.custom.column.HtmlSimpleColumn column = new org.apache.myfaces.custom.column.HtmlSimpleColumn();
+                column.setId( "col1" );
+                org.apache.myfaces.component.html.ext.HtmlOutputText text = new org.apache.myfaces.component.html.ext.HtmlOutputText();
+                text.setId( "text1" );
+
+                javax.faces.el.ValueBinding vb = app.createValueBinding( "#{result.text}" );
+                text.setValueBinding( "value", vb );
+                column.getChildren().add( text );
+            suggestions.getChildren().add( column );
+        bar.getChildren().add( suggestions );
+...
+]]></programlisting>
+                <para> See also <ulink
+                                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4099047#4099047"
+                                >RichFaces User Forum</ulink>.</para>
+        </section>
+
+
 
         <section id="DecidingWhatToChangeOnTheServerSide">
                 <?dbhtml filename="DecidingWhatToChangeOnTheServerSide.html"?>
@@ -737,68 +785,7 @@ background-color: transparent;
                 <para>To avoid exception, don&apos;t forget that the component stores beans in
                         serialized view, but your bean should implement java.io.Serializable.</para>
         </section>
-        <!--section id="FilterUsageDamagesAnApplicationLayout">
-                <?dbhtml filename="FilterUsageDamagesAnApplicationLayout.html"?>
-                <title>Why does filter usage damage an application layout?</title>
-                <para>RichFaces uses <property>filters</property> for correction of xhtml code
-                        received on an Ajax response, because when a response is recieved from the
-                        server, RichFaces makes direct changes in DOM tree and browser
-                        doesn&apos;t make any corrections in generated xhtml. There are two ways
-                        for setting <property>filters</property> that could be used in an
-                        RichFaces-based application.</para>
-                <para> The first one:</para>
 
-                <para>
-                        <emphasis role="bold">Example:</emphasis>
-                </para>
-                <programlisting role="XML"><![CDATA[<context-param filter>
-  <display-name>RichFaces Filter</display-name>
-  <filter-name>richfaces</filter-name>
-  <filter-class>org.ajax4jsf.Filter</filter-class>
-</filter>]]></programlisting>
-                <para>This <property>filter</property> is based on Tidy Filter usage and recommended
-                        for applications with complicated or non-standard markup, as all the
-                        necessary xhtml code corrections are made by the filter when a response
-                        comes from the server.</para>
-                <para> Anyway, some obvious errors could damage a layout, if it happens, make sure
-                        that the markup corresponds to the xhtml-strict specification. </para>
-                <para>The second one:</para>
-
-                <para>
-                        <emphasis role="bold">Example:</emphasis>
-                </para>
-                <programlisting role="XML"><![CDATA[<filter>
-  <display-name>RichFaces FastFilter</display-name>
-  <filter-name>richfaces</filter-name>
-  <filter-class>org.ajax4jsf.FastFilter</filter-class>
-</filter>]]></programlisting>
-                <para>This <property>filter</property> is based on the Neko parser. In this case an
-                        output xhtml code isn&apos;t strictly verified and it also could cause
-                        lot&apos;s of errors and corrupt a layout as a result. Though if you
-                        sure that your application markup is really strict for this filter, the
-                        filter considerably accelerates all Ajax requests processing. </para>
-                <para><emphasis role="bold">Extra information</emphasis>. </para>
-                <para>forceParcer parameters setting for <property>filters</property>:</para>
-
-                <para>
-                        <emphasis role="bold">Example:</emphasis>
-                </para>
-                <programlisting role="XML"><![CDATA[<filter>
-...
-<init-param>
-<param-name>forceparser</param-name>
-<param-value>false</param-value>
-</init-param>
-...
-</filter>]]></programlisting>
-                <para>The &quot;false&quot; setting for initialization parameter switches
-                        off application of filters for non-Ajax requests, if
-                        &quot;true&quot; is chosen, the filter checks all requests. <important>
-                                <title>Changes for Ajax4jsf 1.1.0</title>
-                                <property>forceparser parameter</property> default value is false
-                                from this version. </important>
-                </para>
-        </section-->
         <section id="AFormIsNotSubmittedOrASetterIsNotCalledAfterAJAXrequest">
                 <?dbhtml filename="AFormIsNotSubmittedOrASetterIsNotCalledAfterAJAXrequest.html"?>
                 <title>Why form isn&apos;t submitted or setter isn&apos;t called after AJAX
@@ -836,7 +823,6 @@ background-color: transparent;
                 </para>
         </section>
 
-
         <section id="IgnoreDupResponsesAndRequestDelay">
                 <?dbhtml filename="IgnoreDupResponsesAndRequestDelay.html"?>
 
@@ -864,8 +850,6 @@ background-color: transparent;
                                 >Ajax4Jsf Users Forum. </ulink>
                 </para>
         </section>
-
-
 
         <section id="EventQueueUsage">
                 <?dbhtml filename="EventQueueUsage.html"?>
@@ -1029,5 +1013,17 @@ background-color: transparent;
                         and a browser tries to access them via cashed URL.</para>
 
                 <para>The problem is solved with browser cash update (e.g. CTRL+F5).</para>
+        </section>
+       
+        <section id="RerenderingPartPage">
+                <?dbhtml filename="RerenderingPartPage.html"?>
+                <title>How to reRender only particular row(s) of table?</title>
+                <para> If you use dataTable then you may use <emphasis>
+                        <property>&quot;ajaxKeys&quot;</property>
+                </emphasis> attribute to bind the rowKeys to be reRendered there.
+                        After you need to point reRender on the specific rows. See also
+                        <link linkend="IterationcomponentsAjaxattributes"
+                                >&quot;Iteration components Ajax attributes
+                                section&quot;</link>. </para>
         </section>
 </chapter>
