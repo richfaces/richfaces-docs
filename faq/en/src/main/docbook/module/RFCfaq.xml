@@ -10,7 +10,7 @@
 
         <section>
                 <?dbhtml filename="Wherearebinary/sourcedistributionforRichFacesrelease.html"?>
-                <title>Where are binary/source distribution for RichFaces 3.1.0 release?</title>
+                <title>Where are binary/source distribution for RichFaces?</title>
                 <para> Most important links for RichFaces can be found <ulink
                                 url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=104575"
                                 >here</ulink>.</para>
@@ -22,6 +22,95 @@
                 <para>This <ulink
                                 url="http://labs.jboss.com/wiki/HowToBuildRichFacesSnapshotManually"
                                 > wiki article</ulink> helps you to find an answer.</para>
+        </section>
+
+        <section>
+                <?dbhtml filename="HowtobuildRichFacessnapshotmanually.html"?>
+                <title>How to configure Maven for RichFaces</title>
+                <itemizedlist>
+                        <listitem>
+                                <para>Download and install Maven if you have not it yet installed.
+                                        Follow the instruction at <ulink
+                                                url="http://maven.apache.org/download.html">
+                                                http://maven.apache.org/download.html</ulink>.</para>
+                        </listitem>
+
+                        <listitem>
+                                <para>Open
+                                        <property>&lt;Maven-Root&gt;/conf/settings.xml</property>
+                                        file to edit</para>
+
+                                <para>Add into the <property>&lt;profile&gt;</property>
+                                        section:</para>
+                                <programlisting role="XML"><![CDATA[
+   <id>RichFaces</id>
+   <repositories>
+      <repository>
+         <releases>
+            <enabled>true</enabled>
+         </releases>
+         <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>never</updatePolicy>
+         </snapshots>
+         <id>repository.jboss.com</id>
+         <name>Jboss Repository for Maven</name>
+         <url>
+            http://repository.jboss.com/maven2/
+         </url>
+         <layout>default</layout>
+      </repository>
+      <repository>
+         <releases>
+            <enabled>false</enabled>
+         </releases>
+         <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+         </snapshots>
+         <id>maven2-snapshots.jboss.com</id>
+         <name>Jboss Repository for Maven Snapshots</name>
+         <url>http://snapshots.jboss.com/</url>
+         <layout>default</layout>
+      </repository>
+   </repositories>
+ <pluginRepositories>
+   <pluginRepository>
+         <id>maven2-snapshots.jboss.com</id>
+         <name>Jboss Repository for Maven Snapshots</name>
+         <url>http://snapshots.jboss.com/</url>
+     <releases>
+       <enabled>false</enabled>
+     </releases>
+     <snapshots>
+       <enabled>true</enabled>
+       <updatePolicy>always</updatePolicy>
+     </snapshots>
+   </pluginRepository>
+   <pluginRepository>
+         <releases>
+            <enabled>true</enabled>
+         </releases>
+         <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>never</updatePolicy>
+         </snapshots>
+         <id>repository.jboss.com</id>
+         <name>Jboss Repository for Maven</name>
+         <url>
+            http://repository.jboss.com/maven2/
+         </url>
+         <layout>default</layout>
+   </pluginRepository>
+ </pluginRepositories>
+]]></programlisting>
+                                <para> Add into the
+                                        <property>&lt;activeProfiles&gt;</property> section:</para>
+                                <programlisting role="XML"><![CDATA[<activeProfile>RichFaces</activeProfile>]]></programlisting>
+
+                        </listitem>
+
+                </itemizedlist>
         </section>
 
         <section>
@@ -43,7 +132,7 @@
 
         <section>
                 <?dbhtml filename="IstheredemoforRichFacescomponents.html"?>
-                <title>Where could I find a demo for RichFaces 3.1.0 components?</title>
+                <title>Where could I find a demo for RichFaces components?</title>
                 <para>Online demo Web applications that show the most important functionality of
                         RichFaces components are available <ulink
                                 url="http://livedemo.exadel.com/richfaces-demo/">here</ulink>.</para>
@@ -78,7 +167,7 @@
                         Prototype.Browser() function can&apos;t be found.</title>
                 <para>RichFaces 3.1.0 has been released with the latest Prototype 1.5.1.1. The
                         conflict happens because on your page an older version of prototypes that
-                        can be added from Tomahawk 1.1.6 is used. See the solution to the problem
+                        can be added from Tomahawk 1.1.6 is used. See the solution for the problem
                                 <ulink
                                 url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=118526&amp;postdays=0&amp;postorder=asc&amp;start=0"
                                 >here.</ulink></para>
@@ -279,9 +368,14 @@ included2.xhtml
         <section>
                 <?dbhtml filename="HowtocustomizesimpleTogglePanel.html"?>
                 <title>How to pass own parameters during a modalPanel opening or closing?</title>
-                <para>The answer could be found in the &quot;Details of usage&quot; of <link
-                                linkend="modalPanel">&lt;rich:modalPanel&gt;
-                        component</link>.</para>
+                <para> You can pass your parameters during modalPanel opening or closing. This passing could be
+                        performed in the following way: </para>
+                
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="JAVA"><![CDATA[Richfaces.showModalPanel('panelId', {left: auto}, {param1: value1});]]></programlisting>
+                <para> Thus, except the standard modalPanel parameters you can pass any of your own parameters. </para>
         </section>
 
         <section>
@@ -662,8 +756,7 @@ background-color: transparent;
         <section id="DecidingWhatToChangeOnTheServerSide">
                 <?dbhtml filename="DecidingWhatToChangeOnTheServerSide.html"?>
                 <title>What should I change on the server side?</title>
-                <para> As it was mentioned <ulink url="index.html#DecideWhatToChange"
-                        >before</ulink>, the list of zones to be reRendered can be specified as EL
+                <para> The list of zones to be reRendered can be specified as EL
                         expression. But there is a question that must be specified more exactly. </para>
                 <para> The list of Ids is formed during beforePhase of RENDER_RESPONSE. Therefore,
                         in this case one can point reRender to the Set type Bean&apos;s property
@@ -1014,16 +1107,34 @@ background-color: transparent;
 
                 <para>The problem is solved with browser cash update (e.g. CTRL+F5).</para>
         </section>
-       
+
         <section id="RerenderingPartPage">
                 <?dbhtml filename="RerenderingPartPage.html"?>
                 <title>How to reRender only particular row(s) of table?</title>
-                <para> If you use dataTable then you may use <emphasis>
+                <!--para> If you use dataTable then you may use <emphasis>
+                                <property>&quot;ajaxKeys&quot;</property>
+                        </emphasis> attribute to bind the rowKeys to be reRendered there. After you
+                        need to point reRender on the specific rows. </para-->
+                <para><emphasis>
                         <property>&quot;ajaxKeys&quot;</property>
-                </emphasis> attribute to bind the rowKeys to be reRendered there.
-                        After you need to point reRender on the specific rows. See also
-                        <link linkend="IterationcomponentsAjaxattributes"
-                                >&quot;Iteration components Ajax attributes
-                                section&quot;</link>. </para>
+                </emphasis> attribute defines strings that are updated after an Ajax request. It provides
+                        possibility to update several child components separately without updating the whole page.</para>
+                
+                <programlisting role="XML"><![CDATA[...
+    <a4j:poll intervall="1000" action="#{repeater.action}" reRender="text">
+        <table>
+            <tbody>
+                <a4j:repeat value="#{bean.props}" var="detail" ajaxKeys="#{repeater.ajaxedRowsSet}">
+                    <tr>                
+                        <td>
+                            <h:outputText value="detail.someProperty" id="text"/>
+                        </td>                            
+                    </tr>
+                </a4j:repeat>
+            </tbody>
+        </table>
+    </a4j:poll>
+...
+]]></programlisting>
         </section>
 </chapter>
