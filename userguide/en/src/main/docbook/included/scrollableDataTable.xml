@@ -132,6 +132,27 @@ HtmlScrollableDataTable myScrollableDataTable = new HtmlScrollableDataTable();
 </rich:scrollableDataTable>
 ...
 ]]></programlisting>
+     <para>
+       In order to access the selected rows in <emphasis role="bold">
+         <property>&lt;rich:scrollableDataTable&gt;</property>
+       </emphasis> component you can use the <emphasis><property>&quot;selection&quot;</property></emphasis> attribute. Simple code is placed below.
+       <programlisting role="XML"><![CDATA[...
+<rich:scrollableDataTable value="#{bean.unLinkedThemes}" var="cur" selection="#{bean.selection}">
+	<rich:column width="100px">
+		<f:facet name="header" >
+			<h:outputText value="State"/>
+		</f:facet>
+		<h:outputText value="#{cur.cell1}"/>
+		<f:facet name="footer">
+			<h:outputText value="State"/>
+		</f:facet>
+	</rich:column>		
+	<!--...//Set of columns and header/footer facets-->
+</rich:scrollableDataTable>
+...
+]]></programlisting>
+       
+     </para>
 <para>
 Finally, the component has the following extra attributes for event processing on the client:
 	<itemizedlist>
