@@ -1,50 +1,51 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <section>
-<sectioninfo>
-<keywordset>
-<keyword>grid</keyword>
-<keyword>rich:dataGrid</keyword>
-<keyword>HtmlDataGrid</keyword>
-</keywordset>
-</sectioninfo>
-  
-    <table>
-      <title>Component identification parameters </title>
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Name</entry>
-            <entry>Value</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry>component-type</entry>
-            <entry>org.richfaces.DataGrid</entry>
-          </row>
-          <row>
-            <entry>component-class</entry>
-            <entry>org.richfaces.component.html.HtmlDataGrid</entry>
-          </row>
-          <row>
+  <sectioninfo>
+    <keywordset>
+      <keyword>grid</keyword>
+      <keyword>rich:dataGrid</keyword>
+      <keyword>HtmlDataGrid</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <table>
+    <title>Component identification parameters </title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+          <entry>Value</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+          <entry>org.richfaces.DataGrid</entry>
+        </row>
+        <row>
+          <entry>component-class</entry>
+          <entry>org.richfaces.component.html.HtmlDataGrid</entry>
+        </row>
+        <row>
           <entry>component-family</entry>
           <entry>org.richfaces.DataGrid</entry>
-          </row>
-          <row>
+        </row>
+        <row>
           <entry>renderer-type</entry>
           <entry>org.richfaces.DataGridRenderer</entry>
-          </row>          
-          <row>
-            <entry>tag-class</entry>
-            <entry>org.richfaces.taglib.DataGridTag</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  
+        </row>
+        <row>
+          <entry>tag-class</entry>
+          <entry>org.richfaces.taglib.DataGridTag</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
   <section>
     <title>Creating the Component with a Page Tag</title>
-    <para>To create the simplest variant of <property>dataGrid</property> on a page, use the following syntax:</para>
+    <para>To create the simplest variant of <property>dataGrid</property> on a page, use the
+      following syntax:</para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
@@ -57,36 +58,95 @@
 ]]></programlisting>
   </section>
   <section>
-  <title>Creating the Component Dynamically Using Java</title>
+    <title>Creating the Component Dynamically Using Java</title>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-  <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlDataGrid;
+    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlDataGrid;
 ...
 HtmlDataGrid myList = new HtmlDataGrid();
 ...
 ]]></programlisting>
-</section>
-<section>
-<title>Details of Usage</title>
-<para>The component takes a list from a model and outputs it the same way as with <emphasis role="bold"><property>&lt;h:PanelGrid&gt;</property></emphasis>
- for inline data. To define grid properties and styles, use the same definitions as for <emphasis role="bold"><property>&lt;h:panelGrid&gt;</property>.</emphasis>
-  The component also has similar to ordinary UIData components output ways.</para>
-<itemizedlist>
-<listitem>A header and footer output</listitem>
-<listitem>Limitation of the output elements (the  <emphasis ><property>&quot;elements&quot;</property></emphasis> attribute) and definition of the first
- element</listitem>
- <listitem>Binding to scrolling components of list pages</listitem>
- </itemizedlist>
- <para>The component is created basing on the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> component and as a result the component could
-  be partially updated with AJAX.</para>
-  <para>Here is an example for <link linkend="dataGrid">the first</link> screenshot:</para>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+    <para>The component takes a list from a model and outputs it the same way as with <emphasis
+        role="bold">
+        <property>&lt;h:panelGrid&gt;</property>
+      </emphasis> for inline data. To define grid properties and styles, use the same definitions as
+      for <emphasis role="bold"><property>&lt;h:panelGrid&gt;</property>.</emphasis></para>
+    <para>The component allows to:</para>
+    <itemizedlist>
+      <listitem>Use <emphasis>
+          <property>&quot;header&quot;</property>
+        </emphasis> and <emphasis>
+          <property>&quot;footer&quot;</property>
+        </emphasis> facets for output</listitem>
+      <listitem>Limit number of output elements (<emphasis>
+          <property>&quot;elements&quot;</property>
+        </emphasis> attribute) and define first element (<emphasis>
+          <property>&quot;first&quot;</property>
+        </emphasis> attribute)</listitem>
+      <listitem>Bind list pages with <emphasis role="bold">
+          <property>&lt;rich:datascroller&gt;</property>
+        </emphasis> component</listitem>
+    </itemizedlist>
+
+    <para>Here is an example:</para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-  <programlisting role="XML"><![CDATA[...
+
+    <programlisting role="XML"><![CDATA[...
+    <rich:panel style="width:150px;height:200px;">
+        <h:form>
+              <rich:dataGrid value="#{dataTableScrollerBean.allCars}" var="car" columns="2" elements="4" first="1">
+                  <f:facet name="header">
+                      <h:outputText value="Car Store"></h:outputText>
+                  </f:facet>
+                  <rich:panel>
+                      <f:facet name="header">
+                          <h:outputText value="#{car.make} #{car.model}"></h:outputText>
+                      </f:facet>
+                      <h:panelGrid columns="2">
+                           <h:outputText value="Price:" styleClass="label"></h:outputText>
+                           <h:outputText value="#{car.price}" />
+                           <h:outputText value="Mileage:" styleClass="label"></h:outputText>
+                           <h:outputText value="#{car.mileage}" />
+                      </h:panelGrid>
+                  </rich:panel>
+                  <f:facet name="footer">
+                      <rich:datascroller></rich:datascroller>
+                  </f:facet>
+              </rich:dataGrid>
+        </h:form>
+    </rich:panel>		
+...
+]]></programlisting>
+    <para>This is a result:</para>
+
+    <figure>
+      <title>Component usage</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/datagrid2.gif"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>The component is created basing on the <emphasis role="bold">
+        <property>&lt;a4j:repeat&gt;</property>
+      </emphasis> component and as a result it could be partially updated with Ajax. <emphasis>
+        <property>&quot;ajaxKeys&quot;</property>
+      </emphasis> attribute allows to define strings that are updated after an Ajax request.</para>
+    <para>Here is an example:</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
     <rich:dataGrid value="#{bean.capitals}" var="caps" ajaxKeys="#{listBean.list}" 
                         binding="#{listBean.dataList}" id="grid" elements="20" columns="4">
         <h:graphicImage value="#{cap.stateFlag}"/>
@@ -98,76 +158,75 @@ HtmlDataGrid myList = new HtmlDataGrid();
     <a4j:commandButton action"#{listBean.action}" reRender="grid" value="Submit"/>
 ...
 ]]></programlisting>
-<para>In the example there is an output of a grid with four columns and output limitation to 20 elements. 
-But when the action is processed the ajaxKeys set is composed and then update specified for the whole table
- actually happens only for the chosen set of elements.</para>
-</section>
-  
- <section>
-   <title>Look-and-Feel Customization</title>
-   
-   <para>For skinnability implementation, the components use a <emphasis>
-     <property>style class redefinition method.</property>
-   </emphasis> Default style classes are mapped on <emphasis>
-     <property>skin parameters.</property>
-   </emphasis></para>
-   
-   <para>There are two ways to redefine the appearance of all <emphasis role="bold">
-     <property>&lt;rich:dataGrid&gt;</property>
-   </emphasis> components at once:</para>
-   
-   <itemizedlist>
-     <listitem>
-       <para>Redefine the corresponding skin parameters</para>
-     </listitem>
-     
-     <listitem>
-       <para>Add to your style sheets <emphasis>
-         <property>style classes</property>
-       </emphasis> used by a <emphasis role="bold">
-         <property>&lt;rich:dataGrid&gt;</property>
-       </emphasis> component</para>
-     </listitem>
-   </itemizedlist>
- 
- </section>
+
+  </section>
+
+  <section>
+    <title>Look-and-Feel Customization</title>
+
+    <para>For skinnability implementation, the components use a <emphasis>
+        <property>style class redefinition method.</property>
+      </emphasis> Default style classes are mapped on <emphasis>
+        <property>skin parameters.</property>
+      </emphasis></para>
+
+    <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+        <property>&lt;rich:dataGrid&gt;</property>
+      </emphasis> components at once:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Redefine the corresponding skin parameters</para>
+      </listitem>
+
+      <listitem>
+        <para>Add to your style sheets <emphasis>
+            <property>style classes</property>
+          </emphasis> used by a <emphasis role="bold">
+            <property>&lt;rich:dataGrid&gt;</property>
+          </emphasis> component</para>
+      </listitem>
+    </itemizedlist>
+
+  </section>
   <section>
     <title>Skin Parameters Redefinition</title>
-    
+
     <para>Skin parameters redefinition for <emphasis role="bold">
-      <property>&lt;rich:dataGrid&gt;</property>
-    </emphasis> are the same as for the <emphasis role="bold">
-      <property>&lt;rich:dataTable&gt;</property>
-    </emphasis> <link linkend="SPR">component</link>.</para>
+        <property>&lt;rich:dataGrid&gt;</property>
+      </emphasis> are the same as for the <emphasis role="bold">
+        <property>&lt;rich:dataTable&gt;</property>
+      </emphasis>
+      <link linkend="SPR">component</link>.</para>
   </section>
-  
-		 <section>
-		 <title>Definition of Custom Style Classes</title>
-		 
-		   <para>Custom style classes for <emphasis role="bold">
-		     <property>&lt;rich:dataGrid&gt;</property>
-		   </emphasis> are the same as for  the <emphasis role="bold">
-		     <property>&lt;rich:dataTable&gt;</property>
-		   </emphasis> <link linkend="DofCCS">component</link>.
-		   </para>
-    
-		   <para>In order to redefine styles for all <emphasis role="bold">
-		     <property>&lt;rich:dataGrid&gt;</property>
-		   </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
-		     same names and define necessary properties in them.</para>
-		   
-		   <para>To change styles of particular <emphasis role="bold">
-		     <property>&lt;rich:dataGrid&gt;</property>
-		   </emphasis> components, define your own style classes in the corresponding <emphasis
-		     role="bold">
-		     <property>&lt;rich:dataGrid&gt;</property>
-		   </emphasis>attributes.</para>
-           </section>
+
+  <section>
+    <title>Definition of Custom Style Classes</title>
+
+    <para>Custom style classes for <emphasis role="bold">
+        <property>&lt;rich:dataGrid&gt;</property>
+      </emphasis> are the same as for the <emphasis role="bold">
+        <property>&lt;rich:dataTable&gt;</property>
+      </emphasis>
+      <link linkend="DofCCS">component</link>. </para>
+
+    <para>In order to redefine styles for all <emphasis role="bold">
+        <property>&lt;rich:dataGrid&gt;</property>
+      </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
+      same names and define necessary properties in them.</para>
+
+    <para>To change styles of particular <emphasis role="bold">
+        <property>&lt;rich:dataGrid&gt;</property>
+      </emphasis> components, define your own style classes in the corresponding <emphasis
+        role="bold">
+        <property>&lt;rich:dataGrid&gt;</property>
+      </emphasis>attributes.</para>
+  </section>
   <section>
     <title>Relevant Resources Links</title>
     <para><ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/dataGrid.jsf?c=dataGrid"
-      >Here</ulink> you can see the example of <emphasis role="bold"
-        ><property>&lt;rich:dataGrid&gt;</property></emphasis> usage and sources for the given example. </para>
-  </section>                     
+        >Here</ulink> you can see the example of <emphasis role="bold">
+        <property>&lt;rich:dataGrid&gt;</property>
+      </emphasis> usage and sources for the given example. </para>
+  </section>
 </section>
-  
