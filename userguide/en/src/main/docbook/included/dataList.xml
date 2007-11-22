@@ -1,184 +1,246 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <section>
-<sectioninfo>
-<keywordset>
-<keyword>grid</keyword>
-<keyword>rich:dataList</keyword>
-<keyword>HtmlDataList</keyword>
-<keyword>unordered list</keyword>
-</keywordset>
-</sectioninfo>
-  
-    <table>
-      <title>Component identification parameters </title>
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Name</entry>
-            <entry>Value</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry>component-type</entry>
-            <entry>org.richfaces.DataList</entry>
-          </row>
-          <row>
-            <entry>component-class</entry>
-            <entry>org.richfaces.component.html.HtmlDataList</entry>
-          </row>
-          <row>
+  <sectioninfo>
+    <keywordset>
+      <keyword>grid</keyword>
+      <keyword>rich:dataList</keyword>
+      <keyword>HtmlDataList</keyword>
+      <keyword>unordered list</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <table>
+    <title>Component identification parameters </title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+          <entry>Value</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+          <entry>org.richfaces.DataList</entry>
+        </row>
+        <row>
+          <entry>component-class</entry>
+          <entry>org.richfaces.component.html.HtmlDataList</entry>
+        </row>
+        <row>
           <entry>component-family</entry>
           <entry>org.richfaces.DataList</entry>
-          </row>
-          <row>
+        </row>
+        <row>
           <entry>renderer-type</entry>
           <entry>org.richfaces.DataListRenderer</entry>
-          </row>          
-          <row>
-            <entry>tag-class</entry>
-            <entry>org.richfaces.taglib.DataListTag</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  
+        </row>
+        <row>
+          <entry>tag-class</entry>
+          <entry>org.richfaces.taglib.DataListTag</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
   <section>
     <title>Creating the Component with a Page Tag</title>
-    <para>To create the simplest variant of <property>dataList</property> on a page, use the following syntax:</para>
+    <para>To create the simplest variant of <property>dataList</property> on a page, use the
+      following syntax:</para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-    <rich:dataList value="#{bean.capitals}" var="caps">
-        <h:outputText value="#{caps.name}"/>
+    <rich:dataList var="car" value="#{dataTableScrollerBean.allCars}" >
+        <h:outputText value="#{cars.name}"/>
     </rich:dataList>
 ...
 ]]></programlisting>
   </section>
   <section>
-  <title>Creating the Component Dynamically Using Java</title>
+    <title>Creating the Component Dynamically Using Java</title>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-  <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlDataList;
+    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlDataList;
 ...
 HtmlDataList myList = new HtmlDataList();
 ...
 ]]></programlisting>
-</section>
-<section>
-<title>Details of Usage</title>
-<para>The component takes a list from a model and outputs it as an ordered list. The component also has 
-similar to ordinary UIData components output ways:</para>
-<itemizedlist>
-<listitem>A header and footer output</listitem>
-<listitem>Limitation of the output elements (the  <emphasis ><property>&quot;elements&quot;</property></emphasis> attribute) and definition of the first
- element</listitem>
- <listitem>Binding to scrolling components of list pages</listitem>
- </itemizedlist>
- <para>The component has the <emphasis ><property>&quot;type&quot;</property></emphasis> attribute corresponding to the <emphasis><property>&quot;ul&quot;</property></emphasis> HTML element.</para>
- <para>The component is created basing on the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> component and as a result the component could
-  be partially updated with AJAX.</para>
+  </section>
+  <section>
+    <title>Details of Usage</title>
+    <para>The <emphasis role="bold">
+        <property>&lt;rich:dataList&gt;</property>
+      </emphasis> component allows to generate a list from a model.</para>
+    <para>The component has the <emphasis>
+        <property>&quot;type&quot;</property>
+      </emphasis> attribute, which corresponds to the <emphasis>
+        <property>&quot;type&quot;</property>
+      </emphasis> parameter for the <emphasis>
+        <property>&quot;ul&quot;</property>
+      </emphasis> HTML element and defines a marker type. Possible values for <emphasis>
+        <property>&quot;type&quot;</property>
+      </emphasis> attribute are: <property>&quot;disc&quot;</property>,
+        <property>&quot;circle&quot;</property>,
+      <property>&quot;square&quot;</property>.</para>
+    <para>Here is an example:</para>
+
+    <programlisting role="XML"><![CDATA[...
+    <h:form>
+        <rich:dataList var="car" value="#{dataTableScrollerBean.allCars}" rows="5" type="disc">
+            <h:outputText value="#{car.make} #{car.model}"/><br/>
+            <h:outputText value="Price:" styleClass="label"></h:outputText>
+            <h:outputText value="#{car.price} " /><br/>
+            <h:outputText value="Mileage:" styleClass="label"></h:outputText>
+            <h:outputText value="#{car.mileage} " /><br/>
+        </rich:dataList>
+</h:form>
+...
+]]></programlisting>
+
+    <para>This is a result:</para>
+
+    <figure>
+      <title>Component usage</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/datalist2.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>In the example the <emphasis>
+        <property>&quot;rows&quot;</property>
+      </emphasis> attribute limits number of output elements of the list.</para>
+
+    <para><emphasis>
+        <property>&quot;first&quot;</property>
+    </emphasis> attribute defines first element for output. <emphasis>
+      <property>&quot;title&quot;</property>
+    </emphasis> are used for popup title. See picture below:</para>
+    
+    <figure>
+      <title>Component usage</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/datalist4.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>The component is created basing on the <emphasis role="bold">
+        <property>&lt;a4j:repeat&gt;</property>
+      </emphasis> component and as a result it could be partially updated with Ajax. <emphasis>
+        <property>&quot;ajaxKeys&quot;</property>
+      </emphasis> attribute allows to define elements that are updated after an Ajax request.</para>
+    <para>Here is an example:</para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-  <programlisting role="XML"><![CDATA[...
-    <rich:dataList value="#{bean.capitals}" var="caps" ajaxKeys="#{listBean.list}" 
-                        binding="#{listBean.dataList}" id="list">
-        <h:outputText value="#{caps.name}"/>
-    </rich:dataList>
+    <programlisting role="XML"><![CDATA[...
+    <rich:dataList value="#{dataTableScrollerBean.allCars}" var="car" ajaxKeys="#{listBean.list}" 
+                        binding="#{listBean.dataList}" id="list" rows="5" type="disc">
+        <h:outputText value="#{car.make} #{car.model}"></h:outputText>
+    </rich:dataGrid>
 ...
-    <a4j:commandButton action"#{listBean.action}" reRender="list" value="Submit">
+    <a4j:commandButton action"#{listBean.action}" reRender="list" value="Submit"/>
 ...
 ]]></programlisting>
-<para>Here during the action is processed the ajaxKeys set is composed into a list and then update
- specified for the whole table actually happens only for the chosen set of rows.</para>
- </section>
- <section>
-   <title>Look-and-Feel Customization</title>
-   
-   <para>For skinnability implementation, the components use a <emphasis>
-     <property>style class redefinition method.</property>
-   </emphasis> Default style classes are mapped on <emphasis>
-     <property>skin parameters.</property>
-   </emphasis></para>
-   
-   <para>There are two ways to redefine the appearance of all <emphasis role="bold">
-     <property>&lt;rich:dataList&gt;</property>
-   </emphasis> components at once:</para>
-   
-   <itemizedlist>
-     <listitem>
-       <para>Redefine the corresponding skin parameters</para>
-     </listitem>
-     
-     <listitem>
-       <para>Add to your style sheets <emphasis>
-         <property>style classes</property>
-       </emphasis> used by a <emphasis role="bold">
-         <property>&lt;rich:dataList&gt;</property>
-       </emphasis> component</para>
-     </listitem>
-   </itemizedlist>
-    </section>
-		 <section>
-		   <title>Definition of Custom Style Classes</title>
-		   
-		   <para>On the screenshot there are classes names that define styles for component elements.</para>
-		   
-		   <figure>
-		     <title>Style classes</title>
-		     <mediaobject> 
-		       <imageobject>
-		         <imagedata fileref="images/datalist2.gif"/>
-		       </imageobject>
-		     </mediaobject>
-		   </figure>
-		 
-		   <table>
-		     <title>Classes names that define a list appearance</title>
-		     <tgroup cols="2">
-		       <thead>
-		         <row>
-		           <entry>Class name</entry>
-		           <entry>Description</entry>
-		         </row>
-		       </thead>
-		       <tbody>
-		         <row>
-		           <entry>rich-datalist</entry>
-		           <entry>Defines styles for an html &lt;ul&gt; element</entry>
-		         </row>
-		         <row>
-		           <entry>rich-list-item</entry>
-		           <entry>Defines styles for an html &lt;li&gt; element</entry>
-		         </row>
-		       </tbody>
-		     </tgroup>
-		   </table>
-		   
-    
-		   <para>In order to redefine styles for all <emphasis role="bold">
-		     <property>&lt;rich:dataList&gt;</property>
-		   </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
-		     same names and define necessary properties in them.</para>
-		   
-		   <para>To change styles of particular <emphasis role="bold">
-		     <property>&lt;rich:dataList&gt;</property>
-		   </emphasis> components, define your own style classes in the corresponding <emphasis
-		     role="bold">
-		     <property>&lt;rich:dataList&gt;</property>
-		   </emphasis>attributes.</para>
-           </section>
+
+    <para> In the example <emphasis>
+        <property>&quot;reRender&quot;</property>
+      </emphasis> attribute contains value of <emphasis>
+        <property>&quot;id&quot;</property>
+      </emphasis> attribute for <emphasis role="bold">
+        <property>&lt;rich:dataList&gt;</property>
+      </emphasis> component. As a result the component are updated after an Ajax request.</para>
+  </section>
+  <section>
+
+    <title>Look-and-Feel Customization</title>
+
+    <para>For skinnability implementation, the components use a <emphasis>
+        <property>style class redefinition method.</property>
+      </emphasis> Default style classes are mapped on <emphasis>
+        <property>skin parameters.</property>
+      </emphasis></para>
+
+    <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+        <property>&lt;rich:dataList&gt;</property>
+      </emphasis> components at once:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Redefine the corresponding skin parameters</para>
+      </listitem>
+
+      <listitem>
+        <para>Add to your style sheets <emphasis>
+            <property>style classes</property>
+          </emphasis> used by a <emphasis role="bold">
+            <property>&lt;rich:dataList&gt;</property>
+          </emphasis> component</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section>
+    <title>Definition of Custom Style Classes</title>
+
+    <para>On the screenshot there are classes names that define styles for component elements.</para>
+
+    <figure>
+      <title>Style classes</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/datalist3.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <table>
+      <title>Classes names that define a list appearance</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Class name</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>rich-datalist</entry>
+            <entry>Defines styles for an html &lt;ul&gt; element</entry>
+          </row>
+          <row>
+            <entry>rich-list-item</entry>
+            <entry>Defines styles for an html &lt;li&gt; element</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+
+    <para>In order to redefine styles for all <emphasis role="bold">
+        <property>&lt;rich:dataList&gt;</property>
+      </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
+      same names and define necessary properties in them.</para>
+
+    <para>To change styles of particular <emphasis role="bold">
+        <property>&lt;rich:dataList&gt;</property>
+      </emphasis> components, define your own style classes in the corresponding <emphasis
+        role="bold">
+        <property>&lt;rich:dataList&gt;</property>
+      </emphasis>attributes.</para>
+  </section>
   <section>
     <title>Relevant Resources Links</title>
     <para><ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/dataLists.jsf?c=dataList"
-      >Here</ulink> you can see the example of <emphasis role="bold"
-        ><property>&lt;rich:dataList&gt;</property></emphasis> usage and sources for the given example. </para>
-  </section>                     
+        >Here</ulink> you can see the example of <emphasis role="bold">
+        <property>&lt;rich:dataList&gt;</property>
+      </emphasis> usage and sources for the given example. </para>
+  </section>
 </section>
-  
