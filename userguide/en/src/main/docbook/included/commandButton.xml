@@ -56,14 +56,42 @@ HtmlAjaxCommandButton myButton = new HtmlAjaxCommandButton();
 	 <note>
       <title>Note:</title>
       <para>AJAX support is built in and it&apos;s not necessary to add nested <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> to the component.</para>
-	  </note>
+	 </note>
+      <para>
+        The usage of the keyword &apos;this&apos; in JavaScript code in the <emphasis><property>&quot;oncomplete&quot;</property></emphasis> attribute 
+        depends on the location of <emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis>. If the <property>commandButton</property> is situated outside the re-rendered region
+        you can use keyword &apos;this&apos; as in the following example:  
+      </para>
+       <programlisting role="JAVA"><![CDATA[
+...
+<h:form id="form"> 
+  <a4j:commandButton id="cbutton" action="director.rollCamera" 
+           onclick="this.disabled=true" 
+           oncomplete="this.disabled=false" /> 
+</h:form>
+...
+]]></programlisting>
+      <para>
+        Otherwise if the <property>commandButton</property> contained in re-rendered region
+        the <emphasis><property>&quot;oncomplete&quot;</property></emphasis> attribute has a problem obtaining a reference of the <property>commandButton</property> object 
+        when using the keyword  &apos;this&apos;. In this case you can use  the <emphasis><property>&quot;oncomplete&quot;</property></emphasis> attribute as in the following example:
+      </para>
+      <programlisting role="JAVA"><![CDATA[
+...
+<h:form id="form"> 
+<a4j:commandButton id="cbutton" action="director.rollCamera" 
+         onclick="this.disabled=true" 
+         oncomplete="document.getElementById('form:cbutton').disabled=false" /> 
+</h:form>
+...
+]]></programlisting>
 	  <para>Common JSF navigation could be performed after an Ajax submit and partial rendering, but Navigation Case must be defined as <emphasis role="bold"><property>&lt;redirect/&gt;</property></emphasis> in order to avoid problems with some browsers.</para>
 	  <para>As any Core Ajax component sending Ajax requests and processing server responses <emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis> has all attributes described above (see <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> chapter) that provide the required behavior of requests sending (delay, limitation of submit area and rendering, and etc.)</para>
     </section>
   <section>
     <title>Relevant resources links</title>
 	<para>
-	  <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/commandButton.jsf?c=commandButton">Here.
+	  <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/commandButton.jsf?c=commandButton">Here
 	  </ulink>you can see the example of <emphasis role="bold"
 	    ><property>&lt;a4j:commandButton&gt;</property></emphasis> usage and sources for the given example.
 	</para>
