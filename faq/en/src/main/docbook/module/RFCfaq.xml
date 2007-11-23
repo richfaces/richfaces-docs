@@ -1137,4 +1137,68 @@ background-color: transparent;
 ...
 ]]></programlisting>
         </section>
+        <section id="RowSelectionInScrollableDataTable">
+                <?dbhtml filename="RowSelectionInScrollableDataTable.html"?>
+                <title>How to get row selection in scrollableDataTable using one and multi-selection rows mode?</title>
+                The <para><emphasis>
+                        <property>&quot;selection&quot;</property>
+                </emphasis> attribute is a reference to object to the instace of  <code>org.richfaces.model.selection.Selection</code> interface, containing current selection.</para>
+                <para>In order to get the row data in one and multi-selection rows mode you should use 
+                        the <emphasis><property>&quot;selection&quot;</property></emphasis> attribute and then work up the selection in particular way.</para>
+<programlisting role="XML"><![CDATA[...
+<rich:scrollableDataTable frozenColCount="1" height="400px" 
+	width="700px" id="carList" rows="40" columnClasses="col"
+	value="#{dataTableScrollerBean.allCars}" var="category" sortMode="single"
+	selection="#{dataTableScrollerBean.selection}">
+        
+        <rich:column id="make">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Make" />
+                </f:facet>
+                <h:outputText value="#{category.make}" />
+        </rich:column>
+        <rich:column id="model">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Model" />
+                </f:facet>
+                <h:outputText value="#{category.model}" />
+        </rich:column>
+        <rich:column id="price">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Price" />
+               </f:facet>
+               <h:outputText value="#{category.price}" />
+       </rich:column>
+
+</rich:scrollableDataTable>
+...
+]]></programlisting>
+                <para>In order to get data from <property>selection</property> you can create a managed bean like this one.</para>
+                <programlisting role="XML"><![CDATA[...
+public class DataTableScrollerBean {
+	private SimpleSelection selection = new SimpleSelection();
+	private ArrayList<DemoInventoryItem> selectedCars = new ArrayList<DemoInventoryItem>(); 
+	
+	...
+	
+	public SimpleSelection getSelection() {
+	    return selection;
+	}
+	
+	public String takeSelection() {
+	    getSelectedCars().clear();
+	    Iterator<SimpleRowKey> iterator = getSelection().getKeys();
+	    while (iterator.hasNext()){
+	        SimpleRowKey key = iterator.next();
+		 getSelectedCars().add(getAllCars().get(key.intValue()));
+		}
+		return null;
+	}
+
+	public ArrayList<DemoInventoryItem> getSelectedCars() {
+		return selectedCars;
+	}
+...
+]]></programlisting>
+        </section>
 </chapter>
