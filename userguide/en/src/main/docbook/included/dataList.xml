@@ -53,7 +53,7 @@
     </para>
     <programlisting role="XML"><![CDATA[...
     <rich:dataList var="car" value="#{dataTableScrollerBean.allCars}" >
-        <h:outputText value="#{cars.name}"/>
+        <h:outputText value="#{car.model}"/>
     </rich:dataList>
 ...
 ]]></programlisting>
@@ -80,7 +80,7 @@ HtmlDataList myList = new HtmlDataList();
       </emphasis> attribute, which corresponds to the <emphasis>
         <property>&quot;type&quot;</property>
       </emphasis> parameter for the <emphasis>
-        <property>&quot;ul&quot;</property>
+        <property>&quot;UL&quot;</property>
       </emphasis> HTML element and defines a marker type. Possible values for <emphasis>
         <property>&quot;type&quot;</property>
       </emphasis> attribute are: <property>&quot;disc&quot;</property>,
@@ -90,12 +90,12 @@ HtmlDataList myList = new HtmlDataList();
 
     <programlisting role="XML"><![CDATA[...
     <h:form>
-        <rich:dataList var="car" value="#{dataTableScrollerBean.allCars}" rows="5" type="disc">
+        <rich:dataList var="car" value="#{dataTableScrollerBean.allCars}" rows="5" type="disc" title="Car Store">
             <h:outputText value="#{car.make} #{car.model}"/><br/>
             <h:outputText value="Price:" styleClass="label"></h:outputText>
-            <h:outputText value="#{car.price} " /><br/>
+            <h:outputText value="#{car.price} "/><br/>
             <h:outputText value="Mileage:" styleClass="label"></h:outputText>
-            <h:outputText value="#{car.mileage} " /><br/>
+            <h:outputText value="#{car.mileage} "/><br/>
         </rich:dataList>
 </h:form>
 ...
@@ -145,7 +145,7 @@ HtmlDataList myList = new HtmlDataList();
     <rich:dataList value="#{dataTableScrollerBean.allCars}" var="car" ajaxKeys="#{listBean.list}" 
                         binding="#{listBean.dataList}" id="list" rows="5" type="disc">
         <h:outputText value="#{car.make} #{car.model}"></h:outputText>
-    </rich:dataGrid>
+    </rich:dataList>
 ...
     <a4j:commandButton action"#{listBean.action}" reRender="list" value="Submit"/>
 ...

@@ -50,8 +50,8 @@
     </para>
     <programlisting role="XML"><![CDATA[...
     <rich:dataDefinitionList value="#{bean.capitals}" var="caps">
-        <f:facet name="term">United States Capitals</f:facet>
-        <h:outputText value="#{caps.name}"/>
+        <f:facet name="term">Cars</f:facet>
+        <h:outputText value="#{car.model}"/>
     </rich:dataDefinitionList>
 ...
 ]]></programlisting>
@@ -71,32 +71,82 @@ HtmlDataDefinitionList myList = new HtmlDataDefinitionList();
 </section>
 <section>
 <title>Details of Usage</title>
-<para>The component takes a list from a model and outputs it as an ordered list. The component also has
- similar to ordinary UIData components output ways:</para>
-<itemizedlist>
-<listitem>A header and footer output</listitem>
-<listitem>Limitation of the output elements (the <emphasis ><property>&quot;elements&quot;</property></emphasis> attribute) and definition of the first
- element</listitem>
- <listitem>Binding to scrolling components of list pages</listitem>
- </itemizedlist>
- <para>It allows definition inside a facet with the <emphasis><property>&quot;term&quot;</property></emphasis> name to add HTML DT elements into a list.</para>
- <para>The component is created basing on the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> component and as a result the component could
-  be partially updated with AJAX.</para>
-
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
+  <para>The <emphasis role="bold">
+    <property>&lt;rich:dataDefinitionList&gt;</property>
+  </emphasis> component allows to generate an definition list from a model.</para>
+  <para>The component has the <emphasis>
+    <property>&quot;type&quot;</property>
+  </emphasis> facet, which corresponds to the <emphasis>
+    <property>&quot;type&quot;</property>
+  </emphasis> parameter for the <emphasis>
+    <property>&quot;DT&quot;</property>
+  </emphasis> HTML element.</para>
+  <para>Here is an example:</para>
+  
   <programlisting role="XML"><![CDATA[...
-    <rich:dataDefinitionList value="#{bean.capitals}" var="caps" ajaxKeys="#{listBean.list}" 
-                        binding="#{listBean.dataList}" id="list">
-        <h:outputText value="#{caps.name}"/>
+    <h:form>
+        <rich:dataDefinitionList var="car" value="#{dataTableScrollerBean.allCars}" rows="5" first="4" title="Cars">
+            <f:facet name="term">
+                <h:outputText value="#{car.make} #{car.model}"></h:outputText>
+            </f:facet>
+            <h:outputText value="Price:" styleClass="label"></h:outputText>
+            <h:outputText value="#{car.price} " /><br/>
+            <h:outputText value="Mileage:" styleClass="label"></h:outputText>
+            <h:outputText value="#{car.mileage} " /><br/>
+        </rich:dataDefinitionList>
+    </h:form>
+...
+]]></programlisting>
+  
+  <para>This is a result:</para>
+  
+  <figure>
+    <title>Component usage</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="images/datadefinitionlist1.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+  
+  <para>In the example the <emphasis>
+    <property>&quot;rows&quot;</property>
+  </emphasis> attribute limits number of output elements of the list.</para>
+  
+  <para><emphasis>
+    <property>&quot;first&quot;</property>
+  </emphasis> attribute defines first element for output. <emphasis>
+    <property>&quot;title&quot;</property>
+  </emphasis> are used for popup title.</para>
+  
+  <para>The component is created basing on the <emphasis role="bold">
+    <property>&lt;a4j:repeat&gt;</property>
+  </emphasis> component and as a result it could be partially updated with Ajax. <emphasis>
+    <property>&quot;ajaxKeys&quot;</property>
+  </emphasis> attribute allows to define elements that are updated after an Ajax request.</para>
+  <para>Here is an example:</para>
+  
+  <para>
+    <emphasis role="bold">Example:</emphasis>
+  </para>
+  <programlisting role="XML"><![CDATA[...
+    <rich:dataDefinitionList value="#{dataTableScrollerBean.allCars}" var="car" ajaxKeys="#{listBean.list}" 
+                        binding="#{listBean.dataList}" id="list" rows="5" type="disc">
+        <h:outputText value="#{car.make} #{car.model}"></h:outputText>
     </rich:dataDefinitionList>
 ...
     <a4j:commandButton action"#{listBean.action}" reRender="list" value="Submit"/>
 ...
 ]]></programlisting>
-<para>Here during the action is processed the ajaxKeys set is composed into a list and then update
- specified for the whole table actually happens only for the chosen set of rows.</para>
+  
+  <para> In the example <emphasis>
+    <property>&quot;reRender&quot;</property>
+  </emphasis> attribute contains value of <emphasis>
+    <property>&quot;id&quot;</property>
+  </emphasis> attribute for <emphasis role="bold">
+    <property>&lt;rich:dataDefinitionList&gt;</property>
+  </emphasis> component. As a result the component are updated after an Ajax request.</para>
+  
 </section>
   
  <section>
