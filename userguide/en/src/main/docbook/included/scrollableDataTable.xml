@@ -133,19 +133,60 @@ HtmlScrollableDataTable myScrollableDataTable = new HtmlScrollableDataTable();
 ...
 ]]></programlisting>
      <para>In order to get the row data when using <property>one and multi-selection rows mode</property> the access to the selected rows is required.</para> 
-     <para>In this case you can use the <emphasis><property>&quot;selection&quot;</property></emphasis> attribute. Simple code is placed below.</para>
+     <para>In this case you can use the <emphasis><property>&quot;selection&quot;</property></emphasis> attribute. 
+       This attribute is a reference to object to the instace of  <code>org.richfaces.model.selection.Selection</code> interface, containing current selection.</para>
+       It&apos;s only necessary to work up a selection in a particular way and to get data.
+Simple code is placed below.
+     <para><emphasis role="bold">Example:</emphasis></para>
      <programlisting role="XML"><![CDATA[...
-<rich:scrollableDataTable value="#{bean.property1}" var="cur" selection="#{bean.selection}">
-	<rich:column width="100px">
-		<f:facet name="header" >
-			<h:outputText value="State"/>
-		</f:facet>
-		<h:outputText value="#{cur.cell1}"/>
-		<f:facet name="footer">
-			<h:outputText value="State"/>
-		</f:facet>
-	</rich:column>		
+<rich:scrollableDataTable frozenColCount="1" height="400px" 
+				width="700px" id="carList" rows="40" columnClasses="col"
+				value="#{dataTableScrollerBean.allCars}" var="category" sortMode="single"
+				selection="#{dataTableScrollerBean.selection}">
+
+				<rich:column id="make">
+					<f:facet name="header"><h:outputText styleClass="headerText" value="Make" /></f:facet>
+					<h:outputText value="#{category.make}" />
+				</rich:column>
+				<rich:column id="model">
+					<f:facet name="header"><h:outputText styleClass="headerText" value="Model" /></f:facet>
+					<h:outputText value="#{category.model}" />
+				</rich:column>
+				<rich:column id="price">
+					<f:facet name="header"><h:outputText styleClass="headerText" value="Price" /></f:facet>
+					<h:outputText value="#{category.price}" />
+				</rich:column>
+
 </rich:scrollableDataTable>
+...
+]]></programlisting>
+     <para>In order to build this application, you can create a managed bean like this one. 
+       Function takeSelection() fills the array &apos;selectedCars&apos;: with the data, got from the <property>selection</property>.</para>
+ <para><emphasis role="bold">Example:</emphasis></para>    
+ <programlisting role="XML"><![CDATA[...
+public class DataTableScrollerBean {
+	private SimpleSelection selection = new SimpleSelection();
+	private ArrayList<DemoInventoryItem> selectedCars = new ArrayList<DemoInventoryItem>(); 
+	
+	...
+	
+	public SimpleSelection getSelection() {
+	    return selection;
+	}
+	
+	public String takeSelection() {
+	    getSelectedCars().clear();
+	    Iterator<SimpleRowKey> iterator = getSelection().getKeys();
+	    while (iterator.hasNext()){
+	        SimpleRowKey key = iterator.next();
+		 getSelectedCars().add(getAllCars().get(key.intValue()));
+		}
+		return null;
+	}
+
+	public ArrayList<DemoInventoryItem> getSelectedCars() {
+		return selectedCars;
+	}
 ...
 ]]></programlisting>
      <para>
