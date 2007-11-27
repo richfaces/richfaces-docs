@@ -368,14 +368,15 @@ included2.xhtml
         <section>
                 <?dbhtml filename="HowtocustomizesimpleTogglePanel.html"?>
                 <title>How to pass own parameters during a modalPanel opening or closing?</title>
-                <para> You can pass your parameters during modalPanel opening or closing. This passing could be
-                        performed in the following way: </para>
-                
+                <para> You can pass your parameters during modalPanel opening or closing. This
+                        passing could be performed in the following way: </para>
+
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
                 <programlisting role="JAVA"><![CDATA[Richfaces.showModalPanel('panelId', {left: auto}, {param1: value1});]]></programlisting>
-                <para> Thus, except the standard modalPanel parameters you can pass any of your own parameters. </para>
+                <para> Thus, except the standard modalPanel parameters you can pass any of your own
+                        parameters. </para>
         </section>
 
         <section>
@@ -756,8 +757,8 @@ background-color: transparent;
         <section id="DecidingWhatToChangeOnTheServerSide">
                 <?dbhtml filename="DecidingWhatToChangeOnTheServerSide.html"?>
                 <title>What should I change on the server side?</title>
-                <para> The list of zones to be reRendered can be specified as EL
-                        expression. But there is a question that must be specified more exactly. </para>
+                <para> The list of zones to be reRendered can be specified as EL expression. But
+                        there is a question that must be specified more exactly. </para>
                 <para> The list of Ids is formed during beforePhase of RENDER_RESPONSE. Therefore,
                         in this case one can point reRender to the Set type Bean&apos;s property
                         and fill the Set during a tracking request. </para>
@@ -1116,10 +1117,11 @@ background-color: transparent;
                         </emphasis> attribute to bind the rowKeys to be reRendered there. After you
                         need to point reRender on the specific rows. </para-->
                 <para><emphasis>
-                        <property>&quot;ajaxKeys&quot;</property>
-                </emphasis> attribute defines strings that are updated after an Ajax request. It provides
-                        possibility to update several child components separately without updating the whole page.</para>
-                
+                                <property>&quot;ajaxKeys&quot;</property>
+                        </emphasis> attribute defines strings that are updated after an Ajax
+                        request. It provides possibility to update several child components
+                        separately without updating the whole page.</para>
+
                 <programlisting role="XML"><![CDATA[...
     <a4j:poll intervall="1000" action="#{repeater.action}" reRender="text">
         <table>
@@ -1139,66 +1141,126 @@ background-color: transparent;
         </section>
         <section id="RowSelectionInScrollableDataTable">
                 <?dbhtml filename="RowSelectionInScrollableDataTable.html"?>
-                <title>How to get row selection in scrollableDataTable using one and multi-selection rows mode?</title>
-                The <para><emphasis>
-                        <property>&quot;selection&quot;</property>
-                </emphasis> attribute is a reference to object to the instace of  <code>org.richfaces.model.selection.Selection</code> interface, containing current selection.</para>
-                <para>In order to get the row data in one and multi-selection rows mode you should use 
-                        the <emphasis><property>&quot;selection&quot;</property></emphasis> attribute and then work up the selection in particular way.</para>
-<programlisting role="XML"><![CDATA[...
-<rich:scrollableDataTable frozenColCount="1" height="400px" 
-	width="700px" id="carList" rows="40" columnClasses="col"
-	value="#{dataTableScrollerBean.allCars}" var="category" sortMode="single"
-	selection="#{dataTableScrollerBean.selection}">
-        
-        <rich:column id="make">
-                <f:facet name="header">
-                        <h:outputText styleClass="headerText" value="Make" />
-                </f:facet>
-                <h:outputText value="#{category.make}" />
-        </rich:column>
-        <rich:column id="model">
-                <f:facet name="header">
-                        <h:outputText styleClass="headerText" value="Model" />
-                </f:facet>
-                <h:outputText value="#{category.model}" />
-        </rich:column>
-        <rich:column id="price">
-                <f:facet name="header">
-                        <h:outputText styleClass="headerText" value="Price" />
-               </f:facet>
-               <h:outputText value="#{category.price}" />
-       </rich:column>
-
-</rich:scrollableDataTable>
-...
-]]></programlisting>
-                <para>In order to get data from <property>selection</property> you can create a managed bean like this one.</para>
+                <title>How to get row selection in scrollableDataTable using one and multi-selection
+                        rows mode?</title>
+                <para>In order to get row selection in scrollableDataTable using <property>one and
+                                multi-selection rows mode</property> you should use the <emphasis>
+                                <property>&quot;selection&quot;</property>
+                        </emphasis> attribute. </para>
+                <para>In the following example when user submits the form current collection of
+                        objects selected by user is placed in the object's property. Then on
+                        complete action the <emphasis role="bold">
+                                <property>&lt;rich:modalPanel&gt;</property>
+                        </emphasis> with selected data will be shown.</para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+<h:form>
+        <rich:spacer height="30" />
+        <rich:scrollableDataTable rowKeyVar="rkv" frozenColCount="1" height="200px" 
+                width="300px" id="carList" rows="40" columnClasses="col"
+                value="#{dataTableScrollerBean.allCars}" var="category" sortMode="single"
+                selection="#{dataTableScrollerBean.selection}">
+                        <rich:column id="make">
+                                <f:facet name="header">
+                                        <h:outputText styleClass="headerText" value="Make" />
+                                </f:facet>
+                                <h:outputText value="#{category.make}" />
+                        </rich:column>
+                        <rich:column id="model">
+                                <f:facet name="header">
+                                        <h:outputText styleClass="headerText" value="Model" />
+                                </f:facet>
+                                <h:outputText value="#{category.model}" />
+                        </rich:column>
+                        <rich:column id="price">
+                                <f:facet name="header">
+                                        <h:outputText styleClass="headerText" value="Price" />
+                                </f:facet>
+                                <h:outputText value="#{category.price}" />
+                        </rich:column>
+        </rich:scrollableDataTable>
+        <rich:spacer height="20px"/>
+        <a4j:commandButton value="Show Current Selection" reRender="table" 
+                action="#{dataTableScrollerBean.takeSelection}" 
+                oncomplete="javascript:Richfaces.showModalPanel('panel');"/>
+</h:form>
+<rich:modalPanel id="panel" autosized="true">
+        <f:facet name="header">
+                <h:outputText value="Selected Rows"/>
+        </f:facet>
+        <f:facet name="controls">
+                <span style="cursor:pointer" onclick="javascript:Richfaces.hideModalPanel('panel')">X</span>
+        </f:facet>
+        <rich:dataTable value="#{dataTableScrollerBean.selectedCars}" var="sel" id="table">
+                <rich:column>
+                        <f:facet name="header">
+                                <h:outputText value="Make" />
+                        </f:facet>
+                        <h:outputText value="#{sel.make}" />
+                </rich:column>
+                <rich:column id="model">
+                        <f:facet name="header">
+                                <h:outputText value="Model" />
+                        </f:facet>
+                        <h:outputText value="#{sel.model}" />
+                </rich:column>
+                <rich:column id="price">
+                        <f:facet name="header">
+                                <h:outputText value="Price" />
+                        </f:facet>
+                        <h:outputText value="#{sel.price}" />
+                </rich:column>
+        </rich:dataTable>
+</rich:modalPanel>
+...]]></programlisting>
+                <para>In order to build this application, you can create a managed bean like this
+                        one. Function <emphasis>
+                                <property>takeSelection()</property>
+                        </emphasis> fills the array <property>selectedCars</property> with the data,
+                        got from the <property>selection</property>. Function <emphasis>
+                                <property>getSelectedCars()</property>
+                        </emphasis> returns the array <property>selectedCars</property>, which is
+                        used for filling <emphasis role="bold">
+                                <property>&lt;rich:dataTable&gt;</property>
+                        </emphasis> with selected row/rows data.</para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
                 <programlisting role="XML"><![CDATA[...
 public class DataTableScrollerBean {
-	private SimpleSelection selection = new SimpleSelection();
-	private ArrayList<DemoInventoryItem> selectedCars = new ArrayList<DemoInventoryItem>(); 
-	
-	...
-	
-	public SimpleSelection getSelection() {
-	    return selection;
-	}
-	
-	public String takeSelection() {
-	    getSelectedCars().clear();
-	    Iterator<SimpleRowKey> iterator = getSelection().getKeys();
-	    while (iterator.hasNext()){
-	        SimpleRowKey key = iterator.next();
-		 getSelectedCars().add(getAllCars().get(key.intValue()));
-		}
-		return null;
-	}
-
-	public ArrayList<DemoInventoryItem> getSelectedCars() {
-		return selectedCars;
-	}
-...
-]]></programlisting>
+        private SimpleSelection selection = new SimpleSelection();
+        private ArrayList<DemoInventoryItem> selectedCars = new ArrayList<DemoInventoryItem>(); 
+        ...
+        public SimpleSelection getSelection() {
+                return selection;
+        }
+        public void setSelection(SimpleSelection selection) {
+                System.out.println("Setting Started");
+                this.selection = selection;
+        System.out.println("Setting Complete");
+        }
+        public String takeSelection() {
+                getSelectedCars().clear();
+                Iterator<SimpleRowKey> iterator = getSelection().getKeys();
+                while (iterator.hasNext()){
+                        SimpleRowKey key = iterator.next();
+                        getSelectedCars().add(getAllCars().get(key.intValue()));
+                }
+                return null;
+        }
+        public ArrayList<DemoInventoryItem> getSelectedCars() {
+                return selectedCars;
+        }
+        public void setSelectedCars(ArrayList<DemoInventoryItem> selectedCars) {
+                this.selectedCars = selectedCars;
+        }
+}
+...]]></programlisting>
+                <para>Some additional information about usage of <property>one and multi-selection
+                                rows mode</property> can be found <ulink
+                                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=122543"
+                                >here</ulink>.</para>
         </section>
 </chapter>
