@@ -1,46 +1,46 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <section>
-<sectioninfo>
-<keywordset>
-<keyword>rich:subtable</keyword>
-<keyword>HtmlSubTable</keyword>
-</keywordset>
-</sectioninfo>
-  
-     <table>
-	  <title>Component identification parameters </title>
-      <tgroup cols="2">
-	  <thead>
-            <row>
-                  <entry>Name</entry>
-                  <entry>Value</entry>
-            </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry>component-type</entry>
-            <entry>org.richfaces.SubTable</entry>
-          </row>
-          <row>
-            <entry>component-class</entry>
-            <entry>org.richfaces.component.html.HtmlSubTable</entry>
-          </row>
-          <row>
-            <entry>component-family</entry>
-            <entry>org.richfaces.SubTable</entry>
-          </row>
-          <row>
-            <entry>renderer-type</entry>
-            <entry>org.richfaces.SubTableRenderer</entry>
-		  </row>
-		  <row>
-			<entry>tag-class</entry>
-            <entry>org.richfaces.taglib.SubTableTag</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  
+  <sectioninfo>
+    <keywordset>
+      <keyword>rich:subtable</keyword>
+      <keyword>HtmlSubTable</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <table>
+    <title>Component identification parameters </title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+          <entry>Value</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+          <entry>org.richfaces.SubTable</entry>
+        </row>
+        <row>
+          <entry>component-class</entry>
+          <entry>org.richfaces.component.html.HtmlSubTable</entry>
+        </row>
+        <row>
+          <entry>component-family</entry>
+          <entry>org.richfaces.SubTable</entry>
+        </row>
+        <row>
+          <entry>renderer-type</entry>
+          <entry>org.richfaces.SubTableRenderer</entry>
+        </row>
+        <row>
+          <entry>tag-class</entry>
+          <entry>org.richfaces.taglib.SubTableTag</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
   <section>
     <title>Creating the Component with a Page Tag</title>
     <para>Here is a simple example as it could be used on a page:</para>
@@ -49,10 +49,14 @@
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-    <rich:dataTable value="#{capitalsBean.capitals}" var="capitals">
-        <!--...//Set of columns and header/footer facets-->
+     <rich:dataTable value="#{capitalsBean.capitals}" var="capitals">
+        <rich:column>
+            ...
+        </rich:column>
         <rich:subTable value=#{capitals.details} var="detail">
-            <!--...//Set of columns and header/footer facets-->
+            <rich:column>
+                ...
+            </rich:column>
         </rich:subTable>
     </rich:dataTable>
 ...
@@ -72,77 +76,105 @@ HtmlSubTable mySubTable = new HtmlSubTable();
   </section>
   <section>
     <title>Details of Usage</title>
-	<para>The <property>subtable</property> component is very similar to the custom JSF dataTable one, the only difference is that
-	 the component doesn&apos;t add the wrapping <emphasis role="bold"><property>&lt;table&gt;</property></emphasis> and <emphasis role="bold"><property>&lt;tbody&gt;</property></emphasis> tags. 
-	 Hence, it&apos;s possible to add a subtable structure different from the main one to organize tables
-	  of the master - details type. The component is also has common peculiarities of any rich component:</para>
-	   <itemizedlist>
-	   <listitem>Skin support. The table completely meets a three-class principle of Rich Faces skinnability</listitem>
-	   <listitem>Support of Ajax updates for a limited set of rows</listitem>
-	   </itemizedlist>
-    <para>Skins support is described in the <link linkend="ArchitectureOverview">corresponding section</link>. Ajax support is
-	    possible because the component is created basing on the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> component and as a result the 
-	    component has its possibilities of Ajax updates for a limited set of rows. The component is implemented
-	     with the <emphasis ><property>&quot;ajaxKeys&quot;</property></emphasis> attribute for a table and in contrast to the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> outputs the standard HTML 
-	     structure for table rendering.</para>
-	     <programlisting role="XML"><![CDATA[...
-    <rich:dataTable value="#{capitalsBean.capitals}" var="capitals" id="table">
-        <!--...//Set of columns and header/footer facets-->
-        <rich:subTable value="#{capitals.details}" var="detail" ajaxKeys="#{bean.ajaxSet}" binding="#{bean.subtable}" >
-            <!--...//Set of columns and header/footer facets-->
+
+    <para>The <emphasis role="bold">
+        <property>&lt;rich:subTable&gt;</property>
+      </emphasis> component is similar to the <emphasis role="bold">
+        <property>&lt;h:dataTable&gt;</property>
+      </emphasis> one, except Ajax support and skinnability. One more difference is that the
+      component doesn&apos;t add the wrapping <emphasis role="bold">
+        <property>&lt;table&gt;</property>
+      </emphasis> and <emphasis role="bold">
+        <property>&lt;tbody&gt;</property>
+      </emphasis> tags. Ajax support is possible, because the component was created basing on the
+        <emphasis role="bold">
+        <property>&lt;a4j:repeat&gt;</property>
+      </emphasis> component and as a result it could be partially updated with Ajax. <emphasis>
+        <property>&quot;ajaxKeys&quot;</property>
+      </emphasis> attribute allows to define rows that is updated after an Ajax request.</para>
+
+    <para>Here is an example:</para>
+    
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    
+    <programlisting role="XML"><![CDATA[...
+    <rich:dataTable value="#{capitalsBean.capitals}" var="capitals">
+        <rich:column>
+            ...
+        </rich:column>
+        <rich:subTable value="#{capitals.details}" var="detail" ajaxKeys="#{bean.ajaxSet}" binding="#{bean.subtable}" id="subtable">
+            <rich:column>
+                ...
+            </rich:column>
         </rich:subTable>
     </rich:dataTable>
 ...
-    <a4j:commandButton action="#{bean.someAction}" reRender="table"/>
+    <a4j:commandButton action="#{tableBean.action}" reRender="subtable"/>
 ...
 ]]></programlisting>
-<para>For such a table during someAction processing called with Ajax request when the key is pressed
- it&apos;s possible to fill in lot&apos;s of ajaxKeys with strings indices that are to be updated. 
- A resulting output on the client contains only required rows and they are updated in the tree, even 
- when update is specified for the whole table.</para>
+    <para> In the example <emphasis>
+        <property>&quot;reRender&quot;</property>
+      </emphasis> attribute contains value of <emphasis>
+        <property>&quot;id&quot;</property>
+      </emphasis> attribute for <emphasis role="bold">
+        <property>&lt;rich:subTable&gt;</property>
+      </emphasis> component. As a result the component is updated after an Ajax request.</para>
+
+    <para>The component allows to use <emphasis>
+        <property>&quot;header&quot;</property>
+      </emphasis> and <emphasis>
+        <property>&quot;footer&quot;</property>
+      </emphasis> facets for output. See an example for <emphasis role="bold">
+        <property>&lt;rich:dataTable&gt;</property>
+      </emphasis>
+      <link linkend="table_ex">component</link>.</para>
+
   </section>
-  
-    <section>
-      <title>Look-and-Feel Customization</title>
-      
-      <para>For skinnability implementation, the components use a <emphasis>
+
+  <section>
+    <title>Look-and-Feel Customization</title>
+
+    <para>For skinnability implementation, the components use a <emphasis>
         <property>style class redefinition method.</property>
       </emphasis> Default style classes are mapped on <emphasis>
         <property>skin parameters.</property>
       </emphasis></para>
-      
-      <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+
+    <para>There are two ways to redefine the appearance of all <emphasis role="bold">
         <property>&lt;rich:subTable&gt;</property>
       </emphasis> components at once:</para>
-      
-      <itemizedlist>
-        <listitem>
-          <para>Redefine the corresponding skin parameters</para>
-        </listitem>
-        
-        <listitem>
-          <para>Add to your style sheets <emphasis>
+
+    <itemizedlist>
+      <listitem>
+        <para>Redefine the corresponding skin parameters</para>
+      </listitem>
+
+      <listitem>
+        <para>Add to your style sheets <emphasis>
             <property>style classes</property>
           </emphasis> used by a <emphasis role="bold">
             <property>&lt;rich:subTable&gt;</property>
           </emphasis> component</para>
-        </listitem>
-      </itemizedlist>
-    </section>
-  
+      </listitem>
+    </itemizedlist>
+  </section>
+
   <section>
     <title>Skin Parameters Redefinition</title>
-    
+
     <para>Skin parameters redefinition for <emphasis role="bold">
-      <property>&lt;rich:subTable&gt;</property>
-    </emphasis> are the same as for the <emphasis role="bold">
-      <property>&lt;rich:dataTable&gt;</property>
-    </emphasis> <link linkend="SPR">component</link>.</para>
+        <property>&lt;rich:subTable&gt;</property>
+      </emphasis> are the same as for the <emphasis role="bold">
+        <property>&lt;rich:dataTable&gt;</property>
+      </emphasis>
+      <link linkend="SPR">component</link>.</para>
   </section>
-  
+
   <section>
     <title>Definition of Custom Style Classes</title>
-    
+
     <table>
       <title>Classes names that define a component appearance</title>
       <tgroup cols="2">
@@ -161,11 +193,11 @@ HtmlSubTable mySubTable = new HtmlSubTable();
             <entry>rich-subtable-caption</entry>
             <entry>Defines styles for a &quot;caption&quot; facet element</entry>
           </row>
-          
+
         </tbody>
       </tgroup>
     </table>
-    
+
     <table>
       <title>Classes names that define header and footer elements</title>
       <tgroup cols="2">
@@ -176,12 +208,12 @@ HtmlSubTable mySubTable = new HtmlSubTable();
           </row>
         </thead>
         <tbody>
-         
+
           <row>
             <entry>rich-subtable-header</entry>
             <entry>Defines styles for a subtable header row</entry>
           </row>
-          
+
           <row>
             <entry>rich-subtable-header-continue</entry>
             <entry>Defines styles for all subtable header lines after the first</entry>
@@ -190,17 +222,17 @@ HtmlSubTable mySubTable = new HtmlSubTable();
             <entry>rich-subtable-subheader</entry>
             <entry>Defines styles for a column header of subtable</entry>
           </row>
-         
+
           <row>
             <entry>rich-subtable-subfooter</entry>
             <entry>Defines styles for a column footer of subtable</entry>
           </row>
-         
+
           <row>
             <entry>rich-subtable-footer</entry>
             <entry>Defines styles for a subtable footer row</entry>
           </row>
-         
+
           <row>
             <entry>rich-subtable-footer-continue</entry>
             <entry>Defines styles for all subtable footer lines after the first</entry>
@@ -208,7 +240,7 @@ HtmlSubTable mySubTable = new HtmlSubTable();
         </tbody>
       </tgroup>
     </table>
-    
+
     <table>
       <title>Classes names that define rows and cells</title>
       <tgroup cols="2">
@@ -223,7 +255,7 @@ HtmlSubTable mySubTable = new HtmlSubTable();
             <entry>rich-subtable-headercell</entry>
             <entry>Defines styles for a subtable header cell</entry>
           </row>
-          
+
           <row>
             <entry>rich-subtable-subheadercell</entry>
             <entry>Defines styles for a column header cell of subtable</entry>
@@ -240,30 +272,30 @@ HtmlSubTable mySubTable = new HtmlSubTable();
             <entry>rich-subtable-firstrow</entry>
             <entry>Defines styles for a subtable start row</entry>
           </row>
-         
+
           <row>
             <entry>rich-subtable-subfootercell</entry>
             <entry>Defines styles for a column footer cell of subtable</entry>
           </row>
-         
+
           <row>
             <entry>rich-subtable-footercell</entry>
             <entry>Defines styles for a subtable footer cell</entry>
           </row>
-          
+
         </tbody>
       </tgroup>
     </table>
     <para>In order to redefine styles for all <emphasis role="bold">
-      <property>&lt;rich:subTable&gt;</property>
-    </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
+        <property>&lt;rich:subTable&gt;</property>
+      </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
       same names and define necessary properties in them.</para>
-    
+
     <para>To change styles of particular <emphasis role="bold">
-      <property>&lt;rich:subTable&gt;</property>
-    </emphasis> components, define your own style classes in the corresponding <emphasis
-      role="bold">
-      <property>&lt;rich:subTable&gt;</property>
-    </emphasis>attributes.</para>
+        <property>&lt;rich:subTable&gt;</property>
+      </emphasis> components, define your own style classes in the corresponding <emphasis
+        role="bold">
+        <property>&lt;rich:subTable&gt;</property>
+      </emphasis>attributes.</para>
   </section>
 </section>
