@@ -1,51 +1,105 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <chapter>
-  
-      <table>
-      <title>Component identification parameters </title>
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Name</entry>
-            <entry>Value</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry>component-type</entry>
-            <entry>org.ajax4jsf.Push</entry>
-          </row>
-          <row>
-            <entry>component-family</entry>
-            <entry>org.ajax4jsf.components.AjaxPush</entry>
-          </row>
-          <row>
-            <entry>component-class</entry>
-            <entry>org.ajax4jsf.component.html.AjaxPush</entry>
-          </row>
-          <row>
-            <entry>renderer-type</entry>
-            <entry>org.ajax4jsf.components.AjaxPushRenderer</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  
+
+  <table>
+    <title>Component identification parameters </title>
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+          <entry>Value</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+          <entry>org.ajax4jsf.Push</entry>
+        </row>
+        <row>
+          <entry>component-family</entry>
+          <entry>org.ajax4jsf.components.AjaxPush</entry>
+        </row>
+        <row>
+          <entry>component-class</entry>
+          <entry>org.ajax4jsf.component.html.AjaxPush</entry>
+        </row>
+        <row>
+          <entry>renderer-type</entry>
+          <entry>org.ajax4jsf.components.AjaxPushRenderer</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
   <section>
     <title>Creating on a page</title>
-    <programlisting role="XML"><![CDATA[
-<a4j:push reRender="msg" eventProducer="#{messageBean.addListener}" interval="3000"/>]]></programlisting>
+    <programlisting role="XML"><![CDATA[<a4j:push reRender="msg" eventProducer="#{messageBean.addListener}" interval="3000"/>]]></programlisting>
   </section>
- 
- <section>
+
+  <section>
     <title>Dynamical creation of a component from Java code</title>
-   <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.AjaxPush;
+    <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.AjaxPush;
 ...
 AjaxPush myPush = new AjaxPush();
 ...]]></programlisting>
   </section>
-  
+
+
   <section>
+    <title>Key attributes and ways of usage</title>
+    <para>The <emphasis role="bold">
+        <property>&lt;a4j:push&gt;</property>
+      </emphasis> component is similar to the <emphasis role="bold">
+        <property>&lt;a4j:poll&gt;</property>
+      </emphasis>
+      <link linkend="poll_d"> one</link>. The main difference is that the<emphasis role="bold">
+        <property>&lt;a4j:push&gt;</property>
+      </emphasis> makes request to minimal code (not to JSF tree) in order to check presence of
+      messages in a queue. If a message exists, a complete request is performed. The component
+      doesn&apos;t poll registered bean. It registers <property>EventListener</property>, which
+      receives messages about event presence. See an example below:</para>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[<a4j:push reRender="msg" eventProducer="#{pushBean.addListener}" interval="2000"/>
+]]></programlisting>
+    <para>In the example <emphasis>
+        <property>&quot;interval&quot;</property>
+      </emphasis> attribute has value &quot;2000&quot;. This attribute defines an interval
+      in milliseconds beetween the previous response and the next request. Default value is set to
+      &quot;1000&quot; milliseconds (1 second). It&apos;s possible to set value equal to
+      &quot;0&quot;. In this case connection is permanent. </para>
+    <para>The <emphasis>
+        <property>&quot;timeout&quot;</property>
+      </emphasis> attribute defines response wating time in milliseconds. If the response
+      isn&apos;t received during this period a connection is aborted and the next request is
+      sent. Default value for <emphasis>
+        <property>&quot;timeout&quot;</property>
+      </emphasis> attribute isn&apos;t set. Usage of <emphasis>
+        <property>&quot;interval&quot;</property>
+      </emphasis> and <emphasis>
+        <property>&quot;timeout&quot;</property>
+      </emphasis> attributes gives an opportunity to set short polls of queue state or long
+      connections or permanent connection generally.</para>
+    <para>Code for <property>EventListener</property> registration in a bean is placed below:</para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="JAVA"><![CDATA[...
+public void addListener(EventListener listener) {
+synchronized (listener) {
+        if (this.listener != listener) {
+        this.listener = (PushEventListener) listener;
+}
+...
+]]></programlisting>
+
+<para></para>
+
+  </section>
+
+  <!--section>
     <title>Key attributes and ways of usage</title>
 	<para>The main difference between <emphasis role="bold"><property>&lt;a4j:push&gt;</property></emphasis>and
 	<emphasis role="bold"><property>&lt;a4j:poll&gt;</property></emphasis> components
@@ -58,7 +112,7 @@ AjaxPush myPush = new AjaxPush();
 </para>
 <para>
 &quot;interval&quot; - Interval (in ms) for call push requests. Default value 1000 (1 sec).
-<!-- If "0" a connection is permanent. Also you can set different value for parameter 'timeout'. -->
+< If "0" a connection is permanent. Also you can set different value for parameter 'timeout'.>
 </para>
 <para>
 Code for registration of listener:
@@ -83,14 +137,14 @@ synchronized (listener) {
 <para>
 Thus, component 'push' uses asynchronous model instead of polls.
 </para>
-  </section>
- 
+  </section-->
+
   <section>
     <title>Relevant resources links</title>
-	<para>
-	  <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/push.jsf?c=push">Here
-	  </ulink> you can see the example of <emphasis role="bold"
-	    ><property>&lt;a4j:push&gt;</property></emphasis> usage and sources for the given example. 
-	</para>
-  </section> 
+    <para>
+      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/push.jsf?c=push">Here </ulink>
+      you can see the example of <emphasis role="bold">
+        <property>&lt;a4j:push&gt;</property>
+      </emphasis> usage and sources for the given example. </para>
+  </section>
 </chapter>
