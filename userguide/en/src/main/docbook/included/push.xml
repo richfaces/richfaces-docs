@@ -49,40 +49,40 @@ AjaxPush myPush = new AjaxPush();
     <title>Key attributes and ways of usage</title>
     <para>The <emphasis role="bold">
         <property>&lt;a4j:push&gt;</property>
-      </emphasis> component is similar to the <emphasis role="bold">
-        <property>&lt;a4j:poll&gt;</property>
-      </emphasis>
-      <link linkend="poll_d"> one</link>. The main difference is that the<emphasis role="bold">
+      </emphasis> implements reverse Ajax technique. The component makes requests to minimal code
+      (not to JSF tree) in order to check presence of messages in a queue. If a message exists, a
+      complete request is performed. <emphasis role="bold">
+      <property>&lt;a4j:push&gt;</property>
+      </emphasis> registers <property>EventListener</property> in the bean,
+      which receives messages about an event presence.</para>
+
+    <para>The bean, for example, could be subscribed to Java Messaging Service (<ulink
+        url="http://java.sun.com/products/jms/">JMS</ulink>) topic or it could be implemented as
+      Message Driven Bean (MDB) in order to send a message to the <emphasis role="bold">
         <property>&lt;a4j:push&gt;</property>
-      </emphasis> makes request to minimal code (not to JSF tree) in order to check presence of
-      messages in a queue. If a message exists, a complete request is performed. The component
-      doesn&apos;t poll registered bean. It registers <property>EventListener</property>, which
-      receives messages about event presence. See an example below:</para>
+      </emphasis> component about an event presence. In the presence of the event some action
+      occurs.</para>
+
+    <para>Thus, a work paradigm with the <emphasis role="bold">
+        <property>&lt;a4j:push&gt;</property>
+      </emphasis> component corresponds to an anisochronous model, but not to pools as for <emphasis
+        role="bold">
+        <property>&lt;a4j:poll&gt;</property>
+      </emphasis> component. See the simplest example below:</para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="XML"><![CDATA[<a4j:push reRender="msg" eventProducer="#{pushBean.addListener}" interval="2000"/>
+    <programlisting role="JAVA"><![CDATA[...
+class MyPushEventListener implements PushEventListener {
+    public void onEvent(EventObject evt) {
+        System.out.println(evt.getSource());
+            //Some action
+    }
+...
 ]]></programlisting>
-    <para>In the example <emphasis>
-        <property>&quot;interval&quot;</property>
-      </emphasis> attribute has value &quot;2000&quot;. This attribute defines an interval
-      in milliseconds beetween the previous response and the next request. Default value is set to
-      &quot;1000&quot; milliseconds (1 second). It&apos;s possible to set value equal to
-      &quot;0&quot;. In this case connection is permanent. </para>
-    <para>The <emphasis>
-        <property>&quot;timeout&quot;</property>
-      </emphasis> attribute defines response wating time in milliseconds. If the response
-      isn&apos;t received during this period a connection is aborted and the next request is
-      sent. Default value for <emphasis>
-        <property>&quot;timeout&quot;</property>
-      </emphasis> attribute isn&apos;t set. Usage of <emphasis>
-        <property>&quot;interval&quot;</property>
-      </emphasis> and <emphasis>
-        <property>&quot;timeout&quot;</property>
-      </emphasis> attributes gives an opportunity to set short polls of queue state or long
-      connections or permanent connection generally.</para>
-    <para>Code for <property>EventListener</property> registration in a bean is placed below:</para>
+
+    <para>Code for <property>EventListener</property> registration in the bean is placed below:</para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
@@ -95,8 +95,50 @@ synchronized (listener) {
 ...
 ]]></programlisting>
 
-<para></para>
+    <para>A page code for this example is placed below.</para>
 
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+    <a4j:status startText="in progress" stopText="done"/>
+     <a4j:form>
+        <a4j:region>
+            <a4j:push reRender="msg" eventProducer="#{pushBean.addListener}" interval="2000"/>
+        </a4j:region>
+        <a4j:outputPanel id="msg" >
+            <h:outputText value="#{pushBean.date}">
+                <f:convertDateTime type="time"/>
+            </h:outputText>
+        </a4j:outputPanel>
+        <a4j:commandButton value="Push!!" action="#{pushBean.push}" ajaxSingle="true"/>
+    </a4j:form>
+... 
+]]></programlisting>
+
+    <para>The example shows how date is updated on a page in compliance with data taken from a
+      server. In the example <emphasis>
+        <property>&quot;interval&quot;</property>
+      </emphasis> attribute has value &quot;2000&quot;. This attribute defines an interval
+      in milliseconds between the previous response and the next request. Default value is set to
+      &quot;1000&quot; milliseconds (1 second). It&apos;s possible to set value equal to
+      &quot;0&quot;. In this case connection is permanent. </para>
+    <para>The <emphasis>
+        <property>&quot;timeout&quot;</property>
+      </emphasis> attribute defines response waiting time in milliseconds. If a response
+      isn&apos;t received during this period a connection is aborted and the next request is
+      sent. Default value for <emphasis>
+        <property>&quot;timeout&quot;</property>
+      </emphasis> attribute isn&apos;t set. Usage of <emphasis>
+        <property>&quot;interval&quot;</property>
+      </emphasis> and <emphasis>
+        <property>&quot;timeout&quot;</property>
+      </emphasis> attributes gives an opportunity to set short polls of queue state or long
+      connections, or permanent connection.</para>
+
+    <note><title>Note:</title> The form around the <emphasis role="bold">
+        <property>&lt;a4j:push&gt;</property>
+      </emphasis> component is required.</note>
   </section>
 
   <!--section>
