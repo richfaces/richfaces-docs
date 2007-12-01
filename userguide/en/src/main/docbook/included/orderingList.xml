@@ -62,8 +62,7 @@
             <h:inputText value="#{item.name}" />
         </rich:column>
 <rich:orderingList>
-...
-]]></programlisting>
+...]]></programlisting>
     </section>
     <section>
         <title>Creating the Component Dynamically Using Java</title>
@@ -74,8 +73,7 @@
         <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.OrderingList;
 ...	
 HtmlOrderingList myOrderingList = new HtmlOrderingList();
-...
-]]></programlisting>
+...]]></programlisting>
     </section>
     <section>
         <title>Details of Usage</title>
@@ -96,27 +94,27 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
 
         <!-- attributes of component  orderingList -->
 
-        <para> The <property>
-                <emphasis>&quot;value&quot;</emphasis>
-            </property> and <property>
-                <emphasis>&quot;var&quot;</emphasis>
-            </property> attributes are used to access the values of a list. </para>
+        <para> The <emphasis>
+                <property> &quot;value&quot;</property>
+            </emphasis> and <emphasis>
+                <property>&quot;var&quot; </property>
+            </emphasis> attributes are used to access the values of a list. </para>
 
-        <para>The <property>
-                <emphasis>&quot;selection&quot;</emphasis>
-            </property> attribute is bound to a list, which stores a set of indexes for rows
+        <para>The <emphasis>
+                <property>&quot;selection&quot; </property>
+            </emphasis> attribute is bound to a list, which stores a set of indexes for rows
             selected. If the index from a set is out of bounds, it should be ignored. </para>
-        <para>Controls rendering is based on the<property>
-                <emphasis>&quot;controlsType&quot;</emphasis>
-            </property> attribute. Possible types are button, link, none.</para>
+        <para>Controls rendering is based on the <emphasis>
+                <property>&quot;controlsType&quot; </property>
+            </emphasis> attribute. Possible types are button, link, none.</para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:orderingList value="#{bean.simpleItems}" var="item" selection="#{bean.selection}" controlsType="link">
+<rich:orderingList value="#{bean.simpleItems}" var="item" selection="#{bean.selection}" controlsType="button">
         <rich:column>
             <f:facet name="header">
-	    <h:outputText value="Name" />
+	    <h:outputText value="Cars" />
             </f:facet>
                   <h:outputText value="#{item}" />
         </rich:column>
@@ -127,14 +125,12 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 <property>&lt;rich:orderingList&gt;</property>
             </emphasis> component provides to use optional<emphasis>
                 <property>&quot;caption&quot;</property>
-            </emphasis>, <property>
-                <emphasis>&quot;header&quot;</emphasis>
-            </property>(It&apos;s possible to define facet. It has two possible types of
-            representation: sortable and non-sortable) and <property>
-                <emphasis>&quot;footer&quot;</emphasis>
-            </property> facets. </para>
+            </emphasis>, <emphasis>
+                <property>&quot;header&quot; </property>
+            </emphasis>(It&apos;s possible to define facet. It has two possible types of
+            representation: sortable and non-sortable) facets. </para>
 
-        <!-- add screenshot-->
+        <!-- ADD SCREENSHOT-->
 
 
         <para>Simple example is placed below.</para>
@@ -142,16 +138,22 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:orderingList value="#{bean.simpleItems}" var="item" controlsType="link">
+<rich:orderingList value="#{bean.simpleItems}" var="item" controlsType="button" selection="#{bean.selection}">
         <f:facet name="caption">
-            <h:outputText value="Caption" />
+            <h:outputText value="Optional Caption Facet" />
         </f:facet>
         <h:outputText value="#{item}" />
         <rich:column>
             <f:facet name="header">
-	    <h:outputText value="Name" />
+	    <h:outputText value="Cars" />
             </f:facet>
-            <h:outputText value="#{item}" />
+            <h:outputText value="#{item.name}" />
+        </rich:column>
+                <rich:column>
+            <f:facet name="header">
+	    <h:outputText value="Price" />
+            </f:facet>
+            <h:outputText value="#{item.price}" />
         </rich:column>
 </rich:orderingList>
 ...]]></programlisting>
@@ -159,32 +161,30 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
         <!-- ordering control set-->
         <para>The <emphasis role="bold">
                 <property>&lt;rich:orderingList&gt;</property>
-            </emphasis> component provides the possibility to use <property>
-                <emphasis>&quot;ordering controls set&quot;</emphasis>
-            </property>, which performs reordering. Every control has possibility to be disabled. </para>
+            </emphasis> component provides the possibility to use <property>ordering controls set</property>, which performs reordering. Every control has possibility to be disabled. </para>
         <para>
-            <property>
-                <emphasis>&quot;topControl&quot;</emphasis>
-            </property>, <property>
-                <emphasis>&quot;topControlDisabled&quot;</emphasis>
-            </property>, <property>
-                <emphasis>&quot;bottomControl&quot;</emphasis>
-            </property>, <property>
-                <emphasis>&quot;bottomControlDisabled&quot;</emphasis>
-            </property>, <property>
-                <emphasis>&quot;upControl&quot;</emphasis>
-            </property>, <property>
-                <emphasis>&quot;upControlDisabled&quot;</emphasis>
-            </property>, <property>
-                <emphasis>&quot;downControl&quot;</emphasis>
-            </property>, <property>
-                <emphasis>&quot;downControlDisabled&quot;</emphasis>
-            </property> facets are used to replaces the default control with facets content. </para>
+            <emphasis>
+                <property> &quot;topControl&quot; </property>
+            </emphasis>, <emphasis>
+                <property>&quot;topControlDisabled&quot;</property>
+            </emphasis> , <emphasis>
+                <property> &quot;bottomControl&quot;</property>
+            </emphasis> , <emphasis>
+                <property> &quot;bottomControlDisabled&quot; </property>
+            </emphasis>, <emphasis>
+                <property> &quot;upControl&quot; </property>
+            </emphasis>, <emphasis>
+                <property> &quot;upControlDisabled&quot; </property>
+            </emphasis>, <emphasis>
+                <property> &quot;downControl&quot;</property>
+            </emphasis> , <emphasis>
+                <property> &quot;downControlDisabled&quot; </property>
+            </emphasis> facets are used to replaces the default control with facets content. </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
-            <programlisting role="XML"><![CDATA[...
-<rich:orderingList value="#{demoBean.items}" var="item" selection="#{bean.selection}" controlType="button">
+        <programlisting role="XML"><![CDATA[...
+<rich:orderingList value="#{bean.simpleItems}" var="item" controlsType="button" selection="#{bean.selection}">
         <f:facet name="topControl">
             <h:outputText value="Move to top">
         </f:facet>
@@ -198,40 +198,35 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             <h:outputText value="Move to bottom">
         </f:facet>
 <rich:orderingList>
-...
-]]></programlisting>
-
-
-
-
+...]]></programlisting>
 
         <para>The position of the controls relatively to a list could be customized with <itemizedlist>
                 <listitem>
-                    <property>
-                        <emphasis>controlsPosition</emphasis>
-                    </property>attribute. Possible values: <itemizedlist>
+                    <emphasis>
+                        <property>&quot;controlsPosition&quot;</property>
+                    </emphasis> attribute. Possible values: <itemizedlist>
                         <listitem>left - controls could be rendered to the left side of a list</listitem>
-                        <listitem>right(default) controls could be rendered to the right side of a
+                        <listitem>right(default) - controls could be rendered to the right side of a
                             list </listitem>
                         <listitem>top - controls could be rendered above the list </listitem>
                         <listitem>bottom - controls could be rendered below the list </listitem>
                     </itemizedlist>
                 </listitem>
 
-                <listitem><property>
-                        <emphasis>controlsHorizontalAlign</emphasis>
-                    </property>attribute. Possible values: <itemizedlist>
+                <listitem><emphasis>
+                        <property> &quot;controlsHorizontalAlign&quot;</property>
+                    </emphasis> attribute. Possible values: <itemizedlist>
                         <listitem>left - controls could be rendered to the left side of a list</listitem>
-                        <listitem>right(default) controls could be rendered to the right side of a
+                        <listitem>right(default) - controls could be rendered to the right side of a
                             list</listitem>
                         <listitem>center - controls could be centered</listitem>
 
                     </itemizedlist>
                 </listitem>
 
-                <listitem><property>
-                        <emphasis>controlsVerticalAlign </emphasis>
-                    </property>attribute. Possible values: <itemizedlist>
+                <listitem><emphasis>
+                        <property> &quot;controlsVerticalAlign&quot; </property>
+                    </emphasis> attribute. Possible values: <itemizedlist>
                         <listitem>top - controls could be rendered aligned to top side of a list </listitem>
                         <listitem>bottom - controls could be rendered aligned to bottom side of a
                             list </listitem>
@@ -241,15 +236,14 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                     </itemizedlist>
                 </listitem>
 
-                <listitem><property>
-                        <emphasis>controlsLayout </emphasis>
-                    </property>attribute. Possible values: <itemizedlist>
+                <listitem><emphasis>
+                        <property>&quot;controlsLayout&quot;</property>
+                    </emphasis> attribute. Possible values: <itemizedlist>
                         <listitem>inline - controls defined one by one in line </listitem>
                         <listitem>block - controls defined in column </listitem>
                         <listitem/>
                     </itemizedlist>
                 </listitem>
-
             </itemizedlist>
         </para>
 
@@ -257,20 +251,20 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 <property>&lt;rich:orderingList&gt;</property>
             </emphasis> component has a possibility to hide any of the controls by pairs using
             following attributes: <itemizedlist>
-                <listitem><property>
-                        <emphasis>&quot;orderControlsVisible&quot;</emphasis>
-                    </property>attribute may have two values: true or false. If false
-                    &quot;Up&quot; and &quot;Down&quot; controls couldn't be
+                <listitem>
+                    <emphasis>
+                        <property>&quot;orderControlsVisible&quot;</property>
+                    </emphasis> attribute may have two values: true or false. If false
+                    <property>Up</property> and <property>Down</property> controls couldn't be
                     displayed.</listitem>
-                <listitem><property>
-                        <emphasis>&quot;fastOrderControlsVisible&quot;</emphasis>
-                    </property>attribute may have two values: true or false. If false
-                    &quot;Top&quot; and &quot;Bottom&quot; controls couldn't be
-                    displayed</listitem>
+                <listitem>
+                    <emphasis>
+                        <property>&quot;fastOrderControlsVisible&quot;</property>
+                    </emphasis> attribute may have two values: true or false. If false
+                    <property>Top</property> and <property>Bottom</property> controls couldn't be
+                    displayed.</listitem>
             </itemizedlist>
         </para>
-
-
 
         <para>The component provides possibility to be customized using templating. The
             customization could be performed by a layout definition nested into the component. 5
@@ -280,7 +274,6 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
         </para>
         <para>Example:</para>
         <programlisting role="XML"><![CDATA[...
-            
 <rich:orderingList>
         <h:panelGrid columns="2" columnClasses="class1 class2">
             <h:outputText value="{list}"/>
@@ -292,25 +285,24 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 </h:panelGroup>
         </h:panelGrid>
 </rich:orderingList>
-            
- ...]]>
+...]]>
         </programlisting>
         <para>The <emphasis role="bold">
-            <property>&lt;rich:orderingList&gt;</property>
-        </emphasis> component provides the possibility to be customized using templating. The
+                <property>&lt;rich:orderingList&gt;</property>
+            </emphasis> component provides the possibility to be customized using templating. The
             customization could be performed by layout definition nested to component.</para>
         <para>5 elements could be provided to be defined inside template (all standard controls
-            should also possible to use inside): list, topcontrol, bottomControl, downCotrol, upControl.</para>
-        <para>The markup defined in the initial picture could be defined as in the following example.</para>
+            should also possible to use inside): list, topcontrol, bottomControl, downCotrol,
+            upControl.</para>
+        <para>The markup defined in the initial picture could be defined as in the following
+            example.</para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
 <rich:orderingList>
-		<!-- All the columns-->
-			...
-		<!-- All the columns-->
-		<h:panelGrid columns="2" columnClasses="class1 class2">
+...
+	<h:panelGrid columns="2" columnClasses="class1 class2">
 			<h:outputText value="{list}"/>
 			<h:panelGroup>
 				<h:outputText value="{topControl}"/>
@@ -320,16 +312,11 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
 			</h:panelGroup>
 		</h:panelGrid>
 	</rich:orderingList>
-
-...
-]]></programlisting>
-        
-    
+...]]></programlisting>
     </section>
 
-    <para>Keyboard usage</para>
     <table>
-        <title>Keyboard usage for elements selection TO DO</title>
+        <title>Keyboard usage for elements selection</title>
         <tgroup cols="2">
             <thead>
                 <row>
@@ -399,12 +386,12 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
     <para>All the changes uses the same rules that defined in requirement for ordering with
         controls.</para>
 
-     <section>
+    <section>
         <title>JavaScript API</title>
         <para> Controls are accessible for developer on client-side using controls attribute of
             JavaScript component instance. The value of the attribute is an associative array of
-            controls keyed by the following strings: &quot;top&quot;,
-            &quot;up&quot;, &quot;down&quot;, &quot;bottom&quot;.</para>
+            controls keyed by the following strings: <property>top</property>,
+            <property>up</property>, <property>down</property>, <property>bottom</property>.</para>
         <table>
             <title>JavaScript API</title>
             <tgroup cols="3">
@@ -521,15 +508,7 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
 
         <para>On the screenshot there are classes names that define styles for component elements.</para>
 
-        <!-- screenshot -->
-        <figure>
-            <title>Style classes</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="" scalefit="1"/>
-                </imageobject>
-            </mediaobject>
-        </figure>
+        <!-- ADD SCREENSHOT -->
 
         <table>
             <title>Classes names that define a rows representations</title>
@@ -628,12 +607,13 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             </tgroup>
         </table>
         <para>In order to redefine styles for all <emphasis role="bold">
-            <property>&lt;rich:orderingList&gt;</property>
-        </emphasis> components on a page using CSS, it's enough to create classes with the same names and define necessary properties in them.
-            </para>
-            <para>To change styles of particular <emphasis role="bold">
                 <property>&lt;rich:orderingList&gt;</property>
-            </emphasis> components,  define your own style classes in the corresponding <emphasis role="bold">
+            </emphasis> components on a page using CSS, it's enough to create classes with the same
+            names and define necessary properties in them. </para>
+        <para>To change styles of particular <emphasis role="bold">
+                <property>&lt;rich:orderingList&gt;</property>
+            </emphasis> components, define your own style classes in the corresponding <emphasis
+                role="bold">
                 <property>&lt;rich:orderingList&gt;</property>
             </emphasis> component attributes.</para>
     </section>
