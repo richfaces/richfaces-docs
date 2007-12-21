@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+  <sectioninfo>
+    <keywordset>
+      <keyword>componentControl</keyword>
+    </keywordset>
+  </sectioninfo>
+
+  <table>
+    <title>Component identification parameters</title>
+
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Name</entry>
+
+          <entry>Value</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>component-type</entry>
+
+          <entry>org.richfaces.ComponentControl</entry>
+        </row>
+
+        <row>
+          <entry>component-class</entry>
+
+          <entry>org.richfaces.component.html.HtmlComponentControl</entry>
+        </row>
+
+        <row>
+          <entry>component-family</entry>
+
+          <entry>org.richfaces.ComponentControl</entry>
+        </row>
+
+        <row>
+          <entry>renderer-type</entry>
+
+          <entry>org.richfaces.ComponentControlRenderer</entry>
+        </row>
+
+        <row>
+          <entry>tag-class</entry>
+
+          <entry>org.richfaces.taglib.ComponentControlTag</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section>
+    <title>Creating the Component with a Page Tag</title>
+
+    <para>To create the simplest variant on a page use the following syntax:</para>
+
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+      <rich:componentControl attachTo="doExpandCalendarID" for="ccCalendarID" event="onclick" operation="Expand" />
+...]]></programlisting>
+  </section>
+
+  <section>
+    <title>Creating the Component Dynamically Using Java</title>
+
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlComponentControl; 	
+...
+HtmlComponentControl myCalendar = new HtmlComponentControl();
+...
+]]></programlisting>
+  </section>
+
+  <section>
+    <title>Details of Usage</title>
+    <para>There are three ways to use the <emphasis role="bold">
+        <property>&lt;rich:componentControl&gt;</property>
+      </emphasis> to another component.</para>
+    <itemizedlist>
+      <listitem>Defining a name of a function that is generated (definition is similar to a
+        definition of <emphasis role="bold">
+          <property>&lt;a4j:jsFunction&gt;</property>
+        </emphasis>). An &quot;event&quot; argument is passed to this function.</listitem>
+    </itemizedlist>
+    <para>An example is placed below:</para>
+    <programlisting role="XML"><![CDATA[...
+    <rich:componentControl name="ffunction" for="comp_ID" operation="show"/>
+...
+]]></programlisting>
+    <para>According to this code a function with name <property>&quot;call&quot;</property>
+      is generated. It is used in JavaScript code to trigger an operation on the target component
+      with defined id=<property>&quot;comp_ID&quot;</property>.</para>
+    <para>The generated function is shown below:</para>
+    <programlisting role="JAVA"><![CDATA[function ffunction (event) {
+}
+]]></programlisting>
+    <itemizedlist>
+      <listitem>Attaching to a parent component (usage is similar to <emphasis role="bold">
+          <property>&lt;a4j:support&gt;</property>
+        </emphasis> component).</listitem>
+    </itemizedlist>
+    <para>An example is placed below:</para>
+
+    <programlisting role="XML"><![CDATA[...
+    <rich:modalPanel id="ccModalPanelID" onshow="alert(event.parameters.show)" onhide="alert(event.parameters.hide)">
+        ...
+    </rich:modalPanel>
+    <h:commandButton value="Show Modal Panel">
+        <rich:componentControl for="ccModalPanelID" event="onclick" disableDefault="true" operation="show">
+                <f:param name="show" value="componentControl work(show)"/>
+        <rich:componentControl/>
+    </h:commandButton>
+...
+]]></programlisting>
+    <para>In the example the <emphasis>
+        <property>&quot;for&quot;</property>
+      </emphasis> attribute contains value of an Id of <emphasis role="bold">
+        <property>&lt;rich:modalpanel&gt;</property>
+      </emphasis> component. The <emphasis>
+        <property>&quot;operation&quot;</property>
+      </emphasis> attribute contains a name of JavaScript API function. An <emphasis>
+        <property>&quot;event&quot;</property>
+      </emphasis> attribute is used to trigger an operation defined with the <emphasis>
+        <property>&quot;operation&quot;</property>
+      </emphasis> attribute. A set of parameters is defined with <emphasis role="bold">
+        <property>&lt;f:param&gt;</property>
+      </emphasis>. As an alternative, the <emphasis>
+        <property>&quot;params&quot;</property>
+      </emphasis> attribute can be used. Thus, one of main features is that <emphasis role="bold">
+        <property>&lt;rich:componentControl&gt;</property>
+      </emphasis> allows to transfer parameters. The <emphasis>
+        <property>&quot;disableDefault&quot;</property>
+      </emphasis> attribute with <property>&quot;true&quot;</property> value is used instead
+      of <property>onclick="return false;"</property> attribute for <emphasis role="bold">
+        <property>&lt;h:commandButton&gt;</property>
+      </emphasis> to avoid a problem with form submit and <property>modalPanel</property> showing.</para>
+    <itemizedlist>
+      <listitem>Attaching with <emphasis>
+          <property>&quot;attachTo&quot;</property>
+        </emphasis> attribute.</listitem>
+    </itemizedlist>
+    <para>An example is placed below:</para>
+
+    <programlisting role="XML"><![CDATA[...
+    <rich:calendar popup="#{componentControl.calendarPopup}" id="ccCalendarID" />
+    ...
+    <f:verbatim>
+        <a href="#" id="doExpandCalendarID">Calendar (nextYear)</a>
+    </f:verbatim>
+    <rich:componentControl attachTo="doExpandCalendarID" for="ccCalendarID" event="onclick" disableDefault="true" operation="nextYear" />
+...
+]]></programlisting>
+    <para>In the example the <emphasis>
+        <property>&quot;attachTo&quot;</property>
+      </emphasis> attribute contais a value of an Id of <property>&lt;a&gt;</property> tag.
+      The <emphasis>
+        <property>&quot;for&quot;</property>
+      </emphasis> attribute contains value of an Id of <emphasis role="bold">
+        <property>&lt;rich:calendar&gt;</property>
+      </emphasis> component. The <emphasis>
+        <property>&quot;operation&quot;</property>
+      </emphasis> attribute contains a name of JavaScript API function. Thus, clicking on the link
+      represents the next year on the calendar.</para>
+    <!--para>One more example of <emphasis role="bold">
+        <property>&lt;rich:componentControl&gt;</property>
+      </emphasis> usage is placed below:</para>
+    <programlisting role="XML"><![CDATA[...
+    <rich:panelMenu id="ccContextMenuPanelMenuID">
+        <h:outputText value="click text" />
+    </rich:panelMenu>
+    <rich:contextMenu id="ccContextMenuID" submitMode="ajax">
+        <rich:menuItem icon="/pics/header.png" value="tab1" reRender="cmInfoID">
+            <f:param name="cmdParam" value="menu" />
+        </rich:menuItem>
+        <rich:menuSeparator />
+        <rich:menuItem icon="/pics/info.gif" value="a" reRender="cmInfoID">
+            <f:param name="cmdParam" value="a" />
+        </rich:menuItem>
+        <rich:menuItem icon="/pics/info.gif" value=" b" reRender="cmInfoID">
+            <f:param name="cmdParam" value="b" />
+        </rich:menuItem>
+        <rich:menuItem icon="/pics/info.gif" value="c" reRender="cmInfoID">
+            <f:param name="cmdParam" value="c" />
+        </rich:menuItem>
+    </rich:contextMenu>
+    <rich:componentControl event="oncontextmenu" attachTo="ccContextMenuPanelMenuID" for="ccContextMenuID" disableDefault="true" operation="Show" />
+...
+]]></programlisting-->
+
+  </section>
+
+  <section>
+    <title>Look-and-Feel Customization</title>
+
+    <para><emphasis role="bold">
+        <property>&lt;rich:componentControl&gt;</property>
+      </emphasis> has no skin parameters and custom <property>style classes</property>, as the
+      component isn&apos;t visual.</para>
+  </section>
+
+  <section>
+    <title>Relevant Resources Links</title>
+    <para><ulink
+        url="http://livedemo.exadel.com/richfaces-demo/richfaces/componentControl.jsf?c=componentControl"
+        >Here</ulink> you can see an example of <emphasis role="bold">
+        <property>&lt;rich:componentControl&gt;</property>
+      </emphasis> usage and sources for the given example. </para>
+  </section>
+
+</section>

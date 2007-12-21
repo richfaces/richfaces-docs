@@ -13,14 +13,14 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:listShuttle value="#{bean.list}" var="list" selection="#{value.resultList}">
-        <f:facet name=header>
-             <h:outputText value="Header1"/>
-        </f:facet>
-        <rich:column>
-            <h:outputText value="#{list.text}"> 
-        </rich:column>
-<rich:listShuttle>
+<rich:listShuttle var="item" sourceValue="#{bean.source}" targetValue="#{bean.target}" converter="listShuttleconverter">
+        <h:column>
+                <f:facet name="header">
+                        <h:outputText value="Cars" />
+                </f:facet>
+                <h:outputText value="#{item.name}" />
+        </h:column>
+</rich:listShuttle>
 ...]]></programlisting>
     </section>
     <section>
@@ -38,46 +38,38 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
         <para>The <emphasis role="bold">
                 <property>&lt;rich:listShuttle&gt;</property>
             </emphasis> component consists of the following parts: <itemizedlist>
-                <listitem>two <property>item lists</property> (source and target). List consists of items; each item has
-                    three different representations: common, selected, active</listitem>
-                <listitem>optional <property>caption</property>, <property>header</property> (sorted and non-sorted), <property>footer</property> elements</listitem>
-                <listitem><property>copy/moving controls set</property>, a set of controls, which performs moving/copying
-                    items between lists</listitem>
-                <listitem><property>optional ordering controls set</property>, a set of controls that performs
-                reordering</listitem>
+                <listitem>two <property>item lists</property> (source and target). List consists of
+                items. Each item has three different representations: common, selected, active</listitem>
+                <listitem>optional <property>caption</property> element</listitem>
+                <listitem><property>optional ordering controls set</property> is a set of controls
+                that performs reordering</listitem>
+                <listitem><property>move controls set</property> is a set of controls, which
+                    performs moving items between lists</listitem>
             </itemizedlist>
         </para>
-        <para>The <emphasis role="bold">
-                <property>&lt;rich:listShuttle&gt;</property>
-            </emphasis> component provides to use <emphasis>
-                <property>&quot;source&quot;</property>
-            </emphasis> and <emphasis>
-                <property>&quot;target&quot;</property>
-            </emphasis> facets. It is possible to use the facets only together defined. In case the
-            facets definition skipped both lists contain the columns defined nested to listShuttle
-            component.</para>
-        <para>Here is a simple example as it could be used on a page.</para>
+        <para> The <emphasis>
+            <property>&quot;sourceValue&quot; </property>
+        </emphasis> attribute defines the collection to be shown in the source list.</para>
+        <para>The <emphasis>
+            <property>&quot;targetValue&quot; </property>
+        </emphasis> attribute defines the collection to be shown in the target list.</para>
+        <para> The <emphasis>
+            <property>&quot;var&quot; </property>
+        </emphasis> could be shared between both collections to defined lists on the page.</para>
         <para>
-            <emphasis role="bold">Example:</emphasis>
+            The <emphasis>
+                <property>&quot;converter&quot; </property>
+            </emphasis> attribute is used to convert component data to a particular component&apos;s value.
+            For example, when you select items in a list, a converter is used to format a set of objects to a strings to be displayed.  
         </para>
-        <programlisting role="XML"><![CDATA[...
-<rich:listShuttle sourceValue="#{bean.list}" var="list" value="#{value.resultList}">
-        <f:facet name="source">
-            <rich:column>
-                <h:outputText value="#{list.text}"/> 
-            </rich:column>
-        </f:facet>
-        <f:facet name="target">
-            <rich:column>
-                <h:outputText value="#{list.text}"/> 
-            </rich:column>
-            <rich:column>
-                <h:outputText value="#{list.description}"/> 
-            </rich:column>
-        </f:facet>
-<rich:listShuttle>
-...]]></programlisting>
-        <!-- ADD SCREESHOT-->
+        <para>
+            The <emphasis>
+                <property>&quot;sourceSelection&quot; </property>
+            </emphasis> attribute stores the collection of items selected by user in the source list. 
+            The <emphasis>
+                <property>&quot;targetSelection&quot; </property>
+            </emphasis> attribute stores the collection of items selected by user in the target list. 
+        </para>
         <para>Captions could be added to a list only after it was defined as a <emphasis>
                 <property>&quot;sourceCaption&quot;</property>
             </emphasis> and <emphasis>
@@ -86,104 +78,145 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                 <property>&quot;sourceCaptionLabel&quot;</property>
             </emphasis> and <emphasis>
                 <property>&quot;targetCaptionLabel&quot;</property>
-            </emphasis> attribute.</para>
+            </emphasis> attribute.
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:listShuttle var="item" sourceValue="#{bean.source}" targetValue="#{bean.target}" sourceSelection="#{bean.sourceSelection}" 
+                        targetSelection="#{bean.targetSelection}" converter="listShuttleconverter">
+        <f:facet name="sourceCaption">
+                <h:outputText value="Cars Store #1" />
+        </f:facet>
+        <f:facet name="targetCaption">
+                <h:outputText value="Cars Store #2" />
+        </f:facet>
+        <rich:column>
+                <h:outputText value="#{items.name}" />
+        </rich:column>
+</rich:listShuttle>
+...]]></programlisting>
         <!-- ordering control set-->
         <para>The <emphasis role="bold">
                 <property>&lt;rich:listShuttle&gt;</property>
             </emphasis> component provides the possibility to use <property>ordering controls
             set</property>, which performs reordering in the target item list. Every control has
             possibility to be disabled. </para>
-        <para>
+        <para>An <property>ordering controls set</property> could be defined with 
+            <emphasis><property>&quot;topControlLabel&quot;</property></emphasis>, <emphasis><property>&quot;bottomControlLabel&quot;</property></emphasis>,
+            <emphasis><property>&quot;upControlLabel&quot;</property></emphasis>, <emphasis><property>&quot;downControlLabel&quot;</property></emphasis>attributes.
+        </para>
+        <para>It is also possible to use
             <emphasis>
-                <property>&quot;topControl&quot; </property>
+                <property> &quot;topControl&quot; </property>
             </emphasis>, <emphasis>
-                <property>&quot;topControlDisabled&quot; </property>
+                <property>&quot;topControlDisabled&quot;</property>
+            </emphasis> , <emphasis>
+                <property> &quot;bottomControl&quot;</property>
+            </emphasis> , <emphasis>
+                <property> &quot;bottomControlDisabled&quot; </property>
             </emphasis>, <emphasis>
-                <property>&quot;bottomControl&quot; </property>
+                <property> &quot;upControl&quot; </property>
             </emphasis>, <emphasis>
-                <property>&quot;bottomControlDisabled&quot; </property>
+                <property> &quot;upControlDisabled&quot; </property>
             </emphasis>, <emphasis>
-                <property>&quot;upControl&quot; </property>
-            </emphasis>, <emphasis>
-                <property>&quot;upControlDisabled&quot; </property>
-            </emphasis>, <emphasis>
-                <property>&quot;downControl&quot; </property>
-            </emphasis>, <emphasis>
-                <property>&quot;downControlDisabled&quot; </property>
-            </emphasis> facets are used to replaces the default control with facets content. </para>
+                <property> &quot;downControl&quot;</property>
+            </emphasis> , <emphasis>
+                <property> &quot;downControlDisabled&quot; </property>
+            </emphasis> facets in order to replace the default controls with facets content.
+        </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:orderingList value="#{demoBean.items}" var="item" controlType="button">
+<rich:listShuttle var="item" sourceValue="#{bean.source}" targetValue="#{bean.target}" converter="listShuttleconverter">
+...			         
         <f:facet name="topControl">
-            <h:outputText value="Move to top">
+                <h:outputText value="Move to top" />
         </f:facet>
-            <f:facet name="upControl">
-            <h:outputText value="Move up">
+        <f:facet name="upControl">
+                <h:outputText value="Move up" />
         </f:facet>
-            <f:facet name="downControl">
-            <h:outputText value="Move down">
+        <f:facet name="downControl">
+                <h:outputText value="Move down" />
         </f:facet>
-            <f:facet name="bottomControl">
-            <h:outputText value="Move to bottom">
+        <f:facet name="bottomControl">
+                <h:outputText value="Move to bottom" />
         </f:facet>
 <rich:orderingList>
 ...
 ]]></programlisting>
+       
         <!-- copy/move control set -->
+        
         <para>The <emphasis role="bold">
-                <property>&lt;rich:listShuttle&gt;</property>
-            </emphasis>component also provides 4 predefined controls in <property> move/copy
-                controls set</property> for moving or copying items between source and target lists.
+            <property>&lt;rich:listShuttle&gt;</property>
+        </emphasis>component also provides 4 predefined controls in <property>move
+            controls set</property> for moving items between source and target lists.
             Every control has possibility to be disabled. </para>
-        <para>
+        <para>A <property>move controls set</property> could be defined with 
+            <emphasis><property>&quot;copyControlLabel&quot;</property></emphasis>, <emphasis><property>&quot;removeControlLabel&quot;</property></emphasis>,
+            <emphasis><property>&quot;copyAllControlLabel&quot;</property></emphasis>, <emphasis><property>&quot;removeAllControlLabel&quot;</property></emphasis>attributes.
+        </para>
+        <para>It is also possible to use
             <emphasis>
-                <property>&quot;copyCotrol&quot; </property>
-            </emphasis>, <emphasis>
-                <property>&quot;copy_disabled&quot; </property>
-            </emphasis>, <emphasis>
+                <property>&quot;copyControl&quot; </property>
+            </emphasis>, 
+            <emphasis>
                 <property>&quot;removeControl&quot; </property>
-            </emphasis>, <emphasis>
-                <property>&quot;remove_disabled&quot; </property>
-            </emphasis>, <emphasis>
+            </emphasis>, 
+            <emphasis>
                 <property>&quot;copyAllControl&quot; </property>
-            </emphasis>, <emphasis>
-                <property>&quot;copyAll_disabled&quot; </property>
-            </emphasis>, <emphasis>
+            </emphasis>, 
+            <emphasis>
                 <property>&quot;removeAllControl&quot; </property>
-            </emphasis>, <emphasis>
-                <property>&quot;removeAll_disabled&quot; </property>
-            </emphasis> facets are used to replaces the default control with facets content. </para>
-        <!-- attributes -->
-        <para> The 
-            <emphasis><property>&quot;sourceValue&quot;
-            </property></emphasis> attribute defines the collection to be shown in source list.</para>
-        <para>The 
-            <emphasis><property>&quot;value&quot;
-            </property></emphasis> attribute defines the collection to store the value from target list.</para>
-        <para> The 
-            <emphasis><property>&quot;var&quot;
-            </property></emphasis> could be shared between both collections to defined lists on the page.</para>
-        <para>Controls rendering is based on the
-            <emphasis><property>&quot;controlsType&quot;
-            </property></emphasis> attribute. Possible types are <property>button</property> and <property>none</property>.</para> The position of the
-            <property>ordering controls set</property> relatively to list should be customized with 
-        <emphasis><property>&quot;orderControlsVerticalAlign&quot;
-        </property></emphasis> attribute. The position of the <property>move/copy controls set</property>
-        relatively to lists should be customized with 
-        <emphasis><property>&quot;moveControlsVerticalAlign&quot;
-        </property></emphasis> attribute. 
+            </emphasis> 
+          facets in order to replace the default controls with facets content.
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:listShuttle var="item" sourceValue="#{bean.source}" targetValue="#{bean.target}" converter="listShuttleconverter"
+                        copyControlLabel="Copy" removeControlLabel="Remove"
+                        copyAllControlLabel="Copy all" removeAllControlLabel="Remove all">
+        <h:column>
+                <f:facet name="header">
+                        <h:outputText value="Cars" />
+                </f:facet>
+                <h:outputText value="#{item.name}" />
+        </h:column>
+<rich:orderingList>
+...
+]]></programlisting>        
         
-        <!-- template -->
+        <!-- The following facets currently do not work-->
+        <!--<emphasis>
+            <property>&quot;copy_disabled&quot; </property>
+            </emphasis>, -->
+        <!--<emphasis>
+            <property>&quot;remove_disabled&quot; </property>
+            </emphasis>, -->
+        <!--<emphasis>
+            <property>&quot;copyAll_disabled&quot; </property>
+            </emphasis>, -->
+        <!--<emphasis>
+            <property>&quot;removeAll_disabled&quot; </property>
+            </emphasis>-->
         
-        <para>The <emphasis role="bold">
+        <para>Controls rendering is based on the <emphasis>
+                <property>&quot;controlsType&quot; </property>
+            </emphasis> attribute. Possible types are <property>button</property> and
+            <property>none</property>.</para>
+        <note>
+            <para>
+                Currently the button controls type is based on &lt;div&gt; element.     
+            </para>
+        </note>
+        <!-- template wiil be done in 3.2.0 -->
+        <!--para>The <emphasis role="bold">
                 <property>&lt;rich:listShuttle&gt;</property>
             </emphasis> component provides the possibility to be customized using templating. The
             customization could be performed by layout definition nested to component.</para>
         <para>10 elements could be provided to be defined inside template (all standard controls
-            should also possible to use inside): {sourceList}, {targetList}, {CopyControl}, {removeCotrol},
-            {copyAllControl}, {removeAllControl}, {topcontrol}, {bottomControl}, {downCotrol}, {upControl}.</para>
+            should also possible to use inside): {sourceList}, {targetList}, {CopyControl},
+            {removeCotrol}, {copyAllControl}, {removeAllControl}, {topcontrol}, {bottomControl},
+            {downCotrol}, {upControl}.</para>
         <para>The markup defined in the initial picture could be defined as in the following
             example.</para>
         <para>
@@ -210,7 +243,7 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
 		</h:panelGrid>
 	</rich:listShuttle>
 ...
-]]></programlisting>
+]]></programlisting-->
         <table>
             <title>Keyboard usage for elements selection</title>
             <tgroup cols="2">
@@ -224,11 +257,12 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                     <!--Sorting API -->
                     <row>
                         <entry>CTRL+click</entry>
-                        <entry>Described in selection behaviour requirement</entry>
+                        <entry>Inverts selection for an item</entry>
                     </row>
                     <row>
                         <entry>SHIFT+click</entry>
-                        <entry>Described in selection behaviour requirement</entry>
+                        <entry>Selects all rows from active one to a clicked row if they differ,
+                            else select the actve row. All other selections are cleared</entry>
                     </row>
                     <row>
                         <entry>CTRL+A</entry>
@@ -236,13 +270,9 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                             already present in a list</entry>
                     </row>
                     <row>
-                        <entry>Space</entry>
-                        <entry>Inverts selection on the active element</entry>
-                    </row>
-                    <row>
                         <entry>Up, Down arrows</entry>
-                        <entry>Change the active element to the next or previous in a list and make
-                            it the only selected. Scroll should follow the selection to keep it
+                        <entry>Changes the active element to the next or previous in a list and make
+                            it the only selected. Scroll follows the selection to keep it
                             visible</entry>
                     </row>
                 </tbody>
@@ -281,117 +311,97 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
     </section>
     <section>
         <title>JavaScript API</title>
-        <para> Controls are accessible for developer on client-side using controls attribute of
-            JavaScript component instance. The value of the attribute is an associative array of
-            controls keyed by the following strings: <property>top</property>, <property>up</property>, <property>down</property>, <property>bottom</property>.</para>
+        
         <table>
             <title>JavaScript API</title>
-            <tgroup cols="3">
+            <tgroup cols="2">
                 <thead>
                     <row>
                         <entry>Function</entry>
                         <entry>Description</entry>
-                        <entry>Element</entry>
                     </row>
                 </thead>
                 <tbody>
                     <!--Sorting API -->
+                    <!--
                     <row>
-                        <entry>doSortAscending()</entry>
-                        <entry>Sort items in the list ascending</entry>
-                        <entry>Component</entry>
+                        <entry>SortAscending()</entry>
+                        <entry>Sorts items in the list ascending</entry>
                     </row>
                     <row>
-                        <entry>doSortDescending()</entry>
-                        <entry>Sort items in the list descending</entry>
-                        <entry>Component</entry>
+                        <entry>SortDescending()</entry>
+                        <entry>Sorts items in the list descending</entry>
                     </row>
                     <row>
-                        <entry>doSort()</entry>
-                        <entry>Invert current sorting</entry>
-                        <entry>Component</entry>
+                        <entry>Sort()</entry>
+                        <entry>Inverts current sorting</entry>
                     </row>
+                    -->
                     <!--Controls common API -->
                     <row>
-                        <entry>doHide()</entry>
-                        <entry>Hide ordering control</entry>
-                        <entry>Any Ordering control</entry>
+                        <entry>Hide()</entry>
+                        <entry>Hides ordering control</entry>
                     </row>
                     <row>
-                        <entry>doShow()</entry>
-                        <entry>Show ordering control</entry>
-                        <entry>Any Ordering control</entry>
+                        <entry>Show()</entry>
+                        <entry>Shows ordering control</entry>
                     </row>
                     <row>
                         <entry>isShown()</entry>
-                        <entry>Check if current control is shown</entry>
-                        <entry>Any Ordering control</entry>
+                        <entry>Checks if current control is shown</entry>
                     </row>
                     <row>
-                        <entry>doEnable()</entry>
-                        <entry>Enable ordering control</entry>
-                        <entry>Any Ordering control</entry>
+                        <entry>Enable()</entry>
+                        <entry>Enables ordering control</entry>
                     </row>
                     <row>
-                        <entry>doDisable()</entry>
-                        <entry>Disable ordering control</entry>
-                        <entry>Any Ordering control</entry>
+                        <entry>Disable()</entry>
+                        <entry>Disables ordering control</entry>
                     </row>
                     <row>
                         <entry>isEnabled()</entry>
-                        <entry>Check if current control is enabled</entry>
-                        <entry>Any Ordering control</entry>
+                        <entry>Checks if current control is enabled</entry>
                     </row>
                     <!--List managing API -->
                     <row>
                         <entry>moveUp()</entry>
-                        <entry>Move up selected item in the list</entry>
-                        <entry>Any Item</entry>
+                        <entry>Moves up selected item in the list</entry>
                     </row>
                     <row>
                         <entry>moveDown()</entry>
-                        <entry>Move down selected item in the list</entry>
-                        <entry>Any Item</entry>
+                        <entry>Moves down selected item in the list</entry>
                     </row>
                     <row>
                         <entry>moveTop()</entry>
-                        <entry>Move top selected item in the list</entry>
-                        <entry>Any Item</entry>
+                        <entry>Moves top selected item in the list</entry>
                     </row>
                     <row>
                         <entry>moveBottom()</entry>
-                        <entry>Move bottom selected item in the list</entry>
-                        <entry>Any Item</entry>
+                        <entry>Moves bottom selected item in the list</entry>
                     </row>
                     <row>
                         <entry>copy()</entry>
-                        <entry>Copy selected item from the source list to the target list</entry>
-                        <entry>Any Item</entry>
+                        <entry>Copies selected item from the source list to the target list</entry>
                     </row>
                     <row>
                         <entry>remove()</entry>
-                        <entry>Remove selected item from the target list to the source list</entry>
-                        <entry>Any Item</entry>
+                        <entry>Removes selected item from the target list to the source list</entry>
                     </row>
                     <row>
                         <entry>copyAll()</entry>
-                        <entry>Copy all items from the source list to the target list</entry>
-                        <entry>Any Item</entry>
+                        <entry>Copies all items from the source list to the target list</entry>
                     </row>
                     <row>
                         <entry>removeAll()</entry>
-                        <entry>Remove all items from the target list to the source list</entry>
-                        <entry>Any Item</entry>
+                        <entry>Removes all items from the target list to the source list</entry>
                     </row>
                     <row>
                         <entry>getSelection()</entry>
-                        <entry>Return currently selected item</entry>
-                        <entry>Any Item</entry>
+                        <entry>Returns currently selected item</entry>
                     </row>
                     <row>
                         <entry>getItems()</entry>
-                        <entry>Return the collection of all items</entry>
-                        <entry>Any Item</entry>
+                        <entry>Returns the collection of all items</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -414,17 +424,443 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
             </itemizedlist>
         </para>
     </section>
+    
+    <section>
+        <title>Skin Parameters Redefinition</title>
+        <table>
+            <title>Skin parameters redefinition for items in the source and target lists</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalBackgroundColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderColor</entry>
+                        <entry>border-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderWidth</entry>
+                        <entry>border-width</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for caption in the source and target lists</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    <row>
+                        <entry>headerWeightFont</entry>
+                        <entry>font-weight</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for a selected rows in the source and target lists</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>additionalBackgroundColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for a header cell</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>headerBackgroundColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>headerTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    <!--row>
+                        <entry>headerWeightFont</entry>
+                        <entry>font-weight</entry>
+                    </row-->
+                    <row>
+                        <entry>tableBorderWidth</entry>
+                        <entry>border-width</entry>
+                    </row>
+                    <row>
+                        <entry>subBorderColor</entry>
+                        <entry>border-top-color</entry>
+                    </row>
+                    <row>
+                        <entry>panelBorderColor</entry>
+                        <entry>border-bottom-color</entry>
+                    </row>
+                    <row>
+                        <entry>panelBorderColor</entry>
+                        <entry>border-right-color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for a selected cell</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    <row>
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+
+        
+        <table>
+            <title>Skin parameters redefinition for an active cell</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    <row>
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for controls</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>tableBorderColor</entry>
+                        <entry>border-color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for a button</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>trimColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for a disabled button</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>trimColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>tabDisabledTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for a button highlight</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>trimColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>selectControlColor</entry>
+                        <entry>border-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderWidth</entry>
+                        <entry>border-width</entry>
+                    </row>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for a pressed button</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>additionalBackgroundColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderColor</entry>
+                        <entry>border-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderWidth</entry>
+                        <entry>border-width</entry>
+                    </row>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for a button content</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Skin parameters redefinition for a button selection</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+    </section>
+    
     <section>
         <title>Definition of Custom Style Classes</title>
 
         <para>On the screenshot there are classes names that define styles for component elements.</para>
 
-        <!-- ADD SCREENSHOT -->
-
-        <!-- ADD ITEMS representations!!!-->
+        <figure>
+            <title>Style classes</title>
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/listShuttle_classes_s.png" scalefit="1"/>
+                </imageobject>
+            </mediaobject>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/listShuttle_classes_t.png" scalefit="1"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
 
         <table>
-            <title>Classes names that define a caption representations in the source list</title>
+            <title>Classes names that define a list representation</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-list-shuttle</entry>
+                        <entry>Defines styles for a wrapper table element of a listShuttle</entry>
+                    </row>
+                    <row>
+                        <entry>rich-list-shuttle-caption</entry>
+                        <entry>Defines styles for a list caption</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-body</entry>
+                        <entry>Defines styles for a list body</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-list-content</entry>
+                        <entry>Defines styles for a list content</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-source-items</entry>
+                        <entry>Defines styles for a wrapper &lt;div&gt; element for source list</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-target-items</entry>
+                        <entry>Defines styles for a wrapper &lt;div&gt; element for target list</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-list-header</entry>
+                        <entry>Defines styles for a lists header</entry>
+                    </row>
+                    <row>
+                        <entry>rich-shuttle-header-tab-cell</entry>
+                        <entry>Defines styles for a header cell</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Classes names that define a caption representations in a source and target lists</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -435,30 +871,18 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                 <tbody>
                     <row>
                         <entry>rich-shuttle-source-caption</entry>
-                        <entry>Defines a class for caption customization</entry>
+                        <entry>Defines styles for a caption in a source list</entry>
                     </row>
-                </tbody>
-            </tgroup>
-        </table>
-        <table>
-            <title>Classes names that define a caption representations in the target list</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Class name</entry>
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-                <tbody>
                     <row>
                         <entry>rich-shuttle-target-caption</entry>
-                        <entry>Defines a class for caption customization</entry>
+                        <entry>Defines styles for a caption in a target list</entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
+
         <table>
-            <title>Classes names that define a rows representations in the source list</title>
+            <title>Classes names that define a rows representations in a source list</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -469,21 +893,21 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                 <tbody>
                     <row>
                         <entry>rich-shuttle-source-row</entry>
-                        <entry>Defines a default class for any item row</entry>
+                        <entry>Defines styles for a row in a source list</entry>
                     </row>
                     <row>
-                        <entry>rich-shuttle-row-source-selected</entry>
-                        <entry>Defines class to be additionally added to selected item rows</entry>
+                        <entry>rich-shuttle-source-row-selected</entry>
+                        <entry>Defines styles for a selected row in a source list</entry>
                     </row>
                     <row>
-                        <entry>rich-shuttle-row-source-active</entry>
-                        <entry>Defines class to be additionally added to active item rows</entry>
+                        <entry>rich-shuttle-source-row-active</entry>
+                        <entry>Defines styles for an active row in a source list</entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
         <table>
-            <title>Classes names that define a rows representations in the target list</title>
+            <title>Classes names that define a rows representations in a target list</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -493,22 +917,22 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                 </thead>
                 <tbody>
                     <row>
-                        <entry>rich-shuttle-target -row</entry>
-                        <entry>Defines a default class for any item row</entry>
+                        <entry>rich-shuttle-target-row</entry>
+                        <entry>Defines styles for a row in a target list</entry>
                     </row>
                     <row>
-                        <entry>rich-shuttle-row-target -selected</entry>
-                        <entry>Defines class to be additionally added to selected item rows</entry>
+                        <entry>rich-shuttle-target-row-selected</entry>
+                        <entry>Defines styles for a selected row in a target list</entry>
                     </row>
                     <row>
-                        <entry>rich-shuttle-row-target -active</entry>
-                        <entry>Defines class to be additionally added to active item rows</entry>
+                        <entry>rich-shuttle-target-row-active</entry>
+                        <entry>Defines styles for an active row in a target list</entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
         <table>
-            <title>Classes names that define a cells representations in the source list</title>
+            <title>Classes names that define a cells representations in a source list</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -519,21 +943,21 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                 <tbody>
                     <row>
                         <entry>rich-shuttle-source-cell</entry>
-                        <entry>Defines a default class for any item cell</entry>
+                        <entry>Defines styles for a cell in a source list</entry>
                     </row>
                     <row>
                         <entry>rich-shuttle-source-cell-selected</entry>
-                        <entry>Defines class to be additionally added to selected item cells</entry>
+                        <entry>Defines styles for a selected cell in a source list</entry>
                     </row>
                     <row>
                         <entry>rich-shuttle-source-cell-active</entry>
-                        <entry>Defines class to be additionally added to active item cells</entry>
+                        <entry>Defines styles for an active cell in a source list</entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
         <table>
-            <title>Classes names that define a cells representations in the target list</title>
+            <title>Classes names that define a cells representations in a target list</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -543,16 +967,16 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                 </thead>
                 <tbody>
                     <row>
-                        <entry>rich-shuttle-target -cell</entry>
-                        <entry>Defines a default class for any item cell</entry>
+                        <entry>rich-shuttle-target-cell</entry>
+                        <entry>Defines styles for a cell in a target list</entry>
                     </row>
                     <row>
-                        <entry>rich-shuttle-target -cell-selected</entry>
-                        <entry>Defines class to be additionally added to selected item cells</entry>
+                        <entry>rich-shuttle-target-cell-selected</entry>
+                        <entry>Defines styles for a selected cell in a target list</entry>
                     </row>
                     <row>
-                        <entry>rich-shuttle-target -cell-active</entry>
-                        <entry>Defines class to be additionally added to active item cells</entry>
+                        <entry>rich-shuttle-target-cell-active</entry>
+                        <entry>Defines styles for an active cell in a target list</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -568,47 +992,85 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                 </thead>
                 <tbody>
                     <row>
-                        <entry>rich-ordering-controls</entry>
-                        <entry>Could be applied to the whole group of the controls.</entry>
+                        <entry>rich-shuttle-controls</entry>
+                        <entry>Defines styles for a controls group</entry>
                     </row>
                     <row>
                         <entry>rich-shuttle-top</entry>
-                        <entry>Defines class for Top control</entry>
+                        <entry>Defines styles for a &quot;Top&quot; control</entry>
                     </row>
                     <row>
                         <entry>rich-shuttle-bottom</entry>
-                        <entry>Defines class for Bottom control</entry>
+                        <entry>Defines styles for a &quot;Bottom&quot; control</entry>
                     </row>
                     <row>
                         <entry>rich-shuttle-up</entry>
-                        <entry>Defines class for Up control</entry>
+                        <entry>Defines styles for a &quot;Up&quot; control</entry>
                     </row>
                     <row>
                         <entry>rich-shuttle-down</entry>
-                        <entry>Defines class for Down control</entry>
+                        <entry>Defines styles for a &quot;Down&quot; control</entry>
                     </row>
 
                     <row>
                         <entry>rich-shuttle-copy</entry>
-                        <entry>Defines class for Copy control</entry>
+                        <entry>Defines styles for a &quot;Copy&quot; control</entry>
                     </row>
 
                     <row>
                         <entry>rich-shuttle-remove</entry>
-                        <entry>Defines class for Remove control</entry>
+                        <entry>Defines styles for a &quot;Remove&quot; control</entry>
                     </row>
 
                     <row>
                         <entry>rich-shuttle-copyAll</entry>
-                        <entry>Defines class for copyAll control</entry>
+                        <entry>Defines styles for a &quot;copyAll&quot; control</entry>
                     </row>
                     <row>
                         <entry>rich-shuttle-removeAll</entry>
-                        <entry>Defines class for removeAll control</entry>
+                        <entry>Defines styles for a &quot;removeAll&quot; control</entry>
                     </row>
                     <row>
                         <entry>rich-shuttle-control-disabled</entry>
-                        <entry>Defines a class for any control in a disabled state</entry>
+                        <entry>Defines styles for a control in a disabled state</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Classes names that define a button representation</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-list-shuttle-button</entry>
+                        <entry>Defines styles for a button</entry>
+                    </row>
+                    <row>
+                        <entry>rich-list-shuttle-button-disabled</entry>
+                        <entry>Defines styles for a disabled button</entry>
+                    </row>
+                    <row>
+                        <entry>rich-list-shuttle-button-light</entry>
+                        <entry>Defines styles for a button highlight</entry>
+                    </row>
+                    <row>
+                        <entry>rich-list-shuttle-button-press</entry>
+                        <entry>Defines styles for a pressed button</entry>
+                    </row>
+                    <row>
+                        <entry>rich-list-shuttle-button-content</entry>
+                        <entry>Defines styles for a button content</entry>
+                    </row>
+                    <row>
+                        <entry>rich-list-shuttle-button-selection</entry>
+                        <entry>Defines styles for a button selection</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -624,4 +1086,13 @@ HtmllistShuttle mylistShuttle = new HtmllistShuttle();
                 <property>&lt;rich:listShuttle&gt;</property>
             </emphasis> component attributes.</para>
     </section>
+    
+    <section>
+        <title>Relevant Resources Links</title>
+        <para><ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/listShuttle.jsf?c=listShuttle"
+            >Here</ulink> you can see an example of <emphasis role="bold">
+                <property>&lt;rich:listShuttle&gt;</property>
+            </emphasis> usage and sources for the given example. </para>
+    </section>
+    
 </section>

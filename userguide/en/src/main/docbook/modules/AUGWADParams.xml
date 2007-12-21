@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section id="WebApplicationDescriptorParameters">
-<?dbhtml filename="WebApplicationParameters.html"?>
+  <?dbhtml filename="WebApplicationParameters.html"?>
 
   <title>Web Application Descriptor Parameters</title>
 
-  <para>RichFaces doesn&apos;t require any parameters to be defined in your
-    web.xml. But the <property>RichFaces</property> parameters listed below may
-    help with development and may increase the flexibility of RichFaces
-  usage.</para>
+  <para>RichFaces doesn&apos;t require any parameters to be defined in your web.xml. But the
+      <property>RichFaces</property> parameters listed below may help with development and may
+    increase the flexibility of RichFaces usage.</para>
 
-  <para><table>
+  <para>
+    <table>
       <title>Initialization Parameters</title>
 
       <tgroup cols="3">
@@ -24,33 +24,54 @@
         </thead>
 
         <tbody>
-          
+
           <row>
             <entry>org.richfaces.SKIN</entry>
-            
+
             <entry>DEFAULT</entry>
-            
-            <entry>Is a name of a skin used in an application. It can be a
-              literal string with a skin name, or the <emphasis
-                ><property>EL</property></emphasis> expression
-              (#{...}) pointed to a <emphasis
-                ><property>String</property></emphasis> property
-              (skin name) or a property of a org.richfaces.framework.skin type.
+
+            <entry>Is a name of a skin used in an application. It can be a literal string with a
+              skin name, or the <emphasis>
+                <property>EL</property>
+              </emphasis> expression (#{...}) pointed to a <emphasis>
+                <property>String</property>
+              </emphasis> property (skin name) or a property of a org.richfaces.framework.skin type.
               Skin in last case, this instance is used as a current skin</entry>
           </row>
-          
+
+          <row>
+            <entry>org.richfaces.LoadScriptStrategy</entry>
+
+            <entry>DEFAULT</entry>
+
+            <entry>Defines how the RichFaces script files are loaded to application. Possible values
+              are: ALL, DEFAULT, NONE. For more information see <link
+                linkend="ScriptsandStylesLoadStrategy">&quot;Scripts and Styles Load
+                Strategy&quot;</link>.</entry>
+          </row>
+
+          <row>
+            <entry>org.richfaces.LoadStyleStrategy</entry>
+
+            <entry>DEFAULT</entry>
+
+            <entry>Defines how the RichFaces style files are loaded to application. Possible values
+              are: ALL, DEFAULT, NONE. For more information see <link
+                linkend="ScriptsandStylesLoadStrategy">&quot;Scripts and Styles Load
+                Strategy&quot;</link>.</entry>
+          </row>
+
           <row>
             <entry>org.ajax4jsf.LOGFILE</entry>
 
             <entry>none</entry>
 
-            <entry>Is an URL to an application or a container log file (if
-            possible). If this parameter is set, content from the given URL is
-            shown on a <emphasis
-            ><property>Debug</property></emphasis> error page
-            in the <emphasis
-            ><property>iframe</property></emphasis>
-            window</entry>
+            <entry>Is an URL to an application or a container log file (if possible). If this
+              parameter is set, content from the given URL is shown on a <emphasis>
+                <property>Debug</property>
+              </emphasis> error page in the <emphasis>
+                <property>iframe</property>
+              </emphasis> window</entry>
           </row>
 
           <row>
@@ -58,13 +79,12 @@
 
             <entry>none</entry>
 
-            <entry>Is a comma-separated list of custom <emphasis
-            ><property>ViewHandler</property></emphasis>
-            instances for inserting in chain. Handlers are inserted BEFORE
-            RichFaces viewhandlers in the given order. For example, in facelets
-            application this parameter must contain
-            com.sun.facelets.FaceletViewHandler, instead of declaration in
-            faces-config.xml</entry>
+            <entry>Is a comma-separated list of custom <emphasis>
+                <property>ViewHandler</property>
+              </emphasis> instances for inserting in chain. Handlers are inserted BEFORE RichFaces
+              viewhandlers in the given order. For example, in facelets application this parameter
+              must contain com.sun.facelets.FaceletViewHandler, instead of declaration in
+              faces-config.xml</entry>
           </row>
 
           <row>
@@ -72,13 +92,12 @@
 
             <entry>none</entry>
 
-            <entry>Is a comma-separated list of names for a component as a
-            special control case, such as messages bundle loader, alias bean
-            components, etc. Is a type of component got by a reflection from
-            the static field <emphasis
-            ><property>COMPONENT_TYPE</property></emphasis>.
-            For components with such types encode methods always are called in
-            rendering Ajax responses, even if a component isn&apos;t in an updated
+            <entry>Is a comma-separated list of names for a component as a special control case,
+              such as messages bundle loader, alias bean components, etc. Is a type of component got
+              by a reflection from the static field <emphasis>
+                <property>COMPONENT_TYPE</property>
+              </emphasis>. For components with such types encode methods always are called in
+              rendering Ajax responses, even if a component isn&apos;t in an updated
             part</entry>
           </row>
 
@@ -87,15 +106,13 @@
 
             <entry>false</entry>
 
-            <entry>For generated resources, such as encrypt generation data,
-            it&apos;s encoded in the resource URL. For example, URL for an image
-            generated from the <emphasis
-            ><property>mediaOutput</property></emphasis>
-            component contains a name of a generation method, since for a
-            hacker attack, it is possible to create a request for any JSF
-            baked beans or other attributes. To prevent such attacks, set this
-            parameter to &quot;true&quot; in critical applications (works with JRE &gt;
-            1.4 )</entry>
+            <entry>For generated resources, such as encrypt generation data, it&apos;s encoded
+              in the resource URL. For example, URL for an image generated from the <emphasis>
+                <property>mediaOutput</property>
+              </emphasis> component contains a name of a generation method, since for a hacker
+              attack, it is possible to create a request for any JSF baked beans or other
+              attributes. To prevent such attacks, set this parameter to &quot;true&quot; in
+              critical applications (works with JRE &gt; 1.4 )</entry>
           </row>
 
           <row>
@@ -103,27 +120,29 @@
 
             <entry>random</entry>
 
-            <entry>Is a password for encryption of resources data. If isn&apos;t
-            set, a random password is used</entry>
+            <entry>Is a password for encryption of resources data. If isn&apos;t set, a random
+              password is used</entry>
           </row>
 
           <row>
-	    <entry>org.ajax4jsf.COMPRESS_SCRIPT</entry>
-                   <entry>true</entry>
-	    <entry>It doesn&apos;t allow framework to reformat JavaScript files (makes it impossible to debug)
-              </entry>
+            <entry>org.ajax4jsf.COMPRESS_SCRIPT</entry>
+            <entry>true</entry>
+            <entry>It doesn&apos;t allow framework to reformat JavaScript files (makes it
+              impossible to debug) </entry>
           </row>
 
         </tbody>
       </tgroup>
-  </table></para>
-  
+    </table>
+  </para>
+
   <note>
     <title>Note:</title>
     <para>org.richfaces.SKIN is used in the same way as org.ajax4jsf.SKIN</para>
-   </note>
+  </note>
 
-  <para><table>
+  <para>
+    <table>
       <title>org.ajax4jsf.Filter Initialization Parameters</title>
 
       <tgroup cols="3">
@@ -143,9 +162,10 @@
 
             <entry>-</entry>
 
-            <entry>Is a path (relative to web application context) to the
-            <emphasis ><property>log4j.xml</property></emphasis> configuration file, it can be used to setup
-            per-application custom logging</entry>
+            <entry>Is a path (relative to web application context) to the <emphasis>
+                <property>log4j.xml</property>
+              </emphasis> configuration file, it can be used to setup per-application custom
+            logging</entry>
           </row>
 
           <row>
@@ -153,9 +173,9 @@
 
             <entry>true</entry>
 
-            <entry>Enable caching of framework-generated resources (JavaScript, CSS, images, etc.). 
-            For debug purposes development custom JavaScript or Style prevents to use old cached data in a
-            browser</entry>
+            <entry>Enable caching of framework-generated resources (JavaScript, CSS, images, etc.).
+              For debug purposes development custom JavaScript or Style prevents to use old cached
+              data in a browser</entry>
           </row>
 
           <row>
@@ -163,14 +183,15 @@
 
             <entry>true</entry>
 
-            <entry>Force parsing by a filter <emphasis
-            ><property>HTML</property></emphasis> syntax
-            checker on any JSF page. If &quot;false&quot;, only Ajax responses are
-            parsed to syntax check and conversion to well-formed XML. Setting
-            to &quot;false&quot; improves performance, but can provide visual effects on
-            Ajax updates</entry>
+            <entry>Force parsing by a filter <emphasis>
+                <property>HTML</property>
+              </emphasis> syntax checker on any JSF page. If &quot;false&quot;, only Ajax
+              responses are parsed to syntax check and conversion to well-formed XML. Setting to
+              &quot;false&quot; improves performance, but can provide visual effects on Ajax
+              updates</entry>
           </row>
         </tbody>
       </tgroup>
-    </table></para>
+    </table>
+  </para>
 </section>

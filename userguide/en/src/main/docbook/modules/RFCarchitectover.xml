@@ -885,7 +885,59 @@
       (&quot;TIDY&quot; filter type is used for code correction). </para>
 
   </section>
-
+  <section id="ScriptsandStylesLoadStrategy">
+    <?dbhtml filename="ScriptsandStylesLoadStrategy" ?>
+    <title>Scripts and Styles Load Strategy</title>
+    <para>Before the version 3.1.3, RichFaces loaded styles and script on demand. I.e. files are
+      loaded only if they are required on a particular page. Since RichFaces 3.1.3, it&apos;s
+      possible to manage how the RichFaces script and style files are loaded to application. </para>
+    <para>
+      <emphasis role="bold">org.richfaces.LoadScriptStrategy </emphasis>
+    </para>
+    <para>The following declaration in your web.xml allows loading the integrated script files.</para>
+    <programlisting role="XML"><![CDATA[...
+    <context-param>
+          <param-name>org.richfaces.LoadScriptStrategy</param-name>
+          <param-value>ALL</param-value>
+    </context-param>	
+...
+]]></programlisting>
+    <para>If you do not declare the <property>org.richfaces.LoadScriptStrategy</property> in the
+      web.xml, it equals to:</para>
+    <programlisting role="XML"><![CDATA[...
+    <context-param>
+        <param-name>org.richfaces.LoadScriptStrategy</param-name>
+        <param-value>DEFAULT</param-value>
+    </context-param>	
+...
+]]></programlisting>
+    <para>The third possible value is &quot;NONE&quot;. You have no a special reason to
+      use it unless you obtain the newest (or modified) version of the script and want to include
+      it manually in a page header. </para>
+    
+    <para>
+      <emphasis role="bold">org.richfaces.LoadStyleStrategy</emphasis>
+    </para>
+    
+    <para> The following declaration allows to load only one integrated style sheet file.</para>
+    <programlisting role="XML"><![CDATA[...
+    <context-param>
+          <param-name>org.richfaces.LoadStyleStrategy</param-name>
+          <param-value>ALL</param-value>
+    </context-param>
+...
+]]></programlisting>
+    <para>The integrated style sheet contains style for all shipped components. The skinnability
+      feature still works. </para>
+    <para>The &quot;DEFAULT&quot; value is a classical on-demand variant. </para>
+    <para>The &quot;NONE&quot; stops loading the styles at all. The earlier introduced
+      plain skin resets all color and font parameters to null. The &quot;NONE&quot; value
+      for <property>org.richfaces.LoadStyleStrategy</property> means that predefined styles for
+      RichFaces are not used.</para>
+    <para>For more information see <ulink
+      url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4114033"
+      >RichFaces User Forum</ulink>.</para>
+  </section>
 
   <section id="RequestErrorsAndSessionExpirationHandling">
     <?dbhtml filename="RequestErrorsAndSessionExpirationHandling.html"?>

@@ -59,7 +59,7 @@
             <f:facet name="header">
 	    <h:outputText value="Name" />
             </f:facet>
-            <h:inputText value="#{item.name}" />
+            <h:inputText value="#{list.name}" />
         </rich:column>
 <rich:orderingList>
 ...]]></programlisting>
@@ -94,44 +94,64 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
 
         <!-- attributes of component  orderingList -->
 
-        <para> The <emphasis>
+        <para>The <emphasis>
                 <property> &quot;value&quot;</property>
             </emphasis> and <emphasis>
                 <property>&quot;var&quot; </property>
             </emphasis> attributes are used to access the values of a list. </para>
 
-        <para>The <emphasis>
-                <property>&quot;selection&quot; </property>
-            </emphasis> attribute is bound to a list, which stores a set of indexes for rows
-            selected. If the index from a set is out of bounds, it should be ignored. </para>
         <para>Controls rendering is based on the <emphasis>
-                <property>&quot;controlsType&quot; </property>
-            </emphasis> attribute. Possible types are button, link, none.</para>
+            <property>&quot;controlsType&quot; </property>
+        </emphasis> attribute. Possible types are button or none.
+        </para>
+        <note>
+            <para>
+                Currently the button controls type is based on &lt;div&gt; element.     
+            </para>
+        </note>
+        
+
+        <para> The <emphasis>
+                <property>&quot;selection&quot; </property>
+            </emphasis> attribute stores the collection of items selected by user. In the example
+            below after submitting the form the current collection is placed in the object's
+            property and then <emphasis role="bold">
+                <property>&lt;rich:dataTable&gt;</property>
+            </emphasis> with selected items will be shown. </para>
+
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:orderingList value="#{bean.simpleItems}" var="item" selection="#{bean.selection}" controlsType="button">
-        <rich:column>
-            <f:facet name="header">
-                    <h:outputText value="Cars" />
-            </f:facet>
-                  <h:outputText value="#{item}" />
-        </rich:column>
-</rich:orderingList>
+<h:form>
+        <rich:orderingList value="#{bean.simpleItems}" var="item" selection="#{bean.selection}" controlsType="button">
+                <rich:column>
+                    <f:facet name="header">
+                            <h:outputText value="Cars" />
+                    </f:facet>
+                            <h:outputText value="#{item}" />
+                </rich:column>
+        </rich:orderingList>
+        <rich:dataTable id="infoPanelID" value="#{bean.info}" var="info" rendered="true">
+                <rich:column>
+                            <h:outputText value="#{info}" />
+                </rich:column>
+        </rich:dataTable>
+        <a4j:commandButton value="reRender" reRender="infoPanelID" />
+</h:form>
 ...]]></programlisting>
-
         <para> The <emphasis role="bold">
                 <property>&lt;rich:orderingList&gt;</property>
             </emphasis> component allows to use <emphasis>
                 <property>&quot;caption&quot;</property>
-            </emphasis>, <emphasis>
-                <property>&quot;header&quot;</property>
-            </emphasis> and <emphasis>
+            </emphasis>
+            <!--and <emphasis>
                 <property>&quot;footer&quot; </property>
-            </emphasis> facets. A caption could be also defined with <emphasis>
-                <property>&quot;captionLabel&quot;</property>
-            </emphasis> attribute.</para>
+            </emphasis> -->
+            facet.
+            A caption could be also defined with  <emphasis>
+                <property>&quot;captionLabel&quot;</property></emphasis> attribute.           
+        </para>
 
         <!-- ADD SCREENSHOT-->
 
@@ -141,22 +161,21 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
         </para>
         <programlisting role="XML"><![CDATA[...
 <rich:orderingList value="#{bean.simpleItems}" var="item" controlsType="button" selection="#{bean.selection}">
-        <f:facet name="caption"><h:outputText value="Caption Facet" /></f:facet>
-        <f:facet name="header"><h:outputText value="Header Facet" /></f:facet>
-        <h:outputText value="#{item}" />
+        <f:facet name="caption">
+                <h:outputText value="Caption Facet" />
+        </f:facet>
         <rich:column>
-            <f:facet name="header">
-	    <h:outputText value="Cars" />
-            </f:facet>
-            <h:outputText value="#{item.name}" />
+                <f:facet name="header">
+	            <h:outputText value="Cars" />
+                </f:facet>
+                <h:outputText value="#{item.name}" />
         </rich:column>
-                <rich:column>
-            <f:facet name="header">
-	    <h:outputText value="Price" />
-            </f:facet>
-            <h:outputText value="#{item.price}" />
+        <rich:column>
+                <f:facet name="header">
+	            <h:outputText value="Price" />
+                </f:facet>
+                <h:outputText value="#{item.price}" />
         </rich:column>
-        <f:facet name="footer"><h:outputText value="Footer Facet" /></f:facet>
 </rich:orderingList>
 ...]]></programlisting>
 
@@ -165,8 +184,16 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 <property>&lt;rich:orderingList&gt;</property>
             </emphasis> component provides the possibility to use <property>ordering controls
             set</property>, which performs reordering. Every control has possibility to be disabled. </para>
-        <para>
-            <emphasis>
+        <para>An <property>ordering controls set</property> could be defined with <emphasis>
+                <property>&quot;topControlLabel&quot;</property>
+            </emphasis>, <emphasis>
+                <property>&quot;bottomControlLabel&quot;</property>
+            </emphasis>, <emphasis>
+                <property>&quot;upControlLabel&quot;</property>
+            </emphasis>, <emphasis>
+                <property>&quot;downControlLabel&quot;</property>
+            </emphasis>attributes. </para>
+        <para>It is also possible to use <emphasis>
                 <property> &quot;topControl&quot; </property>
             </emphasis>, <emphasis>
                 <property>&quot;topControlDisabled&quot;</property>
@@ -182,23 +209,23 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 <property> &quot;downControl&quot;</property>
             </emphasis> , <emphasis>
                 <property> &quot;downControlDisabled&quot; </property>
-            </emphasis> facets are used to replaces the default control with facets content.</para>
+            </emphasis> facets in order to replace the default controls with facets content. </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
 <rich:orderingList value="#{bean.simpleItems}" var="item" controlsType="button" selection="#{bean.selection}">
         <f:facet name="topControl">
-            <h:outputText value="Move to top">
+                <h:outputText value="Move to top" />
         </f:facet>
-            <f:facet name="upControl">
-            <h:outputText value="Move up">
+        <f:facet name="upControl">
+                <h:outputText value="Move up" />
         </f:facet>
-            <f:facet name="downControl">
-            <h:outputText value="Move down">
+        <f:facet name="downControl">
+                <h:outputText value="Move down" />
         </f:facet>
-            <f:facet name="bottomControl">
-            <h:outputText value="Move to bottom">
+        <f:facet name="bottomControl">
+                <h:outputText value="Move to bottom" />
         </f:facet>
 <rich:orderingList>
 ...]]></programlisting>
@@ -213,7 +240,7 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                             list </listitem>
                         <listitem>top - controls could be rendered above the list </listitem>
                         <listitem>bottom - controls could be rendered below the list </listitem>
-                    
+                    </itemizedlist>
                 </listitem-->
                 <listitem><emphasis>
                         <property> &quot;controlsHorizontalAlign&quot;</property>
@@ -237,7 +264,6 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                     </emphasis> attribute. Possible values: <itemizedlist>
                         <listitem>inline - controls defined one by one in line </listitem>
                         <listitem>block - controls defined in column </listitem>
-                        <listitem/>
                     </itemizedlist>
                 </listitem-->
             </itemizedlist>
@@ -309,12 +335,8 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                             already present in a list</entry>
                     </row>
                     <row>
-                        <entry>Space</entry>
-                        <entry>Inverts selection on the active element</entry>
-                    </row>
-                    <row>
                         <entry>Up, Down arrows</entry>
-                        <entry>Changes the active elements to the next or previous in a list</entry>
+                        <entry>Changes the active and selected elements to the next or previous in a list</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -333,11 +355,11 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 <tbody>
                     <!--Sorting API -->
                     <row>
-                        <entry>Top</entry>
+                        <entry>Page Up</entry>
                         <entry>Moves selected set to the top of a list</entry>
                     </row>
                     <row>
-                        <entry>Bottom</entry>
+                        <entry>Page Down</entry>
                         <entry>Moves selected set to the bottomof a list</entry>
                     </row>
                     <row>
@@ -357,92 +379,79 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
         <title>JavaScript API</title>
         <table>
             <title>JavaScript API</title>
-            <tgroup cols="3">
+            <tgroup cols="2">
                 <thead>
                     <row>
                         <entry>Function</entry>
                         <entry>Description</entry>
-                        <!--entry>Element</entry-->
                     </row>
                 </thead>
                 <tbody>
                     <!--Sorting API -->
+                    <!--
                     <row>
-                        <entry>doSortAscending()</entry>
+                        <entry>SortAscending()</entry>
                         <entry>Sorts items in the list ascending</entry>
-                        <!--entry>Component</entry-->
                     </row>
                     <row>
-                        <entry>doSortDescending()</entry>
+                        <entry>SortDescending()</entry>
                         <entry>Sorts items in the list descending</entry>
-                        <!--entry>Component</entry-->
                     </row>
                     <row>
-                        <entry>doSort()</entry>
+                        <entry>Sort()</entry>
                         <entry>Inverts current sorting</entry>
-                        <!--entry>Component</entry-->
                     </row>
+                    -->
+
                     <!--Controls common API -->
                     <row>
-                        <entry>doHide()</entry>
+                        <entry>Hide()</entry>
                         <entry>Hides ordering control</entry>
-                        <!--entry>Any Ordering control</entry-->
                     </row>
                     <row>
-                        <entry>doShow()</entry>
+                        <entry>Show()</entry>
                         <entry>Shows ordering control</entry>
-                        <!--entry>Any Ordering control</entry-->
                     </row>
                     <row>
                         <entry>isShown()</entry>
                         <entry>Checks if current control is shown</entry>
-                        <!--entry>Any Ordering control</entry-->
                     </row>
                     <row>
-                        <entry>doEnable()</entry>
+                        <entry>Enable()</entry>
                         <entry>Enables ordering control</entry>
-                        <!--entry>Any Ordering control</entry-->
                     </row>
                     <row>
-                        <entry>doDisable()</entry>
+                        <entry>Disable()</entry>
                         <entry>Disables ordering control</entry>
-                        <!--entry>Any Ordering control</entry-->
                     </row>
                     <row>
                         <entry>isEnabled()</entry>
                         <entry>Checksif current control is enabled</entry>
-                        <!--entry>Any Ordering control</entry-->
                     </row>
                     <!--List managing API -->
                     <row>
                         <entry>moveUp()</entry>
                         <entry>Moves up selected item in the list</entry>
-                        <!--entry>Any Item</entry-->
                     </row>
                     <row>
                         <entry>moveDown()</entry>
                         <entry>Moves down selected item in the list</entry>
-                        <!--entry>Any Item</entry-->
                     </row>
                     <row>
                         <entry>moveTop()</entry>
                         <entry>Moves top selected item in the list</entry>
-                        <!--entry>Any Item</entry-->
                     </row>
                     <row>
                         <entry>moveBottom()</entry>
                         <entry>Moves bottom selected item in the list</entry>
-                        <!--entry>Any Item</entry-->
                     </row>
                     <row>
                         <entry>getSelection()</entry>
                         <entry>Returns currently selected item</entry>
-                        <!--entry>Any Item</entry-->
                     </row>
                     <row>
                         <entry>getItems()</entry>
                         <entry>Returns the collection of all items</entry>
-                        <!--entry>Any Item</entry-->
                     </row>
                 </tbody>
             </tgroup>
@@ -466,12 +475,473 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             </itemizedlist>
         </para>
     </section>
+
+    <section>
+        <title>Skin Parameters Redefinition</title>
+
+        <table>
+            <title>Skin parameters redefinition for a wrapper &lt;div&gt; element of a list</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>tableBackgroundColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderColor</entry>
+                        <entry>border-color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for a header cell of a list</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>trimColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+
+                    <row>
+                        <entry>tableBorderWidth</entry>
+                        <entry>border-right-width</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderWidth</entry>
+                        <entry>border-bottom-width</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderColor</entry>
+                        <entry>border-right-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderColor</entry>
+                        <entry>border-bottom-color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for caption element</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    <row>
+                        <entry>headerWeightFont</entry>
+                        <entry>font-weight</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for row element</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>headerGradientColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for selected row element</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>additionalBackgroundColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for cell element</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    <row>
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for selected cell element</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    <row>
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for active cell element</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for a button</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>trimColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for a disabled button</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>trimColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>tabDisabledTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for a button highlight</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>trimColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>selectControlColor</entry>
+                        <entry>border-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderWidth</entry>
+                        <entry>border-width</entry>
+                    </row>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for a pressed button</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>additionalBackgroundColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderColor</entry>
+                        <entry>border-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableBorderWidth</entry>
+                        <entry>border-width</entry>
+                    </row>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for a button content</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for a button selection</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table>
+            <title>Skin parameters redefinition for top, bottom, up, down controls and for controls
+                in disabled state</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>panelBorderColor</entry>
+                        <entry>border-color</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </section>
+
     <section>
         <title>Definition of Custom Style Classes</title>
 
         <para>On the screenshot there are classes names that define styles for component elements.</para>
 
-        <!-- ADD SCREENSHOT -->
+
+        <figure>
+            <title>Style classes</title>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/orderingList_classes.png" scalefit="1"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+
+        <table>
+            <title>Classes names that define a list representation</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-ordering-list-body</entry>
+                        <entry>Defines styles for a wrapper table element of an orderingList</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-output</entry>
+                        <entry>Defines styles for a wrapper &lt;div&gt; element of a
+                        list</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-items</entry>
+                        <entry>Defines styles for a wrapper table element of items in the
+                        list</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-content</entry>
+                        <entry>Defines styles for a list content</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-header</entry>
+                        <entry>Defines styles for a wrapper &lt;div&gt; element for a list
+                            header</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-table-header</entry>
+                        <entry>Defines styles for a wrapper &lt;tr&gt; element for a list
+                            header</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-table-header-cell</entry>
+                        <entry>Defines styles for a header cell</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
 
         <table>
             <title>Classes names that define a caption representation</title>
@@ -499,8 +969,9 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
             </tgroup>
         </table>
 
+
         <table>
-            <title>Classes names that define item rows representations</title>
+            <title>Classes names that define rows representation</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -511,25 +982,25 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 <tbody>
                     <row>
                         <entry>rich-ordering-list-row</entry>
-                        <entry>Defines styles for an item row</entry>
+                        <entry>Defines styles for a row</entry>
                     </row>
                     <row>
                         <entry>rich-ordering-list-row-selected</entry>
-                        <entry>Defines styles for a selected item row</entry>
+                        <entry>Defines styles for a selected row</entry>
                     </row>
                     <row>
                         <entry>rich-ordering-list-row-active</entry>
-                        <entry>Defines styles for an active item row</entry>
+                        <entry>Defines styles for an active row</entry>
                     </row>
                     <row>
                         <entry>rich-ordering-list-row-disabled</entry>
-                        <entry>Defines styles for a disabled item row</entry>
+                        <entry>Defines styles for a disabled row</entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
         <table>
-            <title>Classes names that define item cells representations</title>
+            <title>Classes names that define cells representation</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -539,27 +1010,77 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 </thead>
                 <tbody>
                     <row>
-                        <entry>rich-ordering-list-item-cell</entry>
-                        <entry>Defines styles for an item cell</entry>
+                        <entry>rich-ordering-list-cell</entry>
+                        <entry>Defines styles for a cell</entry>
                     </row>
                     <row>
-                        <entry>rich-ordering-list-item-cell-selected</entry>
-                        <entry>Defines styles for a selected item cell</entry>
+                        <entry>rich-ordering-list-cell-selected</entry>
+                        <entry>Defines styles for a selected cell</entry>
                     </row>
                     <row>
-                        <entry>rich-ordering-list-item-cell-active</entry>
-                        <entry>Defines styles for an active item cell</entry>
+                        <entry>rich-ordering-list-cell-active</entry>
+                        <entry>Defines styles for an active cell</entry>
                     </row>
                     <row>
                         <entry>rich-ordering-list-cell-disabled</entry>
-                        <entry>Defines styles for a disabled item cell</entry>
+                        <entry>Defines styles for a disabled cell</entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
 
         <table>
-            <title>Classes names that define controls representations</title>
+            <title>Classes names that define a button representation</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-ordering-list-button</entry>
+                        <entry>Defines styles for a button</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-button-disabled</entry>
+                        <entry>Defines styles for a disabled button</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-button-light</entry>
+                        <entry>Defines styles for a button highlight</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-button-press</entry>
+                        <entry>Defines styles for a pressed button</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-button-content</entry>
+                        <entry>Defines styles for a button content</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-button-selection</entry>
+                        <entry>Defines styles for a button selection</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-button-valign</entry>
+                        <entry>Defines styles for a wrapper &lt;td&gt; element for buttons
+                            vertical align</entry>
+                    </row>
+                    <row>
+                        <entry>rich-ordering-list-button-layout</entry>
+                        <entry>Defines styles for a wrapper &lt;div&gt; element of buttons
+                            layout</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+
+
+        <table>
+            <title>Classes names that define controls representation</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -606,4 +1127,14 @@ HtmlOrderingList myOrderingList = new HtmlOrderingList();
                 <property>&lt;rich:orderingList&gt;</property>
             </emphasis> component attributes.</para>
     </section>
+
+    <section>
+        <title>Relevant Resources Links</title>
+        <para><ulink
+                url="http://livedemo.exadel.com/richfaces-demo/richfaces/orderingList.jsf?c=orderingList"
+                >Here</ulink> you can see an example of <emphasis role="bold">
+                <property>&lt;rich:orderingList&gt;</property>
+            </emphasis> usage and sources for the given example. </para>
+    </section>
+
 </section>
