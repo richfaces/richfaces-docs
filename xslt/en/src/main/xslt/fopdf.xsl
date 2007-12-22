@@ -295,7 +295,14 @@
                              Images
         ################################################### -->
 
-	<xsl:param name="default.image.width" select="'175mm'"></xsl:param>
+	<!--xsl:param name="default.image.width" select="'175mm'"></xsl:param-->
+        
+    <xsl:attribute-set name="figure.properties" 
+        use-attribute-sets="mediaobject.imageobject.properties"/>
+    
+    <xsl:attribute-set name="mediaobject.imageobject.properties">
+        <xsl:attribute name="text-align">center</xsl:attribute>
+    </xsl:attribute-set>
     
     <!--###################################################
                              Labels
