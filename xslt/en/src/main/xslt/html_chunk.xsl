@@ -90,7 +90,10 @@
     <xsl:template match="section[@role = 'NotInToc']//*"  mode="toc" />
     <xsl:template match="chapter[@role = 'NotInToc']//section//*"  mode="toc" />
     <xsl:template match="book" mode="object.title.markup"/>
-
+  
+  <!-- Ignore image scaling in html version -->
+  <xsl:param name="ignore.image.scaling" select="1"/>	   
+  
 <!--###################################################
                           Forse chunks
     ################################################### -->   
