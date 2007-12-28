@@ -142,9 +142,10 @@ HtmlMenuGroup myMenuGroup = new HtmlMenuGroup();
             </emphasis>. </para>
         <para> Here is an example: </para>
         <programlisting role="XML"><![CDATA[...
-    <rich:menuGroup value="Active" direction="left-down"
-        <!--Nested menu components-->
-    </rich:menuGroup>
+        <rich:menuGroup value="Save As..." direction="left-down">
+                <rich:menuItem   submitMode="ajax" value="Text File"  action="#{ddmenu.doSaveText}"/>
+                <rich:menuItem   submitMode="ajax" value="PDF File"  action="#{ddmenu.doSavePDF}"/>
+        </rich:menuGroup>
 ...
 ]]></programlisting>
         <para> This would be the result: </para>
@@ -156,6 +157,9 @@ HtmlMenuGroup myMenuGroup = new HtmlMenuGroup();
                 </imageobject>
             </mediaobject>
         </figure>
+        <note><title>Note:</title> The <emphasis role="bold">
+            <property>&lt;rich:menuGroup&gt;</property>
+        </emphasis> component was designed to be used only for pop-up menu list creation.</note>
     </section>
 
     <section>
