@@ -53,12 +53,17 @@ AjaxForm myForm = new AjaxForm();
   <section>
     <title>Key attributes and ways of usage</title>
     <para>The difference with the original component is that all hidden fields required for command links are always rendered and it doesn't depend on links rendering on the initial page. It solves the problem with invalid links that weren't rendered on a page immediately, but after some Ajax request.</para>
-    <para>Beginning with release 1.0.5 additional attributes that make this form variant universal have appeared. With a new attribute definition as ajax=<emphasis >
-        <property>&quot;true&quot;</property>
-      </emphasis>, it becomes possible to set Ajax submission way for any components inside, i.e. not a page URL is used as an <emphasis >
-        <property>&quot;action&quot;</property>
-      </emphasis> attribute, but the javascript:A4J.AJAX.Submit(...) call. In this case, rendering is defined as &quot;reRender&quot;=list of Ids for the form element itself.</para>
-	<para>Example</para>
+    <para>Beginning with release 1.0.5 additional attributes that make this form variant universal have appeared. 
+    </para>
+    <para>
+      If <emphasis><property>&quot;ajaxSubmit&quot;</property></emphasis> attribute is true, 
+      it becomes possible to set Ajax submission way for any components inside, 
+      i.e. not a page URL is used as an <emphasis><property>&quot;action&quot;</property></emphasis> attribute, but the javascript:A4J.AJAX.Submit(...) call. 
+      In this case, the <emphasis><property>&quot;reRender&quot;</property></emphasis> attribute contains a list of Ids of components defined for re-rendering.
+      If you have <emphasis role="bold"><property>&lt;h:commandButton&gt;</property></emphasis> or 
+      <emphasis role="bold"><property>&lt;h:commandLink&gt;</property></emphasis> inside the form, they work as <emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis>. 
+    </para>
+    <para><emphasis role="bold">Example:</emphasis></para>
 	<programlisting role="XML"><![CDATA[<a4j:form id="helloForm" ajaxSubmit="true" reRender="table">
 	...
 	<t:dataTable id="table"... >
@@ -81,7 +86,13 @@ AjaxForm myForm = new AjaxForm();
         <property>&lt;h:commandLink&gt;</property>
       </emphasis> and can't be made Ajax ones with using e.g. <emphasis role="bold">
         <property>&lt;a4j:support&gt;</property>
-      </emphasis>.</para>
+      </emphasis>.
+</para>
+    <para>
+      With the help of <emphasis><property>&quot;limitToList&quot;</property></emphasis> attribute you can limit areas, which are updated after the responses. 
+      If <emphasis><property>&quot;limitToList&quot;</property></emphasis> is true, only the reRender attribute is taken in account. 
+      Therefore, if you use blocks of text wrapped with <emphasis role="bold"><property>&lt;a4j:outputPanel&gt;</property></emphasis> and <emphasis><property>&quot;ajaxRendered&quot;</property></emphasis>= <property>true</property>, blocks of text are ignored.
+    </para>
   </section>
   <section>
     <title>Relevant resources links</title>
