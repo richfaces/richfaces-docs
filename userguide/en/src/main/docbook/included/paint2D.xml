@@ -111,37 +111,35 @@ HtmlPaint2D myImage = new HtmlPaint2D();
       </emphasis> and <emphasis>
         <property>&quot;data&quot;</property>
       </emphasis> attributes.</para>
-    <para><emphasis role="bold">Example:</emphasis>
-    </para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="JAVA"><![CDATA[paintBean.java:
-
-    public void paint(Graphics2D g2, Object obj) {
-        // code that gets data from the data Bean (PaintData)
-        PaintData data = (PaintData) obj;
-        ...
-        // a code drawing a rectangle
-        g2.drawRect(0, 0, data.Width, data.Height);
-        ...      
-        // some more code placing graphical data into g2 stream below
-    }
-
+      
+      public void paint(Graphics2D g2, Object obj) {
+          // code that gets data from the data Bean (PaintData)
+          PaintData data = (PaintData) obj;
+          ...
+          // a code drawing a rectangle
+          g2.drawRect(0, 0, data.Width, data.Height);
+          ...
+          // some more code placing graphical data into g2 stream below
+     }
+     
 dataBean.java:
-
+    
     public class PaintData implements Serializable{
         private static final long serialVersionUID = 1L;
         Integer Width=100;
         Integer Height=50;
         ...
     }
-
-page.xhtml:
-...
+    
+    page.xhtml:
+    ...
     <rich:paint2D paint="#{paint2D.paint}" data="#{paint2DModel.data}"/>
-... 
+    ... 
 ]]></programlisting>
 
   </section>
