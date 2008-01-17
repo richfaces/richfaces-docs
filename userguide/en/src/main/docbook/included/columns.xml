@@ -70,9 +70,8 @@ HtmlColumns myColumns = new HtmlColumns();
             <property>&lt;rich:columns&gt;</property>
         </emphasis> component gets a list from data model and outputs corresponding set of columns inside 
             <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> on a page. 
-        </para>
-        <para>The <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> component allows to use 
-            <emphasis><property>&quot;header&quot;</property></emphasis> and <emphasis><property>&quot;footer&quot; </property></emphasis> facets.
+            It is possible to use <emphasis><property>&quot;header&quot;</property></emphasis> and <emphasis><property>&quot;footer&quot; </property></emphasis> facets
+            with <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> component.
         </para>
         <para>The simple example is placed below</para>
         <para>
@@ -91,6 +90,46 @@ HtmlColumns myColumns = new HtmlColumns();
         </rich:columns>
 </rich:dataTable>
 ...]]></programlisting>
+        <para>
+            The <emphasis><property>&quot;columns&quot;</property></emphasis> attribute defines the count of columns.
+        </para>
+        <para>
+            The <emphasis><property>&quot;rows&quot;</property></emphasis> attribute defines the number of rows to be displayed. If the value of this attribute is zero, 
+            all remaining rows in the table are displayed on a page.
+        </para>
+        <para>
+            The <emphasis><property>&quot;begin&quot;</property></emphasis> attribute contains the first iteration item. Note, that iteration begins from zero.
+        </para>
+        <para>
+            The <emphasis><property>&quot;end&quot;</property></emphasis> attribute contains the last iteration item.
+        </para>
+        <para>
+            With the help of the attributes described below you can customize the output, i.e. define which columns and how many rows appear on a page.
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:dataTable value="#{rowBean.rows}" var="row">
+        <rich:columns value="#{colBean.columns}" var="col"  rows="0" columns="5" begin="1" end="5">
+                <f:facet name="header">
+                        <h:outputText value="#{col.header}"/>
+                </f:facet>
+                <h:outputText value="#{row.columnValue}"/>
+        </rich:columns>
+</rich:dataTable>	
+...]]></programlisting>
+        <para>
+            In the example below, columns from second to fourth and all rows are shown in the 
+        <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis>.   
+        </para>
+        
+        <!--para>In order to group columns with text information into one row in one column with a flag, use
+            the <emphasis ><property>&quot;colspan&quot;</property></emphasis> attribute, which is similar to an HTML one, specifying that the first column contains 3 columns.
+            In addition, it&apos;s necessary to specify that the next column begins from the first row with the help of the
+            <emphasis ><property>&quot;breakBefore&quot;</property></emphasis> attribute = true.
+        </para-->
+        
         
         <para>
             The <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> component does not prevent to use 
