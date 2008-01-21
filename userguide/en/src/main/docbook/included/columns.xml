@@ -124,17 +124,10 @@ HtmlColumns myColumns = new HtmlColumns();
         <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis>.   
         </para>
         
-        <!--para>In order to group columns with text information into one row in one column with a flag, use
-            the <emphasis ><property>&quot;colspan&quot;</property></emphasis> attribute, which is similar to an HTML one, specifying that the first column contains 3 columns.
-            In addition, it&apos;s necessary to specify that the next column begins from the first row with the help of the
-            <emphasis ><property>&quot;breakBefore&quot;</property></emphasis> attribute = true.
-        </para-->
-        
-        
         <para>
             The <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> component does not prevent to use 
             <emphasis role="bold"><property>&lt;rich:column&gt;</property></emphasis>. 
-            In the following example one column renders in any way and another columns could be picked from the model:
+            In the following example one column renders in any way and another columns could be picked from the model.
         </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
@@ -155,6 +148,78 @@ HtmlColumns myColumns = new HtmlColumns();
         </rich:columns>
 </rich:dataTable>	
 ...]]></programlisting>
+        
+        <para>In order to group columns with text information into one row, use
+            the <emphasis ><property>&quot;colspan&quot;</property></emphasis> attribute, which is similar to an HTML one, specifying that the first column contains 3 columns.
+            In addition, it&apos;s necessary to specify that the next column begins from the first row with the help of the
+            <emphasis ><property>&quot;breakBefore&quot;</property></emphasis> attribute = true.
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:dataTable value="#{columns.data1}" var="data">
+        <rich:column>
+                <h:outputText value="#{column.Item1}" />
+        </rich:column>
+        <rich:column>
+                <h:outputText value="#{column.Item2}" />
+        </rich:column>
+        <rich:column>
+                <h:outputText value="#{column.Item3}" />
+        </rich:column>
+        <rich:columns columns="3" colspan="3" breakBefore="true">	
+                <h:outputText value="#{data.str0}" />
+        </rich:columns>
+</rich:dataTable>
+...
+]]></programlisting>
+        
+        <!--para>As a result the following structure is rendered:</para>
+        <figure>
+            <title>&lt;rich:column&gt; modified with colspan and breakbefore attributes</title>
+            <mediaobject> 
+                <imageobject>
+                    <imagedata fileref="images/column3.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure-->
+        
+        <para>The same way is used for <property>columns</property> grouping with the <emphasis ><property>&quot;rowspan&quot;</property></emphasis> 
+            attribute that is similar to an HTML one responsible for rows quantity definition occupied with the 
+            current one. The only thing to add in the example is an instruction to move onto the next row for each next after the second column.
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:dataTable value="#{columns.data1}" var="data">
+        <rich:columns columns="2" rowspan="3">	
+                <h:outputText value="#{data.str0}" />
+        </rich:columns>
+        <rich:column>
+                <h:outputText value="#{column.Item1}" />
+        </rich:column>
+        <rich:column  breakBefore="true">
+                <h:outputText value="#{column.Item2}" />
+        </rich:column>
+        <rich:column  breakBefore="true">
+                <h:outputText value="#{column.Item3}" />
+        </rich:column>
+</rich:dataTable>
+...
+]]></programlisting>
+        <!--para>As a result:</para>
+        <figure>
+            <title>&lt;rich:column&gt; generated with rowspan attribute</title>
+            <mediaobject> 
+                <imageobject>
+                    <imagedata fileref="images/column4.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure-->        
+        
+
     </section>
     
     <section>
