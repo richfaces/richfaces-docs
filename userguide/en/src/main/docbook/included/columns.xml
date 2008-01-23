@@ -47,10 +47,10 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:dataTable value="#{bean.model}" var="var" id="tb">
-        <rich:columns value="#{bean.columns}" var="col">
-                <h:outputText value="#{var.property1}" />
-        </rich:columns>
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap">
+        <rich:columns value="#{capitalsBean.labels}" var="col" index="index">
+                <h:outputText value="#{cap[index]}" />
+        </rich:columns>	
 </rich:dataTable>
 ...]]></programlisting>
     </section>
@@ -82,16 +82,16 @@ HtmlColumns myColumns = new HtmlColumns();
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:dataTable value="#{bean.model}" var="var" id="tb">
-        <rich:columns value="#{colBean.columns}" var="col">
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap">
+        <rich:columns value="#{capitalsBean.labels}" var="col" index="index">
                 <f:facet name="header">
-                        <h:outputText value="#{col.header}" />
+                        <h:outputText value="#{col.text}" />
                 </f:facet>
-                <h:outputText value="#{row.value}"/>
-                <f:facet name="footer">
-                        <h:outputText value="#{col.footer}"/>
-                </f:facet>
-        </rich:columns>
+	     <h:outputText value="#{cap[index]}" />
+	     <f:facet name="footer">
+	             <h:outputText value="#{col.text}" />
+	     </f:facet>
+        </rich:columns>	
 </rich:dataTable>
 ...]]></programlisting>
         <para>
@@ -114,20 +114,30 @@ HtmlColumns myColumns = new HtmlColumns();
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:dataTable value="#{rowBean.rows}" var="row">
-        <rich:columns value="#{colBean.columns}" var="col"  rows="0" columns="5" begin="1" end="5">
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap">
+        <rich:columns value="#{capitalsBean.labels}" var="col" index="index" rows="0" columns="3" begin="1" end="2">
                 <f:facet name="header">
-                        <h:outputText value="#{col.header}"/>
+                        <h:outputText value="#{col.text}" />
                 </f:facet>
-                <h:outputText value="#{row.columnValue}"/>
-        </rich:columns>
-</rich:dataTable>	
+                <h:outputText value="#{cap[index]}" />
+        </rich:columns>	
+</rich:dataTable>
 ...]]></programlisting>
         <para>
-            In the example below, columns from second to fourth and all rows are shown in the 
+            In the example below, columns from first to second and all rows are shown in the 
         <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis>.   
         </para>
-        
+        <para>
+            The result is:
+        </para>
+        <figure>
+            <title>Generated &lt;rich:columns&gt;</title>
+            <mediaobject> 
+                <imageobject>
+                    <imagedata fileref="images/columns2.png"/>
+                </imageobject>
+            </mediaobject>
+            </figure>
         <para>
             The <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> component does not prevent to use 
             <emphasis role="bold"><property>&lt;rich:column&gt;</property></emphasis>. 
