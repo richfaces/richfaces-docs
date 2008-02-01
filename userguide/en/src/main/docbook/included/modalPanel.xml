@@ -514,7 +514,7 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
 
     <para>The screenshot shows the classes names for defining different elements.</para>
     
-    <table>
+    <table id="mPC">
       <title>Classes names that define a component appearance</title>
       
       <tgroup cols="2">
@@ -592,14 +592,66 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
     <para>In order to redefine styles for all <emphasis role="bold">
       <property>&lt;rich:modalPanel&gt;</property>
     </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
-      same names and define necessary properties in them.</para>
+      same names (possible classes could be found in the tables <link linkend="mPC"> above</link>) and define necessary properties in them. </para>
     
-    <para>To change styles of particular <emphasis role="bold">
-      <property>&lt;rich:modalPanel&gt;</property>
-    </emphasis> components, define your own style classes in the corresponding <emphasis
-      role="bold">
-      <property>&lt;rich:modalPanel&gt;</property>
-    </emphasis>attributes.</para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="CSS"><![CDATA[...
+.rich-mpnl-mask-div{
+background-color:#ffead9;
+}
+...]]></programlisting>  
+    
+    <para>This is a result:</para>
+    
+    <figure>
+      <title>Redefinition styles with predefined classes</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/mpClass.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    
+    <para>In the example the background color for mask was changed.</para>
+    
+    <para>Also it’s possible to change styles of particular <emphasis role="bold"
+      ><property>&lt;rich:modalPanel&gt;</property></emphasis> component. In this case you should create own style classes and use them in corresponding <emphasis role="bold"
+        ><property>&lt;rich:modalPanel&gt;</property></emphasis> <property>styleClass</property> attributes. An example is placed below:</para>
+    
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="CSS"><![CDATA[...
+.myClass{
+font-style:italic;
+}
+...]]></programlisting>  
+    <para>The <emphasis><property>&quot;headerClass&quot;</property></emphasis> attribute for <emphasis role="bold"
+      ><property>&lt;rich:modalPanel&gt;</property></emphasis> is defined as it’s shown in the example below:</para>
+    
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="CSS"><![CDATA[<rich:modalPanel ... headerClass="myClass"/>
+]]></programlisting>    
+    
+    <para>This is a result:</para>
+    
+    <figure>
+      <title>Redefinition styles with own classes and styleClass attributes</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/mpStyle.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>  
+    
+    <para>As it could be seen on the picture above,the font style for header was changed.</para>
+    
+    
+    
   </section>
   <section>
     <title>Relevant Resources Links</title>
@@ -612,8 +664,7 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
         url="http://labs.jboss.com/wiki/ModalPanelWizards">Wiki article</ulink> and in the <link
         linkend="Organizewizards">FAQ</link> chapter of the guide. </para>
     <para>Examples of validation in <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis>
-      could be found in the <ulink url="http://labs.jboss.com/wiki/ModalPanelValidation">Wiki
-        article</ulink> and on the <ulink
+      could be found in the <ulink url="http://labs.jboss.com/wiki/ModalPanelValidation">Wiki article</ulink> and on the <ulink
         url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4061517"
         >RichFaces Users Forum</ulink>. </para>
   </section>

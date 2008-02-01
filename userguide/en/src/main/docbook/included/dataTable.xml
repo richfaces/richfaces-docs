@@ -322,7 +322,7 @@ HtmlDataTable myTable = new HtmlDataTable();
       </mediaobject>
     </figure>
 
-    <table>
+    <table id="dTC">
       <title>Classes names that define a whole component appearance</title>
       <tgroup cols="2">
         <thead>
@@ -432,16 +432,68 @@ HtmlDataTable myTable = new HtmlDataTable();
     </table>
 
     <para>In order to redefine styles for all <emphasis role="bold">
-        <property>&lt;rich:dataTable&gt;</property>
-      </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
-      same names and define necessary properties in them.</para>
-
-    <para>To change styles of particular <emphasis role="bold">
-        <property>&lt;rich:dataTable&gt;</property>
-      </emphasis> components, define your own style classes in the corresponding <emphasis
-        role="bold">
-        <property>&lt;rich:dataTable&gt;</property>
-      </emphasis>attributes.</para>
+      <property>&lt;rich:dataTable&gt;</property>
+    </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
+      same names (possible classes could be found in the tables <link linkend="dTC"> above</link>) and define necessary properties in them. </para>
+    
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="CSS"><![CDATA[...
+.rich-table-cell{
+font-weight:bold;
+}
+...]]></programlisting>  
+    
+    <para>This is a result:</para>
+    
+    <figure>
+      <title>Redefinition styles with predefined classes</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/datatableClass.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    
+    <para>In the example the font weight for table cell was changed.</para>
+    
+    <para>Also it’s possible to change styles of particular <emphasis role="bold"
+      ><property>&lt;rich:dataTable&gt;</property></emphasis> component. In this case you should create own style classes and use them in corresponding <emphasis role="bold"
+        ><property>&lt;rich:dataTable&gt;</property></emphasis> <property>styleClass</property> attributes. An example is placed below:</para>
+    
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="CSS"><![CDATA[...
+.myClass{
+font-style:italic;
+}
+...]]></programlisting>  
+    <para>The <emphasis><property>&quot;headerClass&quot;</property></emphasis> attribute for <emphasis role="bold"
+      ><property>&lt;rich:dataTable&gt;</property></emphasis> is defined as it’s shown in the example below:</para>
+    
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="CSS"><![CDATA[<rich:dataTable  ... headerClass="myClass"/>
+]]></programlisting>    
+    
+    <para>This is a result:</para>
+    
+    <figure>
+      <title>Redefinition styles with own classes and styleClass attributes</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/datatableStyle.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>  
+    
+    <para>As it could be seen on the picture above, the font style for header was changed.</para>
+    
+    
+    
   </section>
   <section>
     <title>Relevant Resources Links</title>
@@ -460,7 +512,7 @@ HtmlDataTable myTable = new HtmlDataTable();
         <property>&lt;rich:subTable&gt;</property>
       </emphasis> could be found on the <ulink
         url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4059044#4059044"
-        >RichFaces Users Forum.</ulink>
+        >RichFaces Users Forum</ulink>.
     </para>
     <para>How to use <emphasis role="bold">
         <property>&lt;rich:dataTable&gt;</property>
