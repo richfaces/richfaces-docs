@@ -371,7 +371,7 @@ HtmlTree myTree = new HtmlTree();
       <emphasis role="bold">Example:</emphasis>
     </para>
 
-    <programlisting role="JAVA"><![CDATA[...
+    <programlisting role="XML"><![CDATA[...
       <h:form>    
         <rich:tree style="width:300px" value="#{library.data}" var="item" nodeFace="#{item.type}">
             <rich:treeNode type="artist" iconLeaf="/images/tree/singer.png" icon="/images/tree/singer.png">
@@ -451,7 +451,7 @@ HtmlTree myTree = new HtmlTree();
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="JAVA"><![CDATA[<h: outputText value="#{varAttributeName}">]]></programlisting>
+    <programlisting role="XML"><![CDATA[<h: outputText value="#{varAttributeName}">]]></programlisting>
     <para>
       <property>&quot;varAttributeName&quot;</property> is a value for <emphasis>
         <property>&quot;var&quot;</property>
@@ -490,7 +490,7 @@ HtmlTree myTree = new HtmlTree();
       <emphasis role="bold">Example:</emphasis>
     </para>
 
-    <programlisting role="JAVA"><![CDATA[...
+    <programlisting role="XML"><![CDATA[...
       <h:form>    
         <rich:tree style="width:300px" value="#{library.data}" var="item" nodeFace="#{item.type}">
             ...
@@ -565,7 +565,7 @@ HtmlTree myTree = new HtmlTree();
       <emphasis role="bold">Example:</emphasis>
     </para>
     
-    <programlisting role="JAVA"><![CDATA[...
+    <programlisting role="XML"><![CDATA[...
     <rich:tree ....>
         ...
         <f:facet name="icon">
@@ -670,7 +670,7 @@ HtmlTree myTree = new HtmlTree();
       <emphasis role="bold">Example:</emphasis>
     </para>
 
-    <programlisting role="JAVA"><![CDATA[...
+    <programlisting role="XML"><![CDATA[...
     <h:form>    
         <rich:tree dragIndicator=":treeDragIndicator" dropListener="#{libraryAjaxTree.processDrop}" style="width:300px" value="#{libraryAjaxTree.data}" var="item" nodeFace="#{item.type}">
             <rich:treeNode type="artist" acceptedTypes="album" iconLeaf="/images/tree/group.png" icon="/images/tree/group.png">
@@ -714,24 +714,22 @@ HtmlTree myTree = new HtmlTree();
     <title>Events handling</title>
     <para>Listeners classes that process events on the server side are defined with the help of:</para>
     <itemizedlist>
-      <listitem>nodeSelectListener is called during request sending on a node selecting event (if
-        request sending on this event is defined)</listitem>
+      <listitem>changeExpandListener processes expand/collapse event of a <property>treeNode</property></listitem>
       <listitem>dropListener processes a Drop event</listitem>
-      <listitem>dragListener processes a Drug event</listitem>
-      <listitem>changeExpandListener processes expand/collapse event of a
-        <property>treeNode</property></listitem>
+      <listitem>dragListener processes a Drag event</listitem>
+      <listitem>nodeSelectListener is called during request sending on a node selecting event (if request sending on this event is defined)</listitem>
     </itemizedlist>
 
     <para>Listener methods can be defined using the <link linkend="treeNodeKF">following
       attributes</link> or using nested tags.</para>
     <para>Client event attributes are:</para>
     <itemizedlist>
-      <listitem>onexpand - expands a node event</listitem>
-      <listitem>oncollapse - collapses a node event</listitem>
-      <listitem>ondragexit - element passing out from a tree zone event</listitem>
-      <listitem>ondragstart - drags a start event</listitem>
-      <listitem>ondragend - drags an end event (a drop event)</listitem>
-      <listitem>ondragenter - drags an element appearing on a tree event</listitem>
+      <listitem>onexpand is a script expression to invoke when a node is expanded</listitem>
+      <listitem>oncollapse is a script expression to invoke when a node is collapsed</listitem>
+      <listitem>ondragexit is a script expression to invoke when an element passing out from a tree zone</listitem>
+      <listitem>ondragstart is a script expression to invoke when drag starts</listitem>
+      <listitem>ondragend is a script expression to invoke when drag ends (a drop event)</listitem>
+      <listitem>ondragenter is a script expression to invoke when an dragged element appears on a tree</listitem>
     </itemizedlist>
 
     <para>They can be used to add some JavaScript effects.</para>
@@ -818,6 +816,22 @@ HtmlTree myTree = new HtmlTree();
           <row>
             <entry>rich-tree</entry>
             <entry>Defines styles for a wrapper &lt;div&gt; element of a tree</entry>
+          </row>
+          <row>
+            <entry>rich-tree-node</entry>
+            <entry>Defines styles for a node of a tree</entry>
+          </row>
+          <row>
+            <entry>rich-tree-node-children</entry>
+            <entry>Defines styles for a wrapper &lt;div&gt; element of a child node of a tree</entry>
+          </row>
+          <row>
+            <entry>rich-tree-node-selected</entry>
+            <entry>Defines styles for a selected node of a tree</entry>
+          </row>
+          <row>
+            <entry>rich-tree-node-highlighted</entry>
+            <entry>Defines styles for a highlighted node of a tree</entry>
           </row>
         </tbody>
       </tgroup>
