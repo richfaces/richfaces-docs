@@ -66,17 +66,17 @@
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-    <rich:modalPanel id="panel">
-        <f:facet name="header">
-            <h:outputText value="header">
-        </f:facet>
-        ...
-        <!--Any Content inside-->
-        ...
-        <a href="javascript:RichFaces.hideModalPanel('form:panel')">Hide</a>
-    </rich:modalPanel>
+<rich:modalPanel id="panel">
+    <f:facet name="header">
+        <h:outputText value="header" />
+    </f:facet>
+    ...
+    <!--Any Content inside-->
+    ...
+    <a href="javascript:RichFaces.hideModalPanel('form:panel')">Hide</a>
+</rich:modalPanel>
 ...
-    <a href="javascript:RichFaces.showModalPanel('form:panel')">Show</a>
+<a href="javascript:RichFaces.showModalPanel('form:panel')">Show</a>
 ...
 ]]></programlisting>
   </section>
@@ -144,18 +144,17 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-    <form jsfc="h:form" id="form">
-        <rich:modalPanel id="panel" width="400" height="300">
-            <f:facet name="header">
-                <h:outputText value="Modal Panel"/>
-            </f:facet>
+<form jsfc="h:form" id="form">
+    <rich:modalPanel id="panel" width="400" height="300">
+        <f:facet name="header">
+            <h:outputText value="Modal Panel"/>
+        </f:facet>
         <h:graphicImage value="/pages/california_large.png"/>
         <a href="javascript:Richfaces.hideModalPanel('form:panel')">Close</a>
-        </rich:modalPanel>
-        <a href="javascript:Richfaces.showModalPanel('form:panel');">Open</a>
-    </form>
-...
-]]></programlisting>
+    </rich:modalPanel>
+    <a href="javascript:Richfaces.showModalPanel('form:panel');">Open</a>
+</form>
+...]]></programlisting>
 
     <para>This defines a window with a particular size and ID. It includes one "Open" link. Clicking
       on this link makes the modal window content appear.</para>
@@ -178,14 +177,16 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-    <rich:modalPanel id="mp">
-        <f:facet name="header"><h:outputText value="Modal Panel"/></f:facet>
-        <f:facet name="controls">
-             <h:graphicImage value="/pages/close.png" style="cursor:pointer" onclick="Richfaces.hideModalPanel('mp')" />
-        </f:facet>
-        <h:graphicImage value="/pages/california_large.png"/>
-    </rich:modalPanel>
-]]></programlisting>
+<rich:modalPanel id="mp">
+    <f:facet name="header">
+        <h:outputText value="Modal Panel"/>
+    </f:facet>
+    <f:facet name="controls">
+        <h:graphicImage value="/pages/close.png" style="cursor:pointer" onclick="Richfaces.hideModalPanel('mp')" />
+    </f:facet>
+    <h:graphicImage value="/pages/california_large.png"/>
+</rich:modalPanel>
+...]]></programlisting>
 
     <para>The result is displayed here:</para>
 
@@ -228,8 +229,7 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="JAVA"><![CDATA[Richfaces.showModalPanel('panelId', {left: auto}, {param1: value1});
-	]]></programlisting>
+    <programlisting role="XML"><![CDATA[Richfaces.showModalPanel('panelId', {left: auto}, {param1: value1});]]></programlisting>
     <para> Thus, except the standard modalPanel parameters you can pass any of your own parameters. </para>
     <para> Also modalPanel allows to handle its own opening and closing events on the client side.
       The <emphasis><property>&quot;onshow&quot;</property></emphasis> and <emphasis><property>&quot;onclose&quot;</property></emphasis> attributes are used in this
@@ -241,7 +241,7 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
       <emphasis role="bold">Example:</emphasis>
     </para>
 
-    <programlisting role="JAVA"><![CDATA[onshow="alert(event.parameters.param1)"]]></programlisting>
+    <programlisting role="XML"><![CDATA[onshow="alert(event.parameters.param1)"]]></programlisting>
 
     <para> Here, during modalPanel opening the value of a passing parameter is output. </para>
     <para> More information about this problem could be found on the <ulink
@@ -260,10 +260,9 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
       <emphasis role="bold">Example:</emphasis>
     </para>
 
-    <programlisting role="JAVA"><![CDATA[...
+    <programlisting role="XML"><![CDATA[...
 <a href="javascript:Richfaces.showModalPanel('_panel', {top:'10px', left:'10px', height:'400'});">Show</a>
-...
-	]]></programlisting>
+...]]></programlisting>
 
     <para> Here, if you open modal dialog window using current link and after submits data then
       modalPanel destination and height on new loaded page will be restored. </para>
@@ -278,23 +277,22 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
     <para><emphasis role="bold">Example:</emphasis></para>
 
     <programlisting role="XML"><![CDATA[...
-        <rich:modalPanel> 
-                <f:facet name="header"> 
-                        <h:outputText value="Test" /> 
-                </f:facet> 
-                <f:facet name="controls"> 
-                        <h:commandLink value="Close" style="cursor:pointer" onclick="Richfaces.hideModalPanel('mp')" /> 
-                </f:facet> 
-                <h:form> 
-                        <t:commandButton value="Test" action="#{TESTCONTROLLER.test}" /> 
-                </h:form> 
-        </rich:modalPanel>
-        ...
-        <h:form> 
-                <!--Some other Page content-->
-        </h:form>
-...        
-]]></programlisting>
+<rich:modalPanel> 
+    <f:facet name="header"> 
+        <h:outputText value="Test" /> 
+    </f:facet> 
+    <f:facet name="controls"> 
+        <h:commandLink value="Close" style="cursor:pointer" onclick="Richfaces.hideModalPanel('mp')" /> 
+    </f:facet> 
+    <h:form> 
+        <h:commandButton value="Test" action="#{TESTCONTROLLER.test}" /> 
+    </h:form> 
+</rich:modalPanel>
+...
+<h:form> 
+    <!--Some other Page content-->
+</h:form>
+...]]></programlisting>
 
   
 
@@ -320,15 +318,13 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
         <tbody>
           
           <row>
-            <entry>Show()</entry>
-            
-            <entry>Shows the corresponding ToolTip</entry>
+            <entry>show()</entry>
+            <entry>Opens the corresponding modalPanel</entry>
           </row>
           
           <row>
-            <entry>Hide()</entry>
-            
-            <entry>Hides the corresponding ToolTip</entry>
+            <entry>hide()</entry>
+            <entry>Closes the corresponding modalPanel</entry>
           </row>
           
         </tbody>
