@@ -32,7 +32,7 @@
   
   <section>
     <title>Creating on a page</title>
-    <para>To use the component it&apos;s necessary to define it on a page and set Java methods for data keeping and data transmission to output stream. </para>
+    
 	<para>Component definition on a page for graphical data output</para>
 
   <para>
@@ -44,28 +44,7 @@
     mimeType="image/jpeg"/>
 ...
 ]]></programlisting>
-<para>Here is the content of paintData that is a bean containing output data</para>
 
-  <para>
-      <emphasis role="bold">Example:</emphasis>
- </para>
-<programlisting role="JAVA"><![CDATA[package demo;
-
-public class PaintData implements Serializable{
-        private static final long serialVersionUID = 1L;
-        Integer width=100;
-        Integer weight=50;
-...
-]]></programlisting>
-<para>The Paint method of the  paintBean class is a method transmitting graphical data into output stream.</para>
-
-  <para>
-      <emphasis role="bold">Example:</emphasis>
- </para>
-<programlisting role="JAVA"><![CDATA[public void paint(OutputStream out, Object data) throws IOException{
-	<!--...Some code that puts binary data to "out" Stream-->
-        }
-]]></programlisting>
   </section>
   <section>
     <title>Dynamical creation of a component from Java code</title>
@@ -81,6 +60,28 @@ MediaOutput myMedia = new MediaOutput ();
   </section>
   <section>
     <title>Key attributes and ways of usage</title>
+    <para>To use the component it&apos;s necessary to define it on a page and set Java methods for data keeping and data transmission to output stream. </para>
+    <para>Here is the content of paintData that is a bean containing output data</para>
+        <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="JAVA"><![CDATA[package demo;
+
+public class PaintData implements Serializable{
+        private static final long serialVersionUID = 1L;
+        Integer width=100;
+        Integer weight=50;
+...
+]]></programlisting>
+    <para>The Paint method of the  paintBean class is a method transmitting graphical data into output stream.</para>
+    
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="JAVA"><![CDATA[public void paint(OutputStream out, Object data) throws IOException{
+	<!--...Some code that puts binary data to "out" Stream-->
+        }
+]]></programlisting>
     <para>As it was shown in the example above there are two main components:</para>
     <itemizedlist>
         <listitem>

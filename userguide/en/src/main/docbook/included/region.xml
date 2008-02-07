@@ -34,9 +34,11 @@
   <section>
     <title>Creating on a page</title>
     <para>Here is an example of the region decoding on a page. </para>
-    <programlisting role="XML"><![CDATA[<a4j:region>
-	<!--..Some content that will be decoded on server after Ajax request.-->
-</a4j:region>]]></programlisting>
+    <programlisting role="XML"><![CDATA[                <a4j:region>
+                    <h:inputText value="#{userBean.name}">
+                        <a4j:support event="onkeyup" reRender="outname" />
+                    </h:inputText>
+                </a4j:region>]]></programlisting>
   </section>
   <section>
     <title>Dynamical creation of a component from Java code</title>
@@ -52,12 +54,12 @@ HtmlAjaxRegion newRegion = new HtmlAjaxRegion();
   </section>
   <section>
     <title>Key attributes and ways of usage</title>
-    <para>The region is a component used for manipulation with components sent to the server. It sets particular processing parameters for an area on the server, i.e. the region deals with data input on the server and has no direct impact on output. To read more on the components responsible for out, see <emphasis><property>&quot;reference&quot;</property></emphasis> 
+    <para>The region is a component used for manipulation with components sent to the server. It sets particular processing parameters for an area on the server, i.e. the region deals with data input on the server and has no direct impact on output. To read more on the components responsible for out, see &quot;reference&quot; <ulink url="http://java.sun.com/javaee/javaserverfaces/reference/index.html">here</ulink>.
 </para>
     <para>The region marks an area page that is decoded on the server. In most cases it is not necessary to use the region, as ViewRoot is a default region. This component helps to reduce data quantity processed by the server, but the region doesn&apos;t influence on the standard submission rules. It means that:<itemizedlist>
         <listitem>
           The area that is to be submitted onto the server should be embedded in <emphasis role="bold">
-<property>&lt;h:form/a4j:form&gt;</property>
+            <property>&lt;h:form&gt;</property>/<property>&lt;a4j:form&gt;</property>
 </emphasis> component. 
         </listitem>
         <listitem>
@@ -85,7 +87,7 @@ HtmlAjaxRegion newRegion = new HtmlAjaxRegion();
 	<!--..Some content that will be decoded on server after Ajax request.-->
 </a4j:region >]]></programlisting>
     <para>Therefore, the external region is decoded for the &quot;link1&quot; and the internal one is decoded for the &quot;link2&quot;.</para>
-    <para>RichFaces allows setting Ajax responses rendering directly basing on component tree nodes without referring to the JSP (XHTML) page code. It could be defined by<emphasis><property> &quot;selfRendered&quot; </property></emphasis>attribute setting to <emphasis><property>&quot;true&quot;</property></emphasis> on <emphasis role="bold">
+    <para>RichFaces allows setting Ajax responses rendering directly basing on component tree nodes without referring to the JSP (XHTML) page code. It could be defined by<emphasis><property> &quot;selfRendered&quot; </property></emphasis>attribute setting to <property>&quot;true&quot;</property> on <emphasis role="bold">
         <property>&lt;a4j:region&gt;</property>
       </emphasis> and could help considerably speed up a response output. However, this rapid processing could cause missing of transient components that present on view and don&apos;t come into a component tree as well as omitting of <emphasis role="bold">
         <property>&lt;a4j:outputPanel&gt;</property>
@@ -100,7 +102,7 @@ HtmlAjaxRegion newRegion = new HtmlAjaxRegion();
     <para>The processing could be also accelerated if a region decoded for the processing passes straight away into Encode. But to update some data out of the region or on another region, use the <emphasis >
         <property>&quot;renderRegionOnly&quot;</property>
       </emphasis> 
-attribute set to <emphasis><property>&quot;false&quot;</property></emphasis> (&quot;true on default&quot;) to change this behaviour.</para>
+      attribute set to <property>&quot;false&quot;</property> (<property>&quot;true&quot;</property> on default) to change this behaviour.</para>
     <para><emphasis role="bold">Example:</emphasis></para>
     <programlisting role="XML"><![CDATA[<a4j:region renderRegionOnly="true">
 	<a4j:commandLink reRender="someID2" value="Link1" id="link1"/>
@@ -115,7 +117,7 @@ attribute set to <emphasis><property>&quot;false&quot;</property></emphasis> (&q
     <para>This example shows that one of the regions is decoded when a link is used inside. Nevertheless, 
     if after processing the &quot;link1&quot; is clicked, the first region passes into Encode as a root 
     region and encode performance time is reduced. This optimization doesn&apos;t allow data update out of the
-     region and should be implemented very carefully. The data out of the region described with<emphasis><property> &quot;renderRegionOnly&quot;</property></emphasis>=&quot;false&quot; is updated successfully.</para>
+    region and should be implemented very carefully. The data out of the region described with<emphasis><property> &quot;renderRegionOnly&quot;</property></emphasis>=<property>&quot;false&quot;</property> is updated successfully.</para>
   </section>
   <section>
     <title>Relevant resources links</title>

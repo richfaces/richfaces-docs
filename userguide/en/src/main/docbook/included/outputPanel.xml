@@ -42,9 +42,13 @@
   <para>
       <emphasis role="bold">Example:</emphasis>
  </para>
-    <programlisting role="XML"><![CDATA[<a4j:outputPanel>
-<!--...Some Content Inside-->
-</a4j:outputPanel>
+    <programlisting role="XML"><![CDATA[        <a4j:outputPanel>
+                    <h:form>
+                        <h:outputText value="Some text"/>
+                            <h:inputText id="text1" label="text1" value="#{rsBean.text1}">
+                            </h:inputText>
+                    </h:form>
+        </a4j:outputPanel>
 ]]></programlisting>
   </section>
   <section>
@@ -60,7 +64,7 @@ HtmlAjaxOutputPanel  myPanel = new HtmlAjaxOutputPanel();
   </section>
   <section>
     <title>Key attributes and ways of usage</title>
-    <para><emphasis role="bold"><property>&lt;a4j:outPanel&gt;</property></emphasis> allows marking of a page area, which is updated on Ajax response. Anyway, <emphasis role="bold">
+    <para><emphasis role="bold"><property>&lt;a4j:outputPanel&gt;</property></emphasis> allows marking of a page area, which is updated on Ajax response. Anyway, <emphasis role="bold">
         <property>&lt;a4j:outputPanel&gt;</property>
       </emphasis> usage is optional, as in RichFaces it&apos;s possible to indicate any existing component id on a component view in order to define updating areas. 
 
@@ -99,10 +103,10 @@ To speed up the performance, RichFaces updates only a component tree. <emphasis 
         none
       </listitem>
     </itemizedlist>
-    <para>If layout=&quot;block&quot; is chosen, the component is rendered as a pair of opening and closing <emphasis role="bold"><property>&lt;div&gt;</property></emphasis> tag, to which it&apos;s possible to apply any available style attributes available for block tags. </para>
-    <para>Layout=&quot;none&quot; helps to avoid an unnecessary tag round a context that could or couldn&apos;t be rendered according to the defined <emphasis><property>&quot;rendered&quot;</property></emphasis> attribute conditions. If an inner context isn’t rendered, <emphasis role="bold">
+    <para>If <emphasis><property> &quot;layout&quot; </property></emphasis>=<property>&quot;block&quot;</property> is chosen, the component is rendered as a pair of opening and closing <emphasis role="bold"><property>&lt;div&gt;</property></emphasis> tag, to which it&apos;s possible to apply any available style attributes available for block tags. </para>
+    <para><emphasis><property> &quot;layout&quot; </property></emphasis>=<property>&quot;none&quot;</property> helps to avoid an unnecessary tag round a context that could or couldn&apos;t be rendered according to the defined <emphasis><property>&quot;rendered&quot;</property></emphasis> attribute conditions. If an inner context isn’t rendered, <emphasis role="bold">
         <property>&lt;a4j:outputPanel&gt;</property>
-      </emphasis> is rendered as a <emphasis role="bold"><property>&lt;span&gt;</property></emphasis> tag with the id equal to an id of a child component and &quot;display:none&quot; style. If a child component is rendered, <emphasis role="bold">
+    </emphasis> is rendered as a <emphasis role="bold"><property>&lt;span&gt;</property></emphasis> tag with the id equal to an id of a child component and <property>display:none</property> style. If a child component is rendered, <emphasis role="bold">
         <property>&lt;a4j:outputPanel&gt;</property>
       </emphasis> doesn&apos;t present at all in a final code.</para>
     <para><emphasis role="bold">Example:</emphasis></para>
@@ -117,12 +121,15 @@ To speed up the performance, RichFaces updates only a component tree. <emphasis 
     <para>As you see, the code is very similar to the one shown above, but <emphasis ><property>&quot;reRender &quot;</property></emphasis> attribute refers directly to the updating panelGrid and not to the framing outputPanel, and it&apos;s more semantically correct.</para>
     <para><emphasis role="bold"><property>&lt;a4j:outPanel&gt;</property></emphasis> should be used for non-JSF component part framing, which is to be updated on Ajax response, as RichFaces specifies the list of updating areas as a list of an existing JSF component. </para>
     <para>On default non-JSF context isn&apos;t saved in a component tree, but is rendered anew every time. To accelerate the processing speed and Ajax response input speed, RichFaces saves non-JSF context in a component tree on default. This option could be canceled by<emphasis><property> &quot;keepTransient&quot; </property></emphasis>attribute that cancels transient flag forced setting for child components. This flag setting keeps the current value set by child components.</para>
-    <para>Note: In JSF 1.1 implementation and lower, where non-JSF context should be framed with the &quot;f:verbatim&quot; attribute,  <emphasis role="bold">
+    <note>
+      <title>Note:</title>
+    <para>In JSF 1.1 implementation and lower, where non-JSF context should be framed with the <emphasis role="bold"><property>&lt;f:verbatim&gt;</property></emphasis> component,  <emphasis role="bold">
         <property>&lt;a4j:outputPanel&gt;</property>
-      </emphasis> doesn&apos;t improve this JSF implementation option in any way, so you still have to use this tag where it&apos;s necessary without RichFaces usage. </para>
-    <para>RichFaces allows setting Ajax responses rendering directly basing on component tree nodes without referring to the JSP (XHTML) page code. It could be defined by selfRendered attribute setting to <emphasis >
+    </emphasis> doesn&apos;t improve this JSF implementation option in any way, so you still have to use this tag where it&apos;s necessary without RichFaces usage. </para>
+    </note>
+    <para>RichFaces allows setting Ajax responses rendering directly basing on component tree nodes without referring to the JSP (XHTML) page code. It could be defined by selfRendered attribute setting to 
         <property>&quot;true&quot;</property>
-      </emphasis> 
+       
  on <emphasis role="bold">
         <property>&lt;a4j:region&gt;</property>
       </emphasis> and could help considerably speed up a response output. However, if a transient flag is kept as it is, this rapid processing could cause missing of transient components that present on view and don’t come into a component tree. Hence, for any particular case you could choose a way for you application optimization: speed up processing or redundant memory for keeping tree part earlier defined a transient. </para>

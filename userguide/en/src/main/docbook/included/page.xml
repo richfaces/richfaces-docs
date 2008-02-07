@@ -38,27 +38,14 @@
       </emphasis></para>
     <programlisting role="XML"><![CDATA[<f:view>
  <a4j:page>
-  <f:facet name="head">
-   <!--...Head Content here-->
-  </f:facet>
+     <f:facet name="head">
+         <!--...Head Content here-->
+     </f:facet>
    <!--...Page Content here-->
  </a4j:page>
 </f:view>
 ]]></programlisting>
-    <para>This structure is rendered as:</para>
-
-  <para>
-      <emphasis role="bold">Example:</emphasis>
- </para>
-    <programlisting role="XML"><![CDATA[<HTML>
- <HEAD> 
- <!--...Head Content here-->
- </HEAD> 
-<body >
- <!--...Page Content Here-->
-</body> 
-</HTML>]]></programlisting>
-  </section>
+      </section>
   <section>
     <title>Dynamical creation of a component from Java code</title>
 
@@ -75,15 +62,53 @@ HtmlPage myPage = new HtmlPage();
     <title>Key attributes and ways of usage</title>
     <para>The component is mostly used to solve the following problem with MyFaces for erlier Ajax4jsf versions: in MyFaces <emphasis role="bold">
         <property>&lt;f:view&gt;</property>
-      </emphasis> doesn&apos;t get control over the &quot;<emphasis >
+      </emphasis> doesn&apos;t get control over the 
         <property>RENDER_RESPONSE</property>
-      </emphasis>&quot; phase, thus Ajax can&apos;t get control and make a response also. To avoid this problem it was necessary to use <emphasis role="bold">
+       phase, thus Ajax can&apos;t get control and make a response also. To avoid this problem it was necessary to use <emphasis role="bold">
         <property>&lt;a4j:page&gt;</property>
       </emphasis> on a page round the Ajax updatable area. In the last versions of both frameworks the problem is successfully  fixed and no <emphasis role="bold"><property>&lt;a4j:page&gt;</property></emphasis> usage is required.</para>
-    <para>The component is rendered as a full HTML page template (it was shown in the example). The &quot;<emphasis >
-        <property>head</property>
-      </emphasis>&quot; section is defined with the help of the corresponding facet with the name=&quot;head&quot; and also there is an attribute with the same name for<emphasis><property> &quot;contentType&quot; </property></emphasis>definition.</para>
-    </section>
+    <para>The component is rendered as a full HTML page template as it is shown in the <link linkend="exampl">example</link>. The 
+      <property>head</property>
+      section is defined with the help of the corresponding <emphasis><property>&quot;head&quot;</property></emphasis> facet.
+      
+      You do not need to use <emphasis><property>&quot;body&quot;</property></emphasis> facet in order to define first <property>body</property> section. 
+      The second and more <property>body</property> sections is defined with the help of the corresponding <emphasis><property>&quot;body&quot;</property></emphasis> facet.
+      
+      </para>
+      <para>
+        The attribute <emphasis><property>&quot;format&quot;</property></emphasis> defines page layout format  for encoding DOCTYPE. 
+      </para>
+    <para>
+        The attribute <emphasis><property>&quot;pageTitle&quot;</property></emphasis> is  rendered as <property>title</property> section.
+    </para> 
+    
+     
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[<a4j:page format="xhtml" pageTitle="myPage">
+    <f:facet name="head">
+        <!--Head Content here-->
+    </f:facet>
+   <!--Page Content Here-->
+</a4j:page>
+]]></programlisting>
+    <para>This structure is rendered as:</para>
+    
+    <para id="exampl">
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head> 
+        <title>myPage</title>
+        <!--Head Content here-->
+    </head> 
+    <body>
+        <!--Page Content Here-->
+    </body> 
+</html>]]></programlisting>
+  </section>
   
   <section>
     <title>Relevant resources links</title>
