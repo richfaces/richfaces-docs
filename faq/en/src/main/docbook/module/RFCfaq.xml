@@ -1309,4 +1309,248 @@ public class DataTableScrollerBean {
                                 url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=122543"
                                 >here</ulink>.</para>
         </section>
+  <!--  <section id="RowSelectionInDataTable">
+                <?dbhtml filename="RowSelectionInDataTable.html"?>
+                <title>How to show a row of a dataTable on a modal panel?</title>
+                <para>In order to get <property>a row selection in DataTable using </property>  you should use the <emphasis>
+                                <property>&quot;selection&quot;</property>
+                        </emphasis> attribute. </para>
+                <para>In the following example when user submits the form current collection of
+                        objects selected by user is placed in the object's property. Then on
+                        complete action the <emphasis role="bold">
+                                <property>&lt;rich:modalPanel&gt;</property>
+                        </emphasis> with selected data will be shown.</para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>``
+                <programlisting role="XML"><![CDATA[...
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich" id="subview"> 
+        <style>
+                .cur{
+                        cursor:pointer; 
+                }
+        </style>
+        <h:form id="form">
+                <rich:contextMenu attached="false" id="menu" submitMode="ajax">
+	<rich:menuItem >
+	        <b>{car} {model}</b> details
+	        <a4j:actionparam name="det" assignTo="#{ddmenu.current}" value="{car} {model} details"/>
+	</rich:menuItem>
+	<rich:menuGroup value="Actions">  
+	        <rich:menuItem ajaxSingle="true">
+	                Put <b>{car} {model}</b> To Basket
+	                <a4j:actionparam name="bask" assignTo="#{ddmenu.current}" value="Put {car} {model} To Basket"/>
+	        </rich:menuItem>
+	        <rich:menuItem value="Read Comments" ajaxSingle="true">
+	                <a4j:actionparam name="bask" assignTo="#{ddmenu.current}" value="Read Comments"/>
+	        </rich:menuItem>				
+	        <rich:menuItem ajaxSingle="true">
+	                Go to <b>{car}</b> site
+	                <a4j:actionparam name="bask" assignTo="#{ddmenu.current}" value="Go to {car} site"/>
+	         </rich:menuItem>
+	</rich:menuGroup>
+                </rich:contextMenu> 
+                <h:panelGrid columns="2">
+                <rich:dataTable value="#{dataTableScrollerBean.tenRandomCars}" var="car" id="table"
+		onRowMouseOver="this.style.backgroundColor='#F8F8F8'"
+		onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'" rowClasses="cur">
+                                <a4j:support event="onRowClick" ajaxSingle="true" oncomplete="javascript:Richfaces.showModalPanel('subview:form:mhjgfjk'); return false;" reRender="panel">
+	                   <a4j:actionparam name="car" assignTo="#{dataTableScrollerBean.currentCar}" value="#{car.make}"/>
+	                   <a4j:actionparam name="model" assignTo="#{dataTableScrollerBean.currentModel}" value="#{car.model}"/>
+	                   <a4j:actionparam name="price" assignTo="#{dataTableScrollerBean.currentPrice}" value="#{car.price}"/>
+	</a4j:support>
+	<rich:column>
+	                <f:facet name="header">
+		Make
+	                </f:facet>
+	        <h:outputText value="#{car.make}"/>
+	</rich:column>
+	<rich:column>
+	                <f:facet name="header">
+		Model
+	                </f:facet>
+	        <h:outputText value="#{car.model}"/>
+	</rich:column>
+	<rich:column>
+	                <f:facet name="header">
+		Price
+	                </f:facet>
+	        <h:outputText value="#{car.price}" />
+	</rich:column>
+                </rich:dataTable>
+                <rich:modalPanel id="mhjgfjk"  minWidth="300" minHeight="50">
+	        <f:facet name="controls">
+		<span style="cursor:pointer" onclick="Richfaces.hideModalPanel('subview:form:mhjgfjk'); return false;">X</span>
+	        </f:facet>
+	        <f:facet name="header">
+	                        Selection Row
+	        </f:facet>
+	        <rich:panel id="panel">
+      	                <f:facet name="header">
+	                                <h:outputText value="#{dataTableScrollerBean.currentCar}"/>
+	                </f:facet>
+	                <h:panelGrid columns="2">
+		        <h:outputText value="Model" style="font-style:bold"></h:outputText>
+		        <h:outputText value="#{dataTableScrollerBean.currentModel}"/>
+		        <h:outputText value="Price" style="font-style:bold"></h:outputText>
+		        <h:outputText value="#{dataTableScrollerBean.currentPrice}"/>
+	                </h:panelGrid>
+	        </rich:panel>
+                </rich:modalPanel>
+        </h:panelGrid>
+</h:form>			
+</f:subview>
+...]]></programlisting>
+                <para>In order to build this application, you can create a managed bean like this
+                        one. Function <emphasis>
+                                <property>takeSelection()</property>
+                        </emphasis> fills the array <property>selectedCars</property> with the data,
+                        got from the <property>selection</property>. Function <emphasis>
+                                <property>getSelectedCars()</property>
+                        </emphasis> returns the array <property>selectedCars</property>, which is
+                        used for filling <emphasis role="bold">
+                                <property>&lt;rich:dataTable&gt;</property>
+                        </emphasis> with selected row/rows data.</para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+public class DataTableScrollerBean {
+        private SimpleSelection selection = new SimpleSelection();
+        private ArrayList<DemoInventoryItem> selectedCars = new ArrayList<DemoInventoryItem>(); 
+        ...
+        public SimpleSelection getSelection() {
+                return selection;
+        }
+        public void setSelection(SimpleSelection selection) {
+                System.out.println("Setting Started");
+                this.selection = selection;
+        System.out.println("Setting Complete");
+        }
+        public String takeSelection() {
+                getSelectedCars().clear();
+                Iterator<SimpleRowKey> iterator = getSelection().getKeys();
+                while (iterator.hasNext()){
+                        SimpleRowKey key = iterator.next();
+                        getSelectedCars().add(getAllCars().get(key.intValue()));
+                }
+                return null;
+        }
+        public ArrayList<DemoInventoryItem> getSelectedCars() {
+                return selectedCars;
+        }
+        public void setSelectedCars(ArrayList<DemoInventoryItem> selectedCars) {
+                this.selectedCars = selectedCars;
+        }
+}
+...]]></programlisting>
+                <para>Some additional information about usage of <property>one and multi-selection
+                        rows mode</property> can be found <ulink
+                                url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=122543"
+                                >here</ulink>.</para>
+    </section>    -->
+        
+        
+        
+        <section id="RowSelectionInDataTable">
+                <?dbhtml filename="HighlightRowDataTable.html"?>
+                <title>How to highlight rows in a dataTable when the mouse is over?</title>
+                <para>In order <property>to highlight rows in a dataTable when the mouse is over</property> you should use <emphasis><property>"onmouseover"</property></emphasis> and <emphasis><property>"onmouseout"</property></emphasis>  attributes. </para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+<h:form>		
+        <rich:dataTable onRowMouseOver="this.style.font = 'bold 20pt Arial'"
+                                     onRowMouseOut="this.style.font='#{a4jSkin.tableFont}'"
+                                     cellpadding="0" cellspacing="0" 
+                                     width="700" border="0" var="record" value="#{report.expReport.records}" 
+                                     onRowClick="#{dataTableBean.onRowClick}">
+                <f:facet name="header">
+                        <rich:columnGroup>
+                                <rich:column rowspan="2">
+                                        <rich:spacer />
+                                </rich:column>
+                                <rich:column colspan="3">
+                                               <h:outputText value="Expenses" />
+                                </rich:column>
+                                <rich:column rowspan="2">
+                                        <h:outputText value="subtotals" />
+                                </rich:column>
+                                <rich:column breakBefore="true">
+                                        <h:outputText value="Meals" />
+                                </rich:column>
+                                <rich:column>
+                                        <h:outputText value="Hotels" />
+                                </rich:column>
+                                <rich:column>
+                                        <h:outputText value="Transport" />
+                                </rich:column>
+                        </rich:columnGroup>
+                </f:facet>
+                <rich:column  colspan="5">
+                        <h:outputText value="#{record.city}" />
+                </rich:column>
+                <rich:subTable onRowMouseOver="this.style.font = 'bold 20pt Arial'"
+                                            onRowMouseOut="this.style.font='#{a4jSkin.tableFont}'"
+                                            var="expense" value="#{record.items}">
+                        <rich:column>
+                                <h:outputText value="#{expense.day}"></h:outputText>
+                                <f:facet name="footer">
+                                        <rich:spacer />
+                                </f:facet>
+                        </rich:column>
+                        <rich:column>
+                                <h:outputText value="#{expense.meals}"><f:convertNumber   pattern="$####.00"  /></h:outputText>
+                                <f:facet name="footer">
+                                        <h:outputText value="#{record.totalMeals}"><f:convertNumber  pattern="$####.00" /></h:outputText>
+                                </f:facet>
+                        </rich:column>
+                        <rich:column>
+                                        <h:outputText value="#{expense.hotels}"><f:convertNumber  pattern="$####.00"  /></h:outputText>
+                                        <f:facet name="footer">
+                                                        <h:outputText value="#{record.totalHotels}"><f:convertNumber   pattern="$####.00"  /></h:outputText>
+                                        </f:facet>
+                        </rich:column>
+                        <rich:column>
+                                        <h:outputText value="#{expense.transport}"><f:convertNumber   pattern="$####.00"  /></h:outputText>
+                                        <f:facet name="footer">
+                                                <h:outputText value="#{record.totalTransport}"><f:convertNumber   pattern="$####.00"  /></h:outputText>
+                                        </f:facet>
+                        </rich:column>
+                        <rich:column>
+                                <rich:spacer></rich:spacer>
+                                <f:facet name="footer">
+                                        <h:outputText value="#{record.total}"><f:convertNumber   pattern="$####.00"    /></h:outputText>
+                                </f:facet>
+                        </rich:column>					
+                </rich:subTable>
+                <f:facet name="footer">
+                <rich:columnGroup>
+                        <rich:column>Totals</rich:column>
+                        <rich:column>
+                                <h:outputText value="#{report.expReport.totalMeals}"><f:convertNumber   pattern="$####.00"  /></h:outputText>
+                        </rich:column>
+                        <rich:column>
+                                <h:outputText value="#{report.expReport.totalHotels}"><f:convertNumber   pattern="$####.00"  /></h:outputText>
+                        </rich:column>
+                        <rich:column>
+                                <h:outputText value="#{report.expReport.totalTransport}"><f:convertNumber   pattern="$####.00"  /></h:outputText>
+                        </rich:column>
+                        <rich:column>
+                                <h:outputText value="#{report.expReport.grandTotal}"><f:convertNumber   pattern="$####.00"  /></h:outputText>
+                        </rich:column>
+                </rich:columnGroup>
+        </f:facet>
+</rich:dataTable>
+</h:form>
+...]]></programlisting>
+                
+        </section>
+        
 </chapter>
