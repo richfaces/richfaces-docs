@@ -1455,12 +1455,103 @@ public class DataTableScrollerBean {
                                 >here</ulink>.</para>
     </section>    -->
         
+        <!--section id="ScrollableDataTableDragAndDrop">
+                <?dbhtml filename="ScrollableDataTableDragAndDrop.html"?>
+                <title>How to select several rows in a scrollableDataTable and perform  Drag-and-Drop of several rows on dataTable?</title>
+        <para>
+                How to get row selection in scrollableDataTable using <property>one and multi-selection rows mode</property> 
+                you could see section <ulink url="RFCfaq.html#ScrollableDataTableDragAndDrop">above</ulink>.
+        </para>
+        <para>
+               In the following example when user submit                 
+        </para>
+        
+        </section-->
+        
+        <section id="SimpleTogglePanelPanelMenuState">
+                <?dbhtml filename="SimpleTogglePanelPanelMenuState.html"?>
+                <title>How to save the state of simpleTogglePanel or panelMenu?</title>
+                <para>
+                In order to save the state (exapnd/collapse) of the <emphasis role="bold"><property>&lt;rich:simpleTogglePanel&gt;</property></emphasis> component 
+                you could use  <emphasis><property>&quot;opened&quot;</property></emphasis> attribute responsible for keeping a panel state 
+                and <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> binded to <property>onexpand</property> and <property>oncollapse</property> events.
+                </para>
+                <para>
+                        In the following example when you click on the toggle icon simpleTogglePanel arrears and current state displays on modal panel.
+                        This state is remembered between page views.
+                </para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+<programlisting role="XML"><![CDATA[...
+<rich:simpleTogglePanel  id="stpIncludeID" switchType="ajax" width="600px" opened="#{simpleTogglePanel.state}" >
+        <a4j:support event="onexpand" actionListener="#{simpleTogglePanel.stateTrue}" reRender="repeater" oncomplete="javascript:Richfaces.showModalPanel('panel');"/>
+        <a4j:support event="oncollapse" actionListener="#{simpleTogglePanel.stateFalse}" reRender="repeater" oncomplete="javascript:Richfaces.showModalPanel('panel')"/>
+        <h:panelGrid columns="2" border="0">
+                <h:graphicImage url="/pics/Canon.jpg" alt="" width="100px" height="100px"/>
+                <h:panelGroup>
+                        <h:outputText style="font: 18px;font-weight: bold;" value="Canon EOS Digital Rebel XT"/>
+                        <f:verbatim>
+                                <br />
+                                8.2 Megapixels - SLR / Large Digital Camera - 1.8 in LCD Screen -
+                                Storage: Compact Flash, Compact Flash Type II - Built In Flash
+                        </f:verbatim>
+                </h:panelGroup>
+        </h:panelGrid>
+</rich:simpleTogglePanel>
+  
+<rich:modalPanel id="panel" width="200" height="100">
+        <f:facet name="header">
+                <h:outputText value="States of simpleTogglePanel"/>
+        </f:facet>
+        <f:facet name="controls">
+                <span style="cursor:pointer" onclick="javascript:Richfaces.hideModalPanel('panel')">X</span>
+        </f:facet>
+        <h:outputText value="Expanded: " style="font-weight:bold;"/>
+        <h:outputText value="#{simpleTogglePanel.state}" id="repeater" />
+</rich:modalPanel>
+...]]></programlisting>         
+                <para>
+                        In order to build this application, you can create a managed bean like this one.
+                </para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+public class SimpleTogglePanel {
+
+	private boolean  state = false;
+	
+	public boolean isState() {
+		return state;
+	}
+	public void setState(boolean state) {
+		this.state = state;
+	}	
+	
+    
+	public boolean gState() {
+        return state;
+    }
+	
+	public void stateTrue(ActionEvent event) {
+        this.state = true;
+    }
+	public void stateFalse(ActionEvent event) {
+        this.state = false;
+    } 
+}
+...]]></programlisting>                  
+        </section>
         
         
         <section id="RowSelectionInDataTable">
                 <?dbhtml filename="HighlightRowDataTable.html"?>
                 <title>How to highlight rows in a dataTable when the mouse is over?</title>
-                <para>In order to highlight rows in a dataTable when the mouse is over you should use <emphasis><property>"onmouseover"</property></emphasis> and <emphasis><property>"onmouseout"</property></emphasis>  attributes. </para>
+                <para>
+                        In order to highlight rows in a dataTable when the mouse is over you should use 
+                        <emphasis><property>&quot;onmouseover&quot;</property></emphasis> and <emphasis><property>&quot;onmouseout&quot;</property></emphasis>  attributes. 
+                </para>
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
