@@ -1460,7 +1460,7 @@ public class DataTableScrollerBean {
         <section id="RowSelectionInDataTable">
                 <?dbhtml filename="HighlightRowDataTable.html"?>
                 <title>How to highlight rows in a dataTable when the mouse is over?</title>
-                <para>In order <property>to highlight rows in a dataTable when the mouse is over</property> you should use <emphasis><property>"onmouseover"</property></emphasis> and <emphasis><property>"onmouseout"</property></emphasis>  attributes. </para>
+                <para>In order to highlight rows in a dataTable when the mouse is over you should use <emphasis><property>"onmouseover"</property></emphasis> and <emphasis><property>"onmouseout"</property></emphasis>  attributes. </para>
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
@@ -1552,5 +1552,43 @@ public class DataTableScrollerBean {
 ...]]></programlisting>
                 
         </section>
+        
+        <section id="OneRowSelectionInDataTable">
+                <?dbhtml filename="HighlightRowDataTable.html"?>
+                <title>How to select one row of a dataTable by clicking on it, even if clicked in an inputText of this row?</title>
+                <para>In order  to select one row of a dataTable by clicking on it you could use JavaScript function described below. </para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+<script type="text/javascript">
+        var oldRow;
+        function changeColor(row)
+        {
+                if (oldRow!=undefined)
+                        {
+	oldRow.style.backgroundColor='#ffffff';
+                        } 
+                row.style.backgroundColor='#ffff00'; 
+                oldRow=row;
+        }
+</script>                  
+...]]></programlisting>
+                <para>Then you could use <emphasis role="bold"><property>a4j:support</property></emphasis> with <emphasis><property>&quot;event&quot;</property></emphasis> and <emphasis><property>&quot;onsubmit&quot;</property></emphasis> attributes.</para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+<h:form>
+        <rich:dataTable cellpadding="0" cellspacing="0" 
+                                     width="700" border="0" var="record" value="#{report.expReport.records}">
+                <a4j:support event="onRowClick" onsubmit="changeColor(this)" ajaxSingle="true">
+                                <f:param name="currentRow" value="#{record.city}"/>
+                </a4j:support>
+               ...
+        </rich:dataTable>
+</h:form>    
+...]]></programlisting>                
+        </section>       
         
 </chapter>
