@@ -38,12 +38,7 @@
 
                     <entry>org.richfaces.PickListRenderer</entry>
                 </row>
-                <row>
-                    <entry>renderer-class</entry>
-                    
-                    <entry>org.richfaces.renderkit.html.PickListRendererGen</entry>
-                </row>
-                <row>
+                 <row>
                     <entry>tag-class</entry>
 
                     <entry>org.richfaces.taglib.PickListTag</entry>
@@ -59,10 +54,7 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
- <pickList:pickList  
-                copyControlLabel = "#{pickBean.copyLabel}"
-                value="#{pickBean.listValues}">
-                <f:selectItems value="#{pickBean.testList}"/>
+<pickList:pickList value="#{pickBean.listValues}">
 </pickList:pickList>
 ...]]></programlisting>
     </section>
@@ -96,100 +88,69 @@ HtmlPickList myPickList = new HtmlPickList();
 
         <!-- attributes of component  orderingList -->
 
-        <para>The <emphasis>
+        <para>
+            The <emphasis>
                 <property> &quot;value&quot;</property>
             </emphasis> 
-            attribute is used to access the values of a list. </para>
-   
-                      <para>  In the example
-                          below after submitting the form you can see the <emphasis role="bold">
-                              <property>&lt;rich:pickList&gt;</property></emphasis> component with the main attributes 
-                          and the <emphasis role="bold">
-                              <property>&lt;h:panelGrid&gt;</property></emphasis> where you can set the values.</para>
-                        <para>
-            <emphasis role="bold">Example:</emphasis>
+            attribute is used to access the values of a list. 
         </para>
-        <programlisting role="XML"><![CDATA[...
-<h:form>
-        <h:panelGrid columns="2">
-                <h:outputText value="set target list width: "></h:outputText>
-	  <h:inputText value="#{pickBean.targetListWidth}"></h:inputText>
-	  <h:outputText value="set source list width: "></h:outputText>
-	  <h:inputText value="#{pickBean.sourceListWidth}"></h:inputText>
-	  <h:outputText value="set list heights: "></h:outputText>
-	  <h:inputText value="#{pickBean.listsHeight}"></h:inputText>
-	  <h:outputText value="set 'CopyAll' control label: "></h:outputText>
-	   <h:inputText value="#{pickBean.copyAllLabel}"></h:inputText>
-	   <h:outputText value="set 'Copy' control label: "></h:outputText>
-	   <h:inputText value="#{pickBean.copyLabel}"></h:inputText>
-	   <h:outputText value="set 'Remove' control label: "></h:outputText>
-                  <h:inputText value="#{pickBean.removeLabel}"></h:inputText>
-	    <h:outputText value="set 'RemoveAll' control label: "></h:outputText>
-                  <h:inputText value="#{pickBean.removeAllLabel}"></h:inputText>
-         </h:panelGrid>
-        <pickList:pickList  valueChangeListener="#{pickBean.selectionChanged}" listsHeight="#{pickBean.listsHeight}"  
-sourceListWidth="#{pickBean.sourceListWidth}" targetListWidth="#{pickBean.targetListWidth}" copyAllControlLabel = "#{pickBean.copyAllLabel}"
-copyControlLabel = "#{pickBean.copyLabel}" removeControlLabel = "#{pickBean.removeLabel}"
-removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues}">
-                <f:selectItem itemValue="cat" itemLabel="cat"/>
-	  <f:selectItem itemValue="dog" itemLabel="dog"/>
-	  <f:selectItems value="#{pickBean.testList}"/>
-        </pickList:pickList>
-        <h:commandButton value="Submit" action="none"/>
-</h:form>
-...]]></programlisting>
-        
-        <!-- ordering control set-->
         <para>
             The <emphasis role="bold">
                 <property>&lt;rich:pickList&gt;</property></emphasis>
-            component provides changing &quot;height&quot; and &quot;width&quot; parameters of lists by using such attributes as:
-        <itemizedlist>
-            <listitem> 
-                <emphasis>
-                    <property> &quot;listsHeight&quot;</property></emphasis> that defines height of the list in &quot;px&quot;.
-                 
-            </listitem>
-            <listitem> 
-                <emphasis>
-                    <property> &quot;targetListWidth&quot;</property></emphasis> that defines width of a target list in &quot;px&quot;.
-                 
-            </listitem>
-            <listitem> 
-                <emphasis>
-                    <property> &quot;sourceListWidth&quot;</property></emphasis> that defines width of a source list in &quot;px&quot;.
-                 
-            </listitem>
-        </itemizedlist>
-        </para>  
-<para>
-    The <emphasis role="bold">
-        <property>&lt;rich:pickList&gt;</property></emphasis> component has performance to change the &quot;Button labels&quot; with the help of such attributes as:
-    <itemizedlist>
-        <listitem> 
-            <emphasis>
-                <property> &quot;copyAllControlLabel&quot;</property></emphasis> defines label for &quot;Copy all&quot; button.
-            
-        </listitem>
-        <listitem> 
-            <emphasis>
-                <property> &quot;copyControlLabel&quot;</property></emphasis> defines label for &quot;Copy&quot; button.
-            
-        </listitem>
-        <listitem> 
-            <emphasis>
-                <property> &quot;removeControlLabel&quot;</property></emphasis> defines label for &quot;Remove&quot; button.
-            
-        </listitem>
-        <listitem> 
-            <emphasis>
-                <property> &quot;removeAllControlLabel&quot;</property></emphasis> defines label for &quot;Remove all&quot; button.
-            
-        </listitem>
-    </itemizedlist>
-</para> 
+            component provides changing sizes of lists by using such attributes as:
+            <itemizedlist>
+                <listitem> 
+                    <emphasis>
+                        <property> &quot;listsHeight&quot;</property></emphasis> defines height of the lists.
+                    
+                </listitem>
+                <listitem> 
+                    <emphasis>
+                        <property> &quot;sourceListWidth&quot;</property></emphasis> defines width of a source list.
+                    
+                </listitem>
+                <listitem> 
+                    <emphasis>
+                        <property> &quot;targetListWidth&quot;</property></emphasis> defines width of a target list.
+                    
+                </listitem>
+              </itemizedlist>
+        </para> 
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<pickList:pickList listsHeight="#{pickBean.listsHeight}" sourceListWidth="#{pickBean.sourceListWidth}" targetListWidth="#{pickBean.targetListWidth}" value="#{pickBean.listValues}">
+        <f:selectItem itemValue="cat" itemLabel="cat"/>
+        <f:selectItem itemValue="dog" itemLabel="dog"/>
+        <f:selectItems value="#{pickBean.testList}"/>
+</pickList:pickList>
+   ...]]></programlisting>
         
-       
+        <para>
+            A <property>move controls set</property> could be defined with 
+            <emphasis>
+            <property> &quot;copyAllControlLabel&quot;</property></emphasis>, <emphasis>
+                <property> &quot;copyControlLabel&quot;</property></emphasis>, <emphasis>
+                    <property> &quot;removeControlLabel&quot;</property></emphasis>, <emphasis>
+                        <property> &quot;removeAllControlLabel&quot;</property>
+                    </emphasis> attributes.
+          
+         </para> 
+        <para>
+              <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<pickList:pickList copyAllControlLabel = "#{pickBean.copyAllLabel}" copyControlLabel = "#{pickBean.copyLabel}" removeControlLabel = "#{pickBean.removeLabel}" 
+removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues}">
+        <f:selectItem itemValue="cat" itemLabel="cat"/>
+        <f:selectItem itemValue="dog" itemLabel="dog"/>
+        <f:selectItems value="#{pickBean.testList}"/>
+</pickList:pickList>
+...]]></programlisting>
+        
+        <!-- ordering control set-->
+             
         <table>
             <title>Keyboard usage for elements selection</title>
             <tgroup cols="2">
@@ -572,11 +533,11 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                 <tbody>
                     <row>
                         <entry>rich-picklist-list</entry>
-                        <entry>Defines styles for a wrapper table element of a pickList</entry>
+                        <entry>Defines styles for a wrapper &lt;table&gt; element of a pickList</entry>
                     </row>
                     <row>
                         <entry>rich-list-picklist</entry>
-                        <entry>Defines styles for a wrapper table element of a pickList</entry>
+                        <entry>Defines styles for a wrapper &lt;table&gt; element of a pickList</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -605,7 +566,7 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
         </table>
         
         <table >
-            <title>Classes names that define a pressed and highlighted button representation</title>
+            <title>Classes names that define pressed and highlighted button representation</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -614,6 +575,14 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                     </row>
                 </thead>
                 <tbody>
+                    <row>
+                        <entry>rich-list-picklist-button</entry>
+                        <entry>Defines styles for a button</entry>
+                    </row>
+                    <row>
+                        <entry>rich-list-picklist-button-disabled</entry>
+                        <entry>Defines styles for a disabled button</entry>
+                    </row>
                     <row>
                         <entry>rich-list-picklist-button-press</entry>
                         <entry>Defines styles for a pressed button</entry>
