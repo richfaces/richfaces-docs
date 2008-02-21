@@ -1455,29 +1455,129 @@ public class DataTableScrollerBean {
                                 >here</ulink>.</para>
     </section>    -->
         
-        <!--section id="ScrollableDataTableDragAndDrop">
+        <section id="ScrollableDataTableDragAndDrop">
                 <?dbhtml filename="ScrollableDataTableDragAndDrop.html"?>
-                <title>How to select several rows in a scrollableDataTable and perform  Drag-and-Drop of several rows on dataTable?</title>
+                <title>How to select several rows in a scrollableDataTable and Drag-and-Drop them on dataTable?</title>
         <para>
                 How to get row selection in scrollableDataTable using <property>one and multi-selection rows mode</property> 
-                you could see section <ulink url="RFCfaq.html#ScrollableDataTableDragAndDrop">above</ulink>.
+                you could see the section <link  linkend="RowSelectionInScrollableDataTable">above</link>.
         </para>
         <para>
-               In the following example when user submit                 
+                In order to perform Drag-and-Drop of selected columns on a dataTable you could use 
+                <emphasis role="bold"><property>&lt;rich:dragSupport&gt;</property></emphasis> and <emphasis role="bold"><property>&lt;rich:dropSupport&gt;</property></emphasis>
+                components as it is shown in the example below.
         </para>
-        
-        </section-->
+        <para>
+                <emphasis role="bold">Example:</emphasis>
+        </para>      
+        <programlisting role="XML"><![CDATA[...
+<rich:scrollableDataTable rowKeyVar="rkv" frozenColCount="1" height="400px" width="700px" id="carList" rows="40" columnClasses="col"
+                                        value="#{dataTableScrollerBean.allCars}" var="category" sortMode="single" selection="#{dataTableScrollerBean.selection}">
+        <rich:column id="make">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Make" />
+                </f:facet>
+                <a4j:outputPanel>
+                        <rich:dragSupport dragType="selectionDrag" dragIndicator=":indicator"/>
+                        <h:outputText value="#{category.make}" />
+                </a4j:outputPanel>
+        </rich:column>
+        <rich:column id="model">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Model" />
+                </f:facet>
+                <h:outputText value="#{category.model}" />
+        </rich:column>
+        <rich:column id="price">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Price" />
+                </f:facet>
+                <h:outputText value="#{category.price}" />
+        </rich:column>
+        <rich:column id="mileage">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Mileage" />
+                </f:facet>
+                <h:outputText value="#{category.mileage}" />
+        </rich:column>
+        <rich:column width="200px" id="vin">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="VIN" />
+                </f:facet>
+                <h:outputText value="#{category.vin}" />
+        </rich:column>
+        <rich:column id="stock">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Stock" />
+                </f:facet>
+                <h:outputText value="#{category.stock}" />
+        </rich:column>
+</rich:scrollableDataTable>
+<rich:spacer height="20px"/>
+<rich:panel style="width:300px; height:300px">
+        <f:facet name="header">
+                <h:outputText value="Drop Here"/>
+        </f:facet>
+        <rich:dropSupport acceptedTypes="selectionDrag" dropListener="#{dataTableScrollerBean.dropListener}" reRender="table"/>
+        <rich:dataTable value="#{dataTableScrollerBean.droppedCars}" var="sel" id="table">
+                <rich:column>
+                        <f:facet name="header">
+                                <h:outputText value="Make" />
+                        </f:facet>
+                        <h:outputText value="#{sel.make}" />
+                </rich:column>
+                <rich:column id="model">
+                        <f:facet name="header">
+                                <h:outputText value="Model" />
+                        </f:facet>
+                        <h:outputText value="#{sel.model}" />
+                </rich:column>
+                <rich:column id="price">
+                        <f:facet name="header">
+                                <h:outputText value="Price" />
+                        </f:facet>
+                        <h:outputText value="#{sel.price}" />
+                </rich:column>
+                <rich:column id="mileage">
+                        <f:facet name="header">
+                                <h:outputText value="Mileage" />
+                        </f:facet>
+                        <h:outputText value="#{sel.mileage}" />
+                </rich:column> 
+                <rich:column id="stock">
+                        <f:facet name="header">
+                                <h:outputText value="Stock" />
+                        </f:facet>
+                        <h:outputText value="#{sel.stock}" />
+                </rich:column>
+        </rich:dataTable>
+</rich:panel>
+...]]></programlisting>
+                <para>This is the page from <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/scrollableDataTable.jsf">RichFaces LiveDemo</ulink> site and also uses beans from RichFaces LiveDemo site. 
+                       Only one method is added where the dropped selection is stored:</para>
+        <programlisting role="JAVA"><![CDATA[...
+public void dropListener(DropEvent event) {
+        System.out.println("Drop Listener Fired");
+        getDroppedCars().clear();
+        Iterator<SimpleRowKey> item = getSelection().getKeys();
+        while (item.hasNext()){
+                SimpleRowKey key = item.next();
+                getDroppedCars().add(getAllCars().get(key.intValue()));
+        }
+}
+...]]></programlisting>        
+        </section>
         
         <section id="SimpleTogglePanelPanelMenuState">
                 <?dbhtml filename="SimpleTogglePanelPanelMenuState.html"?>
-                <title>How to save the state of simpleTogglePanel or panelMenu?</title>
+                <title>How to save the state of simpleTogglePanel?</title>
                 <para>
                 In order to save the state (exapnd/collapse) of the <emphasis role="bold"><property>&lt;rich:simpleTogglePanel&gt;</property></emphasis> component 
                 you could use  <emphasis><property>&quot;opened&quot;</property></emphasis> attribute responsible for keeping a panel state 
                 and <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> binded to <property>onexpand</property> and <property>oncollapse</property> events.
                 </para>
                 <para>
-                        In the following example when you click on the toggle icon simpleTogglePanel arrears and current state displays on modal panel.
+                        In the following example when you click on the toggle icon simpleTogglePanel appears and current state displays on modal panel.
                         This state is remembered between page views.
                 </para>
                 <para>
