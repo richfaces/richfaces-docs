@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+    <sectioninfo>
+        <keywordset>
+            <keyword>rich:</keyword>
+            <keyword></keyword>
+        </keywordset>
+    </sectioninfo>
+    <table>
+        <title>Component identification parameters</title>
+        
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Value</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>component-type</entry>
+                    <entry>org.richfaces.ProgressBar</entry>
+                </row>
+                <!--row>
+                    <entry>component-class</entry>
+                    <entry></entry>
+                </row-->
+                <row>
+                    <entry>component-family</entry>
+                    <entry>org.richfaces.ProgressBar</entry>
+                </row>
+                <row>
+                    <entry>renderer-type</entry>
+                    <entry>org.richfaces.renderkit.ProgressBarRenderer</entry>
+                </row>
+                <row>
+                    <entry>tag-class</entry>
+                    <entry>org.richfaces.taglib.ProgressBarTag</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <section>
+        <title>Creating the Component with a Page Tag</title>
+        <para>Here is a simple example of how the component can be used on a page: </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+	<rich:progressBar value="#{bean.incValue}" enabled="#{bean.enabled}" id="progrs" action="#{bean.action}"	>
+		<f:facet name="initial">
+			<h:outputText value="Process not started"></h:outputText>
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="Process completed"></h:outputText>
+		</f:facet>
+		<h:outputText value="{value}%" ></h:outputText>
+	</rich:progressBar>
+...]]></programlisting>
+    </section>
+    <section>
+        <title>Creating the Component Dynamically Using Java</title>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.progressBar;
+...	
+HtmlColumns myColumns = new progressBar();
+...]]>
+        </programlisting>
+    </section>
+
+
+    <!-- Start  Details of Usage-->
+
+    <section>
+        <title>Details of Usage</title>
+        <para>    
+       Some processes running with in an application might take some time to complete, therefore in 
+       order to indicate for a user the status of the process we recommend you to use <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property>  </emphasis>
+component. 
+            </para>
+        <para>
+            
+            The component employs the following facets to display the &quot;initial&quot; and &quot;complete&quot; states  of the process: 
+        </para>
+
+        <programlisting role="XML"><![CDATA[...
+		<f:facet name="initial">
+			<h:outputText value="Process not started"></h:outputText>
+		</f:facet>
+
+...]]></programlisting>
+        <para>
+            and
+        </para>
+
+        <programlisting role="XML">
+            <![CDATA[...
+		<f:facet name="complete">
+			<h:outputText value="Process completed"></h:outputText>
+	</f:facet>
+
+            ...]]>
+        
+        </programlisting>       
+        <para> However, the usage of these facets is optional. If you omit them nothing will be displayed. </para>
+        
+        <para> The progress bar starts and finishes rendering its state relying on <emphasis><property>&quot;minValue&quot;</property></emphasis> (default value – &quot;0&quot;) 
+            and <emphasis><property>&quot;maxValue&quot;</property></emphasis>  (default value is &quot;100&quot;) parameters relatively.  See the following example: </para>
+        
+        
+        <programlisting role="XML">
+            <![CDATA[...
+		<rich:progressBar value="#{bean.incValue}" enabled="#{bean.enabled}" id="progrs"
+			minValue="50"
+			maxValue="400">
+		<h:outputText value="{value}%" ></h:outputText>
+	</rich:progressBar>
+
+
+            ...]]>
+            
+        </programlisting>   
+        
+        <para> In order do display textual and numerical information on the progress bar you need to use this code </para>
+      
+        <programlisting role="XML">   
+      <![CDATA[...
+<h:outputText value="{value}%" ></h:outputText>
+            ...]]>
+         </programlisting>     
+      
+      
+      
+        <para> The interval <emphasis><property>&quot;interval&quot;</property></emphasis>attribute defines the frequency of status polling. Polling is active while the component is operational. </para>   
+        <programlisting role="XML">   
+            <![CDATA[...
+<rich:progressBar value="#{bean.incValue}" enabled="#{bean.enabled}" id="progrs"
+			interval="900"	>
+			. . .
+	</rich:progressBar>
+            ...]]>
+        </programlisting>     
+      
+      
+        
+    </section>
+    <!-- End. Details of Usage-->
+    
+    
+    
+    
+    
+    
+    
+    
+  </section>
