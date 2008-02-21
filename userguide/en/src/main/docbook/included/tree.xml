@@ -397,45 +397,41 @@ HtmlTree myTree = new HtmlTree();
         </imageobject>
       </mediaobject>
     </figure>
-    <para>In the example when each node of data model is processed, data contained in the property
-        <property>&quot;data&quot;</property> of
-      <property>&quot;TreeNode&quot;</property> interface is placed in a request scope
-      variable, which name is defined with <emphasis>
+    <para>In the example above, when each node of data model is processed, data contained in the    <property>&quot;data&quot;</property> property
+       of
+      <property>&quot;TreeNode&quot;</property> interface is assigned to a request scope variable, which name is defined with <emphasis>
         <property>&quot;var&quot;</property>
       </emphasis> attribute. The value of the <emphasis>
         <property>&quot;nodeFace&quot;</property>
-      </emphasis> attribute is evaluated in correspondence with data placed in the <emphasis>
+      </emphasis> attribute is evaluated in correspondence with the data assigned to the <emphasis>
         <property>&quot;var&quot;</property>
-      </emphasis> attribute. And for the node representation is used the corresponding <emphasis
-        role="bold">
-        <property>&lt;rich:treeNode&gt;</property>
-      </emphasis> component (with a value of <emphasis>
+      </emphasis> attribute.  The corresponding <emphasis  role="bold"><property>&lt;rich:treeNode&gt;</property></emphasis> component (with a value of <emphasis>
         <property>&quot;type&quot;</property>
       </emphasis> attribute equal to a value of <emphasis>
         <property>&quot;nodeFace&quot;</property>
-      </emphasis>). For example, during processing of data model an object with name &quot;Chris
-      Rea&quot; was placed in the <emphasis>
+      </emphasis>) is used for the node representation.  For example, during data model processing, an object with a name &quot;Chris
+      Rea&quot; was inserted  in the <emphasis>
         <property>&quot;var&quot;</property>
-      </emphasis> attribute. Then value of <emphasis>
+      </emphasis> attribute. Then the value of <emphasis>
         <property>&quot;nodeFace&quot;</property>
-      </emphasis> attribute is evaluated as &quot;artist&quot;. Thus, for node
+      </emphasis> attribute was evaluated as &quot;artist&quot;. Thus, for the node
       representation the <emphasis role="bold">
         <property>&lt;rich:treeNode&gt;</property>
       </emphasis> with <emphasis>
         <property>&quot;type&quot;</property>
-      </emphasis> equal to &quot;artist&quot; is used.</para>
-    <para>Also you can define an EL-expression as value of the <emphasis>
+      </emphasis> equal to &quot;artist&quot;  was used.</para>
+    <para>You can also assign an EL-expression as value of the <emphasis>
         <property>&quot;nodeFace&quot;</property>
       </emphasis> attribute. See an example below: </para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[nodeFace="#{data.name != 'param-value' ? 'artist' : 'album'}" ]]></programlisting>
-    <para>There are some essential moments in a <emphasis>
+    <para>There are some essential points in a <emphasis>
         <property>&quot;nodeFace&quot;</property>
-      </emphasis> attribute usage. For their description it&apos;s necessary to define notions
-      of a <property>&quot;typeless node&quot;</property> and a <property>&quot;default
-        node&quot;</property>.</para>
+      </emphasis> attribute usage: you need to define notions for <property>typeless</property>  and a <property>default</property>  nodes.
+ </para>
+
     <para>The <property>typeless node</property> is the first <emphasis role="bold">
         <property>&lt;rich:treeNode&gt;</property>
       </emphasis> component (from all children nodes nested to the <emphasis role="bold">
@@ -472,20 +468,20 @@ HtmlTree myTree = new HtmlTree();
         </emphasis> attribute for this node is
       <property>&quot;false&quot;</property>.</listitem>
     </itemizedlist>
-    <para>There is also one especial moment in the <emphasis>
+    <para>There is also one thing that has to be remembered using  <emphasis>
         <property>&quot;type&quot;</property>
       </emphasis> and <emphasis>
         <property>&quot;rendered&quot;</property>
-      </emphasis> attributes usage. It&apos;s possible to define several <emphasis role="bold">
+      </emphasis> attributes: it&apos;s possible to define several <emphasis role="bold">
         <property>&lt;rich:treeNode&gt;</property>
-      </emphasis> components with the equal values of <emphasis>
+      </emphasis> components with  equal values of <emphasis>
         <property>&quot;type&quot;</property>
       </emphasis> attribute and different values of <emphasis>
         <property>&quot;rendered&quot;</property>
-      </emphasis> attribute. It provides the possibility to define different representation for the
+      </emphasis> attribute. It provides a possibility to define different representation styles for the
       same node types. In the example with artists and their albums (see <link linkend="example"
         >above</link>) it&apos;s possible to represent albums that are available for sale and
-      albums that are not available. An example is placed below:</para>
+      albums that are not available. Please study the example below:</para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
@@ -506,7 +502,7 @@ HtmlTree myTree = new HtmlTree();
     </rich:tree>
 </h:form>
 ...]]></programlisting>
-    <para>This is a result: </para>
+    <para>This is a result of the code: </para>
     <figure>
       <title>The <emphasis>
           <property>&quot;type&quot;</property>
@@ -536,18 +532,16 @@ HtmlTree myTree = new HtmlTree();
         <property>&quot;false&quot;</property>. Thus, the first <emphasis role="bold">
         <property>&lt;rich:treeNode&gt;</property>
       </emphasis> is selected for node representation. </para>
-    <para>Switching on tree nodes could be performed in three modes. Modes could be specified with <emphasis>
+    <para>Tree node can be run in tree modes.  Modes can be specified with <emphasis>
         <property>&quot;switchType&quot;</property>
       </emphasis> attribute for<emphasis role="bold">
         <property>&lt;rich:tree&gt;</property>
       </emphasis> component.</para>
     <itemizedlist>
-      <listitem>Ajax (default value) - Ajax submission is used for switching. Note, that for
-        collapse/expand operations, an Ajax request is sent to the server and it could cause a
-        short delay.</listitem>
-      <listitem>Server - regular form submission request is used.</listitem>
-      <listitem>Client - switching is done as a whole on a client, no interaction with a server
-        presents. Full page content is reloaded after every click.</listitem>
+      <listitem>Ajax (default value) - Ajax submission is used performing the functionality. 
+Note, that for collapse/expand operations an Ajax request is sent to the server and it can cause a short delay.</listitem>
+      <listitem>Server - regular form of submission request is used.</listitem>
+      <listitem>Client – all operations are performed totally on the client; no interaction with a server is involved. Full page content is reloaded after every action.</listitem>
     </itemizedlist>
     <para> The <emphasis>
       <property>&quot;icon&quot;</property>
@@ -557,9 +551,10 @@ HtmlTree myTree = new HtmlTree();
       <property>&quot;iconExpanded&quot;</property>
     </emphasis>, <emphasis>
       <property>&quot;iconLeaf&quot;</property>
-    </emphasis> attributes define icons for the component. Also you can define icons using facets
-      with the same names. If the facets are defined, the corresponding attributes are ignored and
-      facets content is used as icons. By default the width of a rendered facet area is 16px. </para>
+    </emphasis> attributes set the icons&apos;  images for the component. You can also define icons using facets with the same names. 
+
+If the facets are defined, the corresponding attributes are ignored and
+      facets&apos; content is used as icons. By default the width of a rendered facet area is 16px. </para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
@@ -592,10 +587,10 @@ HtmlTree myTree = new HtmlTree();
     </emphasis> and <emphasis>
       <property>&quot;var&quot;</property>
     </emphasis>. Besides, visual representation shouldn&apos;t be defined right in the
-      <property>tree</property>. In this case a tree tag is intended mainly for defining common
+      <property>tree</property>. In this case a <property>&lt;rich: tree&gt;</property> tag is applied mainly for defining common
       attributes such as <emphasis>
         <property>&quot;ajaxSubmitSelection&quot;</property>
-      </emphasis>, for instance. </para>
+      </emphasis> etc. </para>
   </section>
 
   <section>
@@ -603,24 +598,31 @@ HtmlTree myTree = new HtmlTree();
     <para>The <emphasis role="bold">
         <property>&lt;rich: tree&gt;</property>
       </emphasis> component functionality provides a built-in support for Drag and Drop operations.
-      The main usage principles are the same as for RichFaces DnD wrapper components. Hence, to get
-      additional information on the topic, read the corresponding chapters:<link linkend="dndParam"
+      The main usage principles are similar to RichFaces DnD wrapper components.  Hence, to get
+      additional information on the issue, read the corresponding chapters:<link linkend="dndParam"
         >&quot;rich:dndParam&quot;</link>, <link linkend="dragSupport"
         >&quot;rich:dragSupport&quot;</link>, <link linkend="dragIndicator"
         >&quot;rich:dragIndicator&quot;</link>, <link linkend="dropSupport"
-        >&quot;rich:dropSupport&quot;</link>. As <property>treeNodes</property> could be
-      Drag, Drop or DnD elements, a <property>tree</property> can include the following attributes
-      groups.</para>
+        >&quot;rich:dropSupport&quot;</link>. Since <property>treeNodes</property>can be assigned as 
+      Drag, Drop or Drag-and-Drop elements, a <property>tree</property> can include the following
+      groups of attributes.</para>
     <table>
-      <title>Drag attributes group</title>
+      <title>Drag group</title>
       <tgroup cols="2">
         <thead>
+          <row>
+            <entry>Attribute Name</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
           <row>
             <entry>dragValue</entry>
             <entry>Element value drag passing into processing after a Drop event</entry>
           </row>
-        </thead>
-        <tbody>
+
+
+
           <row>
             <entry>dragListener</entry>
             <entry>A listener that processes a Drag event</entry>
@@ -638,15 +640,20 @@ HtmlTree myTree = new HtmlTree();
       </tgroup>
     </table>
     <table>
-      <title>Drop attributes group</title>
+      <title>Drop group</title>
       <tgroup cols="2">
         <thead>
           <row>
-            <entry>dropValue</entry>
-            <entry>Element value drop passed into processing after Drop events .</entry>
+            <entry>Attribute Name</entry>
+            <entry>Description</entry>
           </row>
         </thead>
         <tbody>
+          <row>
+            <entry>dropValue</entry>
+            <entry>Element value drop passed into processing after Drop events </entry>
+          </row>
+
           <row>
             <entry>dropListener</entry>
             <entry>A listener that processes a Drop event. </entry>
