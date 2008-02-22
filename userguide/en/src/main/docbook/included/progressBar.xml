@@ -76,21 +76,21 @@ HtmlColumns myColumns = new progressBar();
     <section>
         <title>Details of Usage</title>
         <para>    
-       Some processes running with in an application might take some time to complete, therefore in 
+       Some processes running within an application might take some time to complete, therefore in 
        order to indicate for a user the status of the process we recommend you to use <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property>  </emphasis>
 component. 
             </para>
         <para>
             
-            The component employs the following facets to display the &quot;initial&quot; and &quot;complete&quot; states  of the process: 
+            The component employs the following facets to display the <property> &quot;initial&quot;</property> and <property> &quot;complete&quot;</property> states  of the process: 
         </para>
 
         <programlisting role="XML"><![CDATA[...
 		<f:facet name="initial">
 			<h:outputText value="Process not started"></h:outputText>
 		</f:facet>
-
-...]]></programlisting>
+.		.]]>
+</programlisting>
         <para>
             and
         </para>
@@ -99,14 +99,13 @@ component.
             <![CDATA[...
 		<f:facet name="complete">
 			<h:outputText value="Process completed"></h:outputText>
-	</f:facet>
-
-            ...]]>
+	     </f:facet>
+                ...]]>
         
         </programlisting>       
         <para> However, the usage of these facets is optional. If you omit them nothing will be displayed. </para>
         
-        <para> The progress bar starts and finishes rendering its state relying on <emphasis><property>&quot;minValue&quot;</property></emphasis> (default value – &quot;0&quot;) 
+        <para> The progress bar starts and finishes rendering its state being governed by   <emphasis><property>&quot;minValue&quot;</property></emphasis> (default value – &quot;0&quot;) 
             and <emphasis><property>&quot;maxValue&quot;</property></emphasis>  (default value is &quot;100&quot;) parameters relatively.  See the following example: </para>
         
         
@@ -117,13 +116,11 @@ component.
 			maxValue="400">
 		<h:outputText value="{value}%" ></h:outputText>
 	</rich:progressBar>
-
-
             ...]]>
             
         </programlisting>   
         
-        <para> In order do display textual and numerical information on the progress bar you need to use this code </para>
+        <para> In order do display textual and numerical information on the progress bar you need to use this code: </para>
       
         <programlisting role="XML">   
       <![CDATA[...
@@ -133,26 +130,95 @@ component.
       
       
       
-        <para> The interval <emphasis><property>&quot;interval&quot;</property></emphasis>attribute defines the frequency of status polling. Polling is active while the component is operational. </para>   
+        <para> The <emphasis><property>&quot;interval&quot;</property></emphasis>attribute defines the frequency of status polling. Polling is active while the component is operational. </para>   
         <programlisting role="XML">   
             <![CDATA[...
 <rich:progressBar value="#{bean.incValue}" enabled="#{bean.enabled}" id="progrs"
 			interval="900"	>
 			. . .
 	</rich:progressBar>
-            ...]]>
+                     ...]]>
         </programlisting>     
       
-      
-        
+ 
+
+        <para>The <property>&lt;rich:progressBar&gt;</property>component can be use in two modes: Ajax (default) and Client.  In order to define the mode you need, use <emphasis><property>&quot;mode&quot;</property></emphasis> attribute. </para>   
+
+        <itemizedlist>
+             <listitem>
+                 <para><property>Ajax</property> - polling is activated when the component is enabled to check its value. </para>
+             </listitem>
+            <listitem>
+                <para><property>Client</property> - component updates after its value changed through JavaScript API. </para>
+            </listitem>
+
+         </itemizedlist>
+
+
     </section>
     <!-- End. Details of Usage-->
     
     
+    <!-- JavaScript API-->  
+    <section>
+        <title>JavaScript API</title>
+        <table>
+            <title>JavaScript API</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Function</entry>
+                        <entry>Description</entry>
+                      
+                    </row>
+                </thead>
+                <tbody>
+                    <!--Sorting API -->
+                    <row>
+                        <entry>enable()</entry>
+                        <entry>Begins polling for ajax mode </entry>
+             
+                    </row>
+                    <row>
+                        <entry>disable()</entry>
+                        <entry>Stops polling for ajax mode</entry>
+          
+                    </row>
+                    
+                    <row>
+                        <entry>setValue(value)</entry>
+                        <entry>Updates the progress of the process</entry>
+                        
+                    </row>
+                    <row>
+                        <entry>setLabel(label)</entry>
+                        <entry>Update the label for the process</entry>
+                        
+                    </row>
+                    
+                    
+                    
+                    
+                </tbody>
+            </tgroup>
+        </table>
+    </section>
+    <!-- End of JavaScript API-->  
     
     
+    <!-- Look-and-Feel Customization-->  
     
+    <section>
+        <title>Look-and-Feel Customization</title>
+        <para>For skinnability implementation, the component uses a <emphasis>
+            <property>style class redefinition method.</property>
+        </emphasis> Default style classes are mapped on <emphasis>
+            <property>skin parameters.</property>
+        </emphasis></para>
+
+    </section>   
     
+    <!-- End of Look-and-Feel Customization-->  
     
     
   </section>
