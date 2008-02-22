@@ -1584,13 +1584,13 @@ public void dropListener(DropEvent event) {
                         <emphasis role="bold">Example:</emphasis>
                 </para>
 <programlisting role="XML"><![CDATA[...
-<rich:simpleTogglePanel  id="stpIncludeID" switchType="ajax" width="600px" opened="#{simpleTogglePanel.state}" >
-        <a4j:support event="onexpand" actionListener="#{simpleTogglePanel.stateTrue}" reRender="repeater" oncomplete="javascript:Richfaces.showModalPanel('panel');"/>
-        <a4j:support event="oncollapse" actionListener="#{simpleTogglePanel.stateFalse}" reRender="repeater" oncomplete="javascript:Richfaces.showModalPanel('panel')"/>
+<rich:simpleTogglePanel id="toggleP" label="simpleTogglePanel" switchType="client" width="600px" opened="#{demo.state}">
+        <a4j:support event="onexpand" actionListener="#{demo.stateTrue}" reRender="repeater" oncomplete="Richfaces.showModalPanel('myFrom:panel')" />
+        <a4j:support event="oncollapse" actionListener="#{demo.stateFalse}" reRender="repeater" oncomplete="Richfaces.showModalPanel('myFrom:panel')" />
         <h:panelGrid columns="2" border="0">
-                <h:graphicImage url="/pics/Canon.jpg" alt="" width="100px" height="100px"/>
+                <h:graphicImage url="pics/Canon.jpg" alt="" width="100px" height="100px" />
                 <h:panelGroup>
-                        <h:outputText style="font: 18px;font-weight: bold;" value="Canon EOS Digital Rebel XT"/>
+                        <h:outputText style="font: 18px;font-weight: bold;" value="Canon EOS Digital Rebel XT" />
                         <f:verbatim>
                                 <br />
                                 8.2 Megapixels - SLR / Large Digital Camera - 1.8 in LCD Screen -
@@ -1599,16 +1599,15 @@ public void dropListener(DropEvent event) {
                 </h:panelGroup>
         </h:panelGrid>
 </rich:simpleTogglePanel>
-  
-<rich:modalPanel id="panel" width="200" height="100">
+<rich:modalPanel id="panel" width="300" height="100">
         <f:facet name="header">
-                <h:outputText value="States of simpleTogglePanel"/>
+                <h:outputText value="States of simpleTogglePanel" />
         </f:facet>
         <f:facet name="controls">
-                <span style="cursor:pointer" onclick="javascript:Richfaces.hideModalPanel('panel')">X</span>
+                <span style="cursor: pointer" onclick="Richfaces.hideModalPanel('myFrom:panel')">X</span>
         </f:facet>
-        <h:outputText value="Expanded: " style="font-weight:bold;"/>
-        <h:outputText value="#{simpleTogglePanel.state}" id="repeater" />
+        <h:outputText value="Expanded simpleTogglePanel: " style="font-weight:bold;" />
+        <h:outputText value="#{demo.state}" id="repeater" />
 </rich:modalPanel>
 ...]]></programlisting>         
                 <para>
@@ -1620,26 +1619,23 @@ public void dropListener(DropEvent event) {
                 <programlisting role="XML"><![CDATA[...
 public class SimpleTogglePanel {
 
-	private boolean  state = false;
-	
-	public boolean isState() {
-		return state;
-	}
-	public void setState(boolean state) {
-		this.state = state;
-	}	
-	
-    
-	public boolean gState() {
-        return state;
-    }
-	
-	public void stateTrue(ActionEvent event) {
-        this.state = true;
-    }
-	public void stateFalse(ActionEvent event) {
-        this.state = false;
-    } 
+        private boolean  state = false;
+        
+        public boolean isState() {
+                return state;
+        }
+        
+        public void setState(boolean state) {
+                this.state = state;
+        }	
+        
+        public void stateTrue(ActionEvent event) {
+                this.state = true;
+        }
+        
+        public void stateFalse(ActionEvent event) {
+                this.state = false;
+        } 
 }
 ...]]></programlisting>                  
         </section>
