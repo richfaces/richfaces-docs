@@ -63,8 +63,20 @@ HtmlAjaxSupport mySupport = new HtmlAjaxSupport();>]]></programlisting>
 </para>
     <para><emphasis role="bold">Example:</emphasis></para>
 	<programlisting role="XML"><![CDATA[<h:inputText value="#{bean.text}">
-    <a4j:support event="onkeyup" reRender="repeater"/>
+    <a4j:support event="onkeyup" reRender="output" action="#{bean.action}"/>
 </h:inputText>
+]]></programlisting>
+    
+   <para> Below you can see example Java code where support was added as facelets, not children:</para>   
+    <para><emphasis role="bold">Example:</emphasis></para>
+    <programlisting role="JAVA"><![CDATA[
+HtmlInputText inputText = new HtmlInputText();
+...
+HtmlAjaxSupport ajaxSupport = new HtmlAjaxSupport();
+      ajaxSupport.setActionExpression(FacesContext.getCurrentInstance().getApplication().getExpressionFactory().createMethodExpression(FacesContext.getCurrentInstance().getELContext(), "#{bean.action}", String.class, new Class[] {}));
+      ajaxSupport.setEvent("onkeyup");
+      ajaxSupport.setReRender("output");
+      inputText.getFacets().put("a4jsupport", ajaxSupport);
 ]]></programlisting>
 <para>Is decoded on a page as:</para>
 
@@ -149,7 +161,7 @@ event calls a utility RichFaces method that submit a form creating a special mar
 Moreover, if the next request is already sent, the rerendering after the previous request is banned, and
  it helps to avoid unnecessary processing on the client.</para>
         </listitem>
-      </itemizedlist>
+	</itemizedlist>
   </section>
   
     <section>
