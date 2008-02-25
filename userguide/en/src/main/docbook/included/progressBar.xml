@@ -76,54 +76,100 @@ HtmlColumns myColumns = new progressBar();
     <section>
         <title>Details of Usage</title>
         <para>    
-       Some processes running within an application might take some time to complete, therefore in 
-       order to indicate for a user the status of the process we recommend you to use <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property>  </emphasis>
-component. 
-            </para>
+            
+            As it was mentioned above <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property>  </emphasis>
+            component displays the status of the ongoing process.  The component has a number of key attributes. 
+        </para>
+        
+        <para>
+            
+            <property> &quot;label&quot;</property>  the attribute responsible for displaying informational 
+            data on the progress bar, if it&apos;s not displayed using  children components. 
+            If this attribute is not set and the children components are not used either, no textual information 
+            regarding ongoing process will be indicated. 
+            In order to indicated the current status you need to pass the value to this attribute. Please see see an example.
+        </para>     
+        
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="JAVA"><![CDATA[
+...	
+<progressBar:progressBar value="#{bean.incValue}" id="progrs"
+        label="{value}%">
+</progressBar:progressBar>
+...]]>
+        </programlisting>
+        
+        <para>
+            
+            <property> &quot;value&quot;</property> sets the current value of the process. Status of the process is calculated basing on value.  
+        </para>     
+        
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="JAVA"><![CDATA[
+...	
+	<progressBar:progressBar	
+			value="#{bean.incValue}"
+	</progressBar:progressBar>
+...]]>
+        </programlisting>
+        
+ 
+        
+
         <para>
             
             The component employs the following facets to display the <property> &quot;initial&quot;</property> and <property> &quot;complete&quot;</property> states  of the process: 
         </para>
-
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
         <programlisting role="XML"><![CDATA[...
-		<f:facet name="initial">
-			<h:outputText value="Process not started"></h:outputText>
-		</f:facet>
-.		.]]>
+<f:facet name="initial">
+        <h:outputText value="Process not started" />
+</f:facet>
+...]]>
 </programlisting>
         <para>
             and
         </para>
-
-        <programlisting role="XML">
-            <![CDATA[...
-		<f:facet name="complete">
-			<h:outputText value="Process completed"></h:outputText>
-	     </f:facet>
-                ...]]>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<f:facet name="complete">
+        <h:outputText value="Process completed" />
+</f:facet>
+ ...]]>
         
         </programlisting>       
         <para> However, the usage of these facets is optional. If you omit them nothing will be displayed. </para>
         
         <para> The progress bar starts and finishes rendering its state being governed by   <emphasis><property>&quot;minValue&quot;</property></emphasis> (default value – &quot;0&quot;) 
-            and <emphasis><property>&quot;maxValue&quot;</property></emphasis>  (default value is &quot;100&quot;) parameters relatively.  See the following example: </para>
+            and <emphasis><property>&quot;maxValue&quot;</property></emphasis>  (default value is &quot;100&quot;) attributes relatively.  See the following example.</para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>      
         
-        
-        <programlisting role="XML">
-            <![CDATA[...
-		<rich:progressBar value="#{bean.incValue}" enabled="#{bean.enabled}" id="progrs"
-			minValue="50"
-			maxValue="400">
-		<h:outputText value="{value}%" ></h:outputText>
-	</rich:progressBar>
-            ...]]>
-            
+        <programlisting role="XML"><![CDATA[...
+<rich:progressBar value="#{bean.incValue}" enabled="#{bean.enabled}" id="progrs"
+        minValue="50"
+        maxValue="400">
+        <h:outputText value="{value}%" ></h:outputText>
+</rich:progressBar>
+...]]>          
         </programlisting>   
         
-        <para> In order do display textual and numerical information on the progress bar you need to use this code: </para>
-      
-        <programlisting role="XML">   
-      <![CDATA[...
+        <para> In order to display textual and numerical information on the progress bar you need to use this code: </para>
+       
+        
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
 <h:outputText value="{value}%" ></h:outputText>
             ...]]>
          </programlisting>     
@@ -131,18 +177,22 @@ component.
       
       
         <para> The <emphasis><property>&quot;interval&quot;</property></emphasis>attribute defines the frequency of status polling. Polling is active while the component is operational. </para>   
-        <programlisting role="XML">   
-            <![CDATA[...
+     
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        
+        <programlisting role="XML"><![CDATA[...
 <rich:progressBar value="#{bean.incValue}" enabled="#{bean.enabled}" id="progrs"
-			interval="900"	>
-			. . .
-	</rich:progressBar>
-                     ...]]>
+    nterval="900"	>
+        . . .
+</rich:progressBar>
+...]]>
         </programlisting>     
       
  
 
-        <para>The <property>&lt;rich:progressBar&gt;</property>component can be use in two modes: Ajax (default) and Client.  In order to define the mode you need, use <emphasis><property>&quot;mode&quot;</property></emphasis> attribute. </para>   
+        <para>The <property>&lt;rich:progressBar&gt;</property>component can be used in two modes: Ajax (default) and Client.  In order to define the mode you need to  use <emphasis><property>&quot;mode&quot;</property></emphasis> attribute. </para>   
 
         <itemizedlist>
              <listitem>
@@ -160,7 +210,7 @@ component.
     
     
     <!-- JavaScript API-->  
-    <section>
+ <section>
         <title>JavaScript API</title>
         <table>
             <title>JavaScript API</title>
@@ -205,19 +255,26 @@ component.
     </section>
     <!-- End of JavaScript API-->  
     
-    
     <!-- Look-and-Feel Customization-->  
     
     <section>
         <title>Look-and-Feel Customization</title>
-        <para>For skinnability implementation, the component uses a <emphasis>
+        <para>For skinnability implementation, the components use a <emphasis>
             <property>style class redefinition method.</property>
         </emphasis> Default style classes are mapped on <emphasis>
             <property>skin parameters.</property>
         </emphasis></para>
-
-    </section>   
-    
+        <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+            <property>&lt;rich:progressBar&gt;</property>
+        </emphasis> components at once: <itemizedlist>
+            <listitem>Redefine the corresponding skin parameters</listitem>
+            <listitem> Add to your style sheets style classes used by a <emphasis role="bold">
+                <property>&lt;rich:progressBar&gt;</property>
+            </emphasis> component</listitem>
+        </itemizedlist>
+        </para>
+    </section>
+       
     <!-- End of Look-and-Feel Customization-->  
     
     
