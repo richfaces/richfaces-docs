@@ -62,15 +62,15 @@ HtmlAjaxSupport mySupport = new HtmlAjaxSupport();>]]></programlisting>
     <para>A4j support addition is very similar to correspondent event redefinition of a component, i.e. 
 </para>
     <para><emphasis role="bold">Example:</emphasis></para>
-	<programlisting role="XML"><![CDATA[<h:inputText value="#{bean.text}">
+	<programlisting role="XML"><![CDATA[...
+<h:inputText value="#{bean.text}">
     <a4j:support event="onkeyup" reRender="output" action="#{bean.action}"/>
 </h:inputText>
-]]></programlisting>
+...]]></programlisting>
     
    <para> Below you can see example Java code where support was added as facelets, not children:</para>   
     <para><emphasis role="bold">Example:</emphasis></para>
-    <programlisting role="JAVA"><![CDATA[
-HtmlInputText inputText = new HtmlInputText();
+    <programlisting role="JAVA"><![CDATA[HtmlInputText inputText = new HtmlInputText();
 ...
 HtmlAjaxSupport ajaxSupport = new HtmlAjaxSupport();
       ajaxSupport.setActionExpression(FacesContext.getCurrentInstance().getApplication().getExpressionFactory().createMethodExpression(FacesContext.getCurrentInstance().getELContext(), "#{bean.action}", String.class, new Class[] {}));
