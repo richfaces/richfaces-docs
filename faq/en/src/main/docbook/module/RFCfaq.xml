@@ -1777,5 +1777,30 @@ public class demo {
 </h:form>    
 ...]]></programlisting>                
         </section>       
-        
+ <section id="AddSupportAsFacet">
+         <title>How to add support as facet instead of children?</title>
+         <para>In order to add <emphasis role="bold">
+                 <property>&lt;a4j:support&gt;</property>
+         </emphasis> in Java code you should  add it as <emphasis><property>facet</property></emphasis>, not children:</para>
+         <para>
+                 <emphasis role="bold">Example:</emphasis>
+         </para>
+         <programlisting role="XML"><![CDATA[...
+<h:inputText value="#{bean.text}">
+    <a4j:support event="onkeyup" reRender="output" action="#{bean.action}"/>
+</h:inputText>
+...]]></programlisting>      
+         <para>Below you can see Java code:</para>
+         <para>
+                 <emphasis role="bold">Example:</emphasis>
+         </para>
+<programlisting role="JAVA"><![CDATA[HtmlInputText inputText = new HtmlInputText();
+...
+HtmlAjaxSupport ajaxSupport = new HtmlAjaxSupport();
+      ajaxSupport.setActionExpression(FacesContext.getCurrentInstance().getApplication().getExpressionFactory().createMethodExpression(FacesContext.getCurrentInstance().getELContext(), "#{bean.action}", String.class, new Class[] {}));
+      ajaxSupport.setEvent("onkeyup");
+      ajaxSupport.setReRender("output");
+      inputText.getFacets().put("a4jsupport", ajaxSupport);
+]]></programlisting>      
+ </section>
 </chapter>
