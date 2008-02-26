@@ -79,7 +79,7 @@ HtmlPickList myPickList = new HtmlPickList();
         <para>The <emphasis role="bold">
                 <property>&lt;rich:pickList&gt;</property>
             </emphasis> component consists of <itemizedlist>
-                <listitem>2 <property>Item lists</property> and every item has three different representations: common, selected, active.
+                <listitem>2 <property>item lists</property>. Every item has three different representations: common, selected, active.
                     Combination of these states is possible.</listitem>
                 <listitem>
                     <property>Move controls set</property> is a set of controls, which performs moving items between lists.
@@ -93,8 +93,19 @@ HtmlPickList myPickList = new HtmlPickList();
             The <emphasis>
                 <property> &quot;value&quot;</property>
             </emphasis> 
-            attribute is used to access the values of a list. 
+            attribute is used to access the values of a target list.  The <emphasis>
+                <property> &quot;selectItems&quot;</property></emphasis> facet is used to access the values of a source list.
+          </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
         </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:pickList value="#{pickBean.listValues}">
+        <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
+        <f:selectItem itemValue="Audi" itemLabel="Audi"/>
+        <f:selectItems value="#{pickBean.testList}"/>
+</rich:pickList>
+   ...]]></programlisting>
         <para>
             The <emphasis role="bold">
                 <property>&lt;rich:pickList&gt;</property></emphasis>
@@ -751,7 +762,7 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
         </para>
         <programlisting role="CSS"><![CDATA[...
 .myClass{
-        font-style:italic;
+        font-weight:bold;
 }
 ...]]></programlisting>  
         <para>The <emphasis><property>&quot;styleClass&quot;</property></emphasis> attribute for <emphasis role="bold"
