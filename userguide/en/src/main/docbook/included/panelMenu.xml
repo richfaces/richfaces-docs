@@ -113,7 +113,11 @@ HtmlPanelMenu myPanelMenu = new HtmlPanelMenu();
         <property>&quot;mode&quot;</property>
       </emphasis> and <emphasis>
         <property>&quot;expandMode&quot;</property>
-      </emphasis> attributes could be used with three possible parameters.</para>
+      </emphasis> attributes could be used with three possible parameters. The <emphasis>
+        <property>&quot;mode&quot;</property>
+      </emphasis> attribute defines parameters for all included <emphasis role="bold">
+        <property>&lt;rich:panelMenuItem&gt;</property>
+      </emphasis> elements.</para>
 
     <itemizedlist>
       <listitem>
@@ -121,22 +125,46 @@ HtmlPanelMenu myPanelMenu = new HtmlPanelMenu();
       </listitem>
     </itemizedlist>
 
-    <para>Regular form submission request is used.</para>
-
+    <para>The common submission of the form is performed and a page is completely refreshed.</para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+      <rich:panelMenu mode="server">
+          <rich:panelMenuGroup label="test Group" action="#{bean.action}"> 
+              <rich:panelMenuItem label="test" action="#{capitalsBean.action}"> 
+                  <f:param value="test value" name="test"/> 
+              </rich:panelMenuItem> 
+          </rich:panelMenuGroup>
+      </rich:panelMenu>
+...]]></programlisting>
     <itemizedlist>
       <listitem>
         <para>Ajax</para>
       </listitem>
     </itemizedlist>
 
-    <para>Ajax submission is used for switching.</para>
-
+    <para>An Ajax form submission is performed, and additionally specified elements in the <emphasis>
+      <property>&quot;reRender&quot;</property>
+    </emphasis> attribute are reRendered.</para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+      <rich:panelMenu mode="ajax">
+           <rich:panelMenuGroup label="test Group" action="#{bean.action}"> 
+               <rich:panelMenuItem label="test" reRender="test" action="#{capitalsBean.action}"> 
+                   <f:param value="test value" name="test"/> 
+               </rich:panelMenuItem> 
+          </rich:panelMenuGroup>
+      </rich:panelMenu>
+...]]></programlisting>
     <itemizedlist>
       <listitem>
         <para>None</para>
       </listitem>
     </itemizedlist>
-
+    
     <para><emphasis>
         <property>&quot;Action&quot;</property>
       </emphasis> and <emphasis>
@@ -149,7 +177,7 @@ HtmlPanelMenu myPanelMenu = new HtmlPanelMenu();
     </para>
     <programlisting role="XML"><![CDATA[...
       <rich:panelMenu event="onclick" submitMode="none">
-            < rich:panelMenuItem label="Link to external page">
+            <rich:panelMenuItem label="Link to external page">
                   <h:outputLink ... >
             <rich:panelMenuItem>
       </rich:panelMenu>
@@ -193,7 +221,20 @@ HtmlPanelMenu myPanelMenu = new HtmlPanelMenu();
           <!--Nested panelMenu components-->
         </rich:panelMenuGroup>
       </rich:panelMenu>
-...]]></programlisting>
+      ...]]></programlisting>
+    <para>
+      The <emphasis>
+        <property>&quot;label&quot;</property>
+      </emphasis> attribute is a generic attribute.
+      The <emphasis>
+        <property>&quot;label&quot;</property>
+      </emphasis> attribute provides an association between a component, and the message that the component (indirectly) produced.  
+      This attribute defines the parameters of localized error and informational messages that
+      occur as a result of conversion, validation, or other application actions during the request
+      processing lifecycle. With the help of this attribute you can  replace the
+      last parameter substitution token shown in the messages. For example, {1} for “DoubleRangeValidator.MAXIMUM”, {2}
+      for “ShortConverter.SHORT”.
+    </para>
   </section>
 
   <section>
