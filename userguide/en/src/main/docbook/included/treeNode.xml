@@ -14,7 +14,7 @@
       <thead>
         <row>
           <entry>Name</entry>
-          <entry>Value</entry> 
+          <entry>Value</entry>
         </row>
       </thead>
       <tbody>
@@ -44,7 +44,7 @@
 
   <section>
     <title>Creating the Component with a Page Tag</title>
-    <para>To create the simplest variant on a page use the following syntax:</para>
+    <para>Here is a simple example as it can be used on a page: </para>
 
     <para>
       <emphasis role="bold">Example:</emphasis>
@@ -70,13 +70,44 @@ HtmlTreeNode myPanel = new HtmlTreeNode();
 ...
 ]]></programlisting>
   </section>
-  
   <section>
     <title>Details of Usage</title>
-    <para>As it has been mentioned <link linkend="treeNode">above</link>, <property>treeNode</property> defines a template for nodes
+    <para> The <emphasis>
+        <property>&quot;icon&quot;</property>
+      </emphasis>, <emphasis>
+        <property>&quot;iconCollapsed&quot;</property>
+      </emphasis>, <emphasis>
+        <property>&quot;iconExpanded&quot;</property>
+      </emphasis>, <emphasis>
+        <property>&quot;iconLeaf&quot;</property>
+      </emphasis> attributes define icons for the component. Also you can define icons using facets
+      with the same names. If the facets are defined, the corresponding attributes are ignored and
+      facets contents are used as icons. The width of a rendered facet area is 16px. </para>
+	  
+    <programlisting role="XML"><![CDATA[...
+    <rich:tree ...>
+        ...
+        <rich:treeNode ...>
+            <f:facet name="icon">
+                <hutputText value="A"/>
+            </f:facet>
+            <f:facet name="iconCollapsed">
+                <hutputText value="B"/>
+            </f:facet>		
+            <f:facet name="iconExpanded">
+                <hutputText value="C"/>
+            </f:facet>
+            <f:facet name="iconLeaf">
+                <hutputText value="D"/>
+            </f:facet>
+        </rich:treeNode>
+        ...
+    </rich:tree>
+...
+]]></programlisting>
+    <para>As it has been mentioned <link linkend="treeNode">above</link>, <emphasis role="bold"><property>&lt;rich:treeNode&gt;</property></emphasis>  defines a template for nodes
       rendering in a tree. Thus, during XML document rendering (a web.xml application) as a tree,
       the following nodes output (passed via var=&quot;data&quot; on a tree) happens:</para>
-
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
@@ -97,52 +128,20 @@ HtmlTreeNode myPanel = new HtmlTreeNode();
         </imageobject>
       </mediaobject>
     </figure>
-    <para>Hence, outputText outputs the &quot;context-param&quot; string and then the input
-      is output for the data.name element of this node.</para>
+    <para>Hence,<property> <![CDATA[<h:outputText />]]></property> tag  outputs the &quot;context-param&quot; string and
+      then the <property><![CDATA[<h:inputText/>]]></property> outputs the data.name element of this node.  
+    </para>
     <para>Different nodes for rendering could be defined depending on some conditions on the tree
       level. Each condition represents some rendering template. To get more information on various
         <property>treeNodesAdaptorAdaptor</property> definition for nodes, <link linkend="tree">see the tree
         component chapter</link>.</para>
     <para>Switching between expanded/collapsed modes is also managed on the tree level and defined
       in <link linkend="tree">the corresponding section</link>.</para>
-    <para>Default nodes of the tree level as well as ones defined with the
+    <para>Default nodes of the tree level as well as the ones defined with the
       <property>treeNodesAdaptorAdaptor</property> component could send Ajax requests when selected with the
       mouse, it&apos;s managed with the <emphasis>
         <property>&quot;ajaxSubmitSelection&quot;</property>
       </emphasis> attribute (true/false).</para>
-    <para> The <emphasis>
-      <property>&quot;icon&quot;</property>
-    </emphasis>, <emphasis>
-      <property>&quot;iconCollapsed&quot;</property>
-    </emphasis>, <emphasis>
-      <property>&quot;iconExpanded&quot;</property>
-    </emphasis>, <emphasis>
-      <property>&quot;iconLeaf&quot;</property>
-    </emphasis> attributes define icons for the component. Also you can define icons using facets
-      with the same names. If the facets are defined, the corresponding attributes are ignored and
-      facets contents are used as icons. By default the width of a rendered facet area is 16px. </para>
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    
-    <programlisting role="JAVA"><![CDATA[...
-    <rich:tree ....>
-        ...
-        <f:facet name="icon">
-            <h:graphicImage value="/images/tree/singer.png "/>
-        </f:facet>
-        <f:facet name="iconCollapsed">
-            <h:graphicImage value="/images/tree/singer.png " />
-        </f:facet>      
-        <f:facet name="iconExpanded">
-            <h:graphicImage value="/images/tree/singer.png " />
-        </f:facet>
-        <f:facet name="iconLeaf">
-            <h:graphicImage value="/images/tree/song.png " />
-        </f:facet>
-          ...
-    </rich:tree>
-...]]></programlisting>
   </section>
   <section>
     <title>Built-in Drag and Drop</title>
@@ -150,11 +149,11 @@ HtmlTreeNode myPanel = new HtmlTreeNode();
         corresponding paragraph</link> of the <property>tree</property> component chapter.
       It&apos;s only necessary to mention that each node could also be a Drag element as well as
       a Drop container, i.e. the container and the element have all attributes, listeners and ways
-      of behavior similar to both <emphasis role="bold">
+      of behavior similar to the ones of the <emphasis role="bold">
         <property>&lt;rich:draggable&gt;</property>
       </emphasis> and <emphasis role="bold">
         <property>&lt;rich:dropZone&gt;</property>
-      </emphasis> components.</para>
+      </emphasis> components simultaneously.</para>
   </section>
   <section>
     <title>Events Handling</title>
