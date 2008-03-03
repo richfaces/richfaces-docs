@@ -57,8 +57,7 @@
 		...
 		<rich:treeNode>
 			 <!-- node content -->
-		</rich:treeNode>
-		
+		</rich:treeNode>	
 		<!-- Others nodes -->   
 		...
 	</rich:recursiveTreeNodesAdaptor>
@@ -86,41 +85,32 @@ HtmlRecursiveTreeNodesAdaptor myRecursiveTreeNodesAdaptor = new HtmlRecursiveTre
     </para>
     <programlisting role="XML"><![CDATA[...
 <rich:tree adviseNodeOpened="#{treeModelBean.adviseNodeOpened}" switchType="client">
-	<rich:treeNodesAdaptor id="project" nodes="#{loaderBean.projects}" var="project">
-		
+	<rich:treeNodesAdaptor id="project" nodes="#{loaderBean.projects}" var="project">	
 		<rich:treeNode>
 			<h:commandLink action="#{project.click}" value="Project: #{project.name}" />
 		</rich:treeNode>
-
 		<rich:recursiveTreeNodesAdaptor id="dir" var="dir" root="#{project.dirs}" nodes="#{dir.directories}">
-			
 			<rich:treeNode>
 				<h:commandLink action="#{dir.click}" value="Directory: #{dir.name}" />
-			</rich:treeNode>
-			
+			</rich:treeNode>			
 			<rich:treeNodesAdaptor id="file" var="file" nodes="#{dir.files}">
 				<rich:treeNode>
 					<h:commandLink action="#{file.click}" value="File: #{file.name}" />
 				</rich:treeNode>
 			</rich:treeNodesAdaptor>
-			
 			<rich:treeNodesAdaptor id="file1" var="file" nodes="#{dir.files}">
 				<rich:treeNode>
 					<h:commandLink action="#{file.click}" value="File1: #{file.name}" />
 				</rich:treeNode>
 			</rich:treeNodesAdaptor>
-
 			<rich:recursiveTreeNodesAdaptor id="archiveEntry" var="archiveEntry"
 				roots="#{dir.files}" nodes="#{archiveEntry.archiveEntries}" 
 				includedRoot="#{archiveEntry.class.simpleName == 'ArchiveFile'}"
-				includedNode="#{archiveEntry.class.simpleName == 'ArchiveEntry'}">
-			
+				includedNode="#{archiveEntry.class.simpleName == 'ArchiveEntry'}">		
 				<rich:treeNode id="archiveEntryNode">
 					<h:commandLink action="#{archiveEntry.click}" value="Archive entry: #{archiveEntry.name}" />
 				</rich:treeNode>
-				
 			</rich:recursiveTreeNodesAdaptor>
-			
 		</rich:recursiveTreeNodesAdaptor>
 	</rich:treeNodesAdaptor>
 </rich:tree>
