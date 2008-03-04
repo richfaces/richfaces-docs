@@ -262,4 +262,17 @@
     <para> This is because, EAServer calls servlet init() before the ServletContextInitializer. Not
       an EAServer bug, this is in Servlet 2.3 spec.</para>
   </section>
+  <section id="Oracle AS/OC4J">
+	<title>Oracle AS/OC4J</title>
+      <para>In order to deploy your project with RichFaces components to an <property>Oracle AS</property> you just have to 
+	prevent the application&apos;s class loader from importing the Oracle XML parser.
+	Use the following notation in <property>orion-application.xml</property>:</para>
+	<programlisting role="XML"><![CDATA[...
+<imported-shared-libraries>
+        <remove-inherited name="oracle.xml"/>
+        <remove-inherited name="oracle.xml.security"/> 
+</imported-shared-libraries>
+...
+]]></programlisting>
+  </section>
 </chapter>
