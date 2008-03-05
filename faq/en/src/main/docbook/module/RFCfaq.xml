@@ -1803,4 +1803,47 @@ HtmlAjaxSupport ajaxSupport = new HtmlAjaxSupport();
       inputText.getFacets().put("a4jsupport", ajaxSupport);
 ]]></programlisting>      
  </section>
+        <section>
+                <?dbhtml filename="HighlightRowDataTable.html"?>
+                <title>How to ReRender table cells with ajax support?</title>
+                <para>In order to ReRender table cells with ajax support you must set exact id values for a all updatable components, 
+                        and point this id's in the reRender parameters.</para>
+                
+                <note>
+                        <title>Note:</title>
+                        <para>The value of <emphasis><property>&quot;reRender&quot;</property></emphasis> 
+                                attribute of the <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> tag defines which part(s) 
+                                of our page is (are) to be updated. In this case, the only part of the page to update is the 
+                                <emphasis role="bold"><property>&lt;h:outputText&gt;</property></emphasis> tag because its ID value matches to the value of <emphasis><property>&quot;reRender&quot;</property></emphasis> 
+                                attribute. 
+                                        As you see, it's not difficult to update multiple elements on the page, only list their IDs as the value of "reRender" .</para>
+                </note>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+<rich:column>
+                <f:facet name="header">
+                                <h:outputText  value="Input1"/>
+                </f:facet>
+                <f:facet name="footer">
+                                <h:outputText  value="#{Controller.totalInput1}"/>
+                </f:facet>
+                        <h:inputText id="input1" value="#{entry.input1}" >
+                                        <a4j:support actionListener="{Controller.updateEntry}"event="onblur" reRender="output1">
+                                        </a4j:support>
+                        </h:inputText>
+</rich:column>
+<rich:column>
+                <f:facet name="header">
+                                <h:outputText value="Value2"/>
+                </f:facet>
+                <f:facet name="footer">
+                                <h:outputText value="#{Controller.totalOutput1}"/>
+                </f:facet>
+                        <h:outputText id="output1" value="#{entry.output1}" >
+                        </h:outputText>
+</rich:column>
+...]]></programlisting> 
+        </section>
 </chapter>
