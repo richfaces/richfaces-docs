@@ -1846,4 +1846,452 @@ HtmlAjaxSupport ajaxSupport = new HtmlAjaxSupport();
 </rich:column>
 ...]]></programlisting> 
         </section>
+        <section>
+                <?dbhtml filename="HighlightRowDataTable.html"?>
+                <title>How to use jsFunction with JSON?</title>
+                <para>There is some main cases to use jsFunction and JSON. An example use case: </para>
+                         
+                <para>A user want to create device in a circuit diagram.</para>
+                <itemizedlist>
+                        <listitem>
+                He drags and drops it from the toolbox in our embedded Javascript(!) graphical editor. But first only a "please wait"-ModalPanel is shown. 
+                        </listitem>
+                                <listitem>
+                With JSFunction we come to the SessionBean and from there to the DB to fetch some Data for drawing the device in the Editor. 
+                                </listitem>
+                                        <listitem>
+                 When the answer comes back, we asked the user with a modal panel to give a name to the device. 
+                                        </listitem>
+                                                <listitem>
+                After he clicks OK, the model panel disappears (and the please wait model panel shows up again) and another JSFunction call goes over the SessionBean to the DB to create the device data there. 
+                                                </listitem>
+                                                        <listitem>
+                When the answer comes back, a JSON-String is created with all data for drawing the device (for example the given name) and the Editor is advised to draw it (and the please wait modal panel disappears again).
+                                                        </listitem>
+                </itemizedlist>
+                <para>Here you can see the example of creating the JSONExporter, where you can put any dataclass.</para>
+                <note>
+                        <para>JSON exporter class, knows what data of the data class you need directly in Javascript.</para>       
+                 </note>
+                              <para>  Here an example for such an exporter class: </para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="JAVA"><![CDATA[import org.richfaces.json.JSONException;
+                        import org.richfaces.json.JSONObject;
+public class SomeDataToJSON implements DataToJSON    {
+                public String toJSON(Object obj)
+    {
+        SomeData data = (SomeData) obj;    
+        JSONObject dataToJSON = new JSONObject();
+                try
+    {
+      dataToJSON.put("ID", data.getObjPhysName()); 
+      dataToJSON.put("name", data.getName());        
+      dataToJSON.put("width", data.getWidth());
+      dataToJSON.put("height", data.getHeight());      
+                }
+    catch (JSONException e)
+    {
+     //TODO Approriate exception handling
+      e.printStackTrace();
+                }    
+    return dataToJSON.toString();
+                }
+                }
+                ]]></programlisting> 
+                <para>As you can see, the SimpleJSON library build the JSON-String for you (integrated in Richfaces). 
+                Sometimes you have to add some brackets or something else.</para> 
+                <para>Here your Javascript code.</para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="JAVA"><![CDATA[var jsonString = executeObjectCreation("test", "anotherParam");
+var myObject = eval(jsonString);
+
+var name = myObject.name;
+...]]></programlisting> 
+                <!--para>You can use  jsFunction to call the jsonTest backing bean that generates some random data in a JSON-String. 
+                That JSON-String is then passed to the updateFields method, which evaluates it and populates some html tags with its content. </para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+        <ui:define name="content">
+                <script lang="javascript" >
+                        function updateFields(data){
+                        var myObj = eval("("+ data +")");
+                                document.getElementById('cpty').innerHTML = myObj.cpty;
+                                document.getElementById('exposure').innerHTML = myObj.exposure;
+                                document.getElementById('limit').innerHTML = myObj.limit;
+                                }
+                </script>
+        <a4j:form>
+                <a4j:jsFunction name="testJsFunc" action="#{jsonTest.actionMethod}" data="#{jsonTest.jsonData}" ajaxSingle="true"
+                ignoreDupResponses="true" eventQueue="foo" oncomplete="updateFields(data);" >
+                        <a4j:actionparam name="Param1" assignTo="#{jsonTest.cptyParam}"/>
+                </a4j:jsFunction>
+        </a4j:form>
+                <table>
+                <tr>
+                        <td>
+                                <a href="#" onclick="testJsFunc('VALUE1')">Set for VALUE1</a>
+                        </td>
+                </tr>
+                <tr>
+                        <td>
+                                <a href="#" onclick="testJsFunc('VALUE2')">Set for VALUE2</a>
+                        </td>
+                </tr>
+                <tr>
+                        <td>
+                                <a href="#" onclick="testJsFunc('VALUE3')">Set for VALUE3</a>
+                        </td>
+                </tr>
+                <tr>
+                        <td>
+                                <a href="#" onclick="testJsFunc('VALUE4')">Set for VALUE4</a>
+                        </td>
+                </tr>
+                </table>
+                <table>
+                        <tr>
+                                <th>Counterparty</th>
+                                <th>Exposure</th>
+                                <th>Limit</th>
+                        </tr>
+                        <tr>
+                                <th>
+                                        <h:outputText id="cpty" value=""/>
+                                </th>
+                                <th>
+                                        <h:outputText id="exposure" value=""/>
+                                </th>
+                                <th>
+                                        <h:outputText id="limit" value=""/>
+                                </th>
+                        </tr>
+                </table>
+        </ui:define>
+</ui:composition>
+...]]></programlisting> 
+                <para>If you are not familiar with the annotations, 
+                they are from the Seam framework and can be removed and replaced with a managed bean definition in faces-config.xml.</para>
+                <programlisting role="JAVA"><![CDATA[import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import org.jboss.seam.ScopeType;
+import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Scope;
+import org.richfaces.json.JSONException;
+import org.richfaces.json.JSONObject;
+
+@Name("jsonTest")
+@Scope(ScopeType.EVENT)
+public class JsonTest {
+
+    public String cptyParam;
+
+    public String jsonData;
+
+    public String actionMethod(){
+        Random rand = new Random(System.currentTimeMillis());
+
+        Map<String,String> data = new HashMap<String,String>();
+        data.put("cpty", cptyParam);
+        data.put("exposure", ""+(rand.nextFloat()*10) );
+        data.put("limit", ""+(rand.nextInt(50)));
+
+        jsonData = toJSON(data);
+
+        return null;
+    }
+
+    public String toJSON(Map<String,String> data){
+
+      JSONObject dataToJSON = new JSONObject();
+      try{
+        dataToJSON.put("cpty", data.get("cpty"));
+        dataToJSON.put("exposure", data.get("exposure"));
+        dataToJSON.put("limit", data.get("limit"));
+      }
+      catch (JSONException e){
+       //TODO Approriate exception handling
+        e.printStackTrace();
+      }
+      return dataToJSON.toString();
+    }
+
+    public String getCptyParam() {
+        return cptyParam;
+    }
+
+    public void setCptyParam(String aCptyParam) {
+        cptyParam = aCptyParam;
+    }
+
+    public String getJsonData() {
+        return jsonData;
+    }
+
+    public void setJsonData(String aJsonData) {
+        jsonData = aJsonData;
+    }
+}
+...]]></programlisting--> 
+        </section>
+        <section>
+                <?dbhtml filename="HighlightRowDataTable.html"?>
+                <title>How to DynamicColumns?</title>
+                <para>In order to create DynamicColumns you can use the rendered attribute of the rich:column. </para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+<ui:composition  template="/WEB-INF/layout/template.xhtml">	
+        <ui:define name="body">
+                <h2>Table</h2>
+	<h:form>
+	<rich:dataTable id="aTable" onRowMouseOver="this.style.backgroundColor='#F1F1F1'"
+	onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'" value="#{trb.tableData}" var="row">
+			<f:facet name="header">
+				<rich:columnGroup>
+					<rich:column colspan="2">
+						Testing
+					</rich:column>
+				</rich:columnGroup>
+			</f:facet>
+			
+			<f:facet name="footer">
+				<rich:columnGroup>
+					<rich:column colspan="2">
+						Footer
+					</rich:column>
+				</rich:columnGroup>
+			</f:facet>
+			
+			<rich:column rendered="#{trb.cellRendered['value1']}">
+				<f:facet name="header">
+	
+					<s:div>
+						value1 <h:commandLink value="x" action="#{trb.hideColumn('value1')}"/>
+					</s:div>										
+				</f:facet>
+				#{row.value1}
+			</rich:column>
+				
+                                    </rich:dataTable>
+		                Generate new table values:
+		<h:commandButton value="generate" action="#{trb.createData}"/>
+	</h:form>
+		
+	<h:form>
+		Select which columns are rendered.
+		<br/>
+		<h:selectBooleanCheckbox title="value1" value="#{trb.cellRendered['value1']}"/>
+		<br/>
+		<h:commandButton value="Apply" action="rerender"/>
+	</h:form>
+	</ui:define>
+</ui:composition>
+...]]></programlisting>
+                <para>Here you can see the JAVA code.</para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="JAVA"><![CDATA[
+public class TableBackingRendered implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Random rand = new Random(System.currentTimeMillis());
+	private List<TableItem> tableData;
+	private Map<String,Boolean> cellRendered = new HashMap<String,Boolean>();
+	public TableBackingRendered(){
+		createData();
+		allCellsRendered();
+	}
+	public String createData(){	
+		int count = rand.nextInt(25)+1;
+		tableData = new ArrayList<TableItem>(count);
+		for(int i=0; i<count; i++){
+			tableData.add( new TableItem(
+					"value1_" +i,
+					));
+		}
+		return null;
+	}
+	public String allCellsRendered(){
+		cellRendered.put("value1", Boolean.TRUE);
+		return null;
+	}
+		public String hideColumn(final String columnToHide){
+		cellRendered.put(columnToHide, Boolean.FALSE);
+		return null;
+	}
+		public List<TableItem> getTableData() {
+		return tableData;
+	}
+	public Map<String, Boolean> getCellRendered() {
+		return cellRendered;
+	}
+	public void setCellRendered(Map<String, Boolean> cellRendered) {
+		this.cellRendered = cellRendered;
+	}
+	public void setTableData(List<TableItem> tableData) {
+		this.tableData = tableData;
+	}
+}
+...]]></programlisting>      
+                <!--para>Another solution when you are dealing with a significant amount of rows, if you are using facelets you can use c:forEach (jslt).</para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...<rich:dataTable value="report.rows" var="row">
+<f:facet name="header">
+        <rich:columnGroup>
+                <c:forEach var="col" items="#{report.columns}/>
+                        <h:outputText value="#{col.label}"/>
+                </c:forEach>
+        </rich:columnGroup>
+</f:facet>
+                <c:forEach var="cell" items="#{report.columns}" varStatus="col">
+                        <h:outputText value="#{rowCol.index?.cells.value}"/>
+                </c:forEach>
+</rich:dataTable>
+...]]></programlisting-->      
+        </section>
+        <section>
+                <?dbhtml filename="HighlightRowDataTable.html"?>
+                <title>RichFacesWithTrinidad?</title>
+                <para>Here is a stripped down version of web.xml that integrates Richfaces and Trinidad.</para>
+     
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[
+<?xml version="1.0" ?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd" 
+  version="2.5">
+  
+  <!-- Ajax4jsf -->
+  <context-param>
+    <param-name>org.ajax4jsf.SKIN</param-name>
+    <param-value>blueSky</param-value>
+  </context-param>
+  
+  <!-- Seam -->
+  <listener>
+    <listener-class>org.jboss.seam.servlet.SeamListener</listener-class>
+  </listener>
+  <filter>
+    <filter-name>Seam Filter</filter-name>
+    <filter-class>org.jboss.seam.servlet.SeamFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Seam Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>Seam Resource Servlet</servlet-name>
+    <servlet-class>org.jboss.seam.servlet.SeamResourceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Seam Resource Servlet</servlet-name>
+    <url-pattern>/seam/resource/*</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Facelets -->
+  <context-param>
+    <param-name>facelets.DEVELOPMENT</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  
+  <!-- JSF -->
+  <context-param>
+    <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+    <param-value>.xhtml</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+  <context-param>        
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>        
+    <param-value>server</param-value>    
+  </context-param> 
+
+  <!-- Trinidad - as suggested by a4j-trinidad example-->
+  <context-param>
+    <param-name>org.apache.myfaces.trinidad.ALTERNATE_VIEW_HANDLER</param-name>
+    <param-value>com.sun.facelets.FaceletViewHandler</param-value>
+  </context-param>
+  <filter>
+    <filter-name>Trinidad</filter-name>
+    <filter-class>org.apache.myfaces.trinidad.webapp.TrinidadFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Trinidad</filter-name>
+    <url-pattern>*.xhtml</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
+  <context-param>
+    <param-name>org.apache.myfaces.trinidad.CACHE_VIEW_ROOT</param-name>
+    <param-value>false</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>Trinidad Resources</servlet-name>
+    <servlet-class>org.apache.myfaces.trinidad.webapp.ResourceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Trinidad Resources</servlet-name>
+    <url-pattern>/adf/*</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Security -->
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Secure Content</web-resource-name>
+      <url-pattern>*.xhtml</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>AuthorizedUser</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+      <transport-guarantee>NONE</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>The Restricted Zone</realm-name>
+  </login-config>
+  <security-role>
+    <description>The role required to access restricted content</description>
+    <role-name>AuthorizedUser</role-name>
+  </security-role>
+  
+  <!-- Welcome files -->
+  <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+  </welcome-file-list>  
+  
+</web-app>
+]]></programlisting> 
+        </section>
 </chapter>
