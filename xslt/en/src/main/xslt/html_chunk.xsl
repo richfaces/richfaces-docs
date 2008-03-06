@@ -37,7 +37,8 @@
     <xsl:param name="chunk.section.depth">'5'</xsl:param>
     <xsl:param name="use.id.as.filename">'1'</xsl:param>
     <xsl:param name="html.stylesheet">css/html.css</xsl:param>
-
+    <xsl:param name="chunk.fast" select="1"/>
+  
     <!-- These extensions are required for table printing and other stuff -->
     <xsl:param name="use.extensions">1</xsl:param>
     <xsl:param name="tablecolumns.extension">0</xsl:param>
@@ -104,7 +105,7 @@
   
   <xsl:choose>
     <xsl:when test="not($node/parent::*)">1</xsl:when>
-    <xsl:when test="$node/parent::node()/processing-instruction('forseChanks')">1</xsl:when>
+    <xsl:when test="$node/parent::node()/processing-instruction('forseChanks') and local-name($node)!='title' and local-name($node)!='para'">1</xsl:when>
     <xsl:when test="local-name($node) = 'sect1'
                     and $chunk.section.depth &gt;= 1
                     and ($chunk.first.sections != 0
