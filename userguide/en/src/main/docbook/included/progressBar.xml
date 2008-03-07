@@ -161,7 +161,38 @@ HtmlColumns myColumns = new progressBar();
             <listitem>
                 <para><property>Client</property> - component updates after its value changed through JavaScript API. </para>
             </listitem>
-         </itemizedlist>
+        </itemizedlist>
+        
+  <para>
+  You can also use macrosubstitution in both Client and Ajax modes, 
+  which allows you to pass 
+      <emphasis><property>&quot;minValue&quot;</property></emphasis>,
+      <emphasis><property>&quot;maxValue&quot;</property></emphasis>and 
+      <emphasis><property>&quot;Value&quot;</property></emphasis>
+      to the facet that is responsible for displaying  information on the progress bar, using 
+      <emphasis><property>{minValue}</property></emphasis>, 
+      <emphasis><property>{maxValue}</property></emphasis> and 
+      <emphasis><property>{Value}</property></emphasis>syntax.  
+      See the example.
+  </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<progressBar:progressBar value="#{bean.incValue1}"
+    minValue="400"
+    maxValue="900">
+        <h:outputText value="Min value is {minValue}, current value is {value}, max value is {maxValue}"></h:outputText>
+</progressBar:progressBar> 
+ ...]]> </programlisting>    
+        <figure>
+            <title>Macrosubstitution</title>  
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/progressbar_macrosubs.png"/>
+                </imageobject>
+            </mediaobject>     
+        </figure>                   
     </section>
     <!-- End. Details of Usage-->
     
