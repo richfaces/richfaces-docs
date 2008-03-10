@@ -13,7 +13,6 @@
             <thead>
                 <row>
                     <entry>Name</entry>
-                    
                     <entry>Value</entry>
                 </row>
             </thead>
@@ -48,9 +47,7 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:comboBox value="#{bean.state}" valueChangeListener="#{bean.selectionChanged}" >
-        <f:selectItems  value="#{bean.selectItems}"/>
-</rich:comboBox>
+<rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}" />
 ...]]></programlisting>
     </section>
     <section>
@@ -89,7 +86,7 @@ HtmlComboBox myComboBox = new HtmlComboBox();
                 <emphasis role="bold">Example:</emphasis>
             </para>
 <programlisting role="XML"><![CDATA[...
-<rich:comboBox value="#{bean.state}" valueChangeListener="#{bean.selectionChanged}"  suggestionValues="#{bean.suggestions}" />    
+<rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}" />    
 ...]]></programlisting>    
             <itemizedlist>    
             <listitem>
@@ -118,7 +115,13 @@ HtmlComboBox myComboBox = new HtmlComboBox();
             The <emphasis><property> &quot;directInputSuggestions&quot;</property></emphasis> attribute defines, how the first value from the suggested one appears in an input field. 
             If it&apos;s &quot;true&quot; the first value appears with the suggested part highlighted. 
         </para>
-                                
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}" directInputSuggestions="true" />            
+...]]></programlisting>        
+        <para>This is a result:</para>
             <figure>
                 <title><emphasis role="bold">
                     <property>&lt;rich:comboBox&gt;</property>
@@ -131,12 +134,16 @@ HtmlComboBox myComboBox = new HtmlComboBox();
             </figure>
             
         <para>
-        
-        </para>
-        <para>
         The <emphasis><property> &quot;selectFirstOnUpdate&quot;</property></emphasis> attribute defines if the first value from suggested is selected in a popup list. 
         If it&apos;s &quot;false&quot; nothing is selected in the list before a user hovers some item with the mouse. Also nothing could be selected after the mouse is out the list. 
-            </para>
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}" selectFirstOnUpdate="false" />           
+...]]></programlisting>     
+        <para>This is a result:</para>
             <figure>
                 <title><emphasis role="bold">
                     <property>&lt;rich:comboBox&gt;</property>
@@ -147,12 +154,58 @@ HtmlComboBox myComboBox = new HtmlComboBox();
                     </imageobject>
                 </mediaobject>
             </figure>
-                      
-        
-        <para>
+       
+        <!--para>
             The <emphasis><property> &quot;filterNewValues&quot;</property></emphasis> attribute defines the appearance of values in the list.
             If it&apos;s &quot;true&quot; only the part of a list, which satisfies the prefix entered appears in a popup list.
-            If it&apos;s &quot;false&quot; all values appear in the popup list. But the list is scrolled to the first value that satisfies the prefix.            
+            If it&apos;s &quot;false&quot; all values appear in the popup list and the list is scrolled to the first value that satisfies the prefix.            
+            </para-->
+        <para>
+          The <emphasis><property>&quot;defaultLabel&quot;</property></emphasis> attribute defines the default label of the input element. Simple example is placed below.
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}" defaultLabel="Select a city..." />            
+...]]></programlisting>     
+        <para>This is a result:</para>
+            <figure>
+                <title><emphasis role="bold">
+                    <property>&lt;rich:comboBox&gt;</property>
+                </emphasis> with <emphasis><property> &quot;defaultLabel&quot;</property></emphasis> attribute.</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/comboBox5.png"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>   
+     
+            <para>
+                With the help of the <emphasis><property>&quot;disabled&quot;</property></emphasis> attribute you can disable the whole 
+                <emphasis role="bold"><property>&lt;rich:comboBox&gt;</property></emphasis> component. See the following example.
+            </para>
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}" disabled="true" />            
+...]]></programlisting>  
+        <para>This is a result:</para>
+                <figure>
+                    <title><emphasis role="bold">
+                        <property>&lt;rich:comboBox&gt;</property>
+                    </emphasis> with <emphasis><property> &quot;disabled&quot;</property></emphasis> attribute.</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/comboBox6.png"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>      
+        
+        <para>
+        The <emphasis role="bold"><property>&lt;rich:comboBox&gt;</property></emphasis> component provides the possibility to use 
+            specific event attribute <emphasis><property> &quot;onlistcall&quot;</property></emphasis> which is fired before the list opening.
         </para>
         
         <para>
@@ -167,10 +220,8 @@ HtmlComboBox myComboBox = new HtmlComboBox();
                 </listitem>
             </itemizedlist>  
         </para>
-        <para>
-            The <emphasis><property> &quot;defaultLabel&quot;</property></emphasis> attribute defines the default label of the input element.
-        </para>
-        <para>
+        
+     <!--para>
         The <emphasis role="bold"><property>&lt;rich:comboBox&gt;</property></emphasis> component provides to use 
             specific event attributes:
             <itemizedlist>
@@ -181,7 +232,10 @@ HtmlComboBox myComboBox = new HtmlComboBox();
                     <emphasis><property> &quot;onchange&quot;</property></emphasis> is fired both with onselected and after the input value changed
                 </listitem>
             </itemizedlist>   
-        </para>
+     </para-->
+        
+        
+        
           </section>
     <section>
         <title>JavaScript API</title>
