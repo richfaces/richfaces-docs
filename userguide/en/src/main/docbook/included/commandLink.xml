@@ -37,7 +37,9 @@
       <para>
         <emphasis role="bold">Example:</emphasis>
       </para>
-      <programlisting role="XML"><![CDATA[<a4j:commandLink reRender="someData" action="#{bean.action1}" value="Link"/>]]></programlisting>
+      <programlisting role="XML"><![CDATA[...
+   <a4j:commandLink reRender="someData" action="#{bean.action1}" value="Link"/>
+...]]></programlisting>
                 </section>
 	  <section>
       <title>Creating the Component Dynamically Using Java</title>
@@ -58,13 +60,11 @@ HtmlAjaxCommandLink myLink = new HtmlAjaxCommandLink();
         submit on the server, <property>action1</property> method performance, and rendering of the component 
         with <property>someData</property> id after the response comes back from the server.</para>
       <para>The component <emphasis role="bold"><property>&lt;a4j:commandLink&gt;</property></emphasis> placed on a page generates the following HTML code:</para>
-	  <programlisting role="XML"><![CDATA[<a href="#" onclick="A4J.AJAX.Submit(?"request parameters");
-	  return 
-	  <a href="#" onclick="A4J.AJAX.Submit(?"request parameters");
-	  return false;">
-	  <span style="color: black;">Link Value</span>
-	  </a>
-]]></programlisting>
+	  <programlisting role="XML"><![CDATA[...
+<a href="#" onclick="A4J.AJAX.Submit(?"request parameters"); return false;">
+	  <span>Link Value</span>
+</a>
+...]]></programlisting>
       <para>Hence, the utility method <property>A4J.AJAX.Submit</property> is called on a click, the method performs Ajax request as the <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> component</para>
 	 <note>
       <title>Note:</title>
