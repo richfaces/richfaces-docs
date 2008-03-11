@@ -49,35 +49,32 @@
   </section>
   <section>
     <title>Creating the Component Dynamically Using Java</title>
-
+    <para>In order to add <emphasis role="bold">
+      <property>&lt;a4j:support&gt;</property>
+    </emphasis> in Java code you should  add it as <emphasis><property>facet</property></emphasis>, not children:</para>
   <para>
       <emphasis role="bold">Example:</emphasis>
  </para>
-    <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.HtmlAjaxSupport;
+    <programlisting role="JAVA"><![CDATA[HtmlInputText inputText = new HtmlInputText();
 ...
-HtmlAjaxSupport mySupport = new HtmlAjaxSupport();>]]></programlisting>
+HtmlAjaxSupport ajaxSupport = new HtmlAjaxSupport();
+      ajaxSupport.setActionExpression(FacesContext.getCurrentInstance().getApplication().getExpressionFactory().createMethodExpression(
+          FacesContext.getCurrentInstance().getELContext(), "#{bean.action}", String.class, new Class[] {}));
+      ajaxSupport.setEvent("onkeyup");
+      ajaxSupport.setReRender("output");
+      inputText.getFacets().put("a4jsupport", ajaxSupport);
+]]></programlisting>
   </section>
   <section>
     <title>Key attributes and ways of usage</title>
-    <para>A4j support addition is very similar to correspondent event redefinition of a component, i.e. 
+    <para><emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> addition is very similar to correspondent event redefinition of a component, i.e. 
 </para>
     <para><emphasis role="bold">Example:</emphasis></para>
 	<programlisting role="XML"><![CDATA[...
 <h:inputText value="#{bean.text}">
     <a4j:support event="onkeyup" reRender="output" action="#{bean.action}"/>
 </h:inputText>
-...]]></programlisting>
-    
-   <para> Below you can see example Java code where support was added as facelets, not children:</para>   
-    <para><emphasis role="bold">Example:</emphasis></para>
-    <programlisting role="JAVA"><![CDATA[HtmlInputText inputText = new HtmlInputText();
-...
-HtmlAjaxSupport ajaxSupport = new HtmlAjaxSupport();
-      ajaxSupport.setActionExpression(FacesContext.getCurrentInstance().getApplication().getExpressionFactory().createMethodExpression(FacesContext.getCurrentInstance().getELContext(), "#{bean.action}", String.class, new Class[] {}));
-      ajaxSupport.setEvent("onkeyup");
-      ajaxSupport.setReRender("output");
-      inputText.getFacets().put("a4jsupport", ajaxSupport);
-]]></programlisting>
+...]]></programlisting>    
 <para>Is decoded on a page as:</para>
 
   <para>
