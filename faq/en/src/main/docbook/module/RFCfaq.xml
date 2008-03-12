@@ -1777,67 +1777,70 @@ public class demo {
 </h:form>    
 ...]]></programlisting>                
         </section>      
-        <section>
-                <?dbhtml filename="HighlightRowDataTable.html"?>
-                <title>How to ReRender table cells with ajax support?</title>
-                <para>In order to ReRender table cells with ajax support you must set exact id values for a all updatable components, 
-                        and point this id's in the reRender parameters.</para>
+         <section id="reRenderCells">
+                <?dbhtml filename="reRenderCells.html"?>
+                <title>How to reRender table cells with &lt;a4j:support&gt;?</title>
+                <para>In order to reRender table cells with <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis>
+                        you should set exact <property>ids</property> values for every updatable components 
+                        and point this <property>id</property> to the <emphasis><property>&quot;reRender&quot;</property></emphasis> attribute.</para>
                 
                 <note>
                         <title>Note:</title>
                         <para>The value of <emphasis><property>&quot;reRender&quot;</property></emphasis> 
                                 attribute of the <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> tag defines which part(s) 
                                 of our page is (are) to be updated. In this case, the only part of the page to update is the 
-                                <emphasis role="bold"><property>&lt;h:outputText&gt;</property></emphasis> tag because its ID value matches to the value of <emphasis><property>&quot;reRender&quot;</property></emphasis> 
+                                <emphasis role="bold"><property>&lt;h:outputText&gt;</property></emphasis> tag because its <property>id</property>
+                                value matches to the value of <emphasis><property>&quot;reRender&quot;</property></emphasis> 
                                 attribute. 
-                                        As you see, it's not difficult to update multiple elements on the page, only list their IDs as the value of "reRender" .</para>
+                                As you see, it's not difficult to update multiple elements on the page, only list their <property>ids</property> as the value of  
+                                <emphasis><property>&quot;reRender&quot;</property></emphasis> 
+                                attribute .</para>
                 </note>
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
                 <programlisting role="XML"><![CDATA[...
 <rich:column>
-                <f:facet name="header">
-                                <h:outputText  value="Input1"/>
-                </f:facet>
-                <f:facet name="footer">
-                                <h:outputText  value="#{Controller.totalInput1}"/>
-                </f:facet>
-                        <h:inputText id="input1" value="#{entry.input1}" >
-                                        <a4j:support actionListener="{Controller.updateEntry}"event="onblur" reRender="output1">
-                                        </a4j:support>
-                        </h:inputText>
+        <f:facet name="header">
+                <h:outputText  value="Input1"/>
+        </f:facet>
+        <f:facet name="footer">
+                <h:outputText  value="#{Controller.totalInput1}"/>
+        </f:facet>
+        <h:inputText id="input1" value="#{entry.input1}">
+                <a4j:support actionListener="{Controller.updateEntry}"event="onblur" reRender="output1"/>
+        </h:inputText>
 </rich:column>
 <rich:column>
-                <f:facet name="header">
-                                <h:outputText value="Value2"/>
-                </f:facet>
-                <f:facet name="footer">
-                                <h:outputText value="#{Controller.totalOutput1}"/>
-                </f:facet>
-                        <h:outputText id="output1" value="#{entry.output1}" >
-                        </h:outputText>
+        <f:facet name="header">
+                <h:outputText value="Value2"/>
+        </f:facet>
+        <f:facet name="footer">
+                <h:outputText value="#{Controller.totalOutput1}"/>
+        </f:facet>
+        <h:outputText id="output1" value="#{entry.output1}"/>
 </rich:column>
 ...]]></programlisting> 
+                <para>As it could be seen in the example above, the footer with <emphasis role="bold"><property>&lt;h:outputText&gt;</property></emphasis> reRenderes.</para>
         </section>
-        <section>
+        <!--section>
                 <?dbhtml filename="HighlightRowDataTable.html"?>
                 <title>How to use jsFunction with JSON?</title>
-                <para>There is some main cases to use jsFunction and JSON. An example use case: </para>
+                <para>JsFunction and JSON can be used in many ways, for example:</para>
                          
-                <para>A user want to create device in a circuit diagram.</para>
+                <para>You want to create device in a circuit diagram. Here is the number of steps for creating:</para>
                 <itemizedlist>
                         <listitem>
-                He drags and drops it from the toolbox in our embedded Javascript(!) graphical editor. But first only a "please wait"-ModalPanel is shown. 
+                You drag and drop it from the toolbox in our embedded Javascript(!) graphical editor. But first only a "please wait"-ModalPanel is shown. 
                         </listitem>
                                 <listitem>
                 With JSFunction we come to the SessionBean and from there to the DB to fetch some Data for drawing the device in the Editor. 
                                 </listitem>
                                         <listitem>
-                 When the answer comes back, we asked the user with a modal panel to give a name to the device. 
+                 When the answer comes back, we asked you with a modal panel to give a name to the device. 
                                         </listitem>
                                                 <listitem>
-                After he clicks OK, the model panel disappears (and the please wait model panel shows up again) and another JSFunction call goes over the SessionBean to the DB to create the device data there. 
+                After you click OK, the model panel disappears (and the please wait model panel shows up again) and another JSFunction call goes over the SessionBean to the DB to create the device data there. 
                                                 </listitem>
                                                         <listitem>
                 When the answer comes back, a JSON-String is created with all data for drawing the device (for example the given name) and the Editor is advised to draw it (and the please wait modal panel disappears again).
@@ -1851,30 +1854,28 @@ public class demo {
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
-                <programlisting role="JAVA"><![CDATA[import org.richfaces.json.JSONException;
-                        import org.richfaces.json.JSONObject;
+                <programlisting role="JAVA"><![CDATA[	import org.richfaces.json.JSONException;
+    import org.richfaces.json.JSONObject;
 public class SomeDataToJSON implements DataToJSON    {
-                public String toJSON(Object obj)
-    {
-        SomeData data = (SomeData) obj;    
-        JSONObject dataToJSON = new JSONObject();
-                try
-    {
-      dataToJSON.put("ID", data.getObjPhysName()); 
-      dataToJSON.put("name", data.getName());        
-      dataToJSON.put("width", data.getWidth());
-      dataToJSON.put("height", data.getHeight());      
-                }
-    catch (JSONException e)
-    {
-     //TODO Approriate exception handling
-      e.printStackTrace();
-                }    
-    return dataToJSON.toString();
-                }
-                }
-                ]]></programlisting> 
-                <para>As you can see, the SimpleJSON library build the JSON-String for you (integrated in Richfaces). 
+public String toJSON(Object obj)
+{
+SomeData data = (SomeData) obj;    
+JSONObject dataToJSON = new JSONObject();
+try
+{
+dataToJSON.put("ID", data.getObjPhysName()); 
+dataToJSON.put("name", data.getName());        
+dataToJSON.put("width", data.getWidth());
+dataToJSON.put("height", data.getHeight());      
+}
+catch (JSONException e)
+{
+e.printStackTrace();
+}    
+return dataToJSON.toString();
+}
+}]]></programlisting> 
+                <para>As you can see, the SimpleJSON library build the JSON-String for you (integrated in RichFaces). 
                 Sometimes you have to add some brackets or something else.</para> 
                 <para>Here your Javascript code.</para>
                 <para>
@@ -1882,9 +1883,8 @@ public class SomeDataToJSON implements DataToJSON    {
                 </para>
                 <programlisting role="JAVA"><![CDATA[var jsonString = executeObjectCreation("test", "anotherParam");
 var myObject = eval(jsonString);
-
 var name = myObject.name;
-...]]></programlisting> 
+...]]></programlisting--> 
                 <!--para>You can use  jsFunction to call the jsonTest backing bean that generates some random data in a JSON-String. 
                 That JSON-String is then passed to the updateFields method, which evaluates it and populates some html tags with its content. </para>
                 <para>
@@ -2020,11 +2020,13 @@ public class JsonTest {
     }
 }
 ...]]></programlisting--> 
-        </section>
-        <section>
-                <?dbhtml filename="HighlightRowDataTable.html"?>
-                <title>How to DynamicColumns?</title>
-                <para>In order to create DynamicColumns you can use the rendered attribute of the rich:column. </para>
+        <!--/section-->
+        <section id="DinamicColumns">
+                <?dbhtml filename="DinamicColumns.html"?>
+                <title>How to dynamic columns?</title>
+                <para>In order to create dynamic columns you could use the <emphasis role="bold"><property>&lt;rich:column&gt;</property></emphasis> component
+                        with the<emphasis><property>&quot;rendered&quot;</property></emphasis> attribute. You should just set the value of defined dynamic cell to the 
+                        <emphasis><property>&quot;rendered&quot;</property></emphasis> attribute field.</para>
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
@@ -2032,86 +2034,79 @@ public class JsonTest {
 <ui:composition  template="/WEB-INF/layout/template.xhtml">	
         <ui:define name="body">
                 <h2>Table</h2>
-	<h:form>
-	<rich:dataTable id="aTable" onRowMouseOver="this.style.backgroundColor='#F1F1F1'"
-	onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'" value="#{trb.tableData}" var="row">
-			<f:facet name="header">
-				<rich:columnGroup>
-					<rich:column colspan="2">
-						Testing
-					</rich:column>
-				</rich:columnGroup>
-			</f:facet>
-			
-			<f:facet name="footer">
-				<rich:columnGroup>
-					<rich:column colspan="2">
-						Footer
-					</rich:column>
-				</rich:columnGroup>
-			</f:facet>
-			
-			<rich:column rendered="#{trb.cellRendered['value1']}">
-				<f:facet name="header">
-	
-					<s:div>
-						value1 <h:commandLink value="x" action="#{trb.hideColumn('value1')}"/>
-					</s:div>										
-				</f:facet>
-				#{row.value1}
-			</rich:column>
-				
-                                    </rich:dataTable>
-		                Generate new table values:
-		<h:commandButton value="generate" action="#{trb.createData}"/>
-	</h:form>
-		
-	<h:form>
-		Select which columns are rendered.
-		<br/>
-		<h:selectBooleanCheckbox title="value1" value="#{trb.cellRendered['value1']}"/>
-		<br/>
-		<h:commandButton value="Apply" action="rerender"/>
-	</h:form>
-	</ui:define>
+                        <h:form>
+                                <rich:dataTable id="aTable" onRowMouseOver="this.style.backgroundColor='#F1F1F1'"
+                                 onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'" value="#{trb.tableData}" var="row">
+                                        <f:facet name="header">
+                                                <rich:columnGroup>
+                                                        <rich:column colspan="2">
+                                                                Testing
+                                                        </rich:column>
+                                                </rich:columnGroup>
+                                        </f:facet>			
+                                        <f:facet name="footer">
+                                                <rich:columnGroup>
+                                                        <rich:column colspan="2">
+                                                                Footer
+                                                        </rich:column>
+                                                </rich:columnGroup>
+                                        </f:facet>			
+                                <rich:column rendered="#{trb.cellRendered['value1']}">
+                                        <f:facet name="header">	
+                                                <s:div>
+                                                        value1 <h:commandLink value="x" action="#{trb.hideColumn('value1')}"/>
+                                                </s:div>										
+                                        </f:facet>
+                                        #{row.value1}
+                                </rich:column>				
+                                </rich:dataTable>
+                                        Generate new table values:
+                                <h:commandButton value="generate" action="#{trb.createData}"/>
+                        </h:form>	
+                        <h:form>
+                                Select which columns are rendered.
+                                <br/>
+                                        <h:selectBooleanCheckbox title="value1" value="#{trb.cellRendered['value1']}"/>
+                                <br/>
+                                <h:commandButton value="Apply" action="rerender"/>
+                        </h:form>
+        </ui:define>
 </ui:composition>
 ...]]></programlisting>
-                <para>Here you can see the JAVA code.</para>
+                <para>In order to build this application, you can create a managed bean like this
+                        one.</para>
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
                 <programlisting role="JAVA"><![CDATA[
-public class TableBackingRendered implements Serializable{
-	/**
-	 * 
-	 */
+public class TableBackingRendered implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Random rand = new Random(System.currentTimeMillis());
 	private List<TableItem> tableData;
-	private Map<String,Boolean> cellRendered = new HashMap<String,Boolean>();
-	public TableBackingRendered(){
+	private Map<String, Boolean> cellRendered = new HashMap<String, Boolean>();
+	public TableBackingRendered() {
 		createData();
 		allCellsRendered();
 	}
 	public String createData(){	
-		int count = rand.nextInt(25)+1;
-		tableData = new ArrayList<TableItem>(count);
-		for(int i=0; i<count; i++){
-			tableData.add( new TableItem(
-					"value1_" +i,
-					));
+			int count = rand.nextInt(25)+1;
+			tableData = new ArrayList<TableItem>(count);
+			for(int i=0; i<count; i++){
+				tableData.add( new TableItem(
+						"value1_" +i,
+						));
+			}
+			return null;
 		}
-		return null;
-	}
-	public String allCellsRendered(){
+	public String allCellsRendered() {
 		cellRendered.put("value1", Boolean.TRUE);
 		return null;
 	}
-		public String hideColumn(final String columnToHide){
+	public String hideColumn(final String columnToHide) {
 		cellRendered.put(columnToHide, Boolean.FALSE);
 		return null;
 	}
-		public List<TableItem> getTableData() {
+	public List<TableItem> getTableData() {
 		return tableData;
 	}
 	public Map<String, Boolean> getCellRendered() {
@@ -2143,10 +2138,10 @@ public class TableBackingRendered implements Serializable{
 </rich:dataTable>
 ...]]></programlisting-->      
         </section>
-        <section>
-                <?dbhtml filename="HighlightRowDataTable.html"?>
-                <title>RichFacesWithTrinidad?</title>
-                <para>Here is a stripped down version of web.xml that integrates Richfaces and Trinidad.</para>
+        <section id="Trinidad">
+                <?dbhtml filename="Trinidad.html"?>
+                <title>RichFaces with Trinidad?</title>
+                <para>Here is a stripped down version of<property> web.xml</property> that integrates RichFaces and Trinidad.</para>
      
                 <para>
                         <emphasis role="bold">Example:</emphasis>

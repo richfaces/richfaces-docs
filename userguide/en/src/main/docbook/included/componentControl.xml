@@ -168,7 +168,68 @@ HtmlComponentControl myCalendar = new HtmlComponentControl();
       </emphasis> component. The <emphasis>
         <property>&quot;operation&quot;</property>
       </emphasis> attribute contains a name of JavaScript API function. Thus, clicking on the link
-      represents the next year on the calendar.</para>
+      represents the next year on the calendar.
+    </para>
+    <para>
+      <emphasis role="bold">
+        <property>&lt;rich:componentControl&gt;</property>
+      </emphasis> interacts with such components as:
+      <itemizedlist>
+        <listitem><emphasis role="bold">
+          <property>&lt;rich:contextMenu&gt;</property>
+        </emphasis></listitem>
+        <listitem><emphasis role="bold">
+          <property>&lt;rich:toolTip&gt;</property>
+        </emphasis></listitem>
+        <listitem><emphasis role="bold">
+          <property>&lt;rich:modalPanel &gt;</property>
+        </emphasis></listitem>
+        <listitem><emphasis role="bold">
+          <property>&lt;rich:listShuttle&gt;</property>
+        </emphasis></listitem>
+        <listitem><emphasis role="bold">
+          <property>&lt;rich:orderingList&gt;</property>
+        </emphasis></listitem>
+        </itemizedlist>
+    </para>
+    <para>In order to use  <emphasis role="bold">
+      <property>&lt;rich:componentControl&gt;</property>
+    </emphasis> with another component you should place the id of this component into <emphasis>
+      <property>&quot;for&quot;</property>
+    </emphasis> attribute field. All operations with defined component you can find in the JavaScript API section of defined component.</para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+<f:view>
+    <h:form>
+        <br>
+        <rich:toolTip id="toolTipFor" followMouse="false" direction="top-right" mode="ajax" value="This is button" horizontalOffset="5" verticalOffset="5" layout="block">
+        </rich:toolTip>
+    </h:form>
+    <h:commandButton id="ButtonID" value="Button">
+        <cc:componentControl for="toolTipFor" attachTo="ButtonID" operation="show" event="onclick"/>
+    </h:commandButton>
+</f:view>
+...]]></programlisting>
+    <para>This is a result:</para>
+    <figure>
+      <title><emphasis role="bold">
+        <property>&lt;rich:componentControl&gt;</property>
+      </emphasis> with <emphasis><property> &quot;for&quot;</property></emphasis> attribute.</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/componentControl1.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    
+    <para>
+      As it could be seen in the picture above, the <emphasis role="bold">
+        <property>&lt;rich:toolTip&gt;</property>
+      </emphasis> shows after you click the button.
+    </para>
+    
     <!--para>One more example of <emphasis role="bold">
         <property>&lt;rich:componentControl&gt;</property>
       </emphasis> usage is placed below:</para>
