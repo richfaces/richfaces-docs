@@ -46,29 +46,27 @@
 
   <section>
     <title>Creating the Component with a Page Tag</title>
-    <para>To create the simplest variant of <property>rich:treeNodesAdaptor</property> on a page, use the
-      following syntax:</para>
-
+    <!--para>
+      In order to create the simplest variant of <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> on a page use the
+      following syntax:
+    </para-->
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
 <rich:treeNodesAdaptor var="issue" nodes="#{model.issues}">
-	...
-	<rich:treeNode>
-		<!-- node content -->							
-	</rich:treeNode>
-	... 
-	<!-- Others nodes -->							
-	...
+    <rich:treeNode>
+        <h:commandLink action="#{project.click}" value="Project: #{project.name}" />
+    </rich:treeNode>
+    ... 
+    <!-- Others nodes -->							
+    ...
 </rich:treeNodesAdaptor>
-...
-]]></programlisting>
+...]]></programlisting>
   </section>
 
   <section>
     <title>Creating the Component Dynamically Using Java</title>
-
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
@@ -82,7 +80,20 @@ HtmlTreeNodesAdaptor myTreeNodesAdaptor = new HtmlTreeNodesAdaptor();
   <section>
     <title>Details of Usage</title>
     <para>
-      <emphasis role="bold">The typical variant of using:</emphasis>
+      The <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> component 
+      has a <emphasis><property>&quot;nodes&quot;</property></emphasis> attribute that defines a collection of elements to iterate through.
+    </para>
+    <para>
+      Collections are allowed to include lists, arrays, maps, XML NodeList and NamedNodeMap either as a single object. 
+    </para>
+    <para>
+    The <emphasis><property>&quot;var&quot;</property></emphasis> attribute is used to access to the current collection element.
+    </para>
+    <para>
+     The simple example is placed below.
+    </para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
 	<rich:tree adviseNodeOpened="#{treeModelBean.adviseNodeOpened}" switchType="client">
@@ -113,8 +124,9 @@ HtmlTreeNodesAdaptor myTreeNodesAdaptor = new HtmlTreeNodesAdaptor();
  </section>
   <section>
     <title>Relevant Resources Links</title>
-    <para><ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/treeNodesAdaptor.jsf?c=treeNodesAdaptor"
-      >Here</ulink> you can see the example of <emphasis role="bold"
-        ><property>&lt;rich:treeNodesAdaptor &gt;</property></emphasis> usage and sources for the given example. </para>
+    <para>
+      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/treeNodesAdaptor.jsf?c=treeNodesAdaptor"
+      >Here</ulink> you can see the example of <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor &gt;</property></emphasis> 
+      usage and sources for the given example. </para>
   </section>    
 </section>
