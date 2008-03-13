@@ -74,12 +74,13 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
         <!--maintenance of component  orderingList-->
 
         <para>The <emphasis role="bold">
-                <property>&lt;rich:pickList&gt;</property>
-            </emphasis> component consists of <itemizedlist>
-                <listitem>2 <property>item lists</property>. Every item has three different representations: common, selected, active.
-                    Combination of these states is possible.</listitem>
+                <property>&lt;rich:fileUpload&gt;</property>
+        </emphasis> component consists of two parts:<itemizedlist>
+            <listitem><property>List of files</property> which contains the list of currently chosen files with possibility to manage every file.
+            </listitem>
                 <listitem>
-                    <property>Move controls set</property> is a set of controls, which performs moving items between lists.
+                    <property>Component controls</property>- the bar with controls for managing the whole component.
+                    
                 </listitem>
             </itemizedlist>
         </para>
@@ -88,95 +89,148 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
 
         <para>
             The <emphasis>
-                <property> &quot;value&quot;</property>
+                <property> &quot;disabled&quot;</property>
             </emphasis> 
-            attribute is used to access the values of a target list.  The <emphasis>
-                <property> &quot;selectItems&quot;</property></emphasis> facet is used to access the values of a source list.
-          </para>
+            attribute is used to disable all elements of the component. All the controls should be disabled too.  </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:pickList value="#{pickBean.listValues}">
-        <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
-        <f:selectItem itemValue="Audi" itemLabel="Audi"/>
-        <f:selectItems value="#{pickBean.testList}"/>
-</rich:pickList>
-   ...]]></programlisting>
-        <para>
-            The <emphasis role="bold">
-                <property>&lt;rich:pickList&gt;</property></emphasis>
-            component provides resizing of lists by using such attributes as:
-            <itemizedlist>
-                <listitem> 
-                    <emphasis>
-                        <property> &quot;listsHeight&quot;</property></emphasis> defines height of the lists.
-                    
-                </listitem>
-                <listitem> 
-                    <emphasis>
-                        <property> &quot;sourceListWidth&quot;</property></emphasis> defines width of a source list.
-                    
-                </listitem>
-                <listitem> 
-                    <emphasis>
-                        <property> &quot;targetListWidth&quot;</property></emphasis> defines width of a target list.
-                    
-                </listitem>
-              </itemizedlist>
-        </para> 
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
-<rich:pickList listsHeight="#{pickBean.listsHeight}" sourceListWidth="#{pickBean.sourceListWidth}" targetListWidth="#{pickBean.targetListWidth}" value="#{pickBean.listValues}">
-        <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
-        <f:selectItem itemValue="Audi" itemLabel="Audi"/>
-        <f:selectItems value="#{pickBean.testList}"/>
-</rich:pickList>
-   ...]]></programlisting>
-        
-        <para>
-            Lables of  <property>move controls</property> can be defined with 
-            <emphasis>
-            <property> &quot;copyAllControlLabel&quot;</property></emphasis>, <emphasis>
-                <property> &quot;copyControlLabel&quot;</property></emphasis>,
-            <emphasis> <property> &quot;removeControlLabel&quot;</property></emphasis>, 
-            <emphasis> <property> &quot;removeAllControlLabel&quot;</property></emphasis> attributes.
-          
-        </para> 
-        <para>
-              <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
-<rich:pickList copyAllControlLabel = "#{pickBean.copyAllLabel}" copyControlLabel = "#{pickBean.copyLabel}" removeControlLabel = "#{pickBean.removeLabel}" 
-removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues}">
-        <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
-        <f:selectItem itemValue="Audi" itemLabel="Audi"/>
-        <f:selectItems value="#{pickBean.testList}"/>
-</rich:pickList>
+<rich:fileUpload disabled="true" uploadData="#{bean.data}" />
 ...]]></programlisting>
-         <para>
-             If you want not to display labels on the buttons of move controls you need to set  
-             <emphasis> <property> &quot;showButtonsLabel&quot;</property></emphasis> to<property> &quot;false&quot;</property>.    
-         </para>
-             <figure>
-                 <title>Move control buttons without labels</title>
-                 <mediaobject>
-                     <imageobject>
-                         <imagedata fileref="images/picklist_no_lbls.png"/>
-                     </imageobject>
-                 </mediaobject>
-             </figure>       
-  
+        <para>This is a result:</para>
+        <figure>
+            <title><emphasis role="bold">
+                <property>&lt;rich:fileUpload&gt;</property>
+            </emphasis>with <emphasis>
+                <property> &quot;disabled&quot;</property>
+            </emphasis> attribute</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/fileUpload2.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>       
+   
+             <para>The <emphasis>
+                <property> &quot;acceptedTypes&quot;</property></emphasis> attribute is used to define file types which should be accepted to upload.
+            </para>
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<rich:fileUpload uploadData="#{bean.data}" acceptedTypes="html"/>
+ ...]]></programlisting>
+        <para>As it could be seen in the example below, only files with "html" extension should be accepted to upload.</para>
+       
+        <para>The <emphasis>
+            <property> &quot;autoclear&quot;</property></emphasis> attribute is used to remove automatically files from list after upload completed.</para>
+        
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true"
+ acceptedTypes="html"/>
+ ...]]></programlisting>
+            <para>As it could be seen in the example below, files removes from list after upload completed.</para>
+        <para>The <emphasis>
+            <property> &quot;maxFilesQuantity&quot;</property></emphasis> defines max number of files allowed for upload. 
+            After number of files in the list is equals to this attribute – add button should be disabled.
+            Add button should not be enabled before upload of the whole list done.
+        </para>
         <para>
-         <emphasis> <property> &quot;switchByClick&quot;</property></emphasis> provides an option to copy and remove a list item by one click, 
-            default the value of this attribute is <property> &quot;false&quot;</property> , and you need a double click to copy, remove a list item.
-        </para> 
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2"
+ acceptedTypes="html"/>
+ ...]]></programlisting>
+        <para>This is a result:</para>
+        <figure>
+            <title><emphasis role="bold">
+                <property>&lt;rich:fileUpload&gt;</property>
+            </emphasis>with <emphasis>
+                <property> &quot;maxFilesQuantity&quot;</property>
+            </emphasis> attribute</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/fileUpload5.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>       
+        <para>As it could be seen in the picture below, only 2 files allows for upload.</para>
+        <para>The <emphasis>
+            <property> &quot;fileUploadedListener&quot;</property></emphasis> is 
+            called at server side after every file uploaded and used for the file saving by end developer.
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
+ acceptedTypes="html"/>
+ ...]]></programlisting>
+        <para>The <emphasis role="bold">
+            <property>&lt;rich:fileUpload&gt;</property>
+        </emphasis> provides using a number of handlers. The <emphasis>
+            <property> &quot;onupload&quot;</property></emphasis> is available to cancel the upload at client side. The <emphasis>
+                <property> &quot;onuploadcomplete&quot;</property></emphasis> is called after all files in from list uploaded. The <emphasis>
+                    <property> &quot;onuploadcanceled&quot;</property></emphasis> is called after upload was canceled via cancel control. The <emphasis>
+                        <property> &quot;onerror&quot;</property></emphasis> is if the file upload was interrupted according to any errors.</para>
+        <para>
+            There is a number of facets that define entry customization. Markup should be provided using <emphasis>
+                <property> &quot;entry&quot;</property></emphasis> facet. <emphasis>
+                    <property> &quot;label&quot;</property></emphasis> facet could be used to provide displaying the progress of uploading.
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
+ acceptedTypes="html">
+        <f:facet name="label">
+                <h:outputText value="{_KB}KB from {KB}KB uploaded --- {mm}:{ss}"></h:outputText>
+        </f:facet>
+</rich:fileUpload>
+...]]></programlisting>
+        <para>This is a result:</para>
+        <figure>
+            <title><emphasis role="bold">
+                <property>&lt;rich:fileUpload&gt;</property>
+            </emphasis>with <emphasis>
+                <property> &quot;label&quot;</property>
+            </emphasis> facet</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/fileUpload6.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>       
+        <para>As it could be seen in the picture below, the label displays under the item.</para>
+        <para>Labels of <property>component controls</property> can be defined with <emphasis>
+            <property> &quot;addControlLabel&quot;</property></emphasis>, <emphasis>
+                <property> &quot;clearAllControlLabel&quot;</property></emphasis>, <emphasis>
+                    <property> &quot;clearControlLabel&quot;</property></emphasis>, <emphasis>
+                        <property> &quot;stopEntryControlLabel&quot;</property></emphasis>, <emphasis> 
+                            <property> &quot;uploadControlLabel&quot;</property></emphasis></para>
+        <para>The <emphasis role="bold">
+            <property>&lt;rich:fileUpload&gt;</property>
+        </emphasis> component allows to use sizes attributes: 
+        <itemizedlist>
+            <listitem><emphasis>
+                <property> &quot;listHeight&quot;</property></emphasis> attribute specify height for list of files in pixels
+            </listitem>
+            <listitem><emphasis>
+                <property> &quot;listWidth&quot;</property></emphasis> attribute specify width for list of files in pixels.
+            </listitem>
+            </itemizedlist>
+        </para>
+          
         
+        </section>
         
-        
-        <!-- ordering control set-->
+        <!-- ordering control set>
              
         <table>
             <title>Keyboard usage for elements selection</title>
@@ -188,7 +242,7 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                     </row>
                 </thead>
                 <tbody>
-                    <!--Sorting API -->
+                    <Sorting API >
                     <row>
                         <entry>CTRL+click</entry>
                         <entry>Inverts selection for an item</entry>
@@ -212,7 +266,7 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
         </table>
     </section>
 
-    <!-- section>
+    <section>
         <title>JavaScript API</title>
         <table>
             <title>JavaScript API</title>
@@ -293,7 +347,7 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                 </tbody>
             </tgroup>
         </table>
-    </section-->
+    </section>
 
     <section>
         <title>Look-and-Feel Customization</title>
@@ -842,14 +896,14 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
         
         <para>As it could be seen on the picture above, the font style for buttons is changed.</para>
                        
-    </section>
+    </section-->
  
     <section>
         <title>Relevant Resources Links</title>
         <para><ulink
-                url="http://livedemo.exadel.com/richfaces-demo/richfaces/pickList.jsf?c=pickList"
+            url="http://livedemo.exadel.com/richfaces-demo/richfaces/fileUpload.jsf?c=fileUpload"
                 >Here</ulink> you can see an example of <emphasis role="bold">
-                <property>&lt;rich:pickList&gt;</property>
+                <property>&lt;rich:fileUpload&gt;</property>
             </emphasis> usage and sources for the given example. </para>
     </section>
 
