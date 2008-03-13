@@ -46,23 +46,14 @@
 
   <section>
     <title>Creating the Component with a Page Tag</title>
-    <para>To create the simplest variant of <property>rich:recursiveTreeNodesAdaptor</property> on a page, use the
-      following syntax:</para>
-
-    <para>
+      <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-	<rich:recursiveTreeNodesAdaptor var="issue" root="#{project.root}" nodes="#{model.issues}">
-		...
-		<rich:treeNode>
-			 <!-- node content -->
-		</rich:treeNode>	
-		<!-- Others nodes -->   
-		...
-	</rich:recursiveTreeNodesAdaptor>
-...
-]]></programlisting>
+<rich:tree switchType="ajax" stateAdvisor="#{treeDemoStateAdvisor}">
+    <rich:recursiveTreeNodesAdaptor roots="#{fileSystemBean.sourceRoots}" var="item" nodes="#{item.nodes}" />
+</rich:tree>
+...]]></programlisting>
   </section>
 
   <section>
@@ -80,8 +71,22 @@ HtmlRecursiveTreeNodesAdaptor myRecursiveTreeNodesAdaptor = new HtmlRecursiveTre
   
     <section>
     <title>Details of Usage</title>
+      <para>
+        The <emphasis role="bold"><property>&lt;rich:recursiveTreeNodesAdaptor&gt;</property></emphasis> component has a 
+        <emphasis><property>&quot;roots&quot;</property></emphasis> attribute that defines collection to use at the top of recursion. 
+      </para>
+      <para>
+        The <emphasis><property>&quot;nodes&quot;</property></emphasis> attribute defines collection to use on another recursion levels.  
+      </para>
+      <para>
+        The <emphasis><property>&quot;var&quot;</property></emphasis> attribute is used to access to the current collection element.
+      </para>
+      <para>
+        The <emphasis role="bold"><property>&lt;rich:recursiveTreeNodesAdaptor&gt;</property></emphasis> component can be nested without any limitations. 
+        See the following example.  
+      </para>
     <para>
-      <emphasis role="bold">The typical variant of using:</emphasis>
+      <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
 <rich:tree adviseNodeOpened="#{treeModelBean.adviseNodeOpened}" switchType="client">
@@ -117,7 +122,8 @@ HtmlRecursiveTreeNodesAdaptor myRecursiveTreeNodesAdaptor = new HtmlRecursiveTre
 ...
 ]]></programlisting>
 
- </section>
+    </section>
+  
 <!--
   <section>
     <title>Details of Usage</title>
@@ -212,12 +218,13 @@ the <property>rich:effect</property> attribute. Those are:
 </para>
 	
  </section>
-   <section>
+
+  
+-->
+  <section>
     <title>Relevant resources links</title>
     <para>
-      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/effect.jsf?c=effect">Here</ulink>
-      you can see the example of <emphasis role="bold">&lt;rich:effect&gt;</emphasis> usage. </para>
+      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/treeNodesAdaptor.jsf?c=recursiveTreeNodesAdaptor">Here</ulink>
+      you can see the example of <emphasis role="bold"><property>&lt;rich:recursiveTreeNodesAdaptor&gt;</property></emphasis> usage. </para>
   </section>
-  
-  -->
 </section>
