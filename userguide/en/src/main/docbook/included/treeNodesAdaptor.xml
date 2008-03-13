@@ -90,36 +90,36 @@ HtmlTreeNodesAdaptor myTreeNodesAdaptor = new HtmlTreeNodesAdaptor();
     The <emphasis><property>&quot;var&quot;</property></emphasis> attribute is used to access to the current collection element.
     </para>
     <para>
-     The simple example is placed below.
+      The <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> component can be nested without any limitations. 
+      See the following example.  
     </para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-	<rich:tree adviseNodeOpened="#{treeModelBean.adviseNodeOpened}" switchType="client">
-		<rich:treeNodesAdaptor id="project" nodes="#{loaderBean.projects}" var="project">
-			<rich:treeNode>
-				<h:commandLink action="#{project.click}" value="Project: #{project.name}" />
-			</rich:treeNode>
-			<rich:treeNodesAdaptor id="srcDir" var="srcDir" nodes="#{project.srcDirs}">
-				<rich:treeNode>
-					<h:commandLink action="#{srcDir.click}" value="Source directory: #{srcDir.name}" />
-				</rich:treeNode>
-				<rich:treeNodesAdaptor id="pkg" var="pkg" nodes="#{srcDir.packages}">
-					<rich:treeNode>
-						<h:commandLink action="#{pkg.click}" value="Package: #{pkg.name}" />
-					</rich:treeNode>
-					<rich:treeNodesAdaptor id="class" var="class" nodes="#{pkg.classes}">
-						<rich:treeNode>
-							<h:commandLink action="#{class.click}" value="Class: #{class.name}" />
-						</rich:treeNode>
-					</rich:treeNodesAdaptor>	
-				</rich:treeNodesAdaptor>
-			</rich:treeNodesAdaptor>
-		</rich:treeNodesAdaptor>
-	</rich:tree>
-...
-]]></programlisting>
+<rich:tree adviseNodeOpened="#{treeModelBean.adviseNodeOpened}" switchType="client">
+    <rich:treeNodesAdaptor id="project" nodes="#{loaderBean.projects}" var="project">
+        <rich:treeNode>
+            <h:commandLink action="#{project.click}" value="Project: #{project.name}" />
+        </rich:treeNode>
+    <rich:treeNodesAdaptor id="srcDir" var="srcDir" nodes="#{project.srcDirs}">
+        <rich:treeNode>
+            <h:commandLink action="#{srcDir.click}" value="Source directory: #{srcDir.name}" />
+        </rich:treeNode>
+    <rich:treeNodesAdaptor id="pkg" var="pkg" nodes="#{srcDir.packages}">
+        <rich:treeNode>
+            <h:commandLink action="#{pkg.click}" value="Package: #{pkg.name}" />
+        </rich:treeNode>
+    <rich:treeNodesAdaptor id="class" var="class" nodes="#{pkg.classes}">
+        <rich:treeNode>
+            <h:commandLink action="#{class.click}" value="Class: #{class.name}" />
+        </rich:treeNode>
+    </rich:treeNodesAdaptor>	
+    </rich:treeNodesAdaptor>
+    </rich:treeNodesAdaptor>
+    </rich:treeNodesAdaptor>
+</rich:tree>
+...]]></programlisting>
 
  </section>
   <section>
