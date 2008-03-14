@@ -2,8 +2,8 @@
 <section>
     <sectioninfo>
         <keywordset>
-            <keyword>rich:fileUpload</keyword>
-            <keyword>fileUpload</keyword>
+            <keyword>rich:pickList</keyword>
+            <keyword>pickList</keyword>
         </keywordset>
     </sectioninfo>
     <table>
@@ -21,27 +21,27 @@
                 <row>
                     <entry>component-type</entry>
 
-                    <entry>org.richfaces.component.FileUpload</entry>
+                    <entry>org.richfaces.PickList</entry>
                 </row>
                 <row>
                     <entry>component-class</entry>
 
-                    <entry>org.richfaces.component.html.HtmlFileUpload</entry>
+                    <entry>org.richfaces.component.html.HtmlPickList</entry>
                 </row>
                 <row>
                     <entry>component-family</entry>
 
-                    <entry>org.richfaces.component.FileUpload</entry>
+                    <entry>org.richfaces.PickList</entry>
                 </row>
                 <row>
                     <entry>renderer-type</entry>
 
-                    <entry>org.richfaces.renderkit.html.FileUploadRenderer</entry>
+                    <entry>org.richfaces.PickListRenderer</entry>
                 </row>
                  <row>
                     <entry>tag-class</entry>
 
-                     <entry>org.richfaces.taglib.FileUploadTag</entry>
+                    <entry>org.richfaces.taglib.PickListTag</entry>
                 </row>
             </tbody>
         </tgroup>
@@ -54,7 +54,10 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:fileUpload uploadData="#{bean.data}"/> 
+<rich:pickList value="#{pickBean.listValues}">
+        <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
+        <f:selectItem itemValue="Audi" itemLabel="Audi"/>
+</rich:pickList>
 ...]]></programlisting>
     </section>
     <section>
@@ -63,9 +66,9 @@
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
-        <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlFileUpload;
+        <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlPickList;
 ...	
-HtmlFileUpload myFileUpload = new HtmlFileUpload();
+HtmlPickList myPickList = new HtmlPickList();
 ...]]></programlisting>
     </section>
     <section>
@@ -330,17 +333,13 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                         <entry>generalBackgroundColor</entry>
                         <entry>background-color</entry>
                     </row>
-                    <row>
-                        <entry>tableBorderWidth</entry>
-                        <entry>border-width</entry>
-                    </row>
                   
                 </tbody>
             </tgroup>
         </table>
         
          <table>
-            <title>Skin parameters redefinition for a button</title>
+            <title>Skin parameters redefinition for a button, button in disable state</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -368,40 +367,10 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                                      
                 </tbody>
             </tgroup>
-         </table>
-        <table>
-            <title>Skin parameters redefinition for a disabled button</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>trimColor</entry>
-                        <entry>background-color</entry>
-                    </row>
-                    <row>
-                        <entry>generalTextColor</entry>
-                        <entry>color</entry>
-                    </row>
-                    <row>
-                        <entry>generalFamilyFont</entry>
-                        <entry>font-family</entry>
-                    </row>
-                    <row>
-                        <entry>generalSizeFont</entry>
-                        <entry>font-size</entry>
-                    </row>
-                    
-                </tbody>
-            </tgroup>
         </table>
-               
+        
         <table>
-            <title>Skin parameters redefinition for a pressed button</title>
+            <title>Skin parameters redefinition for a pressed and highlighted button</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -438,44 +407,7 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                 </tbody>
             </tgroup>
         </table>
-        <table>
-            <title>Skin parameters redefinition for a highlighted button</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>trimColor</entry>
-                        <entry>background-color</entry>
-                    </row>
-                    <row>
-                        <entry>generalTextColor</entry>
-                        <entry>color</entry>
-                    </row>
-                    <row>
-                        <entry>generalFamilyFont</entry>
-                        <entry>font-family</entry>
-                    </row>
-                    <row>
-                        <entry>generalSizeFont</entry>
-                        <entry>font-size</entry>
-                    </row>
-                    <row>
-                        <entry>tableBorderColor</entry>
-                        <entry>border-color</entry>
-                    </row>
-                    <row>
-                        <entry>tableBorderWidth</entry>
-                        <entry>border-width</entry>
-                    </row>
-                    
-                </tbody>
-            </tgroup>
-        </table>
+        
         <table>
             <title>Skin parameters redefinition for a button selection</title>
             <tgroup cols="2">
@@ -583,10 +515,18 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                 </thead>
                 <tbody>
                     <row>
-                        <entry>controlBorderColor</entry>
+                        <entry>tableBorderColor</entry>
                         <entry>border-color</entry>
                     </row>
-                                        
+                    <row>
+                        <entry>tableBottomBorderColor</entry>
+                        <entry>border-bottom-color</entry>
+                    </row>
+                    <row>
+                        <entry>tableTopBorderColor</entry>
+                        <entry>border-top-color</entry>
+                    </row>
+                    
                 </tbody>
             </tgroup>
         </table>
@@ -625,13 +565,38 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                         <entry>rich-picklist-list</entry>
                         <entry>Defines styles for a wrapper &lt;table&gt; element of a pickList</entry>
                     </row>
-                    
+                    <row>
+                        <entry>rich-list-picklist</entry>
+                        <entry>Defines styles for a wrapper &lt;table&gt; element of a pickList</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
         
         <table >
             <title>Classes names that define a button representation</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-list-picklist-button</entry>
+                        <entry>Defines styles for a button</entry>
+                    </row>
+                    <row>
+                        <entry>rich-list-picklist-button-disabled</entry>
+                        <entry>Defines styles for a disabled button</entry>
+                    </row>
+                  </tbody>
+            </tgroup>
+        </table>
+        
+        <table >
+            <title>Classes names that define pressed and highlighted button representation</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -656,19 +621,47 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                         <entry>rich-list-picklist-button-light</entry>
                         <entry>Defines styles for a button highlight</entry>
                     </row>
+                 </tbody>
+            </tgroup>
+        </table>
+        
+        <table >
+            <title>Classes names that define a button selection representation</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
                     <row>
                         <entry>rich-list-picklist-button-selection</entry>
                         <entry>Defines styles for a button selection</entry>
                     </row>
-                    <row>
-                        <entry>rich-list-picklist-button-content</entry>
-                        <entry>Defines styles for a button content</entry>
-                    </row>
-                  </tbody>
+                </tbody>
             </tgroup>
         </table>
-                      
-               
+        
+        <table >
+            <title>Classes names that define a button content representation</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                     <row>
+                        <entry>rich-list-picklist-button-content</entry>
+                         <entry>Defines styles for a button content</entry>
+                    </row>
+                    
+                </tbody>
+            </tgroup>
+        </table>
+        
         <table >
             <title>Classes names that define a source and target items representation</title>
             <tgroup cols="2">
@@ -693,7 +686,7 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
         </table>
         
         <table >
-            <title>Classes names that define a source cell representation</title>
+            <title>Classes names that define a source and target cell representation</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -707,38 +700,8 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                         <entry>Defines styles for a cell in a source list</entry>
                     </row>
                     <row>
-                        <entry>rich-picklist-source-cell-selected</entry>
-                        <entry>Defines styles for a selected cell in a source list</entry>
-                    </row>
-                    <row>
-                        <entry>rich-picklist-source-cell-active</entry>
-                        <entry>Defines styles for an active cell in a source list</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-        
-        <table >
-            <title>Classes names that define a target cell representation</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Class name</entry>
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>rich-picklist-target-cel</entry>
-                        <entry>Defines styles for a cell in a source list</entry>
-                    </row>
-                    <row>
-                        <entry>rich-picklist-target-cell-selected</entry>
-                        <entry>Defines styles for a selected cell in a target list</entry>
-                    </row>
-                    <row>
-                        <entry>rich-picklist-target-cell-active</entry>
-                        <entry>Defines styles for an active cell in a target list</entry>
+                        <entry>rich-picklist-target-cell</entry>
+                        <entry>Defines styles for a cell in a target list</entry>
                     </row>
                 </tbody>
             </tgroup>
