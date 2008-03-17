@@ -181,12 +181,197 @@ HtmlColumn myColumn = new HtmlColumn();
     component, it becomes possible to group easily the rows with special HTML attribute.</para>
     <para>The columns also could be grouped in a particular way with the help of the <emphasis role="bold"><property>&lt;h:columnGroup&gt;</property></emphasis>
         component that is described in <link linkend="columnGroup">the following chapter</link>.</para>
- </section>
+</section>
+    
+    <section>
+        <title id="sortAndFilter">Sorting and Filtering</title>
+        <section>
+            <title>Sorting</title>
+            <para>In order to sort the columns you should use <emphasis><property>&quot;sortBy&quot;</property></emphasis> attribute which defines a bean property which is used for sorting of a column.</para>
+            <para>By default, the first column sorted in ascending. Below you can see code example:</para>
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<h:form>
+    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" width="300px">
+        <f:facet name="header">
+            <h:outputText value="Sorting Example"/>
+        </f:facet>
+        <rich:column sortBy="#{cap.state}">
+            <f:facet name="header">
+                <h:outputText value="State Name"></h:outputText>
+            </f:facet>
+            <h:outputText value="#{cap.state}"></h:outputText>
+        </rich:column> 
+        <rich:column sortBy="#{cap.name}">
+            <f:facet name="header">
+                <h:outputText value="State Capital"></h:outputText>
+            </f:facet>
+            <h:outputText value="#{cap.name}"/> 
+        </rich:column>
+    </rich:dataTable>
+</h:form>
+...
+]]></programlisting>
+            <para>This is result:</para>
+            <figure>
+                <title>Example sorting first column in ascending</title>
+                <mediaobject> 
+                    <imageobject>
+                        <imagedata fileref="images/columnsort1.png"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+            <para>In order to sort the data in descending order, you should double-click on the header of column, which you want to sort.</para>
+            <para><emphasis><property>&quot;sortOrder&quot;</property></emphasis> attribute may be possible in three states:
+                <itemizedlist>
+                    <listitem>
+                        <emphasis><property>&quot;none&quot;</property></emphasis>
+                    </listitem>
+                    <listitem>
+                        <emphasis><property>&quot;ascending&quot;</property></emphasis>
+                    </listitem>
+                    <listitem>
+                        <emphasis><property>&quot;descending&quot;</property></emphasis>.
+                    </listitem>
+                </itemizedlist>
+               </para>
+            <para>By default, data in the columns is not sorted.</para>
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<h:panelGrid columns="2" columnClasses="top">
+        <rich:dataTable value="#{dataTableScrollerBean.allCars}" var="category" rows="5" id="table">
+            <rich:column id="make" sortBy="#{category.make}" sortOrder="#{sortingBean.makeDirection}">
+                <f:facet name="header"><h:outputText styleClass="headerText" value="Make" />
+                <h:outputText value="#{category.make}" />
+            </rich:column>
+            <rich:column id="model" sortBy="#{category.model}" sortOrder="#{sortingBean.modelDirection}">
+                <f:facet name="header">
+	        <h:outputText styleClass="headerText" value="Model" />
+	 </f:facet>
+	 <h:outputText value="#{category.model}" />
+            </rich:column>
+            <rich:column id="price" sortBy="#{category.price}" sortOrder="#{sortingBean.priceDirection}">
+	<f:facet name="header">
+	        <h:outputText styleClass="headerText" value="Price" />
+	</f:facet>
+	<h:outputText value="#{category.price}" />
+            </rich:column>
+            <rich:column id="mileage" sortBy="#{category.mileage}" sortOrder="#{sortingBean.mileageDirection}">
+	    <f:facet name="header">
+	        <h:outputText styleClass="headerText" value="Mileage" />
+	    </f:facet>
+	    <h:outputText value="#{category.mileage}" />
+            </rich:column>
+            <rich:column width="200px" id="vin">
+                <f:facet name="header">
+	        <h:outputText styleClass="headerText" value="VIN" />
+	 </f:facet>
+	 <h:outputText value="#{category.vin}" />
+            </rich:column>
+            <rich:column id="stock">
+	<f:facet name="header">
+	        <h:outputText styleClass="headerText" value="Stock" />
+	</f:facet>
+	<h:outputText value="#{category.stock}" />
+            </rich:column>
+</rich:dataTable>
+...]]></programlisting>
+            <para>Below you can see result:</para>
+            <figure>
+                <title>Sorting using the example of the <emphasis><property>&quot;sortOrder&quot;</property></emphasis> attribute</title>
+                <mediaobject> 
+                    <imageobject>
+                        <imagedata fileref="images/columnsort2.png"/>
+                    </imageobject>
+                </mediaobject>
+            </figure> 
+            <para><emphasis><property>&quot;selfSorted&quot;</property></emphasis> attribute will manage if it's header will be clickable, icons rendered and sorting will be fired after click on the header. 
+                So, developer will be able to define the <emphasis><property>sortBy</property></emphasis> property and conditionally use internal sorting.</para>
+            <para>The default attribute is set to <emphasis><property>&quot;true&quot;</property></emphasis>.</para>  
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<h:form>
+    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" width="300px" columnClasses="center">
+        <f:facet name="header">
+	<h:outputText value="Sorting Example"/>
+        </f:facet>
+        <rich:column>
+	<f:facet name="header">
+	    <h:outputText value="State Flag"></h:outputText>
+	</f:facet>
+	<h:graphicImage value="#{cap.stateFlag}"/> 
+        </rich:column>
+        <rich:column sortBy="#{cap.state}" selfSorted="false"> 
+	<f:facet name="header">
+	    <h:outputText value="State Name"></h:outputText>
+	</f:facet>
+	<h:outputText value="#{cap.state}"></h:outputText>
+        </rich:column> 
+        <rich:column sortBy="#{cap.name}">
+	<f:facet name="header">
+	    <h:outputText value="State Capital"></h:outputText>
+	</f:facet>
+	<h:outputText value="#{cap.name}"/> 
+        </rich:column>
+    </rich:dataTable>
+</h:form>
+...
+]]></programlisting>     
+            <para>As a result, the second column will be unavailable for sorting.</para>
+            <para>Sorting can&apos;t be used together with pagination.</para>
+        </section>
+        <section>
+            <title>Filtering</title>
+            <para>In order to filter the column value, in accordance with the entered value, it is necessary to use a <emphasis><property>&quot;filterBy&quot;</property></emphasis> attribute.</para>
+            <para>Below you can see example code and the result of its use:</para>
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<h:form>
+    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" width="500px">
+        <f:facet name="header">
+            <h:outputText value="Filtering Example"/>
+        </f:facet>
+        <rich:column> 
+	<f:facet name="header">
+	    <h:graphicImage value="/images/ico_DataTable.gif"></h:graphicImage>
+	</f:facet>
+	<h:graphicImage value="#{cap.stateFlag}"/>
+        </rich:column>
+        <rich:column filterBy="#{cap.state}" filterDefaultLabel="click to filter">
+	<h:outputText value="#{cap.state}"></h:outputText>
+        </rich:column> 
+        <rich:column filterBy="#{cap.name}" filterDefaultLabel="click to filter">
+	<h:outputText value="#{cap.name}"/> 
+        </rich:column>
+    </rich:dataTable>
+</h:form>
+...
+]]></programlisting>     
+            <figure>
+                <title>Filtering using the example of the <emphasis><property>&quot;filterBy&quot;</property></emphasis> attribute</title>
+                <mediaobject> 
+                    <imageobject>
+                        <imagedata fileref="images/columnFilt1.png"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>      
+        </section>
+        
+    </section>
+    
  <section>
      <title>Look-and-Feel Customization</title>
      
      <para>For skinnability implementation, the components use a <emphasis>
-         <property>style class redefinition method.</property>
+         <property>style class redefinition method</property>.
      </emphasis> Default style classes are mapped on <emphasis>
          <property>skin parameters.</property>
      </emphasis></para>
