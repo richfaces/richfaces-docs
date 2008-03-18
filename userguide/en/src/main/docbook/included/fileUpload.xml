@@ -85,13 +85,15 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
             </itemizedlist>
         </para>
 
-        <!-- attributes of component  orderingList -->
-
+    
+        <!--para><emphasis>
+            <property> &quot;uploadData&quot;</property>
+        </emphasis> attribute shows the collection of files uploaded. With the help of this attribute you can define the place to upload data.</para-->
         <para>
             The <emphasis>
                 <property> &quot;disabled&quot;</property>
             </emphasis> 
-            attribute is used to disable all elements of the component. All the controls should be disabled too.  </para>
+            attribute is used to disable all elements of the component. All the controls disables too.  </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
@@ -113,7 +115,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
         </figure>       
    
              <para>The <emphasis>
-                <property> &quot;acceptedTypes&quot;</property></emphasis> attribute is used to define file types which should be accepted to upload.
+                <property> &quot;acceptedTypes&quot;</property></emphasis> attribute is used to define file types which are accepted to upload.
             </para>
             <para>
                 <emphasis role="bold">Example:</emphasis>
@@ -121,7 +123,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
             <programlisting role="XML"><![CDATA[...
 <rich:fileUpload uploadData="#{bean.data}" acceptedTypes="html"/>
  ...]]></programlisting>
-        <para>As it could be seen in the example below, only files with "html" extension should be accepted to upload.</para>
+        <para>As it could be seen in the example above, only files with "html" extension are accepted to upload.</para>
        
         <para>The <emphasis>
             <property> &quot;autoclear&quot;</property></emphasis> attribute is used to remove automatically files from list after upload completed.</para>
@@ -133,11 +135,11 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
 <rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true"
  acceptedTypes="html"/>
  ...]]></programlisting>
-            <para>As it could be seen in the example below, files removes from list after upload completed.</para>
+            <para>As it could be seen in the example above, files removes from list after upload completed.</para>
         <para>The <emphasis>
             <property> &quot;maxFilesQuantity&quot;</property></emphasis> defines max number of files allowed for upload. 
-            After number of files in the list is equals to this attribute – add button should be disabled.
-            Add button should not be enabled before upload of the whole list done.
+            After number of files in the list is equals to this attribute – add button is disabled.
+            The add button is not available until all list items are uploaded.
         </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
@@ -159,7 +161,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                 </imageobject>
             </mediaobject>
         </figure>       
-        <para>As it could be seen in the picture below, only 2 files allows for upload.</para>
+        <para>As it could be seen in the picture above, only 2 files allows for upload.</para>
         <para>The <emphasis>
             <property> &quot;fileUploadedListener&quot;</property></emphasis> is 
             called at server side after every file uploaded and used for the file saving by end developer.
@@ -179,9 +181,15 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                     <property> &quot;onuploadcanceled&quot;</property></emphasis> is called after upload was canceled via cancel control. The <emphasis>
                         <property> &quot;onerror&quot;</property></emphasis> is if the file upload was interrupted according to any errors.</para>
         <para>
-            There is a number of facets that define entry customization. Markup should be provided using <emphasis>
-                <property> &quot;entry&quot;</property></emphasis> facet. <emphasis>
-                    <property> &quot;label&quot;</property></emphasis> facet could be used to provide displaying the progress of uploading.
+            There are a number of facets providing for this component:
+           <emphasis>
+                    <property> &quot;header&quot;</property></emphasis>
+              
+                    <emphasis>
+                        <property> &quot;footer&quot;</property></emphasis>
+                      <emphasis>
+                          <property> &quot;label&quot;</property></emphasis>. <emphasis>
+                              <property> &quot;label&quot;</property></emphasis> facet could be used to provide displaying the progress of uploading.
         </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
@@ -207,7 +215,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                 </imageobject>
             </mediaobject>
         </figure>       
-        <para>As it could be seen in the picture below, the label displays under the item.</para>
+        <para>As it could be seen in the picture above, the label displays under the item.</para>
         <para>Labels of <property>component controls</property> can be defined with <emphasis>
             <property> &quot;addControlLabel&quot;</property></emphasis>, <emphasis>
                 <property> &quot;clearAllControlLabel&quot;</property></emphasis>, <emphasis>
@@ -227,7 +235,13 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
             </itemizedlist>
         </para>
           
-        <para>The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component allows to use internationalization method to redefine and localize the labels. You could use application resource bundle and define RICH_FILE_UPLOAD_CANCEL_LABEL,  RICH_FILE_UPLOAD_STOP_LABEL,  RICH_FILE_UPLOAD_ADD_LABEL, RICH_FILE_UPLOAD_UPLOAD_LABEL, RICH_FILE_UPLOAD_CLEAR_LABEL, RICH_FILE_UPLOAD_CLEAR_ALL_LABEL, RICH_FILE_UPLOAD_PROGRESS_LABEL,  RICH_FILE_UPLOAD_SIZE_ERROR_LABLE,  RICH_FILE_UPLOAD_TRANSFER_ERROR_LABLE, RICH_FILE_UPLOAD_ENTRY_STOP_LABEL, RICH_FILE_UPLOAD_ENTRY_CLEAR_LABEL, RICH_FILE_UPLOAD_ENTRY_CANCEL_LABEL  there.</para>
+        <para>The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> 
+            component allows to use internationalization method to redefine and localize the labels. You could use application 
+            resource bundle and define <property>RICH_FILE_UPLOAD_CANCEL_LABEL,  RICH_FILE_UPLOAD_STOP_LABEL,  
+                RICH_FILE_UPLOAD_ADD_LABEL, RICH_FILE_UPLOAD_UPLOAD_LABEL, RICH_FILE_UPLOAD_CLEAR_LABEL, 
+                RICH_FILE_UPLOAD_CLEAR_ALL_LABEL, RICH_FILE_UPLOAD_PROGRESS_LABEL,  RICH_FILE_UPLOAD_SIZE_ERROR_LABLE,  
+                RICH_FILE_UPLOAD_TRANSFER_ERROR_LABLE, RICH_FILE_UPLOAD_ENTRY_STOP_LABEL, RICH_FILE_UPLOAD_ENTRY_CLEAR_LABEL, 
+                RICH_FILE_UPLOAD_ENTRY_CANCEL_LABEL</property>  there.</para>
        
         
         <!-- ordering control set>
