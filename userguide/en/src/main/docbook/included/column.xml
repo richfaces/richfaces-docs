@@ -226,7 +226,7 @@ HtmlColumn myColumn = new HtmlColumn();
             <para>In order to sort the data in descending order, you should double-click on the header of column, which you want to sort.</para>
             <para><emphasis><property>&quot;sortOrder&quot;</property></emphasis> attribute may be possible in three states:
                 <itemizedlist>
-                    <listitem>
+                        <listitem>
                         <emphasis><property>&quot;none&quot;</property></emphasis>
                     </listitem>
                     <listitem>
@@ -242,42 +242,43 @@ HtmlColumn myColumn = new HtmlColumn();
                 <emphasis role="bold">Example:</emphasis>
             </para>
             <programlisting role="XML"><![CDATA[...
-<h:panelGrid columns="2" columnClasses="top">
-        <rich:dataTable value="#{dataTableScrollerBean.allCars}" var="category" rows="5" id="table">
-            <rich:column id="make" sortBy="#{category.make}" sortOrder="#{sortingBean.makeDirection}">
-                <f:facet name="header"><h:outputText styleClass="headerText" value="Make" />
-                <h:outputText value="#{category.make}" />
-            </rich:column>
-            <rich:column id="model" sortBy="#{category.model}" sortOrder="#{sortingBean.modelDirection}">
-                <f:facet name="header">
-	        <h:outputText styleClass="headerText" value="Model" />
-	 </f:facet>
-	 <h:outputText value="#{category.model}" />
-            </rich:column>
-            <rich:column id="price" sortBy="#{category.price}" sortOrder="#{sortingBean.priceDirection}">
-	<f:facet name="header">
-	        <h:outputText styleClass="headerText" value="Price" />
-	</f:facet>
-	<h:outputText value="#{category.price}" />
-            </rich:column>
-            <rich:column id="mileage" sortBy="#{category.mileage}" sortOrder="#{sortingBean.mileageDirection}">
-	    <f:facet name="header">
-	        <h:outputText styleClass="headerText" value="Mileage" />
-	    </f:facet>
-	    <h:outputText value="#{category.mileage}" />
-            </rich:column>
-            <rich:column width="200px" id="vin">
-                <f:facet name="header">
-	        <h:outputText styleClass="headerText" value="VIN" />
-	 </f:facet>
-	 <h:outputText value="#{category.vin}" />
-            </rich:column>
-            <rich:column id="stock">
-	<f:facet name="header">
-	        <h:outputText styleClass="headerText" value="Stock" />
-	</f:facet>
-	<h:outputText value="#{category.stock}" />
-            </rich:column>
+<rich:dataTable value="#{dataTableScrollerBean.allCars}" var="category" rows="5" id="table">
+        <rich:column id="make" sortBy="#{category.make}" sortOrder="#{sortingBean.makeDirection}">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Make" />
+            </f:facet>
+            <h:outputText value="#{category.make}" />
+        </rich:column>
+        <rich:column id="model" sortBy="#{category.model}" sortOrder="#{sortingBean.modelDirection}">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Model" />
+            </f:facet>
+            <h:outputText value="#{category.model}" />
+        </rich:column>
+        <rich:column id="price" sortBy="#{category.price}" sortOrder="#{sortingBean.priceDirection}">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Price" />
+            </f:facet>
+            <h:outputText value="#{category.price}" />
+        </rich:column>
+        <rich:column id="mileage" sortBy="#{category.mileage}" sortOrder="#{sortingBean.mileageDirection}">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Mileage" />
+            </f:facet>
+            <h:outputText value="#{category.mileage}" />
+        </rich:column>
+        <rich:column width="200px" id="vin">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="VIN" />
+            </f:facet>
+            <h:outputText value="#{category.vin}" />
+        </rich:column>
+        <rich:column id="stock">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Stock" />
+            </f:facet>
+            <h:outputText value="#{category.stock}" />
+        </rich:column>
 </rich:dataTable>
 ...]]></programlisting>
             <para>Below you can see result:</para>
@@ -324,6 +325,67 @@ HtmlColumn myColumn = new HtmlColumn();
 ...
 ]]></programlisting>     
             <para>As a result, the second column will be unavailable for sorting.</para>
+            <para><emphasis><property>&quot;sortable&quot;</property></emphasis> attribute  is used with <emphasis role="bold"><property>&lt;rich:scrollableDataTable&gt;</property></emphasis> component.</para>
+            <para>Below you can find example code of usage and result:</para>
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<h:form>
+   <rich:spacer height="30" />
+    <rich:scrollableDataTable rowKeyVar="rkv" frozenColCount="1" height="400px" width="700px" id="carList" rows="40" columnClasses="col"
+		                      value="#{dataTableScrollerBean.allCars}" var="category" sortMode="single"
+			               binding="#{dataTableScrollerBean.table}"
+			               selection="#{dataTableScrollerBean.selection}">
+        <rich:column id="make" sortable="true">
+	<f:facet name="header">
+	    <h:outputText styleClass="headerText" value="Make" />
+	</f:facet>
+	<h:outputText value="#{category.make}" />
+        </rich:column>
+        <rich:column id="model">
+	<f:facet name="header">
+	        <h:outputText styleClass="headerText" value="Model" />
+	</f:facet>
+	<h:outputText value="#{category.model}" />
+        </rich:column>
+        <rich:column id="price">
+	<f:facet name="header">
+	    <h:outputText styleClass="headerText" value="Price" />
+	</f:facet>
+	<h:outputText value="#{category.price}" />
+        </rich:column>
+        <rich:column id="mileage">
+	<f:facet name="header">
+	    <h:outputText styleClass="headerText" value="Mileage" />
+               </f:facet>
+	<h:outputText value="#{category.mileage}" />
+        </rich:column>
+        <rich:column width="200px" id="vin">
+	<f:facet name="header">
+	    <h:outputText styleClass="headerText" value="VIN" />
+               </f:facet>
+	<h:outputText value="#{category.vin}" />
+        </rich:column>
+        <rich:column id="stock">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Stock" />
+            </f:facet>
+            <h:outputText value="#{category.stock}" />
+        </rich:column>
+    </rich:scrollableDataTable>
+   <rich:spacer height="20px"/>
+</h:form>
+...]]></programlisting>
+            <para>As a result, only the first column can be sorted.</para>
+            <figure>
+                <title>Sorting using the example of the <emphasis><property>&quot;sortable&quot;</property></emphasis> attribute</title>
+                <mediaobject> 
+                    <imageobject>
+                        <imagedata fileref="images/columnsort3.png"/>
+                    </imageobject>
+                </mediaobject>
+            </figure> 
             <para>Sorting can&apos;t be used together with pagination.</para>
         </section>
         <section>
@@ -362,7 +424,7 @@ HtmlColumn myColumn = new HtmlColumn();
                         <imagedata fileref="images/columnFilt1.png"/>
                     </imageobject>
                 </mediaobject>
-            </figure>      
+            </figure>    
         </section>
         
     </section>
