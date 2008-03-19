@@ -290,6 +290,56 @@ HtmlColumn myColumn = new HtmlColumn();
                     </imageobject>
                 </mediaobject>
             </figure> 
+            <para><emphasis><property>&quot;sortPriority&quot;</property></emphasis> attribute is defined in the <emphasis role="bold"><property>rich:dataTable</property></emphasis> component which should be defined as set of column ids in the order the columns should be set.</para>
+            <para>If the columns sort order changed externally – sort priorities should be used to define which columns will be sorted first.</para>
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<rich:dataTable value="#{dataTableScrollerBean.allCars}"
+                             var="category" rows="30" id="table"
+		sortPriority="#{sortingBean.prioritList}">
+        <rich:column id="make" sortBy="#{category.make}" sortOrder="#{sortingBean.makeDirection}" selfSorted="false">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Make" />
+            </f:facet>
+            <h:outputText value="#{category.make}" />
+        </rich:column>
+        <rich:column id="model" sortBy="#{category.model}" sortOrder="#{sortingBean.modelDirection}" selfSorted="false">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Model" />
+            </f:facet>
+            <h:outputText value="#{category.model}" />
+        </rich:column>
+        <rich:column id="price" sortBy="#{category.price}" sortOrder="#{sortingBean.priceDirection}" selfSorted="false">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Price" />
+            </f:facet>
+            <h:outputText value="#{category.price}" />
+        </rich:column>
+        <rich:column id="mileage" sortBy="#{category.mileage}" sortOrder="#{sortingBean.mileageDirection}" selfSorted="false">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Mileage" />
+            </f:facet>
+            <h:outputText value="#{category.mileage}" />
+        </rich:column>
+        <rich:column width="200px" id="vin">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="VIN" />
+            </f:facet>
+            <h:outputText value="#{category.vin}" />
+        </rich:column>
+        <rich:column id="stock">
+            <f:facet name="header">
+                <h:outputText styleClass="headerText" value="Stock" />
+            </f:facet>
+            <h:outputText value="#{category.stock}" />
+        </rich:column>
+        <f:facet name="footer">
+            <rich:datascroller />
+        </f:facet>
+</rich:dataTable>
+...]]></programlisting>
             <para><emphasis><property>&quot;selfSorted&quot;</property></emphasis> attribute will manage if it's header will be clickable, icons rendered and sorting will be fired after click on the header. 
                 So, developer will be able to define the <emphasis><property>sortBy</property></emphasis> property and conditionally use internal sorting.</para>
             <para>The default attribute is set to <emphasis><property>&quot;true&quot;</property></emphasis>.</para>  
@@ -415,8 +465,7 @@ HtmlColumn myColumn = new HtmlColumn();
         </rich:column>
     </rich:dataTable>
 </h:form>
-...
-]]></programlisting>     
+...]]></programlisting>     
             <figure>
                 <title>Filtering using the example of the <emphasis><property>&quot;filterBy&quot;</property></emphasis> attribute</title>
                 <mediaobject> 
@@ -424,7 +473,45 @@ HtmlColumn myColumn = new HtmlColumn();
                         <imagedata fileref="images/columnFilt1.png"/>
                     </imageobject>
                 </mediaobject>
-            </figure>    
+            </figure>  
+            <para><emphasis><property>&quot;filterExpression&quot;</property></emphasis> attribute is used to check if the row should be present in result. Any expression could be used inside and should return boolean value. </para>
+            <para>Below you can find example code:</para>
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<h:form id="form">
+    <h:inputText value="#{capitalsBean.filter}">
+        <a4j:support event="onblur" reRender="dataTable" />
+    </h:inputText>
+    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" width="500px">
+        <f:facet name="header">
+            <h:outputText value="Filtering Example" />
+        </f:facet>
+        <rich:column>
+            <f:facet name="header">
+                <h:graphicImage value="/images/ico_DataTable.gif"/>
+            </f:facet>
+            <h:graphicImage value="#{cap.stateFlag}" />
+        </rich:column>
+        <rich:column filterBy="#{cap.state}" filterDefaultLabel="click to filter" filterExpression="#{form:startWith(cap.name,cap.state)}">
+            <h:outputText value="#{cap.state}"></h:outputText>
+        </rich:column>
+        <rich:column filterBy="#{cap.name}" filterDefaultLabel="click to filter">
+            <h:outputText value="#{cap.name}" />
+        </rich:column>
+    </rich:dataTable>
+</h:form>
+...]]></programlisting>
+            <para><emphasis><property>&quot;filterFunction&quot;</property></emphasis> attribute has three values:</para>
+            <itemizedlist>
+                <listitem><emphasis><property>&quot;startWith&quot;</property></emphasis>(by default)</listitem>
+                <listitem><emphasis><property>&quot;contains&quot;</property></emphasis></listitem>
+                <listitem><emphasis><property>&quot;equals&quot;</property></emphasis></listitem>                
+            </itemizedlist>
+            <para>Example of usage you could see in the previous example.</para>
+            <para><emphasis><property>&quot;filterMethod&quot;</property></emphasis> should be called for every object of the table. It should get current object and return boolean value. </para>
+                        
         </section>
         
     </section>
