@@ -183,8 +183,8 @@ HtmlColumn myColumn = new HtmlColumn();
         component that is described in <link linkend="columnGroup">the following chapter</link>.</para>
 </section>
     
-    <section>
-        <title id="sortAndFilter">Sorting and Filtering</title>
+    <section id="sortAndFilter">
+        <title>Sorting and Filtering</title>
         <section>
             <title>Sorting</title>
             <para>In order to sort the columns you should use <emphasis><property>&quot;sortBy&quot;</property></emphasis> attribute which defines a bean property which is used for sorting of a column.</para>
@@ -435,12 +435,14 @@ HtmlColumn myColumn = new HtmlColumn();
                         <imagedata fileref="images/columnsort3.png"/>
                     </imageobject>
                 </mediaobject>
-            </figure> 
+            </figure>
+            <para><emphasis><property>&quot;sortExpression&quot;</property></emphasis> attribute defines a bean property which is used for sorting of a column. Usage of this attribute is not recommendable.</para>
             <para>Sorting can&apos;t be used together with pagination.</para>
         </section>
         <section>
             <title>Filtering</title>
             <para>In order to filter the column value, in accordance with the entered value, it is necessary to use a <emphasis><property>&quot;filterBy&quot;</property></emphasis> attribute.</para>
+            <para>If <emphasis><property>&quot;filterValue&quot;</property></emphasis> attribute isn&apos;t empty from the beginning – table should be filtered on first rendering.</para>
             <para>Below you can see example code and the result of its use:</para>
             <para>
                 <emphasis role="bold">Example:</emphasis>
@@ -457,7 +459,7 @@ HtmlColumn myColumn = new HtmlColumn();
 	</f:facet>
 	<h:graphicImage value="#{cap.stateFlag}"/>
         </rich:column>
-        <rich:column filterBy="#{cap.state}" filterDefaultLabel="click to filter">
+        <rich:column filterBy="#{cap.state}" filterDefaultLabel="click to filter" filterValue="#{filterName.filterBean}">
 	<h:outputText value="#{cap.state}"></h:outputText>
         </rich:column> 
         <rich:column filterBy="#{cap.name}" filterDefaultLabel="click to filter">
@@ -503,13 +505,14 @@ HtmlColumn myColumn = new HtmlColumn();
     </rich:dataTable>
 </h:form>
 ...]]></programlisting>
-            <para><emphasis><property>&quot;filterFunction&quot;</property></emphasis> attribute has three values:</para>
+<!--           <para><emphasis><property>&quot;filterFunction&quot;</property></emphasis> attribute has three values:</para>
             <itemizedlist>
                 <listitem><emphasis><property>&quot;startWith&quot;</property></emphasis>(by default)</listitem>
                 <listitem><emphasis><property>&quot;contains&quot;</property></emphasis></listitem>
                 <listitem><emphasis><property>&quot;equals&quot;</property></emphasis></listitem>                
             </itemizedlist>
-            <para>Example of usage you could see in the previous example.</para>
+            <para>Example of usage you could see in the previous example.</para> -->  
+            <para><emphasis><property>&quot;filterEvent&quot;</property></emphasis> attribute is used for customization. </para>
             <para><emphasis><property>&quot;filterMethod&quot;</property></emphasis> should be called for every object of the table. It should get current object and return boolean value. </para>
                         
         </section>
