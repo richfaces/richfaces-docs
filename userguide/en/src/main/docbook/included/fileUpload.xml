@@ -173,13 +173,26 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
 <rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
  acceptedTypes="html"/>
  ...]]></programlisting>
+        <para>The <emphasis>
+            <property> &quot;immediateUpload&quot;</property></emphasis> attribute allows files to be uploaded immediately after they have been added into list.
+            If you set this attribute to true files immediately uploads after they have been added into list, all next files automatically uploads one by one.
+            If you cancel uploading – next files aren't start uploading till you press the general upload button or clear the list.
+            
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
+ acceptedTypes="html" immediateUpload="true"/>
+ ...]]></programlisting>
         <para>The <emphasis role="bold">
             <property>&lt;rich:fileUpload&gt;</property>
         </emphasis> provides using a number of handlers. The <emphasis>
             <property> &quot;onupload&quot;</property></emphasis> is available to cancel the upload at client side. The <emphasis>
                 <property> &quot;onuploadcomplete&quot;</property></emphasis> is called after all files in from list uploaded. The <emphasis>
                     <property> &quot;onuploadcanceled&quot;</property></emphasis> is called after upload was canceled via cancel control. The <emphasis>
-                        <property> &quot;onerror&quot;</property></emphasis> is if the file upload was interrupted according to any errors.</para>
+                        <property> &quot;onerror&quot;</property></emphasis> is called if the file upload was interrupted according to any errors.</para>
         <para>
             There are a number of facets providing for this component:
            <emphasis>
