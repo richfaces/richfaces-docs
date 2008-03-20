@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+    <sectioninfo>
+        <keywordset>
+            <keyword>rich:inplaceInput</keyword>
+            <keyword>inplaceInput</keyword>
+        </keywordset>
+    </sectioninfo>
+    <table>
+        <title>Component identification parameters</title>
+        
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Value</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>component-type</entry>
+                    <entry>org.richfaces.inplaceInput</entry>
+                </row>
+                <!--row>
+                    <entry>component-class</entry>
+                    <entry></entry>
+                </row-->
+                <row>
+                    <entry>component-family</entry>
+                  <entry>org.richfaces.inplaceInput</entry>
+                </row>
+                <row>
+                    <entry>renderer-type</entry>
+                  <entry>org.richfaces.renderkit.inplaceInputRenderer</entry>
+                </row>
+                <row>
+                    <entry>tag-class</entry>
+                  <entry>org.richfaces.taglib.inplaceInputTag</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <section>
+        <title>Creating the Component with a Page Tag</title>
+        <para>Here is a simple example of how the component can be used on a page: </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:inplaceInput value="#{bean.value}"/>
+...]]></programlisting>
+    </section>
+    <section>
+        <title>Creating the Component Dynamically Using Java</title>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+      <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.inplaceInput;
+...	
+HtmlInpaceInput myInplaceInput = new InplaceInput();
+...]]></programlisting>
+    </section>
+  
+  
+
+  
+  
+    <!-- Start  Details of Usage-->
+    <section>
+        <title>Details of Usage</title>
+    
+      <para>    
+          As it was mentioned earlier the 
+          <emphasis role="bold"><property>&lt;rich:inplaceInput&gt;</property>  </emphasis>
+          component was designed to facilitate inputting and editing some parts of a text.
+        </para>
+      
+      <para>     
+        The component has three logical states:    
+        <itemizedlist>        
+          <listitem>
+            <para><property>&quot;View&quot;</property> state displays the text containing in a <emphasis><property>&quot;value&quot;</property></emphasis>  attribute;</para>
+          <figure>
+            <title>&quot;View&quot; state</title>  
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="images/inplaceInputViewState_shadow.png"/>
+              </imageobject>
+            </mediaobject>     
+          </figure>        
+          </listitem>
+         <listitem>
+            <para><property>&quot;Editable&quot;</property>state  - the text can be edited and saved;</para>       
+                      <figure>
+            <title>&quot;Editable&quot; state</title>  
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="images/inplaceInputEditState_shadow.png"/>
+              </imageobject>
+            </mediaobject>     
+          </figure>
+          </listitem>
+          <listitem>
+            <para><property>&quot;Changed&quot;</property>state - displays the edited text and indicates that it was edited, changed</para>     
+                    <figure>
+            <title>&quot;Changed&quot; state</title>  
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="images/inplaceInputChangedState_shadow.png"/>
+              </imageobject>
+            </mediaobject>     
+          </figure>      
+          </listitem>
+    </itemizedlist>
+   
+      </para>  
+      
+      
+      
+      
+      
+      
+        <para>     
+          The main attribute of the component is 
+          <emphasis><property>&quot;value&quot;</property></emphasis> 
+          it displays the text on a page, the text can be edited by clicking (default action, which can be redefined) on it.         
+        </para>     
+      
+      <para> 
+      However, if
+        <emphasis><property>&quot;value&quot;</property></emphasis> 
+      attribute is not defined, you can use 
+       <emphasis><property>&quot;defaultLabel attribute &quot;</property></emphasis> 
+      which will display some default text while
+        <emphasis><property>&quot;value&quot;</property></emphasis>  
+    attribute stays undefined.
+      </para> 
+      
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>   
+      
+      <programlisting role="XML"><![CDATA[...
+<rich:inplaceInput value="#{bean.value}" defaultLabel="click to edit"/>
+...]]> </programlisting>      
+      <para>
+        In the shown example,
+        <emphasis><property>&quot;value&quot;</property></emphasis> attribute is not defined; 
+        therefore default text &quot;Click to edit&quot; is displayed 
+        since it is placed into the 
+        <emphasis><property>&quot;defaultLabel&quot;</property></emphasis> attribute.       
+      </para>
+      
+      
+      <para>
+      Input data is saved (submitted) automatically when the input field loses focus. 
+      Nevertheless, you can use a 
+        <emphasis><property>&quot;showControls&quot;</property></emphasis>
+      attribute, which make <property>&quot;save&quot;</property>and  <property>&quot;cancel&quot; </property> buttons 
+        appear next to the input field. 
+     </para>
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>      
+      
+      <programlisting role="XML"><![CDATA[...
+<rich:inplaceInput value="#{bean.value}" defaultLabel='click to edit' showControls="true"/>
+...]]> </programlisting>    
+      
+      <figure>
+        <title>Usage <emphasis><property>&quot;showControls&quot;</property></emphasis> attribute</title>  
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/inplaceInputShowControls.png"/>
+          </imageobject>
+        </mediaobject>     
+      </figure>  
+      <para>
+        You can also position the controls relatively to the input field, by means of 
+        <emphasis><property>&quot;  controlsHorizontalPosition&quot;</property></emphasis> 
+        <emphasis><property>&quot; controlsVerticalPosition &quot;</property></emphasis>
+        attributes.
+        
+        The 
+        <emphasis><property>&quot;  controlsHorizontalPosition&quot;</property></emphasis> attribute has 
+        <property>&quot;left&quot;</property>, <property>&quot;right&quot;</property> and <property> &quot;center&quot;</property> definitions. 
+        
+        The 
+        <emphasis><property>&quot; controlsVerticalPosition &quot;</property></emphasis>
+        attribute has <property>&quot;bottom&quot;</property>, <property>&quot;center&quot;</property> and <property>&quot;top&quot;</property> definitions.
+         </para>
+      
+      <figure>
+        <title>Positioning of &quot;save&quot; and &quot;cancel&quot; buttons</title>  
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/inplaceInputShowControlsAlignLeft.png"/>
+          </imageobject>
+        </mediaobject>     
+      </figure>   
+      
+      <para>
+        Redefinition of the
+        &quot;save&quot; and &quot;cancel&quot; icons can be performed using 
+        <emphasis><property>&quot;saveControlIcon&quot;</property></emphasis>
+        and  
+        <emphasis><property>&quot;cancelControlIcon&quot;</property></emphasis>
+        attributes relatively.  You need to define the path to where your  images  are located. 
+      </para>
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>      
+      
+      <programlisting role="XML"><![CDATA[...
+<rich:inplaceInput value="#{bean.incValue}"  minValue="50"  maxValue="400"/>
+...]]> </programlisting>   
+      
+      
+      
+      
+      
+      
+                         
+    </section>
+    <!-- End. Details of Usage-->
+    
+    <!-- JavaScript API-->  
+ <section>
+        <title>JavaScript API</title>
+        <table> 
+            <title>JavaScript API</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Function</entry>
+                        <entry>Description</entry>
+                      
+                    </row>
+                </thead>
+                <tbody>
+                    <!--Sorting API -->
+                    <row>
+                        <entry>enable()</entry>
+                        <entry>Begins polling for ajax mode </entry>
+             
+                    </row>
+                    <row>
+                        <entry>disable()</entry>
+                        <entry>Stops polling for ajax mode</entry>
+          
+                    </row>
+                    
+                    <row>
+                        <entry>setValue(value)</entry>
+                        <entry>Updates the progress of the process</entry>
+                        
+                    </row>
+                    <row>
+                        <entry>setLabel(label)</entry>
+                        <entry>Update the label for the process</entry>
+                        
+                    </row>
+                    
+                    
+                    
+                    
+                </tbody>
+            </tgroup>
+        </table>
+    </section>
+    <!-- End of JavaScript API-->   
+    
+    <!-- Look-and-Feel Customization-->  
+    
+    <section>
+        <title>Look-and-Feel Customization</title>
+        <para>For skinnability implementation, the components use a <emphasis>
+            <property>style class redefinition method.</property>
+        </emphasis> Default style classes are mapped on <emphasis>
+            <property>skin parameters.</property>
+        </emphasis></para>
+        <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+            <property>&lt;rich:progressBar&gt;</property>
+        </emphasis> components at once: <itemizedlist>
+            <listitem>Redefine the corresponding skin parameters</listitem>
+            <listitem> Add to your style sheets style classes used by a <emphasis role="bold">
+                <property>&lt;rich:progressBar&gt;</property>
+            </emphasis> component</listitem>
+        </itemizedlist>
+        </para>
+    </section>
+       
+  <!-- Skin Parameters Redefinition-->  
+ <section>
+    <title>Skin Parameters Redefinition</title>
+
+    <table>
+      <title>Skin parameters redefinition for the &quot;completed&quot; part of the bar with no label</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>selectControlColor</entry>
+
+            <entry>background-color</entry>
+          </row>
+
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>Skin parameters redefinition for the &quot;completed&quot; part of the bar with a label used</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>panelBorderColor</entry>
+
+            <entry>border-color</entry>
+          </row>
+
+           </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>Skin parameters redefinition for the “completed” part of the bar with a label used</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>selectControlColor</entry>
+
+            <entry>background-color</entry>
+          </row>
+
+          <row>
+            <entry>controlBackgroundColor</entry>
+
+            <entry>color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>Skin parameters redefinition for the &quot;remained&quot; part of the bar</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>controlBackgroundColor</entry>
+
+            <entry>background-color</entry>
+          </row>
+
+          <row>
+            <entry>controlTextColor</entry>
+
+            <entry>color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>Skin parameters redefinition for the bar itself with a label used</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>panelBorderColor</entry>
+
+            <entry>border-color</entry>
+          </row>
+
+          <row>
+            <entry>generalFamilyFont</entry>
+
+            <entry>font-family</entry>
+          </row>
+
+          <row>
+            <entry>headerFamilyFont</entry>
+
+            <entry>font-family</entry>
+          </row>
+
+          <row>
+            <entry>generalSizeFont</entry>
+
+            <entry>font-size</entry>
+          </row>
+
+          <row>
+            <entry>controlTextColor</entry>
+
+            <entry>color</entry>
+          </row>
+
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table>
+      <title>Skin parameters redefinition for the bar itself with no label used</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>controlBackgroundColor</entry>
+
+            <entry>background-color</entry>
+          </row>
+
+          <row>
+            <entry>panelBorderColor</entry>
+
+            <entry>border-color</entry>
+          </row>
+
+        </tbody>
+      </tgroup>
+    </table>
+
+    
+  </section>
+  <!-- END Skin Parameters Redefinition-->  
+
+  <!-- Definition of Custom Style Classes-->  
+
+  <section>
+    <title>Definition of Custom Style Classes</title>
+    <para>On the screenshot there are classes names that define styles for component elements.</para>
+    
+    <figure>
+      <title>Classes names</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/progressbarClasses.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    
+    <table>
+      <title>Classes names for the bar</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Class name</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>rich-progress-bar-shell</entry>
+            <entry>Defines styles for the background and the borders of the bar when label is not used</entry>
+          </row>
+          
+          <row>
+            <entry>rich-progress-bar-shell-dig</entry>
+            <entry>Defines styles for background, font and border settings when label is used</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    
+    <table>
+      <title>Classes names that define &quot;completed&quot; part of the bar</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Class name</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          
+          <row>
+            <entry>rich-progress-bar-uploaded</entry>
+            <entry>Defines styles for of &quot;completed&quot; progress area with no labels used</entry>
+          </row>
+          <row>
+            <entry>rich-progress-bar-uploaded-dig</entry>
+            <entry>Defines styles for that &quot;completed&quot; progress area with labels used </entry>
+          </row>
+          
+          <row>
+            <entry>rich-progress-bar-completed</entry>
+            <entry>Defines styles for the &quot;completed&quot; progress area with a label used</entry>
+          </row>
+          
+          
+        </tbody>
+      </tgroup>
+    </table>
+    
+    
+    
+    <table>
+      <title>Classes names that define &quot;remained&quot; part of the progress area</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Class name</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          
+          <row>
+            <entry>rich-progress-bar-remained</entry>
+            <entry>Defines styles for the &quot;remained&quot; part of the bar</entry>
+          </row>
+  
+          
+          
+        </tbody>
+      </tgroup>
+    </table>
+    <para>In order to redefine styles for all <emphasis role="bold">
+      <property>&lt;rich:progressBar&gt;</property>
+    </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
+      same names (possible classes could be found in the tables <link linkend="tab_cn3"> above</link>) and define necessary properties in them. </para> 
+    
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="CSS"><![CDATA[...
+.rich-progress-bar-remained{									
+    background-color: #ebf3fd;							
+}	
+...]]></programlisting>  
+    
+    <para>This is the result:</para>
+    
+    <figure>
+      <title>Redefinition styles with predefined classes</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/progressbarRedefinedClasses.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <para>In the example the &quot;remained&quot; part of progress area is modified with a background-color CSS property.</para>
+    
+    
+    
+    
+    
+    <para>It&apos;s aslo possible to change styles of a particular 
+      <emphasis role="bold"> <property>&lt;rich:progressBar&gt;</property></emphasis> component. In this case you should create own style classes and use them in corresponding <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property></emphasis> <property>styleClass</property> attributes. An example is placed below:</para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="CSS"><![CDATA[...
+.RremainClass{  background-color: #ebf3fd;}
+...]]></programlisting>  
+    <para>The <emphasis><property>&quot;styleClass&quot;</property></emphasis> attribute for <emphasis role="bold"
+      ><property>&lt;rich:progressBar&gt; </property></emphasis> is defined as it’s shown in the example below:</para>
+    
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="CSS"><![CDATA[<rich:progressBar value="#{bean.incValue1}" styleClass="remainClass" />
+]]></programlisting>    
+    
+    <para>This is a result:</para>
+    
+    <figure>
+      <title>Modificaton of a look and feel with own classes and <emphasis><property>styleClass</property></emphasis> attributes</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/progressbarRedefinedClasses.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>  
+    
+    <para>As it could be seen on the picture above, the font style for output text was changed.</para>
+    
+    
+  </section>
+  <section>
+    <title>Relevant Resources Links</title>
+    <para>
+      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/progressbar.jsf?c=progressbar">Here</ulink>
+      you can see the example of <emphasis role="bold">
+        <property>&lt;rich:progressBar&gt;</property>
+      </emphasis> usage and sources for the given example. </para>
+   
+  </section>
+</section>
