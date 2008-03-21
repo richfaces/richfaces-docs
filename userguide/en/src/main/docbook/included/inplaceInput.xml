@@ -212,15 +212,107 @@ HtmlInpaceInput myInplaceInput = new InplaceInput();
       </para>      
       
       <programlisting role="XML"><![CDATA[...
-<rich:inplaceInput value="#{bean.incValue}"  minValue="50"  maxValue="400"/>
-...]]> </programlisting>   
+<rich:inplaceInput value="#{bean.value}" defaultLabel='click to edit'
+    showControls="true"
+    controlsHorizontalPosition="left"
+    controlsVerticalPosition="top"
+    saveControlIcon="/richfaces-demo/richfaces/cancel.gif"
+    cancelControlIcon="/richfaces-demo/richfaces/save.gif"/> 
+    ...]]> </programlisting>   
+      <figure>
+        <title>Redefining of &quot;save&quot; and &quot;cancel&quot; buttons</title>  
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/inplaceInputShowControlsCustom.png"/>
+          </imageobject>
+        </mediaobject>     
+      </figure>   
       
       
       
+      <para>
+        The 
+        <emphasis><property>&quot;editEvent&quot;</property></emphasis>         
+        attribute provides an option to assign an JS action that triggers state changing from
+        <property>&quot;View&quot;</property>
+        to 
+        <property>&quot;Edit&quot;</property>. 
+        The default value is &quot;click&quot;. 
+   
+       </para>
+      <note>
+        <para>
+          
+    Do not use &quot;on&quot; prefix applying event action. E.g. use &quot;click&quot; instead of &quot;onClick&quot;, use &quot;mouseover&quot; instead of &quot;onMouseOver&quot;. 
+    
+        </para>
+      </note>
+  
+ <para> 
+ 
+ The 
+
+   <emphasis><property>&quot;selectOnEdit&quot;</property></emphasis>  
+   (with possible values <property>&quot;true</property>, <property>&quot;false&quot;</property>) gives you an 
+   option to make the text in the input area selected right after the change from 
+   <property>&quot;View&quot;</property> state to <property>&quot;Edit&quot;</property>. 
+ 
+  </para>
+<para>
+  The 
+  <emphasis><property>&quot; oneditactivation&quot;</property></emphasis> , 
+  <emphasis><property>&quot;oneditactivated&quot;</property></emphasis> , 
+  <emphasis><property>&quot;onviewactivation&quot;</property></emphasis> 
+  and  
+  <emphasis><property>&quot; onviewactivated&quot;</property></emphasis>  
+  provide a possibility to assign JavaScript code on 
+  <property>&quot;Edit&quot;</property> state activation, on 
+  <property>&quot;Edit&quot;</property> state activated,on 
+  <property>&quot;View&quot;</property> state activation and on 
+  <property>&quot;View&quot;</property> state activated respectively. 
+</para>
+
       
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>      
+      <programlisting role="XML"><![CDATA[...
+<rich:inplaceInput value="#{bean.value}" defaultLabel='click to edit'
+ onviewactivated="if (confirm('Are you sure you want to change value?')){return false;}" />
+...]]> </programlisting>  
+      <para>
+        The given code illustrates how onviewactivation attribute works, 
+        namely when the state is being changed from 
+        <property>&quot;Edit&quot;</property> to 
+        <property>&quot;View&quot;</property>, 
+        a confirmation window with a message
+        &quot;Are you sure you want to change value?&quot; comes up.
+      </para>
+     
       
-      
-                         
+      <table>
+        <title>Keyboard usage</title>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>Keys and combinations </entry>
+              <entry>Description</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>ENTER</entry>
+              <entry>Saves the input data, and changes the state from &quot;Edit&quot; to &quot;Changed&quot;</entry>
+            </row>
+            <row>
+              <entry>ESC</entry>
+              <entry>changes the state from &quot;Edit&quot; to &quot;View&quot; or &quot;Changed&quot;, value is not affected</entry>
+            </row>
+              </tbody>
+        </tgroup>
+      </table>
+    
+    
     </section>
     <!-- End. Details of Usage-->
     
