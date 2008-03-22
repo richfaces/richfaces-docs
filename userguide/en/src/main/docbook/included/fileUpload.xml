@@ -126,7 +126,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
         <para>As it could be seen in the example above, only files with "html" extension are accepted to upload.</para>
        
         <para>The <emphasis>
-            <property> &quot;autoclear&quot;</property></emphasis> attribute is used to remove automatically files from list after upload completed.</para>
+            <property> &quot;autoclear&quot;</property></emphasis> attribute is used to remove automatically files from the list after upload completed.</para>
         
             <para>
                 <emphasis role="bold">Example:</emphasis>
@@ -135,10 +135,10 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
 <rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true"
  acceptedTypes="html"/>
  ...]]></programlisting>
-            <para>As it could be seen in the example above, files removes from list after upload completed.</para>
+            <para>As it could be seen in the example above, files are removed from the list after upload completed.</para>
         <para>The <emphasis>
             <property> &quot;maxFilesQuantity&quot;</property></emphasis> defines max number of files allowed for upload. 
-            After number of files in the list is equals to this attribute – add button is disabled.
+            After a number of files in the list equals to this attribute – add button is disabled.
             The add button is not available until all list items are uploaded.
         </para>
         <para>
@@ -175,7 +175,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
  ...]]></programlisting>
         <para>The <emphasis>
             <property> &quot;immediateUpload&quot;</property></emphasis> attribute allows files to be uploaded immediately after they have been added into list.
-            If you set this attribute to true files immediately uploads after they have been added into list, all next files automatically uploads one by one.
+            If you set this attribute to true files immediately uploads after they have been added into the list, all next files automatically uploads one by one.
             If you cancel uploading – next files aren't start uploading till you press the general upload button or clear the list.
             
         </para>
@@ -186,6 +186,39 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
 <rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
  acceptedTypes="html" immediateUpload="true"/>
  ...]]></programlisting>
+        <para>In order to encode form around <emphasis role="bold">
+            <property>&lt;rich:fileUpload&gt;</property>
+        </emphasis> component you could confine this area by <emphasis role="bold">
+            <property>&lt;h:form&gt;</property>
+        </emphasis>/<emphasis role="bold">
+            <property>&lt;/h:form&gt;</property></emphasis> tags.
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<h:form>
+        <rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
+         acceptedTypes="html" immediateUpload="true"/>
+                <a4j:commandLink style="font-weight: bold; width: 200px;" value="Show files uploaded:" reRender="files_list">
+                        <h:dataTable value="#{bean.fileList}" var="file" id="files_list" style="width: 500px">
+                                <h:column>
+                                        <h:outputText value="#{file.fileName}"></h:outputText>	
+                                </h:column>
+                        </h:dataTable>
+</h:form>
+...]]></programlisting>
+        <para>This is a result:</para>
+        <figure>
+            <title><emphasis role="bold">
+                <property>&lt;rich:fileUpload&gt;</property>
+            </emphasis>at server-side</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/fileUpload11.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>       
         <para>The <emphasis role="bold">
             <property>&lt;rich:fileUpload&gt;</property>
         </emphasis> provides using a number of handlers. The <emphasis>
@@ -194,7 +227,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                     <property> &quot;onuploadcanceled&quot;</property></emphasis> is called after upload was canceled via cancel control. The <emphasis>
                         <property> &quot;onerror&quot;</property></emphasis> is called if the file upload was interrupted according to any errors.</para>
         <para>
-            There are a number of facets providing for this component:
+            There is a number of facets providing for this component:
            <emphasis>
                     <property> &quot;header&quot;</property></emphasis>
               
@@ -208,8 +241,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
- acceptedTypes="html">
+<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}">
         <f:facet name="label">
                 <h:outputText value="{_KB}KB from {KB}KB uploaded --- {mm}:{ss}"></h:outputText>
         </f:facet>
@@ -760,7 +792,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="CSS"><![CDATA[...
-..upload_list_decor{
+.upload_list_decor{
 background-color:#ecf4fe;
 }
 ...]]></programlisting>  
