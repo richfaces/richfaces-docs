@@ -56,7 +56,7 @@
         <programlisting role="XML"><![CDATA[...
 <rich:pickList value="#{pickBean.listValues}">
         <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
-        <f:selectItem itemValue="Audi" itemLabel="Audi"/>
+        <f:selectItems value="#{pickBean.testList}"/>
 </rich:pickList>
 ...]]></programlisting>
     </section>
@@ -73,9 +73,6 @@ HtmlPickList myPickList = new HtmlPickList();
     </section>
     <section>
         <title>Details of Usage</title>
-
-        <!--maintenance of component  orderingList-->
-
         <para>The <emphasis role="bold">
                 <property>&lt;rich:pickList&gt;</property>
             </emphasis> component consists of <itemizedlist>
@@ -87,14 +84,12 @@ HtmlPickList myPickList = new HtmlPickList();
             </itemizedlist>
         </para>
 
-        <!-- attributes of component  orderingList -->
-
         <para>
-            The <emphasis>
-                <property> &quot;value&quot;</property>
-            </emphasis> 
-            attribute is used to access the values of a target list.  The <emphasis>
-                <property> &quot;selectItems&quot;</property></emphasis> facet is used to access the values of a source list.
+            The <emphasis><property>&quot;value&quot;</property></emphasis> attribute is used to access the values of a target list.  
+        </para>
+        <para>
+            The <emphasis role="bold"><property>&lt;f:selectItem /&gt;</property></emphasis> or <emphasis role="bold">
+                <property>&lt;f:selectItems /&gt;</property></emphasis> facets are used to access the values of a source list.
           </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
@@ -106,6 +101,46 @@ HtmlPickList myPickList = new HtmlPickList();
         <f:selectItems value="#{pickBean.testList}"/>
 </rich:pickList>
    ...]]></programlisting>
+
+        <para>
+            The <emphasis> <property> &quot;switchByClick&quot;</property></emphasis> attribute provides an option to copy and remove items between lists by one click. 
+            Default value of this attribute is &quot;false&quot;, so you need a double click to copy, remove items from one list to another.
+        </para> 
+        <para>
+            Lables of  the <property>move controls</property> can be defined with 
+            <emphasis><property> &quot;copyAllControlLabel&quot;</property></emphasis>, 
+            <emphasis><property> &quot;copyControlLabel&quot;</property></emphasis>,
+            <emphasis> <property> &quot;removeControlLabel&quot;</property></emphasis>, 
+            <emphasis> <property> &quot;removeAllControlLabel&quot;</property></emphasis> attributes.
+        </para> 
+        <para>
+              <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:pickList copyAllControlLabel = "#{pickBean.copyAllLabel}" copyControlLabel = "#{pickBean.copyLabel}" removeControlLabel = "#{pickBean.removeLabel}" 
+removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues}">
+        <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
+        <f:selectItem itemValue="Audi" itemLabel="Audi"/>
+        <f:selectItems value="#{pickBean.testList}"/>
+</rich:pickList>
+...]]></programlisting>
+         <para>
+             If you don&apos;t want to display labels on the buttons of move controls you need to set  
+             <emphasis> <property> &quot;showButtonsLabel&quot;</property></emphasis> to &quot;false&quot;.    
+         </para>
+             <figure>
+                 <title>Move control buttons without labels</title>
+                 <mediaobject>
+                     <imageobject>
+                         <imagedata fileref="images/picklist_no_lbls.png"/>
+                     </imageobject>
+                 </mediaobject>
+             </figure>       
+  
+
+        
+        
+        
         <para>
             The <emphasis role="bold">
                 <property>&lt;rich:pickList&gt;</property></emphasis>
@@ -126,7 +161,7 @@ HtmlPickList myPickList = new HtmlPickList();
                         <property> &quot;targetListWidth&quot;</property></emphasis> defines width of a target list.
                     
                 </listitem>
-              </itemizedlist>
+            </itemizedlist>
         </para> 
         <para>
             <emphasis role="bold">Example:</emphasis>
@@ -138,48 +173,6 @@ HtmlPickList myPickList = new HtmlPickList();
         <f:selectItems value="#{pickBean.testList}"/>
 </rich:pickList>
    ...]]></programlisting>
-        
-        <para>
-            Lables of  <property>move controls</property> can be defined with 
-            <emphasis>
-            <property> &quot;copyAllControlLabel&quot;</property></emphasis>, <emphasis>
-                <property> &quot;copyControlLabel&quot;</property></emphasis>,
-            <emphasis> <property> &quot;removeControlLabel&quot;</property></emphasis>, 
-            <emphasis> <property> &quot;removeAllControlLabel&quot;</property></emphasis> attributes.
-          
-        </para> 
-        <para>
-              <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
-<rich:pickList copyAllControlLabel = "#{pickBean.copyAllLabel}" copyControlLabel = "#{pickBean.copyLabel}" removeControlLabel = "#{pickBean.removeLabel}" 
-removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues}">
-        <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
-        <f:selectItem itemValue="Audi" itemLabel="Audi"/>
-        <f:selectItems value="#{pickBean.testList}"/>
-</rich:pickList>
-...]]></programlisting>
-         <para>
-             If you want not to display labels on the buttons of move controls you need to set  
-             <emphasis> <property> &quot;showButtonsLabel&quot;</property></emphasis> to<property> &quot;false&quot;</property>.    
-         </para>
-             <figure>
-                 <title>Move control buttons without labels</title>
-                 <mediaobject>
-                     <imageobject>
-                         <imagedata fileref="images/picklist_no_lbls.png"/>
-                     </imageobject>
-                 </mediaobject>
-             </figure>       
-  
-        <para>
-         <emphasis> <property> &quot;switchByClick&quot;</property></emphasis> provides an option to copy and remove a list item by one click, 
-            default the value of this attribute is <property> &quot;false&quot;</property> , and you need a double click to copy, remove a list item.
-        </para> 
-        
-        
-        
-        <!-- ordering control set-->
              
         <table>
             <title>Keyboard usage for elements selection</title>
