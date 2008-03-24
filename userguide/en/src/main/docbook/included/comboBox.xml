@@ -33,10 +33,10 @@
                     <entry>renderer-type</entry>
                     <entry>org.richfaces.renderkit.ComboBoxRenderer</entry>
                 </row>
-                <!--row>
+                <row>
                     <entry>tag-class</entry>
-                    <entry></entry>
-                </row-->
+                    <entry>org.richfaces.taglib.ComboBoxTag</entry>
+                </row>
             </tbody>
         </tgroup>
     </table>
@@ -91,7 +91,7 @@ HtmlComboBox myComboBox = new HtmlComboBox();
             <itemizedlist>    
             <listitem>
                 Using the <emphasis role="bold"><property>&lt;f:selectItem /&gt;</property></emphasis> or <emphasis role="bold">
-                    <property>&lt;f:selectItems /&gt;</property></emphasis> components
+                    <property>&lt;f:selectItems /&gt;</property></emphasis> facets
              </listitem>
             </itemizedlist>
             <para>
@@ -189,7 +189,7 @@ HtmlComboBox myComboBox = new HtmlComboBox();
                 <emphasis role="bold">Example:</emphasis>
             </para>
             <programlisting role="XML"><![CDATA[...
-<rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}" disabled="true" />            
+<rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}" defaultLabel="Select a city..." disabled="true" />            
 ...]]></programlisting>  
         <para>This is a result:</para>
                 <figure>
@@ -203,10 +203,23 @@ HtmlComboBox myComboBox = new HtmlComboBox();
                     </mediaobject>
                 </figure>      
         
-        <para>
+        <!--para>
         The <emphasis role="bold"><property>&lt;rich:comboBox&gt;</property></emphasis> component provides the possibility to use 
             specific event attribute <emphasis><property> &quot;onlistcall&quot;</property></emphasis> which is fired before the list opening.
-        </para>
+        </para-->
+        
+        <para>
+            The <emphasis role="bold"><property>&lt;rich:comboBox&gt;</property></emphasis> component provides to use 
+            specific event attributes:
+            <itemizedlist>
+            <listitem>
+                <emphasis><property> &quot;onlistcall&quot;</property></emphasis>which is fired before the list opening and gives you a possibility to cancel list popup/update 
+            </listitem>
+            <listitem>
+                <emphasis><property> &quot;onselect&quot;</property></emphasis>which gives you a possibility to send AJAX request when item is selected 
+            </listitem>
+            </itemizedlist>   
+         </para>
         
         <para>
             The <emphasis role="bold"><property>&lt;rich:comboBox&gt;</property></emphasis> component allows to use sizes attributes:
@@ -221,18 +234,7 @@ HtmlComboBox myComboBox = new HtmlComboBox();
             </itemizedlist>  
         </para>
         
-     <!--para>
-        The <emphasis role="bold"><property>&lt;rich:comboBox&gt;</property></emphasis> component provides to use 
-            specific event attributes:
-            <itemizedlist>
-                <listitem>
-                    <emphasis><property> &quot;onlistcall&quot;</property></emphasis> is fired before the list opening
-                </listitem>
-                 <listitem>
-                    <emphasis><property> &quot;onchange&quot;</property></emphasis> is fired both with onselected and after the input value changed
-                </listitem>
-            </itemizedlist>   
-     </para-->
+
         
         
         
@@ -646,14 +648,103 @@ HtmlComboBox myComboBox = new HtmlComboBox();
                     </row>
                 </thead>
                 <tbody>
-                    
+
+                    <row>
+                        <entry>rich-combobox-shell</entry>
+                        <entry>Defines styles for a wrapper &lt;div&gt; element of a list</entry>
+                    </row>
+                    <row>
+                        <entry>rich-combobox-list-position</entry>
+                        <entry>Defines position of a list</entry>
+                    </row>              
                     <row>
                         <entry>rich-combobox-list-decoration</entry>
                         <entry>Defines styles for a list</entry>
                     </row>
+                    <row>
+                        <entry>rich-combobox-list-scroll</entry>
+                        <entry>Defines styles for a list scrolling</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>    
+
+        <table>
+            <title>Classes names that define font representation</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-combobox-font</entry>
+                        <entry>Defines styles for a font</entry>
+                    </row>
+                    <row>
+                        <entry>rich-combobox-font-inactive</entry>
+                        <entry>Defines styles for an inactive font</entry>
+                    </row>
+                    <row>
+                        <entry>rich-combobox-font-disabled</entry>
+                        <entry>Defines styles for a disabled font</entry>
+                    </row>
+                  </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Classes names that define input field representation</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    
+                    <row>
+                        <entry>rich-combobox-input</entry>
+                        <entry>Defines styles for an input field</entry>
+                    </row>
+                    <row>
+                        <entry>rich-combobox-input-disabled</entry>
+                        <entry>Defines styles for an input field in disabled state</entry>
+                    </row>
+                    <row>
+                        <entry>rich-combobox-input-inactive</entry>
+                        <entry>Defines styles for an inactive input field</entry>
+                    </row>
+                    
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <table>
+            <title>Classes names that define item representation</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Class name</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>rich-combobox-item</entry>
+                        <entry>Defines styles for an item</entry>
+                    </row>
+                    <row>
+                        <entry>rich-combobox-item-selected</entry>
+                        <entry>Defines styles for a selected item</entry>
+                    </row>
+                 </tbody>
+            </tgroup>
+        </table>
+        
         <table>
             <title>Classes names that define button representation</title>
             <tgroup cols="2">
@@ -696,13 +787,20 @@ HtmlComboBox myComboBox = new HtmlComboBox();
                         <entry>rich-combobox-button-pressed-background</entry>
                         <entry>Defines styles for a pressed button background</entry>
                     </row>
-                 
+                    <row>
+                        <entry>rich-combobox-button-icon</entry>
+                        <entry>Defines styles for a button icon</entry>
+                    </row>
+                    <row>
+                        <entry>rich-combobox-button-icon-inactive</entry>
+                        <entry>Defines styles for an inactive button icon</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
-      
+        
         <table>
-            <title>Classes names that define font representation</title>
+            <title>Classes names that define shadow representation</title>
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -712,66 +810,26 @@ HtmlComboBox myComboBox = new HtmlComboBox();
                 </thead>
                 <tbody>
                     <row>
-                        <entry>rich-combobox-font</entry>
-                        <entry>Defines styles for a font</entry>
+                        <entry>rich-combobox-shadow</entry>
+                        <entry>Defines styles for a wrapper &lt;div&gt; element of a shadow</entry>
                     </row>
                     <row>
-                        <entry>rich-combobox-font-inactive</entry>
-                        <entry>Defines styles for an inactive font</entry>
+                        <entry>rich-combobox-shadow-tl</entry>
+                        <entry>Defines styles for a top-left element of a shadow</entry>
                     </row>
                     <row>
-                        <entry>rich-combobox-font-disabled</entry>
-                        <entry>Defines styles for a disabled font</entry>
-                    </row>
-                  </tbody>
-            </tgroup>
-        </table>
-        <table>
-            <title>Classes names that define input field representation</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Class name</entry>
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    
-                    <row>
-                        <entry>rich-combobox-input</entry>
-                        <entry>Defines styles for an input text</entry>
+                        <entry>rich-combobox-shadow-tr</entry>
+                        <entry>Defines styles for a top-right element of a shadow</entry>
                     </row>
                     <row>
-                        <entry>rich-combobox-input-disabled</entry>
-                        <entry>Defines styles for an input text in disabled state</entry>
+                        <entry>rich-combobox-shadow-bl</entry>
+                        <entry>Defines styles for a bottom-left element of a shadow</entry>
                     </row>
                     <row>
-                        <entry>rich-combobox-input-inactive</entry>
-                        <entry>Defines styles for an inactive input text</entry>
+                        <entry>rich-combobox-shadow-br</entry>
+                        <entry>Defines styles for a bottom-right element of a shadow</entry>
                     </row>
-                    
                 </tbody>
-            </tgroup>
-        </table>
-        <table>
-            <title>Classes names that define item representation</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Class name</entry>
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>rich-combobox-item</entry>
-                        <entry>Defines styles for an item</entry>
-                    </row>
-                    <row>
-                        <entry>rich-combobox-item-selected</entry>
-                        <entry>Defines styles for a selected item</entry>
-                    </row>
-                 </tbody>
             </tgroup>
         </table>
         
