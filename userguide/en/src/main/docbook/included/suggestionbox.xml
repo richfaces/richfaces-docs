@@ -51,8 +51,7 @@
     </para>
         <programlisting role="XML"><![CDATA[...
     <h:inputText value="#{bean.property}" id="suggest"/>
-    <rich:suggestionbox for="suggest" suggestionAction="#{bean.autocomplete}" 
-                        var="suggest">
+    <rich:suggestionbox for="suggest" suggestionAction="#{bean.autocomplete}"  var="suggest">
         <h:column>
             <h:outputText value="#{suggest.text}"/>	
         </h:column>
@@ -122,8 +121,7 @@ HtmlSuggestionBox myList = new HtmlSuggestionBox();
             could get any collection for an output and outputs it in a ToolTip window the same as a
             custom dataTable (in several columns)</para>
         <programlisting role="XML"><![CDATA[...
-    <rich:suggestionbox for="test"
-                        suggestionAction="#{bean.autocomplete}" var="cit" fetchValue="#{cit.text}">
+    <rich:suggestionbox for="test" suggestionAction="#{bean.autocomplete}" var="cit" fetchValue="#{cit.text}">
         <h:column>
             <h:outputText value="#{cit.label}"/>
         </h:column>
@@ -152,8 +150,7 @@ HtmlSuggestionBox myList = new HtmlSuggestionBox();
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-    <rich:suggestionbox for="test" suggestionAction="#{bean.autocomplete}" var="cit" 
-                        selfRendered="true" tokens=","> 
+    <rich:suggestionbox for="test" suggestionAction="#{bean.autocomplete}" var="cit" selfRendered="true" tokens=","> 
         <h:column>
             <h:outputText value="#{cit.text}"/>
         </h:column>
@@ -231,7 +228,24 @@ Attribute<emphasis><property> &quot;nothingLabel&quot; </property></emphasis>or 
                     <imagedata fileref="images/suggestionbox5.png"/>
                 </imageobject>
             </mediaobject>
-        </figure>
+	</figure>
+	    <para>
+	        There is such feature in <emphasis role="bold"><property>&lt;rich:suggestionBox&gt;</property></emphasis> component as object selection. 
+	        If you want that selected item has been represented as object, you could set to "true" the value for 
+	        <emphasis><property> &quot;usingSuggestObjects&quot; </property></emphasis> attribute, "false" value means that selected item represents as string.
+                  </para>
+	    <para>
+	        <emphasis role="bold">Example:</emphasis>
+	    </para>
+	    <programlisting role="XML"><![CDATA[...
+<rich:suggestionbox for="test" suggestionAction="#{bean.autocomplete}" var="cit" usingSuggestObjects="true"> 
+        <h:column>
+                <h:outputText value="#{cit.text}"/>
+        </h:column>
+</rich:suggestionbox>
+...
+]]></programlisting>		
+	    
 </section>
     
     <section>
