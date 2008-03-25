@@ -21,10 +21,10 @@
                     <entry>component-type</entry>
                     <entry>org.richfaces.ProgressBar</entry>
                 </row>
-                <!--row>
+                <row>
                     <entry>component-class</entry>
-                    <entry></entry>
-                </row-->
+                    <entry>org.richfaces.component.html.HtmlProgressBar</entry>
+                </row>
                 <row>
                     <entry>component-family</entry>
                     <entry>org.richfaces.ProgressBar</entry>
@@ -65,14 +65,31 @@ HtmlProgressBar myProgressBar = new progressBar();
         <title>Details of Usage</title>
         <para>    
             As it was mentioned above, the <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property>  </emphasis>
-            component displays the status of the ongoing process.  The component has a number of key attributes. 
+            component displays the status of the ongoing process. 
         </para>
-        <para>     
-          The <emphasis><property>&quot;value&quot;</property></emphasis> attribute sets the current value of the process. Status of the process is calculated basing on  <emphasis><property> &quot;value&quot;</property></emphasis> attribute.  
-        </para>     
+      <para>
+        Status of the process is calculated basing on values of the following attributes: 
+      <itemizedlist>
+        <listitem>
+          <para>     
+            <emphasis><property>&quot;value&quot;</property></emphasis> attribute sets the current value of the process
+          </para>     
+        </listitem>
+        <listitem>
+          <para>
+            <emphasis><property>&quot;minValue&quot;</property></emphasis> (default value – &quot;0&quot;) sets minimal value for 
+            the <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property></emphasis> to start rendering
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <emphasis><property>&quot;minValue&quot;</property></emphasis> (default value – &quot;0&quot;) sets maximum value for 
+            the <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property></emphasis> to finish rendering
+          </para>
+        </listitem>
+      </itemizedlist>
+      </para>
       
-        <para> The <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property>  </emphasis> starts and finishes rendering its state being governed by   <emphasis><property>&quot;minValue&quot;</property></emphasis> (default value – &quot;0&quot;) 
-            and <emphasis><property>&quot;maxValue&quot;</property></emphasis>  (default value is &quot;100&quot;) attributes relatively.  See the following example.</para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>      
@@ -80,7 +97,8 @@ HtmlProgressBar myProgressBar = new progressBar();
         <programlisting role="XML"><![CDATA[...
 <rich:progressBar value="#{bean.incValue}"  minValue="50"  maxValue="400"/>
 ...]]> </programlisting>   
-      <para>
+ 
+      <!--para>
         The   <emphasis><property> &quot;label&quot;</property></emphasis>  attribute is responsible for displaying informational 
         data, information on the progress bar, if it&apos;s not displayed using  children components. 
         If this attribute is not set and the children components are not used either, no textual information 
@@ -93,26 +111,53 @@ HtmlProgressBar myProgressBar = new progressBar();
       <programlisting role="XML"><![CDATA[...	
 <rich:progressBar value="#{bean.incValue}" id="progrs" label="{value}%"/>
 ...]]></programlisting>
-<para>
+
+ <para>
   Displaying information on a progress bar can be also performed using
   
-  <property>&lt;h:outputText&gt;</property>    within 
+  <emphasis role="bold"><property>&lt;h:outputText&gt;</property></emphasis>    within 
   <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property>  </emphasis> tags passing the progress value to the value of the JSF tag.  
 </para>
+<para>
+<emphasis role="bold">Example:</emphasis>
+</para>
+
+<programlisting role="XML"><![CDATA[...
+<rich:progressBar value="#{bean.incValue1}">
+<h:outputText value="#{bean.incValue1}"/>
+</rich:progressBar>
+...]]> </programlisting-->  
     
-      <para>
-        <emphasis role="bold">Example:</emphasis>
-      </para>
-      
-      <programlisting role="XML"><![CDATA[...
+    <para>
+      There are two ways to display information on a progress bar:
+    </para>
+      <itemizedlist>
+        <listitem>
+          <para>Using <emphasis><property> &quot;label&quot;</property></emphasis> attribute</para>
+          <para>
+            <emphasis role="bold">Example:</emphasis>
+          </para>
+          <programlisting role="XML"><![CDATA[...	
+<rich:progressBar value="#{bean.incValue}" id="progrs" label="bean.incValue1"/>
+...]]></programlisting>      
+        </listitem>
+     
+        <listitem>
+          <para>Using  <emphasis role="bold"><property>&lt;h:outputText /&gt;</property></emphasis></para>
+          <para>
+            <emphasis role="bold">Example:</emphasis>
+          </para>
+          <programlisting role="XML"><![CDATA[...
 <rich:progressBar value="#{bean.incValue1}">
     <h:outputText value="#{bean.incValue1}"/>
 </rich:progressBar>
-...]]> </programlisting>  
-     
-      
-      
-      <para>  
+...]]> </programlisting>
+        </listitem>
+
+      </itemizedlist>
+
+   
+      <!--para>  
       The   <emphasis><property> &quot;progressVar&quot;</property></emphasis> attribute serves to provide an option for a
       value substitution on the page. It defines a variable that contains the 
       data taken from 
@@ -122,14 +167,16 @@ HtmlProgressBar myProgressBar = new progressBar();
       attribute is to provide a way to use the data placed into the 
       <emphasis><property>&quot;value&quot;</property></emphasis> attribute. 
       Please study carefully the following code example:
+      </para-->
       
-      
-
-    </para>
+      <para>
+        The  <emphasis><property>&quot;progressVar&quot;</property></emphasis> attribute defines request scoped variable that could be used
+        for substitution purpose.  This variable contains the data taken from <emphasis><property>&quot;value&quot;</property></emphasis> attribute.
+        Please, study carefully the following example.
+      </para>
       <para>
         <emphasis role="bold">Example:</emphasis>
       </para>
-      
        <programlisting role="XML"><![CDATA[...
 <rich:progressBar value="#{bean.incValue1}" enabled="#{bean.enabled1}" id="progrs1" progressVar="progress">
     <h:outputText value="{progress}%"/>
@@ -137,16 +184,27 @@ HtmlProgressBar myProgressBar = new progressBar();
 ...]]> </programlisting>  
       
       
-      <para>
- In the shown example 
-   <emphasis><property> &quot;progressVar&quot;</property></emphasis> attribute
+      <!--para>
+ In the shown example <emphasis><property> &quot;progressVar&quot;</property></emphasis> attribute
   gets the &quot;progress&quot; value which contains data taken from 
  <emphasis><property>&quot;value&quot;</property></emphasis>
    attribute of  a 
   <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property>  </emphasis>
         and transfers the received data to the &quot;value&quot; attribute of <property>&lt;h:outputText&gt;</property>, to make the data appear on the page. 
+        </para-->
+      
+      <para>
+        In the shown example <emphasis><property> &quot;progressVar&quot;</property></emphasis> attribute
+        defines a variable &quot;progress&quot; with the value taken from <emphasis><property>&quot;value&quot;</property></emphasis>
+        attribute of the <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property></emphasis> component.
+        The &quot;progress&quot; variable performs substitution passing the current value of a progress to the
+        <emphasis><property>&quot;value&quot;</property></emphasis> attribute of the 
+        <emphasis role="bold"><property>&lt;h:outputText&gt;</property></emphasis>.
+        This is how the current value of a progress appears on  
+        the label of <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property></emphasis>.
       </para>
-<!--Macrosubs-->
+
+      <!--Macrosubs-->
       
       <para>
         The <emphasis role="bold"><property>&lt;rich:progressBar&gt;</property>  </emphasis>
@@ -173,7 +231,8 @@ HtmlProgressBar myProgressBar = new progressBar();
 <rich:progressBar value="#{bean.incValue1}" minValue="400" maxValue="900">
         <h:outputText value="Min value is {minValue}, current value is {value}, max value is {maxValue}"/>
 </rich:progressBar> 
- ...]]> </programlisting>    
+...]]> </programlisting>    
+      <para>This is a result:</para>
       <figure>
         <title>Macrosubstitution</title>  
         <mediaobject>
@@ -184,14 +243,23 @@ HtmlProgressBar myProgressBar = new progressBar();
       </figure> 
  <!--END of  Macrosubs-->
       <!-- Parameters-->
-      <para>
+      <!--para>
         The <emphasis><property>&quot;parameters&quot;</property></emphasis>
         is also a special attribute that can be used for substitutional purposes.      
         All you need is to define a value of your own parameter
         (e.g parameters=&quot;param:&apos;#{bean.incValue1}&apos;&quot;)
         and you can use it to pass the data. 
-           </para> 
+           </para--> 
         
+        
+      <para>
+        The <emphasis><property>&quot;parameters&quot;</property></emphasis>
+        is also a special attribute that defines parameters for substitution in the label.      
+        All you need is to define a value of your own parameter
+        (e.g parameters=&quot;param:&apos;#{bean.incValue1}&apos;&quot;)
+        and you can use it to pass the data. 
+      </para> 
+      
       <para>
         <emphasis role="bold">Example:</emphasis>
       </para>
@@ -206,18 +274,22 @@ HtmlProgressBar myProgressBar = new progressBar();
       
       <!-- END Parameters-->
 
-
-
-
-      <para> The <emphasis><property>&quot;interval&quot;</property></emphasis>attribute defines the frequency of status polling. Polling is active while the component is operational. </para>   
+      <para> 
+        The <emphasis><property>&quot;interval&quot;</property></emphasis> attribute defines the frequency of status polling.
+        </para>
+        <para>
+          Polling is active while the <emphasis><property>&quot;enabled&quot;</property></emphasis> attribute is &quot;true&quot;.</para>   
         <para>
             <emphasis role="bold">Example:</emphasis>
-        </para>
-        
+        </para> 
  <programlisting role="XML"><![CDATA[...
-<rich:progressBar value="#{bean.incValue}" id="progrs" interval="900"/>
+<rich:progressBar value="#{bean.incValue}" id="progrs" interval="900" enabled="true"/>
 ...]]> </programlisting>     
       
+      <para>
+        With the help of <emphasis><property>&quot;timeout&quot;</property></emphasis> attribute you can define the waiting time on a particular request.
+        If a response is not received during this time the request is aborted. 
+      </para>
       
       
 
@@ -640,7 +712,7 @@ background-color: #ebf3fd;
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="CSS"><![CDATA[<rich:progressBar value="#{bean.incValue1}" styleClass="myClass"/>
+    <programlisting role="XML"><![CDATA[<rich:progressBar value="#{bean.incValue1}" styleClass="myClass"/>
 ]]></programlisting>    
     
     <para>This is a result:</para>
