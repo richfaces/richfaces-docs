@@ -2265,12 +2265,23 @@ public class TableBackingRendered implements Serializable {
         </section>
         <section>
                 <?dbhtml filename="WhydoesJSScriptsconflict.html"?>
-                <title>Why does J scripts conflict?</title>
+                <title>Why does Java scripts conflict?</title>
                 <para>Richfaces 3.1.3 uses 1.6.0 version of prototype.js script instead of 1.5.1 
                         that's been used for earlier versions. There are 2 prototype versions included 
                         (the first included implicitly as a dependency of toggle panel components and 
                         the second one included explicitly as a link). Versions conflict is the cause of the problem.</para>
-                <para>The solution of this problem is in upgrading jQuery.js to 1.2.3 version and prototype.js to 1.6.0.2 version.
+                <para>RichFaces 3.1.3 is bundled with the same ones as Prototype 1.6.0, Scriptaculous 1.8.0</para>
+                <para>
+                        <emphasis role="bold">Example in web.xml::</emphasis>
                 </para>
+                <programlisting role="XML"><![CDATA[...
+<context-param>
+	<param-name>org.richfaces.ExcludeScripts</param-name>
+	<param-value>Prototype,Scriptaculous</param-value>
+</context-param>
+...]]></programlisting>       
+                <para>RichFaces components use Prototype very hard. In particular, some patches has been removed that are already included into 1.6.0. 
+                        Adding feature with exclusion makes it possible to use Prototype with version less than 1.6.0. This will break some of the components.</para>
+               
         </section>
 </chapter>
