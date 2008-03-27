@@ -8,39 +8,32 @@
     </sectioninfo>
     <table>
         <title>Component identification parameters</title>
-
         <tgroup cols="2">
             <thead>
                 <row>
                     <entry>Name</entry>
-
                     <entry>Value</entry>
                 </row>
             </thead>
             <tbody>
                 <row>
                     <entry>component-type</entry>
-
                     <entry>org.richfaces.component.FileUpload</entry>
                 </row>
                 <row>
                     <entry>component-class</entry>
-
                     <entry>org.richfaces.component.html.HtmlFileUpload</entry>
                 </row>
                 <row>
                     <entry>component-family</entry>
-
                     <entry>org.richfaces.component.FileUpload</entry>
                 </row>
                 <row>
                     <entry>renderer-type</entry>
-
                     <entry>org.richfaces.renderkit.html.FileUploadRenderer</entry>
                 </row>
                  <row>
                     <entry>tag-class</entry>
-
                      <entry>org.richfaces.taglib.FileUploadTag</entry>
                 </row>
             </tbody>
@@ -54,7 +47,7 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:fileUpload uploadData="#{bean.data}"/> 
+<rich:fileUpload /> 
 ...]]></programlisting>
     </section>
     <section>
@@ -70,60 +63,166 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
     </section>
     <section>
         <title>Details of Usage</title>
-
-        <!--maintenance of component  orderingList-->
-
-        <para>The <emphasis role="bold">
-                <property>&lt;rich:fileUpload&gt;</property>
-        </emphasis> component consists of two parts:<itemizedlist>
-            <listitem><property>List of files</property> which contains the list of currently chosen files with possibility to manage every file.
+        <para>The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component consists of two parts:<itemizedlist>
+            <listitem>
+                <para>
+                    <property>List of files</property> which contains the list of currently chosen files to upload with possibility to manage every file
+                </para>
             </listitem>
                 <listitem>
-                    <property>Component controls</property>- the bar with controls for managing the whole component.
-                    
+                    <para>
+                    <property>Component controls</property> - the bar with controls for managing the whole component
+                    </para>
                 </listitem>
             </itemizedlist>
         </para>
 
-    
-        <!--para><emphasis>
-            <property> &quot;uploadData&quot;</property>
-        </emphasis> attribute shows the collection of files uploaded. With the help of this attribute you can define the place to upload data.</para-->
+
         <para>
-            The <emphasis>
-                <property> &quot;disabled&quot;</property>
-            </emphasis> 
-            attribute is used to disable all elements of the component. All the controls disables too.  </para>
+            There are two places where uploaded files are stored:
+        </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        In the temporary folder (depends on OS) if the value of the <property>createTempFile</property> parameter in <property>Ajax4jsf Filter</property> section
+                        is &quot;true&quot; (by Default)
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
+<init-param>
+        <param-name>createTempFiles</param-name>
+        <param-value>true</param-value>
+</init-param>
+...]]></programlisting>           
+                </listitem>
+                <listitem>
+                    <para>
+                        In the RAM if the value of the <property>createTempFile</property> parameter in <property>Ajax4jsf Filter</property> section
+                        is &quot;false&quot;. This is a better way for storing small-sized files.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+        <para>
+          The <emphasis><property>&quot;uploadData&quot;</property></emphasis> attribute 
+           defines the collection of files uploaded. See the example below. 
+        </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:fileUpload disabled="true" uploadData="#{bean.data}" />
+<rich:fileUpload uploadData="#{bean.data}"/>
 ...]]></programlisting>
-        <para>This is a result:</para>
-        <figure>
-            <title><emphasis role="bold">
-                <property>&lt;rich:fileUpload&gt;</property>
-            </emphasis>with <emphasis>
-                <property> &quot;disabled&quot;</property>
-            </emphasis> attribute</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/fileUpload2.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>       
-   
-             <para>The <emphasis>
-                <property> &quot;acceptedTypes&quot;</property></emphasis> attribute is used to define file types which are accepted to upload.
+
+        <para>The <emphasis><property>&quot;fileUploadedListener&quot;</property></emphasis> is 
+            called at server side after every file uploaded and used for the saving files from temporary folder or RAM.
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:fileUpload uploadData="#{bean.data}" fileUploadListener="#{bean.listener}"/>
+ ...]]></programlisting>
+
+
+        <para>The <emphasis>
+            <property> &quot;immediateUpload&quot;</property></emphasis> attribute allows files to be uploaded immediately after they have been added into list.
+            If you set this attribute to &quot;true&quot; files immediately upload after they have been added into the list, all next files automatically uploads one by one.
+            If you cancel uploading – next files aren&apos;t start uploading till you press the general upload button or clear the list.
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
+ acceptedTypes="html" immediateUpload="true"/>
+ ...]]></programlisting>
+
+
+
+<!--RESTRICTIONS-->
+        
+<para>
+    The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component provides following restrictions:
+</para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                By <property> file types</property>, use <emphasis><property> &quot;acceptedTypes&quot;</property></emphasis> attribute 
+                to define file types accepted by component.
+                In the example below only files with &quot;html&quot; and &quot;jpg&quot; extensions are accepted to upload.
+            </para>
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+<programlisting role="XML"><![CDATA[...
+<rich:fileUpload acceptedTypes="html, jpg"/>
+...]]></programlisting>
+        </listitem>
+        <listitem>
+            <para>
+                By <property> file size</property>, use the <property>maxRequestSize</property> parameter(value in bytes) inside <property>Ajax4jsf Filter</property> section 
+                in <property>web.xml</property>:
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<init-param>
+        <param-name>maxRequestSize</param-name>
+        <param-value>1000000</param-value>
+</init-param>
+...]]></programlisting>
+        </listitem>
+        <listitem>
+            <para>
+                By <property>max files quantity</property>, use the <emphasis><property> &quot;maxFilesQuantity&quot;</property></emphasis> attribute 
+                to define max number of files allowed to be uploaded. After a number of files in the list equals to the value of this attribute &quot;Add&quot; button is disabled.
+                As it could be seen in the example below, only 2 files are accepted for uploading.
             </para>
             <para>
                 <emphasis role="bold">Example:</emphasis>
             </para>
             <programlisting role="XML"><![CDATA[...
-<rich:fileUpload uploadData="#{bean.data}" acceptedTypes="html"/>
+<rich:fileUpload maxFilesQuantity="2"/>
  ...]]></programlisting>
-        <para>As it could be seen in the example above, only files with "html" extension are accepted to upload.</para>
+            <para>
+                This is the result:
+            </para>
+            <figure>
+                <title><emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis>with 
+                    <emphasis><property> &quot;maxFilesQuantity&quot;</property></emphasis> attribute</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="images/fileUpload5.png"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>       
+        </listitem>
+    </itemizedlist>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+ 
+
+   
+ 
        
         <para>The <emphasis>
             <property> &quot;autoclear&quot;</property></emphasis> attribute is used to remove automatically files from the list after upload completed.</para>
@@ -136,56 +235,9 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
  acceptedTypes="html"/>
  ...]]></programlisting>
             <para>As it could be seen in the example above, files are removed from the list after upload completed.</para>
-        <para>The <emphasis>
-            <property> &quot;maxFilesQuantity&quot;</property></emphasis> defines max number of files allowed for upload. 
-            After a number of files in the list equals to this attribute – add button is disabled.
-            The add button is not available until all list items are uploaded.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
-<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2"
- acceptedTypes="html"/>
- ...]]></programlisting>
-        <para>This is a result:</para>
-        <figure>
-            <title><emphasis role="bold">
-                <property>&lt;rich:fileUpload&gt;</property>
-            </emphasis>with <emphasis>
-                <property> &quot;maxFilesQuantity&quot;</property>
-            </emphasis> attribute</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/fileUpload5.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>       
-        <para>As it could be seen in the picture above, only 2 files allows for upload.</para>
-        <para>The <emphasis>
-            <property> &quot;fileUploadedListener&quot;</property></emphasis> is 
-            called at server side after every file uploaded and used for the file saving by end developer.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
-<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
- acceptedTypes="html"/>
- ...]]></programlisting>
-        <para>The <emphasis>
-            <property> &quot;immediateUpload&quot;</property></emphasis> attribute allows files to be uploaded immediately after they have been added into list.
-            If you set this attribute to true files immediately uploads after they have been added into the list, all next files automatically uploads one by one.
-            If you cancel uploading – next files aren't start uploading till you press the general upload button or clear the list.
-            
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
-<rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
- acceptedTypes="html" immediateUpload="true"/>
- ...]]></programlisting>
+ 
+
+
         <!--para>In order to encode form around <emphasis role="bold">
             <property>&lt;rich:fileUpload&gt;</property>
         </emphasis> component you could confine this area by <emphasis role="bold">
@@ -288,6 +340,30 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                 RICH_FILE_UPLOAD_TRANSFER_ERROR_LABLE, RICH_FILE_UPLOAD_ENTRY_STOP_LABEL, RICH_FILE_UPLOAD_ENTRY_CLEAR_LABEL, 
                 RICH_FILE_UPLOAD_ENTRY_CANCEL_LABEL</property>  there.</para>
        
+        
+        <para>
+            In order to disable the whole component you could use the <emphasis><property> &quot;disabled&quot;</property></emphasis> attribute.
+            See the following example.
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:fileUpload disabled="true"/>
+...]]></programlisting>
+        <para>This is the result:</para>
+        <figure>
+            <title><emphasis role="bold">
+                <property>&lt;rich:fileUpload&gt;</property>
+            </emphasis>with <emphasis>
+                <property> &quot;disabled&quot;</property>
+            </emphasis> attribute</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/fileUpload2.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>       
         
         <!-- ordering control set>
              
