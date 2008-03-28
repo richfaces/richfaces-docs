@@ -2,8 +2,8 @@
 <section>
     <sectioninfo>
         <keywordset>
-            <keyword>rich:inplaceInput</keyword>
-            <keyword>inplaceInput</keyword>
+            <keyword>rich:inplaceSelect</keyword>
+            <keyword>inplaceSelect</keyword>
         </keywordset>
     </sectioninfo>
     <table>
@@ -46,8 +46,14 @@
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
+      <!-- itemLabels has to have realy value-->
+      
         <programlisting role="XML"><![CDATA[...
-<rich:inplaceInput value="#{bean.value}"/>
+<rich:inplaceSelect value="#{Bean.inputValue}" defaultLabel="Click  to edit">
+    <f:selectItem itemValue="0" itemLabel="oil well"/>
+    <f:selectItem itemValue="1" itemLabel="factory"/>
+    <f:selectItem itemValue="2" itemLabel="newspaper"/>
+</rich:inplaceSelect>
 ...]]></programlisting>
     </section>
     <section>
@@ -55,9 +61,9 @@
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
-      <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.inplaceInput;
+      <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.inplaceSelect;
 ...	
-HtmlInpaceInput myInplaceInput = new InplaceInput();
+HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
 ...]]></programlisting>
     </section>
   
@@ -70,135 +76,139 @@ HtmlInpaceInput myInplaceInput = new InplaceInput();
         <title>Details of Usage</title>
     
       <para>    
-          As it was mentioned earlier the 
-          <emphasis role="bold"><property>&lt;rich:inplaceInput&gt;</property>  </emphasis>
-          component was designed to facilitate inputting and editing some parts of text.
+        The        <emphasis role="bold"><property>&lt;rich:inplaceSelect&gt;</property>  </emphasis> component has three functional states, which are: 
         </para>
-      
-      <para>     
-        The component has three logical states:    
+         <para>     
         <itemizedlist>        
           <listitem>
-            <para><property>View</property> state displays the text containing in a <emphasis><property>&quot;value&quot;</property></emphasis>  attribute;</para>
-          <figure>
+            <para><property>View </property>state displays the current value as text;</para>
+<!--          <figure>
             <title>View state</title>  
             <mediaobject>
               <imageobject>
                 <imagedata fileref="images/inplaceInputViewState_shadow.png"/>
               </imageobject>
             </mediaobject>     
-          </figure>        
+          </figure>       --> 
           </listitem>
          <listitem>
-            <para><property>;Edit</property>state  - the text can be edited and saved;</para>       
-                      <figure>
+           <para><property>Edit </property>state displays a list with options;</para>       
+                      <!--<figure>
             <title>Edit state</title>  
             <mediaobject>
               <imageobject>
                 <imagedata fileref="images/inplaceInputEditState_shadow.png"/>
               </imageobject>
             </mediaobject>     
-          </figure>
+          </figure>-->
           </listitem>
           <listitem>
-            <para><property>Changed</property>state - displays the edited text and indicates that it was edited, changed</para>     
-                    <figure>
+            <para><property>Changed </property>state displays the value of the selected option  as text</para>     
+                    <!--<figure>
             <title>Changed state</title>  
             <mediaobject>
               <imageobject>
                 <imagedata fileref="images/inplaceInputChangedState_shadow.png"/>
               </imageobject>
             </mediaobject>     
-          </figure>      
+          </figure>      -->
           </listitem>
     </itemizedlist>
    
       </para>  
-      
-      
-      
-      
-      
-      
+  
         <para>     
-          The main attribute of the component is 
+          The 
           <emphasis><property>&quot;value&quot;</property></emphasis> 
-          it displays the text on a page, the text can be edited by clicking (default action, which can be redefined) on it.         
-        </para>     
+          attribute displays the value as an  outputtext.  
+          The attribute is defined when some option in the list is selected. 
+         </para>     
+
+  
+  
+  
+ <para>You can form he list of the options: using
+ <emphasis><property>&lt;f:selectItem&gt;</property></emphasis>   and 
+ <emphasis><property>&lt;f:selectItems&gt;</property></emphasis> </para>
+      <para>Please see the example below</para>
       
-      <para> 
-      However, if
-        <emphasis><property>&quot;value&quot;</property></emphasis> 
-      attribute is not defined, you can use 
-       <emphasis><property>&quot;defaultLabel&quot;</property></emphasis>  attribute 
-      which displays some default text while
-        <emphasis><property>&quot;value&quot;</property></emphasis>  
-    attribute stays undefined.
-      </para> 
-      
-      <para>
+     
+  
+
+
+<para>
         <emphasis role="bold">Example:</emphasis>
-      </para>   
-      
-      <programlisting role="XML"><![CDATA[...
-<rich:inplaceInput value="#{bean.value}" defaultLabel="click to edit"/>
+</para>  
+<programlisting role="XML"><![CDATA[...
+<rich:inplaceSelect value="#{inplaceComponentsBean.inputValue}" showControls="true" defaultLabel="click to edit">
+    <f:selectItem itemValue="0" itemLabel="oil well"/>
+    <f:selectItem itemValue="1" itemLabel="factory"/>
+    <f:selectItem itemValue="2" itemLabel="newspaper"/>
+</rich:inplaceSelect>
 ...]]> </programlisting>      
-      <para>
-        In the shown example,
-        <emphasis><property>&quot;value&quot;</property></emphasis> attribute is not defined; 
-        therefore default text &quot;Click to edit&quot; is displayed 
-        since it is placed into the 
-        <emphasis><property>&quot;defaultLabel&quot;</property></emphasis> attribute.       
-      </para>
       
-      
-      <para>
-      Input data is saved (submitted) automatically whenever the input field loses focus. 
-      Nevertheless, you can use the 
-        <emphasis><property>&quot;showControls&quot;</property></emphasis>
-      attribute, which makes <property>&quot;save&quot;</property>and  <property>&quot;cancel&quot; </property> buttons 
-        appear next to the input field. 
-     </para>
-      <para>
-        <emphasis role="bold">Example:</emphasis>
-      </para>      
-      
-      <programlisting role="XML"><![CDATA[...
-<rich:inplaceInput value="#{bean.value}" defaultLabel='click to edit' showControls="true"/>
-...]]> </programlisting>    
-      
-      <figure>
-        <title>Usage <emphasis><property>&quot;showControls&quot;</property></emphasis> attribute</title>  
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="images/inplaceInputShowControls.png"/>
-          </imageobject>
-        </mediaobject>     
-      </figure>  
-      <para>
-        You can also position the controls relatively to the input field, by means of 
-        <emphasis><property>&quot;  controlsHorizontalPosition&quot;</property></emphasis> 
-        <emphasis><property>&quot; controlsVerticalPosition &quot;</property></emphasis>
-        attributes.
+<para>
+ The <emphasis><property>&quot;value&quot;</property></emphasis>  attribute gets 
+ some value when an option in the select-box in clicked on (the default action).   
+</para>      
+  
+      <para> 
+ Nowever, if you want the end user to confirm the data saving explicitly you can: </para>   
+      <itemizedlist>
+        <listitem>
+          <para>Use a <emphasis><property>&quot;showControls&quot;</property></emphasis>  attribute, which makes &quot;save&quot; and &quot;cancel&quot; buttons (displayed as icons) appear next to the input field;
+          </para>
+            <para>Please see the example </para>
+          <para>
+            <emphasis role="bold">Example:</emphasis>
+          </para>      
+          
+          <programlisting role="XML"><![CDATA[...
+	<rich:inplaceSelect value="#{inplaceComponentsBean.inputValue}"
+		defaultLabel="Click here to edit">
+    <f:selectItem itemValue="0" itemLabel="oil well"/>
+    <f:selectItem itemValue="1" itemLabel="factory"/>
+    <f:selectItem itemValue="2" itemLabel="newspaper"/>
+	</rich:inplaceSelect>
+...]]> </programlisting>  
         
-        The 
-        <emphasis><property>&quot;  controlsHorizontalPosition&quot;</property></emphasis> attribute has 
-        <property>&quot;left&quot;</property>, <property>&quot;right&quot;</property> and <property> &quot;center&quot;</property> definitions. 
+        </listitem>
         
-        The 
-        <emphasis><property>&quot; controlsVerticalPosition &quot;</property></emphasis>
-        attribute has <property>&quot;bottom&quot;</property>, <property>&quot;center&quot;</property> and <property>&quot;top&quot;</property> definitions.
-         </para>
+        
+        <listitem>
+          <para>Use standard buttons by means of the  <emphasis role="bold"><property>controls</property></emphasis>facet
+          </para>
+          <para>Please see the example </para>
+          <para>
+            <emphasis role="bold">Example:</emphasis>
+          </para>      
+          
+          <programlisting role="XML"><![CDATA[...
+<rich:inplaceSelect value="#{inplaceComponentsBean.inputValue}" defaultLabel="Click to edit" showControls="true">
+    <f:facet name="controls">
+        <input type="button" value="Save"/>
+        <input type="button" value="Cancel"/>
+    </f:facet>
+    <f:selectItem itemValue="0" itemLabel="oil well"/>
+    <f:selectItem itemValue="1" itemLabel="factory"/>
+    <f:selectItem itemValue="2" itemLabel="newspaper"/>
+</rich:inplaceSelect>
+...]]> </programlisting>  
+          
+        </listitem>
+      </itemizedlist>   
       
-      <figure>
-        <title>Positioning of &quot;save&quot; and &quot;cancel&quot; buttons</title>  
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="images/inplaceInputShowControlsAlignLeft.png"/>
-          </imageobject>
-        </mediaobject>     
-      </figure>   
       
+     <note>
+        <title>Note:</title>
+        <para>
+          The <emphasis> <property>controls</property></emphasis>facet also implies using showcontrols 
+          attribute and it has to be defined as &quot;true&quot;.
+        </para>     
+      </note>
+      
+      
+     <!--Icons redefinitions-->
       <para>
         Redefinition of the
         &quot;save&quot; and &quot;cancel&quot; icons can be performed using 
@@ -212,138 +222,116 @@ HtmlInpaceInput myInplaceInput = new InplaceInput();
       </para>      
       
       <programlisting role="XML"><![CDATA[...
-<rich:inplaceInput value="#{bean.value}" defaultLabel='click to edit'
+<rich:inplaceSelect 
+   value="#{inplaceComponentsBean.inputValue}" defaultLabel="Click to edit" showControls="true"
     showControls="true"
     controlsHorizontalPosition="left"
     controlsVerticalPosition="top"
     saveControlIcon="/richfaces-demo/richfaces/cancel.gif"
-    cancelControlIcon="/richfaces-demo/richfaces/save.gif"/> 
-    ...]]> </programlisting>   
-      <figure>
-        <title>Redefining of &quot;save&quot; and &quot;cancel&quot; buttons</title>  
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="images/inplaceInputShowControlsCustom.png"/>
-          </imageobject>
-        </mediaobject>     
-      </figure>   
+    cancelControlIcon="/richfaces-demo/richfaces/save.gif"> 
+    
+<f:selectItem itemValue="0" itemLabel="oil well"/>
+<f:selectItem itemValue="1" itemLabel="factory"/>
+<f:selectItem itemValue="2" itemLabel="newspaper"/>
+</rich:inplaceSelect>
+    ...]]> </programlisting>  
+  
+
+      <para>
+        You can also position the controls relatively to the input field, by means of 
+        <emphasis><property>&quot;  controlsHorizontalPosition&quot;</property></emphasis> 
+        <emphasis><property>&quot; controlsVerticalPosition &quot;</property></emphasis>
+        attributes.
+        
+        The 
+        <emphasis><property>&quot;  controlsHorizontalPosition&quot;</property></emphasis> attribute has 
+        <property>&quot;left&quot;</property>, <property>&quot;right&quot;</property> and <property> &quot;center&quot;</property> definitions. 
+        
+        The 
+        <emphasis><property>&quot; controlsVerticalPosition &quot;</property></emphasis>
+        attribute has <property>&quot;bottom&quot;</property>, <property>&quot;center&quot;</property> and <property>&quot;top&quot;</property> definitions.
+      </para>
+
+
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>      
+      
+      <programlisting role="XML"><![CDATA[...
+<rich:inplaceSelect value="#{inplaceComponentsBean.inputValue}" defaultLabel="Click to edit"  controlsHorizontalPosition="left" controlsVerticalPosition="top" showControls="true">
+    <f:facet name="controls" >
+        <input type="button" value="Save"/>
+        <input type="button" value="Cancel"/>
+    </f:facet>
+    <f:selectItem itemValue="0" itemLabel="oil well"/>
+    <f:selectItem itemValue="1" itemLabel="factory"/>
+    <f:selectItem itemValue="2" itemLabel="newspaper"/>
+</rich:inplaceSelect>
+...]]> </programlisting>  
+
     <para>
-      The 
-      <emphasis><property>&quot;inputWidth&quot;</property></emphasis>, 
-      <emphasis><property>&quot;minInputWidth&quot;</property></emphasis>, and 
-      <emphasis><property>&quot;maxInputWidth&quot;</property></emphasis> 
-      attributes are provided to specify the width, minimal width and maximal width for the input element respectively. 
-      
-      
-      
-      
-    </para>  
-      
-      
+     Another useful attribute is 
+        <emphasis><property>&quot;openOnEdit&quot;</property></emphasis>. 
+        It allows you to make the drop-down box with options appear once &quot;edit&quot; state activated. 
+      </para>
+
+
+
+
+
+
       <para>
         The 
         <emphasis><property>&quot;editEvent&quot;</property></emphasis>         
         attribute provides an option to assign an JavaScript action that initiates the change of the state  from
-      <property>view</property>
+        <property>view</property>
         to 
         <property>edit</property>. 
         
         
         The default value is &quot;click&quot;. 
-   
+        
       </para>
       
-   
       
-      <note>
+      
+     <note>
+        <title>Note:</title>
         <para>
-          
-    Do not use &quot;on&quot; prefix applying event action. E.g. use &quot;click&quot; instead of &quot;onClick&quot;, use &quot;mouseover&quot; instead of &quot;onMouseOver&quot;. 
-    
+          Do not use &quot;on&quot; prefix applying event action. E.g. use &quot;click&quot; instead of &quot;onClick&quot;, use &quot;mouseover&quot; instead of &quot;onMouseOver&quot;. 
         </para>
       </note>
-  
-  
-   <para>
-   Having multiple
-   <emphasis role="bold"><property>&lt;rich:inplaceInput&gt;</property></emphasis>
-   components 
-   on a page you can use <emphasis><property>&quot;tabindex&quot;</property></emphasis>  attribute that enables switching (tabbing)
-   between the components by pressing the “Tab” key. 
-   Switching order is determined by the value of the attribute which is an integer between 0 and 32767.
- </para>  
-  
-  
- <para> 
- 
- The 
 
-   <emphasis><property>&quot;selectOnEdit&quot;</property></emphasis>  
-   (with possible values &quot;true&quot;, &quot;false&quot;) gives you an 
-   option to make the text in the input area selected right after the change from 
-   <property>view</property> state to <property>edit</property> occurs. 
- 
-  </para>
-<para>
-  The 
-  <emphasis><property>&quot; oneditactivation&quot;</property></emphasis> , 
-  <emphasis><property>&quot;oneditactivated&quot;</property></emphasis> , 
-  <emphasis><property>&quot;onviewactivation&quot;</property></emphasis> 
-  and  
-  <emphasis><property>&quot; onviewactivated&quot;</property></emphasis>  attributes
-  provide a possibility to assign JavaScript code on 
-  <property>edit</property> state activation, on 
-  <property>edit</property> state activated,on 
-<property>view</property> state activation and on 
-<property>view</property> state activated respectively. 
-</para>
-
-      
-      <para>
-        <emphasis role="bold">Example:</emphasis>
-      </para>      
-      <programlisting role="XML"><![CDATA[...
-<rich:inplaceInput value="#{bean.value}" defaultLabel='click to edit'
- onviewactivated="if (confirm('Are you sure you want to change value?')){return false;}" />
-...]]> </programlisting>  
-      <para>
-        The given code illustrates how onviewactivation attribute works, 
-        namely when the state is being changed from 
-        <property>edit</property> to 
-      <property>view</property>, 
-        a confirmation window with a message
-        &quot;Are you sure you want to change value?&quot; comes up.
+      <para> 
+        The   
+        <emphasis><property>&quot;selectOnEdit&quot;</property></emphasis>  
+        (with possible values &quot;true&quot;, &quot;false&quot;) gives you an 
+        option to make the text in the input area selected right after the change from 
+        <property>view</property> state to <property>edit</property> occurs. 
+        
       </para>
-     
-      
-      <table>
-        <title>Keyboard usage</title>
-        <tgroup cols="2">
-          <thead>
-            <row>
-              <entry>Keys and combinations </entry>
-              <entry>Description</entry>
-            </row>
-          </thead>
-          <tbody>
-            <row>
-              <entry>ENTER</entry>
-              <entry>Saves the input data, and changes the state from edit to changed</entry>
-            </row>
-            <row>
-              <entry>ESC</entry>
-              <entry>changes the state from edit to view or changed, value is not affected</entry>
-            </row>
-            
-            <row>
-              <entry>TAB</entry>
-              <entry>switches between the components</entry>
-            </row>
-              </tbody>
-        </tgroup>
-      </table>
-    
-    
+      <para>
+        The 
+        <emphasis><property>&quot;  inputWidth&quot;</property></emphasis> , 
+        <emphasis><property>&quot; minInputWidth&quot;</property></emphasis> , and 
+        <emphasis><property>&quot; maxInputWidth&quot;</property></emphasis>  
+        attributes are provided to specify the width, minimal width and maximal width for the input element respectively. 
+        
+        
+      </para>
+      <para>
+        The 
+        <emphasis><property>&quot; oneditactivation&quot;</property></emphasis> , 
+        <emphasis><property>&quot;oneditactivated&quot;</property></emphasis> , 
+        <emphasis><property>&quot;onviewactivation&quot;</property></emphasis> 
+        and  
+        <emphasis><property>&quot; onviewactivated&quot;</property></emphasis>  attributes
+        provide a possibility to assign JavaScript code on 
+        <property>edit</property> state activation, on 
+        <property>edit</property> state activated,on 
+        <property>view</property> state activation and on 
+        <property>view</property> state activated respectively. 
+      </para>   
     </section>
     <!-- End. Details of Usage-->
 
@@ -412,18 +400,19 @@ HtmlInpaceInput myInplaceInput = new InplaceInput();
             <property>skin parameters.</property>
         </emphasis></para>
         <para>There are two ways to redefine the appearance of all <emphasis role="bold">
-            <property>&lt;rich:inplaceInput&gt;</property>
-        </emphasis> components at once: <itemizedlist>
+            <property>&lt;rich:inplaceSelect&gt;</property>
+        </emphasis> components at once: 
+          <itemizedlist>
             <listitem>Redefine the corresponding skin parameters</listitem>
             <listitem> Add to your style sheets style classes used by a <emphasis role="bold">
-                <property>&lt;rich:inplaceInput&gt;</property>
+                <property>&lt;rich:inplaceSelect&gt;</property>
             </emphasis> component</listitem>
         </itemizedlist>
         </para>
     </section>
        
 
- <section>
+<!-- <section>
     <title>Skin Parameters Redefinition</title>
 
     <table>
@@ -550,12 +539,13 @@ HtmlInpaceInput myInplaceInput = new InplaceInput();
     </table>
 
     
-  </section>-->
+    </section>-->
+  
   <!-- END Skin Parameters Redefinition-->  
 
   <!-- Definition of Custom Style Classes-->  
 
-  <section>
+  <!--<section>
     <title>Definition of Custom Style Classes</title>
     <para>On the screenshot there are classes names that define styles for component elements.</para>
 
@@ -694,7 +684,7 @@ HtmlInpaceInput myInplaceInput = new InplaceInput();
     
 
     <para>In order to redefine styles for all <emphasis role="bold">
-      <property>&lt;rich:inplaceInput&gt;</property>
+      <property>&lt;rich:inplaceSelect&gt;</property>
     </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
       same names (possible classes could be found in the tables <link linkend="tab_cn3"> above</link>) and define necessary properties in them. </para> 
     
@@ -725,7 +715,7 @@ font-style: bold;
     
     
     <para>It&apos;s aslo possible to change styles of a particular 
-      <emphasis role="bold"> <property>&lt;rich:inplaceInput&gt;</property></emphasis> component. In this case you should create own style classes and use them in corresponding <emphasis role="bold"><property>&lt;rich:inplaceInput&gt;</property></emphasis> <property>styleClass</property> attributes. An example is placed below:</para>
+      <emphasis role="bold"> <property>&lt;rich:inplaceSelect&gt;</property></emphasis> component. In this case you should create own style classes and use them in corresponding <emphasis role="bold"><property>&lt;rich:inplaceSelect&gt;</property></emphasis> <property>styleClass</property> attributes. An example is placed below:</para>
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
@@ -735,12 +725,12 @@ color:  #008cca;
 }
 ...]]></programlisting>  
     <para>The <emphasis><property>&quot;styleClass&quot;</property></emphasis> attribute for <emphasis role="bold"
-      ><property>&lt;rich:inplaceInput&gt; </property></emphasis> is defined as it’s shown in the example below:</para>
+      ><property>&lt;rich:inplaceSelect&gt; </property></emphasis> is defined as it’s shown in the example below:</para>
     
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="CSS"><![CDATA[...<rich:inplaceInput value="click to edit" styleClass="myClass"/>
+    <programlisting role="CSS"><![CDATA[...<rich:inplaceSelect value="click to edit" styleClass="myClass"/>
 ]]></programlisting>    
     
     <para>This is a result:</para>
@@ -756,8 +746,7 @@ color:  #008cca;
     
     <para>As it could be seen on the picture above, the font color of the text on the component was changed.</para>
         
-  </section>
-    -->
+  </section>-->
 
   <section>
     <title>Relevant Resources Links</title>
