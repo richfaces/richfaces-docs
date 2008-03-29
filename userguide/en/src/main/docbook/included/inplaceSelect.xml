@@ -50,7 +50,7 @@
       
         <programlisting role="XML"><![CDATA[...
 <rich:inplaceSelect value="#{Bean.inputValue}" defaultLabel="Click  to edit">
-    <f:selectItem itemValue="0" itemLabel="oil well"/>
+    <f:selectItems  value="#{bean.selectItems}"/>
     <f:selectItem itemValue="1" itemLabel="factory"/>
     <f:selectItem itemValue="2" itemLabel="newspaper"/>
 </rich:inplaceSelect>
@@ -128,8 +128,8 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
   
   
  <para>You can form he list of the options: using
- <emphasis><property>&lt;f:selectItem&gt;</property></emphasis>   and 
- <emphasis><property>&lt;f:selectItems&gt;</property></emphasis> </para>
+   <emphasis role="bold"><property>&lt;f:selectItem&gt;</property></emphasis>   and 
+   <emphasis role="bold"><property>&lt;f:selectItems&gt;</property></emphasis> </para>
       <para>Please see the example below</para>
       
      
@@ -141,7 +141,7 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
 </para>  
 <programlisting role="XML"><![CDATA[...
 <rich:inplaceSelect value="#{inplaceComponentsBean.inputValue}" showControls="true" defaultLabel="click to edit">
-    <f:selectItem itemValue="0" itemLabel="oil well"/>
+    <f:selectItems  value="#{bean.selectItems}"/>
     <f:selectItem itemValue="1" itemLabel="factory"/>
     <f:selectItem itemValue="2" itemLabel="newspaper"/>
 </rich:inplaceSelect>
@@ -156,7 +156,7 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
  Nowever, if you want the end user to confirm the data saving explicitly you can: </para>   
       <itemizedlist>
         <listitem>
-          <para>Use a <emphasis><property>&quot;showControls&quot;</property></emphasis>  attribute, which makes &quot;save&quot; and &quot;cancel&quot; buttons (displayed as icons) appear next to the input field;
+          <para>Use a <emphasis><property>&quot;showControls&quot;</property></emphasis>  attribute, which makes &quot;Save&quot; and &quot;Cancel&quot; buttons (displayed as icons) appear next to the input field;
           </para>
             <para>Please see the example </para>
           <para>
@@ -176,7 +176,7 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
         
         
         <listitem>
-          <para>Use standard buttons by means of the  <emphasis role="bold"><property>controls</property></emphasis>facet
+          <para>Use standard buttons by means of the  <emphasis><property>&quot;controls&quot;</property></emphasis>facet
           </para>
           <para>Please see the example </para>
           <para>
@@ -202,7 +202,7 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
      <note>
         <title>Note:</title>
         <para>
-          The <emphasis> <property>controls</property></emphasis>facet also implies using showcontrols 
+          The <emphasis> <property>&quot;controls&quot;</property></emphasis>facet also implies using showcontrols 
           attribute and it has to be defined as &quot;true&quot;.
         </para>     
       </note>
@@ -245,11 +245,11 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
         
         The 
         <emphasis><property>&quot;  controlsHorizontalPosition&quot;</property></emphasis> attribute has 
-        <property>&quot;left&quot;</property>, <property>&quot;right&quot;</property> and <property> &quot;center&quot;</property> definitions. 
+        &quot;left&quot;, &quot;right&quot; and  &quot;center&quot; definitions. 
         
         The 
         <emphasis><property>&quot; controlsVerticalPosition &quot;</property></emphasis>
-        attribute has <property>&quot;bottom&quot;</property>, <property>&quot;center&quot;</property> and <property>&quot;top&quot;</property> definitions.
+        attribute has &quot;bottom&quot;, &quot;center&quot; and &quot;top&quot; definitions.
       </para>
 
 
@@ -412,46 +412,8 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
     </section>
        
 
-<!-- <section>
+<section>
     <title>Skin Parameters Redefinition</title>
-
-    <table>
-      <title>Skin parameters redefinition for &quot;save&quot; and &quot;cancel&quot; controls</title>
-
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Skin parameters</entry>
-
-            <entry>CSS properties</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>tabBackgroundColor</entry>
-
-            <entry>background-color</entry>
-          </row>
-          
-          <row>
-            <entry>panelBorderColor</entry>
-            
-            <entry>border-color</entry>
-          </row>
-          
-          <row>
-            <entry>panelBorderColor</entry>
-            
-            <entry>border-color</entry>
-          </row>
-
-
-
-
-        </tbody>
-      </tgroup>
-    </table>
 
     <table>
       <title>Skin parameters redefinition for view state</title>
@@ -471,47 +433,20 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
 
             <entry>background-color</entry>
           </row>
+          
           <row>
-            <entry>generalTextColor</entry>
+            <entry>generaTextColor</entry>
             
             <entry>border-bottom-color</entry>
           </row>
-           </tbody>
-      </tgroup>
-    </table>
-
-
-
-    <table>
-      <title>Skin parameters redefinition for &quot;Changed&quot; state</title>
-
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Skin parameters</entry>
-
-            <entry>CSS properties</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry>editorBackgroundColor</entry>
-
-            <entry>background-color</entry>
-          </row>
-
-          <row>
-            <entry>generalTextColo</entry>
-
-            <entry>border-bottom-color</entry>
-          </row>
+          
+      
         </tbody>
       </tgroup>
     </table>
 
     <table>
-      <title>Classes names that define input field look and feel in edit state </title>
+      <title>Skin parameters redefinition for input field in edit state</title>
 
       <tgroup cols="2">
         <thead>
@@ -528,6 +463,35 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
 
             <entry>background-color</entry>
           </row>
+          <row>
+            <entry>panelBorderColor</entry>
+            
+            <entry>border-color</entry>
+          </row>
+           </tbody>
+      </tgroup>
+    </table>
+
+
+
+    <table>
+      <title>Skin parameters redefinition for control</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>tabBackgroundColor</entry>
+
+            <entry>background-color</entry>
+          </row>
 
           <row>
             <entry>panelBorderColor</entry>
@@ -538,16 +502,103 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
       </tgroup>
     </table>
 
+    <table>
+      <title>Skin parameters redefinition for pressed control</title>
+
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>Skin parameters</entry>
+
+            <entry>CSS properties</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>tabBackgroundColor</entry>
+
+            <entry>background-color</entry>
+          </row>
+
+          <row>
+            <entry>panelBorderColor</entry>
+
+            <entry>border-color</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  <table>
+    <title>Skin parameters redefinition for list</title>
     
-    </section>-->
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Skin parameters</entry>
+          
+          <entry>CSS properties</entry>
+        </row>
+      </thead>
+      
+      <tbody>
+        <row>
+          <entry>editBackgroundColor</entry>
+          
+          <entry>background-color</entry>
+        </row>
+        
+        <row>
+          <entry>panelBorderColor</entry>
+          
+          <entry>border-color</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+  <table>
+    <title>Skin parameters redefinition for selected item</title>
+    
+    <tgroup cols="2">
+      <thead>
+        <row>
+          <entry>Skin parameters</entry>
+          
+          <entry>CSS properties</entry>
+        </row>
+      </thead>
+      
+      <tbody>
+        <row>
+          <entry>headerTextColor</entry>
+          
+          <entry>color</entry>
+        </row>
+        
+        <row>
+          <entry>headerBackgroundColor</entry>
+          
+          <entry>background-color</entry>
+        </row>
+        <row>
+          <entry>headerBackgroundColor</entry>
+          
+          <entry>border-color</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+    
+    </section>
   
   <!-- END Skin Parameters Redefinition-->  
 
   <!-- Definition of Custom Style Classes-->  
 
-  <!--<section>
+  <section>
     <title>Definition of Custom Style Classes</title>
-    <para>On the screenshot there are classes names that define styles for component elements.</para>
+    <!--para>On the screenshot there are classes names that define styles for component elements.</para>
 
 
     <figure>
@@ -557,10 +608,9 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
           <imagedata fileref="images/inplaceInputClasses.png"/>
         </imageobject>
       </mediaobject>
-    </figure>    
+    </figure-->    
     
-    
-    <table>
+    <table id="cn3">
       <title>Class name for the view state</title>
       <tgroup cols="2">
         <thead>
@@ -571,15 +621,29 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
         </thead>
         <tbody>
           <row>
-            <entry>rich-inplace-view</entry>
-            <entry>Defines styles for the view state</entry>
+            <entry>rich-inplace-select-view</entry>
+            <entry>Defines styles for the select view</entry>
           </row>
           
+         
+        </tbody>
+      </tgroup>
+    </table>
+    <table>
+      <title>Class name for the input field in edit state</title>
+      <tgroup cols="2">
+        <thead>
           <row>
-            <entry>rich-inplace-input-view-hover</entry>
-            <entry>Defines styles for hovered text in  the view state  </entry>
+            <entry>Class name</entry>
+            <entry>Description</entry>
           </row>
-          
+        </thead>
+        <tbody>
+          <row>
+          <entry>rich-inplace-select-field</entry>
+          <entry>Defines styles for the select field</entry>
+          </row>
+      
         </tbody>
       </tgroup>
     </table>
@@ -590,7 +654,7 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
     
     
     <table>
-      <title>Class name for the input field in  edit state</title>
+      <title>Class name for the control</title>
       <tgroup cols="2">
         <thead>
           <row>
@@ -600,8 +664,12 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
         </thead>
         <tbody>
           <row>
-            <entry>rich-inplace-field</entry>
-            <entry>Defines styles for input field look and feel in edit state</entry>
+          <entry>rich-inplace-select-control</entry>
+          <entry>Defines styles for the select control</entry>
+          </row>
+          <row>
+          <entry>rich-inplace-select-control-press</entry>
+          <entry>Defines styles for the pressed select control</entry>
           </row>
 
         </tbody>
@@ -610,7 +678,7 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
     
     
     <table>
-      <title>Class name for the &quot;Changed&quot; state</title>
+      <title>Class name for the list</title>
       <tgroup cols="2">
         <thead>
           <row>
@@ -620,16 +688,11 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
         </thead>
         <tbody>
           <row>
-            <entry>rich-inplace-changed</entry>
-            <entry>Defines styles for the &quot;Changed&quot; state</entry>
+          <entry>rich-inplace-select-list-decoration</entry>
+          <entry>Defines styles for a wrapper &lt;table&gt; element of an inplaceSelect</entry>
           </row>
-          <row>
-            <entry> rich-inplace-input-changed-hover </entry>
-            <entry>Defines styles for the hovered text in  the &quot;Changed&quot; state</entry>
-          </row> 
-          
-          rich-inplace-input-changed-hover 
-        </tbody>
+                 
+                </tbody>
       </tgroup>
     </table>
     
@@ -637,7 +700,7 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
     
     
     <table>
-      <title>Classes names &quot;save&quot; and &quot;cancel&quot; controls in Edit state</title>
+      <title>Classes names for the selected item</title>
       <tgroup cols="2">
         <thead>
           <row>
@@ -648,36 +711,45 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
         <tbody>
           
           <row>
-            <entry>rich-inplace-control</entry>
-            <entry>Defines styles for the controls</entry>
+          <entry>rich-inplace-select-selected-item</entry>
+            <entry>Defines styles for the selected item</entry>
           </row>
-          <row>
-            <entry>.rich-inplace-control-press</entry>
-            <entry>Defines styles for the controls when either of the buttons is pressed</entry>
-          </row>
-          <row>
-            <entry>.rich-inplace-shadow-size</entry>
-            <entry>Defines size of the shadow</entry>
-          </row>
-          <row>
-            <entry>rich-inplace-shadow-tl</entry>
-            <entry>Defines styles for the shadow in the top left corner </entry>
-          </row>
-          <row>
-            <entry>rich-inplace-shadow-tr</entry>
-            <entry>Defines styles for the shadow in the top right corner</entry>
-          </row>
-          <row>
-            <entry>rich-inplace-shadow-bl</entry>
-            <entry>Defines styles for the shadow in the bottom left corner</entry>
-          </row>
-          <row>
-            <entry>rich-inplace-shadow-br</entry>
-            <entry>Defines styles for the shadow in the bottom right corner</entry>
-          </row>
+         
           
         </tbody>
       </tgroup>
+    </table>
+    <table>
+    <title>Classes names for the shadow</title>
+    <tgroup cols="2">
+    <thead>
+    <row>
+    <entry>Class name</entry>
+    <entry>Description</entry>
+    </row>
+    </thead>
+    <tbody>
+    
+    <row>
+    <entry>rich-inplace-select-shadow-tl</entry>
+    <entry>Defines styles for the top-left shadow</entry>
+    </row>
+    <row>
+    <entry>rich-inplace-select-shadow-tr</entry>
+    <entry>Defines styles for the top-right shadow</entry>
+    </row>
+    <row>
+    <entry>rich-inplace-select-shadow-bl</entry>
+    <entry>Defines styles for the bottom-left shadow</entry>
+    </row>
+    <row>
+    <entry>rich-inplace-select-shadow-br</entry>
+    <entry>Defines styles for the bottom-right shadow</entry>
+    </row>
+    
+    
+    </tbody>
+    </tgroup>
     </table>
     
     
@@ -686,14 +758,14 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
     <para>In order to redefine styles for all <emphasis role="bold">
       <property>&lt;rich:inplaceSelect&gt;</property>
     </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
-      same names (possible classes could be found in the tables <link linkend="tab_cn3"> above</link>) and define necessary properties in them. </para> 
+      same names (possible classes could be found in the tables <link linkend="cn3"> above</link>) and define necessary properties in them. </para> 
     
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="CSS"><![CDATA[...
-.rich-inplace-field {
-font-style: bold;
+.rich-inplace-select-list-decoration{
+    background-color: #ecf4fe;
 }						
 	
 ...]]></programlisting>  
@@ -704,11 +776,11 @@ font-style: bold;
       <title>Redefinition styles with predefined classes</title>
       <mediaobject>
         <imageobject>
-          <imagedata fileref="images/inplaceInputRich-inplace-field.png"/>
+          <imagedata fileref="images/inplaceSelect1.png"/>
         </imageobject>
       </mediaobject>
     </figure>
-    <para>In the shown example the font in <property>edit</property> state is changed to bold.</para>
+    <para>In the shown example the background color for list is changed.</para>
     
     
     
@@ -721,16 +793,16 @@ font-style: bold;
     </para>
     <programlisting role="CSS"><![CDATA[...
 .myClass {
-color:  #008cca;
-}
+    background-color:#bed6f8;
+    font-style:italic;}
 ...]]></programlisting>  
-    <para>The <emphasis><property>&quot;styleClass&quot;</property></emphasis> attribute for <emphasis role="bold"
+    <para>The <emphasis><property>&quot;viewClass&quot;</property></emphasis> attribute for <emphasis role="bold"
       ><property>&lt;rich:inplaceSelect&gt; </property></emphasis> is defined as it’s shown in the example below:</para>
     
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="CSS"><![CDATA[...<rich:inplaceSelect value="click to edit" styleClass="myClass"/>
+    <programlisting role="CSS"><![CDATA[...<rich:inplaceSelect value="click to edit" viewClass="myClass"/>
 ]]></programlisting>    
     
     <para>This is a result:</para>
@@ -739,14 +811,14 @@ color:  #008cca;
       <title>Modificaton of a look and feel with own classes and <emphasis><property>styleClass</property></emphasis> attributes</title>
       <mediaobject>
         <imageobject>
-          <imagedata fileref="images/inplaceInputMyClass.png"/>
+          <imagedata fileref="images/inplaceSelect2.png"/>
         </imageobject>
       </mediaobject>
     </figure>  
     
-    <para>As it could be seen on the picture above, the font color of the text on the component was changed.</para>
+    <para>As it could be seen on the picture above, the font style and background color in <property>view</property> state is changed.</para>
         
-  </section>-->
+  </section>
 
   <section>
     <title>Relevant Resources Links</title>
