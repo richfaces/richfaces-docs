@@ -1558,6 +1558,683 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
         </member>
       </simplelist>
     </section>
+    
+    <section>
+      <title>Standard controls skinning</title>
+      <para>The feature is designed to unify the look and feel of standard HTML element and RichFaces components. 
+        Skinning can be applied to all controls on a page basing on element&apos; 
+        name and attribute type (where applicable). Also this feature
+        provides a set of CSS styles so that skinning can be applied 
+        assigning rich-* classes to particular elements or to container of elements that nests controls.
+      </para>  
+      
+      
+      <para>
+        Standard controls skinning feature provides 2 levels of skinning:
+      </para>    
+        <itemizedlist>
+          <listitem>
+            <para>
+              <property><emphasis><property>Basic</property></emphasis></property> provides customization only basic style properties
+            </para>  
+            <para>
+              Appling the level of skinning is based on detecting User Agent. Basic level of skinning is applied:
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <property><emphasis><property>Advanced</property></emphasis></property>extends basic level introducing 
+              broader number of style properties and is applied to browsers with rich visual styling capability of controls
+            </para>
+          </listitem>
+        </itemizedlist> 
+  
+  <para>
+Appling the level of skinning is based on detecting User Agent. If User Agent is not detected, Advanced level is used. 
+  </para>
+ <para>
+   To the following browsers Basic level of skinning is applied:
+ </para>     
+      
+      <para>
+        Standard controls skinning feature provides 2 levels of skinning, while skinning is based on detecting User Agent. If User Agent is not detected, Advanced level is used.
+     </para>   
+         <itemizedlist>
+          <listitem>
+            <para>
+              <property><emphasis><property>Basic</property></emphasis></property> provides customization only basic style properties.       
+            </para>
+            <para>
+              To the following browsers Basic level of skinning is applied:
+            </para>     
+              <itemizedlist>
+                <listitem>Internet Explorer 6 </listitem>
+                <listitem>Internet Explorer 7 in BackCompat mode  (see<ulink url="http://msdn2.microsoft.com/en-us/library/ms533687(VS.85).aspx">document.compatMode property in MSDN</ulink>) </listitem>
+                <listitem>Opera </listitem>
+                <listitem>Safari</listitem>
+              </itemizedlist> 
+          </listitem>
+ 
+          <listitem>
+            <para>
+              <property>
+                <emphasis><property>Advanced</property></emphasis></property>extends basic level introducing broader 
+              number of style properties and is applied to browsers with rich visual styling capability of controls
+            </para>
+            <para>
+            The following browsers support Advanced level of skinning: 
+            </para>   
+        <itemizedlist>
+          <listitem>Mozilla Firefox</listitem>
+          <listitem>Internet Explorer 7 in Standards-compliant mode ( CSS1Compat) mode</listitem>
+        </itemizedlist>
+            
+          </listitem>
+        </itemizedlist> 
+      
+      
+   <para>
+     
+     These are the elements that affected by skinning:
+     </para>
+       <itemizedlist>
+         <listitem><property>input</property></listitem>
+         <listitem><property>select</property></listitem>
+         <listitem><property>textarea</property></listitem>
+         <listitem><property>keygen</property></listitem>
+         <listitem><property>isindex</property></listitem>
+         <listitem><property>legend</property></listitem>
+         <listitem><property>fieldset</property></listitem>
+         <listitem><property>hr</property></listitem>
+         <listitem><property>a (together with a:hover, a:visited &quot;pseudo&quot;-elements)</property></listitem>
+
+       </itemizedlist>
+     
+
+      <para>Skinning can be initialized in two ways: </para> 
+       <itemizedlist>
+         <listitem>
+           <para>
+             adding org.richfaces.CONTROL_SKINNING parmeter to web.xml. Values: &quot;enable&quot; and &quot;disable&quot;.
+       This way implies that skinning style classes are applied to elements by element name and type attribute (where applicable). No additional steps required from an application developer. 
+       Please find below the table  that contains the list of element to which skinning a applicable.
+           </para>
+         </listitem>
+        <listitem>
+          <para>
+            adding org.richfaces.CONTROL_SKINNING_CLASSES parameter to web.xml file.  Possible values &quot;enable&quot; and &quot;disable&quot;.
+       Implementation of this method implies the provision of several style classes for different types of elements. 
+       The style classes have predefined names. Application developer should manually assign classes to controls that needs skinning or assign class to an element that contains controls. 
+          </para>
+        </listitem>
+       </itemizedlist>    
+       
+     <para>
+       By setting org.richfaces.CONTROL_SKINNING_CLASSES to &quot;enable&quot; you are provided with style classes applicable to:
+     </para>
+     
+     <itemizedlist>
+       <listitem>
+         <para>
+           Basic elements nested inside element having rich-container class, e.g.:
+         </para>
+         <para>
+           <emphasis role="bold">Example:</emphasis>
+         </para>
+         <programlisting role="CSS"><![CDATA[...
+.rich-container select {
+   //class content
+}
+...]]></programlisting>
+       </listitem>
+       <listitem>
+         <para>
+           Elements that has class name corresponding to one of the basic elements name/type mapped by the following scheme 
+           rich-&lt;elementName&gt;[-&lt;elementType&gt;]. See the example:
+         </para>
+         <para>
+           <emphasis role="bold">Example:</emphasis>
+         </para>    
+         <programlisting role="CSS"><![CDATA[...
+.rich-select {
+  //class content
+}
+
+.rich-input-text {
+  //class content
+}
+
+...]]></programlisting>    
+         
+         <note>
+           <title>Note:</title>
+           <para>
+             a elements have classes based on &quot;link&quot; and pseudo class name, e.g.: rich-link, rich-link-hover, rich-link-visited
+           </para>
+         </note>    
+       </listitem>
+     </itemizedlist>  
+ 
+ <section>
+   
+   <title>Basic level</title>
+   
+   
+   <table>
+     <title>Html Elements Skin Bindings for input, select, textarea, button, keygen, isindex, legend</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>
+      
+        <row>
+           <entry>font-size</entry>
+           <entry>generalSizeFont</entry>
+         </row>
+         <row>
+           <entry>font-family</entry>
+           <entry>generalFamilyFont</entry>
+         </row>
+         <row>
+           <entry>color</entry>
+           <entry>controlTextColor</entry>
+         </row>
+       </tbody>
+     </tgroup>
+   </table>  
+         
+         
+   <table>
+     <title>Html Elements Skin Bindings for fieldset</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>     
+
+         
+         <row>
+           <entry>border-color</entry>
+           <entry>panelBorderColor</entry>
+         </row>
+       </tbody>
+     </tgroup>
+   </table>
+   
+         
+         
+   <table>
+     <title>Html Elements Skin Bindings for hr</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>     
+         
+         <row>
+           <entry>border-color</entry>
+           <entry>panelBorderColor</entry>
+         </row>
+       </tbody>
+     </tgroup>
+   </table>
+   
+   <table>
+     <title>Html Elements Skin Bindings for a</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody> 
+    
+
+         
+         <row>
+           <entry>color</entry>
+           <entry>generalLinkColor</entry>
+         </row>
+         
+       </tbody>
+     </tgroup>
+   </table>
+   
+   <table>
+     <title>Html Elements Skin Bindings for a:hover</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>       
+      
+         <row>
+           <entry>color</entry>
+           <entry>hoverLinkColorgeneralLinkColor</entry>
+         </row>   
+       </tbody>
+     </tgroup>
+   </table>
+   
+         
+   <table>
+     <title>Html Elements Skin Bindings for a:visited</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>   
+         
+         <row>
+           <entry>color</entry>
+           <entry>visitedLinkColor</entry>
+         </row>           
+       </tbody>
+     </tgroup>
+   </table>
+   
+   
+   
+   
+   <table>
+     <title>Rich Elements Skin Bindings  for .rich-input, .rich-select, .rich-textarea, .rich-button, .rich-keygen, .rich-isindex, .rich-legend, .rich-link</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>
+
+         <row>
+           <entry>font-size</entry>
+           <entry>generalSizeFont</entry>
+         </row>
+         <row>
+           <entry>font-family</entry>
+           <entry>generalFamilyFont</entry>
+         </row>
+         <row>
+           <entry>color</entry>
+           <entry>controlTextColor</entry>
+         </row>
+       </tbody>
+     </tgroup>
+   </table>
+   
+         
+         
+         
+   <table>
+     <title>Rich Elements Skin Bindings  for .rich-fieldset</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>    
+         <row>
+           <entry>border-color</entry>
+           <entry>panelBorderColor</entry>
+         </row>
+       </tbody>
+     </tgroup>
+   </table>
+   
+   
+   <table>
+     <title>Rich Elements Skin Bindings  for .rich-hr</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>          
+
+         <row>
+           <entry>border-color</entry>
+           <entry>panelBorderColor</entry>
+         </row>
+       </tbody>
+     </tgroup>
+   </table>
+   
+   
+   <table>
+     <title>Rich Elements Skin Bindings  for .rich-link</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>    
+   
+         <row>
+           <entry>color</entry>
+           <entry>generalLinkColor</entry>
+         </row>
+       </tbody>
+     </tgroup>
+   </table>
+   
+   
+   
+   
+   <table>
+     <title>Rich Elements Skin Bindings  for .rich-link:hover</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>   
+         
+         <row>
+           <entry>color</entry>
+           <entry>hoverLinkColor</entry>
+         </row>
+         
+       </tbody>
+     </tgroup>
+   </table>     
+   
+   
+   
+   <table>
+     <title>Rich Elements Skin Bindings  for .rich-link:visited</title>
+     <tgroup cols="2">
+       <thead>
+         <row>
+           <entry>CSS Properties</entry>
+           <entry>Skin parameters</entry>
+         </row>
+       </thead>
+       <tbody>   
+
+         
+         <row>
+           <entry>color</entry>
+           <entry>visitedLinkColor</entry>
+         </row>
+         
+       </tbody>
+     </tgroup>
+   </table>   
+   
+   
+   
+   
+ </section>
+      
+      
+      <section>
+        
+        <title>Advanced level </title>  
+        
+
+    
+    <table>
+
+      <title>Html Elements Skin Bindings for input, select, textarea, button, keygen, isindex</title>
+      <tgroup cols="2">
+        <thead>
+          <row>
+            <entry>CSS properties</entry>
+            <entry>Skin parameters</entry>
+          </row>
+        </thead>
+        <tbody>
+             <row>
+            <entry>border-width</entry>
+            <entry>1px</entry>
+          </row>
+          <row>
+            <entry>border-color</entry>
+            <entry>panelBorderColor</entry>
+          </row>
+          <row>
+            <entry>color</entry>
+            <entry>controlTextColor</entry>
+          </row>
+          
+          
+          
+          
+        </tbody>
+      </tgroup>
+    </table> 
+          
+          
+        <table> 
+        <title>Html Elements Skin Bindings for *|button</title>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>CSS properties</entry>
+              <entry>Skin parameters</entry>
+            </row>
+          </thead>
+          <tbody>
+            
+            
+          <row>
+            <entry>border-color</entry>
+            <entry>panelBorderColor</entry>
+          </row>
+          
+          <row>
+            <entry>font-size</entry>
+            <entry>generalSizeFont</entry>
+          </row>
+          
+          <row>
+            <entry>font-family</entry>
+            <entry>generalFamilyFont</entry>
+          </row>
+          
+          <row>
+            <entry>color</entry>
+            <entry>headerTextColor</entry>
+          </row>
+          
+          <row>
+            <entry>background-color</entry>
+            <entry>headerBackgroundColor</entry>
+          </row>
+          
+          <row>
+            <entry>background-image</entry>
+            <entry>org.richfaces.renderkit.html.images.ButtonBackgroundImage</entry>
+          </row>
+        
+        
+        </tbody>
+        </tgroup>
+        </table> 
+          
+          
+          
+        <table>
+        <title>Html Elements Skin Bindings for button[type=button], button[type=reset], button[type=submit], input[type=reset], input[type=submit], input[type=button]</title>
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry>CSS properties</entry>
+              <entry>Skin parameters</entry>
+            </row>
+          </thead>
+          <tbody>
+          
+          <row>
+            <entry>border-color</entry>
+            <entry>panelBorderColor</entry>
+          </row>
+          
+          <row>
+            <entry>font-size</entry>
+            <entry>generalSizeFont</entry>
+          </row>    
+          
+          
+          
+          <row>
+            <entry>font-family</entry>
+            <entry>generalFamilyFont</entry>
+          </row>
+          
+          <row>
+            <entry>color</entry>
+            <entry>headerTextColor</entry>
+          </row> 
+          
+          
+          <row>
+            <entry>background-color</entry>
+            <entry>headerBackgroundColor</entry>
+          </row>
+          
+          <row>
+            <entry>background-image</entry>
+            <entry>org.richfaces.renderkit.html.images.ButtonBackgroundImage</entry>
+          </row> 
+          </tbody>
+          </tgroup>
+          </table> 
+          
+     
+     
+        <table>
+          <title>Html Elements Skin Bindings for *|textarea</title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>CSS properties</entry>
+                <entry>Skin parameters</entry>
+              </row>
+            </thead>
+            <tbody>
+
+          <row>
+            <entry>border-color</entry>
+            <entry>panelBorderColor</entry>
+          </row> 
+          
+          <row>
+            <entry>font-size</entry>
+            <entry>generalSizeFont</entry>
+          </row>
+          
+          <row>
+            <entry>font-family</entry>
+            <entry>generalFamilyFont</entry>
+          </row> 
+          
+          
+          
+          <row>
+            <entry>color</entry>
+            <entry>controlTextColor</entry>
+          </row>
+          
+          <row>
+            <entry>background-color</entry>
+            <entry>controlBackgroundColor</entry>
+          </row> 
+          
+          
+          
+          <row>
+            <entry>background-image</entry>
+            <entry>org.richfaces.renderkit.html.images.InputBackgroundImage</entry>
+          </row>
+          </tbody>
+          </tgroup>
+          </table> 
+          
+          
+         
+         
+        <table>
+          <title>Html Elements Skin Bindings for textarea[type=textarea], input[type=text], input[type=password], select</title>
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry>CSS properties</entry>
+                <entry>Skin parameters</entry>
+              </row>
+            </thead>
+            <tbody>       
+          <row>
+            <entry>border-color</entry>
+            <entry>panelBorderColor</entry>
+          </row>
+          
+          <row>
+            <entry>font-size</entry>
+            <entry>generalSizeFont</entry>
+          </row> 
+          
+          
+          
+          
+          <row>
+            <entry>font-family</entry>
+            <entry>generalFamilyFont</entry>
+          </row>
+          
+          <row>
+            <entry>color</entry>
+            <entry>controlTextColor</entry>
+          </row> 
+          
+          
+          
+          
+          <row>
+            <entry>background-color</entry>
+            <entry>controlBackgroundColor</entry>
+          </row>
+          
+          <row>
+            <entry>background-image</entry>
+            <entry>org.richfaces.renderkit.html.images.InputBackgroundImage</entry>
+          </row> 
+          
+        </tbody>
+      </tgroup>
+    </table>
+    
+    
+ </section>   
+ 
+</section>
+    
 
   </section>
 
