@@ -259,13 +259,13 @@ HtmlColumn myColumn = new HtmlColumn();
         </f:facet>
         <rich:column sortBy="#{cap.state}" sortOrder="ASCENDING">
             <f:facet name="header">
-                <h:outputText value="State Name"></h:outputText>
+                <h:outputText value="State Name"/>
             </f:facet>
-            <h:outputText value="#{cap.state}"></h:outputText>
+            <h:outputText value="#{cap.state}"/>
         </rich:column> 
         <rich:column sortBy="#{cap.name}" sortOrder="DESCENDING">
             <f:facet name="header">
-                <h:outputText value="State Capital"></h:outputText>
+                <h:outputText value="State Capital"/>
             </f:facet>
             <h:outputText value="#{cap.name}"/> 
         </rich:column>
@@ -307,11 +307,11 @@ HtmlColumn myColumn = new HtmlColumn();
         </f:facet>
         <rich:column sortBy="#{cap.state}">
             <f:facet name="header">
-                <h:outputText value="State Name"></h:outputText>
+                <h:outputText value="State Name"/>
             </f:facet>
-            <h:outputText value="#{cap.state}"></h:outputText>
+            <h:outputText value="#{cap.state}"/>
         </rich:column> 
-        <rich:column sortBy="#{cap.name}" >
+        <rich:column sortBy="#{cap.name}">
             <f:facet name="header">
                 <h:outputText value="State Capital"></h:outputText>
             </f:facet>
@@ -367,21 +367,21 @@ HtmlColumn myColumn = new HtmlColumn();
 	    selection="#{dataTableScrollerBean.selection}">
         <rich:column id="make" sortable="true">
                 <f:facet name="header">
-                        <h:outputText styleClass="headerText" value="Make" />
+                        <h:outputText styleClass="headerText" value="Make"/>
                 </f:facet>
-                <h:outputText value="#{category.make}" />
+                <h:outputText value="#{category.make}"/>
         </rich:column>
         <rich:column id="model">
                 <f:facet name="header">
-                        <h:outputText styleClass="headerText" value="Model" />
+                        <h:outputText styleClass="headerText" value="Model"/>
                 </f:facet>
-                <h:outputText value="#{category.model}" />
+                <h:outputText value="#{category.model}"/>
         </rich:column>
         <rich:column id="price">
                 <f:facet name="header">
-                        <h:outputText styleClass="headerText" value="Price" />
+                        <h:outputText styleClass="headerText" value="Price"/>
                 </f:facet>
-                <h:outputText value="#{category.price}" />
+                <h:outputText value="#{category.price}"/>
         </rich:column>
 </rich:scrollableDataTable>
 ...]]></programlisting>
@@ -413,82 +413,104 @@ HtmlColumn myColumn = new HtmlColumn();
         
         <section>
             <title>Filtering</title>
-            <para>In order to filter the column value, in accordance with the entered value, it is necessary to use a <emphasis><property>&quot;filterBy&quot;</property></emphasis> attribute.</para>
-            <para>If <emphasis><property>&quot;filterValue&quot;</property></emphasis> attribute isn&apos;t empty from the beginning – table should be filtered on first rendering.</para>
-            <para>Below you can see example code and the result of its use:</para>
+            
             <para>
-                <emphasis role="bold">Example:</emphasis>
+                There are two ways to filter the column value: 
             </para>
-            <programlisting role="XML"><![CDATA[...
-<h:form>
-    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" width="500px">
-        <f:facet name="header">
-            <h:outputText value="Filtering Example"/>
-        </f:facet>
-        <rich:column> 
-	<f:facet name="header">
-	    <h:graphicImage value="/images/ico_DataTable.gif"></h:graphicImage>
-	</f:facet>
-	<h:graphicImage value="#{cap.stateFlag}"/>
-        </rich:column>
-        <rich:column filterBy="#{cap.state}" filterDefaultLabel="click to filter" filterValue="#{filterName.filterBean}">
-	<h:outputText value="#{cap.state}"></h:outputText>
-        </rich:column> 
-        <rich:column filterBy="#{cap.name}" filterDefaultLabel="click to filter">
-	<h:outputText value="#{cap.name}"/> 
-        </rich:column>
-    </rich:dataTable>
-</h:form>
-...]]></programlisting>     
-            <figure>
-                <title>Filtering using the example of the <emphasis><property>&quot;filterBy&quot;</property></emphasis> attribute</title>
-                <mediaobject> 
-                    <imageobject>
-                        <imagedata fileref="images/columnFilt1.png"/>
-                    </imageobject>
-                </mediaobject>
-            </figure>  
-            <para><emphasis><property>&quot;filterExpression&quot;</property></emphasis> attribute is used to check if the row should be present in result. Any expression could be used inside and should return boolean value. </para>
-            <para>Below you can find example code:</para>
-            <para>
-                <emphasis role="bold">Example:</emphasis>
-            </para>
-            <programlisting role="XML"><![CDATA[...
-<h:form id="form">
-    <h:inputText value="#{capitalsBean.filter}">
-        <a4j:support event="onblur" reRender="dataTable" />
-    </h:inputText>
-    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" width="500px">
-        <f:facet name="header">
-            <h:outputText value="Filtering Example" />
-        </f:facet>
-        <rich:column>
-            <f:facet name="header">
-                <h:graphicImage value="/images/ico_DataTable.gif"/>
-            </f:facet>
-            <h:graphicImage value="#{cap.stateFlag}" />
-        </rich:column>
-        <rich:column filterBy="#{cap.state}" filterDefaultLabel="click to filter" filterExpression="#{form:startWith(cap.name,cap.state)}">
-            <h:outputText value="#{cap.state}"></h:outputText>
-        </rich:column>
-        <rich:column filterBy="#{cap.name}" filterDefaultLabel="click to filter">
-            <h:outputText value="#{cap.name}" />
-        </rich:column>
-    </rich:dataTable>
-</h:form>
-...]]></programlisting>
-<!--           <para><emphasis><property>&quot;filterFunction&quot;</property></emphasis> attribute has three values:</para>
             <itemizedlist>
-                <listitem><emphasis><property>&quot;startWith&quot;</property></emphasis>(by default)</listitem>
-                <listitem><emphasis><property>&quot;contains&quot;</property></emphasis></listitem>
-                <listitem><emphasis><property>&quot;equals&quot;</property></emphasis></listitem>                
+                <listitem>
+                    <para>
+                        Using built-in filtering. It uses <property>startsWith()</property> function to make filtering. 
+                        In this case you need to define <emphasis><property>&quot;filterBy&quot;</property></emphasis> attribute 
+                        at column you want to be filterable. This attribute defines iterable object property which is used when filtering performed.
+                    </para>
+                    <para>
+                        The <emphasis><property>&quot;filterValue&quot;</property></emphasis> attribute is used to get or change current filtering value. 
+                        It could be defined with initial filtering value on the page or as value binding to get/change it on server.
+                        If the <emphasis><property>&quot;filterValue&quot;</property></emphasis> attribute isn&apos;t empty from the beginning table is filtered on the first rendering.
+                    </para>
+                    <para>
+                        In order to change filter event you could use <emphasis><property>&quot;filterEvent&quot;</property></emphasis> attribute 
+                        on column (e.g. filterEvent = &quot;onblur&quot;).
+                    </para>
+                    <!--para>
+                        The <emphasis><property>&quot;filterDefaultLabel&quot;</property></emphasis> attribute defines the label that appears instead of input field. 
+                    </para-->
+                    <para>Below you can see the example:</para>
+                    <para>
+                        <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" width="500px">
+        <rich:column> 
+                <f:facet name="header">
+                        <h:graphicImage value="/images/ico_DataTable.gif"/>
+                </f:facet>
+                <h:graphicImage value="#{cap.stateFlag}"/>
+        </rich:column>
+        <rich:column filterBy="#{cap.state}" filterValue="#{filterName.filterBean}" filterEvent="onkeyup">
+                <h:outputText value="#{cap.state}"/>
+        </rich:column> 
+        <rich:column filterBy="#{cap.name}" filterEvent="onkeyup">
+                <h:outputText value="#{cap.name}"/> 
+        </rich:column>
+</rich:dataTable>
+...]]></programlisting>     
+                    <para>
+                        This is the result:
+                    </para>
+                    <figure>
+                        <title>Built-in filtering feature usage</title>
+                        <mediaobject> 
+                            <imageobject>
+                                <imagedata fileref="images/columnFilt1.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure>  
+                </listitem>
+                <listitem>
+                    <para>
+                        Using external filtering. In this case you need to write your custom filtering function and define controls.
+                    </para>
+                    <para>
+                        The <emphasis><property>&quot;filterExpression&quot;</property></emphasis> attribute is used to define expression evaluated to boolean value. 
+                        This expression checks if the object satisfies filtering condition.
+                    </para>
+                    <para>
+                        The <emphasis><property>&quot;filterMethod&quot;</property></emphasis> attribute is defined with method binding.
+                        This method accepts on Object parameter and return boolean value. 
+                        So, this method also could be used to check if the object satisfies filtering condition. 
+                        The usage of this attribute is the best way for implementing your own complex business logic. 
+                    </para>
+                    <para>See the following example:</para>
+                    <para>
+                        <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" id="table">
+        <rich:column filterMethod="#{filteringBean.filterStates}">
+                <f:facet name="header">
+                        <h:inputText value="#{filteringBean.filterValue}" id="input">
+                                <a4j:support event="onkeyup" reRender="table"
+                                                     ignoreDupResponses="true" requestDelay="700" focus="input" />
+                        </h:inputText>
+                </f:facet>
+                <h:outputText value="#{cap.state}" />
+        </rich:column>
+        <rich:column filterExpression="#{fn:containsIgnoreCase(cap.timeZone, filteringBean.filterZone)}">
+                <f:facet name="header">
+                        <h:selectOneMenu value="#{filteringBean.filterZone}">
+                                <f:selectItems value="#{filteringBean.filterZones}" />
+                                <a4j:support event="onchange" reRender="table" />
+                        </h:selectOneMenu>
+                </f:facet>
+                <h:outputText value="#{cap.timeZone}" />
+        </rich:column>
+</rich:dataTable>
+...]]></programlisting>
+                </listitem>
             </itemizedlist>
-            <para>Example of usage you could see in the previous example.</para> -->  
-            <para><emphasis><property>&quot;filterEvent&quot;</property></emphasis> attribute is used for customization. </para>
-            <para><emphasis><property>&quot;filterMethod&quot;</property></emphasis> should be called for every object of the table. It should get current object and return boolean value. </para>
-                        
         </section>
-        
     </section>
     
  <section>
