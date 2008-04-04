@@ -364,13 +364,13 @@ HtmlCalendar myCalendar = new HtmlCalendar();
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-         <a4j:form id="form">
-                        <rich:calendar popup="true" rendered="#{!bean.check}" value="#{bean.date}" id="c"/>
-                        <!--The link which is used to call a calendar popup externally-->
-                        <a onclick="$('form:c').component.Expand()" href="#">Show</a>
-        </a4j:form>
-...
-]]></programlisting>
+         <rich:calendar value="#{calendarBean.selectedDate}" id="calendarID"
+						locale="#{calendarBean.locale}"
+						popup="#{calendarBean.popup}"
+						datePattern="#{calendarBean.pattern}"
+					 	showApplyButton="#{calendarBean.showApply}" style="width:200px"/>
+	 <h:commandButton value="Show next year" onclick="#{rich:component('calendarID')}.nextYear();"/>
+...]]></programlisting>
 
     <para>Also the discussion about this problem can be found on the <ulink
         url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4078301#4078301"
