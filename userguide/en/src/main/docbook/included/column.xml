@@ -189,8 +189,8 @@ HtmlColumn myColumn = new HtmlColumn();
         <section>
             <title>Sorting</title>
             <para>
-                In order to sort the columns you could use <emphasis><property>&quot;sortBy&quot;</property></emphasis> attribute 
-                which defines a bean property which is used for sorting of a column. See the following example.
+                In order to sort the columns you could use <emphasis><property>&quot;sortBy&quot;</property></emphasis> attribute indicates what values to be sorted column.
+                The original column is not sorted. In order to sort the column should double-click on its header. See the following example.
             </para>
             <para>
                 <emphasis role="bold">Example:</emphasis>
@@ -227,9 +227,33 @@ HtmlColumn myColumn = new HtmlColumn();
                     </imageobject>
                 </mediaobject>
             </figure>
-            
             <para>
-                In order to change sort order you could use <emphasis><property>&quot;sortOrder&quot;</property></emphasis> attribute. 
+                The <emphasis><property>&quot;selfSorted&quot;</property></emphasis> attribute 
+                that would add the possibility of automatic sorting by clicking the column header.
+                Default value is &quot;true&quot;. In the example below the second column is unavailable for sorting.
+            </para>
+            <para>
+                <emphasis role="bold">Example:</emphasis>
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap">
+        <rich:column>
+                <f:facet name="header">
+                        <h:outputText value="State Flag"/>
+                </f:facet>
+                <h:graphicImage value="#{cap.stateFlag}"/> 
+        </rich:column>
+        <rich:column sortBy="#{cap.state}" selfSorted="false"> 
+                <f:facet name="header">
+                        <h:outputText value="State Name"/>
+                </f:facet>
+                <h:outputText value="#{cap.state}"/>
+        </rich:column> 
+</rich:dataTable>
+...]]></programlisting>     
+            <para>
+               <emphasis><property>&quot;sortOrder&quot;</property></emphasis> attribute 
+               is used for changing the sorting of columns by means of external controls. 
             </para>
             <para>Possible values are:</para>
             <itemizedlist>
@@ -243,12 +267,6 @@ HtmlColumn myColumn = new HtmlColumn();
                     &quot;UNSORTED&quot; - column isn&apos;t sorted
                 </listitem>
             </itemizedlist>
-            <para>
-                If you don&apos;t use <emphasis><property>&quot;sortOrder&quot;</property></emphasis>  attribute then the first column is sorted in ascending.
-            </para>
-            <para>
-                In order to change the sort order, you could double-click on the header of column, which you want to sort.
-            </para>          
             <para>
                 <emphasis role="bold">Example:</emphasis>
             </para>
@@ -289,14 +307,14 @@ HtmlColumn myColumn = new HtmlColumn();
             <para>
                 The <emphasis><property>&quot;sortPriority&quot;</property></emphasis> attribute
                 defines a set of column <property>ids</property> in the order the columns could be set. 
-             </para>
+            </para>
             <para>
                 If the columns sort order changed externally sort priorities could be used to define which columns will be sorted first.
             </para>
             <!--para>
                 Note that  <emphasis><property>&quot;sortPriority&quot;</property></emphasis> attribute is defined in 
                 the <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> component!
-            </para-->
+                </para-->
             <para>
                 <emphasis role="bold">Example:</emphasis>
             </para>
@@ -322,38 +340,6 @@ HtmlColumn myColumn = new HtmlColumn();
 </h:form>
 ...]]></programlisting>
             <para>
-                You could manage if the header of the column is clickable, icons rendered and sorting is fired after click on the header
-                with the help of the following attributes:
-            </para>
-                <itemizedlist>
-                    <listitem>
-                        <para>
-                            The <emphasis><property>&quot;selfSorted&quot;</property></emphasis> attribute 
-                            which is defined in <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> component.
-                            Default value is &quot;true&quot;. In the example below the second column is unavailable for sorting.
-                        </para>
-                        <para>
-                            <emphasis role="bold">Example:</emphasis>
-                        </para>
-                        <programlisting role="XML"><![CDATA[...
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap">
-        <rich:column>
-                <f:facet name="header">
-                        <h:outputText value="State Flag"/>
-                </f:facet>
-                <h:graphicImage value="#{cap.stateFlag}"/> 
-        </rich:column>
-        <rich:column sortBy="#{cap.state}" selfSorted="false"> 
-                <f:facet name="header">
-                        <h:outputText value="State Name"/>
-                </f:facet>
-                <h:outputText value="#{cap.state}"/>
-        </rich:column> 
-</rich:dataTable>
-...]]></programlisting>     
-                    </listitem>
-                    <listitem>
-                        <para>
                             The <emphasis><property>&quot;sortable&quot;</property></emphasis> attribute which is used 
                             with <emphasis role="bold"><property>&lt;rich:scrollableDataTable&gt;</property></emphasis> component.
                             In the following example only the first column could be sorted.
@@ -394,18 +380,6 @@ HtmlColumn myColumn = new HtmlColumn();
                                 </imageobject>
                             </mediaobject>
                         </figure>
-                    </listitem>
-                    </itemizedlist>
-
-    <note>
-        <title>Note:</title>
-        <para>
-           The <emphasis><property>&quot;sortExpression&quot;</property></emphasis> attribute that defines
-            sorting property is deprecated! You could use the <emphasis><property>&quot;sortBy&quot;</property></emphasis> attribute
-            for the same purpose.
-        </para>
-    </note>
-
             <para>
                 Sorting could not be used together with pagination.
                 Only row that currently on the client could be sorted.
@@ -471,7 +445,7 @@ HtmlColumn myColumn = new HtmlColumn();
                 </listitem>
                 <listitem>
                     <para>
-                        Using external filtering. In this case you need to write your custom filtering function and define controls.
+                        Using external filtering. In this case you need to write your custom filtering function or expression and define controls.
                     </para>
                     <para>
                         The <emphasis><property>&quot;filterExpression&quot;</property></emphasis> attribute is used to define expression evaluated to boolean value. 
