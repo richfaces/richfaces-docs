@@ -879,9 +879,9 @@ background-color: transparent;
                                 <property>&lt;a4j:commandLink onclick="var myControl=this;"
                                         oncomplete="anotherFunction(myControl)"/&gt;</property>
                         </emphasis>). </para>
-                <important>
-                        <title>New:</title>
-                        <para> The onComplete syntax now is: </para>
+                <tip>
+                        <title>Tip:</title>
+                        <para>The onComplete syntax now is:</para>
                         <programlisting role="XML">
 	<![CDATA[<someAjaxActionComponent ...oncomplete="myFunc(req,event,data)".../>]]>
             </programlisting>
@@ -890,7 +890,7 @@ background-color: transparent;
                                 the element instead of this. and <property>data</property> is a
                                 variable that contains deserialized value from the
                                 <property>data</property> attribute. </para>
-                </important>
+                </tip>
         </section>
         <section id="InvokeOnComponentUsingWithJSF1.2">
                 <?dbhtml filename="InvokeOnComponentUsingWithJSF1.2.html"?>
@@ -2283,5 +2283,34 @@ public class TableBackingRendered implements Serializable {
                 <para>RichFaces components use Prototype very hard. In particular, some patches has been removed that are already included into 1.6.0. 
                         Adding feature with exclusion makes it possible to use Prototype with version less than 1.6.0. This will break some of the components.</para>
                
+        </section>
+        
+        <section id="fileUploadConf">
+                <?dbhtml filename="FileUploadConf.html"?>
+                <title>&lt;rich:fileUpload&gt; with Seam</title>
+                <para>
+                        The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component could work together with Seam framework.
+                </para>
+                <para>
+                        Initialization parameters should be defined for Seam Filter in <property>web.xml</property>. 
+                        They will be automatically set up for Ajax4Jsf Filer by Seam framework on start up. 
+                </para>
+               <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+<filter>
+        <filter-name>Seam Filter</filter-name>
+        <filter-class>org.jboss.seam.servlet.SeamFilter</filter-class>
+        <init-param>
+                <param-name>createTempFiles</param-name>
+                <param-value>true</param-value>
+        </init-param>
+        <init-param>
+                <param-name>maxRequestSize</param-name>
+                <param-value>200000</param-value>
+        </init-param>
+</filter>
+...]]></programlisting>       
         </section>
 </chapter>
