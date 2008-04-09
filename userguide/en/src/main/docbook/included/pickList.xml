@@ -20,27 +20,22 @@
             <tbody>
                 <row>
                     <entry>component-type</entry>
-
                     <entry>org.richfaces.PickList</entry>
                 </row>
                 <row>
                     <entry>component-class</entry>
-
                     <entry>org.richfaces.component.html.HtmlPickList</entry>
                 </row>
                 <row>
                     <entry>component-family</entry>
-
                     <entry>org.richfaces.PickList</entry>
                 </row>
                 <row>
                     <entry>renderer-type</entry>
-
                     <entry>org.richfaces.PickListRenderer</entry>
                 </row>
                  <row>
                     <entry>tag-class</entry>
-
                     <entry>org.richfaces.taglib.PickListTag</entry>
                 </row>
             </tbody>
@@ -54,9 +49,9 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:pickList value="#{pickBean.listValues}">
+<rich:pickList value="#{pickBean.targetValues}">
         <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
-        <f:selectItems value="#{pickBean.testList}"/>
+        <f:selectItems value="#{pickBean.sourceValues}"/>
 </rich:pickList>
 ...]]></programlisting>
     </section>
@@ -85,11 +80,11 @@ HtmlPickList myPickList = new HtmlPickList();
         </para>
 
         <para>
-            The <emphasis><property>&quot;value&quot;</property></emphasis> attribute is used to access the values of a target list.  
+            The <emphasis><property>&quot;value&quot;</property></emphasis> attribute is the initial value of this component.  
         </para>
         <para>
             The <emphasis role="bold"><property>&lt;f:selectItem /&gt;</property></emphasis> or <emphasis role="bold">
-                <property>&lt;f:selectItems /&gt;</property></emphasis> facets are used to access the values of a source list.
+                <property>&lt;f:selectItems /&gt;</property></emphasis> facets are used to define the values of a source list.
           </para>
         <para>
             <emphasis role="bold">Example:</emphasis>
@@ -98,7 +93,7 @@ HtmlPickList myPickList = new HtmlPickList();
 <rich:pickList value="#{pickBean.listValues}">
         <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
         <f:selectItem itemValue="Audi" itemLabel="Audi"/>
-        <f:selectItems value="#{pickBean.testList}"/>
+        <f:selectItems value="#{pickBean.sourceList}"/>
 </rich:pickList>
 ...]]></programlisting>
 
@@ -121,7 +116,7 @@ HtmlPickList myPickList = new HtmlPickList();
 removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues}">
         <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
         <f:selectItem itemValue="Audi" itemLabel="Audi"/>
-        <f:selectItems value="#{pickBean.testList}"/>
+        <f:selectItems value="#{pickBean.sourceList}"/>
 </rich:pickList>
 ...]]></programlisting>
          <para>
@@ -171,10 +166,18 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
 <rich:pickList listsHeight="#{pickBean.listsHeight}" sourceListWidth="#{pickBean.sourceListWidth}" targetListWidth="#{pickBean.targetListWidth}" value="#{pickBean.listValues}">
         <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
         <f:selectItem itemValue="Audi" itemLabel="Audi"/>
-        <f:selectItems value="#{pickBean.testList}"/>
+        <f:selectItems value="#{pickBean.sourceList}"/>
 </rich:pickList>
 ...]]></programlisting>
              
+        <para>The <emphasis role="bold"><property>&lt;rich:pickList&gt;</property></emphasis> component allows to use internationalization method 
+            to redefine and localize the labels. You could use application resource bundle and define 
+            <property>RICH_PICK_LIST_COPY_ALL_LABEL</property>,  
+            <property>RICH_PICK_LIST_COPY_LABEL</property>, 
+            <property>RICH_PICK_LIST_REMOVE_ALL_LABEL</property>, 
+            <property>RICH_PICK_LIST_REMOVE_LABEL</property> there.
+        </para>
+        
         <table>
             <title>Keyboard usage for elements selection</title>
             <tgroup cols="2">
