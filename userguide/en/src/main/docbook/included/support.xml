@@ -104,42 +104,7 @@ event calls a utility RichFaces method that submit a form creating a special mar
 					{form.reset(); return false;}" oncomplete="alert('Value succesfully stored')"/>
 </h:selectOneMenu>]]></programlisting>
     <para>In example there is the condition checking (confirm) is used before request sending and message printing after the request processing is over. </para>
-    <para>
-      <emphasis >
-        <property>&quot;process&quot;</property></emphasis> attribute defines the component to be processed together with the component which contains this attribute. 
-      In order to define processed components you could set theirs ids into the value of   <emphasis >
-        <property>&quot;process&quot;</property></emphasis> attribute. </para>
-    <para>
-      <emphasis >
-        <property>&quot;process&quot;</property></emphasis> attribute attribute has two limitations:
-      <itemizedlist>
-        <listitem>
-          <para>it works only if <emphasis >
-            <property>&quot;ajaxSingle&quot;</property></emphasis> equals to "true"  for given command component</para>
-        </listitem>
-        <listitem>
-          <para>you do not have to point this attribute to one of the own parent components to avoid processing of command component twice.</para>
-        </listitem>
-      </itemizedlist>
-    </para>
-    <para><emphasis role="bold">Example:</emphasis></para>
-    <programlisting role="XML"><![CDATA[...
-<h:form>
-    <h:inputText id="oneA" value="#{bean.width}"/>
-        <br/>
-    <h:inputText id="oneB" value="#{bean.text}"/>
-        <br/>
-    <a4j:commandButton value="Submit2" process="oneB" ajaxSingle="true" reRender=":three1, :three2"/>
-</h:form>
-        <h:outputText id="three1" value="#{bean.width}"/>
-            <br/>
-        <h:outputText id="three2" value="#{bean.text}"/>
-...]]></programlisting>
-    <para>
-      In the example above only <emphasis role="bold"><property>&lt;h:inputText&gt;</property></emphasis> with "oneB" id process. 
-      After you click on the button- the value of this component appears into the <emphasis role="bold"><property>&lt;h:outputText&gt;</property></emphasis> with "three2" id.
-    </para>
-    <para>The components allows different Ajax request managing ways for its various optimization in particular conditions such as: 
+      <para>The components allows different Ajax request managing ways for its various optimization in particular conditions such as: 
 <itemizedlist>
         <listitem>
           <emphasis role="bold">Limitation of the submit area and updating area for the request.</emphasis>
@@ -194,6 +159,9 @@ Moreover, if the next request is already sent, the rerendering after the previou
  it helps to avoid unnecessary processing on the client.</para>
         </listitem>
 	</itemizedlist>
+    <para>
+      Information about the <emphasis><property>&quot;process&quot;</property></emphasis> attribute usage you can find <link linkend="process">here</link>.
+    </para>
   </section>
   
     <section>

@@ -709,6 +709,8 @@
             <property>&quot;ignoreDupResponses&quot;</property>
           </emphasis> is used to abort unfinished request on new event. </listitem>
       </itemizedlist-->
+   
+   
     </section>
 
 
@@ -764,6 +766,44 @@
             Component to the output panel ID. </listitem>
         </itemizedlist>
       </para>
+      <section id="process">
+        <title>Decide what to process</title>
+        <para>
+          In order to process defined components you could use the <emphasis><property>&quot;process&quot;</property></emphasis>
+          attribute. </para>
+        <para>
+          The <emphasis><property>&quot;process&quot;</property></emphasis> attribute defines the ids of  the components to be processed 
+          together with the component which contains this attribute. In order to define processed components you could set theirs ids into the value of the
+          <emphasis><property>&quot;process&quot;</property></emphasis> attribute.
+        </para>
+        <para>The <emphasis><property>&quot;process&quot;</property></emphasis> attribute has two limitations:</para>
+        <itemizedlist>
+          <listitem>
+            it works only if <emphasis><property>&quot;ajaxSingle&quot;</property></emphasis> equals to "true" for given command component
+          </listitem>
+          <listitem>
+            you do not have to point this attribute to one of the own parent components to avoid processing of command component twice
+          </listitem>
+        </itemizedlist>
+        <para><emphasis role="bold">Example:</emphasis></para>
+        <programlisting role="XML"><![CDATA[...
+<h:form>
+    <h:inputText id="oneA" value="#{bean.width}"/>
+        <br/>
+    <h:inputText id="oneB" value="#{bean.text}"/>
+        <br/>
+    <a4j:commandButton value="Submit2" process="oneB" ajaxSingle="true" reRender=":three1, :three2"/>
+</h:form>
+<h:outputText id="three1" value="#{bean.width}"/>
+    <br/>
+<h:outputText id="three2" value="#{bean.text}"/>
+...]]></programlisting>
+        <para>
+          In the example above after you click on the <emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis> 
+          <property>only</property> <emphasis role="bold"><property>&lt;h:inputText&gt;</property></emphasis> with "oneB" id is processed and entered data appears into the <emphasis role="bold"><property>&lt;h:outputText&gt;</property></emphasis> with "three2" id.
+          If you doesn't use this attribute <property>both</property> <emphasis role="bold"><property>&lt;h:inputText&gt;</property></emphasis> is processed and entered data appears into the <property>both</property> <emphasis role="bold"><property>&lt;h:outputText&gt;</property></emphasis>.
+        </para>
+      </section>
     </section>
   </section>
 
