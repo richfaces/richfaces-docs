@@ -1,0 +1,103 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<artifactId>docs</artifactId>
+		<groupId>org.richfaces</groupId>
+		<version>3.2.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.richfaces.docs</groupId>
+	<artifactId>migration</artifactId>
+	<packaging>pom</packaging>
+	<version>3.2.1-SNAPSHOT</version>
+	<name>Migration Guide</name>
+	<description>RichFaces Migration Guide from 3.1.* to 3.2.0 version</description>
+	<pluginRepositories>
+		<pluginRepository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+			<id>repository.jboss.com</id>
+			<name>Jboss Repository for Maven</name>
+			<url>http://repository.jboss.com/maven2/</url>
+			<layout>default</layout>
+		</pluginRepository>
+	</pluginRepositories>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.jboss.maven.plugins</groupId>
+					<artifactId>maven-jdocbook-plugin</artifactId>
+					<version>2.0.0</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.richfaces.docs.xslt</groupId>
+							<artifactId>${translation}</artifactId>
+							<version>${project.version}</version>
+							<type>jar</type>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<sourceDirectory> ${basedir}/src/main/docbook </sourceDirectory>
+						<imageResource>
+							<directory> ${basedir}/src/main/resources </directory>
+						</imageResource>
+						<cssResource>
+							<directory> ${basedir}/src/main/resources </directory>
+						</cssResource>
+						<sourceDocumentName>master.xml</sourceDocumentName>
+						<formats>
+							<format>
+								<formatName>pdf</formatName>
+								<stylesheetResource>/xslt/fopdf.xsl</stylesheetResource>
+								<finalName>RF_migration_guide.pdf</finalName>
+								<imagePathSettingRequired>true</imagePathSettingRequired>
+							</format>
+							<format>
+								<formatName>html</formatName>
+								<stylesheetResource>
+									/xslt/html_chunk.xsl
+								</stylesheetResource>
+								<finalName>index.html</finalName>
+								<imageCopyingRequired>
+									true
+								</imageCopyingRequired>
+								<imagePathSettingRequired>
+									false
+								</imagePathSettingRequired>
+							</format>
+							<format>
+								<formatName>html_single</formatName>
+								<stylesheetResource>/xslt/html.xsl</stylesheetResource>
+								<imageCopyingRequired>true</imageCopyingRequired>
+								<imagePathSettingRequired>false</imagePathSettingRequired>
+								<finalName>RF_migration_guide.html </finalName>
+							</format>
+						</formats>
+						<xincludeSupported>true</xincludeSupported>
+						<options>
+							<xincludeSupported>true</xincludeSupported>
+							<useRelativeImageUris> true </useRelativeImageUris>
+							<xmlTransformerType> saxon </xmlTransformerType>
+							<docbookVersion>1.72.0</docbookVersion>
+						</options>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<properties>
+		<masterTranslation>en</masterTranslation>
+	</properties>
+
+	<modules>
+		<module>en</module>
+	</modules>
+
+</project>
