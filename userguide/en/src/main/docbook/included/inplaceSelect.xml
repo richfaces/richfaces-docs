@@ -139,7 +139,7 @@ private String value = "";
             <title>Changed state</title>  
             <mediaobject>
               <imageobject>
-              <imagedata fileref="images/inplaceSelectCh1.png"/>
+		<imagedata fileref="images/inplaceSelectCh1.png"/>
               </imageobject>
             </mediaobject>     
           </figure>  
@@ -224,6 +224,22 @@ private String value = "";
         The <emphasis><property>&quot;selectOnEdit&quot;</property></emphasis> (with possible values &quot;true&quot;, &quot;false&quot;) gives you an 
         option to make the text in the input field selected right after the change from <property>view</property> state to <property>edit</property> occurs. 
       </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:inplaceSelect value="#{bean.inputValue}" selectOnEdit="true">
+    <f:selectItems  value="#{bean.selectItems}"/>
+</rich:inplaceSelect>
+...]]></programlisting>  
+      <para>
+        This is the result:
+      </para>
+      <figure>
+        <title>The <emphasis><property>&quot;selectOnEdit&quot;</property></emphasis> attribute usage</title>  
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/inplaceSelectSoE.png"/>
+          </imageobject>
+        </mediaobject>     
+      </figure>  
       <para>
         Another useful attribute is <emphasis><property>&quot;openOnEdit&quot;</property></emphasis>. 
         With &quot;true&quot; value it defines that the drop-down list with items opens automatically after <property>edit</property> state is activated.
@@ -241,7 +257,17 @@ private String value = "";
     <f:selectItems  value="#{bean.selectItems}"/>
 </rich:inplaceSelect>
 ...]]></programlisting>  
-        
+      <para>
+        This is the result:
+      </para>
+      <figure>
+        <title>The <emphasis><property>&quot;showControls&quot;</property></emphasis> attribute usage</title>  
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/inplaceSelectSC.png"/>
+          </imageobject>
+        </mediaobject>     
+      </figure>     
         
       <para>
         You can also position the controls relatively to the input field, by means of 
@@ -264,11 +290,21 @@ private String value = "";
         <emphasis role="bold">Example:</emphasis>
       </para>      
       <programlisting role="XML"><![CDATA[...
-<rich:inplaceSelect value="#{bean.inputValue}" controlsHorizontalPosition="left" controlsVerticalPosition="bottom" showControls="true">
+<rich:inplaceSelect value="#{bean.inputValue}" controlsHorizontalPosition="left" controlsVerticalPosition="center" showControls="true">
     <f:selectItems  value="#{bean.selectItems}"/>
 </rich:inplaceSelect>
 ...]]> </programlisting>  
-      
+      <para>
+        This is the result:
+      </para>
+      <figure>
+        <title>Controls positioning</title>  
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/inplaceSelectCentLeft.png"/>
+          </imageobject>
+        </mediaobject>     
+      </figure>   
       
       <para>It is also possible to use <emphasis><property>&quot;controls&quot;</property></emphasis>  
         facet in order to replace the default controls with facets content. See the example below.
@@ -278,7 +314,7 @@ private String value = "";
             <emphasis role="bold">Example:</emphasis>
           </para>      
           <programlisting role="XML"><![CDATA[...
-<rich:inplaceSelect value="#{bean.inputValue}" showControls="true" controlsHorizontalPosition="left" controlsVerticalPosition="bottom">
+<rich:inplaceSelect value="#{bean.inputValue}" showControls="true">
     <f:facet name="controls">
         <button onclick="#{rich:component('inplaceSelect')}.save();" type="button">Save</button>
         <button onclick="#{rich:component('inplaceSelect')}.cancel();" type="button">Cancel</button> 
@@ -286,7 +322,17 @@ private String value = "";
     <f:selectItems  value="#{bean.selectItems}"/>
 </rich:inplaceSelect>
 ...]]> </programlisting>  
-
+      <para>
+        This is the result:
+      </para>
+      <figure>
+        <title><emphasis><property>&quot;controls&quot;</property></emphasis> facet usage</title>  
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/inplaceSelectFct.png"/>
+          </imageobject>
+        </mediaobject>     
+      </figure>   
      <note>
         <title>Note:</title>
         <para>
