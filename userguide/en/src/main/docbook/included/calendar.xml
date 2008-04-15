@@ -153,7 +153,27 @@ HtmlCalendar myCalendar = new HtmlCalendar();
       </emphasis> could be used for possibility of date selection canceling. See an example below:</para>
     <programlisting role="XML"><![CDATA[...
     <rich:calendar id="date" value="#{bean.dateTest}" ondateselect="if (!confirm('Are you sure to change date?')){return false;}"/>
-...]]></programlisting>
+    ...]]></programlisting>
+    <para>
+ 
+      <emphasis>
+      <property>&quot;oncurrentdataselected&quot;</property>
+      </emphasis> event is fired when the "next/previous month" or "next/previous year" button is pressed, 
+      and the value is <property>applied</property>.
+    </para>
+    <para>
+      <emphasis>
+        <property>&quot;oncurrentdataselect&quot;</property>
+      </emphasis> event is fired when the "next/previous month" or "next/previous year" button is pressed, 
+      but the value is <property>not applied</property> yet (you can change the logic of upplying the value). Also this event could be used for possibility of  "next/previous month" or "next/previous year" selection canceling. See an example below:
+    </para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+<rich:calendar id="date" value="#{bean.dateTest}" oncurrentdateselect="if (!confirm('Are you sure to change month(year)?')){return false;}"
+oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"/>
+ ...]]></programlisting>
     <para>How to use these attributes see also on the <ulink
         url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4092275#4092275"
         >RichFaces Users Forum</ulink>.</para>
