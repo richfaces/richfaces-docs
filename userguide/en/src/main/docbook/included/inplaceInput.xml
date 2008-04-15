@@ -66,7 +66,7 @@ HtmlInpaceInput myInplaceInput = new InplaceInput();
         <title>Details of Usage</title>
     
       <para>    
-          As it was mentioned earlier the 
+         The
           <emphasis role="bold"><property>&lt;rich:inplaceInput&gt;</property></emphasis>
         component was designed to facilitate displaying and inputting(editing) some data.
         </para>
@@ -105,16 +105,17 @@ HtmlInpaceInput myInplaceInput = new InplaceInput();
             <programlisting role="XML"><![CDATA[...
 <rich:inplaceInput value="#{bean.value}" defaultLabel="click to edit"/>
 ...]]> </programlisting>
-            <para>
+            
+<!--            <para>
                 The managed bean code: 
-            </para>
-            <programlisting role="JAVA"><![CDATA[...
+            </para>-->
+<!--            <programlisting role="JAVA"><![CDATA[...
 private String value = null;
-...]]> </programlisting>
+...]]> </programlisting>-->
             <para>
-              In the example above the <emphasis><property>&quot;value&quot;</property></emphasis> attribute is &quot;null&quot;; 
-              therefore &quot;click to edit&quot; value is displayed since it is placed into the 
-              <emphasis><property>&quot;defaultLabel&quot;</property></emphasis> attribute.       
+              In the example above the <emphasis><property>&quot;value&quot;</property></emphasis> attribute is not initialized
+              therefore &quot;click to edit&quot; text, that  
+              <emphasis><property>&quot;defaultLabel&quot;</property></emphasis>, contains is displayed.
             </para>
             <para>
               This is the result:
@@ -155,15 +156,15 @@ private String value = null;
         </itemizedlist>
       
       <para>
-        The <emphasis><property>&quot;editEvent&quot;</property></emphasis> attribute provides an option to assign an JavaScript action 
-        that initiates the change of the state from <property>view</property> to <property>edit</property>. 
+        The <emphasis><property>&quot;editEvent&quot;</property></emphasis> attribute provides an option to assign a JavaScript action 
+        to initiate the change of the state from <property>view</property>/<property>changed</property> to <property>edit</property>. 
         The default value is &quot;onclick&quot;. 
       </para>
       <para>
         <emphasis role="bold">Example:</emphasis>
       </para>  
       <programlisting role="XML"><![CDATA[...
-<rich:inplaceInput value="#{bean.value}" editEvent="onmouseover"/>
+<rich:inplaceInput value="#{bean.value}" editEvent="ondblclick"/> 
 ...]]> </programlisting>
       
       <!--note>
@@ -215,15 +216,32 @@ private String value = null;
       
       <para> 
         The <emphasis><property>&quot;selectOnEdit&quot;</property></emphasis> (with possible values &quot;true&quot;, &quot;false&quot;) gives you an 
-        option to make the text in the input field selected right after the change from <property>view</property> state to <property>edit</property> occurs. 
+        option to make the text (displayed by <emphasis><property>&quot;value&quot;</property></emphasis> attribute)  in the input field selected right after the change from <property>view</property>/<property>changed</property> state to <property>edit</property> occurs. 
+      
       </para>
+      
+      <para>This is the result:</para>
+     
+      <figure>
+        <title>Usage of  the <emphasis><property>&quot;selectOnEdit&quot;</property></emphasis> attribute</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/inplaceInputSelect.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      
       
       <para>
         If the <emphasis role="bold"><property>&lt;rich:inplaceInput&gt;</property></emphasis> loses focus input data is saved automatically 
-        and the component displays new value. 
+        and the component displays new value. Additionally, the data is saved when &quot;Enter&quot; is pressed. 
         Nevertheless, you can use the <emphasis><property>&quot;showControls&quot;</property></emphasis>
-        attribute, which makes &quot;Save&quot; and  &quot;Cancel&quot; buttons appear next to the input field. 
-     </para>
+        attribute, which makes &quot;Save&quot; and  &quot;Cancel&quot; buttons appear next to the input field.
+        If the controls are used, data is not saved automatically when the form loses focus: user has to confirm that he/she wants to save/discard the data explicitly. 
+       In both cases(with controls or without them) the input data can be discarded by pressing &quot;Esc&quot; key.
+      
+      </para>
       <para>
         <emphasis role="bold">Example:</emphasis>
       </para>      
