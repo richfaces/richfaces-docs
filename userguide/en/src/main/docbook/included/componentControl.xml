@@ -3,6 +3,7 @@
   <sectioninfo>
     <keywordset>
       <keyword>rich:componentControl</keyword>
+      <keyword>componentControl</keyword>
     </keywordset>
   </sectioninfo>
 
@@ -62,7 +63,7 @@
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-      <rich:componentControl attachTo="doExpandCalendarID" for="ccCalendarID" event="onclick" operation="Expand" />
+<rich:componentControl attachTo="doExpandCalendarID" for="ccCalendarID" event="onclick" operation="Expand" />
 ...]]></programlisting>
   </section>
 
@@ -74,55 +75,61 @@
     </para>
     <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlComponentControl; 	
 ...
-HtmlComponentControl myCalendar = new HtmlComponentControl();
+HtmlComponentControl myComponentControl = new HtmlComponentControl();
 ...
 ]]></programlisting>
   </section>
 
   <section>
     <title>Details of Usage</title>
-    <para>There are three ways to use the <emphasis role="bold">
+    <para>
+      In order to use the <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> with another components you need to take the following steps:
+    
+    <!--
+      There are three ways to use the <emphasis role="bold">
         <property>&lt;rich:componentControl&gt;</property>
-      </emphasis> to another component.</para>
+      </emphasis> to another component.
+      -->
+    </para>
     <itemizedlist>
-      <listitem>Defining a name of a function that is generated (definition is similar to a
+      <listitem>Define a name of a function that is generated (definition is similar to a
         definition of <emphasis role="bold">
           <property>&lt;a4j:jsFunction&gt;</property>
         </emphasis>). An &quot;event&quot; argument is passed to this function.</listitem>
     </itemizedlist>
     <para>An example is placed below:</para>
     <programlisting role="XML"><![CDATA[...
-    <rich:componentControl name="ffunction" for="comp_ID" operation="show"/>
+<rich:componentControl name="ffunction" for="comp_ID" operation="show"/>
 ...
 ]]></programlisting>
-    <para>According to this code a function with name <property>&quot;call&quot;</property>
+    <para>According to this code a function with name <property>ffunction</property>
       is generated. It is used in JavaScript code to trigger an operation on the target component
-      with defined id=<property>&quot;comp_ID&quot;</property>.</para>
+      with defined <property>id</property>=&quot;comp_ID&quot;.</para>
     <para>The generated function is shown below:</para>
     <programlisting role="JAVA"><![CDATA[function ffunction (event) {
 }
 ]]></programlisting>
     <itemizedlist>
-      <listitem>Attaching to a parent component (usage is similar to <emphasis role="bold">
+      <listitem>Attach to a parent component (usage is similar to <emphasis role="bold">
           <property>&lt;a4j:support&gt;</property>
         </emphasis> component).</listitem>
     </itemizedlist>
     <para>An example is placed below:</para>
 
     <programlisting role="XML"><![CDATA[...
-    <rich:modalPanel id="ccModalPanelID" onshow="alert(event.parameters.show)" onhide="alert(event.parameters.hide)">
-        ...
-    </rich:modalPanel>
-    <h:commandButton value="Show Modal Panel">
-        <rich:componentControl for="ccModalPanelID" event="onclick" disableDefault="true" operation="show">
-                <f:param name="show" value="componentControl work(show)"/>
-        <rich:componentControl/>
-    </h:commandButton>
+<rich:modalPanel id="ccModalPanelID" onshow="alert(event.parameters.show)" onhide="alert(event.parameters.hide)">
+    <h:outputText value="#{bean.text}"/>
+</rich:modalPanel>
+<h:commandButton value="Show Modal Panel">
+    <rich:componentControl for="ccModalPanelID" event="onclick" disableDefault="true" operation="show">
+        <f:param name="show" value="componentControl work(show)"/>
+    <rich:componentControl/>
+</h:commandButton>
 ...
 ]]></programlisting>
     <para>In the example the <emphasis>
         <property>&quot;for&quot;</property>
-      </emphasis> attribute contains value of an Id of <emphasis role="bold">
+    </emphasis> attribute contains value of an <property>id</property> of <emphasis role="bold">
         <property>&lt;rich:modalPanel&gt;</property>
       </emphasis> component. The <emphasis>
         <property>&quot;operation&quot;</property>
@@ -143,27 +150,27 @@ HtmlComponentControl myCalendar = new HtmlComponentControl();
         <property>&lt;h:commandButton&gt;</property>
       </emphasis> to avoid a problem with form submit and <property>modalPanel</property> showing.</para>
     <itemizedlist>
-      <listitem>Attaching with <emphasis>
+      <listitem>Attach with <emphasis>
           <property>&quot;attachTo&quot;</property>
         </emphasis> attribute.</listitem>
     </itemizedlist>
     <para>An example is placed below:</para>
 
     <programlisting role="XML"><![CDATA[...
-    <rich:calendar popup="#{componentControl.calendarPopup}" id="ccCalendarID" />
+<rich:calendar popup="#{componentControl.calendarPopup}" id="ccCalendarID" />
     ...
-    <f:verbatim>
-        <a href="#" id="doExpandCalendarID">Calendar (nextYear)</a>
-    </f:verbatim>
-    <rich:componentControl attachTo="doExpandCalendarID" for="ccCalendarID" event="onclick" disableDefault="true" operation="nextYear" />
+<f:verbatim>
+    <a href="#" id="doExpandCalendarID">Calendar (nextYear)</a>
+</f:verbatim>
+<rich:componentControl attachTo="doExpandCalendarID" for="ccCalendarID" event="onclick" disableDefault="true" operation="nextYear" />
 ...
 ]]></programlisting>
     <para>In the example the <emphasis>
         <property>&quot;attachTo&quot;</property>
-      </emphasis> attribute contais a value of an Id of <property>&lt;a&gt;</property> tag.
+    </emphasis> attribute contais a value of an <property>id</property> of <emphasis role="bold"><property>&lt;a&gt;</property></emphasis> element.
       The <emphasis>
         <property>&quot;for&quot;</property>
-      </emphasis> attribute contains value of an Id of <emphasis role="bold">
+      </emphasis> attribute contains value of an <property>id</property> of <emphasis role="bold">
         <property>&lt;rich:calendar&gt;</property>
       </emphasis> component. The <emphasis>
         <property>&quot;operation&quot;</property>
@@ -171,11 +178,32 @@ HtmlComponentControl myCalendar = new HtmlComponentControl();
       represents the next year on the calendar.
     </para>
     <para>
+      With the help of the <emphasis><property>&quot;attachTiming&quot;</property></emphasis> attribute you can define the page loading phase when
+      <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> is attached to source component. Possible values are: 
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          &quot;immediate&quot; - attached during execution of <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> script
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          &quot;onavailable&quot; - attached after the target component is initialized
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          &quot;onload&quot; - attached after the page is loaded
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
       <emphasis role="bold">
         <property>&lt;rich:componentControl&gt;</property>
       </emphasis> interacts with such components as:
-      <itemizedlist>
-        <listitem><emphasis role="bold">
+
+<emphasis role="bold">
           <property>&lt;rich:contextMenu&gt;</property>
         </emphasis>, <emphasis role="bold">
           <property>&lt;rich:toolTip&gt;</property>
@@ -187,9 +215,8 @@ HtmlComponentControl myCalendar = new HtmlComponentControl();
           <property>&lt;rich:orderingList&gt;</property>
         </emphasis>, <emphasis role="bold">
           <property>&lt;rich:calendar&gt;</property>
-        </emphasis></listitem>
-               
-        </itemizedlist>
+        </emphasis>
+             
     </para>
     <para>In order to use  <emphasis role="bold">
       <property>&lt;rich:componentControl&gt;</property>
@@ -202,12 +229,11 @@ HtmlComponentControl myCalendar = new HtmlComponentControl();
     <programlisting role="XML"><![CDATA[...
 <f:view>
     <h:form>
-        <br>
-        <rich:toolTip id="toolTipFor" followMouse="false" direction="top-right" mode="ajax" value="This is button" horizontalOffset="5" verticalOffset="5" layout="block">
-        </rich:toolTip>
+        <br />
+        <rich:toolTip id="toolTipFor" followMouse="false" direction="top-right" mode="ajax" value="This is button" horizontalOffset="5" verticalOffset="5" layout="block" />
     </h:form>
     <h:commandButton id="ButtonID" value="Button">
-        <cc:componentControl for="toolTipFor" attachTo="ButtonID" operation="show" event="onclick"/>
+        <rich:componentControl for="toolTipFor" attachTo="ButtonID" operation="show" event="onclick"/>
     </h:commandButton>
 </f:view>
 ...]]></programlisting>
