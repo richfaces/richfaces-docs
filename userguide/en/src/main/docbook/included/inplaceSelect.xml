@@ -95,16 +95,18 @@ HtmlInpaceSelect myInplaceSelect = new InplaceSelect();
     <f:selectItems value="#{bean.selectItems}" />
 </rich:inplaceSelect>
 ...]]> </programlisting>
-            <para>
+        <!--    <para>
               The managed bean code: 
             </para>
             <programlisting role="JAVA"><![CDATA[...
 private String value = "";
-...]]> </programlisting>
+...]]> </programlisting>-->
+            
+            
             <para>
-              In the example above the <emphasis><property>&quot;value&quot;</property></emphasis> attribute is empty string 
-              therefore &quot;click to edit&quot; value is displayed since it is placed into the 
-              <emphasis><property>&quot;defaultLabel&quot;</property></emphasis> attribute.       
+              In the example above the <emphasis><property>&quot;value&quot;</property></emphasis> attribute is not initialized
+              therefore &quot;click to edit&quot; text, that  
+              <emphasis><property>&quot;defaultLabel&quot;</property></emphasis>, contains is displayed.
             </para>
             <para>
               This is the result:
@@ -187,22 +189,22 @@ private String value = "";
       <itemizedlist>
         <listitem>
           <para>
-            <emphasis><property>&quot;oneditactivation&quot;</property></emphasis> which is fired on <property>edit</property> state activation            
+            <emphasis><property>&quot;oneditactivation&quot;</property></emphasis> fired on <property>edit</property> state activation            
           </para>
         </listitem>
         <listitem>
           <para>
-            <emphasis><property>&quot;oneditactivated&quot;</property></emphasis> which is fired when <property>edit</property> state is activated          
+            <emphasis><property>&quot;oneditactivated&quot;</property></emphasis> fired when <property>edit</property> state is activated          
           </para>
         </listitem>
         <listitem>
           <para>
-            <emphasis><property>&quot;onviewactivation&quot;</property></emphasis> which is fired on <property>view</property> state activation         
+            <emphasis><property>&quot;onviewactivation&quot;</property></emphasis> fired on <property>view</property> state activation         
           </para>
         </listitem>
         <listitem>
           <para>
-            <emphasis><property>&quot;onviewactivated&quot;</property></emphasis> which is fired after the component is changed to representation state
+            <emphasis><property>&quot;onviewactivated&quot;</property></emphasis> fired after the component is changed to representation state
           </para>
         </listitem>
       </itemizedlist>
@@ -220,7 +222,8 @@ private String value = "";
         namely when the state is being changed from <property>view</property> to <property>edit</property>, 
         a confirmation window with a message &quot;Are you sure you want to change value?&quot; comes up.
       </para>
-      <para> 
+      
+<!--      <para> 
         The <emphasis><property>&quot;selectOnEdit&quot;</property></emphasis> (with possible values &quot;true&quot;, &quot;false&quot;) gives you an 
         option to make the text in the input field selected right after the change from <property>view</property> state to <property>edit</property> occurs. 
       </para>
@@ -228,7 +231,22 @@ private String value = "";
 <rich:inplaceSelect value="#{bean.inputValue}" selectOnEdit="true">
     <f:selectItems  value="#{bean.selectItems}"/>
 </rich:inplaceSelect>
-...]]></programlisting>  
+...]]></programlisting>  -->
+      
+      
+
+      <para>
+        Another useful attribute boolean is <emphasis><property>&quot;openOnEdit&quot;</property></emphasis>, when set to &quot;true&quot; it opens
+        drop-down list with items after <property>edit</property> state is activated.
+        </para>
+
+      <programlisting role="XML"><![CDATA[...
+<rich:inplaceSelect value="#{bean.inputValue}" showControls="true" openOnEdit="true">
+    <f:selectItems  value="#{bean.selectItems}"/>
+</rich:inplaceSelect>
+...]]></programlisting> 
+
+
       <para>
         This is the result:
       </para>
@@ -240,14 +258,13 @@ private String value = "";
           </imageobject>
         </mediaobject>     
       </figure>  
-      <para>
-        Another useful attribute is <emphasis><property>&quot;openOnEdit&quot;</property></emphasis>. 
-        With &quot;true&quot; value it defines that the drop-down list with items opens automatically after <property>edit</property> state is activated.
-      </para>
+
 
       <para> 
        Nowever, if you want to confirm the data saving explicitly you can use the <emphasis><property>&quot;showControls&quot;</property></emphasis> attribute, 
        which makes &quot;Save&quot; and &quot;Cancel&quot; buttons (displayed as icons) appear next to the input field.
+       <property>Edit</property> state can be deactivated by pressing &quot;Esc&quot; key. 
+        An option in the drop-drown list can be also selected by pressing &quot;Enter&quot;. 
       </para>
       <para>
             <emphasis role="bold">Example:</emphasis>
