@@ -190,7 +190,7 @@ HtmlColumn myColumn = new HtmlColumn();
             <title>Sorting</title>
             <para>
                 In order to sort the columns you could use <emphasis><property>&quot;sortBy&quot;</property></emphasis> attribute indicates what values to be sorted column.
-                The original column is not sorted. In order to sort the column should double-click on its header. See the following example.
+                 In order to sort the column should click on its header. See the following example.
             </para>
             <para>
                 <emphasis role="bold">Example:</emphasis>
@@ -316,30 +316,6 @@ HtmlColumn myColumn = new HtmlColumn();
                 the <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> component!
                 </para-->
             <para>
-                <emphasis role="bold">Example:</emphasis>
-            </para>
-            <programlisting role="XML"><![CDATA[...
-<h:form>
-    <rich:dataTable value="#{capitalsBean.capitals}" var="cap" width="300px" sortPriority="#{bean.sortPriority}">
-        <f:facet name="header">
-            <h:outputText value="Sorting Example"/>
-        </f:facet>
-        <rich:column sortBy="#{cap.state}">
-            <f:facet name="header">
-                <h:outputText value="State Name"/>
-            </f:facet>
-            <h:outputText value="#{cap.state}"/>
-        </rich:column> 
-        <rich:column sortBy="#{cap.name}">
-            <f:facet name="header">
-                <h:outputText value="State Capital"></h:outputText>
-            </f:facet>
-            <h:outputText value="#{cap.name}"/> 
-        </rich:column>
-    </rich:dataTable>
-</h:form>
-...]]></programlisting>
-            <para>
                             The <emphasis><property>&quot;sortable&quot;</property></emphasis> attribute which is used 
                             with <emphasis role="bold"><property>&lt;rich:scrollableDataTable&gt;</property></emphasis> component.
                             In the following example only the first column could be sorted.
@@ -380,10 +356,7 @@ HtmlColumn myColumn = new HtmlColumn();
                                 </imageobject>
                             </mediaobject>
                         </figure>
-            <para>
-                Sorting could not be used together with pagination.
-                Only row that currently on the client could be sorted.
-            </para>
+            <para><emphasis><property>&quot;sortExpression&quot;</property></emphasis> attribute defines a bean property which is used for sorting of a column.</para>
         </section>
         
         <section>
@@ -406,7 +379,7 @@ HtmlColumn myColumn = new HtmlColumn();
                     </para>
                     <para>
                         In order to change filter event you could use <emphasis><property>&quot;filterEvent&quot;</property></emphasis> attribute 
-                        on column (e.g. filterEvent = &quot;onblur&quot;).
+                        on column, e.g. &quot;onblur&quot;(default value).
                     </para>
                     <!--para>
                         The <emphasis><property>&quot;filterDefaultLabel&quot;</property></emphasis> attribute defines the label that appears instead of input field. 
@@ -417,12 +390,6 @@ HtmlColumn myColumn = new HtmlColumn();
                     </para>
                     <programlisting role="XML"><![CDATA[...
 <rich:dataTable value="#{capitalsBean.capitals}" var="cap" width="500px">
-        <rich:column> 
-                <f:facet name="header">
-                        <h:graphicImage value="/images/ico_DataTable.gif"/>
-                </f:facet>
-                <h:graphicImage value="#{cap.stateFlag}"/>
-        </rich:column>
         <rich:column filterBy="#{cap.state}" filterValue="#{filterName.filterBean}" filterEvent="onkeyup">
                 <h:outputText value="#{cap.state}"/>
         </rich:column> 
