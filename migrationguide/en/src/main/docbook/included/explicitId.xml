@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="explicitId">
+    <sectioninfo>
+        <keywordset>
+            <keyword>explicit</keyword>
+            <keyword>id</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>Ajax requests in JSF 1.2</title>
+    <section>
+        <title>Description</title>
+        <para>
+            Ajax requests stop to work without any errors shown when intensive Ajax traffic is expected. No error or other diagnostic presents.
+        </para>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+        <para>
+            Do not define an <property>id</property> for Ajax command component.
+        </para>
+        <programlisting role="XML"><![CDATA[...
+ <h:form>
+    <h:panelGrid columns="2">
+        <h:inputText id="myinput" value="#{userBean.name}">
+            <a4j:support event="onkeyup" reRender="outtext" />
+        </h:inputText>
+        <h:outputText id="outtext" value="#{userBean.name}" />
+    </h:panelGrid>
+ </h:form>
+...]]></programlisting>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+            This is a specific of the dynamic id generation of the JSF 1.2 implementation. 
+            In case of simultaneous request processing, the id of the command component becomes <property>out-of-sync</property> 
+            with id of the same component on the page. After that any Ajax requests from the component with old id just do not process.
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+            You should define the <property>id</property> for the command component and parent namespace components 
+            (<emphasis role="bold"><property>&lt;h:form&gt;</property></emphasis>, 
+            <emphasis role="bold"><property>&lt;f:subview&gt;</property></emphasis>,
+            <emphasis role="bold"><property>&lt;h:dataTable&gt;</property></emphasis> and so on) explicitly.
+            As soon as this is a core JSF 1.2 functionality, the problem cannot be solved on the <property>RichFaces</property> level.
+        </para>
+    </section>
+    
+</section>
