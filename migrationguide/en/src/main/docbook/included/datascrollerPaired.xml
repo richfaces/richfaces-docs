@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="datascrollerPaired">
+    <?dbhtml filename="datascrollerPaired.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>datascroller</keyword>
+            <keyword>paired</keyword>
+            <keyword>page</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>Paired &lt;rich:datascroller&gt; components aren&apos;t work</title>
+    <section>
+        <title>Description</title>
+        <para>
+            Two <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components bound to the same table aren&apos;t synchronized.
+            Storing data component in session-scoped beans no more saves <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> state. 
+            It is a common pattern to have 2 <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components: 
+            the first in header, the second in footer. The first will not work.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://jira.jboss.com/jira/browse/RF-2970">Jira</ulink>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4141786#4141786">RichFaces Forum</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+    <para>
+        Add 2 <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components to any table.
+    </para>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+            The <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> component  is now responsible for managing data table&apos;s scroll state.
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+            The decision is to use    <emphasis><property>&quot;page&quot;</property></emphasis> attribute and bind it to the same property for all 
+            <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components.
+        </para>
+    </section>
+    
+</section>
