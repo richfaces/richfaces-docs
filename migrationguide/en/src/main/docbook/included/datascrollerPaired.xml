@@ -8,14 +8,14 @@
             <keyword>page</keyword>
         </keywordset>
     </sectioninfo>
-    <title>Paired &lt;rich:datascroller&gt; components aren&apos;t work</title>
+    <title>Paired &lt;rich:datascroller&gt; components do not work</title>
     <section>
         <title>Description</title>
         <para>
             Two <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components bound to the same table aren&apos;t synchronized.
-            Storing data component in session-scoped beans no more saves <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> state. 
+            Having two <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis>components on a page, session-scoped beans saves the data for only one  <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> component. 
             It is a common pattern to have 2 <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components: 
-            the first in header, the second in footer. The first will not work.
+            the first in the header, the second in the footer. In this case the first one will not work.
         </para>
     </section>
     <section>
@@ -36,20 +36,20 @@
     <section>
         <title>How to reproduce</title>    
     <para>
-        Add 2 <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components to any table.
+        The described above problem occurs if 2 <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components added to any table.
     </para>
     </section>
     <section>
         <title>Causes</title>
         <para>
-            The <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> component  is now responsible for managing data table&apos;s scroll state.
+            The <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> component  does not manage the scroll state of a data table.
         </para>
     </section>
     
     <section>
         <title>Workarounds</title>
         <para>
-            The decision is to use    <emphasis><property>&quot;page&quot;</property></emphasis> attribute and bind it to the same property for all 
+            The solution is to use    <emphasis><property>&quot;page&quot;</property></emphasis> attribute and bind it to the same property for all 
             <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components.
         </para>
     </section>

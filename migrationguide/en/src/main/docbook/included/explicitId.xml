@@ -11,13 +11,13 @@
     <section>
         <title>Description</title>
         <para>
-            Ajax requests stop to work without any errors shown when intensive Ajax traffic is expected. No error or other diagnostic presents.
+            Ajax requests stop to work without any errors messages displayed,  when intensive Ajax traffic is expected. No errors or other messages to detect cause of the defect are shown.
         </para>
     </section>
     <section>
         <title>How to reproduce</title>    
         <para>
-            Do not define an <property>id</property> for Ajax command component.
+            The described above problem occurs if an <property>id</property> for Ajax command component is not defined.
         </para>
         <programlisting role="XML"><![CDATA[...
  <h:form>
@@ -33,9 +33,9 @@
     <section>
         <title>Causes</title>
         <para>
-            This is a specific of the dynamic id generation of the JSF 1.2 implementation. 
-            In case of simultaneous request processing, the id of the command component becomes <property>out-of-sync</property> 
-            with id of the same component on the page. After that any Ajax requests from the component with old id just do not process.
+            The problem occurred due to specific usage of the dynamic id generation of the JSF 1.2 implementation. 
+             In case of simultaneous request processing, the id of the command component becomes <property>out-of-sync</property> 
+            with id of the same component on the page. After that any Ajax requests from the component with old id just is no  processed.
         </para>
     </section>
     
