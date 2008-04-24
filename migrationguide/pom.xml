@@ -37,10 +37,15 @@
 					<version>2.0.0</version>
 					<dependencies>
 						<dependency>
-							<groupId>org.richfaces.docs.xslt</groupId>
-							<artifactId>${translation}</artifactId>
-							<version>${project.version}</version>
-							<type>jar</type>
+							<groupId>org.jboss</groupId>
+							<artifactId>jbossorg-docbook-xslt</artifactId>
+							<version>1.1.0-SNAPSHOT</version>
+						</dependency>
+						<dependency>
+							<groupId>org.jboss</groupId>
+							<artifactId>jbossorg-jdocbook-style</artifactId>
+							<version>1.1.0-SNAPSHOT</version>
+							<type>jdocbook-style</type>
 						</dependency>
 					</dependencies>
 					<configuration>
@@ -55,14 +60,14 @@
 						<formats>
 							<format>
 								<formatName>pdf</formatName>
-								<stylesheetResource>/xslt/fopdf.xsl</stylesheetResource>
+								<stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
 								<finalName>richfaces_migration_guide.pdf</finalName>
 								<imagePathSettingRequired>true</imagePathSettingRequired>
 							</format>
 							<format>
 								<formatName>html</formatName>
 								<stylesheetResource>
-									/xslt/html_chunk.xsl
+									classpath:/xslt/org/jboss/xhtml.xsl
 								</stylesheetResource>
 								<finalName>index.html</finalName>
 								<imageCopyingRequired>
@@ -74,7 +79,7 @@
 							</format>
 							<format>
 								<formatName>html_single</formatName>
-								<stylesheetResource>/xslt/html.xsl</stylesheetResource>
+								<stylesheetResource>classpath:/xslt/org/jboss/xhtml-single.xsl</stylesheetResource>
 								<imageCopyingRequired>true</imageCopyingRequired>
 								<imagePathSettingRequired>false</imagePathSettingRequired>
 								<finalName>index.html </finalName>
