@@ -2342,4 +2342,22 @@ public class TableBackingRendered implements Serializable {
                         </listitem>
                 </itemizedlist>    
         </section>
+        <section id="viewExpiredException">
+                <?dbhtml filename="viewExpiredException.html"?>
+                <title>How to handle ViewExpiredException?</title>
+                <para>
+                        As <property>RichFaces 3.1</property> is targeted at JSF 1.1, 
+                        you won&apos;t get <property>ViewExpiredExceptions</property> generated when using it with JSF 1.2.
+                        This exception appears after session timeout.
+                </para>
+                <para>
+                        Fortunately there is an easy workaround. Add to your <property>web.xml</property>:
+                </para>
+                <programlisting role="XML"><![CDATA[...
+<context-param>
+        <param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
+        <param-value>true</param-value>
+</context-param>
+...]]></programlisting>       
+        </section>
 </chapter>
