@@ -56,6 +56,53 @@ HtmlListShuttle myListShuttle = new HtmlListShuttle();
         <para> The <emphasis>
             <property>&quot;var&quot; </property>
         </emphasis> attribute could be shared between both Lists or Arrays to define lists on the page.</para>
+        
+        <para>
+            The <emphasis><property>&quot;sourceRequired&quot;</property></emphasis> and
+            <emphasis><property>&quot;targetRequired&quot;</property></emphasis> attributes define the case when
+            source and target values are being validated. If the value of both attributes is &quot;true&quot;
+            there should be at least one item in source and target lists. Otherwise validation fails.  
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<h:form id="myForm">
+        <rich:messages>
+                <f:facet name="header">
+                        <h:outputText value="Entered Data Status:" />
+                </f:facet>
+                <f:facet name="errorMarker">
+                        <h:graphicImage value="/images/ajax/error.gif" />   
+                </f:facet>
+        </rich:messages>
+        <rich:listShuttle id="myListShuttle" sourceValue="#{toolBar.freeItems}" targetValue="#{toolBar.items}"  
+                                sourceRequired = "true" targetRequired = "true" var="items" converter="listShuttleconverter"
+                                sourceCaptionLabel="Source List" targetCaptionLabel="Target List">
+                <rich:column>
+                        <h:graphicImage value="#{items.iconURI}" />
+                </rich:column>
+                <rich:column>
+                        <h:outputText value="#{items.label}" />
+                </rich:column>
+        </rich:listShuttle>
+        <a4j:commandButton value="Submit" />
+</h:form>
+...]]></programlisting>
+        <para>
+            In the example above the source list is empty. If you submit the form validation fails and error message appears on a page. 
+        </para>
+        <para>
+            This is the result:
+        </para>
+        <figure>
+            <title>Style classes</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata fileref="images/listShuttle_validation.png" />
+            </imageobject>
+        </mediaobject>
+        </figure>
         <para>
             The <emphasis>
                 <property>&quot;converter&quot; </property>
