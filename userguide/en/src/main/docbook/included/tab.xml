@@ -97,19 +97,23 @@ HtmlTab myTab = new HtmlTab();
     </para>
     <programlisting role="XML"><![CDATA[...
     <rich:tabPanel width="20%"> 
-        <rich:tab label="Tab">
-            <h:outputText value="Active Tab content"/>
-        </rich:tab>
-        <rich:tab label="Disabled Tab" disabled="true">
-            ...
-        </rich:tab>
-        <rich:tab label="Next Enabled Tab">
-            ...
-        </rich:tab>
+        <tabs:tab  label="Canon">
+	    <h:outputText value="Canon EOS Digital Rebel XT" />
+              ...
+	  </tabs:tab>
+	  <tabs:tab  label="Nikon">
+	      <h:outputText value="Nikon D70s" />
+		     ...
+		</tabs:tab>
+		<tabs:tab label="Olympus">
+		    <h:outputText value="Olympus EVOLT E-500" />
+		        ...
+		    </tabs:tab>
+		    <tabs:tab disabled="true" name="disabled" label="Disabled"/>
     </rich:tabPanel>
 ...]]></programlisting>
 <para>With this example it&apos;s possible to generate the <property>tab panel</property>
- with the second disabled and two active <property>tabs</property> (see the picture).</para>
+ with the last disabled and three active <property>tabs</property> (see the picture).</para>
 <figure>
   <title><emphasis role="bold"><property>&lt;rich:tabPanel&gt;</property></emphasis> with disabled <emphasis role="bold"><property>&lt;rich:tab&gt;</property></emphasis></title>
 <mediaobject> 
@@ -306,7 +310,7 @@ for each particular <property>tab</property>, i.e. switching onto one <property>
       </figure>
       
       
-      <table>
+      <table id="tab_tab">
         <title>Classes names that define a tab</title>
         <tgroup cols="2">
           <thead>
@@ -356,14 +360,63 @@ for each particular <property>tab</property>, i.e. switching onto one <property>
       <para>In order to redefine styles for all <emphasis role="bold">
         <property>&lt;rich:tab&gt;</property>
       </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
-        same names and define necessary properties in them.</para>
+        same names (possible classes could be found in the tables <link linkend="tab_tab"> above</link>) and define necessary properties in them. </para>
       
-      <para>To change styles of particular <emphasis role="bold">
-        <property>&lt;rich:tab&gt;</property>
-      </emphasis> components define your own style classes in the corresponding <emphasis
-        role="bold">
-        <property>&lt;rich:tab&gt;</property>
-      </emphasis>attribute.</para>
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>
+      <programlisting role="CSS"><![CDATA[...
+.rich-tab-header{
+        font-weight: bold;
+}
+...]]></programlisting>  
+      
+      <para>This is a result:</para>
+      
+      <figure>
+        <title>Redefinition styles with predefined classes</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/tab_pc.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      
+      <para>In the example a header font weight was changed.</para>
+      
+      <para>Also it’s possible to change styles of particular <emphasis role="bold"
+        ><property>&lt;rich:tab&gt;</property></emphasis> component. In this case you should create own style classes and use them in corresponding <emphasis role="bold"
+          ><property>&lt;rich:tab&gt;</property></emphasis> <emphasis><property>styleClass</property></emphasis> attributes. An example is placed below:</para>
+      
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>
+      <programlisting role="CSS"><![CDATA[...
+.myClass{
+        border-color: #5d9ffc;
+}
+...]]></programlisting>  
+      <para>The <emphasis><property>&quot;styleClass&quot;</property></emphasis> attribute for <emphasis role="bold"
+        ><property>&lt;rich:tab&gt; </property></emphasis> is defined as it’s shown in the example below:</para>
+      
+      <para>
+        <emphasis role="bold">Example:</emphasis>
+      </para>
+      <programlisting role="CSS"><![CDATA[<rich:tab ... styleClass="myClass"/>
+]]></programlisting>    
+      
+      <para>This is a result:</para>
+      
+      <figure>
+        <title>Redefinition styles with own classes and <emphasis><property>styleClass</property></emphasis> attributes</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/tab_oc.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>  
+      
+      <para>As it could be seen on the picture above, the border color was changed.</para>
     </section>
   
 </section>
