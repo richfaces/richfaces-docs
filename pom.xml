@@ -26,37 +26,12 @@
 			<url>http://repository.jboss.com/maven2/</url>
 			<layout>default</layout>
 		</repository>
-		<repository>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-			<id>maven2-snapshots.exadel.com</id>
-			<name>Exadel Repository for Maven Snapshots</name>
-			<url>http://maven.exadel.com/</url>
-			<layout>default</layout>
-		</repository>
     <repository>
       <id>eclipse</id>
       <url>http://repo1.maven.org/eclipse/</url>
     </repository>
 	</repositories>
 	<pluginRepositories>
-		<pluginRepository>
-			<id>maven2-snapshots.exadel.com</id>
-			<name>Exadel Repository for Maven Snapshots</name>
-			<url>http://maven.exadel.com/</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</pluginRepository>
 		<pluginRepository>
 			<releases>
 				<enabled>true</enabled>
@@ -91,5 +66,20 @@
 		<module>faq</module>
 		<module>migrationguide</module>
 
-  </modules>
+	</modules>
+		<build>
+			<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.0.2</version>
+					<configuration>
+						<source>1.5</source>
+						<target>1.5</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
