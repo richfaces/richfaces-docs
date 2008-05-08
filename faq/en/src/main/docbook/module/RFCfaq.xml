@@ -1570,23 +1570,24 @@ public void dropListener(DropEvent event) {
         
         <section id="SimpleTogglePanelPanelMenuState">
                 <?dbhtml filename="SimpleTogglePanelPanelMenuState.html"?>
-                <title>How to save the state of simpleTogglePanel?</title>
+                <title>How to save the state of &lt;rich:simpleTogglePanel&gt;?</title>
                 <para>
                 In order to save the state (exapnd/collapse) of the <emphasis role="bold"><property>&lt;rich:simpleTogglePanel&gt;</property></emphasis> component 
                 you could use  <emphasis><property>&quot;opened&quot;</property></emphasis> attribute responsible for keeping a panel state 
                 and <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> binded to <property>onexpand</property> and <property>oncollapse</property> events.
                 </para>
                 <para>
-                        In the following example when you click on the toggle icon simpleTogglePanel appears and current state displays on modal panel.
+                        In the following example when you click on the toggle icon <emphasis role="bold"><property>&lt;rich:simpleTogglePanel&gt;</property></emphasis> appears and current state displays on 
+                        <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis>.
                         This state is remembered between page views.
                 </para>
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
 <programlisting role="XML"><![CDATA[...
-<rich:simpleTogglePanel id="toggleP" label="simpleTogglePanel" switchType="client" width="600px" opened="#{demo.state}">
-        <a4j:support event="onexpand" actionListener="#{demo.stateTrue}" reRender="repeater" oncomplete="Richfaces.showModalPanel('myFrom:panel')" />
-        <a4j:support event="oncollapse" actionListener="#{demo.stateFalse}" reRender="repeater" oncomplete="Richfaces.showModalPanel('myFrom:panel')" />
+<rich:simpleTogglePanel id="toggleP" label="simpleTogglePanel" switchType="client" width="600px" opened="#{bean.state}">
+        <a4j:support event="onexpand" actionListener="#{bean.stateTrue}" reRender="repeater" oncomplete="Richfaces.showModalPanel('myFrom:panel')" />
+        <a4j:support event="oncollapse" actionListener="#{bean.stateFalse}" reRender="repeater" oncomplete="Richfaces.showModalPanel('myFrom:panel')" />
         <h:panelGrid columns="2" border="0">
                 <h:graphicImage url="pics/Canon.jpg" alt="" width="100px" height="100px" />
                 <h:panelGroup>
@@ -1604,20 +1605,20 @@ public void dropListener(DropEvent event) {
                 <h:outputText value="States of simpleTogglePanel" />
         </f:facet>
         <f:facet name="controls">
-                <span style="cursor: pointer" onclick="Richfaces.hideModalPanel('myFrom:panel')">X</span>
+                <span style="cursor: pointer" onclick="Richfaces.hibeandalPanel('myFrom:panel')">X</span>
         </f:facet>
         <h:outputText value="Expanded simpleTogglePanel: " style="font-weight:bold;" />
-        <h:outputText value="#{demo.state}" id="repeater" />
+        <h:outputText value="#{bean.state}" id="repeater" />
 </rich:modalPanel>
 ...]]></programlisting>         
                 <para>
                         In order to build this application, you can create a managed bean like this one.
                 </para>
-                <para>
+                <para id="beanState">
                         <emphasis role="bold">Example:</emphasis>
                 </para>
                 <programlisting role="XML"><![CDATA[...
-public class demo {
+public class bean {
 
         private boolean  state = false;
         
@@ -1638,6 +1639,50 @@ public class demo {
         } 
 }
 ...]]></programlisting>                  
+        </section>
+        
+        <section id="PanelMenuGroupState">
+                <?dbhtml filename="PanelMenuGroupState.html"?>
+                <title>How to save the state of &lt;rich:panelMenuGroup&gt;?</title>
+                <para>
+                        With the help of the <emphasis><property>&quot;expanded&quot;</property></emphasis> attribute 
+                        and <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> binded to <property>onexpand</property> and <property>oncollapse</property> events
+                        you could keep the state (exapnd/collapse) of the <emphasis role="bold"><property>&lt;rich:panelMenuGroup&gt;</property></emphasis> component.
+                </para>
+                <para>
+                        In the following example when you click on the toggle icon the <emphasis role="bold"><property>&lt;rich:panelMenuGroup&gt;</property></emphasis>
+                        expands and current state displays on <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis>.
+                        This state is remembered between page views.
+                </para>
+                <para>
+                        <emphasis role="bold">Example:</emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[...
+<h:form id="myFrom">
+        <rich:panelMenu expandMode="ajax" iconExpandedTopGroup="chevronUp" iconCollapsedTopGroup="chevronDown">
+                <rich:panelMenuGroup label="Group 1" expanded="#{bean.state}">
+                        <a4j:support event="onexpand" actionListener="#{bean.stateTrue}" reRender="repeater" oncomplete="Richfaces.showModalPanel('myFrom:panel')" />
+                        <a4j:support event="oncollapse" actionListener="#{bean.stateFalse}" reRender="repeater" oncomplete="Richfaces.showModalPanel('myFrom:panel')" />
+                        <rich:panelMenuItem label="Item 1.1" />
+                        <rich:panelMenuItem label="Item 1.2" />
+                        <rich:panelMenuItem label="Item 1.3" />
+                </rich:panelMenuGroup>	
+        </rich:panelMenu>
+        <rich:modalPanel id="panel" width="230" height="50">
+                <f:facet name="header">
+                        <h:outputText value="States of rich:panelMenuGroup" />
+                </f:facet>
+                <f:facet name="controls">
+                        <span style="cursor: pointer" onclick="Richfaces.hideModalPanel('myFrom:panel')">X</span>
+                </f:facet>
+                <h:outputText value="Expanded rich:panelMenuGroup: " />
+                <h:outputText value="#{bean.state}" id="repeater" />
+        </rich:modalPanel>
+</h:form>
+...]]></programlisting>         
+                <para>
+                        In order to build this application, you can create a managed bean like <link linkend="beanState">this one</link>.
+                </para>
         </section>
         
         
