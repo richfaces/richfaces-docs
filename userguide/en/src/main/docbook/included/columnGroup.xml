@@ -221,14 +221,63 @@ HtmlColumnGroup myRow = new HtmlColumnGroup();
         <para>In order to redefine styles for all <emphasis role="bold">
             <property>&lt;rich:columnGroup&gt;</property>
         </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
-            same names and define necessary properties in them.</para>
+            same names (possible classes could be found in the tables <link linkend="SPR"> above</link>) and define necessary properties in them. </para>
         
-        <para>To change styles of particular <emphasis role="bold">
-            <property>&lt;rich:columnGroup&gt;</property>
-        </emphasis> components, define your own style classes in the corresponding <emphasis
-            role="bold">
-            <property>&lt;rich:columnGroup&gt;</property>
-        </emphasis>attributes.</para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="CSS"><![CDATA[...
+.rich-table-cell{
+        color:  #316ac5;
+}	
+...]]></programlisting>  
+        
+        <para>This is a result:</para>
+        
+        <figure>
+            <title>Redefinition styles with predefined classes</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/columnGroup_pc.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>
+        
+        <para>In the example cells color was changed.</para>
+        
+        <para>Also it’s possible to change styles of particular <emphasis role="bold"
+            ><property>&lt;rich:columnGroup&gt;</property></emphasis> component. In this case you should create own style classes and use them in corresponding <emphasis role="bold"
+                ><property>&lt;rich:columnGroup&gt;</property></emphasis> <emphasis><property>styleClass</property></emphasis> attributes. An example is placed below:</para>
+        
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="CSS"><![CDATA[...
+.myClass{
+        background-color: #c0c0c0; 
+}
+...]]></programlisting>  
+        <para>The <emphasis><property>&quot;columnClasses&quot;</property></emphasis> attribute for <emphasis role="bold"
+            ><property>&lt;rich:columnGroup&gt; </property></emphasis> is defined as it’s shown in the example below:</para>
+        
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="CSS"><![CDATA[<rich:columnGroup  columnClasses="myClass">
+]]></programlisting>    
+        
+        <para>This is a result:</para>
+        
+        <figure>
+            <title>Redefinition styles with own classes and <emphasis><property>styleClass</property></emphasis> attributes</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/columnGroup_oc.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>  
+        
+        <para>As it could be seen on the picture above, the background color for columns was changed.</para>
     </section>
     
     <section>
