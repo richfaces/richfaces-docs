@@ -1607,7 +1607,7 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
     <section id="StControlsSkinning">
       <title>Standard controls skinning</title>
       <para>The feature is designed to unify the look and feel of standard HTML element and RichFaces components. 
-        Skinning can be applied to all controls on a page basing on element&apos; 
+        Skinning can be applied to all controls on a page basing on elements&apos; 
         name and attribute type (where applicable). Also this feature
         provides a set of CSS styles so that skinning can be applied 
         assigning rich-* classes to particular elements or to container of elements that nests controls.
@@ -2251,10 +2251,196 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
     
  </section>   
  
-</section>
+    </section>
+    <section id="XCSSfile format">
+    <title>XCSS file format</title>
+      
+      <para>XCSS files are the core of Richfaces components skinnability. </para>
+      <para>XCSS is an XML formatted CSS that adds extra functionality to the skinning process</para>
+      
+      
+      <para>XCSS extends  skinning possibilities by parsing the XCSS file that contains all look-and-feel parameters of 
+        a particular component into a standard CSS file that a web browser can recognize. </para>
+      
+      
+      
+      
+      <para>XCSS file contains CSS properties and skin parameters
+      mappings. Mapping of a CSS selector to a skin parameter 
+      is performed using &lt; u:selector &gt; and &lt; u:style&gt; XML tags 
+      that form the mapping structure. Please study the example below.
+      </para>
+      <programlisting role="XML"><![CDATA[...
+	<u:selector name=".rich-component-name">
+		<u:style name="background-color" skin="additionalBackgroundColor" />
+		<u:style name="border-color" skin="tableBorderColor" />
+		<u:style name="border-width" skin="tableBorderWidth" />
+		<u:style name="border-style" value="solid" />
+	</u:selector>
+...
+]]></programlisting>
+     
+     During processing the code in the shown example will be parsed into a standard CSS format.
+      <programlisting role="CSS"><![CDATA[...
+.rich-component-name {
+background-color: additionalBackgroundColor; /*the value of the constant defined by your skin*/
+border-color: tableBorderColor; /*the value of the constant defined by your skin*/
+border-width: tableBorderWidth /*the value of the constant defined by your skin*/
+border-style: solid;
+}
+...
+]]></programlisting>
+     
+      <para>
+        The <property>name</property> attribute of &lt;u:selector&gt; tag defines the CSS selector, while <property>name</property> attribute  of
+        the  &lt; u:style&gt; tag defines what skin constant is mapped to a CSS property.
+        The <property>value</property> attribute of  the  &lt; u:style&gt; tag can also be used to assign a value to a CSS property. 
+      </para>
+      
+      
+      <para>CSS selectors with identical skinning properties can be set as a comma separated list.   </para>
+        <programlisting role="XML"><![CDATA[...
+<u:selector name=".rich-ordering-control-disabled, .rich-ordering-control-top, .rich-ordering-control-bottom, .rich-ordering-control-up, .rich-ordering-control-down">
+		<u:style name="border-color" skin="tableBorderColor" />
+</u:selector>
+...
+]]></programlisting>  
+        
+        
     
+      
+      
+    </section>
+    
+    <section id="StPluggableSkinnability">
+      <title>Plug-n-Skin</title>
+    
+      <para>Plug-n-Skin feature is designed to extend and override the base skin you use,
+      it allows to redefine the look of a set of components by taking the base skin as basis and plugging-in custom styles. 
+      
+    </para>
+    
+    
+<para>Basically, implementation of this feature is performed the same way as you create your own custom skin. 
+  For more information, please,  read <link linkend="CreatingAndUsingYourOwnSkinFile"> &quot;Creating and Using Your Own Skin File&quot;</link> section of the guide. 
+    The properties that are used to perform the redefinition of the 
+    base skin are stored in &lt;name&gt;.skin.properties  file (same type of file as you would use for creating your own skin). </para>
+    
+    
+    <para>These are the properties you need to set-up this feature:</para>
+    
+    <itemizedlist>
+      <listitem>
+        <para><property>baseSkin</property>    – the name of the base skin to be used as basis.
+    The look of the skin you define will be affected by new style properties. 
+        </para>
+      </listitem>
+      
+       <listitem>
+          <para><property>generalStyleSheet</property>  -
+            a path to the style sheet (&lt;newskinname&gt;.xcss) that imports style sheets of the components to be affected by the new skin
+          </para>
 
+
+       </listitem>
+      
+          <listitem>
+            <para><property>extendedStyleSheet</property> -  a path to a style sheet that is used to unify the appearance of RichFaces components and standard HTML controls.  
+              For additional information please read <link linkend="StControlsSkinning">&quot;Standard controls skinning&quot;</link> chapter.
+          </para></listitem>
+      
+  
+      <listitem>
+        <para><property>gradientType</property> is a predefined property to set the type of gradient applied to the new skin. Possible values are glass, plastic, plain. More information on gradient implementation you can find further in this chapter.
+        </para>
+      </listitem>
+      
+      
+    </itemizedlist>
+      
+<para>
+  As it has already been mentioned the <property>&lt;newskinname&gt;.xcss</property> contains a list of style sheeted that the new skin affects. 
+</para>
+  <para>Importing of the style sheets that redefine the appearance of component to the &lt;newskinname&gt;.xcss is performed using 
+    <property>&lt;f:importResource&gt;</property> tag.  Please see the example below.
+  </para>
+  
+  <programlisting role="XML"><![CDATA[...
+<f:importResource src="org/richfaces/newSkinName/componentName.xcss" />
+...
+]]></programlisting>
+  
+      <para>Here is template of  the <property>&lt;newskinname&gt;.xcss</property> file.</para>
+      <programlisting role="XML"><![CDATA[
+<f:template xmlns:f='http:/jsf.exadel.com/template'
+    xmlns:u='http:/jsf.exadel.com/template/util'
+    xmlns="http://www.w3.org/1999/xhtml" >
+	<f:importResource src="org/richfaces/newSkinName/calendar.xcss" />
+	<f:importResource src="org/richfaces/newSkinName/combobox.xcss" />
+...
+	<f:importResource src="org/richfaces/newSkinName/tree.xcss" />
+	<f:importResource src="org/richfaces/newSkinName/virtualEarth.xcss" />
+</f:template>
+]]></programlisting>
+
+    
+    <para>
+      So, now having imported the XCSS files with style sheets of components you want to be affected by the new skin, you can start redefining style  properties for each component in the
+   <property> componentName.xcss</property> files. Please study the example below.</para>
+    
+      <programlisting role="XML"><![CDATA[...
+	<u:selector name=".rich-combobox-item-selected">
+        <u:style name="border-width" value="1px" />
+        <u:style name="border-style" value="solid" />
+        <u:style name="border-color" skin="newBorder" />
+        <u:style name="background-position" value="0% 50%" />
+        <u:style name="background-image">
+            <f:resource f:key="org.richfaces.renderkit.html.CustomizeableGradient">
+                <f:attribute name="valign" value="middle" />
+                
+                <f:attribute name="gradientHeight" value="17px" />
+                <f:attribute name="baseColor" skin="headerBackgroundColor" />
+            </f:resource>
+        </u:style>	
+	</u:selector>
+...
+]]></programlisting>
+    
+    <para>In the shown example, new skin properties are applied to the <property>combobox</property> component.</para>
+      <para>Please notice that <property>background-image</property> can be used to set a predefined gradient by means of  
+        <property>&lt;f:resource f:key=&quot;org.richfaces.renderkit.html.CustomizeableGradient&quot;&gt;</property> and the <property>gradientType</property> constant set to one of the possible values.
+      </para>
+      
+      <para>You can also apply these style properties to <property>background-image</property>:</para>
+      <itemizedlist>
+        
+        <listitem><para>  baseColor</para></listitem>
+        <listitem><para>  gradientColor</para></listitem>
+        <listitem><para>   gradientHeight</para></listitem>
+        <listitem><para>   valign</para></listitem>
+        <listitem><para>   gradientType</para></listitem>
+       </itemizedlist>
+      
+      <para>The base skin and the new skin should be set in web.xml</para>
+      
+    
+      <programlisting role="XML"><![CDATA[...
+ <context-param>
+  <param-name>org.richfaces.SKIN</param-name>
+  <param-value>#{skinBean.skin}</param-value>
+ </context-param>
+
+ <context-param>
+  <param-name>org.richfaces.BASE_SKIN</param-name>
+  <param-value>#{skinBean.baseSkin}</param-value>
+ </context-param>
+...
+]]></programlisting>
+    
+    </section>
   </section>
+  
+  
 
   <!--section id="OtherRelevantResources">
   <title>Other Relevant Resources</title>
