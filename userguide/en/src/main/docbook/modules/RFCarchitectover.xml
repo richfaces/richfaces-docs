@@ -1604,7 +1604,7 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
       </simplelist>
     </section>
     
-    <section id="StControlsSkinning">
+ <section id="StControlsSkinning">
       <title>Standard controls skinning</title>
       <para>The feature is designed to unify the look and feel of standard HTML element and RichFaces components. 
         Skinning can be applied to all controls on a page basing on elements&apos; 
@@ -1733,11 +1733,10 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
        </listitem>
      </itemizedlist>  
  
- <section>
-   
+   <section id="BasicLevel">
+     <?dbhtml filename="BasicLevel.html"?>
    <title>Basic level</title>
-   
-   
+     
    <table>
      <title>Html Elements Skin Bindings for input, select, textarea, button, keygen, isindex, legend</title>
      <tgroup cols="2">
@@ -2005,18 +2004,13 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
      </tgroup>
    </table>   
    
-   
-   
-   
  </section>
       
       
-      <section>
-        
-        <title>Advanced level </title>  
-        
-
-    
+   <section id="AdvancedLevel">
+     <?dbhtml filename="AdvancedLevel.html"?>
+        <title>Advanced level</title>  
+            
     <table>
 
       <title>Html Elements Skin Bindings for input, select, textarea, button, keygen, isindex</title>
@@ -2249,10 +2243,11 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
     </table>
     
     
- </section>   
+</section>   
+      
+</section>   
  
-    </section>
-    <section id="XCSSfile format">
+  <section id="XCSSfileformat">
     <title>XCSS file format</title>
       
       <para>XCSS files are the core of Richfaces components skinnability. </para>
@@ -2279,9 +2274,10 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
 	</u:selector>
 ...
 ]]></programlisting>
-     
+     <para>
      During processing the code in the shown example will be parsed into a standard CSS format.
-      <programlisting role="CSS"><![CDATA[...
+      </para>
+       <programlisting role="CSS"><![CDATA[...
 .rich-component-name {
 background-color: additionalBackgroundColor; /*the value of the constant defined by your skin*/
 border-color: tableBorderColor; /*the value of the constant defined by your skin*/
@@ -2305,14 +2301,10 @@ border-style: solid;
 </u:selector>
 ...
 ]]></programlisting>  
-        
-        
-    
-      
-      
+
     </section>
     
-    <section id="StPluggableSkinnability">
+    <section id="StPlug-n-Skin">
       <title>Plug-n-Skin</title>
     
       <para>
@@ -2328,7 +2320,7 @@ border-style: solid;
 
 
          <para>First of all, you need to create a template for the new skin.
-           Creation of the template can be performed using Maven build and deployment tool More information on how to configure Maven for RichFaces 
+           Creation of the template can be performed using Maven build and deployment tool. More information on how to configure Maven for RichFaces 
            <ulink url="http://wiki.jboss.org/wiki/HowToConfigureMavenForRichFaces">here</ulink>. You can copy and paste these Maven instructions
       to  command line and execute them. 
          </para>
@@ -2345,10 +2337,10 @@ mvn archetype:create
 ]]></programlisting>    
       <para>Primary keys for the command:</para>
        <itemizedlist>
-         <listitem><para><property>DarchetypeVersion</property> Indicates the RichFaces version.  For example, &quot;3.2.1-SNAPSHOT&quot;</para></listitem>
-         <listitem><para><property>DartifactId</property> Artifact id of the project</para></listitem>
-         <listitem><para><property>DgroupId</property> Group id of the project</para></listitem>
-         <listitem><para><property>Dversion</property> The version of the project you create, by default it is &quot;1.0.-SNAPSHOT&quot;</para></listitem> 
+         <listitem><para><property>DarchetypeVersion</property> indicates the RichFaces version.  For example, &quot;3.2.1-SNAPSHOT&quot;</para></listitem>
+         <listitem><para><property>DartifactId</property> artifact id of the project</para></listitem>
+         <listitem><para><property>DgroupId</property> group id of the project</para></listitem>
+         <listitem><para><property>Dversion</property> the version of the project you create, by default it is &quot;1.0.-SNAPSHOT&quot;</para></listitem> 
        </itemizedlist>
 <para>
  After this operation, a folder with the name of your &quot;ARTIFACT-ID&quot; appears. 
@@ -2369,9 +2361,10 @@ mvn cdk:add-skin -Dname=SKIN-NAME -Dpackage=SKIN-PACKAGE
 ...
 ]]></programlisting>
       
-      <para>Primary keys for the command:</para>
       
+      <para>Primary keys for the command:</para>
       <itemizedlist>
+   
      <listitem><para>
         <property>Dname</property>  defines the name of the new skin
       </para>
@@ -2381,11 +2374,17 @@ mvn cdk:add-skin -Dname=SKIN-NAME -Dpackage=SKIN-PACKAGE
       <para>
         <property>Dpackage</property>  base package of the skin. By default &quot;groupId&quot; of the project is used.
       </para>  
-      </listitem> 
-      <para>
+        </listitem> 
+      </itemizedlist>
+      
+        <para>
         Additional optional keys for the command:
-      </para>
+        </para>
+      
+      <itemizedlist>
+    
         <listitem>
+          
       <para>
         <property>DbaseSkin</property>  defines the name of the base skin. 
       </para>  
@@ -2407,7 +2406,7 @@ mvn cdk:add-skin -Dname=SKIN-NAME -Dpackage=SKIN-PACKAGE
         <listitem><para><property>BaseImageTest.java</property> - a test version of a class that stores images. Location: &quot;\src\test\java\SKIN-PACKAGE\SKIN-NAME\images\&quot;    </para></listitem>
         <listitem><para><property>XCSS files</property> - XCSS files define the new look of  RichFaces components affected by the new skin.   Location: &quot;\src\main\resources\SKIN-PACKAGE\SKIN-NAME\css\&quot;    </para></listitem>
         <listitem><para><property>SKIN-NAME.properties </property> -  a XCSS file that contains properties of the new skin. Location: &quot;\src\main\resources\SKIN-PACKAGE\SKIN-NAME\css\&quot;    </para>
-        <para>The following properties are used to configure the file:</para>
+          <para>The following properties are used to configure the SKIN-NAME.properties  file:</para>
         
         
           <itemizedlist>
@@ -2418,7 +2417,7 @@ mvn cdk:add-skin -Dname=SKIN-NAME -Dpackage=SKIN-PACKAGE
             </listitem>
             <listitem>
               <para><property>generalStyleSheet</property>  -
-                a path to the style sheet (&lt;SKIN-NAME&gt;.xcss) that imports style sheets of the components to be affected by the new skin. 
+                a path to the style sheet (SKIN-NAME.xcss) that imports style sheets of the components to be affected by the new skin. 
               </para>        
             </listitem>
             <listitem>
@@ -2461,7 +2460,7 @@ mvn clean install
 
     <para>
       So, now having built your new skin you can start redefining style properties in the corresponding XCSS files(located in &quot;\src\main\resources\SKIN-PACKAGE\SKIN-NAME\css\&quot;  folder). 
-    In the example below, it's shown how to redefine the style properties for &quot;combobox&quot; component.</para>
+    In the example below, it's shown how to redefine the style properties for the &quot;combobox&quot; component.</para>
     
       <programlisting role="XML"><![CDATA[...
 	<u:selector name=".rich-combobox-item-selected">
@@ -2496,17 +2495,7 @@ mvn clean install
        </itemizedlist>
       
       
-    
-
     </section>
+
   </section>
-  
-  
-
-  <!--section id="OtherRelevantResources">
-  <title>Other Relevant Resources</title>
-  <para><ulink url="http://jsf.javabeat.net/articles/2007/06/introduction-to-ajax4jsf/">Introduction to Ajax4Jsf</ulink> by Shunmuga Raja</para>
-   
-</section-->
-
 </chapter>
