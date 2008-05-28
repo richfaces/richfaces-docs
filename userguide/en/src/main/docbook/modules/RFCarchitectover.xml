@@ -1615,12 +1615,12 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
       
       
       <para>
-        Standard controls skinning feature provides 2 levels of skinning, while skinning is based on detecting User Agent. If User Agent is not detected, Advanced level is used.
+        Standard controls skinning feature provides 2 levels of skinning - standard and extended, while skinning is based on detecting browser user agent. If user agent is not detected, Advanced level is used.
      </para>   
          <itemizedlist>
           <listitem>
             <para>
-              <emphasis><property>Basic</property></emphasis> provides customization only basic style properties.       
+              <emphasis><property>Standard</property></emphasis> provides customization only basic style properties.       
             </para>
             <para>
               To the following browsers Basic level of skinning is applied:
@@ -1636,7 +1636,7 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
           <listitem>
             <para>
               
-                <emphasis><property>Advanced</property></emphasis> extends basic level introducing broader 
+                <emphasis><property>Extended</property></emphasis> extends basic level introducing broader 
               number of style properties and is applied to browsers with rich visual styling capability of controls
             </para>
             <para>
@@ -1728,14 +1728,54 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
            <title>Note:</title>
            <para>
              a elements have classes based on &quot;link&quot; and pseudo class name, e.g.: rich-link, rich-link-hover, rich-link-visited
+        
+           
+           
            </para>
          </note>    
        </listitem>
      </itemizedlist>  
+   
+   
+   <para>Additionally, the predefined rich CSS classes that we provide can be used not only as classes for basic HTML
+   elements but also as classes for creation of  complex elements .</para>
+   <para>There is a snippet with some of them for example:</para>
+   
+   
+   <programlisting role="XML"><![CDATA[...
+<u:selector name=".rich-box-bgcolor-header">
+    <u:style name="background-color" skin="headerBackgroundColor" />
+</u:selector>
+<u:selector name=".rich-box-bgcolor-general">
+   <u:style name="background-color" skin="generalBackgroundColor" />
+</u:selector>
+...
+
+//gradient elements
+...
+<u:selector name=".rich-gradient-menu">
+    <u:style name="background-image">
+        <f:resource f:key="org.richfaces.renderkit.html.gradientimages.MenuGradientImage"/>
+    </u:style>
+    <u:style name="background-repeat" value="repeat-x" />
+</u:selector>
+
+<u:selector name=".rich-gradient-tab">
+    <u:style name="background-image">
+        <f:resource f:key="org.richfaces.renderkit.html.gradientimages.TabGradientImage"/>
+    </u:style>
+    <u:style name="background-repeat" value="repeat-x" />
+</u:selector>
+...]]></programlisting>   
+   
+   
+   <para>To get a better idea of standard component skinning we recommend to explore CSS files located in ui/core/src/main/resources/org/richfaces/ folder
+     of RichFaces svn</para>
+   
  
-   <section id="BasicLevel">
+   <section id="Standard">
      <?dbhtml filename="BasicLevel.html"?>
-   <title>Basic level</title>
+   <title>Standard level</title>
      
    <table>
      <title>Html Elements Skin Bindings for input, select, textarea, button, keygen, isindex, legend</title>
@@ -2009,7 +2049,7 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
       
    <section id="AdvancedLevel">
      <?dbhtml filename="AdvancedLevel.html"?>
-        <title>Advanced level</title>  
+        <title>Extended level</title>  
             
     <table>
 
@@ -2243,8 +2283,9 @@ Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >
     </table>
     
     
-</section>   
-      
+   </section>   
+   
+
 </section>   
  
   <section id="XCSSfileformat">
