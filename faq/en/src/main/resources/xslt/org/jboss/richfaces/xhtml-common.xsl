@@ -11,6 +11,7 @@
    <xsl:import href="collapsing-navigation.xsl"/>
    
    <xsl:param name="html.stylesheet" select="'css/html.css'"/>
+   <xsl:param name="generate.toc" select="'book toc'"/>
 
 	<!--
 From: xhtml/docbook.xsl
