@@ -133,7 +133,7 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
       <title>Important:</title>
       <para>In order to avoid a bug in IE, the root node of the dialog is moved on the top of a DOM
         tree. However, you should have a separate form inside the modal panel if you want to perform
-        submits from this panel. </para>
+        submits from this panel (so, no form should be around the modal panel in this case).</para>
     </important>
 
     <para>It&apos;s possible to add a <emphasis><property>&quot;header&quot;</property></emphasis> facet to the component to set
@@ -144,7 +144,6 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
-<form jsfc="h:form" id="form">
     <rich:modalPanel id="panel" width="400" height="300">
         <f:facet name="header">
             <h:outputText value="Modal Panel"/>
@@ -153,7 +152,6 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
         <a href="javascript:Richfaces.hideModalPanel('form:panel')">Close</a>
     </rich:modalPanel>
     <a href="javascript:Richfaces.showModalPanel('form:panel');">Open</a>
-</form>
 ...]]></programlisting>
 
     <para>This defines a window with a particular size and ID. It includes one "Open" link. Clicking
