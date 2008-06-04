@@ -41,8 +41,8 @@
       </tgroup>
     </table>
 
-  <section>
-    <title>Creating the Component with a Page Tag</title>
+<section>
+    <title id="tab_ccpt">Creating the Component with a Page Tag</title>
     <para>To create the simplest variant of <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> 
       component on a page, use the following syntax:</para>
 
@@ -55,9 +55,9 @@
 </rich:panel>
 ...
 ]]></programlisting>
-  </section>
+</section>
   
-  <section>
+<section>
   <title>Creating the Component Dynamically Using Java</title>
     <para>
       <emphasis role="bold">Example:</emphasis>
@@ -69,14 +69,51 @@ HtmltoolTip mytoolTip = new  HtmltoolTip();
 ]]></programlisting>
 </section>
 
-<section>
-<title>Details of Usage</title>
-<para>
-<property>toolTip</property> main area is a simple rectangle area with any information inside. The content may be defined via
-<emphasis><property>&quot;value&quot;</property></emphasis> attribute as text or via any nested content. When both are defined, the value is displayed as text and nested content
-after the text. <property>toolTip</property> stretches if the content more than the <property>toolTip</property> sizes.
-</para>
-<para>
+ <section>
+     <title>Details of Usage</title>
+          <para>
+             To specify text information, labeled on a <property>tooltip</property>, use <emphasis><property>&quot;value&quot;</property></emphasis> attribute. 
+              Images, links, buttons and other RichFaces components also may be put and composed inside <property>tooltip</property>. 
+             Text, specified between <property>tooltip's</property> start and end tags will be rendered in browser as simple text. 
+              <property>Tooltip</property> borders stretch to enclose it contents.
+           </para>  
+           <para>
+             There are three ways to attach a <property>tooltip</property> to a page element. 
+             One of them uses nesting (this way is shown on example <link linkend="tab_ccpt">above</link>). 
+             In such cases <property>tooltip</property> is attached to the parent component by default. 
+           </para>
+           <note>
+                <title>Note:</title>
+                <para>
+                  It is recommended to specify <emphasis><property>&quot;id&quot;</property></emphasis> for parent page element to ensure <property>tooltip's</property> correct work.
+                </para>
+           </note>
+           <note>
+                <title>Note:</title>
+                <para>
+                  If parent component contains more than one child, it is recommended to define <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> the last one.
+                </para>
+           </note> 
+           <para>
+             Second way uses the attribute <emphasis><property>&quot;for&quot;</property></emphasis>. In this case a <property>tooltip</property> may be defined separately from a page element it is applied to. 
+             <emphasis><property>&quot;id&quot;</property></emphasis> for page element is necessary (see the example below).
+           </para>
+           <para>
+                <emphasis role="bold">Example:</emphasis>
+           </para>
+           <programlisting role="XML"><![CDATA[...
+<rich:panel id=”panelid”>
+…
+</rich:panel>
+<rich:toolTip value="This is a tooltip content" for=”panelid”/>
+...
+]]></programlisting>           
+           <para>Here, the attribute <emphasis><property>&quot;for&quot;</property></emphasis> of a <emphasis role="bold">
+     <property>&lt;rich:toolTip&gt;</property>
+   </emphasis> component is required. Without it an example doesn&apos;t work because HTML elements aren't presented in component tree built by facelets.
+   </para>        
+   
+   <para>
 There is possibility to define a facet with the name &quot;defaultContent&quot;. This facet provides the default content to
 display while the main content is loaded to a page in an Ajax mode. Thus when <property>toolTip</property> called in an Ajax mode, it
 appears with the content defined in the facet and when loading is completed, the content is changed to a loaded one.
@@ -121,14 +158,7 @@ And after <property>toolTip</property> loaded it is changed to next one:
         </imageobject>
     </mediaobject>
     </figure>
-  <note>
-    <title>Note:</title>
-    <para>
-      If you define the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> attached as the child to some componetns 
-      and except <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> there are some other components inside 
-      it is recommended to define <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> in code as last component.
-    </para>
-  </note>
+  
 <para>
 By default, <property>toolTip</property> appears smart positioned. But as you can see from the previous example, you
   can define an appearance direction via the corresponding attribute <emphasis><property>&quot;direction&quot;</property></emphasis>. And also it's possible to define vertical and horizontal
@@ -139,12 +169,6 @@ offsets relatively to a mouse position.
 <property>toolTip</property> activation occurs after a defined event (default=mouseover) on the parent component takes into consideration
 the &quot;delay&quot; attribute (default=0) or after calling JS API function show(). <property>toolTip</property> deactivation occurs after mouseout event on the parent component (excepting the situation when the mouse is hovered onto the <property>toolTip</property> itself) or after calling JS API function hide().
 </para>
-
-<note>
-<title>Note:</title> <para>
-  It is recommended to define parent component  <emphasis><property>&quot;id&quot;</property></emphasis> for correction of <property>toolTip</property> work.
-</para>
-</note>
 
   <para>The attribute <emphasis><property>&quot;for&quot;</property></emphasis>   is used for defining the <emphasis><property>&quot;id&quot;</property></emphasis> of an element a toolTip should be attached to. Look at the example:
 </para>
@@ -165,10 +189,7 @@ the &quot;delay&quot; attribute (default=0) or after calling JS API function sho
 ...
 ]]></programlisting>
   
-  <para>Here, the attribute <emphasis><property>&quot;for&quot;</property></emphasis> of a <emphasis role="bold">
-    <property>&lt;rich:toolTip&gt;</property>
-  </emphasis> component is required. Without it an example doesn&apos;t work because HTML elements aren't presented in component tree built by facelets.
-  </para>
+ 
   
 <para>
 The <emphasis><property>&quot;mode&quot;</property></emphasis> attribute is provided you to control the way of data loading to <property>toolTip</property>. It has following values:
@@ -209,9 +230,9 @@ Moreover, to add  some JavaScript effects, client events defined on it are used:
 		</para></listitem>
     </itemizedlist> 
 </para>
-</section>
+ </section>
   
-  <section>
+<section>
     <title>JavaScript API</title>
     <table>
       <title>JavaScript API</title>
