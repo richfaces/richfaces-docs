@@ -41,8 +41,8 @@
       </tgroup>
     </table>
 
-<section>
-    <title id="tab_ccpt">Creating the Component with a Page Tag</title>
+  <section id="tab_ccpt">
+    <title>Creating the Component with a Page Tag</title>
     <para>To create the simplest variant of <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> 
       component on a page, use the following syntax:</para>
 
@@ -141,111 +141,97 @@ HtmltoolTip mytoolTip = new  HtmltoolTip();
 ...
 ]]></programlisting>
    <para>
-     The component works properly in client and Ajax modes. 
-     For Ajax mode there is possibility to define a facet &quot;defaultContent&quot;, which provides default tooltip content to be displayed, while main content is loading into the <property>tooltip</property> (see the example below).
+     The <emphasis><property>&quot;mode&quot;</property></emphasis> attribute is provided you to control the way of data loading to <property>tooltip</property>.
+     The component works properly in client and Ajax modes.
+     In client mode <property>toolTip</property> content is rendered once on the server and could be rerendered only via external submit. 
+     In Ajax mode <property>toolTip</property> content is requested from server for every activation. 
+     For Ajax mode there is possibility to define a facet &quot;defaultContent&quot;, which provides default <property>tooltip</property> content to be displayed, while main content is loading into the <property>tooltip</property> (see the example below).
    </para>
    <para>
       <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="XML"><![CDATA[...
+   </para>
+   <programlisting role="XML"><![CDATA[...
 <h:commandLink value="Simple Link" id="link">
 	<rich:toolTip followMouse="true" direction="top-right" mode="ajax" value="#{bean.toolTipContent}" horizontalOffset="5" 
 		verticalOffset="5" layout="block">
 		<f:facet name="defaultContent">
-			<f:verbatim>DEFAULT toolTip CONTENT</f:verbatim>
+			<f:verbatim>DEFAULT TOOLTIP CONTENT</f:verbatim>
 		</f:facet>
 	</rich:toolTip>
 </h:commandLink>
 ...
 ]]></programlisting>
-
-<para>
-This is the result:
-</para>
-    <figure>
-      <title><emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> component with default content</title>
-      <mediaobject> 
-        <imageobject>
-            <imagedata fileref="images/toolTip2.png"/>
-        </imageobject>
-    </mediaobject>
-    </figure>
-<para>
-And after <property>toolTip</property> loaded it is changed to next one:
-</para>
-    <figure>
-      <title><emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> component with loaded content</title>
-      <mediaobject> 
-        <imageobject>
-            <imagedata fileref="images/toolTip3.png"/>
-        </imageobject>
-    </mediaobject>
-    </figure>
-  
-<para>
-By default, <property>toolTip</property> appears smart positioned. But as you can see from the previous example, you
-  can define an appearance direction via the corresponding attribute <emphasis><property>&quot;direction&quot;</property></emphasis>. And also it's possible to define vertical and horizontal
-offsets relatively to a mouse position. 
-</para>
-<para>
-<property>toolTip</property> appears attached to the corner dependent on the <emphasis><property>&quot;direction&quot;</property></emphasis> attribute. By default it is positioned bottom-right.
-<property>toolTip</property> activation occurs after a defined event (default=mouseover) on the parent component takes into consideration
-the &quot;delay&quot; attribute (default=0) or after calling JS API function show(). <property>toolTip</property> deactivation occurs after mouseout event on the parent component (excepting the situation when the mouse is hovered onto the <property>toolTip</property> itself) or after calling JS API function hide().
-</para>
-
- 
-  
- 
-  
-<para>
-The <emphasis><property>&quot;mode&quot;</property></emphasis> attribute is provided you to control the way of data loading to <property>toolTip</property>. It has following values:
-    <itemizedlist>
-		<listitem><para>Client</para></listitem>
-		<listitem><para>Ajax</para></listitem>
-	</itemizedlist>  
-</para>
-<para>
-In a client mode, <property>toolTip</property> content is rendered once on the server and could be reRendered only via external submit.
-In an Ajax mode, <property>toolTip</property> content is requested from server every activation.
-</para>
-<para>
-Disabled <property>toolTip</property> is rendered to a page as usual but JS that responds for its activation is
-disabled until enable() is called.
-</para>
-<para>
-Moreover, to add  some JavaScript effects, client events defined on it are used:
-</para>
-<para>
-    Standart:
-    <itemizedlist>
-		<listitem><para>onclick</para></listitem>
-		<listitem><para>ondblclick</para></listitem>
-		<listitem><para>onmouseout</para></listitem>
-		<listitem><para>onmousemove</para></listitem>
-		<listitem><para>onmouseover</para></listitem>
-    </itemizedlist>  
-</para>	
-<para>
-    Special:
-    <itemizedlist>
-		<listitem><para>onshow - Called after the toolTip is called (some element hovered) but before its request
-		</para></listitem>
-		<listitem><para>oncomplete - Called just after the toolTip is shown
-		</para></listitem>
-		<listitem><para>onhide - Called after the toolTip is hidden
-		</para></listitem>
-    </itemizedlist> 
-</para>
+   <para>
+     This is the result:
+   </para>
+   
+   <figure>
+     <title><emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> component with default content</title>
+     <mediaobject>
+       <imageobject>
+         <imagedata fileref="images/toolTip2.png"/>
+       </imageobject>
+     </mediaobject>
+   </figure>
+   
+   <para>
+     And after <property>toolTip</property> loaded it is changed to next one:
+   </para>
+   
+   <figure>
+     <title><emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> component with loaded content</title>
+     <mediaobject>
+       <imageobject>
+         <imagedata fileref="images/toolTip3.png"/>
+       </imageobject>
+     </mediaobject>
+   </figure>
+   
+   <para>
+     <property>toolTip</property> appears attached to the corner dependent on the <emphasis><property>&quot;direction&quot;</property></emphasis> attribute. 
+     By default it is positioned bottom-right. 
+     <property>toolTip</property> activation occurs after an event, defined on the parent component, takes into consideration the &quot;delay&quot; attribute or after calling JS API function <emphasis>show()</emphasis>. 
+     <property>toolTip</property> deactivation occurs after <emphasis>mouseout</emphasis> event on the parent component (excepting the situation when the mouse is hovered onto the <property>tooltip</property> itself) or after calling JS API function <emphasis>hide()</emphasis>.
+   </para>
+   <para>
+     By default, <property>tooltip</property> appears smart positioned. But as you can see from the previous example, you
+     can define an appearance direction via the corresponding attribute <emphasis><property>&quot;direction&quot;</property></emphasis>. 
+     And also it's possible to define vertical and horizontal offsets relatively to a mouse position. 
+   </para>
+   <para>
+     Disabled <property>tooltip</property> is rendered to a page as usual but JS that responds for its activation is disabled until <emphasis>enable()</emphasis> is called. 
+   </para>
+   <para>
+     Moreover, to add  some JavaScript effects, client events defined on it are used:
+   </para>
+   <para>
+     Standart:
+     <itemizedlist>
+       <listitem><para>onclick</para></listitem>
+       <listitem><para>ondblclick</para></listitem>
+       <listitem><para>onmouseout</para></listitem>
+       <listitem><para>onmousemove</para></listitem>
+       <listitem><para>onmouseover</para></listitem>
+     </itemizedlist>
+   </para>
+   <para>
+     Special:
+     <itemizedlist>
+       <listitem><para>onshow - Called after the tooltip is called (some element hovered) but before its request</para></listitem>
+       <listitem><para>oncomplete - Called just after the tooltip is shown</para></listitem>
+       <listitem><para>onhide - Called after the tooltip is hidden</para></listitem>
+     </itemizedlist>
+   </para>
  </section>
   
-<section>
+  <section id="tab_jsapi">
+  <title>JavaScript API</title>
+  <table>
     <title>JavaScript API</title>
-    <table>
-      <title>JavaScript API</title>
       
       <tgroup cols="2">
         <thead>
-          <row>
+          <row>every acti
             <entry>Function</entry>
             
             <entry>Description</entry>
