@@ -564,7 +564,7 @@ included2.xhtml
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
-                <programlisting role="JAVA"><![CDATA[.rich-datascr-button { 
+                <programlisting role="CSS"><![CDATA[.rich-datascr-button { 
 border: 0px; 
 } 
 .rich-dtascroller-table { 
@@ -736,8 +736,7 @@ background-color: transparent;
                 <title>How to set &lt;rich:dataTable&gt; border to 0px?</title>
                 <para>Add the following code to your css file:</para>
                 <programlisting role="CSS"><![CDATA[...
-                .rich-table, .rich-table-header,.rich-table-headercell, .rich-table-cell,
-                        .rich-subtable-cell, .rich-table-footercell, .rich-subtable-footercell {
+                .rich-table, .rich-table-header,.rich-table-headercell, .rich-table-cell, .rich-subtable-cell, .rich-table-footercell, .rich-subtable-footercell {
                                 border-width:0px;
                 }
 ...
@@ -836,14 +835,11 @@ background-color: transparent;
                                         <property>&quot;onsubmit&quot;</property>
                                 </emphasis>slightly differs from the standard one. Do not return <emphasis>
                                         <property>&quot;true&quot;</property>
-                                </emphasis> if you want to fire the request - because <emphasis
-                                        role="bold">
-                                        <property>&lt;xxx&gt;&lt;a4j:support
+                                </emphasis> if you want to fire the request - because <code>&lt;xxx&gt;&lt;a4j:support
                                                 event=&quot;onclick&quot;
                                                 onsubmit=&quot;return
-                                        true;&quot;&gt;</property>
-                                </emphasis> is transformed into &lt;xxx onclick=&quot;return
-                                true; A4J.Submit(.... );&quot; &gt; and the request
+                                        true;&quot;&gt;</code> is transformed into <code>&lt;xxx onclick=&quot;return
+                                true; A4J.Submit(.... );&quot; &gt;</code> and the request
                                 isn&apos;t fired also in this case (but the standard event
                                 processing fired). You must only return <emphasis>
                                         <property>&quot;false&quot;</property>
@@ -858,15 +854,13 @@ background-color: transparent;
                         release 1.0?</title>
                 <para> To avoid differences with other JavaScript attributes, a function placement
                         in a JavaScript call is changed, instead of simple inserting of attribute
-                        content (..oncomplete :anotherFunction(this)..), it places (oncomplete:
-                        function(){anotherFunction(this);}..) in anonymous function, to allow put
+                        content (<code>..oncomplete :anotherFunction(this)..</code>), it places (<code>oncomplete:
+                        function(){anotherFunction(this);}..</code>) in anonymous function, to allow put
                         &quot;chain&quot; of statements in attribute. </para>
                 <para> Since, <emphasis>
                                 <property>&quot;this&quot;</property>
                         </emphasis> keyword will point to a parameters map instead of a control
-                        element as it was before. You may use <emphasis>
-                                <property>document.findElementById()</property>
-                        </emphasis>to get references to this object after a request is processed as
+                        element as it was before. You may use <code>document.findElementById()</code>to get references to this object after a request is processed as
                         when a page is updated in Ajax you will have reference to a control, removed
                         from a DOM tree. </para>
                 <para> Or, if you are sure that your element is not updated, you can add <emphasis>
@@ -875,21 +869,19 @@ background-color: transparent;
                                 <property>&lt;a4j:support&gt;</property>
                         </emphasis> (or onclick in <emphasis role="bold">
                                 <property>&lt;a4j:commandLink/Button&gt;</property>
-                        </emphasis>) to place reference to known variable (<emphasis role="bold">
-                                <property>&lt;a4j:commandLink onclick="var myControl=this;"
-                                        oncomplete="anotherFunction(myControl)"/&gt;</property>
-                        </emphasis>). </para>
+                        </emphasis>) to place reference to known variable (<code>&lt;a4j:commandLink onclick="var myControl=this;"
+                                        oncomplete="anotherFunction(myControl)"/&gt;</code>). </para>
                 <tip>
                         <title>Tip:</title>
                         <para>The onComplete syntax now is:</para>
                         <programlisting role="XML">
 	<![CDATA[<someAjaxActionComponent ...oncomplete="myFunc(req,event,data)".../>]]>
             </programlisting>
-                        <para> where the <property>event</property> is a variable where the JS event
+                        <para> where the <code>event</code> is a variable where the JS event
                                 copy that fires the request is placed into. One may use it to get
-                                the element instead of this. and <property>data</property> is a
+                                the element instead of this. and <code>data</code> is a
                                 variable that contains deserialized value from the
-                                <property>data</property> attribute. </para>
+                                <property>&quot;data&quot;</property> attribute. </para>
                 </tip>
         </section>
         <section id="InvokeOnComponentUsingWithJSF1.2">
@@ -923,7 +915,7 @@ background-color: transparent;
                 <title>How to avoid generating exception for &quot;keepAlive&quot;
                         component?</title>
                 <para>To avoid exception, don&apos;t forget that the component stores beans in
-                        serialized view, but your bean should implement java.io.Serializable.</para>
+                        serialized view, but your bean should implement <code>java.io.Serializable</code>.</para>
         </section>
 
         <section id="AFormIsNotSubmittedOrASetterIsNotCalledAfterAJAXrequest">
@@ -1077,7 +1069,7 @@ background-color: transparent;
                         error happens because of the &quot;reRender&quot; attribute of some
                         Ajax core Action Component is set on a component that depends on rendered
                         properties, i.e. a component that is to be hidden/rendered is tried to be
-                        updated. The problem is that if rendered=&quot;false&quot; in this
+                        updated. The problem is that if <code>rendered=&quot;false&quot;</code> in this
                         moment, the component isn&apos;t in the DOM tree and can&apos;t be
                         updated because of the general limitations described in the Ajax Processing
                         chapter. </para>
@@ -1262,19 +1254,16 @@ background-color: transparent;
 </rich:modalPanel>
 ...]]></programlisting>
                 <para>In order to build this application, you can create a managed bean like this
-                        one. Function <emphasis>
-                                <property>takeSelection()</property>
-                        </emphasis> fills the array <property>selectedCars</property> with the data,
-                        got from the <property>selection</property>. Function <emphasis>
-                                <property>getSelectedCars()</property>
-                        </emphasis> returns the array <property>selectedCars</property>, which is
+                        one. Function <code>takeSelection()</code> fills the array <code>selectedCars</code> with the data,
+                        got from the <property>selection</property>. Function <code>getSelectedCars()</code>
+                        returns the array <code>selectedCars</code>, which is
                         used for filling <emphasis role="bold">
                                 <property>&lt;rich:dataTable&gt;</property>
                         </emphasis> with selected row/rows data.</para>
                 <para>
                         <emphasis role="bold">Example:</emphasis>
                 </para>
-                <programlisting role="XML"><![CDATA[...
+                <programlisting role="JAVA"><![CDATA[...
 public class DataTableScrollerBean {
         private SimpleSelection selection = new SimpleSelection();
         private ArrayList<DemoInventoryItem> selectedCars = new ArrayList<DemoInventoryItem>(); 

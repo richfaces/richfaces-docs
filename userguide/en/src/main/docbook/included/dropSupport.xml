@@ -1,118 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
-  <sectioninfo>
-    <keywordset>
-      <keyword>rich:dropSupport</keyword>
+	<sectioninfo>
+		<keywordset>
+			<keyword>rich:dropSupport</keyword>
 
-      <keyword>HtmlDropSupport</keyword>
-    </keywordset>
-  </sectioninfo>
+			<keyword>HtmlDropSupport</keyword>
+		</keywordset>
+	</sectioninfo>
 
-  
-    <table>
-      <title>Component identification parameters</title>
 
-      <tgroup cols="2">
-        <thead>
-          <row>
-            <entry>Name</entry>
+	<table>
+		<title>Component identification parameters</title>
 
-            <entry>Value</entry>
-          </row>
-        </thead>
+		<tgroup cols="2">
+			<thead>
+				<row>
+					<entry>Name</entry>
 
-        <tbody>
-          <row>
-            <entry>component-type</entry>
+					<entry>Value</entry>
+				</row>
+			</thead>
 
-            <entry>org.richfaces.DropSupport</entry>
-          </row>
+			<tbody>
+				<row>
+					<entry>component-type</entry>
 
-          <row>
-            <entry>component-class</entry>
+					<entry>org.richfaces.DropSupport</entry>
+				</row>
 
-            <entry>org.richfaces.component.html.HtmlDropSupport</entry>
-          </row>
+				<row>
+					<entry>component-class</entry>
 
-          <row>
-            <entry>component-family</entry>
+					<entry>
+						org.richfaces.component.html.HtmlDropSupport
+					</entry>
+				</row>
 
-            <entry>org.richfaces.DropSupport</entry>
-          </row>
+				<row>
+					<entry>component-family</entry>
 
-          <row>
-            <entry>renderer-type</entry>
+					<entry>org.richfaces.DropSupport</entry>
+				</row>
 
-            <entry>org.richfaces.DropSupportRenderer</entry>
-          </row>
+				<row>
+					<entry>renderer-type</entry>
 
-          <row>
-            <entry>tag-class</entry>
+					<entry>org.richfaces.DropSupportRenderer</entry>
+				</row>
 
-            <entry>org.richfaces.taglib.DropSupportTag</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  
+				<row>
+					<entry>tag-class</entry>
 
-  <section>
-    <title>Creating the Component with a Page Tag</title>
+					<entry>org.richfaces.taglib.DropSupportTag</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
 
-    <para>This simple example shows how to make a panel component a potential drop target for
-      drag-and-drop operations using "text" elements as the dragged items.</para>
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="XML"><![CDATA[...
+	<section>
+		<title>Creating the Component with a Page Tag</title>
+
+		<para>
+			This simple example shows how to make a panel component a
+			potential drop target for drag-and-drop operations using
+			"text" elements as the dragged items.
+		</para>
+
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
     <rich:panel>
         <rich:dropSupport acceptedTypes="text"/>
     </rich:panel>
 ...
 ]]></programlisting>
-  </section>
+	</section>
 
-  <section>
-    <title>Creating the Component Dynamically Using Java</title>
+	<section>
+		<title>Creating the Component Dynamically Using Java</title>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlDropSupport;
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlDropSupport;
 ...
 HtmlDropSupport myDragZone = new HtmlDropSupport();
 ...
 ]]></programlisting>
-  </section>
+	</section>
 
-  <section>
-    <title>Details of Usage</title>
+	<section>
+		<title>Details of Usage</title>
 
-    <para>As shown in the example, the key attribute for <emphasis role="bold">
-        <property>&lt;rich:dropSupport&gt;</property>
-      </emphasis> is <emphasis>
-        <property>"acceptedTypes"</property>
-      </emphasis>. This attribute defines the types of draggable items that can be dropped onto the
-      designated drop zone.</para>
+		<para>
+			As shown in the example, the key attribute for
+			<emphasis role="bold">
+				<property>&lt;rich:dropSupport&gt;</property>
+			</emphasis>
+			is
+			<emphasis>
+				<property>"acceptedTypes"</property>
+			</emphasis>
+			. This attribute defines the types of draggable items that
+			can be dropped onto the designated drop zone.
+		</para>
 
-    <para>The second most important attribute for <emphasis role="bold">
-        <property>&lt;rich:dropSupport&gt;</property>
-      </emphasis> is <emphasis>
-        <property>"typeMapping"</property>
-      </emphasis>. This attribute maps a specific type among the acceptable types for draggable
-      items to a specific <emphasis role="bold">
-        <property>&lt;rich:dndParam&gt;</property>
-      </emphasis> child element under <emphasis role="bold">
-        <property>&lt;rich:dropSupport&gt;</property>
-      </emphasis>.</para>
+		<para>
+			The second most important attribute for
+			<emphasis role="bold">
+				<property>&lt;rich:dropSupport&gt;</property>
+			</emphasis>
+			is
+			<emphasis>
+				<property>"typeMapping"</property>
+			</emphasis>
+			. This attribute maps a specific type among the acceptable
+			types for draggable items to a specific
+			<emphasis role="bold">
+				<property>&lt;rich:dndParam&gt;</property>
+			</emphasis>
+			child element under
+			<emphasis role="bold">
+				<property>&lt;rich:dropSupport&gt;</property>
+			</emphasis>
+			.
+		</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis> </para>
-   
-    <programlisting role="XML"><![CDATA[...
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+
+		<programlisting role="XML"><![CDATA[...
     <rich:dropSupport acceptedTypes="[iconsDragged, textDragged]" typeMapping="{iconsDragged: DropIcon}"> 
         <rich:dndParam name="DropIcon">
             <h:graphicImage value="/images/drop-icon.png"/>
@@ -120,23 +142,40 @@ HtmlDropSupport myDragZone = new HtmlDropSupport();
 ...
 ]]></programlisting>
 
-    <para>In this example, dropping a draggable item of an <emphasis><property>&quot;iconsDragged&quot;</property></emphasis> type
-      will trigger the use a parameter named <emphasis><property>&quot;DropIcon&quot;</property></emphasis> in the event processing
-      after a drop event. (Also, an Ajax request is sent, and the action and dropListener defined
-      for the component are called.)</para>
+		<para>
+			In this example, dropping a draggable item of an
+			<emphasis>
+				<property>&quot;iconsDragged&quot;</property>
+			</emphasis>
+			type will trigger the use a parameter named
+			<emphasis>
+				<property>&quot;DropIcon&quot;</property>
+			</emphasis>
+			in the event processing after a drop event. (Also, an Ajax
+			request is sent, and the action and dropListener defined for
+			the component are called.)
+		</para>
 
-    <para>Here is an example of moving records between tables. The example describes all the pieces
-      for drag-and-drop. (To get extra information on these components, read the sections for these
-      components.)</para>
+		<para>
+			Here is an example of moving records between tables. The
+			example describes all the pieces for drag-and-drop. (To get
+			extra information on these components, read the sections for
+			these components.)
+		</para>
 
-    <para>As draggable items, this table contains a list of such items designated as being of type
-      "text":</para>
+		<para>
+			As draggable items, this table contains a list of such items
+			designated as being of type
+			<code>"text"</code>
+			:
+		</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis></para>
-    
-    <programlisting role="XML"><![CDATA[...
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+
+		<programlisting role="XML"><![CDATA[...
     <rich:dataTable value="#{capitalsBean.capitals}" var="caps">
         <f:facet name="caption">Capitals List</f:facet>
         <h:column>
@@ -151,14 +190,21 @@ HtmlDropSupport myDragZone = new HtmlDropSupport();
 ...
 ]]></programlisting>
 
-    <para>As a drop zone, this panel will accept draggable items of type "text" and then rerender an
-      element with the ID of "box":</para>
+		<para>
+			As a drop zone, this panel will accept draggable items of
+			type
+			<code>text</code>
+			and then rerender an element with the ID of
+			<code>box</code>
+			:
+		</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis> </para>
-   
-    <programlisting role="XML"><![CDATA[...
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+
+		<programlisting role="XML"><![CDATA[...
     <rich:panel style="width:100px;height:100px;">
         <f:facet name="header">Drop Zone</f:facet>
         <rich:dropSupport acceptedTypes="text" reRender="box" 
@@ -167,14 +213,18 @@ HtmlDropSupport myDragZone = new HtmlDropSupport();
 ...
 ]]></programlisting>
 
-    <para>As a part of the page that can be updated in a partial page update, this table has an ID
-      of "box":</para>
+		<para>
+			As a part of the page that can be updated in a partial page
+			update, this table has an ID of
+			<code>box</code>
+			:
+		</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="XML"><![CDATA[...
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
     <rich:dataTable value="#{capitalsBean.capitals2}" var="cap2" id="box">
         <f:facet name="caption">Capitals chosen</f:facet>
         <h:column>
@@ -183,13 +233,16 @@ HtmlDropSupport myDragZone = new HtmlDropSupport();
     </rich:dataTable>
 ...]]></programlisting>
 
-    <para>And finally, as a listener, this listener will implement the dropped element:</para>
+		<para>
+			And finally, as a listener, this listener will implement the
+			dropped element:
+		</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="JAVA"><![CDATA[...
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="JAVA"><![CDATA[...
     public void addCapital2(DropEvent event) {
         FacesContext context = FacesContext.getCurrentInstance();
         Capital cap = new Capital();
@@ -199,62 +252,115 @@ HtmlDropSupport myDragZone = new HtmlDropSupport();
 ...
 ]]></programlisting>
 
-    <para>Here is the result after a few drops of items from the first table:</para>
+		<para>
+			Here is the result after a few drops of items from the first
+			table:
+		</para>
 
-    <figure>
-      <title>Results of drop actions</title>
+		<figure>
+			<title>Results of drop actions</title>
 
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/dropSupport2.png"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/dropSupport2.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
 
-    <para>In this example, items are dragged element-by-element from the rendered list in the first
-      table and dropped on a panel in the middle. After each drop, a drop event is generated and a
-      common Ajax request is performed that renders results in the third table.</para>
+		<para>
+			In this example, items are dragged element-by-element from
+			the rendered list in the first table and dropped on a panel
+			in the middle. After each drop, a drop event is generated
+			and a common Ajax request is performed that renders results
+			in the third table.
+		</para>
 
-    <para>As with every Ajax action component, <emphasis role="bold">
-        <property>&lt;rich:dropSupport&gt;</property>
-      </emphasis> has all the common attributes (<emphasis><property>"timeout"</property>,</emphasis>
-      <emphasis><property>"limitToList"</property>,</emphasis>
-      <emphasis><property>"reRender"</property>,</emphasis> etc.) for Ajax request customization.</para>
+		<para>
+			As with every Ajax action component,
+			<emphasis role="bold">
+				<property>&lt;rich:dropSupport&gt;</property>
+			</emphasis>
+			has all the common attributes (
+			<emphasis>
+				<property>"timeout"</property>
+				,
+			</emphasis>
+			<emphasis>
+				<property>"limitToList"</property>
+				,
+			</emphasis>
+			<emphasis>
+				<property>"reRender"</property>
+				,
+			</emphasis>
+			etc.) for Ajax request customization.
+		</para>
 
-    <para>Finally, the component has the following extra attributes for event processing on the
-      client:</para>
+		<para>
+			Finally, the component has the following extra attributes
+			for event processing on the client:
+		</para>
 
-    <itemizedlist>
-      <listitem><para>ondragenter</para></listitem>
+		<itemizedlist>
+			<listitem>
+				<para>ondragenter</para>
+			</listitem>
 
-      <listitem><para>ondragexit</para></listitem>
+			<listitem>
+				<para>ondragexit</para>
+			</listitem>
 
-      <listitem><para>ondrop</para></listitem>
+			<listitem>
+				<para>ondrop</para>
+			</listitem>
 
-      <listitem><para>ondropend</para></listitem>
-    </itemizedlist>
+			<listitem>
+				<para>ondropend</para>
+			</listitem>
+		</itemizedlist>
 
-    <para>Developers can use their own custom JavaScript functions to handle these events.</para>
-    <para>
-      Information about the <emphasis><property>&quot;process&quot;</property></emphasis> attribute usage you can find <link linkend="process">here</link>.
-    </para>
-  </section>
+		<para>
+			Developers can use their own custom JavaScript functions to
+			handle these events.
+		</para>
+		<para>
+			Information about the
+			<emphasis>
+				<property>&quot;process&quot;</property>
+			</emphasis>
+			attribute usage you can find
+			<link linkend="process">here</link>
+			.
+		</para>
+	</section>
 
-  <section>
-    <title>Look-and-Feel Customization</title>
+	<section>
+		<title>Look-and-Feel Customization</title>
 
-    <para><emphasis role="bold">
-      <property>&lt;rich:dropSupport&gt;</property>
-    </emphasis> has no skin parameters and custom <emphasis><property>style classes</property></emphasis>, as the
-      component isn&apos;t visual.</para>
-  </section>
-  <section>
-    <title>Relevant Resources Links</title>
-    <para>
-      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/dragSupport.jsf?c=dropSupport"
-        >Here</ulink> you can see the example of <emphasis role="bold"
-        ><property>&lt;rich:dropSupport&gt;</property></emphasis> usage and sources for the given example.
-    </para>
-  </section>
+		<para>
+			<emphasis role="bold">
+				<property>&lt;rich:dropSupport&gt;</property>
+			</emphasis>
+			has no skin parameters and custom
+			<emphasis>
+				<property>style classes</property>
+			</emphasis>
+			, as the component isn&apos;t visual.
+		</para>
+	</section>
+	<section>
+		<title>Relevant Resources Links</title>
+		<para>
+			<ulink
+				url="http://livedemo.exadel.com/richfaces-demo/richfaces/dragSupport.jsf?c=dropSupport">
+				Here
+			</ulink>
+			you can see the example of
+			<emphasis role="bold">
+				<property>&lt;rich:dropSupport&gt;</property>
+			</emphasis>
+			usage and sources for the given example.
+		</para>
+	</section>
 
 </section>

@@ -1,107 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
-  <sectioninfo>
-    <keywordset>
-      <keyword>rich:dragSupport</keyword>
+	<sectioninfo>
+		<keywordset>
+			<keyword>rich:dragSupport</keyword>
 
-      <keyword>HtmlDragSupport</keyword>
-    </keywordset>
-  </sectioninfo>
-
-
-  <table>
-    <title>Component identification parameters</title>
-
-    <tgroup cols="2">
-      <thead>
-        <row>
-          <entry>Name</entry>
-
-          <entry>Value</entry>
-        </row>
-      </thead>
-
-      <tbody>
-        <row>
-          <entry>component-type</entry>
-
-          <entry>org.richfaces.DragSupport</entry>
-        </row>
-
-        <row>
-          <entry>component-class</entry>
-
-          <entry>org.richfaces.component.html.HtmlDragSupport</entry>
-        </row>
-
-        <row>
-          <entry>component-family</entry>
-
-          <entry>org.richfaces.DragSupport</entry>
-        </row>
-
-        <row>
-          <entry>renderer-type</entry>
-
-          <entry>org.richfaces.DragSupportRenderer</entry>
-        </row>
-
-        <row>
-          <entry>tag-class</entry>
-
-          <entry>org.richfaces.taglib.DragSupportTag</entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
+			<keyword>HtmlDragSupport</keyword>
+		</keywordset>
+	</sectioninfo>
 
 
-  <section>
-    <title>Creating the Component with a Page Tag</title>
+	<table>
+		<title>Component identification parameters</title>
 
-    <para>Here is a simple example as it could be used on a page:</para>
+		<tgroup cols="2">
+			<thead>
+				<row>
+					<entry>Name</entry>
+
+					<entry>Value</entry>
+				</row>
+			</thead>
+
+			<tbody>
+				<row>
+					<entry>component-type</entry>
+
+					<entry>org.richfaces.DragSupport</entry>
+				</row>
+
+				<row>
+					<entry>component-class</entry>
+
+					<entry>
+						org.richfaces.component.html.HtmlDragSupport
+					</entry>
+				</row>
+
+				<row>
+					<entry>component-family</entry>
+
+					<entry>org.richfaces.DragSupport</entry>
+				</row>
+
+				<row>
+					<entry>renderer-type</entry>
+
+					<entry>org.richfaces.DragSupportRenderer</entry>
+				</row>
+
+				<row>
+					<entry>tag-class</entry>
+
+					<entry>org.richfaces.taglib.DragSupportTag</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="XML"><![CDATA[...
+	<section>
+		<title>Creating the Component with a Page Tag</title>
+
+		<para>
+			Here is a simple example as it could be used on a page:
+		</para>
+
+
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
     <h:panelGrid id="drag1">
         <rich:dragSupport dragType="item"/>
             <!--Some content to be dragged-->
     </h:panelGrid>
 ...
 ]]></programlisting>
-  </section>
+	</section>
 
-  <section>
-    <title>Creating the Component Dynamically Using Java</title>
+	<section>
+		<title>Creating the Component Dynamically Using Java</title>
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlDragSupport;
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlDragSupport;
 ...
 HtmlDragSupport myDragZone = new HtmlDragSupport();
 ...
 ]]></programlisting>
-  </section>
+	</section>
 
-  <section>
-    <title>Details of Usage</title>
+	<section>
+		<title>Details of Usage</title>
 
-    <para>The <property>dragSupport</property> tag inside a component completely specifies the
-      events and JavaScript required to use the component and it's children for dragging as part of
-      a drag-and-drop operation. In order to work, though, <property>dragSupport</property> must be
-      placed inside a wrapper component that outputs child components and that has the right events
-      defined on it. Thus, this example won't work, because the <property>h:column</property> tag
-      doesn't provide the necessary properties for redefining events on the client:</para>
+		<para>
+			The
+			<property>dragSupport</property>
+			tag inside a component completely specifies the events and
+			JavaScript required to use the component and it's children
+			for dragging as part of a drag-and-drop operation. In order
+			to work, though,
+			<property>dragSupport</property>
+			must be placed inside a wrapper component that outputs child
+			components and that has the right events defined on it.
+			Thus, this example won't work, because the
+			<code>h:column</code>
+			tag doesn't provide the necessary properties for redefining
+			events on the client:
+		</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="XML"><![CDATA[...
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
     <h:column>
         <rich:dragSupport dragIndicator=":form:iii" dragType="text">
             <a4j:actionParam value="#{caps.name}" name="name"/>
@@ -111,14 +124,19 @@ HtmlDragSupport myDragZone = new HtmlDragSupport();
 ...
 ]]></programlisting>
 
-    <para>However, using <property>a4j:outputPanel</property> as a wrapper inside
-      <property>h:column</property>, the following code could be used successfully:</para>
+		<para>
+			However, using
+			<property>a4j:outputPanel</property>
+			as a wrapper inside
+			<code>h:column</code>
+			, the following code could be used successfully:
+		</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="XML"><![CDATA[...
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
     <h:column>
         <a4j:outputPanel>
             <rich:dragSupport dragIndicator=":form:iii" dragType="text">
@@ -130,18 +148,26 @@ HtmlDragSupport myDragZone = new HtmlDragSupport();
 ...
 ]]></programlisting>
 
-    <para>This code makes all rows of this column draggable.</para>
+		<para>This code makes all rows of this column draggable.</para>
 
-    <para>One of the main attributes for <property>dragSupport</property> is
-          <emphasis><property>"dragType"</property>,</emphasis> which associates a name with the
-      drag zone. Only drop zones with this name as an acceptable type can be used in drag-and-drop
-      operations. Here is an example:</para>
+		<para>
+			One of the main attributes for
+			<property>dragSupport</property>
+			is
+			<emphasis>
+				<property>"dragType"</property>
+				,
+			</emphasis>
+			which associates a name with the drag zone. Only drop zones
+			with this name as an acceptable type can be used in
+			drag-and-drop operations. Here is an example:
+		</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="XML"><![CDATA[...
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
     <h:panelGrid id="drag1">
         <rich:dragSupport dragType="singleItems" .../>
         <!--Some content to be dragged-->
@@ -159,60 +185,117 @@ HtmlDragSupport myDragZone = new HtmlDragSupport();
 ...
 ]]></programlisting>
 
-    <para>In this example, the <property>drop1</property> panel grid is a drop zone that invokes
-      drag-and-drop for drops of items from the first <property>drag1</property> panel grid, but not
-      the second <property>drag2</property> panel grid. In the section about
-      <property>dropSupport</property>, you will find an example that shows more detailed
-      information about moving data between tables with drag and drop.</para>
+		<para>
+			In this example, the
+			<code>drop1</code>
+			panel grid is a drop zone that invokes drag-and-drop for
+			drops of items from the first
+			<code>drag1</code>
+			panel grid, but not the second
+			<code>drag2</code>
+			panel grid. In the section about
+			<property>dropSupport</property>
+			, you will find an example that shows more detailed
+			information about moving data between tables with drag and
+			drop.
+		</para>
 
-    <para>The <property>dragSupport</property> component also has a <emphasis>
-        <property>"value"</property>
-      </emphasis> attribute for passing data into the processing after a drop event.</para>
+		<para>
+			The
+			<property>dragSupport</property>
+			component also has a
+			<emphasis>
+				<property>"value"</property>
+			</emphasis>
+			attribute for passing data into the processing after a drop
+			event.
+		</para>
 
-    <para>One more important attribute for <emphasis role="bold">
-        <property>&lt;rich:dragSupport&gt;</property>
-      </emphasis> is the <emphasis>
-        <property>"dragIndicator"</property>
-      </emphasis> attribute that point to the component id of the <emphasis role="bold">
-        <property>&lt;rich:dragIndicator&gt;</property>
-      </emphasis> component to be used for dragged items from this drag zone. If it isn't defined, a
-      default indicator for drag operations is used.</para>
+		<para>
+			One more important attribute for
+			<emphasis role="bold">
+				<property>&lt;rich:dragSupport&gt;</property>
+			</emphasis>
+			is the
+			<emphasis>
+				<property>"dragIndicator"</property>
+			</emphasis>
+			attribute that point to the component id of the
+			<emphasis role="bold">
+				<property>&lt;rich:dragIndicator&gt;</property>
+			</emphasis>
+			component to be used for dragged items from this drag zone.
+			If it isn't defined, a default indicator for drag operations
+			is used.
+		</para>
 
-    <para>Finally, the component has the following extra attributes for event processing on the
-      client:</para>
+		<para>
+			Finally, the component has the following extra attributes
+			for event processing on the client:
+		</para>
 
-    <itemizedlist>
-      <listitem><para>ondragenter</para></listitem>
+		<itemizedlist>
+			<listitem>
+				<para>ondragenter</para>
+			</listitem>
 
-      <listitem><para>ondragexit</para></listitem>
-    </itemizedlist>
+			<listitem>
+				<para>ondragexit</para>
+			</listitem>
+		</itemizedlist>
 
-    <para>You can use your own custom JavaScript functions to handle these events.</para>
-    
-    
-    <note><title>Note:</title><para> If you define width for a outputPanel, in Internet Explorer 6 you can  
-      perform a drag and drop operation, placing the mouse cursor on the text in  the outputPanel only.</para></note>
-    <para>
-     Information about the <emphasis><property>&quot;process&quot;</property></emphasis> attribute usage you can find <link linkend="process">here</link>.
-    </para>
-  </section>
+		<para>
+			You can use your own custom JavaScript functions to handle
+			these events.
+		</para>
 
-  <section>
-    <title>Look-and-Feel Customization</title>
 
-    <para><emphasis role="bold">
-        <property>&lt;rich:dragSupport&gt;</property>
-      </emphasis> has no skin parameters and custom <property>style classes</property>, as the
-      component isn&apos;t visual.</para>
-  </section>
-  
-  <section>
-    <title>Relevant Resources Links</title>
-    <para>
-      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/dragSupport.jsf?c=dragSupport"
-        >Here</ulink> you can see the example of <emphasis role="bold">
-        <property>&lt;rich:dragSupport&gt;</property>
-      </emphasis> usage and sources for the given example. </para>
-  </section>
+		<note>
+			<title>Note:</title>
+			<para>
+				If you define width for a outputPanel, in Internet
+				Explorer 6 you can perform a drag and drop operation,
+				placing the mouse cursor on the text in the outputPanel
+				only.
+			</para>
+		</note>
+		<para>
+			Information about the
+			<emphasis>
+				<property>&quot;process&quot;</property>
+			</emphasis>
+			attribute usage you can find
+			<link linkend="process">here</link>
+			.
+		</para>
+	</section>
+
+	<section>
+		<title>Look-and-Feel Customization</title>
+
+		<para>
+			<emphasis role="bold">
+				<property>&lt;rich:dragSupport&gt;</property>
+			</emphasis>
+			has no skin parameters and custom
+			<property>style classes</property>
+			, as the component isn&apos;t visual.
+		</para>
+	</section>
+
+	<section>
+		<title>Relevant Resources Links</title>
+		<para>
+			<ulink
+				url="http://livedemo.exadel.com/richfaces-demo/richfaces/dragSupport.jsf?c=dragSupport">
+				Here
+			</ulink>
+			you can see the example of
+			<emphasis role="bold">
+				<property>&lt;rich:dragSupport&gt;</property>
+			</emphasis>
+			usage and sources for the given example.
+		</para>
+	</section>
 
 </section>

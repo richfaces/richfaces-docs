@@ -1,87 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
-    <sectioninfo>
-        <keywordset>
-            <keyword>rich:columns</keyword>
-            <keyword>columns</keyword>
-        </keywordset>
-    </sectioninfo>
-    <table>
-        <title>Component identification parameters</title>
-        
-        <tgroup cols="2">
-            <thead>
-                <row>
-                    <entry>Name</entry>
-                    <entry>Value</entry>
-                </row>
-            </thead>
-            <tbody>
-                <row>
-                    <entry>component-type</entry>
-                    <entry>org.richfaces.Column</entry>
-                </row>
-                <!--row>
-                    <entry>component-class</entry>
-                    <entry></entry>
-                </row>
-                <row>
-                    <entry>component-family</entry>
-                    <entry></entry>
-                </row>
-                <row>
-                    <entry>renderer-type</entry>
-                    <entry></entry>
-                </row-->
-                <row>
-                    <entry>tag-class</entry>
-                    <entry>org.richfaces.taglib.ColumnsTagHandler</entry>
-                </row>
-            </tbody>
-        </tgroup>
-    </table>
-    <section>
-        <title>Creating the Component with a Page Tag</title>
-        <para>To create the simplest variant on a page use the following syntax:</para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+	<sectioninfo>
+		<keywordset>
+			<keyword>rich:columns</keyword>
+			<keyword>columns</keyword>
+		</keywordset>
+	</sectioninfo>
+	<table>
+		<title>Component identification parameters</title>
+
+		<tgroup cols="2">
+			<thead>
+				<row>
+					<entry>Name</entry>
+					<entry>Value</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>component-type</entry>
+					<entry>org.richfaces.Column</entry>
+				</row>
+				<!--row>
+					<entry>component-class</entry>
+					<entry></entry>
+					</row>
+					<row>
+					<entry>component-family</entry>
+					<entry></entry>
+					</row>
+					<row>
+					<entry>renderer-type</entry>
+					<entry></entry>
+					</row-->
+				<row>
+					<entry>tag-class</entry>
+					<entry>
+						org.richfaces.taglib.ColumnsTagHandler
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<section>
+		<title>Creating the Component with a Page Tag</title>
+		<para>
+			To create the simplest variant on a page use the following
+			syntax:
+		</para>
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
 <rich:dataTable value="#{capitalsBean.capitals}" var="cap">
         <rich:columns value="#{capitalsBean.labels}" var="col" index="index">
                 <h:outputText value="#{cap[index]}" />
         </rich:columns>	
 </rich:dataTable>
 ...]]></programlisting>
-    </section>
-    <section>
-        <title>Creating the Component Dynamically Using Java</title>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlColumns;
+	</section>
+	<section>
+		<title>Creating the Component Dynamically Using Java</title>
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlColumns;
 ...	
 HtmlColumns myColumns = new HtmlColumns();
 ...]]></programlisting>
-    </section>
-    <section>
-        <title>Details of Usage</title>
-        <para>The <emphasis role="bold">
-            <property>&lt;rich:columns&gt;</property>
-        </emphasis> component gets a list from data model and outputs corresponding set of columns inside 
-            <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> on a page. 
-            It is possible to use <emphasis><property>&quot;header&quot;</property></emphasis> and <emphasis><property>&quot;footer&quot; </property></emphasis> facets
-            with <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> component.
-        </para>
-        <para>
-            The <emphasis><property>&quot;value&quot;</property></emphasis> and  <emphasis><property>&quot;var&quot;</property></emphasis>attributes 
-            are used to access the values of collection.
-        </para>
-        <para>The simple example is placed below.</para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+	</section>
+	<section>
+		<title>Details of Usage</title>
+		<para>
+			The
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			component gets a list from data model and outputs
+			corresponding set of columns inside
+			<emphasis role="bold">
+				<property>&lt;rich:dataTable&gt;</property>
+			</emphasis>
+			on a page. It is possible to use
+			<emphasis>
+				<property>&quot;header&quot;</property>
+			</emphasis>
+			and
+			<emphasis>
+				<property>&quot;footer&quot;</property>
+			</emphasis>
+			facets with
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			component.
+		</para>
+		<para>
+			The
+			<emphasis>
+				<property>&quot;value&quot;</property>
+			</emphasis>
+			and
+			<emphasis>
+				<property>&quot;var&quot;</property>
+			</emphasis>
+			attributes are used to access the values of collection.
+		</para>
+		<para>The simple example is placed below.</para>
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
 <rich:dataTable value="#{capitalsBean.capitals}" var="cap">
         <rich:columns value="#{capitalsBean.labels}" var="col" index="index">
                 <f:facet name="header">
@@ -94,26 +123,46 @@ HtmlColumns myColumns = new HtmlColumns();
         </rich:columns>	
 </rich:dataTable>
 ...]]></programlisting>
-        <para>
-            The <emphasis><property>&quot;columns&quot;</property></emphasis> attribute defines the count of columns.
-        </para>
-        <para>
-            The <emphasis><property>&quot;rows&quot;</property></emphasis> attribute defines the number of rows to be displayed. If the value of this attribute is zero, 
-            all remaining rows in the table are displayed on a page.
-        </para>
-        <para>
-            The <emphasis><property>&quot;begin&quot;</property></emphasis> attribute contains the first iteration item. Note, that iteration begins from zero.
-        </para>
-        <para>
-            The <emphasis><property>&quot;end&quot;</property></emphasis> attribute contains the last iteration item.
-        </para>
-        <para>
-            With the help of the attributes described below you can customize the output, i.e. define which columns and how many rows appear on a page.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+		<para>
+			The
+			<emphasis>
+				<property>&quot;columns&quot;</property>
+			</emphasis>
+			attribute defines the count of columns.
+		</para>
+		<para>
+			The
+			<emphasis>
+				<property>&quot;rows&quot;</property>
+			</emphasis>
+			attribute defines the number of rows to be displayed. If the
+			value of this attribute is zero, all remaining rows in the
+			table are displayed on a page.
+		</para>
+		<para>
+			The
+			<emphasis>
+				<property>&quot;begin&quot;</property>
+			</emphasis>
+			attribute contains the first iteration item. Note, that
+			iteration begins from zero.
+		</para>
+		<para>
+			The
+			<emphasis>
+				<property>&quot;end&quot;</property>
+			</emphasis>
+			attribute contains the last iteration item.
+		</para>
+		<para>
+			With the help of the attributes described below you can
+			customize the output, i.e. define which columns and how many
+			rows appear on a page.
+		</para>
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
 <rich:dataTable value="#{capitalsBean.capitals}" var="cap">
         <rich:columns value="#{capitalsBean.labels}" var="col" index="index" rows="0" columns="3" begin="1" end="2">
                 <f:facet name="header">
@@ -123,30 +172,45 @@ HtmlColumns myColumns = new HtmlColumns();
         </rich:columns>	
 </rich:dataTable>
 ...]]></programlisting>
-        <para>
-            In the example below, columns from first to second and all rows are shown in the 
-        <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis>.   
-        </para>
-        <para>
-            The result is:
-        </para>
-        <figure>
-            <title>Generated <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> with columns from first to second and all rows</title>
-            <mediaobject> 
-                <imageobject>
-                    <imagedata fileref="images/columns2.png"/>
-                </imageobject>
-            </mediaobject>
-            </figure>
-        <para>
-            The <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> component does not prevent to use 
-            <emphasis role="bold"><property>&lt;rich:column&gt;</property></emphasis>. 
-            In the following example one column renders in any way and another columns could be picked from the model.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+		<para>
+			In the example below, columns from first to second and all
+			rows are shown in the
+			<emphasis role="bold">
+				<property>&lt;rich:dataTable&gt;</property>
+			</emphasis>
+			.
+		</para>
+		<para>The result is:</para>
+		<figure>
+			<title>
+				Generated
+				<emphasis role="bold">
+					<property>&lt;rich:columns&gt;</property>
+				</emphasis>
+				with columns from first to second and all rows
+			</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/columns2.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>
+			The
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			component does not prevent to use
+			<emphasis role="bold">
+				<property>&lt;rich:column&gt;</property>
+			</emphasis>
+			. In the following example one column renders in any way and
+			another columns could be picked from the model.
+		</para>
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
 <rich:dataTable value="#{rowBean.rows}" var="row">
         <rich:column>
                 <h:outputText value ="#{row.columnValue}"/>
@@ -162,17 +226,24 @@ HtmlColumns myColumns = new HtmlColumns();
         </rich:columns>
 </rich:dataTable>	
 ...]]></programlisting>
-        
-        <para>In order to group columns with text information into one row, use
-            the <emphasis ><property>&quot;colspan&quot;</property></emphasis> attribute, which is similar to an HTML one. 
-            In the following example the third column contains 3 columns.
-            In addition, it&apos;s necessary to specify that the next column begins from the first row with the help of the
-            <emphasis ><property>&quot;breakBefore&quot;</property></emphasis> attribute = true.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+
+		<para>
+			In order to group columns with text information into one
+			row, use the
+			<emphasis>
+				<property>&quot;colspan&quot;</property>
+			</emphasis>
+			attribute, which is similar to an HTML one. In the following
+			example the third column contains 3 columns. In addition,
+			it&apos;s necessary to specify that the next column begins
+			from the first row with the help of the
+			<code>breakBefore = &quot;true&quot;</code>
+			.
+		</para>
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
 <rich:dataTable value="#{columns.data1}" var="data">
         <rich:column>
                 <h:outputText value="#{column.Item1}" />
@@ -189,24 +260,32 @@ HtmlColumns myColumns = new HtmlColumns();
 </rich:dataTable>
 ...
 ]]></programlisting>
-        
-        <!--para>As a result the following structure is rendered:</para>
-        <figure>
-            <title>&lt;rich:column&gt; modified with colspan and breakbefore attributes</title>
-            <mediaobject> 
-                <imageobject>
-                    <imagedata fileref="images/column3.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure-->
-        
-        <para>The same way is used for <property>columns</property> grouping with the <emphasis ><property>&quot;rowspan&quot;</property></emphasis> 
-            attribute that is similar to an HTML. The only thing to add in the example is an instruction to move onto the next row for each next after the second column.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+
+		<!--para>As a result the following structure is rendered:</para>
+			<figure>
+			<title>&lt;rich:column&gt; modified with colspan and breakbefore attributes</title>
+			<mediaobject> 
+			<imageobject>
+			<imagedata fileref="images/column3.png"/>
+			</imageobject>
+			</mediaobject>
+			</figure-->
+
+		<para>
+			The same way is used for
+			<property>columns</property>
+			grouping with the
+			<emphasis>
+				<property>&quot;rowspan&quot;</property>
+			</emphasis>
+			attribute that is similar to an HTML. The only thing to add
+			in the example is an instruction to move onto the next row
+			for each next after the second column.
+		</para>
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
 <rich:dataTable value="#{columns.data1}" var="data">
         <rich:columns columns="2" rowspan="3">	
                 <h:outputText value="#{data.str0}" />
@@ -223,129 +302,208 @@ HtmlColumns myColumns = new HtmlColumns();
 </rich:dataTable>
 ...
 ]]></programlisting>
-        
-        <!--para>As a result:</para>
-        <figure>
-            <title>&lt;rich:column&gt; generated with rowspan attribute</title>
-            <mediaobject> 
-                <imageobject>
-                    <imagedata fileref="images/column4.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure-->        
-        <para>Information about sorting and filtering you can find <link linkend="sortAndFilter">here</link>.</para>      
 
-    </section>
-    
-    <section>
-        <title>Look-and-Feel Customization</title>
-        
-        <para>For skinnability implementation, the components use a <emphasis>
-            <property>style class redefinition method.</property>
-        </emphasis> Default style classes are mapped on <emphasis>
-            <property>skin parameters.</property>
-        </emphasis></para>
-        <para>There are two ways to redefine the appearance of all <emphasis role="bold">
-            <property>&lt;rich:columns&gt;</property>
-        </emphasis> components at once:</para>
-        <itemizedlist>
-            <listitem>
-                <para>Redefine the corresponding skin parameters</para>
-            </listitem>
-            <listitem>
-                <para>Add to your style sheets <emphasis>
-                    <property>style classes</property>
-                </emphasis> used by a <emphasis role="bold">
-                    <property>&lt;rich:columns&gt;</property>
-                </emphasis> component</para>
-            </listitem>
-        </itemizedlist>
-    </section>
-    <section>
-        <title>Skin Parameters Redefinition</title>
-        
-        <para>Skin parameters redefinition for <emphasis role="bold">
-            <property>&lt;rich:columns&gt;</property>
-        </emphasis> are the same as for the <emphasis role="bold">
-            <property>&lt;rich:dataTable&gt;</property>
-        </emphasis> <link linkend="SPR">component</link>.</para>
-    </section>
-    <section>
-        <title>Definition of Custom Style Classes</title>
-        
-        <para>Custom style classes for <emphasis role="bold">
-            <property>&lt;rich:columns&gt;</property>
-        </emphasis> are the same as for  the <emphasis role="bold">
-            <property>&lt;rich:dataTable&gt;</property>
-        </emphasis> <link linkend="DofCCS">component</link>.
-        </para>
-        
-        <para>In order to redefine styles for all <emphasis role="bold">
-            <property>&lt;rich:columns&gt;</property>
-        </emphasis> components on a page using CSS, it&apos;s enough to create classes with the
-            same names (possible classes could be found in the tables <link linkend="SPR"> above</link>) and define necessary properties in them. </para>
-        
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="CSS"><![CDATA[...
+		<!--para>As a result:</para>
+			<figure>
+			<title>&lt;rich:column&gt; generated with rowspan attribute</title>
+			<mediaobject> 
+			<imageobject>
+			<imagedata fileref="images/column4.png"/>
+			</imageobject>
+			</mediaobject>
+			</figure-->
+		<para>
+			Information about sorting and filtering you can find
+			<link linkend="sortAndFilter">here</link>
+			.
+		</para>
+
+	</section>
+
+	<section>
+		<title>Look-and-Feel Customization</title>
+
+		<para>
+			For skinnability implementation, the components use a
+			<emphasis>
+				<property>style class redefinition method.</property>
+			</emphasis>
+			Default style classes are mapped on
+			<emphasis>
+				<property>skin parameters.</property>
+			</emphasis>
+		</para>
+		<para>
+			There are two ways to redefine the appearance of all
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			components at once:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>Redefine the corresponding skin parameters</para>
+			</listitem>
+			<listitem>
+				<para>
+					Add to your style sheets
+					<emphasis>
+						<property>style classes</property>
+					</emphasis>
+					used by a
+					<emphasis role="bold">
+						<property>&lt;rich:columns&gt;</property>
+					</emphasis>
+					component
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+	<section>
+		<title>Skin Parameters Redefinition</title>
+
+		<para>
+			Skin parameters redefinition for
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			are the same as for the
+			<emphasis role="bold">
+				<property>&lt;rich:dataTable&gt;</property>
+			</emphasis>
+			<link linkend="SPR">component</link>
+			.
+		</para>
+	</section>
+	<section>
+		<title>Definition of Custom Style Classes</title>
+
+		<para>
+			Custom style classes for
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			are the same as for the
+			<emphasis role="bold">
+				<property>&lt;rich:dataTable&gt;</property>
+			</emphasis>
+			<link linkend="DofCCS">component</link>
+			.
+		</para>
+
+		<para>
+			In order to redefine styles for all
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			components on a page using CSS, it&apos;s enough to create
+			classes with the same names (possible classes could be found
+			in the tables
+			<link linkend="SPR">above</link>
+			) and define necessary properties in them.
+		</para>
+
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="CSS"><![CDATA[...
 .rich-table-subheadercell{
         color: #a0a0a0;
 }	
-...]]></programlisting>  
-        
-        <para>This is a result:</para>
-        
-        <figure>
-            <title>Redefinition styles with predefined classes</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/columns_pc.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>
-        
-        <para>In the example column header cells color was changed.</para>
-        
-        <para>Also it’s possible to change styles of particular <emphasis role="bold"
-            ><property>&lt;rich:columns&gt;</property></emphasis> component. In this case you should create own style classes and use them in corresponding <emphasis role="bold"
-                ><property>&lt;rich:columns&gt;</property></emphasis> <emphasis><property>styleClass</property></emphasis> attributes. An example is placed below:</para>
-        
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="CSS"><![CDATA[...
+...]]></programlisting>
+
+		<para>This is a result:</para>
+
+		<figure>
+			<title>Redefinition styles with predefined classes</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/columns_pc.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+
+		<para>
+			In the example column header cells color was changed.
+		</para>
+
+		<para>
+			Also it’s possible to change styles of particular
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			component. In this case you should create own style classes
+			and use them in corresponding
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			<emphasis>
+				<property>styleClass</property>
+			</emphasis>
+			attributes. An example is placed below:
+		</para>
+
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="CSS"><![CDATA[...
 .myClass {
         font-style: oblique;
 }
-...]]></programlisting>  
-        <para>The <emphasis><property>&quot;styleClass&quot;</property></emphasis> attribute for <emphasis role="bold"
-            ><property>&lt;rich:columns&gt; </property></emphasis> is defined as it’s shown in the example below:</para>
-        
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[<rich:columns  styleClass="myClass">
-]]></programlisting>    
-        
-        <para>This is a result:</para>
-        
-        <figure>
-            <title>Redefinition styles with own classes and <emphasis><property>styleClass</property></emphasis> attributes</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/columns_oc.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>  
-        
-        <para>As it could be seen on the picture above, the font style for columns was changed.</para>
-    </section>
-    
-    <section>
-        <title>Relevant Resources Links</title>
-        <para><ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/dataTable.jsf?c=columns"
-            >Here</ulink> you can found some additional information for <emphasis role="bold"
-                ><property>&lt;rich:columns&gt;</property></emphasis> component usage. </para>
-    </section>   
-    </section>
+...]]></programlisting>
+		<para>
+			The
+			<emphasis>
+				<property>&quot;styleClass&quot;</property>
+			</emphasis>
+			attribute for
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			is defined as it’s shown in the example below:
+		</para>
+
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[<rich:columns  styleClass="myClass">
+]]></programlisting>
+
+		<para>This is a result:</para>
+
+		<figure>
+			<title>
+				Redefinition styles with own classes and
+				<emphasis>
+					<property>styleClass</property>
+				</emphasis>
+				attributes
+			</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/columns_oc.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+
+		<para>
+			As it could be seen on the picture above, the font style for
+			columns was changed.
+		</para>
+	</section>
+
+	<section>
+		<title>Relevant Resources Links</title>
+		<para>
+			<ulink
+				url="http://livedemo.exadel.com/richfaces-demo/richfaces/dataTable.jsf?c=columns">
+				Here
+			</ulink>
+			you can found some additional information for
+			<emphasis role="bold">
+				<property>&lt;rich:columns&gt;</property>
+			</emphasis>
+			component usage.
+		</para>
+	</section>
+</section>
