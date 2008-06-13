@@ -106,21 +106,21 @@ HtmlCalendar myCalendar = new HtmlCalendar();
       </emphasis> component can render pages of days in two modes. A mode could be
       defined with the <emphasis>
         <property>&quot;mode&quot;</property>
-      </emphasis> attribute with two possible parameters: &quot;ajax&quot; and &quot;client&quot;. Default value is 
+      </emphasis> attribute with two possible parameters: &quot;<code>ajax</code>&quot; and &quot;<code>client</code>&quot;. Default value is 
        &quot;client&quot;.</para>
     <itemizedlist>
       <listitem>
-        <para>Ajax</para>
+        <para><code>Ajax</code></para>
       </listitem>
     </itemizedlist>
     <para>Calendar requests portions of data from Data Model for a page rendering. If <emphasis>
         <property>&quot;dataModel&quot;</property>
       </emphasis> attribute has <property>&quot;null&quot;</property> value, data requests
-      are not sent. In this case the &quot;ajax&quot; mode is equal to the
-      &quot;client&quot;. </para>
+      are not sent. In this case the &quot;<code>ajax</code>&quot; mode is equal to the
+      &quot;<code>client</code>&quot;. </para>
     <itemizedlist>
       <listitem>
-        <para>Client</para>
+        <para><code>Client</code></para>
       </listitem>
     </itemizedlist>
     <para>Calendar loads an initial portion of data in a specified range and use this data to render
@@ -244,8 +244,17 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
       This attribute defines the parameters of localized error and informational messages that
       occur as a result of conversion, validation, or other application actions during the request
       processing lifecycle. With the help of this attribute you can  replace the
-      last parameter substitution token shown in the messages. For example, {1} for “DoubleRangeValidator.MAXIMUM”, {2}
-      for “ShortConverter.SHORT”.
+      last parameter substitution token shown in the messages. For example, {1} for <code>&quot;DoubleRangeValidator.MAXIMUM&quot;</code>, {2}
+      for <code>&quot;ShortConverter.SHORT&quot;</code>.
+    </para>
+    <para>
+    	<emphasis><property>&quot;defaultTime&quot;</property></emphasis> attribute defines the default 
+    	time for newly-selected dates if <code>resetTimeOnDateSelect = &quot;true&quot;</code>.
+    	In order to define default time for a choosen date should be used defaultTime attribute 
+
+<emphasis><property>&quot;resetTimeOnDateSelect&quot;</property></emphasis> attribute responsible for reset of 
+time during date change. If &quot;true&quot; - time will be reset to <emphasis><property>&quot;defaultTime&quot;</property></emphasis> 
+after date changed. 	
     </para>
     <para>The <emphasis role="bold">
         <property>&lt;rich:calendar&gt;</property>
@@ -258,16 +267,16 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
       </emphasis>, <emphasis>
         <property>&quot;optionalFooter&quot;</property>
       </emphasis> facets. The following elements are available in these facets:
-      {currentMonthControl}, {nextMonthControl}, {nextYearControl}, {previousYearControl},
-      {previousMonthControl}, {todayControl}, {selectedDateControl}. These elements could be used
+      <code>{currentMonthControl}</code>, <code>{nextMonthControl}</code>, <code>{nextYearControl}</code>, <code>{previousYearControl}</code>,
+      <code>{previousMonthControl}</code>, <code>{todayControl}</code>, <code>{selectedDateControl}</code>. These elements could be used
       for labels output.</para>
     <para>Also you can use <emphasis>
         <property>&quot;weekNumber&quot;</property>
-      </emphasis> facet with available {weekNumber}, {elementId} elements and <emphasis>
+      </emphasis> facet with available <code>{weekNumber}</code>, <code>{elementId}</code> elements and <emphasis>
         <property>&quot;weekDay&quot;</property>
-      </emphasis> facet with {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber}, {isWeekend},
-      {elementId} elements. {weekNumber}, {weekDayLabel}, {weekDayLabelShort}, {weekDayNumber}
-      elements could be used for labels output, {isWeekend}, {elementId} - for additional processing
+      </emphasis> facet with <code>{weekDayLabel}</code>, <code>{weekDayLabelShort}</code>, <code>{weekDayNumber}</code>, <code>{isWeekend}</code>,
+      <code>{elementId}</code> elements. <code>{weekNumber}</code>, <code>{weekDayLabel}</code>, <code>{weekDayLabelShort}</code>, <code>{weekDayNumber}</code>
+      elements could be used for labels output, <code>{isWeekend}</code>, <code>{elementId}</code> - for additional processing
       in JavaScript code.</para>
      <para>These elements are shown on the picture below.</para>
 
@@ -340,14 +349,14 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
       </mediaobject>
     </figure>
 
-    <para>As it&apos;s shown on the picture above {selectedDateControl}, {todayControl} elements
+    <para>As it&apos;s shown on the picture above <code>{selectedDateControl}</code>, <code>{todayControl}</code> elements
       are placed in the <emphasis>
         <property>&quot;header&quot;</property>
-      </emphasis> facet, {previousMonthControl}, {currentMonthControl}, {nextMonthControl} - in the <emphasis>
+      </emphasis> facet, <code>{previousMonthControl}</code>, <code>{currentMonthControl}</code>, <code>{nextMonthControl}</code> - in the <emphasis>
         <property>&quot;footer&quot;</property>
-      </emphasis> facet, {weekDayLabelShort} - in the <emphasis>
+      </emphasis> facet, <code>{weekDayLabelShort}</code> - in the <emphasis>
         <property>&quot;weekDay&quot;</property>
-      </emphasis> facet, {nextYearControl}, {previousYearControl} are absent. Numbers of weeks are
+      </emphasis> facet, <code>{nextYearControl}</code>, <code>{previousYearControl}</code> are absent. Numbers of weeks are
       red colored.</para>
 
     <para>
@@ -365,7 +374,7 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
     <para>Also the <emphasis role="bold">
         <property>&lt;rich:calendar&gt;</property>
       </emphasis> component allows to show and manage time. It&apos;s necessary to define time
-      in a pattern (for example, it could be defined as &quot;d/M/yy HH:mm&quot;). Then after
+      in a pattern (for example, it could be defined as &quot;<code>d/M/yy HH:mm</code>&quot;). Then after
       you choose some data in the calendar, it becomes possible to manage time for this date. For time editing
       it&apos;s necessary to click on its field (see a picture below). To clean the field click
       on the &quot;Clean&quot;.</para>
@@ -408,7 +417,7 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
     </itemizedlist>
     <para><property>CalendarDataModel</property> provides the following function:</para>
     <itemizedlist>
-      <listitem><para>CalendarDataModelItem[] getData(Date[]);</para></listitem>
+      <listitem><para><code>CalendarDataModelItem[] getData(Date[])</code>;</para></listitem>
     </itemizedlist>
     <para>This method is called when it&apos;s necessary to represent the next block of
       CalendarDataItems. It happens during navigation to the next (previous) month or in any other
@@ -417,17 +426,17 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
       </emphasis> mode when the calendar renders a new page. </para>
     <para><property>CalendarDataModelItem</property> provides the following function:</para>
     <itemizedlist>
-      <listitem><para>Date getDate() - returns date from the item. Default implementation returns date.</para></listitem>
-      <listitem><para>Boolean isEnabled() - returns <emphasis>
+      <listitem><para>Date <code>getDate()</code> - returns date from the item. Default implementation returns date.</para></listitem>
+      <listitem><para>Boolean <code>isEnabled()</code> - returns <emphasis>
           <property>&quot;true&quot;</property>
         </emphasis> if date is <emphasis>
           <property>&quot;selectable&quot;</property>
         </emphasis> on the calendar. Default implementation returns &quot;true&quot;.</para></listitem>
-      <listitem><para>String getStyleClass() - returns string appended to the style class for the date
+      <listitem><para>String <code>getStyleClass()</code> - returns string appended to the style class for the date
         span. For example it could be &quot;relevant holyday&quot;. It means that the class
         could be defined like the &quot;rich-cal-day-relevant-holyday&quot; one. Default
         implementation returns empty string.</para></listitem>
-      <listitem><para>Object getData() - returns any additional payload that must be JSON-serializable
+      <listitem><para>Object <code>getData()</code> - returns any additional payload that must be JSON-serializable
         object. It could be used in the custom date representation on the calendar (inside the
         custom facet).</para></listitem>
     </itemizedlist>
@@ -437,14 +446,14 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
         <property>&lt;rich:calendar&gt;</property>
       </emphasis> component provides the possibility to use internationalization method to redefine and localize the labels. 
       You could use application resource bundle and define 
-      <property>RICH_CALENDAR_APPLY_LABEL</property>,
-      <property>RICH_CALENDAR_TODAY_LABEL</property>,
-      <property>RICH_CALENDAR_CLOSE_LABEL</property>,
-      <property>RICH_CALENDAR_OK_LABEL</property>,
-      <property>RICH_CALENDAR_CLEAN_LABEL</property>,
-      <property>RICH_CALENDAR_CANCEL_LABEL </property> there. 
+      <code>RICH_CALENDAR_APPLY_LABEL</code>,
+      <code>RICH_CALENDAR_TODAY_LABEL</code>,
+      <code>RICH_CALENDAR_CLOSE_LABEL</code>,
+      <code>RICH_CALENDAR_OK_LABEL</code>,
+      <code>RICH_CALENDAR_CLEAN_LABEL</code>,
+      <code>RICH_CALENDAR_CANCEL_LABEL </code> there. 
     </para>
-    <para>You could also pack <property>org.richfaces.renderkit.calendar</property> <ulink url="http://labs.jboss.com/file-access/default/members/jbossrichfaces/freezone/docs/apidoc/org/richfaces/renderkit/CalendarRendererBase.html#CALENDAR_BUNDLE"
+    <para>You could also pack <code>org.richfaces.renderkit.calendar</code> <ulink url="http://labs.jboss.com/file-access/default/members/jbossrichfaces/freezone/docs/apidoc/org/richfaces/renderkit/CalendarRendererBase.html#CALENDAR_BUNDLE"
       >resource</ulink> bundle with your JARs defining the same properties.
     </para>
   </section>
