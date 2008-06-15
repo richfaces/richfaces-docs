@@ -159,32 +159,109 @@ HtmlDatascroller myScroll = new HtmlDatascroller();
       <property>&quot;fastStep&quot;</property>
     </emphasis> attribute is used. The attribute indicates pages quantity to switch onto when fast
       scrolling is used. </para>
-    <para>The <emphasis>
-      <property>&quot;pageIndexVar&quot;</property>
-    </emphasis> and <emphasis>
-      <property>&quot;pagesVar&quot;</property>
-    </emphasis> attributes provide an ability to show the current page and the number of pages in
-      the datascroller. These attributes are used for definition the names of variables, that is used in the facet with name<emphasis>
-        <property>&quot;pages&quot;.</property>
-      </emphasis> An example can be found below: </para>
+      
+    <para>
+    	The <emphasis><property>&quot;page&quot;</property></emphasis> is a value-binding attribute used to
+    	define and save current page number. The example is placed below.
+    </para>  
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
-    <programlisting role="XML"><![CDATA[ ...
-      <h:form>
-            <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5">
-                  <rich:column>
-                         <h:outputText value="#{cap.name}"></h:outputText>
-                  </rich:column>
-                  <f:facet name="footer">
-                        <rich:datascroller pageIndexVar="pageIndex" pagesVar="pages">
-                                <f:facet name="pages">
-                                      <h:outputText value="#{pageIndex} / #{pages}"></h:outputText>
-                                </f:facet>
-                        </rich:datascroller>
-                  </f:facet>
-            </rich:dataTable>
-      </h:form>
+    <programlisting role="XML"><![CDATA[...
+<h:form id="myForm">
+	<rich:dataTable id="carList" rows="7" value="#{dataTableScrollerBean.allCars}" var="category">
+		<f:facet name="header">
+			<rich:columnGroup>
+				<h:column>
+					<h:outputText value="Make" />
+				</h:column>
+				<h:column>
+					<h:outputText value="Model" />
+				</h:column>
+				<h:column>
+					<h:outputText value="Price" />
+				</h:column>
+			</rich:columnGroup>
+		</f:facet>
+		<h:column>
+			<h:outputText value="#{category.make}" />
+		</h:column>
+		<h:column>
+			<h:outputText value="#{category.model}" />
+		</h:column>
+		<h:column>
+			<h:outputText value="#{category.price}" />
+		</h:column>
+	</rich:dataTable>
+	<rich:datascroller id="sc2" for="carList" reRender="sc1" maxPages="7"
+					page="#{dataTableScrollerBean.scrollerPage}" />
+	<h:panelGrid>
+		<h:panelGroup>
+			<h:outputText value="Set current page number: " />
+			<h:inputText value="#{dataTableScrollerBean.scrollerPage}" id="sc1" size="1"/>
+			<h:commandButton value="Set" />	
+		</h:panelGroup>
+	</h:panelGrid>
+</h:form>      
+...
+]]></programlisting>
+
+	<para>
+	 In the example above you can enter the page number you want and set it by clicking 
+	 on the <emphasis role="bold"><property>&lt;h:commandButton&gt;</property></emphasis>. By the way, 
+	 current page number in the input field changes 
+	 if you use <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> page links.
+	</para>
+	<para>
+	 This is a result:
+	</para>
+	<figure>
+      <title>The <emphasis><property>&quot;page&quot;</property></emphasis> attribute usage</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/datascroller3.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <!--
+    	The <emphasis><property>&quot;pageIndexVar&quot;</property></emphasis> and <emphasis>
+      <property>&;pagesVar&quot;</property>
+    </emphasis> attributes provide an ability to show the current page and the number of pages in
+      the <emphasis role="bold">
+      <property>&lt;rich:datascroller&gt;</property>
+    </emphasis>. 
+    -->
+    
+    
+    <para>
+	    The <emphasis><property>&quot;pageIndexVar&quot;</property></emphasis> 
+	    and <emphasis><property>&quot;pagesVar&quot;</property></emphasis> attributes 
+	    defines a request scope variables and provide an ability to show the current page
+	    and the number of pages in the 
+	    <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis>.
+    </para>
+    <para>
+    	These attributes are used for definition the names of variables, 
+    	that is used in the facet with name <emphasis><property>&quot;pages&quot;</property></emphasis>.
+    	An example can be found below: </para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+<h:form>
+	<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5">
+		<rich:column>
+			<h:outputText value="#{cap.name}" />
+		</rich:column>
+		<f:facet name="footer">
+			<rich:datascroller pageIndexVar="pageIndex" pagesVar="pages">
+				<f:facet name="pages">
+					<h:outputText value="#{pageIndex} / #{pages}" />
+				</f:facet>
+			</rich:datascroller>
+		</f:facet>
+	</rich:dataTable>
+</h:form>
 ...
 ]]></programlisting>
     <para> It&apos;s possible to insert optional separators between controls. For this purpose use a <emphasis>
