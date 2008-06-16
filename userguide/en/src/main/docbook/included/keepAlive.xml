@@ -59,32 +59,39 @@ AjaxKeepAlive myKeepAlive = new AjaxKeepAlive();
   <section>
     <title>Key attributes and ways of usage</title>
 	<para>
-	  If a managed bean is declared with <property>request</property> scope in the configuration file with the help of <property>managed-bean-scope</property> tag then the life-time of
+	  If a managed bean is declared with <property>request</property> scope in the configuration file with the help of 
+	  <emphasis role="bold"><property>&lt;managed-bean-scope&gt;</property></emphasis> tag then the life-time of
 	 this bean instance is valid only for the current request.
 	 Any attempts to make a reference to the bean instance after the request end will throw in Illegal Argument Exception by the server.
-	To avoid these kinds of Exception, component
-	<emphasis role="bold"><property>&lt;a4j:keepAlive&gt;</property>
-	</emphasis>  is used to maintain the state of the whole bean object among subsequent request. 
+	To avoid these kinds of Exception, component <emphasis role="bold"><property>&lt;a4j:keepAlive&gt;</property></emphasis>  
+	is used to maintain the state of the whole bean object among subsequent request. 
 	</para>
 
-	<para><emphasis role="bold">Example:</emphasis></para>
+	<para>
+		<emphasis role="bold">Example:</emphasis>
+	</para>
 
 	<programlisting role="XML"><![CDATA[<a4j:keepAlive beanName = "#{myClass.testBean}"/>]]></programlisting>
 
 	<para>
-	  Note that the attribute <emphasis><property>&quot;beanName&quot;</property></emphasis> must point to a legal jsf EL expression which resolves to a managed mean instance. For example for
-	the above code the class definition may look like this:</para>
-
+	The <emphasis><property>&quot;beanName&quot;</property></emphasis> attribute defines the request scope bean name you&apos;d like  
+	to re-use. Note that this attribute must point to a legal JSF EL expression which resolves to a managed mean instance. For example for
+	the above code the class definition may look like this one:
+	</para>
 	<programlisting role="JAVA"><![CDATA[
-        class MyClass{
+class MyClass{
 	...
 	private TestBean testBean;
 	// Getters and Setters for testBean.
 	...
 }
-	]]></programlisting>
-
-
+]]></programlisting>
+	<para>
+		The <emphasis><property>&quot;ajaxOnly&quot;</property></emphasis> attribute 
+		declares whether the value of the bean should be available during a non-Ajax request.
+		If the value of this attribute is &quot;true&quot; a request scope bean keeps the same value during Ajax requests 
+		from the given page. If a non-Ajax request is sent from this page the bean is re-created as a regular request scope bean.
+	</para>
   </section>
   <section>
     <title>Relevant resources links</title>
