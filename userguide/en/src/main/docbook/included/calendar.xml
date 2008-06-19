@@ -247,15 +247,19 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
       last parameter substitution token shown in the messages. For example, {1} for <code>&quot;DoubleRangeValidator.MAXIMUM&quot;</code>, {2}
       for <code>&quot;ShortConverter.SHORT&quot;</code>.
     </para>
-    <para>
-    	<emphasis><property>&quot;defaultTime&quot;</property></emphasis> attribute defines the default 
-    	time for newly-selected dates if <code>resetTimeOnDateSelect = &quot;true&quot;</code>.
-    	In order to define default time for a choosen date should be used defaultTime attribute 
-
-<emphasis><property>&quot;resetTimeOnDateSelect&quot;</property></emphasis> attribute responsible for reset of 
-time during date change. If &quot;true&quot; - time will be reset to <emphasis><property>&quot;defaultTime&quot;</property></emphasis> 
-after date changed. 	
-    </para>
+      <para>The <emphasis><property>&quot;defaultTime&quot;</property></emphasis> attribute to  set the default time value for the current date in two cases:</para> 
+      <itemizedlist>
+        <listitem>
+          <para>
+            If time is not set
+          </para>
+        </listitem> 
+        <listitem>
+          <para>
+       		If another date is selected and the value of the <emphasis><property>&quot;resetTimeOnDateSelect&quot;</property></emphasis> attribute is set to &quot;true&quot;
+        </para>
+        </listitem>
+      </itemizedlist>
     <para>The <emphasis role="bold">
         <property>&lt;rich:calendar&gt;</property>
       </emphasis> component allows to use <emphasis>
@@ -412,19 +416,19 @@ after date changed.
       </emphasis> component provides the possibility to use a special Data Model to define data for
       element rendering. Data Model includes two major interfaces: </para>
     <itemizedlist>
-      <listitem><para>CalendarDataModel</para></listitem>
-      <listitem><para>CalendarDataModelItem</para></listitem>
+      <listitem><para><code>CalendarDataModel</code></para></listitem>
+      <listitem><para><code>CalendarDataModelItem</code></para></listitem>
     </itemizedlist>
-    <para><property>CalendarDataModel</property> provides the following function:</para>
+    <para><code>CalendarDataModel</code> provides the following function:</para>
     <itemizedlist>
       <listitem><para><code>CalendarDataModelItem[] getData(Date[])</code>;</para></listitem>
     </itemizedlist>
     <para>This method is called when it&apos;s necessary to represent the next block of
-      CalendarDataItems. It happens during navigation to the next (previous) month or in any other
+      <code>CalendarDataItems</code>. It happens during navigation to the next (previous) month or in any other
       case when calendar renders. This method is called in <emphasis>
         <property>&quot;Ajax&quot;</property>
       </emphasis> mode when the calendar renders a new page. </para>
-    <para><property>CalendarDataModelItem</property> provides the following function:</para>
+    <para><code>CalendarDataModelItem</code> provides the following function:</para>
     <itemizedlist>
       <listitem><para>Date <code>getDate()</code> - returns date from the item. Default implementation returns date.</para></listitem>
       <listitem><para>Boolean <code>isEnabled()</code> - returns <emphasis>
