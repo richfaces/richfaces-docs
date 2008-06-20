@@ -63,4 +63,70 @@ Version: 1.72.0
 
 	<xsl:apply-templates select="." mode="head.keywords.content"/>
 </xsl:template>
+<xsl:template name="toc.line">
+  <xsl:param name="toc-context" select="."/>
+  <xsl:param name="depth" select="1"/>
+  <xsl:param name="depth.from.context" select="8"/>
+
+ <span>
+  <xsl:attribute name="class"><xsl:value-of select="local-name(.)"/></xsl:attribute>
+
+  <!-- * if $autotoc.label.in.hyperlink is zero, then output the label -->
+  <!-- * before the hyperlinked title (as the DSSSL stylesheet does) -->
+  <xsl:if test="$autotoc.label.in.hyperlink = 0">
+    <xsl:variable name="label">
+      <xsl:apply-templates select="." mode="label.markup"/>
+    </xsl:variable>
+    <xsl:copy-of select="$label"/>
+    <xsl:if test="$label != ''">
+      <xsl:value-of select="$autotoc.label.separator"/>
+    </xsl:if>
+  </xsl:if>
+
+  <a>
+    <xsl:attribute name="href">
+      <xsl:call-template name="href.target">
+        <xsl:with-param name="context" select="$toc-context"/>
+        <xsl:with-param name="toc-context" select="$toc-context"/>
+      </xsl:call-template>
+    </xsl:attribute>
+
+<xsl:choose>
+<xsl:when test="@role='new'">
+<xsl:attribute name="class">
+<xsl:value-of select="@role"/>
+</xsl:attribute>
+</xsl:when>
+<xsl:when test="@role='updated'">
+<xsl:attribute name="class">
+<xsl:value-of select="@role"/>
+</xsl:attribute>
+</xsl:when>
+</xsl:choose>
+    
+  <!-- * if $autotoc.label.in.hyperlink is non-zero, then output the label -->
+  <!-- * as part of the hyperlinked title -->
+  <xsl:if test="not($autotoc.label.in.hyperlink = 0)">
+    <xsl:variable name="label">
+      <xsl:apply-templates select="." mode="label.markup"/>
+    </xsl:variable>
+    <xsl:copy-of select="$label"/>
+    <xsl:if test="$label != ''">
+      <xsl:value-of select="$autotoc.label.separator"/>
+    </xsl:if>
+  </xsl:if>
+
+    <xsl:apply-templates select="." mode="titleabbrev.markup"/>
+  </a>
+  </span>
+</xsl:template>
+
+<xsl:template match="book" mode="toc">
+  <xsl:param name="toc-context" select="."/>
+
+  <xsl:call-template name="subtoc">
+    <xsl:with-param name="toc-context" select="$toc-context"/>
+    <xsl:with-param name="nodes" select="part|reference |preface|chapter|appendix |article |bibliography|glossary|index |refentry |bridgehead[$bridgehead.in.toc != 0]"/>
+  </xsl:call-template>
+</xsl:template>
 </xsl:stylesheet>
