@@ -121,7 +121,23 @@ HtmlAjaxRegion newRegion = new HtmlAjaxRegion();
     <para>This example shows that one of the regions is decoded when a link is used inside. Nevertheless, 
     if after processing the &quot;link1&quot; is clicked, the first region passes into Encode as a root 
     region and encode performance time is reduced. This optimization doesn&apos;t allow data update out of the
-    region and should be implemented very carefully. The data out of the region described with <code>renderRegionOnly=&quot;false&quot;</code> is updated successfully.</para>
+    region and should be implemented very carefully. The data out of the region described with <code>renderRegionOnly=&quot;false&quot;</code> is updated successfully.
+    </para>
+    <para>
+      Starting from version 3.2.0 <emphasis role="bold"><property>&lt;a4j:region&gt;</property></emphasis> can be used inside any iterative component 
+      (e.g. <emphasis role="bold"><property>&lt;rich:column&gt;</property></emphasis>, <emphasis role="bold"><property>&lt;rich:scrollableDataTable&gt;</property></emphasis>) 
+      and just re-render the components from the same row without updating the whole table 
+      and without any additional listeners.
+    </para>
+    <para><emphasis role="bold">Example:</emphasis></para>
+    <programlisting role="XML"><![CDATA[<rich:column>
+       <a4j:region>
+              <a4j:commandLink reRender="out"/>
+       </a4j:region>
+</rich:column>
+<rich:column>
+        <h:outputText id="out">
+</rich:column>]]></programlisting>
   </section>
   <section>
     <title>Relevant resources links</title>
