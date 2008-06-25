@@ -357,7 +357,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                 </imageobject>
             </mediaobject>
         </figure>       
-        <para>It's possible to handle events for fileUpload from JavaScript code. A simplest example of usage JavaScript API is placed below:</para>
+        <para>It's possible to handle events for fileUpload using JavaScript code. A simplest example of usage JavaScript API is placed below:</para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
@@ -365,6 +365,29 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
 <rich:fileUpload  id="upload" disabled="false"/>
 <h:commandButton onclick="${rich:component('upload')}.disable(event); return false;" value="Disable" />
 ...]]></programlisting>  
+        
+        <para>
+            <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> 
+            component also provides a number of JavaScript property,
+            that can be used to process uploaded files, file states etc. 
+            The given below example illustrates how the <property>entries[0].state</property> property can be used to get access to the file state. 
+            Full list of JavaScript properties can be found <link linkend="objectProperties">below</link> .
+        
+        </para>
+        
+        
+        <programlisting role="XML"><![CDATA[...
+<rich:fileUpload fileUploadListener="#{fileUploadBean.listener}"
+        maxFilesQuantity="#{fileUploadBean.uploadsAvailable}"
+        reRender="table" id="upload"
+        immediateUpload="#{fileUploadBean.autoUpload}"
+        acceptedTypes="jpg, gif, png, bmp">
+            <a4j:support event="onuploadcomplete" reRender="info"  />
+</rich:fileUpload>
+<h:commandButton onclick="if($('j_id232:upload').component.entries[0].state == FileUploadEntry.UPLOAD_SUCCESS) alert ('DONE');" value="Check file state"/>  
+...]]></programlisting>  
+        
+        
         <para>The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component allows to use internationalization method 
             to redefine and localize the labels. You could use application resource bundle and define 
             <code>RICH_FILE_UPLOAD_CANCEL_LABEL</code>,  
@@ -380,6 +403,14 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
             <code>RICH_FILE_UPLOAD_ENTRY_CLEAR_LABEL</code>, 
             <code>RICH_FILE_UPLOAD_ENTRY_CANCEL_LABEL</code>  there.
         </para>
+        
+        
+        <para>
+            
+            
+            
+            
+        </para>
        
        <para>
            The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component could work together with Seam framework.
@@ -387,10 +418,12 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
            <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> requests.
        </para>
         
+        
+        
 
 </section>
     <!-- JavaScript API-->  
-    <section>
+    <section >
         <title>JavaScript API</title>
         <table> 
             <title>JavaScript API</title>
@@ -416,42 +449,33 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                     </row>
                     <row>
                         <entry>clear()</entry>
-                        <entry>Clears list of files</entry>
+                        <entry>Removes all files from the list. The function can also get the $('id').component.entries[0] as a parameter to remove a particular file. </entry>
                     </row>
                     
-                    <row>
-                        <entry>$('id').component.entries</entry>
-                        <entry>Returns a array of all files in the listмассив всех файлов в списке
-                            
-                            $('id').component.entries.length   --- количество файлов в списке
-                            
-                            $('id').component.entries[0].fileName  --- имя файла
-                        </entry>
-                        </row>
+     
                     
+        
                     
                 </tbody>
             </tgroup>
         </table>
         
+
         
-        
-        
-        
-        <table> 
+        <table d="objectProperties"> 
             <title>Client side object properties</title>
             <tgroup cols="2">
                 <thead>
                     <row>
-                        <entry>Objects</entry>
+                        <entry>Property</entry>
                         <entry>Description</entry>  
                     </row>
                 </thead>
                 <tbody>
         
                     <row>
-                        <entry>$('id').component.entries</entry>
-                        <entry>Returns a array of all files in the listмассив всех файлов в списке
+                        <entry>entries</entry>
+                        <entry>Returns a array of all files in the list
        
                         </entry>
                     </row>
@@ -459,30 +483,30 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
         
         
                     <row>
-                        <entry>$('id').component.entries.length</entry>
+                        <entry>entries.length</entry>
                         <entry>Returns the number of files in the list  </entry>
                     </row>
                     
                     
                     <row>
-                        <entry>$('id').component.entries[0].fileName</entry>
+                        <entry>entries[0].fileName</entry>
                         <entry>Returns the file name, that is retrieved by the array index </entry>
                     </row>
                     
                     
                     
                     <row>
-                        <entry>$('id').component.entries[0].state </entry> 
+                        <entry>entries[0].state </entry> 
                         <entry>Returns the file state. Possible states are 
                             <itemizedlist>
                                 
-                                <listitem><para>&quot;initialized&quot; - the file is added</para> </listitem>
-                                <listitem><para>&quot;progress&quot; - the file is being uploaded</para> </listitem>
-                                <listitem><para>&quot;ready&quot; - uploading is in process. The file will be uploaded on queue order.</para> </listitem>
-                                <listitem><para>&quot;canceled&quot; - uploading of the file is canceled </para> </listitem>
-                                <listitem><para>&quot;done&quot; - the file is uploaded successfully</para> </listitem>
-                                <listitem><para>&quot;transfer_error’  &quot; - a file transfer error  occurred </para> </listitem>
-                                <listitem><para>&quot;size_error’ &quot; - the file exceeded maximum size</para> </listitem>
+                                <listitem><para>&quot;initialized&quot; - the file is added, corresponds to FileUploadEntry.INITIALIZED constant </para> </listitem>
+                                <listitem><para>&quot;progress&quot; - the file is being uploaded, corresponds to FileUploadEntry.UPLOAD_IN_PROGRESS  constant</para> </listitem>
+                                <listitem><para>&quot;ready&quot; - uploading is in process, corresponds to FileUploadEntry.READY  constant The file will be uploaded on queue order.</para> </listitem>
+                                <listitem><para>&quot;canceled&quot; - uploading of the file is canceled, corresponds to FileUploadEntry.UPLOAD_CANCELED  constant </para> </listitem>
+                                <listitem><para>&quot;done&quot; - the file is uploaded successfully, corresponds to FileUploadEntry.UPLOAD_SUCCESS  constant</para> </listitem>
+                                <listitem><para>&quot;transfer_error&quot; - a file transfer error  occurred, corresponds to FileUploadEntry.UPLOAD_TRANSFER_ERROR  constant </para> </listitem>
+                                <listitem><para>&quot;size_error&quot; - the file exceeded maximum size, corresponds to FileUploadEntry.UPLOAD_SIZE_ERROR  constant</para> </listitem>
                               
                         
                                 </itemizedlist>
