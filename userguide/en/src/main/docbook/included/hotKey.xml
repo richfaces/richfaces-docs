@@ -64,8 +64,54 @@ HtmlHotKey myHotKey = new HtmlHotKey();
     <section>
 		<title>Details of Usage</title>
 		<para>
-
+			There are two ways to register <emphasis role="bold"><property>&lt;rich:hotKey&gt;</property></emphasis>:
 		</para>
+		<itemizedlist>
+		    <listitem>
+		        <para>
+		            by attaching it to the whole page (<property>html[0] element</property>). This is default scenario.
+		        </para>
+		    </listitem>
+		    <listitem>
+		        <para>
+		            by attaching it with <emphasis><property>&quot;selector&quot;</property></emphasis> attribute to all the elements 
+		            defined using this selector. 
+		            This attribute uses defined by <ulink url="http://www.w3.org">w3c consortium</ulink> syntax for CSS rule selector 
+		            with some jQuery extensions. 
+		        </para>
+		    </listitem>
+		</itemizedlist>
+        <para>
+            The <emphasis><property>&quot;key&quot;</property></emphasis> attribute defines the hot key itself 
+            which is processed by the component. 
+        </para>
+        <para>
+            After the hot key has been registered and defined you could set the <emphasis><property>&quot;handler&quot;</property></emphasis> 
+            attribute which determines a JavaScript function to be called every time when corresponding keys are pressed.   
+        </para>
+        
+        <para>
+            With the help of the <emphasis><property>&quot;timing&quot;</property></emphasis> attribute
+            you could manage <emphasis role="bold"><property>&lt;rich:hotKey&gt;</property></emphasis> registration timing. 
+            There are three possible values of this attribute:
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    &quot;immediate&quot; - the component is rendered in browser immediately  
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    &quot;onload&quot; - the component is rendered after the page is fully loaded
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    &quot;onregistercall&quot; - the component is rendered only after JavaScript API for the key registration is used.
+                </para>
+            </listitem>
+        </itemizedlist>
 	</section>
     <section>
         <title>JavaScript API</title>
