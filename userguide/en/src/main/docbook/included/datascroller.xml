@@ -79,7 +79,7 @@ HtmlDatascroller myScroll = new HtmlDatascroller();
       with Ajax requests usage.</para>
     <para>The component should be placed into footer of the parent table or be bound to it with the <emphasis>
       <property>&quot;for&quot;</property>
-    </emphasis> attribute. Note, that &quot;for&quot; is evaluated on view build, not on view render, that is why it will ignore JSTL tags.</para>
+    </emphasis> attribute. Note, that <emphasis><property>&quot;for&quot;</property></emphasis> is evaluated on view build, not on view render, that is why it will ignore JSTL tags.</para>
     <para>The table should also have the defined <emphasis>
       <property>&quot;rows&quot;</property>
     </emphasis> attribute limiting the quantity of inputted table rows.</para>
@@ -260,6 +260,22 @@ HtmlDatascroller myScroll = new HtmlDatascroller();
       </f:facet>
 ...
 ]]></programlisting>
+    <para>
+      Starting from 3.2.1 of RichFaces multiple <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> instances behavior and page bindings are corrected. Incorrect page after model changes handling is added. 
+      Phase Listener called before RenderResponce scans the page for the <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> and performs the following operations:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Checks if the <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> is rendered. (If the checking generates an exception, the <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> is considered to be not rendered )
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          If the <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> is rendered -  the table to which the <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> is attached gets the value of the page attribute of <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis>. 
+        </para>
+      </listitem>
+    </itemizedlist>
     <para>
       Information about the <emphasis><property>&quot;process&quot;</property></emphasis> attribute usage you can find <link linkend="process">here</link>.
     </para>
