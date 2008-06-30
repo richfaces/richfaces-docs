@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3CR3//EN" "http://www.oasis-open.org/docbook/xml/4.3CR3/docbookx.dtd" 
+[
+<!ENTITY extDataTable "rich:extendedDataTable">
+]
+>
+
+<section>
+  <sectioninfo>
+  <keywordset>
+  <keyword>table</keyword>
+  <keyword>&extDataTable;</keyword>
+  <keyword>HtmlDataTable</keyword>
+  </keywordset>
+  </sectioninfo>
+
+  <table>
+  <title>Component identification parameters </title>
+  <tgroup cols="2">
+  <thead>
+  <row>
+  <entry>Name</entry>
+  <entry>Value</entry>
+  </row>
+  </thead>
+  <tbody>
+  <row>
+  <entry>component-type</entry>
+  <entry>org.richfaces.ExtendedDataTable</entry>
+  </row>
+  <row>
+  <entry>component-class</entry>
+  <entry>org.richfaces.component.html.HtmlExtendedDataTable</entry>
+  </row>
+  <row>
+  <entry>component-family</entry>
+  <entry>org.richfaces.ExtendedDataTable</entry>
+  </row>
+  <row>
+  <entry>renderer-type</entry>
+  <entry>org.richfaces.ExtendedDataTableRenderer</entry>
+  </row>
+  <row>
+  <entry>tag-class</entry>
+  <entry>org.richfaces.taglib.ExtendedDataTableTag</entry>
+  </row>
+  </tbody>
+  </tgroup>
+  </table>
+  
+  <section>
+  <title>Creating the Component with a Page Tag</title>
+  <para>Here is a simple example as it could be used on a page:</para>
+
+  <para>
+  <emphasis role="bold">Example:</emphasis>
+  </para>
+  <programlisting role="XML"><![CDATA[...
+  <rich:extendedDataTable value="#{extendedDT.dataModel}" var="edt">
+   <rich:column>
+  ...
+  </rich:column>
+  </rich:extendedDataTable>
+...
+]]></programlisting>
+  </section>
+  <section>
+  <title>Creating the Component Dynamically from Java</title>
+
+  <para>
+  <emphasis role="bold">Example:</emphasis>
+  </para>
+  <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlExtendedDataTable;
+...
+HtmlExtendedDataTable myTable = new HtmlExtendedDataTable();
+...
+]]></programlisting>
+  </section>
+  <section>
+  <title>Details of Usage</title>
+  <para>The <emphasis role="bold">
+  <property>&lt;&extDataTable;&gt;</property>
+  </emphasis> component is similar to the <emphasis role="bold">
+  <property>&lt;rich:dataTable&gt;</property>
+  </emphasis>. The data in component is scrollable. You can also set the type of selection (<emphasis>
+  <property>&quot;none&quot;,</property>
+  </emphasis> <emphasis>
+  <property>&quot;single&quot;</property>
+  </emphasis> or <emphasis>
+  <property>&quot;multi&quot;</property>
+  </emphasis> lines). Selection of multiple lines is possible using Shift and Ctrl keys.</para>
+  
+  <para>Here is an example:</para>
+
+  <para>
+  <emphasis role="bold">Example:</emphasis>
+  </para>
+  <programlisting role="XML"><![CDATA[...
+  <rich:extendedDataTable id="edt" value="#{extendedDT.dataModel}"
+			var="edt" width="500px" height="500px"
+			selectedClass="dataTableSelectedRow"
+			sortMode="single" selectionMode="multi"
+			selection="#{extendedDT.selection}" rowKeyVar="rkvar"
+			tableState="#{extendedDT.tableState}">
+			<rich:column id="id" headerClass="dataTableHeader" width="50"
+				label="Id" sortable="true" sortBy="#{edt.id}"
+				sortIconAscending="dataTableAscIcon"
+				sortIconDescending="dataTableDescIcon">
+				<f:facet name="header">
+					<h:outputText value="Id" />
+				</f:facet>
+				<h:outputText value="#{edt.id}" />
+			</rich:column>
+			<rich:column id="name" width="300" headerClass="dataTableHeader"
+				label="Name" sortable="true" sortBy="#{edt.name}"
+				sortIconAscending="dataTableAscIcon"
+				sortIconDescending="dataTableDescIcon" filterBy="#{edt.name}"
+				filterEvent="onkeyup" visible="false">
+				<f:facet name="header">
+					<h:outputText value="Name" />
+				</f:facet>
+				<h:outputText value="#{edt.name}" />
+			</rich:column>
+			<rich:column id="date" width="100" headerClass="dataTableHeader"
+				label="Date" sortable="true"
+				comparator="#{extendedDT.dateComparator}"
+				sortIconAscending="dataTableAscIcon"
+				sortIconDescending="dataTableDescIcon">
+				<f:facet name="header">
+					<h:outputText value="Date" />
+				</f:facet>
+				<h:outputText value="#{edt.date}">
+					<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+				</h:outputText>
+			</rich:column>
+			<rich:column id="group" width="50" headerClass="dataTableHeader"
+				label="Group" sortable="true" sortBy="#{edt.group}"
+				sortIconAscending="dataTableAscIcon"
+				sortIconDescending="dataTableDescIcon">
+				<f:facet name="header">
+					<h:outputText value="Group" />
+				</f:facet>
+				<h:outputText value="#{edt.group}" />
+			</rich:column>
+
+		</rich:extendedDataTable>
+  ...
+]]></programlisting>
+
+  <figure>
+  <title><emphasis role="bold">
+  <property>&lt;&extDataTable;&gt;</property>
+  </emphasis> component with selected multiple lines</title>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="images/extendedDataTable_multiselect.png" width="75%"/>
+  </imageobject>
+  </mediaobject>
+  </figure>
+  <para>Information about sorting and filtering can be found <link linkend="sortAndFilter">here</link>.</para>
+  
+  <para> In the example <emphasis> 
+  <property>&quot;selection&quot;</property>
+  </emphasis> attribute contains object with selected rows. 
+  </para>
+  
+  <note>
+  Attribute<emphasis>
+  <property>&quot;height&quot;</property>
+  </emphasis>is mandatory. The default value is <emphasis>
+  <property>&quot;500px&quot;</property>
+  </emphasis>.
+  </note>
+  
+  <para>
+  Menu on the right side of the column header is used to perform action: sorting, grouping, hiding columns.
+  </para>
+  
+  <para>This is an example:</para>
+  
+  <figure>
+  <title>Column menu</title>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="images/extendedDataTable_actions.png" width="50%"/>
+  </imageobject>
+  </mediaobject>
+  </figure>
+  
+  <para>
+  After selecting a "Group by this column" option, you can see the data grouped. You can collapse and expand groups by clicking on a group header.
+  </para>
+  
+  <para>This is an example:</para>
+  
+  <figure>
+  <title><emphasis role="bold">
+  <property>&lt;&extDataTable;&gt;</property>
+  </emphasis> component with grouped data</title>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="images/extendedDataTable_grouped.png" width="75%"/>
+  </imageobject>
+  </mediaobject>
+  </figure>
+  
+  <para>
+  The <emphasis>
+  <property>&quot;label&quot;</property>
+  </emphasis> attribute in <emphasis role="bold">
+  <property>&lt;rich:column&gt;</property>
+  </emphasis> sets the name of the column, which is used when dragging columns (in drag window) and in context menu, in "Columns" submenu.
+  </para>
+  
+  <para>
+  <emphasis role="bold">Example:</emphasis>
+  </para>
+  <programlisting role="XML"><![CDATA[...
+  <rich:column id="name"
+  label="#{msg['name']}"
+  ...>
+]]></programlisting>
+  
+  <figure>
+  <title><emphasis role="bold">
+  <property>&lt;&extDataTable;&gt;</property>
+  </emphasis> component with Drag&amp;Drop column 'Name'</title>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="images/extendedDataTable_DD.png" width="75%"/>
+  </imageobject>
+  </mediaobject>
+  </figure>
+  
+  <para>
+  In the component <emphasis role="bold">
+  <property>&lt;&extDataTable;&gt;</property>
+  </emphasis> columns can hidden:
+  </para>
+  
+  <figure>
+  <title><emphasis role="bold">
+  <property>&lt;&extDataTable;&gt;</property>
+  </emphasis> component with hidden column 'Id' and 'Group'</title>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="images/extendedDataTable_hideCol.png" width="75%"/>
+  </imageobject>
+  </mediaobject>
+  </figure>
+  
+ <!--   <para>
+  For each column can be set the filter.
+  </para>
+  
+  <para>
+  <emphasis role="bold">Example:</emphasis>
+  </para>
+  <programlisting role="XML"><![CDATA[...
+  <rich:column id="name"
+  filterBy="#{entity.name}" filterEvent="onkeyup">
+...
+]]></programlisting>
+  
+  <figure>
+  <title><emphasis role="bold">
+  <property>&lt;&extDataTable;&gt;</property>
+  </emphasis> component with filtered column 'Name'</title>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="images/extendedDataTable_filtered.png" width="75%"/>
+  </imageobject>
+  </mediaobject>
+  </figure>
+  -->  
+  <para><emphasis>
+  <property>&quot;tableState&quot;</property>
+  </emphasis> attribute  can be used to bind state of the table (column width, column position, visible, sequence, grouping...) 
+  to a backing-bean string property, for a later used. This state can be for example saved to a database, and it is different 
+  form standard JSF state saving mechanisms.</para>
+
+  <para>
+  <emphasis role="bold">Example:</emphasis>
+  </para>
+
+	<programlisting role="XML"><![CDATA[...
+  tableState="#{extendedDT.tableState}"
+...
+]]></programlisting>
+  
+  
+  </section>
+  <section>
+  <title>Look-and-Feel Customization</title>
+
+  <para>For skinnability implementation, the components use a <emphasis>
+  <property>style class redefinition method.</property>
+  </emphasis> Default style classes are mapped on <emphasis>
+  <property>skin parameters.</property>
+  </emphasis></para>
+
+  <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+  <property>&lt;&extDataTable;&gt;</property>
+  </emphasis> components at once:</para>
+
+  <itemizedlist>
+  <listitem>
+  <para>Redefine the corresponding skin parameters</para>
+  </listitem>
+
+  <listitem>
+  <para>Add to your style sheets <emphasis>
+  <property>style classes</property>
+  </emphasis> used by a <emphasis role="bold">
+  <property>&lt;&extDataTable;&gt;</property>
+  </emphasis> component</para>
+  </listitem>
+  </itemizedlist>
+  </section>
+
+  <section id="SPR">
+  <title>Skin Parameters Redefinition</title>
+
+  <table>
+  <title>Skin parameters redefinition for a table</title>
+  <tgroup cols="2">
+  <thead>
+  <row>
+  <entry>Skin parameters</entry>
+  <entry>CSS properties</entry>
+  </row>
+  </thead>
+  <tbody>
+  <row>
+  <entry>tableBackgroundColor</entry>
+  <entry>background-color</entry>
+  </row>
+  </tbody>
+  </tgroup>
+  </table>
+
+  <table>
+  <title>Skin parameters redefinition for a header</title>
+  <tgroup cols="2">
+  <thead>
+  <row>
+  <entry>Skin parameters</entry>
+  <entry>CSS properties</entry>
+  </row>
+  </thead>
+  <tbody>
+  <row>
+  <entry>headerBackgroundColor</entry>
+  <entry>background-color</entry>
+  </row>
+  </tbody>
+  </tgroup>
+  </table>
+
+  <table>
+  <title>Skin parameters redefinition for a footer</title>
+  <tgroup cols="2">
+  <thead>
+  <row>
+  <entry>Skin parameters</entry>
+  <entry>CSS properties</entry>
+  </row>
+  </thead>
+  <tbody>
+  <row>
+  <entry>tableFooterBackgroundColor</entry>
+  <entry>background-color</entry>
+  </row>
+  </tbody>
+  </tgroup>
+  </table>
+
+  <table>
+  <title>Skin parameters redefinition for a column header</title>
+  <tgroup cols="2">
+  <thead>
+  <row>
+  <entry>Skin parameters</entry>
+  <entry>CSS properties</entry>
+  </row>
+  </thead>
+  <tbody>
+  <row>
+  <entry>additionalBackgroundColor</entry>
+  <entry>background-color</entry>
+  </row>
+  </tbody>
+  </tgroup>
+  </table>
+
+  <table>
+  <title>Skin parameters redefinition for a column footer</title>
+  <tgroup cols="2">
+  <thead>
+  <row>
+  <entry>Skin parameters</entry>
+  <entry>CSS properties</entry>
+  </row>
+  </thead>
+  <tbody>
+  <row>
+  <entry>tableSubfooterBackgroundColor</entry>
+  <entry>background-color</entry>
+  </row>
+  </tbody>
+  </tgroup>
+  </table>
+
+  <table>
+  <title>Skin parameters redefinition for cells</title>
+  <tgroup cols="2">
+  <thead>
+  <row>
+  <entry>Skin parameters</entry>
+  <entry>CSS properties</entry>
+  </row>
+  </thead>
+  <tbody>
+  <row>
+  <entry>generalSizeFont</entry>
+  <entry>font-size</entry>
+  </row>
+  <row>
+  <entry>generalTextColor</entry>
+  <entry>color</entry>
+  </row>
+  <row>
+  <entry>generalFamilyFont</entry>
+  <entry>font-family</entry>
+  </row>
+  </tbody>
+  </tgroup>
+  </table>
+
+  </section>
+
+  <section id="DofCCS">
+  <title>Definition of Custom Style Classes</title>
+
+  <para>On the screenshot there are classes names that define styles for component elements.</para>
+
+  <figure>
+  <title><emphasis role="bold"><property>&lt;&extDataTable;&gt;</property></emphasis> class names</title>
+  <mediaobject>
+  <imageobject>
+  <imagedata fileref="images/extendedDataTable_cn.png" width="100%"/>
+  </imageobject>
+  </mediaobject>
+  </figure>
+
+  <table id="dTC">
+  <title>Classes names that define a whole component appearance</title>
+  <tgroup cols="2">
+  <thead>
+  <row>
+  <entry>Class name</entry>
+  <entry>Description</entry>
+  </row>
+  </thead>
+  <tbody>
+  <row>
+  <entry>rich-extdt</entry>
+  <entry>Defines styles for all table</entry>
+  </row>
+  <row>
+  <entry>rich-extdt-caption</entry>
+  <entry>Defines styles for a &quot;caption&quot; facet element</entry>
+  </row>
+  </tbody>
+  </tgroup>
+  </table>
+
+  <table>
+  <title>Classes names that define header and footer elements</title>
+  <tgroup cols="2">
+  <thead>
+  <row>
+  <entry>Class name</entry>
+  <entry>Description</entry>
+  </row>
+  </thead>
+  <tbody>
+
+  <row>
+  <entry>rich-extdt-header</entry>
+  <entry>Defines styles for a table header row</entry>
+  </row>
+
+  <row>
+  <entry>rich-extdt-header-continue</entry>
+  <entry>Defines styles for all header lines after the first</entry>
+  </row>
+  <row>
+  <entry>rich-extdt-subheader</entry>
+  <entry>Defines styles for a column header</entry>
+  </row>
+
+  <row>
+  <entry>rich-extdt-footer</entry>
+  <entry>Defines styles for a footer row</entry>
+  </row>
+
+  <row>
+  <entry>rich-extdt-footer-continue</entry>
+  <entry>Defines styles for all footer lines after the first</entry>
+  </row>
+  <row>
+  <entry>rich-extdt-subfooter</entry>
+  <entry>Defines styles for a column footer</entry>
+  </row>
+  </tbody>
+  </tgroup>
+  </table>
+
+  <table>
+  <title>Classes names that define rows and cells of a table</title>
+  <tgroup cols="2">
+  <thead>
+  <row>
+  <entry>Class name</entry>
+  <entry>Description</entry>
+  </row>
+  </thead>
+  <tbody>
+  <row>
+  <entry>rich-extdt-headercell</entry>
+  <entry>Defines styles for a header cell</entry>
+  </row>
+
+  <row>
+  <entry>rich-extdt-subheadercell</entry>
+  <entry>Defines styles for a column header cell</entry>
+  </row>
+  <row>
+  <entry>rich-extdt-cell</entry>
+  <entry>Defines styles for a table cell</entry>
+  </row>
+  <row>
+  <entry>rich-extdt-row</entry>
+  <entry>Defines styles for a table row</entry>
+  </row>
+  <row>
+  <entry>rich-extdt-firstrow</entry>
+  <entry>Defines styles for a table start row</entry>
+  </row>
+
+  <row>
+  <entry>rich-extdt-footercell</entry>
+  <entry>Defines styles for a footer cell</entry>
+  </row>
+
+  <row>
+  <entry>rich-extdt-subfootercell</entry>
+  <entry>Defines styles for a column footer cell</entry>
+  </row>
+  </tbody>
+  </tgroup>
+  </table>
+
+  <para> An example of use the styles for component <emphasis role="bold">
+  <property>&lt;&extDataTable;&gt;</property>
+  </emphasis> is similar to 
+  <emphasis role="bold">
+  <property>&lt;rich:dataTable&gt;</property>
+  </emphasis>
+  </para>
+    
+  </section>
+</section>
