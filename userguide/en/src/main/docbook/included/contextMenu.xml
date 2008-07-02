@@ -85,21 +85,27 @@ html.ContextMenu myContextMenu = new html.ContextMenu();
                 <property>&lt;rich:dropDownMenu&gt;</property>
             </emphasis>. </para>
 
-        <para>If a value of the <emphasis>
-                <property>&quot;attached&quot;</property>
-            </emphasis> attribute is defined as &quot;true&quot;,
-            the component is attached to the parent component. An example is placed below.</para>
+        <para>If <emphasis><property>&quot;attached&quot;</property></emphasis> value is &quot;true&quot; (default value), 
+		component is attached to the parent component or to the component, which 
+		<emphasis><property>&quot;id&quot;</property></emphasis> is specified in the 
+		<emphasis><property>&quot;attachTo&quot;</property></emphasis> attribute. 
+		An example is placed below.</para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
+		<rich:contextMenu event="oncontextmenu" attachTo="pic1" submitMode="none">
+            <rich:menuItem value="Zoom In" onclick="enlarge();" id="zin"/>
+            <rich:menuItem value="Zoom Out" onclick="decrease();" id="zout"/>
+        </rich:contextMenu>
         <h:panelGrid columns="1" columnClasses="cent">
                 <h:panelGroup id="picture">
                         <h:graphicImage value="/richfaces/jQuery/images/pic1.png" id="pic"/>
-                        <rich:contextMenu event="oncontextmenu" attached="true" submitMode="none">
-                                <rich:menuItem value="Zoom In" onclick="enlarge();" id="zin"></rich:menuItem>
-                                <rich:menuItem value="Zoom Out" onclick="decrease();" id="zout"></rich:menuItem>
-                        </rich:contextMenu>
+                </h:panelGroup>
+        </h:panelGrid>
+		<h:panelGrid columns="1" columnClasses="cent">
+                <h:panelGroup id="picture1">
+                        <h:graphicImage value="/richfaces/jQuery/images/pic2.png" id="pic1"/>
                 </h:panelGroup>
         </h:panelGrid>
 ...]]></programlisting>
@@ -126,13 +132,14 @@ html.ContextMenu myContextMenu = new html.ContextMenu();
                 <property>&lt;h:panelGroup&gt;</property>
             </emphasis> component. The <emphasis role="bold">
                 <property>&lt;rich:contextMenu&gt;</property>
-            </emphasis> component is defined as nested to <emphasis role="bold">
+            </emphasis> component is not nested to <emphasis role="bold">
                 <property>&lt;h:panelGroup&gt;</property>
-            </emphasis> one and has a value of the<emphasis>
-                <property>&quot;attached&quot;</property>
-            </emphasis> attribute defined as &quot;true&quot;. Thus,
-            the context menu is attached to the parent component. The context menu has two items to
-            zoom in (zoom out) a picture by <emphasis><property>&quot;onclick&quot;</property></emphasis> event.
+            </emphasis> and has a value of the<emphasis>
+                <property>&quot;attachTo&quot;</property>
+            </emphasis> attribute defined as <code>&quot;pic1&quot;</code>. Thus,
+            the context menu is attached to the component, which 
+			<emphasis><property>&quot;id&quot;</property></emphasis> is <code>&quot;pic1&quot;</code>. 
+			The context menu has two items to zoom in (zoom out) a picture by <emphasis><property>&quot;onclick&quot;</property></emphasis> event.
             For earch item corresponding JavaScript function is defined to provide necessary action
             as a result of the clicking on it. For the menu is defined an <emphasis>
                 <property>&quot;oncontextmenu&quot;</property>
