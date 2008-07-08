@@ -11,10 +11,158 @@
 
     <title>Setting up the environment</title>
     <para>
-      To start working with the project, it's necessary to have Maven installed.
+        In order to start working with the <property>Component Development Kit (CDK)</property>
+        and to create your rich component, 
+        it&apos;s necessary to have the following installed:
     </para>
-	<para>
-		JDK 1.5
-	</para>	
-
+    <itemizedlist>
+        <listitem>
+            <para>
+                <ulink url="http://java.sun.com/javase/downloads/index_jdk5.jsp">The Java SE 5 Development Kit (JDK)</ulink>
+            </para>        
+        </listitem>
+        <listitem>
+            <para>
+                <ulink url="http://maven.apache.org/download.html">Apache Maven 2.0.9</ulink>
+            </para>        
+        </listitem>
+        <listitem>
+            <para>
+                <ulink url="http://tomcat.apache.org">Apache Tomcat 6.0</ulink>
+            </para>        
+        </listitem>
+        <listitem>
+            <para>
+                Browser (on client side)
+            </para>        
+        </listitem>
+    </itemizedlist>
+    <para>
+        After the <property>Maven</property> is installed you should configure it. 
+        In this case, please, go to the directory where you&apos;ve just installed <property>Maven</property>,
+        open a <property>conf/settings.xml</property> file for editing and add to the <property>profiles</property>
+        section this code:
+    </para>
+    <programlisting role="XML"><![CDATA[...
+<profile>
+    <id>cdk</id>
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+            <id>repository.jboss.com</id>
+            <name>Jboss Repository for Maven</name>
+            <url>http://repository.jboss.com/maven2/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven.jboss.org</id>
+            <name>JBoss Repository for Maven Snapshots</name>
+            <url>http://snapshots.jboss.org/maven2/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+            <id>repository.jboss.com</id>
+            <name>Jboss Repository for Maven</name>
+            <url> http://repository.jboss.com/maven2/ </url>
+            <layout>default</layout>
+        </pluginRepository>
+    </pluginRepositories>
+</profile>
+...]]>
+</programlisting>
+    <para>
+        In order to activate new profile, please, add the following after the <property>profiles</property> section:
+    </para>
+    <programlisting role="XML"><![CDATA[...
+<activeProfiles>
+    <activeProfile>cdk</activeProfile>
+</activeProfiles>
+...]]>
+</programlisting>
+    <note>
+        <title>Note:</title>
+        <para>
+            In order to work with <property>Maven</property> from Eclipse, 
+            it&apos;s possible to download and install the <property>Maven</property> plugin. 
+            Please, follow the instruction at 
+            <ulink url="http://maven.apache.org/eclipse-plugin.html">Eclipse plugins for Maven page</ulink>
+        </para>
+    </note>
+    <para>
+        The environment is set up now to use the <property>Component Development Kit (CDK)</property>.
+    </para>        
+    <para>
+        We are going to create two components throughout the RichFaces CDK Developer Guide, but at first 
+        you need take the following steps in order to set up the <property>Project</property> and create your library: 
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                Create a new directory where all the components will be stored (for example <property>Sandbox</property>). 
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Create a file named <property>pom.xml</property> in the directory with the following content:
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<?xml version="1.0" encoding="UTF-8"?>
+<project 
+      xmlns="http://maven.apache.org/POM/4.0.0" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>org.mycompany</groupId>
+   <artifactId>mylib-parent</artifactId>
+   <url>http://mycompany.org</url>
+   <version>1.0-SNAPSHOT</version>
+   <packaging>pom</packaging>
+   <dependencies>
+      <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>servlet-api</artifactId>
+         <version>2.4</version>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>javax.servlet</groupId>
+         <artifactId>jsp-api</artifactId>
+         <version>2.0</version>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+	<groupId>org.richfaces.ui</groupId>
+	<artifactId>richfaces-ui</artifactId>
+	<version>3.1.0</version>
+      </dependency>
+   </dependencies>
+</project>
+...]]>
+</programlisting>
+        </listitem>        
+    </itemizedlist>
+        
+      
+    
 </chapter>
