@@ -4023,7 +4023,7 @@ border-style: solid;
 
 			<para>
 				The
-				<emphasis><property>&quote;name&quote;</property></emphasis>
+				<emphasis><property>&quot;name&quot;</property></emphasis>
 				attribute of <emphasis role="bold"><property>&lt;u:selector&gt;</property></emphasis> tag defines the CSS
 				selector, while
 				<emphasis><property>&quot;name&quot;</property></emphasis>
@@ -4056,15 +4056,18 @@ border-style: solid;
 			<title>Plug-n-Skin</title>
 
 			<para>
-				Plug-n-Skin feature is designed to easily create a new
-				custom skin which extends and overrides a base skin, it
-				allows to redefine the look of a set of components by
-				taking the base skin as basis and plugging-in custom
-				styles as well as to unify the appearance of standard
-				controls and RichFaces components.
+				Plug-n-Skin is a feature that gives a developer an opportunity
+				to easily create, customize and plug into a project a custom skin. 
+				The skin can be created basing on parameters of some predefined RichFaces skin.
 
 			</para>
 
+
+			<para>
+				The feature also provides an option to unify
+				the appearance of rich controls with standard HTML elements.
+			</para>
+			
 			<para>
 				In order to create your own skin using Plug-n-Skin
 				feature, you can follow these step by step instructions.
@@ -4093,7 +4096,8 @@ mvn archetype:create
 -DarchetypeArtifactId=maven-archetype-plug-n-skin 
 -DarchetypeVersion=RF-VERSION
 -DartifactId=ARTIFACT-ID
--DgroupId=GROUP-ID -Dversion=VERSION
+-DgroupId=GROUP-ID 
+-Dversion=VERSION
 ...
 ]]></programlisting>
 			<para>Primary keys for the command:</para>
@@ -4323,25 +4327,118 @@ mvn cdk:add-skin -Dname=SKIN-NAME -Dpackage=SKIN-PACKAGE
 				</listitem>
 			</itemizedlist>
 
+			<para>Now you can start editing the XCSS files 
+				located in &quot;\src\main\resources\SKIN-PACKAGE\SKIN-NAME\css\&quot;.  
+				New style properties can be assigned to the selectors (the selectors listed in the XCSS files) in two ways, which are both valid, and it&apos;up to the developer what way to choose.  </para>
+<itemizedlist>
+	<listitem><para>Applying a standard CSS coding approach, i.e. you can add css properties to the given selectors are you normally do while doing CSS coding. 
+		The only thing, you have to keep in mind is that the selectors must me inside 
+		&lt;f:verbatim&gt; &lt;![CDATA[ ...]]&gt; &lt;/f:verbatim&gt; tags.</para>
+	
+	
+	For example
+	
+		<programlisting role="XML">
+<![CDATA[...
+.rich-calendar-cell {
+background: #537df8;
+}
+...
+]]></programlisting>
+	
+	
+	
+	</listitem>
+	
+	
+	<listitem><para>
+		
+		Using XCSS coding approach, the same way as XCSS files are normally formed in RichFaces. 
+		The XCSS tags have to be placed outside &lt;f:verbatim&gt; &lt;![CDATA[ ...]]&gt; &lt;/f:verbatim&gt; tags.
+		
+		</para>
+	
+		<programlisting role="XML">
+			<![CDATA[...
+<u:selector name=".rich-calendar-cell">
+	<u:style name="border-bottom-color" skin="panelBorderColor"/>
+	<u:style name="border-right-color" skin="panelBorderColor"/>
+	<u:style name="background-color" skin="tableBackgroundColor"/>
+	<u:style name="font-size" skin="generalSizeFont"/>
+	<u:style name="font-family" skin="generalFamilyFont"/>
+</u:selector>
+...
+]]></programlisting>
+		
+		
+	</listitem>
+</itemizedlist>
 
+
+<para>
+	
+	
+	
+	
+</para>
 
 			<para>
-				Having performed the previous steps you can proceed to
-				building the new skin. This can be done by executing the
+				Having performed described above steps and edited the XCSS files 
+				you can proceed to building the new skin and to plugging it into the project. 
+				Building the new skin can be done by executing the
 				given below command in the command line in the root
 				folder of you skin project (the one that contains
 				pom.xml file).
 			</para>
 
-			<programlisting role="XML"><![CDATA[...
+<programlisting role="XML"><![CDATA[...
 mvn clean install
 ...
 ]]></programlisting>
 
 
-
-			<para>
-				Now, you can use your newly-created skin in your project
+			<para>In addition Plug-n-Skin has a number of predefined 
+				fancy gradients that you can also you to make your application look nicer. The given below code snippet shows how the gradient can be used
+			</para>
+				
+<programlisting role="XML"><![CDATA[...
+<u:selector name=".rich-combobox-item-selected">
+	<u:style name="border-width" value="1px" />
+	<u:style name="border-style" value="solid" />
+	<u:style name="border-color" skin="newBorder" />
+	<u:style name="background-position" value="0% 50%" />
+	<u:style name="background-image">
+		<f:resource f:key="org.richfaces.renderkit.html.CustomizeableGradient">
+			<f:attribute name="valign" value="middle" />
+			<f:attribute name="gradientHeight" value="17px" />
+			<f:attribute name="baseColor" skin="headerBackgroundColor" />
+		 </f:resource>
+	</u:style>	
+</u:selector>
+...
+]]></programlisting>
+				
+				<para>
+					So, as you can see, the  <property>background-image</property> CSS property is defined with 
+					<code>
+						&lt;f:resource
+						f:key=&quot;org.richfaces.renderkit.html.CustomizeableGradient&quot;&gt;
+					</code>
+					that sets the gradient. While the gradient type can be specified in the 
+					<property>SKIN-NAME.properties</property> file with <property>gradientType</property> property. 
+					
+				
+				The <property>gradientType</property> property can be set to one of the possible values glass, plastic, plain. 
+					The  gradient in it&apos;s turn can be can be  adjusted using baseColor, gradientColor, gradientHeight, valign attributes.
+					Their usage is shown in the snippet above. 
+				
+					
+				</para>
+				
+				
+				
+			<para>	
+				Now, you can use your newly-created and customized skin in your project
 				by adding your new skin parameters to web.xml file and
 				placing the jar file with your skin
 				( the jar file  is located in &quot;target&quot; folder of your skin project) 
@@ -4357,71 +4454,12 @@ mvn clean install
 ]]></programlisting>
 
 
-			<para>
-				So, now having built your new skin you can start
-				redefining style properties in the corresponding XCSS
-				files(located in
-				&quot;\src\main\resources\SKIN-PACKAGE\SKIN-NAME\css\&quot;
-				folder). In the example below, it's shown how to
-				redefine the style properties for the
-				<emphasis role="bold"><property>&lt;rich:combobox&gt;</property></emphasis> component.
-			</para>
-
-			<programlisting role="XML"><![CDATA[...
-	<u:selector name=".rich-combobox-item-selected">
-        <u:style name="border-width" value="1px" />
-        <u:style name="border-style" value="solid" />
-        <u:style name="border-color" skin="newBorder" />
-        <u:style name="background-position" value="0% 50%" />
-        <u:style name="background-image">
-            <f:resource f:key="org.richfaces.renderkit.html.CustomizeableGradient">
-                <f:attribute name="valign" value="middle" />
-                
-                <f:attribute name="gradientHeight" value="17px" />
-                <f:attribute name="baseColor" skin="headerBackgroundColor" />
-            </f:resource>
-        </u:style>	
-	</u:selector>
-...
-]]></programlisting>
-
-			<para>
-				Please notice that
-				<property>background-image</property>
-				can be used to set a predefined gradient by means of
-				<code>
-					&lt;f:resource
-					f:key=&quot;org.richfaces.renderkit.html.CustomizeableGradient&quot;&gt;
-				</code>
-				and the
-				<property>gradientType</property>
-				constant set to one of the possible values.
-			</para>
-
-			<para>
-				You can also apply these style properties to
-				<property>background-image</property>
-				:
-			</para>
-			<itemizedlist>
-
-				<listitem>
-					<para>baseColor</para>
-				</listitem>
-				<listitem>
-					<para>gradientColor</para>
-				</listitem>
-				<listitem>
-					<para>gradientHeight</para>
-				</listitem>
-				<listitem>
-					<para>valign</para>
-				</listitem>
-				<listitem>
-					<para>gradientType</para>
-				</listitem>
-			</itemizedlist>
-
+<section>
+	<title>Details of Usage</title>
+	
+	<para>This section will cover some practical aspects of Plug-n-Skin implementation. </para>
+	
+</section>
 
 		</section>
 
