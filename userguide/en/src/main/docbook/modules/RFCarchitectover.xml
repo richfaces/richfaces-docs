@@ -2687,7 +2687,7 @@
 				</listitem>
 				<listitem>
 					<para>
-						Elements that has class name corresponding to
+						Elements that have class name corresponding to
 						one of the basic elements name/type mapped by
 						the following scheme
 						<code>
@@ -4300,14 +4300,15 @@ mvn cdk:add-skin -Dname=SKIN-NAME -Dpackage=SKIN-PACKAGE
 						<property>XCSS files</property>
 						If the command is executed with the
 						&quot;DcreateExt&quot; key set to
-						&quot;true&quot;, XCSS files that define style
+						&quot;true&quot;,  the XCSS (extended_classes.xcss and extended.xcss) files that define style
 						for standard controls will be created. Location:
 						&quot;\src\main\resources\SKIN-PACKAGE\SKIN-NAME\css\&quot;.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<property>SKIN-NAME-ext.xcss</property>
+						<property>SKIN-NAME-ext.xcss</property> /
+						
 						If the command is executed with the
 						&quot;DcreateExt&quot; key set to
 						&quot;true&quot;, the configuration
@@ -4457,10 +4458,115 @@ mvn clean install
 <section>
 	<title>Details of Usage</title>
 	
-	<para>This section will cover some practical aspects of Plug-n-Skin implementation. </para>
+	<para>This section will cover some practical aspects of Plug-n-Skin implementation.
+	It's assumed that you have read the section of the guide that tells how the new skin using Plug-n-Skin prototype can be created. </para>
+	<para>Above all, we need to create a new skin, in order to do that we just  have to  follow 
+	the steps described in the previous section.</para>
 	
-</section>
+	<para>This command will be used to create a template of the new skin project. </para>
+	
+	<programlisting role="XML"><![CDATA[
+mvn archetype:create 
+-DarchetypeGroupId=org.richfaces.cdk 
+-DarchetypeArtifactId=maven-archetype-plug-n-skin 
+-DarchetypeVersion=3.2.2-SNAPSHOT 
+-DartifactId=P-n-S 
+-DgroupId=GROUPID 
+-Dversion=1.0.-SNAPSHOT
+]]></programlisting>
+	<para>
+		Now you can browse the &quot;P-n-S&quot; folder to view what files and folders were created there.
+	</para>
+	
+	<para>
+		Next, we will also use Maven to add all needed files to the skin project. This will  done by the following command:
+	</para>
+	
+	<programlisting role="XML"><![CDATA[
+mvn cdk:add-skin -DbaseSkin=blueSky  -DcreateExt=true -Dname=PlugnSkinDemo -Dpackage=SKINPACKAGE 
+]]></programlisting>
+	
+	<para>
+		As you remember from the previous section &quot;-DbaseSkin&quot; key defines what skin to be used as a base, 
+		&quot;-DcreateExt=true&quot; determines that the new skin will 
+		come with XCSS files that unify the look of the rich components with standard HTML controls.
+	</para>
+	
+	
+	<para>
+		So, now the files and folder with all needed resources are created 
+		and we can start redefining/editing the new skin.
+	</para>
+	
+	<para>
+		Now we can start editing XCSS files of the rich components. 
+		In order to see how the Plug-n-Skin feature works we will change some style attributes of <emphasis role="bold">
+			<property>&lt;rich:calendar&gt;</property></emphasis> and some basic HTML controls to see how they are affected by standard controls skinning.
+	
+	</para>
+	<para>Thus, it will be demonstrated how to: </para>
+		<itemizedlist>
+			<listitem><para>Recolor the current day's cell background of the  <emphasis role="bold">
+				<property>&lt;rich:calendar&gt;</property></emphasis> to see how the new skin created with the help of Plug-n-Skin feature affects the style of the component;</para></listitem>
+			<listitem><para>Recolor a standard HTML submit button;</para></listitem>
+			
+		</itemizedlist>
+		
+		
+	<para>In oder to edit the style properties of <emphasis role="bold">
+		<property>&lt;rich:calendar&gt;</property></emphasis> you
+		need to open the  &quot;calendar.xcss&quot; file located in &quot;P-n-S\src\main\resources\skinpackage\plugnskindemo\css\&quot;. Once, you have opened the file, please find ".rich-calendar-today"  selector and add specify it the following way:<code>background-color: #075ad1;</code>.</para>
+	
+	<para>Now we will see how font style of a standard HTML submit button can be changed. Please, open &quot;extended.xcss&quot; file located in &quot;P-n-S\src\main\resources\skinpackage\plugnskindemo\css\&quot; and <code>font-weight: bold;</code>inside the curly braces of these coma separated selectors </para>
+	<code>button[type=&quot;button&quot;], button[type=&quot;reset&quot;], button[type=&quot;submit&quot;], input[type=&quot;reset&quot;], input[type=&quot;submit&quot;], input[type=&quot;button&quot;]</code>
 
+	<para>All the changes that were planned to be preformed are done and now you can proceed to building the new PlugnSkinDemo skin and import it into the project. 
+		As you read, the skin should be built in the &quot;P-n-S&quot; folder of the skin project be executing <code>mvn clean install</code> command. This procedure results in creating a &quot;target&quot; folder that contains a .jar file with a compiled new skin, it our case the file is named &quot;P-n-S-1.0.-SNAPSHOT.jar&quot;. 
+		The next step is to import the new PlugnSkinDemo skin into the project.</para>
+	<para>What you need to do, in order to have the new skin imported to the project is</para>
+	<itemizedlist>
+		
+		<listitem><para>Copy the &quot;P-n-S-1.0.-SNAPSHOT.jar&quot; file to the &quot;\WebContent\WEB-INF\lib\&quot; folder.</para></listitem>
+		<listitem><para>Add the new skin&apos;s name to the &quot;web.xml&quot; file. It is done like this</para>
+		
+<programlisting role="XML"><![CDATA[
+ <context-param>
+  <param-name>org.ajax4jsf.SKIN</param-name>
+  <param-value>PlugnSkinDemo</param-value>
+ </context-param>
+]]></programlisting>
+		
+		
+		
+		</listitem>
+	</itemizedlist>
+	
+	
+<para>	
+	
+	Please, do not forget that standard controls skinning has to be enabled in the &quot;web.xml&quot; file, which can be done by adding the following code to the &quot;web.xml&quot; file:
+	</para>
+			
+			
+	<programlisting role="XML"><![CDATA[
+ <context-param>
+  <param-name>org.richfaces.CONTROL_SKINNING</param-name>
+  <param-value>enable</param-value>
+ </context-param>
+]]></programlisting>
+			<para>The result of both action is displayed on the figure below.</para>
+			
+			
+			
+			<figure>
+				<title>Plug-n-Skin feature in action. </title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/PlugnSkinDemo.png"/>
+					</imageobject>
+				</mediaobject>
+			</figure>
+</section>
 		</section>
 
 	</section>
