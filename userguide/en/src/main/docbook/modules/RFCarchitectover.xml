@@ -4399,7 +4399,7 @@ mvn clean install
 
 
 			<para>In addition Plug-n-Skin has a number of predefined 
-				fancy gradients that you can also you to make your application look nicer. The given below code snippet shows how the gradient can be used
+				 gradients that you can also use to make your application look nicer. The given below code snippet shows how a gradient can be used
 			</para>
 				
 <programlisting role="XML"><![CDATA[...
@@ -4479,7 +4479,7 @@ mvn archetype:create
 	</para>
 	
 	<para>
-		Next, we will also use Maven to add all needed files to the skin project. This will  done by the following command:
+		Next, we will use Maven to add all needed files to the skin project. This will  done by the following command:
 	</para>
 	
 	<programlisting role="XML"><![CDATA[
@@ -4487,7 +4487,7 @@ mvn cdk:add-skin -DbaseSkin=blueSky  -DcreateExt=true -Dname=PlugnSkinDemo -Dpac
 ]]></programlisting>
 	
 	<para>
-		As you remember from the previous section &quot;-DbaseSkin&quot; key defines what skin to be used as a base, 
+		As you remember from the previous section &quot;-DbaseSkin&quot; key defines what RichFaces built-in skin to be used as a base one, 
 		&quot;-DcreateExt=true&quot; determines that the new skin will 
 		come with XCSS files that unify the look of the rich components with standard HTML controls.
 	</para>
@@ -4495,7 +4495,7 @@ mvn cdk:add-skin -DbaseSkin=blueSky  -DcreateExt=true -Dname=PlugnSkinDemo -Dpac
 	
 	<para>
 		So, now the files and folder with all needed resources are created 
-		and we can start redefining/editing the new skin.
+		and  redefining/editing the new skin can be started.
 	</para>
 	
 	<para>
@@ -4515,15 +4515,21 @@ mvn cdk:add-skin -DbaseSkin=blueSky  -DcreateExt=true -Dname=PlugnSkinDemo -Dpac
 		
 	<para>In oder to edit the style properties of <emphasis role="bold">
 		<property>&lt;rich:calendar&gt;</property></emphasis> you
-		need to open the  &quot;calendar.xcss&quot; file located in &quot;P-n-S\src\main\resources\skinpackage\plugnskindemo\css\&quot;. Once, you have opened the file, please find ".rich-calendar-today"  selector and add specify it the following way:<code>background-color: #075ad1;</code>.</para>
+		need to open the  &quot;calendar.xcss&quot; file located in &quot;P-n-S\src\main\resources\skinpackage\plugnskindemo\css\&quot;. Once, you have opened the file, please find ".rich-calendar-today"  selector and  amend it as follows: <code>background-color: #075ad1;</code>. The current day's background color can be considered recolored.</para>
 	
-	<para>Now we will see how font style of a standard HTML submit button can be changed. Please, open &quot;extended.xcss&quot; file located in &quot;P-n-S\src\main\resources\skinpackage\plugnskindemo\css\&quot; and <code>font-weight: bold;</code>inside the curly braces of these coma separated selectors </para>
-	<code>button[type=&quot;button&quot;], button[type=&quot;reset&quot;], button[type=&quot;submit&quot;], input[type=&quot;reset&quot;], input[type=&quot;submit&quot;], input[type=&quot;button&quot;]</code>
+	<para>Now we will see how font style of a standard HTML submit button can be changed. Please, open &quot;extended.xcss&quot; file located in &quot;P-n-S\src\main\resources\skinpackage\plugnskindemo\css\&quot; and put in <code>font-weight: bold;</code>inside the curly braces of these coma separated selectors </para>
+	<code>button[type=&quot;button&quot;], button[type=&quot;reset&quot;], button[type=&quot;submit&quot;], input[type=&quot;reset&quot;], input[type=&quot;submit&quot;], input[type=&quot;button&quot;]</code>. So, the CSS code should look like this.
 
+
+	<programlisting role="XML"><![CDATA[
+button[type=&quot;button&quot;], button[type=&quot;reset&quot;], button[type=&quot;submit&quot;], input[type=&quot;reset&quot;], input[type=&quot;submit&quot;], input[type=&quot;button&quot;] {
+font-weight: bold;
+}
+]]></programlisting>
 	<para>All the changes that were planned to be preformed are done and now you can proceed to building the new PlugnSkinDemo skin and import it into the project. 
-		As you read, the skin should be built in the &quot;P-n-S&quot; folder of the skin project be executing <code>mvn clean install</code> command. This procedure results in creating a &quot;target&quot; folder that contains a .jar file with a compiled new skin, it our case the file is named &quot;P-n-S-1.0.-SNAPSHOT.jar&quot;. 
+		As you read in the previous section, the skin should be built in the &quot;P-n-S&quot; folder of the skin project be executing <code>mvn clean install</code> command. This procedure results in creating a &quot;target&quot; folder that contains a .jar file with a compiled new skin, it our case the file is named &quot;P-n-S-1.0.-SNAPSHOT.jar&quot;. 
 		The next step is to import the new PlugnSkinDemo skin into the project.</para>
-	<para>What you need to do, in order to have the new skin imported to the project is</para>
+	<para>What you need to do, in order to have the new skin imported to the project is to</para>
 	<itemizedlist>
 		
 		<listitem><para>Copy the &quot;P-n-S-1.0.-SNAPSHOT.jar&quot; file to the &quot;\WebContent\WEB-INF\lib\&quot; folder.</para></listitem>
