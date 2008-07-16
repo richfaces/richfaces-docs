@@ -80,16 +80,98 @@ HtmlComponentControl myComponentControl = new HtmlComponentControl();
 ]]></programlisting>
   </section>
 
+
+
+
+
+
   <section>
     <title>Details of Usage</title>
     <para>
-      In order to use the <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> with another components you need to take the following steps:
+      <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> 
+      is a command component, that allows to call JavaScript API function on some defined event. 
+      Look at the example:
+      </para>
+      <programlisting role="XML"><![CDATA[...
+<rich:componentControl attachTo="doExpandCalendarID" event="onclick" for="ccCalendarID" operation="Expand"/>
+...
+]]></programlisting>
+    <para>
+      In other words it means &quot;clicking on the component with ID &apos;doExpandCalendarID&apos;, 
+      expands the component with ID &apos;ccCalendarID&apos;&quot;. 
+      It can be said, that <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> 
+      connects two components with the help of JavaScript API function.
+    </para>
+    <para>
+      Component ID, to wich the event, that invokes JavaScript API function is applied, 
+      is defined with <emphasis><property>&quot;attachTo&quot;</property></emphasis> attribute 
+      (see the exapmle above). 
+      If <emphasis><property>&quot;attachTo&quot;</property></emphasis> attribute is not defined, 
+      the component will be attached to the parent component.
+    </para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+<h:commandButton value="Show Modal Panel">
+    <rich:componentControl for="ccModalPanelID" event="onclick" operation="show"/> <!--attached to the commandButton-->
+</h:commandButton>
+...
+]]></programlisting>
+    <para>
+      On the result page the component is rendered to JavaScript code. 
+      This means, that it is possible to invoke the <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> 
+      handler operation as usual JavaScript function.  
+      This function is called by name, specified in the component <emphasis><property>&quot;name&quot;</property></emphasis> attribute. 
+      The definition of <emphasis><property>&quot;name&quot;</property></emphasis> attribute is shown on the example below:
+    </para>
+    <programlisting role="XML"><![CDATA[...
+<rich:componentControl name="func" event="onRowClick" for="menu" operation="show" />
+...
+]]></programlisting>
+    <para>
+      The generated JavaScript function will look as shown below:
+    </para>
+    <programlisting role="XML"><![CDATA[function func (event) {
+}
+]]></programlisting>
+      <para>
+        An important <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> feature, 
+        is that it allows transferring parameters, with the help of special attribute <emphasis><property>&quot;params&quot;</property></emphasis>.
+      </para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+<rich:componentControl name="func" event="onRowClick" for="menu" operation="show" params=”#{car.model}"/>
+...
+]]></programlisting>
+    <para>
+      The alternative way for parameters transferring uses <emphasis role="bold"><property>&lt;f:param&gt;</property></emphasis> attribute. 
+      As the code above, the following code will represent the same functionality.
+    </para>
+    <para>
+      <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+<rich:componentControl event="onRowClick" for="menu" operation="show">
+                <f:param value="#{car.model}" name="model"/>
+</rich:componentControl>
+...
+]]></programlisting>
     
-    <!--
-      There are three ways to use the <emphasis role="bold">
-        <property>&lt;rich:componentControl&gt;</property>
-      </emphasis> to another component.
-      -->
+      
+      
+      
+     
+      
+      
+      
+      
+      
+ <!--     In order to use the <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> with another components you need to take the following steps:
+    
+  
     </para>
     <itemizedlist>
       <listitem><para>Define a name of a function that is generated (definition is similar to a
@@ -176,7 +258,11 @@ HtmlComponentControl myComponentControl = new HtmlComponentControl();
         <property>&quot;operation&quot;</property>
       </emphasis> attribute contains a name of JavaScript API function. Thus, clicking on the link
       represents the next year on the calendar.
-    </para>
+      </para> -->
+    
+    
+    
+    
     <para>
       With the help of the <emphasis><property>&quot;attachTiming&quot;</property></emphasis> attribute you can define the page loading phase when
       <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> is attached to source component. Possible values are: 
