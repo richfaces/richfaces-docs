@@ -157,7 +157,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
     <itemizedlist>
         <listitem>
             <para>
-                By <property> file types</property>, use <emphasis><property> &quot;acceptedTypes&quot;</property></emphasis> attribute 
+                On <property> file types</property>, use <emphasis><property> &quot;acceptedTypes&quot;</property></emphasis> attribute 
                 to define file types accepted by component.
                 In the example below only files with &quot;html&quot; and &quot;jpg&quot; extensions are accepted to upload.
             </para>
@@ -170,7 +170,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
         </listitem>
         <listitem>
             <para>
-                By <property> file size</property>, use the <code>maxRequestSize</code> parameter(value in bytes) inside <property>Ajax4jsf Filter</property> section 
+               On <property> file size</property>, use the <code>maxRequestSize</code> parameter(value in bytes) inside <property>Ajax4jsf Filter</property> section 
                 in <property>web.xml</property>:
             </para>
             <programlisting role="XML"><![CDATA[...
@@ -182,11 +182,12 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
         </listitem>
         <listitem>
             <para>
-                By <property>max files quantity</property>, use the <emphasis><property> &quot;maxFilesQuantity&quot;</property></emphasis> attribute 
+                On <property>max files quantity</property>, use the <emphasis><property> &quot;maxFilesQuantity&quot;</property></emphasis> attribute 
                 to define max number of files allowed to be uploaded. After a number of files in the list equals to the value of this attribute &quot;Add&quot; button is disabled and nothing could be uploaded even if you clear the whole list.
                 In order to upload files again you should rerender the component.
                 As it could be seen in the example below, only 2 files are accepted for uploading.
             </para>
+            
             <para>
                 <emphasis role="bold">Example:</emphasis>
             </para>
@@ -208,6 +209,25 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
         </listitem>
     </itemizedlist>
 
+
+        <!--Flash Module-->
+        <para>
+            The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component has an embedded Flash module 
+            that adds extra functionality to the component. The module is enabled with <emphasis><property> &quot;allowFlash&quot;</property></emphasis>
+attribute set to &quot;true&quot;.       
+        </para>
+<para>Apart from uploading files to the sever, without using AJAX, the Flash module provides a number of useful API functions that can be used to obtain information about the uploaded file. </para>          
+        <para>For instance, in case it's needed to check the file type of an uploaded file, the <code>entry.Type</code> can be applied. The example below illustrates how it can be done.</para>         
+        
+        
+        <programlisting role="XML"><![CDATA[...
+<rich:fileUpload maxFilesQuantity="2"/>
+ ...]]></programlisting>     
+          
+
+        
+        
+        <!--End of Flash Module-->
    
         <para>The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component 
             provides a number of specific event attributes: 
