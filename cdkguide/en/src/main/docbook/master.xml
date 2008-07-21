@@ -21,7 +21,7 @@
 <!ENTITY skin SYSTEM "includes/skin.xml">
 <!ENTITY register SYSTEM "includes/register.xml">
 <!ENTITY taghandler SYSTEM "includes/taghandler.xml">
-<!ENTITY rssubclass SYSTEM "includes/rssubclass.xml">
+<!ENTITY rendererbase SYSTEM "includes/rendererbase.xml">
 <!--Check the links page -->
 <!ENTITY links SYSTEM "modules/links.xml">
 ]>
@@ -36,101 +36,73 @@
         </copyright>
 
     </bookinfo>
-    <toc/>
-	&intro;
-	&roadmap;
-	&setup;
-
-	
-<!--
+    <toc/> &intro; &roadmap; &setup; <!--
 	&ccreate;
 	&compdev;
 -->
+    <chapter id="compdev" xreflabel="compdev">
+        <?dbhtml filename="compdev.html"?>
+        <chapterinfo>
+            <keywordset>
+                <keyword>inputDate</keyword>
+                <keyword>component</keyword>
+                <keyword>CDK</keyword>
+                <keyword>Guide</keyword>
+            </keywordset>
+        </chapterinfo>
+        <title>inputDate component development</title>
+        <para> We a going to create the <emphasis role="bold">
+                <property>&lt;inputDate&gt;</property>
+            </emphasis> component that can take a value, process that value, and then push it back
+            to the underlying model as a strongly typed <property>Date</property> object. </para>
+        <para> The <emphasis role="bold">
+                <property>&lt;inputDate&gt;</property>
+            </emphasis> component allows to attach a converter in order to set the desired date
+            format such as <property>mm/dd/yyyy</property>. So the component could convert and
+            validate the date entered by user. </para> &pcreate; &ccreate; &protoui;
+            <section id="crenderer" xreflabel="crenderer">
+            <?dbhtml filename="crenderer.html"?>
+            <sectioninfo>
+                <keywordset>
+                    <keyword>renderer</keyword>
+                    <keyword>UI</keyword>
+                    <keyword>CDK</keyword>
+                    <keyword>Guide</keyword>
+                </keywordset>
+            </sectioninfo>
+            <title>Creating a Renderer</title>
+            <para> Renderer is responsible for the JSF component representation. It generates the
+                appropriate client-side markup, such as HTML, WML, XUL, etc. Renderer is also
+                responsible for the converting information coming from the client to the proper type
+                for the component (for example, a string value from the request is converted to a
+                strongly type <code>Date</code> object). </para>
+            <para> You could actually implement the renderer-specific component subclass that
+                exposes client-side attributes such as <emphasis>
+                    <property>&quot;style&quot;</property>
+                </emphasis>, <emphasis>
+                    <property>&quot;class&quot;</property>
+                </emphasis>, etc. It is common practice to implement the client-specific component
+                subclass to make some aspects of application development easier, but in our case we
+                do not need to do it. The <emphasis role="bold">
+                    <property>&lt;inputDate&gt;</property>
+                </emphasis> is a simple <code>UIInput</code> component, therefore
+                    <code>InputDateRenderer</code> class generates all the markup itself. </para>
+            <para> It is a time to start creating the <property>Renderer</property>. </para>
+            <para> One of the most convenient features of the <property>Component Development Kit
+                    (CDK)</property> is a <property>Templating</property> mechanism. </para>
+            &template; &rendererbase; &skin; </section> &register; &ui;
+        &taghandler; </chapter> &test; &overview; <chapter id="button"
+        xreflabel="button">
+        <?dbhtml filename="button.html"?>
+        <chapterinfo>
+            <keywordset>
+                <keyword>button</keyword>
+                <keyword>component</keyword>
+                <keyword>CDK</keyword>
+                <keyword>Guide</keyword>
+            </keywordset>
+        </chapterinfo>
+        <title>Button component development</title>
+        <para> Command Ajax components TBD with RichFaces CDK. </para>
 
-	
-
-
-
-<chapter id="compdev" xreflabel="compdev">
-    <?dbhtml filename="compdev.html"?>
-    <chapterinfo>
-        <keywordset>
-            <keyword>inputDate</keyword>
-            <keyword>component</keyword>
-            <keyword>CDK</keyword>
-	    <keyword>Guide</keyword>
-        </keywordset>
-    </chapterinfo>
-    <title>inputDate component development</title>
-    <para>
-        We a going to create the <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis>
-        component that can take a value, process that value, and then push it
-        back to the underlying model as a strongly typed <property>Date</property> object.
-    </para>
-    <para>
-        The <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component allows to attach
-        a converter in order to set the desired date format such as <property>mm/dd/yyyy</property>. So the component 
-        could convert and validate the date entered by user. 
-    </para>
-    
-	&pcreate;
-	&ccreate;
-	&protoui;
-
-<section id="crenderer" xreflabel="crenderer">
-    <?dbhtml filename="crenderer.html"?>
-    <sectioninfo>
-        <keywordset>
-            <keyword>renderer</keyword>
-            <keyword>UI</keyword>
-            <keyword>CDK</keyword>
-	    <keyword>Guide</keyword> 
-        </keywordset>
-    </sectioninfo>
-		<title>Creating a Renderer</title>
-		<para>
-			Renderer is responsible for the JSF component representation. It generates the appropriate client-side markup,
-			such as HTML, WML, XUL, etc. Renderer is also responsible for the converting information coming from the client to the proper type
-			for the component (for example, a string value from the request is converted to a strongly type <code>Date</code> object).
-		</para>
-		<para>
-			You could actually implement the renderer-specific component subclass that exposes
-			client-side attributes such as style, disabled, tooltip, etc.
-		</para>
-	&template;
-	&skin;
-</section>
-
-
-
-	&rssubclass;
-	&ui;
-	&register;
-	&taghandler;
-
-</chapter>
-
-	&test;
-	&overview;
-	
-	<chapter id="button" xreflabel="button">
-    <?dbhtml filename="button.html"?>
-    <chapterinfo>
-        <keywordset>
-            <keyword>button</keyword>
-            <keyword>component</keyword>
-            <keyword>CDK</keyword>
-		    <keyword>Guide</keyword>
-        </keywordset>
-    </chapterinfo>
-		<title>Button component development</title>
-		<para>
-			Command Ajax components TBD with RichFaces CDK. 
-		</para>
-
-	</chapter>
-	&ide;
-	&namingconv;
-	&ref;
-	&temptags;
-</book>
+    </chapter> &ide; &namingconv; &ref; &temptags; </book>

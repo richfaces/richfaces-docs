@@ -1,19 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section id="template" xreflabel="template">
-<?dbhtml filename="template.html"?>
-<sectioninfo>
-<keywordset>
-<keyword>templating</keyword>
-<keyword>UI</keyword>
-<keyword>CDK</keyword>
-<keyword>Guide</keyword>
-</keywordset>
-</sectioninfo>
-<title>Templating</title>
-<para>
-How to write your renderer with the help of a template.
-</para>
-<para>
-How to create a base class
-</para>
-</section>
+    <?dbhtml filename="template.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>templating</keyword>
+            <keyword>UI</keyword>
+            <keyword>CDK</keyword>
+            <keyword>Guide</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>Templating</title>
+    <para> The <property>Component Development Kit (CDK)</property> allows to use the
+            <property>templates</property> for generation <property>Renderer</property> class. </para>
+    <para> Templates are JSP-like markup pages with special tags that are converted into
+            <property>Renderer</property> by a build script. </para>
+    <para> It&apos;s possible to use evaluated expressions in components templates.
+        It&apos;s also possible to create the <property>base class</property> for a template to
+        implement additional functions in it, so as the functions could be called from the template.
+        Hence, in the generated <property>Renderer</property> class there are corresponding function
+        calls on the place of these elements. </para>
+    <para> Let&apos;s create the template. At first you should proceed to the
+            <property>inputDate/src/main/templates/org/mycompany</property> directory where
+            <property>htmlInputDate.jspx</property> template file is stored. This file contains a
+            <property>Template Skeleton</property> like this one: </para>
+    <programlisting role="XML"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	xmlns:f="http://ajax4jsf.org/cdk/template" 
+	xmlns:c=" http://java.sun.com/jsf/core" 
+	xmlns:ui=" http://ajax4jsf.org/cdk/ui"
+	xmlns:u=" http://ajax4jsf.org/cdk/u"
+	xmlns:x=" http://ajax4jsf.org/cdk/x"
+	class="org.mycompany.renderkit.html.InputDateRenderer"
+	baseclass="org.ajax4jsf.renderkit.AjaxComponentRendererBase"
+	component="org.mycompany.component.UIInputDate" 
+	>
+	<f:clientid var="clientId"/>
+	<div id="#{clientId}"
+		x:passThruWithExclusions="value,name,type,id"
+		>
+	</div>
+</f:root>
+    ]]></programlisting>
+    <para> According to the created <property>UI prototype</property> you need to extend
+            <property>Template Skeleton</property> with proper elements. Here is a full example for
+        the <emphasis role="bold">
+            <property>&lt;inputDate&gt;</property>
+        </emphasis> component: </para>
+    <ulink url="jspx/htmlInputDate.jspx">htmlInputDate.jspx</ulink>. </section>

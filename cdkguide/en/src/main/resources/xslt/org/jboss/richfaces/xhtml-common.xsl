@@ -65,5 +65,9 @@ Version: 1.72.0
 	<xsl:apply-templates select="." mode="head.keywords.content"/>
 </xsl:template>
 
-
+<xsl:template match="//citebiblio">
+	<div>
+	<xsl:value-of select="." />
+</div>
+</xsl:template>
 </xsl:stylesheet>
