@@ -210,29 +210,19 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
     </itemizedlist>
 
 
-        <!--Flash Module-->
-        <para>
-            The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component has an embedded Flash module 
-            that adds extra functionality to the component. The module is enabled with <emphasis><property> &quot;allowFlash&quot;</property></emphasis>
-attribute set to &quot;true&quot;.       
-        </para>
-<para>Apart from uploading files to the sever, without using AJAX, the Flash module provides a number of useful API functions that can be used to obtain information about the uploaded file. </para>          
-        <para>For instance, in case it's needed to check the file type of an uploaded file, the <code>entry.Type</code> can be applied. The example below illustrates how it can be done.</para>         
-        
-        
-        <programlisting role="XML"><![CDATA[...
-<rich:fileUpload maxFilesQuantity="2"/>
- ...]]></programlisting>     
-          
-
-        
-        
-        <!--End of Flash Module-->
+     
    
-        <para>The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component 
+        <para id="fileUploadEventAttributes">The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component 
             provides a number of specific event attributes: 
         </para>
             <itemizedlist>
+                
+                <listitem>
+                    <para>
+                        The <emphasis><property> &quot;onadd&quot;</property></emphasis>a event handler called on an add file operation         
+                    </para>
+                </listitem>
+                
                 <listitem>
                     <para>
                         The <emphasis><property> &quot;onupload&quot;</property></emphasis> which gives you a possibility to cancel the upload at client side            
@@ -254,6 +244,36 @@ attribute set to &quot;true&quot;.
                     </para>
                 </listitem>
             </itemizedlist>    
+            
+            
+            
+            
+        <!--Flash Module-->
+        <para>
+            The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component has an embedded Flash module 
+            that adds extra functionality to the component. The module is enabled with <emphasis><property> &quot;allowFlash&quot;</property></emphasis>
+            attribute set to &quot;true&quot;.       
+        </para>
+        <para>Apart from uploading files to the sever without using AJAX, the Flash module provides a number of useful API functions that can be used to obtain information about the uploaded file. </para>          
+      
+        <para>There are 2 ways to obtain the data stored in the FileUploadEntry  object. </para>
+ 
+ <itemizedlist>
+        <listitem><para>By means of JavaScript on the client side. Use the following syntax for that <code>entries[i].propertyName</code>. For example <code>entries[0].state</code> will return the state of the file the is being processed or has just been processed. A full list of properties can be found <link linkend="objectProperties">here</link>.   </para></listitem>
+ 
+       
+     <listitem><para>The properties of  <code>FileUploadEntry</code>  object can be retrieved using  the <code>entry.propertyName</code> expression in the specific event attributes. For example, <code>onupload=&quot;alert(entry.fileName)&quot;</code> will display a message with the name of the file at the moment when upload operation begins.</para></listitem>   
+        
+        
+ </itemizedlist>   
+
+        
+        
+        
+        <!--End of Flash Module-->
+            
+            
+            
             
         
         <para>
@@ -383,7 +403,7 @@ attribute set to &quot;true&quot;.
         </para>
         <programlisting role="XML"><![CDATA[...
 <rich:fileUpload  id="upload" disabled="false"/>
-<h:commandButton onclick="${rich:component('upload')}.disable(event); return false;" value="Disable" />
+<h:commandButton onclick="${rich:component('upload')}.disable();" value="Disable" />
 ...]]></programlisting>  
         
         <para>
@@ -469,7 +489,7 @@ attribute set to &quot;true&quot;.
                     </row>
                     <row>
                         <entry>clear()</entry>
-                        <entry>Removes all files from the list. The function can also get the $('id').component.entries[0] as a parameter to remove a particular file. </entry>
+                        <entry>Removes all files from the list. The function can also get the $(&apos;id&apos;).component.entries[i] as a parameter to remove a particular file. </entry>
                     </row>
                     
      
@@ -482,7 +502,7 @@ attribute set to &quot;true&quot;.
         
 
         
-        <table d="objectProperties"> 
+        <table id="objectProperties"> 
             <title>Client side object properties</title>
             <tgroup cols="2">
                 <thead>
@@ -509,14 +529,14 @@ attribute set to &quot;true&quot;.
                     
                     
                     <row>
-                        <entry>entries[0].fileName</entry>
+                        <entry>entries[i].fileName</entry>
                         <entry>Returns the file name, that is retrieved by the array index </entry>
                     </row>
                     
                     
                     
                     <row>
-                        <entry>entries[0].state </entry> 
+                        <entry>entries[i].state </entry> 
                         <entry>Returns the file state. Possible states are 
                             <itemizedlist>
                                 
@@ -534,12 +554,74 @@ attribute set to &quot;true&quot;.
                         
                         </entry>
                     </row>
+      
+                    
+                    
+                    <row>
+                        <entry>entries[i].size</entry><entry> Returns the size of the file. Available in flash enabled version only</entry> 
+                    </row>   
+                    <row>
+                        <entry>entries[i].Type</entry><entry>Returns the mime type of the file. Available in flash enabled version only</entry>
+                    </row>   
+                    <row>
+                        <entry>entries[i].creator </entry><entry>Returns the name of the author of the file. Available in flash enabled version only</entry> 
+                    </row> 
+                    <row>
+                        <entry>entries[i].creationDate</entry><entry>Returns the date when the file was created. Available in flash enabled version only</entry> 
+                    </row>   
+                    <row>
+                        <entry>entries[i].modificationDate</entry>  <entry>Returns the date of the last file modification. Available in flash enabled version only</entry> 
+                    </row>   
+                    
+            
+                    
+                    
+        </tbody>
+        </tgroup>
+        </table>
+        
+        
+        
+        
+        <table d="objectPropertiesWithAttributes"> 
+            <title>Client side object properties available with specific <link linkend="fileUploadEventAttributes"> event attributes</link></title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Property</entry>
+                        <entry>Description</entry>  
+                    </row>
+                </thead>
+                <tbody>
+
+                    
+                        
+                    
+                    <row>
+                        <entry>entry.state </entry> 
+                        <entry>Returns the file state. Possible states are 
+                            <itemizedlist>
+                                
+                                <listitem><para>&quot;initialized&quot; - the file is added, corresponds to FileUploadEntry.INITIALIZED constant </para> </listitem>
+                                <listitem><para>&quot;progress&quot; - the file is being uploaded, corresponds to FileUploadEntry.UPLOAD_IN_PROGRESS  constant</para> </listitem>
+                                <listitem><para>&quot;ready&quot; - uploading is in process, corresponds to FileUploadEntry.READY  constant The file will be uploaded on queue order.</para> </listitem>
+                                <listitem><para>&quot;canceled&quot; - uploading of the file is canceled, corresponds to FileUploadEntry.UPLOAD_CANCELED  constant </para> </listitem>
+                                <listitem><para>&quot;done&quot; - the file is uploaded successfully, corresponds to FileUploadEntry.UPLOAD_SUCCESS  constant</para> </listitem>
+                                <listitem><para>&quot;transfer_error&quot; - a file transfer error  occurred, corresponds to FileUploadEntry.UPLOAD_TRANSFER_ERROR  constant </para> </listitem>
+                                <listitem><para>&quot;size_error&quot; - the file exceeded maximum size, corresponds to FileUploadEntry.UPLOAD_SIZE_ERROR  constant</para> </listitem>
+                                
+                                
+                            </itemizedlist>
+                            
+                            
+                        </entry>
+                    </row>
                     
                     <row>
                         <entry>entry.fileName </entry> 
                         <entry>Returns the file&apos;s name. This property works with all event handlers except for &quot;onadd&quot;.
-                    </entry>
-                   </row>               
+                        </entry>
+                    </row>               
                     
                     
                     
@@ -553,17 +635,17 @@ attribute set to &quot;true&quot;.
                         <entry>entry.creator </entry><entry>Returns the name of the author of the file. Available in flash enabled version only</entry> 
                     </row> 
                     <row>
-                    <entry>entry.creationDate</entry><entry>Returns the date when the file was created. Available in flash enabled version only</entry> 
+                        <entry>entry.creationDate</entry><entry>Returns the date when the file was created. Available in flash enabled version only</entry> 
                     </row>   
                     <row>
-                    <entry>entry.modificationDate</entry>  <entry>Returns the date of the last file modification. Available in flash enabled version only</entry> 
+                        <entry>entry.modificationDate</entry>  <entry>Returns the date of the last file modification. Available in flash enabled version only</entry> 
                     </row>   
                     
-            
                     
                     
-        </tbody>
-        </tgroup>
+                    
+                </tbody>
+            </tgroup>
         </table>
         
         
