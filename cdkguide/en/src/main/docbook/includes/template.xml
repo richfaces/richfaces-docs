@@ -14,7 +14,7 @@
             <property>templates</property> for generation <property>Renderer</property> class. </para>
     <para> Templates are JSP-like markup pages with special tags that are converted into
             <property>Renderer</property> by a build script. </para>
-    <para> It&apos;s possible to use evaluated expressions in components templates.
+    <para> It&apos;s possible to use evaluated expressions in components templates with the help of <property>scriptlets</property>.
         It&apos;s also possible to create the <property>base class</property> for a template to
         implement additional functions in it, so as the functions could be called from the template.
         Hence, in the generated <property>Renderer</property> class there are corresponding function
@@ -43,8 +43,79 @@
 </f:root>
     ]]></programlisting>
     <para> According to the created <property>UI prototype</property> you need to extend
-            <property>Template Skeleton</property> with proper elements. Here is a full example for
+            <property>Template Skeleton</property> with proper elements:
+</para>
+<itemizedlist>
+	<listitem>
+		<para>
+			<emphasis role="bold"><property>&lt;div&gt;</property></emphasis>-wrapper element with 
+			<emphasis><property>&quot;title&quot;</property></emphasis>,
+<emphasis><property>&quot;value&quot;</property></emphasis>,
+<emphasis><property>&quot;name&quot;</property></emphasis>,
+<emphasis><property>&quot;type&quot;</property></emphasis>,
+<emphasis><property>&quot;id&quot;</property></emphasis> attributes and with 
+the<emphasis><property>&quot;caption&quot;</property></emphasis> facet
+		</para>
+	</listitem>
+	<listitem>
+		<para>
+			<emphasis role="bold"><property>&lt;input&gt;</property></emphasis> element with 
+<emphasis><property>&quot;id&quot;</property></emphasis>,			
+<emphasis><property>&quot;value&quot;</property></emphasis>,
+<emphasis><property>&quot;name&quot;</property></emphasis>,
+<emphasis><property>&quot;type&quot;</property></emphasis>,
+<emphasis><property>&quot;class&quot;</property></emphasis>,
+<emphasis><property>&quot;style&quot;</property></emphasis> attributes and with
+the <emphasis><property>&quot;icon&quot;</property></emphasis> facet used to define an icon of the component.
+		</para>
+	</listitem>
+	<listitem>
+		<para>
+			<emphasis role="bold"><property>&lt;img&gt;</property></emphasis> element with 
+<emphasis><property>&quot;src&quot;</property></emphasis>,
+<emphasis><property>&quot;class&quot;</property></emphasis>,
+<emphasis><property>&quot;style&quot;</property></emphasis> attributes.
+		</para>
+	</listitem>
+</itemizedlist>
+<para>
+	The <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component uses styles and scripts that should 
+	be defined in the template with the help of <emphasis role="bold"><property>&lt;h:styles&gt;</property></emphasis> and
+	<emphasis role="bold"><property>&lt;h:scripts&gt;</property></emphasis> tags. How to register all resources is explained in the
+	<property>&quot;Component resources registration&quot;</property> chapter.
+</para>
+<important>
+	<title>Important:</title>
+	<para>
+		Don&apos;t forget to add namespace <code>xmlns:h=&quot; http://ajax4jsf.org/cdk/h&quot;</code> to the 
+		<emphasis role="bold"><property>&lt;f:root&gt;</property></emphasis> element:
+	</para>
+    <programlisting role="XML"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<f:root 
+	...
+	xmlns:h=" http://ajax4jsf.org/cdk/h"
+	...
+	>
+	...
+</f:root>]]></programlisting>	
+</important>
+<para>
+Here is a full example of the template for
         the <emphasis role="bold">
             <property>&lt;inputDate&gt;</property>
-        </emphasis> component: </para>
-    <ulink url="jspx/htmlInputDate.jspx">htmlInputDate.jspx</ulink>. </section>
+        </emphasis> component: 
+    <ulink url="jspx/htmlInputDate.jspx">htmlInputDate.jspx</ulink>. 
+    </para>
+    <note>
+	<title>Note:</title>
+	<para>
+		In the <property>Template Skeleton</property> Renderer Baseclass is <code>org.ajax4jsf.renderkit.AjaxComponentRendererBase</code>, but 
+		you need to define Renderer Baseclass special for <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component.
+		In the next section <link linkend="rendererbase">&quot;Creating a Renderer Base class&quot;</link> we will define Renderer Baseclass <code>org.mycompany.renderkit.InputDateRendererBase</code>.
+	</para>
+    </note>
+    <para>
+	All the Template tags you could find in the <property>&quot;Template tags overview&quot;</property> chapter.
+    </para>
+    </section>
