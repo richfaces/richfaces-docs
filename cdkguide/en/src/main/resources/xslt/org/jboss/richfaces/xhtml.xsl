@@ -10,7 +10,7 @@
 
    <xsl:import href="classpath:/xslt/org/jboss/xhtml.xsl"/>
    <xsl:import href="xhtml-common.xsl"/>
-
+   
 <xsl:param name="chunk.fast" select="1"/>
 
 <xsl:template name="chunk">
@@ -18,7 +18,7 @@
   
   <xsl:choose>
     <xsl:when test="not($node/parent::*)">1</xsl:when>
-    <xsl:when test="$node/parent::node()/processing-instruction('forseChanks') and local-name($node)!='title' and local-name($node)!='para'">1</xsl:when>
+    <xsl:when test="$node/parent::node()/processing-instruction('forseChanks') and local-name($node)!='title' and local-name($node)!='para' and local-name($node)='section'" >1</xsl:when>
     <xsl:when test="local-name($node) = 'sect1'
                     and $chunk.section.depth &gt;= 1
                     and ($chunk.first.sections != 0
