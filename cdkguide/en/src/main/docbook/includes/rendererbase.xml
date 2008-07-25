@@ -10,5 +10,159 @@
         </keywordset>
     </sectioninfo>
     <title>Creating a Renderer Base class</title>
-    <para> How to create a base class </para>
+    <para> 
+	After the component tree is restored on the <property>Restore View Phase </property>, 
+	each component in the tree extracts its new value from the request parameters
+	by using its <code>decode()</code> method. Then the value is stored locally on the component.
+    </para>
+    <para>
+	The <code>InputDateRendererBase</code> class extends a <code>HeaderResourcesRendererBase</code>
+	class. In the <code>HeaderResourcesRendererBase</code> class all the <code>encode()</code> methods for 
+	the right resources encoding
+	are already realized, so in the <code>InputDateRendererBase</code> class you need to override
+	the <code>decode()</code> method only:
+    </para>
+<programlisting role="JAVA"><![CDATA[ public void decode(FacesContext context, UIComponent component){
+	ExternalContext external = context.getExternalContext();
+	Map requestParams = external.getRequestParameterMap();
+	UIInputDate inputDate = (UIInputDate)component;
+	String clientId = inputDate.getClientId(context);
+	String submittedValue = (String)requestParams.get(clientId);
+	if (submittedValue != null) {
+		inputDate.setSubmittedValue(submittedValue);
+	}
+}	
+]]></programlisting>
+<para>
+	As you see in the example above the <code>decode()</code> method reads values from request parameters, 
+	grabs the <code>clientId</code> from the component to identify the request parameter to be looked up.
+	The <code>clientId</code> is calculated as the fully qualified name of the component given its container path:
+	<property>nameOfForm:nameOfComponent</property> (for example <property>myForm:inputDate</property>).
+	The last step of the <code>decode()</code> method is to store the submitted value locally on the component.
+</para>
+<note>
+	<title>Note:</title>
+	<para>
+		By default, the base Renderer implementation returns the <code>submittedValue</code> directly without any conversion!
+		If you want to convert submitted value to a strongly typed object you should implement <property>Converter</property>
+		and the <code>getConvertedValue()</code> method in your Renderer class (in our case in the <code>InputDateRendererBase</code> class).
+	</para>
+</note>
+<section id="converter" xreflabel="converter">
+    <?dbhtml filename="converter.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>converter</keyword>
+            <keyword>UI</keyword>
+            <keyword>CDK</keyword>
+            <keyword>Guide</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>Creating a Converter</title>
+<para>
+	As it was mentioned before the <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis>
+	component at the <property>Apply Request Values</property> phase takes a value and pushes it 
+	to the model as a strongly typed <property>Date</property> object. 
+	Therefore you need to implement a <property>Converter</property> in the Renderer Base class and also check
+	whether a <property>Converter</property> has been already attached by the application developer.
+	If the conversion of the value fails, an error message associated with the component is generated 
+	and queued on <property>FacesContext</property>. 
+</para>
+<para>
+	The <code>getConverter()</code> method of the <code>InputDateRendererBase</code> class controls 
+	the conversion of entered values, as shown in the following example:
+</para>
+<programlisting role="JAVA"><![CDATA[private Converter getConverter(FacesContext context, UIInputDate inputDate){
+	Converter converter = inputDate.getConverter();
+	if (converter == null){
+		// default the converter
+		DateTimeConverter datetime = new DateTimeConverter();
+		datetime.setLocale(context.getViewRoot().getLocale());
+		datetime.setTimeZone(TimeZone.getDefault());
+		datetime.setType("date");
+		datetime.setDateStyle("medium");
+		datetime.setPattern("d/m/y");
+		converter = datetime;
+	}
+	return converter;
+}	
+]]></programlisting>
+<para>
+	At first you should check whether the application developer has attached a <property>Converter</property> to the 
+	<emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component 
+	(for example, <emphasis role="bold"><property>&lt;f:convertDateTime&gt;</property></emphasis>) .
+	If not you should follow the next steps:
+</para>
+<itemizedlist>
+	<listitem>
+		<para>
+			create a new <property>DateTimeConverter</property>
+		</para>
+	</listitem>
+		<listitem>
+		<para>
+			get the locale for the client from the context with the help of the <code>getLocale()</code> method
+			and set it on the new <property>Converter</property> by means of the <code>setLocale()</code> method
+		</para>
+	</listitem>
+		<listitem>
+		<para>
+			set the time zone, date type, date style, and date pattern on the new converter with the help of 
+			<code>setTimeZone</code>, <code>setType</code>, <code>setDateStyle</code>, and 
+			<code>setPattern</code> methods respectively
+		</para>
+	</listitem>
+		<listitem>
+		<para>
+			return the <property>Converter</property>
+		</para>
+	</listitem>
+</itemizedlist>
+<para>
+	After the <property>Apply Request Values</property> phase the application enters the 
+	<property>Process Validation</property> phase during which the <code>validate()</code> method
+	calls the <code>getConvertedValue()</code> method on every submitted value and passes 
+	the newly submitted value from the decode process.
+</para>
+<para>
+	The <code>getConvertedValue()</code> method converts the submitted value to a strongly typed 
+	object (in our case <property>Date</property>) using the <code>getAsObject()</code> method. 
+	Then the new strongly typed object is validated and if there are no errors 
+	<property>Process Validation</property> phase ends. Otherwise the <code>getConvertedValue()</code> method
+	throws a <property>ConverterException</property>.
+</para>
+<para>
+	Here is the snippet:
+</para>
+<programlisting role="JAVA"><![CDATA[public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue) throws ConverterException{
+	UIInputDate inputDate = (UIInputDate)component;
+	Converter converter = getConverter(context, inputDate);
+	String valueString = (String)submittedValue;
+	return converter.getAsObject(context, component, valueString);
+}]]></programlisting>
+	<para>
+		Finally on the the <property>Renderer Response</property> phase the value of the component is rendered back to the view.
+		The converter is responsible for transforming the object data back in to a string representation, so you need to 
+		implement <code>getValueAsString</code>. 
+		JSF calls the <code>getAsString</code> method of your <property>Converter</property> which converts an Object into a String.
+	</para>
+	<para>
+		Here is the example:
+	</para>
+	<programlisting role="JAVA"><![CDATA[protected String getValueAsString(FacesContext context, UIComponent component) throws IOException {
+	UIInputDate inputDate = (UIInputDate) component;
+	String valueString = (String) inputDate.getSubmittedValue();
+	if (valueString == null) {
+		Object value = inputDate.getValue();
+		if (value != null) {
+			Converter converter = getConverter(context, inputDate);
+			valueString = converter.getAsString(context, component, value);
+		}
+	}
+	return valueString;
+}]]></programlisting>
+	</section>
+	<para>
+		You could find the whole example of the <code>InputDateRendererBase</code> class <ulink url="examples/InputDateRendererBase.java">here</ulink>.
+	</para>
 </section>
