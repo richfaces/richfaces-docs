@@ -84,15 +84,26 @@
                 </keywordset>
             </sectioninfo>
             <title>Creating a Renderer</title>
-            <para> Renderer is responsible for the JSF component representation. It generates the
+	    	<para>
+			Component functionality typically centers around two actions: 
+			<property>decoding</property> and <property>encoding</property> data. 
+			Decoding is the process of converting incoming request parameters to the values of the component. 
+			Encoding is converting the current values of the component into the corresponding markup. In the
+			following figure you can see decoding and encoding occur in the JSF lifecycle:
+		</para>
+	    <!-- PIC -->
+	    <para>
+		Thus, JSF components consist of two parts: the <property>component class</property> and the <property>renderer</property>.
+		The <property>component class</property> is responsible for the state and behavior of a UI component and will be discussed later in the <property>&quot;Configuring component&quot;</property> section.
+	    </para>
+            <para>The <property>Renderer</property> is responsible for the JSF component representation. It generates the
                 appropriate client-side markup, such as HTML, WML, XUL, etc. Renderer is also
                 responsible for the converting information coming from the client to the proper type
                 for the component (for example, a string value from the request is converted to a
-                strongly type <code>Date</code> object). </para>
+                strongly type <code>Date</code> object). 
+		</para>
 		<para>
-			It is necessary to create following renderer classes for the <emphasis role="bold">
-                <property>&lt;inputDate&gt;</property>
-            </emphasis> component:
+			It is necessary to create following renderer classes for the <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component:
 		</para>
 		<itemizedlist>
 			<listitem>
