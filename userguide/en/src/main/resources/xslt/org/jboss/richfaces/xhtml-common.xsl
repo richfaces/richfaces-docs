@@ -129,4 +129,12 @@ Version: 1.72.0
     <xsl:with-param name="nodes" select="part|reference |preface|chapter|appendix |article |bibliography|glossary|index |refentry |bridgehead[$bridgehead.in.toc != 0]"/>
   </xsl:call-template>
 </xsl:template>
+
+<xsl:template match="abstract" mode="titlepage.mode">
+  <div>
+    <xsl:apply-templates select="." mode="class.attribute"/>
+    <xsl:apply-templates mode="titlepage.mode"/>
+  </div>
+</xsl:template>
+
 </xsl:stylesheet>
