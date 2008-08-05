@@ -3773,85 +3773,6 @@
 
 
 		</section>
-		
-		
-		<section>
-			<title>Client-side script for extended skinning support</title>
-			
-			<para>As it was mentioned earlier in the Guide,
-				extended skinning of standard HTML controls is applied automatically: 
-				the browser type is detected and if a browser doesn&apos;t fully support 
-				extended skinning feature, only basic skinning is applied. 
-			</para>
-			
-			<para>
-				However, if a develop doesn&apos;t want to
-				the rich components and standard HTML 
-				controls to be skinned automatically and
-				perform the skinnability implementation himself, 
-				he might encounter with a problem, i.e. standard 
-				HTML controls in such browsers as Opera and Safari are
-				affected by standard controls skinning featured. 
-				(Here you can get more details on how to disable skinnability.)		
-			</para>
-			
-			<para>
-				In brief, to disable the skinnability mechanism of RichFaces you need to
-				set the &quot;org.richfaces.LoadStyleStrategy&quot; parameter to &quot;NONE&quot; in web.xml. 
-				
-			</para>
-			
-<programlisting role="XML"><![CDATA[...
-<context-param>
-	<param-name>org.richfaces.LoadStyleStrategy</param-name>
-	<param-value>NONE</param-value>
-</context-param>
-...
-]]></programlisting>
-			
-			<para>
-				Additionally, you should include the style sheets that perform skinning 
-				of the rich component and standard HTML controls.	
-			</para>
-			
-			<para>
-				In order to resolve the problem with extended skinning in Opera and Safari a client script (skinning.js) is added to the RichFaces library. 
-				The script detects the browser type and enables extended skinning only for those browsers that fully support it. 	
-				
-			</para>
-			
-			<para>
-				The script can be activated by inserting this JavaScript code to the page:			
-			</para>
-			
-<programlisting role="XML"><![CDATA[
-<script type="text/javascript">
-window.RICH_FACES_EXTENDED_SKINNING_ON = true;
-</script>
-]]></programlisting>
-				
-				
-				<para>
-					You also need to specify &quot;media&quot; attribute in the 
-					&lt;link&gt; tag which includes the &quot;extended_both.xcss&quot; style sheet with &quot;rich-extended-skinning&quot;.
-	
-				</para>
-			<para>
-				This is how you can include the style sheets to the page,
-				in case automatic skinnability implementation is disabled.
-				
-			</para>
-			
-<programlisting role="XML"><![CDATA[
-<link href='/YOUR_PROJECT_NAME/a4j_3_2_2-SNAPSHOTorg/richfaces/renderkit/html/css/basic_both.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />
-<link media='rich-extended-skinning' href='/ YOUR_PROJECT_NAME /a4j_3_2_2-SNAPSHOTorg/richfaces/renderkit/html/css/extended_both.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />
-<link href='/ YOUR_PROJECT_NAME /a4j_3_2_2-SNAPSHOT/org/richfaces/skin.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />
-]]></programlisting>
-			
-			
-		
-		</section>
-		
 		<section id="XCSSfileformat">
 			<title>XCSS file format</title>
 			<para>
@@ -4511,12 +4432,13 @@ font-weight: bold;
 		<para>
 			Actually States is a <property>map</property> where the entry key is name of the State and the value is a State map. 
 			Concrete State map has entries with some names as keys and any objects as values. 
-			So any values, method bindings, or just simple state constants could be saved in the State map. 
+			So any values, method bindings, or just some simple state varialbes (constants) could be saved in the State map. 
 		</para>
 		<para>
 			One of the most convenience features of the <property>RichFaces State API</property> is a navigation between states.
 			The <property>RichFaces State API</property> implements states change as the standard JSF navigation. 
-			Action component just returns outcome and the <property>RichFaces State API</property> extension for the JSF navigation handler 
+			Action component just returns outcome and the RichFaces State API
+			<property>extension for the JSF navigation handler</property> 
 			checks if this outcome registered as a <property>state change outcome</property>. 
 			If the <property>state change outcome</property> is found corresponding state is activated.
 			Otherwise the standard navigation handling is called.
@@ -4568,8 +4490,77 @@ font-weight: bold;
 </managed-bean>
 ...]]></programlisting>
 				<para>
-					One bean (&quot;config&quot;) defines and stores states.
+					One bean (&quot;config&quot;) defines and stores states as it is shown in the following example:
 				</para>
+				<programlisting role="JAVA"><![CDATA[...
+public class Config {
+
+	/**
+	 * @return States
+	 */
+	public States getStates() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		States states = new States();
+
+		// Registering new User State definition
+		states.setCurrentState("register"); // Name of the new state
+
+		// Text labels, properties and Labels for controls in "register" state
+		states.put("showConfirm", Boolean.TRUE); // confirm field rendering
+		states.put("link", "(To login)"); // Switch State link label
+		states.put("okBtn", "Register"); // Login/Register button label
+		states.put("stateTitle", "Register New User"); // Panel title
+
+		ExpressionFactory expressionFactory = facesContext.getApplication()
+				.getExpressionFactory();
+
+		// Define "registerbean" available under "bean" EL binding on the page
+		ValueExpression beanExpression = expressionFactory
+				.createValueExpression(facesContext.getELContext(),
+						"#{registerbean}", Bean.class);
+		states.put("bean", beanExpression);
+
+		// Define "registeraction" available under "action" EL binding on the
+		// page
+		beanExpression = expressionFactory.createValueExpression(facesContext
+				.getELContext(), "#{registeraction}", RegisterAction.class);
+		states.put("action", beanExpression);
+
+		// Define method expression inside registeraction binding for this state
+		MethodExpression methodExpression = expressionFactory.createMethodExpression(
+				facesContext.getELContext(), "#{registeraction.ok}",
+				String.class, new Class[] {});
+		states.put("ok", methodExpression);
+
+		// Outcome for switching to login state definition
+		states.setNavigation("switch", "login");
+
+		// Login Existent User State analogous definition
+		states.setCurrentState("login");
+		states.put("showConfirm", Boolean.FALSE);
+		states.put("link", "(To register)");
+		states.put("okBtn", "Login");
+		states.put("stateTitle", "Login Existing User");
+
+		beanExpression = expressionFactory.createValueExpression(facesContext
+				.getELContext(), "#{loginbean}", Bean.class);
+		states.put("bean", beanExpression);
+
+		beanExpression = expressionFactory.createValueExpression(facesContext
+				.getELContext(), "#{loginaction}", LoginAction.class);
+		states.put("action", beanExpression);
+
+		methodExpression = expressionFactory.createMethodExpression(
+				facesContext.getELContext(), "#{loginaction.ok}",
+				String.class, new Class[] {});
+		states.put("ok", methodExpression);
+
+		states.setNavigation("switch", "register");
+
+		return states;
+	}
+}
+...]]></programlisting>				
 				<para>
 					The other bean (&quot;state&quot;) with the type <code>org.richfaces.ui.model.States</code> has
 					the &quot;states&quot; managed property that is bound to the &quot;config&quot; bean which defines states.
@@ -4577,13 +4568,24 @@ font-weight: bold;
 			</listitem>
 			<listitem>
 				<para>
-					Use <property>state</property> bindings on the pages. 
+					Use <property>state</property> bindings on the page. See the following example: 
 				</para>
+								<programlisting role="XML"><![CDATA[...
+<h:panelGrid columns="3">
+	<h:outputText value="username" />
+	<h:inputText value="#{state.bean.name}" id="name" required="true" />
+	<h:outputText value="password" />
+	<h:inputSecret value="#{state.bean.password}" id="password" required="true" />
+	<h:outputText value="confirm" rendered="#{state.showConfirm}" />
+	<h:inputSecret value="#{state.bean.confirmPassword}" rendered="#{state.showConfirm}" id="confirm" required="true" />
+</h:panelGrid>
+<a4j:commandButton actionListener="#{state.action.listener}" action="#{state.ok}" value="#{state.okBtn}" id="action"/>
+...]]></programlisting>
 			</listitem>
 		</itemizedlist>
 		<para>
-			<ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/stateAPI.jsf?c=stateAPI">Here</ulink> 
-			you could find the <property>Login/Register dialog</property> example and sources for the given example.
+			To get full <property>Login/Register dialog</property> example, please, 
+			click <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/stateAPI.jsf?c=stateAPI">here</ulink>.
 		</para>
 	</section>
 </chapter>
