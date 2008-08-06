@@ -262,13 +262,44 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
         <listitem><para>By means of JavaScript on the client side. Use the following syntax for that <code>entries[i].propertyName</code>. For example <code>entries[0].state</code> will return the state of the file the is being processed or has just been processed. A full list of properties can be found <link linkend="objectProperties">here</link>.   </para></listitem>
  
        
-     <listitem><para>The properties of  <code>FileUploadEntry</code>  object can be retrieved using  the <code>entry.propertyName</code> expression in the specific event attributes. For example, <code>onupload=&quot;alert(entry.fileName)&quot;</code> will display a message with the name of the file at the moment when upload operation begins.</para></listitem>   
+     <listitem><para>The properties of  <code>FileUploadEntry</code>  object can be retrieved using  the <code>entry.propertyName</code> expression in the specific event attributes. For example, <code>onupload=&quot;alert(event.memo.entry.fileName);&quot; </code> will display a message with the name of the file at the very moment when upload operation starts. A full list of properties can be found <link linkend="objectPropertiesWithAttributes">here</link>.</para></listitem>   
         
         
  </itemizedlist>   
+<para>The given bellow code sample demonstrates how the properties can be used. Please study it carefully. </para>
+        <programlisting role="XML"><![CDATA[...
+            <head>
+                  <script>
+                        function _onaddHandler (e) {
+                             var i = 0;
+                             for (; i < e.memo.entries.lenght; i++) {
+                                   alert(e.memo.entries[i].creator);  //Shows creators of the added files 
+                             }
+                        }
 
+                        function _onerrorhandle(e) {
+                             alert(e.memo.entry.fileName + "file was not uploaded due  transfer error");
+                        }
+                  </script>
+            </head>
+ ...]]></programlisting>
         
+     
+     
+   <para>  Moreover, embedded Flash module provides a smoother representation of progress bar during the uploading process: the polling is performed is not by AJAX, but my means of the flash module. 
+   </para>
+        <figure>
+            <title>
+             Uploading using Flash module <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> 
+            </title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="images/flash_fileUpload.png"/>
+                </imageobject>
+            </mediaobject>
+        </figure>   
         
+        <para>Though, the Flash module doens&apos;t perform any visual representation.</para>
         
         <!--End of Flash Module-->
             
@@ -583,7 +614,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
         
         
         
-        <table d="objectPropertiesWithAttributes"> 
+        <table id="objectPropertiesWithAttributes"> 
             <title>Client side object properties available with specific <link linkend="fileUploadEventAttributes"> event attributes</link></title>
             <tgroup cols="2">
                 <thead>
