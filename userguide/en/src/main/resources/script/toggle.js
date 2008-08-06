@@ -1,3 +1,5 @@
+document.write('<div id="overlay">&nbsp;</div>');
+
 function dbToggle(node, expandText, collapseText) {
 	var dt = node.parentNode;
 	if (dt.nodeName.toLowerCase() == 'dt') {
