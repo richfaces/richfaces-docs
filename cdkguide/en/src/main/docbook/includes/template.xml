@@ -55,6 +55,22 @@
 <emphasis><property>&quot;id&quot;</property></emphasis> attributes and with 
 the<emphasis><property>&quot;caption&quot;</property></emphasis> facet
 		</para>
+		   <programlisting role="XML"><![CDATA[...
+<c:object var="caption" type="javax.faces.component.UIComponent"/>
+<jsp:scriptlet>
+	caption = component.getFacet("caption");
+	if(caption !=null && caption.isRendered()) {
+</jsp:scriptlet>
+<div id="#{clientId}_caption" class="my-inputDate-caption #{component.attributes['captionClass']}">
+	<f:insertComponent value="#{caption}"/>
+</div>
+<jsp:scriptlet>
+	}
+</jsp:scriptlet>
+<div id="#{clientId}" title="#{value}" x:passThruWithExclusions="value,name,type,id">
+	...
+</div>
+...]]></programlisting>
 	</listitem>
 	<listitem>
 		<para>
@@ -64,23 +80,49 @@ the<emphasis><property>&quot;caption&quot;</property></emphasis> facet
 <emphasis><property>&quot;name&quot;</property></emphasis>,
 <emphasis><property>&quot;type&quot;</property></emphasis>,
 <emphasis><property>&quot;class&quot;</property></emphasis>,
-<emphasis><property>&quot;style&quot;</property></emphasis> attributes and with
-the <emphasis><property>&quot;icon&quot;</property></emphasis> facet used to define an icon of the component.
+<emphasis><property>&quot;style&quot;</property></emphasis> attributes.
+It is possible to use the <emphasis><property>&quot;icon&quot;</property></emphasis> facet in order to redefine a default icon of the component.
 		</para>
+	<programlisting role="XML"><![CDATA[...
+<input  id="#{clientId}" 
+		name="#{clientId}"
+		type="text" 
+		value="#{this:getValueAsString(context, component)}" 
+		class="my-inputDate-input #{component.attributes['inputClass']}" 
+		style="#{component.attributes['inputStyle']}"/>
+...]]></programlisting>
 	</listitem>
 	<listitem>
 		<para>
 			<emphasis role="bold"><property>&lt;img&gt;</property></emphasis> element with 
 <emphasis><property>&quot;src&quot;</property></emphasis>,
 <emphasis><property>&quot;class&quot;</property></emphasis>,
-<emphasis><property>&quot;style&quot;</property></emphasis> attributes.
+<emphasis><property>&quot;style&quot;</property></emphasis> attributes which defines a default icon of the component.
+	In order to add an image to the Template you should register it with the help of
+	<emphasis role="bold"><property>&lt;f:resource&gt;</property></emphasis> template tag 
+	and bind to a variable specified by the <emphasis><property>&quot;var&quot;</property></emphasis> attribute:
 		</para>
+			<programlisting role="XML"><![CDATA[...
+<f:resource name="/org/mycompany/renderkit/html/images/inputDate.png" var="icon" />
+	...
+<img src="#{icon}" class="my-inputDate-icon #{component.attributes['iconClass']}" style="#{component.attributes['iconStyle']}"/>
+...]]></programlisting>
 	</listitem>
 </itemizedlist>
 <para>
 	The <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component uses styles and scripts that should 
 	be defined in the template with the help of <emphasis role="bold"><property>&lt;h:styles&gt;</property></emphasis> and
-	<emphasis role="bold"><property>&lt;h:scripts&gt;</property></emphasis> tags. How to register all resources is explained in the
+	<emphasis role="bold"><property>&lt;h:scripts&gt;</property></emphasis> tags: 
+</para>
+	<programlisting role="XML"><![CDATA[...
+<h:scripts>
+	new org.ajax4jsf.javascript.PrototypeScript(),
+	/org/mycompany/renderkit/html/scripts/inputDate.js
+</h:scripts>
+<h:styles>/org/mycompany/renderkit/html/css/inputDate.xcss</h:styles>
+...]]></programlisting>
+<para>
+	How to register all resources is explained in the
 	<property>&quot;Component resources registration&quot;</property> chapter.
 </para>
 <important>
@@ -109,9 +151,10 @@ Here is a full example of the template for
     <note>
 	<title>Note:</title>
 	<para>
-		In the <property>Template Skeleton</property> Renderer Baseclass is <code>org.ajax4jsf.renderkit.AjaxComponentRendererBase</code>, but 
-		you need to define Renderer Baseclass special for <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component.
-		In the next section <link linkend="rendererbase">&quot;Creating a Renderer Base class&quot;</link> we will define Renderer Baseclass <code>org.mycompany.renderkit.InputDateRendererBase</code>.
+		As is easy to see, in the <property>Template Skeleton</property> the Renderer Baseclass is <code>org.ajax4jsf.renderkit.AjaxComponentRendererBase</code>.
+		You need to define Renderer Base class special for the <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component.
+		In the next section <link linkend="rendererbase">&quot;Creating a Renderer Base class&quot;</link> 
+		we will create Renderer Base class <code>org.mycompany.renderkit.InputDateRendererBase</code>.
 	</para>
     </note>
     <para>

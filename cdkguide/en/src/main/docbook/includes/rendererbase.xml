@@ -14,15 +14,11 @@
 	After the component tree is restored on the <property>Restore View Phase </property>, 
 	each component in the tree extracts its new value from the request parameters
 	by using its <code>decode()</code> method. Then the value is stored locally on the component.
+	So in the <code>InputDateRendererBase</code> class you need to override
+	the <code>decode()</code> method:
     </para>
-    <para>
-	The <code>InputDateRendererBase</code> class extends a <code>HeaderResourcesRendererBase</code>
-	class. In the <code>HeaderResourcesRendererBase</code> class all the <code>encode()</code> methods for 
-	the right resources encoding
-	are already realized, so in the <code>InputDateRendererBase</code> class you need to override
-	the <code>decode()</code> method only:
-    </para>
-<programlisting role="JAVA"><![CDATA[ public void decode(FacesContext context, UIComponent component){
+<programlisting role="JAVA"><![CDATA[ ...
+public void decode(FacesContext context, UIComponent component){
 	ExternalContext external = context.getExternalContext();
 	Map requestParams = external.getRequestParameterMap();
 	UIInputDate inputDate = (UIInputDate)component;
@@ -32,7 +28,7 @@
 		inputDate.setSubmittedValue(submittedValue);
 	}
 }	
-]]></programlisting>
+...]]></programlisting>
 <para>
 	As you see in the example above the <code>decode()</code> method reads values from request parameters, 
 	grabs the <code>clientId</code> from the component to identify the request parameter to be looked up.
@@ -69,10 +65,10 @@
 	and queued on <property>FacesContext</property>. 
 </para>
 <para>
-	The <code>getConverter()</code> method of the <code>InputDateRendererBase</code> class controls 
-	the conversion of entered values, as shown in the following example:
+	The <code>getConverter()</code> method of the <code>InputDateRendererBase</code> class returns the a converter, as shown in the following example:
 </para>
-<programlisting role="JAVA"><![CDATA[private Converter getConverter(FacesContext context, UIInputDate inputDate){
+<programlisting role="JAVA"><![CDATA[...
+private Converter getConverter(FacesContext context, UIInputDate inputDate){
 	Converter converter = inputDate.getConverter();
 	if (converter == null){
 		// default the converter
@@ -86,10 +82,10 @@
 	}
 	return converter;
 }	
-]]></programlisting>
+...]]></programlisting>
 <para>
-	At first you should check whether the application developer has attached a <property>Converter</property> to the 
-	<emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component 
+	During the converter creation you should check whether the application developer has attached a <property>Converter</property> to the 
+	<emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component already
 	(for example, <emphasis role="bold"><property>&lt;f:convertDateTime&gt;</property></emphasis>) .
 	If not you should follow the next steps:
 </para>
@@ -108,8 +104,8 @@
 		<listitem>
 		<para>
 			set the time zone, date type, date style, and date pattern on the new converter with the help of 
-			<code>setTimeZone</code>, <code>setType</code>, <code>setDateStyle</code>, and 
-			<code>setPattern</code> methods respectively
+			<code>setTimeZone()</code>, <code>setType()</code>, <code>setDateStyle()</code>, and 
+			<code>setPattern()</code> methods respectively
 		</para>
 	</listitem>
 		<listitem>
@@ -134,22 +130,24 @@
 <para>
 	Here is the snippet:
 </para>
-<programlisting role="JAVA"><![CDATA[public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue) throws ConverterException{
+<programlisting role="JAVA"><![CDATA[...
+public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue) throws ConverterException{
 	UIInputDate inputDate = (UIInputDate)component;
 	Converter converter = getConverter(context, inputDate);
 	String valueString = (String)submittedValue;
 	return converter.getAsObject(context, component, valueString);
-}]]></programlisting>
+}
+...]]></programlisting>
 	<para>
 		Finally on the the <property>Renderer Response</property> phase the value of the component is rendered back to the view.
 		The converter is responsible for transforming the object data back in to a string representation, so you need to 
-		implement <code>getValueAsString</code>. 
-		JSF calls the <code>getAsString</code> method of your <property>Converter</property> which converts an Object into a String.
+		implement <code>getValueAsString()</code> method:
 	</para>
 	<para>
 		Here is the example:
 	</para>
-	<programlisting role="JAVA"><![CDATA[protected String getValueAsString(FacesContext context, UIComponent component) throws IOException {
+	<programlisting role="JAVA"><![CDATA[...
+protected String getValueAsString(FacesContext context, UIComponent component) throws IOException {
 	UIInputDate inputDate = (UIInputDate) component;
 	String valueString = (String) inputDate.getSubmittedValue();
 	if (valueString == null) {
@@ -160,7 +158,8 @@
 		}
 	}
 	return valueString;
-}]]></programlisting>
+}
+...]]></programlisting>
 	</section>
 	<para>
 		You could find the whole example of the <code>InputDateRendererBase</code> class <ulink url="examples/InputDateRendererBase.java">here</ulink>.
