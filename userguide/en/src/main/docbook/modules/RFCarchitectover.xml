@@ -3773,6 +3773,82 @@
 
 
 		</section>
+		<section>
+			<title>Client-side script for extended skinning support</title>
+			
+			<para>As it was mentioned earlier in the guide,
+				extended skinning of standard HTML controls is applied automatically: 
+				the browser type is detected and if a browser doesn&apos;t fully support 
+				extended skinning feature, only basic skinning is applied. 
+			</para>
+			
+			<para>
+				However, if a develop doesn&apos;t want to
+				the rich components and standard HTML 
+				controls to be skinned automatically and
+				perform the skinnability implementation himself, 
+				he might encounter with a problem, i.e. standard 
+				HTML controls in such browsers as Opera and Safari are
+				affected by standard controls skinning featured. 
+				( <link linkend="ScriptsandStylesLoadStrategy">Here</link> you can get more details on how to disable skinnability.)		
+			</para>
+			
+			<para>
+				In brief, to disable the skinnability mechanism of RichFaces you need to
+				set the &quot;org.richfaces.LoadStyleStrategy&quot; parameter to &quot;NONE&quot; in web.xml. 
+				
+			</para>
+			
+			<programlisting role="XML"><![CDATA[...
+<context-param>
+	<param-name>org.richfaces.LoadStyleStrategy</param-name>
+	<param-value>NONE</param-value>
+</context-param>
+...
+]]></programlisting>
+			
+			<para>
+				Additionally, you should include the style sheets that perform skinning 
+				of the rich component and standard HTML controls.	
+			</para>
+			
+			<para>
+				In order to resolve the problem with extended skinning in Opera and Safari a client script (skinning.js) is added to the RichFaces library. 
+				The script detects the browser type and enables extended skinning only for those browsers that fully support it. 	
+				
+			</para>
+			
+			<para>
+				The script can be activated by inserting this JavaScript code to the page:			
+			</para>
+			
+			<programlisting role="XML"><![CDATA[
+<script type="text/javascript">
+window.RICH_FACES_EXTENDED_SKINNING_ON = true;
+</script>
+]]></programlisting>
+			
+			
+			<para>
+				You also need to specify &quot;media&quot; attribute in the 
+				&lt;link&gt; tag which includes the &quot;extended_both.xcss&quot; style sheet with &quot;rich-extended-skinning&quot;.
+				
+			</para>
+			<para>
+				This is how you can include the style sheets to the page,
+				in case automatic skinnability implementation is disabled.
+				
+			</para>
+			
+			<programlisting role="XML"><![CDATA[
+<link href='/YOUR_PROJECT_NAME/a4j_3_2_2-SNAPSHOTorg/richfaces/renderkit/html/css/basic_both.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />
+<link media='rich-extended-skinning' href='/ YOUR_PROJECT_NAME /a4j_3_2_2-SNAPSHOTorg/richfaces/renderkit/html/css/extended_both.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />
+<link href='/ YOUR_PROJECT_NAME /a4j_3_2_2-SNAPSHOT/org/richfaces/skin.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />
+]]></programlisting>
+			
+			
+			
+		</section>
 		<section id="XCSSfileformat">
 			<title>XCSS file format</title>
 			<para>
