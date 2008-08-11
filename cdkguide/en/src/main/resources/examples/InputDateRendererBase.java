@@ -15,7 +15,7 @@ import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
 import org.mycompany.component.UIInputDate;
 
 
-public abstract class InputDateRendererBase extends HeaderResourcesRendererBase{
+public abstract class InputDateRendererBase  extends HeaderResourcesRendererBase{
 
 	public void decode(FacesContext context, UIComponent component){
 		ExternalContext external = context.getExternalContext();

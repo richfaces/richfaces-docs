@@ -1,28 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section id="skin" xreflabel="skin">
-<?dbhtml filename="skin.html"?>
-<sectioninfo>
-<keywordset>
-<keyword>skin</keyword>
-<keyword>UI</keyword>
-<keyword>CDK</keyword>
-<keyword>Guide</keyword>
-</keywordset>
-</sectioninfo>
-<title>Skinnability</title>
-<para>
- creation
-</para>
-<section>
-<title>XCSS Format</title>
-<para>
-XCSS
-</para>
-</section>
-<section>
-<title>Dynamic images generation</title>
-<para>
-XCSS
-</para>
-</section>
+	<?dbhtml filename="skin.html"?>
+	<sectioninfo>
+		<keywordset>
+			<keyword>skin</keyword>
+			<keyword>UI</keyword>
+			<keyword>CDK</keyword>
+			<keyword>Guide</keyword>
+		</keywordset>
+	</sectioninfo>
+	<title>Skinnability</title>
+	<para>
+		One of the significant features of the Component Development Kit (CDK) is a skins-based technology which helps you to create a modern rich user interface look-and-feel.
+		RichFaces has a number of predefined skins you could use wtih the <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component.
+		But if you want to create your own skin, please, read carefully 
+		the <property>&quot;Skinnability&quot;</property> section of the 
+		<ulink url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/html/ArchitectureOverview.html#Skinnability">RichFaces Developer Guide</ulink>. You could find all neccesary information about 
+		<property>Built-in skinnability in RichFaces</property>, <property>XCSS file format</property>, <property>Plug-n-Skin feature</property>, etc. there.
+	</para>
+	<para>
+		According to the  <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> markup you need to
+		define following selectors and classes in the <property>inputDate.xcss</property>:
+	</para>	
+	<itemizedlist>
+		<listitem>
+			<para>
+				<code>.my-inputDate-input</code>, <code>.my-inputDate-icon</code> selectors 	
+			</para>
+			<programlisting role="XML"><![CDATA[...
+<u:selector name=".my-inputDate-input">
+	<u:style name="border-color" skin="panelBorderColor"/>
+	<u:style name="background-color" skin="controlBackgroundColor"/>
+	<u:style name="color" skin="controlTextColor"/>
+	<u:style name="font-family" skin="generalFamilyFont"/>
+	<u:style name="font-size" skin="generalSizeFont"/>
+</u:selector>
+<u:selector name=".my-inputDate-icon">
+	<u:style name="border-color" skin="panelBorderColor"/>
+	<u:style name="background-image">
+		<f:resource f:key="/org/mycompany/renderkit/html/images/inputDate.png" />
+	</u:style>
+</u:selector>
+...]]></programlisting>
+		</listitem>
+				<listitem>
+			<para>
+				<code>.my-inputDate-input</code>, <code>.my-inputDate-icon</code>, and <code>.my-inputDate-caption</code> classes 	
+			</para>
+			<programlisting role="CSS"><![CDATA[...
+.my-inputDate-input{
+	background-color: #EBEBE4;
+	border: 1px solid #7F9DB9;
+	float:left;
+}
+.my-inputDate-icon{
+	margin-left: 3px;
+}
+.my-inputDate-caption{
+	color: #000000;
+}
+...]]></programlisting>
+		</listitem>
+	</itemizedlist>
+	<para>
+		You could find a complete <property>inputDate.xcss</property> <ulink url="examples/inputDate.xcss">here</ulink>.
+	</para>	
+	
+	<!--section>
+		<title>Dynamic images generation</title>
+		<para>
+		Dynamic images generation
+		</para>
+	</section-->
 </section>

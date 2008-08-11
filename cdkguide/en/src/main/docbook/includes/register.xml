@@ -1,22 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section id="register" xreflabel="register">
 <?dbhtml filename="register.html"?>
-<sectioninfo>
-<keywordset>
-<keyword>register</keyword>
-<keyword>UI</keyword>
-<keyword>CDK</keyword>
-<keyword>Guide</keyword>
-</keywordset>
-</sectioninfo>
-<title>Component resources registration</title>
-<para>
- Registering component resources
-</para>
-<section id="resconf">
-<title>resources-config.xml file format</title>
-<para>
-resources-config.xml file format
-</para>
-</section>
+	<sectioninfo>
+		<keywordset>
+			<keyword>register</keyword>
+			<keyword>UI</keyword>
+			<keyword>CDK</keyword>
+			<keyword>Guide</keyword>
+		</keywordset>
+	</sectioninfo>
+	<title>Component resources registration</title>
+	<para>
+		The <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component has a number of resources that should be registered 
+		in the <property>resource-config.xml</property> file. 
+		If the resource is registered, the RichFaces filter will send a request to the <property>ResourceBuilder</property> class 
+		in order to create and to deliver the resource. 
+	</para>
+	<para>
+		So, you need to proceed to the <property>inputDate/src/main/config/resources</property> directory and
+		register following resources in the <property>resource-config.xml</property> file:
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para>
+				an icon
+			</para>
+			<programlisting role="XML"><![CDATA[...
+<resource>
+	<name>org/mycompany/renderkit/html/images/inputDate.png</name>
+	<path>org/mycompany/renderkit/html/images/inputDate.png</path>
+</resource>
+...]]></programlisting>
+		</listitem>
+		<listitem>
+			<para>
+				the <property>inputDate.xcss</property> file
+			</para>
+			<programlisting role="XML"><![CDATA[...
+<resource>
+	<name>org/mycompany/renderkit/html/css/inputDate.xcss</name>
+	<path>org/mycompany/renderkit/html/css/inputDate.xcss</path>
+</resource>		
+...]]></programlisting>
+		</listitem>
+		<listitem>
+			<para>
+				the <property>inputDate.js</property> file
+			</para>
+			<programlisting role="XML"><![CDATA[...
+<resource>
+	<name>org/mycompany/renderkit/html/scripts/inputDate.js</name>
+	<path>org/mycompany/renderkit/html/scripts/inputDate.js</path>
+</resource>		
+...]]></programlisting>
+		</listitem>
+	</itemizedlist>
+	<para>
+		<ulink url="examples/resource-config.xml">Here</ulink> you could find a full example of the <property>resource-config.xml</property> 
+		for the <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component.
+	</para>
+	<section id="resconf">
+		<title>resource-config.xml file format</title>
+		<para>
+			The <property>resource-config.xml</property> is a file for resources registration. 
+			Note, that the <property>resource-config.xml</property> should appear in the <property>META-INF</property> folder after the
+			component building.
+		</para>
+		<para>
+			This file has the <emphasis role="bold"><property>&lt;resource-config&gt;</property></emphasis> root element 
+			with nested <emphasis role="bold"><property>&lt;resource&gt;</property></emphasis> elements. 
+		</para>
+		<para>
+			It is possible to register static resources (images, JavaScript , CSS, XCSS, SWF, (X)HTML, XML, Log files), dynamic created images,
+			component-incapsulated, JAR resources, etc.
+		</para>
+		<para>
+			Here is a simple example of the image registration:
+		</para>
+		<programlisting role="XML"><![CDATA[...
+<resource>
+	<name>org/mycompany/renderkit/html/images/inputDate.png</name>
+	<path>org/mycompany/renderkit/html/images/inputDate.png</path>
+</resource>
+...]]></programlisting>
+		<para>
+			There are two element in the example above:
+			an obligatory <emphasis role="bold"><property>&lt;name&gt;</property></emphasis> element which defines resource name and 
+			a <emphasis role="bold"><property>&lt;path&gt;</property></emphasis> element which defines the path to the resource.
+			The <emphasis role="bold"><property>&lt;path&gt;</property></emphasis> element is optional as it is possible to register 
+			dynamic resources with the <emphasis><property>&quot;class&quot;</property></emphasis> attribute.
+			For example you could register dynamic created image as it is shown in the following example:
+		</para>
+		<programlisting role="XML"><![CDATA[...
+<resource class="org.mycompany.renderkit.html.images.inputDate">
+	<name>org.mycompany.renderkit.html.images.inputDate</name>
+</resource>
+...]]></programlisting>
+
+				<!--programlisting role="XML"><![CDATA[...
+<resource>
+	<name></name>
+	<path></path>
+	<cacheable></cacheable>
+	<session-aware></session-aware>
+	<property>
+		<name></name>
+	</property>
+	<content-type></content-type>
+	<renderer>
+		<content-type></content-type>
+	</renderer>
+</resource>		
+...]]></programlisting-->
+
+	</section>
 </section>
