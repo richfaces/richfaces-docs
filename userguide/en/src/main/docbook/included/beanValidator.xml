@@ -55,18 +55,16 @@
   <section>
     <title>Creating the Component with a Page Tag</title>
 
-    <para>To create the simplest variant on a page use the following syntax:</para>
+    <para>To create the simplest variant of the component on a page use the following syntax:</para>
 
 
     <para>
       <emphasis role="bold">Example:</emphasis>
     </para>
     <programlisting role="XML"><![CDATA[...
- <h:outputText value="Name:" />
-                <h:inputText value="#{userBean.name}" id="name" required="true">
-                    <f:validateLength minimum="3" maximum="12"/>
-                    <rich:beanValidator event="onblur"/>
-                </h:inputText>
+<h:inputText value="#{validationBean.email}" id="email">
+<rich:beanValidator summary="Invalid email"/>
+</h:inputText>
 ...]]></programlisting>
   </section>
 
@@ -81,6 +79,119 @@
 HtmlbeanValidator mybeanValidator= new HtmlbeanValidator();
 ...
 ]]></programlisting>
+    
+    
+    <!-- Start  Details of Usage-->
+    <section>
+      <title>Details of Usage</title>
+      
+   <para>  
+ Starting from 3.2.2 GA version Rich Faces provides support for model-based constraints defined using Hibernate Validator. 
+ Thus it's possible to use Hibernate Validators the same as for Seam based applications.
+   </para>
+      
+  <para>The <emphasis role="bold"><property>&lt;rich:beanValidator&gt;</property></emphasis>
+       component is defined in the same way as any JSF validator. Look at the example below. 
+  </para> 
+      
+      <programlisting role="XML"><![CDATA[...     
+      <rich:panel>
+        <f:facet name="header">
+          <h:outputText value="#{validationBean.progressString}" id="progress"/>
+        </f:facet>
+        <h:panelGrid columns="3">
+          <h:outputText value="Name:" />
+          <h:inputText value="#{validationBean.name}" id="name">
+            <rich:beanValidator summary="Invalid name"/>
+          </h:inputText>
+          <rich:message for="name" />
+          <h:outputText value="Email:" />
+          <h:inputText value="#{validationBean.email}" id="email">
+            <rich:beanValidator summary="Invalid email"/>
+          </h:inputText>
+          <rich:message for="email" />
+          <h:outputText value="Age:" />
+          <h:inputText value="#{validationBean.age}" id="age">
+            <rich:beanValidator summary="Wrong age"/>
+          </h:inputText>
+          <rich:message for="age" />
+          <f:facet name="footer">
+            <a4j:commandButton value="Submit" action="#{validationBean.success}" reRender="progress"/>
+          </f:facet>
+        </h:panelGrid>
+      </rich:panel>
+      ...]]></programlisting>    
+      
+      <para>Please play close attention on  the bean code that contains the constraints
+      defined with Hibernate annotation which perform validation of the input data.</para>
+      
+      <programlisting role="JAVA"><![CDATA[
+package org.richfaces.demo.validation;
+
+import org.hibernate.validator.Email;
+import org.hibernate.validator.Length;
+import org.hibernate.validator.Max;
+import org.hibernate.validator.Min;
+import org.hibernate.validator.NotEmpty;
+import org.hibernate.validator.NotNull;
+
+public class ValidationBean {
+
+    @NotEmpty
+    @Length(min=3,max=12)
+    private String name;
+    @Email
+    @NotEmpty
+    private String email;
+    @NotNull
+    @Min(18)
+    @Max(100)
+    private int age;
+    
+    public ValidationBean() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}]]></programlisting>
+      
+<para>The following figure shows what happens if validation fails</para> 
+      
+      <figure>
+        <title><emphasis role="bold"><property>&lt;rich:beanValidator&gt;</property></emphasis> usage</title>  
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/beanValidator1.png"/>
+          </imageobject>
+        </mediaobject>     
+      </figure>    
+      <para>As you can see from the example that  in order to validate the <emphasis role="bold"><property>&lt;rich:beanValidator&gt;</property></emphasis>
+      should be nested into a input JSF or RichFaces component. 
+      </para>
+      
+      <para>The component has the only attribute - <emphasis><property>&quot;summary&quot;</property></emphasis>which displays validation messages about validation errors.</para>
+      </section>
   </section>
 
 
