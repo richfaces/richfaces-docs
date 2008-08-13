@@ -1,281 +1,347 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
-    <sectioninfo>
-        <keywordset>
-            <keyword>rich:fileUpload</keyword>
-            <keyword>fileUpload</keyword>
-        </keywordset>
-    </sectioninfo>
-    <table>
-        <title>Component identification parameters</title>
-        <tgroup cols="2">
-            <thead>
-                <row>
-                    <entry>Name</entry>
-                    <entry>Value</entry>
-                </row>
-            </thead>
-            <tbody>
-                <row>
-                    <entry>component-type</entry>
-                    <entry>org.richfaces.component.FileUpload</entry>
-                </row>
-                <row>
-                    <entry>component-class</entry>
-                    <entry>org.richfaces.component.html.HtmlFileUpload</entry>
-                </row>
-                <row>
-                    <entry>component-family</entry>
-                    <entry>org.richfaces.component.FileUpload</entry>
-                </row>
-                <row>
-                    <entry>renderer-type</entry>
-                    <entry>org.richfaces.renderkit.html.FileUploadRenderer</entry>
-                </row>
-                 <row>
-                    <entry>tag-class</entry>
-                     <entry>org.richfaces.taglib.FileUploadTag</entry>
-                </row>
-            </tbody>
-        </tgroup>
-    </table>
-    <section>
-        <title>Creating the Component with a Page Tag</title>
-        <para>To create the simplest variant on a page use the following syntax:</para>
+          <sectioninfo>
+                    <keywordset>
+                              <keyword>rich:fileUpload</keyword>
+                              <keyword>fileUpload</keyword>
+                    </keywordset>
+          </sectioninfo>
+          <table>
+                    <title>Component identification parameters</title>
+                    <tgroup cols="2">
+                              <thead>
+                                        <row>
+                                                  <entry>Name</entry>
+                                                  <entry>Value</entry>
+                                        </row>
+                              </thead>
+                              <tbody>
+                                        <row>
+                                                  <entry>component-type</entry>
+                                                  <entry>org.richfaces.component.FileUpload</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>component-class</entry>
+                                                  <entry>org.richfaces.component.html.HtmlFileUpload</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>component-family</entry>
+                                                  <entry>org.richfaces.component.FileUpload</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>renderer-type</entry>
+                                                  <entry>org.richfaces.renderkit.html.FileUploadRenderer</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>tag-class</entry>
+                                                  <entry>org.richfaces.taglib.FileUploadTag</entry>
+                                        </row>
+                              </tbody>
+                    </tgroup>
+          </table>
+          <section>
+                    <title>Creating the Component with a Page Tag</title>
+                    <para>To create the simplest variant on a page use the following syntax:</para>
 
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
 <rich:fileUpload /> 
 ...]]></programlisting>
-    </section>
-    <section>
-        <title>Creating the Component Dynamically Using Java</title>
+          </section>
+          <section>
+                    <title>Creating the Component Dynamically Using Java</title>
 
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlFileUpload;
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlFileUpload;
 ...	
 HtmlFileUpload myFileUpload = new HtmlFileUpload();
 ...]]></programlisting>
-    </section>
-    <section>
-        <title>Details of Usage</title>
-        <para>The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component consists of two parts:<itemizedlist>
-            <listitem>
-                <para>
-                    <property>List of files</property> which contains the list of currently chosen files to upload with possibility to manage every file
-                </para>
-            </listitem>
-                <listitem>
-                    <para>
-                    <property>Component controls</property> - the bar with controls for managing the whole component
+          </section>
+          <section>
+                    <title>Details of Usage</title>
+                    <para>The <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component consists of two parts:<itemizedlist>
+                                        <listitem>
+                                                  <para>
+                                                  <property>List of files</property> which
+                                                  contains the list of currently chosen
+                                                  files to upload with possibility to
+                                                  manage every file </para>
+                                        </listitem>
+                                        <listitem>
+                                                  <para>
+                                                  <property>Component controls</property>
+                                                  - the bar with controls for managing the
+                                                  whole component </para>
+                                        </listitem>
+                              </itemizedlist>
                     </para>
-                </listitem>
-            </itemizedlist>
-        </para>
 
 
-        <para>
-            There are two places where uploaded files are stored:
-        </para>
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        In the temporary folder (depends on OS) if the value of the <code>createTempFile</code> parameter in <property>Ajax4jsf Filter</property> section
-                        is &quot;true&quot; (by Default)
-                    </para>
-                    <programlisting role="XML"><![CDATA[...
+                    <para> There are two places where uploaded files are stored: </para>
+                    <itemizedlist>
+                              <listitem>
+                                        <para> In the temporary folder (depends on OS) if the value
+                                                  of the <code>createTempFile</code> parameter in
+                                                  <property>Ajax4jsf Filter</property>
+                                                  section is &quot;true&quot; (by Default) </para>
+                                        <programlisting role="XML"><![CDATA[...
 <init-param>
         <param-name>createTempFiles</param-name>
         <param-value>true</param-value>
 </init-param>
-...]]></programlisting>           
-                </listitem>
-                <listitem>
-                    <para>
-                        In the RAM if the value of the <code>createTempFile</code> parameter in <property>Ajax4jsf Filter</property> section
-                        is &quot;false&quot;. This is a better way for storing small-sized files.
-                    </para>
-                </listitem>
-            </itemizedlist>
+...]]></programlisting>
+                              </listitem>
+                              <listitem>
+                                        <para> In the RAM if the value of the
+                                                  <code>createTempFile</code> parameter in
+                                                  <property>Ajax4jsf Filter</property>
+                                                  section is &quot;false&quot;. This is a
+                                                  better way for storing small-sized files. </para>
+                              </listitem>
+                    </itemizedlist>
 
-        <para>
-          The <emphasis><property>&quot;uploadData&quot;</property></emphasis> attribute 
-           defines the collection of files uploaded. See the example below. 
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+                    <para> The <emphasis>
+                                        <property>&quot;uploadData&quot;</property>
+                              </emphasis> attribute defines the collection of files uploaded. See
+                              the example below. </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
 <rich:fileUpload uploadData="#{bean.data}"/>
 ...]]></programlisting>
 
-        <para>The <emphasis><property>&quot;fileUploadedListener&quot;</property></emphasis> is 
-            called at server side after every file uploaded and used for the saving files from temporary folder or RAM.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+                    <para>The <emphasis>
+                                        <property>&quot;fileUploadedListener&quot;</property>
+                              </emphasis> is called at server side after every file uploaded and
+                              used for the saving files from temporary folder or RAM. </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
 <rich:fileUpload uploadData="#{bean.data}" fileUploadListener="#{bean.listener}"/>
  ...]]></programlisting>
 
 
-        <para>
-            Automatically files uploading could be performed by means of the <emphasis><property> &quot;immediateUpload&quot;</property></emphasis> attribute.
-            If the value of this attribute is &quot;true&quot; files are uploaded automatically once they have been added into the list. 
-            All next files in the list are uploaded automatically one by one.
-            If you cancel uploading process next files aren&apos;t started to upload till you press the &quot;Upload&quot; button or clear the list.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+                    <para> Automatically files uploading could be performed by means of the <emphasis>
+                                        <property> &quot;immediateUpload&quot;</property>
+                              </emphasis> attribute. If the value of this attribute is
+                              &quot;true&quot; files are uploaded automatically once they
+                              have been added into the list. All next files in the list are uploaded
+                              automatically one by one. If you cancel uploading process next files
+                              aren&apos;t started to upload till you press the
+                              &quot;Upload&quot; button or clear the list. </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
 <rich:fileUpload uploadData="#{bean.data}" fileUploadListener="#{bean.listener}" immediateUpload="true"/>
  ...]]></programlisting>
 
-        <para>
-            The <emphasis><property> &quot;autoclear&quot;</property></emphasis> attribute is used to remove automatically files from the list after upload completed.
-            See the simple example below.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+                    <para> The <emphasis>
+                                        <property> &quot;autoclear&quot;</property>
+                              </emphasis> attribute is used to remove automatically files from the
+                              list after upload completed. See the simple example below. </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
 <rich:fileUpload uploadData="#{bean.data}" autoclear="true"/>
 ...]]></programlisting>
 
 
-<!--RESTRICTIONS-->
-        
-<para>
-    The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component provides following restrictions:
-</para>
-    <itemizedlist>
-        <listitem>
-            <para>
-                On <property> file types</property>, use <emphasis><property> &quot;acceptedTypes&quot;</property></emphasis> attribute 
-                to define file types accepted by component.
-                In the example below only files with &quot;html&quot; and &quot;jpg&quot; extensions are accepted to upload.
-            </para>
-            <para>
-                <emphasis role="bold">Example:</emphasis>
-            </para>
-<programlisting role="XML"><![CDATA[...
+                    <!--RESTRICTIONS-->
+
+                    <para> The <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component provides following restrictions: </para>
+                    <itemizedlist>
+                              <listitem>
+                                        <para> On <property> file types</property>, use <emphasis>
+                                                  <property>
+                                                  &quot;acceptedTypes&quot;</property>
+                                                  </emphasis> attribute to define file types
+                                                  accepted by component. In the example below only
+                                                  files with &quot;html&quot; and
+                                                  &quot;jpg&quot; extensions are accepted to
+                                                  upload. </para>
+                                        <para>
+                                                  <emphasis role="bold">Example:</emphasis>
+                                        </para>
+                                        <programlisting role="XML"><![CDATA[...
 <rich:fileUpload acceptedTypes="html, jpg"/>
 ...]]></programlisting>
-        </listitem>
-        <listitem>
-            <para>
-               On <property> file size</property>, use the <code>maxRequestSize</code> parameter(value in bytes) inside <property>Ajax4jsf Filter</property> section 
-                in <property>web.xml</property>:
-            </para>
-            <programlisting role="XML"><![CDATA[...
+                              </listitem>
+                              <listitem>
+                                        <para> On <property> file size</property>, use the
+                                                  <code>maxRequestSize</code>
+                                                  parameter(value in bytes) inside
+                                                  <property>Ajax4jsf Filter</property>
+                                                  section in <property>web.xml</property>: </para>
+                                        <programlisting role="XML"><![CDATA[...
 <init-param>
         <param-name>maxRequestSize</param-name>
         <param-value>1000000</param-value>
 </init-param>
 ...]]></programlisting>
-        </listitem>
-        <listitem>
-            <para>
-                On <property>max files quantity</property>, use the <emphasis><property> &quot;maxFilesQuantity&quot;</property></emphasis> attribute 
-                to define max number of files allowed to be uploaded. After a number of files in the list equals to the value of this attribute &quot;Add&quot; button is disabled and nothing could be uploaded even if you clear the whole list.
-                In order to upload files again you should rerender the component.
-                As it could be seen in the example below, only 2 files are accepted for uploading.
-            </para>
-            
-            <para>
-                <emphasis role="bold">Example:</emphasis>
-            </para>
-            <programlisting role="XML"><![CDATA[...
+                              </listitem>
+                              <listitem>
+                                        <para> On <property>max files quantity</property>, use the <emphasis>
+                                                  <property>
+                                                  &quot;maxFilesQuantity&quot;</property>
+                                                  </emphasis> attribute to define max number of
+                                                  files allowed to be uploaded. After a number of
+                                                  files in the list equals to the value of this
+                                                  attribute &quot;Add&quot; button is
+                                                  disabled and nothing could be uploaded even if you
+                                                  clear the whole list. In order to upload files
+                                                  again you should rerender the component. As it
+                                                  could be seen in the example below, only 2 files
+                                                  are accepted for uploading. </para>
+
+                                        <para>
+                                                  <emphasis role="bold">Example:</emphasis>
+                                        </para>
+                                        <programlisting role="XML"><![CDATA[...
 <rich:fileUpload maxFilesQuantity="2"/>
  ...]]></programlisting>
-            <para>
-                This is the result:
-            </para>
-            <figure>
-                <title><emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis>with 
-                    <emphasis><property> &quot;maxFilesQuantity&quot;</property></emphasis> attribute</title>
-                <mediaobject>
-                    <imageobject>
-                        <imagedata fileref="images/fileUpload2.png"/>
-                    </imageobject>
-                </mediaobject>
-            </figure>       
-        </listitem>
-    </itemizedlist>
+                                        <para> This is the result: </para>
+                                        <figure>
+                                                  <title><emphasis role="bold">
+                                                  <property>&lt;rich:fileUpload&gt;</property>
+                                                  </emphasis>with <emphasis>
+                                                  <property>
+                                                  &quot;maxFilesQuantity&quot;</property>
+                                                  </emphasis> attribute</title>
+                                                  <mediaobject>
+                                                  <imageobject>
+                                                  <imagedata
+                                                  fileref="images/fileUpload2.png"
+                                                  />
+                                                  </imageobject>
+                                                  </mediaobject>
+                                        </figure>
+                              </listitem>
+                    </itemizedlist>
 
 
-     
-   
-        <para id="fileUploadEventAttributes">The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component 
-            provides a number of specific event attributes: 
-        </para>
-            <itemizedlist>
-                
-                <listitem>
-                    <para>
-                        The <emphasis><property> &quot;onadd&quot;</property></emphasis>a event handler called on an add file operation         
-                    </para>
-                </listitem>
-                
-                <listitem>
-                    <para>
-                        The <emphasis><property> &quot;onupload&quot;</property></emphasis> which gives you a possibility to cancel the upload at client side            
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        The <emphasis><property> &quot;onuploadcomplete&quot;</property></emphasis> which is called after all files from the list are uploaded            
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        The <emphasis><property> &quot;onuploadcanceled&quot;</property></emphasis> which is called after upload has been canceled via cancel control            
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        The <emphasis><property> &quot;onerror&quot;</property></emphasis> which is called if the file upload was interrupted according to any errors          
-                    </para>
-                </listitem>
-            </itemizedlist>    
-            
-            
-            
-            
-        <!--Flash Module-->
-        <para>
-            The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component has an embedded Flash module 
-            that adds extra functionality to the component. The module is enabled with <emphasis><property> &quot;allowFlash&quot;</property></emphasis>
-            attribute set to &quot;true&quot;.       
-        </para>
-        <para>These are the additional features that the Flash module provides:</para>
-        
-        <itemizedlist>
-            <listitem><para>Multiple files choosing;</para></listitem>
-            <listitem><para>Permitted file types are specified in the &quot;Open File&quot; dialog window;</para></listitem>
-            <listitem><para>A number of additional entry object properties are also available, which can be found <link linkend="objectProperties">here</link>. </para></listitem>
-        </itemizedlist>
-        
-        <para>Apart from uploading files to the sever without using AJAX, the Flash module provides a number of useful API functions that can be used to obtain information about the uploaded file. </para>          
-      
-        <para>There are 2 ways to obtain the data stored in the FileUploadEntry  object. </para>
- 
- <itemizedlist>
-        <listitem><para>By means of JavaScript on the client side. Use the following syntax for that <code>entries[i].propertyName</code>. For example <code>entries[0].state</code> will return the state of the file the is being processed or has just been processed.</para></listitem>
- 
-       
-     <listitem><para>The properties of  <code>FileUploadEntry</code>  object can be retrieved using  the <code>entry.propertyName</code> expression in the specific event attributes. For example, <code>onupload=&quot;alert(event.memo.entry.fileName);&quot; </code> will display a message with the name of the file at the very moment when upload operation starts. A full list of properties can be found <link linkend="objectPropertiesWithAttributes">here</link>.</para></listitem>   
-        
-        
- </itemizedlist>   
-<para>The given bellow code sample demonstrates how the properties can be used. Please study it carefully. </para>
-        <programlisting role="XML"><![CDATA[...
+
+
+                    <para id="fileUploadEventAttributes">The <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component provides a number of specific event attributes: </para>
+                    <itemizedlist>
+
+                              <listitem>
+                                        <para> The <emphasis>
+                                                  <property>
+                                                  &quot;onadd&quot;</property>
+                                                  </emphasis>a event handler called on an add file
+                                                  operation </para>
+                              </listitem>
+
+                              <listitem>
+                                        <para> The <emphasis>
+                                                  <property>
+                                                  &quot;onupload&quot;</property>
+                                                  </emphasis> which gives you a possibility to
+                                                  cancel the upload at client side </para>
+                              </listitem>
+                              <listitem>
+                                        <para> The <emphasis>
+                                                  <property>
+                                                  &quot;onuploadcomplete&quot;</property>
+                                                  </emphasis> which is called after all files from
+                                                  the list are uploaded </para>
+                              </listitem>
+                              <listitem>
+                                        <para> The <emphasis>
+                                                  <property>
+                                                  &quot;onuploadcanceled&quot;</property>
+                                                  </emphasis> which is called after upload has been
+                                                  canceled via cancel control </para>
+                              </listitem>
+                              <listitem>
+                                        <para> The <emphasis>
+                                                  <property>
+                                                  &quot;onerror&quot;</property>
+                                                  </emphasis> which is called if the file upload was
+                                                  interrupted according to any errors </para>
+                              </listitem>
+                    </itemizedlist>
+
+
+
+
+                    <!--Flash Module-->
+                    <para> The <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component has an embedded Flash module that adds extra
+                              functionality to the component. The module is enabled with <emphasis>
+                                        <property> &quot;allowFlash&quot;</property>
+                              </emphasis> attribute set to &quot;true&quot;. </para>
+                    <para>These are the additional features that the Flash module provides:</para>
+
+                    <itemizedlist>
+                              <listitem>
+                                        <para>Multiple files choosing;</para>
+                              </listitem>
+                              <listitem>
+                                        <para>Permitted file types are specified in the
+                                                  &quot;Open File&quot; dialog
+                                        window;</para>
+                              </listitem>
+                              <listitem>
+                                        <para>A number of additional entry object properties are
+                                                  also available, which can be found <link
+                                                  linkend="objectProperties">here</link>.
+                                        </para>
+                              </listitem>
+                    </itemizedlist>
+
+                    <para>Apart from uploading files to the sever without using AJAX, the Flash
+                              module provides a number of useful API functions that can be used to
+                              obtain information about the uploaded file. </para>
+
+                    <para>There are 2 ways to obtain the data stored in the FileUploadEntry object. </para>
+
+                    <itemizedlist>
+                              <listitem>
+                                        <para>By means of JavaScript on the client side. Use the
+                                                  following syntax for that
+                                                  <code>entries[i].propertyName</code>.
+                                                  For example <code>entries[0].state</code> will
+                                                  return the state of the file the is being
+                                                  processed or has just been processed.</para>
+                              </listitem>
+
+
+                              <listitem>
+                                        <para>The properties of <code>FileUploadEntry</code> object
+                                                  can be retrieved using the
+                                                  <code>entry.propertyName</code>
+                                                  expression in the specific event attributes. For
+                                                  example,
+                                                  <code>onupload=&quot;alert(event.memo.entry.fileName);&quot;
+                                                  </code> will display a message with the name of
+                                                  the file at the very moment when upload operation
+                                                  starts. A full list of properties can be found
+                                                  <link
+                                                  linkend="objectPropertiesWithAttributes"
+                                                  >here</link>.</para>
+                              </listitem>
+
+
+                    </itemizedlist>
+                    <para>The given bellow code sample demonstrates how the properties can be used.
+                              Please study it carefully. </para>
+                    <programlisting role="XML"><![CDATA[...
             <head>
                   <script>
                         function _onaddHandler (e) {
@@ -291,53 +357,64 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                   </script>
             </head>
  ...]]></programlisting>
-        
-     
-     
-   <para>  Moreover, embedded Flash module provides a smoother representation of progress bar during the uploading process: the polling is performed is not by AJAX, but my means of the flash module. 
-   </para>
-        <figure>
-            <title>
-             Uploading using Flash module <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> 
-            </title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/flash_fileUpload.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>   
-        
-        <para>However, the Flash module doens&apos;t perform any visual representation of the component.</para>
-        
-        <!--End of Flash Module-->
-            
-            
-            
-            
-        
-        <para>
-            In order to customize the information regarding the ongoing process you could use <emphasis><property>&quot;label&quot;</property></emphasis> facet
-            with the following macrosubstitution:
-            <itemizedlist>
-                <listitem>
-                    <para>
-                       <code> {B}</code>, <code>{KB}</code>, <code>{MB}</code> contains the size of file uploaded in bytes, kilobytes, megabytes respectively 
+
+
+
+                    <para> Moreover, embedded Flash module provides a smoother representation of
+                              progress bar during the uploading process: the polling is performed is
+                              not by AJAX, but my means of the flash module. </para>
+                    <figure>
+                              <title> Uploading using Flash module <emphasis role="bold">
+                                                  <property>&lt;rich:fileUpload&gt;</property>
+                                        </emphasis>
+                              </title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/flash_fileUpload.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+
+                    <para>However, the Flash module doens&apos;t perform any visual
+                              representation of the component.</para>
+
+                    <!--End of Flash Module-->
+
+
+
+
+
+                    <para> In order to customize the information regarding the ongoing process you
+                              could use <emphasis>
+                                        <property>&quot;label&quot;</property>
+                              </emphasis> facet with the following macrosubstitution: <itemizedlist>
+                                        <listitem>
+                                                  <para>
+                                                  <code> {B}</code>, <code>{KB}</code>,
+                                                  <code>{MB}</code> contains the
+                                                  size of file uploaded in bytes,
+                                                  kilobytes, megabytes respectively
+                                                  </para>
+                                        </listitem>
+                                        <listitem>
+                                                  <para>
+                                                  <code>{_B}</code>, <code>{_KB}</code>,
+                                                  <code>{_MB}</code> contains
+                                                  the remain file size to upload in bytes,
+                                                  kilobytes, megabytes respectively
+                                                  </para>
+                                        </listitem>
+                                        <listitem>
+                                                  <para>
+                                                  <code>{ss}</code>, <code>{mm}</code>,
+                                                  <code>{hh}</code> contains
+                                                  elapsed time in seconds, minutes and
+                                                  hours respectively </para>
+                                        </listitem>
+                              </itemizedlist>
                     </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <code>{_B}</code>, <code>{_KB}</code>, <code>{_MB}</code> contains the remain file size to upload in bytes, kilobytes, megabytes respectively 
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <code>{ss}</code>, <code>{mm}</code>, <code>{hh}</code>  contains elapsed time in seconds, minutes and hours respectively
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
-                    
-            <!--
+
+                    <!--
             There is a number of facets providing for this component:
            <emphasis>
                     <property> &quot;header&quot;</property></emphasis>
@@ -347,115 +424,132 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                       <emphasis>
                           <property> &quot;label&quot;</property></emphasis>.  could be used to provide displaying the progress of uploading.
             -->
-       
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
 <rich:fileUpload uploadData="#{bean.data}" fileUploadListener="#{bean.listener}">
         <f:facet name="label">
                 <h:outputText value="{_KB}KB from {KB}KB uploaded --- {mm}:{ss}" />
         </f:facet>
 </rich:fileUpload>
 ...]]></programlisting>
-        <para>This is the result:</para>
-        <figure>
-            <title>
-                <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> 
-                with <emphasis><property> &quot;label&quot;</property></emphasis> facet
-            </title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/fileUpload3.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>       
-        
-        <para>You could define labels of the <property>component controls</property> with the help of 
-            <emphasis><property> &quot;addControlLabel&quot;</property></emphasis>, 
-            <emphasis><property> &quot;clearAllControlLabel&quot;</property></emphasis>, 
-            <emphasis><property> &quot;clearControlLabel&quot;</property></emphasis>, 
-            <emphasis><property> &quot;stopEntryControlLabel&quot;</property></emphasis>, 
-            <emphasis><property> &quot;uploadControlLabel&quot;</property></emphasis>
-        attributes. See the following example.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+                    <para>This is the result:</para>
+                    <figure>
+                              <title>
+                                        <emphasis role="bold">
+                                                  <property>&lt;rich:fileUpload&gt;</property>
+                                        </emphasis> with <emphasis>
+                                                  <property> &quot;label&quot;</property>
+                                        </emphasis> facet </title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload3.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+
+                    <para>You could define labels of the <property>component controls</property>
+                              with the help of <emphasis>
+                                        <property> &quot;addControlLabel&quot;</property>
+                              </emphasis>, <emphasis>
+                                        <property>
+                                        &quot;clearAllControlLabel&quot;</property>
+                              </emphasis>, <emphasis>
+                                        <property> &quot;clearControlLabel&quot;</property>
+                              </emphasis>, <emphasis>
+                                        <property>
+                                        &quot;stopEntryControlLabel&quot;</property>
+                              </emphasis>, <emphasis>
+                                        <property> &quot;uploadControlLabel&quot;</property>
+                              </emphasis> attributes. See the following example. </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
 <rich:fileUpload addControlLabel="Add file..." clearAllControlLabel="Clear all" clearControlLabel="Clear"
                         stopEntryControlLabel="Stop process" uploadControlLabel="Upload file"/>
 ...]]></programlisting>
-<para>
-    This is the result:
-</para>        
-        <figure>
-            <title>
-                <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> with labels
-            </title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/fileUpload4.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>       
-        <para>
-            The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component allows to use sizes attributes:
-        </para>
-        <itemizedlist>
-            <listitem>
-                <para>
-                <emphasis><property> &quot;listHeight&quot;</property></emphasis> attribute specify height for list of files in pixels
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                <emphasis><property> &quot;listWidth&quot;</property></emphasis> attribute specify width for list of files in pixels
-                </para>
-            </listitem>
-        </itemizedlist>
-        
-        <para>
-            In order to disable the whole component you could use the <emphasis><property> &quot;disabled&quot;</property></emphasis> attribute.
-            See the following example.
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+                    <para> This is the result: </para>
+                    <figure>
+                              <title>
+                                        <emphasis role="bold">
+                                                  <property>&lt;rich:fileUpload&gt;</property>
+                                        </emphasis> with labels </title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload4.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+                    <para> The <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component allows to use sizes attributes: </para>
+                    <itemizedlist>
+                              <listitem>
+                                        <para>
+                                                  <emphasis>
+                                                  <property>
+                                                  &quot;listHeight&quot;</property>
+                                                  </emphasis> attribute specify height for list of
+                                                  files in pixels </para>
+                              </listitem>
+                              <listitem>
+                                        <para>
+                                                  <emphasis>
+                                                  <property>
+                                                  &quot;listWidth&quot;</property>
+                                                  </emphasis> attribute specify width for list of
+                                                  files in pixels </para>
+                              </listitem>
+                    </itemizedlist>
+
+                    <para> In order to disable the whole component you could use the <emphasis>
+                                        <property> &quot;disabled&quot;</property>
+                              </emphasis> attribute. See the following example. </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
 <rich:fileUpload disabled="true"/>
 ...]]></programlisting>
-        <para>This is the result:</para>
-        <figure>
-            <title>
-                <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis>with <emphasis><property> &quot;disabled&quot;</property></emphasis> attribute
-            </title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/fileUpload5.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>       
-        <para>It&apos;s possible to handle events for fileUpload using JavaScript code. A simplest example of usage JavaScript API is placed below:</para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[...
+                    <para>This is the result:</para>
+                    <figure>
+                              <title>
+                                        <emphasis role="bold">
+                                                  <property>&lt;rich:fileUpload&gt;</property>
+                                        </emphasis>with <emphasis>
+                                                  <property> &quot;disabled&quot;</property>
+                                        </emphasis> attribute </title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload5.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+                    <para>It&apos;s possible to handle events for fileUpload using JavaScript
+                              code. A simplest example of usage JavaScript API is placed below:</para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
 <rich:fileUpload  id="upload" disabled="false"/>
 <h:commandButton onclick="${rich:component('upload')}.disable();" value="Disable" />
-...]]></programlisting>  
-        
-        <para>
-            <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> 
-            component also provides a number of JavaScript property,
-            that can be used to process uploaded files, file states etc. 
-            The given below example illustrates how the <code>entries[0].state</code> property can be used to get access to the file state. 
-            Full list of JavaScript properties can be found <link linkend="objectProperties">below</link>.
-        
-        </para>
-        
-        
-        <programlisting role="XML"><![CDATA[...
+...]]></programlisting>
+
+                    <para>
+                              <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component also provides a number of JavaScript property,
+                              that can be used to process uploaded files, file states etc. The given
+                              below example illustrates how the <code>entries[0].state</code>
+                              property can be used to get access to the file state. Full list of
+                              JavaScript properties can be found <link linkend="objectProperties"
+                                        >below</link>. </para>
+
+
+                    <programlisting role="XML"><![CDATA[...
 <rich:fileUpload fileUploadListener="#{fileUploadBean.listener}"
         maxFilesQuantity="#{fileUploadBean.uploadsAvailable}"
         reRender="table" id="upload"
@@ -464,730 +558,1019 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
             <a4j:support event="onuploadcomplete" reRender="info"  />
 </rich:fileUpload>
 <h:commandButton onclick="if($('j_id232:upload').component.entries[0].state == FileUploadEntry.UPLOAD_SUCCESS) alert ('DONE');" value="Check file state"/>  
-...]]></programlisting>  
-        
-        
-        <para>The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component allows to use internationalization method 
-            to redefine and localize the labels. You could use application resource bundle and define 
-            <code>RICH_FILE_UPLOAD_CANCEL_LABEL</code>,  
-            <code>RICH_FILE_UPLOAD_STOP_LABEL</code>, 
-            <code>RICH_FILE_UPLOAD_ADD_LABEL</code>, 
-            <code>RICH_FILE_UPLOAD_UPLOAD_LABEL</code>, 
-            <code>RICH_FILE_UPLOAD_CLEAR_LABEL</code>, 
-            <code>RICH_FILE_UPLOAD_CLEAR_ALL_LABEL</code>, 
-            <code>RICH_FILE_UPLOAD_PROGRESS_LABEL</code>,  
-            <code>RICH_FILE_UPLOAD_SIZE_ERROR_LABLE</code>,  
-            <code>RICH_FILE_UPLOAD_TRANSFER_ERROR_LABLE</code>, 
-            <code>RICH_FILE_UPLOAD_ENTRY_STOP_LABEL</code>, 
-            <code>RICH_FILE_UPLOAD_ENTRY_CLEAR_LABEL</code>, 
-            <code>RICH_FILE_UPLOAD_ENTRY_CANCEL_LABEL</code>  there.
-        </para>
-        
-        
-        <para>
-            
-            
-            
-            
-        </para>
-       
-       <para>
-           The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component could work together with Seam framework.
-           <ulink url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/faq/faq.html#fileUploadConf">Here</ulink> you can see how to configure Seam Filter in order to handle
-           <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> requests.
-       </para>
-        
-        
-        
+...]]></programlisting>
 
-</section>
-    <!-- JavaScript API-->  
-    <section >
-        <title>JavaScript API</title>
-        <table> 
-            <title>JavaScript API</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Function</entry>
-                        <entry>Description</entry>  
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>enable()</entry>
-                        <entry>Enables the component</entry>
-                    </row>
-                    <row>
-                        <entry>disable()</entry>
-                        <entry>Disables the component</entry>
-                    </row>
-                    <row>
-                        <entry>stop()</entry>
-                        <entry>Stops the uploading process</entry>
-                    </row>
-                    <row>
-                        <entry>clear()</entry>
-                        <entry>Removes all files from the list. The function can also get the $(&apos;id&apos;).component.entries[i] as a parameter to remove a particular file. </entry>
-                    </row>
-                    
-     
-                    
-        
-                    
-                </tbody>
-            </tgroup>
-        </table>
-        
 
-        
-        <table id="objectProperties"> 
-            <title>Client side object properties</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Property</entry>
-                        <entry>Description</entry>  
-                    </row>
-                </thead>
-                <tbody>
-        
-                    <row>
-                        <entry>entries</entry>
-                        <entry>Returns a array of all files in the list
-       
-                        </entry>
-                    </row>
-                    
-        
-        
-                    <row>
-                        <entry>entries.length</entry>
-                        <entry>Returns the number of files in the list  </entry>
-                    </row>
-                    
-                    
-                    <row>
-                        <entry>entries[i].fileName</entry>
-                        <entry>Returns the file name, that is retrieved by the array index </entry>
-                    </row>
-                    
-                    
-                    
-                    <row>
-                        <entry>entries[i].state </entry> 
-                        <entry>Returns the file state. Possible states are 
-                            <itemizedlist>
-                                
-                                <listitem><para>&quot;initialized&quot; - the file is added, corresponds to FileUploadEntry.INITIALIZED constant </para> </listitem>
-                                <listitem><para>&quot;progress&quot; - the file is being uploaded, corresponds to FileUploadEntry.UPLOAD_IN_PROGRESS  constant</para> </listitem>
-                                <listitem><para>&quot;ready&quot; - uploading is in process, corresponds to FileUploadEntry.READY  constant The file will be uploaded on queue order.</para> </listitem>
-                                <listitem><para>&quot;canceled&quot; - uploading of the file is canceled, corresponds to FileUploadEntry.UPLOAD_CANCELED  constant </para> </listitem>
-                                <listitem><para>&quot;done&quot; - the file is uploaded successfully, corresponds to FileUploadEntry.UPLOAD_SUCCESS  constant</para> </listitem>
-                                <listitem><para>&quot;transfer_error&quot; - a file transfer error  occurred, corresponds to FileUploadEntry.UPLOAD_TRANSFER_ERROR  constant </para> </listitem>
-                                <listitem><para>&quot;size_error&quot; - the file exceeded maximum size, corresponds to FileUploadEntry.UPLOAD_SIZE_ERROR  constant</para> </listitem>
-                              
-                        
-                                </itemizedlist>
-                        
-                        
-                        </entry>
-                    </row>
-      
-                    
-                    
-                    <row>
-                        <entry>entries[i].size</entry><entry> Returns the size of the file. Available in flash enabled version only</entry> 
-                    </row>   
-                    <row>
-                        <entry>entries[i].Type</entry><entry>Returns the mime type of the file. Available in flash enabled version only</entry>
-                    </row>   
-                    <row>
-                        <entry>entries[i].creator </entry><entry>Returns the name of the author of the file. Available in flash enabled version only</entry> 
-                    </row> 
-                    <row>
-                        <entry>entries[i].creationDate</entry><entry>Returns the date when the file was created. Available in flash enabled version only</entry> 
-                    </row>   
-                    <row>
-                        <entry>entries[i].modificationDate</entry>  <entry>Returns the date of the last file modification. Available in flash enabled version only</entry> 
-                    </row>   
-                    
-            
-                    
-                    
-        </tbody>
-        </tgroup>
-        </table>
-        
-        
-        
-        
-        <table id="objectPropertiesWithAttributes"> 
-            <title>Client side object properties available with specific <link linkend="fileUploadEventAttributes"> event attributes</link></title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Property</entry>
-                        <entry>Description</entry>  
-                    </row>
-                </thead>
-                <tbody>
+                    <para>The <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component allows to use internationalization method to
+                              redefine and localize the labels. You could use application resource
+                              bundle and define <code>RICH_FILE_UPLOAD_CANCEL_LABEL</code>,
+                                        <code>RICH_FILE_UPLOAD_STOP_LABEL</code>,
+                                        <code>RICH_FILE_UPLOAD_ADD_LABEL</code>,
+                                        <code>RICH_FILE_UPLOAD_UPLOAD_LABEL</code>,
+                                        <code>RICH_FILE_UPLOAD_CLEAR_LABEL</code>,
+                                        <code>RICH_FILE_UPLOAD_CLEAR_ALL_LABEL</code>,
+                                        <code>RICH_FILE_UPLOAD_PROGRESS_LABEL</code>,
+                                        <code>RICH_FILE_UPLOAD_SIZE_ERROR_LABLE</code>,
+                                        <code>RICH_FILE_UPLOAD_TRANSFER_ERROR_LABLE</code>,
+                                        <code>RICH_FILE_UPLOAD_ENTRY_STOP_LABEL</code>,
+                                        <code>RICH_FILE_UPLOAD_ENTRY_CLEAR_LABEL</code>,
+                                        <code>RICH_FILE_UPLOAD_ENTRY_CANCEL_LABEL</code> there. </para>
 
-                    
-                        
-                    
-                    <row>
-                        <entry>entry.state </entry> 
-                        <entry>Returns the file state. Possible states are 
-                            <itemizedlist>
-                                
-                                <listitem><para>&quot;initialized&quot; - the file is added, corresponds to FileUploadEntry.INITIALIZED constant </para> </listitem>
-                                <listitem><para>&quot;progress&quot; - the file is being uploaded, corresponds to FileUploadEntry.UPLOAD_IN_PROGRESS  constant</para> </listitem>
-                                <listitem><para>&quot;ready&quot; - uploading is in process, corresponds to FileUploadEntry.READY  constant The file will be uploaded on queue order.</para> </listitem>
-                                <listitem><para>&quot;canceled&quot; - uploading of the file is canceled, corresponds to FileUploadEntry.UPLOAD_CANCELED  constant </para> </listitem>
-                                <listitem><para>&quot;done&quot; - the file is uploaded successfully, corresponds to FileUploadEntry.UPLOAD_SUCCESS  constant</para> </listitem>
-                                <listitem><para>&quot;transfer_error&quot; - a file transfer error  occurred, corresponds to FileUploadEntry.UPLOAD_TRANSFER_ERROR  constant </para> </listitem>
-                                <listitem><para>&quot;size_error&quot; - the file exceeded maximum size, corresponds to FileUploadEntry.UPLOAD_SIZE_ERROR  constant</para> </listitem>
-                                
-                                
-                            </itemizedlist>
-                            
-                            
-                        </entry>
-                    </row>
-                    
-                    <row>
-                        <entry>entry.fileName </entry> 
-                        <entry>Returns the file&apos;s name. This property works with all event handlers except for &quot;onadd&quot;.
-                        </entry>
-                    </row>               
-                    
-                    
-                    
-                    <row>
-                        <entry>entry.size</entry><entry> Returns the size of the file. Available in flash enabled version only</entry> 
-                    </row>   
-                    <row>
-                        <entry>entry.Type</entry><entry>Returns the mime type of the file. Available in flash enabled version only</entry>
-                    </row>   
-                    <row>
-                        <entry>entry.creator </entry><entry>Returns the name of the author of the file. Available in flash enabled version only</entry> 
-                    </row> 
-                    <row>
-                        <entry>entry.creationDate</entry><entry>Returns the date when the file was created. Available in flash enabled version only</entry> 
-                    </row>   
-                    <row>
-                        <entry>entry.modificationDate</entry>  <entry>Returns the date of the last file modification. Available in flash enabled version only</entry> 
-                    </row>   
-                    
-                    
-                    
-                    
-                </tbody>
-            </tgroup>
-        </table>
-        
-        
-        
-    </section>
-    <!-- End of JavaScript API-->   
-    <section>
-        <title>Look-and-Feel Customization</title>
-        <para>For skinnability implementation, the components use a <emphasis>
-                <property>style class redefinition method.</property>
-            </emphasis> Default style classes are mapped on <emphasis>
-                <property>skin parameters.</property>
-            </emphasis></para>
-        <para>There are two ways to redefine the appearance of all <emphasis role="bold">
-                <property>&lt;rich:fileUpload&gt;</property>
-            </emphasis> components at once: <itemizedlist>
-                <listitem><para>Redefine the corresponding skin parameters</para></listitem>
-                <listitem><para> Add to your style sheets style classes used by a <emphasis role="bold">
-                        <property>&lt;rich:fileUpload&gt;</property>
-                    </emphasis> component</para></listitem>
-            </itemizedlist>
-        </para>
-    </section>
 
-    <section>
-        <title>Skin Parameters Redefinition</title>
+                    <para> </para>
 
-        <table>
-            <title>Skin parameters redefinition for a component</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>tableBackgroundColor</entry>
-                        <entry>background-color</entry>
-                    </row>
-                    <row>
-                        <entry>tableBorderColor</entry>
-                        <entry>border-color</entry>
-                    </row>   
-                </tbody>
-            </tgroup>
-        </table>
-        
-         <table>
-            <title>Skin parameters redefinition for a font</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>generalFamilyFont</entry>
-                        <entry>font-family</entry>
-                    </row>
-                    <row>
-                        <entry>generalSizeFont</entry>
-                        <entry>font-size</entry>
-                    </row>                                
-                </tbody>
-            </tgroup>
-         </table>
-        
-        <table>
-            <title>Skin parameters redefinition for a toolbar</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>additionalBackgroundColor</entry>
-                        <entry>background-color</entry>
-                    </row>
-                    <row>
-                        <entry>tableBorderColor</entry>
-                        <entry>border-bottom-color</entry>
-                    </row>
-                    <row>
-                        <entry>tableBackgroundColor</entry>
-                        <entry>border-top-color</entry>
-                    </row>
-                    <row>
-                        <entry>tableBackgroundColor</entry>
-                        <entry>border-left-color</entry>
-                    </row>
-                    
-                </tbody>
-            </tgroup>
-        </table>
-        
-        <table>
-            <title>Skin parameters redefinition for items in the list</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>tableBorderColor</entry>
-                        <entry>border-bottom-color</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-               
-        <table>
-            <title>Skin parameters redefinition for a &quot;Cancel&quot;, &quot;Clear&quot; links</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>generalLinkColor</entry>
-                        <entry>color</entry>
-                    </row>
-            </tbody>
-            </tgroup>
-        </table>
+                    <para> The <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component could work together with Seam framework. <ulink
+                                        url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/faq/faq.html#fileUploadConf"
+                                        >Here</ulink> you can see how to configure filters for both
+                              of them in web.xml file in
+                              order to handle <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> requests. </para>
 
-        <table>
-            <title>Skin parameters redefinition for a button</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                     <row>
-                         <entry>trimColor</entry>
-                         <entry>background-color</entry>
-                    </row>                  
-                </tbody>
-            </tgroup>
-        </table>
-        <table>
-            <title>Skin parameters redefinition for a button border</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>tableBorderColor</entry>
-                        <entry>border-color</entry>
-                    </row>                  
-                </tbody>
-            </tgroup>
-        </table>
-        <table>
-            <title>Skin parameters redefinition for a highlighted button</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>trimColor</entry>
-                        <entry>background-color</entry>
-                    </row>
-                    <row>
-                        <entry>selectControlColor</entry>
-                        <entry>border-color</entry>
-                    </row>                    
-                </tbody>
-            </tgroup>
-        </table>
-        
-        <table>
-            <title>Skin parameters redefinition for a pressed button</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>selectControlColor</entry>
-                        <entry>border-color</entry>
-                    </row>
-                    <row>
-                        <entry>additionalBackgroundColor</entry>
-                        <entry>background-color</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
 
-        <table>
-            <title>Skin parameters redefinition for &quot;Upload&quot;, &quot;Clean&quot; buttons</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>generalTextColor</entry>
-                        <entry>color</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-        <table>
-            <title>Skin parameters redefinition for a disabled &quot;Start&quot; button icon</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>tableBorderColor</entry>
-                        <entry>color</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-        <table>
-            <title>Skin parameters redefinition for a disabled &quot;Clear&quot; button icon</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Skin parameters</entry>
-                        <entry>CSS properties</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>tableBorderColor</entry>
-                        <entry>color</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-    </section>
 
-    <section>
-        <title>Definition of Custom Style Classes</title>
 
-        <para>The following picture illustrates how CSS classes define styles for component elements.</para>
-        <figure>
-            <title>Classes names</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/fileUpload_cn.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>
-        <figure>
-            <title>Classes names</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/fileUpload_cn2.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>
+          </section>
+          <!-- JavaScript API-->
+          <section>
+                    <title>JavaScript API</title>
+                    <table>
+                              <title>JavaScript API</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Function</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>enable()</entry>
+                                                  <entry>Enables the component</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>disable()</entry>
+                                                  <entry>Disables the component</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>stop()</entry>
+                                                  <entry>Stops the uploading
+                                                  process</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>clear()</entry>
+                                                  <entry>Removes all files from the list.
+                                                  The function can also get the
+                                                  $(&apos;id&apos;).component.entries[i]
+                                                  as a parameter to remove a
+                                                  particular file. </entry>
+                                                  </row>
 
-        <table id="fileUploadCN">
-            <title>Classes names that define a component representation</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Class name</entry>
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>rich-fileupload-list-decor</entry>
-                        <entry>Defines styles for a wrapper &lt;div&gt; element of a fileUpload</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-font</entry>
-                        <entry>Defines styles for a font of buttons and items</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-toolbar-decor</entry>
-                        <entry>Defines styles for a toolbar</entry>
-                    </row>
-                    <row>
-                        <entry> rich-fileupload-list-overflow</entry>
-                        <entry>Defines styles for a list of files</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
 
-                      
-        <table >
-            <title>Classes names that define buttons representation</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Class name</entry>
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>rich-fileupload-button</entry>
-                        <entry>Defines styles for a buttons</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-button-border</entry>
-                        <entry>Defines styles for a border of buttons</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-button-light</entry>
-                        <entry>Defines styles for a highlight of  button</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-button-press</entry>
-                        <entry>Defines styles for a pressed button</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-button-dis</entry>
-                        <entry>Defines styles for a disabled button</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-button-selection</entry>
-                        <entry>Defines styles for &quot;Upload&quot;, &quot;Clean&quot; buttons</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-        
-        <table >
-            <title>Classes names that define the representation of the buttons' icons</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Class name</entry>
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>rich-fileupload-ico</entry>
-                        <entry>Defines styles for an icon</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-ico-add</entry>
-                        <entry>Defines styles for a &quot;Add&quot; button icon</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-ico-start</entry>
-                        <entry>Defines styles for a &quot;Upload&quot; button icon</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-ico-stop</entry>
-                        <entry>Defines styles for a &quot;Stop&quot; button icon</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-ico-clear</entry>
-                        <entry>Defines styles for a &quot;Clear&quot; button icon</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-ico-add-dis</entry>
-                        <entry>Defines styles for a disabled &quot;Add&quot; button icon</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-ico-start-dis</entry>
-                        <entry>Defines styles for a disabled &quot;Upload&quot; button icon</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-ico-clear-dis</entry>
-                        <entry>Defines styles for a disabled &quot;Clear&quot; button icon</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-        
-        <table >
-            <title>Classes names that define list items representation</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Class name</entry>
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>rich-fileupload-table-td</entry>
-                        <entry>Defines styles for a wrapper &lt;td&gt; element of a list items</entry>
-                    </row>
-                    <row>
-                        <entry>rich-fileupload-anc</entry>
-                        <entry>Defines styles for &quot;Cancel&quot;, &quot;Stop&quot;, &quot;Clear&quot; links</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-        
-        
-        <para>In order to redefine styles for all <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> components on a page 
-            using CSS, it&apos;s enough to create classes with the same names 
-            (possible classes could be found in the tables <link linkend="fileUploadCN"> above</link>) and define necessary properties in them. 
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="CSS"><![CDATA[...
+
+
+
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+
+
+                    <table id="objectProperties">
+                              <title>Client side object properties</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Property</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+
+                                                  <row>
+                                                  <entry>entries</entry>
+                                                  <entry>Returns a array of all files in
+                                                  the list </entry>
+                                                  </row>
+
+
+
+                                                  <row>
+                                                  <entry>entries.length</entry>
+                                                  <entry>Returns the number of files in
+                                                  the list </entry>
+                                                  </row>
+
+
+                                                  <row>
+                                                  <entry>entries[i].fileName</entry>
+                                                  <entry>Returns the file name, that is
+                                                  retrieved by the array index
+                                                  </entry>
+                                                  </row>
+
+
+
+                                                  <row>
+                                                  <entry>entries[i].state </entry>
+                                                  <entry>Returns the file state. Possible
+                                                  states are <itemizedlist>
+
+                                                  <listitem>
+                                                  <para>&quot;initialized&quot;
+                                                  -
+                                                  the
+                                                  file
+                                                  is
+                                                  added,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.INITIALIZED
+                                                  constant
+                                                  </para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;progress&quot;
+                                                  -
+                                                  the
+                                                  file
+                                                  is
+                                                  being
+                                                  uploaded,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.UPLOAD_IN_PROGRESS
+                                                  constant</para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;ready&quot;
+                                                  -
+                                                  uploading
+                                                  is
+                                                  in
+                                                  process,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.READY
+                                                  constant
+                                                  The
+                                                  file
+                                                  will
+                                                  be
+                                                  uploaded
+                                                  on
+                                                  queue
+                                                  order.</para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;canceled&quot;
+                                                  -
+                                                  uploading
+                                                  of
+                                                  the
+                                                  file
+                                                  is
+                                                  canceled,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.UPLOAD_CANCELED
+                                                  constant
+                                                  </para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;done&quot;
+                                                  -
+                                                  the
+                                                  file
+                                                  is
+                                                  uploaded
+                                                  successfully,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.UPLOAD_SUCCESS
+                                                  constant</para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;transfer_error&quot;
+                                                  -
+                                                  a
+                                                  file
+                                                  transfer
+                                                  error
+                                                  occurred,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.UPLOAD_TRANSFER_ERROR
+                                                  constant
+                                                  </para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;size_error&quot;
+                                                  -
+                                                  the
+                                                  file
+                                                  exceeded
+                                                  maximum
+                                                  size,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.UPLOAD_SIZE_ERROR
+                                                  constant</para>
+                                                  </listitem>
+
+
+                                                  </itemizedlist>
+                                                  </entry>
+                                                  </row>
+
+
+
+                                                  <row>
+                                                  <entry>entries[i].size</entry>
+                                                  <entry> Returns the size of the file.
+                                                  Available in flash enabled
+                                                  version only</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>entries[i].Type</entry>
+                                                  <entry>Returns the mime type of the
+                                                  file. Available in flash
+                                                  enabled version only</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>entries[i].creator </entry>
+                                                  <entry>Returns the name of the author of
+                                                  the file. Available in flash
+                                                  enabled version only</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>entries[i].creationDate</entry>
+                                                  <entry>Returns the date when the file
+                                                  was created. Available in
+                                                  flash enabled version
+                                                  only</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>entries[i].modificationDate</entry>
+                                                  <entry>Returns the date of the last file
+                                                  modification. Available in
+                                                  flash enabled version
+                                                  only</entry>
+                                                  </row>
+
+
+
+
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+
+
+
+                    <table id="objectPropertiesWithAttributes">
+                              <title>Client side object properties available with specific <link
+                                                  linkend="fileUploadEventAttributes"> event
+                                                  attributes</link></title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Property</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+
+
+
+
+                                                  <row>
+                                                  <entry>entry.state </entry>
+                                                  <entry>Returns the file state. Possible
+                                                  states are <itemizedlist>
+
+                                                  <listitem>
+                                                  <para>&quot;initialized&quot;
+                                                  -
+                                                  the
+                                                  file
+                                                  is
+                                                  added,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.INITIALIZED
+                                                  constant
+                                                  </para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;progress&quot;
+                                                  -
+                                                  the
+                                                  file
+                                                  is
+                                                  being
+                                                  uploaded,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.UPLOAD_IN_PROGRESS
+                                                  constant</para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;ready&quot;
+                                                  -
+                                                  uploading
+                                                  is
+                                                  in
+                                                  process,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.READY
+                                                  constant
+                                                  The
+                                                  file
+                                                  will
+                                                  be
+                                                  uploaded
+                                                  on
+                                                  queue
+                                                  order.</para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;canceled&quot;
+                                                  -
+                                                  uploading
+                                                  of
+                                                  the
+                                                  file
+                                                  is
+                                                  canceled,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.UPLOAD_CANCELED
+                                                  constant
+                                                  </para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;done&quot;
+                                                  -
+                                                  the
+                                                  file
+                                                  is
+                                                  uploaded
+                                                  successfully,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.UPLOAD_SUCCESS
+                                                  constant</para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;transfer_error&quot;
+                                                  -
+                                                  a
+                                                  file
+                                                  transfer
+                                                  error
+                                                  occurred,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.UPLOAD_TRANSFER_ERROR
+                                                  constant
+                                                  </para>
+                                                  </listitem>
+                                                  <listitem>
+                                                  <para>&quot;size_error&quot;
+                                                  -
+                                                  the
+                                                  file
+                                                  exceeded
+                                                  maximum
+                                                  size,
+                                                  corresponds
+                                                  to
+                                                  FileUploadEntry.UPLOAD_SIZE_ERROR
+                                                  constant</para>
+                                                  </listitem>
+
+
+                                                  </itemizedlist>
+                                                  </entry>
+                                                  </row>
+
+                                                  <row>
+                                                  <entry>entry.fileName </entry>
+                                                  <entry>Returns the file&apos;s name.
+                                                  This property works with all
+                                                  event handlers except for
+                                                  &quot;onadd&quot;.
+                                                  </entry>
+                                                  </row>
+
+
+
+                                                  <row>
+                                                  <entry>entry.size</entry>
+                                                  <entry> Returns the size of the file.
+                                                  Available in flash enabled
+                                                  version only</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>entry.Type</entry>
+                                                  <entry>Returns the mime type of the
+                                                  file. Available in flash
+                                                  enabled version only</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>entry.creator </entry>
+                                                  <entry>Returns the name of the author of
+                                                  the file. Available in flash
+                                                  enabled version only</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>entry.creationDate</entry>
+                                                  <entry>Returns the date when the file
+                                                  was created. Available in
+                                                  flash enabled version
+                                                  only</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>entry.modificationDate</entry>
+                                                  <entry>Returns the date of the last file
+                                                  modification. Available in
+                                                  flash enabled version
+                                                  only</entry>
+                                                  </row>
+
+
+
+
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+
+
+          </section>
+          <!-- End of JavaScript API-->
+          <section>
+                    <title>Look-and-Feel Customization</title>
+                    <para>For skinnability implementation, the components use a <emphasis>
+                                        <property>style class redefinition method.</property>
+                              </emphasis> Default style classes are mapped on <emphasis>
+                                        <property>skin parameters.</property>
+                              </emphasis></para>
+                    <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> components at once: <itemizedlist>
+                                        <listitem>
+                                                  <para>Redefine the corresponding skin
+                                                  parameters</para>
+                                        </listitem>
+                                        <listitem>
+                                                  <para> Add to your style sheets style classes used
+                                                  by a <emphasis role="bold">
+                                                  <property>&lt;rich:fileUpload&gt;</property>
+                                                  </emphasis> component</para>
+                                        </listitem>
+                              </itemizedlist>
+                    </para>
+          </section>
+
+          <section>
+                    <title>Skin Parameters Redefinition</title>
+
+                    <table>
+                              <title>Skin parameters redefinition for a component</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>tableBackgroundColor</entry>
+                                                  <entry>background-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>border-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for a font</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>generalFamilyFont</entry>
+                                                  <entry>font-family</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>generalSizeFont</entry>
+                                                  <entry>font-size</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for a toolbar</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>additionalBackgroundColor</entry>
+                                                  <entry>background-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>border-bottom-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>tableBackgroundColor</entry>
+                                                  <entry>border-top-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>tableBackgroundColor</entry>
+                                                  <entry>border-left-color</entry>
+                                                  </row>
+
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for items in the list</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>border-bottom-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for a &quot;Cancel&quot;,
+                                        &quot;Clear&quot; links</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>generalLinkColor</entry>
+                                                  <entry>color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for a button</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>trimColor</entry>
+                                                  <entry>background-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+                    <table>
+                              <title>Skin parameters redefinition for a button border</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>border-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+                    <table>
+                              <title>Skin parameters redefinition for a highlighted button</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>trimColor</entry>
+                                                  <entry>background-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>selectControlColor</entry>
+                                                  <entry>border-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for a pressed button</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>selectControlColor</entry>
+                                                  <entry>border-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>additionalBackgroundColor</entry>
+                                                  <entry>background-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for &quot;Upload&quot;,
+                                        &quot;Clean&quot; buttons</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>generalTextColor</entry>
+                                                  <entry>color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+                    <table>
+                              <title>Skin parameters redefinition for a disabled
+                                        &quot;Start&quot; button icon</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+                    <table>
+                              <title>Skin parameters redefinition for a disabled
+                                        &quot;Clear&quot; button icon</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+          </section>
+
+          <section>
+                    <title>Definition of Custom Style Classes</title>
+
+                    <para>The following picture illustrates how CSS classes define styles for
+                              component elements.</para>
+                    <figure>
+                              <title>Classes names</title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload_cn.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+                    <figure>
+                              <title>Classes names</title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload_cn2.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+
+                    <table id="fileUploadCN">
+                              <title>Classes names that define a component representation</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Class name</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>rich-fileupload-list-decor</entry>
+                                                  <entry>Defines styles for a wrapper
+                                                  &lt;div&gt; element of
+                                                  a fileUpload</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-font</entry>
+                                                  <entry>Defines styles for a font of
+                                                  buttons and items</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-toolbar-decor</entry>
+                                                  <entry>Defines styles for a
+                                                  toolbar</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry> rich-fileupload-list-overflow</entry>
+                                                  <entry>Defines styles for a list of
+                                                  files</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+
+                    <table>
+                              <title>Classes names that define buttons representation</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Class name</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>rich-fileupload-button</entry>
+                                                  <entry>Defines styles for a
+                                                  buttons</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-button-border</entry>
+                                                  <entry>Defines styles for a border of
+                                                  buttons</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-button-light</entry>
+                                                  <entry>Defines styles for a highlight of
+                                                  button</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-button-press</entry>
+                                                  <entry>Defines styles for a pressed
+                                                  button</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-button-dis</entry>
+                                                  <entry>Defines styles for a disabled
+                                                  button</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-button-selection</entry>
+                                                  <entry>Defines styles for
+                                                  &quot;Upload&quot;,
+                                                  &quot;Clean&quot;
+                                                  buttons</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Classes names that define the representation of the buttons'
+                                        icons</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Class name</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico</entry>
+                                                  <entry>Defines styles for an
+                                                  icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-add</entry>
+                                                  <entry>Defines styles for a
+                                                  &quot;Add&quot; button
+                                                  icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-start</entry>
+                                                  <entry>Defines styles for a
+                                                  &quot;Upload&quot;
+                                                  button icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-stop</entry>
+                                                  <entry>Defines styles for a
+                                                  &quot;Stop&quot;
+                                                  button icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-clear</entry>
+                                                  <entry>Defines styles for a
+                                                  &quot;Clear&quot;
+                                                  button icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-add-dis</entry>
+                                                  <entry>Defines styles for a disabled
+                                                  &quot;Add&quot; button
+                                                  icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-start-dis</entry>
+                                                  <entry>Defines styles for a disabled
+                                                  &quot;Upload&quot;
+                                                  button icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-clear-dis</entry>
+                                                  <entry>Defines styles for a disabled
+                                                  &quot;Clear&quot;
+                                                  button icon</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Classes names that define list items representation</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Class name</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>rich-fileupload-table-td</entry>
+                                                  <entry>Defines styles for a wrapper
+                                                  &lt;td&gt; element of
+                                                  a list items</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-anc</entry>
+                                                  <entry>Defines styles for
+                                                  &quot;Cancel&quot;,
+                                                  &quot;Stop&quot;,
+                                                  &quot;Clear&quot;
+                                                  links</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+
+                    <para>In order to redefine styles for all <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> components on a page using CSS, it&apos;s enough to
+                              create classes with the same names (possible classes could be found in
+                              the tables <link linkend="fileUploadCN"> above</link>) and define
+                              necessary properties in them. </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="CSS"><![CDATA[...
 .rich-fileupload-anc{
     font-weight:bold;
     text-decoration:none;
 }
-...]]></programlisting>  
-        
-        <para>This is the result:</para>
-        
-        <figure>
-            <title>Redefinition styles with predefined classes</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/fileUpload_pc.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>
-        
-        <para>In the example above the font weight and text decoration for &quot;Cancel&quot; and &quot;Clear&quot; links are changed.</para>
-        
-        <para>
-            Also it&apos;s possible to change styles of particular <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component. 
-            In this case you should create own style classes and use them in the corresponding <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> 
-            <emphasis><property>styleClass</property></emphasis> attributes. An example is placed below:
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="CSS"><![CDATA[...
+...]]></programlisting>
+
+                    <para>This is the result:</para>
+
+                    <figure>
+                              <title>Redefinition styles with predefined classes</title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload_pc.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+
+                    <para>In the example above the font weight and text decoration for
+                              &quot;Cancel&quot; and &quot;Clear&quot; links are
+                              changed.</para>
+
+                    <para> Also it&apos;s possible to change styles of particular <emphasis
+                                        role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component. In this case you should create own style
+                              classes and use them in the corresponding <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis>
+                              <emphasis>
+                                        <property>styleClass</property>
+                              </emphasis> attributes. An example is placed below: </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="CSS"><![CDATA[...
 .myClass{
         font-weight:bold;
 }
-...]]></programlisting>  
-        <para>
-            The <emphasis><property>&quot;addButtonClass&quot;</property></emphasis> attribute for 
-            <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> is defined as it&apos;s shown in the example below:
-        </para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[<rich:fileUpload ... addButtonClass="myClass"/>
-]]></programlisting>    
-        
-        <para>This is the result:</para>
-        <figure>
-            <title>Redefinition styles with own classes and <emphasis><property>styleClass</property></emphasis> attributes</title>
-            <mediaobject>
-                <imageobject>
-                    <imagedata fileref="images/fileUpload_oc.png"/>
-                </imageobject>
-            </mediaobject>
-        </figure>  
-        
-        <para>As it could be seen on the picture above, the font style for &quot;Add&quot; button is changed.</para>
-                       
-    </section>
- 
-    <section>
-        <title>Relevant Resources Links</title>
-        <para><ulink
-            url="http://livedemo.exadel.com/richfaces-demo/richfaces/fileUpload.jsf?c=fileUpload"
-                >Here</ulink> you can see an example of <emphasis role="bold">
-                <property>&lt;rich:fileUpload&gt;</property>
-            </emphasis> usage and sources for the given example. </para>
-    </section>
+...]]></programlisting>
+                    <para> The <emphasis>
+                                        <property>&quot;addButtonClass&quot;</property>
+                              </emphasis> attribute for <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> is defined as it&apos;s shown in the example below: </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[<rich:fileUpload ... addButtonClass="myClass"/>
+]]></programlisting>
+
+                    <para>This is the result:</para>
+                    <figure>
+                              <title>Redefinition styles with own classes and <emphasis>
+                                                  <property>styleClass</property>
+                                        </emphasis> attributes</title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload_oc.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+
+                    <para>As it could be seen on the picture above, the font style for
+                              &quot;Add&quot; button is changed.</para>
+
+          </section>
+
+          <section>
+                    <title>Relevant Resources Links</title>
+                    <para><ulink
+                                        url="http://livedemo.exadel.com/richfaces-demo/richfaces/fileUpload.jsf?c=fileUpload"
+                                        >Here</ulink> you can see an example of <emphasis
+                                        role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> usage and sources for the given example. </para>
+          </section>
 
 </section>
-
 <!--para>In order to encode form around <emphasis role="bold">
     <property>&lt;rich:fileUpload&gt;</property>
     </emphasis> component you could confine this area by <emphasis role="bold">
@@ -1220,4 +1603,4 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
     <imagedata fileref="images/fileUpload11.png"/>
     </imageobject>
     </mediaobject>
-    </figure-->      
+    </figure-->
