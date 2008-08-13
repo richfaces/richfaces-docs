@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section id="taghandler" xreflabel="taghandler">
-<?dbhtml filename="taghandler.html"?>
-<sectioninfo>
-<keywordset>
-<keyword>taghandler</keyword>
-<keyword>UI</keyword>
-<keyword>CDK</keyword>
-<keyword>Guide</keyword>
-</keywordset>
-</sectioninfo>
-<title>Creating tag classes and descriptor for JSP and Facelets</title>
-<para>
-Creating a JSP tag handler and TLD
-</para>
+	<?dbhtml filename="taghandler.html"?>
+	<sectioninfo>
+		<keywordset>
+			<keyword>taghandler</keyword>
+			<keyword>UI</keyword>
+			<keyword>CDK</keyword>
+			<keyword>Guide</keyword>
+		</keywordset>
+	</sectioninfo>
+	<title>Creating tag class and descriptors for JSP and Facelets</title>
+	<para>
+		The last step is to create a JSP tag handler and descriptors. 
+	</para>
+	<para>
+		JSF components are not inherently tied to JSP. You will use a custom tag (a.k.a action) on the JSP page to 
+		indicate which JSF <code>UIComponent</code> is needed for the application.
+		The custom tag has a corresponding tag handler class, which is responsible for creating the <code>UIComponent</code> 
+		and transferring each declarative JSP tag attribute to the <code>UIComponent</code> instance. 
+		So you need a custom <property>tag class</property> that returns 
+		the component type (<code>org.mycompany.InputDate</code>) and the renderer (<code>org.mycompany.InputDateRenderer</code>).
+	</para>
+	<para>
+		After the <property>tag class</property> creation you need to register it in the descriptors: 
+		in the <property>TLD (Tag Library Descriptor)</property> file for JSP pages and
+		in the <property>inputDate.taglib.xml</property> file for Facelets.
+	</para>
+	<para>
+		But you know that <property>inputDate.xml</property> configuration file generates 
+		the JSP tag handler and descriptors instead of you!
+		Just proceed to the <property>inputDate</property> folder and launch the following command:
+	</para>
+	<programlisting role="XML"><![CDATA[mvn clean install]]></programlisting>
+	<para>
+		After the generation process you will find in the <property>inputDate/target/classes/META-INF</property> folder
+		<property>inputDate.tld</property>, <property>inputDate.taglib.xml</property>, <property>resources-config.xml</property>,
+		and <property>faces-config.xml</property> files. 
+	</para>
+	<para>
+		The <code>InputDateTag</code> class could be found in the <property>inputDate/target/classes/org/mycompany/taglib</property>.
+	</para>
+	<para>
+		Well done! The <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component is created.
+		The <property>inputDate-1.0-SNAPSHOT.jar</property> for the component usage could be found in the <property>inputDate/target</property> folder.
+	</para>
 </section>

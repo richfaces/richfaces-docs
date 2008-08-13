@@ -99,24 +99,51 @@
 		<para>
 			With the help of the <emphasis role="bold"><property>&lt;cacheable&gt;</property></emphasis> element 
 			you could manage whether the resource is cached or not. 
-			If the value of this element is &quot;true&quot;, the resource is cached on the server and also on the client sides.
+			If the value of this element is &quot;true&quot;, the resource is cached on the server and also on the client sides:
 		</para>
-
-				<!--programlisting role="XML"><![CDATA[...
+		<programlisting role="XML"><![CDATA[...
+<resource class="org.mycompany.renderkit.html.images.inputDate">
+	<name>org.mycompany.renderkit.html.images.inputDate</name>
+	<cacheable>true</cacheable>
+</resource>
+...]]></programlisting>
+		<para>
+			You could start a session for the some resource 
+			using <emphasis role="bold"><property>&lt;session-aware&gt;</property></emphasis> element set to &quot;true&quot;:
+		</para>
+		<programlisting role="XML"><![CDATA[...
 <resource>
-	<name></name>
-	<path></path>
-	<cacheable></cacheable>
-	<session-aware></session-aware>
+	<name>org/mycompany/renderkit/html/scripts/inputDate.js</name>
+	<path>org/mycompany/renderkit/html/scripts/inputDate.js</path>
+	<session-aware>true</session-aware>
+</resource>
+...]]></programlisting>
+		<para>
+			Sometimes the definition of content type of the resource is needed, so it is possible to add 
+			the <emphasis role="bold"><property>&lt;content-type&gt;</property></emphasis> element with the proper MIME type.
+		</para>
+		<para>
+			You could also define a custom <property>renderer</property>  for the resource:
+		</para>
+		<programlisting role="XML"><![CDATA[...
+<resource>
+	<name>org/mycompany/renderkit/html/scripts/inputDate.js</name>
+	<path>org/mycompany/renderkit/html/scripts/inputDate.js</path>
+	<renderer class="org.ajax4jsf.resource.ScriptRenderer"/>
+</resource>
+...]]></programlisting>
+		<para>
+			It is possible to specify a MIME type for the resource <property>renderer</property> 
+			using the <emphasis role="bold"><property>&lt;content-type&gt;</property></emphasis> element.
+		</para>
+	
+
+<!--
+TBD
 	<property>
 		<name></name>
 	</property>
-	<content-type></content-type>
-	<renderer>
-		<content-type></content-type>
-	</renderer>
-</resource>		
-...]]></programlisting-->
+-->
 
 	</section>
 </section>
