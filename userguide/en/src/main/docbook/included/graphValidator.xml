@@ -81,7 +81,57 @@
 HtmlgraphValidator mygraphValidator= new HtmlgraphValidator();
 ...
 ]]></programlisting>
+    
+    
   </section>
+  
+  <para> The<emphasis role="bold">
+    <property>&lt;rich:graphValidator&gt;</property></emphasis>component behaves basically the same way as the <emphasis role="bold">
+    <property>&lt;rich:beanValidator&gt;</property></emphasis>
+
+    The deference between these two components is that in order to validate some input data with a  <emphasis role="bold">
+      <property>&lt;rich:beanValidator&gt;</property></emphasis> component, it should be a nested element of an input component,  whereas <emphasis role="bold">
+        <property>&lt;rich:graphValidator&gt;</property></emphasis> wraps multiple input components and validates the data received from them.
+  </para>
+
+  <para>The following example demonstrate a pattern of  how the <emphasis role="bold">
+    <property>&lt;rich:graphValidator&gt;</property></emphasis> can be used.</para>
+  <programlisting role="XML"><![CDATA[...
+                <rich:graphValidator>
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Name:" />
+                        <h:inputText value="#{validationBean.name}" id="name">
+                            <f:validateLength minimum="2" />
+                        </h:inputText>
+                        <rich:message for="name" />
+                        <h:outputText value="Email:" />
+                        <h:inputText value="#{validationBean.email}" id="email" />
+                        <rich:message for="email" />
+                    </h:panelGrid>
+                </rich:graphValidator>
+                ...
+]]></programlisting>
+  
+  <para>The data validation can be also performed using Hibernate Validator, the same way as it is done with <emphasis role="bold">
+    <property>&lt;rich:beanValidator&gt;</property></emphasis>. </para>
+  
 
 
+  <para>The components&apos;s architecture provides an option to bind the component to a managed bean, which is done with the <emphasis >
+    <property>&lt;value&gt;</property></emphasis> attribute. The attribute ensures that the entered  data is valid after the model is updated by revalidating the bean properties.</para>
+  <para>Please look at the example below.</para>
+  
+  
+  <programlisting role="XML"><![CDATA[...
+  <rich:graphValidator value="#{dayStatistics}">
+    <h:outputText value="#{pt.title}" /><
+     <rich:inputNumberSpinne minValue="0" maxValue="24" value="#{pt.time}" id="time">
+       </rich:inputNumberSpinner>
+         <rich:message for="time" />  
+</rich:graphValidator>
+                ...
+]]></programlisting>
+  
+
+</section>
 
