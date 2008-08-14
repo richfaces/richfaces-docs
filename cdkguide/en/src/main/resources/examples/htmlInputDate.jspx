@@ -14,18 +14,17 @@
 	<f:clientid var="clientId"/>
 	<h:styles>/org/mycompany/renderkit/html/css/inputDate.xcss</h:styles>
 	<f:resource	name="/org/mycompany/renderkit/html/images/inputDate.png" var="icon" />
-	<c:object var="caption" type="javax.faces.component.UIComponent" />
-		<jsp:scriptlet>
-			<![CDATA[
-			caption = component.getFacet("caption");
-		if(caption !=null && caption.isRendered()) {]]>
-		</jsp:scriptlet>
+	<jsp:scriptlet>
+		<![CDATA[if(component.getFacet("caption")!=null && component.getFacet("caption").isRendered()) {]]>
+	</jsp:scriptlet>        
 	<div id="#{clientId}_caption" class="my-inputDate-caption #{component.attributes['captionClass']}">
-	              <f:insertComponent value="#{caption}" />
-        	</div>
-		<jsp:scriptlet>
-			<![CDATA[}]]>
-		</jsp:scriptlet>		
+		<u:insertFacet name="caption" />
+	</div>
+	<jsp:scriptlet>
+		<![CDATA[
+			}
+		]]>
+	</jsp:scriptlet>
 	<div id="#{clientId}" title="#{value}" x:passThruWithExclusions="value,name,type,id">
 	   	<input  id="#{clientId}" 
 				name="#{clientId}"

@@ -49,24 +49,10 @@
 		<para>
 			<emphasis role="bold"><property>&lt;div&gt;</property></emphasis>-wrapper element with 
 			<emphasis><property>&quot;title&quot;</property></emphasis>,
-<emphasis><property>&quot;value&quot;</property></emphasis>,
-<emphasis><property>&quot;name&quot;</property></emphasis>,
-<emphasis><property>&quot;type&quot;</property></emphasis>,
 <emphasis><property>&quot;id&quot;</property></emphasis> attributes and with 
 the<emphasis><property>&quot;caption&quot;</property></emphasis> facet
 		</para>
 		   <programlisting role="XML"><![CDATA[...
-<c:object var="caption" type="javax.faces.component.UIComponent"/>
-<jsp:scriptlet>
-	caption = component.getFacet("caption");
-	if(caption !=null && caption.isRendered()) {
-</jsp:scriptlet>
-<div id="#{clientId}_caption" class="my-inputDate-caption #{component.attributes['captionClass']}">
-	<f:insertComponent value="#{caption}"/>
-</div>
-<jsp:scriptlet>
-	}
-</jsp:scriptlet>
 <div id="#{clientId}" title="#{value}" x:passThruWithExclusions="value,name,type,id">
 	...
 </div>
@@ -110,15 +96,10 @@ It is possible to use the <emphasis><property>&quot;icon&quot;</property></empha
 	</listitem>
 </itemizedlist>
 <para>
-	The <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component uses styles and scripts that should 
-	be defined in the template with the help of <emphasis role="bold"><property>&lt;h:styles&gt;</property></emphasis> and
-	<emphasis role="bold"><property>&lt;h:scripts&gt;</property></emphasis> tags: 
+	The <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component uses styles that should 
+	be defined in the template with the help of <emphasis role="bold"><property>&lt;h:styles&gt;</property></emphasis> tag: 
 </para>
 	<programlisting role="XML"><![CDATA[...
-<h:scripts>
-	new org.ajax4jsf.javascript.PrototypeScript(),
-	/org/mycompany/renderkit/html/scripts/inputDate.js
-</h:scripts>
 <h:styles>/org/mycompany/renderkit/html/css/inputDate.xcss</h:styles>
 ...]]></programlisting>
 <para>

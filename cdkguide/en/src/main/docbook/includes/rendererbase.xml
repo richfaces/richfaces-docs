@@ -14,8 +14,34 @@
 	After the component tree is restored on the <property>Restore View Phase </property>, 
 	each component in the tree extracts its new value from the request parameters
 	by using its <code>decode()</code> method. Then the value is stored locally on the component.
-	So in the <code>InputDateRendererBase</code> class you need to override
-	the <code>decode()</code> method:
+	</para>
+	 <para>
+	In order to create <code>InputDateRendererBase</code> class you should proceed to the 
+	<property>src/main/java/org/mycompany/renderkit</property>
+	directory and create this class there:
+    </para>
+    <programlisting role="JAVA"><![CDATA[package org.mycompany.renderkit;
+import java.io.IOException;
+import java.util.Map;
+import java.util.TimeZone;
+import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import javax.faces.convert.ConverterException;
+import javax.faces.convert.DateTimeConverter;
+import org.ajax4jsf.renderkit.HeaderResourcesRendererBase;
+import org.mycompany.component.UIInputDate;
+
+public abstract class InputDateRendererBase extends HeaderResourcesRendererBase {
+	...
+}]]></programlisting>
+<para>
+	The <code>InputDateRendererBase</code> class extends a <code>HeaderResourcesRendererBase</code>
+	class. In the <code>HeaderResourcesRendererBase</code> class all the <code>encode()</code> methods for 
+	the right resources encoding
+	are already realized, so in the <code>InputDateRendererBase</code> class you need to override
+	the <code>decode()</code> method only:
     </para>
 <programlisting role="JAVA"><![CDATA[ ...
 public void decode(FacesContext context, UIComponent component){
