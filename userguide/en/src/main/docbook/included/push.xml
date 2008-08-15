@@ -1,78 +1,80 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <section>
-  <sectioninfo>
-    <keywordset>
-      <keyword>a4j:push</keyword>
-    </keywordset>
-  </sectioninfo>
-  <table>
-    <title>Component identification parameters </title>
-    <tgroup cols="2">
-      <thead>
-        <row>
-          <entry>Name</entry>
-          <entry>Value</entry>
-        </row>
-      </thead>
-      <tbody>
-        <row>
-          <entry>component-type</entry>
-          <entry>org.ajax4jsf.Push</entry>
-        </row>
-        <row>
-          <entry>component-family</entry>
-          <entry>org.ajax4jsf.components.AjaxPush</entry>
-        </row>
-        <row>
-          <entry>component-class</entry>
-          <entry>org.ajax4jsf.component.html.AjaxPush</entry>
-        </row>
-        <row>
-          <entry>renderer-type</entry>
-          <entry>org.ajax4jsf.components.AjaxPushRenderer</entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
+          <sectioninfo>
+                    <keywordset>
+                              <keyword>a4j:push</keyword>
+                    </keywordset>
+          </sectioninfo>
+          <table>
+                    <title>Component identification parameters </title>
+                    <tgroup cols="2">
+                              <thead>
+                                        <row>
+                                                  <entry>Name</entry>
+                                                  <entry>Value</entry>
+                                        </row>
+                              </thead>
+                              <tbody>
+                                        <row>
+                                                  <entry>component-type</entry>
+                                                  <entry>org.ajax4jsf.Push</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>component-family</entry>
+                                                  <entry>org.ajax4jsf.components.AjaxPush</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>component-class</entry>
+                                                  <entry>org.ajax4jsf.component.html.AjaxPush</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>renderer-type</entry>
+                                                  <entry>org.ajax4jsf.components.AjaxPushRenderer</entry>
+                                        </row>
+                              </tbody>
+                    </tgroup>
+          </table>
 
-  <section>
-    <title>Creating on a page</title>
-    <programlisting role="XML"><![CDATA[<a4j:push reRender="msg" eventProducer="#{messageBean.addListener}" interval="3000"/>]]></programlisting>
-  </section>
+          <section>
+                    <title>Creating on a page</title>
+                    <programlisting role="XML"><![CDATA[<a4j:push reRender="msg" eventProducer="#{messageBean.addListener}" interval="3000"/>]]></programlisting>
+          </section>
 
-  <section>
-    <title>Creating the Component Dynamically Using Java</title>
-    <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.AjaxPush;
+          <section>
+                    <title>Creating the Component Dynamically Using Java</title>
+                    <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.AjaxPush;
 ...
 AjaxPush myPush = new AjaxPush();
 ...]]></programlisting>
-  </section>
+          </section>
 
 
-  <section>
-    <title>Key attributes and ways of usage</title>
-    <para>The <emphasis role="bold">
-        <property>&lt;a4j:push&gt;</property>
-      </emphasis> implements reverse Ajax technique. </para>
+          <section>
+                    <title>Key attributes and ways of usage</title>
+                    <para>The <emphasis role="bold">
+                                        <property>&lt;a4j:push&gt;</property>
+                              </emphasis> implements reverse Ajax technique. </para>
 
-    <para>The bean, for example, could be subscribed to Java Messaging Service (<ulink
-        url="http://java.sun.com/products/jms/">JMS</ulink>) topic or it could be implemented as
-      Message Driven Bean (MDB) in order to send a message to the <emphasis role="bold">
-        <property>&lt;a4j:push&gt;</property>
-      </emphasis> component about an event presence. In the presence of the event some action
-      occurs.</para>
+                    <para>The bean, for example, could be subscribed to Java Messaging Service
+                                        (<ulink url="http://java.sun.com/products/jms/">JMS</ulink>)
+                              topic or it could be implemented as Message Driven Bean (MDB) in order
+                              to send a message to the <emphasis role="bold">
+                                        <property>&lt;a4j:push&gt;</property>
+                              </emphasis> component about an event presence. In the presence of the
+                              event some action occurs.</para>
 
-    <para>Thus, a work paradigm with the <emphasis role="bold">
-        <property>&lt;a4j:push&gt;</property>
-      </emphasis> component corresponds to an anisochronous model, but not to pools as for <emphasis
-        role="bold">
-        <property>&lt;a4j:poll&gt;</property>
-      </emphasis> <link linkend="poll">component</link>. See the simplest example below:</para>
+                    <para>Thus, a work paradigm with the <emphasis role="bold">
+                                        <property>&lt;a4j:push&gt;</property>
+                              </emphasis> component corresponds to an anisochronous model, but not
+                              to pools as for <emphasis role="bold">
+                                        <property>&lt;a4j:poll&gt;</property>
+                              </emphasis>
+                              <link linkend="poll">component</link>. See the simplest example below:</para>
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="JAVA"><![CDATA[...
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="JAVA"><![CDATA[...
 class MyPushEventListener implements PushEventListener {
     public void onEvent(EventObject evt) {
         System.out.println(evt.getSource());
@@ -81,11 +83,12 @@ class MyPushEventListener implements PushEventListener {
 ...
 ]]></programlisting>
 
-    <para>Code for <code>EventListener</code> registration in the bean is placed below:</para>
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="JAVA"><![CDATA[...
+                    <para>Code for <code>EventListener</code> registration in the bean is placed
+                              below:</para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="JAVA"><![CDATA[...
 public void addListener(EventListener listener) {
 synchronized (listener) {
         if (this.listener != listener) {
@@ -94,12 +97,12 @@ synchronized (listener) {
 ...
 ]]></programlisting>
 
-    <para>A page code for this example is placed below.</para>
+                    <para>A page code for this example is placed below.</para>
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="XML"><![CDATA[...
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
     <a4j:status startText="in progress" stopText="done"/>
      <a4j:form>
         <a4j:region>
@@ -115,32 +118,37 @@ synchronized (listener) {
 ... 
 ]]></programlisting>
 
-    <para>The example shows how date is updated on a page in compliance with data taken from a
-      server. In the example <emphasis>
-        <property>&quot;interval&quot;</property>
-      </emphasis> attribute has value &quot;2000&quot;. This attribute defines an interval
-      in milliseconds between the previous response and the next request. Default value is set to
-      &quot;1000&quot; milliseconds (1 second). It&apos;s possible to set value equal to
-      &quot;0&quot;. In this case connection is permanent. </para>
-    <para>The <emphasis>
-        <property>&quot;timeout&quot;</property>
-      </emphasis> attribute defines response waiting time in milliseconds. If a response
-      isn&apos;t received during this period a connection is aborted and the next request is
-      sent. Default value for <emphasis>
-        <property>&quot;timeout&quot;</property>
-      </emphasis> attribute isn&apos;t set. Usage of <emphasis>
-        <property>&quot;interval&quot;</property>
-      </emphasis> and <emphasis>
-        <property>&quot;timeout&quot;</property>
-      </emphasis> attributes gives an opportunity to set short polls of queue state or long
-      connections, or permanent connection.</para>
+                    <para>The example shows how date is updated on a page in compliance with data
+                              taken from a server. In the example <emphasis>
+                                        <property>&quot;interval&quot;</property>
+                              </emphasis> attribute has value &quot;2000&quot;. This
+                              attribute defines an interval in milliseconds between the previous
+                              response and the next request. Default value is set to
+                              &quot;1000&quot; milliseconds (1 second). It&apos;s
+                              possible to set value equal to &quot;0&quot;. In this case
+                              connection is permanent. </para>
+                    <para>The <emphasis>
+                                        <property>&quot;timeout&quot;</property>
+                              </emphasis> attribute defines response waiting time in milliseconds.
+                              If a response isn&apos;t received during this period a connection
+                              is aborted and the next request is sent. Default value for <emphasis>
+                                        <property>&quot;timeout&quot;</property>
+                              </emphasis> attribute isn&apos;t set. Usage of <emphasis>
+                                        <property>&quot;interval&quot;</property>
+                              </emphasis> and <emphasis>
+                                        <property>&quot;timeout&quot;</property>
+                              </emphasis> attributes gives an opportunity to set short polls of
+                              queue state or long connections.</para>
 
-    <note><title>Note:</title><para> The form around the <emphasis role="bold">
-        <property>&lt;a4j:push&gt;</property>
-      </emphasis> component is required.</para></note>
-  </section>
+                    <note>
+                              <title>Note:</title>
+                              <para> The form around the <emphasis role="bold">
+                                                  <property>&lt;a4j:push&gt;</property>
+                                        </emphasis> component is required.</para>
+                    </note>
+          </section>
 
-  <!--section>
+          <!--section>
     <title>Key attributes and ways of usage</title>
 	<para>The main difference between <emphasis role="bold"><property>&lt;a4j:push&gt;</property></emphasis>and
 	<emphasis role="bold"><property>&lt;a4j:poll&gt;</property></emphasis> components
@@ -179,15 +187,17 @@ synchronized (listener) {
 Thus, component 'push' uses asynchronous model instead of polls.
 </para>
   </section-->
-  <para>
-    Information about the <emphasis><property>&quot;process&quot;</property></emphasis> attribute usage you can find <link linkend="process">here</link>.
-  </para>
-  <section>
-    <title>Relevant resources links</title>
-    <para>
-      <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/push.jsf?c=push">Here</ulink>
-      you can found some additional information for <emphasis role="bold">
-        <property>&lt;a4j:push&gt;</property>
-      </emphasis> component usage. </para>
-  </section>
+          <para> Information about the <emphasis>
+                              <property>&quot;process&quot;</property>
+                    </emphasis> attribute usage you can find <link linkend="process">here</link>. </para>
+          <section>
+                    <title>Relevant resources links</title>
+                    <para>
+                              <ulink
+                                        url="http://livedemo.exadel.com/richfaces-demo/richfaces/push.jsf?c=push"
+                                        >Here</ulink> you can found some additional information for
+                                        <emphasis role="bold">
+                                        <property>&lt;a4j:push&gt;</property>
+                              </emphasis> component usage. </para>
+          </section>
 </section>
