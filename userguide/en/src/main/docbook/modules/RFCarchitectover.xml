@@ -1291,27 +1291,37 @@
 		<section id="process">
 			<title>Decide what to process</title>
 			<para>
-				In order to process defined components you could use the
-				<emphasis>
-					<property>&quot;process&quot;</property>
-				</emphasis>
-				attribute.
+				The <emphasis><property>&quot;process&quot;</property></emphasis> attribute allows to 
+				define the ids of components to be processed together with the component which is marked as <property>ajaxSingle</property> or wrapped to region. 
 			</para>
 			<para>
-				The
-				<emphasis>
-					<property>&quot;process&quot;</property>
-				</emphasis>
-				attribute defines the ids of the components to be
-				processed together with the component which contains
-				this attribute. In order to define processed components
-				you could set theirs ids into the value of the
-				<emphasis>
-					<property>&quot;process&quot;</property>
-				</emphasis>
-				attribute.
+				You could make use of the <emphasis><property>&quot;process&quot;</property></emphasis> attribute when you need to process only two
+				components in the different parts of view.
 			</para>
 			<para>
+				Imagine you need to process only two input fields but not all the view.
+				If you wrap the first input to region or make <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> component  
+				with <code>ajaxSingle=&quot;true&quot;</code> nested the second input will not be processed.
+			</para>
+			<para>
+				Here is a simple solution:
+			</para>
+			<programlisting role="XML"><![CDATA[...
+<h:inputText value="#{bean.name}" id="name">
+	<a4j:support ajaxSingle="true" process="email" event="onblur" reRender="someOut"/>
+</h:inputText>
+<h:inputTextarea value="#{bean.description}" id="desc" />
+<h:inputText value="#{bean.email}" id="email">
+	<a4j:support ajaxSingle="true" process="name" event="onblur" reRender="someOut"/>
+</h:inputText>
+...]]></programlisting>
+			<para>
+				In the example above when the input field with the <code>id=&quot;name&quot;</code> looses focus, an AJAX request is sent. 
+				So only two input fields (with <code>id=&quot;name&quot;</code> and additionally with <code>id=&quot;email&quot;</code>) 
+				are processed: decoding, conversion/validation, value applying phases are executed. 
+				The input field with the <code>id=&quot;email&quot;</code> is handled the same way on blur event.
+			</para>
+			<!--para>
 				The
 				<emphasis>
 					<property>&quot;process&quot;</property>
@@ -1379,7 +1389,7 @@
 					<property>&lt;h:outputText&gt;</property>
 				</emphasis>
 				.
-			</para>
+			</para-->
 		</section>
 	</section>
 
