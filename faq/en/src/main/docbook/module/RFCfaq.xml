@@ -1875,8 +1875,8 @@ public class bean {
 
           <section id="OneRowSelectionInDataTable">
                     <?dbhtml filename="HighlightRowDataTable.html"?>
-                    <title>How to select one row of a dataTable by clicking on it, even if clicked
-                              in an inputText of this row?</title>
+                    <title>How to select one row of a &lt;rich:dataTable&gt; by clicking on it, even if clicked
+                              in an &lt;h:inputText&gt; of this row?</title>
                     <para>In order to select one row of a dataTable by clicking on it you could use
                               JavaScript function described below. </para>
                     <para>
@@ -1897,7 +1897,7 @@ public class bean {
 </script>                  
 ...]]></programlisting>
                     <para>Then you could use <emphasis role="bold">
-                                        <property>a4j:support</property>
+                                        <property>&lt;a4j:support&gt;</property>
                               </emphasis> with <emphasis>
                                         <property>&quot;event&quot;</property>
                               </emphasis> and <emphasis>
@@ -2610,6 +2610,60 @@ public class TableBackingRendered implements Serializable {
         <param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
         <param-value>true</param-value>
 </context-param>
+...]]></programlisting>
+          </section>
+	  <section id="ajaxCookie">
+                    <?dbhtml filename="ajaxCookie.html"?>
+                    <title>How to add cookie in an AJAX Respond?</title>
+		<para> 
+			In order to add cookie in an AJAX Respond you could use bean described below.
+		</para>
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+                    <programlisting role="JAVA"><![CDATA[...
+public class CookieBean {
+	
+	private String testCookie = null;
+	
+	public String setTestCookie() {
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
+		Cookie cookie = new Cookie("test", "Setted at time " + System.currentTimeMillis());
+		cookie.setMaxAge(60 * 60 * 24 * 365);
+		response.addCookie(cookie);
+		return "verify_cookie";
+	}
+
+	public String getTestCookie() {
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+		Cookie[] cookies = request.getCookies();
+		for (int i = 0; i < cookies.length; i++) {
+			if (cookies[i].getName().equals("test")) {
+				testCookie = cookies[i].getValue();
+				return testCookie;
+			}
+		}
+		return null;
+	}
+}
+...]]></programlisting>
+	<para>
+		Then you could try to set cookie with AJAX Respond as it is shown in the following example. 
+		After the cookie &quot;test&quot; is set the value of this cookie appears on a page.
+	</para>
+	<para>
+		<emphasis role="bold">Example:</emphasis>
+	</para>
+        <programlisting role="XML"><![CDATA[...
+<h:form>
+	<h:outputText id="text" value="Cookie value: #{cookieBean.testCookie}"/>
+    	<br />
+ 	<a4j:commandButton action="#{cookieBean.setTestCookie}" value="Set Cookie by AJAX">
+       		<a4j:support event="oncomplete" reRender="text" />
+       	</a4j:commandButton>
+</h:form>
 ...]]></programlisting>
           </section>
 </chapter>
