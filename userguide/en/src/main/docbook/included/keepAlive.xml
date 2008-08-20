@@ -1,84 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter>
-  <chapterinfo>
-    <keywordset>
-      <keyword>a4j:keepAlive</keyword>
-    </keywordset>
-  </chapterinfo>
-     <table>
-	  <title>Component identification parameters </title>
-      <tgroup cols="2">
-	  <thead>
-            <row>
-                  <entry>Name</entry>
-                  <entry>Value</entry>
-            </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry>component-type</entry>
-            <entry>org.ajax4jsf.components.KeepAlive</entry>
-          </row>
-          <row>
-            <entry>component-family</entry>
-            <entry>org.ajax4jsf.components.AjaxKeepAlive</entry>
-          </row>
-          <row>
-            <entry>component-class</entry>
-            <entry>org.ajax4jsf.components.AjaxKeepAlive</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  
-  <section>
-    <title>Creating the Component with a Page Tag</title>
+          <chapterinfo>
+                    <keywordset>
+                              <keyword>a4j:keepAlive</keyword>
+                    </keywordset>
+          </chapterinfo>
+          <table>
+                    <title>Tag identification parameters </title>
+                    <tgroup cols="2">
+                              <thead>
+                                        <row>
+                                                  <entry>Name</entry>
+                                                  <entry>Value</entry>
+                                        </row>
+                              </thead>
+                              <tbody>
+                                        <row>
+                                                  <entry>component-type</entry>
+                                                  <entry>org.ajax4jsf.components.KeepAlive</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>component-family</entry>
+                                                  <entry>org.ajax4jsf.components.AjaxKeepAlive</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>component-class</entry>
+                                                  <entry>org.ajax4jsf.components.AjaxKeepAlive</entry>
+                                        </row>
+                              </tbody>
+                    </tgroup>
+          </table>
 
-    <para>To create the simplest variant on a page use the following syntax:</para>
+          <section  id="a4jkalpagetag" role="updated">
+                    <title>Using the tag on a Page</title>
 
-	  <para>
-		  <emphasis role="bold">Example:</emphasis>  </para>
-		<programlisting role="XML"><![CDATA[<a4j:keepAlive beanName = "testBean"/>]]></programlisting>
-	
-  </section>
-  
-  <section>
-    <title>Creating the Component Dynamically Using Java</title>
+                    <para>To create the simplest variant on a page use the following syntax:</para>
 
-	  <para>
-		  <emphasis role="bold">Example:</emphasis>  </para>	
-
-	  <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.ajax.AjaxKeepAlive;
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[<a4j:keepAlive beanName = "testBean"/>]]></programlisting>
+                    <para>Note, that to be put into the request scope the pointed bean should be registered inside faces-config.xml file and marked with <property>org.ajax4jsf.model.KeepAlive</property> annotation.
+                    </para>
+          </section>
+          
+          <!--  There's no AjaxKeepAlive component nor AjaxKeepAlive class and it cannot be created programmatically and there's no need for that.          
+                    
+                    <section>
+                    <title>Creating the Component Dynamically Using Java</title>
+                   <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.ajax.AjaxKeepAlive;
 ...
 AjaxKeepAlive myKeepAlive = new AjaxKeepAlive();
-...
-		]]></programlisting>
-		
-  </section>
+...]]></programlisting>
+          </section>
+          -->
+          
+          <section>
+                    <title>Key attributes and ways of usage</title>
+                    <para> If a managed bean is declared with <property>request</property> scope in
+                              the configuration file with the help of <emphasis role="bold">
+                                        <property>&lt;managed-bean-scope&gt;</property>
+                              </emphasis> tag then the life-time of this bean instance is valid only
+                              for the current request. Any attempts to make a reference to the bean
+                              instance after the request end will throw in Illegal Argument
+                              Exception by the server. To avoid these kinds of Exception, component
+                                        <emphasis role="bold">
+                                        <property>&lt;a4j:keepAlive&gt;</property>
+                              </emphasis> is used to maintain the state of the whole bean object
+                              among subsequent request. </para>
 
-  <section>
-    <title>Key attributes and ways of usage</title>
-	<para>
-	  If a managed bean is declared with <property>request</property> scope in the configuration file with the help of 
-	  <emphasis role="bold"><property>&lt;managed-bean-scope&gt;</property></emphasis> tag then the life-time of
-	 this bean instance is valid only for the current request.
-	 Any attempts to make a reference to the bean instance after the request end will throw in Illegal Argument Exception by the server.
-	To avoid these kinds of Exception, component <emphasis role="bold"><property>&lt;a4j:keepAlive&gt;</property></emphasis>  
-	is used to maintain the state of the whole bean object among subsequent request. 
-	</para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
 
-	<para>
-		<emphasis role="bold">Example:</emphasis>
-	</para>
+                    <programlisting role="XML"><![CDATA[<a4j:keepAlive beanName = "#{myClass.testBean}"/>]]></programlisting>
 
-	<programlisting role="XML"><![CDATA[<a4j:keepAlive beanName = "#{myClass.testBean}"/>]]></programlisting>
-
-	<para>
-	The <emphasis><property>&quot;beanName&quot;</property></emphasis> attribute defines the request scope bean name you&apos;d like  
-	to re-use. Note that this attribute must point to a legal JSF EL expression which resolves to a managed mean instance. For example for
-	the above code the class definition may look like this one:
-	</para>
-	<programlisting role="JAVA"><![CDATA[
+                    <para> The <emphasis>
+                                        <property>&quot;beanName&quot;</property>
+                              </emphasis> attribute defines the request scope bean name
+                              you&apos;d like to re-use. Note that this attribute must point to
+                              a legal JSF EL expression which resolves to a managed mean instance.
+                              For example for the above code the class definition may look like this
+                              one: </para>
+                    <programlisting role="JAVA"><![CDATA[
 class MyClass{
 	...
 	private TestBean testBean;
@@ -86,20 +93,25 @@ class MyClass{
 	...
 }
 ]]></programlisting>
-	<para>
-		The <emphasis><property>&quot;ajaxOnly&quot;</property></emphasis> attribute 
-		declares whether the value of the bean should be available during a non-Ajax request.
-		If the value of this attribute is &quot;true&quot; a request scope bean keeps the same value during Ajax requests 
-		from the given page. If a non-Ajax request is sent from this page the bean is re-created as a regular request scope bean.
-	</para>
-  </section>
-  <section>
-    <title>Relevant resources links</title>
-    <para><ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/keepAlive.jsf?c=keepAlive"
-      >Here</ulink> you can see the example of <emphasis role="bold"
-        ><property>&lt;a4j:keepAlive&gt;</property></emphasis> usage and sources for the given example. </para>
-      <para>
-	  Some additional information about usage of component can be found <ulink url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=104989">here</ulink>.
-	</para>
-  </section>
-</chapter>   
+                    <para> The <emphasis>
+                                        <property>&quot;ajaxOnly&quot;</property>
+                              </emphasis> attribute declares whether the value of the bean should be
+                              available during a non-Ajax request. If the value of this attribute is
+                              &quot;true&quot; a request scope bean keeps the same value
+                              during Ajax requests from the given page. If a non-Ajax request is
+                              sent from this page the bean is re-created as a regular request scope
+                              bean. </para>
+          </section>
+          <section>
+                    <title>Relevant resources links</title>
+                    <para><ulink
+                                        url="http://livedemo.exadel.com/richfaces-demo/richfaces/keepAlive.jsf?c=keepAlive"
+                                        >Here</ulink> you can see the example of <emphasis
+                                        role="bold">
+                                        <property>&lt;a4j:keepAlive&gt;</property>
+                              </emphasis> usage and sources for the given example. </para>
+                    <para> Some additional information about usage of component can be found <ulink
+                                        url="http://jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=104989"
+                                        >here</ulink>. </para>
+          </section>
+</chapter>
