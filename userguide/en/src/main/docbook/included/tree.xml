@@ -657,94 +657,131 @@ nodeFace="#{data.name != 'param-value' ? 'artist' : 'album'}"
 
           <section id="tsebro" role="updated">
                     <title>Built-In Drag and Drop</title>
-                    <para>Words &quot;built-in&quot; in this context mean, 
-                              that <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component has its own attributes, that provide <property>drag-and-drop</property> capability. 
-                              These attributes can be divided into two groups: those ones which provide <property>drag</property> and those which provide <property>drop</property> operations (see the tables below).
-                    </para>
-                    
+                    <para>Words &quot;built-in&quot; in this context mean, that <emphasis
+                                        role="bold">
+                                        <property>&lt;rich:tree&gt;</property>
+                              </emphasis> component has its own attributes, that provide
+                                        <property>drag-and-drop</property> capability. These
+                              attributes can be divided into two groups: those ones which provide
+                                        <property>drag</property> and those which provide
+                                        <property>drop</property> operations (see the tables below). </para>
+
                     <table>
                               <title>Drag group</title>
                               <tgroup cols="2">
                                         <thead>
                                                   <row>
-                                                            <entry>Attribute Name</entry>
-                                                            <entry>Description</entry>
+                                                  <entry>Attribute Name</entry>
+                                                  <entry>Description</entry>
                                                   </row>
                                         </thead>
                                         <tbody>
                                                   <row>
-                                                            <entry>dragValue</entry>
-                                                            <entry>Element value drag passed into processing after a Drop event</entry>
+                                                  <entry>dragValue</entry>
+                                                  <entry>Element value drag passed into
+                                                  processing after a Drop
+                                                  event</entry>
                                                   </row>
                                                   <row>
-                                                            <entry>dragListener</entry>
-                                                            <entry>A listener that processes a Drag event</entry>
+                                                  <entry>dragListener</entry>
+                                                  <entry>A listener that processes a Drag
+                                                  event</entry>
                                                   </row>
                                                   <row>
-                                                            <entry>dragIndicator</entry>
-                                                            <entry>Id of a component that is used as a drag pointer during the drag
-                                                                      operation</entry>
+                                                  <entry>dragIndicator</entry>
+                                                  <entry>Id of a component that is used as
+                                                  a drag pointer during the drag
+                                                  operation</entry>
                                                   </row>
                                                   <row>
-                                                            <entry>dragType</entry>
-                                                            <entry>Defines a drag zone type that is used for definition of a dragged element, which
-                                                                      can be accepted by a drop zone</entry>
+                                                  <entry>dragType</entry>
+                                                  <entry>Defines a drag zone type that is
+                                                  used for definition of a
+                                                  dragged element, which can be
+                                                  accepted by a drop
+                                                  zone</entry>
                                                   </row>
                                         </tbody>
                               </tgroup>
                     </table>
-                    
+
                     <table>
                               <title>Drop group</title>
                               <tgroup cols="2">
                                         <thead>
                                                   <row>
-                                                            <entry>Attribute Name</entry>
-                                                            <entry>Description</entry>
+                                                  <entry>Attribute Name</entry>
+                                                  <entry>Description</entry>
                                                   </row>
                                         </thead>
                                         <tbody>
                                                   <row>
-                                                            <entry>dropValue</entry>
-                                                            <entry>Element value drop passed into processing after Drop events </entry>
-                                                  </row>                                          
-                                                  <row>
-                                                            <entry>dropListener</entry>
-                                                            <entry>A listener that processes a Drop event. </entry>
+                                                  <entry>dropValue</entry>
+                                                  <entry>Element value drop passed into
+                                                  processing after Drop events
+                                                  </entry>
                                                   </row>
                                                   <row>
-                                                            <entry>acceptedTypes</entry>
-                                                            <entry>Drag zone names are allowed to be processed with a Drop zone</entry>
+                                                  <entry>dropListener</entry>
+                                                  <entry>A listener that processes a Drop
+                                                  event. </entry>
                                                   </row>
                                                   <row>
-                                                            <entry>typeMapping</entry>
-                                                            <entry>Drag zones names mapping on the corresponding drop zone parameters</entry>
+                                                  <entry>acceptedTypes</entry>
+                                                  <entry>Drag zone names are allowed to be
+                                                  processed with a Drop
+                                                  zone</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>typeMapping</entry>
+                                                  <entry>Drag zones names mapping on the
+                                                  corresponding drop zone
+                                                  parameters</entry>
                                                   </row>
                                         </tbody>
                               </tgroup>
                     </table>
-                    
-                    <para>Consider <property>drag-and-drop</property> inside a tree. 
-                              All zones, which are assumed to be dragged, must be marked. 
-                              In terms of <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> these zones completely correspond to tree nodes. 
-                              So, all dragging nodes should be marked with <emphasis><property>&quot;dragType&quot;</property></emphasis> attribute, which value must be the same as value for node’s <emphasis><property>&quot;type&quot;</property></emphasis> attribute. 
-                              Then, to mark zone(-s), where the dragging node could be dropped, pass the type of dragging node to the <emphasis><property>&quot;acceptedTypes&quot;</property></emphasis> attribute of the drop zone. 
-                              It would be good to itemize, that each tree node in the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component’s structure has its own <emphasis>key</emphasis>. 
-                              Depending on how the component is used, these keys can be generated by the component itself or can be taken from the component’s data model. 
-                              Keys help to identify each node in a tree; key is what exactly being passing from one node to another in <property>drag-and-drop</property> operations. 
-                              Finally, the method binding, that will process <property>drag-and-drop</property> operation, should be pointed via <emphasis><property>&quot;dropListener&quot;</property></emphasis> attribute of the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis>.
-                    </para>
-                    <para>
-                              Chapters &quot;<link linkend="ch1">6.40 &lt;dragIndicator&gt;</link>&quot; and &quot;<link linkend="dndParam">6.39 &lt;dndParam&gt;</link>&quot; describes how to apply visual element, that show some additional information (e.g. dragging item name) while operating with <property>drag-and-drop</property>.
-                    </para>
-                    <para>
-                              Page code, that describes a tree with built in <property>drag-and-drop</property> in the way it is considered, is shown below.
-                    </para>
-                    
+
+                    <para>Consider <property>drag-and-drop</property> inside a tree. All zones,
+                              which are assumed to be dragged, must be marked. In terms of <emphasis
+                                        role="bold">
+                                        <property>&lt;rich:tree&gt;</property>
+                              </emphasis> these zones completely correspond to tree nodes. So, all
+                              dragging nodes should be marked with <emphasis>
+                                        <property>&quot;dragType&quot;</property>
+                              </emphasis> attribute. 
+                              Then, to mark zone(-s), where the dragging node
+                              could be dropped, pass the type of dragging node to the <emphasis>
+                                        <property>&quot;acceptedTypes&quot;</property>
+                              </emphasis> attribute of the drop zone. It would be good to itemize,
+                              that each tree node in the <emphasis role="bold">
+                                        <property>&lt;rich:tree&gt;</property>
+                              </emphasis> component’s structure has its own
+                              <emphasis>key</emphasis>. Depending on how the component is used,
+                              these keys can be generated by the component itself or can be taken
+                              from the component’s data model. Keys help to identify each node in a
+                              tree; key is what exactly being passing from one node to another in
+                                        <property>drag-and-drop</property> operations. Finally, the
+                              method binding, that will process <property>drag-and-drop</property>
+                              operation, should be pointed via <emphasis>
+                                        <property>&quot;dropListener&quot;</property>
+                              </emphasis> attribute of the <emphasis role="bold">
+                                        <property>&lt;rich:tree&gt;</property>
+                              </emphasis>. </para>
+                    <para> Chapters &quot;<link linkend="ch1">6.40
+                              &lt;dragIndicator&gt;</link>&quot; and &quot;<link
+                                        linkend="dndParam">6.39
+                              &lt;dndParam&gt;</link>&quot; describes how to apply
+                              visual element, that show some additional information (e.g. dragging
+                              item name) while operating with <property>drag-and-drop</property>. </para>
+                    <para> Page code, that describes a tree with built in
+                              <property>drag-and-drop</property> in the way it is considered, is
+                              shown below. </para>
+
                     <para>
                               <emphasis role="bold">Example:</emphasis>
                     </para>
-                    
+
                     <programlisting role="XML"><![CDATA[...
 <h:form>    
      <rich:tree style="width:300px" value="#{libraryAjaxTree.data}" nodeFace="#{item.type}" var="item" dropListener="#{libraryAjaxTree.processDrop}" dragIndicator=":treeDragIndicator">
@@ -762,9 +799,9 @@ nodeFace="#{data.name != 'param-value' ? 'artist' : 'album'}"
     </rich:tree>
 </h:form>
 ...]]></programlisting>
-                    
+
                     <para>This code renders following tree:</para>
-                    
+
                     <figure>
                               <title>Drag-and-drop operations</title>
                               <mediaobject>
@@ -773,9 +810,9 @@ nodeFace="#{data.name != 'param-value' ? 'artist' : 'album'}"
                                         </imageobject>
                               </mediaobject>
                     </figure>
-                    
+
           </section>
-          
+
           <section>
                     <title>Events handling</title>
                     <para>Listeners classes that process events on the server side are defined with
