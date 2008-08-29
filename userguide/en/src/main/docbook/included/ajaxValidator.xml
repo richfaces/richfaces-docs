@@ -1,202 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section>
-  <sectioninfo>
-    <keywordset>
-      <keyword>rich:ajaxValidator</keyword>
-    </keywordset>
-  </sectioninfo>
+          <sectioninfo>
+                    <keywordset>
+                              <keyword>rich:ajaxValidator</keyword>
+                    </keywordset>
+          </sectioninfo>
 
-  <table>
-    <title>Component identification parameters</title>
+          <table>
+                    <title>Component identification parameters</title>
 
-    <tgroup cols="2">
-      <thead>
-        <row>
-          <entry>Name</entry>
+                    <tgroup cols="2">
+                              <thead>
+                                        <row>
+                                                  <entry>Name</entry>
 
-          <entry>Value</entry>
-        </row>
-      </thead>
+                                                  <entry>Value</entry>
+                                        </row>
+                              </thead>
 
-      <tbody>
-        <row>
-          <entry>component-type</entry>
+                              <tbody>
+                                        <row>
+                                                  <entry>component-type</entry>
 
-          <entry>org.richfaces.ajaxValidator</entry>
-        </row>
+                                                  <entry>org.richfaces.ajaxValidator</entry>
+                                        </row>
 
-        <row>
-          <entry>component-class</entry>
+                                        <row>
+                                                  <entry>component-class</entry>
 
-          <entry>org.richfaces.component.html.HtmlajaxValidator</entry>
-        </row>
+                                                  <entry>org.richfaces.component.html.HtmlajaxValidator</entry>
+                                        </row>
 
-        <row>
-          <entry>component-family</entry>
+                                        <row>
+                                                  <entry>component-family</entry>
 
-          <entry>org.richfaces.ajaxValidator</entry>
-        </row>
+                                                  <entry>org.richfaces.ajaxValidator</entry>
+                                        </row>
 
-        <row>
-          <entry>renderer-type</entry>
+                                        <row>
+                                                  <entry>renderer-type</entry>
 
-          <entry>org.richfaces.ajaxValidatorRenderer</entry>
-        </row>
+                                                  <entry>org.richfaces.ajaxValidatorRenderer</entry>
+                                        </row>
 
-        <row>
-          <entry>tag-class</entry>
+                                        <row>
+                                                  <entry>tag-class</entry>
 
-          <entry>org.richfaces.taglib.ajaxValidatorTag</entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
+                                                  <entry>org.richfaces.taglib.ajaxValidatorTag</entry>
+                                        </row>
+                              </tbody>
+                    </tgroup>
+          </table>
 
-  <section>
-    <title>Creating the Component with a Page Tag</title>
+          <section>
+                    <title>Creating the Component with a Page Tag</title>
 
-    <para>To create the simplest variant on a page use the following syntax:</para>
+                    <para>To create the simplest variant on a page use the following syntax:</para>
 
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="XML"><![CDATA[...
- <h:outputText value="Name:" />
-                <h:inputText value="#{userBean.name}" id="name" required="true">
-                    <f:validateLength minimum="3" maximum="12"/>
-                    <rich:ajaxValidator event="onblur"/>
-                </h:inputText>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
+<h:outputText value="Name:" />
+<h:inputText value="#{userBean.name}" id="name" required="true">
+       <f:validateLength minimum="3" maximum="12"/>
+       <rich:ajaxValidator event="onblur"/>
+</h:inputText>
 ...]]></programlisting>
-  </section>
+          </section>
 
-  <section>
-    <title>Creating the Component Dynamically Using Java</title>
+          <section>
+                    <title>Creating the Component Dynamically Using Java</title>
 
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
-    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlCalendar; 	
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlCalendar; 	
 ...
 HtmlAjaxValidator myAjaxValidator= new HtmlAjaxValidator();
 ...
 ]]></programlisting>
-  </section>
-  <section>
-    <title>Details of Usage</title>
-    
-    <para>The <emphasis role="bold"><property>&lt;rich:ajaxValidator&gt;</property></emphasis> component should 
-      be added as a child component to an input  JSF tag which data 
-      should be validated and an event that triggers validation should be specified as well.  
-      The component is ajaxSingle by default so only the current field will be validated.</para>
-      
-    
-    <para>The following example demonstrates how the <emphasis role="bold"><property>&lt;rich:ajaxValidator&gt;</property></emphasis> adds AJAX functionality to standard JSF validators.
-      The request is sent when the input field loses focus, 
-      the action is determined by the <emphasis><property>&quot;event&quot;</property></emphasis> attribute that is set to <code>&quot;onblur&quot;</code>.
-    </para>
-    
-    
-    
-    <programlisting role="XML"><![CDATA[...
- <h:form>
-        <rich:panel>
-            <f:facet name="header">
-                <h:outputText value="User Info:" />
-            </f:facet>
-            <h:panelGrid columns="3">
-                
-                <h:outputText value="Name:" />
-                <h:inputText value="#{userBean.name}" id="name" required="true">
-                    <f:validateLength minimum="3" maximum="12"/>
-                    <rich:ajaxValidator event="onblur"/>
-                </h:inputText>
-                <rich:message for="name" />
-                
-                <h:outputText value="Age:" />
-                <h:inputText value="#{userBean.age}" id="age" required="true">
-                    <f:convertNumber integerOnly="true"/>
-                    <f:validateLongRange minimum="18" maximum="99"/>
-                    <rich:ajaxValidator event="onblur"/>
-                </h:inputText>
-                <rich:message for="age"/>
-                
-            </h:panelGrid>
-        </rich:panel>
-    </h:form>
-    ...]]></programlisting>    
-    
-    <para>This is the result of the snippet. </para>
-    
-    
-    <figure>
-      <title>Simple example of <emphasis role="bold"><property>&lt;rich:ajaxValidator&gt;</property></emphasis>with 
-</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/ajaxValidator1.png"/>
-        </imageobject>
-      </mediaobject>
-    </figure>   
-    
-    
-    <para>In the example above it's show how to work with  standard JSF validators. 
-      The <emphasis role="bold"><property>&lt;rich:ajaxValidator&gt;</property></emphasis> component also works perfectly with 
-    custom validators enhancing their usage with AJAX. 
-    </para>
+          </section>
+          <section>
+                    <title>Details of Usage</title>
 
-    <para>
-     Custom validation can be performed in two ways:
-    </para>
-    
-    <itemizedlist>
-      <listitem><para>Using JSF Validation API is available in javax.faces.validator package</para></listitem>
-      <listitem><para>Using Hibernate Validator, specifying a constraint for the data to be validated. A reference on Hibernate Validator can be found <ulink url="http://www.hibernate.org/hib_docs/validator/reference/en/html_single/">here</ulink>.</para></listitem>
-    </itemizedlist>
-    
-    <para>  
-      The following example shows how the data entered by user can be validated using Hibernate Validator. 
-    </para>
+                    <para>The <emphasis role="bold">
+                                        <property>&lt;rich:ajaxValidator&gt;</property>
+                              </emphasis> component should be added as a child component to an input
+                              JSF tag which data should be validated and an event that triggers
+                              validation should be specified as well. The component is ajaxSingle by
+                              default so only the current field will be validated.</para>
 
-    <programlisting role="XML"><![CDATA[...
-		<rich:panel>
-			<f:facet name="header">
-				<h:outputText value="User Info:" />
-			</f:facet>
-			<h:panelGrid columns="3">
-			
-				<h:outputText value="Name:" />
-				<h:inputText value="#{validationBean.name}" id="name" required="true">
-					<rich:ajaxValidator event="onblur" />
-				</h:inputText>
-				<rich:message for="name" />
-				<h:outputText value="Email:" />
-				<h:inputText value="#{validationBean.email}" id="email">
-					<rich:ajaxValidator event="onblur" />
-				</h:inputText>
-				<rich:message for="email" />
-				<h:outputText value="Age:" />
-				<h:inputText value="#{validationBean.age}" id="age">
-					<rich:ajaxValidator event="onblur" />
-				</h:inputText>
-				<rich:message for="age" />
-			</h:panelGrid>
-		</rich:panel>
-    ...]]></programlisting>    
-    
-    
-    <para>Here is the source code of the managed bean.</para>
-    
-    
-    <programlisting role="JAVA"><![CDATA[...
+
+                    <para>The following example demonstrates how the <emphasis role="bold">
+                                        <property>&lt;rich:ajaxValidator&gt;</property>
+                              </emphasis> adds AJAX functionality to standard JSF validators. The
+                              request is sent when the input field loses focus, the action is
+                              determined by the <emphasis>
+                                        <property>&quot;event&quot;</property>
+                              </emphasis> attribute that is set to
+                              <code>&quot;onblur&quot;</code>. </para>
+
+
+
+                    <programlisting role="XML"><![CDATA[...
+<rich:panel>
+       <f:facet name="header">
+              <h:outputText value="User Info:" />
+       </f:facet>
+       <h:panelGrid columns="3">
+              <h:outputText value="Name:" />
+              <h:inputText value="#{userBean.name}" id="name" required="true">
+                     <f:validateLength minimum="3" maximum="12"/>
+                            <rich:ajaxValidator event="onblur"/>
+              </h:inputText>
+              <rich:message for="name" />
+       </h:panelGrid>
+</rich:panel>
+...]]></programlisting>
+
+                    <para>This is the result of the snippet. </para>
+
+
+                    <figure>
+                              <title>Simple example of <emphasis role="bold">
+                                                  <property>&lt;rich:ajaxValidator&gt;</property>
+                                        </emphasis>with </title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/ajaxValidator1.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+
+
+                    <para>In the example above it's show how to work with standard JSF validators.
+                              The <emphasis role="bold">
+                                        <property>&lt;rich:ajaxValidator&gt;</property>
+                              </emphasis> component also works perfectly with custom validators
+                              enhancing their usage with AJAX. </para>
+
+                    <para> Custom validation can be performed in two ways: </para>
+
+                    <itemizedlist>
+                              <listitem>
+                                        <para>Using JSF Validation API is available in
+                                                  javax.faces.validator package</para>
+                              </listitem>
+                              <listitem>
+                                        <para>Using Hibernate Validator, specifying a constraint for
+                                                  the data to be validated. A reference on Hibernate
+                                                  Validator can be found <ulink
+                                                  url="http://www.hibernate.org/hib_docs/validator/reference/en/html_single/"
+                                                  >here</ulink>.</para>
+                              </listitem>
+                    </itemizedlist>
+
+                    <para> The following example shows how the data entered by user can be validated
+                              using Hibernate Validator. </para>
+
+                    <programlisting role="XML"><![CDATA[...
+<rich:panel>
+       <f:facet name="header">
+              <h:outputText value="User Info:" />
+       </f:facet>
+       <h:panelGrid columns="3">
+              <h:outputText value="Name:" />
+              <h:inputText value="#{validationBean.name}" id="name" required="true">
+                     <rich:ajaxValidator event="onblur" />
+              </h:inputText>
+              <rich:message for="name" />
+       </h:panelGrid>
+</rich:panel>
+...]]></programlisting>
+
+
+                    <para>Here is the source code of the managed bean.</para>
+
+
+                    <programlisting role="JAVA"><![CDATA[...
 package org.richfaces.demo.validation;
 
+import org.hibernate.validator.NotEmpty;
 import org.hibernate.validator.Email;
 import org.hibernate.validator.Length;
-import org.hibernate.validator.Max;
-import org.hibernate.validator.Min;
-import org.hibernate.validator.NotEmpty;
-import org.hibernate.validator.NotNull;
 
 public class ValidationBean {
 
@@ -206,11 +194,7 @@ public class ValidationBean {
 	@Email (message="wrong email format")
 	@NotEmpty
 	private String email;
-	@NotNull
-	@Min(18)
-	@Max(100)
-	private int age;
-	
+		
 	public ValidationBean() {
 	}
 	public String getName() {
@@ -225,32 +209,26 @@ public class ValidationBean {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
 }
-...]]></programlisting>    
-    
-    <para>By default the Hibernate Validator generates an error message in 10 language, though you can redefine the messages that are displayed to a user when validation fails. In the shows example it was done by adding <code>(message=&quot;wrong email format&quot;)</code> to the <code>@Email</code> annotation.</para>
-    
-    <para>This is how it looks. </para>
-    <figure>
-      <title>Validation using Hibernate validator
-      </title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/ajaxValidator2.png"/>
-        </imageobject>
-      </mediaobject>
-    </figure>   
-    
-    
-    </section>
-  
+...]]></programlisting>
+
+                    <para>By default the Hibernate Validator generates an error message in 10
+                              language, though you can redefine the messages that are displayed to a
+                              user when validation fails. In the shows example it was done by adding
+                                        <code>(message=&quot;wrong email
+                              format&quot;)</code> to the <code>@Email</code> annotation.</para>
+
+                    <para>This is how it looks. </para>
+                    <figure>
+                              <title>Validation using Hibernate validator </title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/ajaxValidator2.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+
+
+          </section>
+
 </section>
-
-
-
