@@ -1196,15 +1196,23 @@
 		<para> RichFaces allows to redefine standard handlers responsible for processing of
 			different exceptional situations. It helps to define own JavaScript, which is executed
 			when these situations occur. </para>
+		<para>
+			Add the following code to web.xml:
+		</para>
+		<programlisting role="XML"><![CDATA[<context-param>
+	<param-name>org.ajax4jsf.handleViewExpiredOnClient</param-name>
+	<param-value>true</param-value>
+</context-param>]]>
+		</programlisting>
 		<section id="RequestErrorsHandling">
 			<?dbhtml filename="RequestErrorsHandling.html"?>
 			<title>Request Errors Handling</title>
 			<para> To execute your own code on the client in case of an error during Ajax request,
 				it&apos;s necessary to redefine the standard
 					<code>&quot;A4J.AJAX.onError&quot;</code> method: </para>
-			<programlisting role="JAVA"><![CDATA[A4J.AJAX.onError = function(req,status,message) {
-          // Custom Developer Code
-};]]></programlisting>
+			<programlisting role="JAVA"><![CDATA[ A4J.AJAX.onError = function(req,status,message){
+    window.alert("Custom onError handler "+message);
+}]]></programlisting>
 			<para> The function defined this way accepts as parameters: </para>
 			<itemizedlist>
 				<listitem>
@@ -1236,10 +1244,14 @@
 				<emphasis role="bold">Example:</emphasis>
 			</para>
 
-			<programlisting role="JAVA"><![CDATA[A4J.AJAX.onExpired = function(loc,expiredMsg){
-          // Custom Developer Code
-};
-]]></programlisting>
+			<programlisting role="JAVA">
+<![CDATA[A4J.AJAX.onExpired = function(loc,expiredMsg){
+    if(window.confirm("Custom onExpired handler "+expiredMsg+" for a location: "+loc)){
+      return loc;
+    } else {
+     return false;
+    }
+}]]></programlisting>
 
 			<para>Here the function receives in params:</para>
 			<itemizedlist>
@@ -3039,8 +3051,10 @@ window.RICH_FACES_EXTENDED_SKINNING_ON = true;
 ]]></programlisting>
 
 			<note>
-				<para> Now necessary to use resources prefix <code>a4j/version</code>
-					instead of <code>a4j_version</code>. </para>
+				<para>
+					Now necessary to use resources prefix <code>a4j/versionXXX</code> instead of <code>a4j_versionXXX</code>.
+					Base64 encoder changed to use &apos;<code>!</code>&apos; instead of &apos;<code>.</code>&apos;.
+				</para>
 			</note>
 
 
