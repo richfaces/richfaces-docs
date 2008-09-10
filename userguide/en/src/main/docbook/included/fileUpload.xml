@@ -47,7 +47,7 @@
                               <emphasis role="bold">Example:</emphasis>
                     </para>
                     <programlisting role="XML"><![CDATA[...
-<rich:fileUpload /> 
+<rich:fileUpload />
 ...]]></programlisting>
           </section>
           <section>
@@ -57,7 +57,7 @@
                               <emphasis role="bold">Example:</emphasis>
                     </para>
                     <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlFileUpload;
-...	
+...
 HtmlFileUpload myFileUpload = new HtmlFileUpload();
 ...]]></programlisting>
           </section>
@@ -127,8 +127,27 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                     <programlisting role="XML"><![CDATA[...
 <rich:fileUpload uploadData="#{bean.data}" fileUploadListener="#{bean.listener}"/>
  ...]]></programlisting>
-
-
+                    <para>
+                              The following methods of processing the uploaded files are:
+                    </para>
+                    <itemizedlist>
+                              <listitem>
+                                        <para>
+                                                  <code>isMultiUpload()</code>. It returns &quot;true&quot; if several files have been uploaded
+                                        </para>
+                              </listitem>
+                              <listitem>
+                                        <para>
+                                                  <code>getUploadItems()</code>. It returns the list of the uploaded files.
+                                                  If one file was uploaded, the <code>getUploadItems()</code> method will return the list consisting of one file
+                                        </para>
+                              </listitem>
+                              <listitem>
+                                        <para>
+                                                  <code>getUploadItem()</code>. It returns the whole list in case of uploading one file only. If several files were uploaded, the <code>getUploadItem()</code> method will return the first element of the uploaded files list.
+                                        </para>
+                              </listitem>
+                    </itemizedlist>
                     <para> Automatically files uploading could be performed by means of the <emphasis>
                                         <property> &quot;immediateUpload&quot;</property>
                               </emphasis> attribute. If the value of this attribute is
@@ -347,7 +366,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                         function _onaddHandler (e) {
                              var i = 0;
                              for (; i < e.memo.entries.lenght; i++) {
-                                   alert(e.memo.entries[i].creator);  //Shows creators of the added files 
+                                   alert(e.memo.entries[i].creator);  //Shows creators of the added files
                              }
                         }
 
@@ -418,7 +437,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
             There is a number of facets providing for this component:
            <emphasis>
                     <property> &quot;header&quot;</property></emphasis>
-              
+
                     <emphasis>
                         <property> &quot;footer&quot;</property></emphasis>
                       <emphasis>
@@ -557,7 +576,7 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
         acceptedTypes="jpg, gif, png, bmp">
             <a4j:support event="onuploadcomplete" reRender="info"  />
 </rich:fileUpload>
-<h:commandButton onclick="if($('j_id232:upload').component.entries[0].state == FileUploadEntry.UPLOAD_SUCCESS) alert ('DONE');" value="Check file state"/>  
+<h:commandButton onclick="if($('j_id232:upload').component.entries[0].state == FileUploadEntry.UPLOAD_SUCCESS) alert ('DONE');" value="Check file state"/>
 ...]]></programlisting>
 
 
@@ -642,25 +661,6 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
                                                   should be used together with
                                                   commands </entry>
                                                   </row>
-
-                                                  <row>
-                                                  <entry> isMultiUpload() </entry>
-                                                  <entry> Returns &quot;true&quot;
-                                                  if several files have been
-                                                  uploaded. </entry>
-                                                  </row>
-
-                                                  <row>
-                                                  <entry> getUploadItems() </entry>
-                                                  <entry> Returns the list of the uploaded
-                                                  files. If several files were
-                                                  uploaded the first element of
-                                                  this list will be returned. If
-                                                  one file was uploaded, the
-                                                  list consisting of one file
-                                                  will be returned </entry>
-                                                  </row>
-
                                         </tbody>
                               </tgroup>
                     </table>
@@ -1610,12 +1610,12 @@ HtmlFileUpload myFileUpload = new HtmlFileUpload();
     </para>
     <programlisting role="XML"><![CDATA[...
     <h:form>
-    <rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}" 
+    <rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}"
     acceptedTypes="html" immediateUpload="true"/>
     <a4j:commandLink style="font-weight: bold; width: 200px;" value="Show files uploaded:" reRender="files_list">
     <h:dataTable value="#{bean.fileList}" var="file" id="files_list" style="width: 500px">
     <h:column>
-    <h:outputText value="#{file.fileName}"></h:outputText>	
+    <h:outputText value="#{file.fileName}"></h:outputText>
     </h:column>
     </h:dataTable>
     </h:form>
