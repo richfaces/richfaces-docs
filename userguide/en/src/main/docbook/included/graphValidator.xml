@@ -133,14 +133,48 @@ HtmlgraphValidator mygraphValidator= new HtmlgraphValidator();
 
 
           <programlisting role="XML"><![CDATA[...
-<rich:graphValidator value="#{dayStatistics}">
-       <h:outputText value="#{pt.title}" />
-              <rich:inputNumberSpinne minValue="0" maxValue="24" value="#{pt.time}" id="time">
-       </rich:inputNumberSpinner>
-       <rich:message for="time" />  
+<rich:graphValidator summary="Invalid values: " value="#{dayStatistics}">
+<a4j:repeat value="#{dayStatistics.dayPasstimes}" var="pt" id="table">
+<h:outputText value="#{pt.title}" />
+<rich:inputNumberSpinner minValue="0" maxValue="24" value="#{pt.time}" id="time">
+</rich:inputNumberSpinner>
+<rich:message for="time" />
+</a4j:repeat>
 </rich:graphValidator>
 ...
 ]]></programlisting>
 
+
+<para>Hence, the given above code will provide the functionality that is illustrated on the images below.</para>
+
+          <figure>
+                    <title>&quot;Games&quot; field did not pass validation</title>
+                    <mediaobject>
+                              <imageobject>
+                                        <imagedata fileref="images/graphValidator11.png"/>
+                              </imageobject>
+                    </mediaobject>
+          </figure>
+          <para>As you can see from the picture the &quot;Games&quot; field did not pass validation, as <emphasis role="bold"><property>&lt;rich:graphValidator&gt;</property>
+          </emphasis> can be used to perform validation of a single input item. 
+          </para>
+   
+          <figure>
+                    <title>Total sum of  all input values is incorrect</title>
+                    <mediaobject>
+                              <imageobject>
+                                        <imagedata fileref="images/graphValidator12.png"/>
+                              </imageobject>
+                    </mediaobject>
+          </figure>
+          
+          
+         <para> The figure above  shows that the entered data was revalidated after all fields were completed,  and the data did not pass revalidation since the total sum was incorrect. </para> 
+          <section>
+                    <title>Relevant Resources Links</title>
+                    <para><ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/graphValidator.jsf?c=graphValidator">
+                              Here</ulink> you can see an example of <emphasis role="bold"><property>&lt;rich:graphValidator&gt;</property>
+                              </emphasis> usage and sources for the given example. </para>
+          </section>
 
 </section>
