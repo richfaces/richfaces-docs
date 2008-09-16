@@ -2480,12 +2480,12 @@ public class TableBackingRendered implements Serializable {
           
           <section id="richfileUploadforMyFaces" role="new">
                     <?dbhtml filename="richfileUploadforMyFaces.html"?>
-                    <title>How to configure &lt;rich:fileUpload&gt; for MyFaces framework</title>
-                    <para> To make <emphasis role="bold">
-                              <property>&lt;rich:fileUpload&gt;</property>
-                    </emphasis> component work properly with MyFaces framework, the
-                              extentions filter for that framework should be defined in web.xml
-                              file. </para>
+                    <title>&lt;rich:fileUpload&gt; with MyFaces</title>
+                    <para>The following order, in which filters are defined and mapped in web.xml, is important for <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component proper work with MyFaces. 
+					Note that the extention filter should be mapped on faces servlet not to *.jsf (!) to provide this sequence work correctly.
+					</para>
                     <para>
                               <emphasis role="bold">Example:</emphasis>
                     </para>
@@ -2555,11 +2555,7 @@ public class TableBackingRendered implements Serializable {
           <url-pattern>*.jsf</url-pattern>
 </servlet-mapping>
 ...]]></programlisting>
-                    <para> Note, that definition and mapping of the extentions filter goes after
-                              definition and mapping of ajax filter. This is a required condition to
-                              make it work properly. Moreover, the extention filter should be mapped
-                              on the faces servlet but not to *.jsf (!) to provide this sequence
-                              work properly. </para>
+                    
           </section>
           
           <section id="suggestionboxObjectSelection">
