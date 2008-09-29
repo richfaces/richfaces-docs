@@ -1210,7 +1210,7 @@
 			<para> To execute your own code on the client in case of an error during Ajax request,
 				it&apos;s necessary to redefine the standard
 					<code>&quot;A4J.AJAX.onError&quot;</code> method: </para>
-			<programlisting role="JAVA"><![CDATA[ A4J.AJAX.onError = function(req,status,message){
+			<programlisting role="JAVA"><![CDATA[ A4J.AJAX.onError = function(req, status, message){
     window.alert("Custom onError handler "+message);
 }]]></programlisting>
 			<para> The function defined this way accepts as parameters: </para>
@@ -1245,7 +1245,7 @@
 			</para>
 
 			<programlisting role="JAVA">
-<![CDATA[A4J.AJAX.onExpired = function(loc,expiredMsg){
+<![CDATA[A4J.AJAX.onExpired = function(loc, expiredMsg){
     if(window.confirm("Custom onExpired handler "+expiredMsg+" for a location: "+loc)){
       return loc;
     } else {
@@ -1267,6 +1267,20 @@
 						</emphasis> event. </para>
 				</listitem>
 			</itemizedlist>
+			<note>
+				<title>Note:</title>
+				<para>
+				Note that custom <emphasis><property>&quot;onError&quot;</property></emphasis>, <emphasis><property>&quot;onExpire&quot;</property></emphasis> handlers 
+				do not work under MyFaces. MyFaces handles exception by its internals generating debug page. 
+				You could use the following code to prevent such behavior:
+				</para>
+				<programlisting role="XML"><![CDATA[...
+<context-param>
+	<param-name>org.apache.myfaces.ERROR_HANDLING</param-name>
+	<param-value>false</param-value>
+</context-param> 
+...]]></programlisting>
+			</note>
 			<!--note>
 				<title>Note:</title>
 				Until the version 1.0.5 the method can&apos;t be redefined on <emphasis >

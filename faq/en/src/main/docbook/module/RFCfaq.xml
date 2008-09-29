@@ -2608,6 +2608,62 @@ public class TableBackingRendered implements Serializable {
 </context-param>
 ...]]></programlisting>
           </section>
+          <section id="sessionExpiredHandling">
+                    <?dbhtml filename="sessionExpiredHandling.html"?>
+                    <title>How to handle Request Errors and Session Expiration?</title>
+                    <para> 
+                   	In order to redefine standard handlers responsible for processing of different exceptional situations 
+                    you should take the following steps:
+                    </para>
+                    <itemizedlist>
+                    	<listitem>
+                    		<para>
+                    			add to your <property>web.xml</property> the following code:		
+                    		</para>
+                 	        <programlisting role="XML"><![CDATA[...
+<context-param>
+	<param-name>org.ajax4jsf.handleViewExpiredOnClient</param-name>
+	<param-value>true</param-value>
+</context-param> 
+...]]></programlisting>
+                    	</listitem>
+                    	<listitem>
+                    		<para>
+                    			add custom <emphasis><property>&quot;onError&quot;</property></emphasis>, <emphasis><property>&quot;onExpire&quot;</property></emphasis> handlers: 
+                    		</para>
+                   	        <programlisting role="Java"><![CDATA[...
+A4J.AJAX.onError = function(req,status,message){
+	window.alert("Custom onError handler "+message);
+}
+A4J.AJAX.onExpired = function(loc,expiredMsg){
+	if(window.confirm("Custom onExpired handler "+expiredMsg+" for a location: "+loc)){
+		return loc;
+	} else {
+		return false;
+	}
+} 
+...]]></programlisting>
+							<para>
+								For the detailed description see 
+								the <ulink url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/html_single/index.html#RequestErrorsAndSessionExpirationHandling">Request Errors and Session Expiration Handling</ulink> section of the Developer Guide.
+							</para>
+                    	</listitem>
+                    </itemizedlist> 
+                <note>
+				<title>Note:</title>
+				<para>
+				Note that custom <emphasis><property>&quot;onError&quot;</property></emphasis>, <emphasis><property>&quot;onExpire&quot;</property></emphasis> handlers 
+				do not work under MyFaces. MyFaces handles exception by its internals generating debug page. 
+				You could use the following code to prevent such behavior:
+				</para>
+				<programlisting role="XML"><![CDATA[...
+<context-param>
+	<param-name>org.apache.myfaces.ERROR_HANDLING</param-name>
+	<param-value>false</param-value>
+</context-param> 
+...]]></programlisting>
+			</note>
+          </section>
 	  <section id="ajaxCookie">
                     <?dbhtml filename="ajaxCookie.html"?>
                     <title>How to add cookie in an AJAX Respond?</title>
