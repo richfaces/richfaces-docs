@@ -105,7 +105,7 @@ HtmlColumns myColumns = new HtmlColumns();
                                         <property>&quot;columns&quot;</property>
                               </emphasis> attribute defines the count of columns. </para>
                     <para> The <emphasis>
-                                        <property>&quot;rows&quot;</property>
+                                        <property>&quot;rowspan&quot;</property>
                               </emphasis> attribute defines the number of rows to be displayed. If
                               the value of this attribute is zero, all remaining rows in the table
                               are displayed on a page. </para>
@@ -123,7 +123,7 @@ HtmlColumns myColumns = new HtmlColumns();
                     </para>
                     <programlisting role="XML"><![CDATA[...
 <rich:dataTable value="#{capitalsBean.capitals}" var="cap">
-        <rich:columns value="#{capitalsBean.labels}" var="col" index="index" rows="0" columns="3" begin="1" end="2">
+        <rich:columns value="#{capitalsBean.labels}" var="col" index="index" rowspan="0" columns="3" begin="1" end="2">
                 <f:facet name="header">
                         <h:outputText value="#{col.text}" />
                 </f:facet>
@@ -247,18 +247,24 @@ HtmlColumns myColumns = new HtmlColumns();
 			</figure-->
                     <note>
                               <title>Note:</title>
-                              <para>
-                                        The <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> tag is initialized during components tree building process. 
-                                        This process precedes page rendering at &quot;Render Response&quot; JSF phase. 
-                                        To be rendered properly the component needs all it variables to be initialized while the components tree is being building. 
-                                        A <emphasis>javax.servlet.jsp.JspTagException</emphasis> occurs if <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> uses variables passed from other components, if these variables are initialized during rendering. 
-                                        Thus, when <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> is asking for such variables they do not already exist. 
-                                        Use <property>&lt;c:forEach&gt;</property> JSP standard tag as workaround. 
-                                        Compare two examples below.
-                              </para>
-                              <para>
-                                        This code calls the exception:
-                              </para>
+                              <para> The <emphasis role="bold">
+                                                  <property>&lt;rich:columns&gt;</property>
+                                        </emphasis> tag is initialized during components tree
+                                        building process. This process precedes page rendering at
+                                        &quot;Render Response&quot; JSF phase. To be
+                                        rendered properly the component needs all it variables to be
+                                        initialized while the components tree is being building. A
+                                                  <emphasis>javax.servlet.jsp.JspTagException</emphasis>
+                                        occurs if <emphasis role="bold">
+                                                  <property>&lt;rich:columns&gt;</property>
+                                        </emphasis> uses variables passed from other components, if
+                                        these variables are initialized during rendering. Thus, when
+                                                  <emphasis role="bold">
+                                                  <property>&lt;rich:columns&gt;</property>
+                                        </emphasis> is asking for such variables they do not already
+                                        exist. Use <property>&lt;c:forEach&gt;</property>
+                                        JSP standard tag as workaround. Compare two examples below. </para>
+                              <para> This code calls the exception: </para>
                               <programlisting role="XML"><![CDATA[...
 <rich:dataTable value="#{bean.data}" var="var">
           <rich:columns value="#{var.columns}">
@@ -267,9 +273,7 @@ HtmlColumns myColumns = new HtmlColumns();
 </rich:dataTable>
 ...
 ]]></programlisting>
-                              <para>
-                                        This code works properly:
-                              </para>
+                              <para> This code works properly: </para>
                               <programlisting role="XML"><![CDATA[...
 <c:forEach items="#{bean.data}" var="var">
           <rich:columns value="#{var.columns}">
@@ -279,8 +283,8 @@ HtmlColumns myColumns = new HtmlColumns();
 ...
 ]]></programlisting>
                     </note>
-                                    
-                    
+
+
                     <para> Information about sorting and filtering you can find <link
                                         linkend="sortAndFilter">here</link> . </para>
 
