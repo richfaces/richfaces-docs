@@ -1,260 +1,246 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <chapter id="GettingStarted" xreflabel="GettingStarted">
-  <?dbhtml filename="GettingStarted.html"?>
-  <chapterinfo>
-    <keywordset>
-      <keyword>MyFaces</keyword>
+          <?dbhtml filename="GettingStarted.html"?>
+          <chapterinfo>
+                    <keywordset>
+                              <keyword>MyFaces</keyword>
 
-      <keyword>JSF</keyword>
+                              <keyword>JSF</keyword>
 
-      <keyword>RichFaces</keyword>
+                              <keyword>RichFaces</keyword>
 
-    </keywordset>
-  </chapterinfo>
-  <title>Getting Started with RichFaces</title>
-  <section id="DownloadingRichFaces">
-    <?dbhtml filename="DownloadingRichFaces.html" ?>
-    <title>Downloading RichFaces 3.2.1</title>
-    <para>The latest release of <property>RichFaces</property> is available for download at:<simplelist>
-        <member>
-          <ulink url="http://labs.jboss.com/jbossrichfaces/downloads"
-            >http://labs.jboss.com/jbossrichfaces/downloads</ulink>
-        </member>
-      </simplelist> in the <property>RichFaces</property> project area under JBoss.</para>
-  </section>
-  <section id="Installation">
-    <?dbhtml filename="Installation.html" ?>
-    <title>Installation</title>
-    <itemizedlist>
-      <listitem><para> Unzip <emphasis>
-          <property>&quot;richfaces-ui-3.2.1.GA-bin.zip&quot;</property>
-        </emphasis> file to the chosen folder. </para></listitem>
-      <listitem><para> Copy <code>&quot;richfaces-api-3.2.1.jar&quot;</code>, <code>&quot;richfaces-impl-3.2.1.jar&quot;</code>,<code>&quot;richfaces-ui-3.2.1.jar&quot;</code>files into the &quot;WEB-INF/lib&quot;  folder of your application. </para></listitem>
-      <!--note>
-        <title>Note:</title>
-        <para>Starting from Ajax4jsf 1.1.1, the oscache library is not required to be in the
-          classpath anymore. </para>
-      </note-->
-      <listitem><para> Add the following content into the &quot;WEB-INF/web.xml&quot; file of your application: </para><programlisting role="XML"><![CDATA[...
-    <context-param>
-        <param-name>org.richfaces.SKIN</param-name>
-        <param-value>blueSky</param-value>
-    </context-param>
-    <filter> 
-        <display-name>RichFaces Filter</display-name> 
-        <filter-name>richfaces</filter-name> 
-        <filter-class>org.ajax4jsf.Filter</filter-class> 
-    </filter> 
-    <filter-mapping> 
-        <filter-name>richfaces</filter-name> 
-        <servlet-name>Faces Servlet</servlet-name>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
-    </filter-mapping>]]></programlisting>
-        <!--note>
-          <title>Note:</title>
-          <para>You can copy and paste the above text from the <emphasis>
-              <property>&quot;README.txt&quot;</property>
-            </emphasis> file.</para>
-        </note-->
-      </listitem>
+                    </keywordset>
+          </chapterinfo>
+          <title>Getting Started with RichFaces</title>
+          <para>This chapter describes all necessary actions and configurations that should be done
+                    for adding the RichFaces library into a JSF project. The description relies on a
+                    simple JSF application creation process from downloading the libraries to
+                    running the application in a browser.</para>
 
-      <listitem>
+          <section id="DownloadingRichFaces">
+                    <?dbhtml filename="DownloadingRichFaces.html" ?>
+                    <title>Downloading the RichFaces</title>
 
-        <para>Add the following lines for each JSP page of your application.</para>
-        <programlisting role="XML"><![CDATA[<%@ taglib uri="http://richfaces.org/a4j" prefix="a4j"%>
-<%@ taglib uri="http://richfaces.org/rich" prefix="rich"%> ]]></programlisting>
-        <para>For XHTML pages:</para>
-        <programlisting role="XML"><![CDATA[<xmlns:a4j="http://richfaces.org/a4j">
+                    <para> The latest release of RichFaces components is available for download at
+                                        <ulink url="http://labs.jboss.com/jbossrichfaces/downloads"
+                                        >JBoss RichFaces Downloads area</ulink> at JBoss community.
+                              Files that uploaded there have different extensions, which should be
+                              touched here: <code>*.bin.zip</code> archives contain full compiled
+                              version of components for Windows and Mac operating systems and
+                                        <code>*.src.zip</code> archives have it source code;
+                                        <code>*.bin.tar.gz</code> and <code>*.src.tar.gz</code>
+                              archives contain compiled version and source code for UNIX-like
+                              systems correspondingly; uploaded there <code>*.jar</code> files
+                              contain components skins. </para>
+                    <para> In computer file system create new folder; download and unzip the archive
+                              with components there. </para>
+          </section>
+
+          <section id="Creating a simple application with RichFaces">
+                    <?dbhtml filename="Installation.html" ?>
+                    <title>Creating a simple application with RichFaces</title>
+                    <para> "RichFaces Greeter"—the simple application—is hello-world like
+                              application but with one difference: the world of RichFaces will say
+                              "Hello!" to user first. </para>
+                    <para> Create new JSF 1.2 project with name "Greeter", JSFBlankWithLibs template
+                              and Servlet version 2.5. </para>
+                    <para> To import RichFaces libraries into the project in the JBoss Developer
+                              studio click with RMB on the project name in the "Package Explorer"
+                              window and select "Build Path"—›"Configure Build Path…" in context
+                              menu. In opened "Java Build Path" window click "Add external JARs…"
+                              button in "Libraries" tab. Pass to the folder with unzipped earlier
+                              RichFaces components and open <code>lib</code> folder. This folder contains three
+                                        <code>*.jar</code> files with API, UI and implementation
+                              libraries. Select all of them and add to project libraries. Another
+                              way to import RichFaces libraries into the project is to copy in
+                              computer file system that "jars" from <code>lib</code> folder to
+                                        <code>WEB-INF/lib</code> folder of the application. </para>
+                    <para> After RichFaces libraries where added into the project libraries it is
+                              necessary to register them in project <code>web.xml</code> file. Add following in
+                              <code>web.xml</code>: </para>
+                    <programlisting role="XML"><![CDATA[...
+<context-param>
+   <param-name>org.richfaces.SKIN</param-name>
+   <param-value>blueSky</param-value>
+</context-param>
+ 
+<filter> 
+   <display-name>RichFaces Filter</display-name> 
+   <filter-name>richfaces</filter-name> 
+   <filter-class>org.ajax4jsf.Filter</filter-class> 
+</filter> 
+  
+<filter-mapping> 
+   <filter-name>richfaces</filter-name> 
+   <servlet-name>Faces Servlet</servlet-name>
+   <dispatcher>REQUEST</dispatcher>
+   <dispatcher>FORWARD</dispatcher>
+   <dispatcher>INCLUDE</dispatcher>
+</filter-mapping>
+...]]></programlisting>
+                    <para> To enable standard control skinning following lines should be added into
+                                        <code>web.xml</code> too: </para>
+                    <programlisting role="XML"><![CDATA[...
+<context-param>
+   <param-name>org.richfaces.CONTROL_SKINNING</param-name>
+   <param-value>enable</param-value>
+</context-param>
+...]]></programlisting>
+                    <para> Finally the <code>web.xml</code> should look like the following: </para>
+                    <programlisting role="XML"><![CDATA[<?xml version="1.0"?>
+<web-app version="2.5" 
+                 xmlns="http://java.sun.com/xml/ns/javaee"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<display-name>Greeter</display-name>
+  
+<context-param>
+   <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+   <param-value>server</param-value>
+</context-param>
+  
+<context-param>
+   <param-name>org.richfaces.SKIN</param-name>
+   <param-value>blueSky</param-value>
+</context-param>
+  
+<!-- Enabling control skinning -->
+<context-param>
+   <param-name>org.richfaces.CONTROL_SKINNING</param-name>
+   <param-value>enable</param-value>
+</context-param>
+  
+<!-- RichFaces Filter -->
+<filter> 
+   <display-name>RichFaces Filter</display-name> 
+   <filter-name>richfaces</filter-name> 
+   <filter-class>org.ajax4jsf.Filter</filter-class> 
+</filter> 
+
+<!-- RichFaces Filter mapping-->
+<filter-mapping> 
+   <filter-name>richfaces</filter-name> 
+   <servlet-name>Faces Servlet</servlet-name>
+   <dispatcher>REQUEST</dispatcher>
+   <dispatcher>FORWARD</dispatcher>
+   <dispatcher>INCLUDE</dispatcher>
+</filter-mapping>
+  
+<listener>
+   <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+</listener>
+  
+<!-- Faces Servlet -->
+<servlet>
+   <servlet-name>Faces Servlet</servlet-name>
+   <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+   <load-on-startup>1</load-on-startup>
+</servlet>
+ 
+<!-- Faces Servlet Mapping -->
+<servlet-mapping>
+   <servlet-name>Faces Servlet</servlet-name>
+   <url-pattern>*.jsf</url-pattern>
+</servlet-mapping>
+  
+<login-config>
+   <auth-method>BASIC</auth-method>
+   </login-config>
+</web-app>
+...]]></programlisting>
+                    <para> The "RichFaces Greeter" application need a managed bean. Create a new
+                              managed bean with name <code>user</code> in <code>demo</code> package and paste there the following simple
+                              code: </para>
+                    <programlisting role="JAVA">package demo;
+
+public class user {
+   private String name="";
+   public String getName() {
+      return name;
+   }
+   public void setName(String name) {
+      this.name = name;
+   }
+}</programlisting>
+                    <para> With the next step the "user" bean should be registered in <code>faces-config.xml</code> file: </para>
+                    <programlisting role="XML"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" 
+                   xmlns="http://java.sun.com/xml/ns/javaee"
+                   xmlns:xi="http://www.w3.org/2001/XInclude"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+   <managed-bean>
+      <description>UsernName Bean</description>
+      <managed-bean-name>user</managed-bean-name>
+      <managed-bean-class>demo.user</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+      <managed-property>
+         <property-name>name</property-name>
+         <property-class>java.lang.String</property-class>
+         <value/>
+      </managed-property>
+   </managed-bean>
+</faces-config>
+]]></programlisting>
+                    <para> The "RichFaces Greeter" application has only one JSP page. Create <code>pages</code>
+                              folder in root of <code>WEB CONTENT</code> folder. Create <code>greeter.jsp</code> page
+                              inside <code>pages</code> and add there following code: </para>
+                    <programlisting role="XML"><![CDATA[<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<%@ taglib uri="http://java.sun.com/jsf/core" prefix="f" %>
+<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
+<!-- RichFaces tag library declaration -->
+<%@ taglib uri="http://richfaces.org/a4j" prefix="a4j"%>
+<%@ taglib uri="http://richfaces.org/rich" prefix="rich"%>
+ 
+<html>
+   <head>
+      <title>RichFaces Greeter</title>
+   </head>
+   <body>
+      <f:view>
+         <h1>RichFaces Greeter</h1>
+         <a4j:form>
+            <h:panelGroup style="margin-left: 10" >
+               <h:outputText value="Your name: " />
+               <h:inputText value="#{user.name}" >
+                  <f:validateLength minimum="1" maximum="30" />
+               </h:inputText>
+               <a4j:commandButton value="Get greeting" reRender="greeting" />
+            </h:panelGroup>
+         </a4j:form>
+         <h:panelGroup id="greeting" >
+            <h:outputText value="Hello, " rendered="#{not empty user.name}" style="margin-left: 10" />
+            <h:outputText value="#{user.name}" />
+            <h:outputText value="!" rendered="#{not empty user.name}" />
+         </h:panelGroup>
+      </f:view>
+   </body>
+   </html>]]></programlisting>
+                    <para> The application uses two RichFaces components: <emphasis role="bold">
+                                        <property>&lt;a4j:commandButton&gt;</property>
+                              </emphasis> with built-in Ajax support allows rendering a
+                              greeting dynamically after a response comes back and <emphasis
+                                        role="bold">
+                                        <property>&lt;a4j:form&gt;</property>
+                              </emphasis> helps the button to perform the action. </para>
+                    <para> Note, that the RichFaces tag library should be declared on each JSP page.
+                              For XHTML pages add following lines for tag library declaration: </para>
+                    <programlisting role="XML"><![CDATA[<xmlns:a4j="http://richfaces.org/a4j">
 <xmlns:rich="http://richfaces.org/rich">]]></programlisting>
-      </listitem>
-    </itemizedlist>
-    <!--note>
-      <title>Note:</title>
-      <para>The previous namespaces URLs (<ulink url="https://ajax4jsf.dev.java.net/ajax">https://ajax4jsf.dev.java.net/ajax</ulink> and
-        <ulink url="http://richfaces.ajax4jsf.org/rich">http://richfaces.ajax4jsf.org/rich</ulink>) are also available for backward compatibility.</para>
-    </note-->
-  </section>
-  <section id="SimpleAJAXEchoProject">
-    <?dbhtml filename="SimpleAJAXEchoProject.html" ?>
-    <title>Simple Ajax Echo Project </title>
-    <para> In our JSF project you need only one JSP page that has a form with a couple of child
-      tags: <emphasis role="bold">
-        <property>&lt;h:inputText&gt;</property>
-      </emphasis> and <emphasis role="bold">
-        <property>&lt;h:outputText&gt;</property>
-      </emphasis>. </para>
-    <para>This simple application let you input some text into the <emphasis role="bold">
-        <property>&lt;h:inputText&gt;</property>
-      </emphasis>, send data to the server, and see the server response as a value of <emphasis
-        role="bold">
-        <property>&lt;h:outputText&gt;</property>
-      </emphasis>. </para>
-    <section id="JSPPage">
-      <?dbhtml filename="JSPPage.html"?>
-      <title>JSP Page</title>
-      <para>Here is the necessary page (echo.jsp):</para>
- 	  <programlisting role="XML"><![CDATA[
-    <%@ taglib uri="http://richfaces.org/a4j" prefix="a4j"%>
-    <%@ taglib uri="http://richfaces.org/rich" prefix="rich"%>
-    <%@ taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
-    <%@ taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
-    <html>
-      <head>
-        <title>repeater </title> 
-      </head>
-      <body>
-        <f:view>
-          <h:form>
-              <rich:panel header="Simple Echo">
-                <h:inputText size="50" value="#{bean.text}" > 
-                  <a4j:support event="onkeyup" reRender="rep"/>
-                </h:inputText>
-                <h:outputText value="#{bean.text}" id="rep"/>
-              </rich:panel>
-          </h:form>
-        </f:view>
-      </body>
-    </html>]]></programlisting>
-
-      <para>Only two tags distinguish this page from a &quot;regular&quot; JSF
-        one. There are <emphasis role="bold">
-          <property>&lt;rich:panel&gt;</property>
-        </emphasis> and <emphasis role="bold">
-          <property>&lt;a4j:support&gt;</property>
-        </emphasis>.</para>
-
-      <para>The <emphasis role="bold">
-          <property>&lt;rich:panel&gt;</property>
-      </emphasis>allows to place the page elements in rectangle panel that can be skinned.</para>
-
-      <para>The <emphasis role="bold">
-          <property>&lt;a4j:support&gt;</property>
-        </emphasis> with corresponding attributes (as it was shown in the previous example) adds an
-        Ajax support to the parent <emphasis role="bold">
-          <property>&lt;h:inputText&gt;</property>
-        </emphasis> tag. This support is bound to <emphasis><property>&quot;onkeyup&quot;</property></emphasis> JavaScript event, so
-        that each time when this event is fired on the parent tag, our application sends an Ajax
-        request to the server. It means that the text field pointed to our managed bean property
-        contains up-to-date value of our input. </para>
-      <para> The value of <emphasis>
-          <property>&quot;reRender&quot;</property>
-        </emphasis> attribute of the <emphasis role="bold">
-          <property>&lt;a4j:support&gt;</property>
-        </emphasis> tag defines which part(s) of our page is (are) to be updated. In this case, the
-        only part of the page to update is the <emphasis role="bold">
-          <property>&lt;h:outputText&gt;</property>
-        </emphasis> tag because its ID value matches to the value of <emphasis>
-          <property>&quot;reRender&quot;</property>
-        </emphasis> attribute. As you see, it&apos;s not difficult to update multiple elements
-        on the page, only list their IDs as the value of <emphasis>
-          <property>&quot;reRender&quot;</property>
-        </emphasis>. </para>
-    </section>
-    <section id="DataBean">
-      <?dbhtml filename="DataBean.html"?>
-      <title>Data Bean</title>
-      <para>In order to build this application, you should create a managed bean:</para>
-      <programlisting role="JAVA">package demo;
-        
-        public class Bean {
-        private String text;
-        public Bean() {
-        }
-        public String getText() {
-        return text;
-        }
-        public void setText(String text) {
-        this.text = text;
-        }
-        }</programlisting>
-    </section>
-    <section id="faces-config.xml">
-      <?dbhtml filename="faces-config.xml.html"?>
-      <title>faces-config.xml</title>
-      <para>Next, it&apos;s necessary to register your bean inside of the faces-config.xml file:</para>
-      <programlisting role="XML">    <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD  JavaServer Faces Config 1.1//EN"
-    "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
-    <faces-config>
-      <managed-bean>
-        <managed-bean-name>bean</managed-bean-name>
-        <managed-bean-class>demo.Bean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-        <managed-property>
-          <property-name>text</property-name>
-          <value/>
-        </managed-property>
-      </managed-bean>
-    </faces-config>]]></programlisting>
-      <para>
-        <note>
-          <title>Note:</title>
-          <para>Nothing that relates directly to RichFaces is required in the configuration
-          file.</para>
-        </note>
-      </para>
-    </section>
-    <section id="Web.xml">
-      <?dbhtml filename="Web.xml.html"?>
-      <title>Web.xml</title>
-      <para>It is also necessary to add jar files (see <link linkend="Installation">installation
-          chapter</link>) and modify the &quot;web.xml&quot; file: </para>
-      <programlisting role="XML">    <![CDATA[<?xml version="1.0"?>
-    <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-    <display-name>a4jEchoText</display-name>
-    <context-param>
-        <param-name>org.richfaces.SKIN</param-name>
-        <param-value>blueSky</param-value>
-    </context-param>
-    <context-param>
-        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-        <param-value>server</param-value>
-    </context-param>
-    <filter> 
-        <display-name>RichFaces Filter</display-name> 
-        <filter-name>richfaces</filter-name> 
-        <filter-class>org.ajax4jsf.Filter</filter-class> 
-    </filter> 
-    <filter-mapping> 
-        <filter-name>richfaces</filter-name> 
-        <servlet-name>Faces Servlet</servlet-name>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
-    </filter-mapping>
-    <listener>
-        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-    </listener>
-      
-    <!-- Faces Servlet -->
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-      
-    <!-- Faces Servlet Mapping -->
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
-    </servlet-mapping>
-    <login-config>
-        <auth-method>BASIC</auth-method>
-    </login-config>
-    </web-app>]]></programlisting>
-      <para>Now your application should work.</para>
-    </section>
-    <section id="Deployment">
-      <?dbhtml filename="Deployment.html"?>
-      <title>Deployment</title>
-      <para>Finally, you should be able to place this application on your Web server.To start your
-        project, point your browser at <ulink url="http://localhost:8080/a4jEchoText/echo.jsf"
-          >http://localhost:8080/a4jEchoText/echo.jsf</ulink>
-      </para>
-    </section>
-  </section>
+                    <para> That’s it. Run the application on server. Write the full pass to <code>greeter.jsp</code> page in browser; 
+                              do not forget to change the extension to <code>*.jsf</code>: <code>http://localhost:8080/Greeter/pages/greeter.jsf</code>
+                    </para>
+                    <figure>
+                              <title>"RichFaces Greeter" application</title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/RichFaces Greeter.png" />
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+                    <para>
+                              <ulink url="http://docs.jboss.org/tools/movies/demos/rich_faces_demo/rich_faces_demo.htm">RichFaces Toolkit for developing Web application</ulink> video tutorial at JBoss portal
+                              shows how to perform the described actions in JBoss Developer Studio in details. 
+                    </para>
+          </section>
 </chapter>
