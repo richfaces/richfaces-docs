@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="devsample" xreflabel="devsample">
+    <?dbhtml filename="devsample.html"?>
+    <chapterinfo>
+        <keywordset>
+            <keyword>devsample</keyword>
+            <keyword>CDK</keyword>
+	    <keyword>Guide</keyword>
+        </keywordset>
+    </chapterinfo>
+
+    <title>Developer sample creation</title>
+	<para>
+			The <property>RichFaces CDK</property> allows you to create samples easier as it has been discussed earlier
+			in the <link linkend="overview">&quot;Component usage overview&quot;</link> chapter.
+			Let&apos;s create a simple JSF project, called <property>inputDate-sample</property> for example,
+     		with the help of the <property>maven-archetype-jsfwebapp</property> archetype.
+	</para>
+	<para>
+    	 It is necessary to proceed to your <property>Sandbox</property> directory
+    	 where you have created the <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component
+    	 and launch the following command (all in one line):
+    </para>
+    <programlisting role="XML"><![CDATA[mvn archetype:create -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-jsfwebapp -DarchetypeVersion=3.3.0.GA -DgroupId=org.mycompany -DartifactId=inputDate-sample]]></programlisting>
+    <para>
+    	As easy to see a new directory <property>inputDate-sample</property> is created with the predefined JSF project structure:
+    </para>	
+    <figure>
+        <title>The predefined JSF project structure</title>
+        <mediaobject> 
+            <imageobject>
+                <imagedata fileref="images/root.png"/>
+            </imageobject>
+        </mediaobject>
+    </figure>
+	<para>
+		It should be pointed out that <property>maven-archetype-jsfwebapp</property> archetype creates 
+		skeletons of the following files: 
+		JSP page, 
+		Facelets page, 
+		managed bean already registered in the <property>faces-config.xml</property>, 
+		complete deployment descriptor (<property>web.xml</property>).
+	</para>
+	<para>
+		Now it is necessary to edit a JSP page, managed bean skeletons, and add the proper dependency 
+		to the <property>pom.xml</property> file of the <property>inputDate-sample</property> project.
+	</para>
+	  <section id="devsample_jsppage">
+    	<title>JSP Page</title>
+    	<para>
+	    	You should proceed to the <property>inputDate-sample/src/main/webapp/pages</property> directory
+	    	and edit <property>index.jsp</property> file. 
+	    	You should add a form with our <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component.
+	    </para>
+	    <para>
+    	 	Here is the full page (index.jsp):
+    	</para>
+   
+    <programlisting role="XML"><![CDATA[
+<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
+<%@ taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
+<%@ taglib uri="http://mycompany.org/inputDate" prefix="my"%>
+<html>
+	<head>
+		<title>My inputDate</title> 
+	</head>
+	<body>
+		<f:view>
+			<h:form>
+				<my:inputDate value="#{bean.text}">
+					<f:facet name="caption">
+						<f:verbatim>
+							Calendar:
+						</f:verbatim>
+					</f:facet>
+				</my:inputDate>
+				<h:commandButton value="Submit" />
+			</h:form>
+		</f:view>
+	</body>
+</html>
+]]></programlisting>
+	</section>
+	<section id="devsample_dataBean">
+    	<title>Data Bean</title>
+    	<para>
+    	 In order to build this application, you should edit already created managed bean:
+    	</para>
+   
+    <programlisting role="JAVA"><![CDATA[
+package org.mycompany;
+
+public class Bean {
+
+	private	String text = null;
+
+	public Bean() {
+	
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+}
+]]></programlisting>
+	</section>
+	<section id="devsample_pom">
+    	<title>pom.xml</title>
+    	<para>
+    		In order to use any component on a page (JSF, Facelets, RichFaces, etc.) you should 
+    		add necessary libraries to the JSF project. Sometime it takes a lot of time to get
+    		all the dependencies of a particular library. You should also prevent versions conflict if the 
+    		library already exists on a server.
+    		Now we are going to add necessary libraries to the JSF project, deploy and run project on 
+    		a server. <property>Maven</property> will help us.
+    	</para>
+   		<para>
+   			<property>Maven</property> is a high-level, intelligent build and deployment tool 
+   			designed to take much of the hard work out of the build process. 
+   			In Maven&apos;s Project Object Model (POM) file we could declare necessary 
+   			dependent libraries and Maven plugins used to manage all parts of the build process.
+   		</para>
+   		<para>
+   			Our <emphasis role="bold"><property>&lt;inputDate&gt;</property></emphasis> component depends on JSF and RichFaces
+   			libraries.
+   			If you declare <property>inputDate</property> dependency in 
+   			the <property>inputDate-sample</property> project&apos;s POM   			
+   			all the necessary libraries will be added automatically.
+   			Therefore you need to delete <property>richfaces-ui</property> artifact out of 
+   			dependencies first and then	add only one <property>inputDate</property> dependency:
+   		</para>
+    <programlisting role="XML"><![CDATA[...
+<dependency>
+	<groupId>org.mycompany</groupId>
+	<artifactId>inputDate</artifactId>
+	<version>1.0-SNAPSHOT</version>
+</dependency>
+...]]></programlisting>
+	<para>
+		Now it is possible to build the <property>inputDate-sample</property> project with the help of the following command:
+	</para>
+	    <programlisting role="XML"><![CDATA[mvn install]]></programlisting>
+	<para>
+		The final step is to deploy and run the project on a server. 
+		One of the convenient features of Maven is the <link url="http://mojo.codehaus.org/jetty-maven-plugin/usage.html">Jetty plugin</link>.
+		<link url="http://www.mortbay.org/jetty/">Jetty</link> is an open-source web server implemented entirely in Java. 
+		In order to deploy and run the project on the <property>Jetty</property> you should take the following steps:   
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para>
+				add the <property>maven-jetty-plugin</property> to the <property>pom.xml</property>:
+			</para>
+			    <programlisting role="XML"><![CDATA[...
+<plugin>
+	<groupId>org.mortbay.jetty</groupId>
+	<artifactId>maven-jetty-plugin</artifactId>
+	<version>6.1.5</version>
+	<configuration>
+		<scanIntervalSeconds>10</scanIntervalSeconds>
+		<connectors>
+			<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+				<port>8080</port>
+				<maxIdleTime>60000</maxIdleTime>
+			</connector>
+		</connectors>
+	</configuration>
+</plugin>
+...]]></programlisting>
+		</listitem>
+		<listitem>
+			<para>
+				launch the following command in the <property>inputDate-sample</property> directory:
+			</para>
+			    <programlisting role="XML"><![CDATA[...
+mvn jetty:run
+...]]></programlisting>
+		</listitem>
+		<listitem>
+			<para>
+				after the scanner has been started 
+				point your browser at <ulink url="http://localhost:8080/inputDate-sample">http://localhost:8080/inputDate-sample</ulink>.
+			</para>
+		</listitem>		
+	</itemizedlist>
+	<para>
+		That&apos; all! Your sample JSF project has been created.
+	</para>
+	<para>
+		Here you can find the whole <ulink url="examples/pom.xml">pom.xml</ulink> file.
+	</para>
+	</section>
+</chapter>
