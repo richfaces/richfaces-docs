@@ -72,7 +72,7 @@
                     <para>
                               <emphasis role="bold">Example:</emphasis>
                     </para>
-                    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlCalendar; 	
+                    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlCalendar;
 ...
 HtmlCalendar myCalendar = new HtmlCalendar();
 ...
@@ -132,6 +132,39 @@ HtmlCalendar myCalendar = new HtmlCalendar();
                                                   changing selected day.</para>
                               </listitem>
                     </itemizedlist>
+                    
+                    
+                    
+                    <para>
+                              With the help of the
+	<emphasis>
+	          <property>&quot;readonly&quot;</property>
+	</emphasis>
+                              attribute you can make date, time and input field unavailable, but you can look through the next/previous month or the next/previous year.
+                    </para>
+                    <para>
+                              In order to disable the component, use the <emphasis>
+	<property>&quot;disabled&quot;</property>
+                              </emphasis> attribute. With its help both controls are disabled in the 
+                              <emphasis>
+                                        <property>&quot;popup&quot;</property>
+                              </emphasis>
+                                                  mode.
+                    </para>
+                    <figure>
+                              <title>Using the <emphasis>
+                                        <property>&quot;disabled&quot;</property>
+                              </emphasis> attribute.</title>
+                              
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/calendar6.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+                    
+                    
+                    
                     <para>The <emphasis role="bold">
                                         <property>&lt;rich:calendar&gt;</property>
                               </emphasis> component can render pages of days in two modes. A mode
@@ -190,7 +223,7 @@ HtmlCalendar myCalendar = new HtmlCalendar();
                               </emphasis> event as it&apos;s shown in the example below:</para>
                     <programlisting role="XML"><![CDATA[...
     <rich:calendar id="date" value="#{bean.dateTest}">
-        <a4j:support event="ondateselected" reRender="mainTable"/>                     
+        <a4j:support event="ondateselected" reRender="mainTable"/>
     </rich:calendar>
 ...]]></programlisting>
                     <para><emphasis>
@@ -404,19 +437,19 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
     .talign{
         text-align:center;
     }
-</style>     
+</style>
  ...]]></programlisting>
 
                     <programlisting role="XML"><![CDATA[...
-<rich:calendar id="myCalendar" popup="true" locale="#{calendarBean.locale}" value="#{bean.date}" 
+<rich:calendar id="myCalendar" popup="true" locale="#{calendarBean.locale}" value="#{bean.date}"
                             preloadRangeBegin="#{bean.date}" preloadRangeEnd="#{bean.date}" cellWidth="40px" cellHeight="40px">
 
-<!-- Customization with usage of facets and accessible elements -->                            
+<!-- Customization with usage of facets and accessible elements -->
     <f:facet name="header">
         <h:panelGrid columns="2" width="100%" columnClasses="width100, fake">
             <h:outputText value="{selectedDateControl}" />
             <h:outputText value="{todayControl}"  style="font-weight:bold; text-align:left"/>
-        </h:panelGrid> 
+        </h:panelGrid>
     </f:facet>
     <f:facet name="weekDay">
         <h:panelGroup style="width:60px; overflow:hidden;" layout="block">
@@ -429,12 +462,12 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
         </h:panelGroup>
      </f:facet>
      <f:facet name="footer">
-        <h:panelGrid columns="3" width="100%" columnClasses="fake, width100 talign">  
+        <h:panelGrid columns="3" width="100%" columnClasses="fake, width100 talign">
             <h:outputText value="{previousMonthControl}" style="font-weight:bold;"/>
             <h:outputText value="{currentMonthControl}" style="font-weight:bold;"/>
             <h:outputText value="{nextMonthControl}" style="font-weight:bold;"/>
-        </h:panelGrid> 
-    </f:facet>  
+        </h:panelGrid>
+    </f:facet>
     <h:outputText value="{day}"></h:outputText>
 </rich:calendar>
 ...]]></programlisting>
@@ -722,13 +755,13 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
                                                   <!--
           <row>
           <entry>enable()</entry>
-          
+
           <entry>Enables calendar</entry>
           </row>
-          
+
           <row>
           <entry>disable()</entry>
-          
+
           <entry>Disables calendar</entry>
           </row>
         -->
@@ -1909,9 +1942,9 @@ oncurrentdateselected="alert('month(year) select:'+event.rich.date.toString());"
                               <emphasis role="bold">Example:</emphasis>
                     </para>
                     <programlisting role="CSS"><![CDATA[...
-.rich-calendar-today {									
-    background-color: #FF0000;							
-}	
+.rich-calendar-today {
+    background-color: #FF0000;
+}
 ...]]></programlisting>
 
                     <para>This is a result:</para>
