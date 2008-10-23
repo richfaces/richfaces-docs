@@ -1,175 +1,113 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<chapter id="SettingsForDifferentEnvironments"
-	xreflabel="SettingsForDifferentEnvironments">
-	<?dbhtml filename="SettingsForDifferentEnvironments.html"?>
-	<chapterinfo>
-		<keywordset>
-			<keyword>MyFaces</keyword>
+<chapter id="SettingsForDifferentEnvironments" xreflabel="SettingsForDifferentEnvironments">
+          <?dbhtml filename="SettingsForDifferentEnvironments.html"?>
+          <chapterinfo>
+                    <keywordset>
+                              <keyword>MyFaces</keyword>
 
-			<keyword>JSF</keyword>
+                              <keyword>JSF</keyword>
 
-			<keyword>RichFaces</keyword>
+                              <keyword>RichFaces</keyword>
 
-		</keywordset>
-	</chapterinfo>
+                    </keywordset>
+          </chapterinfo>
+          <title>Settings for different environments</title>
+          <para> RichFaces comes with support for all tags (components) included in the JavaServer
+                    Faces specification. To add RichFaces capabilities to the existing JSF project
+                    you should just put the RichFaces libraries into the lib folder of the project
+                    and add filter mapping. The behavior of the existing project doesn&apos;t
+                    change just because of RichFaces. </para> &wadParams; <section id="SunJSFRI">
+                    <?dbhtml filename="SunJSFRI.html"?>
+                    <title>Sun JSF RI</title>
+                    <para> RichFaces works with implementation of <property>JSF</property> (JSF 1.2)
+                              and with most <property>JSF</property> component libraries without any
+                              additional settings. For more information look at: </para>
 
-	<title>Settings for different environments</title>
-	<para>
-		RichFaces comes with support for all tags (components) included
-		in the JavaServer Faces specification. To add RichFaces
-		capabilities to the existing JSF project you should just put the
-		RichFaces libraries into the lib folder of the project and add
-		filter mapping. The behavior of the existing project
-		doesn&apos;t change just because of RichFaces.
-	</para>
-	&wadParams;
-	<section id="SunJSFRI">
-		<?dbhtml filename="SunJSFRI.html"?>
-		<title>Sun JSF RI</title>
-		<para>
-			RichFaces works with implementation of
-			<property>JSF</property>
-			(JSF 1.2) and with most
-			<property>JSF</property>
-			component libraries without any additional settings. For
-			more information look at:
-		</para>
+                    <simplelist>
+                              <member>
+                                        <ulink url="http://java.sun.com/javaee/javaserverfaces/">
+                                                  java.sun.com </ulink>
+                              </member>
+                    </simplelist>
+                    <para> Additional information how to get <code> ViewExpiredExceptions </code>
+                              when using <property>RichFaces</property> with <property>JSF
+                              1.2</property> you can find <ulink
+                                        url="http://wiki.jboss.org/auth/wiki//RichFacesCookbook/ViewExpiredException"
+                                        >here</ulink>. </para>
+          </section>
+          <section id="ApacheMyFaces">
+                    <?dbhtml filename="ApacheMyFaces.html"?>
+                    <title>Apache MyFaces</title>
+                    <para> RichFaces works with <property>Apache MyFaces</property> 1.2 version
+                              including specific libraries like TOMAHAWK Sandbox and Trinidad (the
+                              previous ADF Faces). However, there are some considerations to take
+                              into account for configuring applications to work with
+                                        <property>MyFaces</property> and RichFaces. </para>
+                    <para> There are some problems with different filters defined in the web.xml
+                              file clashing. To avoid these problems, the RichFaces filter must be
+                              the first one among other filters in the web.xml configuration file. </para>
+                    <para> For more information look at: <ulink url="http://myfaces.apache.org">
+                                        http://myfaces.apache.org </ulink>
+                    </para>
+                    <para> There&apos;s one more problem while using <property>MyFaces +
+                              Seam</property> . If you use this combination you should use <emphasis
+                                        role="bold">
+                                        <property>&lt;a4j:page&gt;</property>
+                              </emphasis> inside <emphasis role="bold">
+                                        <property>&lt;f:view&gt;</property>
+                              </emphasis> (right after it in your code) wrapping another content
+                              inside your pages because of some problems in realization of <emphasis
+                                        role="bold">
+                                        <property>&lt;f:view&gt;</property>
+                              </emphasis> in myFaces. </para>
+                    <para> The problem is to be overcome in the nearest future. </para>
+          </section>
+          <section id="FaceletsSupport">
+                    <?dbhtml filename="FaceletsSupport.html"?>
+                    <title>Facelets Support</title>
+                    <para> A high-level support for <property>Facelets</property> is one of our main
+                              support features. When working with RichFaces, there is no difference
+                              what release of <property>Facelets</property> is used. </para>
+                    <para> You should also take into account that some JSF frameworks such as
+                                        <property>Facelets</property> use their own
+                                        <code>ViewHandler</code> and need to have it first in the
+                              chain of ViewHandlers and the RichFaces AjaxViewHandler is not an
+                              exception. At first RichFaces installs its ViewHandler in any case, so
+                              in case of two frameworks, for example RichFaces + Facelets, no
+                              changes in settings are required. Although, when more then one
+                              framework (except RichFaces) is used, it&apos;s possible to use
+                              the <code>VIEW_HANDLERS</code> parameter defining these frameworks
+                              view handlers according to its usage order in it. For example, the
+                              declaration: </para>
 
-		<simplelist>
-			<member>
-				<ulink
-					url="http://java.sun.com/javaee/javaserverfaces/">
-					java.sun.com
-				</ulink>
-			</member>
-		</simplelist>
-		<para>
-			Additional information how to get
-			<code>
-				ViewExpiredExceptions
-			</code>
-			when using <property>RichFaces</property>
-			with <property>JSF 1.2</property>
-			you can find <ulink url="http://wiki.jboss.org/auth/wiki//RichFacesCookbook/ViewExpiredException">here</ulink>.
-		 </para>
-	</section>
-	<section id="ApacheMyFaces">
-		<?dbhtml filename="ApacheMyFaces.html"?>
-		<title>Apache MyFaces</title>
-		<para>
-			RichFaces works with
-			<property>Apache MyFaces</property>
-			1.2 version including specific libraries like TOMAHAWK
-			Sandbox and Trinidad (the previous ADF Faces). However,
-			there are some considerations to take into account for
-			configuring applications to work with
-			<property>MyFaces</property>
-			and RichFaces.
-		</para>
-		<para>
-			There are some problems with different filters defined in
-			the web.xml file clashing. To avoid these problems, the
-			RichFaces filter must be the first one among other filters
-			in the web.xml configuration file.
-		</para>
-		<para>
-			For more information look at:
-			<ulink url="http://myfaces.apache.org">
-				http://myfaces.apache.org
-			</ulink>
-		</para>
-		<para>
-			There&apos;s one more problem while using
-			<property>MyFaces + Seam</property>
-			. If you use this combination you should use
-			<emphasis role="bold">
-				<property>&lt;a4j:page&gt;</property>
-			</emphasis>
-			inside
-			<emphasis role="bold">
-				<property>&lt;f:view&gt;</property>
-			</emphasis>
-			(right after it in your code) wrapping another content
-			inside your pages because of some problems in realization of
-			<emphasis role="bold">
-				<property>&lt;f:view&gt;</property>
-			</emphasis>
-			in myFaces.
-		</para>
-		<para>
-			The problem is to be overcome in the nearest future.
-		</para>
-	</section>
-	<section id="FaceletsSupport">
-		<?dbhtml filename="FaceletsSupport.html"?>
-		<title>Facelets Support</title>
-		<para>
-			A high-level support for
-			<property>Facelets</property>
-			is one of our main support features. When working with
-			RichFaces, there is no difference what release of
-			<property>Facelets</property>
-			is used.
-		</para>
-		<para>
-			You should also take into account that some JSF frameworks
-			such as
-			<property>Facelets</property>
-			use their own
-			<code>ViewHandler</code>
-			and need to have it first in the chain of ViewHandlers and
-			the RichFaces AjaxViewHandler is not an exception. At first
-			RichFaces installs its ViewHandler in any case, so in case
-			of two frameworks, for example RichFaces + Facelets, no
-			changes in settings are required. Although, when more then
-			one framework (except RichFaces) is used, it&apos;s possible to
-			use the
-			<code>VIEW_HANDLERS</code>
-			parameter defining these frameworks view handlers according
-			to its usage order in it. For example, the declaration:
-		</para>
-
-		<para>
-			<emphasis role="bold">Example:</emphasis>
-		</para>
-		<programlisting role="XML">
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML">
 			&lt;context-param&gt;
 			&lt;param-name&gt;org.ajax4jsf.VIEW_HANDLERS&lt;/param-name&gt;
 			&lt;param-value&gt;com.sun.facelets.FaceletViewHandler&lt;/param-value&gt;
 			&lt;/context-param&gt;
 		</programlisting>
-		<para>
-			says that
-			<property>Facelets</property>
-			will officially be the first, however <code>AjaxViewHandler</code> will
-			be a little ahead temporarily to do some small, but very
-			important job.
-		</para>
-		<note>
-			<title>Note:</title>
-			<para>
-				In this case you don&apos;t have to define
-				<code>FaceletViewHandler</code>
-				in the WEB-INF/faces-config.xml.
-			</para>
-		</note>
-	</section>
-	<section id="JBossSeamSupport">
-		<?dbhtml filename="JBossSeamSupport.html"?>
-		<title>JBoss Seam Support</title>
-		<para>
-			RichFaces now works out-of-the-box with
-			<property>JBoss Seam</property>
-			and Facelets running inside JBoss AS 4.0.4 and higher. There
-			is no more shared JAR files needed. You just have to package
-			the RichFaces library with your application.
-		</para>
-		<para>
-			Your web.xml for
-			<property>Seam 1.2</property>
-			must be like this:
-		</para>
-		<programlisting role="XML"><![CDATA[<?xml version="1.0" ?>
+                    <para> says that <property>Facelets</property> will officially be the first,
+                              however <code>AjaxViewHandler</code> will be a little ahead
+                              temporarily to do some small, but very important job. </para>
+                    <note>
+                              <title>Note:</title>
+                              <para> In this case you don&apos;t have to define
+                                                  <code>FaceletViewHandler</code> in the
+                                        WEB-INF/faces-config.xml. </para>
+                    </note>
+          </section>
+          <section id="JBossSeamSupport">
+                    <?dbhtml filename="JBossSeamSupport.html"?>
+                    <title>JBoss Seam Support</title>
+                    <para> RichFaces now works out-of-the-box with <property>JBoss Seam</property>
+                              and Facelets running inside JBoss AS 4.0.4 and higher. There is no
+                              more shared JAR files needed. You just have to package the RichFaces
+                              library with your application. </para>
+                    <para> Your web.xml for <property>Seam 1.2</property> must be like this: </para>
+                    <programlisting role="XML"><![CDATA[<?xml version="1.0" ?>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
@@ -188,12 +126,7 @@
         <url-pattern>*.seam</url-pattern>
     </filter-mapping>
 
-    <context-param>
-        <param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
-        <param-value>org.jboss.seam.ui.facelet.SeamFaceletViewHandler</param-value>
-    </context-param>
-
-    <!-- Seam -->
+<!-- Seam -->
 
     <listener>
         <listener-class>org.jboss.seam.servlet.SeamListener</listener-class>
@@ -249,13 +182,11 @@
     </servlet-mapping>
 
 </web-app>]]></programlisting>
-		<para>
-			<property>Seam 2</property>
-			supports RichFaces Filter. Thus your web.xml for Seam 2 must
-			be like this:
-		</para>
+                    <para>
+                              <property>Seam 2</property> supports RichFaces Filter. Thus your
+                              web.xml for Seam 2 must be like this: </para>
 
-		<programlisting role="XML"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+                    <programlisting role="XML"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5"
     xmlns="http://java.sun.com/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -317,34 +248,29 @@
 
 </web-app>]]></programlisting>
 
-		<para>
-			Only one issue still persists while using
-			<property>Seam</property>
-			with MyFaces. Look at myFaces part of this section.
-		</para>
-		<para>Detailed information on how to integrate Richfaces and Trinidad and how to hide &quot;.seam&quot; postfix in the URL you can find
-		<ulink url="http://wiki.jboss.org/auth/wiki/RichFacesWithTrinidad">here</ulink></para>
-	</section>
-	<section id="PortletSupport">
-		<title>Portlet Support</title>
-		<para>
-			<property>JBoss Portlets</property>
-			have support since version Ajax4jsf 1.1.1. This support is
-			improved in RichFaces 3.2.1. Provide your feedback on
-			compatible with RichFaces if you face some problems.
-		</para>
-	</section>
-	<section id="SybaseEAServer">
-		<title>Sybase EAServer</title>
-		<para>
-			The load-on-startup for the Faces Servlet had to be set to 0
-			in web.xml.
-		</para>
+                    <para> Only one issue still persists while using <property>Seam</property> with
+                              MyFaces. Look at myFaces part of this section. </para>
+                    <para>Detailed information on how to integrate Richfaces and Trinidad and how to
+                              hide &quot;.seam&quot; postfix in the URL you can find <ulink
+                                        url="http://wiki.jboss.org/auth/wiki/RichFacesWithTrinidad"
+                                        >here</ulink></para>
+          </section>
+          <section id="PortletSupport">
+                    <title>Portlet Support</title>
+                    <para>
+                              <property>JBoss Portlets</property> have support since version
+                              Ajax4jsf 1.1.1. This support is improved in RichFaces 3.2.1. Provide
+                              your feedback on compatible with RichFaces if you face some problems.
+                    </para>
+          </section>
+          <section id="SybaseEAServer">
+                    <title>Sybase EAServer</title>
+                    <para> The load-on-startup for the Faces Servlet had to be set to 0 in web.xml. </para>
 
-		<para>
-			<emphasis role="bold">Example:</emphasis>
-		</para>
-		<programlisting role="XML"><![CDATA[...
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
       <servlet>
           <servlet-name>Faces Servlet</servlet-name>
           <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -352,30 +278,23 @@
     </servlet>
 ...
 ]]></programlisting>
-		<para>
-			This is because, EAServer calls servlet <code>init()</code> before the
-			<code>ServletContextInitializer</code>. Not an EAServer bug, this is in
-			Servlet 2.3 spec.
-		</para>
-	</section>
-	<section id="OracleAS_OC4J">
-		<title>Oracle AS/OC4J</title>
-		<para>
-			In order to deploy your project with RichFaces components to
-			an
-			<property>Oracle AS</property>
-			you just have to prevent the application&apos;s class loader
-			from importing the Oracle XML parser. Use the following
-			notation in
-			<property>orion-application.xml</property>
-			:
-		</para>
-		<programlisting role="XML"><![CDATA[...
+                    <para> This is because, EAServer calls servlet <code>init()</code> before the
+                                        <code>ServletContextInitializer</code>. Not an EAServer bug,
+                              this is in Servlet 2.3 spec. </para>
+          </section>
+          <section id="OracleAS_OC4J">
+                    <title>Oracle AS/OC4J</title>
+                    <para> In order to deploy your project with RichFaces components to an
+                                        <property>Oracle AS</property> you just have to prevent the
+                              application&apos;s class loader from importing the Oracle XML
+                              parser. Use the following notation in
+                              <property>orion-application.xml</property> : </para>
+                    <programlisting role="XML"><![CDATA[...
 <imported-shared-libraries>
         <remove-inherited name="oracle.xml"/>
         <remove-inherited name="oracle.xml.security"/>
 </imported-shared-libraries>
 ...
 ]]></programlisting>
-	</section>
+          </section>
 </chapter>
