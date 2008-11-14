@@ -50,20 +50,20 @@
 	
     		<form id="feedback-mailform">
 			<div class="feedback-textbox-div">
-			  Subject:<input type="text" id="subject" title="Enter the subject of your message" class="feedback-textbox" />
+			  Subject:<input type="text" id="subject" name="subject" title="Enter the subject of your message" class="feedback-textbox" />
 			</div>
 			<div class="feedback-textbox-div">
 			  <span style="vertical-align: top;">Message:</span>
-			  <textarea name="message" title="Type here the text of your message" id="feedback-message"><xsl:text> </xsl:text></textarea>
+			  <textarea name="message" title="Type here the text of your message" id="message"><xsl:text> </xsl:text></textarea>
 			</div>
 			<div class="feedback-textbox-div">
-			  Your name:<input type="text" id="name" title="Enter your name" class="feedback-textbox" />
+			  Your name:<input type="text" id="name" name="name" title="Enter your name" class="feedback-textbox" />
 			</div>
 			<div class="feedback-textbox-div">
-			  Your email:<input type="text" id="email" title="Enter your email address" class="feedback-textbox" />
+			  Your email:<input type="text" id="email" name="email" title="Enter your email address" class="feedback-textbox" />
 			</div>
 			<span class="feedback-button-container">
-				<input type="submit" value="Send Message" class="feedback-formbutton" title="Send Message" />
+				<input type="submit" value="Send Message" name="submit" class="feedback-formbutton" title="Send Message" />
 			</span>
 			<span class="feedback-button-container">
 				<input type="reset" value="Clear All Fields" class="feedback-formbutton" title="Clear All Fields" />

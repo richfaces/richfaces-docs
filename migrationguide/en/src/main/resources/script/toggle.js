@@ -8,11 +8,11 @@ function initializeEmailClient(){
 
  // send http request
 function sendEmail(e){
-  var params='subject='+$F('subject')+'&message='+escape($F('message'))+'&name='+$F('name')+'&email='+$F('email');
-  var xmlobj=new Ajax.Updater('feedback-state','script/send_mail.php',{method:'post',parameters: params});
 
   // prevent form from submitting
   Event.stop(e);
+  var params='subject='+$F('subject')+'&message='+escape($F('message'))+'&name='+$F('name')+'&email='+$F('email')+'&path='+window.location;
+  var xmlobj=new Ajax.Updater('feedback-state','script/send_mail.php',{method:'get',parameters: params});
 }
 
 function dbToggle(node, expandText, collapseText) {
