@@ -6,7 +6,7 @@
    Author: Mark Newton <mark.newton@jboss.org>
 -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"  xmlns:date="http://exslt.org/dates-and-times" exclude-result-prefixes="date">
 
    <xsl:import href="collapsing-navigation.xsl"/>
    
@@ -18,6 +18,7 @@ From: xhtml/docbook.xsl
 Reason: Remove inline style for draft mode
 Version: 1.72.0
 -->
+
 <xsl:template name="head.content">
 	<xsl:param name="node" select="."/>
 	<xsl:param name="title">
@@ -61,13 +62,23 @@ Version: 1.72.0
 	</xsl:if>
 	
 	<link rel="shortcut icon"  type="image/vnd.microsoft.icon" href="images/favicon.ico" />
-
 	<xsl:apply-templates select="." mode="head.keywords.content"/>
 </xsl:template>
 
-<xsl:template match="//citebiblio">
+
+
+<xsl:template match="abstract" mode="titlepage.mode">
+	<div id="timestamp">
+		<xsl:text>Last published: </xsl:text>
+		<xsl:call-template name="datetime.format">
+			<xsl:with-param name="date" select="date:date-time()"/>
+			<xsl:with-param name="format" select="'B d, Y'"/>
+		</xsl:call-template>
+	</div>
 	<div>
-	<xsl:value-of select="." />
-</div>
+	    <xsl:apply-templates select="." mode="class.attribute"/>
+	    <xsl:apply-templates mode="titlepage.mode"/>
+	  </div>
 </xsl:template>
+
 </xsl:stylesheet>
