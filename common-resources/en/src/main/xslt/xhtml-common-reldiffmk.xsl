@@ -69,13 +69,6 @@ Version: 1.72.0
 </xsl:template>
 
 <xsl:template match="abstract" mode="titlepage.mode">
-	<div id="timestamp">
-		<xsl:text>Last published: </xsl:text>
-		<xsl:call-template name="datetime.format">
-			<xsl:with-param name="date" select="date:date-time()"/>
-			<xsl:with-param name="format" select="'B d, Y'"/>
-		</xsl:call-template>
-	</div>
 	<div>
 	    <xsl:apply-templates select="." mode="class.attribute"/>
 	    <xsl:apply-templates mode="titlepage.mode"/>
