@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section>
+          <sectioninfo>
+                    <keywordset>
+                              <keyword>rich:editor</keyword>
+                              <keyword>editor</keyword>
+                    </keywordset>
+          </sectioninfo>
+          <table>
+                    <title>Component identification parameters</title>
+                    <tgroup cols="2">
+                              <thead>
+                                        <row>
+                                                  <entry>Name</entry>
+                                                  <entry>Value</entry>
+                                        </row>
+                              </thead>
+                              <tbody>
+                                        <row>
+                                                  <entry>component-type</entry>
+                                                  <entry>org.richfaces.component.editor</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>component-class</entry>
+                                                  <entry>org.richfaces.component.html.Htmleditor</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>component-family</entry>
+                                                  <entry>org.richfaces.component.editor</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>renderer-type</entry>
+                                                  <entry>org.richfaces.renderkit.html.editorRenderer</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>tag-class</entry>
+                                                  <entry>org.richfaces.taglib.editorTag</entry>
+                                        </row>
+                              </tbody>
+                    </tgroup>
+          </table>
+          <section>
+                    <title>Creating the Component with a Page Tag</title>
+                    <para>To create the simplest variant on a page use the following syntax:</para>
+
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
+<rich:editor />
+...]]></programlisting>
+          </section>
+          <section>
+                    <title>Creating the Component Dynamically Using Java</title>
+
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.Htmleditor;
+...
+Htmleditor myeditor = new Htmleditor();
+...]]></programlisting>
+          </section>
+          <section>
+                    <title>Details of Usage</title>
+
+<para>The <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> is fully 
+          based on TinyMCE web based Javascript HTML WYSIWYG editor control and supports all of the features has.
+The rich:editor adjusts  TinyMCE editor of JSF environment adding some functional capabilities.
+</para>
+                    
+                    
+ <para>The easiest way to place the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis>on a page is as follows:</para>
+                    
+                    
+ <programlisting role="XML"><![CDATA[
+   <rich:editor value="#{bean.editorValue}" />
+]]></programlisting>  
+
+             
+                    <para>Implementation of  <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> provides three ways to define the properties of the component:
+                    </para>
+ 
+ <orderedlist>
+          
+           <listitem><para>Using attributes;</para></listitem>
+           <listitem><para>Using using &lt;f:param&gt; JSF tag;</para></listitem>
+           <listitem><para>Using configuration files.</para></listitem>
+           
+ </orderedlist>
+      
+                    <para>The most important properties are implemented as attributes and you can define them as any other attribute. 
+                              The attributes of the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> component
+                              match the corresponding properties of TinyMCE editor.</para>   
+                    
+                    <para>For example, a theme for the editor an be defined using  the <property>&quot;theme&quot;</property> attribute like this: </para>
+                    
+                    <programlisting role="XML"><![CDATA[
+<rich:editor value="#{bean.editorValue}" theme="advanced"/>
+]]></programlisting>  
+                   
+                    <para>
+                              Apart from the attributes that define the editor&apos;s properties there are a some attributes that help  handle events(custom event handlers).
+                    </para>
+                    <para>
+                              All custom event handlers can be found in the table of attributes and you can use them the same way as standard HTML event handlers. For example, like this:
+                    </para>
+
+
+                    <para>Most configuration options that TinyMCE provides can be applied using &lt;f:param&gt; JSF tag. 
+                              The syntax is quite simple: the <property>&quot;name&quot;</property> attribute should contain the option, 
+                              the <property>&quot;value&quot;</property> attribute assigns some value to the option.</para>
+
+<para>For example, this code adds some buttons to the editor and positions the toolbar.  </para>
+                    
+<programlisting role="XML"><![CDATA[...
+<rich:editor value="#{bean.editorValue}" theme="advanced" plugins="save,paste" >
+          <f:param name="theme_advanced_buttons1" value="bold,italic,underline, cut,copy,paste,pasteword"/>
+          <f:param name="theme_advanced_toolbar_location" value="top"/>                               
+          <f:param name="theme_advanced_toolbar_align" value="left"/>
+</rich:editor>
+...]]></programlisting> 
+                                                          
+                    <para>This is what you get as a result:</para>
+                    
+                    
+                    
+       <figure>
+                              <title> Setting configuration options with &lt;f:param&gt;
+             
+                              </title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/editor2.png"/>
+                                        </imageobject>
+                              </mediaobject>
+       </figure>
+                    
+                
+                    <para>The last way to configure the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> is 
+                    to use configuration file (.properties)</para>
+                    
+                    <para> This method is can easy your life if you need to configure multiple instances 
+                              of the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis>. </para>
+                    <para>To implement this type of configuration you need to take a few steps:</para>
+                  
+                    <itemizedlist>
+                            <listitem><para>Create a configuration file (.properties) in the classpath folder and add some properties to it. Use standard syntax for the .properties files: <code>parameter=value</code>.  Here is an example of configuration file:</para>
+                                      <programlisting role="XML"><![CDATA[
+theme="advanced"
+plugins="save,paste"
+theme_advanced_buttons1="bold,italic,underline, cut,copy,paste,pasteword"
+theme_advanced_toolbar_location="top"
+theme_advanced_toolbar_align="left"
+]]></programlisting> 
+                                                       
+                            </listitem>
+                            <listitem><para>The properties stored in  configuration file are passed to the
+                                      <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> via 
+                                      <property>&quot;configuration&quot;</property>attribute which takes the name of the configuration file as a value (with out .properties extension).  </para></listitem>
+                              <para>For example, you named the configuration file &quot;editorconfig&quot;, you would address it as follows:
+                              </para>
+                              
+                              <programlisting role="XML"><![CDATA[...
+<rich:editor value="#{bean.editorValue}" configuration="editorconfig"/>
+...]]></programlisting> 
+                              
+                              
+                    <listitem><para>
+                              Alternately, you can use a  EL-binding to define a configuration file. This way you can dynamically change the sets of configuration properties. </para>
+                 
+             <para>    For example, you have two configuration files &quot;configurationAdvanced&quot; and  &quot;configurationSimple&quot; and you want them to be 
+             applied under some condition. </para>
+                              
+                              <para>To do this you need to bind <property>&quot;configuration&quot;</property>attribute to  the appropriate bean property  like this . </para>
+            
+<programlisting role="XML"><![CDATA[...
+<rich:editor value="#{bean.editorValue}" configuration="#{editor.property}" />
+...]]></programlisting> 
+                              <para>Your Java file should look like this.</para>
+                              
+                              <programlisting role="JAVA"><![CDATA[...
+	String configuration;
+	if(some condition){//define some condition
+                              configuration = "configurationAdvanced"; //the name on the file with advanced properties	
+	}
+	else{
+	     configuration= "configurationSimple"; //the name on the file with simplified properties	
+		
+	}
+...]]></programlisting>            
+                              
+                    
+                    </listitem>
+                    
+                    </itemizedlist>
+                    
+  
+                    <para></para>
+                    
+          </section>
+          
+          
+          
+          
+          <!-- JavaScript API-->
+          <section>
+                    <title>JavaScript API</title>
+                
+
+
+          </section>
+          <!-- End of JavaScript API-->
+                <section>
+                    <title>JavaScript API</title>
+                    <table>
+                              <title>JavaScript API</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Function</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>enable()</entry>
+                                                  <entry>Enables the component</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>disable()</entry>
+                                                  <entry>Disables the component</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>stop()</entry>
+                                                  <entry>Stops the uploading
+                                                  process</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>clear()</entry>
+                                                  <entry>Removes all files from the list.
+                                                  The function can also get the
+                                                  $(&apos;id&apos;).component.entries[i]
+                                                  as a parameter to remove a
+                                                  particular file. </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry> submitForm() </entry>
+                                                  <entry> Submits form to server. All
+                                                  added files will be put to
+                                                  model and event. </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry> beforeSubmit() </entry>
+                                                  <entry> Sets up necessary request
+                                                  parameters for file uploading
+                                                  and submits form to server by
+                                                  command button. This method
+                                                  should be used together with
+                                                  commands </entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+
+
+              
+
+
+
+                    
+
+
+          </section>
+          <!-- End of JavaScript API-->
+          <section>
+                    <title>Look-and-Feel Customization</title>
+                    <para>For skinnability implementation, the components use a <emphasis>
+                                        <property>style class redefinition method.</property>
+                              </emphasis> Default style classes are mapped on <emphasis>
+                                        <property>skin parameters.</property>
+                              </emphasis></para>
+                    <para>There are two ways to redefine the appearance of all <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> components at once: <itemizedlist>
+                                        <listitem>
+                                                  <para>Redefine the corresponding skin
+                                                  parameters</para>
+                                        </listitem>
+                                        <listitem>
+                                                  <para> Add to your style sheets style classes used
+                                                  by a <emphasis role="bold">
+                                                  <property>&lt;rich:fileUpload&gt;</property>
+                                                  </emphasis> component</para>
+                                        </listitem>
+                              </itemizedlist>
+                    </para>
+          </section>
+
+          <section>
+                    <title>Skin Parameters Redefinition</title>
+
+                    <table>
+                              <title>Skin parameters redefinition for a component</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>tableBackgroundColor</entry>
+                                                  <entry>background-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>border-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for a font</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>generalFamilyFont</entry>
+                                                  <entry>font-family</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>generalSizeFont</entry>
+                                                  <entry>font-size</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for a toolbar</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>additionalBackgroundColor</entry>
+                                                  <entry>background-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>border-bottom-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>tableBackgroundColor</entry>
+                                                  <entry>border-top-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>tableBackgroundColor</entry>
+                                                  <entry>border-left-color</entry>
+                                                  </row>
+
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for items in the list</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>border-bottom-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for a &quot;Cancel&quot;,
+                                        &quot;Clear&quot; links</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>generalLinkColor</entry>
+                                                  <entry>color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for a button</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>trimColor</entry>
+                                                  <entry>background-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+                    <table>
+                              <title>Skin parameters redefinition for a button border</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>border-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+                    <table>
+                              <title>Skin parameters redefinition for a highlighted button</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>trimColor</entry>
+                                                  <entry>background-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>selectControlColor</entry>
+                                                  <entry>border-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for a pressed button</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>selectControlColor</entry>
+                                                  <entry>border-color</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>additionalBackgroundColor</entry>
+                                                  <entry>background-color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Skin parameters redefinition for &quot;Upload&quot;,
+                                        &quot;Clean&quot; buttons</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>generalTextColor</entry>
+                                                  <entry>color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+                    <table>
+                              <title>Skin parameters redefinition for a disabled
+                                        &quot;Start&quot; button icon</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+                    <table>
+                              <title>Skin parameters redefinition for a disabled
+                                        &quot;Clear&quot; button icon</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Skin parameters</entry>
+                                                  <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>tableBorderColor</entry>
+                                                  <entry>color</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+          </section>
+
+          <section>
+                    <title>Definition of Custom Style Classes</title>
+
+                    <para>The following picture illustrates how CSS classes define styles for
+                              component elements.</para>
+                    <figure>
+                              <title>Classes names</title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload_cn.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+                    <figure>
+                              <title>Classes names</title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload_cn2.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+
+                   
+
+                    <table>
+                              <title>Classes names that define buttons representation</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Class name</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>rich-fileupload-button</entry>
+                                                  <entry>Defines styles for a
+                                                  buttons</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-button-border</entry>
+                                                  <entry>Defines styles for a border of
+                                                  buttons</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-button-light</entry>
+                                                  <entry>Defines styles for a highlight of
+                                                  button</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-button-press</entry>
+                                                  <entry>Defines styles for a pressed
+                                                  button</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-button-dis</entry>
+                                                  <entry>Defines styles for a disabled
+                                                  button</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-button-selection</entry>
+                                                  <entry>Defines styles for
+                                                  &quot;Upload&quot;,
+                                                  &quot;Clean&quot;
+                                                  buttons</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Classes names that define the representation of the buttons'
+                                        icons</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Class name</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico</entry>
+                                                  <entry>Defines styles for an
+                                                  icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-add</entry>
+                                                  <entry>Defines styles for a
+                                                  &quot;Add&quot; button
+                                                  icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-start</entry>
+                                                  <entry>Defines styles for a
+                                                  &quot;Upload&quot;
+                                                  button icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-stop</entry>
+                                                  <entry>Defines styles for a
+                                                  &quot;Stop&quot;
+                                                  button icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-clear</entry>
+                                                  <entry>Defines styles for a
+                                                  &quot;Clear&quot;
+                                                  button icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-add-dis</entry>
+                                                  <entry>Defines styles for a disabled
+                                                  &quot;Add&quot; button
+                                                  icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-start-dis</entry>
+                                                  <entry>Defines styles for a disabled
+                                                  &quot;Upload&quot;
+                                                  button icon</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-ico-clear-dis</entry>
+                                                  <entry>Defines styles for a disabled
+                                                  &quot;Clear&quot;
+                                                  button icon</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+                    <table>
+                              <title>Classes names that define list items representation</title>
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                  <entry>Class name</entry>
+                                                  <entry>Description</entry>
+                                                  </row>
+                                        </thead>
+                                        <tbody>
+                                                  <row>
+                                                  <entry>rich-fileupload-table-td</entry>
+                                                  <entry>Defines styles for a wrapper
+                                                  &lt;td&gt; element of
+                                                  a list items</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>rich-fileupload-anc</entry>
+                                                  <entry>Defines styles for
+                                                  &quot;Cancel&quot;,
+                                                  &quot;Stop&quot;,
+                                                  &quot;Clear&quot;
+                                                  links</entry>
+                                                  </row>
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+
+                    <para>In order to redefine styles for all <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> components on a page using CSS, it&apos;s enough to
+                              create classes with the same names (possible classes could be found in
+                              the tables <link linkend="fileUploadCN"> above</link>) and define
+                              necessary properties in them. </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="CSS"><![CDATA[...
+.rich-fileupload-anc{
+    font-weight:bold;
+    text-decoration:none;
+}
+...]]></programlisting>
+
+                    <para>This is the result:</para>
+
+                    <figure>
+                              <title>Redefinition styles with predefined classes</title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload_pc.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+
+                    <para>In the example above the font weight and text decoration for
+                              &quot;Cancel&quot; and &quot;Clear&quot; links are
+                              changed.</para>
+
+                    <para> Also it&apos;s possible to change styles of particular <emphasis
+                                        role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> component. In this case you should create own style
+                              classes and use them in the corresponding <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis>
+                              <emphasis>
+                                        <property>styleClass</property>
+                              </emphasis> attributes. An example is placed below: </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="CSS"><![CDATA[...
+.myClass{
+        font-weight:bold;
+}
+...]]></programlisting>
+                    <para> The <emphasis>
+                                        <property>&quot;addButtonClass&quot;</property>
+                              </emphasis> attribute for <emphasis role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> is defined as it&apos;s shown in the example below: </para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[<rich:fileUpload ... addButtonClass="myClass"/>
+]]></programlisting>
+
+                    <para>This is the result:</para>
+                    <figure>
+                              <title>Redefinition styles with own classes and <emphasis>
+                                                  <property>styleClass</property>
+                                        </emphasis> attributes</title>
+                              <mediaobject>
+                                        <imageobject>
+                                                  <imagedata fileref="images/fileUpload_oc.png"/>
+                                        </imageobject>
+                              </mediaobject>
+                    </figure>
+
+                    <para>As it could be seen on the picture above, the font style for
+                              &quot;Add&quot; button is changed.</para>
+
+          </section>
+
+          <section>
+                    <title>Relevant Resources Links</title>
+                    <para><ulink
+                                        url="http://livedemo.exadel.com/richfaces-demo/richfaces/fileUpload.jsf?c=fileUpload"
+                                        >Here</ulink> you can see an example of <emphasis
+                                        role="bold">
+                                        <property>&lt;rich:fileUpload&gt;</property>
+                              </emphasis> usage and sources for the given example. </para>
+          </section>
+
+</section>
+<!--para>In order to encode form around <emphasis role="bold">
+    <property>&lt;rich:fileUpload&gt;</property>
+    </emphasis> component you could confine this area by <emphasis role="bold">
+    <property>&lt;h:form&gt;</property>
+    </emphasis>/<emphasis role="bold">
+    <property>&lt;/h:form&gt;</property></emphasis> tags.
+    </para>
+    <para>
+    <emphasis role="bold">Example:</emphasis>
+    </para>
+    <programlisting role="XML"><![CDATA[...
+    <h:form>
+    <rich:fileUpload uploadData="#{bean.data}" addControlLabel="myLabel" autoclear="true" maxFilesQuantity="2" fileUploadListener="#{bean.listener}"
+    acceptedTypes="html" immediateUpload="true"/>
+    <a4j:commandLink style="font-weight: bold; width: 200px;" value="Show files uploaded:" reRender="files_list">
+    <h:dataTable value="#{bean.fileList}" var="file" id="files_list" style="width: 500px">
+    <h:column>
+    <h:outputText value="#{file.fileName}"></h:outputText>
+    </h:column>
+    </h:dataTable>
+    </h:form>
+    ...]]></programlisting>
+    <para>This is a result:</para>
+    <figure>
+    <title><emphasis role="bold">
+    <property>&lt;rich:fileUpload&gt;</property>
+    </emphasis>at server-side</title>
+    <mediaobject>
+    <imageobject>
+    <imagedata fileref="images/fileUpload11.png"/>
+    </imageobject>
+    </mediaobject>
+    </figure-->
