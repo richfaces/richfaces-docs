@@ -135,12 +135,17 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
 
                     <important>
                               <title>Important:</title>
-                              <para>In order to avoid a bug in IE, the root node of the dialog is
-                                        moved on the top of a DOM tree. However, you should have a
-                                        separate form inside the modal panel if you want to perform
-                                        submits from this panel (so, no form should be around the
-                                        modal panel in this case).</para>
-                    </important>
+                              <para>To work properly the &lt;rich:modalPanel&gt; should always be placed 
+							  outside the original &lt;h:form&gt; and must include its own &lt;h:form&gt; for such cases like 
+							  performing submissions from within the &lt;rich:modalPanel&gt;.
+							  </para>
+				    </important>
+				    <note>
+					    <title>Note:</title>
+					    <para>In order to avoid a bug in IE, the root node of the dialog is moved on the top of a DOM tree.
+					    </para>
+				    </note>
+							 
 
                     <para>It&apos;s possible to add a <emphasis>
                                         <property>&quot;header&quot;</property>
@@ -769,36 +774,46 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
           </section>
           <section>
                     <title>Relevant Resources Links</title>
-                    <para>
-                              <ulink
-                                        url="http://livedemo.exadel.com/richfaces-demo/richfaces/modalPanel.jsf?c=modalPanel"
-                                        >Here</ulink> you can see the example of <emphasis
-                                        role="bold">
-                                        <property>&lt;rich:modalPanel&gt;</property>
-                              </emphasis> usage and sources for the given example. </para>
-                    <para>Information about wizards using the <emphasis role="bold">
-                                        <property>&lt;rich:modalPanel&gt;</property>
-                              </emphasis> component could be found in the <ulink
-                                        url="http://labs.jboss.com/wiki/ModalPanelWizards">Wiki
-                                        article</ulink> and in the <ulink
-                                        url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/faq/faq.html#Organizewizards"
-                                        >FAQ</ulink> chapter of the guide. </para>
-                    <para>Examples of validation in <emphasis role="bold">
-                                        <property>&lt;rich:modalPanel&gt;</property>
-                              </emphasis> could be found in the <ulink
-                                        url="http://labs.jboss.com/wiki/ModalPanelValidation">Wiki
-                                        article</ulink> and on the <ulink
-                                        url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4061517"
-                                        >RichFaces Users Forum</ulink>. </para>
-                    <para>
-                              <ulink url="http://wiki.jboss.org/wiki/RichFacesPleaseWaitBox"> Here
-                              </ulink> you can find information on how to show a &quot;Please
-                              Wait&quot; box and block the input while the Ajax request is
-                              processed using combination of <emphasis role="bold">
-                                        <property>&lt;a4j:status&gt;</property>
-                              </emphasis> and <emphasis role="bold">
-                                        <property>&lt;rich:modalPanel&gt;</property>
-                              </emphasis> components . </para>
+                    <para>Vizit <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/modalPanel.jsf?c=modalPanel">
+					ModalPanel page</ulink> at RichFaces Livedemo for examples of component usage and their sources.
+					</para>
+							  
+                    <para>Read the &quot;<ulink url="http://eclipse.dzone.com/articles/an-introduction-to-jboss-richf?page=0%2C0">
+					An Introduction To JBoss RichFaces</ulink>&quot; tutorial by Max Katz to find out how 
+					the <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> 
+					helps to edit and save changes for table entries. 
+					</para>
+					
+					<para>Some articles at JBoss portal describing different aspects of <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> usage:
+					</para>
+					
+					<itemizedlist>
+					    <listitem>
+						    <para>
+							   &quot;<ulink url="http://www.jboss.org/community/docs/DOC-11436">ModalPanelWizards</ulink>&quot; article describes 
+							   how to create a typical wizard with the help of <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> component 
+							   (the same could also be found in the &quot;<ulink url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/faq/faq.html#Organizewizards">
+							   How to organize wizards using the &lt;rich:modalPanel&gt; component?</ulink>&quot; chapter of RichFaces FAQ guide);
+							</para>
+						</listitem>
+                        <listitem>
+                            <para>
+							    &quot;<ulink url="http://www.jboss.org/community/docs/DOC-11435">ModalPanelValidation</ulink>&quot; article 
+								gives examples of validation in <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> 
+								(the same in the <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4061517">corresponding topic</ulink> 
+								at RichFaces Users Forum);
+                            </para>
+						</listitem>
+						<listitem>
+                            <para>
+							    &quot;<ulink url="http://www.jboss.org/community/docs/DOC-11863">RichFacesPleaseWaitBox</ulink>&quot; article 
+								describes how to show a &quot;Please wait&quot; box and block the input while the Ajax request is being processed 
+								using combination of <emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis> and 
+								<emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> components.
+                            </para>
+						</listitem>    
+					</itemizedlist>
+					                    
           </section>
 
 
