@@ -56,12 +56,99 @@
         <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.HtmlQueue;            
 ...
 HtmlQueue myQueue = new HtmlQueue();
-...]]></programlisting>     
+]]></programlisting>     
     </section>
     
     <section>
         <title>Key attributes and ways of usage</title>
-        
+        <para>By means of the <emphasis role="bold"><property>&lt;a4j:queue&gt;</property></emphasis> component a user can create several types of queues associated with it.</para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    A user can set a queue globally in &quot;web.xml&quot;. You don&apos;t need set the queue on the page itself. The global queue can be used by all components. Example you can see below:
+                </para>
+                <programlisting role="XML"><![CDATA[<context-param>
+   <param-name>org.richfaces.queue.global.enabled</param-name>
+   <param-value>true</param-value>
+   </context-param>]]></programlisting>
+                <para>
+                    The global queue can be disabled for specifically view's application.
+                </para>
+                <para>
+                    In order to enable/disable a global queue see the following examples:
+                </para>
+                <programlisting role="XML"><![CDATA[<a4j:queue name="org.richfaces.global_queue" disabled="false"... />]]></programlisting>
+                <para>
+                    or:
+                </para>
+                <programlisting role="XML"><![CDATA[<a4j:queue name="org.richfaces.global_queue" disabled="true"... />]]></programlisting>
+            </listitem>
+            <listitem>
+                <para>
+                    A user can create separate queue for specific form with the help of the <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> or <emphasis role="bold"><property>&lt;h:form&gt;</property></emphasis> tags. 
+                    It will be the global queue only for this form.
+                </para>
+                <para>
+                    <emphasis role="bold">
+                        Example:
+                    </emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[<h:form ... >
+    ...
+    <a4j:queue ... /> 
+    ...
+    </h:form>]]></programlisting>
+                <para>
+                    or:
+                </para>
+                <para>
+                    <emphasis role="bold">
+                        Example:
+                    </emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[<a4j:form ... >
+    ...
+    <a4j:queue <a4j:queue name="fooQueue" ... /> 
+    ...
+</a4j:form>]]></programlisting>
+                <para>If you use <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> tag, you can reference a named queue as the form&apos;s default.</para>
+                <para>
+                    <emphasis role="bold">
+                        Example:
+                    </emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[<a4j:form eventsQueue="fooQueue" ...>
+   ...
+   </a4j:form>]]></programlisting>
+            </listitem>
+            <listitem>
+                <para>With the help of the <emphasis><property>&quot;eventsQueue&quot;</property></emphasis> attribute a user can reference a named queue from any <emphasis role="bold"><property>a4j</property></emphasis> or <emphasis role="bold"><property>rich</property></emphasis> component that supports this attribute.</para>
+                <para>
+                    <emphasis role="bold">
+                        Example:
+                    </emphasis>
+                </para>
+                <programlisting role="XML"><![CDATA[<a4j:queue name="fooQueue" ... />
+...
+<h:inputText value="#{foo2.bar1}">
+    <a:support id="onblur" event="onblur" reRender="bar21" eventsQueue="fooQueue"/>
+</h:inputText>
+
+<a4j:commandButton eventsQueue="fooQueue" ... >]]></programlisting>
+                <para>
+                    As a result all requests generated through the onblur of the <emphasis><property>&lt;h:inputText&gt;</property></emphasis> component, and clicking of the <emphasis><property>&lt;h:commandButton&gt;</property></emphasis> will be funneled through the <code>&quot;fooQueue&quot;</code>.
+                </para>
+                <para>
+                    If you have a try to reference a nonexistent queue a new named queue will be created with all default settings.
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            The <emphasis><property>&quot;size&quot;</property></emphasis> attribute help you to set the number of items allowed in the queue at one time.
+        </para>
+        <para>
+            
+        </para>
     </section>
     
     <section>
