@@ -65,8 +65,8 @@ Htmleditor myeditor = new Htmleditor();
                     <title>Details of Usage</title>
 
 <para>The <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> is fully 
-          based on TinyMCE web based Javascript HTML WYSIWYG editor control and supports all of the features has.
-The rich:editor adjusts  TinyMCE editor of JSF environment adding some functional capabilities.
+          based on TinyMCE web based Javascript HTML WYSIWYG editor control and supports all of the features it has.
+          The <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> adapts the TinyMCE editor for JSF environment and adds some functional capabilities.
 </para>
                     
                     
@@ -89,21 +89,27 @@ The rich:editor adjusts  TinyMCE editor of JSF environment adding some functiona
            
  </orderedlist>
       
-                    <para>The most important properties are implemented as attributes and you can define them as any other attribute. 
+      <para>The three methods are described in details in the chapter.</para>
+                    
+       <para>The most important properties are implemented as attributes and you can define them as any other attribute. 
                               The attributes of the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> component
                               match the corresponding properties of TinyMCE editor.</para>   
                     
-                    <para>For example, a theme for the editor an be defined using  the <property>&quot;theme&quot;</property> attribute like this: </para>
+      <para>For example, a theme for the editor can be defined using  the <property>&quot;theme&quot;</property> attribute like this: </para>
                     
                     <programlisting role="XML"><![CDATA[
 <rich:editor value="#{bean.editorValue}" theme="advanced"/>
 ]]></programlisting>  
+                    <para>Setting a different skin for the editor can be done using the <property>&quot;skin&quot;</property> attribute.</para>
+                    
+                    <para>Another useful property that is implemented at attribute level is <property>&quot;viewmode&quot;</property>. 
+                              The attribute switches between &quot;visual&quot; and &quot;source&quot; modes, toggling between modes is performed setting the attribute to  &quot;visual&quot; and &quot;source&quot; respectively.</para>
                    
                     <para>
-                              Apart from the attributes that define the editor&apos;s properties there are a some attributes that help  handle events(custom event handlers).
+                              Apart from the attributes that define the editor&apos;s properties there are  some attributes that help  handle events(custom event handlers).
                     </para>
                     <para>
-                              All custom event handlers can be found in the table of attributes and you can use them the same way as standard HTML event handlers. For example, like this:
+                              All custom event handlers  are listed in the table of attributes and you can use them the same way as standard HTML event handlers. 
                     </para>
 
 
@@ -137,11 +143,11 @@ The rich:editor adjusts  TinyMCE editor of JSF environment adding some functiona
        </figure>
                     
                 
-                    <para>The last way to configure the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> is 
+                    <para>The third way to configure the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> is 
                     to use configuration file (.properties)</para>
                     
-                    <para> This method is can easy your life if you need to configure multiple instances 
-                              of the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis>. </para>
+                    <para> This method eases your life if you need to configure multiple instances 
+                              of the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis>: you configure the editor once and in one spot and the configuration properties can be applied to any <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis>in your application.</para>
                     <para>To implement this type of configuration you need to take a few steps:</para>
                   
                     <itemizedlist>
@@ -157,15 +163,15 @@ theme_advanced_toolbar_align="left"
                             </listitem>
                             <listitem><para>The properties stored in  configuration file are passed to the
                                       <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> via 
-                                      <property>&quot;configuration&quot;</property>attribute which takes the name of the configuration file as a value (with out .properties extension).  </para></listitem>
-                              <para>For example, you named the configuration file &quot;editorconfig&quot;, you would address it as follows:
+                                      <property>&quot;configuration&quot;</property>attribute which takes the name of the configuration file as a value (with out .properties extension).  </para>
+                              <para>For example, if you named the configuration file &quot;editorconfig&quot;, you would address it as follows:
                               </para>
                               
                               <programlisting role="XML"><![CDATA[...
 <rich:editor value="#{bean.editorValue}" configuration="editorconfig"/>
 ...]]></programlisting> 
                               
-                              
+                            </listitem>    
                     <listitem><para>
                               Alternately, you can use a  EL-binding to define a configuration file. This way you can dynamically change the sets of configuration properties. </para>
                  
@@ -202,14 +208,15 @@ theme_advanced_toolbar_align="left"
                     </para>
                     
                     <para>
-                              Adding a custom plug-in also requires a few steps to take. Though the procedure is very similar to adding a configuration file.
+                              Adding a custom plug-in also requires a few steps to take. Though, the procedure is very similar to adding a configuration file.
                               
                     </para>
                     
                     <para>This is what you need to add a plug-in:</para>
                     
                     <itemizedlist>
-                              <listitem><para>Create a .properties file and put the name of the plug-in and a path to it there. The file can contain multiple plug-ins declarations. Your .properties file should be like this. </para>
+                              <listitem><para>Create a .properties file and put the name of the plug-in and a path to it into the file.
+                                        The file can contain multiple plug-in declarations. Your .properties file should be like this. </para>
                                         <programlisting role="XML"><![CDATA[...
 pluginName=/mytinymceplugins/plugin1Name/editor_plugin.js
 ...]]></programlisting>      
@@ -229,29 +236,39 @@ pluginName=/mytinymceplugins/plugin1Name/editor_plugin.js
                                         
                                         <para>
                                                   
-Some plug-ins which available for download could have some dependencies to TinyMCE scripts.
-For example, dialog pop-ups requires tiny_mce_popup.js. 
-Taking into consideration that developer will not plug our custom plugins to the RF jar with editor component
-(as opposite to standard tinyMCE plugins creation, which means that plugins will be put into tinyMCE corersponding directory) - 
-  the developer should manually add needed tinyMCE scripts to some folder and correct the js includes.
+Some plug-ins which available for download might have some dependencies on TinyMCE scripts.
+For example, dialog pop-ups require tiny_mce_popup.js script file. 
+Assuming that you will not plug  custom plugins to the RF jar with editor component
+(standard TinyMCE plugins creation implies that plugins are put into TinyMCE&apos;s corresponding directory)
+ you should manually add required TinyMCE scripts to some project folder and correct the js includes.
                                         </para>
                               </note>
                               
                     </itemizedlist>
                     
+                    <para>The <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> 
+                              component has a build-in converter that renders HTML code generated by the editor 
+                              to Seam text (you can read more Seam text <ulink url="http://docs.jboss.org/seam/1.1.5.GA/reference/en/html/text.html">here</ulink>.), it also interprets Seam text
+                              passed to the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> and renders it to HTML. 
+                              The converter can be enable with the <property>&quot;seamTest&quot;</property> attribute.</para>
+                    <para>Example:</para>
+                    
+                    <para>This HTML code generated by editor</para>
+                    <programlisting role="XML"><![CDATA[...
+<p><a href="http://mysite.com">Lorem ipsum</a> <i>dolor sit</i> amet, ea <u>commodo</u> consequat.</p>
+...]]></programlisting>   
+                   <para>will be parsed to the following Seam text:</para>
+                    
+                    <programlisting role="XML"><![CDATA[...
+[Lorem ipsum=>http://mysite.com] *dolor sit* amet, ea _commodo_ consequat.
+...]]></programlisting>
+                    <para>Accordingly, if the Seam text is passed to the component it will be parsed to HTML code.</para>
+
           </section>
           
           
           
-          
-          <!-- JavaScript API-->
-          <section>
-                    <title>JavaScript API</title>
-                
-
-
-          </section>
-          <!-- End of JavaScript API-->
+  
                 <section>
                     <title>JavaScript API</title>
                     
@@ -287,14 +304,420 @@ Taking into consideration that developer will not plug our custom plugins to the
                               </itemizedlist>
                     </para>
           </section>
-
+          
           <section>
                     <title>Skin Parameters Redefinition</title>
+                    
+                    <table>
+                              <title>Skin parameters redefinition for containers</title>
+                              
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                            <entry>Skin parameters</entry>
+                                                            
+                                                            <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        
+                                        <tbody>
+                                                  <row>
+                                                            <entry>additionalBackgroundColor</entry>
+                                                            
+                                                            <entry>background</entry>
+                                                  </row>
+                                                  
+                                        </tbody>
+                              </tgroup>
+                    </table>
 
-                
-                              <title>Skin parameters redefinition for a component</title>
-                             
-          </section>
+
+
+                    <table>
+                              <title>Skin parameters redefinition for external controls</title>
+                              
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                            <entry>Skin parameters</entry>
+                                                            
+                                                            <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        
+                                        <tbody>
+                                                  <row>
+                                                            <entry>panelBorderColor</entry>
+                                                            
+                                                            <entry>border-color</entry>
+                                                  </row>
+                                                  
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+
+                    <table>
+                              <title>Skin parameters redefinition for layout</title>
+                              
+                              <tgroup cols="2">
+                                        <thead>
+                                                  <row>
+                                                            <entry>Skin parameters</entry>
+                                                            
+                                                            <entry>CSS properties</entry>
+                                                  </row>
+                                        </thead>
+                                        
+                                        <tbody>
+                                                  <row>
+                                                            <entry>panelBorderColor</entry>
+                                                            
+                                                            <entry>border-left-color</entry>
+                                                  </row>
+                                                  
+                                                  
+                                                  <row>
+                                                            <entry>panelBorderColor</entry>
+                                                            
+                                                            <entry>border-right-color</entry>
+                                                  </row>
+                                                  
+                                                  
+                                                  
+                                                  <row>
+                                                            <entry>panelBorderColor</entry>
+                                                            
+                                                            <entry>border-top-color</entry>
+                                                  </row>
+                                                  
+                                                  
+                                                  <row>
+                                                            <entry>panelBorderColor</entry>
+                                                            
+                                                            <entry>border-bottom-color</entry>
+                                                  </row>
+                                                  
+                                                  <row>
+                                                                                                                     
+                                                            <entry>generalFamilyFont</entry>
+                                                            
+                                                            <entry>font-family</entry>
+                                                  </row>
+                                                  
+                                                  
+                                                  
+                                                  <row>
+                                                            <entry>generalTextColor</entry>
+                                                            
+                                                            <entry>color</entry>
+                                                  </row>
+                                                  
+                                                  
+                                                  <row>
+                                                            <entry>headerBackgroundColor</entry>
+                                                            
+                                                            <entry>background-color</entry>
+                                                  </row>
+                                                  
+                                        </tbody>
+                              </tgroup>
+                    </table>                
+                        <table>
+                                                            <title>Skin parameters redefinition for buttons</title>
+                                                            
+                                                            <tgroup cols="2">
+                                                                      <thead>
+                                                                                <row>
+                                                                                          <entry>Skin parameters</entry>
+                                                                                          
+                                                                                          <entry>CSS properties</entry>
+                                                                                </row>
+                                                                      </thead>
+                                                                      
+                                                                      <tbody>                     
+                                                  
+                                                  
+                                                  <row>
+                                                            <entry>headerBackgroundColor</entry>
+                                                            
+                                                            <entry>background-color</entry>
+                                                  </row>
+                                                  
+                                        </tbody>
+                              </tgroup>
+                    </table>
+
+
+
+
+
+                                                  <table>
+                                                            <title>Skin parameters redefinition for list box</title>
+                                                            
+                                                            <tgroup cols="2">
+                                                                      <thead>
+                                                                                <row>
+                                                                                          <entry>Skin parameters</entry>
+                                                                                          
+                                                                                          <entry>CSS properties</entry>
+                                                                                </row>
+                                                                      </thead>
+                                                                      
+                                                                      <tbody>                     
+                                                                                
+                                                                                
+                                                                                <row>
+                                                                                          <entry>tableBackgroundColor</entry>
+                                                                                          
+                                                                                          <entry>background</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                                <row>
+                                                                                          <entry>panelBorderColor</entry>
+                                                                                          
+                                                                                          <entry>border-color</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                                <row>
+                                                                                          <entry>generalFamilyFont</entry>
+                                                                                          
+                                                                                          <entry>font-family</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                       
+                                                                                
+                                                                      </tbody>
+                                                            </tgroup>
+                                                  </table>
+                                                  
+                                                  
+                                                  
+                                                  <table>
+                                                            <title>Skin parameters redefinition for color split button</title>
+                                                            
+                                                            <tgroup cols="2">
+                                                                      <thead>
+                                                                                <row>
+                                                                                          <entry>Skin parameters</entry>
+                                                                                          
+                                                                                          <entry>CSS properties</entry>
+                                                                                </row>
+                                                                      </thead>
+                                                                      
+                                                                      <tbody>                     
+                                                                                
+                                                                                
+                                                                                <row>
+                                                                                          <entry>tableBackgroundColor</entry>
+                                                                                          
+                                                                                          <entry>background</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                                <row>
+                                                                                          <entry>panelBorderColor</entry>
+                                                                                          
+                                                                                          <entry>border-color</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                                <row>
+                                                                                          <entry>generalFamilyFont</entry>
+                                                                                          
+                                                                                          <entry>font-family</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                                <row>
+                                                                                          <entry>additionalBackgroundColor</entry>
+                                                                                          
+                                                                                          <entry>background-color</entry>
+                                                                                </row>
+                                                            
+                                                                                
+                                                                      </tbody>
+                                                            </tgroup>
+                                                  </table>
+                                                  
+                                                  
+                                                  <table>
+                                                            <title>Skin parameters redefinition for  hovered color split button</title>
+                                                            
+                                                            <tgroup cols="2">
+                                                                      <thead>
+                                                                                <row>
+                                                                                          <entry>Skin parameters</entry>
+                                                                                          
+                                                                                          <entry>CSS properties</entry>
+                                                                                </row>
+                                                                      </thead>
+                                                                      
+                                                                      <tbody>                     
+                                                                                
+                                                                                  <row>
+                                                                                          <entry>headerBackgroundColor</entry>
+                                                                                          
+                                                                                          <entry>border-color</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                      </tbody>
+                                                            </tgroup>
+                                                  </table>
+                                                  
+                                                  
+                                                  
+                                                  <table>
+                                                            <title>Skin parameters redefinition for menu</title>
+                                                            
+                                                            <tgroup cols="2">
+                                                                      <thead>
+                                                                                <row>
+                                                                                          <entry>Skin parameters</entry>
+                                                                                          
+                                                                                          <entry>CSS properties</entry>
+                                                                                </row>
+                                                                      </thead>
+                                                                      
+                                                                      <tbody>                     
+                                                                                
+                                                                                <row>
+                                                                                          <entry>panelBorderColor</entry>
+                                                                                          
+                                                                                          <entry>border-color</entry>
+                                                                                </row>
+                                                                                
+                                                                                <row>
+                                                                                          <entry>tableBackgroundColor</entry>
+                                                                                          
+                                                                                          <entry>background</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                                <row>
+                                                                                          <entry>generalFamilyFont</entry>
+                                                                                          
+                                                                                          <entry>font-family</entry>
+                                                                                </row>
+                                                                                
+                                                                                <row>
+                                                                                          <entry>generalTextColor</entry>
+                                                                                          
+                                                                                          <entry>color</entry>
+                                                                                </row>
+                                                                                
+                                                                                <row>
+                                                                                          <entry>additionalBackgroundColor</entry>
+                                                                                          
+                                                                                          <entry>background-color</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                                <row>
+                                                                                          <entry>additionalBackgroundColor</entry>
+                                                                                          
+                                                                                          <entry>background-color</entry>
+                                                                                </row>
+                                                                                
+                                                                      </tbody>
+                                                            </tgroup>
+                                                  </table>
+                                                  
+                                                  <table>
+                                                            <title>Skin parameters redefinition for menu item</title>
+                                                            
+                                                            <tgroup cols="2">
+                                                                      <thead>
+                                                                                <row>
+                                                                                          <entry>Skin parameters</entry>
+                                                                                          
+                                                                                          <entry>CSS properties</entry>
+                                                                                </row>
+                                                                      </thead>
+                                                                      
+                                                                      <tbody>                     
+                                                                                
+                                                                                <row>
+                                                                                          <entry>additionalBackgroundColor</entry>
+                                                                                          
+                                                                                          <entry>background</entry>
+                                                                                </row>
+                                                                                
+                                                                                <row>
+                                                                                          <entry>panelBorderColor</entry>
+                                                                                          
+                                                                                          <entry>border-bottom-color</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                                <row>
+                                                                                          <entry>generalTextColor</entry>
+                                                                                          
+                                                                                          <entry>color</entry>
+                                                                                </row>
+                                                                                
+                                                                                <row>
+                                                                                          <entry>generalTextColor</entry>
+                                                                                          
+                                                                                          <entry>color</entry>
+                                                                                </row>
+                                                                                
+                                                                                <row>
+                                                                                          <entry>tabDisabledTextColor</entry>
+                                                                                          
+                                                                                          <entry>color</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                         
+                                                                                
+                                                                      </tbody>
+                                                            </tgroup>
+                                                  </table>
+                                                  
+                                                  
+                                                  
+                                                  <table>
+                                                            <title>Skin parameters redefinition for progress and resize states</title>
+                                                            
+                                                            <tgroup cols="2">
+                                                                      <thead>
+                                                                                <row>
+                                                                                          <entry>Skin parameters</entry>
+                                                                                          
+                                                                                          <entry>CSS properties</entry>
+                                                                                </row>
+                                                                      </thead>
+                                                                      
+                                                                      <tbody>                     
+                                                                                
+                                                                                <row>
+                                                                                          <entry>tableBackgroundColor</entry>
+                                                                                          
+                                                                                          <entry>background</entry>
+                                                                                </row>
+                                                                                
+                                                                                <row>
+                                                                                          <entry>tableBorderColor</entry>
+                                                                                          
+                                                                                          <entry>border-color</entry>
+                                                                                </row>
+                                                                                
+                                                                                
+                                                                            
+                                                                                
+                                                                                
+                                                                                
+                                                                      </tbody>
+                                                            </tgroup>
+                                                  </table>
+                                                  
+
+
 
           <section>
                     <title>Definition of Custom Style Classes</title>
