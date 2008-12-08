@@ -65,15 +65,12 @@ HtmlQueue myQueue = new HtmlQueue();
         <itemizedlist>
             <listitem>
                 <para>
-                    A user can set a queue globally in &quot;web.xml&quot;. You don&apos;t need set the queue on the page itself. The global queue can be used by all components. Example you can see below:
+                    A user can set a queue globally in &quot;web.xml&quot;. You don&apos;t need set the queue on the page itself. The global queue can be used by all components. You can see the example below:
                 </para>
                 <programlisting role="XML"><![CDATA[<context-param>
    <param-name>org.richfaces.queue.global.enabled</param-name>
    <param-value>true</param-value>
    </context-param>]]></programlisting>
-                <para>
-                    The global queue can be disabled for specifically view's application.
-                </para>
                 <para>
                     In order to enable/disable a global queue see the following examples:
                 </para>
@@ -85,7 +82,7 @@ HtmlQueue myQueue = new HtmlQueue();
             </listitem>
             <listitem>
                 <para>
-                    A user can create separate queue for specific form with the help of the <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> or <emphasis role="bold"><property>&lt;h:form&gt;</property></emphasis> tags. 
+                    A user can create a separate queue for specific form with the help of the <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> or <emphasis role="bold"><property>&lt;h:form&gt;</property></emphasis> tags. 
                     It will be the global queue only for this form.
                 </para>
                 <para>
@@ -111,7 +108,7 @@ HtmlQueue myQueue = new HtmlQueue();
     <a4j:queue <a4j:queue name="fooQueue" ... /> 
     ...
 </a4j:form>]]></programlisting>
-                <para>If you use <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> tag, you can reference a named queue as the form&apos;s default.</para>
+                <para>If you use the <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> tag, you can reference a named queue as the form&apos;s default.</para>
                 <para>
                     <emphasis role="bold">
                         Example:
@@ -136,18 +133,48 @@ HtmlQueue myQueue = new HtmlQueue();
 
 <a4j:commandButton eventsQueue="fooQueue" ... >]]></programlisting>
                 <para>
-                    As a result all requests generated through the onblur of the <emphasis><property>&lt;h:inputText&gt;</property></emphasis> component, and clicking of the <emphasis><property>&lt;h:commandButton&gt;</property></emphasis> will be funneled through the <code>&quot;fooQueue&quot;</code>.
+                    As a result all requests generated through the onblur of the <emphasis role="bold"><property>&lt;h:inputText&gt;</property></emphasis> component, and clicking of the <emphasis role="bold"><property>&lt;h:commandButton&gt;</property></emphasis> will be funneled through the <code>&quot;fooQueue&quot;</code>.
                 </para>
                 <para>
-                    If you have a try to reference a nonexistent queue a new named queue will be created with all default settings.
+                    If you try to refer to the nonexistent queue the new named queue will be created with all default settings.
                 </para>
             </listitem>
         </itemizedlist>
         <para>
-            The <emphasis><property>&quot;size&quot;</property></emphasis> attribute help you to set the number of items allowed in the queue at one time.
+            The <emphasis><property>&quot;size&quot;</property></emphasis> attribute helps you to set the number of requests allowed in the queue at one time.
         </para>
         <para>
-            
+            The <emphasis><property>&quot;sizeExceededBehavior&quot;</property></emphasis> attribute defines four strategies of the queue&apos;s behavior if the number of the requests waiting in the queue is exceeded:
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>dropNext - this strategy is default. It drops next request that should be fired</para>
+            </listitem>
+            <listitem>
+                <para>dropNew - it drops the incoming request</para>
+            </listitem>
+            <listitem>
+                <para>fireNext - with the help of this strategy you can immediately fire the next request in line to be fired</para>
+            </listitem>
+            <listitem>
+                <para>fireNew - This type of the strategy immediately fires the incoming request.</para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            The <emphasis><property>&quot;requestDelay&quot;</property></emphasis> attribute defines time delay for all the requests which fired using this queue.
+        </para>
+        <para>
+            <emphasis role="bold">
+                Example:
+            </emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[<a4j:queue requestDelay="2000" ... />]]></programlisting>
+        <para>
+            As a result all the requests which were fired using this queue will have 2 sec delay.
+        </para>
+        <para>
+            The requests collect in the queue, combining similar ones, during request delay. 
+            User should remember that such requests can combine, if they are raised sequentially, in order to not block the queue and not to change the requests order.
         </para>
     </section>
     
