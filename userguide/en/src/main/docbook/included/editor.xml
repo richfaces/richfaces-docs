@@ -72,7 +72,9 @@ Htmleditor myeditor = new Htmleditor();
                     
  <para>The easiest way to place the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis>on a page is as follows:</para>
                     
-                    
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>          
  <programlisting role="XML"><![CDATA[
    <rich:editor value="#{bean.editorValue}" />
 ]]></programlisting>  
@@ -83,9 +85,9 @@ Htmleditor myeditor = new Htmleditor();
  
  <orderedlist>
           
-           <listitem><para>Using attributes;</para></listitem>
-           <listitem><para>Using using &lt;f:param&gt; JSF tag;</para></listitem>
-           <listitem><para>Using configuration files.</para></listitem>
+           <listitem><para>Using attributes</para></listitem>
+           <listitem><para>Using using &lt;f:param&gt; JSF tag</para></listitem>
+           <listitem><para>Using configuration files that allow you to set up multiple configurations for all editors in your application and change them in the runtime</para></listitem>
            
  </orderedlist>
       
@@ -96,16 +98,34 @@ Htmleditor myeditor = new Htmleditor();
                               match the corresponding properties of TinyMCE editor.</para>   
                     
       <para>For example, a theme for the editor can be defined using  the <property>&quot;theme&quot;</property> attribute like this: </para>
-                    
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
                     <programlisting role="XML"><![CDATA[
 <rich:editor value="#{bean.editorValue}" theme="advanced"/>
 ]]></programlisting>  
                     <para>Setting a different skin for the editor can be done using the <property>&quot;skin&quot;</property> attribute.</para>
                     
-                    <para>Another useful property that is implemented at attribute level is <property>&quot;viewmode&quot;</property>. 
-                              The attribute switches between &quot;visual&quot; and &quot;source&quot; modes, toggling between modes is performed setting the attribute to  &quot;visual&quot; and &quot;source&quot; respectively.</para>
-                   
-                    <para>
+                    <para>Another useful property that is implemented at attribute level is <property>&quot;viewMode&quot;</property>. 
+                              The attribute switches between &quot;visual&quot; and &quot;source&quot; modes, toggling between modes is performed setting the attribute to  &quot;visual&quot; and &quot;source&quot; respectively. 
+                              Implementation of <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> also implies that you can change the modes dynamically 
+                              setting the value of the <property>&quot;viewMode&quot;</property> attribute using EL-expression. 
+                    </para>
+                    
+                              <para>
+                                        <emphasis role="bold">Example:</emphasis>
+                              </para>
+              
+                    <programlisting role="XML"><![CDATA[...  
+                    <rich:editor value="#{editor.submit}" theme="advanced" viewMode="#{editor.viewMode}" >
+                    ...
+                    <h:selectOneRadio value="#{editor.viewMode}" onchange="submit();">
+	<f:selectItem itemValue="visual" itemLabel="visual" />
+	<f:selectItem itemValue="source" itemLabel="source" />
+                    </h:selectOneRadio>
+                    ...
+                    ...]]></programlisting>  
+                     <para>
                               Apart from the attributes that define the editor&apos;s properties there are  some attributes that help  handle events(custom event handlers).
                     </para>
                     <para>
@@ -118,7 +138,10 @@ Htmleditor myeditor = new Htmleditor();
                               the <property>&quot;value&quot;</property> attribute assigns some value to the option.</para>
 
 <para>For example, this code adds some buttons to the editor and positions the toolbar.  </para>
-                    
+    
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
 <programlisting role="XML"><![CDATA[...
 <rich:editor value="#{bean.editorValue}" theme="advanced" plugins="save,paste" >
           <f:param name="theme_advanced_buttons1" value="bold,italic,underline, cut,copy,paste,pasteword"/>
@@ -152,6 +175,9 @@ Htmleditor myeditor = new Htmleditor();
                   
                     <itemizedlist>
                             <listitem><para>Create a configuration file (.properties) in the classpath folder and add some properties to it. Use standard syntax for the .properties files: <code>parameter=value</code>.  Here is an example of configuration file:</para>
+                                      <para>
+                                                <emphasis role="bold">Example:</emphasis>
+                                      </para>      
                                       <programlisting role="XML"><![CDATA[
 theme="advanced"
 plugins="save,paste"
@@ -166,28 +192,33 @@ theme_advanced_toolbar_align="left"
                                       <property>&quot;configuration&quot;</property>attribute which takes the name of the configuration file as a value (with out .properties extension).  </para>
                               <para>For example, if you named the configuration file &quot;editorconfig&quot;, you would address it as follows:
                               </para>
-                              
+                                      <para>
+                                                <emphasis role="bold">Example:</emphasis>
+                                      </para>
                               <programlisting role="XML"><![CDATA[...
 <rich:editor value="#{bean.editorValue}" configuration="editorconfig"/>
 ...]]></programlisting> 
                               
                             </listitem>    
                     <listitem><para>
-                              Alternately, you can use a  EL-binding to define a configuration file. This way you can dynamically change the sets of configuration properties. </para>
+                              Alternately, you can use a  EL-expression to define a configuration file. This way you can dynamically change the sets of configuration properties. </para>
                  
              <para>    For example, you have two configuration files &quot;configurationAdvanced&quot; and  &quot;configurationSimple&quot; and you want them to be 
              applied under some condition. </para>
                               
                               <para>To do this you need to bind <property>&quot;configuration&quot;</property>attribute to  the appropriate bean property  like this . </para>
             
+                              <para>
+                                        <emphasis role="bold">Example:</emphasis>
+                              </para>
 <programlisting role="XML"><![CDATA[...
-<rich:editor value="#{bean.editorValue}" configuration="#{editor.property}" />
+<rich:editor value="#{bean.editorValue}" configuration="#{editor.configuration}" />
 ...]]></programlisting> 
                               <para>Your Java file should look like this.</para>
                               
                               <programlisting role="JAVA"><![CDATA[...
 	String configuration;
-	if(some condition){//define some condition
+	if(some condition){//defines some condition
                               configuration = "configurationAdvanced"; //the name on the file with advanced properties	
 	}
 	else{
@@ -217,6 +248,9 @@ theme_advanced_toolbar_align="left"
                     <itemizedlist>
                               <listitem><para>Create a .properties file and put the name of the plug-in and a path to it into the file.
                                         The file can contain multiple plug-in declarations. Your .properties file should be like this. </para>
+                                        <para>
+                                                  <emphasis role="bold">Example:</emphasis>
+                                        </para>
                                         <programlisting role="XML"><![CDATA[...
 pluginName=/mytinymceplugins/plugin1Name/editor_plugin.js
 ...]]></programlisting>      
@@ -226,6 +260,9 @@ pluginName=/mytinymceplugins/plugin1Name/editor_plugin.js
                                         <para>Use the <property>&quot;customPlugins&quot;</property> attribute to specify the .properties file with a plug-in name and a path to it.</para>
                                         <para>Example:</para>
                                         <para>If your .properties file is named "myPlugins", then your will have this code on the page.</para>
+                                        <para>
+                                                  <emphasis role="bold">Example:</emphasis>
+                                        </para>
                                         <programlisting role="XML"><![CDATA[...
 <rich:editor theme="advanced" customPlugins="myPlugins" plugins="pluginName">
 ...]]></programlisting>   
@@ -251,7 +288,9 @@ Assuming that you will not plug  custom plugins to the RF jar with editor compon
                               to Seam text (you can read more Seam text <ulink url="http://docs.jboss.org/seam/1.1.5.GA/reference/en/html/text.html">here</ulink>.), it also interprets Seam text
                               passed to the <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> and renders it to HTML. 
                               The converter can be enable with the <property>&quot;seamTest&quot;</property> attribute.</para>
-                    <para>Example:</para>
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
                     
                     <para>This HTML code generated by editor</para>
                     <programlisting role="XML"><![CDATA[...
@@ -1209,6 +1248,10 @@ Assuming that you will not plug  custom plugins to the RF jar with editor compon
 
           <section>
                     <title>Relevant Resources Links</title>
+                    
+                    <para>The <emphasis role="bold"> <property>&lt;rich:editor&gt;</property></emphasis> is based on TinyMCE editor and supports almost all its features and properties some of which are not described here since you can find more detailed documentation on them on the official <ulink url="http://wiki.moxiecode.com/index.php/TinyMCE:Index">web site.</ulink></para>
+                    
+                    
                     <para><ulink
                                         url="http://livedemo.exadel.com/richfaces-demo/richfaces/fileUpload.jsf?c=editor"
                                         >Here</ulink> you can see an example of <emphasis
