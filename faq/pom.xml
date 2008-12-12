@@ -12,7 +12,19 @@
 	<name>FAQ</name>
 	<description>Frequently asked questions</description>
 	<pluginRepositories>
-		<pluginRepository>
+ <pluginRepository>
+          <id>maven.jboss.org</id>
+          <name>JBoss Repository for Maven Snapshots</name>
+          <url>http://snapshots.jboss.org/maven2/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+          </snapshots>
+        </pluginRepository>
+<pluginRepository>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -29,6 +41,26 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+			<plugin>
+					<groupId>org.jboss.maven.plugins</groupId>
+					<artifactId>maven-spellChecker-plugin</artifactId>
+					<version>1.0-SNAPSHOT</version>
+					<executions>
+							<execution>
+								<id>spellChecker:check</id>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+					</executions>		
+					<configuration>
+								<dirForScan>en/src/main/docbook</dirForScan>
+								<outputDir>
+									${project.build.directory}/spellCheckerLogs
+								</outputDir>
+					</configuration>
+				</plugin>
 					<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
@@ -133,7 +165,7 @@
 						</sourceDocumentName>
 						<formats>
 
-							<format>
+							<!--format>
 								<formatName>pdf</formatName>
 								<stylesheetResource>
 									classpath:/xslt/org/jboss/pdf.xsl
@@ -144,7 +176,7 @@
 								<imagePathSettingRequired>
 									true
 								</imagePathSettingRequired>
-							</format>
+							</format-->
 							<!--format>
 								<formatName>html</formatName>
 								<stylesheetResource>
