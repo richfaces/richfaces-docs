@@ -37,12 +37,25 @@
     
     <section>
         <title>Creating on a page</title>
-        <para>Here is the simplest way for a component creation on a page.</para>
+        <para>In order to create the named queue, see following example.</para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[<a4j:queue name="myQueue" ... />
+...
+<h:inputText value="#{myQueue.text}">
+    <a:support id="onblur" event="onblur" eventsQueue="myQueue"/>
+</h:inputText>
+...
+<a4j:commandButton eventsQueue="myQueue" ... >]]></programlisting>
+        <para>You can also create the queue with a default name. This queue is global for the all form. See the example below.</para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[<h:form>
-       <a4j:queue name="fooQueue" ... />
+            ...
+       <a4j:queue/>
+       ...
 </h:form>
 ]]></programlisting>
     </section>
@@ -61,29 +74,28 @@ HtmlQueue myQueue = new HtmlQueue();
     
     <section>
         <title>Key attributes and ways of usage</title>
-        <para>By means of the <emphasis role="bold"><property>&lt;a4j:queue&gt;</property></emphasis> component a user can create several types of queues associated with it.</para>
+        <para>By means of the <emphasis role="bold"><property>&lt;a4j:queue&gt;</property></emphasis> component you can create several types of queues associated with it.</para>
         <itemizedlist>
             <listitem>
                 <para>
-                    A user can set a queue globally in &quot;web.xml&quot;. You don&apos;t need set the queue on the page itself. The global queue can be used by all components. You can see the example below:
+                    In order to create global queue for the all Can set a queue globally in &quot;web.xml&quot;. You don&apos;t need set the queue on the page itself. The global queue can be used by all components. You can see the example below:
                 </para>
                 <programlisting role="XML"><![CDATA[<context-param>
    <param-name>org.richfaces.queue.global.enabled</param-name>
    <param-value>true</param-value>
    </context-param>]]></programlisting>
                 <para>
-                    In order to enable/disable a global queue see the following examples:
+                    In order to enable/disable a global queue for concrete views see the following examples:
                 </para>
                 <programlisting role="XML"><![CDATA[<a4j:queue name="org.richfaces.global_queue" disabled="false"... />]]></programlisting>
                 <para>
-                    or:
+                    In order to disable the queue the<emphasis><property>&quot;disabled&quot;</property></emphasis> attribute should be &quot;true&quot;.
                 </para>
-                <programlisting role="XML"><![CDATA[<a4j:queue name="org.richfaces.global_queue" disabled="true"... />]]></programlisting>
             </listitem>
             <listitem>
                 <para>
-                    A user can create a separate queue for specific form with the help of the <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> or <emphasis role="bold"><property>&lt;h:form&gt;</property></emphasis> tags. 
-                    It will be the global queue only for this form.
+                    You can create a separate queue for a specific form with the help of the <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> or <emphasis role="bold"><property>&lt;h:form&gt;</property></emphasis> tags. 
+                    It is the queue only for this form. The queue&apos;s name don&apos;t define by default if you haven&apos;t defined it.
                 </para>
                 <para>
                     <emphasis role="bold">
@@ -105,7 +117,7 @@ HtmlQueue myQueue = new HtmlQueue();
                 </para>
                 <programlisting role="XML"><![CDATA[<a4j:form ... >
     ...
-    <a4j:queue <a4j:queue name="fooQueue" ... /> 
+    <a4j:queue name="myQueue" ... /> 
     ...
 </a4j:form>]]></programlisting>
                 <para>If you use the <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> tag, you can reference a named queue as the form&apos;s default.</para>
@@ -114,26 +126,26 @@ HtmlQueue myQueue = new HtmlQueue();
                         Example:
                     </emphasis>
                 </para>
-                <programlisting role="XML"><![CDATA[<a4j:form eventsQueue="fooQueue" ...>
+                <programlisting role="XML"><![CDATA[<a4j:form eventsQueue="myQueue" ...>
    ...
    </a4j:form>]]></programlisting>
             </listitem>
             <listitem>
-                <para>With the help of the <emphasis><property>&quot;eventsQueue&quot;</property></emphasis> attribute a user can reference a named queue from any <emphasis role="bold"><property>a4j</property></emphasis> or <emphasis role="bold"><property>rich</property></emphasis> component that supports this attribute.</para>
+                <para>With the help of the <emphasis><property>&quot;eventsQueue&quot;</property></emphasis> attribute you can reference a named queue from any <emphasis role="bold"><property>a4j</property></emphasis> or <emphasis role="bold"><property>rich</property></emphasis> component that supports this attribute.</para>
                 <para>
                     <emphasis role="bold">
                         Example:
                     </emphasis>
                 </para>
-                <programlisting role="XML"><![CDATA[<a4j:queue name="fooQueue" ... />
+                <programlisting role="XML"><![CDATA[<a4j:queue name="myQueue" ... />
 ...
-<h:inputText value="#{foo2.bar1}">
-    <a:support id="onblur" event="onblur" reRender="bar21" eventsQueue="fooQueue"/>
+<h:inputText value="#{queueBean.text}">
+    <a4j:support id="onblur" event="onblur" eventsQueue="myQueue"/>
 </h:inputText>
 
-<a4j:commandButton eventsQueue="fooQueue" ... >]]></programlisting>
+<a4j:commandButton eventsQueue="myQueue" ... >]]></programlisting>
                 <para>
-                    As a result all requests generated through the onblur of the <emphasis role="bold"><property>&lt;h:inputText&gt;</property></emphasis> component, and clicking of the <emphasis role="bold"><property>&lt;h:commandButton&gt;</property></emphasis> will be funneled through the <code>&quot;fooQueue&quot;</code>.
+                    As a result all requests generated after the &quot;onblur&quot; event of the <emphasis role="bold"><property>&lt;h:inputText&gt;</property></emphasis> component, and clicking of the <emphasis role="bold"><property>&lt;h:commandButton&gt;</property></emphasis> will be funneled through the <code>&quot;myQueue&quot;</code>.
                 </para>
                 <para>
                     If you try to refer to the nonexistent queue the new named queue will be created with all default settings.
@@ -148,20 +160,20 @@ HtmlQueue myQueue = new HtmlQueue();
         </para>
         <itemizedlist>
             <listitem>
-                <para>dropNext - this strategy is default. It drops next request that should be fired</para>
+                <para>dropNext - drops next request that should be fired</para>
             </listitem>
             <listitem>
-                <para>dropNew - it drops the incoming request</para>
+                <para>dropNew - drops the incoming request</para>
             </listitem>
             <listitem>
-                <para>fireNext - with the help of this strategy you can immediately fire the next request in line to be fired</para>
+                <para>fireNext - immediately fires the next request in line to be fired</para>
             </listitem>
             <listitem>
-                <para>fireNew - This type of the strategy immediately fires the incoming request.</para>
+                <para>fireNew - immediately fires the incoming request.</para>
             </listitem>
         </itemizedlist>
         <para>
-            The <emphasis><property>&quot;requestDelay&quot;</property></emphasis> attribute defines time delay for all the requests which fired using this queue.
+            The <emphasis><property>&quot;requestDelay&quot;</property></emphasis> attribute defines delay time for all the requests which fired using this queue.
         </para>
         <para>
             <emphasis role="bold">
@@ -170,11 +182,11 @@ HtmlQueue myQueue = new HtmlQueue();
         </para>
         <programlisting role="XML"><![CDATA[<a4j:queue requestDelay="2000" ... />]]></programlisting>
         <para>
-            As a result all the requests which were fired using this queue will have 2 sec delay.
+            As a result all the requests are fired with to 2 sec delay.
         </para>
         <para>
-            The requests collect in the queue, combining similar ones, during request delay. 
-            User should remember that such requests can combine, if they are raised sequentially, in order to not block the queue and not to change the requests order.
+            The requests collected in the queue, combining similar ones, during request delay. 
+            Note, that such requests can combine, if they are raised sequentially, in order to not block the queue and not to change the requests order.
         </para>
     </section>
     
