@@ -15,6 +15,14 @@ function sendEmail(e){
   var xmlobj=new Ajax.Updater('feedback-state','script/send_mail.php',{method:'get',parameters: params});
 }
 
+Event.observe(window, 'load', function() {
+	var array = new Array();
+	array = $$('.title:not(h1) a');
+	for(i=0; i<array.length; i++){
+		array[i].setAttribute('href', window.location.toString().replace(/#[0-9A-Za-z_\-]*/, "")+"#"+$(array[i]).readAttribute('id'));
+	}
+});
+
 function dbToggle(node, expandText, collapseText) {
 	var dt = node.parentNode;
 	if (dt.nodeName.toLowerCase() == 'dt') {
