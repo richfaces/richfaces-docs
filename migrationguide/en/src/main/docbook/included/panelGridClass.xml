@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="panelGridClass" role="new">
+    <?dbhtml filename="panelGridClass.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>panelGrid</keyword>
+            <keyword>class</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>&lt;h:panelGrid&gt;: column classes are encoded in a wrong way</title>
+    <section>
+        <title>Description</title>
+        <para>
+          The column classes of <emphasis role="bold"><property>&lt;h:panelGrid&gt;</property></emphasis> are encoded in a wrong way: only the first <emphasis role="bold"><property>&lt;td&gt;</property></emphasis> element in a table has the class specified in the <emphasis><property>&quot;columnClasses&quot;</property></emphasis> attribute.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="https://jira.jboss.org/jira/browse/RF-5424">Jira</ulink>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="https://javaserverfaces.dev.java.net/issues/show_bug.cgi?id=900">JavaServer Faces issues</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+        <para>
+            Place <code>&lt;h:panelGrid columns="3" columnClasses="cell"&gt;</code> on a page and specify styles for the <code>.cell</code> class. As the result only the first <emphasis role="bold"><property>&lt;td&gt;</property></emphasis>  in a table has this class.
+        </para>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+         It is a defect in JSF-RI 1.2.10 and JSF-RI 1.2_11. 
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+          The solution is to use as many <emphasis><property>&quot;columnClasses&quot;</property></emphasis> attributes as columns in the <emphasis role="bold"><property>&lt;h:panelGrid&gt;</property></emphasis>.
+        </para>
+    </section>
+</section>
