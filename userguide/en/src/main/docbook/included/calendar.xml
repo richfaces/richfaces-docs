@@ -212,7 +212,7 @@ HtmlCalendar myCalendar = new HtmlCalendar();
                               </emphasis> attribute is used to define an event that is triggered
                               before date selection.</para>
                     <para><emphasis>
-                                        <property>&quot;ondateselected&quot;</property>
+                                        The <property>&quot;ondateselected&quot;</property>
                               </emphasis> attribute is used to define an event that is triggered
                               after date selection. </para>
                     <para>For example, to fire some event after date selection you should use
@@ -225,7 +225,14 @@ HtmlCalendar myCalendar = new HtmlCalendar();
     <rich:calendar id="date" value="#{bean.dateTest}">
         <a4j:support event="ondateselected" reRender="mainTable"/>
     </rich:calendar>
-...]]></programlisting>
+    ...]]></programlisting>
+                    <note>
+                              <title>Note:</title>
+                              <para>
+                                        When a timePicker was fulfilled, the <emphasis><property>&quot;ondateselected&quot;</property></emphasis> attribute does not allow you to submit a selected date. It happens because this event rose when the date is selected but the input hasn't been updated with new value yet.
+                                        
+                              </para>
+                    </note>
                     <para><emphasis>
                                         <property>&quot;ondateselect&quot;</property>
                               </emphasis> could be used for possibility of date selection canceling.
