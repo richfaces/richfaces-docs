@@ -43,15 +43,11 @@
 
   <section id="tab_ccpt">
     <title>Creating the Component with a Page Tag</title>
-    <para>To create the simplest variant of <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> 
-      component on a page, use the following syntax:</para>
-
-    <para>
-      <emphasis role="bold">Example:</emphasis>
-    </para>
+    <para>The simplest way to create the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> component on a page is as following:</para>
+ 
     <programlisting role="XML"><![CDATA[...
 <rich:panel>
-	<rich:toolTip value="toolTip content"/>
+	<rich:toolTip value="Hello, I am the content of this tooltip!"/>
 </rich:panel>
 ...
 ]]></programlisting>
@@ -72,74 +68,74 @@ HtmltoolTip mytoolTip = new  HtmltoolTip();
  <section>
    <title>Details of Usage</title>
    <para>
-             To specify text information, labeled on a <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis>, use <emphasis><property>&quot;value&quot;</property></emphasis> attribute. 
-              Images, links, buttons and other RichFaces components also may be put and composed inside <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis>. 
-             Text, specified between <property>tooltip&apos;s</property> start and end tags will be rendered in browser as simple text. 
-              <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> borders stretch to enclose it contents.
+             Text information, labeled on the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis>, is specified with <emphasis><property>&quot;value&quot;</property></emphasis> attribute. 
+         Text that is put between tooltip start and end tags will also be rendered as tooltip content and could be marked with HTML tags. 
+         Images, links, buttons and other RichFaces components are also may be put and composed inside the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis>. 
+         The <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> borders are stretched automatically to enclose the contents.
    </para>
    <para>
-             There are three ways to attach a <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> to a page element. 
-             One of them uses nesting (this way is shown on example <link linkend="tab_ccpt">above</link>). 
-             In such cases <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> is attached to the parent component by default.
+             There are three ways to attach the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> to a page element. 
+         The first and simplest one is when the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> is nested into a page element the tooltip is applied to. 
+         This way is shown on example in the <link linkend="tab_ccpt">Creating the Component with a Page Tag</link> section. 
+         The <emphasis><property>&quot;attached&quot;</property></emphasis> attribute is &quot;true&quot; by default in this case,  
+         which means that the tolltip will be invoked automatically when the mouse cursor is hovered above the parent component.         
    </para>
-   <note>
-     <title>Note:</title>
-     <para>
-                  It is recommended to specify <emphasis><property>&quot;id&quot;</property></emphasis> for parent page element to ensure <property>tooltip&apos;s</property> correct work.
-     </para>
-   </note>
-   <note>
-     <title>Note:</title>
-     <para>
-                  If parent component contains more than one child, it is recommended to define <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> as the last one.
-     </para>
-   </note>
+           
    <para>
-             <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> may be attached to a page element by the use of <emphasis><property>&quot;for&quot;</property></emphasis> attribute. In this case a <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> may be defined separately from a page element it is applied to. 
-             <emphasis><property>&quot;id&quot;</property></emphasis> for page element is necessary (see the example below).
+         The second one uses <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> <emphasis><property>&quot;for&quot;</property></emphasis> attribute. 
+         In this case the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> is defined separately from a component it is applied to.
    </para>
+       
    <para>
                 <emphasis role="bold">Example:</emphasis>
    </para>
-   <programlisting role="XML"><![CDATA[...
-<rich:panel id="panelId">
+   <programlisting role="XML"><![CDATA[<rich:panel id="panelId">
 ...
 </rich:panel>
-<rich:toolTip value="This is a tooltip content" for="panelId"/>
-...
-]]></programlisting>
-   <para>
-     Because HTML elements are not presented in components tree built by facelets, 
-     use the attribute <emphasis><property>&quot;for&quot;</property></emphasis> with HTML elements as shown in example below.
-   </para>
+<rich:toolTip value="This is a tooltip." for="panelId"/>]]></programlisting>
+   
+       <para>These two ways are also applicable for HTML elements that are not presented in components tree built by facelets.  
+             Use <emphasis><property>&quot;for&quot;</property></emphasis> attribute to attach the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> in both cases.   
+       </para>
    <para>
      <emphasis role="bold">Example:</emphasis>
    </para>
-   <programlisting role="XML"><![CDATA[...
-<div id="elementId">
-      <rich:toolTip for="elementId">Using a toolTip</rich:toolTip>
-      <p>The first simple example</p>
+   <programlisting role="XML"><![CDATA[<!-- The <rich:toolTip> is nested into the parent HTML element -->
+<div id="para1">
+      <p>This paragraph and tooltip are nested into the same <div> element.</p>
+      <rich:toolTip for="para1">This is a tooltip.</rich:toolTip>
 </div>
-...
-<div id="elementId">
-      <p>The second simple example</p>
+
+<!-- The <rich:toolTip> is defined separately -->
+<div id="para2">
+      <p>The tooltip for this paragraph is defined separately.</p>
 </div>
-<rich:toolTip for="elementId">Using a toolTip</rich:toolTip>
-...
-]]></programlisting>
-   <para>
-     <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> may also be invoked by JS API function.
+<rich:toolTip for="para2">This is a tooltip.</rich:toolTip>]]></programlisting>
+       
+   <para>The third way to invoke the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> uses JS API function.
      List of JS API functions available for <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> is listed <link linkend="tab_jsapi">below</link>.
-     JS API functions are defined for a page element, the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> is applied to. Thus, <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> can be defined separately from that page element. 
-     It is necessary to specify <emphasis><property>&quot;ids&quot;</property></emphasis> for both and set <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> <emphasis><property>&quot;attached&quot;</property></emphasis> attribute&apos;s value to &quot;false&quot; (see the example below). 
+     JS API functions are defined for a component the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> is applied to. 
+         The <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> <emphasis><property>&quot;attached&quot;</property></emphasis> attribute should be set to &quot;false&quot; in this case.         
    </para>
-   <programlisting role="XML"><![CDATA[...
-<rich:panel id="paneld" onclick="#{rich:component("tooltipId")}.show();">
-...
-</rich:panel>
-<rich:toolTip id="tooltipId" attached="false" value="This is a tooltip content"/>
-...
-]]></programlisting>
+       <para>
+             <emphasis role="bold">Example:</emphasis>
+       </para>
+   <programlisting role="XML"><![CDATA[<rich:panel id="panelId" onclick="#{rich:component("tooltipId")}.show(event);" />
+<a4j:form>
+      <rich:toolTip id="tooltipId" attached="false" value="This is a tooltip."/>
+</a4j:form>]]></programlisting>
+     
+       <note>
+             <title>Notes:</title>
+             <para>To provide <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> component proper work in complex cases do the following:
+                   <itemizedlist>
+                         <listitem><para>specify <emphasis><property>&quot;id&apos;s&quot;</property></emphasis> for both <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> and component it is applied to;</para></listitem>
+                         <listitem><para>define the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> as last child, when nesting it into the component the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> is applied to;</para></listitem>
+                         <listitem><para>put the <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis> into <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> when invoking it with JS API function.</para></listitem>
+                   </itemizedlist>
+             </para>
+       </note>
+       
    <para>
      The <emphasis><property>&quot;mode&quot;</property></emphasis> attribute is provided you to control the way of data loading to <emphasis role="bold"><property>&lt;rich:toolTip&gt;</property></emphasis>.
      The component works properly in client and Ajax modes.
