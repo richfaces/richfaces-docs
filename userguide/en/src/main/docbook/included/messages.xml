@@ -71,138 +71,72 @@ HtmlRichMessages myMessages = new HtmlRichMessages();
 
           <section>
                     <title>Details of Usage</title>
-                    <para> The component has the same behavior as standard <emphasis role="bold">
-                                        <property>&lt;h:message&gt;</property>
-                              </emphasis>component except next features: <itemizedlist>
-                                        <listitem>
-                                                  <para>It&apos;s ajaxRendered. It means that
-                                                  the component is reRendered after Ajax
-                                                  request automatically without
-                                                  outputPanel usage.</para>
-                                        </listitem>
-                                        <listitem>
-                                                  <para>The component optionally provides
-                                                  &quot;passed&quot; state which
-                                                  will be shown if no message to be
-                                                  displayed.</para>
-                                        </listitem>
-                                        <listitem>
-                                                  <para>Provides possibility to add some marker to
-                                                  message. By default, a marker element
-                                                  isn&apos;t shown.</para>
-                                        </listitem>
-                              </itemizedlist>
+                <para>The <emphasis role="bold"><property>&lt;rich:messages&gt;</property></emphasis> component is considered as JSF HTML <emphasis role="bold"><property>&lt;h:message&gt;</property></emphasis>, 
+                      extended with following features:
+                          <itemizedlist>
+                                <listitem><para>Ajax support (the component does not require to be wrapped in <emphasis role="bold"><property>&lt;a4j:outputPanel&gt;</property></emphasis> in order to be rendered during Ajax requests);</para></listitem>
+                                <listitem><para>possibilty to add graphical markers (pictograms) to reinforce a message for both &quot;passed&quot; or &quot;failed&quot; states;</para></listitem>
+                                <listitem><para>set of predefined CSS classes for customizing messages appearance.</para></listitem>                              
+                          </itemizedlist>
                     </para>
-                    <para>The component provides two parts to be optionally defined: marker and
-                              informational label before the marker for every message.</para>
-                    <para> Set of facet which can be used for a marker defining: <itemizedlist>
-                                        <listitem>
-                                                  <para><emphasis>
-                                                  <property>&quot;passedMarker&quot;</property>
-                                                  </emphasis>. This facet is provided to
-                                                  allow setting a marker to be displayed
-                                                  if there is no message.</para>
-                                        </listitem>
-                                        <listitem>
-                                                  <para><emphasis>
-                                                  <property>&quot;errorMarker&quot;</property>
-                                                  </emphasis>. This facet is provided to
-                                                  allow setting a marker to be displayed
-                                                  if there is a message with a severity
-                                                  class of
-                                                  &quot;ERROR&quot;.</para>
-                                        </listitem>
-                                        <listitem>
-                                                  <para><emphasis>
-                                                  <property>&quot;fatalMarker&quot;</property>
-                                                  </emphasis>. This facet is provided to
-                                                  allow setting a marker to be displayed
-                                                  if there is a message with a severity
-                                                  class of
-                                                  &quot;FATAL&quot;.</para>
-                                        </listitem>
-                                        <listitem>
-                                                  <para><emphasis>
-                                                  <property>&quot;infoMarker&quot;</property>
-                                                  </emphasis>. This facet is provided to
-                                                  allow setting a marker to be displayed
-                                                  if there is a message with a severity
-                                                  class of
-                                                  &quot;INFO&quot;.</para>
-                                        </listitem>
-                                        <listitem>
-                                                  <para><emphasis>
-                                                  <property>&quot;warnMarker&quot;</property>
-                                                  </emphasis>. This facet is provided to
-                                                  allow setting a marker to be displayed
-                                                  if there is an message with a severity
-                                                  class of
-                                                  &quot;WARN&quot;.</para>
-                                        </listitem>
-                              </itemizedlist>
-                    </para>
-
-                    <para>The following example shows different variants of customization of the
-                              component.</para>
+                <para>There are two optional parts that could be defined for every message: marker and text label. The set of facets, which can be used for a marker definition, is shown below:</para>
+                    
+                <table>
+                      <title>Facets</title>
+                      <tgroup cols="2">
+                            <thead>
+                                  <row>
+                                        <entry>Facet</entry>
+                                        <entry>Description</entry>
+                                  </row>
+                            </thead>
+                            <tbody>
+                                  <row>
+                                        <entry>errorMarker</entry>
+                                        <entry>Defines marker for &quot;Error&quot; message severity class</entry>
+                                  </row>
+                                  <row>
+                                        <entry>fatalError</entry>
+                                        <entry>Defines marker for &quot;Fatal&quot; message severity class</entry>
+                                  </row>
+                                  <row>
+                                        <entry>infoError</entry>
+                                        <entry>Defines marker for &quot;Info&quot; message severity class</entry>
+                                  </row>
+                                  <row>
+                                        <entry>warnError</entry>
+                                        <entry>Defines marker for &quot;Warn&quot; message severity class</entry>
+                                  </row>
+                                  <row>
+                                        <entry>passedError</entry>
+                                        <entry>Defines marker if there is no message</entry>
+                                  </row>
+                            </tbody>
+                      </tgroup>
+                </table>
+                
+                <para>The following example shows different variants of customization of the component.</para>
 
                     <para>
                               <emphasis role="bold">Example:</emphasis>
                     </para>
-                    <programlisting role="XML"><![CDATA[...
-    <rich:messages layout="table" tooltip="true" showDetail="false" showSummary="true" passedLabel="No Errors"
-        <f:facet name="errorMarker">
+                    <programlisting role="XML"><![CDATA[<rich:messages layout="table" tooltip="true" showDetail="false" showSummary="true" passedLabel="No Errors">
+      <f:facet name="errorMarker">
             <h:graphicImage url="/image/error.png"/>
-        </f:facet>
-        <f:facet name="infoMarker">
+      </f:facet>
+      <f:facet name="infoMarker">
             <h:graphicImage url="/image/info.png"/>
-        </f:facet>
-        <f:facet name="passedMarker">
+      </f:facet>
+      <f:facet name="passedMarker">
             <h:graphicImage url="/image/passed.png"/>
-        </f:facet> 
-    </rich:messages>
-...
-]]></programlisting>
+      </f:facet>
+</rich:messages>]]></programlisting>
+                
+                <para>The <emphasis role="bold"><property>&lt;rich:messages&gt;</property></emphasis> component keeps all messages for all components even after only one ajax-validated component  was updated.</para>                
 
           </section>
           
-          <section>
-                    <title>Facets</title>
-                    <table>
-                              <title>Facets</title>
-                              <tgroup cols="2">
-                                        <thead>
-                                                  <row>
-                                                            <entry>Facet</entry>
-                                                            <entry>Description</entry>
-                                                  </row>
-                                        </thead>
-                                        <tbody>
-                                                  <row>
-                                                            <entry>errorMarker</entry>
-                                                            <entry>Redefines the content for the marker if there is message with a severity class of &quot;ERROR&quot;</entry>
-                                                  </row>
-                                                  <row>
-                                                            <entry>fatalError</entry>
-                                                            <entry>Redefines the content for the marker if there is message with a severity class of &quot;FATAL&quot;</entry>
-                                                  </row>
-                                                  <row>
-                                                            <entry>infoError</entry>
-                                                            <entry>Redefines the content for the marker if there is message with a severity class of &quot;INFO&quot;</entry>
-                                                  </row>
-                                                  <row>
-                                                            <entry>warnError</entry>
-                                                            <entry>Redefines the content for the marker if there is message with a severity class of &quot;WARN&quot;</entry>
-                                                  </row>
-                                                  <row>
-                                                            <entry>passedError</entry>
-                                                            <entry>Redefines the content for the marker if there is no message</entry>
-                                                  </row>
-                                        </tbody>
-                              </tgroup>
-                    </table>
-          </section>
-
-          <section>
+                  <section>
                     <title>Look-and-Feel Customization</title>
 
                     <para>For skinnability implementation, the components use a <emphasis>
