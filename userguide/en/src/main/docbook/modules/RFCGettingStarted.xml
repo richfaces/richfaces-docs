@@ -66,11 +66,19 @@
                                         necessary to register them in project <code>web.xml</code>
                                         file. Add following lines in <code>web.xml</code>: </para>
                               <programlisting role="XML"><![CDATA[...
+<!-- Plugging the "Blue Sky" skin into the project -->
 <context-param>
    <param-name>org.richfaces.SKIN</param-name>
    <param-value>blueSky</param-value>
 </context-param>
+
+<!-- Making the RichFaces skin spread to standard HTML controls -->
+<context-param>
+      <param-name>org.richfaces.CONTROL_SKINNING</param-name>
+      <param-value>enable</param-value>
+</context-param>
  
+<!-- Defining and mapping the RichFaces filter -->
 <filter> 
    <display-name>RichFaces Filter</display-name> 
    <filter-name>richfaces</filter-name> 
@@ -85,6 +93,7 @@
    <dispatcher>INCLUDE</dispatcher>
 </filter-mapping>
 ...]]></programlisting>
+                          <para>For more information on how to work with RichFaces skins read &quot;<link linkend="Skinnability">Skinnabilty</link>&quot; chapter.</para>
                               <para>Finally the <code>web.xml</code> should look like this: </para>
                               <programlisting role="XML"><![CDATA[<?xml version="1.0"?>
 <web-app version="2.5" 
@@ -102,15 +111,18 @@
    <param-name>org.richfaces.SKIN</param-name>
    <param-value>blueSky</param-value>
 </context-param>
+
+<context-param>
+      <param-name>org.richfaces.CONTROL_SKINNING</param-name>
+      <param-value>enable</param-value>
+</context-param>
  
-<!-- RichFaces Filter -->
 <filter> 
    <display-name>RichFaces Filter</display-name> 
    <filter-name>richfaces</filter-name> 
    <filter-class>org.ajax4jsf.Filter</filter-class> 
 </filter> 
 
-<!-- RichFaces Filter mapping-->
 <filter-mapping> 
    <filter-name>richfaces</filter-name> 
    <servlet-name>Faces Servlet</servlet-name>
@@ -200,37 +212,35 @@ public class user {
 <%@ taglib uri="http://richfaces.org/rich" prefix="rich"%>
  
 <html>
-   <head>
-      <title>RichFaces Greeter</title>
-   </head>
-   <body>
-      <f:view>
-         <h1>RichFaces Greeter</h1>
-         <a4j:form>
-            <h:panelGroup style="margin-left: 10" >
-               <h:outputText value="Your name: " />
-               <h:inputText value="#{user.name}" >
-                  <f:validateLength minimum="1" maximum="30" />
-               </h:inputText>
-               <a4j:commandButton value="Get greeting" reRender="greeting" />
-            </h:panelGroup>
-         </a4j:form>
-         <h:panelGroup id="greeting" >
-            <h:outputText value="Hello, " rendered="#{not empty user.name}" style="margin-left: 10" />
-            <h:outputText value="#{user.name}" />
-            <h:outputText value="!" rendered="#{not empty user.name}" />
-         </h:panelGroup>
-      </f:view>
-   </body>
+      <head>
+            <title>RichFaces Greeter</title>
+      </head>
+      <body>
+            <f:view>
+                  <a4j:form>
+                        <rich:panel header="RichFaces Greeter" style="width: 315px">
+                              <h:outputText value="Your name: " />
+                              <h:inputText value="#{user.name}" >
+                                    <f:validateLength minimum="1" maximum="30" />
+                              </h:inputText>
+                              
+                              <a4j:commandButton value="Get greeting" reRender="greeting" />
+                              
+                              <h:panelGroup id="greeting" >
+                                    <h:outputText value="Hello, " rendered="#{not empty user.name}" />
+                                    <h:outputText value="#{user.name}" />
+                                    <h:outputText value="!" rendered="#{not empty user.name}" />
+                              </h:panelGroup>
+                        </rich:panel>
+                  </a4j:form>
+            </f:view>
+      </body>
 </html>]]></programlisting>
-                              <para>The application uses two RichFaces components: <emphasis
-                                                  role="bold">
-                                                  <property>&lt;a4j:commandButton&gt;</property>
-                                        </emphasis> with built-in Ajax support allows rendering a
-                                        greeting dynamically after a response comes back and
-                                                  <emphasis role="bold">
-                                                  <property>&lt;a4j:form&gt;</property>
-                                        </emphasis> helps the button to perform the action. </para>
+                              <para>The application uses three RichFaces components: 
+                                    <emphasis role="bold"><property>&lt;rich:panel&gt;</property></emphasis> is used as visual container for information; 
+                                    <emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis> with built-in Ajax support allows rendering a greeting dynamically after a response comes back 
+                                    and <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> helps the button to perform the action. 
+                              </para>
                               <para>Note, that the RichFaces tag library should be declared on each
                                         JSP page. For XHTML pages add following lines for tag
                                         library declaration: </para>
