@@ -37,7 +37,9 @@
     
     <section>
         <title>Creating on a page</title>
-        <para>In order to create the named queue, see following example.</para>
+        <para>There is possibility of the creation as a named queue so and a queue with the default name. 
+            You can reference the named queue only from such components which have <emphasis><property>&quot;eventsQueue&quot;</property></emphasis> attribute.</para>
+        <para>So, the following example helps to create the named queue.</para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
@@ -46,16 +48,15 @@
 <h:inputText value="#{myQueue.text}">
     <a:support id="onblur" event="onblur" eventsQueue="myQueue"/>
 </h:inputText>
-...
-<a4j:commandButton eventsQueue="myQueue" ... >]]></programlisting>
-        <para>You can also create the queue with a default name. This queue is global for the all form. See the example below.</para>
+...>]]></programlisting>
+        <para>See the example of the creation the default queue below.</para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[<h:form>
-            ...
+    ...
        <a4j:queue/>
-       ...
+    ...
 </h:form>
 ]]></programlisting>
     </section>
@@ -74,23 +75,23 @@ HtmlQueue myQueue = new HtmlQueue();
     
     <section>
         <title>Key attributes and ways of usage</title>
-        <para>By means of the <emphasis role="bold"><property>&lt;a4j:queue&gt;</property></emphasis> component you can create several types of queues associated with it.</para>
+        <para>It&apos;s possible by means of the <emphasis role="bold"><property>&lt;a4j:queue&gt;</property></emphasis> component to create the several types of the queues.</para>
         <itemizedlist>
             <listitem>
                 <para>
-                    In order to create global queue for the all Can set a queue globally in &quot;web.xml&quot;. You don&apos;t need set the queue on the page itself. The global queue can be used by all components. You can see the example below:
+                    So that to create a global queue you should add the following code into your &quot;web.xml&quot; file. In this instance the queue can be used for the all pages and all components of these pages.
+                </para>
+                <para>
+                    You can define only one global queue.
                 </para>
                 <programlisting role="XML"><![CDATA[<context-param>
    <param-name>org.richfaces.queue.global.enabled</param-name>
    <param-value>true</param-value>
    </context-param>]]></programlisting>
                 <para>
-                    In order to enable/disable a global queue for concrete views see the following examples:
+                    By default the global queue is disabled. In order to enable or disable the queue the value of the &quot;<code>org.richfaces.global_queue</code>&quot; parameter should be &quot;true&quot; or &quot;false&quot; accordingly. 
                 </para>
                 <programlisting role="XML"><![CDATA[<a4j:queue name="org.richfaces.global_queue" disabled="false"... />]]></programlisting>
-                <para>
-                    In order to disable the queue the<emphasis><property>&quot;disabled&quot;</property></emphasis> attribute should be &quot;true&quot;.
-                </para>
             </listitem>
             <listitem>
                 <para>
