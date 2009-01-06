@@ -75,8 +75,8 @@ HtmlQueue myQueue = new HtmlQueue();
     
     <section>
         <title>Key attributes and ways of usage</title>
-        <para>It&apos;s possible by means of the <emphasis role="bold"><property>&lt;a4j:queue&gt;</property></emphasis> component to create the several types of the queues.</para>
-        <itemizedlist>
+        <para>It&apos;s possible by means of the <emphasis role="bold"><property>&lt;a4j:queue&gt;</property></emphasis> component to create the several types of the queues. The information about it you can find here.</para>
+       <!-- <itemizedlist>
             <listitem>
                 <para>
                     So that to create a global queue you should add the following code into your &quot;web.xml&quot; file. In this instance the queue can be used for the all pages and all components of these pages.
@@ -152,7 +152,8 @@ HtmlQueue myQueue = new HtmlQueue();
                     If you try to refer to the nonexistent queue the new named queue will be created with all default settings.
                 </para>
             </listitem>
-        </itemizedlist>
+            </itemizedlist>-->
+        <para>In order to disable or enable the <emphasis role="bold"><property>&lt;a4j:queue&gt;</property></emphasis> component on the page you can use the <emphasis><property>&quot;disabled&quot;</property></emphasis> attribute.</para>
         <para>
             The <emphasis><property>&quot;size&quot;</property></emphasis> attribute helps you to set the number of requests allowed in the queue at one time.
         </para>
@@ -174,6 +175,17 @@ HtmlQueue myQueue = new HtmlQueue();
             </listitem>
         </itemizedlist>
         <para>
+            The example of the usage this attribute you can find below.
+        </para>
+        <para>
+            <emphasis role="bold">
+                Example:
+            </emphasis>
+        </para>
+        <programlisting role="XML"><![CDATA[...
+    <a4j:queue sizeExceededBehavior="dropNext" requestDelay="5000" ... />
+    ...]]></programlisting>
+        <para>
             The <emphasis><property>&quot;requestDelay&quot;</property></emphasis> attribute defines delay time for all the requests which fired using this queue.
         </para>
         <para>
@@ -188,6 +200,20 @@ HtmlQueue myQueue = new HtmlQueue();
         <para>
             The requests collected in the queue, combining similar ones, during request delay. 
             Note, that such requests can combine, if they are raised sequentially, in order to not block the queue and not to change the requests order.
+        </para>
+        <para>
+            You can define the JavaScript code for call after Ajax response receiving and before updating DOM on a client side via the <emphasis><property>&quot;onbeforedomupdate&quot;</property></emphasis> attribute.
+        </para>
+        <para>
+            The <emphasis><property>&quot;onrequestqueue&quot;</property></emphasis> attribute is a JavaScript code for call which fired after the new request has been added to queue.
+            And the <emphasis><property>&quot;onrequestdequeue&quot;</property></emphasis> attribute is the code for call which fired after the request has been removed from queue. 
+        </para>
+        
+        <para>
+            The <emphasis><property>&quot;onsubmit&quot;</property></emphasis> attribute is fired after request is completed. This attribute allows to invoke JavaScript code before an Ajax request is sent.
+        </para>
+        <para>The additional information about the <emphasis><property>&quot;requestDelay&quot;</property></emphasis>, <emphasis><property>&quot;timeout&quot;</property></emphasis> and <emphasis><property>&quot;ignoreDupResponses&quot;</property></emphasis>
+            you can find in <link linkend="QueueandTrafficFloodProtection">this</link> section.
         </para>
     </section>
     
