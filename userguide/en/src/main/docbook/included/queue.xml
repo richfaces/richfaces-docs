@@ -37,19 +37,9 @@
     
     <section>
         <title>Creating on a page</title>
-        <para>There is possibility of the creation as a named queue so and a queue with the default name. 
+        <para>There is possibility of the creation several types of the queue. The additional information about them you can find <link linkend="QueuePrinciples">here</link>. 
             You can reference the named queue only from such components which have <emphasis><property>&quot;eventsQueue&quot;</property></emphasis> attribute.</para>
-        <para>So, the following example helps to create the named queue.</para>
-        <para>
-            <emphasis role="bold">Example:</emphasis>
-        </para>
-        <programlisting role="XML"><![CDATA[<a4j:queue name="myQueue" ... />
-...
-<h:inputText value="#{myQueue.text}">
-    <a:support id="onblur" event="onblur" eventsQueue="myQueue"/>
-</h:inputText>
-...>]]></programlisting>
-        <para>See the example of the creation the default queue below.</para>
+        <para>So, the following example is the easiest example of the queue&apos;s creation .</para>
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
@@ -76,89 +66,12 @@ HtmlQueue myQueue = new HtmlQueue();
     <section>
         <title>Key attributes and ways of usage</title>
         <para>It&apos;s possible by means of the <emphasis role="bold"><property>&lt;a4j:queue&gt;</property></emphasis> component to create the several types of the queues. The information about it you can find here.</para>
-       <!-- <itemizedlist>
-            <listitem>
-                <para>
-                    So that to create a global queue you should add the following code into your &quot;web.xml&quot; file. In this instance the queue can be used for the all pages and all components of these pages.
-                </para>
-                <para>
-                    You can define only one global queue.
-                </para>
-                <programlisting role="XML"><![CDATA[<context-param>
-   <param-name>org.richfaces.queue.global.enabled</param-name>
-   <param-value>true</param-value>
-   </context-param>]]></programlisting>
-                <para>
-                    By default the global queue is disabled. In order to enable or disable the queue the value of the &quot;<code>org.richfaces.global_queue</code>&quot; parameter should be &quot;true&quot; or &quot;false&quot; accordingly. 
-                </para>
-                <programlisting role="XML"><![CDATA[<a4j:queue name="org.richfaces.global_queue" disabled="false"... />]]></programlisting>
-            </listitem>
-            <listitem>
-                <para>
-                    You can create a separate queue for a specific form with the help of the <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> or <emphasis role="bold"><property>&lt;h:form&gt;</property></emphasis> tags. 
-                    It is the queue only for this form. The queue&apos;s name don&apos;t define by default if you haven&apos;t defined it.
-                </para>
-                <para>
-                    <emphasis role="bold">
-                        Example:
-                    </emphasis>
-                </para>
-                <programlisting role="XML"><![CDATA[<h:form ... >
-    ...
-    <a4j:queue ... /> 
-    ...
-    </h:form>]]></programlisting>
-                <para>
-                    or:
-                </para>
-                <para>
-                    <emphasis role="bold">
-                        Example:
-                    </emphasis>
-                </para>
-                <programlisting role="XML"><![CDATA[<a4j:form ... >
-    ...
-    <a4j:queue name="myQueue" ... /> 
-    ...
-</a4j:form>]]></programlisting>
-                <para>If you use the <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> tag, you can reference a named queue as the form&apos;s default.</para>
-                <para>
-                    <emphasis role="bold">
-                        Example:
-                    </emphasis>
-                </para>
-                <programlisting role="XML"><![CDATA[<a4j:form eventsQueue="myQueue" ...>
-   ...
-   </a4j:form>]]></programlisting>
-            </listitem>
-            <listitem>
-                <para>With the help of the <emphasis><property>&quot;eventsQueue&quot;</property></emphasis> attribute you can reference a named queue from any <emphasis role="bold"><property>a4j</property></emphasis> or <emphasis role="bold"><property>rich</property></emphasis> component that supports this attribute.</para>
-                <para>
-                    <emphasis role="bold">
-                        Example:
-                    </emphasis>
-                </para>
-                <programlisting role="XML"><![CDATA[<a4j:queue name="myQueue" ... />
-...
-<h:inputText value="#{queueBean.text}">
-    <a4j:support id="onblur" event="onblur" eventsQueue="myQueue"/>
-</h:inputText>
-
-<a4j:commandButton eventsQueue="myQueue" ... >]]></programlisting>
-                <para>
-                    As a result all requests generated after the &quot;onblur&quot; event of the <emphasis role="bold"><property>&lt;h:inputText&gt;</property></emphasis> component, and clicking of the <emphasis role="bold"><property>&lt;h:commandButton&gt;</property></emphasis> will be funneled through the <code>&quot;myQueue&quot;</code>.
-                </para>
-                <para>
-                    If you try to refer to the nonexistent queue the new named queue will be created with all default settings.
-                </para>
-            </listitem>
-            </itemizedlist>-->
         <para>In order to disable or enable the <emphasis role="bold"><property>&lt;a4j:queue&gt;</property></emphasis> component on the page you can use the <emphasis><property>&quot;disabled&quot;</property></emphasis> attribute.</para>
         <para>
             The <emphasis><property>&quot;size&quot;</property></emphasis> attribute helps you to set the number of requests allowed in the queue at one time.
         </para>
         <para>
-            The <emphasis><property>&quot;sizeExceededBehavior&quot;</property></emphasis> attribute defines four strategies of the queue&apos;s behavior if the number of the requests waiting in the queue is exceeded:
+            The <emphasis><property>&quot;sizeExceededBehavior&quot;</property></emphasis> attribute defines the strategies of the queue&apos;s behavior if the number of the requests waiting in the queue is exceeded:
         </para>
         <itemizedlist>
             <listitem>
@@ -174,6 +87,7 @@ HtmlQueue myQueue = new HtmlQueue();
                 <para>fireNew - immediately fires the incoming request.</para>
             </listitem>
         </itemizedlist>
+        <para>You can use this attribute only if the <emphasis><property>&quot;size&quot;</property></emphasis> attribute&apos;s value has been set.</para>
         <para>
             The example of the usage this attribute you can find below.
         </para>
@@ -183,7 +97,7 @@ HtmlQueue myQueue = new HtmlQueue();
             </emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-    <a4j:queue sizeExceededBehavior="dropNext" requestDelay="5000" ... />
+    <a4j:queue size="4" sizeExceededBehavior="dropNext" ... />
     ...]]></programlisting>
         <para>
             The <emphasis><property>&quot;requestDelay&quot;</property></emphasis> attribute defines delay time for all the requests which fired using this queue.
