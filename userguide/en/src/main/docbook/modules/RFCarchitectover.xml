@@ -402,9 +402,34 @@
 		</section>
 		<section id="QueuePrinciples">
 			<title>Queue Principles</title>
-			<para>Starting from 3.3.0 version RichFaces has a improved queue functionality. The new
-				implementation provides a rich flexibility for making queues of Ajax requests. You
-				can use the queue in a number of ways: </para>
+			<para>Starting from 3.3.0 version RichFaces has an improved queue.</para>
+		
+			<para>There are some serious reasons why the queue has been improved. The improved queue allows to</para>
+			
+			<itemizedlist>
+		
+			
+					<listitem>
+						<para>
+							Eliminate the possibility of collisions when several JSF requests pass the JSF lifecycle at the same time. The queue prevents sending such requests. Only one request is processed. The rest ones are waiting. 
+						</para>
+					</listitem>
+			
+					<listitem>
+						<para> 
+							Reduce the traffic between browser and the server. The "similar" requests came within requestDelay are absorbed. Only the last one is actually sent. Reducing the number of request reduces the server load. 
+						</para>
+					</listitem>
+				
+				<listitem><para>
+					
+					Significantly increase the amount of &quot;unrelated&quot; asynchronous requests to processed
+					
+				</para></listitem>
+			
+			</itemizedlist>
+				
+			<para>There are 4 types of the queue:</para>
 			<itemizedlist>
 				<listitem><para>
 					Global default queue, defined in the web.xml file
