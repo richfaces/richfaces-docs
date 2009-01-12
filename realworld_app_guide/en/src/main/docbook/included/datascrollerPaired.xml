@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="datascrollerPaired" role="NotInToc">
+    <?dbhtml filename="datascrollerPaired.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>datascroller</keyword>
+            <keyword>paired</keyword>
+            <keyword>page</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>Paired &lt;rich:datascroller&gt; components do not work</title>
+    <section>
+        <title>Description</title>
+        <para>
+            Two <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components bound to the same table aren&apos;t synchronized.
+            Having two <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis>components on a page, session-scoped beans saves the data for only one  <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> component. 
+            It is a common pattern to have 2 <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components: 
+            the first in the header, the second in the footer. In this case the first one will not work.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://jira.jboss.com/jira/browse/RF-2970">Jira</ulink>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4141786#4141786">RichFaces Forum</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+    <para>
+        The described above problem occurs if two <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components are added to any table.
+    </para>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+            The <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> component  does not manage the scroll state of a data table.
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+            The solution is to use    <emphasis><property>&quot;page&quot;</property></emphasis> attribute and bind it to the same property for all 
+            <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> components.
+        </para>
+    </section>
+    
+</section>

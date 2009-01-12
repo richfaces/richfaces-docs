@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="i18n" role="NotInToc">
+    <?dbhtml filename="i18n.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>i18n</keyword>
+            <keyword>internationalization</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>non-ASCII characters in application with i18n</title>
+    <section>
+        <title>Description</title>
+        <para>
+           An application with i18n does not work correctly due to the validation error that occurs when non-ASCII characters are used. 
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://jira.jboss.com/jira/browse/RF-2962">Jira</ulink>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4141302#4141302">RichFaces Forum</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+        <programlisting role="XML"><![CDATA[...
+<select id="j_id27:cbxUser" name="j_id27:cbxUser" size="1" style="width:120px">
+        <option value="Al Korbeli& #269;o">Al Korbeli& #269;o</option>
+        <option value="Al Nagyov& aacute;">Al Nagyov& aacute;</option>
+        <option value="Al Tothov& aacute;">Al Tothov& aacute;</option>
+        <option value="An Gajdov& aacute;">An Gajdov& aacute;</option>
+        ...
+</select>
+...]]></programlisting>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+            Bug is caused by the<emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+           You need to update to <ulink url="http://www.jboss.org/jbossrichfaces/downloads/">RichFaces 3.2.0 SP1</ulink>
+        </para>
+    </section>
+    
+</section>

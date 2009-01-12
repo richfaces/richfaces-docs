@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="dataTableAjax" role="new">
+    <?dbhtml filename="dataTableAjax.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>dataTable</keyword>
+            <keyword>ajax</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>Ajax request calls encode() methods of &lt;rich:dataTable&gt; even if it is not necessary</title>
+    <section>
+        <title>Description</title>
+        <para>
+        	Any Ajax request reloads the list that is related to the <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> component even if the Ajax request is related to another bean. 
+It happens because the Ajax request checks whether the <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> has nested <emphasis role="bold"><property>&lt;rich:outputPanel&gt;</property></emphasis> or <emphasis role="bold"><property>&lt;rich:messages&gt;</property></emphasis> components that should be updated. 
+If there are no <emphasis role="bold"><property>&lt;rich:outputPanel&gt;</property></emphasis>, <emphasis role="bold"><property>&lt;rich:messages&gt;</property></emphasis> components inside the <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> will not be updated, but anyway the <code>encode()</code> methods is called by the Ajax request.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="https://jira.jboss.org/jira/browse/RF-3341">Jira</ulink>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4197996#4197996">RichFaces Forum</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+        <para>
+            Place the following code on a page and click the button. The list in <code>myBean1.myList</code> will be reloaded.
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<h:form  id="form1">
+    <rich:dataTable id="myTable" value="#{myBean1.myList}" var="comp">
+        ...
+    </rich:dataTable>	
+</h:form>
+<h:form id="form2">
+    <h:outputText value="#{myBean2.test}"/>
+    <a4j:commandButton event="onclick" reRender="form2" />
+</h:form>
+...]]></programlisting>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+         Bug is caused by <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> implementation peculiarity.
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+         Wrap the zone of a page that should be processed and updated in the <emphasis role="bold"><property>&lt;a4j:region&gt;</property></emphasis> component with <code>renderRegionOnly=&quot;true&quot;</code>. The <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> should be outside of the <emphasis role="bold"><property>&lt;a4j:region&gt;</property></emphasis>. 
+        </para>
+    </section>
+</section>
