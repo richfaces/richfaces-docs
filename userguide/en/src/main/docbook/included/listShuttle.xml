@@ -47,6 +47,10 @@ HtmlListShuttle myListShuttle = new HtmlListShuttle();
                     performs moving items between lists</para></listitem>
             </itemizedlist>
         </para>
+        <note>
+            <title>Note:</title>
+            <para>Now the listener can not be called from the column facet. This is a temporary limitation. The additional information is <ulink url="https://jira.jboss.org/jira/browse/RF-5327">here</ulink>.</para>
+        </note>
         <para> The <emphasis>
             <property>&quot;sourceValue&quot; </property>
         </emphasis> attribute defines a List or Array of items to be shown in the source list.</para>
@@ -106,11 +110,10 @@ HtmlListShuttle myListShuttle = new HtmlListShuttle();
             </emphasis> attribute is used to convert component data to a particular component&apos;s value.
             For example, when you select items in a list, a converter is used to format a set of objects to a strings to be displayed.  
         </para>
-        <note>
+        <note id="conv">
             <para>
-                It is necessary to override the <emphasis>
-                    <property>&quot;equals&quot;</property></emphasis> and <emphasis>
-                        <property>&quot;hashCode&quot;</property></emphasis> methods in your own class!
+                The <emphasis><property>&quot;converter&quot;</property></emphasis> attribute and the <emphasis><property>&quot;equals&quot;</property></emphasis> and <emphasis>
+                        <property>&quot;hashCode&quot;</property></emphasis> methods should be defined only in your own class.
             </para>
         </note>
         <para>
