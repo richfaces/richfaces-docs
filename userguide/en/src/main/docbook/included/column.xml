@@ -222,7 +222,8 @@ HtmlColumn myColumn = new HtmlColumn();
                               <para> In order to sort the columns you should use <emphasis>
                                                   <property>&quot;sortBy&quot;</property>
                                         </emphasis> attribute that indicates what values to be
-                                        sorted. In order to sort the column you should click on its
+                                        sorted.This attribute can be used only with the <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> component. 
+                                        In order to sort the column you should click on its
                                         header. See the following example. </para>
                               <para>
                                         <emphasis role="bold">Example:</emphasis>
@@ -263,6 +264,49 @@ HtmlColumn myColumn = new HtmlColumn();
                                                   </imageobject>
                                         </mediaobject>
                               </figure>
+                              <para>The <emphasis>
+                                        <property>&quot;sortExpression&quot;</property>
+                              </emphasis> attribute defines a bean property which is used
+                                        for sorting of a column. This attribute can be used only with the <emphasis role="bold"><property>&lt;rich:scrollableDataTable&gt;</property></emphasis> component.
+                                        The following example is a example of the attribute usage.
+                              </para>
+                              <para>
+                                        <emphasis role="bold">Example:</emphasis>
+                              </para>
+                              <programlisting role="XML"><![CDATA[...
+<rich:scrollableDataTable id="carList" value="#{dataTableScrollerBean.allCars}"
+	    sortMode="single" binding="#{dataTableScrollerBean.table}">
+        <rich:column id="make" sortExpression="#{cap.state}">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Make"/>
+                </f:facet>
+                <h:outputText value="#{category.make}"/>
+        </rich:column>
+        <rich:column id="model">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Model"/>
+                </f:facet>
+                <h:outputText value="#{category.model}"/>
+        </rich:column>
+        <rich:column id="price">
+                <f:facet name="header">
+                        <h:outputText styleClass="headerText" value="Price"/>
+                </f:facet>
+                <h:outputText value="#{category.price}"/>
+        </rich:column>
+</rich:scrollableDataTable>
+...]]></programlisting>
+                            <!--  <figure>
+                                        <title>The <emphasis>
+                                                  <property>&quot;sortExpression&quot;</property>
+                                        </emphasis> attribute usage</title>
+                                        <mediaobject>
+                                                  <imageobject>
+                                                            <imagedata fileref="images/column7.png"
+                                                            />
+                                                  </imageobject>
+                                        </mediaobject>
+                              </figure>-->
                               <para> The <emphasis>
                                                   <property>&quot;selfSorted&quot;</property>
                                         </emphasis> attribute that would add the possibility of
@@ -367,51 +411,8 @@ HtmlColumn myColumn = new HtmlColumn();
                                         </emphasis> attribute which is used with <emphasis
                                                   role="bold">
                                                   <property>&lt;rich:scrollableDataTable&gt;</property>
-                                        </emphasis> component. In the following example only the
-                                        first column could be sorted. </para>
-                              <para>
-                                        <emphasis role="bold">Example:</emphasis>
-                              </para>
-                              <programlisting role="XML"><![CDATA[...
-<rich:scrollableDataTable rowKeyVar="rkv" frozenColCount="1"
-	    id="carList" columnClasses="col" value="#{dataTableScrollerBean.allCars}" var="category" 
-	    sortMode="single" binding="#{dataTableScrollerBean.table}"
-	    selection="#{dataTableScrollerBean.selection}">
-        <rich:column id="make" sortable="true">
-                <f:facet name="header">
-                        <h:outputText styleClass="headerText" value="Make"/>
-                </f:facet>
-                <h:outputText value="#{category.make}"/>
-        </rich:column>
-        <rich:column id="model">
-                <f:facet name="header">
-                        <h:outputText styleClass="headerText" value="Model"/>
-                </f:facet>
-                <h:outputText value="#{category.model}"/>
-        </rich:column>
-        <rich:column id="price">
-                <f:facet name="header">
-                        <h:outputText styleClass="headerText" value="Price"/>
-                </f:facet>
-                <h:outputText value="#{category.price}"/>
-        </rich:column>
-</rich:scrollableDataTable>
-...]]></programlisting>
-                              <figure>
-                                        <title>The <emphasis>
-                                                  <property>&quot;sortable&quot;</property>
-                                                  </emphasis> attribute usage</title>
-                                        <mediaobject>
-                                                  <imageobject>
-                                                  <imagedata fileref="images/column7.png"
-                                                  />
-                                                  </imageobject>
-                                        </mediaobject>
-                              </figure>
-                              <para><emphasis>
-                                                  <property>&quot;sortExpression&quot;</property>
-                                        </emphasis> attribute defines a bean property which is used
-                                        for sorting of a column. This attribute can be used only with the <emphasis role="bold"><property>&lt;rich:scrollableDataTable&gt;</property></emphasis> component.</para>
+                                        </emphasis> component.</para>
+                             
                     </section>
 
                     <section id="filter">
