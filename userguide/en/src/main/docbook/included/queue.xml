@@ -45,9 +45,10 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[<h:form>
-    ...
-       <a4j:queue/>
-    ...
+	<a4j:queue />
+	<h:inputText value="#{bean.a}">
+		<a4j:support event="onkeyup" />
+	</h:inputText>
 </h:form>
 ]]></programlisting>
     </section>
@@ -101,18 +102,18 @@ HtmlQueue myQueue = new HtmlQueue();
         </para>
         <programlisting role="XML"><![CDATA[...
 <h:form>
-<a4j:queue size="2"  requestDelay="500" sizeExceededBehavior="dropNext" onsizeexceeded="alert('The size of the queue is exceeded')"  />
-<h:inputText value="#{bean.a}" >
-<a4j:support event="onkeyup" />
-</h:inputText>
-<h:inputText value="#{bean.b}"  >
-<a4j:support event="onblur" />
-<h:selectBooleanCheckbox value="#{bean.check}" id="checkboxID" >
-<a4j:support id="checkboxSupport" event="onchange" />
-</h:selectBooleanCheckbox>
+	<a4j:queue size="2" requestDelay="500" sizeExceededBehavior="dropNext" onsizeexceeded="alert('The size of the queue is exceeded')" />
+	<h:inputText value="#{bean.a}">
+		<a4j:support event="onkeyup" />
+	</h:inputText>
+	<h:inputText value="#{bean.b}">
+		<a4j:support event="onblur" />
+	</h:inputText>
+	<h:selectBooleanCheckbox value="#{bean.check}" id="checkboxID">
+		<a4j:support id="checkboxSupport" event="onchange" />
+	</h:selectBooleanCheckbox>
 </h:form>
 ...]]></programlisting>
-        
         <para>
             In this example if the queue has more than 2 requests waiting to be processed the next event will be dropped and a message (the  <emphasis><property>&quot;onsizeexceeded&quot;</property></emphasis> attribute fires a JavaScript function ) saying that the queues is exceeded will be displayed.
         </para>
@@ -127,34 +128,31 @@ HtmlQueue myQueue = new HtmlQueue();
         </para>
         <programlisting role="XML"><![CDATA[...
 <h:form>
-<a4j:queue requestDelay="500" ignoreDupResponses="true"   />
-<h:inputText value="#{bean.a}" >
-<a4j:support event="onkeyup" />
+	<a4j:queue requestDelay="500" ignoreDupResponses="true" />
+	<h:inputText value="#{bean.a}">
+		<a4j:support event="onkeyup" />
+	</h:inputText>
 </h:form>
 ...]]></programlisting>
         
-        
-        
         <para>In this example, the requests are glued together and only the last one is submitted.</para>
-        
-        
         
         <para>Another key attribute that easies revers load is <emphasis><property
             >&quot;timeout&quot;</property></emphasis>.
             The attribute specifies the  amount of time an item can be in the queue before the sent event is be aborted and dropped from the queue.
           </para> 
-            <para>
-                <emphasis role="bold"> Example: </emphasis>
-            </para>
         <para>If the request is sent and response is not returned within the
             time frame defined in this attribute - the request is aborted, and the next one is sent.
         </para>
-            
+          <para>
+                <emphasis role="bold"> Example: </emphasis>
+          </para>            
         <programlisting role="XML"><![CDATA[...
 <h:form>
-<a4j:queue timeout="1000" />
-<h:inputText value="#{bean.a}" >
-<a4j:support event="onkeyup" />
+	<a4j:queue timeout="1000" />
+	<h:inputText value="#{bean.a}" >
+		<a4j:support event="onkeyup" />
+	</h:inputText>
 </h:form>
 ...]]></programlisting>
         
@@ -178,13 +176,13 @@ HtmlQueue myQueue = new HtmlQueue();
         </para>
         <programlisting role="XML"><![CDATA[...
 <h:form  >
-<a4j:queue oncomplete="alert(request.queue.getSize())" requestDelay="1000" />
-
-<h:inputText value="#{bean.a}"  >
-<a4j:support event="onkeyup" />
-<h:selectBooleanCheckbox value="#{bean.check}" >
-<a4j:support event="onchange"/>
-</h:selectBooleanCheckbox>
+	<a4j:queue oncomplete="alert(request.queue.getSize())" requestDelay="1000" />
+	<h:inputText value="#{bean.a}">
+		<a4j:support event="onkeyup" />
+	</h:inputText>
+	<h:selectBooleanCheckbox value="#{bean.check}">
+		<a4j:support event="onchange"/>
+	</h:selectBooleanCheckbox>
 </h:form>
 ...]]></programlisting>
         
@@ -210,7 +208,6 @@ HtmlQueue myQueue = new HtmlQueue();
                     <row>
                         <entry>Function</entry>
                         <entry>Description</entry>
-                        
                     </row>
                 </thead>
                 <tbody>
@@ -223,12 +220,7 @@ HtmlQueue myQueue = new HtmlQueue();
                     <row>
                         <entry>getMaximumSize()</entry>
                         <entry>Returns the maximum size to the queue, specified in the &quot;size&quot; attribute</entry>
-                        
                     </row>
-                    
-                   
-                    
-                    
                 </tbody>
             </tgroup>
         </table>
