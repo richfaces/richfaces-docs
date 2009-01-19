@@ -9,8 +9,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"  xmlns:date="http://exslt.org/dates-and-times" exclude-result-prefixes="date">
 
    <xsl:import href="collapsing-navigation.xsl"/>
-   <xsl:param name="generate.toc" select="'book toc'"/>
+   <!--xsl:param name="generate.toc" select="'book toc'"/-->
    <xsl:param name="toc.section.depth" select="5"/>
+   
+   
 	<!--
 From: xhtml/docbook.xsl
 Reason: Remove inline style for draft mode
