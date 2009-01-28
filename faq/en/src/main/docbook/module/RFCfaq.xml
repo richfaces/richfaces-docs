@@ -2724,6 +2724,7 @@ public class CookieBean {
           </section>
 		  
 		  <section id="newin32x">
+		            <?dbhtml filename="newin32x.html"?>
 		     <title>What's new in a4j in 3.2.x release</title>
 		        <para>RichFaces 3.2.x releases have some new features: 
 			       <itemizedlist>
@@ -2752,5 +2753,25 @@ public class CookieBean {
      <param-value>true</param-value>
 </context-param>
 ...]]></programlisting>
+          </section>
+          <section  id="passBoolValueInComponentControl">
+                    <?dbhtml filename="passBoolValueInComponentControl.html"?>
+                    <title>How to pass the boolean value in the &lt;rich:componentControl&gt; component?</title>
+                    <para>
+                              There is an example which will help you to do without a boolean value definition below. 
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
+<rich:componentControl event="oncontextmenu" attachTiming="onload" for="em" operation="show">
+    <f:param value="#{node.description}" name="nm"/>
+    <f:param value="#{node.id}" name="id"/>
+    <f:param value="#{node.craftUrl}" name="crft"/>
+    <f:param value="#{node.craftUrl == null ? 'block' : 'none' }" name="cd"/>
+    <f:param value="#{node.craftUrl == null ? 'none' : 'block' }" name="ce"/>
+</rich:componentControl>
+...
+<rich:menuItem style="display: {cd};" value="Launch Craft" disabled="true" submitMode="none"/> 
+<rich:menuItem style="display: {ce};" value="Launch Craft" disabled="false" onclick="launchcrft('{crft}');"/>
+...]]></programlisting>
+                    <para>Use <code>&apos;block&apos;</code> instead of <code>&apos; &apos;</code> in order to avoid the CSS errors about invalid style.</para>
           </section>
 </chapter>
