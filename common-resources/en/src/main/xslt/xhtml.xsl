@@ -28,45 +28,8 @@
 				<div id="overlay">
 					<xsl:text> </xsl:text>
 				</div>
-
-      <!-- FEEDBACK -->
-	<div id="feedback-maincontainer" style="display:none">
-		<div id="feedback-header">
-			Send your remarks, comments or wishes to doc team
-		</div>
-		<a href="#" onclick="$('feedback-maincontainer').hide(); return false;" id="feedback-close">
-			<img src="images/close.png" class="feedback-images" />
-		</a>
-		<div id="feedback-state"><xsl:text> </xsl:text></div>
-	
-    		<form id="feedback-mailform">
-			<div class="feedback-textbox-div">
-			  Subject:<input type="text" id="subject" name="subject" title="Enter the subject of your message" class="feedback-textbox" />
-			</div>
-			<div class="feedback-textbox-div">
-			  <span style="vertical-align: top;">Message:</span>
-			  <textarea name="message" title="Type here the text of your message" id="message"><xsl:text> </xsl:text></textarea>
-			</div>
-			<div class="feedback-textbox-div">
-			  Your name:<input type="text" id="name" name="name" title="Enter your name" class="feedback-textbox" />
-			</div>
-			<div class="feedback-textbox-div">
-			  Your email:<input type="text" id="email" name="email" title="Enter your email address" class="feedback-textbox" />
-			</div>
-			<span class="feedback-button-container">
-				<input type="submit" value="Send Message" name="submit" class="feedback-formbutton" title="Send Message" />
-			</span>
-			<span class="feedback-button-container">
-				<input type="reset" value="Clear All Fields" class="feedback-formbutton" title="Clear All Fields" />
-			</span>
-	    </form>
-	</div>
-	<div id="feedback-wrapper">
-		<a id="feedback-link" href="#" onclick="$('feedback-maincontainer').appear(); return false;">
-			<img src="images/feedback_logo.png" class="feedback-images" width="100px"/>
-		</a>
-	</div>							
- <!-- FEEDBACK ENDS -->
+				<!-- FEEDBACK -->
+				<xsl:call-template name="feedback" />
 
 				<p xmlns="http://www.w3.org/1999/xhtml">
 					<xsl:attribute name="id">

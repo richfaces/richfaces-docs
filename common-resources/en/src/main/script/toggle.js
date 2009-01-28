@@ -1,3 +1,4 @@
+/*
 // attach handler to window object
   Event.observe(window,'load',initializeEmailClient,false);
 
@@ -11,17 +12,29 @@ function sendEmail(e){
 
   // prevent form from submitting
   Event.stop(e);
-  var params='subject='+$F('subject')+'&message='+escape($F('message'))+'&name='+$F('name')+'&email='+$F('email')+'&path='+window.location;
-  var xmlobj=new Ajax.Updater('feedback-state','script/send_mail.php',{method:'get',parameters: params});
+  var params='subject='+$F('subject')+'&emailContent='+escape($F('emailContent'))+'&senderName='+$F('senderName')+'&from='+$F('from')+'&path='+window.location;
+  var xmlobj=new Ajax.Updater('feedback-state','http://192.168.0.194:8090/feedback/FeedbackRF',{method:'get',parameters: params});
 }
+*/
+function feedbackAppear(){
+			document.getElementById('feedback-maincontainer').style.display = "block";
+		}
+		function feedbackClose(){
+			document.getElementById('feedback-maincontainer').style.display = "none";
+		}
 
-Event.observe(window, 'load', function() {
-	var array = new Array();
-	array = $$('.title:not(h1) a');
-	for(i=0; i<array.length; i++){
-		array[i].setAttribute('href', window.location.toString().replace(/#[0-9A-Za-z_\-]*/, "")+"#"+$(array[i]).readAttribute('id'));
+	window.onload = function(){
+		var array = new Array();
+		for(i=2; i<=6; i++){
+		    array[i]=document.getElementsByTagName('h'+i).item('a');
+		}	
+		for (var i in array){
+			if(array[i] != null && array[i].className == 'title'){
+				array[i].childNodes[0].setAttribute("href",window.location.toString().replace(/#[0-9A-Za-z_\-]*/, "")+"#"+array[i].childNodes[0].id);		
+			}
+		}
 	}
-});
+
 
 function dbToggle(node, expandText, collapseText) {
 	var dt = node.parentNode;
