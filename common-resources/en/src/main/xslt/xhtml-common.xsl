@@ -11,7 +11,7 @@
    <xsl:import href="collapsing-navigation.xsl"/>
    <!--xsl:param name="generate.toc" select="'book toc'"/-->
    <xsl:param name="toc.section.depth" select="5"/>
-   
+   	
    
 	<!--
 From: xhtml/docbook.xsl
