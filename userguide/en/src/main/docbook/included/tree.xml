@@ -123,11 +123,11 @@ org.richfaces.model.TreeNodeImpl
 		              </para>
 		              <para>
 		              	When the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component is being rendered 
-		              	it iterates through model nodes and renders them using one of its <property>immediate</property> 
+		              	it iterates over the model nodes and renders them using one of its <property>immediate</property> 
 		              	<emphasis role="bold"><property>&lt;rich:treeNode&gt;</property></emphasis> children. 
 		              	Data property of the current model <code>TreeNode</code> is exposed using 
 		              	<emphasis><property>&quot;var&quot;</property></emphasis> attribute, 
-		              	so if <code>var=&quot;itemData&quot;</code> you can refer to that data using <code>#{itemData}</code> syntax. 
+		              	so if <code>var=&quot;station&quot;</code> you can refer to that data using <code>#{station}</code> syntax. 
 		              </para>	
 		              <para>
           In the following example the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> is
@@ -173,10 +173,13 @@ and define the <emphasis><property>&quot;var&quot;</property></emphasis> attribu
 	</mediaobject>
 </figure>
 				
-<para>There is a <code>&quot;XmlTreeDataBuilder&quot;</code> class
+<para>
+Implementation of the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis>  component 
+provides another way to build a tree.
+This approach implies using a <code>&quot;XmlTreeDataBuilder&quot;</code> class
 	(<ulink url="http://labs.jboss.com/file-access/default/members/jbossrichfaces/freezone/docs/apidoc/org/richfaces/component/xml/XmlTreeDataBuilder.html">
 	org.richfaces.component.xml.XmlTreeDataBuilder
-	</ulink>) that allows transforming XML into structures of objects containing <code>&quot;XmlNodeData&quot;</code> 
+	</ulink>) that allows to transform XML into structures of objects containing <code>&quot;XmlNodeData&quot;</code> 
 	(<ulink url="http://labs.jboss.com/file-access/default/members/jbossrichfaces/freezone/docs/apidoc_framework/org/richfaces/component/xml/XmlNodeData.html">
 	org.richfaces.component.xml.XmlNodeData
 	</ulink>) instances as data, which could be represented by the 
@@ -197,7 +200,7 @@ and define the <emphasis><property>&quot;var&quot;</property></emphasis> attribu
 		</feed>
 </station>]]></programlisting>
 <para>
-	Now you need a bean that holds a model nodes:
+	Now you need to create a bean that holds a model nodes:
 </para>
 <programlisting role="JAVA"><![CDATA[...
 private TreeNode data;
