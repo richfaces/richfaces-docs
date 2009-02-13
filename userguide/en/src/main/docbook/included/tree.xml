@@ -115,7 +115,7 @@ org.richfaces.model.TreeNode
 (<ulink url="http://labs.jboss.com/file-access/default/members/jbossrichfaces/freezone/docs/apidoc_framework/org/richfaces/model/TreeNodeImpl.html">
 org.richfaces.model.TreeNodeImpl
 </ulink>).
-					 </para>
+			     </para>
 		             <para>
 		               	The <emphasis><property>&quot;value&quot;</property></emphasis> attribute 
 		                of the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component 
@@ -128,7 +128,51 @@ org.richfaces.model.TreeNodeImpl
 		              	Data property of the current model <code>TreeNode</code> is exposed using 
 		              	<emphasis><property>&quot;var&quot;</property></emphasis> attribute, 
 		              	so if <code>var=&quot;itemData&quot;</code> you can refer to that data using <code>#{itemData}</code> syntax. 
-		              </para>							
+		              </para>	
+		              <para>
+          In the following example the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> is
+          built from a simple <code>org.richfaces.model.TreeNode</code> model:
+		              </para>
+		              <programlisting role="JAVA"><![CDATA[...
+private TreeNodeImpl<String> stationRoot = new TreeNodeImpl<String>();
+private TreeNodeImpl<String> stationNodes = new TreeNodeImpl<String>(); 
+private String[] kickRadioFeed = { "Hall & Oates - Kiss On My List",
+	"David Bowie - Let's Dance", "Lyn Collins - Think (About It)",
+	"Kim Carnes - Bette Davis Eyes",
+	"KC & the Sunshine Band - Give It Up" };
+	...	
+stationRoot.setData("KickRadio");
+stationNodes.addChild(0, stationRoot);
+for (int i = 0; i < kickRadioFeed.length; i++){
+	TreeNodeImpl<String> child = new TreeNodeImpl<String>();
+	child.setData(kickRadioFeed[i]);
+	stationRoot.addChild(i, child);
+}
+...]]></programlisting>		
+<para>
+As it is mentioned before you need to pass <code>#{stations.stationNodes}</code> property to the 
+<emphasis><property>&quot;value&quot;</property></emphasis> attribute 
+and define the <emphasis><property>&quot;var&quot;</property></emphasis> attribute in order to refer to the data:     
+</para>
+<programlisting role="XML"><![CDATA[...
+<rich:tree value="#{stations.stationNodes}" var="station">
+	<rich:treeNode>
+		<h:outputText value="#{station}" />
+	</rich:treeNode>
+</rich:tree>
+...]]></programlisting>		
+<para>
+	This is a result:
+</para>
+<figure>
+	<title>A simple <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> from a <code>org.richfaces.model.TreeNode</code></title>
+	<mediaobject>
+		<imageobject>
+			<imagedata fileref="images/treeModel.png"/>
+		</imageobject>
+	</mediaobject>
+</figure>
+				
 <para>There is a <code>&quot;XmlTreeDataBuilder&quot;</code> class
 	(<ulink url="http://labs.jboss.com/file-access/default/members/jbossrichfaces/freezone/docs/apidoc/org/richfaces/component/xml/XmlTreeDataBuilder.html">
 	org.richfaces.component.xml.XmlTreeDataBuilder
