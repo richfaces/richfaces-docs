@@ -70,28 +70,18 @@ HtmlAjaxRepeat repeater = new HtmlAjaxRepeat ();
                               several child components separately without updating the whole page.</para>
 
                     <programlisting role="XML"><![CDATA[...
-    <a4j:poll intervall="1000" action="#{repeater.action}" reRender="text">
-        <table>
-            <tbody>
-                <a4j:repeat value="#{bean.props}" var="detail" ajaxKeys="#{repeater.ajaxedRowsSet}">
-                    <tr>                
-                        <td>
-                            <h:outputText value="detail.someProperty" id="text"/>
-                        </td>                            
-                    </tr>
-                </a4j:repeat>
-            </tbody>
-        </table>
-    </a4j:poll>
-...
-]]></programlisting>
-
-                    <para>Thus, a list with a table structure from <code>bean.props</code> is
-                              output.</para>
-                    <para>In the above-mentioned example the component <emphasis role="bold">
-                                        <property>&lt;a4j:poll&gt;</property>
-                              </emphasis> sends Ajax requests every second, calling the
-                              <code>action</code> method of the <code>repeater</code> bean. </para>
+<table>
+	<tbody>
+		<a4j:repeat value="#{repeatBean.items}" var="item"
+		     		ajaxKeys="#{updateBean.updatedRow}">
+			<tr>
+				<td><h:outputText value="#{item.code}" id="item1" /></td>
+				<td><h:outputText value="#{item.price}" id="item2" /></td>
+			</tr>
+		</a4j:repeat>
+	</tbody>
+</table>
+...]]></programlisting>
                     <note>
                               <title>Note:</title>
                               <para>The <emphasis role="bold">
