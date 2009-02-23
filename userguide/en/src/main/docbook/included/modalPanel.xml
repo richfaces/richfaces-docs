@@ -155,20 +155,20 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                     <para>
                               <emphasis role="bold">Example:</emphasis>
                     </para>
-                    <programlisting role="XML"><![CDATA[...
-    <rich:modalPanel id="panel" width="400" height="300">
-        <f:facet name="header">
-            <h:outputText value="Modal Panel"/>
-        </f:facet>
-        <h:graphicImage value="/pages/california_large.png"/>
-        <a href="javascript:Richfaces.hideModalPanel('form:panel')">Close</a>
-    </rich:modalPanel>
-    <a href="javascript:Richfaces.showModalPanel('form:panel');">Open</a>
-...]]></programlisting>
+                    <programlisting role="XML"><![CDATA[<a onclick="Richfaces.showModalPanel('pnl');" href="#">Show ModalPanel</a>
+<a4j:form>
+	<rich:modalPanel id="pnl">
+		<f:facet name="header">
+			<h:outputText value="This is a panel header" />
+		</f:facet> 
+		<p>The &lt;rich:modalPanel&gt; accepts different types of information: 
+		from simple text to iterative components such as &lt;rich:dataTable&gt;, etc.
+		</p>
+		<a onclick="Richfaces.hideModalPanel('pnl');" href="#">Hide</a>
+	</rich:modalPanel>
+</a4j:form>]]></programlisting>
 
-                    <para>This defines a window with a particular size and ID. It includes one
-                              "Open" link. Clicking on this link makes the modal window content
-                              appear.</para>
+                    <para>Here is what happening on the page:</para>
 
                     <figure>
                               <title><emphasis role="bold">
@@ -191,24 +191,26 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                     <para>
                               <emphasis role="bold">Example:</emphasis>
                     </para>
-                    <programlisting role="XML"><![CDATA[...
-<rich:modalPanel id="mp">
-    <f:facet name="header">
-        <h:outputText value="Modal Panel"/>
-    </f:facet>
-    <f:facet name="controls">
-        <h:graphicImage value="/pages/close.png" style="cursor:pointer" onclick="Richfaces.hideModalPanel('mp')" />
-    </f:facet>
-    <h:graphicImage value="/pages/california_large.png"/>
-</rich:modalPanel>
-...]]></programlisting>
+                    <programlisting role="XML"><![CDATA[<a onclick="Richfaces.showModalPanel('pnl');" href="#">Show ModalPanel</a>
+<a4j:form>
+	<rich:modalPanel id="pnl">
+		<f:facet name="header">
+			<h:outputText value="This is a panel header" />
+		</f:facet> 
+		<f:facet name="controls">
+			<h:graphicImage value="/pages/close.png" style="cursor:pointer" onclick="Richfaces.hideModalPanel('pnl')" />
+		</f:facet>
+		<p>The &lt;rich:modalPanel&gt; accepts different types of information: 
+		from simple text to iterative components such as &lt;rich:dataTable&gt;, etc.
+		</p>
+	</rich:modalPanel>
+</a4j:form>]]></programlisting>
 
-                    <para>The result is displayed here:</para>
+                    <para>The result:</para>
 
                     <figure>
-                              <title><emphasis role="bold">
-                                                  <property>&lt;rich:modalPanel&gt;</property>
-                                        </emphasis> with control element</title>
+                        <title><emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> 
+						with &apos;Close&apos; control</title>
 
                               <mediaobject>
                                         <imageobject>
@@ -217,11 +219,25 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                               </mediaobject>
                     </figure>
 
-                    <para>To manage the placement of inserted windows, use the <emphasis>
-                                        <property>"zindex"</property>
-                              </emphasis> attribute that is similar to the standard HTML attribute
-                              and can specify window placement relative to the content.</para>
-
+                <para>To understand the sence of &quot;<emphasis><property>domElementAttachment</property></emphasis>&quot; attribute 
+					you should understand the <emphasis>stacking context</emphasis> in the division element (<code>&lt;div&gt;</code>) HTML makeup. 
+					Since each positioned or z-indexed element (in CSS <code>position: absolute</code> or <code>relative</code> or <code>z-index: [any integer value different from 0]</code>) 
+					form their own stacking context the <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> nested into such element 
+					may be overlapped with another elements, which appear later in HTML heirarchy and assimilated with basic stacking context (HTML &lt;body&gt;). 
+					To make the panel rendered in closest to the observer layer and avoid such overlapping, the component was designed in way when 
+					it is always being automatically assimilated with <code>&lt;body&gt;</code> and with a very high rendering layer (<code>z-index</code>). 
+					Due to some side effects the <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> should not always be 
+                      assimilated with <code>&lt;body&gt;</code> stacking context. The &quot;<emphasis><property>domElementAttachment</property></emphasis>&quot; 
+					attribute helps to reassign the panel to it &apos;<emphasis>parent</emphasis>&apos;	or &apos;<emphasis>form</emphasis>&apos; element. 
+					If &apos;<emphasis>form</emphasis>&apos; is used and no parent form is available the panel is functioning as if it is assimilated with <code>&lt;body&gt;</code>.
+					</para>
+					
+					<note>
+					    <title>Note:</title>
+					      <para>If &quot;<emphasis><property>domElementAttachment</property></emphasis>&quot; value is not &apos;<emphasis>body</emphasis>&apos; then some overlapping may occur. 
+					    </para>
+				    </note>
+					
                     <para>To manage window placement relative to the component, there are <emphasis>
                                         <property>"left"</property>
                               </emphasis> and <emphasis>
@@ -297,9 +313,7 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                               <emphasis role="bold">Example:</emphasis>
                     </para>
 
-                    <programlisting role="XML"><![CDATA[...
-<a href="javascript:Richfaces.showModalPanel('_panel', {top:'10px', left:'10px', height:'400'});">Show</a>
-...]]></programlisting>
+                    <programlisting role="XML"><![CDATA[<a href="javascript:Richfaces.showModalPanel('pnl', {top:'10px', left:'10px', height:'400'});">Show</a>]]></programlisting>
 
                     <para> Here, if you open modal dialog window using current link and after
                               submits data then modalPanel destination and height on new loaded page
@@ -322,23 +336,18 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                               <emphasis role="bold">Example:</emphasis>
                     </para>
 
-                    <programlisting role="XML"><![CDATA[...
-<rich:modalPanel>
-    <f:facet name="header">
-        <h:outputText value="Test" />
-    </f:facet>
-    <f:facet name="controls">
-        <h:commandLink value="Close" style="cursor:pointer" onclick="Richfaces.hideModalPanel('mp')" />
-    </f:facet>
-    <h:form>
-        <h:commandButton value="Test" action="#{TESTCONTROLLER.test}" />
-    </h:form>
-</rich:modalPanel>
-...
-<h:form>
-    <!--Some other Page content-->
-</h:form>
-...]]></programlisting>
+                    <programlisting role="XML"><![CDATA[<a4j:form>
+	<rich:modalPanel>
+		<f:facet name="header">
+			<h:outputText value="Test" />
+		</f:facet>
+		<f:facet name="controls">
+			<h:commandLink value="Close" style="cursor:pointer" onclick="Richfaces.hideModalPanel('mp')" />
+		</f:facet>
+		<h:form>
+			<h:commandButton value="Test" action="#{TESTCONTROLLER.test}" />
+		</h:form>
+	</rich:modalPanel>]]></programlisting>
 
 
 
@@ -622,14 +631,14 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
 
                                                   <entry>Defines styles for a wrapper
                                                   &lt;div&gt; element of
-                                                  a modalpanel</entry>
+                                                  a modalPanel</entry>
                                                   </row>
 
                                                   <row>
                                                   <entry>rich-mpnl_panel</entry>
 
                                                   <entry>Defines styles for a
-                                                  modalpanel</entry>
+                                                  modalPanel</entry>
                                                   </row>
 
                                                   <row>
@@ -651,14 +660,14 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                                                   <row>
                                                   <entry>rich-mpnl-shadow</entry>
 
-                                                  <entry>Defines styles for a modalpanel
+                                                  <entry>Defines styles for a modalPanel
                                                   shadow</entry>
                                                   </row>
 
                                                   <row>
                                                   <entry>rich-mpnl-header</entry>
 
-                                                  <entry>Defines styles for a modalpanel
+                                                  <entry>Defines styles for a modalPanel
                                                   header</entry>
                                                   </row>
 
@@ -681,7 +690,7 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                                                   <entry>rich-mpnl-body</entry>
 
                                                   <entry>Defines styles for a content
-                                                  inside a modalpanel</entry>
+                                                  inside a modalPanel</entry>
                                                   </row>
 
                                                   <row>
@@ -689,7 +698,7 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
 
                                                   <entry>Defines styles for a wrapper
                                                   &lt;div&gt; element of
-                                                  a modalpanel control</entry>
+                                                  a modalPanel control</entry>
                                                   </row>
                                         </tbody>
                               </tgroup>
