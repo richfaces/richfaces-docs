@@ -2011,6 +2011,91 @@
 					</ulink>
 				</member>
 			</simplelist>
+	</section>
+    <section id="ChangeAndModifySkin">
+			<title>Changing skin in runtime</title>
+			<para>
+				It&apos;s possible to change skins in runtime. In order to do that, define the EL-expression in the web.xml.
+                For example:
+			</para>
+			<programlisting role="XML"><![CDATA[<context-param>
+  <param-name>org.richfaces.SKIN</param-name>
+  <param-value>#{skinBean.skin}</param-value>
+</context-param>]]>
+			</programlisting>
+			<para>
+				The <code>skinBean</code> code looks as follows:
+			</para>
+			<programlisting role="JAVA"><![CDATA[public class SkinBean {
+
+	private String skin;
+
+	public String getSkin() {
+		return skin;
+	}
+	public void setSkin(String skin) {
+		this.skin = skin;
+	}
+}]]></programlisting>
+			<para>
+				Further, it is necessary to set the skin property to the initial value in the configuration file.
+                For example, &quot;classic&quot;:
+			</para>
+			<programlisting role="XML"><![CDATA[<managed-bean>
+  <managed-bean-name>skinBean</managed-bean-name>
+  <managed-bean-class>SkinBean</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+  <managed-property>
+   <property-name>skin</property-name>
+   <value>classic</value>
+  </managed-property>
+</managed-bean>]]>
+			</programlisting>
+			<para>
+				You can also change the default skin, for instance, change the default color.
+                To do this, edit the file properties of the skin. Here is an example of the code for page:
+			</para>
+			<programlisting role="XML"><![CDATA[<h:form>
+	<div style="display: block; float: left"><h:selectOneRadio
+			value="#{skinBean.skin}" border="0" layout="pageDirection"
+			title="Changing skin" style="font-size: 8; font-family: comic"
+			onchange="submit()">
+			<f:selectItem itemLabel="plain" itemValue="plain" />
+			<f:selectItem itemLabel="emeraldTown" itemValue="emeraldTown" />
+			<f:selectItem itemLabel="blueSky" itemValue="blueSky" />
+			<f:selectItem itemLabel="wine" itemValue="wine" />
+			<f:selectItem itemLabel="japanCherry" itemValue="japanCherry" />
+			<f:selectItem itemLabel="ruby" itemValue="ruby" />
+			<f:selectItem itemLabel="classic" itemValue="classic" />
+			<f:selectItem itemLabel="laguna" itemValue="laguna" />
+			<f:selectItem itemLabel="deepMarine" itemValue="deepMarine" />
+			<f:selectItem itemLabel="blueSky Modified" itemValue="blueSkyModify" />
+		</h:selectOneRadio>
+	</div>
+	<div style="display: block; float: left">
+		<rich:panelBar height="100" width="200">
+			<rich:panelBarItem label="Item 1" style="font-family: monospace; font-size: 12;">
+			Changing skin in runtime
+			</rich:panelBarItem>
+			<rich:panelBarItem label="Item 2"
+				style="font-family: monospace; font-size: 12;">
+			 This is a result of the modification "blueSky" skin
+			</rich:panelBarItem>
+		</rich:panelBar>
+	</div>
+</h:form>]]>
+			</programlisting>
+			<para>
+				This is result:
+			</para>
+			<figure>
+				<title>Changing skin in runtime</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/ChangeSkinInRuntime.png"/>
+					</imageobject>
+				</mediaobject>
+			</figure>
 		</section>
 		<section id="StControlsSkinning">
 			<title>Standard Controls Skinning</title>
