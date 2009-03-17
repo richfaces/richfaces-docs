@@ -132,123 +132,147 @@ div.table-contents table{
 
 /* Feedback styles */
 
-* html div#feedback-wrapper {position: absolute;
-top:expression(eval(document.compatMode && 
-document.compatMode=='CSS1Compat') ?
-documentElement.scrollTop
-+(documentElement.clientHeight-this.clientHeight) 
-: document.body.scrollTop
-+(document.body.clientHeight-this.clientHeight));}
-
-* html #feedback-maincontainer {position: absolute;
-top:expression(eval(document.compatMode && 
-document.compatMode=='CSS1Compat') ?
-documentElement.scrollTop
-+(documentElement.clientHeight-this.clientHeight) 
-: document.body.scrollTop
-+(document.body.clientHeight-this.clientHeight));}
-
-#feedback-wrapper{
-    margin: 0px;
-    padding: 0px;
-    position:fixed;
-    bottom:0px;
-    right:0px;
-    height:322px;
-	width: 100px;
-	overflow: hidden;
+.problemLayer {
+	position: absolute;
+	left: 34%;
+	top: 20%;
+	width: 400px;
+	height: 110px;
+	z-index: 2;
+	background: #fff;
+	display: none;
 }
 
-#feedback-link{
-	float: left;
-	display: block;
-}
-
-
-#feedback-header{
-	background-color: #AAB3BD;
-	text-align: center;
-	color: white;
+.time_out_div {
+	height: 100%;
 	width: 100%;
-	font-weight: bold;
-	position: relative;
-	height: 20px;
-	padding: 0px;
-	margin:0px;
+	min-height: 100%;
+	background-color: #5781AF;
+	filter:alpha(opacity=50);
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+	z-index: 99;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+* html div#feedback-wrapper, * html  div#feedback-maincontainer, * html  div#time_out_div {
+position: absolute;
+top:expression(eval(document.compatMode && 
+document.compatMode=='CSS1Compat') ?
+documentElement.scrollTop
++(documentElement.clientHeight-this.clientHeight) 
+: document.body.scrollTop
++(document.body.clientHeight-this.clientHeight));
+}
+
+#feedback-maincontainer{
+	font-family: Arial;
+	font-size: 14px;
+	display:none;
+	background: #F5F5F5;
+	border: 8px solid #7F9DB9;
+	height:420px;
+	left:30%;
+	position:fixed;
+	text-align:left;
+	top:20%;
+	bottom:20%;
+	width:500px;
+	z-index:100;
+}
+* html #feedback-maincontainer {
+	width:480px;
+}
+#feedback-maincontainer  div#guide_words{
+	margin: 0px 20px 0px 20px !important;
+	font-size: 12px;
+}
+.feedback-helper, #summary-helper-left{
+	color: #ff3333;
+	font-size: 10px;
+	float:left;
+	
+}
+#summary-helper-left{
+	float:right;
+	color: #5781AF;
+	padding-right:5px;
+}
+ 
+.clear{
+	clear:both;
+}
+*html #feedback-maincontainer{
+	width: 500px;
+}
+*html #feedback-header{
+	width: 100%;
+}
+#feedback-header{
+	background-color:#5781AF;
+	border-bottom: 2px solid #ccc;
+	color:white;
+	font-weight:bold;
+	font-size: 16px;
+	height:20px;
+	margin:0;
+	padding:10px 0 10px 20px;
+	position:relative;
+	text-align:left;
 }
 
 #feedback-close{
 	display:block;
 	position:absolute;
-	right:2px;
-	top:2px;
+	right:9px;
+	top:6px;
 	width:12px;
 	border: 0px;
 }
 
-#feedback-state{
-  font-weight: bold;
-  height: 20px;
-  width: 508px;
-  line-height: 20px;
-  overflow: hidden;
-}
-
-#feedback-maincontainer{
-	z-index:2000;
-	text-align: center;	
-	background: #F5F5F5;
-	border: 1px solid #CCC;
-	position: fixed;
-	bottom: 0px;
-	right: 120px;
-}
-*html #feedback-maincontainer{
-	width: 520px;
-}
-
 #feedback-mailform{
-	margin: 0px 20px 0px 20px;
+	margin: 0px 20px 0px 20px !important;
 	padding-bottom:5px;
+	text-align:left;
 }
 
 *html #feedback-mailform{
 	margin: 0px 20px 0px 0px;
 	padding-bottom:5px;
 }
-
-.feedback-textbox-div{
-    font-weight: bold;
-	margin-bottom:5px;
-	text-align: right;
-    color: #415973;
+#feedback-mailform textarea, #feedback-mailform input, #feedback-mailform label{
+	font-family: Arial,Helvetica,sans-serif;
+	width:450px;
 }
-
-#feedback-emailContent{
-    width: 200px;
-    height: 150px;
-    padding: 2px;
+#feedback-mailform input, #feedback-mailform label{
+	display:block;
+}
+#feedback-mailform label{
+	margin-top: 10px;
+}
+#feedback-mailform label span{
+	color: #ff0000
+}
+#feedback-mailform textarea{
+	font-size: 14px;
+	height: 100px;
+	padding: 2px;
+}
+#feedback-mailform textarea#feedback-environment{
+	height: 50px;
 }
 
 .feedback-formbutton{
 	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
-	color: #415973;
+	color: #999;
+	margin: 15px 20px;
 }
 
-.feedback-textbox, #feedback-emailContent{
-	background-color:#FFFFFF;
-	border:1px solid #A5ACB2;
-	padding:2px 1px 3px 5px;
-	width: 400px;
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
-	color: #000;
-}
-
-.feedback-button-container{
-	margin: 0px 5px 0px 0px;
-}
 
 .feedback-images{
 	border:0;
@@ -256,11 +280,33 @@ documentElement.scrollTop
 	display: inline;
 }
 #feedback-iFrame {
-  height: 20px;
-  width: 508px;
-  line-height: 20px;
-  overflow: hidden;
-  border: none;
-  background-color: #F5F5F5;
+	background-color:#F5F5F5;
+	border:medium none;
+	height:90%;
+	line-height:20px;
+	overflow:visible;
+	width:100%;
+	display:none;
+}
+
+#feedback-wrapper{
+	margin: 0px;
+	padding: 0px;
+	position:fixed;
+	bottom:0px;
+	right:0px;
+	height:322px;
+	width: 100px;
+	overflow: hidden;
+	cursor:pointer;
+}
+
+#feedback-link{
+	float: left;
+	display: block;
+}
+
+#feedback-link img{
+	width: 100px;
 }
 
