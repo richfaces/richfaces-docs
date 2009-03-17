@@ -2104,10 +2104,17 @@
 				elements&apos; name and attribute type (where applicable). Also this feature
 				provides a set of CSS styles so that skinning can be applied assigning rich-*
 				classes to particular elements or to container of elements that nests controls. </para>
-			<para> Standard controls skinning feature provides 2 levels of skinning - <property
-					>Standard</property> and <property>Extended</property> while skinning is based
-				on detecting browser user agent. If user agent is not detected, Advanced level is
-				used. </para>
+			<para> Standard controls skinning feature provides 2 levels of skinning: <property
+					>Standard</property> and <property>Extended</property>. The level  is based
+				on detecting the browser type. If browser type is not identified, Advanced level is
+				used. However, if you want to explicitly specify the level of skinning you want to be applied, you need to add a context parameter to your web.xml 
+				with <code>org.richfaces.CONTROL_SKINNING_LEVEL</code> as the parameter name 
+				
+				 and value  set to either <code>basic</code> or <code>extended</code>.  
+			
+			
+			
+			</para>
 			<itemizedlist>
 				<listitem>
 					<para>
@@ -2204,20 +2211,19 @@
 			<para>Skinning for standard HTML controls can be initialized in two ways:</para>
 			<itemizedlist>
 				<listitem>
-					<para> adding <code>org.richfaces.CONTROL_SKINNING</code> parmeter to web.xml.
+					<para>by adding <code>org.richfaces.CONTROL_SKINNING</code> parameter to web.xml.
 						Values: &quot;enable&quot; and &quot;disable&quot;. This way implies that
 						skinning style properties are applied to elements by element name and
 						attribute type (where applicable). No additional steps required. Please find
-						below the table that contains the list of elements to which skinning a
+						below the table that contains the list of elements to which skinning is
 						applicable. </para>
 				</listitem>
 				<listitem>
-					<para> adding <code> org.richfaces.CONTROL_SKINNING_CLASSES </code> parameter to
+					<para>by adding <code> org.richfaces.CONTROL_SKINNING_CLASSES </code> parameter to
 						web.xml file. Possible values &quot;enable&quot; and &quot;disable&quot;.
-						Implementation of this method implies that the provision of several style
-						classes for different types of elements. The style classes have predefined
-						names. Application developer should manually assign classes to controls that
-						needs skinning or assign class to an element that contains controls. </para>
+						When this option is enabled you are provided with a set of predefined CSS classes
+						that you can use for skinning your HTML components.
+						</para>
 				</listitem>
 			</itemizedlist>
 			<para> By setting <code>org.richfaces.CONTROL_SKINNING_CLASSES</code> to
@@ -2254,7 +2260,7 @@
 ...]]></programlisting>
 					<note>
 						<title>Note:</title>
-						<para> a elements have classes based on &quot;link&quot; and pseudo class
+						<para>Elements have classes based on &quot;link&quot; and pseudo class
 							name, e.g.: rich-link, rich-link-hover, rich-link-visited </para>
 					</note>
 				</listitem>
