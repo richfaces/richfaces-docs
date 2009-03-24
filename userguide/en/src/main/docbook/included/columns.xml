@@ -171,6 +171,35 @@ HtmlColumn myColumns = new HtmlColumn();
         </rich:columns>
 </rich:dataTable>	
 ...]]></programlisting>
+                    <para>
+                              Now, you can use a few <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> together with <emphasis role="bold"><property>&lt;rich:column&gt;</property></emphasis> within the one table:
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
+<rich:dataTable value="#{dataTableScrollerBean.model}" var="model" width="500px" rows="5">
+          <f:facet name="header">
+	          <h:outputText value="Cars Available"></h:outputText>
+	</f:facet>
+	<rich:columns value="#{dataTableScrollerBean.columns}" var="columns" index="ind">
+	          <f:facet name="header">
+		          <h:outputText value="#{columns.header}" />
+		</f:facet>
+		<h:outputText value="#{model[ind].model} " />
+	</rich:columns>
+	<rich:column>
+		<f:facet name="header">
+		          <h:outputText value="Price" />
+		</f:facet>
+                    <h:outputText value="Price" />
+	</rich:column>
+	<rich:columns value="#{dataTableScrollerBean.columns}" var="columns" index="ind">
+	          <f:facet name="header">
+		          <h:outputText value="#{columns.header}" />
+		</f:facet>
+		<h:outputText value="#{model[ind].mileage}$" />
+	</rich:columns>
+</rich:dataTable>
+...]]>                              
+                    </programlisting>
 
                     <para> In order to group columns with text information into one row, use the <emphasis>
                                         <property>&quot;colspan&quot;</property>
