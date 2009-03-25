@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="how_it_works" xreflabel="how_it_works">
+    <?dbhtml filename="how_it_works.html"?>
+    <chapterinfo>
+        <keywordset>
+            <keyword>RichFaces</keyword>
+            
+        </keywordset>
+    </chapterinfo>
+    
+    <title>How it works</title>
+      <section><title>General application overview</title>
+            <section><title>Used technologies overview</title>
+            <para>The PhotoAlbum is based on following technologies and frameworks:</para>
+            <itemizedlist>
+                  <listitem><para>Java Server Faces (JSF), technology that provides a single, standard, productive way to use Java technologies to build Web-based applications;</para></listitem>
+                  <listitem><para>Facelets, the technology that combines the power of UI components and the flexibility of XML to accelerate JavaServer Faces development. Facelets presents a compelling alternative to JSP as the markup technology of choice for next-generation JSF applications;</para></listitem>
+                  <listitem><para>Asynchronous JavaScript and XML (AJAX), several incorporated technologies. Ajax binds together standards-based presentation using XHTML and CSS, dynamic display and interaction using the DOM, data interchange and manipulation using XML and XSLT, asynchronous data retrieval using XMLHttpRequest and JavaScript;</para></listitem>
+                  <listitem><para>Seam technology that integrates previous mentioned technologies with Java Persistence (JPA), Enterprise Java Beans (EJB 3.0) and Business Process Management (BPM) into a unified full-stack solution;</para></listitem>
+                  <listitem><para>RichFaces, a framework and library of Ajax-capable UI components for JSF framework that had been evolved from Ajax4JSF framework (merge of Ajax and JavaServer Faces technologies).</para></listitem>
+            </itemizedlist>
+            <para>One of the main goals for the PhotoAlbum Demo is to demonstrate the RichFaces.</para>
+            </section>
+            
+            <section>
+                  <title>The main benefits of the RichFaces</title>
+                  <para>The RichFaces has set of benefits positioning this library and framework with a difference to the wide range of similar libraries. 
+                        All the RichFaces benefits are fully described in the <ulink url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/html/Introduction.html">Introduction to the RichFaces</ulink>. 
+                        The &lt;Photo Album&gt; covers some of the most important of them and demonstrates: </para>
+                  <itemizedlist>
+                        <listitem><para><emphasis>wide variety of UI components</emphasis>, which provides Lego-like way of building user interfaces for web applications;</para></listitem>
+                        <listitem><para><emphasis>built-in Ajax capability</emphasis>, which offers both component-wide and a lot more flexible page-wide Ajax support;</para></listitem>
+                        <listitem><para><emphasis>highly customizable look-and-feel</emphasis> (the RichFaces have special feature called 
+                              &quot;<ulink url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/html/ArchitectureOverview.html#Skinnability">Skinnability</ulink>&quot;).</para></listitem>
+                  </itemizedlist>
+            </section>
+            
+            <section>
+                  <title>The main structure and organization of the PhotoAlbum</title>
+                  <para>Since the application uses Facelets technology the main page <code>index.xhtml</code> represents an &lt;include&gt; (or facelet) wrapped with the <emphasis role="bold">&lt;ui:composition&gt;</emphasis> tag. 
+                        This tag is used to trim unnecessary markup in the facelet. Any content outside of <emphasis role="bold">&lt;ui:composition&gt;</emphasis> tag will be ignored by the Facelets view handler. 
+                        A facelet can be incorporated into another page or facelet with the help of <emphasis role="bold">&lt;ui:define&gt;</emphasis> and <emphasis role="bold">&lt;ui:include&gt;</emphasis> tags pointed to by the <emphasis role="bold">&lt;ui:include&gt;</emphasis> &quot;src&quot; attribute. 
+                        The facelet may simply contain a fragment of XHTML or XML to be included.</para>
+                  
+                  <para>Here is <code>index.xhtml</code> page source code:</para>
+                  <programlisting role="XML"><![CDATA[<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		    xmlns:s="http://jboss.com/products/seam/taglib"
+		    xmlns:ui="http://java.sun.com/jsf/facelets"
+		    xmlns:f="http://java.sun.com/jsf/core"
+		    xmlns:h="http://java.sun.com/jsf/html"
+		    xmlns:rich="http://richfaces.org/rich"
+		    xmlns:a4j="http://richfaces.org/a4j"
+		    xmlns:richx="http://richfaces.org/richx"
+		    template="layout/template.xhtml">
+	
+	<ui:define name="searchWidget">
+		<ui:include src="includes/search/searchWidget.xhtml" />
+	</ui:define>
+	
+	<ui:define name="menu">
+		<ui:include src="/includes/index/menu.xhtml" />
+	</ui:define>
+	
+	<ui:define name="tree">
+		<ui:include src="/includes/index/tree.xhtml" />
+	</ui:define>
+	
+	<ui:define name="body">
+		<h:panelGroup id="mainArea" layout="block">
+			<h:panelGroup styleClass="content_box" layout="block">
+				<ui:include src="#{model.mainArea.template}" />
+			</h:panelGroup>
+			<ui:include src="includes/misc/errorPanel.xhtml" />
+		</h:panelGroup>
+	</ui:define>
+
+</ui:composition>]]>
+                  </programlisting>
+                  
+                  <para>The snippet above shows that the <code>index.xhtml</code> page does not contain sources for application functional parts but includes them as templates that are rendered depending on conditions and events taking place during user interaction with the PhotoAlbum. 
+                        The illustration below shows <code>index.xhtml</code> page schematically with it &qout;includes&quot; and paths to them:</para>
+                  <mediaobject>
+                        <imageobject>
+                              <imagedata fileref="images/indexxhtml.png"/>
+                        </imageobject>
+                  </mediaobject>
+                  
+            </section>
+   
+</chapter>
+
