@@ -131,7 +131,39 @@ removeAllControlLabel ="#{pickBean.removeAllLabel}" value="#{pickBean.listValues
                      </imageobject>
                  </mediaobject>
              </figure>       
-  
+  <para>
+      Alternative to the given attributes are the following facets: <emphasis><property>&quot;copyAllControl&quot;</property></emphasis>,
+      <emphasis><property>&quot;removeAllControl&quot;</property></emphasis>, 
+      <emphasis><property>&quot;copyControl&quot;</property></emphasis>, 
+      <emphasis><property>&quot;removeControl&quot;</property></emphasis>, 
+      <emphasis><property>&quot;copyAllControlDisabled&quot;</property></emphasis>, 
+      <emphasis><property>&quot;removeAllControlDisabled&quot;</property></emphasis>, 
+      <emphasis><property>&quot;copyControlDisabled&quot;</property></emphasis>, 
+      <emphasis><property>&quot;removeControlDisabled&quot;</property></emphasis>, 
+      <emphasis><property>&quot;caption&quot;</property></emphasis>.
+  </para>
+        <para>
+            It is an example of usage of the facets and it is identical to the previous example.
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<rich:pickList value="#{pickBean.listValues}">
+    <f:facet name="copyAllControl">
+        <h:commandButton value="#{pickBean.copyAllLabel}" />
+    </f:facet>
+    <f:facet name="copyControl">
+        <h:commandButton value="#{pickBean.copyLabel}" />
+    </f:facet>
+    <f:facet name="removeControl">
+        <h:commandButton value="#{pickBean.removeLabel}" />
+    </f:facet>
+    <f:facet name="removeAllControl">
+        <h:commandButton value="#{pickBean.removeAllLabel}" />
+    </f:facet>
+        <f:selectItem itemValue="Bentley" itemLabel="Bentley"/>
+        <f:selectItem itemValue="Audi" itemLabel="Audi"/>
+        <f:selectItems value="#{pickBean.sourceList}"/>
+</rich:pickList>
+...]]></programlisting>
         <para>
             With the help of <emphasis><property>&quot;moveControlsVerticalAlign&quot;</property></emphasis> attribute 
             you can align <property>move controls</property> vertically.
