@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<section>
+          <sectioninfo>
+                    <keywordset>
+                              <keyword>rich:layout</keyword>
+                              <keyword>rich:layout</keyword>
+                              <keyword>breakBefore</keyword>
+                    </keywordset>
+          </sectioninfo>
+          <table>
+                    <title>Component identification parameters </title>
+                    <tgroup cols="2">
+                              <thead>
+                                        <row>
+                                                  <entry>Name</entry>
+                                                  <entry>Value</entry>
+                                        </row>
+                              </thead>
+                              <tbody>
+                                        <row>
+                                                  <entry>component-type</entry>
+                                                  <entry>org.richfaces.layout</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>component-class</entry>
+                                                  <entry>org.richfaces.component.html.Htmllayout</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>component-family</entry>
+                                                  <entry>org.richfaces.layout</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>renderer-type</entry>
+                                                  <entry>org.richfaces.layoutRenderer</entry>
+                                        </row>
+                                        <row>
+                                                  <entry>tag-class</entry>
+                                                  <entry>org.richfaces.taglib.layoutTag</entry>
+                                        </row>
+                              </tbody>
+                    </tgroup>
+          </table>
+
+          <section>
+                    <title>Creating the Component with a Page Tag</title>
+                    <para>To create the simplest variant of <property>layout</property> on a page,
+                              use the following syntax:</para>
+
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[...
+
+...
+]]></programlisting>
+          </section>
+          <section>
+                    <title>Creating the Component Dynamically Using Java</title>
+
+                    <para>
+                              <emphasis role="bold">Example:</emphasis>
+                    </para>
+                    <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.Htmllayout;
+...
+Htmllayout mylayout = new Htmllayout();
+...
+]]></programlisting>
+          </section>
+          <section>
+                    <title>Details of Usage</title>
+                    
+                    <para>The <emphasis role="bold"><property>&lt;rich:layout&gt;</property></emphasis> allows to build a grid that can be used to arrange the layout on the page. The <emphasis role="bold"><property>&lt;rich:layout&gt;</property></emphasis> is used in conjunction with the <emphasis role="bold"><property>&lt;rich:layoutPanel&gt;</property></emphasis> that is used as a child element and carries the main burned of building grid.</para>
+                   
+                   <para>Hence, you need to use the <emphasis role="bold"><property>&lt;rich:layout&gt;</property></emphasis> as a container and <emphasis role="bold"><property>&lt;rich:layoutPanel&gt;</property></emphasis> to create areas inside the container.</para>
+                    <para>By setting the <emphasis><property>&quot;position&quot;</property></emphasis> attribute of each <emphasis role="bold"><property>&lt;rich:layoutPanel&gt;</property></emphasis> to top, left, center, right, bottom
+                              you can build up to 5 corresponding areas.
+                 </para>
+          
+          <para>
+                    <emphasis role="bold">Example:</emphasis>
+          </para>
+                    
+          <programlisting role="XML"><![CDATA[...
+<rich:layout>
+ <rich:layoutPanel position="top">
+                 <!--top-->
+                 </rich:layoutPanel>
+                 <rich:layoutPanel position="left">
+                   <!--left-->
+                 </rich:layoutPanel>
+                 <rich:layoutPanel position="center">
+                    <!--center-->
+                  </rich:layoutPanel>            
+                 <rich:layoutPanel position="right">
+                <!--right-->
+                 </rich:layoutPanel>
+                   <rich:layoutPanel position="bottom">
+               <!--bottom-->
+                 </rich:layoutPanel>
+</rich:layout>
+...]]></programlisting> 
+                    
+                    <note>
+                              <title>Note:</title>
+                              <para>Please keep in mind that no matter what layout 
+                                        composition you are creating you should have a <emphasis role="bold"><property>&lt;rich:layoutPanel &gt;</property></emphasis> with the <emphasis><property>&quot;position&quot;</property></emphasis> attribute set to &quot;center&quot;. </para>
+                              
+                    </note>
+                    
+                    
+                    
+                    <para>To create a two-column layout  you need to use two 
+                              <emphasis role="bold"><property>&lt;rich:layoutPanel&gt;</property></emphasis>
+                              one of which should be a central area(<code>position=&quot;center&quot;</code>) and the other one should be either left or right.
+                              The following snippet will help you understand the way <emphasis role="bold"><property>&lt;rich:layout&gt;</property></emphasis> works.</para>
+          
+          
+          <programlisting role="XML"><![CDATA[...<rich:layout>
+                 <rich:layoutPanel position="left">
+                   <!--left--> 
+                 </rich:layoutPanel>
+                 <rich:layoutPanel position="center">
+                   <!--center-->
+                  </rich:layoutPanel>
+                  </rich:layout>
+                  ...]]></programlisting> 
+                    
+                    
+                    
+                    <para>Moreover, you can nest the <emphasis role="bold"><property>&lt;rich:layoutPanel&gt;</property></emphasis> tags  into <emphasis role="bold"><property>&lt;rich:layoutPanel&gt;</property></emphasis> to divide the area as well.</para>
+                    
+                    
+                    
+          </section>
+
+          <section>
+                    <title>Relevant Resources Links</title>
+                    <para>Vizit 
+					<ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/dataTable.jsf?c=layout">layout</ulink> page at 
+					RichFaces live demo for examples of component usage and their sources.</para>
+					<para>&quot;
+					<ulink url="http://www.jboss.org/community/docs/DOC-9607">Using the "rendered" attribute of &lt;rich:layout&gt;</ulink>&quot; article 
+					in RichFaces cookbook at JBoss portal gives an example of code of the component usage case. 
+					</para>
+          </section>
+</section>
