@@ -44,8 +44,7 @@
  </para>
      <programlisting role="XML"><![CDATA[<h:panelGroup id="wizard">
 		<a4j:include  viewId="/pages/include/first.xhtml" />
-</h:panelGroup>
-]]></programlisting>
+</h:panelGroup>]]></programlisting>
 <para>For navigation inside a page defined in viewId any components responsible for Ajax requests to the server generation are used.</para>
 <para>For example, the following component on a page <code>&quot;/pages/include/first.xhtml&quot;</code></para>
 
@@ -54,21 +53,19 @@
  </para>
 <programlisting role="XML"><![CDATA[...
 <a4j:commandButton action="next" reRender="wizard"/>
-...
-]]></programlisting>
+...]]></programlisting>
 <para>And in faces-config it&apos;s defined:</para>
 
   <para>
       <emphasis role="bold">Example:</emphasis>
  </para>
 <programlisting role="XML"><![CDATA[<navigation-rule>
-  <from-view-id>/pages/include/first.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>next</from-outcome>
-   <to-view-id>/pages/include/second.xhtml</to-view-id>
-  </navigation-case>
- </navigation-rule>
-]]></programlisting>
+     <from-view-id>/pages/include/first.xhtml</from-view-id>
+     <navigation-case>
+          <from-outcome>next</from-outcome>
+          <to-view-id>/pages/include/second.xhtml</to-view-id>
+     </navigation-case>
+</navigation-rule>]]></programlisting>
 <para>In this case after a click on a button defined inside <code>&quot;first.xhtml&quot;</code> view, navigation is performed after an Ajax request (the same as standard JSF one) only inside this view.</para>
  </section>
   <section>

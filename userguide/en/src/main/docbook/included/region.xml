@@ -38,11 +38,11 @@
   <section>
     <title>Creating on a page</title>
     <para>Here is an example of the region decoding on a page. </para>
-    <programlisting role="XML"><![CDATA[                <a4j:region>
-                    <h:inputText value="#{userBean.name}">
-                        <a4j:support event="onkeyup" reRender="outname" />
-                    </h:inputText>
-                </a4j:region>]]></programlisting>
+    <programlisting role="XML"><![CDATA[<a4j:region>
+      <h:inputText value="#{userBean.name}">
+            <a4j:support event="onkeyup" reRender="outname" />
+      </h:inputText>
+</a4j:region>]]></programlisting>
   </section>
   <section>
     <title>Creating the Component Dynamically Using Java</title>
@@ -53,8 +53,7 @@
     <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.HtmlAjaxRegion;
 ...
 HtmlAjaxRegion newRegion = new HtmlAjaxRegion();
-...
-]]></programlisting>
+...]]></programlisting>
   </section>
   <section>
     <title>Key attributes and ways of usage</title>
@@ -72,10 +71,10 @@ HtmlAjaxRegion newRegion = new HtmlAjaxRegion();
       </itemizedlist></para>
     <para><emphasis role="bold">Example:</emphasis></para>
     <programlisting role="XML"><![CDATA[<h:form id="form1">
-	<a4j:region>
-		<a4j:commandLink reRender="someID" value="Link" id="link1"/>
-		<!--..Some content that will be decoded on server after Ajax request.-->
-	</a4j:region>
+      <a4j:region>
+            <a4j:commandLink reRender="someID" value="Link" id="link1"/>
+            <!--..Some content that will be decoded on server after Ajax request.-->
+	    </a4j:region>
 <h:form>]]></programlisting>
     <para>Hence, the <emphasis role="bold">
         <property>&lt;a4j:commandLink&gt;</property>
@@ -83,12 +82,12 @@ HtmlAjaxRegion newRegion = new HtmlAjaxRegion();
     <para>The regions could be nested in any order, the server picks out and decodes only the region, which contains a particular component that sends a request.</para>
     <para><emphasis role="bold">Example:</emphasis></para>
     <programlisting role="XML"><![CDATA[<a4j:region>
-	<a4j:commandLink reRender="someID" value="Link" id="link1"/>
-	<a4j:region>
-		<a4j:commandLink reRender="someID" value="Link" id="link2"/>
-		<!--..Some content that will be decoded on server after Ajax request.-->
-	</a4j:region >
-	<!--..Some content that will be decoded on server after Ajax request.-->
+      <a4j:commandLink reRender="someID" value="Link" id="link1"/>
+      <a4j:region>
+          <a4j:commandLink reRender="someID" value="Link" id="link2"/>
+          <!--..Some content that will be decoded on server after Ajax request.-->
+      </a4j:region >
+      <!--..Some content that will be decoded on server after Ajax request.-->
 </a4j:region >]]></programlisting>
     <para>Therefore, the external region is decoded for the <code>&quot;link1&quot;</code> and the internal one is decoded for the <code>&quot;link2&quot;</code>.</para>
     <para>RichFaces allows setting Ajax responses rendering directly basing on component tree nodes without referring to the JSP (XHTML) page code. It could be defined by<emphasis><property> &quot;selfRendered&quot; </property></emphasis>attribute setting to &quot;true&quot; on <emphasis role="bold">
@@ -99,8 +98,8 @@ HtmlAjaxRegion newRegion = new HtmlAjaxRegion();
 </para>
     <para><emphasis role="bold">Example:</emphasis></para>
     <programlisting role="XML"><![CDATA[<a4j:region selfRendered ="true">
-	<a4j:commandLink reRender="someID" value="Link" id="link1"/>
-	<!--..Some content with HTML used ("br","h1" and other tags used)-->
+      <a4j:commandLink reRender="someID" value="Link" id="link1"/>
+      <!--..Some content with HTML used ("br","h1" and other tags used)-->
 </a4j:region >]]></programlisting>
     <para>In this case, the processing is quicker and going on without referring to a page code, but the HTML code that isn&apos;t saved in a component tree could be lost. Thus, this optimization should be very carefully performed and a usage of the additional components RichFaces (<emphasis role="bold"><property>&lt;a4j:outputPanel&gt;</property></emphasis>) is required. </para>
     <para>The processing could be also accelerated if a region decoded for the processing passes straight away into Encode. But to update some data out of the region or on another region, use the <emphasis >
@@ -109,14 +108,12 @@ HtmlAjaxRegion newRegion = new HtmlAjaxRegion();
       attribute set to &quot;false&quot; (&quot;true&quot; on default) to change this behaviour.</para>
     <para><emphasis role="bold">Example:</emphasis></para>
     <programlisting role="XML"><![CDATA[<a4j:region renderRegionOnly="true">
-	<a4j:commandLink reRender="someID2" value="Link1" id="link1"/>
-	<h:panelGroup id="someId1">
-	</h:panelGroup>
+      <a4j:commandLink reRender="someID2" value="Link1" id="link1"/>
+      <h:panelGroup id="someId1" />
 </a4j:region>
 <a4j:region renderRegionOnly="false">
-	<a4j:commandLink reRender="someID1" value="Link2" id="link2"/>
-	<h:panelGroup  id="someId1">
-	</h:panelGroup>
+      <a4j:commandLink reRender="someID1" value="Link2" id="link2"/>
+	    <h:panelGroup  id="someId1" />
 </a4j:region>]]></programlisting>
     <para>This example shows that one of the regions is decoded when a link is used inside. Nevertheless, 
     if after processing the <code>&quot;link1&quot;</code> is clicked, the first region passes into Encode as a root 

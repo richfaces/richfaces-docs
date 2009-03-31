@@ -80,8 +80,8 @@ class MyPushEventListener implements PushEventListener {
         System.out.println(evt.getSource());
             //Some action
     }
-...
-]]></programlisting>
+}    
+...]]></programlisting>
 
                     <para>Code for <code>EventListener</code> registration in the bean is placed
                               below:</para>
@@ -91,11 +91,12 @@ class MyPushEventListener implements PushEventListener {
                     <programlisting role="JAVA"><![CDATA[...
 public void addListener(EventListener listener) {
 synchronized (listener) {
-        if (this.listener != listener) {
-        this.listener = (PushEventListener) listener;
+                  if (this.listener != listener) {
+                            this.listener = (PushEventListener) listener;
+                  }
+          }
 }
-...
-]]></programlisting>
+...]]></programlisting>
 
                     <para>A page code for this example is placed below.</para>
 
@@ -103,20 +104,19 @@ synchronized (listener) {
                               <emphasis role="bold">Example:</emphasis>
                     </para>
                     <programlisting role="XML"><![CDATA[...
-    <a4j:status startText="in progress" stopText="done"/>
+<a4j:status startText="in progress" stopText="done"/>
      <a4j:form>
-        <a4j:region>
-            <a4j:push reRender="msg" eventProducer="#{pushBean.addListener}" interval="2000"/>
-        </a4j:region>
-        <a4j:outputPanel id="msg" >
-            <h:outputText value="#{pushBean.date}">
-                <f:convertDateTime type="time"/>
-            </h:outputText>
-        </a4j:outputPanel>
-        <a4j:commandButton value="Push!!" action="#{pushBean.push}" ajaxSingle="true"/>
-    </a4j:form>
-... 
-]]></programlisting>
+          <a4j:region>
+                <a4j:push reRender="msg" eventProducer="#{pushBean.addListener}" interval="2000"/>
+          </a4j:region>
+          <a4j:outputPanel id="msg" >
+                    <h:outputText value="#{pushBean.date}">
+                         <f:convertDateTime type="time"/>
+                    </h:outputText>
+         </a4j:outputPanel>
+         <a4j:commandButton value="Push!!" action="#{pushBean.push}" ajaxSingle="true"/>
+</a4j:form>
+...]]></programlisting>
 
                     <para>The example shows how date is updated on a page in compliance with data
                               taken from a server. In the example <emphasis>

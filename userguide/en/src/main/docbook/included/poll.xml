@@ -60,8 +60,7 @@
     <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.AjaxPoll;
 ...
 AjaxPoll myPoll = new AjaxPoll();
-...
-]]></programlisting>
+...]]></programlisting>
   </section>
   <section>
     <title>Key attributes and ways of usage</title>
@@ -106,28 +105,27 @@ AjaxPoll myPoll = new AjaxPoll();
     </para>
 
     <programlisting role="XML"><![CDATA[...
-    <a4j:region>
-        <h:form>
+<a4j:region>
+      <h:form>
             <a4j:poll id="poll" interval="1000" enabled="#{userBean.pollEnabled}" reRender="poll,grid"/>
-        </h:form>
-    </a4j:region>
-    <h:form>
-        <h:panelGrid columns="2" width="80%" id="grid">
-            <h:panelGrid columns="1">
-                <h:outputText value="Polling Inactive" rendered="#{not userBean.pollEnabled}"></h:outputText>
-                <h:outputText value="Polling Active" rendered="#{userBean.pollEnabled}"></h:outputText>
+      </h:form>
+</a4j:region>
+<h:form>
+      <h:panelGrid columns="2" width="80%" id="grid">
+           <h:panelGrid columns="1">
+                <h:outputText value="Polling Inactive" rendered="#{not userBean.pollEnabled}" />
+                <h:outputText value="Polling Active" rendered="#{userBean.pollEnabled}" />
                 <a4j:commandButton style="width:120px" id="control"
-                                   value="#{userBean.pollEnabled?'Stop':'Start'} Polling"
-                                   reRender="poll, grid">
-                    <a4j:actionparam name="polling" value="#{!userBean.pollEnabled}"
-                                     assignTo="#{userBean.pollEnabled}"/>
+                         value="#{userBean.pollEnabled?'Stop':'Start'} Polling"
+                         reRender="poll, grid">
+                     <a4j:actionparam name="polling" value="#{!userBean.pollEnabled}"
+                          assignTo="#{userBean.pollEnabled}"/>
                 </a4j:commandButton>
-            </h:panelGrid>
-                <h:outputText id="serverDate" style="font-size:16px" value="Server Date: #{userBean.date}"/>
-        </h:panelGrid>
-    </h:form>
-...
-]]></programlisting>
+          </h:panelGrid>
+          <h:outputText id="serverDate" style="font-size:16px" value="Server Date: #{userBean.date}"/>
+    </h:panelGrid>
+</h:form>
+...]]></programlisting>
 
     <para>The example shows how date and time are updated on a page in compliance with data taken
       from a server. The <emphasis role="bold">

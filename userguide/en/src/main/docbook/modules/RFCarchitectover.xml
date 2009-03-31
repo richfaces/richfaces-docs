@@ -222,13 +222,12 @@
 				</emphasis> attribute is an id of the JSF component or an id list. </para>
 			<para>A simple example is placed below:</para>
 			<programlisting role="XML"><![CDATA[...
-        <a4j:commandButton value="update" reRender="infoBlock"/>
-            ...
-        <h:panelGrid id="infoBlock">
-            ...
-        </h:panelGrid>
+<a4j:commandButton value="update" reRender="infoBlock"/>
 ...
-]]></programlisting>
+<h:panelGrid id="infoBlock">
+    ...
+</h:panelGrid>
+...]]></programlisting>
 			<para> The value of <emphasis>
 					<property>&quot;reRender&quot;</property>
 				</emphasis> attribute of the <emphasis role="bold">
@@ -254,24 +253,23 @@
 				it more precisely. The following example shows the difference in approaches (both
 				buttons will work successfully): </para>
 			<programlisting role="XML"><![CDATA[...
-    <h:form id="form1">
-        ...
-        <a4j: commandButton value="Usual Way" reRender="infoBlock, infoBlock2" />
-        <a4j:commandButton value="Shortcut" reRender=":infoBlockl,:sv:infoBlock2" />
-        ...
-    </h:form>
-    <h:panelGrid id="infoBlock">
-        ...
-    </h:panelGrid>
+<h:form id="form1">
+	...
+	<a4j: commandButton value="Usual Way" reRender="infoBlock, infoBlock2" />
+    <a4j:commandButton value="Shortcut" reRender=":infoBlockl,:sv:infoBlock2" />
     ...
-    <f:subview id="sv">
-      <h:panelGrid id="infoBlock2">
-        ...
-      </h:panelGrid>
-      ...
-    </f:subview>
+</h:form>
+<h:panelGrid id="infoBlock">
+	...
+</h:panelGrid>
 ...
-]]></programlisting>
+<f:subview id="sv">
+	<h:panelGrid id="infoBlock2">
+    	...
+    </h:panelGrid>
+	...
+</f:subview>
+...]]></programlisting>
 			<para> It&apos;s also possible to use JSF EL expression as a value of the reRender
 				attribute. It might be a property of types Set, Collection, Array or simple String.
 				The EL for reRender is resolved right before the Render Response phase. Hence, you
@@ -304,11 +302,10 @@
 				on any Ajax request. For example, the following code allows to output error messages
 				regardless of what Ajax request causes the Validation phase failed. </para>
 			<programlisting role="XML"><![CDATA[...
-     <a4j:outputPanel ajaxRendered="true">
-        <h:messages />
-    </a4j:outputPanel>
-...
-]]></programlisting>
+<a4j:outputPanel ajaxRendered="true">
+	<h:messages />
+</a4j:outputPanel>
+...]]></programlisting>
 			<para>
 				<emphasis>
 					<property>&quot;limitToList&quot;</property>
@@ -324,14 +321,13 @@
 					<code>ajaxRendered=&quot;true&quot;</code> is ignored. An example is placed
 				below: </para>
 			<programlisting role="XML"><![CDATA[...
-    <h:form>
-       <h:inputText value="#{person.name}">
-            <a4j:support event="onkeyup" reRender="test" limitToList="true"/>
-        </h:inputText>
-        <h:outputText value="#{person.name}" id="test"/>
-    </form>
-...
-]]></programlisting>
+<h:form>
+	<h:inputText value="#{person.name}">
+    	<a4j:support event="onkeyup" reRender="test" limitToList="true"/>
+    </h:inputText>
+    <h:outputText value="#{person.name}" id="test"/>
+</form>
+...]]></programlisting>
 		</section>
 		<section id="QueueandTrafficFloodProtection">
 			<?dbhtml filename="QueueandTrafficFloodProtection.html"?>
@@ -356,11 +352,10 @@
 				newest request will be sent to the server if you type very fast and has typed the
 				several characters already before the previous Ajax Response is back. </para>
 			<programlisting role="XML"><![CDATA[...
-    <h:inputText value="#{userBean.name}">
-        <a4j:support event="onkeyup" eventsQueue="foo" reRender="bar" />
-    </h:inputText>
-...
-]]></programlisting>
+<h:inputText value="#{userBean.name}">
+	<a4j:support event="onkeyup" eventsQueue="foo" reRender="bar" />
+</h:inputText>
+...]]></programlisting>
 			<para>
 				<emphasis>
 					<property>&quot;requestDelay&quot;</property>
@@ -501,8 +496,7 @@
 						view using the following:</para>
 					<programlisting role="XML"><![CDATA[...
 <a4j:queue name="org.richfaces.global_queue" disabled="true"... />
-...
-]]></programlisting>
+...]]></programlisting>
 					<para>Hence, to enable the queue for a single view page you need to define the
 							<property>&quot;disable&quot;</property> attribute with
 						&quot;false&quot;. </para>
@@ -523,8 +517,7 @@
 						the forms in order not to be recognized as a form-based queue. </para>
 					<programlisting role="XML"><![CDATA[...
 <a4j:queue ... />
-...
-]]></programlisting>
+...]]></programlisting>
 				</section>
 					<section>
 						<title>View scoped named queue</title>
@@ -550,12 +543,10 @@
 						
 						<programlisting role="XML"><![CDATA[...
 <a4j:queue name="sampleQueue"/>							
-
 <h:inputText value="#{bean.inputValue}" >
-<a4j:support id="inputSupport" event="onkeyup" eventsQueue="sample"/>
+	<a4j:support id="inputSupport" event="onkeyup" eventsQueue="sample"/>
 </h:inputText>
 <rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}" eventsQueue="sample" />    
-
 ...]]></programlisting>
 						<para>In this example, two components(&lt;a4j:queue&gt;,
 							&lt;rich:comboBox&gt;,) reference the named queue via the
@@ -589,8 +580,8 @@
 				</para>
 				<programlisting role="XML"><![CDATA[...
 <h:form ... >
-<a4j:queue ... /><!-- note no name specified -->
-   ...
+	<a4j:queue ... /><!-- note no name specified -->
+	...
 </h:form>
 ...]]></programlisting>		
 			
@@ -601,7 +592,7 @@
 				</para>
 				<programlisting role="XML"><![CDATA[...
 <a4j:form eventsQueue="fooQueue" ...>
-   ...
+	...
 </a4j:form>
 ...]]></programlisting>		
 			<para>However the implementation of the queue allows you to reference a named queue from the form with a form-based queue.</para>
@@ -614,9 +605,9 @@
 <a4j:queue name="sampleQueue" ... /> <!-- named queue -->
 ...
 <h:form ... >
- <a4j:queue ... /><!-- form-based queue-->
-  <a4j:commandButton ... > <!-- uses the form-based queue -->
- <a4j:commandButton eventsQueue="sampleQueue" > <!-- uses named queue -->
+	<a4j:queue ... /><!-- form-based queue-->
+    <a4j:commandButton ... /> <!-- uses the form-based queue -->
+ 	<a4j:commandButton eventsQueue="sampleQueue" /> <!-- uses named queue -->
 </h:form>
 ...]]></programlisting>	
 	
@@ -742,14 +733,13 @@
 					<property>&lt;a4j:support&gt;</property>
 				</emphasis> , it is a value of the parent component. An example is placed below: </para>
 			<programlisting role="XML"><![CDATA[...
-    <h:form>
-        <h:inputText value="#{person.name}">
-            <a4j:support event="onkeyup" reRender="test" ajaxSingle="true"/>
-        </h:inputText>
-      <h:inputText value="#{person.middleName}"/>
-    </form>
-...
-]]></programlisting>
+<h:form>
+	<h:inputText value="#{person.name}">
+    	<a4j:support event="onkeyup" reRender="test" ajaxSingle="true"/>
+    </h:inputText>
+    <h:inputText value="#{person.middleName}"/>
+</form>
+...]]></programlisting>
 			<para> In this example the request contains only the input component causes the request
 				generation, not all the components contained on a form, because of
 					<code>ajaxSingle=&quot;true&quot;</code> usage. </para>
@@ -869,9 +859,8 @@
 				&quot;true&quot; or &quot;false&quot; , use the conditional statement to return
 				something only when you need to cancel the request. For example: </para>
 			<programlisting role="XML"><![CDATA[...
-    onsubmit="if (mynosendfunct()==false){return false}"
-...
-]]></programlisting>
+onsubmit="if (mynosendfunct()==false){return false}"
+...]]></programlisting>
 			<para>
 				<emphasis>
 					<property>&quot;onclick&quot;</property>
@@ -903,9 +892,8 @@
 					<property>&quot;data&quot;</property>
 				</emphasis> variable. For example: </para>
 			<programlisting role="XML"><![CDATA[...
-    <a4j:commandButton value="Update" data="#{userBean.name}" oncomplete="showTheName(data.name)" />
-...
-]]></programlisting>
+<a4j:commandButton value="Update" data="#{userBean.name}" oncomplete="showTheName(data.name)" />
+...]]></programlisting>
 			<para> RichFaces allows to serialize not only primitive types into JSON format, but also
 				complex types including arrays and collections. The beans should be serializable to
 				be refered with <emphasis>
@@ -936,7 +924,7 @@
 						taking the short ID of the component as a parameter. </para>
 					<programlisting role="XML"><![CDATA[...
 <h:inputText id="myInput">
-    <a4j:support event="onkeyup" reRender="outtext"/>
+	<a4j:support event="onkeyup" reRender="outtext"/>
 </h:inputText>
 <h:outputText id="outtext" value="#{rich:findComponent('myInput').value}" />
 ...]]></programlisting>
@@ -953,21 +941,20 @@
 				provides possibility to update several child components separately without updating
 				the whole page. </para>
 			<programlisting role="XML"><![CDATA[...
-    <a4j:poll intervall="1000" action="#{repeater.action}" reRender="text">
-        <table>
-            <tbody>
-                <a4j:repeat value="#{bean.props}" var="detail" ajaxKeys="#{repeater.ajaxedRowsSet}">
-                    <tr>
-                        <td>
-                            <h:outputText value="detail.someProperty" id="text"/>
-                        </td>
-                    </tr>
-                </a4j:repeat>
-            </tbody>
-        </table>
-    </a4j:poll>
-...
-]]></programlisting>
+<a4j:poll intervall="1000" action="#{repeater.action}" reRender="text">
+	<table>
+    	<tbody>
+        	<a4j:repeat value="#{bean.props}" var="detail" ajaxKeys="#{repeater.ajaxedRowsSet}">
+            	<tr>
+                	<td>
+                    	<h:outputText value="detail.someProperty" id="text"/>
+                    </td>
+                </tr>
+            </a4j:repeat>
+        </tbody>
+    </table>
+</a4j:poll>
+...]]></programlisting>
 		</section>
 		<section id="Otherusefulattributes">
 			<?dbhtml filename="Otherusefulattributes.html"?>
@@ -987,35 +974,33 @@
 				</emphasis> component between different Ajax components from different regions. The
 				following example shows it. </para>
 			<programlisting role="XML"><![CDATA[...
-    <a4j:region id="extr">
-        <h:form>
-            <h:outputText value="Status:" />
-            <a4j:status id="commonstatus" startText="In Progress...." stopText=""/>
-            <h:panelGrid columns="2">
-                <h:outputText value="Name"/>
-                <h:inputText id="name" value="#{userBean.name}">
-                    <a4j:support event="onkeyup" reRender="out" />
+<a4j:region id="extr">
+	<h:form>
+    	<h:outputText value="Status:" />
+        <a4j:status id="commonstatus" startText="In Progress...." stopText=""/>
+        <h:panelGrid columns="2">
+        	<h:outputText value="Name"/>
+            <h:inputText id="name" value="#{userBean.name}">
+            	<a4j:support event="onkeyup" reRender="out" />
+            </h:inputText>
+            <h:outputText value="Job"/>
+            <a4j:region  id="intr">
+            	<h:inputText id="job" value="#{userBean.job}">
+                	<a4j:support event="onkeyup"  reRender="out" status="commonstatus"/>
                 </h:inputText>
-                <h:outputText value="Job"/>
-                <a4j:region  id="intr">
-                    <h:inputText id="job" value="#{userBean.job}">
-                        <a4j:support event="onkeyup"  reRender="out" status="commonstatus"/>
-                   </h:inputText>
-                </a4j:region>
-            </h:panelGrid>
-
-            <a4j:region>
-                <h:outputText id="out" value="Name: #{userBean.name}, Job: #{userBean.job}" />
-                <br />
-                <a4j:commandButton ajaxSingle="true" value="Clean Up Form" reRender="name, job, out"  status="commonstatus">
-                    <a4j:actionparam name="n" value=""  assignTo="#{userBean.name}" />
-                    <a4j:actionparam name="j" value=""  assignTo="#{userBean.job}" />
-                </a4j:commandButton>
             </a4j:region>
-        </h:form>
-    </a4j:region>
-...
-]]></programlisting>
+        </h:panelGrid>
+        <a4j:region>
+			<h:outputText id="out" value="Name: #{userBean.name}, Job: #{userBean.job}" />
+            <br />
+            <a4j:commandButton ajaxSingle="true" value="Clean Up Form" reRender="name, job, out"  status="commonstatus">
+            	<a4j:actionparam name="n" value=""  assignTo="#{userBean.name}" />
+                <a4j:actionparam name="j" value=""  assignTo="#{userBean.job}" />
+            </a4j:commandButton>
+        </a4j:region>
+    </h:form>
+</a4j:region>
+...]]></programlisting>
 			<para> In the example <emphasis role="bold">
 					<property>&lt;a4j:support&gt;</property>
 				</emphasis> and <emphasis role="bold">
@@ -1306,13 +1291,12 @@
 			<emphasis role="bold">Example:</emphasis>
 		</para>
 		<programlisting role="XML"><![CDATA[...
-    <filter>
-        <display-name>RichFaces Filter</display-name>
-        <filter-name>richfaces</filter-name>
-        <filter-class>org.ajax4jsf.Filter</filter-class>
-    </filter>
-...
-]]></programlisting>
+<filter>
+	<display-name>RichFaces Filter</display-name>
+    <filter-name>richfaces</filter-name>
+    <filter-class>org.ajax4jsf.Filter</filter-class>
+</filter>
+...]]></programlisting>
 		<note>
 			<title>Note:</title>
 			<para> Fast Filter is deprecated and available only for backward compatibility with
@@ -1352,50 +1336,43 @@
 			<emphasis role="bold">Example:</emphasis>
 		</para>
 		<programlisting role="XML"><![CDATA[...
-    <context-param>
-        <param-name>org.ajax4jsf.xmlparser.ORDER</param-name>
-        <param-value>NONE,NEKO,TIDY</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>org.ajax4jsf.xmlparser.NONE</param-name>
-        <param-value>/pages/performance\.xhtml,/pages/default.*\.xhtml</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>org.ajax4jsf.xmlparser.NEKO</param-name>
-        <param-value>/pages/repeat\.xhtml</param-value>
-    </context-param>
-
-    <filter>
-        <display-name>RichFaces Filter</display-name>
-        <filter-name>richfaces</filter-name>
-        <filter-class>org.ajax4jsf.Filter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>richfaces</filter-name>
-        <servlet-name>Faces Servlet</servlet-name>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>INCLUDE</dispatcher>
-    </filter-mapping>
-...
-]]></programlisting>
+<context-param>
+	<param-name>org.ajax4jsf.xmlparser.ORDER</param-name>
+    <param-value>NONE,NEKO,TIDY</param-value>
+</context-param>
+<context-param>
+	<param-name>org.ajax4jsf.xmlparser.NONE</param-name>
+    <param-value>/pages/performance\.xhtml,/pages/default.*\.xhtml</param-value>
+</context-param>
+<context-param>
+	<param-name>org.ajax4jsf.xmlparser.NEKO</param-name>
+    <param-value>/pages/repeat\.xhtml</param-value>
+</context-param>
+<filter>
+	<display-name>RichFaces Filter</display-name>
+    <filter-name>richfaces</filter-name>
+    <filter-class>org.ajax4jsf.Filter</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>richfaces</filter-name>
+    <servlet-name>Faces Servlet</servlet-name>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+</filter-mapping>
+...]]></programlisting>
 		<para> The example shows that <code>ORDER</code> parameter defines the order in which
 			particular filter types are used for pages code correction. </para>
 		<para> First of all &quot;NONE&quot; type is specified for the filter. Then two different
 			sets of pages are defined for which two filter types (NONE and NEKO) are used
 			correspondingly. If a page relates to the first set that is defined in the following
 			way: </para>
-		<programlisting role="XML"><![CDATA[<param-value>/pages/performance\.xhtml,/pages/default.*\.xhtml</param-value>,
-]]></programlisting>
+		<programlisting role="XML"><![CDATA[<param-value>/pages/performance\.xhtml,/pages/default.*\.xhtml</param-value>]]></programlisting>
 		<para> it&apos;s not corrected, because filter type for this page is defined as
 			&quot;NONE&quot;. If a page is not from the first set, then &quot;NEKO&quot; type is
 			set. </para>
 		<para> If a page relates to the second set that is defined in the following way: </para>
-		<programlisting role="XML"><![CDATA[<param-value>/pages/repeat\.xhtml</param-value>,
-]]></programlisting>
+		<programlisting role="XML"><![CDATA[<param-value>/pages/repeat\.xhtml</param-value>]]></programlisting>
 		<para> then &quot;NEKO&quot; filter type is used for correction. If it&apos;s not related to
 			the second set, &quot;TIDY&quot; type is set for the filter (&quot;TIDY&quot; filter
 			type is used for code correction). </para>
@@ -1412,21 +1389,19 @@
 		</para>
 		<para> The following declaration in your web.xml allows loading the integrated script files. </para>
 		<programlisting role="XML"><![CDATA[...
-    <context-param>
-          <param-name>org.richfaces.LoadScriptStrategy</param-name>
-          <param-value>ALL</param-value>
-    </context-param>
-...
-]]></programlisting>
+<context-param>
+	<param-name>org.richfaces.LoadScriptStrategy</param-name>
+    <param-value>ALL</param-value>
+</context-param>
+...]]></programlisting>
 		<para> If you do not declare the <code>org.richfaces.LoadScriptStrategy</code> in the
 			web.xml, it equals to: </para>
 		<programlisting role="XML"><![CDATA[...
-    <context-param>
-        <param-name>org.richfaces.LoadScriptStrategy</param-name>
-        <param-value>DEFAULT</param-value>
-    </context-param>
-...
-]]></programlisting>
+<context-param>
+	<param-name>org.richfaces.LoadScriptStrategy</param-name>
+    <param-value>DEFAULT</param-value>
+</context-param>
+...]]></programlisting>
 		<para> The third possible value is &quot;NONE&quot;. You have no a special reason to use it
 			unless you obtain the newest (or modified) version of the script and want to include it
 			manually in a page header. </para>
@@ -1447,12 +1422,11 @@
 		</para>
 		<para> The following declaration allows to load only one integrated style sheet file. </para>
 		<programlisting role="XML"><![CDATA[...
-    <context-param>
-          <param-name>org.richfaces.LoadStyleStrategy</param-name>
-          <param-value>ALL</param-value>
-    </context-param>
-...
-]]></programlisting>
+<context-param>
+	<param-name>org.richfaces.LoadStyleStrategy</param-name>
+    <param-value>ALL</param-value>
+</context-param>
+...]]></programlisting>
 		<para> The integrated style sheet contains style for all shipped components. The
 			skinnability feature still works. </para>
 		<para> The &quot;DEFAULT&quot; value is a classical on-demand variant. </para>
@@ -1641,8 +1615,7 @@
 			<para>
 				<emphasis role="bold">Example:</emphasis>
 			</para>
-			<programlisting role="XML">
-				&lt;rich:panel&gt; ... &lt;/rich:panel&gt;
+			<programlisting role="XML"><![CDATA[<rich:panel> ... </rich:panel>]]>
 			</programlisting>
 			<para> The code generates a panel component on a page, which consists of two elements: a
 				wrapper <emphasis role="bold">
@@ -1657,7 +1630,7 @@
 				<emphasis role="bold">Example:</emphasis>
 			</para>
 			<programlisting role="XML">
-				&lt;div class="dr-pnl rich-panel"&gt; ... &lt;/div&gt;
+				<![CDATA[<div class="dr-pnl rich-panel"> ... </div>]]>
 			</programlisting>
 			<para> dr-pnl is a CSS class specified in the framework via skin parameters: </para>
 			<itemizedlist>
@@ -1686,8 +1659,7 @@
 				<emphasis role="bold">Example:</emphasis>
 			</para>
 			<programlisting role="XML">
-				&lt;rich:panel styleClass="customClass"&gt; ...
-				&lt;/rich:panel&gt;
+				<![CDATA[<rich:panel styleClass="customClass" />]]>
 			</programlisting>
 			<para> Could add some style properties from customClass to one particular panel, as a
 				result we get three styles: </para>
@@ -1695,8 +1667,9 @@
 				<emphasis role="bold">Example:</emphasis>
 			</para>
 			<programlisting role="XML">
-				&lt;div class="dr_pnl rich-panel customClass"&gt; ...
-				&lt;/div&gt;
+<![CDATA[<div class="dr_pnl rich-panel customClass"> 
+	...
+</div>]]>
 			</programlisting>
 		</section>
 		<section id="SkinParametersTablesInRichFaces">
@@ -1929,12 +1902,11 @@
 						<emphasis role="bold">Example:</emphasis>
 					</para>
 					<programlisting role="XML"><![CDATA[...
-    <context-param>
-        <param-name>org.richfaces.SKIN</param-name>
-        <param-value>name</param-value>
-    </context-param>
-...
-]]></programlisting>
+<context-param>
+	<param-name>org.richfaces.SKIN</param-name>
+    <param-value>name</param-value>
+</context-param>
+...]]></programlisting>
 				</listitem>
 				<listitem>
 					<para> Put your <code>&lt;name&gt;.skin.properties</code> file in one of the
@@ -1967,8 +1939,8 @@
 					<para> Create a custom render kit and register it in the faces-config.xml like
 						this: </para>
 					<programlisting role="XML"><![CDATA[<render-kit>
-        <render-kit-id>NEW_SKIN</render-kit-id>
-        <render-kit-class>
+	<render-kit-id>NEW_SKIN</render-kit-id>
+    	<render-kit-class>
             org.ajax4jsf.framework.renderer.ChameleonRenderKitImpl
         </render-kit-class>
 </render-kit>]]></programlisting>
@@ -1977,11 +1949,9 @@
 					<para> Then you need to create and register custom renderers for the component
 						based on the look-and-feel predefined variables: </para>
 					<programlisting role="XML"><![CDATA[<renderer>
-        <component-family>javax.faces.Command</component-family>
-        <renderer-type>javax.faces.Link</renderer-type>
-        <renderer-class>
-           newskin.HtmlCommandLinkRenderer
-        </renderer-class>
+	<component-family>javax.faces.Command</component-family>
+    <renderer-type>javax.faces.Link</renderer-type>
+    <renderer-class>newskin.HtmlCommandLinkRenderer</renderer-class>
 </renderer>]]></programlisting>
 				</listitem>
 				<listitem>
@@ -2019,8 +1989,8 @@
                 For example:
 			</para>
 			<programlisting role="XML"><![CDATA[<context-param>
-  <param-name>org.richfaces.SKIN</param-name>
-  <param-value>#{skinBean.skin}</param-value>
+	<param-name>org.richfaces.SKIN</param-name>
+	<param-value>#{skinBean.skin}</param-value>
 </context-param>]]>
 			</programlisting>
 			<para>
@@ -2042,13 +2012,13 @@
                 For example, &quot;classic&quot;:
 			</para>
 			<programlisting role="XML"><![CDATA[<managed-bean>
-  <managed-bean-name>skinBean</managed-bean-name>
-  <managed-bean-class>SkinBean</managed-bean-class>
-  <managed-bean-scope>session</managed-bean-scope>
-  <managed-property>
-   <property-name>skin</property-name>
-   <value>classic</value>
-  </managed-property>
+	<managed-bean-name>skinBean</managed-bean-name>
+	<managed-bean-class>SkinBean</managed-bean-class>
+	<managed-bean-scope>session</managed-bean-scope>
+	<managed-property>
+		<property-name>skin</property-name>
+		<value>classic</value>
+  	</managed-property>
 </managed-bean>]]>
 			</programlisting>
 			<para>
@@ -2277,7 +2247,6 @@
    <u:style name="background-color" skin="generalBackgroundColor" />
 </u:selector>
 ...
-
 //gradient elements
 ...
 <u:selector name=".rich-gradient-menu">
@@ -2286,7 +2255,6 @@
     </u:style>
     <u:style name="background-repeat" value="repeat-x" />
 </u:selector>
-
 <u:selector name=".rich-gradient-tab">
     <u:style name="background-image">
         <f:resource f:key="org.richfaces.renderkit.html.gradientimages.TabGradientImage"/>
@@ -3166,8 +3134,7 @@
 	<param-name>org.richfaces.LoadStyleStrategy</param-name>
 	<param-value>NONE</param-value>
 </context-param>
-...
-]]></programlisting>
+...]]></programlisting>
 			<para> Additionally, you should include the style sheets that perform skinning of the
 				RichFaces component and standard HTML controls. </para>
 			<para> In order to resolve the problem with extended skinning in Opera and Safari a
@@ -3175,11 +3142,9 @@
 				the browser type and enables extended skinning only for those browsers that fully
 				support it. </para>
 			<para> The script can be activated by inserting this JavaScript code to the page: </para>
-			<programlisting role="XML"><![CDATA[
-<script type="text/javascript">
-window.RICH_FACES_EXTENDED_SKINNING_ON = true;
-</script>
-]]></programlisting>
+			<programlisting role="XML"><![CDATA[<script type="text/javascript">
+	window.RICH_FACES_EXTENDED_SKINNING_ON = true;
+</script>]]></programlisting>
 			<para> When NO script loading strategy is used and extended skinning is turned on then
 				corresponding warning message will appears in the console. </para>
 			<para> You also need to specify <emphasis>
@@ -3190,11 +3155,9 @@ window.RICH_FACES_EXTENDED_SKINNING_ON = true;
 				&quot;rich-extended-skinning&quot;. </para>
 			<para> This is how you can include the style sheets to the page, in case automatic
 				skinnability implementation is disabled. </para>
-			<programlisting role="XML"><![CDATA[
-<link href='/YOUR_PROJECT_NAME/a4j_3_2_2-SNAPSHOTorg/richfaces/renderkit/html/css/basic_both.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />
+			<programlisting role="XML"><![CDATA[<link href='/YOUR_PROJECT_NAME/a4j_3_2_2-SNAPSHOTorg/richfaces/renderkit/html/css/basic_both.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />
 <link media='rich-extended-skinning' href='/ YOUR_PROJECT_NAME /a4j_3_2_2-SNAPSHOTorg/richfaces/renderkit/html/css/extended_both.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />
-<link href='/ YOUR_PROJECT_NAME /a4j_3_2_2-SNAPSHOT/org/richfaces/skin.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />
-]]></programlisting>
+<link href='/ YOUR_PROJECT_NAME /a4j_3_2_2-SNAPSHOT/org/richfaces/skin.xcss/DATB/eAF7sqpgb-jyGdIAFrMEaw__.jsf' type='text/css' rel='stylesheet' class='component' />]]></programlisting>
 			<note>
 				<para> Now it&apos;s necessary to use  <code>a4j/versionXXX</code> resources prefix  instead of
 						<code>a4j_versionXXX</code>. Base64 encoder changed to use
@@ -3217,25 +3180,23 @@ window.RICH_FACES_EXTENDED_SKINNING_ON = true;
 				</emphasis> XML tags that form the mapping structure. Please study the example
 				below. </para>
 			<programlisting role="XML"><![CDATA[...
-	<u:selector name=".rich-component-name">
-		<u:style name="background-color" skin="additionalBackgroundColor" />
-		<u:style name="border-color" skin="tableBorderColor" />
-		<u:style name="border-width" skin="tableBorderWidth" />
-		<u:style name="border-style" value="solid" />
-	</u:selector>
-...
-]]></programlisting>
+<u:selector name=".rich-component-name">
+	<u:style name="background-color" skin="additionalBackgroundColor" />
+	<u:style name="border-color" skin="tableBorderColor" />
+	<u:style name="border-width" skin="tableBorderWidth" />
+	<u:style name="border-style" value="solid" />
+</u:selector>
+...]]></programlisting>
 			<para> During processing the code in the shown example is parsed into a standard
 				CSS format. </para>
 			<programlisting role="CSS"><![CDATA[...
 .rich-component-name {
-background-color: additionalBackgroundColor; /*the value of the constant defined by your skin*/
-border-color: tableBorderColor; /*the value of the constant defined by your skin*/
-border-width: tableBorderWidth /*the value of the constant defined by your skin*/
-border-style: solid;
+	background-color: additionalBackgroundColor; /*the value of the constant defined by your skin*/
+	border-color: tableBorderColor; /*the value of the constant defined by your skin*/
+	border-width: tableBorderWidth /*the value of the constant defined by your skin*/
+	border-style: solid;
 }
-...
-]]></programlisting>
+...]]></programlisting>
 			<para> The <emphasis>
 					<property>&quot;name&quot;</property>
 				</emphasis> attribute of <emphasis role="bold">
@@ -3254,10 +3215,9 @@ border-style: solid;
 				list. </para>
 			<programlisting role="XML"><![CDATA[...
 <u:selector name=".rich-ordering-control-disabled, .rich-ordering-control-top, .rich-ordering-control-bottom, .rich-ordering-control-up, .rich-ordering-control-down">
-		<u:style name="border-color" skin="tableBorderColor" />
+	<u:style name="border-color" skin="tableBorderColor" />
 </u:selector>
-...
-]]></programlisting>
+...]]></programlisting>
 		</section>
 		<section id="PlugnSkin" role="new">
 			<?dbhtml filename="PlugnSkin.html"?>
@@ -3282,8 +3242,7 @@ mvn archetype:create
 -DartifactId=ARTIFACT-ID
 -DgroupId=GROUP-ID
 -Dversion=VERSION
-...
-]]></programlisting>
+...]]></programlisting>
 			<para>Primary keys for the command:</para>
 			<itemizedlist>
 				<listitem>
@@ -3451,10 +3410,9 @@ mvn cdk:add-skin -Dname=SKIN-NAME -Dpackage=SKIN-PACKAGE
 					<programlisting role="XML">
 <![CDATA[...
 .rich-calendar-cell {
-background: #537df8;
+	background: #537df8;
 }
-...
-]]></programlisting>
+...]]></programlisting>
 				</listitem>
 				<listitem>
 					<para> Using XCSS coding approach, the same way as XCSS files are normally
@@ -3470,8 +3428,7 @@ background: #537df8;
 	<u:style name="font-size" skin="generalSizeFont"/>
 	<u:style name="font-family" skin="generalFamilyFont"/>
 </u:selector>
-...
-]]></programlisting>
+...]]></programlisting>
 				</listitem>
 			</itemizedlist>
 			<para>
@@ -3482,8 +3439,7 @@ background: #537df8;
 				folder of you skin project (the one that contains pom.xml file). </para>
 			<programlisting role="XML"><![CDATA[...
 mvn clean install
-...
-]]></programlisting>
+...]]></programlisting>
 			<para>In addition Plug-n-Skin has a number of predefined gradients that you can also use
 				to make your application look nicer. The given below code snippet shows how a
 				gradient can be used </para>
@@ -3501,8 +3457,7 @@ mvn clean install
 		 </f:resource>
 	</u:style>
 </u:selector>
-...
-]]></programlisting>
+...]]></programlisting>
 			<para> So, as you can see, the <property>background-image</property> CSS property is
 				defined with <code> &lt;f:resource
 					f:key=&quot;org.richfaces.renderkit.html.CustomizeableGradient&quot;&gt;
@@ -3521,8 +3476,7 @@ mvn clean install
     <param-name>org.ajax4jsf.SKIN</param-name>
     <param-value>SKIN-NAME</param-value>
 </context-param>
-...
-]]></programlisting>
+...]]></programlisting>
 			<section>
 				<sectioninfo>
 					<keywordset>
@@ -3549,9 +3503,7 @@ mvn archetype:create
 					folders were created there. </para>
 				<para> Next, we will use Maven to add all needed files to the skin project. This
 					will done by the following command: </para>
-				<programlisting role="XML"><![CDATA[
-mvn cdk:add-skin -DbaseSkin=blueSky  -DcreateExt=true -Dname=PlugnSkinDemo -Dpackage=SKINPACKAGE
-]]></programlisting>
+				<programlisting role="XML"><![CDATA[mvn cdk:add-skin -DbaseSkin=blueSky  -DcreateExt=true -Dname=PlugnSkinDemo -Dpackage=SKINPACKAGE]]></programlisting>
 				<para> As you remember from the previous section &quot;-DbaseSkin&quot; key defines
 					what RichFaces built-in skin to be used as a base one,
 					&quot;-DcreateExt=true&quot; determines that the new skin will come with XCSS
@@ -3595,9 +3547,8 @@ mvn cdk:add-skin -DbaseSkin=blueSky  -DcreateExt=true -Dname=PlugnSkinDemo -Dpac
 					this. </para>
 				<programlisting role="XML"><![CDATA[
 button[type=&quot;button&quot;], button[type=&quot;reset&quot;], button[type=&quot;submit&quot;], input[type=&quot;reset&quot;], input[type=&quot;submit&quot;], input[type=&quot;button&quot;] {
-font-weight: bold;
-}
-]]></programlisting>
+	font-weight: bold;
+}]]></programlisting>
 				<para>All the changes that were planned to be preformed are done and now you can
 					proceed to building the new PlugnSkinDemo skin and import it into the project.
 					As you read in the previous section, the skin should be built in the
@@ -3616,23 +3567,19 @@ font-weight: bold;
 					<listitem>
 						<para>Add the new skin&apos;s name to the &quot;web.xml&quot; file. It is
 							done like this</para>
-						<programlisting role="XML"><![CDATA[
- <context-param>
-  <param-name>org.ajax4jsf.SKIN</param-name>
-  <param-value>PlugnSkinDemo</param-value>
- </context-param>
-]]></programlisting>
+						<programlisting role="XML"><![CDATA[ <context-param>
+	<param-name>org.ajax4jsf.SKIN</param-name>
+	<param-value>PlugnSkinDemo</param-value>
+</context-param>]]></programlisting>
 					</listitem>
 				</itemizedlist>
 				<para> Please, do not forget that standard controls skinning has to be enabled in
 					the &quot;web.xml&quot; file, which can be done by adding the following code to
 					the &quot;web.xml&quot; file: </para>
-				<programlisting role="XML"><![CDATA[
- <context-param>
-  <param-name>org.richfaces.CONTROL_SKINNING</param-name>
-  <param-value>enable</param-value>
- </context-param>
-]]></programlisting>
+				<programlisting role="XML"><![CDATA[<context-param>
+	<param-name>org.richfaces.CONTROL_SKINNING</param-name>
+	<param-value>enable</param-value>
+</context-param>]]></programlisting>
 				<para>The result of both operations is displayed on the figure below.</para>
 				<figure>
 					<title>Plug-n-Skin feature in action. </title>

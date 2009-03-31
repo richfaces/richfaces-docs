@@ -49,8 +49,10 @@
 	</script>
 </head>
 <body>
-...
-<a4j:jsFunction data="#{bean.someProperty}" name="callScript" oncomplete="myScript(data.subProperty1, data.subProperty2)"/>
+     ...
+     <a4j:jsFunction data="#{bean.someProperty}" name="callScript" oncomplete="myScript(data.subProperty1, data.subProperty2)"/>
+     ...
+</body>
 ...]]>
 	</programlisting>
     <para> The script <code>&quot;myScript&quot;</code> is called after
@@ -66,8 +68,7 @@
     <programlisting role="JAVA"><![CDATA[import org.ajax4jsf.component.html.HtmlajaxFunction;
 ...
 HtmlajaxFunction myFunction = new HtmlajaxFunction();
-...
-]]></programlisting>
+...]]></programlisting>
   </section>
   <section>
     <title>Key attributes and ways of usage</title>
@@ -83,12 +84,12 @@ HtmlajaxFunction myFunction = new HtmlajaxFunction();
 <body onload="callScript()">
     ...
     <h:form>
-    ...
-    <a4j:jsFunction name="callScript" data="#{bean.someProperty1}"
-        reRender="someComponent" oncomplete="myScript(data.subProperty1, data.subProperty2)">
-        <a4j:actionparam name="param_name" assignTo="#{bean.someProperty2}"/>
-    </a4j:jsFunction>
-    ...
+      ...
+        <a4j:jsFunction name="callScript" data="#{bean.someProperty1}"
+            reRender="someComponent" oncomplete="myScript(data.subProperty1, data.subProperty2)">
+             <a4j:actionparam name="param_name" assignTo="#{bean.someProperty2}"/>
+        </a4j:jsFunction>
+        ...
     </h:form>
     ...
 </body>
