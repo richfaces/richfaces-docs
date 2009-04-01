@@ -63,10 +63,10 @@
                     </para>
                     <programlisting role="XML"><![CDATA[...
 <h:outputText value="Name:" />
-       <h:inputText value="#{userBean.name}" id="name" required="true">
-              <f:validateLength minimum="3" maximum="12"/>
-              <rich:graphValidator event="onblur"/>
-       </h:inputText>
+<h:inputText value="#{userBean.name}" id="name" required="true">
+          <f:validateLength minimum="3" maximum="12"/>
+          <rich:graphValidator event="onblur"/>
+</h:inputText>
 ...]]></programlisting>
           </section>
 
@@ -79,8 +79,7 @@
                     <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlCalendar; 	
 ...
 HtmlgraphValidator mygraphValidator= new HtmlgraphValidator();
-...
-]]></programlisting>
+...]]></programlisting>
 
 
           </section>
@@ -134,15 +133,13 @@ HtmlgraphValidator mygraphValidator= new HtmlgraphValidator();
 
           <programlisting role="XML"><![CDATA[...
 <rich:graphValidator summary="Invalid values: " value="#{dayStatistics}">
-<a4j:repeat value="#{dayStatistics.dayPasstimes}" var="pt" id="table">
-<h:outputText value="#{pt.title}" />
-<rich:inputNumberSpinner minValue="0" maxValue="24" value="#{pt.time}" id="time">
-</rich:inputNumberSpinner>
-<rich:message for="time" />
-</a4j:repeat>
+          <a4j:repeat value="#{dayStatistics.dayPasstimes}" var="pt" id="table">
+                    <h:outputText value="#{pt.title}" />
+                    <rich:inputNumberSpinner minValue="0" maxValue="24" value="#{pt.time}" id="time" />
+                    <rich:message for="time" />
+          </a4j:repeat>
 </rich:graphValidator>
-...
-]]></programlisting>
+...]]></programlisting>
 
 
 <para>Hence, the given above code will provide the functionality that is illustrated on the images below.</para>

@@ -76,8 +76,7 @@
     <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlComponentControl; 	
 ...
 HtmlComponentControl myComponentControl = new HtmlComponentControl();
-...
-]]></programlisting>
+...]]></programlisting>
   </section>
 
 
@@ -114,10 +113,9 @@ HtmlComponentControl myComponentControl = new HtmlComponentControl();
     </para>
     <programlisting role="XML"><![CDATA[...
 <h:commandButton value="Show Modal Panel">
-    <rich:componentControl for="ccModalPanelID" event="onclick" operation="show"/> <!--attached to the commandButton-->
+      <rich:componentControl for="ccModalPanelID" event="onclick" operation="show"/> <!--attached to the commandButton-->
 </h:commandButton>
-...
-]]></programlisting>
+...]]></programlisting>
     <para>
       On the result page the component is rendered to JavaScript code. 
       This means, that it is possible to invoke the <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> 
@@ -127,14 +125,12 @@ HtmlComponentControl myComponentControl = new HtmlComponentControl();
     </para>
     <programlisting role="XML"><![CDATA[...
 <rich:componentControl name="func" event="onRowClick" for="menu" operation="show" />
-...
-]]></programlisting>
+...]]></programlisting>
     <para>
       The generated JavaScript function will look as shown below:
     </para>
     <programlisting role="XML"><![CDATA[function func (event) {
-}
-]]></programlisting>
+}]]></programlisting>
       <para>
         An important <emphasis role="bold"><property>&lt;rich:componentControl&gt;</property></emphasis> feature, 
         is that it allows transferring parameters, with the help of special attribute <emphasis><property>&quot;params&quot;</property></emphasis>.
@@ -144,8 +140,7 @@ HtmlComponentControl myComponentControl = new HtmlComponentControl();
     </para>
     <programlisting role="XML"><![CDATA[...
 <rich:componentControl name="func" event="onRowClick" for="menu" operation="show" params=”#{car.model}"/>
-...
-]]></programlisting>
+...]]></programlisting>
     <para>
       The alternative way for parameters transferring uses <emphasis role="bold"><property>&lt;f:param&gt;</property></emphasis> attribute. 
       As the code above, the following code will represent the same functionality.
@@ -155,10 +150,9 @@ HtmlComponentControl myComponentControl = new HtmlComponentControl();
     </para>
     <programlisting role="XML"><![CDATA[...
 <rich:componentControl event="onRowClick" for="menu" operation="show">
-                <f:param value="#{car.model}" name="model"/>
+      <f:param value="#{car.model}" name="model"/>
 </rich:componentControl>
-...
-]]></programlisting>
+...]]></programlisting>
     
       
       
@@ -316,7 +310,8 @@ HtmlComponentControl myComponentControl = new HtmlComponentControl();
 <f:view>
     <h:form>
         <br />
-        <rich:toolTip id="toolTipFor" followMouse="false" direction="top-right" mode="ajax" value="This is button" horizontalOffset="5" verticalOffset="5" layout="block" />
+        <rich:toolTip id="toolTipFor" followMouse="false" direction="top-right" mode="ajax" value="This is button" 
+                      horizontalOffset="5" verticalOffset="5" layout="block" />
     </h:form>
     <h:commandButton id="ButtonID" value="Button">
         <rich:componentControl for="toolTipFor" attachTo="ButtonID" operation="show" event="onclick"/>
