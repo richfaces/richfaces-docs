@@ -26,9 +26,9 @@
     	is better secured to us than to any other people in the world.
     </para>
     <para>    
-    	Eclipse IDE seems to be more preferable for the rapid component creation process.
+    	<ulink url="http://www.eclipse.org/downloads">Eclipse IDE</ulink> seems to be more preferable for 
+    	the rapid component creation process.
     </para>
-    
     <tip>
     	<title>Tip:</title>
     	<para>
@@ -37,4 +37,130 @@
     		and in <ulink url="http://www.jboss.org/tools">JBoss Tools</ulink>. 
     	</para>
     </tip>
+    <section>
+    	<sectioninfo>
+	    	<keywordset>
+	            <keyword>eclipse</keyword>
+	            <keyword>CDK</keyword>
+		    	<keyword>guide</keyword>
+	        </keywordset>
+    	</sectioninfo>
+    	<title>Creating project in Eclipse IDE</title>
+    	<para>
+    		During the development process you could be confronted with some difficulties. 
+    		For example, it is necessary to rebuild component every time 
+    		you want to check your work on it in a developer sample.
+    		It is also hard to debug JavaScript scenario without IDE&apos;s help.  
+    	</para>
+    	<para>
+    		First of all you need to download and install 
+    		<ulink url="http://www.eclipse.org/downloads">Eclipse IDE for Java EE Developers</ulink>. 
+    	</para>
+    	<para>
+    		After that you need to build  <property><emphasis role="bold">&lt;rich:inputDate&gt;</emphasis></property> component and 
+    		it&apos;s sample project for the import as existing Eclipse projects. 
+    		It is necessary to proceed to the <property>Sandbox/inputDate</property> and <property>Sandbox/inputDate-sample</property>
+    		directories and launch the following command:    
+    	</para>
+    	<programlisting role="XML"><![CDATA[mvn eclipse:eclipse -Dwtpversion=1.5]]></programlisting>
+	<para>
+		The command you&apos;ve launched above creates files and folders necessary for the import. The <code>-Dwtpversion=1.5</code> key indicates 
+		that you have Web application, so it should be possible to run it on a server.  
+	</para>
+	<para>
+		Finally you need to make import. You can find the step-by-step tutorial at the 
+		<ulink url="http://help.eclipse.org/ganymede/topic/org.eclipse.platform.doc.user/tasks/tasks-importproject.htm">Eclipse documentation</ulink> page
+		or simply in the <emphasis><property>Help</property></emphasis> &gt; <emphasis><property>Help Contents</property></emphasis> of the Eclipse.
+		As the result two projects should appear in the workspace:
+	</para>
+	<figure>
+        <title>Projects in the workspace</title>
+        <mediaobject> 
+            <imageobject>
+                <imagedata fileref="images/projects.png"/>
+            </imageobject>
+        </mediaobject>
+    </figure>
+    <para>
+    	Now it is necessary to define  <property><emphasis role="bold">&lt;rich:inputDate&gt;</emphasis></property> component JAR
+    	you have imported on the build path of the <property>inputDate-sample</property> project.  	
+    </para>
+    <para>
+    	You need to select  <emphasis><property>Properties</property></emphasis> of the <property>inputDate-sample</property> project,
+    	proceed to the <emphasis><property>Java Build Path</property></emphasis> &gt; <emphasis><property>Libraries</property></emphasis> tab 
+    	and then remove &quot;inputDate-1.0-SNAPSHOT.jar&quot; item.
+    </para>
+    <figure>
+        <title>Remove inputDate item from the Library</title>
+        <mediaobject> 
+            <imageobject>
+                <imagedata fileref="images/removeItem.png"/>
+            </imageobject>
+        </mediaobject>
+    </figure>
+    <para>
+    	After that you need to proceed to the <emphasis><property>Java Build Path</property></emphasis> &gt; <emphasis><property>Projects</property></emphasis> tab 
+    	and add already imported <property>inputDate</property> project.  
+    </para>
+    <figure>
+        <title>Add imported inputDate project</title>
+        <mediaobject> 
+            <imageobject>
+                <imagedata fileref="images/addProject.png"/>
+            </imageobject>
+        </mediaobject>
+    </figure>
+    <para>
+    	Finally you should select <emphasis><property>Java EE Module Dependecies</property></emphasis>,
+    	uncheck <property>var/M2_REPO/org/mycompany/inputDate/1.0-SNAPSHOT/inputDate-1.0-SNAPSHOT.jar</property>,
+    	and check imported <property>inputDate</property> module.
+    </para>
+    <figure>
+        <title>Java EE Module Dependecies selection</title>
+        <mediaobject> 
+            <imageobject>
+                <imagedata fileref="images/javaEEModule.png"/>
+            </imageobject>
+        </mediaobject>
+    </figure>
+    <para>
+    	That&apos;s all! Now it is possible to 
+    	create a server (<ulink url="http://help.eclipse.org/ganymede/topic/org.eclipse.jst.server.ui.doc.user/topics/tomcat.html">Apache Tomcat</ulink>, for example)
+    	and run <property>inputDate-sample</property>.
+    </para>
+    <para>
+    	Actually you can build/rebuild your projects for the import
+    	at any time you want.
+    </para>
+    <para>
+    	In order to rebuild existing project for the import you should use
+    	the following command:
+    </para>
+    	<programlisting role="XML"><![CDATA[mvn eclipse:clean eclipse:eclipse -Dwtpversion=1.5]]></programlisting>
+    <para>
+   	In conclusion it should be pointed out that binding <property><emphasis role="bold">&lt;rich:inputDate&gt;</emphasis></property> component project and 
+    	developer sample give you more advantages such as editing any sources on-the-fly, debugging JavaScript, etc.
+    </para>
+    </section>
+     <section>
+    	<sectioninfo>
+	    	<keywordset>
+	            <keyword>netbeans</keyword>
+	            <keyword>CDK</keyword>
+		    	<keyword>guide</keyword>
+	        </keywordset>
+    	</sectioninfo>
+    	<title>Creating project in NetBeans IDE</title>
+    	<para>
+    		NetBeans is another free, open-source IDE that provides plenty of features and tools 
+    		you need to create professional enterprise, web applications.
+    	</para>
+    	<para>
+    		Once you have built your projects for Eclipse IDE
+    		you can easily migrate to NetBeans IDE.
+    		You can get all necessary information at
+    		<ulink url="http://www.netbeans.org/kb/articles/import-eclipse.html">Automatically Import Your Projects From Eclipse to NetBeans IDE</ulink>
+    		page.
+    	</para>
+	</section>
 </chapter>
