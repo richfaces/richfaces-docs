@@ -118,16 +118,16 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                                                   <entry>RichFaces.showModalPanel (client
                                                   Id)</entry>
 
-                                                  <entry>Opens a window with a specified
-                                                  client Id</entry>
+                                                  <entry>Opens a window with a specified client
+                                                  Id</entry>
                                                   </row>
 
                                                   <row>
                                                   <entry>RichFaces.hideModalPanel (client
                                                   Id)</entry>
 
-                                                  <entry>Closes a window with a specified
-                                                  client Id</entry>
+                                                  <entry>Closes a window with a specified client
+                                                  Id</entry>
                                                   </row>
                                         </tbody>
                               </tgroup>
@@ -135,21 +135,23 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
 
                     <important>
                               <title>Important:</title>
-                              <para>To work properly the &lt;rich:modalPanel&gt; should always be placed 
-							  outside the original &lt;h:form&gt; and must include its own &lt;h:form&gt; for such cases like 
-							  performing submissions from within the &lt;rich:modalPanel&gt;.
-							  </para>
-				    </important>
-				    <note>
-					    <title>Note:</title>
-					    <para>In order to avoid a bug in IE, the root node of the dialog is moved on the top of a DOM tree.
-					    </para>
-				    </note>
-							 
+                              <para>To work properly the &lt;rich:modalPanel&gt; should
+                                        always be placed outside the original &lt;h:form&gt;
+                                        and must include its own &lt;h:form&gt; for such
+                                        cases like performing submissions from within the
+                                        &lt;rich:modalPanel&gt;. </para>
+                    </important>
+                    <note>
+                              <title>Note:</title>
+                              <para>In order to avoid a bug in IE, the root node of the dialog is
+                                        moved on the top of a DOM tree. </para>
+                    </note>
+
 
                     <para>It&apos;s possible to add a <emphasis>
                                         <property>&quot;header&quot;</property>
-                              </emphasis> facet to the component to set the content for the header.</para>
+                              </emphasis> facet to the component to set the content for the
+                              header.</para>
 
 
                     <para>
@@ -209,8 +211,9 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                     <para>The result:</para>
 
                     <figure>
-                        <title><emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> 
-						with &apos;Close&apos; control</title>
+                              <title><emphasis role="bold">
+                                                  <property>&lt;rich:modalPanel&gt;</property>
+                                        </emphasis> with &apos;Close&apos; control</title>
 
                               <mediaobject>
                                         <imageobject>
@@ -219,25 +222,44 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                               </mediaobject>
                     </figure>
 
-                <para>To understand the sence of &quot;<emphasis><property>domElementAttachment</property></emphasis>&quot; attribute 
-					you should understand the <emphasis>stacking context</emphasis> in the division element (<code>&lt;div&gt;</code>) HTML makeup. 
-					Since each positioned or z-indexed element (in CSS <code>position: absolute</code> or <code>relative</code> or <code>z-index: [any integer value different from 0]</code>) 
-					form their own stacking context the <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> nested into such element 
-					may be overlapped with another elements, which appear later in HTML heirarchy and assimilated with basic stacking context (HTML &lt;body&gt;). 
-					To make the panel rendered in closest to the observer layer and avoid such overlapping, the component was designed in way when 
-					it is always being automatically assimilated with <code>&lt;body&gt;</code> and with a very high rendering layer (<code>z-index</code>). 
-					Due to some side effects the <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> should not always be 
-                      assimilated with <code>&lt;body&gt;</code> stacking context. The &quot;<emphasis><property>domElementAttachment</property></emphasis>&quot; 
-					attribute helps to reassign the panel to it &apos;<emphasis>parent</emphasis>&apos;	or &apos;<emphasis>form</emphasis>&apos; element. 
-					If &apos;<emphasis>form</emphasis>&apos; is used and no parent form is available the panel is functioning as if it is assimilated with <code>&lt;body&gt;</code>.
-					</para>
-					
-					<note>
-					    <title>Note:</title>
-					      <para>If &quot;<emphasis><property>domElementAttachment</property></emphasis>&quot; value is not &apos;<emphasis>body</emphasis>&apos; then some overlapping may occur. 
-					    </para>
-				    </note>
-					
+                    <para>To understand the sence of &quot;<emphasis>
+                                        <property>domElementAttachment</property>
+                              </emphasis>&quot; attribute you should understand the
+                                        <emphasis>stacking context</emphasis> in the division
+                              element (<code>&lt;div&gt;</code>) HTML makeup. Since each
+                              positioned or z-indexed element (in CSS <code>position:
+                                        absolute</code> or <code>relative</code> or <code>z-index:
+                                        [any integer value different from 0]</code>) form their own
+                              stacking context the <emphasis role="bold">
+                                        <property>&lt;rich:modalPanel&gt;</property>
+                              </emphasis> nested into such element may be overlapped with another
+                              elements, which appear later in HTML heirarchy and assimilated with
+                              basic stacking context (HTML &lt;body&gt;). To make the panel
+                              rendered in closest to the observer layer and avoid such overlapping,
+                              the component was designed in way when it is always being
+                              automatically assimilated with <code>&lt;body&gt;</code> and
+                              with a very high rendering layer (<code>z-index</code>). Due to some
+                              side effects the <emphasis role="bold">
+                                        <property>&lt;rich:modalPanel&gt;</property>
+                              </emphasis> should not always be assimilated with
+                                        <code>&lt;body&gt;</code> stacking context. The &quot;<emphasis>
+                                        <property>domElementAttachment</property>
+                              </emphasis>&quot; attribute helps to reassign the panel to it
+                                        &apos;<emphasis>parent</emphasis>&apos; or
+                                        &apos;<emphasis>form</emphasis>&apos; element. If
+                                        &apos;<emphasis>form</emphasis>&apos; is used and no
+                              parent form is available the panel is functioning as if it is
+                              assimilated with <code>&lt;body&gt;</code>. </para>
+
+                    <note>
+                              <title>Note:</title>
+                              <para>If &quot;<emphasis>
+                                                  <property>domElementAttachment</property>
+                                        </emphasis>&quot; value is not
+                                                  &apos;<emphasis>body</emphasis>&apos; then
+                                        some overlapping may occur. </para>
+                    </note>
+
                     <para>To manage window placement relative to the component, there are <emphasis>
                                         <property>"left"</property>
                               </emphasis> and <emphasis>
@@ -256,13 +278,12 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                               </emphasis> and <emphasis>
                                         <property>"minHeight"</property>
                               </emphasis> attributes specifying the minimal window sizes.</para>
-                    <para>
-                              Also you can use <emphasis>
+                    <para> Also you can use <emphasis>
                                         <property>&quot;minWidth&quot;</property>
                               </emphasis> and <emphasis>
                                         <property>&quot;minHeight&quot;</property>
-                              </emphasis> attributes used as <code>showModalPanel()</code> arguments in JavaScript options.
-                    </para>
+                              </emphasis> attributes used as <code>showModalPanel()</code> arguments
+                              in JavaScript options. </para>
                     <para> You can pass your parameters during modalPanel opening or closing. This
                               passing could be performed in the following way: </para>
 
@@ -274,7 +295,8 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                               own parameters. </para>
                     <para> Also modalPanel allows to handle its own opening and closing events on
                               the client side. The <emphasis>
-                                        <property>&quot;onshow&quot;</property></emphasis> attribute is used in this case. </para>
+                                        <property>&quot;onshow&quot;</property>
+                              </emphasis> attribute is used in this case. </para>
                     <para> The following example shows how on the client side to define opening and
                               closing event handling in such a way that your own parameters could
                               also be obtained: </para>
@@ -331,7 +353,8 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                                                   level up) if it has the form inside.</para>
                               </listitem>
                     </itemizedlist>
-                    <para>Simple example of using commandButton within modalPanel is placed below.</para>
+                    <para>Simple example of using commandButton within modalPanel is placed
+                              below.</para>
                     <para>
                               <emphasis role="bold">Example:</emphasis>
                     </para>
@@ -393,14 +416,12 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
 
                                                   <row>
                                                   <entry>show()</entry>
-                                                  <entry>Opens the corresponding
-                                                  modalPanel</entry>
+                                                  <entry>Opens the corresponding modalPanel</entry>
                                                   </row>
 
                                                   <row>
                                                   <entry>hide()</entry>
-                                                  <entry>Closes the corresponding
-                                                  modalPanel</entry>
+                                                  <entry>Closes the corresponding modalPanel</entry>
                                                   </row>
 
                                         </tbody>
@@ -408,7 +429,7 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                     </table>
 
           </section>
-          
+
           <section>
                     <title>Facets</title>
                     <table>
@@ -416,18 +437,19 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                               <tgroup cols="2">
                                         <thead>
                                                   <row>
-                                                            <entry>Facet</entry>
-                                                            <entry>Description</entry>
+                                                  <entry>Facet</entry>
+                                                  <entry>Description</entry>
                                                   </row>
                                         </thead>
                                         <tbody>
                                                   <row>
-                                                            <entry>header</entry>
-                                                            <entry>Define the header content</entry>
+                                                  <entry>header</entry>
+                                                  <entry>Define the header content</entry>
                                                   </row>
                                                   <row>
-                                                            <entry>controls</entry>
-                                                            <entry>Defines the control elements on the header</entry>
+                                                  <entry>controls</entry>
+                                                  <entry>Defines the control elements on the
+                                                  header</entry>
                                                   </row>
                                         </tbody>
                               </tgroup>
@@ -611,7 +633,8 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                               </mediaobject>
                     </figure>
 
-                    <para>The screenshot shows the classes names for defining different elements.</para>
+                    <para>The screenshot shows the classes names for defining different
+                              elements.</para>
 
                     <table id="mPC">
                               <title>Classes names that define a component appearance</title>
@@ -630,37 +653,36 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                                                   <entry>rich-modalpanel</entry>
 
                                                   <entry>Defines styles for a wrapper
-                                                  &lt;div&gt; element of
-                                                  a modalPanel</entry>
+                                                  &lt;div&gt; element of a
+                                                  modalPanel</entry>
                                                   </row>
 
                                                   <row>
                                                   <entry>rich-mpnl-mask-div</entry>
 
                                                   <entry>Defines styles for a wrapper
-                                                  &lt;div&gt; element of
-                                                  a mask</entry>
+                                                  &lt;div&gt; element of a mask</entry>
                                                   </row>
-                                                  
+
                                                   <row>
-                                                            <entry>rich-mpnl_panel</entry>
-                                                            
-                                                            <entry>Defines styles for a
-                                                                      modalPanel</entry>
+                                                  <entry>rich-mpnl_panel</entry>
+
+                                                  <entry>Defines styles for a modalPanel</entry>
                                                   </row>
-                                                  
+
                                                   <row>
-                                                            <entry>rich-mp-container </entry>
-                                                            
-                                                            <entry>Defines styles for a modalPanel container</entry>
+                                                  <entry>rich-mp-container </entry>
+
+                                                  <entry>Defines styles for a modalPanel
+                                                  container</entry>
                                                   </row>
 
                                                   <row>
                                                   <entry>rich-mpnl-resizer</entry>
 
                                                   <entry>Defines styles for a wrapper
-                                                  &lt;div&gt; element of
-                                                  a resizing element</entry>
+                                                  &lt;div&gt; element of a resizing
+                                                  element</entry>
                                                   </row>
 
                                                   <row>
@@ -669,11 +691,12 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                                                   <entry>Defines styles for a modalPanel
                                                   shadow</entry>
                                                   </row>
-                                                  
+
                                                   <row>
-                                                            <entry>rich-mp-content-table</entry>
-                                                            
-                                                            <entry>Defines styles for a &lt;table&gt; element of a modalPanel</entry>
+                                                  <entry>rich-mp-content-table</entry>
+
+                                                  <entry>Defines styles for a &lt;table&gt;
+                                                  element of a modalPanel</entry>
                                                   </row>
 
                                                   <row>
@@ -686,31 +709,30 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                                                   <row>
                                                   <entry>rich-mpnl-header-cell</entry>
 
-                                                  <entry>Defines styles for a header
-                                                  cell</entry>
+                                                  <entry>Defines styles for a header cell</entry>
                                                   </row>
 
                                                   <row>
                                                   <entry>rich-mpnl-text</entry>
 
                                                   <entry>Defines styles for a wrapper
-                                                  &lt;div&gt; element of
-                                                  a header text</entry>
+                                                  &lt;div&gt; element of a header
+                                                  text</entry>
                                                   </row>
 
                                                   <row>
                                                   <entry>rich-mpnl-body</entry>
 
-                                                  <entry>Defines styles for a content
-                                                  inside a modalPanel</entry>
+                                                  <entry>Defines styles for a content inside a
+                                                  modalPanel</entry>
                                                   </row>
 
                                                   <row>
                                                   <entry>rich-mpnl-controls</entry>
 
                                                   <entry>Defines styles for a wrapper
-                                                  &lt;div&gt; element of
-                                                  a modalPanel control</entry>
+                                                  &lt;div&gt; element of a modalPanel
+                                                  control</entry>
                                                   </row>
                                         </tbody>
                               </tgroup>
@@ -767,7 +789,8 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
                                         <property>&quot;headerClass&quot;</property>
                               </emphasis> attribute for <emphasis role="bold">
                                         <property>&lt;rich:modalPanel&gt;</property>
-                              </emphasis> is defined as it&apos;s shown in the example below:</para>
+                              </emphasis> is defined as it&apos;s shown in the example
+                              below:</para>
 
                     <para>
                               <emphasis role="bold">Example:</emphasis>
@@ -795,46 +818,74 @@ HtmlModalPanel myPanel = new HtmlModalPanel();
           </section>
           <section>
                     <title>Relevant Resources Links</title>
-                    <para>Vizit <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/modalPanel.jsf?c=modalPanel">
-					ModalPanel page</ulink> at RichFaces Livedemo for examples of component usage and their sources.
-					</para>
-							  
-                    <para>Read the &quot;<ulink url="http://eclipse.dzone.com/articles/an-introduction-to-jboss-richf?page=0%2C0">
-					An Introduction To JBoss RichFaces</ulink>&quot; tutorial by Max Katz to find out how 
-					the <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> 
-					helps to edit and save changes for table entries. 
-					</para>
-					
-					<para>Some articles at JBoss portal describing different aspects of <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> usage:
-					</para>
-					
-					<itemizedlist>
-					    <listitem>
-						    <para>
-							   &quot;<ulink url="http://www.jboss.org/community/docs/DOC-11436">ModalPanelWizards</ulink>&quot; article describes 
-							   how to create a typical wizard with the help of <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> component 
-							   (the same could also be found in the &quot;<ulink url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/faq/faq.html#Organizewizards">
-							   How to organize wizards using the &lt;rich:modalPanel&gt; component?</ulink>&quot; chapter of RichFaces FAQ guide);
-							</para>
-						</listitem>
-                        <listitem>
-                            <para>
-							    &quot;<ulink url="http://www.jboss.org/community/docs/DOC-11435">ModalPanelValidation</ulink>&quot; article 
-								gives examples of validation in <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> 
-								(the same in the <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4061517">corresponding topic</ulink> 
-								at RichFaces Users Forum);
-                            </para>
-						</listitem>
-						<listitem>
-                            <para>
-							    &quot;<ulink url="http://www.jboss.org/community/docs/DOC-11863">RichFacesPleaseWaitBox</ulink>&quot; article 
-								describes how to show a &quot;Please wait&quot; box and block the input while the Ajax request is being processed 
-								using combination of <emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis> and 
-								<emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> components.
-                            </para>
-						</listitem>    
-					</itemizedlist>
-					                    
+                    <para>Vizit <ulink
+                                        url="http://livedemo.exadel.com/richfaces-demo/richfaces/modalPanel.jsf?c=modalPanel"
+                                        > ModalPanel page</ulink> at RichFaces Livedemo for examples
+                              of component usage and their sources. </para>
+
+                    <para>Read the &quot;<ulink
+                                        url="http://eclipse.dzone.com/articles/an-introduction-to-jboss-richf?page=0%2C0"
+                                        > An Introduction To JBoss RichFaces</ulink>&quot;
+                              tutorial by Max Katz to find out how the <emphasis role="bold">
+                                        <property>&lt;rich:modalPanel&gt;</property>
+                              </emphasis> helps to edit and save changes for table entries. </para>
+
+                    <para>Some articles at JBoss portal describing different aspects of <emphasis
+                                        role="bold">
+                                        <property>&lt;rich:modalPanel&gt;</property>
+                              </emphasis> usage: </para>
+
+                    <itemizedlist>
+                              <listitem>
+                                        <para> &quot;<ulink
+                                                  url="http://www.jboss.org/community/docs/DOC-11436"
+                                                  >ModalPanelWizards</ulink>&quot; article
+                                                  describes how to create a typical wizard with the
+                                                  help of <emphasis role="bold">
+                                                  <property>&lt;rich:modalPanel&gt;</property>
+                                                  </emphasis> component (the same could also be
+                                                  found in the &quot;<ulink
+                                                  url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/faq/faq.html#Organizewizards"
+                                                  > How to organize wizards using the
+                                                  &lt;rich:modalPanel&gt;
+                                                  component?</ulink>&quot; chapter of RichFaces
+                                                  FAQ guide); </para>
+                              </listitem>
+                              <listitem>
+                                        <para>Refer to the &quot;<ulink
+                                                  url="http://www.jboss.org/community/docs/DOC-11853"
+                                                  >How to do a detail view modalPanel in a
+                                                  table</ulink>&quot; article in the RichFaces cookbook at JBoss Portal to find out how to
+                                                  build a table with details link clicking on which
+                                                  will display a modal panel with information loaded from the server.</para>
+                              </listitem>
+                              <listitem>
+                                        <para>&quot;<ulink
+                                                  url="http://www.jboss.org/community/docs/DOC-11435"
+                                                  >ModalPanelValidation</ulink>&quot; article
+                                                  gives examples of validation in <emphasis
+                                                  role="bold">
+                                                  <property>&lt;rich:modalPanel&gt;</property>
+                                                  </emphasis> (the same in the <ulink
+                                                  url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4061517"
+                                                  >corresponding topic</ulink> at RichFaces Users
+                                                  Forum);</para>
+                              </listitem>
+                              <listitem>
+                                        <para>&quot;<ulink
+                                                  url="http://www.jboss.org/community/docs/DOC-11863"
+                                                  >RichFacesPleaseWaitBox</ulink>&quot; article
+                                                  describes how to show a &quot;Please
+                                                  wait&quot; box and block the input while the
+                                                  Ajax request is being processed using combination
+                                                  of <emphasis role="bold">
+                                                  <property>&lt;a4j:status&gt;</property>
+                                                  </emphasis> and <emphasis role="bold">
+                                                  <property>&lt;rich:modalPanel&gt;</property>
+                                                  </emphasis> components. </para>
+                              </listitem>
+                    </itemizedlist>
+
           </section>
 
 
