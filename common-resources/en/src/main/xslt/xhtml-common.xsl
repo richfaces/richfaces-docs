@@ -99,7 +99,7 @@ Version: 1.72.0
 		<form onsubmit="return validate_form()" id="feedback-mailform" method="post" action="https://jira.jboss.org/jira/secure/CreateIssueDetails!init.jspa?pid=12310341&amp;issuetype=3" target="feedback-iFrame">
 			<input type="hidden" id="priority" name="priority" value="3" />
 			<input type="hidden" id="components" name="components" value="12311170" />
-			<input type="hidden" id="versions" name="versions" value="12312451" />
+			<input type="hidden" id="versions" name="versions" value="12313100" />
 			<input type="hidden" id="customfield_12310031" name="customfield_12310031" value="Documentation (Ref Guide, User Guide, etc.)" />
 		
 			<label for="summary">Summary</label>

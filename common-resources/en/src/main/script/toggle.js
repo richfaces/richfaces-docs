@@ -11,6 +11,7 @@ function showPopup(_popupId) {
 	document.getElementById(_popupId).style.display = "block";
 	document.getElementById('timeOutDiv').style.display = "block";
 	document.getElementById("feedback-maincontainer").style.display = "block";
+		document.getElementById("guide_words").style.display = "block";
 	getPlace();
 }
 
@@ -23,6 +24,7 @@ function hidePopup(_popupId, form, iFrame, but,  container) {
 	document.getElementById(container).style.left="30%";
 	document.getElementById(container).style.top="20%";
 	document.getElementById(container).style.width="500px";
+	document.getElementById(container).style.height="440px";
 	getPlace();
 }
 
