@@ -62,14 +62,8 @@ Version: 1.72.0
 			</meta>
 		</xsl:if>
 	</xsl:if>
-	
 	<link rel="shortcut icon"  type="image/vnd.microsoft.icon" href="images/favicon.ico" />
-
 	<xsl:apply-templates select="." mode="head.keywords.content"/>
-		<!--script type="text/javascript" src="script/prototype-1.6.0.2.js"><xsl:comment>If you see this message, your web browser doesn't support JavaScript or JavaScript is disabled.</xsl:comment></script>
-		<script type="text/javascript" src="script/effects.js"><xsl:comment>If you see this message, your web browser doesn't support JavaScript or JavaScript is disabled.</xsl:comment></script>
-		<script type="text/javascript" src="script/scriptaculous.js"><xsl:comment>If you see this message, your web browser doesn't support JavaScript or JavaScript is disabled.</xsl:comment></script-->
-
 </xsl:template>
 
 <xsl:template match="abstract" mode="titlepage.mode">
@@ -161,4 +155,306 @@ Version: 1.72.0
 		</a>
 	</div-->							
  </xsl:template>
+
+<xsl:template name="navig.content">
+    <xsl:param name="direction" select="next"/>
+    <xsl:variable name="navtext">
+        <xsl:choose>
+            <xsl:when test="$direction = 'prev'">
+                <xsl:call-template name="gentext.nav.prev"/>
+            </xsl:when>
+            <xsl:when test="$direction = 'next'">
+                <xsl:call-template name="gentext.nav.next"/>
+            </xsl:when>
+            <xsl:when test="$direction = 'up'">
+                <xsl:call-template name="gentext.nav.up"/>
+            </xsl:when>
+            <xsl:when test="$direction = 'home'">
+                <xsl:call-template name="gentext.nav.home"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>xxx</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
+    <xsl:choose>
+        <xsl:when test="$navig.graphics != 0">
+            <img>
+                <xsl:attribute name="src">
+                    <xsl:value-of select="$navig.graphics.path"/>
+                    <xsl:value-of select="$direction"/>
+                    <xsl:value-of select="$navig.graphics.extension"/>
+                </xsl:attribute>
+                <xsl:attribute name="alt">
+                    <xsl:value-of select="$navtext"/>
+                </xsl:attribute>
+            </img>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:value-of select="$navtext"/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+<xsl:template name="header.navigation.multiPage">
+	<xsl:param name="prev" select="/foo"/>
+	<xsl:param name="next" select="/foo"/>
+	<xsl:param name="nav.context"/>
+	<xsl:param name="nightly" select="0"/>
+	<xsl:variable name="home" select="/*[1]"/>
+	<xsl:variable name="up" select="parent::*"/>
+	<xsl:variable name="row1" select="$navig.showtitles != 0"/>
+	<xsl:variable name="row2" select="count($prev) &gt; 0 or (count($up) &gt; 0 and generate-id($up) != generate-id($home) and $navig.showtitles != 0) or count($next) &gt; 0"/>
+	<xsl:if test="$suppress.navigation = '0' and $suppress.header.navigation = '0'">
+		<xsl:if test="$row1 or $row2">
+			<xsl:if test="$row1">
+				<xsl:if test="$nightly &gt; 0">
+					<div id="overlay">
+						<xsl:text> </xsl:text>
+					</div>
+				</xsl:if>
+				<!-- FEEDBACK -->
+				<xsl:call-template name="feedback" />
+
+				<p xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:attribute name="id">
+						<xsl:text>title</xsl:text>
+					</xsl:attribute>
+					<a>
+						<xsl:attribute name="href">
+							<xsl:value-of select="$siteHref" />
+						</xsl:attribute>
+						<xsl:attribute name="class">
+							<xsl:text>site_href</xsl:text>
+						</xsl:attribute>
+						<strong>
+						        <xsl:value-of select="$siteLinkText"/>	
+						</strong>
+					</a>
+					<a>
+						<xsl:attribute name="href">
+							<xsl:value-of select="$docHref" />
+						</xsl:attribute>
+						<xsl:attribute name="class">
+							<xsl:text>doc_href</xsl:text>
+						</xsl:attribute>
+						<strong>
+						        <xsl:value-of select="$docLinkText"/>	
+						</strong>
+					</a>
+				</p>
+			</xsl:if>
+			<xsl:if test="$row2">
+				<ul class="docnav" xmlns="http://www.w3.org/1999/xhtml">
+					<li class="previous">
+						<xsl:if test="count($prev)&gt;0">
+							<a accesskey="p">
+								<xsl:attribute name="href">
+									<xsl:call-template name="href.target">
+										<xsl:with-param name="object" select="$prev"/>
+									</xsl:call-template>
+								</xsl:attribute>
+								<strong>
+									<xsl:call-template name="navig.content">
+										<xsl:with-param name="direction" select="'prev'"/>
+									</xsl:call-template>
+								</strong>
+							</a>
+						</xsl:if>
+					</li>
+					<li class="next">
+						<xsl:if test="count($next)&gt;0">
+							<a accesskey="n">
+								<xsl:attribute name="href">
+									<xsl:call-template name="href.target">
+										<xsl:with-param name="object" select="$next"/>
+									</xsl:call-template>
+								</xsl:attribute>
+								<strong>
+									<xsl:call-template name="navig.content">
+										<xsl:with-param name="direction" select="'next'"/>
+									</xsl:call-template>
+								</strong>
+							</a>
+						</xsl:if>
+					</li>
+				</ul>
+			</xsl:if>
+		</xsl:if>
+		<xsl:if test="$header.rule != 0">
+			<hr/>
+		</xsl:if>
+	</xsl:if>
+</xsl:template>
+
+ <xsl:template name="book.titlepage.recto.singlePage">
+	  <xsl:param name="nightly" select="0"/>
+			<xsl:if test="$nightly &gt; 0">
+				<div id="overlay">
+					<xsl:text> </xsl:text>
+				</div>
+			</xsl:if>
+				<!-- FEEDBACK -->
+				<xsl:call-template name="feedback" />
+				<p xmlns="http://www.w3.org/1999/xhtml">
+					<xsl:attribute name="id">
+						<xsl:text>title</xsl:text>
+					</xsl:attribute>
+					<a>
+						<xsl:attribute name="href">
+							<xsl:value-of select="$siteHref" />
+						</xsl:attribute>
+						<xsl:attribute name="class">
+							<xsl:text>site_href</xsl:text>
+						</xsl:attribute>
+						<strong>
+						        <xsl:value-of select="$siteLinkText"/>	
+						</strong>
+					</a>
+					<a>
+						<xsl:attribute name="href">
+							<xsl:value-of select="$docHref" />
+						</xsl:attribute>
+						<xsl:attribute name="class">
+							<xsl:text>doc_href</xsl:text>
+						</xsl:attribute>
+						<strong>
+						        <xsl:value-of select="$docLinkText"/>	
+						</strong>
+					</a>
+				</p>
+  <xsl:choose>
+    <xsl:when test="bookinfo/title">
+      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/title"/>
+    </xsl:when>
+    <xsl:when test="info/title">
+      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/title"/>
+    </xsl:when>
+    <xsl:when test="title">
+      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="title"/>
+    </xsl:when>
+  </xsl:choose>
+
+  <xsl:choose>
+    <xsl:when test="bookinfo/subtitle">
+      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/subtitle"/>
+    </xsl:when>
+    <xsl:when test="info/subtitle">
+      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/subtitle"/>
+    </xsl:when>
+    <xsl:when test="subtitle">
+      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="subtitle"/>
+    </xsl:when>
+  </xsl:choose>
+
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/corpauthor"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/corpauthor"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/authorgroup"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/authorgroup"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/author"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/author"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/othercredit"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/othercredit"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/releaseinfo"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/releaseinfo"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/copyright"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/copyright"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/legalnotice"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/legalnotice"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/pubdate"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/pubdate"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/revision"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/revision"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/revhistory"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/revhistory"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/abstract"/>
+  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/abstract"/>
+
+  </xsl:template>
+ <xsl:template name="chunkerdoc">
+  <xsl:param name="node" select="."/>
+  
+  <xsl:choose>
+    <xsl:when test="not($node/parent::*)">1</xsl:when>
+    <xsl:when test="$node/parent::node()/processing-instruction('forseChanks') and local-name($node)!='title' and local-name($node)!='para' and local-name($node)='section'" >1</xsl:when>
+    <xsl:when test="local-name($node) = 'sect1'
+                    and $chunk.section.depth &gt;= 1
+                    and ($chunk.first.sections != 0
+                         or count($node/preceding-sibling::sect1) &gt; 0)">
+      <xsl:text>1</xsl:text>
+    </xsl:when>
+    <xsl:when test="local-name($node) = 'sect2'
+                    and $chunk.section.depth &gt;= 2
+                    and ($chunk.first.sections != 0
+                         or count($node/preceding-sibling::sect2) &gt; 0)">
+      <xsl:call-template name="chunk">
+        <xsl:with-param name="node" select="$node/parent::*"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:when test="local-name($node) = 'sect3'
+                    and $chunk.section.depth &gt;= 3
+                    and ($chunk.first.sections != 0
+                         or count($node/preceding-sibling::sect3) &gt; 0)">
+      <xsl:call-template name="chunk">
+        <xsl:with-param name="node" select="$node/parent::*"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:when test="local-name($node) = 'sect4'
+                    and $chunk.section.depth &gt;= 4
+                    and ($chunk.first.sections != 0
+                         or count($node/preceding-sibling::sect4) &gt; 0)">
+      <xsl:call-template name="chunk">
+        <xsl:with-param name="node" select="$node/parent::*"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:when test="local-name($node) = 'sect5'
+                    and $chunk.section.depth &gt;= 5
+                    and ($chunk.first.sections != 0
+                         or count($node/preceding-sibling::sect5) &gt; 0)">
+      <xsl:call-template name="chunk">
+        <xsl:with-param name="node" select="$node/parent::*"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:when test="local-name($node) = 'section'
+                    and $chunk.section.depth &gt;= count($node/ancestor::section)+1
+                    and ($chunk.first.sections != 0
+                         or count($node/preceding-sibling::section) &gt; 0)">
+      <xsl:call-template name="chunk">
+        <xsl:with-param name="node" select="$node/parent::*"/>
+      </xsl:call-template>
+    </xsl:when>
+
+    <xsl:when test="local-name($node)='preface'">1</xsl:when>
+    <xsl:when test="local-name($node)='chapter'">1</xsl:when>
+    <xsl:when test="local-name($node)='appendix'">1</xsl:when>
+    <xsl:when test="local-name($node)='article'">1</xsl:when>
+    <xsl:when test="local-name($node)='part'">1</xsl:when>
+    <xsl:when test="local-name($node)='reference'">1</xsl:when>
+    <xsl:when test="local-name($node)='refentry'">1</xsl:when>
+    <xsl:when test="local-name($node)='index' and ($generate.index != 0 or count($node/*) > 0)
+                    and (local-name($node/parent::*) = 'article'
+                    or local-name($node/parent::*) = 'book'
+                    or local-name($node/parent::*) = 'part'
+                    )">1</xsl:when>
+    <xsl:when test="local-name($node)='bibliography'
+                    and (local-name($node/parent::*) = 'article'
+                    or local-name($node/parent::*) = 'book'
+                    or local-name($node/parent::*) = 'part'
+                    )">1</xsl:when>
+    <xsl:when test="local-name($node)='glossary'
+                    and (local-name($node/parent::*) = 'article'
+                    or local-name($node/parent::*) = 'book'
+                    or local-name($node/parent::*) = 'part'
+                    )">1</xsl:when>
+    <xsl:when test="local-name($node)='colophon'">1</xsl:when>
+    <xsl:when test="local-name($node)='book'">1</xsl:when>
+    <xsl:when test="local-name($node)='set'">1</xsl:when>
+    <xsl:when test="local-name($node)='setindex'">1</xsl:when>
+    <xsl:when test="local-name($node)='legalnotice'
+                    and $generate.legalnotice.link != 0">1</xsl:when>
+    <xsl:otherwise>0</xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
 </xsl:stylesheet>
