@@ -1629,9 +1629,9 @@ onsubmit="if (mynosendfunct()==false){return false}"
 			<para>
 				<emphasis role="bold">Example:</emphasis>
 			</para>
-			<programlisting role="XML">
-				<![CDATA[<div class="dr-pnl rich-panel"> ... </div>]]>
-			</programlisting>
+			<programlisting role="XML"><![CDATA[<div class="dr-pnl rich-panel">
+     ...
+</div>]]></programlisting>
 			<para> dr-pnl is a CSS class specified in the framework via skin parameters: </para>
 			<itemizedlist>
 				<listitem>
@@ -1658,10 +1658,8 @@ onsubmit="if (mynosendfunct()==false){return false}"
 			<para>
 				<emphasis role="bold">Example:</emphasis>
 			</para>
-			<programlisting role="XML">
-				<![CDATA[<rich:panel styleClass="customClass" />]]>
-			</programlisting>
-			<para> Could add some style properties from customClass to one particular panel, as a
+			<programlisting role="XML"><![CDATA[<rich:panel styleClass="customClass" />]]></programlisting>
+			<para>Could add some style properties from customClass to one particular panel, as a
 				result we get three styles: </para>
 			<para>
 				<emphasis role="bold">Example:</emphasis>
@@ -1903,8 +1901,8 @@ onsubmit="if (mynosendfunct()==false){return false}"
 					</para>
 					<programlisting role="XML"><![CDATA[...
 <context-param>
-	<param-name>org.richfaces.SKIN</param-name>
-    <param-value>name</param-value>
+     <param-name>org.richfaces.SKIN</param-name>
+     <param-value>name</param-value>
 </context-param>
 ...]]></programlisting>
 				</listitem>
@@ -1939,10 +1937,8 @@ onsubmit="if (mynosendfunct()==false){return false}"
 					<para> Create a custom render kit and register it in the faces-config.xml like
 						this: </para>
 					<programlisting role="XML"><![CDATA[<render-kit>
-	<render-kit-id>NEW_SKIN</render-kit-id>
-    	<render-kit-class>
-            org.ajax4jsf.framework.renderer.ChameleonRenderKitImpl
-        </render-kit-class>
+     <render-kit-id>NEW_SKIN</render-kit-id>
+     <render-kit-class>org.ajax4jsf.framework.renderer.ChameleonRenderKitImpl</render-kit-class>
 </render-kit>]]></programlisting>
 				</listitem>
 				<listitem>
@@ -2026,35 +2022,32 @@ onsubmit="if (mynosendfunct()==false){return false}"
                 To do this, edit the file properties of the skin. Here is an example of the code for page:
 			</para>
 			<programlisting role="XML"><![CDATA[<h:form>
-	<div style="display: block; float: left"><h:selectOneRadio
-			value="#{skinBean.skin}" border="0" layout="pageDirection"
-			title="Changing skin" style="font-size: 8; font-family: comic"
-			onchange="submit()">
-			<f:selectItem itemLabel="plain" itemValue="plain" />
-			<f:selectItem itemLabel="emeraldTown" itemValue="emeraldTown" />
-			<f:selectItem itemLabel="blueSky" itemValue="blueSky" />
-			<f:selectItem itemLabel="wine" itemValue="wine" />
-			<f:selectItem itemLabel="japanCherry" itemValue="japanCherry" />
-			<f:selectItem itemLabel="ruby" itemValue="ruby" />
-			<f:selectItem itemLabel="classic" itemValue="classic" />
-			<f:selectItem itemLabel="laguna" itemValue="laguna" />
-			<f:selectItem itemLabel="deepMarine" itemValue="deepMarine" />
-			<f:selectItem itemLabel="blueSky Modified" itemValue="blueSkyModify" />
-		</h:selectOneRadio>
-	</div>
-	<div style="display: block; float: left">
-		<rich:panelBar height="100" width="200">
-			<rich:panelBarItem label="Item 1" style="font-family: monospace; font-size: 12;">
-			Changing skin in runtime
-			</rich:panelBarItem>
-			<rich:panelBarItem label="Item 2"
-				style="font-family: monospace; font-size: 12;">
-			 This is a result of the modification "blueSky" skin
-			</rich:panelBarItem>
-		</rich:panelBar>
-	</div>
-</h:form>]]>
-			</programlisting>
+     <div style="display: block; float: left">
+          <h:selectOneRadio value="#{skinBean.skin}" border="0" layout="pageDirection" title="Changing skin" style="font-size: 8; font-family: comic" onchange="submit()">
+               	<f:selectItem itemLabel="plain" itemValue="plain" />
+		<f:selectItem itemLabel="emeraldTown" itemValue="emeraldTown" />
+		<f:selectItem itemLabel="blueSky" itemValue="blueSky" />
+		<f:selectItem itemLabel="wine" itemValue="wine" />
+		<f:selectItem itemLabel="japanCherry" itemValue="japanCherry" />
+		<f:selectItem itemLabel="ruby" itemValue="ruby" />
+		<f:selectItem itemLabel="classic" itemValue="classic" />
+		<f:selectItem itemLabel="laguna" itemValue="laguna" />
+		<f:selectItem itemLabel="deepMarine" itemValue="deepMarine" />
+		<f:selectItem itemLabel="blueSky Modified" itemValue="blueSkyModify" />
+          </h:selectOneRadio>
+     </div>
+     <div style="display: block; float: left">
+          <rich:panelBar height="100" width="200">
+               <rich:panelBarItem label="Item 1" style="font-family: monospace; font-size: 12;">
+	     Changing skin in runtime
+	</rich:panelBarItem>
+	
+	<rich:panelBarItem label="Item 2" style="font-family: monospace; font-size: 12;">
+	     This is a result of the modification "blueSky" skin
+	</rich:panelBarItem>
+          </rich:panelBar>
+     </div>
+</h:form>]]></programlisting>
 			<para>
 				This is result:
 			</para>
@@ -2080,10 +2073,7 @@ onsubmit="if (mynosendfunct()==false){return false}"
 				used. However, if you want to explicitly specify the level of skinning you want to be applied, you need to add a context parameter to your web.xml 
 				with <code>org.richfaces.CONTROL_SKINNING_LEVEL</code> as the parameter name 
 				
-				 and value  set to either <code>basic</code> or <code>extended</code>.  
-			
-			
-			
+				 and value  set to either <code>basic</code> or <code>extended</code>.  			
 			</para>
 			<itemizedlist>
 				<listitem>
@@ -2241,25 +2231,25 @@ onsubmit="if (mynosendfunct()==false){return false}"
 			<para> There is a snippet with some of them for example: </para>
 			<programlisting role="XML"><![CDATA[...
 <u:selector name=".rich-box-bgcolor-header">
-    <u:style name="background-color" skin="headerBackgroundColor" />
+     <u:style name="background-color" skin="headerBackgroundColor" />
 </u:selector>
 <u:selector name=".rich-box-bgcolor-general">
-   <u:style name="background-color" skin="generalBackgroundColor" />
+     <u:style name="background-color" skin="generalBackgroundColor" />
 </u:selector>
 ...
 //gradient elements
 ...
 <u:selector name=".rich-gradient-menu">
-    <u:style name="background-image">
-        <f:resource f:key="org.richfaces.renderkit.html.gradientimages.MenuGradientImage"/>
-    </u:style>
-    <u:style name="background-repeat" value="repeat-x" />
+     <u:style name="background-image">
+          <f:resource f:key="org.richfaces.renderkit.html.gradientimages.MenuGradientImage"/>
+     </u:style>
+     <u:style name="background-repeat" value="repeat-x" />
 </u:selector>
 <u:selector name=".rich-gradient-tab">
-    <u:style name="background-image">
-        <f:resource f:key="org.richfaces.renderkit.html.gradientimages.TabGradientImage"/>
-    </u:style>
-    <u:style name="background-repeat" value="repeat-x" />
+     <u:style name="background-image">
+          <f:resource f:key="org.richfaces.renderkit.html.gradientimages.TabGradientImage"/>
+     </u:style>
+     <u:style name="background-repeat" value="repeat-x" />
 </u:selector>
 ...]]></programlisting>
 			<para> To get a better idea of standard component skinning we recommend to explore CSS
@@ -3191,10 +3181,10 @@ onsubmit="if (mynosendfunct()==false){return false}"
 				CSS format. </para>
 			<programlisting role="CSS"><![CDATA[...
 .rich-component-name {
-	background-color: additionalBackgroundColor; /*the value of the constant defined by your skin*/
-	border-color: tableBorderColor; /*the value of the constant defined by your skin*/
-	border-width: tableBorderWidth /*the value of the constant defined by your skin*/
-	border-style: solid;
+     background-color: additionalBackgroundColor; /*the value of the constant defined by your skin*/
+     border-color: tableBorderColor; /*the value of the constant defined by your skin*/
+     border-width: tableBorderWidth; /*the value of the constant defined by your skin*/
+     border-style: solid;
 }
 ...]]></programlisting>
 			<para> The <emphasis>
@@ -3407,10 +3397,9 @@ mvn cdk:add-skin -Dname=SKIN-NAME -Dpackage=SKIN-PACKAGE
 							<code>&lt;f:verbatim&gt; &lt;![CDATA[ ...]]&gt;
 							&lt;/f:verbatim&gt;</code> tags.</para>
 					<para>For example </para>
-					<programlisting role="XML">
-<![CDATA[...
+					<programlisting role="XML"><![CDATA[...
 .rich-calendar-cell {
-	background: #537df8;
+     background: #537df8;
 }
 ...]]></programlisting>
 				</listitem>
@@ -3419,14 +3408,13 @@ mvn cdk:add-skin -Dname=SKIN-NAME -Dpackage=SKIN-PACKAGE
 						formed in RichFaces. The XCSS tags have to be placed outside
 							<code>&lt;f:verbatim&gt; &lt;![CDATA[ ...]]&gt;
 							&lt;/f:verbatim&gt;</code> tags. </para>
-					<programlisting role="XML">
-			<![CDATA[...
+					<programlisting role="XML"><![CDATA[...
 <u:selector name=".rich-calendar-cell">
-	<u:style name="border-bottom-color" skin="panelBorderColor"/>
-	<u:style name="border-right-color" skin="panelBorderColor"/>
-	<u:style name="background-color" skin="tableBackgroundColor"/>
-	<u:style name="font-size" skin="generalSizeFont"/>
-	<u:style name="font-family" skin="generalFamilyFont"/>
+     <u:style name="border-bottom-color" skin="panelBorderColor"/>
+     <u:style name="border-right-color" skin="panelBorderColor"/>
+     <u:style name="background-color" skin="tableBackgroundColor"/>
+     <u:style name="font-size" skin="generalSizeFont"/>
+     <u:style name="font-family" skin="generalFamilyFont"/>
 </u:selector>
 ...]]></programlisting>
 				</listitem>
