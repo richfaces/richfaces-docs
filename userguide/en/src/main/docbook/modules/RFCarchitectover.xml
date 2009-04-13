@@ -3766,4 +3766,24 @@ public class Config {
 				url="http://livedemo.exadel.com/richfaces-demo/richfaces/stateAPI.jsf?c=stateAPI"
 				>here</ulink>. </para>
 	</section>
+
+	<section>
+		<title>Identifing User Roles</title>
+		
+		<para>RichFaces provides a function to check whether the logged-in user belongs to a certain <property>user role</property>. The function is <code>rich:isUserInRole(Object)</code>, it takes  a String, a comma-separated list String, Collection etc. as arguments and returns a boolean value.
+		</para>
+		<para>For example, you need to render some controls only for administrators.
+			To do this you need to create a  role &quot;admin&quot; in web.xml and implement authorisation that assigns the &quot;admin&quot; role to the user that loggged-in as an administrator. Afterwards, you can use the <code>rich:isUserInRole(Object)</code> function with the <emphasis><property>&quot;rendered&quot;</property></emphasis> attribute of any component.</para>
+		
+		<para>
+			<emphasis role="bold">Example:</emphasis>
+		</para>
+		<programlisting role="XML"><![CDATA[...
+<rich:editor value="#{bean.text}"  rendered="#{rich:isUserInRole('admin')}" />
+...]]></programlisting> 
+		
+		<para>In the example above only a logged-in user with the role &quot;admin&quot; can see the text editor while  for the user with other roles the component will not be rendered.</para>
+		
+	</section>
+	
 </chapter>
