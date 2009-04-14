@@ -79,13 +79,14 @@ Version: 1.72.0
 	    <xsl:apply-templates mode="titlepage.mode"/>
 	  </div>
 </xsl:template>
+
 <xsl:template name="feedback">
    <!--[if IE 6]><iframe frameborder="0" class="problemLayer" id="place"><xsl:text> </xsl:text></iframe><![endif]-->
 	<div class="time_out_div" id="timeOutDiv"><xsl:text> </xsl:text></div>
 	<div id="feedback-maincontainer">
 		<h3 id="feedback-header">
 			Create new RichFaces Documentation Jira issue
-			<a href="#" onclick="hidePopup('feedback-maincontainer', 'feedback-mailform', 'feedback-iFrame','feedback-submit', 'feedback-maincontainer');" id="feedback-close">
+			<a href="javascript:void(0);" onclick="hidePopup('feedback-maincontainer', 'feedback-mailform', 'feedback-iFrame','feedback-submit', 'feedback-maincontainer');" id="feedback-close">
 			<img src="images/close_org.png" class="feedback-images" />
 		</a>
 		</h3>
