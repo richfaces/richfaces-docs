@@ -13,12 +13,8 @@
 	   
 	<xsl:param name="chunk.fast" select="1"/>
 	<xsl:param name="html.stylesheet" select="'css/html.css'"/>
-		
-	<xsl:template name="header.navigation">
-		<xsl:call-template name="header.navigation.multiPage">
-			 <xsl:with-param name="nightly" select="1" />
-		</xsl:call-template>
-	</xsl:template>
+	<xsl:variable name="nightly" select="1" />
+
 	<xsl:template name="chunk">
 		<xsl:call-template name="chunkerdoc" />
 	</xsl:template>

@@ -12,9 +12,6 @@
 	<xsl:import href="xhtml-common-reldiffmk.xsl"/>
 
 	<xsl:param name="html.stylesheet" select="'css/html-release.css'"/>
-	  
-	<xsl:template name="book.titlepage.recto">
-		<xsl:call-template name="book.titlepage.recto.singlePage" />
-	</xsl:template>
+	<xsl:variable name="nightly" select="0" />
 
 </xsl:stylesheet>

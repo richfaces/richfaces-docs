@@ -11,11 +11,6 @@
 <xsl:import href="classpath:/xslt/org/jboss/xhtml-single.xsl"/>
 <xsl:import href="xhtml-common.xsl"/>
 <xsl:param name="html.stylesheet" select="'css/html.css'"/>
-
-<xsl:template name="book.titlepage.recto">
-	<xsl:call-template name="book.titlepage.recto.singlePage">
-		 <xsl:with-param name="nightly" select="1" />
-	</xsl:call-template>
-</xsl:template>
+<xsl:variable name="nightly" select="1" />
 
 </xsl:stylesheet>

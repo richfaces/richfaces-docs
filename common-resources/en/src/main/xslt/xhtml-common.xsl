@@ -198,11 +198,11 @@ Version: 1.72.0
     </xsl:choose>
 </xsl:template>
 
-<xsl:template name="header.navigation.multiPage">
+<xsl:template name="header.navigation">
 	<xsl:param name="prev" select="/foo"/>
 	<xsl:param name="next" select="/foo"/>
 	<xsl:param name="nav.context"/>
-	<xsl:param name="nightly" select="0"/>
+	
 	<xsl:variable name="home" select="/*[1]"/>
 	<xsl:variable name="up" select="parent::*"/>
 	<xsl:variable name="row1" select="$navig.showtitles != 0"/>
@@ -289,8 +289,7 @@ Version: 1.72.0
 	</xsl:if>
 </xsl:template>
 
- <xsl:template name="book.titlepage.recto.singlePage">
-	  <xsl:param name="nightly" select="0"/>
+ <xsl:template name="book.titlepage.recto">
 			<xsl:if test="$nightly &gt; 0">
 				<div id="overlay">
 					<xsl:text> </xsl:text>
