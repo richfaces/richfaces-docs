@@ -271,7 +271,239 @@ public class user {
                               </figure>
                     </section>
           </section>
-      
+          
+          <section>
+                    <title>Integration of RichFaces into Maven Project</title>
+                    <para>In this section we will tell how you can create a simple JSF application with RichFaces using Maven. </para>
+                    <para>In the first place you need to make sure that Maven is installed on you local machine. We will run the JSF application on Tomcat 6.0 server, so please download and install it if you haven't done already so. </para>                    
+                    <para>
+                              Now we can move on to creating the application. To create the project structure and fill it with minimal content we will use the &quot;maven-archetype-jsfwebapp&quot; Maven archetype which is a part of RichFaces CDK. 
+                             
+                    </para>
+                    <para>The &quot;maven-archetype-jsfwebapp&quot; archetype and the project itself require extra repositories to be provided, namely &quot;http://snapshots.jboss.org/maven2/&quot; and &quot;http://repository.jboss.com/maven2/&quot;.
+                              The easiest way to make the repositories visible for Maven is to  create a profile in &quot;maven_installation_folder/conf/settings.xml&quot; in <code>&lt;profiles&gt;</code> element. This is the content of the profile: </para>
+          
+          <programlisting role="XML"><![CDATA[
+<profile>
+	<id>jsf-app-profile</id>
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<id>snapshots.jboss.org</id>
+			<name>Snapshot Jboss Repository for Maven</name>
+			<url>http://snapshots.jboss.org/maven2/</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<id>repository.jboss.com</id>
+			<name>Jboss Repository for Maven</name>
+			<url>http://repository.jboss.com/maven2/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+</profile>
+ ]]></programlisting> 
+                    <para>When the profile is added you need to activate it in the <code>&lt;activeProfiles&gt;</code> element. It can be done like this:</para>
+                    
+                    <programlisting role="XML"><![CDATA[...
+<activeProfiles>
+  <activeProfile>jsf-app-profile</activeProfile>
+</activeProfiles>
+...]]></programlisting> 
+                    
+                    
+                    <para>Now  you have everything to create the project using the &quot;maven-archetype-jsfwebapp&quot; archetype. Create a folder that will house your project and run the this command in it:</para>
+          <programlisting role="XML" ><![CDATA[...
+mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-jsfwebapp -DarchetypeVersion=3.3.1-SNAPSHOT -DgroupId=org.docs.richfaces -DartifactId=jsf-app
+...]]></programlisting> 
+                  
+                  
+                  <para>You can adjust some parameters of the command. </para>
+                  <table>
+                            <title>Title of the table</title>   
+                            <tgroup cols="2">
+                                      <thead>
+                                                <row>
+                                                          <entry>Parameter</entry>
+                                                          
+                                                          <entry>Description</entry>
+                                                </row>
+                                      </thead>
+                                      <tbody>
+                                                <row>
+                                                          <entry>-DgroupId</entry>
+                                                          <entry>Defines the package for the Managed beans</entry>
+                                                </row>                                               
+                                                <row>
+                                                          <entry>-DartifactId</entry>
+                                                          <entry>Defines the name of the project</entry>
+                                                </row> 
+                                      </tbody>
+                            </tgroup>
+                  </table>
+                    
+                  
+                  
+                  <para>This command generates a JSF project that has the following structure:</para>
+          
+          <programlisting role="XML"><![CDATA[
+jsf-app
+|-- pom.xml
+`-- src
+    |-- main
+    |   |-- java
+    |   |   `-- org
+    |   |       `-- docs
+    |   |           `-- richfaces
+    |   |               `-- Bean.java
+    |   |-- resources
+    |   `-- webapp
+    |       |-- WEB-INF
+    |       |   |-- faces-config.xml
+    |       |   `-- web.xml
+    |       |-- index.jsp
+    |       `-- pages
+    |           |-- index.jsp
+    |           `-- index.xhtml
+    `-- test
+        `-- java
+            `-- org
+                `-- docs
+                    `-- richfaces
+                        `-- BeanTest.java
+ ]]></programlisting> 
+          <para>
+                    Now go to &quot;jsf-app&quot; folder, it contains a project descriptor(pom.xml). Open the project descriptor to edit and add  dependencies to the <code>&lt;dependencies&gt;</code> element. Your <code>&lt;dependencies&gt;</code> element content should be the following:
+          </para>
+    
+    
+    
+ <programlisting role="XML"><![CDATA[...
+<dependencies>
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>3.8.1</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>2.4</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jsp-api</artifactId>
+		<version>2.0</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>jstl</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.1.2</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet.jsp</groupId>
+		<artifactId>jsp-api</artifactId>
+		<version>2.1</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.faces</groupId>
+		<artifactId>jsf-api</artifactId>
+		<version>1.2_12</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.faces</groupId>
+		<artifactId>jsf-impl</artifactId>
+		<version>1.2_12</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.el</groupId>
+		<artifactId>el-api</artifactId>
+		<version>1.0</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>el-impl</groupId>
+		<artifactId>el-impl</artifactId>
+		<version>1.0</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.annotation</groupId>
+		<artifactId>jsr250-api</artifactId>
+		<version>1.0</version>
+	</dependency>
+	<!-- RichFaces libraries -->
+	<dependency>
+		<groupId>org.richfaces.framework</groupId>
+		<artifactId>richfaces-api</artifactId>
+		<version>3.3.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+		<groupId>org.richfaces.framework</groupId>
+		<artifactId>richfaces-impl</artifactId>
+		<version>3.3.1-SNAPSHOT</version>
+	</dependency>
+	<dependency>
+		<groupId>org.richfaces.ui</groupId>
+		<artifactId>richfaces-ui</artifactId>
+		<version>3.3.1-SNAPSHOT</version>
+	</dependency>
+</dependencies>
+...]]></programlisting>    
+                    <para>The last three dependences add RichFaces libraries to the project. You can now build the project with the  <emphasis role="bold"><code>mvn install</code></emphasis> command.</para>
+       
+                    
+             <para>
+          When you see the "BUILD SUCCESSFUL" message, the project is assembled and can be imported to a IDE and run on the server. 
+             </para>          
+
+                    <para>The project can be built for Eclipse IDE with  <emphasis role="bold"><code>mvn eclipse:eclipse -Dwtpversion=2.0</code></emphasis> command. </para>
+                    
+                    <para>Then you can import the project into Eclipse. After importing to Eclipse open the &quot;jsf-app/src/main/webapp/WEB-INF/web.xml&quot;  to configure it according to the listing in the <link linkend="RegisteringRichFacesinwebxml">Registering RichFaces in web.xml</link> section of the guide.</para>                    
+                    <para>The project is configured and now you can start using RichFaces. Open &quot;jsf-app/src/main/webapp/pages/index.jsp&quot; file and add the tag library declaration.</para>
+                    <programlisting role="XML"><![CDATA[...
+<%@ taglib uri="http://richfaces.org/rich" prefix="rich"%>
+...]]></programlisting> 
+           
+           <para>Add some RichFaces component to the &quot;index.jsp&quot; page, for instance <emphasis role="bold"><property>&lt;rich:calendar&gt;</property></emphasis>. Your &quot;index.jsp&quot; page will look like this:</para>
+           
+           <programlisting role="XML"><![CDATA[...
+<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h" %>
+<%@ taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
+<%@ taglib uri="http://richfaces.org/rich" prefix="rich"%>
+<html>
+	<head>
+		<title>JSF Application with RichFaces built by Maven</title>
+	</head>
+	<body>
+		<f:view>
+		<rich:calendar />
+		</f:view>
+	</body>	
+</html>  
+...]]></programlisting> 
+                    
+                    <para>Now run the application on Tomcat server and open it in your favourite browser by pointing it to &quot;http://localhost:8080/jsf-app/&quot; .</para>
+          </section>
+          
+          
 <!-- RELEVANT RESOURCES LINKS -->
       
       <section id="RelevantResourcesLinks">
