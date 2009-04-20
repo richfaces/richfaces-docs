@@ -12,9 +12,9 @@
       <section>
             <title>Used components</title>
             
-            <para>Below there is a list of components used in &quot;Photo album&quot;.</para>
+            <para>Below there is a list of components used in <property>Photo Album Demo</property>.</para>
             <table>
-                  <title>Components used in &quot;Photo album&quot;</title>
+                  <title>Components used in &quot;Photo Album Demo&quot;</title>
                   <tgroup cols="2">
                         <thead>
                               <row>
@@ -89,5 +89,324 @@
                   </tgroup>
             </table>
       </section>
+      
+      <section>
+            <title>Albums representation</title>
+        
+            <section>
+                  <title>Building the &lt;rich:tree&gt; on the page</title>
+      
+                  <para>
+                        The <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component is designed for hierarchical data presentation and is used  to build a tree structure. The component also supports built-in drag and drop functionality.
+                  </para>
+                  <para>
+                        The <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component in the <property>Photo Album Demo</property> application helps to represent and implement inherently the &quot;Shelves—Albums—Photos&quot; hierarchy. 
+                        Shelf  is the highest possible level in the tree hierarchy. 
+                        Shelfs are used to group thematic albums and may contain as many albums as needed.  
+                        Photos are not represented in the tree because it can be a great number of them and it can make a tree clumsy. 
+                        Photos  are rendered in the center of the screen (hereinafter referred to as a watching area).
+                  </para>
+                  
+                  <para>
+                        Implicitly, the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component takes one the main place  in the <property>Photo Album Demo</property> and is tightly bounded with the application logic. 
+                        There are several ways to implement the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis>. 
+                        In the current application the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> is designed  using a model tag <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis>. 
+                  </para>
+                  <para>
+                        The <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> component accepts a collection of elements, which are allowed to include lists, arrays, maps, XML NodeList or NamedNodeMap, and iterates through it. 
+                        The <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> component repeats a hierarchical tree structure on a <code>xhtml</code> or <code>jsp</code> page in a component tree and can be nested without any limitations. 
+                        The code snippet below schematically shows the idea of how a tree can be built on a page with the help of adaptors:
+                  </para>
+                  
+                  <programlisting role="XML"><![CDATA[<rich:tree>
+      <rich:treeNodesAdaptor>
+            <rich:treeNode />
+
+            <rich:treeNodesAdaptor>
+                  <rich:treeNode />
+                  
+                  <rich:treeNodesAdaptor>
+                        <rich:treeNode />
+                         ...
+                  </rich:treeNodesAdaptor>
+            </rich:treeNodesAdaptor>
+      </rich:treeNodesAdaptor>
+</rich:tree>]]></programlisting>
+                  
+                  <para>
+                        When using <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> component there is no need to specify 
+                        the <emphasis><property>&quot;value&quot;</property></emphasis> and <emphasis><property>&quot;var&quot;</property></emphasis> attributes for the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis>. 
+                        The values for nodes to render are passed directly into the corresponding adaptor and the component performs all the necessary iterative work 
+                        (vizit the <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/treeNodesAdaptor.jsf?c=treeNodesAdaptor">&lt;rich:treeNodesAdaptor&gt; page</ulink> on the RichFacesLiveDemo for more details).
+                  </para>
+                  
+                  <para>
+                        Implementation of the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> in the application is very close to the model shown above. 
+                        The <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> component has &lt;nodes&gt; attribute. 
+                        The top <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> in the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> in the Phot Album Demo application is responsible for shelfs rendering. 
+                        Its <emphasis><property>&quot;nodes&quot;</property></emphasis> attribute refers to <emphasis><property>getShelfs()</property></emphasis> method of the <code>ShelfManager</code> class and gets the collection of shelfs associated with the current user including all shared shelfs in the system.
+                        Take a look at this method:
+                  </para>
+                  
+                  <programlisting role="JAVA"><![CDATA[public List<Shelf> getShelfs(){
+      if(shelfs == null){
+            shelfs = shelfAction.getShelfs(user);
+      }
+      return shelfs;
+} ]]></programlisting>
+                  
+                  <para>
+                        After the <emphasis><property>&quot;nodes&quot;</property></emphasis> attribute of the <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis>, which is responsible for shelves rendering, receives the collection of shelves, 
+                        the iteration process switches to the nested <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis>, which is responsible for albums. 
+                        The &quot;albums&quot; <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> <emphasis><property>&quot;nodes&quot;</property></emphasis> attribute refers in its turn to the <code>albums</code> field of the <code>Shelf</code> class 
+                        and takes a collection of all albums associated with the current shelf. 
+                        The &quot;albums&quot; <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> renders all albums that belong to the current iterating shelf and then switches back to the &quot;shelf&quot; <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> to render and iterate the next shelf in the shelves collection received earlier. 
+                        Here is how it looks in the <code>webapp/includes/index/tree.xhtml</code> file:  
+                  </para>
+                  
+                  <programlisting role="XML"><![CDATA[<rich:tree id="tree" switchType="client" treeNodeVar="treeNode" showConnectingLines="false" dragIndicator="dragIndicator" ajaxSubmitSelection="false"
+            adviseNodeOpened="#{treeManager.adviseNodeSelected}"
+            adviseNodeSelected="#{treeManager.adviseNodeSelected}" 
+            iconCollapsed="/img/shell/tree_icon_plus.png"
+            iconExpanded="/img/shell/tree_icon_minus.png">
+      <rich:treeNodesAdaptor nodes="#{shelfManager.getShelfs()}" var="shelf">
+            <rich:treeNode reRender="mainArea" selectedClass="tree-selected-node">
+                  <f:facet name="icon">
+                        <h:graphicImage style="border: none" value="/img/shell/tree_icon_shelf.png">
+                              <a4j:support reRender="tree, mainArea" event="onclick" actionListener="#{controller.showShelf(shelf)}" similarityGroupingId="sel" />
+                        </h:graphicImage>
+                  </f:facet>
+                  <rich:dropSupport id="shelfDND" acceptedTypes="album" dropValue="#{shelf}" dropListener="#{dndManager.processDrop}" reRender="mainArea, tree" />
+                  <ui:include src="/includes/contextMenu/CMForShelf.xhtml" >
+                        <ui:param name="shelf" value="#{shelf}" />
+                  </ui:include>
+                  <a4j:outputPanel>
+                        <h:outputText value="#{shelf.name}" />
+                        <h:outputText value=" :: " />
+                        <strong>#{shelf.unvisitedImages.size()}</strong> new
+                        <a4j:support reRender="tree, mainArea" event="onclick" actionListener="#{controller.showShelf(shelf)}" similarityGroupingId="sel" />
+                  </a4j:outputPanel>
+            </rich:treeNode>
+
+            <rich:treeNodesAdaptor var="album" nodes="#{shelf.albums}">
+                  <rich:treeNode reRender="mainArea" dragType="album" dragValue="#{album}" dropValue="#{album}" acceptedTypes="image, album"
+                  selectedClass="tree-selected-node" icon="img/shell/tree_icon_album.png">
+                        <f:facet name="iconLeaf">
+                              <h:graphicImage style="border: none" value="img/shell/tree_icon_album.png">
+                                    <a4j:support reRender="tree, mainArea" event="onclick" actionListener="#{controller.showAlbum(album)}" similarityGroupingId="sel" />
+                              </h:graphicImage>
+                        </f:facet>
+                        <ui:include src="/includes/contextMenu/CMForAlbum.xhtml" >
+                              <ui:param name="album" value="#{album}" />
+                        </ui:include>
+                        <rich:dndParam name="label" type="drag" value="#{album.name}" />
+                        <a4j:outputPanel>
+                              <h:outputText value="#{album.name}" />
+                              <h:outputText value=" :: " />
+                              <strong>#{album.unvisitedImages.size()}</strong> new
+                                    <a4j:support reRender="tree, mainArea" event="onclick" actionListener="#{controller.showAlbum(album)}" similarityGroupingId="sel" />
+                        </a4j:outputPanel>
+                        <rich:dropSupport id="php" acceptedTypes="image" dropValue="#{album}" dropListener="#{dndManager.processDrop}" reRender="mainArea, tree" />
+                  </rich:treeNode>
+            </rich:treeNodesAdaptor>
+      </rich:treeNodesAdaptor>
+</rich:tree>]]></programlisting>
+                  
+                  <para>
+                        The illustration below shows how the Shelves—Albums heirarchy is rendered on the page.        
+                  </para>
+                  
+                  <figure>
+                        <title>Shelves and albums nodes rendered with the help of the &lt;rich:treeNodesAdaptor&gt;</title>
+                        <mediaobject>
+                              <imageobject>
+                                    <imagedata fileref="images/tree.png"/>
+                              </imageobject>
+                        </mediaobject>
+                  </figure>              
+                  
+</section>
+            
+            <section>
+                  <title>Drag-and-drop inside the &lt;rich:tree&gt;</title>
+                  <para>
+                        Drag and drop features supported in the Photo Album Demo application are not so complicated as it may seem from the first view. 
+                        In this application we can mark out two types of drag-and-drop: one type takes place only inside the tree (between tree nodes) and another one — between the watching area and the tree. 
+                        The difference is not considerable enough to describe two types separately, but also not at all insignificant to be omitted here.
+                  </para>
+                  
+                  <para>
+                        Let&apos;s examine drag-and-drop inside tree. The tree related components (<emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> and <emphasis role="bold"><property>&lt;rich:treeNode&gt;</property></emphasis>) 
+                        have their own attributes that provide drag-and-drop functionality. These attributes can be divided into two groups: those  which provide drag (dragValue, dragListener, dragIndicator, dragType attributes) and those which provide drop operations (dropValue, dropListener, acceptedTypes, typeMapping).      
+                  </para>
+                  
+                  <note>
+                        <title>
+                              Note:
+                        </title>
+                        <para>
+                              Due to &quot;Shelves—Albums—Photos&quot; paradigm we can say that photos could be moved between albums, albums could be moved between shelves. 
+                              To avoid a mishmash, it's not allowed to place photos directly in shelves as well as nesting shelves inside shelves or albums inside albums.
+                        </para>
+                  </note>
+                  
+                  <para>
+                        All albums or images (<property>drag-and-drop zones</property> in terms of RichFaces drag-and-drop), which are assumed to be dragged, must be marked somehow in the application code. 
+                        For albums that are represented as tree nodes we will use previously mentioned <property>drag group</property> attributes:
+                  </para>
+                  <programlisting role="XML"><![CDATA[<rich:treeNodesAdaptor var="album" nodes="#{shelf.albums}">
+      <rich:treeNode dragType="album"
+            dragValue="#{album}" 
+            dropValue="#{album}"
+            acceptedTypes="image, album" />
+            …
+</rich:treeNodesAdaptor>
+]]></programlisting>
+              
+              <para>
+                    To provide drop functionality for the marked albums we should mark shelves as drop zones in the application code too. 
+                    For this purpose we add the <emphasis role="bold"><property>rich:dropSupport</property></emphasis> component to the &quot;shelf&quot; node:
+              </para>
+                  <programlisting role="XML"><![CDATA[<rich:treeNodesAdaptor nodes="#{shelfManager.getShelfs()}" var="shelf">
+      <rich:treeNode
+            <rich:dropSupport id="shelfDND" 
+	acceptedTypes="album" 
+	dropValue="#{album}"
+	dropListener="#{dndManager.processDrop}" 
+	reRender="mainArea">
+            </rich:dropSupport>
+            …
+      </rich:treeNode>
+</rich:treeNodeAdaptor>]]></programlisting>
+              
+              <para>
+                    The <emphasis><property>&quot;acceptedType&quot;</property></emphasis> attribute tells the &quot;shelf&quot; node what types of dragged zones (albums in this case) it can accept. 
+                    The value for the <emphasis><property>&quot;acceptedType&quot;</property></emphasis> attribute corresponds the album <emphasis><property>&quot;dragType&quot;</property></emphasis> attribute. 
+                    The method binding that will process drag-and-drop operation should be pointed via <emphasis><property>&quot;dropListener&quot;</property></emphasis> attribute of the <emphasis role="bold"><property>rich:tree</property></emphasis>. 
+                    This method is shown in th e listing below: 
+              </para>
+                  <programlisting role="JAVA"><![CDATA[...
+public void processDrop(DropEvent dropEvent) {
+      Dropzone dropzone = (Dropzone) dropEvent.getComponent();
+      Object dragValue = dropEvent.getDragValue();
+      Object dropValue = dropzone.getDropValue();
+      if(dragValue instanceof Image){
+            if(!((Album)dropValue).getOwner().getLogin().equals(user.getLogin())){
+                  Events.instance().raiseEvent(Constants.ADD_ERROR_EVENT, Constants.DND_PHOTO_ERROR);
+                  return;
+            }
+            handleImage((Image)dragValue, (Album)dropValue);	
+      }else if(dragValue instanceof Album){
+            if(!((Shelf)dropValue).getOwner().getLogin().equals(user.getLogin())){
+                  Events.instance().raiseEvent(Constants.ADD_ERROR_EVENT, Constants.DND_ALBUM_ERROR);
+                  return;
+            }
+            handleAlbum((Album)dragValue, (Shelf)dropValue);
+      }
+}
+...]]></programlisting>
+              <para>
+                    The illustration below shows how the described above drag-and-drop features are rendered in the Photo Album Demo.  
+              </para>
+                  <figure>
+                        <title>Dragging the &quot;Flora&quot; album from &quot;Sport&quot; shelf into the &quot;Nature&quot; (left) and the tree after drag-and-drop (right).</title>
+                        <mediaobject>
+                              <imageobject>
+                                    <imagedata fileref="images/dnd.png"/>
+                              </imageobject>
+                        </mediaobject>
+                  </figure>
+              
+            </section>
+            
+      </section>
+      
+      <section>
+            <title>Upload images</title>
+            <para>The implementation of <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> in the Phot Album Demo uses the embedded Flash module that adds extra functionality to the component. 
+                  Here are the additional features that the Flash module provides:
+            </para>
+            <itemizedlist>
+                  <listitem><para>Multiple files choosing;</para></listitem>
+                  <listitem><para>Specification of permitted file types in the &quot;Open File&quot; dialog window;</para></listitem>
+                  <listitem><para>A number of additional entry object properties.</para></listitem>
+            </itemizedlist>
+            
+            <para>
+                  The photos uploading functionality is realized on the <code>/includes/fileUpload/fileUploader.xhtml page</code>. Let's have a look at this page to find out how the uploader is imlemented:   
+            </para>
+            
+            <programlisting role="XML"><![CDATA[<rich:fileUpload style="margin : 0px 0px 20px 0px; width : 504px; height : 200px; background : #f1f1f1; border : 1px solid #A1A1A1"
+		id="fileUpload"
+		allowFlash="true" 
+		immediateUpload="false" 
+		acceptedTypes="jpg,jpeg"
+		maxFilesQuantity="100" 
+		autoclear="true"
+		fileUploadListener="#{fileUploadManager.listener}" >
+	<a4j:support event="onuploadcomplete" reRender="filesPanel, tree" />
+	<a4j:support event="onfileuploadcomplete" />
+	</rich:fileUpload>]]></programlisting>
+            
+            <para>
+                  The &quot;<emphasis><property>FileUploadListener</property></emphasis>&quot; attribute is binded with <code>fileUploadManager.listener</code> method which makes the main job on the upload. 
+                  Below is the <code>fileUploadManager.listener</code> method:
+            </para>
+            <programlisting role="JAVA"><![CDATA[public void listener(UploadEvent event) throws Exception {
+      UploadItem item = event.getUploadItem();
+      Image image = constructImage(item);
+      try {
+            extractMetadata(item, image);
+      } catch (Exception e1) {
+            addError(item, image, Constants.FILE_PROCESSING_ERROR);
+            return;
+      }
+      image.setAlbum(model.getSelectedAlbum());
+      if(image.getAlbum() == null){
+            addError(item, image, Constants.NO_ALBUM_TO_DOWNLOAD_ERROR);
+            return;
+      }
+      try{
+            if(imageAction.isImageWithThisPathExist(image)){
+                  image.setPath(generateNewPath(image.getPath()));
+            }
+            imageAction.addImage(image);
+      }catch(Exception e){
+            addError(item, image, Constants.IMAGE_SAVING_ERROR);
+            return;
+      }
+      if(!fileManager.addImage(image.getFullPath(), item.getFile().getPath())){
+            addError(item, image, Constants.FILE_SAVE_ERROR);
+                  return;
+      }
+      fileWrapper.getFiles().add(image);
+      Events.instance().raiseEvent(Constants.IMAGE_ADDED_EVENT, image);
+      item.getFile().delete();
+}]]></programlisting>
+            
+<para>
+      When a photo is added into the uploader, the first thing it does is saving this photo in the file system. 
+      The uploaded files are stored in the temporary folder in the computer file system. 
+      For this purpose  the value of the <code>createTempFile</code> parameter in <code>Ajax4jsf Filter</code> section should be set to <code>true</code>. 
+      Below in the <code>Web.xml</code> file Ajax filter section:
+</para>
+
+            <programlisting role="XML"><![CDATA[...
+<init-param>
+      <param-name>createTempFiles</param-name>
+      <param-value>true</param-value>
+</init-param>
+...]]></programlisting>
+       
+       <para>
+             Then the uploader creates an <code>Image</code> object and extracts all image metadata such as Camera name, Image size etc. 
+             Then it sets an album and generates a new path to it. 
+             The system should save six different sizes of the photo. 
+             After the photo was added into the data base the system removes a temporary file created for storage.
+       </para>
+            
+            
+      </section>
+      
       
 </chapter>
