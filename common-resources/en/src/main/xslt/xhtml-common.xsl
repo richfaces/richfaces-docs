@@ -62,8 +62,14 @@ Version: 1.72.0
 			</meta>
 		</xsl:if>
 	</xsl:if>
+	
 	<link rel="shortcut icon"  type="image/vnd.microsoft.icon" href="images/favicon.ico" />
+
 	<xsl:apply-templates select="." mode="head.keywords.content"/>
+		<!--script type="text/javascript" src="script/prototype-1.6.0.2.js"><xsl:comment>If you see this message, your web browser doesn't support JavaScript or JavaScript is disabled.</xsl:comment></script>
+		<script type="text/javascript" src="script/effects.js"><xsl:comment>If you see this message, your web browser doesn't support JavaScript or JavaScript is disabled.</xsl:comment></script>
+		<script type="text/javascript" src="script/scriptaculous.js"><xsl:comment>If you see this message, your web browser doesn't support JavaScript or JavaScript is disabled.</xsl:comment></script-->
+
 </xsl:template>
 
 <xsl:template match="abstract" mode="titlepage.mode">
@@ -79,7 +85,6 @@ Version: 1.72.0
 	    <xsl:apply-templates mode="titlepage.mode"/>
 	  </div>
 </xsl:template>
-
 <xsl:template name="feedback">
    <!--[if IE 6]><iframe frameborder="0" class="problemLayer" id="place"><xsl:text> </xsl:text></iframe><![endif]-->
 	<div class="time_out_div" id="timeOutDiv"><xsl:text> </xsl:text></div>
@@ -94,7 +99,7 @@ Version: 1.72.0
 		<form onsubmit="return validate_form()" id="feedback-mailform" method="post" action="https://jira.jboss.org/jira/secure/CreateIssueDetails!init.jspa?pid=12310341&amp;issuetype=3" target="feedback-iFrame">
 			<input type="hidden" id="priority" name="priority" value="3" />
 			<input type="hidden" id="components" name="components" value="12311170" />
-			<input type="hidden" id="versions" name="versions" value="12313100" />
+			<input type="hidden" id="versions" name="versions" value="12312451" />
 			<input type="hidden" id="customfield_12310031" name="customfield_12310031" value="Documentation (Ref Guide, User Guide, etc.)" />
 		
 			<label for="summary">Summary</label>
@@ -156,53 +161,11 @@ Version: 1.72.0
 		</a>
 	</div-->							
  </xsl:template>
-
-<xsl:template name="navig.content">
-    <xsl:param name="direction" select="next"/>
-    <xsl:variable name="navtext">
-        <xsl:choose>
-            <xsl:when test="$direction = 'prev'">
-                <xsl:call-template name="gentext.nav.prev"/>
-            </xsl:when>
-            <xsl:when test="$direction = 'next'">
-                <xsl:call-template name="gentext.nav.next"/>
-            </xsl:when>
-            <xsl:when test="$direction = 'up'">
-                <xsl:call-template name="gentext.nav.up"/>
-            </xsl:when>
-            <xsl:when test="$direction = 'home'">
-                <xsl:call-template name="gentext.nav.home"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text>xxx</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-
-    <xsl:choose>
-        <xsl:when test="$navig.graphics != 0">
-            <img>
-                <xsl:attribute name="src">
-                    <xsl:value-of select="$navig.graphics.path"/>
-                    <xsl:value-of select="$direction"/>
-                    <xsl:value-of select="$navig.graphics.extension"/>
-                </xsl:attribute>
-                <xsl:attribute name="alt">
-                    <xsl:value-of select="$navtext"/>
-                </xsl:attribute>
-            </img>
-        </xsl:when>
-        <xsl:otherwise>
-            <xsl:value-of select="$navtext"/>
-        </xsl:otherwise>
-    </xsl:choose>
-</xsl:template>
-
-<xsl:template name="header.navigation">
+ 
+ <xsl:template name="header.navigation">
 	<xsl:param name="prev" select="/foo"/>
 	<xsl:param name="next" select="/foo"/>
 	<xsl:param name="nav.context"/>
-	
 	<xsl:variable name="home" select="/*[1]"/>
 	<xsl:variable name="up" select="parent::*"/>
 	<xsl:variable name="row1" select="$navig.showtitles != 0"/>
@@ -211,9 +174,9 @@ Version: 1.72.0
 		<xsl:if test="$row1 or $row2">
 			<xsl:if test="$row1">
 				<xsl:if test="$nightly &gt; 0">
-					<div id="overlay">
-						<xsl:text> </xsl:text>
-					</div>
+				<div id="overlay">
+					<xsl:text> </xsl:text>
+				</div>
 				</xsl:if>
 				<!-- FEEDBACK -->
 				<xsl:call-template name="feedback" />
@@ -289,90 +252,7 @@ Version: 1.72.0
 	</xsl:if>
 </xsl:template>
 
- <xsl:template name="book.titlepage.recto">
-			<xsl:if test="$nightly &gt; 0">
-				<div id="overlay">
-					<xsl:text> </xsl:text>
-				</div>
-			</xsl:if>
-				<!-- FEEDBACK -->
-				<xsl:call-template name="feedback" />
-				<p xmlns="http://www.w3.org/1999/xhtml">
-					<xsl:attribute name="id">
-						<xsl:text>title</xsl:text>
-					</xsl:attribute>
-					<a>
-						<xsl:attribute name="href">
-							<xsl:value-of select="$siteHref" />
-						</xsl:attribute>
-						<xsl:attribute name="class">
-							<xsl:text>site_href</xsl:text>
-						</xsl:attribute>
-						<strong>
-						        <xsl:value-of select="$siteLinkText"/>	
-						</strong>
-					</a>
-					<a>
-						<xsl:attribute name="href">
-							<xsl:value-of select="$docHref" />
-						</xsl:attribute>
-						<xsl:attribute name="class">
-							<xsl:text>doc_href</xsl:text>
-						</xsl:attribute>
-						<strong>
-						        <xsl:value-of select="$docLinkText"/>	
-						</strong>
-					</a>
-				</p>
-  <xsl:choose>
-    <xsl:when test="bookinfo/title">
-      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/title"/>
-    </xsl:when>
-    <xsl:when test="info/title">
-      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/title"/>
-    </xsl:when>
-    <xsl:when test="title">
-      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="title"/>
-    </xsl:when>
-  </xsl:choose>
-
-  <xsl:choose>
-    <xsl:when test="bookinfo/subtitle">
-      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/subtitle"/>
-    </xsl:when>
-    <xsl:when test="info/subtitle">
-      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/subtitle"/>
-    </xsl:when>
-    <xsl:when test="subtitle">
-      <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="subtitle"/>
-    </xsl:when>
-  </xsl:choose>
-
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/corpauthor"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/corpauthor"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/authorgroup"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/authorgroup"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/author"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/author"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/othercredit"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/othercredit"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/releaseinfo"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/releaseinfo"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/copyright"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/copyright"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/legalnotice"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/legalnotice"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/pubdate"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/pubdate"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/revision"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/revision"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/revhistory"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/revhistory"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="bookinfo/abstract"/>
-  <xsl:apply-templates mode="book.titlepage.recto.auto.mode" select="info/abstract"/>
-
-  </xsl:template>
- <xsl:template name="chunkerdoc">
+<xsl:template name="chunk">
   <xsl:param name="node" select="."/>
   
   <xsl:choose>
@@ -457,4 +337,50 @@ Version: 1.72.0
   </xsl:choose>
 </xsl:template>
 
+
+
+<!-- ==================================================================== -->
+
+<xsl:template name="navig.content">
+    <xsl:param name="direction" select="next"/>
+    <xsl:variable name="navtext">
+        <xsl:choose>
+            <xsl:when test="$direction = 'prev'">
+                <xsl:call-template name="gentext.nav.prev"/>
+            </xsl:when>
+            <xsl:when test="$direction = 'next'">
+                <xsl:call-template name="gentext.nav.next"/>
+            </xsl:when>
+            <xsl:when test="$direction = 'up'">
+                <xsl:call-template name="gentext.nav.up"/>
+            </xsl:when>
+            <xsl:when test="$direction = 'home'">
+                <xsl:call-template name="gentext.nav.home"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>xxx</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
+    <xsl:choose>
+        <xsl:when test="$navig.graphics != 0">
+            <img>
+                <xsl:attribute name="src">
+                    <xsl:value-of select="$navig.graphics.path"/>
+                    <xsl:value-of select="$direction"/>
+                    <xsl:value-of select="$navig.graphics.extension"/>
+                </xsl:attribute>
+                <xsl:attribute name="alt">
+                    <xsl:value-of select="$navtext"/>
+                </xsl:attribute>
+            </img>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:value-of select="$navtext"/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+<!-- ==================================================================== -->
 </xsl:stylesheet>
