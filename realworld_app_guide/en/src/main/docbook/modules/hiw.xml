@@ -143,20 +143,20 @@
                   <para>
                         Implementation of the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> in the application is very similar to the model shown above. 
                         The <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> component has &lt;nodes&gt; attribute. 
-                        The top <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> in the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> in the Phot Album Demo application is responsible for shelves rendering. 
-                        Its <emphasis><property>&quot;nodes&quot;</property></emphasis> attribute refers to <emphasis><property>getShelfs()</property></emphasis> method of the <code>ShelfManager</code> class and gets the collection of shelves associated with the current user including all shared shelves in the system.
+                        The top <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> in the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> in the Photo Album Demo application is responsible for shelves rendering. 
+                        Its <emphasis><property>&quot;nodes&quot;</property></emphasis> attribute refers to <emphasis><property>getShelves()</property></emphasis> method of the <code>ShelfManager</code> class and gets the collection of shelves associated with the current user including all shared shelves in the system.
                         Take a look at this method:
                   </para>
                   
-                  <programlisting role="JAVA"><![CDATA[public List<Shelf> getShelfs(){
-      if(shelfs == null){
-            shelfs = shelfAction.getShelfs(user);
+                  <programlisting role="JAVA"><![CDATA[public List<Shelf> getShelves(){
+      if(shelves == null){
+            shelves = shelfAction.getShelves(user);
       }
-      return shelfs;
+      return shelves;
 } ]]></programlisting>
                   
                   <para>
-                        After the <emphasis><property>&quot;nodes&quot;</property></emphasis> attribute of the <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis>, which is responsible for shelves rendering, receives the collection of shelves, 
+                        When the <emphasis><property>&quot;nodes&quot;</property></emphasis> attribute of the <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis>, which is responsible for shelves rendering, receives the collection of shelves, 
                         the iteration process switches to the nested <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis>, which is responsible for albums. 
                         The &quot;albums&quot; <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> <emphasis><property>&quot;nodes&quot;</property></emphasis> attribute refers in its turn to the <code>albums</code> field of the <code>Shelf</code> class 
                         and takes a collection of all albums associated with the current shelf. 
@@ -169,7 +169,7 @@
             adviseNodeSelected="#{treeManager.adviseNodeSelected}" 
             iconCollapsed="/img/shell/tree_icon_plus.png"
             iconExpanded="/img/shell/tree_icon_minus.png">
-      <rich:treeNodesAdaptor nodes="#{shelfManager.getShelfs()}" var="shelf">
+      <rich:treeNodesAdaptor nodes="#{shelfManager.getShelves()}" var="shelf">
             <rich:treeNode reRender="mainArea" selectedClass="tree-selected-node">
                   <f:facet name="icon">
                         <h:graphicImage style="border: none" value="/img/shell/tree_icon_shelf.png">
@@ -213,7 +213,7 @@
 </rich:tree>]]></programlisting>
                   
                   <para>
-                        The illustration below shows how the Shelves—Albums heirarchy is rendered on the page.        
+                        The illustration below shows how the Shelves—Albums hierarchy is rendered on the page.        
                   </para>
                   
                   <figure>
@@ -245,7 +245,7 @@
                               Note:
                         </title>
                         <para>
-                              Due to &quot;Shelves—Albums—Photos&quot; paradigm we can say that photos could be moved between albums, albums could be moved between shelves. 
+                              Due to &quot;Shelves—Albums—Photos&quot; hierarchy we can say that photos could be moved between albums, albums could be moved between shelves. 
                               To avoid a mishmash, it's not allowed to place photos directly in shelves as well as nesting shelves inside shelves or albums inside albums.
                         </para>
                   </note>
@@ -267,7 +267,7 @@
                     To provide drop functionality for the marked albums we should mark shelves as drop zones in the application code too. 
                     For this purpose we add the <emphasis role="bold"><property>rich:dropSupport</property></emphasis> component to the &quot;shelf&quot; node:
               </para>
-                  <programlisting role="XML"><![CDATA[<rich:treeNodesAdaptor nodes="#{shelfManager.getShelfs()}" var="shelf">
+                  <programlisting role="XML"><![CDATA[<rich:treeNodesAdaptor nodes="#{shelfManager.getShelves()}" var="shelf">
       <rich:treeNode
             <rich:dropSupport id="shelfDND" 
 	acceptedTypes="album" 
@@ -283,7 +283,7 @@
                     The <emphasis><property>&quot;acceptedType&quot;</property></emphasis> attribute tells the &quot;shelf&quot; node what types of dragged zones (albums in this case) it can accept. 
                     The value for the <emphasis><property>&quot;acceptedType&quot;</property></emphasis> attribute corresponds the album <emphasis><property>&quot;dragType&quot;</property></emphasis> attribute. 
                     The method binding that will process drag-and-drop operation should be pointed via <emphasis><property>&quot;dropListener&quot;</property></emphasis> attribute of the <emphasis role="bold"><property>rich:tree</property></emphasis>. 
-                    This method is shown in th e listing below: 
+                    This method is shown in the listing below: 
               </para>
                   <programlisting role="JAVA"><![CDATA[...
 public void processDrop(DropEvent dropEvent) {
@@ -323,7 +323,7 @@ public void processDrop(DropEvent dropEvent) {
       
       <section>
             <title>Upload images</title>
-            <para>The implementation of <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> in the Phot Album Demo uses the embedded Flash module that adds extra functionality to the component. 
+            <para>The implementation of <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> in the Photo Album Demo uses the embedded Flash module that adds extra functionality to the component. 
                   Here are the additional features that the Flash module provides:
             </para>
             <itemizedlist>
@@ -333,7 +333,7 @@ public void processDrop(DropEvent dropEvent) {
             </itemizedlist>
             
             <para>
-                  The photos uploading functionality is realized on the <code>/includes/fileUpload/fileUploader.xhtml page</code>. Let's have a look at this page to find out how the uploader is imlemented:   
+                  The photos uploading functionality is based on the <code>/includes/fileUpload/fileUploader.xhtml page</code>. Let's have a look at this page to find out how the uploader is implemented:   
             </para>
             
             <programlisting role="XML"><![CDATA[<rich:fileUpload style="margin : 0px 0px 20px 0px; width : 504px; height : 200px; background : #f1f1f1; border : 1px solid #A1A1A1"
@@ -402,7 +402,7 @@ public void processDrop(DropEvent dropEvent) {
              Then the uploader creates an <code>Image</code> object and extracts all image metadata such as Camera name, Image size etc. 
              Then it sets an album and generates a new path to it. 
              The system should save six different sizes of the photo. 
-             After the photo was added into the data base the system removes a temporary file created for storage.
+             After the photo was added into the database the system removes a temporary file created for storage.
        </para>
             
             
@@ -562,7 +562,7 @@ public void startSlideshow(Image selectedImage){
 ...]]></programlisting>
             
             <para>
-                  The described above implements a modal panel with photos that change each other in order they store in an album.       
+                  The described above example implements a modal panel with photos that change each other in order they store in an album.       
             </para>
             <figure>
                   <title>Slide show</title>
