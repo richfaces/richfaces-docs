@@ -119,8 +119,9 @@ HtmlQueue myQueue = new HtmlQueue();
         </para>
         
         <para>
-            The <emphasis><property>&quot;ignoreDupResponses&quot;</property></emphasis> attribute that takes a boolean value can also help optimize your Ajax requests. The idea of the attribute is to cancel
-            similar events and send the latest one to the server. This works only if similar events come sequentially. 
+            The <emphasis><property>&quot;ignoreDupResponses&quot;</property></emphasis> attribute that takes a boolean value can also help optimize your Ajax requests. 
+            If set to true, response processing for request will not occur if a similar request is already waiting in the queue. New request will be fired immediately when the response from the previous one returns.
+         
         </para>
         
         <para>
@@ -137,7 +138,7 @@ HtmlQueue myQueue = new HtmlQueue();
         
         <para>In this example, the requests are glued together and only the last one is submitted.</para>
         
-        <para>Another key attribute that easies revers load is <emphasis><property
+        <para>Another key attribute that easies server load is <emphasis><property
             >&quot;timeout&quot;</property></emphasis>.
             The attribute specifies the  amount of time an item can be in the queue before the sent event is be aborted and dropped from the queue.
           </para> 
