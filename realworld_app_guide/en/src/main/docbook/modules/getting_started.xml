@@ -8,45 +8,111 @@
             </keywordset>
       </chapterinfo>
       <title>Getting started</title>
-      
       <section>
             <title>Environment Configuration</title>
             <para>
-                  The working version of the application is available on-line at  <ulink url="http://livedemo.exadel.com/realworld/">http://livedemo.exadel.com/realworld/</ulink>.
-            </para>
-            <para>
-                  Application sources are available at <ulink url="http://anonsvn.jboss.org/repos/richfaces/trunk/test-applications/realworld/">http://anonsvn.jboss.org/repos/richfaces/trunk/test-applications/realworld/</ulink>.
-            </para>
-            <para>
-                  In order to download  the application sources and deploy them locally the following should be installed and configured on your computer: 
+                  In order to download, build, modify, and deploy the Photo Album application 
+                  you need the following installed and configured: 
             </para>
             <itemizedlist>
-                  <listitem><para>JDK 1.5 and higher</para></listitem>
-                  <listitem><para>Maven 2.0.9</para></listitem>
-                  <listitem><para>JBDS (or another appropriate IDE)</para></listitem>
-                  <listitem><para>JBoss Server 4.2.3</para></listitem>
-                  <listitem><para>SVN client </para></listitem>
-                  <listitem><para>Browser</para></listitem>                  
+                  <listitem>
+                  	<para>
+                  		<ulink url="http://java.sun.com/javase/downloads/index.jsp">JDK 1.5 and higher</ulink>
+                  	</para>
+                  </listitem>
+                  <listitem>
+                  	<para>
+                  		<ulink url="http://maven.apache.org/download.html">Maven 2.0.10</ulink>
+                  	</para>
+                  </listitem>
+                  <listitem>
+                  	<para>
+                  		<ulink url="http://www.jboss.org/tools">JBoss Tools</ulink> 
+                  		(or <ulink url="http://www.eclipse.org/">Eclipse</ulink>)
+					</para>
+				  </listitem>
+                  <listitem>
+                  	<para>
+                  		<ulink url="http://www.jboss.org/jbossas/downloads/">JBoss Server</ulink> (4.2.3.GA, 5.0.x.GA)  
+                  	</para>
+                  </listitem>
+                  <listitem>
+                  	<para>
+                  		<ulink url="http://subversion.tigris.org/">SVN client</ulink>
+                  	</para>
+                  </listitem>
             </itemizedlist>
       </section>
       
       <section>
             <title>Installation</title>
-            <para>Follow the next steps for downloading and installing the Real World demo.</para>
-            
+            <para>
+            	Once you have configured the environment you can install the Photo Album application:
+            </para>
             <itemizedlist>
-                  <listitem><para><emphasis>Checkout the project using installed SVN client</emphasis>. 
-                        URL of repository: <code>https://svn.jboss.org/repos/richfaces/trunk/test-applications/realworld/</code>;</para></listitem>
-                  <listitem><para><emphasis>Build the project</emphasis>. 
-                        Open command line console, point to the folder with checkouted project and tell Maven: <code>mvn clean install eclipse:eclipse</code>;</para></listitem>
-                  <listitem><para><emphasis>Import the project into your IDE</emphasis>. 
-                        Steps to follow for JBDS users: click <code>File</code> -> <code>Import</code> and select <code>Existing project into Workspace</code> as import source; 
+                  <listitem>
+                  	<para>
+                  		<emphasis>Checkout the project</emphasis>
+                    </para>
+                    <programlisting role="XML"><![CDATA[svn co http://anonsvn.jboss.org/repos/richfaces/trunk/examples/photoalbum/]]></programlisting>
+                  </listitem>
+                  <listitem>
+                  	<para>
+                  		<emphasis>Build the project</emphasis>. 
+                        Open command line console, 
+                        point to the folder with checkouted project,
+                        and tell Maven:
+                     </para>
+                     <programlisting role="XML"><![CDATA[mvn clean install eclipse:eclipse -Dwtpversion=1.5]]></programlisting>
+                  </listitem>
+                  <listitem>
+                  	<para>
+                  		<emphasis>Import the project into your IDE</emphasis>. 
+                  		You can just deploy Photo Album application on the server, but
+                  		the convenient way is to import the project into your IDE. 
+                        We recommend Eclipse with JBoss Tools since this bundle is more preferable to 
+                        ensure rapid development process with Seam and RichFaces.
+                        You can find a step-by-step tutorial &quot;Importing existing projects&quot; 
+                        at the 
+<ulink url="http://help.eclipse.org/ganymede/topic/org.eclipse.platform.doc.user/tasks/tasks-importproject.htm">Eclipse documentation</ulink> page 
+or simply in the <emphasis>Help</emphasis> &gt; <emphasis>Help Contents</emphasis> of the Eclipse. 
+                        <!-- 
+                        Steps to follow for JBDS users: 
+                        click <code>File</code> -> <code>Import</code> and select <code>Existing project into Workspace</code> as import source; 
                         in <code>Import Project</code> window click <code>Browse</code> button and point to the realworld project folder; сlick <code>OK</code>.  
-                        Three SNAPSHOTS (<code>ear</code>, <code>ejb</code>, <code>web</code>) should appear in <code>Projects</code> area. 
-                        Checkmark them all and click <code>Finish</code>. These projects appear in JBDS <code>Package Explorer</code> window.</para></listitem>
-                  <listitem><para><emphasis>Register the pass to project images</emphasis>. Open project <code>web.xml</code> file (<code>realworld-web-1.0-SNAPSHOT/src/main/webapp/WEB-INF/web.xml</code>) and change <code>uploadRoot</code> parameter value from <code>E:/Andrey/Upload/</code> to yours e.g. <code>D:/realworld/Upload/</code>.</para></listitem>
-                  <listitem><para><emphasis>Run realworld-ear-1.0-SNAPSHOT</emphasis> on the <code>JBoss 4.2. Server</code> under 3 Runtime (those who prefer manual job should deploy and start <code>realworld.ear</code> file).</para></listitem>
-                  <listitem><para>Browse to <code>http:/localhost:8080/realworld</code>.</para></listitem>                  
+                        -->
+                        As the result three modules of Photo Album project appear in the Workspace:
+                    </para>
+                    <figure>
+        				<title>Modules of Photo Album in the Workspace</title>
+        				<mediaobject> 
+            				<imageobject>
+                				<imagedata fileref="images/modulesList.png"/>
+            				</imageobject>
+        				</mediaobject>
+    				</figure>
+                  </listitem>
+                  <listitem>
+                  	<para>
+                  		<emphasis>Add JBoss AS</emphasis>. 
+                  		Now you need to add JBoss Application Server runtime.
+                  		
+                  		Detailed instructions on how you can do it are given in the
+                  		<ulink url="http://download.jboss.org/jbosstools/nightly-docs/en/as/html/runtimes_servers.html">Runtimes and Servers in the JBoss AS plugin</ulink>
+                  		chapter from the <ulink url="http://download.jboss.org/jbosstools/nightly-docs/en/as/html/index.html">JBoss Server Manager Reference Guide</ulink>. 
+                  	</para>
+                  </listitem>
+                  <listitem>
+                  	<para>
+                  		<emphasis>Run photoalbum-ear-1.0-SNAPSHOT</emphasis> on the JBoss Application Server
+                  		you have just installed.
+                  	</para>
+                  </listitem>
+                  <listitem>
+                  	<para>
+                  		Browse to <code>http:/localhost:8080/photoalbum</code>.
+                  	</para>
+                  </listitem>                  
             </itemizedlist>
       </section>
       
