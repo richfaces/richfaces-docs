@@ -80,8 +80,8 @@ function delAddCi(){
 		svn status | grep '^\!' | grep -o -P [^\!^" ""\n\r?"]+ | while read -r;do svn rm $REPLY >> $LOG 2>&1; done || die "Something wrong with svn remove. See the log file"
 		
 		#Try to commit files
-		printLog "Try to commit files..."
-		svn commit --username $USER --password $PASS --message $MESSAGE >> $LOG 2>&1 || die "Something wrong with svn commit. See the log file"
+		#printLog "Try to commit files..."
+		#svn commit --username $USER --password $PASS --message $MESSAGE >> $LOG 2>&1 || die "Something wrong with svn commit. See the log file"
 	done
 }
 
