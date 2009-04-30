@@ -47,11 +47,9 @@
             <emphasis role="bold">Example:</emphasis>
         </para>
         <programlisting role="XML"><![CDATA[...
-<rich:layout>
- <rich:layoutPanel position="center">
-        <!--center-->
-</rich:layoutPanel>     
-</rich:layout>
+<rich:page> 
+  <!-- page body -->
+</rich:page>
 ...]]></programlisting>
     </section>
     <section>
@@ -60,16 +58,16 @@
         <para>
             <emphasis role="bold">Example:</emphasis>
         </para>
-        <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmllayoutPanel;
+        <programlisting role="JAVA"><![CDATA[import org.richfaces.component.html.HtmlPage;
 ...
-HtmllayoutPanel mylayoutPanel = new HtmllayoutPanel();
+HtmlPage myHtmlPage = new HtmlPage();
 ...]]></programlisting>
     </section>
     <section>
         <title>Details of Usage</title>
         <para>The <emphasis role="bold"><property>&lt;rich:page&gt;</property></emphasis>
             
-            component together with the <emphasis role="bold"><property>&lt;rich:laout&gt;</property></emphasis> component  provides
+            component together with the <emphasis role="bold"><property>&lt;rich:layout&gt;</property></emphasis> component  provides
             a full-fledged mechanism for markup creation. </para>
         
         
@@ -87,7 +85,7 @@ HtmllayoutPanel mylayoutPanel = new HtmllayoutPanel();
                 <listitem><para>&quot;html-3.2&quot;</para></listitem>
 
             </itemizedlist>
-        
+        <para>The default value is &quot;html&quot;.</para>
             <para>
             The <emphasis><property>&quot;contentType&quot;</property></emphasis> allows to specify the type of the content and encoding for the page. 
         </para>
@@ -102,8 +100,7 @@ HtmllayoutPanel mylayoutPanel = new HtmllayoutPanel();
 </para>
         
 <programlisting role="XML"><![CDATA[...
-<rich:page pageTitle="The title of the page" markupType="xhtml"
-	contentType="text/html; charset=utf-8">
+<rich:page pageTitle="The title of the page" markupType="xhtml">
 	<f:facet name="pageHeader">
 		<meta content="The rich:page component" name="keywords" />
 		<link rel="shortcut icon" href="/images/favicon.ico" />
@@ -114,8 +111,8 @@ HtmllayoutPanel mylayoutPanel = new HtmllayoutPanel();
 </rich:page>
 ...]]></programlisting> 
         
-        <para>The implementation of the <emphasis role="bold"><property>&lt;rich:page&gt;</property></emphasis> component provides three facets that you can use to arrange the layout of the page: &quot;header&quot;, &quot;subheader&quot;,  &quot;sidebar&quot;  and &quot;footer&quot;. Their behavior is quite self-explanatory. </para>
-        <para>The position of the panel rendered by a &quot;sidebar&quot; facet can be set with the <emphasis><property>&quot;sidebarPosition&quot;</property></emphasis> attribute that can take either &quot;right&quot; or &quot;left&quot; values, you can also specify width for this facet with  the &quot;sidebarWidth&quot; attribute. </para>
+        <para>The implementation of the <emphasis role="bold"><property>&lt;rich:page&gt;</property></emphasis> component provides four facets that you can use to arrange the layout of the page: &quot;header&quot;, &quot;subheader&quot;,  &quot;sidebar&quot;  and &quot;footer&quot;. Their behavior is quite self-explanatory. </para>
+        <para>The position of the panel rendered by the &quot;sidebar&quot; facet can be set with the <emphasis><property>&quot;sidebarPosition&quot;</property></emphasis> attribute that can take either &quot;right&quot; or &quot;left&quot; as values, you can also specify the width for this facet with  the <emphasis><property>&quot;sidebarWidth&quot;</property></emphasis> attribute. </para>
        <para>
            <emphasis role="bold">Example:</emphasis>
        </para>
@@ -143,7 +140,10 @@ HtmllayoutPanel mylayoutPanel = new HtmllayoutPanel();
         
         
         <para>Several templates are available for the <emphasis role="bold"><property>&lt;rich:page&gt;</property></emphasis> component. A template can be activated with the <emphasis><property>&quot;theme&quot;</property></emphasis> attribute.</para>
-        <para>The template defines the way the <emphasis role="bold"><property>&lt;rich:page&gt;</property></emphasis> is rendered. Standard renderer(default) of the <emphasis role="bold"><property>&lt;rich:page&gt;</property></emphasis> </para>
+       
+        <para>The theme defines the way the <emphasis role="bold"><property>&lt;rich:page&gt;</property></emphasis> is rendered. Default renderer(default theme) of the <emphasis role="bold"><property>&lt;rich:page&gt;</property></emphasis> has no mappings to skin parameters and just provides CSS classes for the page part. However, the <property>simple</property> theme, which is an extension of the default theme, has mappings to skin parameters and adds the RichFaces skinning for the page elements. </para>
+        
+        <para>As a whole, RichFaces provides 4 themes for the <emphasis role="bold"><property>&lt;rich:page&gt;</property></emphasis> component out-of-the-box: &quot;simple&quot;, &quot;violetRays&quot;, &quot;oldschool&quot;, &quot;smooth&quot;. The <ulink url="http://www.jboss.org/community/docs/DOC-13635">Creating a Theme for &lt;rich:page&gt;</ulink> article tells how you can create your custom theme for the <emphasis role="bold"><property>&lt;rich:page&gt;</property></emphasis> component. </para>
         
     </section>
     
@@ -185,6 +185,313 @@ HtmllayoutPanel mylayoutPanel = new HtmllayoutPanel();
                 </tbody>
             </tgroup>
         </table>
+    </section>
+    
+    <section>
+        <title>Skin Parameters for the &quot;simple&quot; theme</title>
+        <table>
+            <title>Skin parameters  for the &lt;body/&gt; HTML element</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    
+                </tbody>
+            </tgroup>
+        </table>
+        
+        
+        
+        <table>
+            <title>Skin parameters  for the whole page</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    
+                </tbody>
+            </tgroup>
+        </table>
+        
+        
+        <table>
+            <title>Skin parameters  for the header</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalSizeFont </entry>
+                        <entry>border-bottom-color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>headerGradientColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>trimColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>headerTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    
+                    
+                    <row>
+                        <entry>headerSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+
+                </tbody>
+            </tgroup>
+        </table>
+        
+        
+        <table>
+            <title>Skin parameters  for the content area of the page</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalBackgroundColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>panelBorderColor</entry>
+                        <entry>border-top-color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>trimColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    
+                </tbody>
+            </tgroup>
+        </table>
+        
+        
+        <table>
+            <title>Skin parameters  for the footer</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>generalBackgroundColor</entry>
+                        <entry>border-top-color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>panelBorderColor</entry>
+                        <entry>background-color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    
+                </tbody>
+            </tgroup>
+        </table>
+        
+        
+        
+        <table>
+            <title>Skin parameters  for the side panel</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+
+                    <row>
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>generalTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>generalSizeFont</entry>
+                        <entry>font-size</entry>
+                    </row>
+                    
+                </tbody>
+            </tgroup>
+        </table>
+        
+        
+        <table>
+            <title>Skin parameters  for h1,h2,h3 HTML tags</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    
+                    <row>
+                        <entry>headerFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>headTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                      
+                </tbody>
+            </tgroup>
+        </table>
+        
+        
+        
+        <table>
+            <title>Skin parameters  for p,ul,ol HTML tags</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    
+                    <row>
+                        <entry>generalFamilyFont</entry>
+                        <entry>font-family</entry>
+                    </row>
+                    
+                    <row>
+                        <entry>controlTextColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    
+                </tbody>
+            </tgroup>
+        </table>
+        
+        
+        
+        <table>
+            <title>Skin parameters  for the hovered link</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    
+                    <row>
+                        <entry>hoverLinkColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    
+                                   
+                </tbody>
+            </tgroup>
+        </table>
+        
+        
+        
+        <table>
+            <title>Skin parameters  for the visited link</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Skin parameters</entry>
+                        <entry>CSS properties</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    
+                    <row>
+                        <entry>visitedLinkColor</entry>
+                        <entry>color</entry>
+                    </row>
+                    
+                    
+                </tbody>
+            </tgroup>
+        </table>
+        
+      
     </section>
     
     
@@ -239,5 +546,14 @@ HtmllayoutPanel mylayoutPanel = new HtmllayoutPanel();
             </tgroup>
         </table>    
   
+    </section>
+    <section>
+        <title>Relevant Resources Links</title>
+        <para>
+            <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/layouts.jsf"
+                >On the component Live Demo page</ulink> you can see the example of <emphasis role="bold">
+                    <property>&lt;rich:page&gt;</property>
+                </emphasis> component usage and sources for the given example. </para>
+        <para>The <ulink url="http://www.jboss.org/community/docs/DOC-13336">Layout components for RichFaces 3.3.1</ulink> on  the JBoss.org Wiki</para>
     </section>
 </section>
