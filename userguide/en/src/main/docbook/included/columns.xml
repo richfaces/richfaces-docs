@@ -105,7 +105,7 @@ HtmlColumn myColumns = new HtmlColumn();
                                         <property>&quot;columns&quot;</property>
                               </emphasis> attribute defines the count of columns. </para>
                     <para> The <emphasis>
-                                        <property>&quot;rowspan&quot;</property>
+                                 <property>&quot;rowspan&quot;</property>
                               </emphasis> attribute defines the number of rows to be displayed. If
                               the value of this attribute is zero, all remaining rows in the table
                               are displayed on a page. </para>
@@ -309,6 +309,22 @@ HtmlColumn myColumns = new HtmlColumn();
 </c:forEach>
 ...]]></programlisting>
                     </note>
+
+
+<note><title>Note:</title>
+          <para>Since 3.3.0GA <emphasis role="bold"><property>&lt;rich:columns&gt;</property></emphasis> requires explicit definition of <emphasis><property>&quot;id&quot;</property></emphasis> for children components to ensure that  decode process works properly.
+                    The  example of how you can define unique <emphasis><property>&quot;id&quot;</property></emphasis> for children component: </para>
+           <programlisting role="XML"><![CDATA[...
+<rich:columns value="#{bean.columns}" var="col" index="ind" ....>
+<h:inputText id="input#{ind}" value="">
+<a4j:support id="support#{ind}" event="onchange" reRender="someId" />
+</h:inputText>
+</rich:columns> 
+...]]></programlisting> 
+          <para>Only if <emphasis><property>&quot;id&quot;</property></emphasis> defined as shown above Ajax after onchange event will be processed as expected. </para>      
+
+</note>
+
 
 
                     <para> Information about sorting and filtering you can find <link
