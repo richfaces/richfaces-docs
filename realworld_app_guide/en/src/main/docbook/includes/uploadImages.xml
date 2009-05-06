@@ -2,12 +2,12 @@
 <section>
 	<title>Upload Images</title>
     <para>
-    	In the previous chapter we have discussed how to create Navigation Panels
+    	In the previous chapter we have discussed how to create Navigation Trees
     	that represent &quot;Shelves - Albums&quot; hierarchy. 
     	Now it is time to upload images.           	
     </para>
     <para>
-    	The implementation of <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> 
+          The <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component  
     	in the Photo Album application uses the embedded Flash module 
     	that adds extra functionality to the component:
     </para>
@@ -23,8 +23,7 @@
 		</listitem>
     </itemizedlist>
     <para>
-       The &quot;/includes/fileUpload/fileUploader.xhtml&quot; page
-       is responsible for the photos uploading functionality:   
+          The code for the <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> is contained in the &quot;/includes/fileUpload/fileUploader.xhtml&quot; page:   
     </para>
     <programlisting role="XML"><![CDATA[...
 <rich:fileUpload
@@ -46,7 +45,7 @@
 	</para>
 	<para>
     	The <emphasis><property>&quot;fileUploadListener&quot;</property></emphasis> attribute 
-    	represents the action listener method <code>listener()</code> of the <code>fileUploadManager</code>
+    	represents the action listener method <code>listener()</code> of the <code>FileUploadManager</code>
     	class that is notified after file is uploaded.
     	This method makes the main job on the upload: 
     </para>
@@ -85,7 +84,7 @@
 ...]]></programlisting>
 	<para>
 		The <code>listener()</code> method is called at server side after every file uploaded 
-		and saves files in a temporary folder or in RAM.  
+		and server saves these files in a temporary folder or in RAM depending on configuration.  
 		In the Photo Album application the uploaded files are stored in the temporary folder
 		because the value of the <code>createTempFile</code> parameter is set to <code>true</code>. 
 	    See the code from the <code>web.xml</code> descriptor:
@@ -93,22 +92,45 @@
 
 <programlisting role="XML"><![CDATA[...
 <filter>
-	<filter-name>Seam Filter</filter-name>
-	<filter-class>org.jboss.seam.servlet.SeamFilter</filter-class>
-	<init-param>
-		<param-name>createTempFiles</param-name>
-		<param-value>true</param-value>
-	</init-param>
-	...
+      <filter-name>Seam Filter</filter-name>
+      <filter-class>org.jboss.seam.servlet.SeamFilter</filter-class>
+      <init-param>
+            <param-name>createTempFiles</param-name>
+            <param-value>true</param-value>
+      </init-param>
+      <init-param>
+            <param-name>maxRequestSize</param-name>
+            <param-value>20000000</param-value>
+      </init-param>
 </filter>
 ...]]></programlisting>
        <para>
-             After the image is stored  in the temporary folder
-             the <code>listener()</code> method creates an <code>Image</code> object 
+             The <code>listener()</code> method creates an <code>Image</code> object 
              and extracts all image metadata such as Camera name, Image size, etc. 
-             It saves six different sizes of the photo in order to create thumbnails 
-             and perform images scaling. 
+             It performs scaling of an image and saves six different image's dimentions in order to create thumbnails. 
              After that the photo is added into the database 
 			 the temporary file is removed.
        </para>
+      
+      <para>
+            Vizit following pages at RichFaces Live Demo for more information, examples and sources on the components used in the application and described in this chapter:
+      </para>
+      
+      <itemizedlist>
+            <listitem>
+                  <para>
+                        <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/fileUpload.jsf?c=fileUpload">FileUpload</ulink> page for the <emphasis role="bold"><property>&lt;rich:fileUpload&gt;</property></emphasis> component;
+                  </para>     
+            </listitem>
+            
+            <listitem>
+                  <para>
+                        <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/support.jsf?c=support">AjaxSupport</ulink> for the <emphasis role="bold"><property>&lt;a4j:suport&gt;</property></emphasis> component.
+                  </para>     
+            </listitem>
+            
+            
+      </itemizedlist>   
+      
+      
 </section>

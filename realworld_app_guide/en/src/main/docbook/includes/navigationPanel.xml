@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section id="navigationPanel" xreflabel="navigationPanel">
+<section id="navigationTree" xreflabel="navigationTree">
 	<?dbhtml filename="navigationPanel.html"?>
-            <title>Navigation panel</title>
+            <title>Navigation tree</title>
         		<para>
                         The <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component takes one of the main places  
                         in the <property>Photo Album</property> and is tightly bounded with the application logic. 
@@ -11,11 +11,11 @@
                         is used to group thematic albums and may contain as many albums as needed.   
                   </para>
                   <para>
-                        There are two types of navigation panel in the application: for a registered user and for a guest.
+                        There are two types of navigation tree in the application: for a registered user and for a guest.
                         The difference between them is that the first one has a context menu and drag-and-drop possibility.
                   </para>
             <section>
-                  <title>Navigation panel for a guest</title>
+                  <title>Navigation tree for a guest</title>
       
                   <!--para>
                         The <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component is designed for 
@@ -23,7 +23,7 @@
                         The component also supports built-in drag-and-drop functionality.
                   </para-->
                   <para>
-                  	Navigation panel for a guest is represented as a simple 
+                  	Navigation tree for a guest is represented as a simple 
                   	<emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component.
                   </para>
                   <para>
@@ -41,7 +41,7 @@
                   	According to the &quot;Shelves - Albums&quot; hierarchy we need two nested
                   	<emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> components.
                   	The first one iterates over the Shelves collection 
-                  	that is returned from the <code>getPredefinedShelves()</code> method:
+                  	that is returned from the <code>getPredefinedShelves()</code> method of <code>ShelfManager.java</code> class:
                   </para>
                   <programlisting role="JAVA"><![CDATA[...
 public List<Shelf> getPredefinedShelves() {
@@ -58,7 +58,7 @@ public List<Shelf> getPredefinedShelves() {
 					<emphasis><property>&quot;var&quot;</property></emphasis> attribute.
 					The  <emphasis><property>&quot;var&quot;</property></emphasis> attribute
 					is used to get access to the data object of the current collection element Shelf, 
-					so it is possible to output any necessary data: 
+					so it is possible to output any necessary data. Let's see the <code>src/main/webapp/includes/index/tree.xhtml</code> file: 
 				</para>
                   <!-- 
                         The <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> component accepts 
@@ -116,53 +116,49 @@ public List<Shelf> getPredefinedShelves() {
                   </para-->
                   
                   <programlisting role="XML"><![CDATA[...
-<rich:tree
-		adviseNodeOpened="#{treeManager.adviseNodeSelected}"
-		adviseNodeSelected="#{treeManager.adviseNodeSelected}"
-		ajaxSubmitSelection="false" id="PreDefinedTree"
-		treeNodeVar="treeNode" switchType="client"
-		iconCollapsed="/img/shell/tree_icon_plus.png"
-		iconExpanded="/img/shell/tree_icon_minus.png"
-		showConnectingLines="false">
-			<rich:treeNodesAdaptor nodes="#{shelfManager.getPredefinedShelves()}" var="shelf">
-				<rich:treeNode style="cursor:pointer" reRender="treeform,mainArea"
-					selectedClass="tree-selected-node">
-				<f:facet name="icon">
-					<h:graphicImage style="border: none" value="/img/shell/tree_icon_shelf.png">
-							<a4j:support reRender="treeform,mainArea" event="onclick" actionListener="#{controller.showShelf(shelf)}" similarityGroupingId="sel" />
-					</h:graphicImage>
-				</f:facet>
-				<a4j:outputPanel  >
-					<h:outputText style="cursor:pointer" value="#{shelf.name}" />
-					<h:outputText value=" :: " />
-					<strong>#{shelf.unvisitedImages.size()}</strong> new
-					<a4j:support reRender="treeform,mainArea" event="onclick" actionListener="#{controller.showShelf(shelf)}" similarityGroupingId="sel" />
-				</a4j:outputPanel>
-				</rich:treeNode>
-				<rich:treeNodesAdaptor var="album"
-					nodes="#{shelf.albums}">
-					<rich:treeNode style="cursor:pointer" reRender="treeform,mainArea"
-						selectedClass="tree-selected-node"
-						icon="img/shell/tree_icon_album.png">
-						<f:facet name="iconLeaf">
-							<h:graphicImage style="border: none" value="img/shell/tree_icon_album.png">
-									<a4j:support reRender="treeform,mainArea" event="onclick" actionListener="#{controller.showAlbum(album)}" similarityGroupingId="sel" />
-							</h:graphicImage>
-						</f:facet>
-						<a4j:outputPanel>
-							<h:outputText style="cursor:pointer" value="#{album.name}" />
-							<h:outputText value=" :: " />
-								<strong>#{album.unvisitedImages.size()}</strong> new
-						<a4j:support reRender="treeform,mainArea" event="onclick" actionListener="#{controller.showAlbum(album)}" similarityGroupingId="sel" />
-						</a4j:outputPanel>
-				</rich:treeNode>
-				</rich:treeNodesAdaptor>
-			</rich:treeNodesAdaptor>
-		</rich:tree>
+<rich:tree adviseNodeOpened="#{treeManager.adviseNodeSelected}"
+            adviseNodeSelected="#{treeManager.adviseNodeSelected}"
+            ajaxSubmitSelection="false" id="PreDefinedTree"
+            treeNodeVar="treeNode" switchType="client"
+            iconCollapsed="/img/shell/tree_icon_plus.png"
+            iconExpanded="/img/shell/tree_icon_minus.png"
+            showConnectingLines="false">
+      <rich:treeNodesAdaptor nodes="#{shelfManager.getPredefinedShelves()}" var="shelf">
+            <rich:treeNode style="cursor:pointer" reRender="treePanel,mainArea" selectedClass="tree-selected-node">
+                  <f:facet name="icon">
+                        <h:graphicImage style="border: none" value="/img/shell/tree_icon_shelf.png">
+                              <a4j:support reRender="treePanel, mainArea" event="onclick" actionListener="#{controller.showShelf(shelf)}" similarityGroupingId="sel" />
+                        </h:graphicImage>
+                  </f:facet>
+                  <a4j:outputPanel  >
+                        <h:outputText style="cursor:pointer" value="#{shelf.name}" />
+                        <h:outputText value=" :: " />
+                        <strong>#{shelf.unvisitedImages.size()}</strong> new
+                        <a4j:support reRender="treePanel, mainArea" event="onclick" actionListener="#{controller.showShelf(shelf)}" similarityGroupingId="sel" />
+                  </a4j:outputPanel>
+            </rich:treeNode>
+            
+            <rich:treeNodesAdaptor var="album" nodes="#{shelf.albums}">
+                  <rich:treeNode style="cursor:pointer" reRender="treePanel,mainArea" selectedClass="tree-selected-node" icon="img/shell/tree_icon_album.png">
+                        <f:facet name="iconLeaf">
+                              <h:graphicImage style="border: none" value="img/shell/tree_icon_album.png">
+                                    <a4j:support reRender="treePanel, mainArea" event="onclick" actionListener="#{controller.showAlbum(album)}" similarityGroupingId="sel" />
+                              </h:graphicImage>
+                        </f:facet>
+                        <a4j:outputPanel>
+                              <h:outputText style="cursor:pointer" value="#{album.name}" />
+                              <h:outputText value=" :: " />
+                              <strong>#{album.unvisitedImages.size()}</strong> new
+                              <a4j:support reRender="treePanel, mainArea" event="onclick" actionListener="#{controller.showAlbum(album)}" similarityGroupingId="sel" />
+                        </a4j:outputPanel>
+                  </rich:treeNode>
+            </rich:treeNodesAdaptor>
+      </rich:treeNodesAdaptor>
+</rich:tree>
 ...]]></programlisting>
 
                   <para>
-                        The image below shows how the navigation panel for a guest is rendered on the page.        
+                        The image below shows how the navigation tree for a guest is rendered on the page.        
                   </para>
                   
                   <figure>
@@ -177,9 +173,9 @@ public List<Shelf> getPredefinedShelves() {
 </section>
             
             <section>
-                  <title>Navigation panel for a registered user</title>
+                  <title>Navigation tree for a registered user</title>
                   <para>
-                  	As it was mentioned before a navigation panel for a registered user has
+                  	As it was mentioned before a navigation tree for a registered user has
                   	two main features: drag-and-drop and context menu. Context menu is described 
                   	in the <link linkend="contextMenu">&quot;Context menu&quot;</link> chapter.
                   </para>
@@ -220,23 +216,32 @@ public List<Shelf> getPredefinedShelves() {
                         For this purpose we use previously mentioned 
                         <emphasis><property>&quot;dragValue&quot;</property></emphasis>,
                         <emphasis><property>&quot;dragType&quot;</property></emphasis>
-                         attributes:
+                        attributes. Let's have a look at the <code>src/main/webapp/includes/index/tree.xhtml</code> file: 
                   </para>
                   <programlisting role="XML"><![CDATA[<rich:treeNodesAdaptor var="album" nodes="#{shelf.albums}">
-	<rich:treeNode dragType="album" dragValue="#{album}" reRender="mainArea, treeform">
-		...
-	</rich:treeNode>
+      <rich:treeNode style="cursor:pointer" 
+                        reRender="mainArea, treePanel" 
+                        dragType="album" 
+                        dragValue="#{album}" 
+                        dropValue="#{album}" 
+                        acceptedTypes="image" 
+                        selectedClass="tree-selected-node" 
+                        icon="img/shell/tree_icon_album.png">
+            ...
+            <rich:dndParam name="label" type="drag" value="#{album.name}" />
+            ...
+      </rich:treeNode>
 </rich:treeNodesAdaptor>
 ]]></programlisting>
               <para>
                     To provide drop functionality for the marked albums, we should mark Shelves as drop zones in the application code too. 
                     For this purpose we add the <emphasis><property>&quot;dropValue&quot;</property></emphasis> and
-                    <emphasis><property>&quot;acceptedTypes&quot;</property></emphasis> attributes to the &quot;Shelf&quot; node:
+                    <emphasis><property>&quot;acceptedTypes&quot;</property></emphasis> attributes to the &quot;Shelf&quot; node in the same <code>src/main/webapp/includes/index/tree.xhtml</code> file:
               </para>
                   <programlisting role="XML"><![CDATA[<rich:treeNodesAdaptor nodes="#{shelfManager.getUserShelves()}" var="shelf">
-	<rich:treeNode acceptedTypes="album" dropValue="#{shelf}" reRender="mainArea, treeform">
-		...
-	</rich:treeNode>
+      <rich:treeNode style="cursor:pointer" acceptedTypes="album" dropValue="#{shelf}" reRender="mainArea, treePanel" selectedClass="tree-selected-node">
+            ...
+      </rich:treeNode>
 </rich:treeNodeAdaptor>]]></programlisting>
               <para>
                     The <emphasis><property>&quot;acceptedTypes&quot;</property></emphasis> attribute tells the &quot;Shelf&quot; node 
@@ -246,14 +251,27 @@ public List<Shelf> getPredefinedShelves() {
                     so the &quot;Shelf&quot; node can accept it.
               </para>
               <para>
-              	Finally we need to specify a listener in the <emphasis><property>&quot;dropListener&quot;</property></emphasis>
-              	attribute in order to process drop on the server side:  
+                    Finally in order to process drop on the server side we need to specify a listener for the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> in the <emphasis><property>&quot;dropListener&quot;</property></emphasis>
+                    attribute (<code>src/main/webapp/includes/index/tree.xhtml</code> file):  
               </para>
-              <programlisting role="XML"><![CDATA[<rich:tree dragIndicator="dragIndicator" dropListener="#{dndManager.processDrop}">
-	...
-</rich:tree>]]></programlisting>       
+                  <programlisting role="XML"><![CDATA[<rich:tree adviseNodeOpened="#{treeManager.adviseNodeSelected}"
+                  adviseNodeSelected="#{treeManager.adviseNodeSelected}"
+                  ajaxSubmitSelection="false" dragIndicator="dragIndicator" 
+                  treeNodeVar="treeNode" switchType="client"
+                  iconCollapsed="/img/shell/tree_icon_plus.png"
+                  iconExpanded="/img/shell/tree_icon_minus.png"
+                  dropListener="#{dndManager.processDrop}"
+                  showConnectingLines="false">
+            ...
+</tree>]]></programlisting>
               <para>
-                    The <code>processDrop()</code> method is shown in the listing below: 
+                    The code for 	the <emphasis role="bold"><property>&lt;rich:dragIndicator&gt;</property></emphasis> looks like the following:
+              </para>    
+                  <programlisting role="XML"><![CDATA[<rich:dragIndicator id="dragIndicator" />]]></programlisting>   
+                  
+                  
+              <para>
+                    The <code>processDrop()</code> method of <code>DnDManager.java</code> class is shown in the listing below: 
               </para>
                   <programlisting role="JAVA"><![CDATA[...
 public void processDrop(DropEvent dropEvent) {
@@ -276,23 +294,25 @@ public void processDrop(DropEvent dropEvent) {
 }
 ...]]></programlisting>
 			<para>
-				Here is	the whole example of the &quot;Navigation panel for a registered user&quot;:
+				Here is	the whole example of the &quot;Navigation tree for a registered user&quot;:
 			</para>
-<programlisting role="XML"><![CDATA[<rich:tree 
+                  <programlisting role="XML"><![CDATA[<h:panelGroup id="tree" rendered="#{identity.hasRole('admin')}" layout="block">
+		<a4j:commandLink actionListener="#{controller.selectShelves()}" reRender="mainArea, treePanel"><h2><h:outputText  value="My shelves:"/></h2></a4j:commandLink><br/>
+	<rich:dragIndicator
+			id="dragIndicator" />
+		<rich:tree 
+			adviseNodeOpened="#{treeManager.adviseNodeSelected}"
+			adviseNodeSelected="#{treeManager.adviseNodeSelected}"
 			ajaxSubmitSelection="false" dragIndicator="dragIndicator" 
 			treeNodeVar="treeNode" switchType="client"
 			iconCollapsed="/img/shell/tree_icon_plus.png"
 			iconExpanded="/img/shell/tree_icon_minus.png"
 			dropListener="#{dndManager.processDrop}"
 			showConnectingLines="false">
-			<rich:treeNodesAdaptor nodes="#{shelfManager.getUserShelves()}"
-				var="shelf">
-				<rich:treeNode style="cursor:pointer" acceptedTypes="album" dropValue="#{shelf}"
-                     reRender="mainArea, treeform"
-					selectedClass="tree-selected-node">
+			 
 				<f:facet name="icon">
 					<h:graphicImage style="border: none" value="/img/shell/tree_icon_shelf.png">
-							<a4j:support reRender="treeform, mainArea" event="onclick" actionListener="#{controller.showShelf(shelf)}" similarityGroupingId="sel" />
+							<a4j:support reRender="treePanel, mainArea" event="onclick" actionListener="#{controller.showShelf(shelf)}" similarityGroupingId="sel" />
 					</h:graphicImage>
 				</f:facet>
     			<ui:include src="/includes/contextMenu/CMForShelf.xhtml" >
@@ -302,20 +322,20 @@ public void processDrop(DropEvent dropEvent) {
 					<h:outputText style="cursor:pointer" value="#{shelf.name}" />
 					<h:outputText value=" :: " />
 					<strong>#{shelf.unvisitedImages.size()}</strong> new
-					<a4j:support reRender="treeform, mainArea" event="onclick" actionListener="#{controller.showShelf(shelf)}" similarityGroupingId="sel" />
+					<a4j:support reRender="treePanel, mainArea" event="onclick" actionListener="#{controller.showShelf(shelf)}" similarityGroupingId="sel" />
 				</a4j:outputPanel>
 				</rich:treeNode>
 
 				<rich:treeNodesAdaptor var="album"
 					nodes="#{shelf.albums}">
-					<rich:treeNode style="cursor:pointer" reRender="mainArea, treeform" dragType="album"
+					<rich:treeNode style="cursor:pointer" reRender="mainArea, treePanel" dragType="album"
 						dragValue="#{album}" dropValue="#{album}"
 						acceptedTypes="image"
 						selectedClass="tree-selected-node"
 						icon="img/shell/tree_icon_album.png">
 						<f:facet name="iconLeaf">
 							<h:graphicImage style="border: none" value="img/shell/tree_icon_album.png">
-									<a4j:support reRender="treeform, mainArea" event="onclick" actionListener="#{controller.showAlbum(album)}" similarityGroupingId="sel" />
+									<a4j:support reRender="treePanel, mainArea" event="onclick" actionListener="#{controller.showAlbum(album)}" similarityGroupingId="sel" />
 							</h:graphicImage>
 						</f:facet>
 						<ui:include src="/includes/contextMenu/CMForAlbum.xhtml" >
@@ -326,14 +346,15 @@ public void processDrop(DropEvent dropEvent) {
 							<h:outputText style="cursor:pointer" value="#{album.name}" />
 							<h:outputText value=" :: " />
 								<strong>#{album.unvisitedImages.size()}</strong> new
-						<a4j:support reRender="treeform, mainArea" event="onclick" actionListener="#{controller.showAlbum(album)}" similarityGroupingId="sel" />
+						<a4j:support reRender="treePanel, mainArea" event="onclick" actionListener="#{controller.showAlbum(album)}" similarityGroupingId="sel" />
 						</a4j:outputPanel>
 				</rich:treeNode>
 
 				</rich:treeNodesAdaptor>
 			</rich:treeNodesAdaptor>
 
-</rich:tree>]]></programlisting>       
+		</rich:tree>
+		</h:panelGroup>]]></programlisting>       
               <para>
                     The image below shows how the described above drag-and-drop features are rendered in the Photo Album.  
               </para>
@@ -345,6 +366,38 @@ public void processDrop(DropEvent dropEvent) {
                               </imageobject>
                         </mediaobject>
                   </figure>
+                  <para>
+                        Vizit following pages at RichFaces Live Demo for more information, examples and sources on the components used in the application and described in this chapter:
+                  </para>
+                  
+                  <itemizedlist>
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/tree.jsf?c=tree">Tree</ulink> for the <emphasis role="bold"><property>&lt;rich:tree&gt;</property></emphasis> component;
+                               </para>     
+                        </listitem>
+                        
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/treeNodesAdaptor.jsf?c=treeNodesAdaptor">TreeNodesAdaptor</ulink> for the <emphasis role="bold"><property>&lt;rich:treeNodesAdaptor&gt;</property></emphasis> component; 
+                              </para>     
+                        </listitem>
+                        
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/dragSupport.jsf?c=dragIndicator">DragIndicator</ulink> for the <emphasis role="bold"><property>&lt;rich:dragIndicator&gt;</property></emphasis> component;
+                              </para>     
+                        </listitem>
+                        
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/dragSupport.jsf?c=dndParam">DragDropParameter</ulink> for the <emphasis role="bold"><property>&lt;rich:dndParam&gt;</property></emphasis> component.
+                              </para>     
+                        </listitem>
+                        
+                  </itemizedlist>   
+                        
+                  
             </section>
 </section>
       

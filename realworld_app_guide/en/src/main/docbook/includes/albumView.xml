@@ -14,11 +14,11 @@
                   The component is included into the page with the help of <emphasis role="bold"><property>ui:include</property></emphasis>:
             </para>
                   <programlisting role="XML"><![CDATA[...
-<ui:include src="/includes/misc/inputNumberSlider.xhtml"/>
+<ui:include src="src/main/webapp/includes/image/inputNumberSlider.xhtml"/>
 ...]]></programlisting> 
             
             <para>
-                  Now let's have a look at <code>src/main/webapp/includes/misc/inputNumberSlider.xhtml</code> file:
+                  Now let's have a look at <code>src/main/webapp/includes/image/inputNumberSlider.xhtml</code> file:
             </para>
                   <programlisting role="XML"><![CDATA[...
 <ui:composition ...>
@@ -37,73 +37,92 @@
 </ui:composition>
 ...]]></programlisting> 
               <para>
-                    On each slider position change the <emphasis role="bold"><property>a4j:support</property></emphasis> component invokes an Ajax request that passes a new set value into the <code>ImageSizeHelper.java</code> class. 
-                    This class saves new photo dimensions, processes and assigns new values to photo related attributes (a CSS class for new photo size, postfix for a new file name, image background):
+                    There is special Enumeration type that contains four predefined values for image size. Each type has a set of image related attributes such as CSS class for new photo size, postfix for a new file name, image background.
+                    The <code>setValue</code> method of the <code>ImageSizeHelper.java</code> class is triggered on each slider's position change. This method sets one of four predefined values for image size and due to slider's position.  
               </para>
+	      <programlisting role="JAVA"><![CDATA[public void setValue(int value) {
+            currentDimension = ImageDimension.getInstance(value);
+            this.value = currentDimension.getX();
+}]]></programlisting> 
+	      
+	      <para>
+	            And here is the <code>ImageDimension.java</code> class:
+	      </para>
+                 
                   <programlisting role="JAVA"><![CDATA[...
- public static enum ImageDimension {
-                  
-      SIZE_80(80), SIZE_120(120), SIZE_160(160), SIZE_200(200);
-                  
-      final static String CSS_CLASS = "preview_box_photo_";
-      final static String FILE_POSTFIX = "_small";
-      final static String IMAGE_BG = "/img/shell/frame_photo_%1$d.png";
-      final static String IMAGE_BG_STYLE = "width: %1$dpx; height: %1$dpx";
+ public enum ImageDimension {
 
-      int x;
-      String bgStyle;
-      String cssClass;
-      String imageBgSrc;
-      String filePostfix;
+	SIZE_80(80), SIZE_120(120), SIZE_160(160), SIZE_200(200), SIZE_MEDIUM(600), ORIGINAL(0);
 
-      private ImageDimension(int x) {
-            this.x = x;
-            this.bgStyle = String.format(IMAGE_BG_STYLE, x + 20);
-            cssClass = CSS_CLASS + x;
-            imageBgSrc = String.format(IMAGE_BG, (x == 160) ? 200 : x);
-            filePostfix = FILE_POSTFIX + x;
-      }
+	final static String CSS_CLASS = "preview_box_photo_";
+	final static String FILE_POSTFIX = "_small";
+	final static String IMAGE_BG = "/img/shell/frame_photo_%1$d.png";
+	final static String IMAGE_BG_STYLE = "width: %1$dpx; height: %1$dpx";
+	
+	int x;
+	String bgStyle;
+	String cssClass;
+	String imageBgSrc;
+	String filePostfix;
+
+	private ImageDimension(int x) {
+		this.x = x;
+		this.bgStyle = String.format(IMAGE_BG_STYLE, x + 20);
+		cssClass = CSS_CLASS + x;
+		imageBgSrc = String.format(IMAGE_BG, (x == 160) ? 200 : x);
+		if(x == 600){
+			filePostfix = "_medium";
+		}else if(x == 0){
+			filePostfix = "";
+		}else{
+			filePostfix = FILE_POSTFIX + x;
+		}
+	}
       ...]]></programlisting>
-                  
-                  <para>
-                        After the <code>ImageSizeHelper.java</code> is worked out  the <emphasis role="bold"><property>a4j:support</property></emphasis> component renders user photos 
+                  	      	      
+	      <para>
+	          After the <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> is worked out user photos 
                         (more exactly, the <emphasis role="bold"><property>h:panelGroup</property></emphasis> with <code>userAlbumImages</code> id  that contains user photos) 
-                        correspondingly to a new set value. Here is <code>web/src/main/webapp/includes/image/imageList.xhtml</code>:
+                        are rendered correspondingly to a new set value. Here is <code>web/src/main/webapp/includes/image/imageList.xhtml</code>:
                   </para>
                   <programlisting role="XML"><![CDATA[...
 <h:panelGroup id="userAlbumImages">		
-      <a4j:repeat id="imageList" value="#{model.images}" var="image" rows="20">
-            <h:panelGroup layout="block" styleClass="#{imageSizeHelper.currentDimension.cssClass}">
-                  <h:graphicImage styleClass="pr_photo_bg" style="#{imageSizeHelper.currentDimension.imageBgStyle}" value="#{imageSizeHelper.currentDimension.imageBg}" />
-                  <h:panelGrid cellpadding="0">
-                        <h:panelGroup>
-                              <a4j:commandLink actionListener="#{controller.showImage(image)}" reRender="mainArea, tree">					
-                                    <a4j:mediaOutput id="img"  element="img" 
-	                              createContent="#{imageLoader.paintImage}" 
-	                              style="border : 1px solid #FFFFFF;"
-	                              value="#{fileManager.transformPath(image.fullPath, imageSizeHelper.currentDimension.filePostfix)}">
-                                          <f:param value="#{imageSizeHelper.currentDimension.x}" name="x" />
-	                    <rich:dragSupport rendered="#{controller.isUserImage(image)}" reRender="mainArea, tree" id="dragSource" dragIndicator="dragIndicator"
-                                                            dragType="image" dragValue="#{image}">
-                                                <rich:dndParam id="dragParam" name="label" value="#{image.name}" />
-                                          </rich:dragSupport>
-                                          <ui:include src="/includes/contextMenu/CMForImage.xhtml" >
-                                                <ui:param name="image" value="#{image}" />
-                                          </ui:include>
-                                    </a4j:mediaOutput>
-                              </a4j:commandLink>
-                              <br/>
-                        </h:panelGroup>
-                  </h:panelGrid>				
-                  <h:panelGroup layout="block" styleClass="photo_name">#{image.name} </h:panelGroup>		
-                  <h:panelGroup layout="block" styleClass="photo_data">
-                        <h:outputText value="#{image.created}">
-                              <f:convertDateTime />
-                        </h:outputText>
-                  </h:panelGroup>		
-            </h:panelGroup>
-      </a4j:repeat>
-</h:panelGroup>	
+	<a4j:repeat id="imageList" value="#{model.images}" var="image" rows="20">
+		<h:panelGroup layout="block" styleClass="#{imageSizeHelper.currentDimension.cssClass}">
+			<h:graphicImage styleClass="pr_photo_bg" style="#{imageSizeHelper.currentDimension.imageBgStyle}" value="#{imageSizeHelper.currentDimension.imageBg}" />
+			<h:panelGrid cellpadding="0">
+				<h:panelGroup>
+					<a4j:commandLink
+							actionListener="#{controller.showImage(image)}"
+							reRender="mainArea, treePanel">					
+								<a4j:mediaOutput id="img"  element="img" 
+									createContent="#{imageLoader.paintImage}" 
+									style="border : 1px solid #FFFFFF;"
+									value="#{fileManager.transformPath(image.fullPath, imageSizeHelper.currentDimension.filePostfix)}">
+									<f:param value="#{imageSizeHelper.currentDimension.x}" name="x" />
+									<rich:dragSupport rendered="#{controller.isUserImage(image)}" reRender="mainArea, treePanel" id="dragSource" dragIndicator="dragIndicator"
+                                dragType="image" dragValue="#{image}">
+                                <rich:dndParam id="dragParam" name="label" value="#{image.name}" />
+                            </rich:dragSupport>
+							</a4j:mediaOutput>
+					</a4j:commandLink>
+					<br/>
+				</h:panelGroup>
+				<ui:include src="/includes/contextMenu/CMForImage.xhtml" >
+					<ui:param name="image" value="#{image}" />
+					<ui:param name="mediaOutput" value="#{rich:clientId('img')}"/>
+				</ui:include>
+				
+			</h:panelGrid>				
+			<h:panelGroup layout="block" styleClass="photo_name">#{image.name}</h:panelGroup>		
+			<h:panelGroup layout="block" styleClass="photo_data">
+				<h:outputText value="#{image.created}">
+					<f:convertDateTime />
+				</h:outputText>
+			</h:panelGroup>		
+		</h:panelGroup>
+	</a4j:repeat>
+	</h:panelGroup>		
 ...]]></programlisting>
               
               <para>
@@ -118,6 +137,25 @@
                               </imageobject>
                         </mediaobject>
                   </figure>
+	      <para>
+	            Vizit following pages at RichFaces Live Demo for more information, examples and sources on the components used in the application and described in this chapter:
+	      </para>
+	      
+	      <itemizedlist>
+	            <listitem>
+	                  <para>
+	                        <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/inputNumberSlider.jsf?c=inputNumberSlider">InputNumberSlider</ulink> page for the <emphasis role="bold"><property>&lt;rich:inputNumberSlider&gt;</property></emphasis> component;
+	                  </para>     
+	            </listitem>
+	            
+	            <listitem>
+	                  <para>
+	                        <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/support.jsf?c=support">AjaxSupport</ulink> for the <emphasis role="bold"><property>&lt;a4j:suport&gt;</property></emphasis> component.
+	                  </para>     
+	            </listitem>
+	            
+	            	            
+	      </itemizedlist>   
             
             </section>
             
@@ -304,6 +342,54 @@ public void startSlideshow(Image selectedImage){
             this.slideshowIndex = 0;
       }
 ...]]></programlisting>
+            
+                  <para>
+                        Vizit following pages at RichFaces Live Demo for more information, examples and sources on the components used in the application and described in this chapter:
+                  </para>
+                  
+                  <itemizedlist>
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/modalPanel.jsf?c=modalPanel">ModalPanel</ulink> page for the <emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> component;
+                              </para>     
+                        </listitem>
+                        
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/effect.jsf?c=effect">Effect</ulink> for the <emphasis role="bold"><property>&lt;rich:effect&gt;</property></emphasis> component;
+                              </para>     
+                        </listitem>
+                        
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/mediaOutput.jsf?c=mediaOutput">MediaOutput</ulink> for the <emphasis role="bold"><property>&lt;a4j:mediaOutput&gt;</property></emphasis> component;
+                              </para>     
+                        </listitem>
+                        
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/support.jsf?c=support">AjaxSupport</ulink> for the <emphasis role="bold"><property>&lt;a4j:suport&gt;</property></emphasis> component;
+                              </para>     
+                        </listitem>
+                        
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/commandLink.jsf?c=commandLink">CommandLink</ulink> for the <emphasis role="bold"><property>&lt;a4j:commandLink&gt;</property></emphasis> component;
+                              </para>     
+                        </listitem>
+                        
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/form.jsf?c=form">AjaxForm</ulink> for the <emphasis role="bold"><property>&lt;a4j:form&gt;</property></emphasis> component;
+                              </para>     
+                        </listitem>
+                        
+                        <listitem>
+                              <para>
+                                    <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/poll.jsf?c=poll">Poll</ulink> for the <emphasis role="bold"><property>&lt;a4j:poll&gt;</property></emphasis> component.
+                              </para>     
+                        </listitem>
+                       </itemizedlist>
             
 </section>
 </section>
