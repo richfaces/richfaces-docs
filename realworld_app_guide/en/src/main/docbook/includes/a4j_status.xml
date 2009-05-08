@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="a4j_status">
+	<title>The  <emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis> component</title>
+	<para>
+		
+		<emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis>
+		 is a component, designed to create some visual effect during Ajax request. The comportment is  usually attached to a certain request, which implies  time consuming processing, so that the end user is aware the page is not hung up, 
+		it's responding to her actions: the user sees the processing progress (the component is frequently used to indicate file uploading process).
+	</para>
+	<para>
+		However, in the Photo Album application the 	<emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis> component is triggered on any Ajax request: to demonstrate  the component itself and partially to display for the user that on every click on a link or a button something is happening, as all actions in the application occur on a single page which is not typical for usual web-workflow, when on each action the user navigates to a new page.
+	</para>
+	<para>
+		
+		By default, <emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis>  works for each Ajax components inside the local region. This means if you have no region defined on the page (the whole view is a region) and have only one <emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis>  on the page, the <emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis>  will be activated during Ajax request  by any of the Ajax component located on the page. 
+	</para>
+	<para>
+		As there are no regions defined explicitly in the application, <emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis> is  located in the main template (template.xhtml) for all pages:
+	</para>
+	 <programlisting role="XML"><![CDATA[...
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	...
+	<body class="main-body">
+		...
+		<ui:include src="/includes/index/status.xhtml" />
+	</body>
+</html>
+
+...]]></programlisting> 
+	<para>
+		Hence the default behavior  of the component meets that application&apos;s requirements: the component is shown on every single Ajax request.
+	</para>
+	<para>
+		This is the page with the <emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis> component:
+	</para>
+	<programlisting role="XML"><![CDATA[...
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:richx="http://richfaces.org/richx">
+	<a4j:status layout="block" stopStyle="display: none;"
+		startStyle="height: 52px; width: 79px; position: absolute; top: 0px; left: 278px;">
+		<f:facet name="start">
+			<h:panelGroup>
+				<h:graphicImage style="position: absolute; top: 0px; left: 0px;"
+					height="79" width="52" alt="" value="/img/shell/ai.png" />
+				<h:graphicImage style="position: absolute; top: 26px; left: 13px;"
+					height="26" width="26" alt="" value="/img/shell/ai.gif" />
+			</h:panelGroup>
+		</f:facet>
+	</a4j:status>
+</ui:composition>
+...]]></programlisting> 
+	<para>
+		The <code>startStyle=&quot;height: 52px; width: 79px; position: absolute; top: 0px; left: 278px;&quot;</code>, attribute specifies what is displayed on the page after the request initiation, which means in our case that it is positioned absolutely: 278 pixels from the left border of the page and 0 pixels from the top, its width is 79px and the height is 52px. 
+	</para>
+	
+	<para>
+		The <code>stopStyle=&quot;display: none;&quot;</code> attribute is responsible for displaying the component on the page when the request is finished, in our case the it will be hidden. 
+		
+	</para>
+	<para>
+		As we need to show only the beginning of the request, we customize only the <code>&lt;f:facet name=&quot;start&quot;&gt;</code> which is just an image(you can insert any image you like).
+	</para>
+	<para>
+		
+		If you would like to get more details about the <emphasis role="bold"><property>&lt;a4j:status&gt;</property></emphasis> please visit <ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/status.jsf?c=status">Live Demo</ulink> web page and <ulink url="http://www.jboss.org/file-access/default/members/jbossrichfaces/freezone/docs/devguide/en/html/status.html">RichFaces Developer Guide</ulink>.  
+	</para>
+</section>
