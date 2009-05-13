@@ -40,9 +40,9 @@ DOCS=(
 	[6]="SRC=$TRUNK/ui/assembly/target/docs/userguide/en/html TARGET=$FREEZONE/devguide/en/html"
 	[7]="SRC=$TRUNK/ui/assembly/target/docs/userguide/en/html_single TARGET=$FREEZONE/devguide/en/html_single"
 	[8]="SRC=$TRUNK/ui/assembly/target/docs/userguide/en/pdf TARGET=$FREEZONE/devguide/en/pdf"
-	[9]="SRC=$TRUNK/ui/assembly/target/docs/realworld/en/pdf TARGET=$FREEZONE/realworld/en/pdf"
-	[10]="SRC=$TRUNK/ui/assembly/target/docs/realworld/en/html TARGET=$FREEZONE/realworld/en/html"
-	[11]="SRC=$TRUNK/ui/assembly/target/docs/realworld/en/html_single TARGET=$FREEZONE/realworld/en/html_single"
+	[9]="SRC=$TRUNK/ui/assembly/target/docs/photo_album_app_guide/en/pdf TARGET=$FREEZONE/photo_album_app_guide/en/pdf"
+	[10]="SRC=$TRUNK/ui/assembly/target/docs/photo_album_app_guide/en/html TARGET=$FREEZONE/photo_album_app_guide/en/html"
+	[11]="SRC=$TRUNK/ui/assembly/target/docs/photo_album_app_guide/en/html_single TARGET=$FREEZONE/photo_album_app_guide/en/html_single"
 )
 
 ##############################################################################################################
