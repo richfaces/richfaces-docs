@@ -114,6 +114,58 @@ or simply in the <emphasis>Help</emphasis> &gt; <emphasis>Help Contents</emphasi
                   	</para>
                   </listitem>                  
             </itemizedlist>
+            
+            <tip>
+                  <title>Tip:</title>
+                  <para>
+                        By default Photo Album is assembled with a limited set of images (4-5 in each album).
+                        In order to build the version of the application with a full set of images you need to use <property>livedemo</property> profile while building Photo Album like this:
+                  </para>
+<programlisting role="JAVA"><![CDATA[
+mvn clean install -Plivedemo
+]]></programlisting> 
+               
+                  </tip>
+      </section>
+      <section>
+            <title>Running Functional(Selenium) Tests</title>
+            <para>
+                  Before starting Selenium test please make sure that you have Firefox browser installed on your local machine and 
+                 since the Photo Album application is designed to be deployed and run on JBoss Application server,
+                 so please make sure that the &lt;jboss.installer.url&gt; property of the project pom.xml (<code>examples/photoalbum/</code>) points to a existing JBoss Application server copy.
+            </para>
+            
+            <para>
+                  You also need to build the Photo Album project in <code>inexamples/photoalbum/reource</code>.
+            </para>
+            <para>
+                  Then, you need to go to the test folder of the project (examples/photoalbum/test/) and run the
+                  
+               
+            </para>
+            <programlisting role="XML"><![CDATA[...
+mvn clean integration-test
+...]]></programlisting> 
+            <para>
+                  By default Selenium tests are executed in the Firefox browser, hence you need to have it installed. 
+                  If you configured everything like it is said above you will see tests being executed in the Firefox browser.  
+                  When the tests are finished you can read  test reports  in the <code>examples/photoalbum/tests/target/surefire-reports/</code> folder.
+            </para>
+      </section>
+      
+      <section>
+            <title>Context Help</title>
+            <para>
+               The Photo Album appellation was developed in the first place to demonstrate the mighty power of RichFaces thus most of UI elements in the application has a context help article that tells how a particular element works, providing technical details about it.
+               A context help article is displayed when you click on the question mark icon ( 
+                  <inlinemediaobject>  
+                             <imageobject>
+                                   <imagedata fileref="images/help_sign.png"/>
+                           </imageobject>
+                  </inlinemediaobject> 
+             ).
+                  
+            </para>
       </section>
       
       
