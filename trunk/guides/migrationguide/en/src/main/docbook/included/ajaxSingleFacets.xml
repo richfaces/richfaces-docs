@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="ajaxSingleFacets" role="NotInToc">
+    <?dbhtml filename="ajaxSingleFacets.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>ajaxSingle</keyword>
+            <keyword>facet</keyword>
+            <keyword>static</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>The ajaxSingle/region components in facets of &lt;h:dataTable&gt;</title>
+    <section>
+        <title>Description</title>
+        <para>
+            The <property>RichFaces</property> components that have 
+            <emphasis><property>&quot;ajaxSingle&quot;</property></emphasis> set to &quot;true&quot; does  not work in 
+            <emphasis><property>&quot;header&quot;</property></emphasis> or <emphasis><property>&quot;footer&quot;</property></emphasis> facets 
+            of <emphasis role="bold"><property>&lt;h:dataTable&gt;</property></emphasis>,  e.g. 
+            <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis>  -  scrolling doesn't work.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://jira.jboss.com/jira/browse/RF-2696">Jira</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>   
+        <para>
+            The described above problem occurs if the following code is used. As a result the <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> component stops working. 
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<h:dataTable>
+    <f:facet name="header">
+        <rich:datascroller ajaxSingle="true"/>
+    </f:facet>
+    ...
+</h:dataTable>
+...]]></programlisting>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+            The ajaxSingle/region requires <code>invokeOnComponent()</code> to work properly. For more details, please, 
+            see <ulink url="https://javaserverfaces.dev.java.net/issues/show_bug.cgi?id=718">JavaServer Faces issues reporting</ulink> page.
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+           The solution is to use <emphasis role="bold"><property>&lt;rich:dataTable&gt;</property></emphasis> component.
+        </para>
+    </section>
+</section>

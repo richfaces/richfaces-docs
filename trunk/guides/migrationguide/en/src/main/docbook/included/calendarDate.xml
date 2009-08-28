@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="calendarDate" role="NotInToc">
+    <?dbhtml filename="calendarDate.html"?>
+   <sectioninfo>
+        <keywordset>
+            <keyword>calendar</keyword>
+            <keyword>date</keyword>
+            <keyword>ondateselected</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>&lt;rich:calendar&gt; and &quot;ondateselected&quot; event problem</title>
+    <section>
+        <title>Description</title>
+        <para>
+            The <emphasis role="bold"><property>&lt;rich:calendar&gt;</property></emphasis> date selected event is fired before input update.
+        </para>
+        <para>
+            If <property>time</property> and <property>apply</property> elements are added to the calendar, 
+            <emphasis><property>&quot;ondateselected&quot;</property></emphasis> gets fired when a date is selected but before it&apos;s updated in input. 
+            Now we have three events instead of one. But it causes compatibility problem because this event was used by customers to save selected value via Ajax.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=132914">RichFaces Forum</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+        <para>
+            The described above problem occurs when  <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis>is put inside <emphasis role="bold"><property>&lt;rich:calendar&gt;</property></emphasis>. 
+            If the <emphasis><property>&quot;event&quot;</property></emphasis> property is set to &quot;ondateselected&quot; 
+            previous value of the <emphasis role="bold"><property>&lt;rich:calendar&gt;</property></emphasis> is stored after selection.
+        </para>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+            Events firing sequence was changed.
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+            You need  <emphasis><property>&quot;onchanged&quot;</property></emphasis> event to be fired after any change which causes input to be updated, both date and time. 
+        </para>
+        <para>
+            Note, that   
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>&quot;ondateselected&quot;</property></emphasis> event is fired after a date is selected in popup
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis><property>&quot;ontimechanged&quot;</property></emphasis> event is fired after new time is selected.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+</section>
