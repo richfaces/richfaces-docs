@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="skinnability" xreflabel="skinnability">
+<?dbhtml filename="skinnability.html"?>
+	<title>Skinnability</title>
+    <para>
+       
+        The Photo Album application employs such feature of RichFaces framework as skinnability. If you have a look at the web.xml you will see that the <code>
+            org.richfaces.SKIN
+        </code>
+        parameter has &quot;photoalbum&quot; value.
+    </para>
+    <programlisting role="XML"><![CDATA[...
+	<context-param>
+        <param-name>org.richfaces.SKIN</param-name>
+        <param-value>photoalbum</param-value>
+    </context-param>
+...]]></programlisting> 
+    <para>
+        This means that the application uses the custom &quot;photoalbum&quot; skin. The skin parameters are stored in the <code>photoalbum.skin.properties</code> file that is located in the 
+        <code>photoalbum\source\web\src\main\resources\META-INF\skins\</code> folder.
+    </para>
+    <para>
+        Each visual RichFaces component has a XCSS file  where some CSS selectors are defined with  style properties mapped to the skin parameters. Here is a  fragment of the XCSS file of <emphasis role="bold"><property>&lt;rich:calendar&gt;</property></emphasis>.
+    </para>
+	
+	<programlisting role="XML"><![CDATA[...
+	 <u:selector name=".rich-calendar-header">
+		<u:style name="border-bottom-color" skin="panelBorderColor"/>
+		<u:style name="background-color" skin="additionalBackgroundColor"/>
+		<u:style name="font-size" skin="generalSizeFont"/>
+		<u:style name="font-family" skin="generalFamilyFont"/>
+	</u:selector>
+	...]]></programlisting> 
+    <para>This code sets style for upper part of the calendar. Hence, for example, <code>font-family</code> property is mapped to the <code>generalFamilyFont</code> property which in its turn has <code>Arial, Verdana, sans-serif</code> value.  </para>
+    <para>These are all values the <code>.rich-calendar-header</code> has.</para>
+    <programlisting role="XML"><![CDATA[...
+panelBorderColor=#636363
+additionalBackgroundColor=#F2F2F2
+generalSizeFont=11px
+generalFamilyFont=Arial, Verdana, sans-serif 
+...]]></programlisting> 
+    
+    <para>
+        You can find more information about the  Skinnability feature in  <ulink  url="&devguide;/#Skinnability">RichFaces Developer Guide</ulink>.
+    </para>
+</section>

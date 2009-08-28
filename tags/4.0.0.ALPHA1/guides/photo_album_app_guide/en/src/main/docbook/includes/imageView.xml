@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="imageView">
+	<title>Image View</title>
+	<para>
+		Image View in the Photo Album application is a page where only one image is displayed. In this view you can also browse the current album with the image scroller as well as to switch to slideshow mode. 
+		If you are a registered user you can leave comments under the current image.
+	</para>
+	
+	<figure>
+		<title>Some title</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata fileref="images/imageView.png"/>
+			</imageobject>
+		</mediaobject>
+	</figure>
+	<section id="customImagesScroller">
+		<title>Custom images scroller widget</title>
+
+			<para>
+				The Images Scroller implementation in the Photo Album application is basically <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> with the value attribute bound to <code>#{model.selectedAlbum.images}</code>, which is a collection of images of the selected album and the <emphasis role="bold"><property>&lt;rich:dataScroller&gt;</property></emphasis> component tied to the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> . 
+			</para>
+			
+			<para>
+				The source code you can find in the includes/images/imageScroller.xhtml file. 
+				Now let's go deeper into the details.  The main component here is <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis>:
+				
+			</para>
+			
+			<programlisting role="XML"><![CDATA[...
+<a4j:repeat value="#{model.selectedAlbum.images}" rows="5"
+	var="img" id="repeat" rowKeyVar="rk">
+
+	<a4j:outputPanel layout="block"
+		styleClass="preview_box_photo_nav #{model.selectedImage == img ? 'preview_box_photo_current' : 'preview_box_photo_default'}">
+		<h:panelGroup layout="block" styleClass="preview_box_photo_80">
+			<h:graphicImage styleClass="pr_photo_bg"
+				value="/img/shell/frame_photo_80.png" />
+			<h:panelGrid cellpadding="0" cellspacing="2">
+				<h:panelGroup layout="block">
+					<a4j:mediaOutput element="img"
+						createContent="#{imageLoader.paintImage}"
+						value="#{fileManager.transformPath(img.fullPath, '_small80')}">
+					</a4j:mediaOutput>
+					<br />
+				</h:panelGroup>
+			</h:panelGrid>
+			<h:panelGroup layout="block" styleClass="photo_name">
+				<h:outputText value="#{img.name}" />
+			</h:panelGroup>
+			<h:panelGroup layout="block" styleClass="photo_data">
+				<h:outputText value="#{rk + 1}" />
+			</h:panelGroup>
+		</h:panelGroup>
+
+		<a4j:support event="onclick" rendered="#{model.selectedImage != img}"
+			reRender="mainArea,treePanel, imagesTable" action="#{controller.showImage(img)}" />
+	</a4j:outputPanel>
+</a4j:repeat>
+...]]></programlisting> 
+			
+			<para>
+				Each element of the  
+				
+				<emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> has a corresponding <emphasis role="bold"><property>&lt;a4j:outputPanel&gt;</property></emphasis> with the <emphasis role="bold"><property>&lt;a4j:mediaOutput&gt;</property></emphasis>   as a nested element. <emphasis role="bold"><property>&lt;a4j:mediaOutput&gt;</property></emphasis> renders the thumbnail of the image. As the rows attribute is set to &quot;5&quot; (<code>rows="5"</code>), only 5 images are displayed on the page at a time.
+				
+			</para>
+			
+			<para>
+				As you&apos;ve noticed, the currently selected image in the images scroller has different style, namely: a red frame around thumbnail, which is implemented with this code:
+			</para>
+			<programlisting role="XML"><![CDATA[...
+<a4j:outputPanel layout="block"
+styleClass="preview_box_photo_nav #{model.selectedImage == img ? 'preview_box_photo_current' : 'preview_box_photo_default'}"> 
+...]]></programlisting> 
+			<para>
+				As you can see from the code snippet, 
+				identification of whether the currently selected image is the same image displayed by the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> is performed in the styleClass, if  it returns &quot;true&quot;,  different style is applied.
+			</para>
+			<para>
+				Each  <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> has a corresponding  <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> configured like this:
+			</para>
+			<programlisting role="XML"><![CDATA[...
+ <a4j:support event="onclick"
+					rendered="#{model.selectedImage != img}"
+					reRender="mainArea,treePanel, imagesTable"
+					action="#{controller.showImage(img)}" />
+
+...]]></programlisting> 
+			
+			<para>
+				On every click <emphasis role="bold"><property>&lt;a4j:support&gt;</property></emphasis> calls <code> #{controller.showImage(img)}</code> method that sets the current image, thumbnail of which has just been clicked on. For more details please see  Controller.java class.
+			</para>
+			
+			<para>
+				To implement thumbnails scrolling effect the  <emphasis role="bold"><property>&lt;rich:datascroller&gt;</property></emphasis> is attached to the  <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis>:
+			</para>
+			
+			<programlisting role="XML"><![CDATA[...
+<rich:datascroller page="#{controller.getPage()}"
+	styleClass="image-scroller" lastPageMode="full" for="repeat" reRender="imagesTable"
+	boundaryControls="hide" stepControls="hide">
+	<f:facet name="pages">
+		<h:outputText />
+	</f:facet>
+	<f:facet name="fastforward">
+		<h:graphicImage styleClass="image-scroller-right-arrow"
+			value="img/shell/arr_right.png" />
+	</f:facet>
+	<f:facet name="fastforward_disabled">
+		<h:graphicImage styleClass="image-scroller-right-arrow"
+			value="img/shell/arr_right_dis.png" />
+	</f:facet>
+	<f:facet name="fastrewind">
+		<h:graphicImage styleClass="image-scroller-left-arrow"
+			value="img/shell/arr_left.png" />
+	</f:facet>
+	<f:facet name="fastrewind_disabled">
+		<h:graphicImage styleClass="image-scroller-left-arrow"
+			value="img/shell/arr_left_dis.png" />
+	</f:facet>
+</rich:datascroller>
+
+...]]></programlisting> 
+			<para>
+				The page attribute identifies which page should be displayed right now. For instance, if you have only 20 images  and the current image has the 12<superscript>th</superscript>  index in the collection, then the 3<superscript>rd</superscript> page will be displayed:
+				
+			</para>
+			<programlisting role="XML"><![CDATA[...
+public Integer getPage(){
+		final Integer index = model.getSelectedAlbum().getIndex(model.getSelectedImage());
+		return index / 5 + 1;
+	}
+
+...]]></programlisting> 
+			
+			<para>
+				The <code>lastPageMode=&quot;full&quot; </code> attribute ensures that  5 thumbnails are always shown on the page. If this attribute hadn't been configured like this, in case the 19th  thumbnail out of 20  had been selected then only 2 last thumbnails would have been displayed. 
+			</para>
+			
+			<para>
+				As you can see, <emphasis role="bold"><property>&lt;rich:dataScroller&gt;</property></emphasis> has a slightly different look-and-feel, the trick is in the redefinition of  <property>fastforward</property>,  <property>fastforward_disabled</property>,  <property>fastrewind</property> and <property>fastrewind_disabled</property> facets on which places we display our images. We didn't redefine other facets because they are not rendered to the page which is achieved with  <code>boundaryControls=&quot;hide&quot;</code> and <code>stepControls=&quot;hide</code> attributes of <emphasis role="bold"><property>&lt;rich:dataSroller&gt;</property></emphasis>.
+			</para>
+			
+			<para>
+				Visit following pages at RichFaces Live Demo for more information, examples and sources on the components used in the application and described in this chapter:
+			</para>
+			
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/dataTableScroller.jsf?c=dataTableScroller">DataTableScrolling</ulink> page for the <emphasis role="bold"><property>&lt;rich:dataScroller&gt;</property></emphasis> component;
+					</para>     
+				</listitem>
+				
+				<listitem>
+					<para>
+						<ulink url="http://livedemo.exadel.com/richfaces-demo/richfaces/repeat.jsf?c=repeat">Repeat</ulink> for the <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> component.
+					</para>     
+				</listitem>
+				
+			</itemizedlist>  
+	
+	</section>
+</section>

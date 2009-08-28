@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="binding" role="NotInToc">
+    <?dbhtml filename="binding.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>binding</keyword>
+            <keyword>JSP</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>Binding problem in JSP</title>
+    <section>
+        <title>Description</title>
+        <para>
+            Binding does not work for all components in JSP: it is impossible to use the<emphasis><property>&quot;binding&quot;</property></emphasis> attribute for 
+            RichFaces components, since wrong class-name is used in TLD generated from XML configuration files.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://jira.jboss.com/jira/browse/RF-2918 ">Jira</ulink>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4140368#4140368">RichFaces Forum</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+        <para>
+            The described above problem occurs if binding attribute is used with RichFaces components.
+        </para>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+            There was a  wrong <code>&lt;classname&gt;java.lang.String&lt;/classname&gt;</code> specified instead of  <code>&lt;classname&gt;javax.faces.component.UIComponent&lt;/classname&gt;</code> in configuration files.
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+            The solution is to use <property>Facelets</property> upgrade to <ulink url=" http://www.jboss.org/jbossrichfaces/downloads/">RichFaces 3.2.0 SP1</ulink>
+        </para>
+    </section>
+    
+</section>

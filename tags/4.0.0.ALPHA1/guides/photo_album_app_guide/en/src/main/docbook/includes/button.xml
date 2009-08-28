@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="Button">
+	<title>How the button is created and how it acts
+	</title>
+	<para>
+	
+	Due to specific design of the buttons in the Photo Album application, it&apos;s necessary to clarify some design and development  points about the button. The button is visually represented by Facelets template stored in the <property>button.xhtml</property> file.
+	
+	</para>
+	<para>Please have a look at the content of the file:
+	</para>
+	<programlisting role="XML"><![CDATA[...
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:richx="http://richfaces.org/richx">
+	<a4j:loadScript src="/scripts/buttons.js" />
+	<richx:actionMapper>
+		<a4j:outputPanel layout="block" style="#{style}" styleClass="photoalbumButton #{styleClass}" lang="#{lang}" dir="#{dir}" title="#{title}" 
+			rendered="#{empty rendered or rendered}"
+			onmousedown="RF_RW_DEMO.toPressed(this)" onmouseup="RF_RW_DEMO.toReleased(this)" onmouseout="RF_RW_DEMO.toReleased(this)">
+				<h:graphicImage value="/img/shell/button.png" alt="" />
+				<h:graphicImage value="/img/shell/button_press.png" style="display: none;" alt="" />
+				<div>#{value}</div>
+				<a4j:commandButton accesskey="#{accesskey}" ajaxSingle="#{ajaxSingle}" alt="#{alt}" type="image" image="/img/shell/spacer.gif" 
+					actionListener="#{mappedActionListener}" action="#{mappedAction}" bypassUpdates="#{bypassUpdates}" data="#{data}" disabled="#{disabled}"
+					eventsQueue="#{eventsQueue}" focus="#{focus}" ignoreDupResponses="#{ignoreDupResponses}" immediate="#{immediate}" limitToList="#{limitToList}"
+					onbeforedomupdate="#{onbeforedomupdate}" timeout="#{timeout}" tabindex="#{tabindex}" status="#{status}" similarityGroupingId="#{similarityGroupingId}" 
+					reRender="#{reRender}" requestDelay="#{requestDelay}" process="#{process}" oncomplete="#{oncomplete}" 
+					onblur="#{onblur}" onclick="#{onclick}" ondblclick="#{ondblclick}" onfocus="#{onfocus}" onkeydown="#{onkeydown}" onkeypress="#{onkeypress}" onkeyup="#{onkeyup}" 
+					onmousedown="#{onmousedown}" onmousemove="#{onmousemove}" onmouseout="#{onmouseout}" onmouseover="#{onmouseover}" onmouseup="#{onmouseup}" />
+		</a4j:outputPanel>
+	</richx:actionMapper>
+</ui:composition>
+
+...]]></programlisting> 
+	<para>
+		The <emphasis role="bold"> <property>&lt;richx:actionMapper&gt;</property></emphasis>
+	  tag is covered in more detail further in the text. In brief, it&apos;s a special tag developed deliberately to pass to the button a method expression of the action which must be performed when the button is clicked.
+			
+	</para>
+	<para>
+		To make sure the button works correctly we include the required JavaScript code that is located in the button.js file using  <code> &lt;a4j:loadScript src="/scripts/buttons.js" /&gt;  </code> component. 
+	</para>
+	<para>
+		The button consists of several parts: 
+	</para>
+	<itemizedlist>
+		<listitem><para>2 images (pressed and not pressed)</para></listitem>
+		<listitem><para>&lt;div&gt; element that displays the button&apos;s text </para></listitem>
+		<listitem><para><emphasis role="bold"><property>&lt;a4j:commandButton&gt;</property></emphasis> that sends Ajax request to the server</para></listitem>
+		
+	</itemizedlist>
+	<para>
+		These elements are wrapped by  <emphasis role="bold"><property>&lt;a4j:outputPanel&gt;</property></emphasis> to adjust the look-and-feel.
+	</para>
+	<para>
+		In the application the button is used for example like this:
+	</para>
+	<programlisting role="XML"><![CDATA[...
+<richx:commandButton actionListener="#{authenticator.register(user)}" reRender="mainform, headerPanel" value="#{messages['user.register']}" />
+...]]></programlisting> 
+	<para>
+		We can pass to the <emphasis role="bold"><property>&lt;richx:commandButton&gt;</property></emphasis>  all  required attributes, in the example only  actionListener,  reRender and  value are passed.
+	</para>
+	<para>
+		<emphasis role="bold"><property>&lt;richx:commandButton&gt;</property></emphasis>
+		 is a custom tag that is declared in the photoalbum-taglib.xml tag library:
+	</para>
+	<programlisting role="XML"><![CDATA[...
+<?xml version="1.0"?>
+<!DOCTYPE facelet-taglib PUBLIC
+  "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+  "facelet-taglib_1_0.dtd">
+<facelet-taglib>
+   <namespace>http://richfaces.org/richx</namespace>
+	<tag>
+	   <tag-name>commandButton</tag-name>
+	   <source>templates/button.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>actionMapper</tag-name>
+		<handler-class>org.richfaces.photoalbum.util.ActionMapperTagHandler</handler-class>
+	</tag>
+</facelet-taglib>
+...]]></programlisting> 
+	<para>
+		In order to use the <emphasis role="bold"><property>&lt;richx:commandButton&gt;</property></emphasis> on the page the namespace of the taglib must be declared:
+	</para>
+	<programlisting role="XML"><![CDATA[...
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	...
+xmlns:richx="http://richfaces.org/richx">
+...]]></programlisting> 
+	<para>
+		A more complex part of the button implementation, as we said earlier, is <emphasis role="bold"><property>&lt;richx:actionMapper&gt;</property></emphasis> which is also described in tablib. But it is not just a simple tag-template since it has Facelets  handler-class which specifies how it is handled when declared on the page. It is created because Facelets templates do not allow to make the  MethodExpression a Facelets-template parameter. Please find below the code of the class(some irrelevant details are omitted):
+	</para>
+	<programlisting role="JAVA"><![CDATA[...
+  public class ActionMapperTagHandler extends TagHandler {
+
+	private static final Class<?>[] ACTION_PARAM_TYPES = new Class[0];
+
+	private static final Class<?>[] ACTION_LISTENER_PARAM_TYPES = new Class[] {ActionEvent.class};
+
+	private static final String ACTION = "action";
+
+	private static final String ACTION_LISTENER = "actionListener";
+
+	private static final String MAPPED_ACTION = "mappedAction";
+	
+	private static final String MAPPED_ACTION_LISTENER = "mappedActionListener";
+
+	public ActionMapperTagHandler(TagConfig config) {
+		super(config);
+	}
+
+	private MethodExpression remap(FaceletContext faceletContext, String varName, 
+			Class<?> expectedReturnType, Class<?>[] expectedParamTypes) {
+		
+		MethodExpression result = null;
+		
+		VariableMapper mapper = faceletContext.getVariableMapper();
+		ValueExpression valueExpression = mapper.resolveVariable(varName);
+		if (valueExpression != null) {
+			ExpressionFactory ef = faceletContext.getExpressionFactory();
+			ELContext elContext = faceletContext.getFacesContext().getELContext();
+			
+			result = ef.createMethodExpression(elContext, valueExpression.getExpressionString(), 
+				expectedReturnType, expectedParamTypes);
+		}
+		
+		return result;
+	}
+	
+	public void apply(FaceletContext ctx, UIComponent parent)
+			throws IOException, FacesException, FaceletException, ELException {
+
+		MethodExpression actionExpression = remap(ctx, ACTION, String.class, ACTION_PARAM_TYPES);
+		MethodExpression actionListenerExpression = remap(ctx, ACTION_LISTENER, null, ACTION_LISTENER_PARAM_TYPES);
+		
+		if (actionExpression != null || actionListenerExpression != null) {
+			VariableMapper initialVarMapper = ctx.getVariableMapper();
+			try {
+				VariableMapperWrapper varMapper = new VariableMapperWrapper(initialVarMapper);
+			
+				if (actionExpression == null) {
+					actionExpression = NOOP_ACTION_EXPRESSION;
+				}
+				
+				varMapper.setVariable(MAPPED_ACTION, 
+					ctx.getExpressionFactory().createValueExpression(actionExpression, 
+						MethodExpression.class));
+
+				if (actionListenerExpression == null) {
+					actionListenerExpression = NOOP_ACTION_LISTENER_EXPRESSION;
+				}
+
+				varMapper.setVariable(MAPPED_ACTION_LISTENER, 
+						ctx.getExpressionFactory().createValueExpression(actionListenerExpression, 
+							MethodExpression.class));
+				
+				ctx.setVariableMapper(varMapper);
+				
+				nextHandler.apply(ctx, parent);
+				
+			} finally {
+				ctx.setVariableMapper(initialVarMapper);
+			}
+		} else {
+			nextHandler.apply(ctx, parent);
+		}
+	}
+}
+
+...]]></programlisting> 
+	<para>
+		You can find more infromation about Facelets, custom tags, taglibs, Facelets tag handlers and Facelets templates here.
+	</para>
+</section>

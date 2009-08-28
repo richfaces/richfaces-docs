@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="resource" role="NotInToc">
+    <?dbhtml filename="resource.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>resource</keyword>
+            <keyword>skinning</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>Resources for standard skinning classes</title>
+    <section>
+        <title>Description</title>
+        <para>
+            When standard skinning classes or background images are inaccessible 
+            <code>&quot;Resource not registered : org.richfaces.renderkit.html.images.InputBackgroundImage&quot;</code> (another name is possible) exception appears in server log.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://jira.jboss.com/jira/browse/RF-2944 ">Jira</ulink>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=4140846#4140846">RichFaces Forum</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+        <para>The described above problem usually occurs  after server restart when user refreshes the page</para>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+            The problem is caused when resources for standard skinning classes are not available to be  registered during <property>RichFaces</property> library build
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+            Switch off standard skinning classes by setting initial parameter in <property>web.xml</property>:
+        </para>
+            <programlisting role="XML"><![CDATA[...
+<context-param>
+    <param-name>org.richfaces.CONTROL_SKINNING_CLASSES</param-name>
+    <param-value>disable</param-value>
+</context-param>
+...]]></programlisting>
+<para>
+            Add  <ulink url="http://docs.google.com/View?docid=dqk93fg_3ggsznfz5">META-INF/resources-config.xml</ulink> to the application classpath.
+</para>
+    </section>
+    
+</section>
