@@ -1,0 +1,74 @@
+<section id="errorsReports">
+	<title>Errors Reports</title>
+	<para>
+		The Photo Album application has a global mechanism for errors checking.
+		You become informed about the error each time it occurs.
+		It is possible because
+		the main page of the application
+		<code>web/src/main/webapp/index.xhtml
+		</code>
+		includes the
+		<code>web/src/main/webapp/includes/misc/errorPanel.xhtml</code>:
+	</para>
+	<programlisting role="XML"><![CDATA[...
+<a4j:outputPanel id="errors" ajaxRendered="true">
+		<h:panelGroup rendered="#{errorHandlerBean.errorExist}">
+			<rich:modalPanel id="errorPanel" showWhenRendered="true" minWidth="300" minHeight="200" autosized="true">
+	                  ...
+            </rich:modalPanel>
+      </h:panelGroup>
+</a4j:outputPanel>
+...]]></programlisting>	
+	<para>
+		Here is the listing of the <code>errorHandlerBean</code> class:
+	</para>
+<programlisting role="JAVA"><![CDATA[package org.richfaces.photoalbum.ui;
+import java.util.ArrayList;
+import java.util.List;
+import org.jboss.seam.ScopeType;
+import org.jboss.seam.annotations.AutoCreate;
+import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Observer;
+import org.jboss.seam.annotations.Scope;
+import org.richfaces.photoalbum.service.Constants;
+
+@Name("errorHandlerBean")
+@Scope(ScopeType.EVENT)
+@AutoCreate
+public class ErrorHandlerBean {
+	private List<String> errors = new ArrayList<String>();
+
+	public List<String> getErrors() {
+		return errors;
+	}
+	
+	public boolean isErrorExist(){
+		return errors.size() > 0 ;
+	}
+	
+	@Observer(Constants.ADD_ERROR_EVENT)
+	public void addToErrors(String e){
+		errors.add(e);
+	}
+}]]></programlisting>
+	<para>
+		The error panel contains the  
+		<emphasis role="bold"><property>&lt;a4j:outputPanel&gt;</property></emphasis>
+		component that is rendered on every Ajax request (<code>ajaxRendered=&quot;true&quot;</code>).
+		If an error is occurred the <code>isErrorExist()</code> method of <code>errorHandlerBean</code> class
+		returns &quot;true&quot;, so the 
+		<emphasis role="bold"><property>&lt;h:panelGroup&gt;</property></emphasis> component 
+		is rendered.
+		In order to show nested 
+		<emphasis role="bold"><property>&lt;rich:modalPanel&gt;</property></emphasis> component
+		with the collected errors 
+		the <emphasis><property>&quot;showWhenRendered&quot;</property></emphasis> attribute
+		should be set to &quot;true&quot;.
+	</para>
+	<para>
+       The <code>addToErrors()</code> method is annotated with <code>@Observer</code> annotation, 
+       thus it observes all events with <code>ADD_ERROR_EVENT</code> constant and adds errors to the 
+       <code>errors</code> List.
+    </para>
+</section>
+

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="app_over" xreflabel="app_over">
+      <?dbhtml filename="app_over.html"?>
+      <chapterinfo>
+            <keywordset>
+                  <keyword>RichFaces</keyword>
+                  
+            </keywordset>
+      </chapterinfo>
+      
+      <title>Application Overview</title>
+     
+      <!-- section><title>Used technologies</title>
+            <para>
+                  The Photo Album Demo application is not only a JSF application. It encompasses various technologies and frameworks:
+            </para>
+            <itemizedlist>
+                  <listitem><para><emphasis>Java Server Faces (JSF)</emphasis>, technology that provides a single, standard, efficient way to use Java technologies to build Web-based applications;</para></listitem>
+                  <listitem><para><emphasis>Facelets</emphasis>, technology that combines the power of UI components and the flexibility of XML to accelerate JSF development. Facelets presents a compelling alternative to JSP as the markup technology of choice for next-generation JSF applications;</para></listitem>
+                  <listitem><para><emphasis>Asynchronous JavaScript and XML (AJAX)</emphasis>, several incorporated technologies. Ajax binds together standards-based presentation using XHTML and CSS, dynamic display and interaction using the DOM, data interchange and manipulation using XML and XSLT, asynchronous data retrieval using XMLHttpRequest and JavaScript;</para></listitem>
+                  <listitem><para><emphasis>Enterprise Java Beans (EJB) 3.0</emphasis>, technology for development of server-side component architecture for Java Platform, Enterprise Edition (Java EE);</para></listitem>
+                  <listitem><para><emphasis>Seam</emphasis> technology that integrates previous mentioned technologies with Java Persistence (JPA), Enterprise Java Beans (EJB 3.0) and Business Process Management (BPM) into a unified full-stack solution;</para></listitem>
+                  <listitem><para><emphasis>RichFaces</emphasis>, a framework and library of Ajax-capable UI components for JSF framework that had been evolved from Ajax4JSF framework (merge of Ajax and JavaServer Faces technologies).</para></listitem>
+                  
+            </itemizedlist>         
+      </section-->
+      
+      <section>
+            <title>General overview</title>
+            <para>
+                        While designing the <property>Photo Album Demo</property>, one of the goal was to create a well-structured and transparent system, which will provide a photo-album-like functionality on one hand and demonstrate the main benefits of the <property>RichFaces</property> on the other. 
+                        Thinking within the bounds of the <property>RichFaces</property> library only we could get is an application  flooded with modal panels,  toggles and other controls where they are necessary and where are not. 
+                        Developing just a photo album could cause missing  the goal to demonstrate the components functionality. 
+                        That’s why the development of the application was started with brewing of Rich component use cases. Some smart cases of using the components were found.
+           </para>
+                  <para>
+                        The clickable prototype of the application (a scope of  graphic images linked with HTML graphic map) is available for download at 
+                        <ulink url="https://anonsvn.jboss.org/repos/richfaces/management/design/realWorldDemo/prototypes/ver_8/">https://anonsvn.jboss.org/repos/richfaces/management/design/realWorldDemo/prototypes/ver_8/</ulink>
+                  </para>
+          <para>
+                In order to document the key concepts and conceptual representation of data of the <property>Photo Album Demo</property> application the Entity Relation Diagram (ERD) is created. 
+                The diagram also identifies the relationships among all major entities within the system and their significant  methods and attributes. 
+                It provides a structural view of the system that can be complemented by other dynamic views in use case models.
+          </para>
+          
+            <figure>
+                  <title>The Photo Album Demo Entity Relation Diagram</title>
+                  <mediaobject>
+                        <imageobject>
+                              <imagedata fileref="images/erd.png"/>
+                        </imageobject>
+                  </mediaobject>
+            </figure>
+        
+        <para>
+              An important benefit of an entity relation diagram is that it describes and constrains the system scope. 
+              It is also used to verify and validate the understanding of the problems among various stakeholders of a project group. 
+              It is especially useful as a communication tool and a focusing point between technical and business teams.
+        </para>
+        
+        <para>
+              To create a Seam application with <property>RichFaces</property> and Facelets project structure, use special archetype that could be found at 
+              <ulink url="https://anonsvn.jboss.org/repos/richfaces/trunk/cdk/maven-archetype-seam-app/">https://anonsvn.jboss.org/repos/richfaces/trunk/cdk/maven-archetype-seam-app/</ulink> directory. 
+              For this purpose the Maven should be installed and configured (see the &quot;Environment Configuration&quot; chapter). 
+              This archetype represents a project template. 
+        </para>
+        <para>
+              The following steps describe how to use  this archetype:
+        </para>
+            <itemizedlist>
+                  <listitem><para>Create a new project directory on your hard disk;</para></listitem>
+                  <listitem><para>Browse to the directory with the archetype (<code>richfaces\cdk\maven-archetype-seam-app</code>), switch to the command line and type the next command <code>mvn install</code> to install the archetype in your repository;</para></listitem>
+                  <listitem><para>Then  browse to your project directory and type in the command line</para>
+                        <para><code>mvn archetype:generate </code></para>
+                        <para><code>-DarchetypeGroupId=org.richfaces.cdk </code></para>
+                        <para><code>-DarchetypeArtifactId=maven-archetype-seam-app </code></para>
+                        <para><code>-DarchetypeVersion=3.3.0-SNAPSHOT </code></para>
+                        <para><code>-DgroupId=[Your_project_group_id] </code></para>
+                        <para><code>-DartifactId=[Your_project_name] </code></para>
+                        <para>Some project preferences such as <property>RichFaces</property> components version or Jboss server version and others could be customized in the root <code>.pom</code> file </para>
+                  </listitem>
+                  <listitem><para>Type <code>mvn install</code>;</para></listitem>
+                  <listitem><para>Type <code>mvn eclipse:eclipse</code> to generate eclipse project </para></listitem>
+                  <listitem><para>Import projects into your IDE.</para></listitem>
+            </itemizedlist>   
+            
+            <para>
+                  View the generated project structure. It keeps three main modules called <code>ear</code>, <code>ejb</code> and <code>web</code>. 
+                  This is a typical Seam project structure. 
+            </para>
+            
+            <para>
+                  The <code>ear</code> module generated with the help of this archetype contains <code>jboss-app.xml</code> file:
+            </para>
+            <programlisting role="XML"><![CDATA[<jboss-app>      
+      <loader-repository> 
+            seam.jboss.org:loader=photoalbum-ear-1.0-SNAPSHOT.ear
+      </loader-repository> 
+</jboss-app>]]>
+            </programlisting>
+            
+            <para>
+                  The loader repository is a specific feature of JBoss projects architecture. 
+                  It's used to prevent classes of one application being used by classes of another application  when two or more applications running on the same server. 
+                  Jboss class loading uses the concept of a class loader repository. 
+                  It needs a little getting used to, so some its features should be described:
+            </para>
+                  
+            <itemizedlist>
+                  <listitem><para>Each of dynamically deployed files (EAR, WAR, EJB jar, RAR and SAR) is loaded with a new subordinate class loader; </para></listitem>
+                  <listitem><para>However the files also register themselves with a loader repository;</para></listitem>
+                  <listitem><para>These class loaders at first ask the repository and then load their own classes;</para></listitem>
+                  <listitem><para>They may also decide to become the head of a new loader repository;</para></listitem>
+                  <listitem><para>Classes loaded into child loader repositories are not visible to parent loader repositories;</para></listitem>
+                  <listitem><para>The order in which the class loaders are added to the repository matters.</para></listitem>
+            </itemizedlist>
+            
+            <para>
+                  The EJB module contains the entity diagram classes and the classes for interaction with a database. The structure of EJB module is illustrated below:
+            </para>
+            
+            <figure>
+                  <title>The Photo Album Demo EJB module structure</title>
+                  <mediaobject>
+                        <imageobject>
+                              <imagedata fileref="images/ejb_struct.png"/>
+                        </imageobject>
+                  </mediaobject>
+            </figure>
+            
+            <para>
+                  The WEB module structure contains <code>.xhtml</code> sources that looks similar to a usual JSF application. The structure of WEB module is illustrated below:
+            </para>
+            
+            <figure>
+                  <title>The Photo Album Demo EJB module structure</title>
+                  <mediaobject>
+                        <imageobject>
+                              <imagedata fileref="images/web_struct.png"/>
+                        </imageobject>
+                  </mediaobject>
+            </figure>
+          
+            <para>Since the Photo Album Demo uses the Facelets technology the main page <code>index.xhtml</code> represents an &lt;include&gt; (or facelet) wrapped with the <emphasis role="bold">&lt;ui:composition&gt;</emphasis> tag. 
+                  This tag is used to trim unnecessary markup in the facelet. 
+                  Any content outside of <emphasis role="bold">&lt;ui:composition&gt;</emphasis> tag is ignored by the Facelets view handler. 
+                  A facelet can be incorporated into another page or facelet with the help of <emphasis role="bold">&lt;ui:define&gt;</emphasis> and <emphasis role="bold">&lt;ui:include&gt;</emphasis> tags pointed to by the <emphasis role="bold">&lt;ui:include&gt;</emphasis> &quot;src&quot; attribute. 
+                  The facelet may simply contain a fragment of XHTML or XML to be included.</para>
+            
+            <para>Here is <code>index.xhtml</code> page source code:</para>
+            <programlisting role="XML"><![CDATA[<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		    xmlns:s="http://jboss.com/products/seam/taglib"
+		    xmlns:ui="http://java.sun.com/jsf/facelets"
+		    xmlns:f="http://java.sun.com/jsf/core"
+		    xmlns:h="http://java.sun.com/jsf/html"
+		    xmlns:rich="http://richfaces.org/rich"
+		    xmlns:a4j="http://richfaces.org/a4j"
+		    xmlns:richx="http://richfaces.org/richx"
+		    template="layout/template.xhtml">
+	
+	<ui:define name="searchWidget">
+		<ui:include src="includes/search/searchWidget.xhtml" />
+	</ui:define>
+	
+	<ui:define name="menu">
+		<ui:include src="/includes/index/menu.xhtml" />
+	</ui:define>
+	
+	<ui:define name="tree">
+		<ui:include src="/includes/index/tree.xhtml" />
+	</ui:define>
+	
+	<ui:define name="body">
+		<h:panelGroup id="mainArea" layout="block">
+			<h:panelGroup styleClass="content_box" layout="block">
+				<ui:include src="#{model.mainArea.template}" />
+			</h:panelGroup>
+			<ui:include src="includes/misc/errorPanel.xhtml" />
+		</h:panelGroup>
+	</ui:define>
+
+</ui:composition>]]>
+            </programlisting>
+            
+            <para>The snippet above shows that the <code>index.xhtml</code> page does not contain sources for application functional parts but includes them as templates that are rendered depending on conditions and events taking place during user interaction with the Photo Album Demo.  
+                  The picture below shows <code>index.xhtml</code> page schematically with all its &quot;includes&quot; and paths to them:</para>
+            <mediaobject>
+                  <imageobject>
+                        <imagedata fileref="images/indexxhtml.png"/>
+                  </imageobject>
+            </mediaobject>
+          
+          
+      </section>
+      
+      
+</chapter>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+      
+            
+      <section>
+            <title>Image Size control</title>
+            
+                        
+            <section>
+                  <title>Links in Photo Album Demo. Using the &lt;a4j:commandLink&gt;</title>
+                  <para>
+                        The main difference between <emphasis role="bold"><property>&lt;h:commandLink&gt;</property></emphasis> component is a) Ajax request that is generated on a click and b) dynamic rerendering of the page after a response comes back. 
+                        It's not necessary to plug any support into the component, as Ajax support is already built-in. 
+                  </para>
+                  <para>
+                        The <emphasis role="bold"><property>&lt;a4j:commandLink&gt;</property></emphasis> component is used widely in the application. 
+                        In the following example clicking on the &lt;Edit&gt; link will rerender the main ares (watching area) of the application and open an album edit form. 
+                        Each album has its owner and only owner can edit the album contents. 
+                        The link &lt;Edit&gt; will be rendered only if the current logged-in user is the owner of this album: the <emphasis><property>&quot;rendered&quot;</property></emphasis> attribute refers to the owner id and compares it with the  current user id:
+                  </para>
+                  <programlisting role="XML"><![CDATA[...
+<a4j:commandLink rendered="#{model.selectedAlbum.owner.id == user.id}"
+            value="#{messages['album.edit']} "
+            actionListener="#{controller.startEditAlbum(model.selectedAlbum)}"
+            reRender="mainArea">
+</a4j:commandLink>
+...]]></programlisting>
+                  <para>
+                        The <emphasis><property>&lt;value&gt;</property></emphasis> attribute (text that will appear on the link) is picked up from the <code>messages_en.properties</code> file. 
+                        Such property files are very useful e.g. for multi language applications. 
+                        Each property is saved in the format &quot;name—value&quot;. 
+                        Let's have a look  at this file in the JBDS:
+                  </para>
+                  <figure>
+                        <title>Image size control</title>
+                        <mediaobject>
+                              <imageobject>
+                                    <imagedata fileref="images/messages_en_property.png"/>
+                              </imageobject>
+                        </mediaobject>
+                  </figure>
+            </section>
+            
+                     
+                        
+                        
+      </section>
