@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="actionparam" role="NotInToc">
+    <?dbhtml filename="actionparam.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>a4j:actionparam</keyword>
+            <keyword>actionListener</keyword>
+            <keyword>JSP</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>Action listeners calling problem with &lt;a4j:actionparam&gt; on JSP page</title>
+    <section>
+        <title>Description</title>
+        <para>
+            As it has been mentioned above we&apos;ve migrated to <property>JSF 1.2</property> standard in <property>RichFaces 3.2.0</property>. 
+            The order of calling action listeners has been changed in <property>JSF 1.2</property>: first the listener of the component itself is called then the other listeners are called.
+        </para>
+        <para>
+            This is why the <emphasis role="bold"><property>&lt;a4j:actionparam&gt;</property></emphasis> component setter is called after 
+            <emphasis><property>&quot;actionListener&quot;</property></emphasis> of the component itself.
+            In the following example <code>#{bean.action}</code> is called before <code>#{bean.value}</code>:
+        </para>
+        <para>
+            <emphasis role="bold">Example:</emphasis>
+        </para>   
+        <programlisting role="XML"><![CDATA[...
+<a4:support actionListener="#{bean.action}"  event="onclick">
+    <a4j:actionparam assignTo="#{bean.value}" value="John"/>
+</a4j:support>
+...]]></programlisting>
+        <para>
+            This issue occurs in  JSP pages only.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://jira.jboss.com/jira/browse/RF-3110">Jira</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+        <programlisting role="XML"><![CDATA[...
+<f:view>
+    <h:form>
+        <h:panelGrid width="120" border="5">
+            <a4j:support event="onclick" reRender="rep" actionListener="#{actionPlanBean.actionListener}">
+                <a4j:actionparam name="username" value="John" assignTo="#{actionPlanBean.name}" />
+            </a4j:support>
+            <h:outputLabel value="Panel 1 - John"/>
+        </h:panelGrid>
+        <rich:panel>
+            <h:outputText id="rep" value="I say: #{actionPlanBean.helloLabel}"/>
+        </rich:panel>
+    </h:form>
+</f:view>
+...]]></programlisting>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+            Please, see <ulink url="http://jira.jboss.com/jira/browse/RF-3080">Jira</ulink>.
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+            The solution is to use <emphasis role="bold"><property>&lt;a4j:actionParam&gt;</property></emphasis> before:
+        </para>
+            <programlisting role="XML"><![CDATA[...
+<f:actionListener binding="#{skin.binding}"/> 
+...]]></programlisting>
+
+    </section>
+</section>

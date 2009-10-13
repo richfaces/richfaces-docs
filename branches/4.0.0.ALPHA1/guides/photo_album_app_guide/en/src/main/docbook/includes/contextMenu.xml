@@ -1,0 +1,128 @@
+<section id="contextMenu">
+	<title>Context Menus </title>
+    <para>Context menus are called when you right-click on a UI element. RichFaces library provides a special component <emphasis role="bold"><property>&lt;rich:contextMenu &gt;</property></emphasis> to implement this type of functionality. </para>	
+    
+	
+	<para>Context menu is made for the following UI controls:</para>
+ 
+	<itemizedlist>
+		<listitem>
+			<para><property>Album</property> menu item in navigation menu/Album thumbnail</para>
+<figure>
+	<title>Context Menu for </title>
+	<mediaobject>
+		<imageobject>
+			<imagedata fileref="images/cm_album.png"/>
+		</imageobject>
+	</mediaobject>
+</figure>
+			
+
+		</listitem>
+        <listitem><para>Image thumbnail</para>
+        
+        
+        <figure>
+        	<title>Image thumbnail context menu</title>
+        	<mediaobject>
+        		<imageobject>
+        			<imagedata fileref="images/cm_image.png"/>
+        		</imageobject>
+        	</mediaobject>
+        </figure>
+        	
+        </listitem>
+		
+		<listitem><para><property>Shelf</property> menu item in navigation menu</para>
+        	<figure>
+        		<title>Context Menu for Shelf menu item </title>
+        		<mediaobject>
+        			<imageobject>
+        				<imagedata fileref="images/cm_shelf.png"/>
+        			</imageobject>
+        		</mediaobject>
+        	</figure>   
+        </listitem>
+   
+     </itemizedlist> 
+        <para>   
+            Let's have a look at the context menu for single image is constructed.
+        </para>
+        
+        <programlisting role="XML"><![CDATA[...
+	<rich:contextMenu disableDefaultMenu="false" style="text-align:left;" rendered="#{controller.isUserImage(image)}"
+		event="oncontextmenu" attached="true" submitMode="ajax" attachTo="#{mediaOutput}">
+		<rich:menuItem value="#{messages['image.delete']}" limitToList="true"
+			actionListener="#{confirmationPopupHelper.initImagePopup('deleteImage',messages['image.delete.confirm'],image)}"
+			oncomplete="#{rich:component('confirmation')}.show()"
+			reRender="confirmation">
+		</rich:menuItem>
+		<rich:menuItem value="#{messages['image.edit']}" limitToList="true"
+			actionListener="#{controller.startEditImage(image)}"
+			reRender="mainArea">
+		</rich:menuItem>
+		<rich:menuItem value="#{messages['image_show']}" limitToList="true"
+			actionListener="#{controller.showImage(image)}"
+			reRender="mainArea">
+		</rich:menuItem>
+	</rich:contextMenu>
+	...]]></programlisting> 
+	<para>
+        	That is a listing from <code>\includes\contextMenu\CMForImage.xhtml</code>. 
+		This code is included into the very bottom of  imageList.xhtml file like this:  
+        </para>
+        
+        <programlisting role="XML"><![CDATA[...
+		<ui:include src="/includes/contextMenu/CMForImage.xhtml" >
+			<ui:param name="image" value="#{image}" />
+			<ui:param name="mediaOutput" value="#{rich:clientId('img')}"/>
+		</ui:include>
+		...]]></programlisting> 
+        
+        <para>The context menu code is included with 2 parameters: <code>&quot;image&quot;</code> and <code>&quot;mediaOutput&quot;</code>. The first ( <code>&quot;image&quot;</code>) is the name of the current image. The <emphasis role="bold"><property>&lt;a4j:repeat&gt;</property></emphasis> iterates over a collection of images(see the next listing), the name of the current image is stored in the <code>&quot;image&quot;</code> variable. <code>&quot;mediaOutput&quot;</code> parameter is set with the help of <code>rich:clientId('id')</code> that returns client id by short id or null if the component with the id specified hasn't been found.   </para>
+
+        <para>This is the block of code that displays each image: </para>
+	
+    <programlisting role="XML"><![CDATA[...
+<a4j:repeat id="imageList" value="#{model.images}" var="image" rows="20">
+		<h:panelGroup layout="block" styleClass="#{imageSizeHelper.currentDimension.cssClass}">
+			<h:graphicImage styleClass="pr_photo_bg" style="#{imageSizeHelper.currentDimension.imageBgStyle}" value="#{imageSizeHelper.currentDimension.imageBg}" />
+			<h:panelGrid cellpadding="0">
+				<h:panelGroup>
+					<a4j:commandLink
+							actionListener="#{controller.showImage(image)}"
+							reRender="mainArea, treePanel">					
+								<a4j:mediaOutput id="img"  element="img" 
+									createContent="#{imageLoader.paintImage}" 
+									style="border : 1px solid #FFFFFF;"
+									value="#{fileManager.transformPath(image.fullPath, imageSizeHelper.currentDimension.filePostfix)}">
+									<f:param value="#{imageSizeHelper.currentDimension.x}" name="x" />
+									<rich:dragSupport rendered="#{controller.isUserImage(image)}" reRender="mainArea, treePanel" id="dragSource" dragIndicator="dragIndicator"
+                                dragType="image" dragValue="#{image}">
+                                <rich:dndParam id="dragParam" name="label" value="#{image.name}" />
+                            </rich:dragSupport>
+							</a4j:mediaOutput>
+					</a4j:commandLink>
+					<br/>
+				</h:panelGroup>
+			</h:panelGrid>				
+			<h:panelGroup layout="block" styleClass="photo_name">#{image.name}</h:panelGroup>		
+			<h:panelGroup layout="block" styleClass="photo_data">
+				<h:outputText value="#{image.created}">
+					<f:convertDateTime />
+				</h:outputText>
+			</h:panelGroup>		
+		</h:panelGroup>
+		<ui:include src="/includes/contextMenu/CMForImage.xhtml" >
+			<ui:param name="image" value="#{image}" />
+			<ui:param name="mediaOutput" value="#{rich:clientId('img')}"/>
+		</ui:include>
+	</a4j:repeat>
+	
+	...]]></programlisting> 
+	
+        <para>The key attribute of <emphasis role="bold"><property>&lt;contextMenu&gt;</property></emphasis> is <emphasis><property>&quot;attachTo&quot;</property></emphasis> that specifies for which control the context menu is displayed. As you can see this attribute has <code>#{mediaOutput}</code> as its value(<code> attachTo="#{mediaOutput}"</code> so this way the id of the current image is passed to <emphasis role="bold"><property>&lt;rich:contexMenu&gt;</property></emphasis> and this is how it knows what photo is affected by user actions. </para>
+       
+
+</section>
+

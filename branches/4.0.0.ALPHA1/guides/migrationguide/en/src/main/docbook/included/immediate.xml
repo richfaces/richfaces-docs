@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="immediate" role="NotInToc">
+    <?dbhtml filename="immediate.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>a4j:support</keyword>
+            <keyword>immediate</keyword>
+            <keyword>JSP</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>Behavior of the &quot;immediate&quot; attribute is changed</title>
+    <section>
+        <title>Description</title>
+        <para>
+        Since we&apos;ve migrated to the <property>JSF 1.2</property> standard in <property>RichFaces 3.2.0</property> the 
+	<emphasis><property>&quot;immediate&quot;</property></emphasis> attribute works exactly like it should according to the JSF 1.2 specification:
+	the default ActionListener stops execution after the Apply Request Values phase, so there is no interaction with a model any more. 
+	We could not use the standard JSF API before as soon as we had to support not only JSF 1.2, but JSF 1.1 as well.
+	We used our own hack that emulated the behavior of the attribute. 
+	This approach had a side effect that allowed interacting with a model but now this side effect is gone.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=133031">RichFaces Forum</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+        <programlisting role="XML"><![CDATA[...
+<h:form>
+	<h:inputText id="oneA" value="#{bean.name}" size="8">
+		<a4j:support event="onkeyup" reRender="three" immediate="true" focus="oneA" action="#{bean.actionOne}"/>
+	</h:inputText>
+	<h:selectBooleanCheckbox id="twoA" value="#{bean.option}">
+		<a4j:support event="onclick" reRender="three" immediate="true" focus="twoA" action="#{bean.actionOne}"/>
+	</h:selectBooleanCheckbox>
+	<h:commandButton id="go" value="Submit"/>
+</h:form>
+<h:outputText id="three" value="#{bean.name} #{bean.option}"/>	
+...]]></programlisting>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+           Behavior of the <emphasis><property>&quot;immediate&quot;</property></emphasis> attribute is changed according to to JSF 1.2 specification.
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+            The solution includes the following steps:
+        </para>
+	<itemizedlist>
+            <listitem>
+                <para>
+                replace <emphasis><property>&quot;immediate&quot;</property></emphasis> attribute with <code>ajaxSingle=&quot;true&quot;</code> 
+                </para>
+            </listitem>
+	    <listitem>
+                <para>
+		add <emphasis><property>&quot;process&quot;</property></emphasis> attribute. 
+		This attribute points to the components that should be processed together with the command component.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+</section>

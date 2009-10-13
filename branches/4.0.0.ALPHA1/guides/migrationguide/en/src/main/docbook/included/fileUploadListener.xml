@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="fileUploadListener" role="NotInToc">
+    <?dbhtml filename="fileUploadListener.html"?>
+    <sectioninfo>
+        <keywordset>
+            <keyword>fileUpload</keyword>
+            <keyword>listener</keyword>
+        </keywordset>
+    </sectioninfo>
+    <title>The &quot;fileUploadListener&quot; with MyFaces or JSF-RI 1.2_04</title>
+    <section>
+        <title>Description</title>
+        <para>
+            The  <emphasis><property>&quot;fileUploadListener&quot;</property></emphasis>(<emphasis><property>&quot;UploadEvent&quot;</property></emphasis> event) is not invoked 
+            when <property>MyFaces</property> or <property>JSF-RI 1.2_04</property> is used. But file is uploaded successfully.
+        </para>
+    </section>
+    <section>
+        <title>Links</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://jira.jboss.com/jira/browse/RF-2935">Jira(for MyFaces)</ulink>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=132530&amp;postdays=0&amp;postorder=asc&amp;start=0">RichFaces Forum</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </section>
+    <section>
+        <title>How to reproduce</title>    
+        <para>
+            <property>MyFaces</property> or <property>JSF-RI 1.2_04</property> with default configuration
+        </para>
+    </section>
+    <section>
+        <title>Causes</title>
+        <para>
+            In case <property>MyFaces</property> <code>org.apache.myfaces.CHECK_EXTENSIONS_FILTER</code> parameter is set to &quot;true&quot;, the parameter checks if the extensions-filter has been properly configured.
+        </para>
+        <para>
+            The reason why usage of  <property>JSF-RI 1.2_04</property> causes the problem is not yet  identified.
+        </para>
+    </section>
+    
+    <section>
+        <title>Workarounds</title>
+        <para>
+            To avoid generation of errors from <property>MyFaces</property> in case of invalid filter configuration 
+            you can set up the following parameters in <property>web.xml</property>: 
+        </para>
+        <programlisting role="XML"><![CDATA[...
+<context-param>
+    <param-name>org.apache.myfaces.CHECK_EXTENSIONS_FILTER</param-name>
+    <param-value>false</param-value>
+</context-param> 
+...]]></programlisting>
+        <para>
+            In case of JSF 1.2_04, upgrading to <ulink url="https://javaserverfaces.dev.java.net/servlets/ProjectDocumentList?folderID=8467&amp;expandFolder=8467&amp;folderID=8819">JSF-RI 1.2_07</ulink>
+            (last stable version) works.
+        </para>
+    </section>
+</section>

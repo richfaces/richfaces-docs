@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="overview" xreflabel="overview">
+      <?dbhtml filename="overview.html"?>
+      <chapterinfo>
+            <keywordset>
+                  <keyword>RichFaces</keyword>
+                  
+            </keywordset>
+      </chapterinfo>
+      <title>Application Overview </title>
+      <section id="pageFlows">
+      	<title>Page flows</title>
+        <para>
+            
+            The page flow of the application is illustrated in the diagram.
+        </para>
+        <figure>
+          <title>Page Flow diagram</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/diagram.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <section>
+          <title>Page flows: implementation details</title>
+         
+          <para>
+            This section covers how the particular elements that govern page flow are implemented in the application.
+          </para>
+          <section>
+            <title>Registering</title>
+            <para>
+              Registering in is basically the first step a user takes in the application if he/she wants to have access to all features of the application. Have a look at a piece of code from <code>\includes\index\index.xhtml</code>:
+            </para>         
+            <programlisting role="XML"><![CDATA[...
+<h:panelGroup rendered="#{!identity.loggedIn}"	styleClass="top-right-bottom-menu-item-link" layout="block">
+  <h:form style="margin: 0px">
+	<a4j:commandLink value="#{messages['login.register']}"actionListener="#{authenticator.goToRegister}" reRender="mainArea" />
+  </h:form>
+</h:panelGroup>
+...]]></programlisting> 
+            <para>When the button is hit the <code>goToRegister</code> method of the <code>Authenticator</code> class is invoked and the <code>START_REGISTER_EVENT</code> is raised. These action display the registration form that is included from <code>\includes\register.xhtml</code>. </para>
+            
+                        
+            <para>The <emphasis role="bold"><property>&lt;a4j:commandLink&gt;</property></emphasis> displays the link to the registration form and invokes the  <code>goToRegister</code> method.
+            </para>
+            <para>When all fields are filled out with correct values the <code>authenticator.register(user)</code> is triggered and a new user object is declared. </para>
+          </section>
+          
+          <section>
+            <title>Navigation Between Pages</title>
+            <para>
+  Technically, user does not browse between pages of the application: every content page is included into the content area of <code>index.xhtml</code> file after a certain action performed by user.
+            </para>
+            <programlisting role="XML"><![CDATA[...
+<h:panelGroup styleClass="content_box" layout="block">
+  <ui:include src="#{model.mainArea.template}" />
+</h:panelGroup>
+...]]></programlisting> 
+           <figure>
+             <title>Content Area</title>
+             <mediaobject>
+               <imageobject>
+                 <imagedata fileref="images/contentArea.png"/>
+               </imageobject>
+             </mediaobject>
+           </figure> 
+            
+            <para>
+              
+              The <code>NavigationEnum</code> enumeration  encapsulated all possible states, that can be applied to content area (&quot;mainArea&quot;)  on the page.
+              
+            </para>
+            
+            <programlisting role="XML"><![CDATA[...
+ public enum NavigationEnum {
+	ANONYM("includes/publicShelves.xhtml"),
+	FILE_UPLOAD("includes/fileUpload.xhtml"),
+	USER_PREFS("includes/userPrefs.xhtml"),
+	REGISTER("includes/register.xhtml"),
+	SEARCH("includes/search.xhtml"),
+	ALBUM_PREVIEW("includes/album.xhtml"),
+	ALBUM_IMAGE_PREVIEW("/includes/image.xhtml"),
+	SHELF_PREVIEW("/includes/shelf.xhtml"),
+	ALL_SHELFS("/includes/userShelves.xhtml"),
+	TAGS("includes/tag.xhtml"),
+	ALL_ALBUMS("/includes/userAlbums.xhtml"),
+	ALL_IMAGES("/includes/userImages.xhtml"),
+	ALBUM_IMAGE_EDIT("/includes/imageEdit.xhtml"),
+	ALBUM_EDIT("/includes/albumEdit.xhtml"),
+	SHELF_EDIT("/includes/shelfEdit.xhtml"),
+	SHELF_UNVISITED("/includes/shelfUnvisited.xhtml"),
+	USER_SHARED_ALBUMS("/includes/userSharedAlbums.xhtml"),
+	USER_SHARED_IMAGES("/includes/userSharedImages.xhtml"),
+	ALBUM_UNVISITED("/includes/albumUnvisited.xhtml");
+...
+}
+]]></programlisting> 
+            
+            <para>
+              
+              This class specifies which file is included depending on some user action.     
+              The template to be loaded is identified according to some condition  in the Controller
+              (<code>Controllor.java</code>) class and is saved to the Model (<code>Model.java</code>). During <code>index.xhtml</code> page rendering the value is taken from the Model to define what should be rendered to the page.
+            </para>
+            </section>
+        
+      </section>
+      <section id="dataModel">
+      	<title>Data Model</title>
+        <para>
+             The data model of the application has the following structure:
+        </para>
+        
+        <figure>
+          <title>Photo Album Data Model</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/erd.png"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+      </section>
+        </section>
+      <!--section id="setUp">
+      	<title>Project Set Up</title>
+        <para>
+             Work in progress...
+        </para>
+      </section-->
+</chapter>
+
