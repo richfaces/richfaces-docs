@@ -5,62 +5,1275 @@
 <chapter id="chap-Migration_Guide-Changes_and_new_features">
 	<title>Changes and new features</title>
 	<para>
-		Incomplete
+		There have been several changes made to the RichFaces framework for version 4.0 that may affect migrated projects.
 	</para>
-	<section id="sect-Migration_Guide-Changes_and_new_features-JSF_2.0_integration">
-		<title>JSF 2.0 integration</title>
+	<section id="sect-Migration_Guide-Changes_and_new_features-JSF_2_integration">
+		<title>JSF 2 integration</title>
 		<para>
-			Incomplete
+			RichFaces 4.0 has full support for JavaServer Faces (<acronym>JSF</acronym>) 2.
 		</para>
 	</section>
 	
-	<section id="sect-Migration_Guide-Changes_and_new_features-Standardized_naming">
-		<title>Standardized naming</title>
+	<section id="sect-Migration_Guide-Changes_and_new_features-Standardized_attributes">
+		<title>Standardized attributes</title>
 		<para>
-			Incomplete
+			Several component and event attribute names have been changed from those used in previous versions of RichFaces. The names have been changed to be more consistent with attribute names used by JavaServer Faces 2, so as to provide standardized usage. Many of the name changes also provide more consistency and cleanliness within the framework itself. Other attributes have been deprecated in favor of consistent functionality.
 		</para>
+		<section id="sect-Migration_Guide-Standardized_attributes-Name_changes">
+			<title>Name changes</title>
+			<para>
+				<xref linkend="tabl-Migration_Guide-Name_changes-Attribute_name_changes" /> lists attribute names that have been changed, and which components and events are affected.
+			</para>
+			<table id="tabl-Migration_Guide-Name_changes-Attribute_name_changes">
+				<title>Attribute name changes</title>
+				<tgroup cols="3">
+					<thead>
+						<row>
+							<entry>
+								Attribute details
+							</entry>
+							<entry>
+								Affected a4j components
+							</entry>
+							<entry>
+								Affected rich components
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>
+								<para>
+									<property>process</property>
+								</para>
+								<para>
+									Changed to <property>execute</property> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toggleControl&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:treeNode&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<property>reRender</property>
+								</para>
+								<para>
+									Changed to <property>render</property> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:ajaxValidator&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dragSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:extendedDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:scrollableDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:treeNode&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<property>eventsQueue</property>
+								</para>
+								<para>
+									Changed to <property>queue</property> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:ajaxValidator&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dragSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:scrollableDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toggleControl&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<property>limitToList</property>
+								</para>
+								<para>
+									Changed to <property>limitRender</property> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:ajaxValidator&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dragSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:scrollableDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toggleControl&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:treeNode&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<property>onbeforedomupdate</property>
+								</para>
+								<para>
+									Changed to <property>onsuccess</property> in 4.0.
+								</para>
+							</entry>
+							<entry>
+							</entry>
+							<entry>
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+		</section>
+		
+		<section id="sect-Migration_Guide-Standardized_attributes-Deprecated_attributes">
+			<title>Deprecated attributes</title>
+			<para>
+				<xref linkend="tabl-Migration_Guide-Deprecated_attributes-Deprecated_attributes" /> lists attributes which have been deprecated in RichFaces 4.0, along with preferred ways to replicate their functionality.
+			</para>
+			<table id="tabl-Migration_Guide-Deprecated_attributes-Deprecated_attributes">
+				<title>Deprecated attributes</title>
+				<tgroup cols="3">
+					<thead>
+						<row>
+							<entry>
+								Attribute details
+							</entry>
+							<entry>
+								Affected a4j components
+							</entry>
+							<entry>
+								Affected rich components
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>
+								<para>
+									<property>ignoreDupResponses</property>
+								</para>
+								<para>
+									Deprecated. Functionality moved to <property>queue</property> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:queue&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:ajaxValidator&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dragSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:scrollableDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toggleControl&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:treeNode&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<property>requestDelay</property>
+								</para>
+								<para>
+									Deprecated. Functionality moved to <property>queue</property> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:queue&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:ajaxValidator&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dragSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:scrollableDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<property>ajaxSingle</property>
+								</para>
+								<para>
+									Deprecated. Use <property>execute="@this"</property> in 4.0 instead.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:fileUpload&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toggleControl&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toolTip&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:treeNode&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+		</section>
+
 	</section>
 	
 	<section id="sect-Migration_Guide-Changes_and_new_features-Performance">
 		<title>Performance</title>
 		<para>
-			Incomplete
+			The RichFaces framework has been extensively refined to provide better performance for applications. This includes improvements to bandwidth requirements for generated markup, size and number of required resources for Javascript and Cascading Style Sheets (<acronym>CSS</acronym>), and other general performance improvements.
 		</para>
+		<section id="sect-Migration_Guide-Performance-Bandwidth_for_generated_markup">
+			<title>Bandwidth for generated markup</title>
+			<para>
+				Several considerations have been made to improve the use of bandwidth when generating markup.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<acronym>XHTML</acronym> markup has been simplified and streamlined using best practices, such as avoiding tables for layout.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Default attribute values are not rendered.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Javascript use has been simplified with shorter function names and only one proxy call per form.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Yahoo!&#39;s best practices for high performance have been implemented. Refer to <ulink url="http://developer.yahoo.com/performance/">http://developer.yahoo.com/performance/</ulink> for details on Yahoo!&#39;s guidelines.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Performance-Resource_requirements">
+			<title>Resource requirements</title>
+			<para>
+				The three Javascript libraries previously used by the RichFaces framework have been consolidated and standardized into a single library for better performance.
+			</para>
+			<para>
+				Usage of Cascading Style Sheets (<acronym>CSS</acronym>) has been simplified, trimming out duplicate or otherwise unnecessary entries and better utilizing the cascading approach for attribute values.
+			</para>
+		</section>
+
 	</section>
 	
-	<section id="sect-Migration_Guide-Changes_and_new_features-New_features">
-		<title>New features</title>
+	<section id="sect-Migration_Guide-Changes_and_new_features-Feature_changes">
+		<title>Feature changes</title>
 		<para>
-			Incomplete
+			Features have been altered or added to existing components and behaviors in the RichFaces 4.0 framework. Refer to the <citetitle>Developer Guide</citetitle> for full details on how to make use of any new features.
 		</para>
+		<section id="sect-Migration_Guide-Feature_changes-Server_side_process_and_render_mechanisms">
+			<title>Server-side process and render mechanisms</title>
+			<para>
+				Some of the mechanisms for server-side processing and rendering have been altered.
+			</para>
+			<section id="sect-Migration_Guide-Server_side_process_and_render_mechanisms-Regions">
+				<title>Regions</title>
+				<para>
+					It is now possible to define zones for processing on the server-side without specifying <property>execute</property> definitions for every component. The <property>execute="@region"</property> property can be used to process regions defined on the server side.
+				</para>
+				<important>
+					<title>Important</title>
+					<para>
+						This approach is the different to that in <acronym>JSF 2</acronym>, which uses default values of <property>execute="@this"</property> and <property>render="@this"</property> if no other value is defined.
+					</para>
+				</important>
+			</section>
+			
+			<section id="sect-Migration_Guide-Server_side_process_and_render_mechanisms-execute">
+				<title><property>execute</property></title>
+				<para>
+					The <property>execute</property> property has been extended to include the <literal>@region</literal> keyword, which facilitates the region rendering changes described in <xref linkend="sect-Migration_Guide-Server_side_process_and_render_mechanisms-Regions" />.
+				</para>
+			</section>
+			
+			<section id="sect-Migration_Guide-Server_side_process_and_render_mechanisms-render">
+				<title><property>render</property></title>
+				<para>
+					The <property>render</property> property can also be defined from the server side, using actions and listeners.
+				</para>
+			</section>
+			
+			<section id="sect-Migration_Guide-Server_side_process_and_render_mechanisms-Differences_between_JSF_and_RichFaces_mechanisms">
+				<title>Differences between <acronym>JSF</acronym> and RichFaces mechanisms</title>
+				<para>
+					JavaServer Faces (<acronym>JSF</acronym>) declares render and execute processes on the client side, while RichFaces declares server-side definitions of lists.
+				</para>
+			</section>
+
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-onbegin_event_attribute">
+			<title><property>onbegin</property> event attribute</title>
+			<para>
+				The <property>onbegin</property> attribute has been added to support <acronym>JSF</acronym> events with the type <literal>begin</literal>.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jcommandButton_and_a4jcommandLink">
+			<title><classname>&lt;a4j:commandButton&gt;</classname> and <classname>&lt;a4j:commandLink&gt;</classname></title>
+			<para>
+				Both the <classname>&lt;a4j:commandButton&gt;</classname> and <classname>&lt;a4j:commandLink&gt;</classname> use the <property>onclick</property> event attribute instead of the <property>onbegin</property> attribute.
+			</para>
+		</section>
+		
+		<!--    
+		<section>
+			<title><classname>&lt;a4j:jsFunction&gt;</classname></title>
+			<para>
+				
+			</para>
+		</section>
+		    -->
+		<section id="sect-Migration_Guide-Feature_changes-a4jlog">
+			<title><classname>&lt;a4j:log&gt;</classname></title>
+			<para>
+				The <classname>&lt;a4j:log&gt;</classname> behavior has had several features modified.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						It is now possible to switch levels on the client side.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The log can now be displayed inline with page markup, in a new browser window, or in the browser console.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						An application context parameter can now be defined to log all application pages.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jmessage_and_a4jmessages">
+			<title><classname>&lt;a4j:message&gt;</classname> and <classname>&lt;a4j:messages&gt;</classname></title>
+			<para>
+				Both the <classname>&lt;a4j:message&gt;</classname> and <classname>&lt;a4j:messages&gt;</classname> components can be automatically updated by any Ajax request, except those requests with <property>limitRender = true</property>. Attributes from previously-passed states are now cleared.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4joutputPanel">
+			<title><classname>&lt;a4j:outputPanel&gt;</classname></title>
+			<para>
+				The <classname>&lt;a4j:outputPanel&gt;</classname> component has had several features modified.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The default value for the <property>layout</property> attribute is now <literal>block</literal>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The default value for the <property>ajaxRendered</property> attribute is now <literal>false</literal>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If a child component is not to be rendered, a placeholder element will be included to preserve the layout.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jpush_and_a4jpoll">
+			<title><classname>&lt;a4j:push&gt;</classname> and <classname>&lt;a4j:poll&gt;</classname></title>
+			<para>
+				Both the <classname>&lt;a4j:push&gt;</classname> and <classname>&lt;a4j:poll&gt;</classname> behaviors now raise a client-side event. For <classname>&lt;a4j:push&gt;</classname>, this is the <property>ondataavailable</property> event, while for <classname>&lt;a4j:poll&gt;</classname> it is the <property>ontimeevent</property>.
+			</para>
+		</section>
+		
+		<!--    
+		<section>
+			<title><classname>&lt;a4j:region&gt;</classname></title>
+			<para>
+			
+			</para>
+		</section>
+		    -->
+		<section id="sect-Migration_Guide-Feature_changes-a4jstatus">
+			<title><classname>&lt;a4j:status&gt;</classname></title>
+			<para>
+				In RichFaces 4.0, <classname>&lt;a4j:status&gt;</classname> has been implemented as a component rather than a behavior, as it should have a representation in the Document Object Model (<acronym>DOM</acronym>) tree.
+			</para>
+			<para>
+				The <classname>&lt;a4j:status&gt;</classname> component has had several other features modified.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<classname>&lt;a4j:status&gt;</classname> no longer needs to be associated with a <classname>&lt;a4j:region&gt;</classname>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<classname>&lt;a4j:status&gt;</classname> can now report request errors. An additional <property>errorText</property> attribute and <literal>error</literal> facet have been added to show if an error was raised when a request completed.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The event attributes now include <property>onstart</property>, <property>onstop</property>, <property>onerror</property>, and <property>onsuccess</property>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Multiple statuses can be presented for the same view or form, or a separate status attached to each component.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+
 	</section>
 	
-	<section id="sect-Migration_Guide-Changes_and_new_features-New_components">
-		<title>New components</title>
+	<section id="sect-Migration_Guide-Changes_and_new_features-New_components_and_behaviors">
+		<title>New components and behaviors</title>
 		<para>
-			Incomplete
+			Several new components and behaviors have been added to RichFaces 4.0, some of which replace the functionality of deprecated components and behaviors.
 		</para>
+		<section id="sect-Migration_Guide-New_components_and_behaviors-a4jajax">
+			<title>&lt;a4j:ajax&gt;</title>
+			<para>
+				The <classname>&lt;a4j:ajax</classname> behavior replaces the deprecated <classname>&lt;a4j:support&gt;</classname> behavior.
+			</para>
+			<para>
+				<classname>&lt;a4j:ajax&gt;</classname> uses <acronym>JSF 2</acronym>, and can be used to add Ajax capabilities to any non-Ajax JSF or RichFaces component. For details on how to use <classname>&lt;a4j:ajax&gt;</classname>, refer to the <citetitle>Developer Guide</citetitle>.
+			</para>
+		</section>
+
 	</section>
 	
-	<section id="sect-Migration_Guide-Changes_and_new_features-Deprecated_features">
-		<title>Deprecated features</title>
+	<section id="sect-Migration_Guide-Changes_and_new_features-Deprecated_components_and_behaviors">
+		<title>Deprecated components and behaviors</title>
 		<para>
-			Incomplete
+			Some components and behaviors have been deprecated in RichFaces 4.0. For the most part these items have their functionality replicated by another component or behavior.
 		</para>
-	</section>
-	
-	<section id="sect-Migration_Guide-Changes_and_new_features-Deprecated_components">
-		<title>Deprecated components</title>
-		<para>
-			Incomplete
-		</para>
-	</section>
-	
-	<section id="sect-Migration_Guide-Changes_and_new_features-Other_changes">
-		<title>Other changes</title>
-		<para>
-			Incomplete
-		</para>
+		<section id="sect-Migration_Guide-Deprecated_components_and_behaviors-a4jpage">
+			<title>&lt;a4j:page&gt;</title>
+			<para>
+				RichFaces 4.0 drops support for the <classname>&lt;a4j:page&gt;</classname> component. The component was previously used for solving incompatibility in the JavaServer Pages (<acronym>JSP</acronym>) environment with Apache MyFaces in early Ajax4jsf versions.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Deprecated_components_and_behaviors-a4jsupport">
+			<title>&lt;a4j:support&gt;</title>
+			<para>
+				The <classname>&lt;a4j:support&gt;</classname> component had been deprecated and its functionality replaced by the <classname>&lt;a4j:ajax&gt;</classname> component. Refer to <xref linkend="sect-Migration_Guide-New_components_and_behaviors-a4jajax" /> for details.
+			</para>
+		</section>
+
 	</section>
 
 </chapter>

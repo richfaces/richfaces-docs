@@ -5,20 +5,110 @@
 <chapter id="chap-Migration_Guide-Upgrading">
 	<title>Upgrading</title>
 	<para>
-		Incomplete
+		Upgrading an existing project to use the RichFaces 4.0 framework only requires that the new libraries replace the old ones. For a complete installation guide for new projects, refer to the <citetitle>Developer Guide</citetitle>.
 	</para>
 	<section id="sect-Migration_Guide-Upgrading-Before_upgrading">
 		<title>Before upgrading</title>
 		<para>
-			Incomplete
+			Ensure you make a back-up copy of any projects and settings before upgrading an existing RichFaces installation.
+		</para>
+		<para>
+			Check that the environment you are working in meets the RichFaces technical requirements listed in the <citetitle>Developer Guide</citetitle>.
 		</para>
 	</section>
 	
 	<section id="sect-Migration_Guide-Upgrading-Installation">
 		<title>Installation</title>
-		<para>
-			Incomplete
-		</para>
+		<procedure>
+			<step id="step-Migration_Guide-Installation-Download_RichFaces_packages">
+				<title>Download RichFaces packages</title>
+				<para>
+					If you have not already done so, download the RichFaces binaries from the RichFaces downloads page at <ulink url="http://www.jboss.org/richfaces/download/stable.html">http://www.jboss.org/richfaces/download/stable.html</ulink>.
+				</para>
+			</step>
+			<step id="step-Migration_Guide-Installation-Install_libraries">
+				<title>Install libraries</title>
+				<para>
+					Copy the following libraries from the RichFaces package to your application&#39;s <filename class="directory">WEB-INF/lib</filename> libraries directory:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<filename class="libraryfile">richfaces-api</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename class="libraryfile">richfaces-impl</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename class="libraryfile">core-ui</filename>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>
+					Existing projects should already contain the following libraries; if not, they will need to be included in the libraries directory as well:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<filename class="libraryfile">commons-logging</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename class="libraryfile">commons-beanutils</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename class="libraryfile">slf4j-api</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename class="libraryfile">slf4j-log4j12</filename>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</step>
+			<step id="step-Migration_Guide-Installation-Namespace_and_taglib_declaration">
+				<title>Namespace and taglib declaration</title>
+				<para>
+					The RichFaces namespaces need to be declared in the project&#39;s XHTML pages as follows:
+				</para>
+				
+<programlisting role="XML">
+&lt;ui:composition
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:a4j="http://richfaces.org/a4j"
+xmlns:rich="http://richfaces.org/rich"&gt;
+   ...
+&lt;/ui:composition&gt;
+</programlisting>
+				<para>
+					Also add the RichFaces libraries to the JSP pages using <code>taglib</code>.
+				</para>
+				
+<programlisting role="XML">
+&lt;%@ taglib uri="http://richfaces.org/a4j" prefix="a4j"%&gt;
+&lt;%@ taglib uri="http://richfaces.org/rich" prefix="rich"%&gt;
+</programlisting>
+				<para>
+					The XHTML namespace and JSP inclusions are the same as those declared for existing projects.
+				</para>
+				<note>
+					<title>Note</title>
+					<para>
+						With RichFaces 4.0, it is no longer necessary to modify the <filename>web.xml</filename> and <filename>faces-config.xml</filename> files of a project to use the framework.
+					</para>
+				</note>
+			</step>
+		</procedure>
+
 	</section>
 
 </chapter>
