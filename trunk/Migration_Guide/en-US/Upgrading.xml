@@ -5,7 +5,7 @@
 <chapter id="chap-Migration_Guide-Upgrading">
 	<title>Upgrading</title>
 	<para>
-		Upgrading an existing project to use the RichFaces 4.0 framework only requires that the new libraries replace the old ones. For a complete installation guide for new projects, refer to the <citetitle>Developer Guide</citetitle>.
+		Upgrading an existing project to use the RichFaces &VERSION; framework only requires that the new libraries replace the old ones. For a complete installation guide for new projects, refer to the <citetitle>Developer Guide</citetitle>.
 	</para>
 	<section id="sect-Migration_Guide-Upgrading-Before_upgrading">
 		<title>Before upgrading</title>
@@ -23,7 +23,7 @@
 			<step id="step-Migration_Guide-Installation-Download_RichFaces_packages">
 				<title>Download RichFaces packages</title>
 				<para>
-					If you have not already done so, download the RichFaces binaries from the RichFaces downloads page at <ulink url="http://www.jboss.org/richfaces/download/stable.html">http://www.jboss.org/richfaces/download/stable.html</ulink>.
+					If you have not already done so, download the RichFaces binaries from the RichFaces downloads page at <ulink url="http://www.jboss.org/richfaces/download.html">http://www.jboss.org/richfaces/download.html</ulink>.
 				</para>
 			</step>
 			<step id="step-Migration_Guide-Installation-Install_libraries">
@@ -74,16 +74,23 @@
 					</listitem>
 				</itemizedlist>
 			</step>
+			<step id="step-Migration_Guide-Installation-Set_up_Maven">
+				<title>Set up Maven</title>
+				<para>
+					For existing projects, you should already have a Maven installation set up for RichFaces. If not, refer to the <citetitle>Developer Guide</citetitle> for how to set up Maven.
+				</para>
+			</step>
 			<step id="step-Migration_Guide-Installation-Namespace_and_taglib_declaration">
 				<title>Namespace and taglib declaration</title>
 				<para>
-					The RichFaces namespaces need to be declared in the project&#39;s XHTML pages as follows:
+					The namespace and library inclusions are the same as those for previous versions of RichFaces.
+				</para>
+				<para>
+					The RichFaces namespaces need to be declared in the project&#39;s XHTML pages.
 				</para>
 				
 <programlisting role="XML">
 &lt;ui:composition
-xmlns="http://www.w3.org/1999/xhtml"
-xmlns:ui="http://java.sun.com/jsf/facelets"
 xmlns:a4j="http://richfaces.org/a4j"
 xmlns:rich="http://richfaces.org/rich"&gt;
    ...
@@ -97,13 +104,10 @@ xmlns:rich="http://richfaces.org/rich"&gt;
 &lt;%@ taglib uri="http://richfaces.org/a4j" prefix="a4j"%&gt;
 &lt;%@ taglib uri="http://richfaces.org/rich" prefix="rich"%&gt;
 </programlisting>
-				<para>
-					The XHTML namespace and JSP inclusions are the same as those declared for existing projects.
-				</para>
 				<note>
 					<title>Note</title>
 					<para>
-						With RichFaces 4.0, it is no longer necessary to modify the <filename>web.xml</filename> and <filename>faces-config.xml</filename> files of a project to use the framework.
+						With RichFaces &VERSION;, it is no longer necessary to modify the <filename>web.xml</filename> and <filename>faces-config.xml</filename> files of a project to use the framework.
 					</para>
 				</note>
 			</step>
