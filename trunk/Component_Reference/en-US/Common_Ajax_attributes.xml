@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+
+<chapter id="chap-Component_Reference-Common_Ajax_attributes">
+	<title>Common Ajax attributes</title>
+	<para>
+		The Ajax components in the <classname>a4j</classname> library share common attributes to perform similar functionality. Most RichFaces components in the <classname>rich</classname> library that feature built-in Ajax support share these common attributes as well.
+	</para>
+	<para>
+		Most attributes have default values, so they need not be explicitly set for the component to function in its default state. These attributes can be altered to customize the behavior of the component if necessary.
+	</para>
+	<section id="sect-Component_Reference-Common_Ajax_attributes-Rendering">
+		<title>Rendering</title>
+		<section id="sect-Component_Reference-Rendering-render">
+			<title><code>render</code></title>
+			<para>
+				The <code>render</code> attribute provides a reference to one or more areas on the page that need updating after an Ajax interaction. It uses the <code>UIComponent.findComponent()</code> algorithm to find the components in the component tree using their <code>id</code> attributes as a reference. Components can be referenced by their <code>id</code> attribute alone, or by a hierarchy of components&#39; <code>id</code> attributes to make locating components more efficient. <xref linkend="exam-Component_Reference-render-render_example" /> shows both ways of referencing components. Each command button will correctly render the referenced panel grids, but the second button locates the references more efficiently with explicit hierarchy paths.
+			</para>
+			<example id="exam-Component_Reference-render-render_example">
+				<title>render example</title>
+				
+<programlisting language="xml">
+&lt;h:form id="form1"&gt;
+    &lt;a4j:commandButton value="Basic reference" render="infoBlock, infoBlock2" /&gt;
+    &lt;a4j:commandButton value="Specific reference" render=":infoBlock,:sv:infoBlock2" /&gt;
+&lt;/h:form&gt;
+
+&lt;h:panelGrid id="infoBlock"&gt;
+    ...
+&lt;/h:panelGrid&gt;
+
+&lt;f:subview id="sv"&gt;
+    &lt;h:panelGrid id="infoBlock2"&gt;
+        ...
+    &lt;/h:panelGrid&gt;
+&lt;/f:subview&gt;
+</programlisting>
+			</example>
+			<para>
+				The value of the <code>render</code> attribute can also be an expression written using JavaServer Faces&#39; Expression Language (<acronym>EL</acronym>); this can either be a <type>Set</type>, <type>Collection</type>, <type>Array</type>, or <type>String</type>.
+			</para>
+			<important>
+				<title>Important</title>
+				<para>
+					A common problem with using <code>render</code> occurs when the referenced component has a <code>rendered</code> attribute. <acronym>JSF</acronym> does not mark the place in the browser&#39;s Document Object Model (<acronym>DOM</acronym>) where the rendered component would be placed in case the <code>rendered</code> attribute returns <literal>false</literal>. As such, when RichFaces sends the render code to the client, the page does not update as the place for the update is not known.
+				</para>
+				<para>
+					To work around this issue, wrap the component to be rendered in an <classname>&lt;a4j:outputPanel&gt;</classname> with <code>layout="none"</code>. The <classname>&lt;a4j:outputPanel&gt;</classname> will receive the update and render the component as required.
+				</para>
+			</important>
+		</section>
+		
+		<section id="sect-Component_Reference-Rendering-ajaxRendered">
+			<title>ajaxRendered</title>
+			<para>
+				A component with <code>ajaxRendered="true"</code> will be re-rendered with <emphasis>every</emphasis> Ajax request, even when not referenced by the requesting component&#39;s <code>render</code> attribute. This can be useful for updating a status display or error message without explicitly requesting it.
+			</para>
+			<para>
+				Rendering of components in this way can be repressed by adding <code>limitRender="true"</code> to the requesting component, as described in <xref linkend="sect-Component_Reference-Rendering-limitRender" />.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Rendering-limitRender">
+			<title>limitRender</title>
+			<para>
+				A component with <code>limitRender="true"</code> specified will <emphasis>not</emphasis> cause components with <code>ajaxRendered="true"</code> to re-render, and only those components listed in the <code>render</code> attribute will be updated. This essentially overrides the <code>ajaxRendered</code> attribute in other components.
+			</para>
+			<para>
+				<xref linkend="exam-Component_Reference-limitRender-Rendering_example" /> describes two command buttons, a panel grid rendered by the buttons, and an output panel showing error messages. When the first button is clicked, the output panel is rendered even though it is not explicitly referenced with the <code>render</code> attribute. The second button, however, uses <code>limitRender="true"</code> to override the output panel&#39;s rendering and only render the panel grid.
+			</para>
+			<example id="exam-Component_Reference-limitRender-Rendering_example">
+				<title>Rendering example</title>
+				
+<programlisting role="XML">
+&lt;h:form id="form1"&gt;
+    &lt;a4j:commandButton value="Normal rendering" render="infoBlock" /&gt;
+    &lt;a4j:commandButton value="Limited rendering" render="infoBlock" limitRender="true" /&gt;
+&lt;/h:form&gt;
+
+&lt;h:panelGrid id="infoBlock"&gt;
+    ...
+&lt;/h:panelGrid&gt;
+
+&lt;a4j:outputPanel ajaxRendered="true"&gt;
+    &lt;h:messages /&gt;
+&lt;/a4j:outputPanel&gt;
+</programlisting>
+			</example>
+		</section>
+
+	</section>
+	
+	<section id="sect-Component_Reference-Common_Ajax_attributes-Queuing_and_traffic_control">
+		<title>Queuing and traffic control</title>
+		<section id="sect-Component_Reference-Queuing_and_traffic_control-queue">
+			<title>queue</title>
+			<para>
+				The <code>queue</code> attribute defines the name of the queue that will be used to schedule upcoming Ajax requests. Typically RichFaces does not queue Ajax requests, so if events are produced simultaneously they will arrive at the server simultaneously. This can potentially lead to unpredictable results when the responses are returned. The <code>queue</code> attribute ensures that the
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Component_Reference-Common_Ajax_attributes-Data_processing">
+		<title>Data processing</title>
+		<section id="sect-Component_Reference-Data_processing-execute">
+			<title>execute</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Data_processing-process">
+			<title>process</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Data_processing-immediate">
+			<title>immediate</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Data_processing-bypassUpdates">
+			<title>bypassUpdates</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Component_Reference-Common_Ajax_attributes-Action_and_navigation">
+		<title>Action and navigation</title>
+		<section id="sect-Component_Reference-Action_and_navigation-action">
+			<title>action</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Action_and_navigation-actionListener">
+			<title>actionListener</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Component_Reference-Common_Ajax_attributes-Events_and_Javascript_interactions">
+		<title>Events and Javascript interactions</title>
+		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onsubmit">
+			<title>onsubmit</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onclick">
+			<title>onclick</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Events_and_Javascript_interactions-oncomplete">
+			<title>oncomplete</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onbegin">
+			<title>onbegin</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onsuccess">
+			<title>onsuccess</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onerror">
+			<title>onerror</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Events_and_Javascript_interactions-data">
+			<title>data</title>
+			<para>
+				Incomplete
+			</para>
+		</section>
+
+	</section>
+
+</chapter>
+
