@@ -1,0 +1,1727 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Migration_Guide.ent">
+<!ENTITY PRODUCT "RichFaces">
+<!ENTITY VERSION "4.0">
+<!ENTITY VERSION_LONG "4.0.0.ALPHA2">
+<!ENTITY BOOKID "Migration_Guide">
+<!ENTITY HOLDER "Red Hat">
+<!ENTITY YEAR "2009">
+]>
+<book lang="en-US" status="draft">
+	<bookinfo id="book-Migration_Guide-Migration_Guide" lang="en-US">
+	<title>Migration Guide</title>
+	<subtitle>Migrating existing projects to RichFaces 4.0.0.ALPHA2<remark> (draft)</remark>
+	</subtitle>
+	<productname>RichFaces</productname>
+	<productnumber>4.0</productnumber>
+	<edition>0.1</edition>
+	<pubsnumber>0</pubsnumber>
+	<abstract>
+		<para>This book details how to take an existing RichFaces project and
+upgrade it for use with RichFaces 4.0. It covers changes in
+component usage and behaviors, as well as new framework features
+which may affect existing RichFaces projects.</para></abstract>
+			<corpauthor>
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="./images/rf_logo.png" format="PNG" scalefit="1"/>
+					</imageobject>
+					<textobject>
+						<phrase>Logo</phrase>
+					</textobject>
+				</inlinemediaobject>
+			</corpauthor>
+			<copyright>
+				<year>2009</year>
+				<holder>Red Hat</holder>
+			</copyright>
+			<!-- FOR PUBLICAN  --><legalnotice xml:base="Common_Content/Legal_Notice.xml">
+	<para>
+		Copyright <trademark class="copyright"/> 2009 Red Hat This material may only be distributed subject to the terms and conditions set forth in the GNU Free Documentation License (GFDL), V1.2 or later (the latest version is presently available at <ulink url="http://www.gnu.org/licenses/fdl.txt">http://www.gnu.org/licenses/fdl.txt</ulink>).
+	</para>
+</legalnotice>
+			<authorgroup lang="en-US">
+	<author>
+		<firstname>Sean</firstname>
+		<surname>Rogers</surname>
+		<affiliation>
+			<orgname>Red Hat</orgname>
+			<orgdiv>Engineering Content Services</orgdiv>
+		</affiliation>
+		<email>serogers@redhat.com</email>
+	</author>
+</authorgroup>
+		</bookinfo>
+	<preface id="pref-Migration_Guide-Preface" lang="en-US">
+	<title>Preface</title>
+	<!-- FOR JDOCBOOK --><section xml:base="Common_Content/Conventions.xml">
+	<title>Document Conventions</title>
+	<para>
+		This manual uses several conventions to highlight certain words and phrases and draw attention to specific pieces of information.
+	</para>
+	<para>
+		In PDF and paper editions, this manual uses typefaces drawn from the <ulink url="https://fedorahosted.org/liberation-fonts/">Liberation Fonts</ulink> set. The Liberation Fonts set is also used in HTML editions if the set is installed on your system. If not, alternative but equivalent typefaces are displayed. Note: Red Hat Enterprise Linux 5 and later includes the Liberation Fonts set by default.
+	</para>
+	<section>
+		<title>Typographic Conventions</title>
+		<para>
+			Four typographic conventions are used to call attention to specific words and phrases. These conventions, and the circumstances they apply to, are as follows.
+		</para>
+		<para>
+			<literal>Mono-spaced Bold</literal>
+		</para>
+		<para>
+			Used to highlight system input, including shell commands, file names and paths. Also used to highlight key caps and key-combinations. For example:
+		</para>
+		<blockquote>
+			<para>
+				To see the contents of the file <filename>my_next_bestselling_novel</filename> in your current working directory, enter the <command>cat my_next_bestselling_novel</command> command at the shell prompt and press <keycap>Enter</keycap> to execute the command.
+			</para>
+		</blockquote>
+		<para>
+			The above includes a file name, a shell command and a key cap, all presented in Mono-spaced Bold and all distinguishable thanks to context.
+		</para>
+		<para>
+			Key-combinations can be distinguished from key caps by the hyphen connecting each part of a key-combination. For example:
+		</para>
+		<blockquote>
+			<para>
+				Press <keycap>Enter</keycap> to execute the command.
+			</para>
+			<para>
+				Press <keycombo><keycap>Ctrl</keycap><keycap>Alt</keycap><keycap>F1</keycap></keycombo> to switch to the first virtual terminal. Press <keycombo><keycap>Ctrl</keycap><keycap>Alt</keycap><keycap>F7</keycap></keycombo> to return to your X-Windows session.
+			</para>
+		</blockquote>
+		<para>
+			The first sentence highlights the particular key cap to press. The second highlights two sets of three key caps, each set pressed simultaneously.
+		</para>
+		<para>
+			If source code is discussed, class names, methods, functions, variable names and returned values mentioned within a paragraph will be presented as above, in <literal>Mono-spaced Bold</literal>. For example:
+		</para>
+		<blockquote>
+			<para>
+				File-related classes include <classname>filesystem</classname> for file systems, <classname>file</classname> for files, and <classname>dir</classname> for directories. Each class has its own associated set of permissions.
+			</para>
+		</blockquote>
+		<para>
+			<application>Proportional Bold</application>
+		</para>
+		<para>
+			This denotes words or phrases encountered on a system, including application names; dialogue box text; labelled buttons; check-box and radio button labels; menu titles and sub-menu titles. For example:
+		</para>
+		<blockquote>
+			<para>
+				Choose <guimenu>System &gt; Preferences &gt; Mouse</guimenu> from the main menu bar to launch <application>Mouse Preferences</application>. In the <guilabel>Buttons</guilabel> tab, click the <guilabel>Left-handed mouse</guilabel> check box and click <guibutton>Close</guibutton> to switch the primary mouse button from the left to the right (making the mouse suitable for use in the left hand).
+			</para>
+			<para>
+				To insert a special character into a <application>gedit</application> file, choose <guimenu>Applications &gt; Accessories &gt; Character Map</guimenu> from the main menu bar. Next, choose <guimenu>Search &gt; Find…</guimenu> from the <application>Character Map</application> menu bar, type the name of the character in the <guilabel>Search</guilabel> field and click <guibutton>Next</guibutton>. The character you sought will be highlighted in the <guilabel>Character Table</guilabel>. Double-click this highlighted character to place it in the <guilabel>Text to copy</guilabel> field and then click the <guibutton>Copy</guibutton> button. Now switch back to your document and choose <guimenu>Edit &gt; Paste</guimenu> from the <application>gedit</application> menu bar.
+			</para>
+		</blockquote>
+		<para>
+			The above text includes application names; system-wide menu names and items; application-specific menu names; and buttons and text found within a GUI interface, all presented in Proportional Bold and all distinguishable by context.
+		</para>
+		<para>
+			Note the <guimenu>&gt;</guimenu> shorthand used to indicate traversal through a menu and its sub-menus. This is to avoid the difficult-to-follow 'Select <guimenuitem>Mouse</guimenuitem> from the <guimenu>Preferences</guimenu> sub-menu in the <guimenu>System</guimenu> menu of the main menu bar' approach.
+		</para>
+		<para>
+			<command><replaceable>Mono-spaced Bold Italic</replaceable></command> or <application><replaceable>Proportional Bold Italic</replaceable></application>
+		</para>
+		<para>
+			Whether Mono-spaced Bold or Proportional Bold, the addition of Italics indicates replaceable or variable text. Italics denotes text you do not input literally or displayed text that changes depending on circumstance. For example:
+		</para>
+		<blockquote>
+			<para>
+				To connect to a remote machine using ssh, type <command>ssh <replaceable>username</replaceable>@<replaceable>domain.name</replaceable></command> at a shell prompt. If the remote machine is <filename>example.com</filename> and your username on that machine is john, type <command>ssh john@example.com</command>.
+			</para>
+			<para>
+				The <command>mount -o remount <replaceable>file-system</replaceable></command> command remounts the named file system. For example, to remount the <filename>/home</filename> file system, the command is <command>mount -o remount /home</command>.
+			</para>
+			<para>
+				To see the version of a currently installed package, use the <command>rpm -q <replaceable>package</replaceable></command> command. It will return a result as follows: <command><replaceable>package-version-release</replaceable></command>.
+			</para>
+		</blockquote>
+		<para>
+			Note the words in bold italics above — username, domain.name, file-system, package, version and release. Each word is a placeholder, either for text you enter when issuing a command or for text displayed by the system.
+		</para>
+		<para>
+			Aside from standard usage for presenting the title of a work, italics denotes the first use of a new and important term. For example:
+		</para>
+		<blockquote>
+			<para>
+				When the Apache HTTP Server accepts requests, it dispatches child processes or threads to handle them. This group of child processes or threads is known as a <firstterm>server-pool</firstterm>. Under Apache HTTP Server 2.0, the responsibility for creating and maintaining these server-pools has been abstracted to a group of modules called <firstterm>Multi-Processing Modules</firstterm> (<firstterm>MPMs</firstterm>). Unlike other modules, only one module from the MPM group can be loaded by the Apache HTTP Server.
+			</para>
+		</blockquote>
+	</section>
+	
+	<section>
+		<title>Pull-quote Conventions</title>
+		<para>
+			Two, commonly multi-line, data types are set off visually from the surrounding text.
+		</para>
+		<para>
+			Output sent to a terminal is set in <computeroutput>Mono-spaced Roman</computeroutput> and presented thus:
+		</para>
+		
+<screen>
+books        Desktop   documentation  drafts  mss    photos   stuff  svn
+books_tests  Desktop1  downloads      images  notes  scripts  svgs
+</screen>
+		<para>
+			Source-code listings are also set in <computeroutput>Mono-spaced Roman</computeroutput> but are presented and highlighted as follows:
+		</para>
+		
+<programlisting language="java">
+package org.jboss.book.jca.ex1;
+
+import javax.naming.InitialContext;
+
+public class ExClient
+{
+   public static void main(String args[]) 
+       throws Exception
+   {
+      InitialContext iniCtx = new InitialContext();
+      Object         ref    = iniCtx.lookup("EchoBean");
+      EchoHome       home   = (EchoHome) ref;
+      Echo           echo   = home.create();
+
+      System.out.println("Created Echo");
+
+      System.out.println("Echo.echo('Hello') = " + echo.echo("Hello"));
+   }
+   
+}
+</programlisting>
+	</section>
+	
+	<section>
+		<title>Notes and Warnings</title>
+		<para>
+			Finally, we use three visual styles to draw attention to information that might otherwise be overlooked.
+		</para>
+		<note>
+			<title>Note</title>
+			<para>
+				A Note is a tip or shortcut or alternative approach to the task at hand. Ignoring a note should have no negative consequences, but you might miss out on a trick that makes your life easier.
+			</para>
+		</note>
+		<important>
+			<title>Important</title>
+			<para>
+				Important boxes detail things that are easily missed: configuration changes that only apply to the current session, or services that need restarting before an update will apply. Ignoring Important boxes won't cause data loss but may cause irritation and frustration.
+			</para>
+		</important>
+		<warning>
+			<title>Warning</title>
+			<para>
+				A Warning should not be ignored. Ignoring warnings will most likely cause data loss.
+			</para>
+		</warning>
+	</section>
+
+</section>
+	<!-- PUBLICAN'S ORIGINAL XINCLUDES --><section xml:base="Common_Content/Feedback.xml">
+	<title>We Need Feedback!</title>
+	<indexterm>
+		<primary>feedback</primary>
+		<secondary>contact information for this manual</secondary>
+	</indexterm>
+	<para>
+		You should over ride this by creating your own local Feedback.xml file.
+	</para>
+</section>
+	
+</preface>
+	<chapter id="chap-Migration_Guide-Introduction" lang="en-US">
+	<title>Introduction</title>
+	<para>
+		RichFaces 4.0 introduces many improvements and refinements to the already comprehensive RichFaces framework. Migrating your RichFaces projects to version 4.0 brings several advantages to your applications, including:
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para>
+				complete integration with JavaServer Faces (<acronym>JSF</acronym>) 2.0, using new features and standardizing components;
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				performance improvements throughout the components and core features;
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				consistency throughout the framework, forming conventions and standards; and
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				simplification of project creation, build procedures, and application extension.
+			</para>
+		</listitem>
+	</itemizedlist>
+	<para>
+		This book guides you through the process of migrating to RichFaces 4.0, and highlights important changes that have been made to the framework and how they may affect your projects and applications.
+	</para>
+</chapter>
+	<chapter id="chap-Migration_Guide-Upgrading" lang="en-US">
+	<title>Upgrading</title>
+	<para>
+		Upgrading an existing project to use the RichFaces 4.0 framework only requires that the new libraries replace the old ones. For a complete installation guide for new projects, refer to the <citetitle>Developer Guide</citetitle>.
+	</para>
+	<section id="sect-Migration_Guide-Upgrading-Before_upgrading">
+		<title>Before upgrading</title>
+		<para>
+			Ensure you make a back-up copy of any projects and settings before upgrading an existing RichFaces installation.
+		</para>
+		<para>
+			Check that the environment you are working in meets the RichFaces technical requirements listed in the <citetitle>Developer Guide</citetitle>.
+		</para>
+	</section>
+	
+	<section id="sect-Migration_Guide-Upgrading-Installation">
+		<title>Installation</title>
+		<procedure>
+			<step id="step-Migration_Guide-Installation-Download_RichFaces_packages">
+				<title>Download RichFaces packages</title>
+				<para>
+					If you have not already done so, download the RichFaces binaries from the RichFaces downloads page at <ulink url="http://www.jboss.org/richfaces/download.html">http://www.jboss.org/richfaces/download.html</ulink>.
+				</para>
+			</step>
+			<step id="step-Migration_Guide-Installation-Install_libraries">
+				<title>Install libraries</title>
+				<para>
+					Copy the following libraries from the RichFaces package to your application's <filename class="directory">WEB-INF/lib</filename> libraries directory:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<filename class="libraryfile">richfaces-api</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename class="libraryfile">richfaces-impl</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename class="libraryfile">core-ui</filename>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>
+					Existing projects should already contain the following libraries; if not, they will need to be included in the libraries directory as well:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<filename class="libraryfile">commons-logging</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename class="libraryfile">commons-beanutils</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename class="libraryfile">slf4j-api</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename class="libraryfile">slf4j-log4j12</filename>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</step>
+			<step id="step-Migration_Guide-Installation-Set_up_Maven">
+				<title>Set up Maven</title>
+				<para>
+					For existing projects, you should already have a Maven installation set up for RichFaces. If not, refer to the <citetitle>Developer Guide</citetitle> for how to set up Maven.
+				</para>
+			</step>
+			<step id="step-Migration_Guide-Installation-Namespace_and_taglib_declaration">
+				<title>Namespace and taglib declaration</title>
+				<para>
+					The namespace and library inclusions are the same as those for previous versions of RichFaces.
+				</para>
+				<para>
+					The RichFaces namespaces need to be declared in the project's XHTML pages.
+				</para>
+				
+<programlisting role="XML">
+&lt;ui:composition
+xmlns:a4j="http://richfaces.org/a4j"
+xmlns:rich="http://richfaces.org/rich"&gt;
+   ...
+&lt;/ui:composition&gt;
+</programlisting>
+				<para>
+					Also add the RichFaces libraries to the JSP pages using <code>taglib</code>.
+				</para>
+				
+<programlisting role="XML">
+&lt;%@ taglib uri="http://richfaces.org/a4j" prefix="a4j"%&gt;
+&lt;%@ taglib uri="http://richfaces.org/rich" prefix="rich"%&gt;
+</programlisting>
+				<note>
+					<title>Note</title>
+					<para>
+						With RichFaces 4.0, it is no longer necessary to modify the <filename>web.xml</filename> and <filename>faces-config.xml</filename> files of a project to use the framework.
+					</para>
+				</note>
+			</step>
+		</procedure>
+
+	</section>
+
+</chapter>
+	<chapter id="chap-Migration_Guide-Changes_and_new_features" lang="en-US">
+	<title>Changes and new features</title>
+	<para>
+		There have been several changes made to the RichFaces framework for version 4.0 that may affect migrated projects.
+	</para>
+	<section id="sect-Migration_Guide-Changes_and_new_features-JSF_2_integration">
+		<title>JSF 2 integration</title>
+		<para>
+			RichFaces 4.0 has full support for JavaServer Faces (<acronym>JSF</acronym>) 2.
+		</para>
+	</section>
+	
+	<section id="sect-Migration_Guide-Changes_and_new_features-Standardized_attributes">
+		<title>Standardized attributes</title>
+		<para>
+			Several component and event attribute names have been changed from those used in previous versions of RichFaces. The names have been changed to be more consistent with attribute names used by JavaServer Faces 2, so as to provide standardized usage. Many of the name changes also provide more consistency and cleanliness within the framework itself. Other attributes have been deprecated in favor of consistent functionality.
+		</para>
+		<section id="sect-Migration_Guide-Standardized_attributes-Name_changes">
+			<title>Name changes</title>
+			<para>
+				<xref linkend="tabl-Migration_Guide-Name_changes-Attribute_name_changes"/> lists attribute names that have been changed, and which components and events are affected.
+			</para>
+			<table id="tabl-Migration_Guide-Name_changes-Attribute_name_changes">
+				<title>Attribute name changes</title>
+				<tgroup cols="3">
+					<thead>
+						<row>
+							<entry>
+								Attribute details
+							</entry>
+							<entry>
+								Affected a4j components
+							</entry>
+							<entry>
+								Affected rich components
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>
+								<para>
+									<code>process</code>
+								</para>
+								<para>
+									Changed to <code>execute</code> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toggleControl&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:treeNode&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<code>reRender</code>
+								</para>
+								<para>
+									Changed to <code>render</code> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:ajaxValidator&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dragSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:extendedDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:scrollableDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:treeNode&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<code>eventsQueue</code>
+								</para>
+								<para>
+									Changed to <code>queue</code> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:ajaxValidator&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dragSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:scrollableDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toggleControl&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<code>limitToList</code>
+								</para>
+								<para>
+									Changed to <code>limitRender</code> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:ajaxValidator&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dragSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:scrollableDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toggleControl&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:treeNode&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<code>onbeforedomupdate</code>
+								</para>
+								<para>
+									Changed to <code>onsuccess</code> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<para>
+									All components
+								</para>
+							</entry>
+							<entry>
+								<para>
+									All components
+								</para>
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+		</section>
+		
+		<section id="sect-Migration_Guide-Standardized_attributes-Deprecated_attributes">
+			<title>Deprecated attributes</title>
+			<para>
+				<xref linkend="tabl-Migration_Guide-Deprecated_attributes-Deprecated_attributes"/> lists attributes which have been deprecated in RichFaces 4.0, along with preferred ways to replicate their functionality.
+			</para>
+			<table id="tabl-Migration_Guide-Deprecated_attributes-Deprecated_attributes">
+				<title>Deprecated attributes</title>
+				<tgroup cols="3">
+					<thead>
+						<row>
+							<entry>
+								Attribute details
+							</entry>
+							<entry>
+								Affected a4j components
+							</entry>
+							<entry>
+								Affected rich components
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>
+								<para>
+									<code>ignoreDupResponses</code>
+								</para>
+								<para>
+									Deprecated. Functionality moved to <code>queue</code> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:queue&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:ajaxValidator&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dragSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:scrollableDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toggleControl&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:treeNode&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<code>requestDelay</code>
+								</para>
+								<para>
+									Deprecated. Functionality moved to <code>queue</code> in 4.0.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:queue&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:ajaxValidator&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dragSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:scrollableDataTable&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+						<row>
+							<entry>
+								<para>
+									<code>ajaxSingle</code>
+								</para>
+								<para>
+									Deprecated. Use <code>execute="@this"</code> in 4.0 instead.
+								</para>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:ajax&gt;</classname> (was <classname>&lt;a4j:support&gt;</classname>)
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandButton&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:commandLink&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:form&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:jsFunction&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:poll&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;a4j:push&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+							<entry>
+								<itemizedlist>
+									<listitem>
+										<para>
+											<classname>&lt;rich:calendar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataFilterSlider&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dataScroller&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:dropSupport&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:fileUpload&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:menuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuGroup&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:panelMenuItem&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:progressBar&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:simpleTogglePanel&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:suggestionBox&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tab&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toggleControl&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:toolTip&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:tree&gt;</classname>
+										</para>
+									</listitem>
+									<listitem>
+										<para>
+											<classname>&lt;rich:treeNode&gt;</classname>
+										</para>
+									</listitem>
+								</itemizedlist>
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+		</section>
+
+	</section>
+	
+	<section id="sect-Migration_Guide-Changes_and_new_features-Performance">
+		<title>Performance</title>
+		<para>
+			The RichFaces framework has been extensively refined to provide better performance for applications. This includes improvements to bandwidth requirements for generated markup, size and number of required resources for Javascript and Cascading Style Sheets (<acronym>CSS</acronym>), and other general performance improvements.
+		</para>
+		<section id="sect-Migration_Guide-Performance-Bandwidth_for_generated_markup">
+			<title>Bandwidth for generated markup</title>
+			<para>
+				Several considerations have been made to improve the use of bandwidth when generating markup.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<acronym>XHTML</acronym> markup has been simplified and streamlined using best practices, such as avoiding tables for layout.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Default attribute values are not rendered.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Javascript use has been simplified with shorter function names and only one proxy call per form.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Yahoo!'s best practices for high performance have been implemented. Refer to <ulink url="http://developer.yahoo.com/performance/">http://developer.yahoo.com/performance/</ulink> for details on Yahoo!'s guidelines.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Performance-Resource_requirements">
+			<title>Resource requirements</title>
+			<para>
+				The three Javascript libraries previously used by the RichFaces framework have been consolidated and standardized into a single library for better performance.
+			</para>
+			<para>
+				Usage of Cascading Style Sheets (<acronym>CSS</acronym>) has been simplified, trimming out duplicate or otherwise unnecessary entries and better utilizing the cascading approach for style values.
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Migration_Guide-Changes_and_new_features-Feature_changes">
+		<title>Feature changes</title>
+		<para>
+			Features have been altered or added to existing components and behaviors in the RichFaces 4.0 framework. Refer to the <citetitle>Developer Guide</citetitle> for full details on how to make use of any new features.
+		</para>
+		<section id="sect-Migration_Guide-Feature_changes-Server_side_process_and_render_mechanisms">
+			<title>Server-side process and render mechanisms</title>
+			<para>
+				Some of the mechanisms for server-side processing and rendering have been altered.
+			</para>
+			<section id="sect-Migration_Guide-Server_side_process_and_render_mechanisms-Regions">
+				<title>Regions</title>
+				<para>
+					It is now possible to define zones for processing on the server-side without specifying <code>execute</code> definitions for every component. The <code>execute="@region"</code> property can be used to process regions defined on the server side.
+				</para>
+				<important>
+					<title>Important</title>
+					<para>
+						This approach is different to that in <acronym>JSF 2</acronym>, which uses default values of <code>execute="@this"</code> and <code>render="@this"</code> if no other value is defined.
+					</para>
+				</important>
+			</section>
+			
+			<section id="sect-Migration_Guide-Server_side_process_and_render_mechanisms-execute">
+				<title>execute</title>
+				<para>
+					The <code>execute</code> property has been extended to include the <literal>@region</literal> keyword, which facilitates the region rendering changes described in <xref linkend="sect-Migration_Guide-Server_side_process_and_render_mechanisms-Regions"/>.
+				</para>
+			</section>
+			
+			<section id="sect-Migration_Guide-Server_side_process_and_render_mechanisms-render">
+				<title>render</title>
+				<para>
+					The <code>render</code> property can also be defined from the server side, using actions and listeners.
+				</para>
+			</section>
+
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-onbegin_event_attribute">
+			<title>onbegin event attribute</title>
+			<para>
+				The <code>onbegin</code> attribute has been added to support <acronym>JSF</acronym> events with the type <literal>begin</literal>.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jcommandButton_and_a4jcommandLink">
+			<title>&lt;a4j:commandButton&gt; and &lt;a4j:commandLink&gt;</title>
+			<para>
+				Both the <classname>&lt;a4j:commandButton&gt;</classname> and <classname>&lt;a4j:commandLink&gt;</classname> use the <code>onclick</code> event attribute instead of the <code>onbegin</code> attribute.
+			</para>
+		</section>
+		
+		<!--        
+		<section>
+			<title>&lt;a4j:jsFunction&gt;</title>
+			<para>
+				
+			</para>
+		</section>
+		        -->
+		<section id="sect-Migration_Guide-Feature_changes-a4jlog">
+			<title>&lt;a4j:log&gt;</title>
+			<para>
+				The <classname>&lt;a4j:log&gt;</classname> behavior has had several features modified.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						It is now possible to switch levels on the client side.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The log can now be displayed inline with page markup, in a new browser window, or in the browser console.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						An application context parameter can now be defined to log all application pages.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jmessage_and_a4jmessages">
+			<title>&lt;a4j:message&gt; and &lt;a4j:messages&gt;</title>
+			<para>
+				Both the <classname>&lt;a4j:message&gt;</classname> and <classname>&lt;a4j:messages&gt;</classname> components can be automatically updated by any Ajax request, except those requests with <code>limitRender = true</code>. Attributes from previously-passed states are now cleared.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4joutputPanel">
+			<title>&lt;a4j:outputPanel&gt;</title>
+			<para>
+				The <classname>&lt;a4j:outputPanel&gt;</classname> component has had several features modified.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The default value for the <code>layout</code> attribute is now <literal>block</literal>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The default value for the <code>ajaxRendered</code> attribute is now <literal>false</literal>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If a child component is not to be rendered, a placeholder element will be included to preserve the layout.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jpush_and_a4jpoll">
+			<title>&lt;a4j:push&gt; and &lt;a4j:poll&gt;</title>
+			<para>
+				Both the <classname>&lt;a4j:push&gt;</classname> and <classname>&lt;a4j:poll&gt;</classname> behaviors now raise a client-side event. For <classname>&lt;a4j:push&gt;</classname>, this is the <code>ondataavailable</code> event, while for <classname>&lt;a4j:poll&gt;</classname> it is the <code>ontimeevent</code>.
+			</para>
+		</section>
+		
+		<!--        
+		<section>
+			<title>&lt;a4j:region&gt;</title>
+			<para>
+			
+			</para>
+		</section>
+		        -->
+		<section id="sect-Migration_Guide-Feature_changes-a4jstatus">
+			<title>&lt;a4j:status&gt;</title>
+			<para>
+				In RichFaces 4.0, <classname>&lt;a4j:status&gt;</classname> has been implemented as a component rather than a behavior, as it should have a representation in the Document Object Model (<acronym>DOM</acronym>) tree.
+			</para>
+			<para>
+				The <classname>&lt;a4j:status&gt;</classname> component has had several other features modified.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<classname>&lt;a4j:status&gt;</classname> no longer needs to be associated with a <classname>&lt;a4j:region&gt;</classname>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<classname>&lt;a4j:status&gt;</classname> can now report request errors. An additional <code>errorText</code> attribute and <literal>error</literal> facet have been added to show if an error was raised when a request completed.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The event attributes now include <code>onstart</code>, <code>onstop</code>, <code>onerror</code>, and <code>onsuccess</code>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Multiple statuses can be presented for the same view or form, or a separate status attached to each component.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-richtogglePanel">
+			<title>&lt;rich:togglePanel&gt;</title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-richtabPanel">
+			<title>&lt;rich:tabPanel&gt;</title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-richtoolBar">
+			<title>&lt;rich:toolBar&gt;</title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-richtoolTip">
+			<title>&lt;rich:toolTip&gt;</title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Migration_Guide-Changes_and_new_features-New_components_and_behaviors">
+		<title>New components and behaviors</title>
+		<para>
+			Several new components and behaviors have been added to RichFaces 4.0, some of which replace the functionality of deprecated elements. For full details on how to use these new components and behaviors, refer to the <citetitle>Developer Guide</citetitle>.
+		</para>
+		<!--     dataTable, dataLists, trees possibly included here as they may be consolidated     -->
+		<section id="sect-Migration_Guide-New_components_and_behaviors-a4jajax">
+			<title>&lt;a4j:ajax&gt;</title>
+			<para>
+				The <classname>&lt;a4j:ajax&gt;</classname> behavior replaces the deprecated <classname>&lt;a4j:support&gt;</classname> behavior.
+			</para>
+			<para>
+				<classname>&lt;a4j:ajax&gt;</classname> uses <acronym>JSF 2</acronym>, and can be used to add Ajax capabilities to any non-Ajax <acronym>JSF</acronym> or RichFaces component.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-New_components_and_behaviors-richbusyBehavior">
+			<title>&lt;rich:busyBehavior&gt;</title>
+			<para>
+				<classname>&lt;rich:busyBehavior&gt;</classname> is used when heavy processing takes place to provide feedback to the user. It can be attached to a component's events to trigger appropriate messages.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-New_components_and_behaviors-richpopupPanel">
+			<title>&lt;rich:popupPanel&gt;</title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Migration_Guide-Changes_and_new_features-Deprecated_components_and_behaviors">
+		<title>Deprecated components and behaviors</title>
+		<para>
+			Some components and behaviors have been deprecated in RichFaces 4.0. For the most part these items have their functionality replicated by another component or behavior.
+		</para>
+		<section id="sect-Migration_Guide-Deprecated_components_and_behaviors-a4jpage">
+			<title>&lt;a4j:page&gt;</title>
+			<para>
+				RichFaces 4.0 drops support for the <classname>&lt;a4j:page&gt;</classname> component. The component was previously used for solving incompatibility in the JavaServer Pages (<acronym>JSP</acronym>) environment with Apache MyFaces in early Ajax4jsf versions.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Deprecated_components_and_behaviors-a4jsupport">
+			<title>&lt;a4j:support&gt;</title>
+			<para>
+				The <classname>&lt;a4j:support&gt;</classname> component had been deprecated and its functionality replaced by the <classname>&lt;a4j:ajax&gt;</classname> component. Refer to <xref linkend="sect-Migration_Guide-New_components_and_behaviors-a4jajax"/> for details.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Deprecated_components_and_behaviors-richmodalPanel">
+			<title>&lt;rich:modalPanel&gt;</title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+
+	</section>
+
+</chapter>
+	<appendix id="appe-Migration_Guide-Revision_History" lang="en-US">
+	<title>Revision History</title>
+	<simpara>
+		<revhistory>
+			<revision>
+				<revnumber>0.1</revnumber>
+				<date>Tue Oct 20 2009</date>
+				<author>
+					<firstname>Sean</firstname>
+					<surname>Rogers</surname>
+					<email>serogers@redhat.com</email>
+				</author>
+				<revdescription>
+					<simplelist>
+						<member>Basic first draft</member>
+					</simplelist>
+				</revdescription>
+			</revision>
+		</revhistory>
+	</simpara>
+</appendix>
+	<index/>
+</book>
