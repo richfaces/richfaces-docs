@@ -72,7 +72,7 @@
 			<example id="exam-Component_Reference-limitRender-Rendering_example">
 				<title>Rendering example</title>
 				
-<programlisting role="XML">
+<programlisting language="XML">
 &lt;h:form id="form1"&gt;
     &lt;a4j:commandButton value="Normal rendering" render="infoBlock" /&gt;
     &lt;a4j:commandButton value="Limited rendering" render="infoBlock" limitRender="true" /&gt;
@@ -96,39 +96,49 @@
 		<section id="sect-Component_Reference-Queuing_and_traffic_control-queue">
 			<title>queue</title>
 			<para>
-				The <code>queue</code> attribute defines the name of the queue that will be used to schedule upcoming Ajax requests. Typically RichFaces does not queue Ajax requests, so if events are produced simultaneously they will arrive at the server simultaneously. This can potentially lead to unpredictable results when the responses are returned. The <code>queue</code> attribute ensures that the
+				The <code>queue</code> attribute defines the name of the queue that will be used to schedule upcoming Ajax requests. Typically RichFaces does not queue Ajax requests, so if events are produced simultaneously they will arrive at the server simultaneously. This can potentially lead to unpredictable results when the responses are returned. The <code>queue</code> attribute ensures that the requests are responded to in a set order.
+			</para>
+			<para>
+				A queue name is specified with the <code>queue</code> attribute, and each request added to the named queue is completed one at a time in the order they were sent. In addition, RichFaces intelligently removes similar requests produced by the same event from a queue to improve performance, protecting against unnecessary traffic flooding and 
 			</para>
 		</section>
-
+		<section>
+			<title>requestDelay</title>
+			<para>
+				The <code>requestDelay</code> attribute specifies an amount of time in milliseconds for the request to wait in the queue before being sent to the server. If a similar request is added to the queue before the delay is over, the original request is removed from the queue and not sent.
+			</para>
+		</section>
+		<section>
+			<title>ignoreDupResponses</title>
+			<para>
+				When set to <literal>true</literal>, the <code>ignoreDupResponses</code> attribute causes responses from the server for the request to be ignored if there is another similar request in the queue. This avoids unnecessary updates on the client when another update is expected. The request is still processed on the server, but if another similar request has been queued then no updates are made on the client.
+			</para>
+		</section>
 	</section>
 	
 	<section id="sect-Component_Reference-Common_Ajax_attributes-Data_processing">
 		<title>Data processing</title>
-		<section id="sect-Component_Reference-Data_processing-execute">
-			<title>execute</title>
-			<para>
-				Incomplete
-			</para>
-		</section>
-		
+		<para>
+			RichFaces uses a form-based approach for sending Ajax requests. As such, each time a request is sent the data from the requesting component's parent <acronym>JSF</acronym> form is submitted along with the <acronym>XMLHTTPRequest</acronym> object. The form data contains values from the input element and auxiliary information such as state-saving data.
+		</para>
 		<section id="sect-Component_Reference-Data_processing-process">
 			<title>process</title>
 			<para>
-				Incomplete
+				The <code>process</code> attribute allows <acronym>JSF</acronym> processing to be limited to defined components. To only process the requesting component, <code>process="@this"</code> can be used.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Data_processing-immediate">
 			<title>immediate</title>
 			<para>
-				Incomplete
+				If the <code>immediate</code> attribute is set to <literal>true</literal>, the default ActionListener is executed immediately during the Apply Request Values phase of the request processing lifecycle, rather than waitingfor the Invoke Application phase. This allows some data model values to be updated regardless of whether the Validation phase is successful or not.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Data_processing-bypassUpdates">
 			<title>bypassUpdates</title>
 			<para>
-				Incomplete
+				If the <code>bypassUpdates</code> attribute is set to <literal>true</literal>, the Update Model phase of the request processing lifecycle is bypassed. This is useful if user input needs to be validated but the model does not need to be updated.
 			</para>
 		</section>
 
@@ -136,71 +146,88 @@
 	
 	<section id="sect-Component_Reference-Common_Ajax_attributes-Action_and_navigation">
 		<title>Action and navigation</title>
+		<para>
+			The <code>action</code> and <code>actionListener</code> attributes can be used to invoke action methods and define action events.
+		</para>
 		<section id="sect-Component_Reference-Action_and_navigation-action">
 			<title>action</title>
 			<para>
-				Incomplete
+				The <code>action</code> attribute is a method binding that points to the application action to be invoked. The method can be activated during the Apply Request Values phase or the Invoke Application phase of the request processing lifecycle.
+			</para>
+			<para>
+				The method specified in the <code>action</code> attribute must return <literal>null</literal> for an Ajax response with a partial page update.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Action_and_navigation-actionListener">
 			<title>actionListener</title>
 			<para>
-				Incomplete
+				The <code>actionListener</code> attribute is a method binding for <classname>ActionEvent</classname> methods with a return type of <literal>void</literal>. 
 			</para>
 		</section>
 
 	</section>
 	
-	<section id="sect-Component_Reference-Common_Ajax_attributes-Events_and_Javascript_interactions">
-		<title>Events and Javascript interactions</title>
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onsubmit">
+	<section id="sect-Component_Reference-Common_Ajax_attributes-Events_and_JavaScript_interactions">
+		<title>Events and JavaScript interactions</title>
+		<para>
+			RichFaces allows for Ajax-enabled <acronym>JSF</acronym> applications to be developed without using any additional JavaScript code. However it is still possible to invoke custom JavaScript code through Ajax events.
+		</para>
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onsubmit">
 			<title>onsubmit</title>
 			<para>
-				Incomplete
+				The <code>onsubmit</code> attribute will invoke the JavaScript code before the Ajax request is sent. The request is canceled if the JavaScript code defined for <code>onsubmit</code> returns <literal>false</literal>.
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onclick">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onclick">
 			<title>onclick</title>
 			<para>
-				Incomplete
+				The <code>onclick</click> attribute functions similarly to the <code>onsubmit</code> attribute for those components that can be clicked, such as <classname>&lt;a4j:commandButton&gt;</classname> and <classname>&lt;a4j:commandLink&gt;</classname>. It invokes the defined JavaScript before the Ajax request, and the request will be canceled if the defined code returns <literal>false</literal>.
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-oncomplete">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-oncomplete">
 			<title>oncomplete</title>
 			<para>
-				Incomplete
+				The <code>oncomplete</code> attribute invokes the JavaScript code after the Ajax response has been returned and the <acronym>DOM</acronym> tree of the browser has been updated. The code is registered for further invocation of the <acronym>XMLHTTP</acronym> request object before an Ajax request is sent. As such, using <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) value binding means the code will not be changed during processing of the request on the server. Additionally the <code>oncomplete</code> attribute cannot use the <literal>this</literal> keyword as it will not point to the component from which the Ajax request was initiated.
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onbegin">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onbegin">
 			<title>onbegin</title>
 			<para>
 				Incomplete
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onsuccess">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onsuccess">
 			<title>onsuccess</title>
 			<para>
 				Incomplete
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onerror">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onerror">
 			<title>onerror</title>
 			<para>
 				Incomplete
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-data">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-data">
 			<title>data</title>
 			<para>
-				Incomplete
+				The <code>data</code> attribute allows the use of additional data during an Ajax call. <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) can be used to reference the property of the managed bean, and its value will be serialized in JavaScript Object Notation (<acronym>JSON</acronym>) and returned to the client side. The property can then be referenced through the <code>data</code> variable in the event attribute definitions. Both primitive types and complex types such as arrays and collections can be serialized and used with <code>data</code>.
 			</para>
+			<example id="exam-Component_Reference-limitRender-Rendering_example">
+				<title>Data reference example</title>
+				
+<programlisting language="XML">
+&lt;a4j:commandButton value="Update" data="#{userBean.name}" oncomplete="showTheName(data.name)" /&gt;
+</programlisting>
+			</example>
+			
 		</section>
 
 	</section>
