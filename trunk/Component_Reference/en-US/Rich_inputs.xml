@@ -22,7 +22,7 @@
 			The position at which the pop-up calendar displays relative to the text field and button can be configured using the <code>jointPoint</code> and <code>direction</code> attributes. The <code>jointPoint</code> attribute refers to the corner of the text field and button with which the calendar will be aligned and the <code>direction</code> specifies which direction the pop-up calendar will span relative to the joint point. The default settings are <code>jointPoint="bottom-left"</code> and <code>direction="bottom-right"</code>, causing the pop-up calendar to align with the bottom-left corner of the text field and span to the bottom-right, underneath the text field and button. The diagram shows the joint points and directions that can be used. Alternatively, both <code>jointPoint</code> and <code>direction</code> can be set to <literal>auto</literal> to allow smart pop-up positioning.
 		</para>
 		<para>
-			The calendar features a <guibutton>Today</guibutton> button for locating today's date on the calendar. This can be set to three different values using the <code>todayControlMode</code> attribute: 
+			The calendar features a <guibutton>Today</guibutton> button for locating today&#39;s date on the calendar. This can be set to three different values using the <code>todayControlMode</code> attribute:
 		</para>
 		<itemizedlist>
 			<listitem>
@@ -32,12 +32,12 @@
 			</listitem>
 			<listitem>
 				<para>
-					<literal>select</literal>, the default setting, which scrolls the calendar to the current month and selects today's date; and
+					<literal>select</literal>, the default setting, which scrolls the calendar to the current month and selects today&#39;s date; and
 				</para>
 			</listitem>
 			<listitem>
 				<para>
-					<literal>scroll</literal>, which scrolls the calendar to the current month but does not select today's date.
+					<literal>scroll</literal>, which scrolls the calendar to the current month but does not select today&#39;s date.
 				</para>
 			</listitem>
 		</itemizedlist>
@@ -82,7 +82,6 @@
 		<para>
 			The entire calendar can be set as read-only with <code>readonly="true"</code>. This allows months and years to be browsed through with the arrow controls, but dates and times cannot be selected.
 		</para>
-		
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richcolorPicker">
@@ -94,7 +93,7 @@
 			The <code>value</code> attribute stores the currently selected color. The <code>colorMode</code> attribute defines whether the <code>value</code> is saved as <literal>hex</literal> (hexadecimal) or <literal>rgb</literal> (red-green-blue).
 		</para>
 		<para>
-			The <classname>&lt;rich:colorPicker&gt;</classname> appears in-line by default, where the color picker spectrum is only shown once the component is clicked on. The component can appear "flat", where the whole color picker is shown,  by setting <code>flat="true"</code>.
+			The <classname>&lt;rich:colorPicker&gt;</classname> appears in-line by default, where the color picker spectrum is only shown once the component is clicked on. The component can appear "flat", where the whole color picker is shown, by setting <code>flat="true"</code>.
 		</para>
 		<para>
 			The <classname>&lt;rich:colorPicker&gt;</classname> component has the unique event handler <code>onbeforeshow</code>, which is triggered immediately before the color picker is opened. The <code>showEvent</code> attribute can be used to bind the opening of the color picker to a specific event; it is bound to the <code>onclick</code> event by default.
@@ -115,18 +114,20 @@
 					Using the <code>suggestionValues</code> attribute, and defining a collection of suggestions:
 				</para>
 				<example>
-					<programlisting language="XML">
+					<title>Defining suggestion values</title>
+<programlisting language="XML">
 &lt;rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}"
-					</programlisting>
+</programlisting>
 				</example>
 			</listitem>
 			<listitem>
 				<para>
 					Using the JSF components <classname>&lt;f:selectItem /&gt;</classname> and <classname>&lt;f:selectItems /&gt;</classname> to define a list of items:
 				</para>
-				<example>
+				<example id="exam-Component_Reference-richcomboBox-Defining_list_items_for_richinplaceSelect">
 					<title>Defining list items for &lt;rich:inplaceSelect&gt;</title>
-					<programlisting language="XML">
+					
+<programlisting language="XML">
 &lt;rich:comboBox value="#{bean.item}" valueChangeListener="#{bean.selectionChanged}" &gt;
     &lt;f:selectItems value="#{bean.selectItems}" /&gt;
     &lt;f.selectItem itemValue="Item 1" /&gt;
@@ -134,22 +135,26 @@
     &lt;f.selectItem itemValue="Item 3" /&gt;
     &lt;f.selectItem itemValue="Item 4" /&gt;
 &lt;/rich:comboBox&gt;
-					</programlisting>
+</programlisting>
 				</example>
 			</listitem>
 		</itemizedlist>
 		<para>
-			Users can type into the combo-box's text field to enter a value, which also searches through the suggestion items in the drop-down box. By default, the first suggestion item is selected as the user types. This behavior can be deactivated by setting <code>selectFirstOnUpdate="false"</code>. Setting <code>directInputSuggestions="true"</code> causes the combo-box to fill the text field box with a matching suggestion as the user types. Alternatively, the text field can be disabled by setting <code>enableManualInput="false"</code>, which forces the users to pick from items in the drop-down box.
+			Users can type into the combo-box&#39;s text field to enter a value, which also searches through the suggestion items in the drop-down box. By default, the first suggestion item is selected as the user types. This behavior can be deactivated by setting <code>selectFirstOnUpdate="false"</code>. Setting <code>directInputSuggestions="true"</code> causes the combo-box to fill the text field box with a matching suggestion as the user types. Alternatively, the text field can be disabled by setting <code>enableManualInput="false"</code>, which forces the users to pick from items in the drop-down box.
 		</para>
 		<para>
 			The <classname>&lt;rich:comboBox&gt;</classname> component has two unique event handlers:
 		</para>
 		<itemizedlist>
 			<listitem>
-				<code>onlistcall</code> triggers before the drop-down list is shown, allowing the operation to be canceled.
+				<para>
+					<code>onlistcall</code> triggers before the drop-down list is shown, allowing the operation to be canceled.
+				</para>
 			</listitem>
 			<listitem>
-				<code>onselect</code> triggers when a suggestion is selected from the drop-down list, before the update request is sent.
+				<para>
+					<code>onselect</code> triggers when a suggestion is selected from the drop-down list, before the update request is sent.
+				</para>
 			</listitem>
 		</itemizedlist>
 	</section>
@@ -157,7 +162,7 @@
 	<section id="sect-Component_Reference-Rich_inputs-richeditor">
 		<title>&lt;rich:editor&gt;</title>
 		<para>
-			The <classname>&lt;rich:editor&gt;</classname> component provides a fully-featured word processor. It features manageable global configurations, and support for Seam text, custom plug-ins, and a customized look and feel. The editor is fully based on the TinyMCE JavaScript editor control, supporting all TinyMCE's parameters, and is adapted for the <acronym>JSF</acronym> environment with some additional capabilities.
+			The <classname>&lt;rich:editor&gt;</classname> component provides a fully-featured word processor. It features manageable global configurations, and support for Seam text, custom plug-ins, and a customized look and feel. The editor is fully based on the TinyMCE JavaScript editor control, supporting all TinyMCE&#39;s parameters, and is adapted for the <acronym>JSF</acronym> environment with some additional capabilities.
 		</para>
 	</section>
 	
@@ -173,9 +178,10 @@
 			Basic usage requires the <code>uploadData</code> attribute, pointing to the collection of uploaded files.
 		</para>
 		<example>
-			<programlisting language="XML">
+			<title>Basic usage of &lt;rich:fileUpload&gt;</title>
+<programlisting language="XML">
 &lt;rich:fileUpload uploadData="#{bean.data}" /&gt;
-			</programlisting>
+</programlisting>
 		</example>
 		<para>
 			The <code>fileUploadListener</code> attribute can be used to call a function on the server side after each file is uploaded.
@@ -252,7 +258,8 @@
 		<para>
 			Basic usage requires the <code>value</code> attribute to point to the expression for the current value of the component.
 		</para>
-		<para>By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <code>editEvent</code> attribute to specify a different event. When switching to "edit" mode, the existing text can be automatically highlighted to make editing easier by setting <code>selectOnEdit="true"</code>.
+		<para>
+			By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <code>editEvent</code> attribute to specify a different event. When switching to "edit" mode, the existing text can be automatically highlighted to make editing easier by setting <code>selectOnEdit="true"</code>.
 		</para>
 		<para>
 			The user can confirm and save their input by pressing the <keycap>Enter</keycap> key or cancel by pressing the <keycap>Esc</keycap> key. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. These buttons can be positioned using the <code>controlsHorizontalPosition</code> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <code>controlsVerticalPosition</code> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <code>saveControlIcon</code> and <code>cancelControlIcon</code>. Further customization is possible through the use of facets.
@@ -295,9 +302,10 @@
 		<para>
 			Basic usage requires the <code>value</code> attribute to point to the expression for the current value of the component and a list of items. The list of items can be defined using the JSF components <classname>&lt;f:selectItem/&gt;</classname> and <classname>&lt;f:selectItems/&gt;</classname>.
 		</para>
-		<example>
+		<example id="exam-Component_Reference-richinplaceSelect-Defining_list_items_for_richinplaceSelect">
 			<title>Defining list items for &lt;rich:inplaceSelect&gt;</title>
-			<programlisting language="XML">
+			
+<programlisting language="XML">
 &lt;rich:inplaceSelect value="#{bean.inputValue}" defaultLabel="click to edit" &gt;
     &lt;f:selectItems value="#{bean.selectItems}" /&gt;
     &lt;f.selectItem itemValue="1" itemLabel="Item 1" /&gt;
@@ -305,9 +313,10 @@
     &lt;f.selectItem itemValue="3" itemLabel="Item 3" /&gt;
     &lt;f.selectItem itemValue="4" itemLabel="Item 4" /&gt;
 &lt;/rich:comboBox&gt;
-			</programlisting>
+</programlisting>
 		</example>
-		<para>By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <code>editEvent</code> attribute to specify a different event. When switching to "edit" mode, the drop-down list of possible values will automatically be displayed; this can be deactivated by setting <code>openOnEdit="false"</code>.
+		<para>
+			By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <code>editEvent</code> attribute to specify a different event. When switching to "edit" mode, the drop-down list of possible values will automatically be displayed; this can be deactivated by setting <code>openOnEdit="false"</code>.
 		</para>
 		<para>
 			Once the user selects an option from the drop-down list, the item becomes the new value for the component and the state is switched to the "changed" state. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. These buttons can be positioned using the <code>controlsHorizontalPosition</code> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <code>controlsVerticalPosition</code> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <code>saveControlIcon</code> and <code>cancelControlIcon</code>. Further customization is possible through the use of facets.
@@ -338,12 +347,11 @@
 			</listitem>
 		</itemizedlist>
 	</section>
-	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richinputNumberSlider">
 		<title>&lt;rich:inputNumberSlider&gt;</title>
 		<para>
-			The <classname>&lt;rich:inputNumberSlider&gt;</classname> component provides a slider for changing numerical values. Optional features include a tool-tip to display the value while sliding, and a text field for typing the numerical value which can then be validated against the slider's range.
+			The <classname>&lt;rich:inputNumberSlider&gt;</classname> component provides a slider for changing numerical values. Optional features include a tool-tip to display the value while sliding, and a text field for typing the numerical value which can then be validated against the slider&#39;s range.
 		</para>
 		<para>
 			Basic use of the component with no attributes specified will render a slider with a minimum value of 0, a maximum of 100, and a gradient step of 1, together with a text field for typing the desired numerical value. The text field can be removed by setting <code>showInput="false"</code>, and the properties of the slider can be set with the attributes <code>minValue</code>, <code>maxValue</code>, and <code>step</code>. The slider is labeled with the minimum and maximum boundary values, and a tool-tip showing the current value is shown while sliding the slider; these items can be turned off by setting <code>showBoundaryValues="false"</code> and <code>showToolTip="false"</code> respectively.
@@ -387,9 +395,8 @@
 			The <code>minChars</code> attribute can be used to limit sending the Ajax request until a certain amount of characters has been entered. If the query returns no results, an appropriate message to display can be set with the <code>nothingLabel</code> attribute.
 		</para>
 		<para>
-			Instead of returning just one value from an object, the entire object can be returned to the client and handled appropriately. This is done by specifying <code>usingSuggestObjects="true"</code> and setting the <code>onobjectchange</code> attribute to a JavaScript method to handle the object, passing the <object>suggestion</object> object as a parameter.
+			Instead of returning just one value from an object, the entire object can be returned to the client and handled appropriately. This is done by specifying <code>usingSuggestObjects="true"</code> and setting the <code>onobjectchange</code> attribute to a JavaScript method to handle the object, passing the <literal>suggestion</literal> object as a parameter.
 		</para>
-		
 	</section>
 
 </chapter>

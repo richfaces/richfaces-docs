@@ -34,7 +34,7 @@ framework, including examples of their use in applications.</para></abstract>
 				<year>2009</year>
 				<holder>Red Hat</holder>
 			</copyright>
-			<!-- FOR PUBLICAN  --><legalnotice xml:base="Common_Content/Legal_Notice.xml">
+			<!--   FOR PUBLICAN    --><legalnotice xml:base="Common_Content/Legal_Notice.xml">
 	<para>
 		Copyright <trademark class="copyright"/> 2009 Red Hat This material may only be distributed subject to the terms and conditions set forth in the GNU Free Documentation License (GFDL), V1.2 or later (the latest version is presently available at <ulink url="http://www.gnu.org/licenses/fdl.txt">http://www.gnu.org/licenses/fdl.txt</ulink>).
 	</para>
@@ -51,7 +51,7 @@ framework, including examples of their use in applications.</para></abstract>
 	</author>
 </authorgroup>
 		</bookinfo>
-	<!--  <xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>  --><chapter id="chap-Component_Reference-Introduction" lang="en-US">
+	<!--    <xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>    --><chapter id="chap-Component_Reference-Introduction" lang="en-US">
 	<title>Introduction</title>
 	<para>
 		This book is a guide to the various components available in the RichFaces 4.0 framework. It includes descriptions of the role of the components, details on how best to use them, coded examples of their use, and basic references of their properties and attributes.
@@ -138,12 +138,12 @@ framework, including examples of their use in applications.</para></abstract>
 				A component with <code>limitRender="true"</code> specified will <emphasis>not</emphasis> cause components with <code>ajaxRendered="true"</code> to re-render, and only those components listed in the <code>render</code> attribute will be updated. This essentially overrides the <code>ajaxRendered</code> attribute in other components.
 			</para>
 			<para>
-				<xref linkend="exam-Component_Reference-limitRender-Rendering_example"/> describes two command buttons, a panel grid rendered by the buttons, and an output panel showing error messages. When the first button is clicked, the output panel is rendered even though it is not explicitly referenced with the <code>render</code> attribute. The second button, however, uses <code>limitRender="true"</code> to override the output panel's rendering and only render the panel grid.
+				<xref linkend="exam-Component_Reference-data-Data_reference_example"/> describes two command buttons, a panel grid rendered by the buttons, and an output panel showing error messages. When the first button is clicked, the output panel is rendered even though it is not explicitly referenced with the <code>render</code> attribute. The second button, however, uses <code>limitRender="true"</code> to override the output panel's rendering and only render the panel grid.
 			</para>
 			<example id="exam-Component_Reference-limitRender-Rendering_example">
 				<title>Rendering example</title>
 				
-<programlisting role="XML">
+<programlisting language="XML">
 &lt;h:form id="form1"&gt;
     &lt;a4j:commandButton value="Normal rendering" render="infoBlock" /&gt;
     &lt;a4j:commandButton value="Limited rendering" render="infoBlock" limitRender="true" /&gt;
@@ -167,7 +167,24 @@ framework, including examples of their use in applications.</para></abstract>
 		<section id="sect-Component_Reference-Queuing_and_traffic_control-queue">
 			<title>queue</title>
 			<para>
-				The <code>queue</code> attribute defines the name of the queue that will be used to schedule upcoming Ajax requests. Typically RichFaces does not queue Ajax requests, so if events are produced simultaneously they will arrive at the server simultaneously. This can potentially lead to unpredictable results when the responses are returned. The <code>queue</code> attribute ensures that the
+				The <code>queue</code> attribute defines the name of the queue that will be used to schedule upcoming Ajax requests. Typically RichFaces does not queue Ajax requests, so if events are produced simultaneously they will arrive at the server simultaneously. This can potentially lead to unpredictable results when the responses are returned. The <code>queue</code> attribute ensures that the requests are responded to in a set order.
+			</para>
+			<para>
+				A queue name is specified with the <code>queue</code> attribute, and each request added to the named queue is completed one at a time in the order they were sent. In addition, RichFaces intelligently removes similar requests produced by the same event from a queue to improve performance, protecting against unnecessary traffic flooding and
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Queuing_and_traffic_control-requestDelay">
+			<title>requestDelay</title>
+			<para>
+				The <code>requestDelay</code> attribute specifies an amount of time in milliseconds for the request to wait in the queue before being sent to the server. If a similar request is added to the queue before the delay is over, the original request is removed from the queue and not sent.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-Queuing_and_traffic_control-ignoreDupResponses">
+			<title>ignoreDupResponses</title>
+			<para>
+				When set to <literal>true</literal>, the <code>ignoreDupResponses</code> attribute causes responses from the server for the request to be ignored if there is another similar request in the queue. This avoids unnecessary updates on the client when another update is expected. The request is still processed on the server, but if another similar request has been queued then no updates are made on the client.
 			</para>
 		</section>
 
@@ -175,31 +192,27 @@ framework, including examples of their use in applications.</para></abstract>
 	
 	<section id="sect-Component_Reference-Common_Ajax_attributes-Data_processing">
 		<title>Data processing</title>
-		<section id="sect-Component_Reference-Data_processing-execute">
-			<title>execute</title>
-			<para>
-				Incomplete
-			</para>
-		</section>
-		
+		<para>
+			RichFaces uses a form-based approach for sending Ajax requests. As such, each time a request is sent the data from the requesting component's parent <acronym>JSF</acronym> form is submitted along with the <acronym>XMLHTTPRequest</acronym> object. The form data contains values from the input element and auxiliary information such as state-saving data.
+		</para>
 		<section id="sect-Component_Reference-Data_processing-process">
 			<title>process</title>
 			<para>
-				Incomplete
+				The <code>process</code> attribute allows <acronym>JSF</acronym> processing to be limited to defined components. To only process the requesting component, <code>process="@this"</code> can be used.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Data_processing-immediate">
 			<title>immediate</title>
 			<para>
-				Incomplete
+				If the <code>immediate</code> attribute is set to <literal>true</literal>, the default ActionListener is executed immediately during the Apply Request Values phase of the request processing lifecycle, rather than waitingfor the Invoke Application phase. This allows some data model values to be updated regardless of whether the Validation phase is successful or not.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Data_processing-bypassUpdates">
 			<title>bypassUpdates</title>
 			<para>
-				Incomplete
+				If the <code>bypassUpdates</code> attribute is set to <literal>true</literal>, the Update Model phase of the request processing lifecycle is bypassed. This is useful if user input needs to be validated but the model does not need to be updated.
 			</para>
 		</section>
 
@@ -207,71 +220,87 @@ framework, including examples of their use in applications.</para></abstract>
 	
 	<section id="sect-Component_Reference-Common_Ajax_attributes-Action_and_navigation">
 		<title>Action and navigation</title>
+		<para>
+			The <code>action</code> and <code>actionListener</code> attributes can be used to invoke action methods and define action events.
+		</para>
 		<section id="sect-Component_Reference-Action_and_navigation-action">
 			<title>action</title>
 			<para>
-				Incomplete
+				The <code>action</code> attribute is a method binding that points to the application action to be invoked. The method can be activated during the Apply Request Values phase or the Invoke Application phase of the request processing lifecycle.
+			</para>
+			<para>
+				The method specified in the <code>action</code> attribute must return <literal>null</literal> for an Ajax response with a partial page update.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Action_and_navigation-actionListener">
 			<title>actionListener</title>
 			<para>
-				Incomplete
+				The <code>actionListener</code> attribute is a method binding for <classname>ActionEvent</classname> methods with a return type of <literal>void</literal>.
 			</para>
 		</section>
 
 	</section>
 	
-	<section id="sect-Component_Reference-Common_Ajax_attributes-Events_and_Javascript_interactions">
-		<title>Events and Javascript interactions</title>
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onsubmit">
+	<section id="sect-Component_Reference-Common_Ajax_attributes-Events_and_JavaScript_interactions">
+		<title>Events and JavaScript interactions</title>
+		<para>
+			RichFaces allows for Ajax-enabled <acronym>JSF</acronym> applications to be developed without using any additional JavaScript code. However it is still possible to invoke custom JavaScript code through Ajax events.
+		</para>
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onsubmit">
 			<title>onsubmit</title>
 			<para>
-				Incomplete
+				The <code>onsubmit</code> attribute will invoke the JavaScript code before the Ajax request is sent. The request is canceled if the JavaScript code defined for <code>onsubmit</code> returns <literal>false</literal>.
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onclick">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onclick">
 			<title>onclick</title>
 			<para>
-				Incomplete
+				The <code>onclick</code> attribute functions similarly to the <code>onsubmit</code> attribute for those components that can be clicked, such as <classname>&lt;a4j:commandButton&gt;</classname> and <classname>&lt;a4j:commandLink&gt;</classname>. It invokes the defined JavaScript before the Ajax request, and the request will be canceled if the defined code returns <literal>false</literal>.
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-oncomplete">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-oncomplete">
 			<title>oncomplete</title>
 			<para>
-				Incomplete
+				The <code>oncomplete</code> attribute invokes the JavaScript code after the Ajax response has been returned and the <acronym>DOM</acronym> tree of the browser has been updated. The code is registered for further invocation of the <acronym>XMLHTTP</acronym> request object before an Ajax request is sent. As such, using <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) value binding means the code will not be changed during processing of the request on the server. Additionally the <code>oncomplete</code> attribute cannot use the <literal>this</literal> keyword as it will not point to the component from which the Ajax request was initiated.
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onbegin">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onbegin">
 			<title>onbegin</title>
 			<para>
 				Incomplete
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onsuccess">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onsuccess">
 			<title>onsuccess</title>
 			<para>
 				Incomplete
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-onerror">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onerror">
 			<title>onerror</title>
 			<para>
 				Incomplete
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-Events_and_Javascript_interactions-data">
+		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-data">
 			<title>data</title>
 			<para>
-				Incomplete
+				The <code>data</code> attribute allows the use of additional data during an Ajax call. <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) can be used to reference the property of the managed bean, and its value will be serialized in JavaScript Object Notation (<acronym>JSON</acronym>) and returned to the client side. The property can then be referenced through the <code>data</code> variable in the event attribute definitions. Both primitive types and complex types such as arrays and collections can be serialized and used with <code>data</code>.
 			</para>
+			<example id="exam-Component_Reference-data-Data_reference_example">
+				<title>Data reference example</title>
+				
+<programlisting language="XML">
+&lt;a4j:commandButton value="Update" data="#{userBean.name}" oncomplete="showTheName(data.name)" /&gt;
+</programlisting>
+			</example>
 		</section>
 
 	</section>
@@ -280,75 +309,399 @@ framework, including examples of their use in applications.</para></abstract>
 	<chapter id="chap-Component_Reference-Rich_inputs" lang="en-US">
 	<title>Rich inputs</title>
 	<para>
-		Incomplete
+		This chapter details rich components for user input and interaction.
 	</para>
 	<section id="sect-Component_Reference-Rich_inputs-richCalendar">
-		<title>rich:Calendar</title>
+		<title>&lt;rich:Calendar&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:calendar&gt;</classname> component allows the user to enter a date and time through an in-line or pop-up calendar. The pop-up calendar can navigate through months and years, and its look and feel can be highly customized.
+		</para>
+		<para>
+			The <classname>&lt;rich:calendar&gt;</classname> component supports two different ways of loading data through defining the <code>mode</code> attribute. When not specified, the component uses <literal>client</literal> mode, which loads an initial portion of data within a set date range. The range can be defined by using the <code>preloadDateRangeBegin</code> and <code>preloadDateRangeEnd</code> attributes. Additional data requests are not sent. Alternatively, with <code>mode="ajax"</code> the <classname>&lt;rich:calendar&gt;</classname> requests portions of data for rendering from a special data model. The data model can be defined through the <code>dataModel</code> attribute, which points to an object that implements the <classname>CalendarDataModel</classname> interface. If the <code>dataModel</code> attribute is not defined or has a value of <literal>null</literal>, the <literal>ajax</literal> mode functions the same as the <literal>client</literal> mode.
+		</para>
+		<para>
+			The <classname>&lt;rich:calendar&gt;</classname> component is presented as a pop-up by default, appearing as a text field with a button to expand the full pop-up calendar. Specifying <code>popup="false</code> will render the calendar in-line on the page instead, which displays the full calendar without the text field or display button. The appearance of the display button can be altered from the standard calendar icon by defining the <code>buttonIcon</code> and <code>buttonIconDisabled</code> attributes to replace the icon with a specified file, or by defining the <code>buttonLabel</code> attribute to display text on the button without an icon. If <code>buttonLabel</code> is specified then both <code>buttonIcon</code> and <code>buttonIconDisabled</code> attributes are ignored. The text field box can also be hidden by setting <code>showInput="false"</code>.
+		</para>
+		<para>
+			The position at which the pop-up calendar displays relative to the text field and button can be configured using the <code>jointPoint</code> and <code>direction</code> attributes. The <code>jointPoint</code> attribute refers to the corner of the text field and button with which the calendar will be aligned and the <code>direction</code> specifies which direction the pop-up calendar will span relative to the joint point. The default settings are <code>jointPoint="bottom-left"</code> and <code>direction="bottom-right"</code>, causing the pop-up calendar to align with the bottom-left corner of the text field and span to the bottom-right, underneath the text field and button. The diagram shows the joint points and directions that can be used. Alternatively, both <code>jointPoint</code> and <code>direction</code> can be set to <literal>auto</literal> to allow smart pop-up positioning.
+		</para>
+		<para>
+			The calendar features a <guibutton>Today</guibutton> button for locating today's date on the calendar. This can be set to three different values using the <code>todayControlMode</code> attribute:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<literal>hidden</literal>, which does not display the button;
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>select</literal>, the default setting, which scrolls the calendar to the current month and selects today's date; and
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>scroll</literal>, which scrolls the calendar to the current month but does not select today's date.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			The <classname>&lt;rich:calendar&gt;</classname> component can additionally allow a time of day to be specified with the date. After selecting a date the option to set a time becomes available. The default time can be set with the <code>defaultTime</code> attribute. If the time is altered and a new date is selected, it will not reset unless <code>resetTimeOnDateSelect="true"</code> is specified.
+		</para>
+		<para>
+			There are several event handlers that are unique to the <classname>&lt;rich:calendar&gt;</classname> component.
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<code>ondateselect</code> is triggered when the date is selected by the user, before the update request is sent.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>ondateselected</code> is triggered after the date is selected by the user.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>oncurrentdateselect</code> is triggered when any of the year- or month-changing buttons are pressed, before the update request is sent.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>oncurrentdateselected</code> is triggered after any of the year- or month-changing buttons are pressed.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>ontimeselect</code> is triggered when the time is set by the user, before the update request is sent.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>ontimeselected</code> is triggered after the time has been set by the user.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			The entire calendar can be set as read-only with <code>readonly="true"</code>. This allows months and years to be browsed through with the arrow controls, but dates and times cannot be selected.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richcolorPicker">
-		<title>rich:colorPicker</title>
+		<title>&lt;rich:colorPicker&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:colorPicker&gt;</classname> component allows the selection of a color, either by picking the color from the spectrum, defining it through decimal or hexadecimal <acronym>RGB</acronym> (red-green-blue) values, or defining it through <acronym>HSB</acronym> (hue-saturation-brightness) values. The <classname>&lt;rich:colorPicker&gt;</classname> component can appear either in-line with a pop-up or flat, and the look and feel can be highly customized.
+		</para>
+		<para>
+			The <code>value</code> attribute stores the currently selected color. The <code>colorMode</code> attribute defines whether the <code>value</code> is saved as <literal>hex</literal> (hexadecimal) or <literal>rgb</literal> (red-green-blue).
+		</para>
+		<para>
+			The <classname>&lt;rich:colorPicker&gt;</classname> appears in-line by default, where the color picker spectrum is only shown once the component is clicked on. The component can appear "flat", where the whole color picker is shown, by setting <code>flat="true"</code>.
+		</para>
+		<para>
+			The <classname>&lt;rich:colorPicker&gt;</classname> component has the unique event handler <code>onbeforeshow</code>, which is triggered immediately before the color picker is opened. The <code>showEvent</code> attribute can be used to bind the opening of the color picker to a specific event; it is bound to the <code>onclick</code> event by default.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richcomboBox">
-		<title>rich:comboBox</title>
+		<title>&lt;rich:comboBox&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:comboBox&gt;</classname> component is a typical combo-box with built-in Ajax capabilities. It supports client-side suggestions, browser-like selection, Seam entity converter support, and customization of the look and feel.
 		</para>
+		<para>
+			The <code>value</code> attribute stores the selected value for the combo-box. Suggestions shown in the drop-down list for the combo-box can be specified in one of two ways:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					Using the <code>suggestionValues</code> attribute, and defining a collection of suggestions:
+				</para>
+				<example>
+					<title>Defining suggestion values</title>
+					
+<programlisting language="XML">
+&lt;rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}"
+</programlisting>
+				</example>
+			</listitem>
+			<listitem>
+				<para>
+					Using the JSF components <classname>&lt;f:selectItem /&gt;</classname> and <classname>&lt;f:selectItems /&gt;</classname> to define a list of items:
+				</para>
+				<example id="exam-Component_Reference-richcomboBox-Defining_list_items_for_richinplaceSelect">
+					<title>Defining list items for &lt;rich:inplaceSelect&gt;</title>
+					
+<programlisting language="XML">
+&lt;rich:comboBox value="#{bean.item}" valueChangeListener="#{bean.selectionChanged}" &gt;
+    &lt;f:selectItems value="#{bean.selectItems}" /&gt;
+    &lt;f.selectItem itemValue="Item 1" /&gt;
+    &lt;f.selectItem itemValue="Item 2" /&gt;
+    &lt;f.selectItem itemValue="Item 3" /&gt;
+    &lt;f.selectItem itemValue="Item 4" /&gt;
+&lt;/rich:comboBox&gt;
+</programlisting>
+				</example>
+			</listitem>
+		</itemizedlist>
+		<para>
+			Users can type into the combo-box's text field to enter a value, which also searches through the suggestion items in the drop-down box. By default, the first suggestion item is selected as the user types. This behavior can be deactivated by setting <code>selectFirstOnUpdate="false"</code>. Setting <code>directInputSuggestions="true"</code> causes the combo-box to fill the text field box with a matching suggestion as the user types. Alternatively, the text field can be disabled by setting <code>enableManualInput="false"</code>, which forces the users to pick from items in the drop-down box.
+		</para>
+		<para>
+			The <classname>&lt;rich:comboBox&gt;</classname> component has two unique event handlers:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<code>onlistcall</code> triggers before the drop-down list is shown, allowing the operation to be canceled.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>onselect</code> triggers when a suggestion is selected from the drop-down list, before the update request is sent.
+				</para>
+			</listitem>
+		</itemizedlist>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richeditor">
-		<title>rich:editor</title>
+		<title>&lt;rich:editor&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:editor&gt;</classname> component provides a fully-featured word processor. It features manageable global configurations, and support for Seam text, custom plug-ins, and a customized look and feel. The editor is fully based on the TinyMCE JavaScript editor control, supporting all TinyMCE's parameters, and is adapted for the <acronym>JSF</acronym> environment with some additional capabilities.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richfileUpload">
-		<title>rich:fileUpload</title>
+		<title>&lt;rich:fileUpload&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:fileUpload&gt;</classname> component allows the user to upload files to a server. It features multiple uploads, automatic uploads, progress bars, restrictions on file types and sizes to be uploaded, and an embedded flash module.
 		</para>
+		<para>
+			Files are uploaded to either the temporary folder (different for each operating system) or to <acronym>RAM</acronym> (random-access memory), depending on the value of the <code>createTempFile</code> parameter of the Ajax4jsf Filter section in the <filename>web.xml</filename> for the project.
+		</para>
+		<para>
+			Basic usage requires the <code>uploadData</code> attribute, pointing to the collection of uploaded files.
+		</para>
+		<example>
+			<title>Basic usage of &lt;rich:fileUpload&gt;</title>
+			
+<programlisting language="XML">
+&lt;rich:fileUpload uploadData="#{bean.data}" /&gt;
+</programlisting>
+		</example>
+		<para>
+			The <code>fileUploadListener</code> attribute can be used to call a function on the server side after each file is uploaded.
+		</para>
+		<para>
+			The <code>immediateUpload</code> attribute can be set to <literal>true</literal> to upload files as soon as they are added to the list, rather than waiting for the user to press the <guibutton>Upload</guibutton>. The <code>autoclear</code> attribute can be set to <code>true</code> to automatically remove files from the list once they have been successfully uploaded.
+		</para>
+		<para>
+			The <classname>&lt;rich:fileUpload&gt;</classname> component can place restrictions on the files that can be uploaded. The <code>acceptedTypes</code> attribute restricts the file types to just those listed. The <code>maxFilesQuantity</code> attribute restricts the maximum number of files that can be uploaded. Size restrictions can be placed on individual files by setting the <code>maxRequestSize</code> parameter of the Ajax4jsf Filter section in the <filename>web.xml</filename> file for the project.
+		</para>
+		<para>
+			There are a number of event handlers specifc to the <classname>&lt;rich:fileUpload&gt;</classname> component:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<code>onadd</code> is triggered before a file is added to the list.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>onupload</code> is triggered before a file is uploaded.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>onuploadcomplete</code> is triggered after all files in the list have finished uploading.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>onuploadcanceled</code> is triggered after an upload has been canceled.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>onerror</code> is triggered when an error occurs during the upload process.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			The <classname>&lt;rich:fileUpload&gt;</classname> component has an embedded Flash module that adds extra functionality. To enable the Flash module, set <code>allowFlash="true"</code>. The Flash module adds additional features to file selection, such as the ability to choose multiple files at once and the filtering of files by their type. Additionally, the Flash module provides a smoother animation of the progress bar during the upload process, as the progress polling is performed by Flash rather than Ajax.
+		</para>
+		<para>
+			The text labels used in the component can be completely customized. Labels for the various controls of the component can be set using <code>addControlLabel</code>, <code>clearAllControlLabel</code>, <code>clearControlLabel</code>, <code>stopEntryControlLabel</code>, and <code>uploadControlLabel</code>. The status label for the upload can be set using the <code>label</code> attribute and the following wildcards:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<code>{B} {KB} {MB}</code>: the full size of the file to be uploaded, measured in bytes, kilobytes and megabytes respectively.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>{_B} {_KB} {_MB}</code>: the amount of data uploaded so far, measured in bytes, kilobytes and megabytes respectively.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>{ss} {mm} {hh}</code>: the elapsed time in seconds, minutes and hours respectively.
+				</para>
+			</listitem>
+		</itemizedlist>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceInput">
-		<title>rich:inplaceInput</title>
+		<title>&lt;rich:inplaceInput&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:inplaceInput&gt;</classname> component allows information to be entered in-line in blocks of text, improving readability of the text. Changes can be rendered either in-line or for the whole block, and inputs can be focused with keyboard navigation. The component has three functional states: the "view" state, where the component displays its initial setting, such as "click to edit"; the "edit" state, where the user can input text; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
 		</para>
+		<para>
+			When in the initial "view" state, the starting label can be set using the <code>defaultLabel</code> attribute, such as <code>defaultLabel="click to edit"</code>.
+		</para>
+		<para>
+			Basic usage requires the <code>value</code> attribute to point to the expression for the current value of the component.
+		</para>
+		<para>
+			By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <code>editEvent</code> attribute to specify a different event. When switching to "edit" mode, the existing text can be automatically highlighted to make editing easier by setting <code>selectOnEdit="true"</code>.
+		</para>
+		<para>
+			The user can confirm and save their input by pressing the <keycap>Enter</keycap> key or cancel by pressing the <keycap>Esc</keycap> key. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. These buttons can be positioned using the <code>controlsHorizontalPosition</code> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <code>controlsVerticalPosition</code> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <code>saveControlIcon</code> and <code>cancelControlIcon</code>. Further customization is possible through the use of facets.
+		</para>
+		<para>
+			There are several event handlers that are specific to the <classname>&lt;rich:inplaceInput&gt;</classname> component:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<code>oneditactivation</code> is triggered before the "edit" state is activated.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>oneditactivated</code> is triggered after the "edit" state is activated.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>onviewactivation</code> is triggered before the "view" or "changed" state is activated.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>onviewactivated</code> is triggered after the "view" or "changed" state is activated.
+				</para>
+			</listitem>
+		</itemizedlist>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceSelect">
-		<title>rich:inplaceSelect</title>
+		<title>&lt;rich:inplaceSelect&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:inplaceSelect&gt;</classname> component is similar to the <classname>&lt;rich:inplaceInput&gt;</classname> component, but the uses a drop-down selection box to enter text instead of a regular text field. Changes can be rendered either in-line or for the whole block, and inputs can be focused with keyboard navigation. The component has three functional states: the "view" state, where the component displays its initial setting, such as "click to edit"; the "edit" state, where the user can select a value from a drop-down list; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
 		</para>
+		<para>
+			When in the initial "view" state, the starting label can be set using the <code>defaultLabel</code> attribute, such as <code>defaultLabel="click to edit"</code>.
+		</para>
+		<para>
+			Basic usage requires the <code>value</code> attribute to point to the expression for the current value of the component and a list of items. The list of items can be defined using the JSF components <classname>&lt;f:selectItem/&gt;</classname> and <classname>&lt;f:selectItems/&gt;</classname>.
+		</para>
+		<example id="exam-Component_Reference-richinplaceSelect-Defining_list_items_for_richinplaceSelect">
+			<title>Defining list items for &lt;rich:inplaceSelect&gt;</title>
+			
+<programlisting language="XML">
+&lt;rich:inplaceSelect value="#{bean.inputValue}" defaultLabel="click to edit" &gt;
+    &lt;f:selectItems value="#{bean.selectItems}" /&gt;
+    &lt;f.selectItem itemValue="1" itemLabel="Item 1" /&gt;
+    &lt;f.selectItem itemValue="2" itemLabel="Item 2" /&gt;
+    &lt;f.selectItem itemValue="3" itemLabel="Item 3" /&gt;
+    &lt;f.selectItem itemValue="4" itemLabel="Item 4" /&gt;
+&lt;/rich:comboBox&gt;
+</programlisting>
+		</example>
+		<para>
+			By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <code>editEvent</code> attribute to specify a different event. When switching to "edit" mode, the drop-down list of possible values will automatically be displayed; this can be deactivated by setting <code>openOnEdit="false"</code>.
+		</para>
+		<para>
+			Once the user selects an option from the drop-down list, the item becomes the new value for the component and the state is switched to the "changed" state. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. These buttons can be positioned using the <code>controlsHorizontalPosition</code> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <code>controlsVerticalPosition</code> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <code>saveControlIcon</code> and <code>cancelControlIcon</code>. Further customization is possible through the use of facets.
+		</para>
+		<para>
+			There are several event handlers that are specific to the <classname>&lt;rich:inplaceSelect&gt;</classname> component:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<code>oneditactivation</code> is triggered before the "edit" state is activated.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>oneditactivated</code> is triggered after the "edit" state is activated.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>onviewactivation</code> is triggered before the "view" or "changed" state is activated.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>onviewactivated</code> is triggered after the "view" or "changed" state is activated.
+				</para>
+			</listitem>
+		</itemizedlist>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richinputNumberSlider">
-		<title>rich:inputNumberSlider</title>
+		<title>&lt;rich:inputNumberSlider&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:inputNumberSlider&gt;</classname> component provides a slider for changing numerical values. Optional features include a tool-tip to display the value while sliding, and a text field for typing the numerical value which can then be validated against the slider's range.
+		</para>
+		<para>
+			Basic use of the component with no attributes specified will render a slider with a minimum value of 0, a maximum of 100, and a gradient step of 1, together with a text field for typing the desired numerical value. The text field can be removed by setting <code>showInput="false"</code>, and the properties of the slider can be set with the attributes <code>minValue</code>, <code>maxValue</code>, and <code>step</code>. The slider is labeled with the minimum and maximum boundary values, and a tool-tip showing the current value is shown while sliding the slider; these items can be turned off by setting <code>showBoundaryValues="false"</code> and <code>showToolTip="false"</code> respectively.
+		</para>
+		<para>
+			Arrow controls can be added to either side of the slider to adjust the value incrementally by setting <code>showArrows="true"</code>. Clicking the arrows move the slider indicator in that direction by the gradient step, and clicking and holding the arrows moves the indicator continuously. The time delay for each step when updating continuously can be defined using the <code>delay</code> attribute.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richinputNumberSpinner">
-		<title>rich:inputNumberSpinner</title>
+		<title>&lt;rich:inputNumberSpinner&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:inputNumberSpinner&gt;</classname> component is a single-line input field with buttons to increase and decrease a numerical value. The value can be changed using the corresponding directional keys on a keyboard, or by typing into the field.
+		</para>
+		<para>
+			Basic use of the component with no attributes specified will render a number spinner with a minimum value of 1, a maximum value of 100, and a gradient step of 1. These default properties can be re-defined with the attributes <code>minValue</code>, <code>maxValue</code>, and <code>step</code> respectively. The starting value of the spinner is the minimum value unless otherwise specified with the <code>value</code> attribute.
+		</para>
+		<para>
+			When changing the value using the buttons, raising the value above the maximum or cause the spinner to restart at the minimum value. Likewise, when lowering below the minimum value the spinner will reset to the maximum value. This behavior can be deactivated by setting <code>cycled="false"</code>, which will cause the buttons to stop responding when the reach the maximum or minimum value.
+		</para>
+		<para>
+			The ability to change the value by typing into the text field can be disabled by setting <code>enableManualInput="false"</code>.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richsuggestionBox">
-		<title>rich:suggestionBox</title>
+		<title>&lt;rich:suggestionBox&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:suggestionBox&gt;</classname> component adds a feature-rich drop-down list of suggestions to any text input component.
+		</para>
+		<para>
+			The <classname>&lt;rich:suggestionBox&gt;</classname> component needs the attributes defined for basic use: <code>for</code>, which identifies the component to attach the suggestion box to; <code>suggestionAction</code>, which defines the method for getting the collection of suggestion data; and <code>var</code>, which defines a collection name for access to the currently highlighted row. Typically the suggestions are presented as a list with one or more columns of suggestion data; the layout of these columns is defined inside the <classname>&lt;rich:suggestionBox&gt;</classname> tags using <classname>&lt;h:column&gt;</classname> and other <acronym>JSF</acronym> components.
+		</para>
+		<para>
+			For suggestion lists with multiple columns, the <code>fetchValue</code> attribute can be used to specify which column is used when selecting the value for the input component.
+		</para>
+		<para>
+			The <code>tokens</code> attribute can be used to define separator characters, which are used when multiple values need to be entered and a new suggestion made for each value. For example, <code>tokens=","</code> (a comma) will begin a new suggestion query each time a comma is typed. Multiple separators can be defined with spaces in between (<code>tokens=", . ; [ ]"</code>) or linking to a bean property that holds the collection of separator tokens.
+		</para>
+		<para>
+			The <code>minChars</code> attribute can be used to limit sending the Ajax request until a certain amount of characters has been entered. If the query returns no results, an appropriate message to display can be set with the <code>nothingLabel</code> attribute.
+		</para>
+		<para>
+			Instead of returning just one value from an object, the entire object can be returned to the client and handled appropriately. This is done by specifying <code>usingSuggestObjects="true"</code> and setting the <code>onobjectchange</code> attribute to a JavaScript method to handle the object, passing the <literal>suggestion</literal> object as a parameter.
 		</para>
 	</section>
 

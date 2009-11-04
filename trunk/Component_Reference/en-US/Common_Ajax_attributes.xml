@@ -67,7 +67,7 @@
 				A component with <code>limitRender="true"</code> specified will <emphasis>not</emphasis> cause components with <code>ajaxRendered="true"</code> to re-render, and only those components listed in the <code>render</code> attribute will be updated. This essentially overrides the <code>ajaxRendered</code> attribute in other components.
 			</para>
 			<para>
-				<xref linkend="exam-Component_Reference-limitRender-Rendering_example" /> describes two command buttons, a panel grid rendered by the buttons, and an output panel showing error messages. When the first button is clicked, the output panel is rendered even though it is not explicitly referenced with the <code>render</code> attribute. The second button, however, uses <code>limitRender="true"</code> to override the output panel&#39;s rendering and only render the panel grid.
+				<xref linkend="exam-Component_Reference-data-Data_reference_example" /> describes two command buttons, a panel grid rendered by the buttons, and an output panel showing error messages. When the first button is clicked, the output panel is rendered even though it is not explicitly referenced with the <code>render</code> attribute. The second button, however, uses <code>limitRender="true"</code> to override the output panel&#39;s rendering and only render the panel grid.
 			</para>
 			<example id="exam-Component_Reference-limitRender-Rendering_example">
 				<title>Rendering example</title>
@@ -99,27 +99,30 @@
 				The <code>queue</code> attribute defines the name of the queue that will be used to schedule upcoming Ajax requests. Typically RichFaces does not queue Ajax requests, so if events are produced simultaneously they will arrive at the server simultaneously. This can potentially lead to unpredictable results when the responses are returned. The <code>queue</code> attribute ensures that the requests are responded to in a set order.
 			</para>
 			<para>
-				A queue name is specified with the <code>queue</code> attribute, and each request added to the named queue is completed one at a time in the order they were sent. In addition, RichFaces intelligently removes similar requests produced by the same event from a queue to improve performance, protecting against unnecessary traffic flooding and 
+				A queue name is specified with the <code>queue</code> attribute, and each request added to the named queue is completed one at a time in the order they were sent. In addition, RichFaces intelligently removes similar requests produced by the same event from a queue to improve performance, protecting against unnecessary traffic flooding and
 			</para>
 		</section>
-		<section>
+		
+		<section id="sect-Component_Reference-Queuing_and_traffic_control-requestDelay">
 			<title>requestDelay</title>
 			<para>
 				The <code>requestDelay</code> attribute specifies an amount of time in milliseconds for the request to wait in the queue before being sent to the server. If a similar request is added to the queue before the delay is over, the original request is removed from the queue and not sent.
 			</para>
 		</section>
-		<section>
+		
+		<section id="sect-Component_Reference-Queuing_and_traffic_control-ignoreDupResponses">
 			<title>ignoreDupResponses</title>
 			<para>
 				When set to <literal>true</literal>, the <code>ignoreDupResponses</code> attribute causes responses from the server for the request to be ignored if there is another similar request in the queue. This avoids unnecessary updates on the client when another update is expected. The request is still processed on the server, but if another similar request has been queued then no updates are made on the client.
 			</para>
 		</section>
+
 	</section>
 	
 	<section id="sect-Component_Reference-Common_Ajax_attributes-Data_processing">
 		<title>Data processing</title>
 		<para>
-			RichFaces uses a form-based approach for sending Ajax requests. As such, each time a request is sent the data from the requesting component's parent <acronym>JSF</acronym> form is submitted along with the <acronym>XMLHTTPRequest</acronym> object. The form data contains values from the input element and auxiliary information such as state-saving data.
+			RichFaces uses a form-based approach for sending Ajax requests. As such, each time a request is sent the data from the requesting component&#39;s parent <acronym>JSF</acronym> form is submitted along with the <acronym>XMLHTTPRequest</acronym> object. The form data contains values from the input element and auxiliary information such as state-saving data.
 		</para>
 		<section id="sect-Component_Reference-Data_processing-process">
 			<title>process</title>
@@ -162,7 +165,7 @@
 		<section id="sect-Component_Reference-Action_and_navigation-actionListener">
 			<title>actionListener</title>
 			<para>
-				The <code>actionListener</code> attribute is a method binding for <classname>ActionEvent</classname> methods with a return type of <literal>void</literal>. 
+				The <code>actionListener</code> attribute is a method binding for <classname>ActionEvent</classname> methods with a return type of <literal>void</literal>.
 			</para>
 		</section>
 
@@ -183,7 +186,7 @@
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onclick">
 			<title>onclick</title>
 			<para>
-				The <code>onclick</click> attribute functions similarly to the <code>onsubmit</code> attribute for those components that can be clicked, such as <classname>&lt;a4j:commandButton&gt;</classname> and <classname>&lt;a4j:commandLink&gt;</classname>. It invokes the defined JavaScript before the Ajax request, and the request will be canceled if the defined code returns <literal>false</literal>.
+				The <code>onclick</code> attribute functions similarly to the <code>onsubmit</code> attribute for those components that can be clicked, such as <classname>&lt;a4j:commandButton&gt;</classname> and <classname>&lt;a4j:commandLink&gt;</classname>. It invokes the defined JavaScript before the Ajax request, and the request will be canceled if the defined code returns <literal>false</literal>.
 			</para>
 		</section>
 		
@@ -220,14 +223,13 @@
 			<para>
 				The <code>data</code> attribute allows the use of additional data during an Ajax call. <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) can be used to reference the property of the managed bean, and its value will be serialized in JavaScript Object Notation (<acronym>JSON</acronym>) and returned to the client side. The property can then be referenced through the <code>data</code> variable in the event attribute definitions. Both primitive types and complex types such as arrays and collections can be serialized and used with <code>data</code>.
 			</para>
-			<example id="exam-Component_Reference-limitRender-Rendering_example">
+			<example id="exam-Component_Reference-data-Data_reference_example">
 				<title>Data reference example</title>
 				
 <programlisting language="XML">
 &lt;a4j:commandButton value="Update" data="#{userBean.name}" oncomplete="showTheName(data.name)" /&gt;
 </programlisting>
 			</example>
-			
 		</section>
 
 	</section>
