@@ -34,7 +34,7 @@ framework, including examples of their use in applications.</para></abstract>
 				<year>2009</year>
 				<holder>Red Hat</holder>
 			</copyright>
-			<!--   FOR PUBLICAN    --><legalnotice xml:base="Common_Content/Legal_Notice.xml">
+			<!--     FOR PUBLICAN      --><legalnotice xml:base="Common_Content/Legal_Notice.xml">
 	<para>
 		Copyright <trademark class="copyright"/> 2009 Red Hat This material may only be distributed subject to the terms and conditions set forth in the GNU Free Documentation License (GFDL), V1.2 or later (the latest version is presently available at <ulink url="http://www.gnu.org/licenses/fdl.txt">http://www.gnu.org/licenses/fdl.txt</ulink>).
 	</para>
@@ -51,7 +51,7 @@ framework, including examples of their use in applications.</para></abstract>
 	</author>
 </authorgroup>
 		</bookinfo>
-	<!--    <xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>    --><chapter id="chap-Component_Reference-Introduction" lang="en-US">
+	<!--      <xi:include href="Preface.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>      --><chapter id="chap-Component_Reference-Introduction" lang="en-US">
 	<title>Introduction</title>
 	<para>
 		This book is a guide to the various components available in the RichFaces 4.0 framework. It includes descriptions of the role of the components, details on how best to use them, coded examples of their use, and basic references of their properties and attributes.
@@ -417,7 +417,7 @@ framework, including examples of their use in applications.</para></abstract>
 				<para>
 					Using the <code>suggestionValues</code> attribute, and defining a collection of suggestions:
 				</para>
-				<example>
+				<example id="exam-Component_Reference-richcomboBox-Defining_suggestion_values">
 					<title>Defining suggestion values</title>
 					
 <programlisting language="XML">
@@ -482,7 +482,7 @@ framework, including examples of their use in applications.</para></abstract>
 		<para>
 			Basic usage requires the <code>uploadData</code> attribute, pointing to the collection of uploaded files.
 		</para>
-		<example>
+		<example id="exam-Component_Reference-richfileUpload-Basic_usage_of_richfileUpload">
 			<title>Basic usage of &lt;rich:fileUpload&gt;</title>
 			
 <programlisting language="XML">
@@ -709,108 +709,219 @@ framework, including examples of their use in applications.</para></abstract>
 	<chapter id="chap-Component_Reference-Panels_and_containers" lang="en-US">
 	<title>Panels and containers</title>
 	<para>
-		Incomplete
+		This chapter details those components which act as panels and containers to hold groups of other components.
 	</para>
 	<section id="sect-Component_Reference-Panels_and_containers-a4jform">
-		<title>a4j:form</title>
+		<title>&lt;a4j:form&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;a4j:form&gt;</classname> builds on the functionality of the JavaServer Faces (<acronym>JSF</acronym>) component <classname>&lt;h:form&gt;</classname>, adding Ajax capabilities to the form.
 		</para>
+		<note>
+			<title>Note</title>
+			<para>
+				The <acronym>JSF</acronym> component <classname>&lt;h:form&gt;</classname>, on which the <classname>&lt;a4j:form&gt;</classname> component is based, had an issue whereby the <classname>&lt;h:commandLink&gt;</classname> component could not be re-rendered without re-rendering the entire form. <classname>&lt;a4j:form&gt;</classname> and <classname>&lt;a4j:commandLink&gt;</classname> fix this issue.
+			</para>
+		</note>
+		<para>
+			The <classname>&lt;a4j:form&gt;</classname> component can add indirect Ajax support to non-Ajax components on the form by setting <code>ajaxSubmit="true"</code>. It then uses the standard Ajax component attributes and updates components specified with the <code>render</code> attribute.
+		</para>
+		<important>
+			<title>Important</title>
+			<para>
+				<classname>&lt;a4j:form&gt;</classname> should not use <code>ajaxSubmit="true"</code> if it contains other Ajax-capable components.
+			</para>
+			<para>
+				Additionally, due to security reasons the file upload form element cannot be indirectly made Ajax-capable with <classname>&lt;a4j:form&gt;</classname>.
+			</para>
+		</important>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-a4joutputPanel">
-		<title>a4j:outputPanel</title>
+		<title>&lt;a4j:outputPanel&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;a4j:outputPanel&gt;</classname> component is used to group together components in to update them as a whole, rather than having to specify the components individually.
+		</para>
+		<para>
+			The <code>layout</code> attribute can be used to determine how the component is rendered in <acronym>HTML</acronym>:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<code>layout="inline"</code> is the default behavior, which will render the component as a pair of <code>&lt;span&gt;</code> tags containing the child components.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>layout="block"</code> will render the component as a pair of <code>&lt;div&gt;</code> tags containing the child components, which will use any defined <code>&lt;div&gt;</code> element styles.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>layout="none"</code> will render the component as a pair of <code>&lt;span&gt;</code> tags with an identifier equal to that of a child component. If the child component is rendered then the <code>&lt;span&gt;</code> are not included, leaving no markup representing the <classname>&lt;a4j:outputPanel&gt;</classname> in <acronym>HTML</acronym>.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			Setting <code>ajaxRendered="true"</code> will cause the <classname>&lt;a4j:outputPanel&gt;</classname> to be updated with each Ajax response for the page, even when not listed explicitly by the requesting component. This can in turn be overridden by specific attributes on any requesting components.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-a4jregion">
-		<title>a4j:region</title>
+		<title>&lt;a4j:region&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;a4j:region&gt;</classname> component specifies a part of the document object model (<acronym>DOM</acronym>) tree to be processed on the server. The processing includes data handling during decoding, conversion, validation, and model updating. When not using <classname>&lt;a4j:region&gt;</classname>, the entire view functions as a region.
+		</para>
+		<para>
+			The whole form is still submitted to the server, but only the specified region is processed. Regions can be nested, in which case only the immediate region of the component initiating the request will be processed.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richmodalPanel">
-		<title>rich:modalPanel</title>
+		<title>&lt;rich:modalPanel&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:modalPanel&gt;</classname> component provides a modal panel or window that blocks interaction with the rest of the application while active. It can be easily positioned on the screen, dragged to a new position by the user, and re-sized.
 		</para>
+		<important>
+			<title>Important</title>
+			<para>
+				The <classname>&lt;rich:modalPanel&gt;</classname> component should always be placed outside the original <classname>&lt;h:form&gt;</classname>, and must include its own <classname>&lt;h:form&gt;</classname> if performing submits.
+			</para>
+		</important>
+		<para>
+			By default, the modal panel can be both re-sized and re-positioned by the user. The minimum possible size for the panel can be set with the These abilities can be deactivated by setting <code>resizable</code> or <code>movable</code> to <literal>false</literal> as necessary. The state of the modal panel, including size and position on screen, can be maintained and restored after submitting and reloading by setting <code>keepVisualState="true"</code>.
+		</para>
+		<para>
+			If <code>showWhenRendered="true"</code> then the modal panel will display when the page is first loaded.
+		</para>
+		<example id="exam-Component_Reference-richmodalPanel-richmodalPanel_example">
+			<title>&lt;rich:modalPanel&gt; example</title>
+			
+<programlisting language="xml">
+&lt;a onclick="Richfaces.showModalPanel('pnl');" href="#"&gt;Show ModalPanel&lt;/a&gt;
+&lt;a4j:form&gt;
+  &lt;rich:modalPanel id="pnl" &gt;
+    &lt;a onclick="Richfaces.hideModalPanel('pnl');" href="#"&gt;Hide ModalPanel&lt;/a&gt;
+  &lt;/rich:modalPanel&gt;
+&lt;/a4j:form&gt;
+</programlisting>
+		</example>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richpanel">
-		<title>rich:panel</title>
+		<title>&lt;rich:panel&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:panel&gt;</classname> component is a bordered panel with an optional header.
+		</para>
+		<para>
+			No attributes need to be listed for basic usage. To add a header to the panel, use the <code>header</code> attribute to specify the text to appear in the header. Alternatively the header can be constructed using a header facet.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richpanelBar">
-		<title>rich:panelBar</title>
+		<title>&lt;rich:panelBar&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:panelBar&gt;</classname> is a series of panels stacked on top of each other, each collapsed such that only the header of the panel is showing. When the header of a panel is clicked, it is expanded to show the content of the panel. Clicking on a different header will collapse the previous panel and epand the selected one. Another name for the component is "accordion". Each panel in contained in a <classname>&lt;rich:panelBar&gt;</classname> component is a <classname>&lt;rich:panelBarItem&gt;</classname> component.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richpanelBarItem">
-		<title>rich:panelBarItem</title>
+		<title>&lt;rich:panelBarItem&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:panelBarItem&gt;</classname> component is a panel for use with the <classname>&lt;rich:panelBar&gt;</classname> component.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richpanelMenu">
-		<title>rich:panelMenu</title>
+		<title>&lt;rich:panelMenu&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:panelMenu&gt;</classname> component can be used in conjunction with <classname>&lt;rich:panelMenuItem&gt;</classname> and <classname>&lt;rich:panelMenuGroup&gt;</classname> to create an expanding, hierarchical menu. The <classname>&lt;rich:panelMenu&gt;</classname> component's appearance can be highly customized, and the hierarchy can stretch to any number of sub-levels.
 		</para>
+		<para>
+			The <code>selectedChild</code> attribute is used to point to the name of the currently selected menu item.
+		</para>
+		<para>
+			By default, the event to expand the menu is a mouse click. This can be changed by setting <code>event</code> to specify the preferred event. Several sub-menus can be expanded a once unless the <code>expandSingle</code> is set to <literal>true</literal>, which only allows one sub-menu at a time to be expanded.
+		</para>
+		<para>
+			The <code>mode</code> attribute defines the submission mode for normal menu items, and the <code>expandMode</code> attribute defines the submission mode for menu items that expand and collapse. The settings for these attributes apply to the entire menu unless a menu item defines its own individual <code>mode</code> or <code>expandMode</code>. The values for <code>mode</code> and <code>expandMode</code> are:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<literal>server</literal>, the default setting, which submits the form normally and completely refreshes the page;
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>ajax</literal>, which performs an Ajax form submission, and re-renders elements specified with the <code>render</code> attribute; and
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>none</literal>, which causes the <code>action</code> and <code>actionListener</code> items to be ignored, and the behavior is fully defined by the nested components instead of responses from submissions.
+				</para>
+			</listitem>
+		</itemizedlist>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richpanelMenuGroup">
-		<title>rich:panelMenuGroup</title>
+		<title>&lt;rich:panelMenuGroup&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:panelMenuGroup&gt;</classname> component defines a group of <classname>&lt;rich:panelMenuItem&gt;</classname> components inside a <classname>&lt;rich:panelMenu&gt;</classname>.
 		</para>
+		<para>
+			If the <code>expandMode</code> is unspecified, the submission behavior for the group is inherited from the parent <classname>&lt;rich:panelMenu&gt;</classname>. Otherwise, the <code>expandMode</code> setting is used instead of the parent's behavior.
+		</para>
+		<para>
+			Icons for menu items can be chosen from a set of standard icons. There are three attributes that relate to the different menu states that the icon represents: <code>iconExpanded</code>, <code>iconCollapsed</code>, and <code>iconDisabled</code>. The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenuGroup-Standard_icons"/>.
+		</para>
+		<figure id="figu-Component_Reference-richpanelMenuGroup-Standard_icons">
+			<title>Standard icons</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/panelMenuGroupIcons.png" format="PNG"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richpanelMenuItem">
-		<title>rich:panelMenuItem</title>
+		<title>&lt;rich:panelMenuItem&gt;</title>
 		<para>
 			Incomplete
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richsimpleTogglePanel">
-		<title>rich:simpleTogglePanel</title>
+		<title>&lt;rich:simpleTogglePanel&gt;</title>
 		<para>
 			Incomplete
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richtabPanel">
-		<title>rich:tabPanel</title>
+		<title>&lt;rich:tabPanel&gt;</title>
 		<para>
 			Incomplete
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richtab">
-		<title>rich:tab</title>
+		<title>&lt;rich:tab&gt;</title>
 		<para>
 			Incomplete
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richtogglePanel">
-		<title>rich:togglePanel</title>
+		<title>&lt;rich:togglePanel&gt;</title>
 		<para>
 			Incomplete
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richtoggleControl">
-		<title>rich:toggleControl</title>
+		<title>&lt;rich:toggleControl&gt;</title>
 		<para>
 			Incomplete
 		</para>
