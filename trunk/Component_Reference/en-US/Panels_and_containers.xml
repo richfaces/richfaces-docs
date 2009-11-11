@@ -80,7 +80,7 @@
 		<important>
 			<title>Important</title>
 			<para>
-				The <classname>&lt;rich:modalPanel&gt;</classname> component should always be placed outside the original <classname>&lt;h:form&gt;</classname>, and must include its own <classname>&lt;h:form&gt;</classname> if performing submits.
+				The <classname>&lt;rich:modalPanel&gt;</classname> component should always be placed outside the original <classname>&lt;h:form&gt;</classname>, and must include its own <classname>&lt;h:form&gt;</classname> if performing submissions.
 			</para>
 		</important>
 		<para>
@@ -139,7 +139,7 @@
 			By default, the event to expand the menu is a mouse click. This can be changed by setting <code>event</code> to specify the preferred event. Several sub-menus can be expanded a once unless the <code>expandSingle</code> is set to <literal>true</literal>, which only allows one sub-menu at a time to be expanded.
 		</para>
 		<para>
-			The <code>mode</code> attribute defines the submission mode for normal menu items, and the <code>expandMode</code> attribute defines the submission mode for menu items that expand and collapse. The settings for these attributes apply to the entire menu unless a menu item defines its own individual <code>mode</code> or <code>expandMode</code>. The values for <code>mode</code> and <code>expandMode</code> are:
+			The <code>mode</code> attribute defines the submission mode for normal menu items that link to content, and the <code>expandMode</code> attribute defines the submission mode for menu items that expand and collapse. The settings for these attributes apply to the entire menu unless a menu item defines its own individual <code>mode</code> or <code>expandMode</code>. The values for <code>mode</code> and <code>expandMode</code> are:
 		</para>
 		<itemizedlist>
 			<listitem>
@@ -169,58 +169,231 @@
 			If the <code>expandMode</code> is unspecified, the submission behavior for the group is inherited from the parent <classname>&lt;rich:panelMenu&gt;</classname>. Otherwise, the <code>expandMode</code> setting is used instead of the parent&#39;s behavior.
 		</para>
 		<para>
-			Icons for menu items can be chosen from a set of standard icons. There are three attributes that relate to the different menu states that the icon represents: <code>iconExpanded</code>, <code>iconCollapsed</code>, and <code>iconDisabled</code>. The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenuGroup-Standard_icons" />.
+			Icons for the menu group can be chosen from a set of standard icons. There are three attributes that relate to the different menu states that the icon represents: <code>iconExpanded</code>, <code>iconCollapsed</code>, and <code>iconDisabled</code>. The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenuGroup-Standard_icons" />.
 		</para>
 		<figure id="figu-Component_Reference-richpanelMenuGroup-Standard_icons">
 			<title>Standard icons</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata fileref="images/panelMenuGroupIcons.png" format="PNG" />
+					<imagedata fileref="images/panelMenuIcons.png" format="PNG" />
 				</imageobject>
 			</mediaobject>
 		</figure>
+		<para>
+			Alternatively, a path can be defined that points to an image file to use as an icon.
+		</para>
+		<example id="exam-Component_Reference-richpanelMenuGroup-Using_custom_icons">
+			<title>Using custom icons</title>
+			
+<programlisting language="xml">
+&lt;rich:panelMenu&gt;
+  &lt;rich:PanelMenuGroup label="Group 1" iconExpanded="\images\img1.png" iconCollapsed="\images\img2.png"&gt;&gt;
+    &lt;!--Nested menu components--&gt;
+  &lt;/rich:panelMenuGroup&gt;
+&lt;/rich:panelMenu&gt;
+</programlisting>
+		</example>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richpanelMenuItem">
 		<title>&lt;rich:panelMenuItem&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:panelMenuItem&gt;</classname> component represents a single item inside a <classname>&lt;rich:panelMenuGroup&gt;</classname> component, which is in turn part of a <classname>&lt;rich:panelMenu&gt;</classname> component.
 		</para>
+		<para>
+			If the <code>mode</code> is unspecified, the submission behavior for the item is inherited from the parent <classname>&lt;rich:panelMenu&gt;</classname>. Otherwise, the <code>mode</code> setting is used instead of the parent&#39;s behavior.
+		</para>
+		<para>
+			Icons for menu items can be chosen from a set of standard icons. There are two attributes that relate to the different menu states that the icon represents: <code>icon</code> and <code>iconDisabled</code>. The standard icons are shown in <xref linkend="figu-Component_Reference-richcolumn-Basic_column_example" />.
+		</para>
+		<figure id="figu-Component_Reference-richpanelMenuItem-Standard_icons">
+			<title>Standard icons</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/panelMenuIcons.png" format="PNG" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>
+			Alternatively, a path can be defined that points to an image file to use as an icon.
+		</para>
+		<example id="exam-Component_Reference-richpanelMenuItem-Using_custom_icons">
+			<title>Using custom icons</title>
+			
+<programlisting language="xml">
+&lt;rich:panelMenu&gt;
+  ...
+    &lt;rich:panelMenuItem value="Item 1.1" icon="\images\img1.png" iconDisabled="\images\img2.png" /&gt;
+  ...
+&lt;/rich:panelMenu&gt;
+</programlisting>
+		</example>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richsimpleTogglePanel">
 		<title>&lt;rich:simpleTogglePanel&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:simpleTogglePanel&gt;</classname> component is a collapsible panel that shows or hides content when the header bar is activated. It is a simplified version of <classname>&lt;rich:togglePanel&gt;</classname> component.
+		</para>
+		<para>
+			Basic usage requires only the <code>label</code> attribute to be specified, which provides the title for the header element.
+		</para>
+		<para>
+			The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<literal>server</literal>, the default setting, which causes the <classname>&lt;rich:simpleTogglePanel&gt;</classname> component to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>ajax</literal>, which causes the <classname>&lt;rich:simpleTogglePanel&gt;</classname> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>client</literal>, which causes <classname>&lt;rich:simpleTogglePanel&gt;</classname> components to update on the client side, re-rendering themselves and any additional components listed with the <code>render</code> attribute.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			If the <classname>&lt;rich:simpleTogglePanel&gt;</classname> component uses <code>opened="true"</code>, the panel is open and expanded, otherwise it is closed and collapsed.
+		</para>
+		<para>
+			The <code>openMarker</code> and <code>closeMarker</code> attributes can be used to define custom icons for the expanding header.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richtabPanel">
 		<title>&lt;rich:tabPanel&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:tabPanel&gt;</classname> component provides a set of tabbed panels for displaying one panel of content at a time. The tabs can be highly customized and themed.
+		</para>
+		<note>
+			<title>Note</title>
+			<para>
+				All <classname>&lt;rich:tabPanel&gt;</classname> components should be wrapped in a form element so that content is correctly submitted.
+			</para>
+		</note>
+		<para>
+			The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<literal>server</literal>, the default setting, which causes the <classname>&lt;rich:tabPanel&gt;</classname> component to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>ajax</literal>, which causes the <classname>&lt;rich:tabPanel&gt;</classname> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>client</literal>, which causes <classname>&lt;rich:tabPanel&gt;</classname> components to update on the client side, re-rendering themselves and any additional components listed with the <code>render</code> attribute.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			The <code>selectedTab</code> attribute holds the active tab name.
+		</para>
+		<para>
+			The tabs themselves can be aligned using the <code>headerAlignment</code> attribute. The attribute can be set to <code>left</code>, <code>center</code>, or <code>right</code>, aligning the header tabs to the left, center, or right of the top edge of the panel respectively. If no alignment is specified, left-alignment is the default behavior.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richtab">
 		<title>&lt;rich:tab&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:tab&gt;</classname> component represents an individual tab inside a <classname>&lt;rich:tabPanel&gt;</classname> component, including the tab&#39;s content. Clicking on the tab header will bring its corresponding content to the front of other tabs.
+		</para>
+		<para>
+			Basic usage of the <classname>&lt;rich:tab&gt;</classname> component requires the <code>label</code> attribute, which provides the text on the tab header. The content of the tab is then detailed inside the <classname>&lt;rich:tab&gt;</classname> tags.
+		</para>
+		<para>
+			An individual tab can be disabled by setting <code>disabled="true"</code>. Disabled tabs cannot be activated or switched to.
+		</para>
+		<para>
+			The switching mode for performing submissions can be inherited from <code>switchMode</code> attribute of the parent <classname>&lt;rich:tabPanel&gt;</classname> component, or set individually for each <classname>&lt;rich:tab&gt;</classname> component. Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richtabPanel" /> for details on the <code>switchMode</code> attribute.
+		</para>
+		<para>
+			There are two event handlers that are unique to the <classname>&lt;rich:tab&gt;</classname> component. The <code>ontabenter</code> attribute points to the function to perform when the mouse enters the tab, while the <code>ontableave</code> attribute points to the function to perform when the mouse leaves the tab.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richtogglePanel">
 		<title>&lt;rich:togglePanel&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:togglePanel&gt;</classname> component is a wrapper component with named facets. Each facet is displayed after activating a corresponding <classname>&lt;rich:toggleControl&gt;</classname> component.
 		</para>
+		<para>
+			The initial state of the component can be configured using the <code>initialState</code> attribute, which points to a facet name to display. Alternatively, setting <code>initialState="empty"</code>, the initial state will be blank until the user selects an option.
+		</para>
+		<para>
+			The order in which the facets are shown can be defined using the <code>statusOrder</code> attribute, listing the facet names separated by commas, as shown in <xref linkend="exam-Component_Reference-richtogglePanel-State_order_example" />.
+		</para>
+		<example id="exam-Component_Reference-richtogglePanel-State_order_example">
+			<title>State order example</title>
+			
+<programlisting language="xml">
+&gt;rich:togglePanel id="panel" initialState="panelB" switchType="client" stateOrder="panelA,panelB,panelC"&lt;
+  &gt;f:facet name="panelA"&lt;
+    ...
+  &gt;/f:facet&lt;
+  &gt;f:facet name="panelB"&lt;
+    ...
+  &gt;/f:facet&lt;
+  &gt;f:facet name="panelC"&lt;
+    ...
+  &gt;/f:facet&lt;
+&gt;/rich:togglePanel&lt; 
+&gt;rich:toggleControl for="panel" value="Switch"/&lt;
+</programlisting>
+		</example>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richtoggleControl">
 		<title>&lt;rich:toggleControl&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:toggleControl&gt;</classname> component works with a <classname>&lt;rich:togglePanel&gt;</classname> component to switch between panel states. It can be located either inside or outside the <classname>&lt;rich:togglePanel&gt;</classname> component, and can be used to switch to a specific state or cycle through a set of states.
 		</para>
+		<para>
+			Basic usage for the <classname>&lt;rich:toggleControl&gt;</classname> requires the <code>for</code> attribute, which points to the <code>id</code> attribute of the <classname>&lt;rich:togglePanel&gt;</classname> that it controls. The <code>value</code> attribute specifies the label of the toggle button.
+		</para>
+		<para>
+			The <code>switchToState</code> attribute can be used to explicitly set a target panel for the toggle to activate. If no <code>switchToState</code> attribute is defined, the toggle will switch to the next panel listed in the <code>switchOrder</code> attribute of the <classname>&lt;rich:toggleControl&gt;</classname> component. <xref linkend="exam-Component_Reference-richtoggleControl-Switching_panel_states" /> shows the use of the <code>switchToState</code> attribute.
+		</para>
+		<example id="exam-Component_Reference-richtoggleControl-Switching_panel_states">
+			<title>Switching panel states</title>
+			
+<programlisting language="xml">
+&lt;rich:togglePanel id="panel" initialState="empty" switchType="client"&gt;
+  &lt;f:facet name="first"&gt;
+    &lt;h:panelGroup&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value="Empty" switchToState="empty"/&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value=" Second" switchToState="second"/&gt;
+      &lt;!--Some content--&gt;
+    &lt;/h:panelGroup&gt;
+  &lt;/f:facet&gt;
+  &lt;f:facet name="second"&gt;
+    &lt;h:panelGroup&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value="Empty" switchToState="empty"/&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value=" first" switchToState="first"/&gt;
+      &lt;!--Some content--&gt;
+    &lt;/h:panelGroup&gt;
+  &lt;/f:facet&gt;
+  &lt;f:facet name="empty"&gt;
+    &lt;h:panelGroup&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value="first" switchToState="first"/&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value=" second" switchToState="second"/&gt;
+    &lt;/h:panelGroup&gt;
+  &lt;/f:facet&gt;
+&lt;/rich:togglePanel&gt;
+</programlisting>
+		</example>
 	</section>
 
 </chapter>

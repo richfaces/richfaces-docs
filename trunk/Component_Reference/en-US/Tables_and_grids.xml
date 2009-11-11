@@ -5,33 +5,209 @@
 <chapter id="chap-Component_Reference-Tables_and_grids">
 	<title>Tables and grids</title>
 	<para>
-		Incomplete
+		This chapter covers all components related to the display of tables and grids.
 	</para>
 	<section id="sect-Component_Reference-Tables_and_grids-richcolumn">
 		<title>rich:column</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:column&gt;</classname> component facilitates columns in a table or other <classname>UIData</classname> component. It supports merging columns and rows, sorting, filtering, and customized skinning.
+		</para>
+		<para>
+			In general usage, the the <classname>&lt;rich:column&gt;</classname> component is used in the same was as the JavaServer Faces (<acronym>JSF</acronym>) <classname>&lt;h:column&gt;</classname> component. It requires no extra attributes for basic usage, as shown in <xref linkend="exam-Component_Reference-richcolumn-Basic_column_example" /> and the resulting <xref linkend="figu-Component_Reference-richcolumn-Basic_column_example" />.
+		</para>
+		<example id="exam-Component_Reference-richcolumn-Basic_column_example">
+			<title>Basic column example</title>
+			
+<programlisting language="xml">
+&lt;rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"&gt; 
+  &lt;rich:column&gt;
+    &lt;f:facet name="header"&gt;State Flag&lt;/f:facet&gt;
+    &lt;h:graphicImage value="#{cap.stateFlag}"/&gt;
+  &lt;/rich:column&gt;
+  &lt;rich:column&gt;
+    &lt;f:facet name="header"&gt;State Name&lt;/f:facet&gt;
+    &lt;h:outputText value="#{cap.state}"/&gt;
+  &lt;/rich:column&gt;
+  &lt;rich:column &gt;
+    &lt;f:facet name="header"&gt;State Capital&lt;/f:facet&gt;
+    &lt;h:outputText value="#{cap.name}"/&gt;
+  &lt;/rich:column&gt;
+  &lt;rich:column&gt;
+    &lt;f:facet name="header"&gt;Time Zone&lt;/f:facet&gt;
+    &lt;h:outputText value="#{cap.timeZone}"/&gt;
+  &lt;/rich:column&gt;
+&lt;/rich:dataTable&gt;
+</programlisting>
+		</example>
+		<figure id="figu-Component_Reference-richcolumn-Basic_column_example">
+			<title>Basic column example</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richcolumn-Basic_column_example.png" format="PNG" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>
+			Columns can be merged by using the <code>colspan</code> attribute to specify how many normal columns to span. The <code>colspan</code> attribute is used in conjunction with the <code>breakBefore</code> attribute on the next column to determine how the merged columns are laid out. <xref linkend="exam-Component_Reference-richcolumn-Column_spanning_example" /> and the resulting <xref linkend="figu-Component_Reference-richcolumn-Column_spanning_example" /> show the first column spanning a width of three columns, with the others broken on to the following line.
+		</para>
+		<example id="exam-Component_Reference-richcolumn-Column_spanning_example">
+			<title>Column spanning example</title>
+			
+<programlisting language="xml">
+&lt;rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"&gt; 
+  &lt;rich:column colspan="3"&gt;
+    &lt;h:graphicImage value="#{cap.stateFlag}"/&gt;
+  &lt;/rich:column&gt;
+  &lt;rich:column breakBefore="true"&gt; 
+    &lt;h:outputText value="#{cap.state}"/&gt;
+  &lt;/rich:column&gt;
+  &lt;rich:column &gt;
+    &lt;h:outputText value="#{cap.name}"/&gt;
+  &lt;/rich:column&gt;
+  &lt;rich:column&gt;
+    &lt;h:outputText value="#{cap.timeZone}"/&gt;
+  &lt;/rich:column&gt;
+&lt;/rich:dataTable&gt;
+</programlisting>
+		</example>
+		<figure id="figu-Component_Reference-richcolumn-Column_spanning_example">
+			<title>Column spanning example</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richcolumn-Column_spanning_example.png" format="PNG" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>
+			Similarly, the <code>rowspan</code> attribute can be used to merge and span rows. Again the <code>breakBefore</code> attribute needs to be used on related <classname>&lt;rich:column&gt;</classname> components to define the layout. <xref linkend="exam-Component_Reference-richcolumn-Row_spanning_example" /> and the resulting <xref linkend="figu-Component_Reference-richcolumnGroup-Complex_headers_using_column_groups" /> show the first column of the table spanning three rows.
+		</para>
+		<example id="exam-Component_Reference-richcolumn-Row_spanning_example">
+			<title>Row spanning example</title>
+			
+<programlisting language="xml">
+&lt;rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"&gt; 
+  &lt;rich:column rowspan="3"&gt;
+    &lt;f:facet name="header"&gt;State Flag&lt;/f:facet&gt;
+    &lt;h:graphicImage value="#{cap.stateFlag}"/&gt;
+  &lt;/rich:column&gt;
+  &lt;rich:column&gt; 
+    &lt;f:facet name="header"&gt;State Info&lt;/f:facet&gt;
+    &lt;h:outputText value="#{cap.state}"/&gt;
+  &lt;/rich:column&gt;
+  &lt;rich:column breakBefore="true"&gt;
+    &lt;h:outputText value="#{cap.name}"/&gt;
+  &lt;/rich:column&gt;
+  &lt;rich:column breakBefore="true"&gt;
+    &lt;h:outputText value="#{cap.timeZone}"/&gt;
+  &lt;/rich:column&gt;
+&lt;/rich:dataTable&gt;
+</programlisting>
+		</example>
+		<figure id="figu-Component_Reference-richcolumn-Row_spanning_example">
+			<title>Row spanning example</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richcolumn-Row_spanning_example.png" format="PNG" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>
+			For details on filtering and sorting columns, refer to <xref linkend="sect-Component_Reference-Tables_and_grids-Table_filtering" /> and <xref linkend="sect-Component_Reference-Tables_and_grids-Table_sorting" />.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Tables_and_grids-richcolumnGroup">
 		<title>rich:columnGroup</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:columnGroup&gt;</classname> component combines multiple columns in a single row to organize complex parts of a table. The resulting effect is similar to using the <code>breakBefore</code> attribute of the <classname>&lt;rich:column&gt;</classname> component, but is clearer and easier to follow in the source code.
 		</para>
+		<para>
+			The <classname>&lt;rich:columnGroup&gt;</classname> can also be used to create complex headers in a table. <xref linkend="exam-Component_Reference-richcolumnGroup-Complex_headers_using_column_groups" /> and the resulting <xref linkend="figu-Component_Reference-richcolumnGroup-Complex_headers_using_column_groups" /> demonstrate how complex headers can be achieved.
+		</para>
+		<example id="exam-Component_Reference-richcolumnGroup-Complex_headers_using_column_groups">
+			<title>Complex headers using column groups</title>
+			
+<programlisting language="xml">
+&lt;rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist"&gt; 
+  &lt;f:facet name="header"&gt;
+    &lt;rich:columnGroup&gt;
+      &lt;rich:column rowspan="2"&gt;
+        &lt;h:outputText value="State Flag"/&gt;
+      &lt;/rich:column&gt;
+      &lt;rich:column colspan="3"&gt;
+        &lt;h:outputText value="State Info"/&gt;
+      &lt;/rich:column&gt;
+      &lt;rich:column breakBefore="true"&gt;
+        &lt;h:outputText value="State Name"/&gt;
+      &lt;/rich:column&gt;
+      &lt;rich:column&gt;
+        &lt;h:outputText value="State Capital"/&gt;
+      &lt;/rich:column&gt;
+      &lt;rich:column&gt;
+        &lt;h:outputText value="Time Zone"/&gt;
+      &lt;/rich:column&gt;
+    &lt;/rich:columnGroup&gt;
+  &lt;/f:facet&gt;
+  &lt;rich:column&gt;
+    &lt;h:graphicImage value="#{cap.stateFlag}"/&gt;
+      &lt;/rich:column&gt;
+      &lt;rich:column&gt;
+    &lt;h:outputText value="#{cap.state}"/&gt;
+      &lt;/rich:column&gt;
+      &lt;rich:column&gt;
+    &lt;h:outputText value="#{cap.name}"/&gt;
+      &lt;/rich:column&gt;
+      &lt;rich:column&gt;
+    &lt;h:outputText value="#{cap.timeZone}"/&gt;
+  &lt;/rich:column&gt;
+&lt;/rich:dataTable&gt;
+</programlisting>
+		</example>
+		<figure id="figu-Component_Reference-richcolumnGroup-Complex_headers_using_column_groups">
+			<title>Complex headers using column groups</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richcolumnGroup-Complex_headers_using_column_groups.png" format="PNG" />
+				</imageobject>
+			</mediaobject>
+		</figure>
 	</section>
 	
 	<section id="sect-Component_Reference-Tables_and_grids-richcolumns">
 		<title>rich:columns</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:columns&gt;</classname> component allows for dynamic sets of columns for tables. Columns and rows can be merged, and the look and feel can be highly customized. The component gets a list from a data model and creates a corresponding set of columns in a <classname>&lt;rich:dataTable&gt;</classname> component. The <classname>&lt;rich:columns&gt;</classname> component also supports header and footer facets.
+		</para>
+		<para>
+			Basic usage of the <classname>&lt;rich:columns&gt;</classname> component requires the <code>value</code> attribute, which points to the data model; the <code>var</code> attribute, which holds the current variable for the collection of data; and the <code>index</code> attribute, which holds the current counter. The <code>id</code> attribute is used for when the individuals rows require identifiers for Ajax events. 
+		</para>
+		<example id="exam-Component_Reference-richcolumns-Complex_headers_using_column_groups">
+			<title>Basic columns example</title>
+<programlisting language="xml">
+&lt;rich:dataTable value="#{dataTableScrollerBean.model}" var="model" width="750"&gt;
+  &lt;rich:columns value="#{dataTableScrollerBean.columns}" var="columns" index="ind" id="column#{ind}"&gt; 
+    &lt;f:facet name="header"&gt;
+      &lt;h:outputText value="#{columns.header}" /&gt;
+    &lt;/f:facet&gt;
+    &lt;h:outputText value="#{model[ind].model} " /&gt;
+    &lt;h:outputText value="#{model[ind].mileage} miles " /&gt;
+    &lt;h:outputText value="#{model[ind].price}$" /&gt;       
+  &lt;/rich:columns&gt; 
+&lt;/rich:dataTable&gt;     
+</programlisting>
+		</example>
+		<para>
+			The <code>columns</code> attribute 
+		</para>
+		<para>
+			For details on filtering and sorting columns, refer to <xref linkend="sect-Component_Reference-Tables_and_grids-Table_filtering" /> and <xref linkend="sect-Component_Reference-Tables_and_grids-Table_sorting" />.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Tables_and_grids-richdataFilterSlider">
 		<title>rich:dataFilterSlider</title>
 		<para>
-			Incomplete
+			The <classname>&lt;rich:dataFilterSlider&gt;</classname> components is a slider control that can be used for filtering data in a table.
 		</para>
 	</section>
 	
