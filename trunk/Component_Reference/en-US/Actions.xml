@@ -10,21 +10,97 @@
 	<section id="sect-Component_Reference-Actions-a4jactionParam">
 		<title>a4j:actionParam</title>
 		<para>
-			Incomplete
+			The <classname>&lt;a4j:actionParam&gt;</classname> behavior combines the functionality of the JavaServer Faces (<acronym>JSF</acronym>) components <classname>&lt;f:param&gt;</classname> and <classname>&lt;f:actionListener&gt;</classname>.
+		</para>
+		<para>
+			Basic usage of the <classname>&lt;a4j:actionParam&gt;</classname> requires three main attributes:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<code>name</code>, for the name of the parameter;
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>value</code>, for the initial value of the parameter; and
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<code>assignTo</code>, for defining the bean property. The property will be updated if the parent command component performs an action event during the <emphasis>Process Request</emphasis> phase.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			<xref linkend="exam-Component_Reference-a4jactionParam-a4jactionParam_example" /> shows a simple implementation along with the accompanying managed bean. When the <guibutton>Set name to Alex</guibutton> button is pressed, the application sets the <code>name</code> parameter of the bean to <literal>Alex</literal>, and displays the name in the output field.
+		</para>
+		<example id="exam-Component_Reference-a4jactionParam-a4jactionParam_example">
+			<title>&lt;a4j:actionParam&gt; example</title>
+			
+<programlisting language="xml">
+&lt;h:form id="form"&gt;
+  &lt;a4j:commandButton value="Set name to Alex" reRender="rep"&gt;
+     &lt;a4j:actionparam name="username" value="Alex" assignTo="#{actionparamBean.name}"/&gt;
+  &lt;/a4j:commandButton&gt;
+  &lt;h:outputText id="rep" value="Name: #{actionparamBean.name}"/&gt;
+&lt;/h:form&gt;
+</programlisting>
+			
+<programlisting language="java">
+public class ActionparamBean {
+  private String name = "John";
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+}
+</programlisting>
+		</example>
+		<para>
+			The <classname>&lt;a4j:actionParam&gt;</classname> behavior can be used with non-Ajax components in addition to Ajax components. In this way, data model values can be updated without an JavaScript code on the server side.
+		</para>
+		<para>
+			The <code>converter</code> attribute can be used to specify how to convert the value before it is submitted to the data model. The property is assigned the new value during the <emphasis>Update Model</emphasis> phase.
+		</para>
+		<note>
+			<title>Note</title>
+			<para>
+				If the validation of the form fails the <emphasis>Update Model</emphasis> phase will be skipped and the property will not be updated.
+			</para>
+		</note>
+		<para>
+			Variables from JavaScript functions can be used for the <code>value</code> attribute. In such an implementation, the <code>noEscape</code> attribute should be set to <literal>true</literal>. Using <code>noEscape="true"</code>, the <code>value</code> attribute can contain any JavaScript expression or JavaScript function invocation, and the result will be sent to the server as the <code>value</code> attribute.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Actions-a4jajax">
 		<title>a4j:ajax</title>
 		<para>
-			Incomplete
+			The <classname>&lt;a4j:ajax&gt;</classname> component allows Ajax capability to be added to any non-Ajax component. It is placed as a direct child to the component that requires Ajax support. The <classname>&lt;a4j:ajax&gt;</classname> component uses the common attributes listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
 		</para>
+		<note>
+			<title>Note</title>
+			<para>
+				When attaching the <classname>&lt;a4j:ajax&gt;</classname> component to non-Ajax JavaServer Faces command components, such as <classname>&lt;h:commandButton&gt;</classname> and <classname>&lt;h:commandLink&gt;</classname>, it is important to set <code>disabledDefault="true"</code>. If this attribute is not set, a non-Ajax request is sent after the Ajax request and the page is refreshed unexpectedly.
+			</para>
+		</note>
 	</section>
 	
 	<section id="sect-Component_Reference-Actions-a4jajaxListener">
 		<title>a4j:ajaxListener</title>
 		<para>
-			Incomplete
+			The <classname>&lt;a4j:ajaxListener&gt;</classname> component adds an action listener to a parent component. It works similar to the JavaServer Faces <classname>&lt;f:actionListener&gt;</classname> or <classname>&lt;f:valueChangeListener&gt;</classname> components, except that the invocation of <classname>&lt;a4j:ajaxListener&gt;</classname> is not canceled if validation of the <emphasis>Update Model</emphasis> phase fails. The <classname>&lt;a4j:ajaxListener&gt;</classname> component is guaranteed to be invoked with each Ajax response.
+		</para>
+		<para>
+			Baasic usage requires only the <code>type</code> attribute, which defines the fully-qualified Java class name for the listener. This Java class should implement the <classname>org.ajax4jsf.event.AjaxListener</classname> interface, which is a base listener for all listeners and is capable of receiving Ajax events. The object from which the event originated could be accessed using the <methodname>java.util.EventObject.getSource()</methodname> method.
+		</para>
+		<para>
+			The <classname>&lt;a4j:ajaxListener&gt;</classname> component is not invoked for non-Ajax requests, or when the RichFaces works in the <emphasis>Ajax request generates non-Ajax response</emphasis> mode, so the <classname>&lt;a4j:ajaxListener&gt;</classname> invocation is a good indicator that an Ajax response is going to be processed.
 		</para>
 	</section>
 	
@@ -130,7 +206,28 @@
 	<section id="sect-Component_Reference-Actions-a4jjsFunction">
 		<title>a4j:jsFunction</title>
 		<para>
-			Incomplete
+			The <classname>&lt;a4j:jsFunction&gt;</classname> component allows Ajax requests to be performed directly from JavaScript code, and server-side data to be invoked and returned in a <acronym>JSON</acronym> format to use in client-side JavaScript calls.
+		</para>
+		<para>
+			The <classname>&lt;a4j:jsFunction&gt;</classname> component has all the common Ajax action attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />; the <code>action</code> and <code>actionListener</code> attributes can be invoked and parts of the page can be re-rendered after a successful call to the JavaScript function. The example shows how an Ajax request can be initiated from the JavaScript and a partial page update performed. The JavaScript function can be invoked with the data returned by the Ajax response.
+		</para>
+		<example>
+			<title>&lt;a4j:jsFunction&gt; example</title>
+<programlisting language="xml">
+&lt;h:form&gt;
+  ...
+  &lt;a4j:jsFunction name="callScript" data="#{bean.someProperty1}" reRender="someComponent" oncomplete="myScript(data.subProperty1, data.subProperty2)"&gt;
+    &lt;a4j:actionParam name="param_name" assignTo="#{bean.someProperty2}"/&gt;
+  &lt;/a4j:jsFunction&gt;
+ ...
+&lt;/h:form&gt;
+</programlisting>
+		</example>
+		<para>
+			The <classname>&lt;a4j:jsFunction&gt;</classname> component allows the use of the <classname>&lt;a4j:actionParam&gt;</classname> component or the JavaServer Faces <classname>&lt;f:param&gt;</classname> component to pass any number of parameters for the JavaScript function.
+		</para>
+		<para>
+			The <classname>&lt;a4j:jsFunction&gt;</classname> component is similar to the <classname>&lt;a4j:commandButton&gt;</classname> component, but it can be activated from the JavaScript code. This allows some server-side functionality to be invoked and the returned data to subsequently be used in a JavaScript function invoked by the <code>oncomplete</code> event attribute. In this way, the <classname>&lt;a4j:jsFunction&gt;</classname> component can be used instead of the <classname>&lt;a4j:commandButton&gt;</classname> component.
 		</para>
 	</section>
 	
