@@ -37,28 +37,11 @@
 		</para>
 		<example id="exam-Component_Reference-a4jactionParam-a4jactionParam_example">
 			<title>&lt;a4j:actionParam&gt; example</title>
-			
 <programlisting language="xml">
-&lt;h:form id="form"&gt;
-  &lt;a4j:commandButton value="Set name to Alex" reRender="rep"&gt;
-     &lt;a4j:actionparam name="username" value="Alex" assignTo="#{actionparamBean.name}"/&gt;
-  &lt;/a4j:commandButton&gt;
-  &lt;h:outputText id="rep" value="Name: #{actionparamBean.name}"/&gt;
-&lt;/h:form&gt;
+<xi:include parse="text" href="extras/exam-Component_Reference-a4jactionParam-a4jactionParam_example.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </programlisting>
-			
 <programlisting language="java">
-public class ActionparamBean {
-  private String name = "John";
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-}
+<xi:include parse="text" href="extras/exam-Component_Reference-a4jactionParam-a4jactionParam_example.js" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </programlisting>
 		</example>
 		<para>
@@ -204,23 +187,18 @@ public class ActionparamBean {
 	</section>
 	
 	<section id="sect-Component_Reference-Actions-a4jjsFunction">
-		<title>a4j:jsFunction</title>
+		<title>&lt;a4j:jsFunction&gt;</title>
 		<para>
-			The <classname>&lt;a4j:jsFunction&gt;</classname> component allows Ajax requests to be performed directly from JavaScript code, and server-side data to be invoked and returned in a <acronym>JSON</acronym> format to use in client-side JavaScript calls.
+			The <classname>&lt;a4j:jsFunction&gt;</classname> component allows Ajax requests to be performed directly from JavaScript code, and server-side data to be invoked and returned in JavaScript Object Notation (<acronym>JSON</acronym>) format to use in client-side JavaScript calls.
 		</para>
 		<para>
-			The <classname>&lt;a4j:jsFunction&gt;</classname> component has all the common Ajax action attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />; the <code>action</code> and <code>actionListener</code> attributes can be invoked and parts of the page can be re-rendered after a successful call to the JavaScript function. The example shows how an Ajax request can be initiated from the JavaScript and a partial page update performed. The JavaScript function can be invoked with the data returned by the Ajax response.
+			The <classname>&lt;a4j:jsFunction&gt;</classname> component has all the common Ajax action attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />; the <code>action</code> and <code>actionListener</code> attributes can be invoked and parts of the page can be re-rendered after a successful call to the JavaScript function. <xref linkend="exam-Component_Reference-a4jjsFunction-a4jjsFunction_example" /> shows how an Ajax request can be initiated from the JavaScript and a partial page update performed. The JavaScript function can be invoked with the data returned by the Ajax response.
 		</para>
-		<example>
+		<example id="exam-Component_Reference-a4jjsFunction-a4jjsFunction_example">
 			<title>&lt;a4j:jsFunction&gt; example</title>
+			
 <programlisting language="xml">
-&lt;h:form&gt;
-  ...
-  &lt;a4j:jsFunction name="callScript" data="#{bean.someProperty1}" reRender="someComponent" oncomplete="myScript(data.subProperty1, data.subProperty2)"&gt;
-    &lt;a4j:actionParam name="param_name" assignTo="#{bean.someProperty2}"/&gt;
-  &lt;/a4j:jsFunction&gt;
- ...
-&lt;/h:form&gt;
+<xi:include href="extras/exam-Component_Reference-a4jjsFunction-a4jjsFunction_example.xml" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
 </programlisting>
 		</example>
 		<para>
@@ -232,14 +210,17 @@ public class ActionparamBean {
 	</section>
 	
 	<section id="sect-Component_Reference-Actions-a4jpoll">
-		<title>a4j:poll</title>
+		<title>&lt;a4j:poll&gt;</title>
 		<para>
-			Incomplete
+			The <classname>&lt;a4j:poll&gt;</classname> component allows periodical sending of Ajax requests to the server. It is used for repeatedly updating a page at specific time intervals.
+		</para>
+		<para>
+			The <code>interval</code> attribute specifies the time in milliseconds to between requests. The default for this value is 1000 ms (1 second).
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Actions-a4jpush">
-		<title>a4j:push</title>
+		<title>&lt;a4j:push&gt;</title>
 		<para>
 			Incomplete
 		</para>
