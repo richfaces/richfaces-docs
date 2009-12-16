@@ -12,30 +12,30 @@
 	<section id="sect-Component_Reference-Actions-a4jactionParam">
 		<title>a4j:actionParam</title>
 		<para>
-			The <classname>&lt;a4j:actionParam&gt;</classname> behavior combines the functionality of the JavaServer Faces (<acronym>JSF</acronym>) components <classname>&lt;f:param&gt;</classname> and <classname>&lt;f:actionListener&gt;</classname>.
+			The <sgmltag>&lt;a4j:actionParam&gt;</sgmltag> behavior combines the functionality of the JavaServer Faces (<acronym>JSF</acronym>) components <sgmltag>&lt;f:param&gt;</sgmltag> and <sgmltag>&lt;f:actionListener&gt;</sgmltag>.
 		</para>
 		<para>
-			Basic usage of the <classname>&lt;a4j:actionParam&gt;</classname> requires three main attributes:
+			Basic usage of the <sgmltag>&lt;a4j:actionParam&gt;</sgmltag> requires three main attributes:
 		</para>
 		<itemizedlist>
 			<listitem>
 				<para>
-					<code>name</code>, for the name of the parameter;
+					<varname>name</varname>, for the name of the parameter;
 				</para>
 			</listitem>
 			<listitem>
 				<para>
-					<code>value</code>, for the initial value of the parameter; and
+					<varname>value</varname>, for the initial value of the parameter; and
 				</para>
 			</listitem>
 			<listitem>
 				<para>
-					<code>assignTo</code>, for defining the bean property. The property will be updated if the parent command component performs an action event during the <emphasis>Process Request</emphasis> phase.
+					<varname>assignTo</varname>, for defining the bean property. The property will be updated if the parent command component performs an action event during the <emphasis>Process Request</emphasis> phase.
 				</para>
 			</listitem>
 		</itemizedlist>
 		<para>
-			<xref linkend="exam-Component_Reference-a4jactionParam-a4jactionParam_example" /> shows a simple implementation along with the accompanying managed bean. When the <guibutton>Set name to Alex</guibutton> button is pressed, the application sets the <code>name</code> parameter of the bean to <literal>Alex</literal>, and displays the name in the output field.
+			<xref linkend="exam-Component_Reference-a4jactionParam-a4jactionParam_example" /> shows a simple implementation along with the accompanying managed bean. When the <guibutton>Set name to Alex</guibutton> button is pressed, the application sets the <varname>name</varname> parameter of the bean to <literal>Alex</literal>, and displays the name in the output field.
 		</para>
 		<example id="exam-Component_Reference-a4jactionParam-a4jactionParam_example">
 			<title>&lt;a4j:actionParam&gt; example</title>
@@ -47,10 +47,10 @@
 </programlisting>
 		</example>
 		<para>
-			The <classname>&lt;a4j:actionParam&gt;</classname> behavior can be used with non-Ajax components in addition to Ajax components. In this way, data model values can be updated without an JavaScript code on the server side.
+			The <sgmltag>&lt;a4j:actionParam&gt;</sgmltag> behavior can be used with non-Ajax components in addition to Ajax components. In this way, data model values can be updated without an JavaScript code on the server side.
 		</para>
 		<para>
-			The <code>converter</code> attribute can be used to specify how to convert the value before it is submitted to the data model. The property is assigned the new value during the <emphasis>Update Model</emphasis> phase.
+			The <varname>converter</varname> attribute can be used to specify how to convert the value before it is submitted to the data model. The property is assigned the new value during the <emphasis>Update Model</emphasis> phase.
 		</para>
 		<note>
 			<title>Note</title>
@@ -59,19 +59,19 @@
 			</para>
 		</note>
 		<para>
-			Variables from JavaScript functions can be used for the <code>value</code> attribute. In such an implementation, the <code>noEscape</code> attribute should be set to <literal>true</literal>. Using <code>noEscape="true"</code>, the <code>value</code> attribute can contain any JavaScript expression or JavaScript function invocation, and the result will be sent to the server as the <code>value</code> attribute.
+			Variables from JavaScript functions can be used for the <varname>value</varname> attribute. In such an implementation, the <varname>noEscape</varname> attribute should be set to <literal>true</literal>. Using <code>noEscape="true"</code>, the <varname>value</varname> attribute can contain any JavaScript expression or JavaScript function invocation, and the result will be sent to the server as the <varname>value</varname> attribute.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Actions-a4jajax">
 		<title>a4j:ajax</title>
 		<para>
-			The <classname>&lt;a4j:ajax&gt;</classname> component allows Ajax capability to be added to any non-Ajax component. It is placed as a direct child to the component that requires Ajax support. The <classname>&lt;a4j:ajax&gt;</classname> component uses the common attributes listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
+			The <sgmltag>&lt;a4j:ajax&gt;</sgmltag> component allows Ajax capability to be added to any non-Ajax component. It is placed as a direct child to the component that requires Ajax support. The <sgmltag>&lt;a4j:ajax&gt;</sgmltag> component uses the common attributes listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
 		</para>
 		<note>
 			<title>Note</title>
 			<para>
-				When attaching the <classname>&lt;a4j:ajax&gt;</classname> component to non-Ajax JavaServer Faces command components, such as <classname>&lt;h:commandButton&gt;</classname> and <classname>&lt;h:commandLink&gt;</classname>, it is important to set <code>disabledDefault="true"</code>. If this attribute is not set, a non-Ajax request is sent after the Ajax request and the page is refreshed unexpectedly.
+				When attaching the <sgmltag>&lt;a4j:ajax&gt;</sgmltag> component to non-Ajax JavaServer Faces command components, such as <sgmltag>&lt;h:commandButton&gt;</sgmltag> and <sgmltag>&lt;h:commandLink&gt;</sgmltag>, it is important to set <code>disabledDefault="true"</code>. If this attribute is not set, a non-Ajax request is sent after the Ajax request and the page is refreshed unexpectedly.
 			</para>
 		</note>
 	</section>
@@ -79,13 +79,13 @@
 	<section id="sect-Component_Reference-Actions-a4jajaxListener">
 		<title>a4j:ajaxListener</title>
 		<para>
-			The <classname>&lt;a4j:ajaxListener&gt;</classname> component adds an action listener to a parent component. It works similar to the JavaServer Faces <classname>&lt;f:actionListener&gt;</classname> or <classname>&lt;f:valueChangeListener&gt;</classname> components, except that the invocation of <classname>&lt;a4j:ajaxListener&gt;</classname> is not canceled if validation of the <emphasis>Update Model</emphasis> phase fails. The <classname>&lt;a4j:ajaxListener&gt;</classname> component is guaranteed to be invoked with each Ajax response.
+			The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component adds an action listener to a parent component. It works similar to the JavaServer Faces <sgmltag>&lt;f:actionListener&gt;</sgmltag> or <sgmltag>&lt;f:valueChangeListener&gt;</sgmltag> components, except that the invocation of <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> is not canceled if validation of the <emphasis>Update Model</emphasis> phase fails. The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component is guaranteed to be invoked with each Ajax response.
 		</para>
 		<para>
-			Baasic usage requires only the <code>type</code> attribute, which defines the fully-qualified Java class name for the listener. This Java class should implement the <classname>org.ajax4jsf.event.AjaxListener</classname> interface, which is a base listener for all listeners and is capable of receiving Ajax events. The object from which the event originated could be accessed using the <methodname>java.util.EventObject.getSource()</methodname> method.
+			Baasic usage requires only the <varname>type</varname> attribute, which defines the fully-qualified Java class name for the listener. This Java class should implement the <classname>org.ajax4jsf.event.AjaxListener</classname> interface, which is a base listener for all listeners and is capable of receiving Ajax events. The object from which the event originated could be accessed using the <methodname>java.util.EventObject.getSource()</methodname> method.
 		</para>
 		<para>
-			The <classname>&lt;a4j:ajaxListener&gt;</classname> component is not invoked for non-Ajax requests, or when the RichFaces works in the <emphasis>Ajax request generates non-Ajax response</emphasis> mode, so the <classname>&lt;a4j:ajaxListener&gt;</classname> invocation is a good indicator that an Ajax response is going to be processed.
+			The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component is not invoked for non-Ajax requests, or when the RichFaces works in the <emphasis>Ajax request generates non-Ajax response</emphasis> mode, so the <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> invocation is a good indicator that an Ajax response is going to be processed.
 		</para>
 	</section>
 	
@@ -114,15 +114,15 @@
 			</listitem>
 		</itemizedlist>
 		<para>
-			The <classname>&lt;a4j:commandButton&gt;</classname> is similar to the JavaServer Faces (<acronym>JSF</acronym>) component <classname>&lt;h:commandButton&gt;</classname>, but additionally includes Ajax support. When the command button is clicked it generates an Ajax form submit, and when a response is received the command button can be dynamically rendered.
+			The <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> is similar to the JavaServer Faces (<acronym>JSF</acronym>) component <sgmltag>&lt;h:commandButton&gt;</sgmltag>, but additionally includes Ajax support. When the command button is clicked it generates an Ajax form submit, and when a response is received the command button can be dynamically rendered.
 		</para>
 		<para>
-			The <classname>&lt;a4j:commandButton&gt;</classname> requires only the <code>value</code> and <code>render</code> attributes to function. The <code>value</code> attribute specifies the text of the button and the <code>render</code> attribute specifies which areas are to be updated. The <classname>&lt;a4j:commandButton&gt;</classname> uses the <code>onclick</code> event instead of the <code>onsubmit</code> event, but otherwise uses all common Ajax attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
+			The <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> requires only the <varname>value</varname> and <varname>render</varname> attributes to function. The <varname>value</varname> attribute specifies the text of the button and the <varname>render</varname> attribute specifies which areas are to be updated. The <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> uses the <varname>onclick</varname> event instead of the <varname>onsubmit</varname> event, but otherwise uses all common Ajax attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
 		</para>
 		<note>
 			<title>Note</title>
 			<para>
-				When attaching a JavaScript function to a <classname>&lt;a4j:commandButton&gt;</classname> with the help of a <classname>&lt;rich:componentControl&gt;</classname>, do not use the <code>attachTo</code> attribute of <classname>&lt;rich:componentControl&gt;</classname>. The attribute adds event handlers using <classname>Event.observe</classname> but <classname>&lt;a4j:commandButton&gt;</classname> does not include this event.
+				When attaching a JavaScript function to a <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> with the help of a <sgmltag>&lt;rich:componentControl&gt;</sgmltag>, do not use the <varname>attachTo</varname> attribute of <sgmltag>&lt;rich:componentControl&gt;</sgmltag>. The attribute adds event handlers using <classname>Event.observe</classname> but <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> does not include this event.
 			</para>
 		</note>
 	</section>
@@ -152,10 +152,10 @@
 			</listitem>
 		</itemizedlist>
 		<para>
-			The <classname>&lt;a4j:commandLink&gt;</classname> is similar to the JavaServer Faces (<acronym>JSF</acronym>) component <classname>&lt;h:commandLink&gt;</classname>, but additionally includes Ajax support. When the command link is clicked it generates an Ajax form submit, and when a response is received the command link can be dynamically rendered.
+			The <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> is similar to the JavaServer Faces (<acronym>JSF</acronym>) component <sgmltag>&lt;h:commandLink&gt;</sgmltag>, but additionally includes Ajax support. When the command link is clicked it generates an Ajax form submit, and when a response is received the command link can be dynamically rendered.
 		</para>
 		<para>
-			The <classname>&lt;a4j:commandLink&gt;</classname> requires only the <code>value</code> and <code>render</code> attributes to function. The <code>value</code> attribute specifies the text of the link and the <code>render</code> attribute specifies which areas are to be updated. The <classname>&lt;a4j:commandLink&gt;</classname> uses the <code>onclick</code> event instead of the <code>onsubmit</code> event, but otherwise uses all common Ajax attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
+			The <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> requires only the <varname>value</varname> and <varname>render</varname> attributes to function. The <varname>value</varname> attribute specifies the text of the link and the <varname>render</varname> attribute specifies which areas are to be updated. The <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> uses the <varname>onclick</varname> event instead of the <varname>onsubmit</varname> event, but otherwise uses all common Ajax attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
 		</para>
 	</section>
 	
@@ -191,10 +191,10 @@
 	<section id="sect-Component_Reference-Actions-a4jjsFunction">
 		<title>&lt;a4j:jsFunction&gt;</title>
 		<para>
-			The <classname>&lt;a4j:jsFunction&gt;</classname> component allows Ajax requests to be performed directly from JavaScript code, and server-side data to be invoked and returned in JavaScript Object Notation (<acronym>JSON</acronym>) format to use in client-side JavaScript calls.
+			The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component allows Ajax requests to be performed directly from JavaScript code, and server-side data to be invoked and returned in JavaScript Object Notation (<acronym>JSON</acronym>) format to use in client-side JavaScript calls.
 		</para>
 		<para>
-			The <classname>&lt;a4j:jsFunction&gt;</classname> component has all the common Ajax action attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />; the <code>action</code> and <code>actionListener</code> attributes can be invoked and parts of the page can be re-rendered after a successful call to the JavaScript function. <xref linkend="exam-Component_Reference-a4jjsFunction-a4jjsFunction_example" /> shows how an Ajax request can be initiated from the JavaScript and a partial page update performed. The JavaScript function can be invoked with the data returned by the Ajax response.
+			The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component has all the common Ajax action attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />; the <varname>action</varname> and <varname>actionListener</varname> attributes can be invoked and parts of the page can be re-rendered after a successful call to the JavaScript function. <xref linkend="exam-Component_Reference-a4jjsFunction-a4jjsFunction_example" /> shows how an Ajax request can be initiated from the JavaScript and a partial page update performed. The JavaScript function can be invoked with the data returned by the Ajax response.
 		</para>
 		<example id="exam-Component_Reference-a4jjsFunction-a4jjsFunction_example">
 			<title>&lt;a4j:jsFunction&gt; example</title>
@@ -204,20 +204,20 @@
 </programlisting>
 		</example>
 		<para>
-			The <classname>&lt;a4j:jsFunction&gt;</classname> component allows the use of the <classname>&lt;a4j:actionParam&gt;</classname> component or the JavaServer Faces <classname>&lt;f:param&gt;</classname> component to pass any number of parameters for the JavaScript function.
+			The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component allows the use of the <sgmltag>&lt;a4j:actionParam&gt;</sgmltag> component or the JavaServer Faces <sgmltag>&lt;f:param&gt;</sgmltag> component to pass any number of parameters for the JavaScript function.
 		</para>
 		<para>
-			The <classname>&lt;a4j:jsFunction&gt;</classname> component is similar to the <classname>&lt;a4j:commandButton&gt;</classname> component, but it can be activated from the JavaScript code. This allows some server-side functionality to be invoked and the returned data to subsequently be used in a JavaScript function invoked by the <code>oncomplete</code> event attribute. In this way, the <classname>&lt;a4j:jsFunction&gt;</classname> component can be used instead of the <classname>&lt;a4j:commandButton&gt;</classname> component.
+			The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component is similar to the <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> component, but it can be activated from the JavaScript code. This allows some server-side functionality to be invoked and the returned data to subsequently be used in a JavaScript function invoked by the <varname>oncomplete</varname> event attribute. In this way, the <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component can be used instead of the <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> component.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Actions-a4jpoll">
 		<title>&lt;a4j:poll&gt;</title>
 		<para>
-			The <classname>&lt;a4j:poll&gt;</classname> component allows periodical sending of Ajax requests to the server. It is used for repeatedly updating a page at specific time intervals.
+			The <sgmltag>&lt;a4j:poll&gt;</sgmltag> component allows periodical sending of Ajax requests to the server. It is used for repeatedly updating a page at specific time intervals.
 		</para>
 		<para>
-			The <code>interval</code> attribute specifies the time in milliseconds to between requests. The default for this value is 1000 ms (1 second).
+			The <varname>interval</varname> attribute specifies the time in milliseconds to between requests. The default for this value is 1000 ms (1 second).
 		</para>
 	</section>
 	

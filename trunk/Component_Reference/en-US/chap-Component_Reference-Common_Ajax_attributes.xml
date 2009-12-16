@@ -15,9 +15,9 @@
 	<section id="sect-Component_Reference-Common_Ajax_attributes-Rendering">
 		<title>Rendering</title>
 		<section id="sect-Component_Reference-Rendering-render">
-			<title><code>render</code></title>
+			<title><varname>render</varname></title>
 			<para>
-				The <code>render</code> attribute provides a reference to one or more areas on the page that need updating after an Ajax interaction. It uses the <code>UIComponent.findComponent()</code> algorithm to find the components in the component tree using their <code>id</code> attributes as a reference. Components can be referenced by their <code>id</code> attribute alone, or by a hierarchy of components&#39; <code>id</code> attributes to make locating components more efficient. <xref linkend="exam-Component_Reference-render-render_example" /> shows both ways of referencing components. Each command button will correctly render the referenced panel grids, but the second button locates the references more efficiently with explicit hierarchy paths.
+				The <varname>render</varname> attribute provides a reference to one or more areas on the page that need updating after an Ajax interaction. It uses the <methodname>UIComponent.findComponent()</methodname> algorithm to find the components in the component tree using their <varname>id</varname> attributes as a reference. Components can be referenced by their <varname>id</varname> attribute alone, or by a hierarchy of components&#39; <varname>id</varname> attributes to make locating components more efficient. <xref linkend="exam-Component_Reference-render-render_example" /> shows both ways of referencing components. Each command button will correctly render the referenced panel grids, but the second button locates the references more efficiently with explicit hierarchy paths.
 			</para>
 			<example id="exam-Component_Reference-render-render_example">
 				<title>render example</title>
@@ -40,15 +40,15 @@
 </programlisting>
 			</example>
 			<para>
-				The value of the <code>render</code> attribute can also be an expression written using JavaServer Faces&#39; Expression Language (<acronym>EL</acronym>); this can either be a <type>Set</type>, <type>Collection</type>, <type>Array</type>, or <type>String</type>.
+				The value of the <varname>render</varname> attribute can also be an expression written using JavaServer Faces&#39; Expression Language (<acronym>EL</acronym>); this can either be a <type>Set</type>, <type>Collection</type>, <type>Array</type>, or <type>String</type>.
 			</para>
 			<important>
 				<title>Important</title>
 				<para>
-					A common problem with using <code>render</code> occurs when the referenced component has a <code>rendered</code> attribute. <acronym>JSF</acronym> does not mark the place in the browser&#39;s Document Object Model (<acronym>DOM</acronym>) where the rendered component would be placed in case the <code>rendered</code> attribute returns <literal>false</literal>. As such, when RichFaces sends the render code to the client, the page does not update as the place for the update is not known.
+					A common problem with using <varname>render</varname> occurs when the referenced component has a <varname>rendered</varname> attribute. <acronym>JSF</acronym> does not mark the place in the browser&#39;s Document Object Model (<acronym>DOM</acronym>) where the rendered component would be placed in case the <varname>rendered</varname> attribute returns <literal>false</literal>. As such, when RichFaces sends the render code to the client, the page does not update as the place for the update is not known.
 				</para>
 				<para>
-					To work around this issue, wrap the component to be rendered in an <classname>&lt;a4j:outputPanel&gt;</classname> with <code>layout="none"</code>. The <classname>&lt;a4j:outputPanel&gt;</classname> will receive the update and render the component as required.
+					To work around this issue, wrap the component to be rendered in an <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> with <code>layout="none"</code>. The <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> will receive the update and render the component as required.
 				</para>
 			</important>
 		</section>
@@ -56,7 +56,7 @@
 		<section id="sect-Component_Reference-Rendering-ajaxRendered">
 			<title>ajaxRendered</title>
 			<para>
-				A component with <code>ajaxRendered="true"</code> will be re-rendered with <emphasis>every</emphasis> Ajax request, even when not referenced by the requesting component&#39;s <code>render</code> attribute. This can be useful for updating a status display or error message without explicitly requesting it.
+				A component with <code>ajaxRendered="true"</code> will be re-rendered with <emphasis>every</emphasis> Ajax request, even when not referenced by the requesting component&#39;s <varname>render</varname> attribute. This can be useful for updating a status display or error message without explicitly requesting it.
 			</para>
 			<para>
 				Rendering of components in this way can be repressed by adding <code>limitRender="true"</code> to the requesting component, as described in <xref linkend="sect-Component_Reference-Rendering-limitRender" />.
@@ -66,10 +66,10 @@
 		<section id="sect-Component_Reference-Rendering-limitRender">
 			<title>limitRender</title>
 			<para>
-				A component with <code>limitRender="true"</code> specified will <emphasis>not</emphasis> cause components with <code>ajaxRendered="true"</code> to re-render, and only those components listed in the <code>render</code> attribute will be updated. This essentially overrides the <code>ajaxRendered</code> attribute in other components.
+				A component with <code>limitRender="true"</code> specified will <emphasis>not</emphasis> cause components with <code>ajaxRendered="true"</code> to re-render, and only those components listed in the <varname>render</varname> attribute will be updated. This essentially overrides the <varname>ajaxRendered</varname> attribute in other components.
 			</para>
 			<para>
-				<xref linkend="exam-Component_Reference-data-Data_reference_example" /> describes two command buttons, a panel grid rendered by the buttons, and an output panel showing error messages. When the first button is clicked, the output panel is rendered even though it is not explicitly referenced with the <code>render</code> attribute. The second button, however, uses <code>limitRender="true"</code> to override the output panel&#39;s rendering and only render the panel grid.
+				<xref linkend="exam-Component_Reference-data-Data_reference_example" /> describes two command buttons, a panel grid rendered by the buttons, and an output panel showing error messages. When the first button is clicked, the output panel is rendered even though it is not explicitly referenced with the <varname>render</varname> attribute. The second button, however, uses <code>limitRender="true"</code> to override the output panel&#39;s rendering and only render the panel grid.
 			</para>
 			<example id="exam-Component_Reference-limitRender-Rendering_example">
 				<title>Rendering example</title>
@@ -98,24 +98,24 @@
 		<section id="sect-Component_Reference-Queuing_and_traffic_control-queue">
 			<title>queue</title>
 			<para>
-				The <code>queue</code> attribute defines the name of the queue that will be used to schedule upcoming Ajax requests. Typically RichFaces does not queue Ajax requests, so if events are produced simultaneously they will arrive at the server simultaneously. This can potentially lead to unpredictable results when the responses are returned. The <code>queue</code> attribute ensures that the requests are responded to in a set order.
+				The <varname>queue</varname> attribute defines the name of the queue that will be used to schedule upcoming Ajax requests. Typically RichFaces does not queue Ajax requests, so if events are produced simultaneously they will arrive at the server simultaneously. This can potentially lead to unpredictable results when the responses are returned. The <varname>queue</varname> attribute ensures that the requests are responded to in a set order.
 			</para>
 			<para>
-				A queue name is specified with the <code>queue</code> attribute, and each request added to the named queue is completed one at a time in the order they were sent. In addition, RichFaces intelligently removes similar requests produced by the same event from a queue to improve performance, protecting against unnecessary traffic flooding and
+				A queue name is specified with the <varname>queue</varname> attribute, and each request added to the named queue is completed one at a time in the order they were sent. In addition, RichFaces intelligently removes similar requests produced by the same event from a queue to improve performance, protecting against unnecessary traffic flooding and
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Queuing_and_traffic_control-requestDelay">
 			<title>requestDelay</title>
 			<para>
-				The <code>requestDelay</code> attribute specifies an amount of time in milliseconds for the request to wait in the queue before being sent to the server. If a similar request is added to the queue before the delay is over, the original request is removed from the queue and not sent.
+				The <varname>requestDelay</varname> attribute specifies an amount of time in milliseconds for the request to wait in the queue before being sent to the server. If a similar request is added to the queue before the delay is over, the original request is removed from the queue and not sent.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Queuing_and_traffic_control-ignoreDupResponses">
 			<title>ignoreDupResponses</title>
 			<para>
-				When set to <literal>true</literal>, the <code>ignoreDupResponses</code> attribute causes responses from the server for the request to be ignored if there is another similar request in the queue. This avoids unnecessary updates on the client when another update is expected. The request is still processed on the server, but if another similar request has been queued then no updates are made on the client.
+				When set to <literal>true</literal>, the <varname>ignoreDupResponses</varname> attribute causes responses from the server for the request to be ignored if there is another similar request in the queue. This avoids unnecessary updates on the client when another update is expected. The request is still processed on the server, but if another similar request has been queued then no updates are made on the client.
 			</para>
 		</section>
 
@@ -129,21 +129,21 @@
 		<section id="sect-Component_Reference-Data_processing-process">
 			<title>process</title>
 			<para>
-				The <code>process</code> attribute allows <acronym>JSF</acronym> processing to be limited to defined components. To only process the requesting component, <code>process="@this"</code> can be used.
+				The <varname>process</varname> attribute allows <acronym>JSF</acronym> processing to be limited to defined components. To only process the requesting component, <code>process="@this"</code> can be used.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Data_processing-immediate">
 			<title>immediate</title>
 			<para>
-				If the <code>immediate</code> attribute is set to <literal>true</literal>, the default ActionListener is executed immediately during the Apply Request Values phase of the request processing lifecycle, rather than waitingfor the Invoke Application phase. This allows some data model values to be updated regardless of whether the Validation phase is successful or not.
+				If the <varname>immediate</varname> attribute is set to <literal>true</literal>, the default ActionListener is executed immediately during the Apply Request Values phase of the request processing lifecycle, rather than waitingfor the Invoke Application phase. This allows some data model values to be updated regardless of whether the Validation phase is successful or not.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Data_processing-bypassUpdates">
 			<title>bypassUpdates</title>
 			<para>
-				If the <code>bypassUpdates</code> attribute is set to <literal>true</literal>, the Update Model phase of the request processing lifecycle is bypassed. This is useful if user input needs to be validated but the model does not need to be updated.
+				If the <varname>bypassUpdates</varname> attribute is set to <literal>true</literal>, the Update Model phase of the request processing lifecycle is bypassed. This is useful if user input needs to be validated but the model does not need to be updated.
 			</para>
 		</section>
 
@@ -152,22 +152,22 @@
 	<section id="sect-Component_Reference-Common_Ajax_attributes-Action_and_navigation">
 		<title>Action and navigation</title>
 		<para>
-			The <code>action</code> and <code>actionListener</code> attributes can be used to invoke action methods and define action events.
+			The <varname>action</varname> and <varname>actionListener</varname> attributes can be used to invoke action methods and define action events.
 		</para>
 		<section id="sect-Component_Reference-Action_and_navigation-action">
 			<title>action</title>
 			<para>
-				The <code>action</code> attribute is a method binding that points to the application action to be invoked. The method can be activated during the Apply Request Values phase or the Invoke Application phase of the request processing lifecycle.
+				The <varname>action</varname> attribute is a method binding that points to the application action to be invoked. The method can be activated during the Apply Request Values phase or the Invoke Application phase of the request processing lifecycle.
 			</para>
 			<para>
-				The method specified in the <code>action</code> attribute must return <literal>null</literal> for an Ajax response with a partial page update.
+				The method specified in the <varname>action</varname> attribute must return <literal>null</literal> for an Ajax response with a partial page update.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Action_and_navigation-actionListener">
 			<title>actionListener</title>
 			<para>
-				The <code>actionListener</code> attribute is a method binding for <classname>ActionEvent</classname> methods with a return type of <literal>void</literal>.
+				The <varname>actionListener</varname> attribute is a method binding for <classname>ActionEvent</classname> methods with a return type of <literal>void</literal>.
 			</para>
 		</section>
 
@@ -181,21 +181,21 @@
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onsubmit">
 			<title>onsubmit</title>
 			<para>
-				The <code>onsubmit</code> attribute will invoke the JavaScript code before the Ajax request is sent. The request is canceled if the JavaScript code defined for <code>onsubmit</code> returns <literal>false</literal>.
+				The <varname>onsubmit</varname> attribute will invoke the JavaScript code before the Ajax request is sent. The request is canceled if the JavaScript code defined for <varname>onsubmit</varname> returns <literal>false</literal>.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onclick">
 			<title>onclick</title>
 			<para>
-				The <code>onclick</code> attribute functions similarly to the <code>onsubmit</code> attribute for those components that can be clicked, such as <classname>&lt;a4j:commandButton&gt;</classname> and <classname>&lt;a4j:commandLink&gt;</classname>. It invokes the defined JavaScript before the Ajax request, and the request will be canceled if the defined code returns <literal>false</literal>.
+				The <varname>onclick</varname> attribute functions similarly to the <varname>onsubmit</varname> attribute for those components that can be clicked, such as <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> and <sgmltag>&lt;a4j:commandLink&gt;</sgmltag>. It invokes the defined JavaScript before the Ajax request, and the request will be canceled if the defined code returns <literal>false</literal>.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-oncomplete">
 			<title>oncomplete</title>
 			<para>
-				The <code>oncomplete</code> attribute invokes the JavaScript code after the Ajax response has been returned and the <acronym>DOM</acronym> tree of the browser has been updated. The code is registered for further invocation of the <acronym>XMLHTTP</acronym> request object before an Ajax request is sent. As such, using <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) value binding means the code will not be changed during processing of the request on the server. Additionally the <code>oncomplete</code> attribute cannot use the <literal>this</literal> keyword as it will not point to the component from which the Ajax request was initiated.
+				The <varname>oncomplete</varname> attribute invokes the JavaScript code after the Ajax response has been returned and the <acronym>DOM</acronym> tree of the browser has been updated. The code is registered for further invocation of the <acronym>XMLHTTP</acronym> request object before an Ajax request is sent. As such, using <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) value binding means the code will not be changed during processing of the request on the server. Additionally the <varname>oncomplete</varname> attribute cannot use the <literal>this</literal> keyword as it will not point to the component from which the Ajax request was initiated.
 			</para>
 		</section>
 		
@@ -223,7 +223,7 @@
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-data">
 			<title>data</title>
 			<para>
-				The <code>data</code> attribute allows the use of additional data during an Ajax call. <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) can be used to reference the property of the managed bean, and its value will be serialized in JavaScript Object Notation (<acronym>JSON</acronym>) and returned to the client side. The property can then be referenced through the <code>data</code> variable in the event attribute definitions. Both primitive types and complex types such as arrays and collections can be serialized and used with <code>data</code>.
+				The <varname>data</varname> attribute allows the use of additional data during an Ajax call. <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) can be used to reference the property of the managed bean, and its value will be serialized in JavaScript Object Notation (<acronym>JSON</acronym>) and returned to the client side. The property can then be referenced through the <varname>data</varname> variable in the event attribute definitions. Both primitive types and complex types such as arrays and collections can be serialized and used with <varname>data</varname>.
 			</para>
 			<example id="exam-Component_Reference-data-Data_reference_example">
 				<title>Data reference example</title>
