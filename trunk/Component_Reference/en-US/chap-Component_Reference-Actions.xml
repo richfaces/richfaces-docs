@@ -10,7 +10,19 @@
 		This chapter details the basic components that respond to a user action and submit an Ajax request.
 	</para>
 	<section id="sect-Component_Reference-Actions-a4jactionParam">
-		<title>a4j:actionParam</title>
+		<title>&lt;a4j:actionParam&gt;</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					component-type: <classname>org.ajax4jsf.ActionParameter</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-class: <classname>org.ajax4jsf.component.html.HTMLActionParameter</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:actionParam&gt;</sgmltag> behavior combines the functionality of the JavaServer Faces (<acronym>JSF</acronym>) components <sgmltag>&lt;f:param&gt;</sgmltag> and <sgmltag>&lt;f:actionListener&gt;</sgmltag>.
 		</para>
@@ -78,11 +90,28 @@
 	
 	<section id="sect-Component_Reference-Actions-a4jajaxListener">
 		<title>a4j:ajaxListener</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					listener-class: <classname>org.ajax4jsf.event.AjaxListener</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					event-class: <classname>org.ajax4jsf.event.AjaxEvent</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					tag-class: <classname>org.ajax4jsf.taglib.html.jsp.AjaxListenerTag</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component adds an action listener to a parent component. It works similar to the JavaServer Faces <sgmltag>&lt;f:actionListener&gt;</sgmltag> or <sgmltag>&lt;f:valueChangeListener&gt;</sgmltag> components, except that the invocation of <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> is not canceled if validation of the <emphasis>Update Model</emphasis> phase fails. The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component is guaranteed to be invoked with each Ajax response.
 		</para>
 		<para>
-			Baasic usage requires only the <varname>type</varname> attribute, which defines the fully-qualified Java class name for the listener. This Java class should implement the <classname>org.ajax4jsf.event.AjaxListener</classname> interface, which is a base listener for all listeners and is capable of receiving Ajax events. The object from which the event originated could be accessed using the <methodname>java.util.EventObject.getSource()</methodname> method.
+			Basic usage requires only the <varname>type</varname> attribute, which defines the fully-qualified Java class name for the listener. This Java class should implement the <classname>org.ajax4jsf.event.AjaxListener</classname> interface, which is a base listener for all listeners and is capable of receiving Ajax events. The object from which the event originated could be accessed using the <methodname>java.util.EventObject.getSource()</methodname> method.
 		</para>
 		<para>
 			The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component is not invoked for non-Ajax requests, or when the RichFaces works in the <emphasis>Ajax request generates non-Ajax response</emphasis> mode, so the <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> invocation is a good indicator that an Ajax response is going to be processed.
@@ -184,12 +213,37 @@
 			</listitem>
 		</itemizedlist>
 		<para>
-			Incomplete
+			The <sgmltag>&lt;a4j:htmlCommandLink&gt;</sgmltag> component functions similarly to the standard <sgmltag>&lt;h:commandLink&gt;</sgmltag> component, but addresses some of the potential issues that can occur.
+		</para>
+		<para>
+			When using the standard component, hidden fields were not rendered to child elements if they were deemed unnecessary, so command links relating to content on the initial page could become broken if they were later updated through Ajax. The <sgmltag>&lt;a4j:htmlCommandLink&gt;</sgmltag> component addresses this by always rendering all hidden fields.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Actions-a4jjsFunction">
 		<title>&lt;a4j:jsFunction&gt;</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					component-type: <classname>org.ajax4jsf.Function</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-family: <classname>org.ajax4jsf.components.ajaxFunction</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-class: <classname>org.ajax4jsf.component.html.HtmlajaxFunction</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					renderer-type: <classname>org.ajax4jsf.components.ajaxFunctionRenderer</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component allows Ajax requests to be performed directly from JavaScript code, and server-side data to be invoked and returned in JavaScript Object Notation (<acronym>JSON</acronym>) format to use in client-side JavaScript calls.
 		</para>
@@ -213,18 +267,74 @@
 	
 	<section id="sect-Component_Reference-Actions-a4jpoll">
 		<title>&lt;a4j:poll&gt;</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					component-type: <classname>org.ajax4jsf.Poll</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-family: <classname>org.ajax4jsf.components.AjaxPoll</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-class: <classname>org.ajax4jsf.component.html.AjaxPoll</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					renderer-type: <classname>org.ajax4jsf.components.AjaxPollRenderer</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:poll&gt;</sgmltag> component allows periodical sending of Ajax requests to the server. It is used for repeatedly updating a page at specific time intervals.
 		</para>
 		<para>
-			The <varname>interval</varname> attribute specifies the time in milliseconds to between requests. The default for this value is 1000 ms (1 second).
+			The <varname>interval</varname> attribute specifies the time in milliseconds between requests. The default for this value is 1000 ms (1 second).
+		</para>
+		<para>
+			The <varname>timeout</varname> attribute defines the response waiting time in milliseconds. If a response isn't received within the timeout period, the connection is aborted and the next request is sent. By default, the timeout is not set.
+		</para>
+		<para>
+			The <sgmltag>&lt;a4j:poll&gt;</sgmltag> component can be enabled and disabled using the <varname>enabled</varname> attribute. Using Expression Language (<acronym>EL</acronym>), the <varname>enabled</varname> attribute can point to a bean property to apply a particular attribute value.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Actions-a4jpush">
 		<title>&lt;a4j:push&gt;</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					component-type: <classname>org.ajax4jsf.Push</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-family: <classname>org.ajax4jsf.components.AjaxPush</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-class: <classname>org.ajax4jsf.component.html.AjaxPush</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					renderer-type: <classname>org.ajax4jsf.components.AjaxPushRenderer</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
-			Incomplete
+			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component periodically performs an Ajax request to the server, simulating "push" functionality. While it is not strictly pushing updates, the request is made to minimal code only, not to the <acronym>JSF</acronym> tree, checking for the presence of new messages in the queue. The request registers <classname>EventListener</classname>, which receives messages about events, but does not poll registered beans. If a message exists, a complete request is performed. This is different from the <sgmltag>&lt;a4j:poll&gt;</sgmltag> component, which performs a full request at every interval.
+		</para>
+		<para>
+			The <varname>interval</varname> attribute specifies the time in milliseconds between checking for messages. The default for this value is 1000 ms (1 second). It is possible to set the interval value to <literal>0</literal>, in which case it is constantly checking for new messages.
+		</para>
+		<para>
+			The <varname>timeout</varname> attribute defines the response waiting time in milliseconds. If a response isn't received within the timeout period, the connection is aborted and the next request is sent. By default, the timeout is not set. In combination with the <varname>interval</varname> attribute, checks for the queue state can short polls or long connections.
 		</para>
 	</section>
 
