@@ -1,9 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "Component_Reference.ent">
-%BOOK_ENTITIES;
 ]>
-
 <chapter id="chap-Component_Reference-Common_Ajax_attributes">
 	<title>Common Ajax attributes</title>
 	<para>
@@ -17,7 +14,7 @@
 		<section id="sect-Component_Reference-Rendering-render">
 			<title><varname>render</varname></title>
 			<para>
-				The <varname>render</varname> attribute provides a reference to one or more areas on the page that need updating after an Ajax interaction. It uses the <methodname>UIComponent.findComponent()</methodname> algorithm to find the components in the component tree using their <varname>id</varname> attributes as a reference. Components can be referenced by their <varname>id</varname> attribute alone, or by a hierarchy of components&#39; <varname>id</varname> attributes to make locating components more efficient. <xref linkend="exam-Component_Reference-render-render_example" /> shows both ways of referencing components. Each command button will correctly render the referenced panel grids, but the second button locates the references more efficiently with explicit hierarchy paths.
+				The <varname>render</varname> attribute provides a reference to one or more areas on the page that need updating after an Ajax interaction. It uses the <methodname>UIComponent.findComponent()</methodname> algorithm to find the components in the component tree using their <varname>id</varname> attributes as a reference. Components can be referenced by their <varname>id</varname> attribute alone, or by a hierarchy of components' <varname>id</varname> attributes to make locating components more efficient. <xref linkend="exam-Component_Reference-render-render_example" /> shows both ways of referencing components. Each command button will correctly render the referenced panel grids, but the second button locates the references more efficiently with explicit hierarchy paths.
 			</para>
 			<example id="exam-Component_Reference-render-render_example">
 				<title>render example</title>
@@ -40,12 +37,12 @@
 </programlisting>
 			</example>
 			<para>
-				The value of the <varname>render</varname> attribute can also be an expression written using JavaServer Faces&#39; Expression Language (<acronym>EL</acronym>); this can either be a <type>Set</type>, <type>Collection</type>, <type>Array</type>, or <type>String</type>.
+				The value of the <varname>render</varname> attribute can also be an expression written using JavaServer Faces' Expression Language (<acronym>EL</acronym>); this can either be a <type>Set</type>, <type>Collection</type>, <type>Array</type>, or <type>String</type>.
 			</para>
 			<important>
 				<title>Important</title>
 				<para>
-					A common problem with using <varname>render</varname> occurs when the referenced component has a <varname>rendered</varname> attribute. <acronym>JSF</acronym> does not mark the place in the browser&#39;s Document Object Model (<acronym>DOM</acronym>) where the rendered component would be placed in case the <varname>rendered</varname> attribute returns <literal>false</literal>. As such, when RichFaces sends the render code to the client, the page does not update as the place for the update is not known.
+					A common problem with using <varname>render</varname> occurs when the referenced component has a <varname>rendered</varname> attribute. <acronym>JSF</acronym> does not mark the place in the browser's Document Object Model (<acronym>DOM</acronym>) where the rendered component would be placed in case the <varname>rendered</varname> attribute returns <literal>false</literal>. As such, when RichFaces sends the render code to the client, the page does not update as the place for the update is not known.
 				</para>
 				<para>
 					To work around this issue, wrap the component to be rendered in an <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> with <code>layout="none"</code>. The <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> will receive the update and render the component as required.
@@ -56,7 +53,7 @@
 		<section id="sect-Component_Reference-Rendering-ajaxRendered">
 			<title>ajaxRendered</title>
 			<para>
-				A component with <code>ajaxRendered="true"</code> will be re-rendered with <emphasis>every</emphasis> Ajax request, even when not referenced by the requesting component&#39;s <varname>render</varname> attribute. This can be useful for updating a status display or error message without explicitly requesting it.
+				A component with <code>ajaxRendered="true"</code> will be re-rendered with <emphasis>every</emphasis> Ajax request, even when not referenced by the requesting component's <varname>render</varname> attribute. This can be useful for updating a status display or error message without explicitly requesting it.
 			</para>
 			<para>
 				Rendering of components in this way can be repressed by adding <code>limitRender="true"</code> to the requesting component, as described in <xref linkend="sect-Component_Reference-Rendering-limitRender" />.
@@ -69,7 +66,7 @@
 				A component with <code>limitRender="true"</code> specified will <emphasis>not</emphasis> cause components with <code>ajaxRendered="true"</code> to re-render, and only those components listed in the <varname>render</varname> attribute will be updated. This essentially overrides the <varname>ajaxRendered</varname> attribute in other components.
 			</para>
 			<para>
-				<xref linkend="exam-Component_Reference-data-Data_reference_example" /> describes two command buttons, a panel grid rendered by the buttons, and an output panel showing error messages. When the first button is clicked, the output panel is rendered even though it is not explicitly referenced with the <varname>render</varname> attribute. The second button, however, uses <code>limitRender="true"</code> to override the output panel&#39;s rendering and only render the panel grid.
+				<xref linkend="exam-Component_Reference-data-Data_reference_example" /> describes two command buttons, a panel grid rendered by the buttons, and an output panel showing error messages. When the first button is clicked, the output panel is rendered even though it is not explicitly referenced with the <varname>render</varname> attribute. The second button, however, uses <code>limitRender="true"</code> to override the output panel's rendering and only render the panel grid.
 			</para>
 			<example id="exam-Component_Reference-limitRender-Rendering_example">
 				<title>Rendering example</title>
@@ -124,7 +121,7 @@
 	<section id="sect-Component_Reference-Common_Ajax_attributes-Data_processing">
 		<title>Data processing</title>
 		<para>
-			RichFaces uses a form-based approach for sending Ajax requests. As such, each time a request is sent the data from the requesting component&#39;s parent <acronym>JSF</acronym> form is submitted along with the <acronym>XMLHTTPRequest</acronym> object. The form data contains values from the input element and auxiliary information such as state-saving data.
+			RichFaces uses a form-based approach for sending Ajax requests. As such, each time a request is sent the data from the requesting component's parent <acronym>JSF</acronym> form is submitted along with the <acronym>XMLHTTPRequest</acronym> object. The form data contains values from the input element and auxiliary information such as state-saving data.
 		</para>
 		<section id="sect-Component_Reference-Data_processing-process">
 			<title>process</title>
