@@ -1,44 +1,29 @@
 package demo;
 
+import java.util.Locale;
+import javax.faces.context.FacesContext;
 
- import java.util.Locale;
+public class ChangeLocale {
 
- import javax.faces.context.FacesContext;
+    public String germanAction() {
 
-
- public class ChangeLocale {
-
- 	public String germanAction() {
-
-		 FacesContext context = FacesContext.getCurrentInstance();
-
-		 context.getViewRoot().setLocale(Locale.GERMAN);
-
-		 return null;
-
-	 }
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getViewRoot().setLocale(Locale.GERMAN);
+        return null;
+    }
 
 
-	 public String englishAction() {
+    public String englishAction() {
 
-		 FacesContext context = FacesContext.getCurrentInstance();
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getViewRoot().setLocale(Locale.ENGLISH);
+        return null;
+    } 
 
-		 context.getViewRoot().setLocale(Locale.ENGLISH);
+    public String italianAction() {
 
-		 return null;
-
-	 }
-
-	 
-
-	 public String italianAction() {
-
-		  FacesContext context = FacesContext.getCurrentInstance();
-
-		  context.getViewRoot().setLocale(Locale.ITALIAN);
-
-		  return null;
-
-	  }
-
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getViewRoot().setLocale(Locale.ITALIAN);
+        return null;
+    }
 }

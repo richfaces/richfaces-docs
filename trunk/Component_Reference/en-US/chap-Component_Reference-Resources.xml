@@ -62,7 +62,7 @@
 						The <acronym>JSF</acronym> <methodname>javax.faces.component.UIViewRoot.setLocale()</methodname> method can be used to update the locale through a Java class:
 					</para>
 					
-<programlisting language="java" role="JAVA">
+<programlisting language="Java" role="JAVA">
 <xi:include href="extras/exam-Component_Reference-a4jloadBundle-a4jloadBundle_example-1.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </programlisting>
 				</step>
@@ -230,7 +230,7 @@
 			The <varname>createContent</varname> attribute points to the method used for generating the displayed content. If necessary, the <varname>value</varname> attribute can be used to pass input data to the content generation method specified with <varname>createContent</varname>. The <varname>cacheable</varname> attribute specifies whether the resulting content will be cached or not.
 		</para>
 		<para>
-			The <varname>mimeType</varname> attribute describes the type of output content, and corresponds to the type in the header of the <acronym>HTTP</acronym> request. The <varname>element</varname> attribute defines <attribute>XHTML</attribute> element used to display the content:
+			The <varname>mimeType</varname> attribute describes the type of output content, and corresponds to the type in the header of the <acronym>HTTP</acronym> request. The <varname>element</varname> attribute defines <acronym>XHTML</acronym> element used to display the content:
 		</para>
 		<itemizedlist>
 			<listitem>
@@ -277,39 +277,41 @@
 				The <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> component uses the <methodname>MediaBean.paint</methodname> method to create the image. The method generates a random number, which is then converted into an output stream and rendered to a <acronym>JPEG</acronym> image. The <classname>MediaBean</classname> class is as follows:
 			</para>
 			
-<programlisting language="XML" role="XML">
+<programlisting language="Java" role="JAVA">
 <xi:include href="extras/exam-Component_Reference-a4jmediaOutput-a4jmediaOutput_example-0.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </programlisting>
 			<para>
 				Another class, <classname>MediaData</classname> is required by the <varname>value</varname> attribute for keeping data to be used as input for the content creation method. The <classname>MediaData</classname> class is as follows:
 			</para>
 			
-<programlisting language="XML" role="XML">
+<programlisting language="Java" role="JAVA">
 <xi:include href="extras/exam-Component_Reference-a4jmediaOutput-a4jmediaOutput_example-1.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </programlisting>
+			<para>
+				The <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> component uses the <classname>MediaBean</classname> and <classname>MediaData</classname> classes to generate a new image on each page refresh, which appears as shown in <xref linkend="figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result" />
+			</para>
+			<blockquote>
+				<figure id="figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result">
+					<title><sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> example result</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result.png" format="PNG" />
+						</imageobject>
+						<textobject>
+							<para>
+								The generated image containing a random verification number.
+							</para>
+						</textobject>
+					</mediaobject>
+				</figure>
+			</blockquote>
 		</example>
 		<note>
-			<title>Note</title>
+			<title><classname>Serializable</classname> interface</title>
 			<para>
 				A bean class passed using the <varname>value</varname> attribute of <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> should implement the <classname>Serializable</classname> interface so that it will be encoded to the <acronym>URL</acronym> of the resource.
 			</para>
 		</note>
-		<para>
-			The <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> component uses the <classname>MediaBean</classname> and <classname>MediaData</classname> classes to generate a new image on each page refresh, which appears as
-		</para>
-		<figure id="figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result">
-			<title><sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> example result</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result.png" format="PNG" />
-				</imageobject>
-				<textobject>
-					<para>
-						The generated image containing a random verification number.
-					</para>
-				</textobject>
-			</mediaobject>
-		</figure>
 	</section>
 
 </chapter>
