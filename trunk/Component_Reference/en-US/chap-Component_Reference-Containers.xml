@@ -33,9 +33,55 @@
 	
 	<section id="sect-Component_Reference-Containers-a4jinclude">
 		<title>a4j:include</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					component-type: <classname>org.ajax4jsf.Include</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-family: <classname>javax.faces.Output</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-class: <classname>org.ajax4jsf.component.html.Include</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					renderer-type: <classname>org.ajax4jsf.components.AjaxIncludeRenderer</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
-			Incomplete
+			The <sgmltag>&lt;a4j:include&gt;</sgmltag> component allows one view to be included as part of another page. This is useful for applications where multiple views might appear on the one page, with navigation between the views. Views can use partial page navigation in Ajax mode, or standard <acronym>JSF</acronym> navigation for navigation between views.
 		</para>
+		<para>
+			The <varname>viewId</varname> attribute is required to reference the resource that will be included as a view on the page. It uses a full context-relative path to point to the resource, similar to the paths used for the <sgmltag>&lt;from-view-id&gt;</sgmltag> and <sgmltag>&lt;to-view-id&gt;</sgmltag> tags in the <filename>faces-config.xml</filename> <acronym>JSF</acronym> navigation rules.
+		</para>
+		<example id="exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude">
+			<title>A wizard using <sgmltag>&lt;a4j:include&gt;</sgmltag></title>
+			<para>
+				The page uses <sgmltag>&lt;a4j:include&gt;</sgmltag> to include the first step of the wizard:
+			</para>
+<programlisting language="XML" role="XML">
+<xi:include parse="text" href="extras/exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</programlisting>
+			<para>
+				The first step is fully contained in a separate file, <filename>wstep1.xhtml</filename>. Subsequent steps are set up similarly with additional <guibutton>Previous</guibutton> buttons.
+			</para>
+<programlisting language="XML" role="XML">
+<xi:include parse="text" href="extras/exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</programlisting>
+			<para>
+				The navigation is defined in the <filename>faces-config.xml</filename> configuration file:
+			</para>
+<programlisting language="XML" role="XML">
+<xi:include parse="text" href="extras/exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude-2.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</programlisting>
+		</example>
 	</section>
 	
 	<section id="sect-Component_Reference-Containers-a4joutputPanel">
