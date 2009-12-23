@@ -66,7 +66,7 @@
 		</para>
 		
 <programlisting language="Java" role="JAVA">
-<xi:include href="extras/exam-Component_Reference-richajaxValidator-Using_richajaxValidator_with_Hibernate_Validator-1.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
+<xi:include href="extras/exam-Component_Reference-exam-Component_Reference-ValidationBean.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </programlisting>
 	</section>
 	
@@ -100,8 +100,28 @@
 			</listitem>
 		</itemizedlist>
 		<para>
-			Incomplete
+			The <sgmltag>&lt;rich:beanValidator&gt;</sgmltag> component provides model-based constraints using Hibernate Validator. This allows Hibernate Validator to be used similar to its use with Seam-based applications.
 		</para>
+		<para>
+			The <varname>summary</varname> attribute is used for displaying messages about validation errors.
+		</para>
+		<example id="exam-Component_Reference-richbeanValidator-richbeanValidator_example">
+			<title><sgmltag>&lt;rich:beanValidator&gt;</sgmltag> example</title>
+			<para>
+				This example shows the bean-based validation of a simple form, containing the user's name, email, and age. The <sgmltag>&lt;rich:beanValidator&gt;</sgmltag> component is defined in the same way as for <acronym>JSF</acronym> validators.
+			</para>
+			
+<programlisting language="XML" role="XML">
+<xi:include href="extras/exam-Component_Reference-richbeanValidator-richbeanValidator_example-0.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</programlisting>
+			<para>
+				The accompanying bean contains the validation data:
+			</para>
+			
+<programlisting language="Java" role="JAVA">
+<xi:include href="extras/exam-Component_Reference-exam-Component_Reference-ValidationBean.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</programlisting>
+		</example>
 	</section>
 	
 	<section id="sect-Component_Reference-Validation-richgraphValidator">
@@ -134,8 +154,38 @@
 			</listitem>
 		</itemizedlist>
 		<para>
-			Incomplete
+			The <sgmltag>&lt;rich:graphValidator&gt;</sgmltag> component is used to wrap a group of input components for overall validation with Hibernate Validators. This is different from the <sgmltag>&lt;rich:beanValidator&gt;</sgmltag> component, which is used as a child element to individual input components.
 		</para>
+		<para>
+			The <varname>summary</varname> attribute is used for displaying messages about validation errors.
+		</para>
+		<example id="exam-Component_Reference-richgraphValidator-richgraphValidator_example">
+			<title><sgmltag>&lt;rich:graphValidator&gt;</sgmltag> example</title>
+			<para>
+				This example shows the validation of a simple form, containing the user's name, email, and age. The <sgmltag>&lt;rich:graphValidator&gt;</sgmltag> component wraps the input components to validate them together.
+			</para>
+			
+<programlisting language="XML" role="XML">
+<xi:include href="extras/exam-Component_Reference-richgraphValidator-richgraphValidator_example-0.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</programlisting>
+			<para>
+				The accompanying bean contains the validation data:
+			</para>
+			
+<programlisting language="Java" role="JAVA">
+<xi:include href="extras/exam-Component_Reference-ValidationBean.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</programlisting>
+		</example>
+		<para>
+			The optional <varname>value</varname> attribute can be used to define a value bound to the bean. The bean properties are then validated again <emphasis>after</emphasis> the model has been updated.
+		</para>
+		<example id="exam-Component_Reference-richgraphValidator-Using_the_value_attribute">
+			<title>Using the <varname>value</varname> attribute</title>
+			
+<programlisting language="XML" role="XML">
+<xi:include href="extras/exam-Component_Reference-richgraphValidator-Using_the_value_attribute.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</programlisting>
+		</example>
 	</section>
 
 </chapter>
