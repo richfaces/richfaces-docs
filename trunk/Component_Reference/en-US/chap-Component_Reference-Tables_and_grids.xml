@@ -8,6 +8,33 @@
 	</para>
 	<section id="sect-Component_Reference-Tables_and_grids-richcolumn">
 		<title>rich:column</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					component-type: <classname>org.richfaces.Column</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-class: <classname>org.richfaces.component.html.HtmlColumn</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-family: <classname>org.richfaces.Column</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					renderer-type: <classname>org.richfaces.renderkit.CellRenderer</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					tag-class: <classname>org.richfaces.taglib.ColumnTag</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;rich:column&gt;</sgmltag> component facilitates columns in a table or other <classname>UIData</classname> component. It supports merging columns and rows, sorting, filtering, and customized skinning.
 		</para>
@@ -117,6 +144,33 @@
 	
 	<section id="sect-Component_Reference-Tables_and_grids-richcolumnGroup">
 		<title>rich:columnGroup</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					component-type: <classname>org.richfaces.ColumnGroup</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-class: <classname>org.richfaces.component.html.HtmlColumnGroup</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-family: <classname>org.richfaces.ColumnGroup</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					renderer-type: <classname>org.richfaces.ColumnGroupRenderer</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					tag-class: <classname>org.richfaces.taglib.ColumnGroupTag</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;rich:columnGroup&gt;</sgmltag> component combines multiple columns in a single row to organize complex parts of a table. The resulting effect is similar to using the <varname>breakBefore</varname> attribute of the <sgmltag>&lt;rich:column&gt;</sgmltag> component, but is clearer and easier to follow in the source code.
 		</para>
@@ -131,19 +185,19 @@
   &lt;f:facet name="header"&gt;
     &lt;rich:columnGroup&gt;
       &lt;rich:column rowspan="2"&gt;
-        &lt;h:outputText value="State Flag"/&gt;
+  &lt;h:outputText value="State Flag"/&gt;
       &lt;/rich:column&gt;
       &lt;rich:column colspan="3"&gt;
-        &lt;h:outputText value="State Info"/&gt;
+  &lt;h:outputText value="State Info"/&gt;
       &lt;/rich:column&gt;
       &lt;rich:column breakBefore="true"&gt;
-        &lt;h:outputText value="State Name"/&gt;
+  &lt;h:outputText value="State Name"/&gt;
       &lt;/rich:column&gt;
       &lt;rich:column&gt;
-        &lt;h:outputText value="State Capital"/&gt;
+  &lt;h:outputText value="State Capital"/&gt;
       &lt;/rich:column&gt;
       &lt;rich:column&gt;
-        &lt;h:outputText value="Time Zone"/&gt;
+  &lt;h:outputText value="Time Zone"/&gt;
       &lt;/rich:column&gt;
     &lt;/rich:columnGroup&gt;
   &lt;/f:facet&gt;
@@ -174,8 +228,20 @@
 	
 	<section id="sect-Component_Reference-Tables_and_grids-richcolumns">
 		<title>rich:columns</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					component-type: <classname>org.richfaces.Column</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					tag-class: <classname>org.richfaces.taglib.ColumnsTagHandler</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
-			The <sgmltag>&lt;rich:columns&gt;</sgmltag> component allows for dynamic sets of columns for tables. Columns and rows can be merged, and the look and feel can be highly customized. The component gets a list from a data model and creates a corresponding set of columns in a <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component. The <sgmltag>&lt;rich:columns&gt;</sgmltag> component also supports header and footer facets.
+			The <sgmltag>&lt;rich:columns&gt;</sgmltag> component allows for dynamic sets of columns for tables. Columns and rows can be merged, and the look and feel can be highly customized. The component gets a list from a data model and creates a corresponding set of columns in a <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component. The <sgmltag>&lt;rich:columns&gt;</sgmltag> component also supports <literal>header</literal> and <literal>footer</literal> facets.
 		</para>
 		<para>
 			Basic usage of the <sgmltag>&lt;rich:columns&gt;</sgmltag> component requires the <varname>value</varname> attribute, which points to the data model; the <varname>var</varname> attribute, which holds the current variable for the collection of data; and the <varname>index</varname> attribute, which holds the current counter. The <varname>id</varname> attribute is used for when the individuals rows require identifiers for Ajax events.
@@ -197,8 +263,39 @@
 </programlisting>
 		</example>
 		<para>
-			The <varname>columns</varname> attribute
+			The output can be customized to display specific columns and rows. The <varname>columns</varname> attribute specifies the number of columns. The <varname>rowspan</varname> attribute specifies the number of rows to display; if the attribute is set to <literal>0</literal>, all remaining rows in the table are displayed. The <varname>begin</varname> and <varname>end</varname> attributes are used to specify the first and last zero-based iteration items to display in the table. Columns can be adjusted using the <varname>colspan</varname>, <varname>rowspan</varname>, and <varname>breakBefore</varname> attributes the same as with the <sgmltag>&lt;rich:column&gt;</sgmltag> component.
 		</para>
+		<para>
+			The <sgmltag>&lt;rich:columns&gt;</sgmltag> component can be used alongside <sgmltag>&lt;rich:column&gt;</sgmltag> components.
+		</para>
+		<example id="exam-Component_Reference-richcolumns-Using_richcolumns_and_richcolumn_together">
+			<title>Using &lt;rich:columns&gt; and &lt;rich:column&gt; together</title>
+<programlisting language="XML" role="XML">
+&lt;rich:dataTable value="#{dataTableScrollerBean.model}" var="model" width="500px" rows="5"&gt;
+  &lt;f:facet name="header"&gt;
+    &lt;h:outputText value="Cars Available"&gt;&lt;/h:outputText&gt;
+  &lt;/f:facet&gt;
+  &lt;rich:columns value="#{dataTableScrollerBean.columns}" var="columns" index="ind"&gt;
+    &lt;f:facet name="header"&gt;
+      &lt;h:outputText value="#{columns.header}" /&gt;
+    &lt;/f:facet&gt;
+    &lt;h:outputText value="#{model[ind].model} " /&gt;
+  &lt;/rich:columns&gt;
+  &lt;rich:column&gt;
+    &lt;f:facet name="header"&gt;
+      &lt;h:outputText value="Price" /&gt;
+    &lt;/f:facet&gt;
+    &lt;h:outputText value="Price" /&gt;
+  &lt;/rich:column&gt;
+  &lt;rich:columns value="#{dataTableScrollerBean.columns}" var="columns" index="ind"&gt;
+    &lt;f:facet name="header"&gt;
+      &lt;h:outputText value="#{columns.header}" /&gt;
+    &lt;/f:facet&gt;
+    &lt;h:outputText value="#{model[ind].mileage}$" /&gt;
+  &lt;/rich:columns&gt;
+&lt;/rich:dataTable&gt;
+</programlisting>
+		</example>
 		<para>
 			For details on filtering and sorting columns, refer to <xref linkend="sect-Component_Reference-Tables_and_grids-Table_filtering" /> and <xref linkend="sect-Component_Reference-Tables_and_grids-Table_sorting" />.
 		</para>
@@ -206,16 +303,132 @@
 	
 	<section id="sect-Component_Reference-Tables_and_grids-richdataFilterSlider">
 		<title>rich:dataFilterSlider</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					component-type: <classname>org.richfaces.DataFilterSlider</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-class: <classname>org.richfaces.component.html.HtmlDataFilterSlider</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-family: <classname>org.richfaces.DataFilterSlider</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					renderer-type: <classname>org.richfaces.DataFilterSliderRenderer</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					tag-class: <classname>org.richfaces.taglib.dataFilterSliderTag</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
-			The <sgmltag>&lt;rich:dataFilterSlider&gt;</sgmltag> components is a slider control that can be used for filtering data in a table.
+			The <sgmltag>&lt;rich:dataFilterSlider&gt;</sgmltag> components is a slider control that can be used for filtering data in a table. The range and increment of the slider control are defined using the <varname>startRange</varname>, <varname>endRange</varname>, and <varname>increment</varname> attributes.
+		</para>
+		<para>
+			The slider is bound to a <classname>UIData</classname> component specified with the <varname>for</varname> attribute. The <varname>forValRef</varname> attribute refers to the <varname>value</varname> attribute used by the target component, and the <varname>filterBy</varname> attribute specifies which object member to filter according to the slider.
+		</para>
+		<para>
+			The <varname>handleValue</varname> attribute keeps the current handle position on the slider control; filtering is based on this value. The <varname>storeResults</varname> attribute allows the <sgmltag>&lt;rich:dataFilterSlider&gt;</sgmltag> component to keep the target <classname>UIData</classname> component in session.
+		</para>
+		<para>
+			The event defined with the <varname>submitOnSlide</varname> attribute is triggered when the handle value on the slider is changed.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Tables_and_grids-richdataGrid">
 		<title>rich:dataGrid</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					component-type: <classname>org.richfaces.DataGrid</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-class: <classname>org.richfaces.component.html.HtmlDataGrid</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					component-family: <classname>org.richfaces.DataGrid</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					renderer-type: <classname>org.richfaces.DataGridRenderer</classname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					tag-class: <classname>org.richfaces.taglib.DataGridTag</classname>
+				</para>
+			</listitem>
+		</itemizedlist>
 		<para>
-			Incomplete
+			The <sgmltag>&lt;rich:dataGrid&gt;</sgmltag> component is used to arrange data objects in a grid. Values in the grid can be updated dynamically from the data model, and Ajax updates can be limited to specific rows. The component supports <literal>header</literal>, <literal>footer</literal>, and <literal>caption</literal> facets.
 		</para>
+		<figure id="figu-Component_Reference-richdataGrid-The_richdataGrid_component">
+			<title>The rich:dataGrid component</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richdataGrid-The_richdataGrid_component.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						The rich:dataGrid component displaying four elements in two columns, with a <literal>header</literal> facet, and <literal>footer</literal> facet containing a data scroller component.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		<para>
+			The <sgmltag>&lt;rich:dataGrid&gt;</sgmltag> component requires the <varname>value</varname> attribute, which points to the data model, and the <varname>var</varname> attribute, which holds the current variable for the collection of data. The number of columns for the grid is specifed with the <varname>columns</varname> attribute, and the number of elements to layout among the columns is determined with the <varname>elements</varname> attribute. The <varname>first</varname> attribute references the zero-based element in the data model from which the grid starts.
+		</para>
+		<example id="exam-Component_Reference-richdataGrid-richdataGrid_example">
+			<title>rich:dataGrid example</title>
+<programlisting language="XML" role="XML">
+<xi:include parse="text" href="extras/exam-Component_Reference-richdataGrid-richdataGrid_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</programlisting>
+		<blockquote>
+			<figure id="figu-Component_Reference-richdataGrid-richdataGrid_example">
+				<title>rich:dataGrid example</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/figu-Component_Reference-richdataGrid-richdataGrid_example.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							The result of the <sgmltag>&lt;rich:dataGrid&gt;</sgmltag> example, with the <literal>header</literal> facet, <literal>footer</literal> facet, and first element annotated.
+						</para>
+					</textobject>
+				</mediaobject>
+			</figure>
+		</blockquote>
+		</example>
+		<para>
+			The <sgmltag>&lt;rich:dataGrid&gt;</sgmltag> component can be used with the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component to display multiple pages of grids. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richdataScroller" /> for details on the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component.
+		</para>
+		<para>
+			As the component is based on the <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component, it can be partially updated with Ajax. The <varname>ajaxKeys</varname> attribute allows row keys to be defined, which are updated after an Ajax request.
+		</para>
+		<example id="exam-Component_Reference-richdataGrid-ajaxKeys_example">
+			<title><varname>ajaxKeys</varname> example</title>
+<programlisting language="XML" role="XML">
+&lt;rich:dataGrid value="#{dataTableScrollerBean.allCars}" var="car" ajaxKeys="#{listBean.list}" binding="#{listBean.dataGrid}" id="grid" elements="4" columns="2"&gt;
+  ...
+&lt;/rich:dataGrid&gt;
+...
+&lt;a4j:commandButton action="#{listBean.action}" reRender="grid" value="Submit"/&gt;
+</programlisting>
+		</example>
 	</section>
 	
 	<section id="sect-Component_Reference-Tables_and_grids-richdataScroller">
