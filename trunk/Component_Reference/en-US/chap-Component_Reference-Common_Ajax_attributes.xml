@@ -51,7 +51,7 @@
 		</section>
 		
 		<section id="sect-Component_Reference-Rendering-ajaxRendered">
-			<title>ajaxRendered</title>
+			<title><varname>ajaxRendered</varname></title>
 			<para>
 				A component with <code>ajaxRendered="true"</code> will be re-rendered with <emphasis>every</emphasis> Ajax request, even when not referenced by the requesting component's <varname>render</varname> attribute. This can be useful for updating a status display or error message without explicitly requesting it.
 			</para>
@@ -61,7 +61,7 @@
 		</section>
 		
 		<section id="sect-Component_Reference-Rendering-limitRender">
-			<title>limitRender</title>
+			<title><varname>limitRender</varname></title>
 			<para>
 				A component with <code>limitRender="true"</code> specified will <emphasis>not</emphasis> cause components with <code>ajaxRendered="true"</code> to re-render, and only those components listed in the <varname>render</varname> attribute will be updated. This essentially overrides the <varname>ajaxRendered</varname> attribute in other components.
 			</para>
@@ -93,7 +93,7 @@
 	<section id="sect-Component_Reference-Common_Ajax_attributes-Queuing_and_traffic_control">
 		<title>Queuing and traffic control</title>
 		<section id="sect-Component_Reference-Queuing_and_traffic_control-queue">
-			<title>queue</title>
+			<title><varname>queue</varname></title>
 			<para>
 				The <varname>queue</varname> attribute defines the name of the queue that will be used to schedule upcoming Ajax requests. Typically RichFaces does not queue Ajax requests, so if events are produced simultaneously they will arrive at the server simultaneously. This can potentially lead to unpredictable results when the responses are returned. The <varname>queue</varname> attribute ensures that the requests are responded to in a set order.
 			</para>
@@ -103,14 +103,14 @@
 		</section>
 		
 		<section id="sect-Component_Reference-Queuing_and_traffic_control-requestDelay">
-			<title>requestDelay</title>
+			<title><varname>requestDelay</varname></title>
 			<para>
 				The <varname>requestDelay</varname> attribute specifies an amount of time in milliseconds for the request to wait in the queue before being sent to the server. If a similar request is added to the queue before the delay is over, the original request is removed from the queue and not sent.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Queuing_and_traffic_control-ignoreDupResponses">
-			<title>ignoreDupResponses</title>
+			<title><varname>ignoreDupResponses</varname></title>
 			<para>
 				When set to <literal>true</literal>, the <varname>ignoreDupResponses</varname> attribute causes responses from the server for the request to be ignored if there is another similar request in the queue. This avoids unnecessary updates on the client when another update is expected. The request is still processed on the server, but if another similar request has been queued then no updates are made on the client.
 			</para>
@@ -124,21 +124,21 @@
 			RichFaces uses a form-based approach for sending Ajax requests. As such, each time a request is sent the data from the requesting component's parent <acronym>JSF</acronym> form is submitted along with the <acronym>XMLHTTPRequest</acronym> object. The form data contains values from the input element and auxiliary information such as state-saving data.
 		</para>
 		<section id="sect-Component_Reference-Data_processing-process">
-			<title>process</title>
+			<title><varname>process</varname></title>
 			<para>
 				The <varname>process</varname> attribute allows <acronym>JSF</acronym> processing to be limited to defined components. To only process the requesting component, <code>process="@this"</code> can be used.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Data_processing-immediate">
-			<title>immediate</title>
+			<title><varname>immediate</varname></title>
 			<para>
 				If the <varname>immediate</varname> attribute is set to <literal>true</literal>, the default ActionListener is executed immediately during the Apply Request Values phase of the request processing lifecycle, rather than waitingfor the Invoke Application phase. This allows some data model values to be updated regardless of whether the Validation phase is successful or not.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Data_processing-bypassUpdates">
-			<title>bypassUpdates</title>
+			<title><varname>bypassUpdates</varname></title>
 			<para>
 				If the <varname>bypassUpdates</varname> attribute is set to <literal>true</literal>, the Update Model phase of the request processing lifecycle is bypassed. This is useful if user input needs to be validated but the model does not need to be updated.
 			</para>
@@ -152,7 +152,7 @@
 			The <varname>action</varname> and <varname>actionListener</varname> attributes can be used to invoke action methods and define action events.
 		</para>
 		<section id="sect-Component_Reference-Action_and_navigation-action">
-			<title>action</title>
+			<title><varname>action</varname></title>
 			<para>
 				The <varname>action</varname> attribute is a method binding that points to the application action to be invoked. The method can be activated during the Apply Request Values phase or the Invoke Application phase of the request processing lifecycle.
 			</para>
@@ -162,7 +162,7 @@
 		</section>
 		
 		<section id="sect-Component_Reference-Action_and_navigation-actionListener">
-			<title>actionListener</title>
+			<title><varname>actionListener</varname></title>
 			<para>
 				The <varname>actionListener</varname> attribute is a method binding for <classname>ActionEvent</classname> methods with a return type of <literal>void</literal>.
 			</para>
@@ -176,49 +176,49 @@
 			RichFaces allows for Ajax-enabled <acronym>JSF</acronym> applications to be developed without using any additional JavaScript code. However it is still possible to invoke custom JavaScript code through Ajax events.
 		</para>
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onsubmit">
-			<title>onsubmit</title>
+			<title><varname>onsubmit</varname></title>
 			<para>
 				The <varname>onsubmit</varname> attribute will invoke the JavaScript code before the Ajax request is sent. The request is canceled if the JavaScript code defined for <varname>onsubmit</varname> returns <literal>false</literal>.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onclick">
-			<title>onclick</title>
+			<title><varname>onclick</varname></title>
 			<para>
 				The <varname>onclick</varname> attribute functions similarly to the <varname>onsubmit</varname> attribute for those components that can be clicked, such as <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> and <sgmltag>&lt;a4j:commandLink&gt;</sgmltag>. It invokes the defined JavaScript before the Ajax request, and the request will be canceled if the defined code returns <literal>false</literal>.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-oncomplete">
-			<title>oncomplete</title>
+			<title><varname>oncomplete</varname></title>
 			<para>
 				The <varname>oncomplete</varname> attribute invokes the JavaScript code after the Ajax response has been returned and the <acronym>DOM</acronym> tree of the browser has been updated. The code is registered for further invocation of the <acronym>XMLHTTP</acronym> request object before an Ajax request is sent. As such, using <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) value binding means the code will not be changed during processing of the request on the server. Additionally the <varname>oncomplete</varname> attribute cannot use the <literal>this</literal> keyword as it will not point to the component from which the Ajax request was initiated.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onbegin">
-			<title>onbegin</title>
+			<title><varname>onbegin</varname></title>
 			<para>
 				Incomplete
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onsuccess">
-			<title>onsuccess</title>
+			<title><varname>onsuccess</varname></title>
 			<para>
 				Incomplete
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-onerror">
-			<title>onerror</title>
+			<title><varname>onerror</varname></title>
 			<para>
 				Incomplete
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-Events_and_JavaScript_interactions-data">
-			<title>data</title>
+			<title><varname>data</varname></title>
 			<para>
 				The <varname>data</varname> attribute allows the use of additional data during an Ajax call. <acronym>JSF</acronym> Expression Language (<acronym>EL</acronym>) can be used to reference the property of the managed bean, and its value will be serialized in JavaScript Object Notation (<acronym>JSON</acronym>) and returned to the client side. The property can then be referenced through the <varname>data</varname> variable in the event attribute definitions. Both primitive types and complex types such as arrays and collections can be serialized and used with <varname>data</varname>.
 			</para>
