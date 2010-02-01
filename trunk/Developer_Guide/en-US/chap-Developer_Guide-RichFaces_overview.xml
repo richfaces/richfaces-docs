@@ -64,7 +64,7 @@
 		<section id="sect-Developer_Guide-RichFaces_overview-Ajax_Filter">
 			<title>Ajax Filter</title>
 			<para>
-				To get all benefits of RichFaces, a filter should be registered in the <filename>web.xml</filename> file of your application. The filter recognizes multiple request types. Filter configuration is covered in detail in <xref linkend="sect-Developer_Guide-Advanced_features-Filters" />. <xref linkend="figu-Developer_Guide-RichFaces_overview-Request_processing_sequences" /> shows the difference between processing a regular JSF request and an Ajax request with a filter.
+				To get all benefits of RichFaces, a filter should be registered in the <filename>web.xml</filename> file of your application. The filter recognizes multiple request types. Filter configuration is covered in detail in <xref linkend="sect-Developer_Guide-Advanced_features-Filters" />. <xref linkend="figu-Developer_Guide-RichFaces_overview-Request_processing_sequences" /> shows the difference between processing a regular JSF request and an Ajax request with a filter. With the regular JSF request, the whole JSF tree is encoded. With the Ajax request, the filter parses the content of an Ajax response before sending it to the client side, and encoding depends on the size of the Ajax region.
 			</para>
 			<figure id="figu-Developer_Guide-RichFaces_overview-Request_processing_sequences">
 				<title>Request processing sequences</title>
@@ -78,12 +78,9 @@
 						</para>
 					</textobject>
 				</mediaobject>
-				<para>
-					With the regular JSF request, the whole JSF tree is encoded. With the Ajax request, the filter parses the content of an Ajax response before sending it to the client side, and encoding depends on the size of the Ajax region.
-				</para>
 			</figure>
 			<para>
-				Both with and without a filter, the required static or dynamic resources that your application requests are registered in the <classname>ResourseBuilder</classname> class. <xref linkend="figu-Developer_Guide-RichFaces_overview-Resource_request_sequence" /> shows the differences in resource requests for a regular JSF request and an Ajax request with a filter.
+				Both with and without a filter, the required static or dynamic resources that your application requests are registered in the <classname>ResourseBuilder</classname> class. <xref linkend="figu-Developer_Guide-RichFaces_overview-Resource_request_sequence" /> shows the differences in resource requests for a regular JSF request and an Ajax request with a filter. When a request for a resource occurs, the RichFaces filter checks the <classname>ResourceCache</classname> for the resource. If the resource is in the cache, it is sent to the client. Otherwise, the filter searches for the resource among those that are registered by the <classname>ResourceBuilder</classname>. If the resource is registered, the RichFaces filter will send a request to the <classname>ResourceBuilder</classname> to deliver the resource.
 			</para>
 			<figure id="figu-Developer_Guide-RichFaces_overview-Resource_request_sequence">
 				<title>Resource request sequence</title>
@@ -97,9 +94,6 @@
 						</para>
 					</textobject>
 				</mediaobject>
-				<para>
-					When a request for a resource occurs, the RichFaces filter checks the <classname>ResourceCache</classname> for the resource. If the resource is in the cache, it is sent to the client. Otherwise, the filter searches for the resource among those that are registered by the <classname>ResourceBuilder</classname>. If the resource is registered, the RichFaces filter will send a request to the <classname>ResourceBuilder</classname> to deliver the resource.
-				</para>
 			</figure>
 		</section>
 		<section id="sect-Developer_Guide-RichFaces_overview-Ajax_Action_Components">
