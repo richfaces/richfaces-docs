@@ -7,13 +7,125 @@
 <chapter id="chap-Developer_Guide-RichFaces_overview">
 	<title>RichFaces overview</title>
 	<para>
-		Incomplete
+		The RichFaces framework is a component library which adds Ajax capability into existing pages, such that you don't need to write any extra JavaScript code or replace any existing components with new Ajax widgets. RichFaces also enables page-wide Ajax support instead of the traditional component-wide support. Events can be defined on pages that invoke Ajax requests. After an Ajax request, the areas of a page that are synchronized with the JSF Component Tree can themselves change data on the server according to events fired on the client.
+	</para>
+	<para>
+		<xref linkend="figu-Developer_Guide-RichFaces_overview-Request_processing_flow" /> illustrates how requests are processed in the RichFaces framework.
+	</para>
+	<figure id="figu-Developer_Guide-RichFaces_overview-Request_processing_flow">
+		<title>Request processing flow</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata fileref="images/figu-Developer_Guide-RichFaces_overview-Request_processing_flow.png" format="PNG" />
+			</imageobject>
+			<textobject>
+				<para>
+					The RichFaces request processing flow.
+				</para>
+			</textobject>
+		</mediaobject>
+	</figure>
+	<para>
+		Using JSF tags, RichFaces allows different parts of a JSF page to be updated with an Ajax request. JSF pages using RichFaces do not change from "regular" JSF pages, and additional JavaScript or XMLHTTPRequest objects do not need to be written.
 	</para>
 	<section id="sect-Developer_Guide-RichFaces_overview-Architecture">
 		<title>Architecture</title>
 		<para>
-			Incomplete
+			The important elements of the RichFaces framework are as follows:
+			<itemizedlist>
+				<listitem>
+					<para>
+						Ajax Filter
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Ajax Action Components
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Ajax Containers
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Skins and Theming
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						RichFaces JavaScript Engine
+					</para>
+				</listitem>
+			</itemizedlist>
+			Read this section for details on each element.
 		</para>
+		<section id="sect-Developer_Guide-RichFaces_overview-Ajax_Filter">
+			<title>Ajax Filter</title>
+			<para>
+				To get all benefits of RichFaces, a filter should be registered in the <filename>web.xml</filename> file of your application. The filter recognizes multiple request types. Filter configuration is covered in detail in <xref linkend="sect-Developer_Guide-Advanced_features-Filters" />. <xref linkend="figu-Developer_Guide-RichFaces_overview-Request_processing_sequences" /> shows the difference between processing a regular JSF request and an Ajax request with a filter.
+			</para>
+			<figure id="figu-Developer_Guide-RichFaces_overview-Request_processing_sequences">
+				<title>Request processing sequences</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/figu-Developer_Guide-RichFaces_overview-Request_processing_sequences.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							The difference between processing a regular JSF request and an Ajax request with a filter.
+						</para>
+					</textobject>
+				</mediaobject>
+				<para>
+					With the regular JSF request, the whole JSF tree is encoded. With the Ajax request, the filter parses the content of an Ajax response before sending it to the client side, and encoding depends on the size of the Ajax region.
+				</para>
+			</figure>
+			<para>
+				Both with and without a filter, the required static or dynamic resources that your application requests are registered in the <classname>ResourseBuilder</classname> class. <xref linkend="figu-Developer_Guide-RichFaces_overview-Resource_request_sequence" /> shows the differences in resource requests for a regular JSF request and an Ajax request with a filter.
+			</para>
+			<figure id="figu-Developer_Guide-RichFaces_overview-Resource_request_sequence">
+				<title>Resource request sequence</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/figu-Developer_Guide-RichFaces_overview-Resource_request_sequence.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							The difference between resource requests for a regular JSF request and an Ajax request with a filter.
+						</para>
+					</textobject>
+				</mediaobject>
+				<para>
+					When a request for a resource occurs, the RichFaces filter checks the <classname>ResourceCache</classname> for the resource. If the resource is in the cache, it is sent to the client. Otherwise, the filter searches for the resource among those that are registered by the <classname>ResourceBuilder</classname>. If the resource is registered, the RichFaces filter will send a request to the <classname>ResourceBuilder</classname> to deliver the resource.
+				</para>
+			</figure>
+		</section>
+		<section id="sect-Developer_Guide-RichFaces_overview-Ajax_Action_Components">
+			<title>Ajax Action Components</title>
+			<para>
+				The RichFaces framework includes several Ajax Action Components: <sgmltag>&lt;a4j:commandButton&gt;</sgmltag>, <sgmltag>&lt;a4j:commandLink&gt;</sgmltag>, <sgmltag>&lt;a4j:poll&gt;</sgmltag>, <sgmltag>&lt;a4j:ajax&gt;</sgmltag>, and more. Use Ajax Action Components to send Ajax requests from the client side.
+			</para>
+		</section>
+		<section id="sect-Developer_Guide-RichFaces_overview-Ajax_Containers">
+			<title>Ajax Containers</title>
+			<para>
+				<classname>AjaxContainer</classname> is an interface that describes an area on a JSF page that is decoded during an Ajax request. <classname>AjaxViewRoot</classname> and <classname>AjaxRegion</classname> are implementations of this interface.
+			</para>
+		</section>
+		<section id="sect-Developer_Guide-RichFaces_overview-Skins_and_Theming">
+			<title>Skins and Theming</title>
+			<para>
+				
+			</para>
+		</section>
+		<section id="sect-Developer_Guide-RichFaces_overview-RichFaces_JavaScript_Engine">
+			<title>RichFaces JavaScript Engine</title>
+			<para>
+				The RichFaces JavaScript Engine runs on the client side. It can update different areas on a JSF page based on an Ajax response. It is not necessary to use the JavaScript code directly, as it is available automatically.
+			</para>
+		</section>
 	</section>
 	
 	<section id="sect-Developer_Guide-RichFaces_overview-Technologies">
@@ -33,7 +145,34 @@
 	<section id="sect-Developer_Guide-RichFaces_overview-Restrictions">
 		<title>Restrictions</title>
 		<para>
-			Incomplete
+			The following restrictions apply to applications implementing the RichFaces framework:
+			<itemizedlist>
+				<listitem>
+					<para>
+						Any Ajax framework should not append or delete elements on a page, but should instead replace them. For successful updates, an element with the same identifier as in the response must exist on the page. If it is necessary to append code to a page, include a placeholder for it (an empty element). For the same reason, it is recommended that messages be placed in the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;f:verbatim&gt;</sgmltag> should not be used for self-rendered containers, since it is transient and not saved in the tree.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Ajax requests are made by XMLHTTPRequest functions in XML format, but this XML bypasses most validations and the corrections that might be made in a browser. As such, a strict standards-compliant code for HTML and XHTML should be used, without skipping any required elements or attributes. Any necessary XML corrections are automatically made by the XML filter on the server, but unexpected effects can be produced through incorrect HTML code.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The RichFaces <classname>ViewHandler</classname> puts itself in front of the Facelets <classname>ViewHandlers</classname> chain.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						RichFaces components uses their own renderers. In the <emphasis>Render Response Phase</emphasis>, the RichFaces framework makes a traversal of the component tree, calls its own renderer, and passes the result to the Faces Response.
+					</para>
+				</listitem>
+			</itemizedlist>
 		</para>
 	</section>
 	
