@@ -1,9 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY % BOOK_ENTITIES SYSTEM "Developer_Guide.ent">
-%BOOK_ENTITIES;
 ]>
-
 <chapter id="chap-Developer_Guide-RichFaces_overview">
 	<title>RichFaces overview</title>
 	<para>
@@ -16,7 +13,7 @@
 		<title>Request processing flow</title>
 		<mediaobject>
 			<imageobject>
-				<imagedata fileref="images/figu-Developer_Guide-RichFaces_overview-Request_processing_flow.png" format="PNG" />
+				<imagedata contentwidth="660" fileref="images/figu-Developer_Guide-RichFaces_overview-Request_processing_flow.png" format="PNG" width="444" />
 			</imageobject>
 			<textobject>
 				<para>
@@ -31,7 +28,7 @@
 	<section id="sect-Developer_Guide-RichFaces_overview-Architecture">
 		<title>Architecture</title>
 		<para>
-			The important elements of the RichFaces framework are as follows:
+			The important elements of the RichFaces framework are as follows: 
 			<itemizedlist>
 				<listitem>
 					<para>
@@ -59,18 +56,18 @@
 					</para>
 				</listitem>
 			</itemizedlist>
-			Read this section for details on each element.
+			 Read this section for details on each element.
 		</para>
-		<section id="sect-Developer_Guide-RichFaces_overview-Ajax_Filter">
+		<section id="sect-Developer_Guide-Architecture-Ajax_Filter">
 			<title>Ajax Filter</title>
 			<para>
-				To get all benefits of RichFaces, a filter should be registered in the <filename>web.xml</filename> file of your application. The filter recognizes multiple request types. Filter configuration is covered in detail in <xref linkend="sect-Developer_Guide-Advanced_features-Filters" />. <xref linkend="figu-Developer_Guide-RichFaces_overview-Request_processing_sequences" /> shows the difference between processing a regular JSF request and an Ajax request with a filter. With the regular JSF request, the whole JSF tree is encoded. With the Ajax request, the filter parses the content of an Ajax response before sending it to the client side, and encoding depends on the size of the Ajax region.
+				To get all benefits of RichFaces, a filter should be registered in the <filename>web.xml</filename> file of your application. The filter recognizes multiple request types. Filter configuration is covered in detail in <xref linkend="sect-Developer_Guide-Advanced_features-Filters" />. <xref linkend="figu-Developer_Guide-Ajax_Filter-Request_processing_sequences" /> shows the difference between processing a regular JSF request and an Ajax request with a filter. With the regular JSF request, the whole JSF tree is encoded. With the Ajax request, the filter parses the content of an Ajax response before sending it to the client side, and encoding depends on the size of the Ajax region.
 			</para>
-			<figure id="figu-Developer_Guide-RichFaces_overview-Request_processing_sequences">
+			<figure id="figu-Developer_Guide-Ajax_Filter-Request_processing_sequences">
 				<title>Request processing sequences</title>
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="images/figu-Developer_Guide-RichFaces_overview-Request_processing_sequences.png" format="PNG" />
+						<imagedata contentwidth="660" fileref="images/figu-Developer_Guide-RichFaces_overview-Request_processing_sequences.png" format="PNG" width="444" />
 					</imageobject>
 					<textobject>
 						<para>
@@ -80,13 +77,13 @@
 				</mediaobject>
 			</figure>
 			<para>
-				Both with and without a filter, the required static or dynamic resources that your application requests are registered in the <classname>ResourseBuilder</classname> class. <xref linkend="figu-Developer_Guide-RichFaces_overview-Resource_request_sequence" /> shows the differences in resource requests for a regular JSF request and an Ajax request with a filter. When a request for a resource occurs, the RichFaces filter checks the <classname>ResourceCache</classname> for the resource. If the resource is in the cache, it is sent to the client. Otherwise, the filter searches for the resource among those that are registered by the <classname>ResourceBuilder</classname>. If the resource is registered, the RichFaces filter will send a request to the <classname>ResourceBuilder</classname> to deliver the resource.
+				Both with and without a filter, the required static or dynamic resources that your application requests are registered in the <classname>ResourseBuilder</classname> class. <xref linkend="figu-Developer_Guide-Ajax_Filter-Resource_request_sequence" /> shows the differences in resource requests for a regular JSF request and an Ajax request with a filter. When a request for a resource occurs, the RichFaces filter checks the <classname>ResourceCache</classname> for the resource. If the resource is in the cache, it is sent to the client. Otherwise, the filter searches for the resource among those that are registered by the <classname>ResourceBuilder</classname>. If the resource is registered, the RichFaces filter will send a request to the <classname>ResourceBuilder</classname> to deliver the resource.
 			</para>
-			<figure id="figu-Developer_Guide-RichFaces_overview-Resource_request_sequence">
+			<figure id="figu-Developer_Guide-Ajax_Filter-Resource_request_sequence">
 				<title>Resource request sequence</title>
 				<mediaobject>
 					<imageobject>
-						<imagedata fileref="images/figu-Developer_Guide-RichFaces_overview-Resource_request_sequence.png" format="PNG" />
+						<imagedata contentwidth="660" fileref="images/figu-Developer_Guide-RichFaces_overview-Resource_request_sequence.png" format="PNG" width="444" />
 					</imageobject>
 					<textobject>
 						<para>
@@ -96,30 +93,38 @@
 				</mediaobject>
 			</figure>
 		</section>
-		<section id="sect-Developer_Guide-RichFaces_overview-Ajax_Action_Components">
+		
+		<section id="sect-Developer_Guide-Architecture-Ajax_Action_Components">
 			<title>Ajax Action Components</title>
 			<para>
 				The RichFaces framework includes several Ajax Action Components: <sgmltag>&lt;a4j:commandButton&gt;</sgmltag>, <sgmltag>&lt;a4j:commandLink&gt;</sgmltag>, <sgmltag>&lt;a4j:poll&gt;</sgmltag>, <sgmltag>&lt;a4j:ajax&gt;</sgmltag>, and more. Use Ajax Action Components to send Ajax requests from the client side.
 			</para>
 		</section>
-		<section id="sect-Developer_Guide-RichFaces_overview-Ajax_Containers">
+		
+		<section id="sect-Developer_Guide-Architecture-Ajax_Containers">
 			<title>Ajax Containers</title>
 			<para>
 				<classname>AjaxContainer</classname> is an interface that describes an area on a JSF page that is decoded during an Ajax request. <classname>AjaxViewRoot</classname> and <classname>AjaxRegion</classname> are implementations of this interface.
 			</para>
 		</section>
-		<section id="sect-Developer_Guide-RichFaces_overview-Skins_and_Theming">
-			<title>Skins and Theming</title>
+		
+		<section id="sect-Developer_Guide-Architecture-Skins_and_theming">
+			<title>Skins and theming</title>
 			<para>
-				
+				RichFaces includes extensive support for application skinning. Skinning is a high-level extension to traditional <acronym>CSS</acronym> (Cascading Style Sheets) which allows the color scheme and appearance of an application to be easily managed. The skins simplify look-and-feel design by allowing multiple elements of the interface to be handled as manageable features, which have associated color palettes and styling. Application skins can additionally be changed on the fly during run-time, allowing user experiences to be personalized and customized.
+			</para>
+			<para>
+				For full details on skinning and how to create skins for the components in your application, refer to <xref linkend="chap-Developer_Guide-Skinning_and_theming" />.
 			</para>
 		</section>
-		<section id="sect-Developer_Guide-RichFaces_overview-RichFaces_JavaScript_Engine">
+		
+		<section id="sect-Developer_Guide-Architecture-RichFaces_JavaScript_Engine">
 			<title>RichFaces JavaScript Engine</title>
 			<para>
 				The RichFaces JavaScript Engine runs on the client side. It can update different areas on a JSF page based on an Ajax response. It is not necessary to use the JavaScript code directly, as it is available automatically.
 			</para>
 		</section>
+
 	</section>
 	
 	<section id="sect-Developer_Guide-RichFaces_overview-Technologies">
@@ -139,7 +144,7 @@
 	<section id="sect-Developer_Guide-RichFaces_overview-Restrictions">
 		<title>Restrictions</title>
 		<para>
-			The following restrictions apply to applications implementing the RichFaces framework:
+			The following restrictions apply to applications implementing the RichFaces framework: 
 			<itemizedlist>
 				<listitem>
 					<para>
@@ -167,20 +172,6 @@
 					</para>
 				</listitem>
 			</itemizedlist>
-		</para>
-	</section>
-	
-	<section id="sect-Developer_Guide-RichFaces_overview-Using_RichFaces_with_Maven">
-		<title>Using RichFaces with Maven</title>
-		<para>
-			Incomplete
-		</para>
-	</section>
-	
-	<section id="sect-Developer_Guide-RichFaces_overview-Using_RichFaces_in_existing_JSF_projects">
-		<title>Using RichFaces in existing JSF projects</title>
-		<para>
-			Incomplete
 		</para>
 	</section>
 
