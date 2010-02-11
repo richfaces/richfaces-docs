@@ -37,36 +37,336 @@
 	<section id="sect-Developer_Guide-Advanced_features-Filters">
 		<title>Filters</title>
 		<para>
-			Incomplete
+			RichFaces uses a filter to correct the code received on an Ajax request. During a regular JSF request, a browser makes corrections independently. For Ajax requests, a filter is needed to prevent layout destruction. This is because a received code could differ from a code validated by a browser, and a browser does not make any corrections. Refer to <xref linkend="sect-Developer_Guide-Architecture-Ajax_Filter" /> for further details on how the Ajax filter works.
+		</para>
+		<para>
+			<xref linkend="exam-Developer_guide-Advanced_features-Example_filter" /> shows how to set a filter in the <filename>web.xml</filename> file of an application.
+		</para>
+		<example id="exam-Developer_guide-Advanced_features-Example_filter">
+			<title>Example filter</title>
+<programlisting language="XML" role="XML">
+...
+&lt;filter&gt;
+    &lt;display-name&gt;RichFaces Filter&lt;/display-name&gt;
+    &lt;filter-name&gt;richfaces&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.ajax4jsf.Filter&lt;/filter-class&gt;
+&lt;/filter&gt;
+...
+</programlisting>
+		</example>
+		<para>
+			Different types of filters can be configured for pages in the same application. There are three filter types:
+			<variablelist>
+				<varlistentry>
+					<term><literal>TIDY</literal></term>
+					<listitem>
+						<para>
+							The <literal>TIDY</literal> filter type is based on the <emphasis>Tidy</emphasis> parser. It is recommended for applications with complicated or non-standard markup. All necessary code corrections are made by the filter when a response comes from the server.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>NEKO</literal></term>
+					<listitem>
+						<para>
+							The <literal>NEKO</literal> filter type replaces the "Fast Filter", and is based on the <emphasis>Neko</emphasis> parser. This filter considerably accelerates all Ajax request processing. However, the filter code is not strictly verified: if it is used with application markup that is non-standard or incorrect, it may cause errors and corrupt the application layout.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>NONE</literal></term>
+					<listitem>
+						<para>
+							No correction is performed.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</para>
+		<para>
+			<xref linkend="exam-Developer_Guide-Advanced_features-Example_filter_configuration" /> shows how to configure a filter through the <filename>web.xml</filename> file.
+		</para>
+		<example id="exam-Developer_Guide-Advanced_features-Example_filter_configuration">
+			<title>Example filter configuration</title>
+<programlisting language="XML" role="XML">
+<xi:include parse="text" href="extras/exam-Developer_Guide-Advanced_features-Example_filter_configuration.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</programlisting>
+		</example>
+		<para>
+			The <parameter>ORDER</parameter> parameter specifies the order in which particular filter types are used for code correction: first <literal>NONE</literal>, then <literal>NEKO</literal>, then <literal>TIDY</literal>. Two sets of pages are specified as using specific filter types:
+			<variablelist>
+				<varlistentry>
+					<term><code>/pages/performance\.xhtml,/pages/default.*\.xhtml</code></term>
+					<listitem>
+						<para>
+							These pages do not use a filter for correction, as they are specified as using <literal>NONE</literal>. If a page is not covered by this set, it is checked against the next set (the set using the <literal>NEKO</literal> filter).
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><code>/pages/repeat\.xhtml</code></term>
+					<listitem>
+						<para>
+							These pages use the <literal>NEKO</literal> filter for correction. If a page is not covered by this set, it uses the <literal>TIDY</literal> filter for code correction as specified with the <parameter>ORDER</parameter> parameter.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
 		</para>
 	</section>
 	
 	<section id="sect-Developer_Guide-Advanced_features-Scripts_and_styles">
-		<title>Scripts and styles</title>
+		<title>Script and style loading</title>
 		<para>
-			Incomplete
+			Scripts and styles are normally loaded into a RichFaces application on demand. The default loading strategy can be altered to suit certain applications by specifying the strategy in the <filename>web.xml</filename> file.
 		</para>
+		<formalpara>
+			<title><code>org.richfaces.LoadScriptStrategy</code></title>
+			<para>
+				The script-loading strategy is specified as follows:
+<programlisting language="XML" role="XML">
+...
+&lt;context-param&gt;
+    &lt;param-name&gt;org.richfaces.LoadScriptStrategy&lt;/param-name&gt;
+    &lt;param-value&gt;ALL&lt;/param-value&gt;
+&lt;/context-param&gt;
+...
+</programlisting>
+			</para>
+			<para>
+				The <sgmltag>&lt;param-value&gt;</sgmltag> element can be set to one of three values:
+				<variablelist>
+					<varlistentry>
+						<term><literal>ALL</literal></term>
+						<listitem>
+							<para>
+								All scripts are loaded when the application starts.
+							</para>
+							<note>
+								<title>JavaScript file compression</title>
+								<para>
+									When <code>org.richfaces.LoadScriptStrategy</code> is set to <literal>ALL</literal>, JavaScript file compression is turned off.
+								</para>
+							</note>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><literal>DEFAULT</literal></term>
+						<listitem>
+							<para>
+								Scripts are loaded as required. If not otherwise specified, this is the normal script-loading behavior.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><literal>NONE</literal></term>
+						<listitem>
+							<para>
+								No scripts are loaded. This can be useful for including scripts manually.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</para>
+		</formalpara>
+		<formalpara>
+			<title><code>org.richfaces.LoadStyleStrategy</code></title>
+			<para>
+				The style-loading strategy is specified as follows:
+<programlisting language="XML" role="XML">
+...
+&lt;context-param&gt;
+    &lt;param-name&gt;org.richfaces.LoadStyleStrategy&lt;/param-name&gt;
+    &lt;param-value&gt;ALL&lt;/param-value&gt;
+&lt;/context-param&gt;
+...
+</programlisting>
+			</para>
+			<para>
+				The <sgmltag>&lt;param-value&gt;</sgmltag> element can be set to one of three values:
+				<variablelist>
+					<varlistentry>
+						<term><literal>ALL</literal></term>
+						<listitem>
+							<para>
+								All styles from a single integrated style sheet are loaded when the application starts.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><literal>DEFAULT</literal></term>
+						<listitem>
+							<para>
+								Styles are loaded as required. If not otherwise specified, this is the normal style-loading behavior.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><literal>NONE</literal></term>
+						<listitem>
+							<para>
+								No styles are loaded. The default plain skin resets all color and font parameters to <literal>null</literal>. Any pre-defined styles for RichFaces are not used.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</para>
+		</formalpara>
 	</section>
 	
 	<section id="sect-Developer_Guide-Advanced_features-Error_handling">
 		<title>Error handling</title>
 		<para>
-			Incomplete
+			RichFaces allows standard handlers to be defined for processing different application exceptions. Custom JavaScript can be executed when these exceptions occur.
 		</para>
+		<para>
+			To define handlers for application exceptions, add the following code to your <filename>web.xml</filename> file:
+<programlisting language="XML" role="XML">
+&lt;context-param&gt;
+    &lt;param-name&gt;org.ajax4jsf.handleViewExpiredOnClient&lt;/param-name&gt;
+    &lt;param-value&gt;true&lt;/param-value&gt;
+&lt;/context-param&gt;
+</programlisting>
+		</para>
+		<section id="sect-Developer_Guide-Advanced_features-Handling_request_errors">
+			<title>Handling request errors</title>
+			<para>
+				To execute custom JavaScript code on the client when an error occurs during an Ajax request, redefine the standard <methodname>A4J.AJAX.onError</methodname> method, as shown in <xref linkend="exam-Developer_Guide-Advanced_features-Example_request_error" />.
+				<example id="exam-Developer_Guide-Advanced_features-Example_request_error">
+					<title>Example request error</title>
+<programlisting language="Java" role="JAVA">
+A4J.AJAX.onError = function(req, status, message){
+    window.alert("Custom onError handler "+message);
+}
+</programlisting>
+				</example>
+				The function accepts three parameters:
+				<variablelist>
+					<varlistentry>
+						<term><parameter>req</parameter></term>
+						<listitem>
+							<para>
+								A string of parameters from the request that caused the error.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>status</parameter></term>
+						<listitem>
+							<para>
+								The error number returned by the server.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>message</parameter></term>
+						<listitem>
+							<para>
+								A default message for the error.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</para>
+		</section>
+		<section id="sect-Developer_Guide-Advanced_features-Handling_session_expiration_errors">
+			<title>Handling session expiration errors</title>
+			<para>
+				Redefine the <methodname>A4J.AJAX.onExpired</methodname> method to handle the expiration of a user's session, as shown in <xref linkend="exam-Developer_Guide-Advanced_features-Example_session_expiration_error" />.
+				<example id="exam-Developer_Guide-Advanced_features-Example_session_expiration_error">
+					<title>Example session expiration error</title>
+<programlisting language="Java" role="JAVA">
+A4J.AJAX.onExpired = function(loc, expiredMsg){
+    if(window.confirm("Custom onExpired handler "+expiredMsg+" for a location: "+loc)){
+        return loc;
+    } else {
+        return false;
+    }
+}
+</programlisting>
+				</example>
+				The function accepts two parameters:
+				<variablelist>
+					<varlistentry>
+						<term><parameter>loc</parameter></term>
+						<listitem>
+							<para>
+								The URL of the current page, which can be updated on demand.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>expiredMsg</parameter></term>
+						<listitem>
+							<para>
+								A default message for the session expiration error.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</para>
+		</section>
+		<note>
+			<title>MyFaces compatibility</title>
+			<para>
+				Custom error handlers for the <methodname>onError</methodname> and <methodname>onExpire</methodname> events do not work under MyFaces. MyFaces handles exceptions through its internal debug page. Use the following code in the <filename>web.xml</filename> file to prevent this behavior in MyFaces:
+<programlisting language="XML" role="XML">
+&lt;context-param&gt;
+    &lt;param-name&gt;org.apache.myfaces.ERROR_HANDLING&lt;/param-name&gt;
+    &lt;param-value&gt;false&lt;/param-value&gt;
+&lt;/context-param&gt;
+</programlisting>
+			</para>
+		</note>
 	</section>
 	
-	<section id="sect-Developer_Guide-Advanced_features-Managing_states">
+	<section id="sect-Developer_Guide-Advanced_features-Managing_states" status="draft">
 		<title>Managing states</title>
 		<para>
-			Incomplete
+			JavaServer Faces (<acronym>JSF</acronym>) has an advanced navigation mechanism that allows you to define navigation from one view to another. Navigation typically happens in a web application when a user moves from one page to another, but there is no switch mechanism between certain logical states in the same view. The RichFaces State API allows sets of states to be defined for the views, as well as any properties associated with these states.
 		</para>
 	</section>
 	
 	<section id="sect-Developer_Guide-Advanced_features-User_roles">
 		<title>User roles</title>
 		<para>
-			Incomplete
+			To check whether the logged-in user belongs to a certain user role, use the <function>rich:isUserInRole(Object)</function> function in RichFaces. The example demonstrates the function's use to render controls only for users with administrator privileges.
 		</para>
+		<example id="exam-Developer_Guide-Advanced_features-User_role_example">
+			<title>User role example</title>
+			<para>
+				Certain controls only need to be rendered for administrators.
+				<procedure>
+					<step>
+						<title>Create <literal>admin</literal> role</title>
+						<para>
+							Create the <literal>admin</literal> role in the <filename>web.xml</filename> file:
+<programlisting language="XML" role="XML">
+&lt;security-role&gt;
+    &lt;role-name&gt;admin&lt;/role-name&gt;
+&lt;/security-role&gt;
+</programlisting>
+						</para>
+					</step>
+					<step>
+						<title>Implement authorization for users</title>
+						<para>
+							Assign the <literal>admin</literal> role to users when they log in to the application as administrators.
+						</para>
+					</step>
+					<step>
+						<title>Use the <function>rich:isUserInRole(Object)</function> function</title>
+						<para>
+							The <function>rich:isUserInRole(Object)</function> function can be used with the <varname>rendered</varname> attribute of any component:
+<programlisting language="XML" role="XML">
+&lt;rich:editor value="#{bean.text}" rendered="#{rich:isUserInRole('admin')}" /&gt;
+</programlisting>
+						</para>
+					</step>
+				</procedure>
+			</para>
+
+		</example>
 	</section>
 
 </chapter>
