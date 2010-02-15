@@ -40,19 +40,11 @@
 			RichFaces uses a filter to correct the code received on an Ajax request. During a regular JSF request, a browser makes corrections independently. For Ajax requests, a filter is needed to prevent layout destruction. This is because a received code could differ from a code validated by a browser, and a browser does not make any corrections. Refer to <xref linkend="sect-Developer_Guide-Architecture-Ajax_Filter" /> for further details on how the Ajax filter works.
 		</para>
 		<para>
-			<xref linkend="exam-Developer_guide-Advanced_features-Example_filter" /> shows how to set a filter in the <filename>web.xml</filename> file of an application.
+			<xref linkend="exam-Developer_Guide-Advanced_features-Example_filter" /> shows how to set a filter in the <filename>web.xml</filename> file of an application.
 		</para>
-		<example id="exam-Developer_guide-Advanced_features-Example_filter">
+		<example id="exam-Developer_Guide-Advanced_features-Example_filter">
 			<title>Example filter</title>
-<programlisting language="XML" role="XML">
-...
-&lt;filter&gt;
-    &lt;display-name&gt;RichFaces Filter&lt;/display-name&gt;
-    &lt;filter-name&gt;richfaces&lt;/filter-name&gt;
-    &lt;filter-class&gt;org.ajax4jsf.Filter&lt;/filter-class&gt;
-&lt;/filter&gt;
-...
-</programlisting>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Advanced_features-Example_filter.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 		</example>
 		<para>
 			Different types of filters can be configured for pages in the same application. There are three filter types:
@@ -88,9 +80,7 @@
 		</para>
 		<example id="exam-Developer_Guide-Advanced_features-Example_filter_configuration">
 			<title>Example filter configuration</title>
-<programlisting language="XML" role="XML">
-<xi:include parse="text" href="extras/exam-Developer_Guide-Advanced_features-Example_filter_configuration.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" />
-</programlisting>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Advanced_features-Example_filter_configuration.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 		</example>
 		<para>
 			The <parameter>ORDER</parameter> parameter specifies the order in which particular filter types are used for code correction: first <literal>NONE</literal>, then <literal>NEKO</literal>, then <literal>TIDY</literal>. Two sets of pages are specified as using specific filter types:
@@ -120,19 +110,16 @@
 		<para>
 			Scripts and styles are normally loaded into a RichFaces application on demand. The default loading strategy can be altered to suit certain applications by specifying the strategy in the <filename>web.xml</filename> file.
 		</para>
-		<formalpara>
+		<section>
 			<title><code>org.richfaces.LoadScriptStrategy</code></title>
 			<para>
 				The script-loading strategy is specified as follows:
-<programlisting language="XML" role="XML">
-...
-&lt;context-param&gt;
+			</para>
+<programlisting language="XML" role="XML">&lt;context-param&gt;
     &lt;param-name&gt;org.richfaces.LoadScriptStrategy&lt;/param-name&gt;
     &lt;param-value&gt;ALL&lt;/param-value&gt;
 &lt;/context-param&gt;
-...
 </programlisting>
-			</para>
 			<para>
 				The <sgmltag>&lt;param-value&gt;</sgmltag> element can be set to one of three values:
 				<variablelist>
@@ -168,20 +155,17 @@
 					</varlistentry>
 				</variablelist>
 			</para>
-		</formalpara>
-		<formalpara>
+		</section>
+		<section>
 			<title><code>org.richfaces.LoadStyleStrategy</code></title>
 			<para>
 				The style-loading strategy is specified as follows:
-<programlisting language="XML" role="XML">
-...
-&lt;context-param&gt;
+			</para>
+<programlisting language="XML" role="XML">&lt;context-param&gt;
     &lt;param-name&gt;org.richfaces.LoadStyleStrategy&lt;/param-name&gt;
     &lt;param-value&gt;ALL&lt;/param-value&gt;
 &lt;/context-param&gt;
-...
 </programlisting>
-			</para>
 			<para>
 				The <sgmltag>&lt;param-value&gt;</sgmltag> element can be set to one of three values:
 				<variablelist>
@@ -211,7 +195,7 @@
 					</varlistentry>
 				</variablelist>
 			</para>
-		</formalpara>
+		</section>
 	</section>
 	
 	<section id="sect-Developer_Guide-Advanced_features-Error_handling">
@@ -221,25 +205,22 @@
 		</para>
 		<para>
 			To define handlers for application exceptions, add the following code to your <filename>web.xml</filename> file:
-<programlisting language="XML" role="XML">
-&lt;context-param&gt;
+		</para>
+<programlisting language="XML" role="XML">&lt;context-param&gt;
     &lt;param-name&gt;org.ajax4jsf.handleViewExpiredOnClient&lt;/param-name&gt;
     &lt;param-value&gt;true&lt;/param-value&gt;
 &lt;/context-param&gt;
 </programlisting>
-		</para>
 		<section id="sect-Developer_Guide-Advanced_features-Handling_request_errors">
 			<title>Handling request errors</title>
 			<para>
 				To execute custom JavaScript code on the client when an error occurs during an Ajax request, redefine the standard <methodname>A4J.AJAX.onError</methodname> method, as shown in <xref linkend="exam-Developer_Guide-Advanced_features-Example_request_error" />.
-				<example id="exam-Developer_Guide-Advanced_features-Example_request_error">
-					<title>Example request error</title>
-<programlisting language="Java" role="JAVA">
-A4J.AJAX.onError = function(req, status, message){
-    window.alert("Custom onError handler "+message);
-}
-</programlisting>
-				</example>
+			</para>
+			<example id="exam-Developer_Guide-Advanced_features-Example_request_error">
+				<title>Example request error</title>
+<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Developer_Guide-Advanced_features-Example_request_error.js" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<para>
 				The function accepts three parameters:
 				<variablelist>
 					<varlistentry>
@@ -273,18 +254,13 @@ A4J.AJAX.onError = function(req, status, message){
 			<title>Handling session expiration errors</title>
 			<para>
 				Redefine the <methodname>A4J.AJAX.onExpired</methodname> method to handle the expiration of a user's session, as shown in <xref linkend="exam-Developer_Guide-Advanced_features-Example_session_expiration_error" />.
-				<example id="exam-Developer_Guide-Advanced_features-Example_session_expiration_error">
-					<title>Example session expiration error</title>
-<programlisting language="Java" role="JAVA">
-A4J.AJAX.onExpired = function(loc, expiredMsg){
-    if(window.confirm("Custom onExpired handler "+expiredMsg+" for a location: "+loc)){
-        return loc;
-    } else {
-        return false;
-    }
-}
+			</para>
+			<example id="exam-Developer_Guide-Advanced_features-Example_session_expiration_error">
+				<title>Example session expiration error</title>
+<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Developer_Guide-Advanced_features-Example_session_expiration_error.js" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </programlisting>
-				</example>
+			</example>
+			<para>
 				The function accepts two parameters:
 				<variablelist>
 					<varlistentry>
@@ -310,13 +286,12 @@ A4J.AJAX.onExpired = function(loc, expiredMsg){
 			<title>MyFaces compatibility</title>
 			<para>
 				Custom error handlers for the <methodname>onError</methodname> and <methodname>onExpire</methodname> events do not work under MyFaces. MyFaces handles exceptions through its internal debug page. Use the following code in the <filename>web.xml</filename> file to prevent this behavior in MyFaces:
-<programlisting language="XML" role="XML">
-&lt;context-param&gt;
+			</para>
+<programlisting language="XML" role="XML">&lt;context-param&gt;
     &lt;param-name&gt;org.apache.myfaces.ERROR_HANDLING&lt;/param-name&gt;
     &lt;param-value&gt;false&lt;/param-value&gt;
 &lt;/context-param&gt;
 </programlisting>
-			</para>
 		</note>
 	</section>
 	
@@ -324,6 +299,9 @@ A4J.AJAX.onExpired = function(loc, expiredMsg){
 		<title>Managing states</title>
 		<para>
 			JavaServer Faces (<acronym>JSF</acronym>) has an advanced navigation mechanism that allows you to define navigation from one view to another. Navigation typically happens in a web application when a user moves from one page to another, but there is no switch mechanism between certain logical states in the same view. The RichFaces State API allows sets of states to be defined for the views, as well as any properties associated with these states.
+		</para>
+		<para>
+			Actually States is a map where the entry key is a name of the State and the value is a State map. Particular State map has entries with some names as keys and any objects as values that are used after the state activation. Thus, in the State map you could define any values, method bindings, or just some simple state variables (constants) which have different values for every State.
 		</para>
 	</section>
 	
@@ -336,35 +314,29 @@ A4J.AJAX.onExpired = function(loc, expiredMsg){
 			<title>User role example</title>
 			<para>
 				Certain controls only need to be rendered for administrators.
-				<procedure>
-					<step>
-						<title>Create <literal>admin</literal> role</title>
-						<para>
-							Create the <literal>admin</literal> role in the <filename>web.xml</filename> file:
-<programlisting language="XML" role="XML">
-&lt;security-role&gt;
-    &lt;role-name&gt;admin&lt;/role-name&gt;
-&lt;/security-role&gt;
-</programlisting>
-						</para>
-					</step>
-					<step>
-						<title>Implement authorization for users</title>
-						<para>
-							Assign the <literal>admin</literal> role to users when they log in to the application as administrators.
-						</para>
-					</step>
-					<step>
-						<title>Use the <function>rich:isUserInRole(Object)</function> function</title>
-						<para>
-							The <function>rich:isUserInRole(Object)</function> function can be used with the <varname>rendered</varname> attribute of any component:
-<programlisting language="XML" role="XML">
-&lt;rich:editor value="#{bean.text}" rendered="#{rich:isUserInRole('admin')}" /&gt;
-</programlisting>
-						</para>
-					</step>
-				</procedure>
 			</para>
+			<procedure>
+				<step>
+					<title>Create <literal>admin</literal> role</title>
+					<para>
+						Create the <literal>admin</literal> role in the <filename>web.xml</filename> file:
+					</para>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Advanced_features-User_role_example-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				</step>
+				<step>
+					<title>Implement authorization for users</title>
+					<para>
+						Assign the <literal>admin</literal> role to users when they log in to the application as administrators.
+					</para>
+				</step>
+				<step>
+					<title>Use the <function>rich:isUserInRole(Object)</function> function</title>
+					<para>
+						The <function>rich:isUserInRole(Object)</function> function can be used with the <varname>rendered</varname> attribute of any component:
+					</para>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Advanced_features-User_role_example-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				</step>
+			</procedure>
 
 		</example>
 	</section>

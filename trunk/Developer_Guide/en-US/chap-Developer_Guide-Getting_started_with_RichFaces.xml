@@ -265,32 +265,15 @@
 			<step id="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries">
 				<title>Reference the tag libraries</title>
 				<para>
-					The RichFaces tag libraries need to be referenced on each JSP and XHTML page in your project.
+					The RichFaces tag libraries need to be referenced on each XHTML page in your project:
 				</para>
-				<variablelist>
-					<varlistentry>
-						<term>Referencing in JSP pages</term>
-						<listitem>
-							
-<programlisting language="XML" role="XML">&lt;%@ taglib uri="http://richfaces.org/a4j" prefix="a4j"%&gt;
-&lt;%@ taglib uri="http://richfaces.org/rich" prefix="rich"%&gt;
-</programlisting>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term>Referencing in XHTML pages</term>
-						<listitem>
-							
 <programlisting language="XML" role="XML">&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:a4j="http://richfaces.org/a4j"
                 xmlns:rich="http://richfaces.org/rich"&gt;
-  ...
+    ...
 &lt;/ui:composition&gt;
 </programlisting>
-						</listitem>
-					</varlistentry>
-				</variablelist>
 			</step>
 		</procedure>
 		
@@ -308,50 +291,50 @@
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_required_repositories">
 				<title>Add required repositories</title>
 				<para>
-					A structure for the Maven project with minimal content can be created with the Maven archetype named <filename>maven-archetype-jsfwebapp</filename> included as part of the RichFaces Component Development Kit (<acronym>CDK</acronym>). The archetype and the project itself require extra repositories to be provided, namely <filename>http://snapshots.jboss.org/maven2/</filename> and <filename>http://repository.jboss.com/maven2/</filename>. To make the repositories accessible to Maven, add a profile in the <filename>maven_installation_folder/conf/settings.xml</filename> file under the <sgmltag>&lt;profiles&gt;</sgmltag> element: 
+					A structure for the Maven project with minimal content can be created with the Maven archetype named <filename>maven-archetype-jsfwebapp</filename> included as part of the RichFaces Component Development Kit (<acronym>CDK</acronym>). The archetype and the project itself require extra repositories to be provided, namely <filename>http://snapshots.jboss.org/maven2/</filename> and <filename>http://repository.jboss.com/maven2/</filename>. To make the repositories accessible to Maven, add a profile in the <filename>maven_installation_folder/conf/settings.xml</filename> file under the <sgmltag>&lt;profiles&gt;</sgmltag> element:
+				</para>
 <programlisting language="XML" role="XML">&lt;profiles&gt;
-	&lt;profile&gt;
-		&lt;id&gt;jsf-app-profile&lt;/id&gt;
-		&lt;repositories&gt;
-		    &lt;repository&gt;
-		        &lt;releases&gt;
-		            &lt;enabled&gt;true&lt;/enabled&gt;
-		        &lt;/releases&gt;
-		        &lt;snapshots&gt;
-		            &lt;enabled&gt;true&lt;/enabled&gt;
-		            &lt;updatePolicy&gt;always&lt;/updatePolicy&gt;
-		        &lt;/snapshots&gt;
-		        &lt;id&gt;snapshots.jboss.org&lt;/id&gt;
-		        &lt;name&gt;Snapshot Jboss Repository for Maven&lt;/name&gt;
-		        &lt;url&gt;http://snapshots.jboss.org/maven2/&lt;/url&gt;
-		        &lt;layout&gt;default&lt;/layout&gt;
-		    &lt;/repository&gt;
-		    &lt;repository&gt;
-		        &lt;releases&gt;
-		            &lt;enabled&gt;true&lt;/enabled&gt;
-		        &lt;/releases&gt;
-		        &lt;snapshots&gt;
-		            &lt;enabled&gt;true&lt;/enabled&gt;
-		            &lt;updatePolicy&gt;always&lt;/updatePolicy&gt;
-		        &lt;/snapshots&gt;
-		        &lt;id&gt;repository.jboss.com&lt;/id&gt;
-		        &lt;name&gt;Jboss Repository for Maven&lt;/name&gt;
-		        &lt;url&gt;http://repository.jboss.com/maven2/&lt;/url&gt;
-		        &lt;layout&gt;default&lt;/layout&gt;
-		    &lt;/repository&gt;
-		&lt;/repositories&gt;
-	&lt;/profile&gt;
-	...
+    &lt;profile&gt;
+        &lt;id&gt;jsf-app-profile&lt;/id&gt;
+        &lt;repositories&gt;
+            &lt;repository&gt;
+                &lt;releases&gt;
+                    &lt;enabled&gt;true&lt;/enabled&gt;
+                &lt;/releases&gt;
+                &lt;snapshots&gt;
+                    &lt;enabled&gt;true&lt;/enabled&gt;
+                    &lt;updatePolicy&gt;always&lt;/updatePolicy&gt;
+                &lt;/snapshots&gt;
+                &lt;id&gt;snapshots.jboss.org&lt;/id&gt;
+                &lt;name&gt;Snapshot Jboss Repository for Maven&lt;/name&gt;
+                &lt;url&gt;http://snapshots.jboss.org/maven2/&lt;/url&gt;
+                &lt;layout&gt;default&lt;/layout&gt;
+            &lt;/repository&gt;
+            &lt;repository&gt;
+                &lt;releases&gt;
+                    &lt;enabled&gt;true&lt;/enabled&gt;
+                &lt;/releases&gt;
+                &lt;snapshots&gt;
+                    &lt;enabled&gt;true&lt;/enabled&gt;
+                    &lt;updatePolicy&gt;always&lt;/updatePolicy&gt;
+                &lt;/snapshots&gt;
+                &lt;id&gt;repository.jboss.com&lt;/id&gt;
+                &lt;name&gt;Jboss Repository for Maven&lt;/name&gt;
+                &lt;url&gt;http://repository.jboss.com/maven2/&lt;/url&gt;
+                &lt;layout&gt;default&lt;/layout&gt;
+            &lt;/repository&gt;
+        &lt;/repositories&gt;
+    &lt;/profile&gt;
+    ...
 &lt;/profiles&gt;
 </programlisting>
-				</para>
 				<para>
-					The profile then needs to be activated in the <sgmltag>&lt;activeProfiles&gt;</sgmltag> element: 
+					The profile then needs to be activated in the <sgmltag>&lt;activeProfiles&gt;</sgmltag> element:
+				</para>
 <programlisting language="XML" role="XML">&lt;activeProfiles&gt;
 	&lt;activeProfile&gt;jsf-app-profile&lt;/activeProfile&gt;
 &lt;/activeProfiles&gt;
 </programlisting>
-				</para>
 			</step>
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Generate_project_from_archetype">
 				<title>Generate project from archetype</title>
@@ -398,9 +381,8 @@ mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactI
     │       ├── WEB-INF
     │       │   ├── faces-config.xml
     │       │   └── web.xml
-    │       ├── index.jsp
+    │       ├── index.xhtml
     │       └── pages
-    │           ├── index.jsp
     │           └── index.xhtml
     └── test
         └── java
@@ -412,9 +394,10 @@ mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactI
 				</para>
 			</step>
 			<step>
-				<title></title>
+				<title>Add dependencies</title>
 				<para>
-					The <filename>jsf-app</filename> directory contains a project descriptor file, <filename>pom.xml</filename>. To add RichFaces libraries to your project, edit the project descriptor to add dependencies to the <sgmltag>&lt;dependencies&gt;</sgmltag> element as follows: 
+					The <filename>jsf-app</filename> directory contains a project descriptor file, <filename>pom.xml</filename>. To add RichFaces libraries to your project, edit the project descriptor to add dependencies to the <sgmltag>&lt;dependencies&gt;</sgmltag> element as follows:
+				</para>
 <programlisting language="XML" role="XML">&lt;dependencies&gt;
     &lt;dependency&gt;
         &lt;groupId&gt;junit&lt;/groupId&gt;
@@ -490,7 +473,6 @@ mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactI
     &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </programlisting>
-				</para>
 			</step>
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Build_the_project">
 				<title>Build the project</title>
@@ -505,14 +487,14 @@ mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactI
 						</para>
 					</step>
 					<step id="step-Developer_Guide-Build_the_project-Building_for_Eclipse_and_JBoss_Tools">
-						<title>Building for <program>Eclipse</program> and <program>JBoss Tools</program></title>
+						<title>Building for <application>Eclipse</application> and <application>JBoss Tools</application></title>
 						<para>
-							To build the project for <program>Eclipse</program> and <program>JBoss Tools</program>, enter the following command at the command line: 
+							To build the project for <application>Eclipse</application> and <application>JBoss Tools</application>, enter the following command at the command line: 
 <screen>mvn eclipse:eclipse -Dwtpversion=2.0
 </screen>
 						</para>
 						<para>
-							The <computeroutput>BUILD SUCCESSFUL</computeroutput> message indicates the project has been assembled and is ready to import into <program>Eclipse</program>.
+							The <computeroutput>BUILD SUCCESSFUL</computeroutput> message indicates the project has been assembled and is ready to import into <application>Eclipse</application>.
 						</para>
 					</step>
 				</stepalternatives>
