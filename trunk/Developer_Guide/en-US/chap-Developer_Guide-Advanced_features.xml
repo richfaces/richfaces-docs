@@ -211,6 +211,17 @@
     &lt;param-value&gt;true&lt;/param-value&gt;
 &lt;/context-param&gt;
 </programlisting>
+		<note>
+			<title>MyFaces compatibility</title>
+			<para>
+				Custom error handlers for the <methodname>onError</methodname> and <methodname>onExpire</methodname> events do not work under MyFaces. MyFaces handles exceptions through its internal debug page. Use the following code in the <filename>web.xml</filename> file to prevent this behavior in MyFaces:
+			</para>
+<programlisting language="XML" role="XML">&lt;context-param&gt;
+    &lt;param-name&gt;org.apache.myfaces.ERROR_HANDLING&lt;/param-name&gt;
+    &lt;param-value&gt;false&lt;/param-value&gt;
+&lt;/context-param&gt;
+</programlisting>
+		</note>
 		<section id="sect-Developer_Guide-Advanced_features-Handling_request_errors">
 			<title>Handling request errors</title>
 			<para>
@@ -282,17 +293,6 @@
 				</variablelist>
 			</para>
 		</section>
-		<note>
-			<title>MyFaces compatibility</title>
-			<para>
-				Custom error handlers for the <methodname>onError</methodname> and <methodname>onExpire</methodname> events do not work under MyFaces. MyFaces handles exceptions through its internal debug page. Use the following code in the <filename>web.xml</filename> file to prevent this behavior in MyFaces:
-			</para>
-<programlisting language="XML" role="XML">&lt;context-param&gt;
-    &lt;param-name&gt;org.apache.myfaces.ERROR_HANDLING&lt;/param-name&gt;
-    &lt;param-value&gt;false&lt;/param-value&gt;
-&lt;/context-param&gt;
-</programlisting>
-		</note>
 	</section>
 	
 	<section id="sect-Developer_Guide-Advanced_features-Managing_states" status="draft">
