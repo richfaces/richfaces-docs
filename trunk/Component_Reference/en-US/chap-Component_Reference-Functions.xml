@@ -4,41 +4,55 @@
 <chapter id="chap-Component_Reference-Functions">
 	<title>Functions</title>
 	<para>
-		Incomplete
+		Read this chapter for details on special functions for use with particular components. Using JavaServer Faces Expression Language (<acronym>JSF</acronym> <acronym>EL</acronym>), these functions can be accessed through the <varname>data</varname> attribute of components. Refer to <xref linkend="sect-Component_Reference-Events_and_JavaScript_interactions-data" /> for details on the <varname>data</varname> attribute.
 	</para>
 	<section id="sect-Component_Reference-Functions-richclientID">
-		<title><sgmltag>&lt;rich:clientID&gt;</sgmltag></title>
+		<title><function>rich:clientId</function></title>
 		<para>
-			Incomplete
+			The <function>rich:clientId('id')</function> function returns the client identifier related to the passed component identifier (<code>'id'</code>). If the specified component identifier is not found, <literal>null</literal> is returned instead.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Functions-richcomponent">
-		<title><sgmltag>&lt;rich:component&gt;</sgmltag></title>
+		<title><function>rich:component</function></title>
 		<para>
-			Incomplete
+			The <function>rich:component('id')</function> function is a shortcut for the equivalent <code>#{rich:clientId('id')}.component</code> code. It returns the UIComponent instance from the client, based on the passed server-side component identifier (<code>'id'</code>). If the specified component identifier is not found, <literal>null</literal> is returned instead.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Functions-richelement">
-		<title><sgmltag>&lt;rich:element&gt;</sgmltag></title>
+		<title><function>rich:element</function></title>
 		<para>
-			Incomplete
+			The <function>rich:element('id')</function> function is a shortcut for the equivalent <code>document.getElementById(#{rich:clientId('id')})</code> code. It returns the element from the client, based on the passed server-side component identifier. If the specified component identifier is not found, <literal>null</literal> is returned instead.
 		</para>
 	</section>
 	
 	<section id="sect-Component_Reference-Functions-richfindComponent">
-		<title><sgmltag>&lt;rich:findComponent&gt;</sgmltag></title>
+		<title><function>rich:findComponent</function></title>
 		<para>
-			Incomplete
+			The <function>rich:findComponent('id')</function> function returns the a UIComponent instance of the passed component identifier. If the specified component identifier is not found, <literal>null</literal> is returned instead.
 		</para>
+		<example id="exam-Component_Reference-richfindComponent-richfindComponent_example">
+			<title><function>rich:findComponent</function> example</title>
+<programlisting language="XML" role="XML">&lt;h:inputText id="myInput"&gt;
+    &lt;a4j:support event="onkeyup" reRender="outtext"/&gt;
+&lt;/h:inputText&gt;
+&lt;h:outputText id="outtext" value="#{rich:findComponent('myInput').value}" /&gt;</programlisting>
+		</example>
 	</section>
 	
 	<section id="sect-Component_Reference-Functions-richisUserInRole">
-		<title><sgmltag>&lt;rich:isUserInRole&gt;</sgmltag></title>
+		<title><function>rich:isUserInRole</function></title>
 		<para>
-			Incomplete
+			The <function>rich:isUserInRole(Object)</function> function checks whether the logged-in user belongs to a certain user role, such as being an administrator. User roles are defined in the <filename>web.xml</filename> settings file.
 		</para>
+		<example id="exam-Component_Reference-richisUserInRole-richisUserInRole_example">
+			<title><function>rich:isUserInRole</function> example</title>
+			<para>
+				The <function>rich:isUserInRole(Object)</function> function can be used in conjunction with the <varname>rendered</varname> attribute of a component to only display certain controls to authorized users.
+			</para>
+<programlisting language="XML" role="XML">&lt;rich:editor value="#{bean.text}" rendered="#{rich:isUserInRole('admin')}" /&gt;</programlisting>
+		</example>
 	</section>
 
 </chapter>
