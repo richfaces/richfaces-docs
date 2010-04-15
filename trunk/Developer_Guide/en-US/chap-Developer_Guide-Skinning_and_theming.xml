@@ -832,8 +832,100 @@ generalSizeFont=12pt</programlisting>
 	<section id="sect-Developer_Guide-Skinning_and_theming-Extended_skinning">
 		<title>Plug-n-skin</title>
 		<para>
-			Incomplete
+			<emphasis>Plug-n-skin</emphasis> is an alternate method to create, customize, and add a skin. The skin can be based on an existing RichFaces skin, and can include support for skinning standard HTML controls.
 		</para>
+		<procedure id="proc-Developer_Guide-Skinning_and_theming-Using_plug-n-skin">
+			<title>Using plug-n-skin</title>
+			<step>
+				<title>Create a template</title>
+				<para>Use the <productname>Maven</productname> build and deployment tool to create the skin template by using the following command:</para>
+<screen>mvn archetype:create -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-plug-n-skin -DarchetypeVersion=<replaceable>RF-VERSION</replaceable> -DartifactId=<replaceable>ARTIFACT-ID</replaceable> -DgroupId=<replaceable>GROUP-ID</replaceable> -Dversion=<replaceable>VERSION</replaceable></screen>
+				<para>
+					Use the following keys for the command:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><parameter>archetypeVersion</parameter></term>
+						<listitem>
+							<para>
+								The version of RichFaces, for example, <literal>4.0.0.GA</literal>.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>artifactId</parameter></term>
+						<listitem>
+							<para>
+								The artifact identifier or name of the project. The Maven template will be created in a directory using this name.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>groupId</parameter></term>
+						<listitem>
+							<para>
+								The group identifier of the project.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>version</parameter></term>
+						<listitem>
+							<para>
+								The version of your project, for example, <literal>1.0</literal>.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</step>
+			<step>
+				<title>Add the skin to the CDK</title>
+				<para>Change to the newly-created directory. Ensure it contains the <filename>pom.xml</name> project file, then enter the following command to create a new skin and add it to the <acronym>CDK</acronym> (Component Development Kit):</para>
+<screen>mvn cdk:add-skin -Dname=<replaceable>SKIN-NAME</replaceable> -Dpackage=<replaceable>SKIN-PACKAGE</replaceable></screen>
+				<para>
+					Use the following keys for the command:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><parameter>name</parameter></term>
+						<listitem>
+							<para>
+								The name of your new skin.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>package</parameter></term>
+						<listitem>
+							<para>
+								The base package of the skin. By default, the group identifier is used.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				<para>
+					Use the following optional keys for advanced features:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><parameter>baseSkin</parameter></term>
+						<listitem>
+							<para>
+								The skin to use as a base for the new skin.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>createExt</parameter></term>
+						<listitem>
+							<para>
+								Use <code>createExt=true</code> to add extended CSS classes for skinning standard HTML controls.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</step>
+		</procedure>
 	</section>
 	
 	<section id="sect-Developer_Guide-Skinning_and_theming-Defining_skins_for_individual_components">
