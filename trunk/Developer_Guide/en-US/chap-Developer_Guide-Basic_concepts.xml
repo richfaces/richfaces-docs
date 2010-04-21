@@ -24,7 +24,7 @@
 			</listitem>
 			<listitem>
 				<para>
-					The <sgmltag>&lt;a4j:support&gt;</sgmltag> tag allows you to add Ajax functionality to standard JSF components and send Ajax request on a chosen JavaScript event, such as <varname>onkeyup</varname> or <varname>onmouseover</varname>, for example.
+					The <sgmltag>&lt;a4j:ajax&gt;</sgmltag> tag allows you to add Ajax functionality to standard JSF components and send Ajax request on a chosen JavaScript event, such as <varname>onkeyup</varname> or <varname>onmouseover</varname>, for example.
 				</para>
 			</listitem>
 			<listitem>
@@ -36,16 +36,18 @@
 	</section>
 	
 	<section id="sect-Developer_Guide-Basic_concepts-Receiving_events_and_updates">
-		<title>Receiving events and updates</title>
+		<title>Receiving events and client-side updates</title>
 		<para>
-			If no specific regions are specified, the whole page is updated when an Ajax response is received.
+			Updates are made only to those regions specified using the <varname>execute</varname>. If no specific regions are declared, the whole page is updated when an Ajax response is received.
 		</para>
+		<!--
 		<note>
 			<title>Rendering outside the active region</title>
 			<para>
 				If the content of an Ajax response needs to be rendered outside the active region, then the value of the <varname>renderRegionOnly</varname> attribute should be set to <literal>false</literal>. Otherwise, your Ajax updates are limited to elements of the active region. If not defined, the default setting is <code>renderRegionOnly="false"</code>.
 			</para>
 		</note>
+		-->
 		<section id="sect-Developer_Guide-Receiving_events_and_updates-Partial_page_updates">
 			<title>Partial page updates</title>
 			<para>
@@ -64,12 +66,14 @@
 
 	</section>
 	
+	<!--
 	<section id="sect-Developer_Guide-Basic_concepts-Processing_data_on_the_server">
 		<title>Processing data on the server</title>
 		<para>
 			Use the <varname>process</varname> attribute to list the <varname>id</varname> identifiers of components that need to be processed together with a requesting component. This can be useful if more than one component needs to be processed, but not the entire view. Alternatively if only one component needs to be processed instead of the entire view, <code>process="@this"</code> can be specified.
 		</para>
 	</section>
+	-->
 	
 	<section id="sect-Developer_Guide-Basic_concepts-Component_overview">
 		<title>Component overview</title>

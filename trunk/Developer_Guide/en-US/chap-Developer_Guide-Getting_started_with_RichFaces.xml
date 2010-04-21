@@ -44,7 +44,7 @@
 								</listitem>
 								<listitem>
 									<para>
-										Seam 1.2 &ndash; 2.1
+										Seam 1.2 and higher
 									</para>
 								</listitem>
 								<listitem>
@@ -75,11 +75,6 @@
 								<listitem>
 									<para>
 										JBoss 4.2 &ndash; 5.0
-									</para>
-								</listitem>
-								<listitem>
-									<para>
-										Jetty 6.1
 									</para>
 								</listitem>
 								<listitem>
@@ -130,7 +125,7 @@
 								</listitem>
 								<listitem>
 									<para>
-										Opera 8.5 and higher
+										Opera 9.5 and higher
 									</para>
 								</listitem>
 							</itemizedlist>
@@ -166,12 +161,12 @@
 								</listitem>
 								<listitem>
 									<para>
-										Internet Explorer 6.0 and higher
+										Internet Explorer 7.0 and higher
 									</para>
 								</listitem>
 								<listitem>
 									<para>
-										Opera 8.5 and higher
+										Opera 9.5 and higher
 									</para>
 								</listitem>
 								<listitem>
@@ -190,7 +185,7 @@
 	<section id="sect-Developer_Guide-Getting_started_with_RichFaces-Installing_RichFaces">
 		<title>Installing RichFaces</title>
 		<para>
-			Follow the instructions in this section to install the RichFaces framework on your computer.
+			Follow the instructions in this section to install the RichFaces framework and begin building applications.
 		</para>
 		<section id="sect-Developer_Guide-Installing_RichFaces-Downloading_RichFaces">
 			<title>Downloading RichFaces</title>
@@ -220,7 +215,7 @@
 			<step id="step-Developer_Guide-Creating_a_project-Create_a_new_project">
 				<title>Create a new project</title>
 				<para>
-					In <application>JBoss Tools</application>, select <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem><guimenuitem>JSF Project</guimenuitem></menuchoice> from the menu. Name the project, select <guilabel>JSF 2</guilabel> from the <guilabel>JSF Environment</guilabel> drop-down box, and click the <guibutton>Finish</guibutton> button to create the project.
+					Create a new project based on the JSF 2 environment by using the JSF Project wizard in <application>JBoss Tools</application>.
 				</para>
 			</step>
 			<step id="step-Developer_Guide-Creating_a_project-Add_the_RichFaces_libraries_to_the_project">
@@ -231,35 +226,35 @@
 				<note>
 					<title>Other required libraries</title>
 					<para>
-						RichFaces also requires the following libraries to be referenced in your project. Typically they are already included when creating a JSF project in <application>JBoss Tools</application>. 
-						<itemizedlist>
-							<listitem>
-								<para>
-									<filename>commons-beanutils.jar</filename>
-								</para>
-							</listitem>
-							<listitem>
-								<para>
-									<filename>commons-collections.jar</filename>
-								</para>
-							</listitem>
-							<listitem>
-								<para>
-									<filename>commons-digester.jar</filename>
-								</para>
-							</listitem>
-							<listitem>
-								<para>
-									<filename>commons-logging.jar</filename>
-								</para>
-							</listitem>
-							<listitem>
-								<para>
-									<filename>jhighlight.jar</filename>
-								</para>
-							</listitem>
-						</itemizedlist>
+						RichFaces also requires the following libraries to be referenced in your project. Typically they are already included when creating a JSF project in <application>JBoss Tools</application>. <remark>These dependencies need to be confirmed.</remark>
 					</para>
+					<itemizedlist>
+						<listitem>
+							<para>
+								<filename>commons-beanutils.jar</filename>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<filename>commons-collections.jar</filename>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<filename>commons-digester.jar</filename>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<filename>commons-logging.jar</filename>
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								<filename>jhighlight.jar</filename>
+							</para>
+						</listitem>
+					</itemizedlist>
 				</note>
 			</step>
 			<step id="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries">
@@ -292,7 +287,7 @@
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_required_repositories">
 				<title>Add required repositories</title>
 				<para>
-					A structure for the Maven project with minimal content can be created with the Maven archetype named <filename>maven-archetype-jsfwebapp</filename> included as part of the RichFaces Component Development Kit (<acronym>CDK</acronym>). The archetype and the project itself require extra repositories to be provided, namely <filename>http://snapshots.jboss.org/maven2/</filename> and <filename>http://repository.jboss.com/maven2/</filename>. To make the repositories accessible to Maven, add a profile in the <filename>maven_installation_folder/conf/settings.xml</filename> file under the <sgmltag>&lt;profiles&gt;</sgmltag> element:
+					A structure for the Maven project with minimal content can be created with the Maven archetype named <filename>maven-archetype-jsfwebapp</filename> <remark>(may be renamed in a later release)</remark> included as part of the RichFaces Component Development Kit (<acronym>CDK</acronym>). The archetype and the project itself require extra repositories to be provided, namely <filename>http://snapshots.jboss.org/maven2/</filename> and <filename>http://repository.jboss.com/maven2/</filename>. To make the repositories accessible to Maven, add a profile in the <filename>maven_installation_folder/conf/settings.xml</filename> file under the <sgmltag>&lt;profiles&gt;</sgmltag> element:
 				</para>
 				
 <programlisting language="XML" role="XML">&lt;profiles&gt;
@@ -342,7 +337,7 @@
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Generate_project_from_archetype">
 				<title>Generate project from archetype</title>
 				<para>
-					The project can now be generated with the <filename>maven-archetype-jsfwebapp</filename> archetype. Create a new directory for your project, then run the following Maven command: 
+					The project can now be generated with the <filename>maven-archetype-jsfwebapp</filename> <remark>(may be renamed in a later release)</remark> archetype. Create a new directory for your project, then run the following Maven command: 
 <screen>mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-jsfwebapp -DarchetypeVersion=4.0.0-SNAPSHOT -DgroupId=<replaceable>org.docs.richfaces</replaceable> -DartifactId=<replaceable>jsf-app</replaceable>
 </screen>
 				</para>
@@ -505,7 +500,7 @@
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_tag_library_references">
 				<title>Add tag library references</title>
 				<para>
-					After importing, edit the <filename><replaceable>jsf-app</replaceable>/src/main/webapp/pages/index.jsp</filename> file to include the tag library declaration as described in <xref linkend="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries" />
+					After importing, edit the <filename><replaceable>jsf-app</replaceable>/src/main/webapp/pages/index.xhtml</filename> file to include the tag library declaration as described in <xref linkend="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries" /> of <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project" />.
 				</para>
 			</step>
 		</procedure>

@@ -4,7 +4,7 @@
 <chapter id="chap-Developer_Guide-RichFaces_overview">
 	<title>RichFaces overview</title>
 	<para>
-		The RichFaces framework is a component library which adds Ajax capability into existing pages, such that you don't need to write any extra JavaScript code or replace any existing components with new Ajax widgets. RichFaces also enables page-wide Ajax support instead of the traditional component-wide support. Events can be defined on pages that invoke Ajax requests. After an Ajax request, the areas of a page that are synchronized with the JSF Component Tree can themselves change data on the server according to events fired on the client.
+		The RichFaces framework is a component library which enhances JSF Ajax capabilities, such that you don't need to write any extra JavaScript code or replace any existing components with new Ajax widgets. RichFaces also enables page-wide Ajax support instead of the traditional component-wide support. Events can be defined on pages that invoke Ajax requests. After an Ajax request, the areas of a page that are synchronized with the JSF Component Tree can themselves change data on the server according to events fired on the client.
 	</para>
 	<para>
 		<xref linkend="figu-Developer_Guide-RichFaces_overview-Request_processing_flow" /> illustrates how requests are processed in the RichFaces framework.
@@ -35,11 +35,6 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-						Ajax Filter
-					</para>
-				</listitem>
-				<listitem>
-					<para>
 						Ajax Action Components
 					</para>
 				</listitem>
@@ -61,6 +56,7 @@
 			</itemizedlist>
 			 Read this section for details on each element.
 		</para>
+		<!--
 		<section id="sect-Developer_Guide-Architecture-Ajax_Filter">
 			<title>Ajax Filter</title>
 			<para>
@@ -102,6 +98,7 @@
 				</mediaobject>
 			</figure>
 		</section>
+		-->
 		
 		<section id="sect-Developer_Guide-Architecture-Ajax_Action_Components">
 			<title>Ajax Action Components</title>
@@ -113,7 +110,7 @@
 		<section id="sect-Developer_Guide-Architecture-Ajax_Containers">
 			<title>Ajax Containers</title>
 			<para>
-				<classname>AjaxContainer</classname> is an interface that describes an area on a JSF page that is decoded during an Ajax request. <classname>AjaxViewRoot</classname> and <classname>AjaxRegion</classname> are implementations of this interface.
+				<classname>AjaxContainer</classname> <remark>(name possibly changed in release)</remark> is an interface that describes an area on a JSF page that is decoded during an Ajax request. <classname>AjaxViewRoot</classname> and <classname>AjaxRegion</classname> are implementations of this interface.
 			</para>
 		</section>
 		
@@ -149,8 +146,20 @@
 	<section id="sect-Developer_Guide-RichFaces_overview-Differences_between_JSF_and_RichFaces_mechanisms">
 		<title>Differences between <acronym>JSF</acronym> and RichFaces mechanisms</title>
 		<para>
-			JavaServer Faces (<acronym>JSF</acronym>) declares render and execute processes on the client side, while RichFaces declares server-side definitions of lists.
+			<remark>Needs additional clarification.</remark>
 		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					JavaServer Faces (<acronym>JSF</acronym>) declares render and execute processes on the client side, while RichFaces declares server-side definitions of lists. 
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					RichFaces components uses their own renderers. In the <emphasis>Render Response Phase</emphasis>, the RichFaces framework makes a traversal of the component tree, calls its own renderer, and passes the result to the Faces Response.
+				</para>
+			</listitem>
+		</itemizedlist>
 	</section>
 	
 	<section id="sect-Developer_Guide-RichFaces_overview-Restrictions">
@@ -160,7 +169,8 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-						Any Ajax framework should not append or delete elements on a page, but should instead replace them. For successful updates, an element with the same identifier as in the response must exist on the page. If it is necessary to append code to a page, include a placeholder for it (an empty element). For the same reason, it is recommended that messages be placed in the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component.
+						Any Ajax framework should not append or delete elements on a page, but should instead replace them. For successful updates, an element with the same identifier as in the response must exist on the page. If it is necessary to append code to a page, include a placeholder for it (an empty element).
+						<!-- For the same reason, it is recommended that messages be placed in the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component.-->
 					</para>
 				</listitem>
 				<listitem>
@@ -168,19 +178,16 @@
 						<sgmltag>&lt;f:verbatim&gt;</sgmltag> should not be used for self-rendered containers, since it is transient and not saved in the tree.
 					</para>
 				</listitem>
+				<!--
 				<listitem>
 					<para>
 						Ajax requests are made by XMLHTTPRequest functions in XML format, but this XML bypasses most validations and the corrections that might be made in a browser. As such, a strict standards-compliant code for HTML and XHTML should be used, without skipping any required elements or attributes. Any necessary XML corrections are automatically made by the XML filter on the server, but unexpected effects can be produced through incorrect HTML code.
 					</para>
 				</listitem>
+				-->
 				<listitem>
 					<para>
 						The RichFaces <classname>ViewHandler</classname> puts itself in front of the Facelets <classname>ViewHandlers</classname> chain.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						RichFaces components uses their own renderers. In the <emphasis>Render Response Phase</emphasis>, the RichFaces framework makes a traversal of the component tree, calls its own renderer, and passes the result to the Faces Response.
 					</para>
 				</listitem>
 			</itemizedlist>

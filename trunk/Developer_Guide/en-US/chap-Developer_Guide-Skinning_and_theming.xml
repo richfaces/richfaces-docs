@@ -89,7 +89,7 @@
 		<para>
 			To add one of these skins to your application, add the <literal>org.richfaces.SKIN</literal> context parameter to the <filename>web.xml</filename> configuration file:
 		</para>
-<programlisting language="XML" role="XML">&lt;context-param&gt;
+<programlisting>&lt;context-param&gt;
     &lt;param-name&gt;org.richfaces.SKIN&lt;/param-name&gt;
     &lt;param-value&gt;<replaceable>skin_name</replaceable>&lt;/param-value&gt;
 &lt;/context-param&gt;</programlisting>
@@ -176,7 +176,7 @@
 	<section id="sect-Developer_Guide-Skinning_and_theming-Skin_parameter_tables_in_RichFaces">
 		<title>Skin parameter tables in RichFaces</title>
 		<para>
-			<xref linkend="tabl-Developer_Guide-Skin_parameter_tables_in_RichFaces-Parameter_settings_for_the_blueSky_skin" /> lists the default values for the parameter settings in the <literal>blueSky</literal> skin. These values can be customized and extended for a unique application theme as described in <xref linkend="sect-Developer_Guide-Skinning_and-theming-Advanced_skinning" />.
+			<xref linkend="tabl-Developer_Guide-Skin_parameter_tables_in_RichFaces-Parameter_settings_for_the_blueSky_skin" /> lists the default values for the parameter settings in the <literal>blueSky</literal> skin. These values can be customized and extended for a unique application theme as described in <xref linkend="sect-Developer_Guide-Skinning_and_theming-Customizing_skins" />.
 		</para>
 		<table id="tabl-Developer_Guide-Skin_parameter_tables_in_RichFaces-Parameter_settings_for_the_blueSky_skin">
 			<title>Parameter settings for the <literal>blueSky</literal> skin</title>
@@ -478,17 +478,7 @@
 			<step>
 				<title>Create the skin bean</title>
 				<para>The skin bean is a simple interface to manage the skin:</para>
-<programlisting language="Java" role="JAVA">public class SkinBean {
-
-    private String skin;
-
-    public String getSkin() {
-        return skin;
-    }
-    public void setSkin(String skin) {
-        this.skin = skin;
-    }
-}</programlisting>
+<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-Create_the_skin_bean.js" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</step>
 			<step>
 				<title>Reference the skin bean</title>
@@ -641,13 +631,17 @@ generalSizeFont=12pt</programlisting>
 			<step>
 				<title>Reference skin definition</title>
 				<para>Add a skin definition <sgmltag>&lt;context-param&gt;</sgmltag> to the <filename>web.xml</filename> settings file of your application:</para>
-<programlisting language="XML" role="XML">&lt;context-param&gt;
+<programlisting>&lt;context-param&gt;
     &lt;param-name&gt;org.richfaces.SKIN&lt;/param-name&gt;
     &lt;param-value&gt;<replaceable>new_skin_name</replaceable>&lt;/param-value&gt;
 &lt;/context-param&gt;</programlisting>
 			</step>
 		</procedure>
-		<section id="sect-Developer_Guide-Skinning_and_Theming-Skinning_standard_JSF_components">
+	</section>
+	
+	<section id="sect-Developer_Guide-Skinning_and_theming-Skinning_standard_controls">
+		<title>Skinning standard controls</title>
+		<section id="sect-Developer_Guide-Skinning_and_theming-Skinning_standard_JSF_components">
 			<title>Skinning standard JSF components</title>
 			<para>
 				The RichFaces framework can also use skinning to theme JSF (JavaServer Faces) components in addition to RichFaces components. Follow these additional steps to skin JSF components.
@@ -656,7 +650,7 @@ generalSizeFont=12pt</programlisting>
 				<step>
 					<title>Register a custom render kit</title>
 					<para>The custom render kit is created by registering it in the <filename>faces-config.xml</filename> configuration file:</para>
-<programlisting language="XML" role="XML">&lt;render-kit&gt;
+<programlisting>&lt;render-kit&gt;
     &lt;render-kit-id&gt;<replaceable>new_skin_name</replaceable>&lt;/render-kit-id&gt;
     &lt;render-kit-class&gt;org.ajax4jsf.framework.renderer.ChameleonRenderKitImpl&lt;/render-kit-class&gt;
 &lt;/render-kit&gt;</programlisting>
@@ -664,7 +658,7 @@ generalSizeFont=12pt</programlisting>
 				<step>
 					<title>Register custom renderers for the JSF component</title>
 					<para>Add custom renderers in the <filename>faces-config.xml</filename> configuration file for each JSF component you want to skin:</para>
-<programlisting language="XML" role="XML">&lt;renderer&gt;
+<programlisting>&lt;renderer&gt;
     &lt;component-family&gt;javax.faces.Command&lt;/component-family&gt;
     &lt;renderer-type&gt;javax.faces.Link&lt;/renderer-type&gt;
     &lt;renderer-class&gt;<replaceable>new_skin_name</replaceable>.HtmlCommandLinkRenderer&lt;/renderer-class&gt;
@@ -676,137 +670,136 @@ generalSizeFont=12pt</programlisting>
 				</step>
 			</procedure>
 		</section>
-	</section>
-	
-	<section id="sect-Developer_Guide-Skinning_and_theming-Skinning_standard_HTML_controls">
-		<title>Skinning standard HTML controls</title>
-		<para>
-			Standard HTML controls and components used alongside RichFaces and JSF components can also be themed to create a cohesive user interface. The following HTML elements accept skinning:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<sgmltag>&lt;a&gt;</sgmltag> (including <sgmltag>a:hover</sgmltag>, <sgmltag>a:visited</sgmltag> and other elements)
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<sgmltag>&lt;fieldset&gt;</sgmltag>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<sgmltag>&lt;hr&gt;</sgmltag>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<sgmltag>&lt;input&gt;</sgmltag>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<sgmltag>&lt;isindex&gt;</sgmltag>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<sgmltag>&lt;keygen&gt;</sgmltag>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<sgmltag>&lt;legend&gt;</sgmltag>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<sgmltag>&lt;select&gt;</sgmltag>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<sgmltag>&lt;textarea&gt;</sgmltag>
-				</para>
-			</listitem>
-		</itemizedlist>
-		<para>
-			Skinning for standard HTML controls can be included in one of two ways:
-		</para>
-		<variablelist>
-			<varlistentry>
-				<term>Automatic skinning</term>
-				<listitem>
-					<para>
-						The skinning style properties are automatically applied to controls based on their element names and attribute types. Specify the <literal>org.richfaces.CONTROL_SKINNING</literal> context parameter in the <filename>web.xml</filename> configuration file:
-					</para>
-<programlisting language="XML" role="XML">&lt;context-param&gt;
-    &lt;param-name&gt;org.richfaces.CONTROL_SKINNING&lt;/param-name&gt;
-    &lt;param-value&gt;enable&lt;/param-value&gt;
-&lt;/context-param&gt;</programlisting>
-				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term>Skinning with CSS classes</term>
-				<listitem>
-					<para>
-						The skinning style properties are determined through CSS. This method is available by default, but can be disabled through the <literal>org.richfaces.CONTROL_SKINNING_CLASSES</literal> context parameter in the <filename>web.xml</filename> configuration file:
-					</para>
-<programlisting language="XML" role="XML">&lt;context-param&gt;
-    &lt;param-name&gt;org.richfaces.CONTROL_SKINNING_CLASSES&lt;/param-name&gt;
-    &lt;param-value&gt;disable&lt;/param-value&gt;
-&lt;/context-param&gt;</programlisting>
-					<para>
-						When enabled, the parameter offers a predefined CSS class named <literal>rich-container</literal>. Reference the class from any container-like component, and the standard HTML controls in the container will be skinned. Standard HTML controls can also be specifically defined in the CSS; refer to the <filename>org/richfaces/renderkit/html/css/basic_classes.xcss</filename> file in the <package>richfaces-ui.jar</package> package for examples of specially-defined CSS classes with skin parameters for HTML controls.
-					</para>
-				</listitem>
-			</varlistentry>
-		</variablelist>
-		<section id="sect-Developer_Guide-Skinning_and_theming-Skinning_levels_for_standard_HTML_controls">
-			<title>Skinning levels for standard HTML controls</title>
+		
+		<section id="sect-Developer_Guide-Skinning_and_theming-Skinning_standard_HTML_controls">
+			<title>Skinning standard HTML controls</title>
 			<para>
-				There are two levels of skinning for HTML controls, depending on whether the browser viewing the application includes rich visual styling capabilities, and whether the browser supports features of CSS2 and CSS3.
+				Standard HTML controls and components used alongside RichFaces and JSF components can also be themed to create a cohesive user interface. The following HTML elements accept skinning:
 			</para>
-			<remark>Browser lists may need to be updated.</remark>
 			<itemizedlist>
-				<title>Basic skinning</title>
 				<listitem>
 					<para>
-						<productname>Apple Safari</productname>
+						<sgmltag>&lt;a&gt;</sgmltag> (including <sgmltag>a:hover</sgmltag>, <sgmltag>a:visited</sgmltag> and other elements)
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<productname>Microsoft Internet Explorer 6</productname>
+						<sgmltag>&lt;fieldset&gt;</sgmltag>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<productname>Microsoft Internet Explorer 7</productname> in <literal>BackCompat</literal> mode (refer to <citetitle pubwork="article"><varname>compatMode</varname> Property</citetitle> at <ulink url="http://msdn.microsoft.com/en-us/library/ms533687(VS.85).aspx">http://msdn.microsoft.com/en-us/library/ms533687(VS.85).aspx</ulink>
+						<sgmltag>&lt;hr&gt;</sgmltag>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<productname>Opera</productname>
-					</para>
-				</listitem>
-			</itemizedlist>
-			<itemizedlist>
-				<title>Extended skinning</title>
-				<listitem>
-					<para>
-						<productname>Microsoft Internet Explorer 7</productname> in standards-compliant mode
+						<sgmltag>&lt;input&gt;</sgmltag>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<productname>Mozilla Firefox</productname>
+						<sgmltag>&lt;isindex&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;keygen&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;legend&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;select&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;textarea&gt;</sgmltag>
 					</para>
 				</listitem>
 			</itemizedlist>
 			<para>
-				If the browser type cannot be identified, the extended level is used. Set the level explicitly by adding the following context parameter to the <filename>web.xml</filename> configuration file, and specifying the <sgmltag>&lt;param-value&gt;</sgmltag> element as either <literal>basic</literal> or <literal>extended</literal>:
+				Skinning for standard HTML controls can be included in one of two ways:
 			</para>
+			<variablelist>
+				<varlistentry>
+					<term>Automatic skinning</term>
+					<listitem>
+						<para>
+							The skinning style properties are automatically applied to controls based on their element names and attribute types. Specify the <literal>org.richfaces.CONTROL_SKINNING</literal> context parameter in the <filename>web.xml</filename> configuration file:
+						</para>
+	<programlisting language="XML" role="XML">&lt;context-param&gt;
+		&lt;param-name&gt;org.richfaces.CONTROL_SKINNING&lt;/param-name&gt;
+		&lt;param-value&gt;enable&lt;/param-value&gt;
+	&lt;/context-param&gt;</programlisting>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Skinning with CSS classes</term>
+					<listitem>
+						<para>
+							The skinning style properties are determined through CSS. This method is available by default, but can be disabled through the <literal>org.richfaces.CONTROL_SKINNING_CLASSES</literal> context parameter in the <filename>web.xml</filename> configuration file:
+						</para>
+	<programlisting language="XML" role="XML">&lt;context-param&gt;
+		&lt;param-name&gt;org.richfaces.CONTROL_SKINNING_CLASSES&lt;/param-name&gt;
+		&lt;param-value&gt;disable&lt;/param-value&gt;
+	&lt;/context-param&gt;</programlisting>
+						<para>
+							When enabled, the parameter offers a predefined CSS class named <literal>rich-container</literal>. Reference the class from any container-like component, and the standard HTML controls in the container will be skinned. Standard HTML controls can also be specifically defined in the CSS; refer to the <filename>org/richfaces/renderkit/html/css/basic_classes.xcss</filename> file in the <package>richfaces-ui.jar</package> package for examples of specially-defined CSS classes with skin parameters for HTML controls.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<section id="sect-Developer_Guide-Skinning_and_theming-Skinning_levels_for_standard_HTML_controls">
+				<title>Skinning levels for standard HTML controls</title>
+				<para>
+					There are two levels of skinning for HTML controls, depending on whether the browser viewing the application includes rich visual styling capabilities, and whether the browser supports features of CSS2 and CSS3.
+				</para>
+				<remark>Browser lists may need to be updated.</remark>
+				<itemizedlist>
+					<title>Basic skinning</title>
+					<listitem>
+						<para>
+							<productname>Apple Safari</productname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<productname>Microsoft Internet Explorer 6</productname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<productname>Microsoft Internet Explorer 7</productname> in <literal>BackCompat</literal> mode (refer to <citetitle pubwork="article"><varname>compatMode</varname> Property</citetitle> at <ulink url="http://msdn.microsoft.com/en-us/library/ms533687(VS.85).aspx">http://msdn.microsoft.com/en-us/library/ms533687(VS.85).aspx</ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<productname>Opera</productname>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<itemizedlist>
+					<title>Extended skinning</title>
+					<listitem>
+						<para>
+							<productname>Microsoft Internet Explorer 7</productname> in standards-compliant mode
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<productname>Mozilla Firefox</productname>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>
+					If the browser type cannot be identified, the extended level is used. Set the level explicitly by adding the following context parameter to the <filename>web.xml</filename> configuration file, and specifying the <sgmltag>&lt;param-value&gt;</sgmltag> element as either <literal>basic</literal> or <literal>extended</literal>:
+				</para>
 <programlisting language="XML" role="XML">&lt;context-param&gt;
     &lt;param-name&gt;org.richfaces.CONTROL_SKINNING_LEVEL&lt;/param-name&gt;
     &lt;param-value&gt;basic&lt;/param-value&gt;
@@ -826,7 +819,53 @@ generalSizeFont=12pt</programlisting>
 				</step>
 			</procedure>
 -->
+			</section>
 		</section>
+	</section>
+	
+	<section id="sect-Developer_Guide-Skinning_and_theming-Defining_skins_for_individual_components">
+		<title>Defining skins for individual components</title>
+		<para>
+			RichFaces uses <acronym>XCSS</acronym> (XML-formatted CSS) files to add extra functionality to the skinning process. XCSS files can contain all the styling information for each RichFaces component in the library.
+		</para>
+		<para>
+			XCSS files contain mappings between CSS properties and skin parameters. The <varname>name</varname> attribute of the <sgmltag>&lt;u:selector&gt;</sgmltag> element is the name of the CSS selector. Each <sgmltag>&lt;u:style&gt;</sgmltag> element defines a CSS property with the <varname>name</varname> attribute as its name. Using the <varname>skin</varname> attribute specifies a skin parameter from the current skin file, while using the <varname>value</varname> attribute enters the literal value in the CSS file. An example of this is shown in <xref linkend="exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings" />.
+		</para>
+		<example id="exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings">
+			<title>XCSS style mappings</title>
+			<para>
+				The XCSS code for the CSS selector named <literal>.rich-component-name</literal> is as follows:
+			</para>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<para>
+				This renders the following CSS code to be read by a standard browser:
+			</para>
+<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings.css" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<para>
+				CSS selectors with identical skinning properties can be listed in a single <varname>name</varname> attribute of a <sgmltag>&lt;u:selector&gt;</sgmltag> element, separated by commas.
+			</para>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+		</example>
+		<para>
+			Style properties can be modified using XML-based XCSS code, or using embedded standard CSS code, as shown in <xref linkend="exam-Developer_Guide-Skinning_and_theming-Using_XCSS_code_or_standard_CSS_code" />
+		</para>
+		<example id="exam-Developer_Guide-Skinning_and_theming-Using_XCSS_code_or_standard_CSS_code">
+			<title>Using XCSS code or standard CSS code</title>
+			<formalpara>
+				<title>Using XCSS code</title>
+				<para>
+					XCSS code follows an XML structure, using <sgmltag>&lt;u:selector&gt;</sgmltag> elements to define style classes and <sgmltag>&lt;u:style&gt;</sgmltag> elements for each style parameter.
+				</para>
+			</formalpara>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-Using_XCSS_code_or_standard_CSS_code-XCSS.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<formalpara>
+				<title>Using standard CSS code</title>
+				<para>
+					CSS code can be included in an XCSS file through the use of a <sgmltag>&lt;f:verbatim&gt;</sgmltag> element with a character data (CDATA) section.
+				</para>
+			</formalpara>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-Using_XCSS_code_or_standard_CSS_code-CSS.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+		</example>
 	</section>
 	
 	<section id="sect-Developer_Guide-Skinning_and_theming-Extended_skinning">
@@ -834,14 +873,13 @@ generalSizeFont=12pt</programlisting>
 		<para>
 			<emphasis>Plug-n-skin</emphasis> is an alternate method to create, customize, and add a skin. The skin can be based on an existing RichFaces skin, and can include support for skinning standard HTML controls.
 		</para>
-		<procedure id="proc-Developer_Guide-Skinning_and_theming-Using_plug-n-skin">
-			<title>Using plug-n-skin</title>
+		<procedure>
 			<step>
 				<title>Create a template</title>
 				<para>Use the <productname>Maven</productname> build and deployment tool to create the skin template by using the following command:</para>
 <screen>mvn archetype:create -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-plug-n-skin -DarchetypeVersion=<replaceable>RF-VERSION</replaceable> -DartifactId=<replaceable>ARTIFACT-ID</replaceable> -DgroupId=<replaceable>GROUP-ID</replaceable> -Dversion=<replaceable>VERSION</replaceable></screen>
 				<para>
-					Use the following keys for the command:
+					Use the following parameters for the command:
 				</para>
 				<variablelist>
 					<varlistentry>
@@ -883,7 +921,7 @@ generalSizeFont=12pt</programlisting>
 				<para>Change to the newly-created directory. Ensure it contains the <filename>pom.xml</filename> project file, then enter the following command to create a new skin and add it to the <acronym>CDK</acronym> (Component Development Kit):</para>
 <screen>mvn cdk:add-skin -Dname=<replaceable>SKIN-NAME</replaceable> -Dpackage=<replaceable>SKIN-PACKAGE</replaceable></screen>
 				<para>
-					Use the following keys for the command:
+					Use the following parameters for the command:
 				</para>
 				<variablelist>
 					<varlistentry>
@@ -924,33 +962,100 @@ generalSizeFont=12pt</programlisting>
 						</listitem>
 					</varlistentry>
 				</variablelist>
+				<para>
+					The command creates the following files:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><filename>src/main/java/<replaceable>SKIN-PACKAGE</replaceable>/<replaceable>SKIN-NAME</replaceable>/images/BaseImage.java</filename></term>
+						<listitem>
+							<para>
+								The base class to store images.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><filename>src/test/java/<replaceable>SKIN-PACKAGE</replaceable>/<replaceable>SKIN-NAME</replaceable>/images/BaseImage.java</filename></term>
+						<listitem>
+							<para>
+								A test version of the base class to store images.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><filename>src/main/resources/<replaceable>SKIN-PACKAGE</replaceable>/<replaceable>SKIN-NAME</replaceable>/css/</filename></term>
+						<listitem>
+							<para>
+								The directory that holds the XCSS files that define the themes for RichFaces components affected by the new skin.
+							</para>
+							<para>
+								If the <code>createExt=true</code> parameter was used with the command, the following XCSS files are included for defining styles for standard HTML controls:
+							</para>
+							<itemizedlist>
+								<listitem>
+									<para>
+										<filename>extended_classes.xcss</filename>
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										<filename>extended.xcss</filename>
+									</para>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><filename>src/main/resources/<replaceable>SKIN-PACKAGE</replaceable>/<replaceable>SKIN-NAME</replaceable>/css/<replaceable>SKIN-NAME</replaceable>.properties</filename></term>
+						<listitem>
+							<para>
+								The file that contains the skin properties.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><filename>src/main/resources/META-INF/skins/<replaceable>SKIN-NAME</replaceable>.xcss</filename></term>
+						<listitem>
+							<para>
+								A global XCSS file that imports the component-specific XCSS files.
+							</para>
+							<para>
+								If the <code>createExt=true</code> parameter was used with the command, the following <filename><replaceable>skin-name</replaceable>-ext.xcss</filename> file is included, which imports the XCSS files for standard HTML controls.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><filename>src/main/config/resources/<replaceable>SKIN-NAME</replaceable>-resources.xml</filename></term>
+						<listitem>
+							<para>
+								The file that contains the description of all the files listed above.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</step>
+			<step>
+				<title>Edit XCSS files</title>
+				<para>
+					Edit the XCSS files contained in the <filename>src/main/resources/META-INF/skins/</filename> directory. Refer to <xref linkend="sect-Developer_Guide-Skinning_and_theming-Defining_skins_for_individual_components" /> for instructions on how to edit XCSS files.
+				</para>
+			</step>
+			<step>
+				<title>Build the skin</title>
+				<para>
+					After editing the XCSS files, build the skin by running the following command in the root directory of your skin project (the directory that contains the <filename>pom.xml</filename> file).
+				</para>
+<screen>mvn clean install</screen>
+			</step>
+			<step>
+				<title>Add the skin to the project configuration</title>
+				<para>Add the following context parameter to your project's <filename>web.xml</filename> configuration file to use the new skin in your application:</para>
+<programlisting>&lt;context-param&gt;
+    &lt;param-name&gt;org.ajax4jsf.SKIN&lt;/param-name&gt;
+    &lt;param-value&gt;<replaceable>SKIN-NAME</replaceable>&lt;/param-value&gt;
+&lt;/context-param&gt;</programlisting>
 			</step>
 		</procedure>
-	</section>
-	
-	<section id="sect-Developer_Guide-Skinning_and_theming-Defining_skins_for_individual_components">
-		<title>Defining skins for individual components</title>
-		<para>
-			RichFaces uses <acronym>XCSS</acronym> (XML-formatted CSS) files to add extra functionality to the skinning process. XCSS files can contain all the styling information for each RichFaces component in the library.
-		</para>
-		<para>
-			XCSS files contain mappings between CSS properties and skin parameters. The <varname>name</varname> attribute of the <sgmltag>&lt;u:selector&gt;</sgmltag> element is the name of the CSS selector. Each <sgmltag>&lt;u:style&gt;</sgmltag> element defines a CSS property with the <varname>name</varname> attribute as its name. Using the <varname>skin</varname> attribute specifies a skin parameter from the current skin file, while using the <varname>value</varname> attribute enters the literal value in the CSS file. An example of this is shown in <xref linkend="exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings" />.
-		</para>
-		<example id="exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings">
-			<title>XCSS style mappings</title>
-			<para>
-				The XCSS code for the CSS selector named <literal>.rich-component-name</literal> is as follows:
-			</para>
-<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			<para>
-				This renders the following CSS code to be read by a standard browser:
-			</para>
-<programlisting language="CSS" role="CSS"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings.css" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			<para>
-				CSS selectors with identical skinning properties can be listed in a single <varname>name</varname> attribute of a <sgmltag>&lt;u:selector&gt;</sgmltag> element, separated by commas.
-			</para>
-<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-		</example>
 	</section>
 
 </chapter>
