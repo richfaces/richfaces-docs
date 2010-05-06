@@ -215,7 +215,7 @@
 			<step id="step-Developer_Guide-Creating_a_project-Create_a_new_project">
 				<title>Create a new project</title>
 				<para>
-					Create a new project based on the JSF 2 environment by using the JSF Project wizard in <application>JBoss Tools</application>.
+					Create a new project based on the JSF 2 environment. In <application>JBoss Tools</application>, select <menuchoice><guimenu>File</guimenu><guimenu>New</guimenu><guimenuitem>JSF Project</guimenuitem></menuchoice> from the menu. Name the project, select <guilabel>JSF 2</guilabel> from the <guilabel>JSF Environment</guilabel> drop-down box, and click the <guibutton>Finish</guibutton> button to create the project.
 				</para>
 			</step>
 			<step id="step-Developer_Guide-Creating_a_project-Add_the_RichFaces_libraries_to_the_project">
@@ -226,7 +226,7 @@
 				<note>
 					<title>Other required libraries</title>
 					<para>
-						RichFaces also requires the following libraries to be referenced in your project. Typically they are already included when creating a JSF project in <application>JBoss Tools</application>. <remark>These dependencies need to be confirmed.</remark>
+						RichFaces also requires the following libraries to be referenced in your project. Typically they are already included when creating a JSF project in <application>JBoss Tools</application>.
 					</para>
 					<itemizedlist>
 						<listitem>
@@ -287,44 +287,10 @@
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_required_repositories">
 				<title>Add required repositories</title>
 				<para>
-					A structure for the Maven project with minimal content can be created with the Maven archetype named <filename>maven-archetype-jsfwebapp</filename> <remark>(may be renamed in a later release)</remark> included as part of the RichFaces Component Development Kit (<acronym>CDK</acronym>). The archetype and the project itself require extra repositories to be provided, namely <filename>http://snapshots.jboss.org/maven2/</filename> and <filename>http://repository.jboss.com/maven2/</filename>. To make the repositories accessible to Maven, add a profile in the <filename>maven_installation_folder/conf/settings.xml</filename> file under the <sgmltag>&lt;profiles&gt;</sgmltag> element:
+					A structure for the Maven project with minimal content can be created with the Maven archetype named <filename>maven-archetype-jsfwebapp</filename> <remark>(may be renamed in a later release)</remark> included as part of the RichFaces Component Development Kit (<acronym>CDK</acronym>). The archetype and the project itself require the JBoss repository to be provided (<filename>https://repository.jboss.org/nexus/content/groups/public/</filename>). To make the repositories accessible to Maven, add a profile in the <filename><replaceable>maven_installation_folder</replaceable>/conf/settings.xml</filename> file under the <sgmltag>&lt;profiles&gt;</sgmltag> element:
 				</para>
 				
-<programlisting language="XML" role="XML">&lt;profiles&gt;
-    &lt;profile&gt;
-        &lt;id&gt;jsf-app-profile&lt;/id&gt;
-        &lt;repositories&gt;
-            &lt;repository&gt;
-                &lt;releases&gt;
-                    &lt;enabled&gt;true&lt;/enabled&gt;
-                &lt;/releases&gt;
-                &lt;snapshots&gt;
-                    &lt;enabled&gt;true&lt;/enabled&gt;
-                    &lt;updatePolicy&gt;always&lt;/updatePolicy&gt;
-                &lt;/snapshots&gt;
-                &lt;id&gt;snapshots.jboss.org&lt;/id&gt;
-                &lt;name&gt;Snapshot Jboss Repository for Maven&lt;/name&gt;
-                &lt;url&gt;http://snapshots.jboss.org/maven2/&lt;/url&gt;
-                &lt;layout&gt;default&lt;/layout&gt;
-            &lt;/repository&gt;
-            &lt;repository&gt;
-                &lt;releases&gt;
-                    &lt;enabled&gt;true&lt;/enabled&gt;
-                &lt;/releases&gt;
-                &lt;snapshots&gt;
-                    &lt;enabled&gt;true&lt;/enabled&gt;
-                    &lt;updatePolicy&gt;always&lt;/updatePolicy&gt;
-                &lt;/snapshots&gt;
-                &lt;id&gt;repository.jboss.com&lt;/id&gt;
-                &lt;name&gt;Jboss Repository for Maven&lt;/name&gt;
-                &lt;url&gt;http://repository.jboss.com/maven2/&lt;/url&gt;
-                &lt;layout&gt;default&lt;/layout&gt;
-            &lt;/repository&gt;
-        &lt;/repositories&gt;
-    &lt;/profile&gt;
-    ...
-&lt;/profiles&gt;
-</programlisting>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_RichFaces_with_Maven-Add_required_repositories.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				<para>
 					The profile then needs to be activated in the <sgmltag>&lt;activeProfiles&gt;</sgmltag> element:
 				</para>
@@ -396,106 +362,25 @@
 					The <filename>jsf-app</filename> directory contains a project descriptor file, <filename>pom.xml</filename>. To add RichFaces libraries to your project, edit the project descriptor to add dependencies to the <sgmltag>&lt;dependencies&gt;</sgmltag> element as follows:
 				</para>
 				
-<programlisting language="XML" role="XML">&lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;junit&lt;/groupId&gt;
-        &lt;artifactId&gt;junit&lt;/artifactId&gt;
-        &lt;version&gt;3.8.1&lt;/version&gt;
-        &lt;scope&gt;test&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-        &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
-        &lt;version&gt;2.4&lt;/version&gt;
-        &lt;scope&gt;provided&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-        &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;
-        &lt;version&gt;2.0&lt;/version&gt;
-        &lt;scope&gt;provided&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;jstl&lt;/groupId&gt;
-        &lt;artifactId&gt;jstl&lt;/artifactId&gt;
-        &lt;version&gt;1.1.2&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
-        &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;
-        &lt;version&gt;2.1&lt;/version&gt;
-        &lt;scope&gt;provided&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.faces&lt;/groupId&gt;
-        &lt;artifactId&gt;jsf-api&lt;/artifactId&gt;
-        &lt;version&gt;1.2_12&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.faces&lt;/groupId&gt;
-        &lt;artifactId&gt;jsf-impl&lt;/artifactId&gt;
-        &lt;version&gt;1.2_12&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.el&lt;/groupId&gt;
-        &lt;artifactId&gt;el-api&lt;/artifactId&gt;
-        &lt;version&gt;1.0&lt;/version&gt;
-        &lt;scope&gt;provided&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;el-impl&lt;/groupId&gt;
-        &lt;artifactId&gt;el-impl&lt;/artifactId&gt;
-        &lt;version&gt;1.0&lt;/version&gt;
-        &lt;scope&gt;provided&lt;/scope&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;javax.annotation&lt;/groupId&gt;
-        &lt;artifactId&gt;jsr250-api&lt;/artifactId&gt;
-        &lt;version&gt;1.0&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;!-- RichFaces libraries --&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.richfaces.framework&lt;/groupId&gt;
-        &lt;artifactId&gt;richfaces-api&lt;/artifactId&gt;
-        &lt;version&gt;4.0.0&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.richfaces.framework&lt;/groupId&gt;
-        &lt;artifactId&gt;richfaces-impl&lt;/artifactId&gt;
-        &lt;version&gt;4.0.0&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;org.richfaces.ui&lt;/groupId&gt;
-        &lt;artifactId&gt;richfaces-ui&lt;/artifactId&gt;
-        &lt;version&gt;4.0.0&lt;/version&gt;
-    &lt;/dependency&gt;
-&lt;/dependencies&gt;
-</programlisting>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_RichFaces_with_Maven-Add_dependencies.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</step>
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Build_the_project">
 				<title>Build the project</title>
-				<stepalternatives>
-					<step id="step-Developer_Guide-Build_the_project-Standard_building">
-						<title>Standard building</title>
-						<para>
-							Build the project from the command line by entering the <command>mvn install</command> command.
-						</para>
-						<para>
-							The <computeroutput>BUILD SUCCESSFUL</computeroutput> message indicates the project has been assembled and is ready to import into an IDE (integrated development environment) and run on a server.
-						</para>
-					</step>
-					<step id="step-Developer_Guide-Build_the_project-Building_for_Eclipse_and_JBoss_Tools">
-						<title>Building for <application>Eclipse</application> and <application>JBoss Tools</application></title>
-						<para>
-							To build the project for <application>Eclipse</application> and <application>JBoss Tools</application>, enter the following command at the command line: 
-<screen>mvn eclipse:eclipse -Dwtpversion=2.0
-</screen>
-						</para>
-						<para>
-							The <computeroutput>BUILD SUCCESSFUL</computeroutput> message indicates the project has been assembled and is ready to import into <application>Eclipse</application>.
-						</para>
-					</step>
-				</stepalternatives>
+				<para>
+					Build the project from the command line by entering the <command>mvn install</command> command.
+				</para>
+				<para>
+					The <computeroutput>BUILD SUCCESSFUL</computeroutput> message indicates the project has been assembled and is ready to import into an IDE (integrated development environment).
+				</para>
+			</step>
+			<step id="step-Developer_Guide-Build_the_project-Building_for_Eclipse_and_JBoss_Tools">
+				<title>Import the project into an IDE</title>
+				<para>
+					Import the Maven project into your IDE.
+				</para>
+				<para>
+					For <application>Eclipse</application> and <application>JBoss Tools</application>, you need to have the <productname>M2Eclipse</productname> plug-in installed. You can then import the <application>Maven</application> project through a wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <guilabel>Maven Projects</guilabel> as the input source and choose the <filename>pom.xml</filename> file for your project.
+				</para>
 			</step>
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_tag_library_references">
 				<title>Add tag library references</title>
