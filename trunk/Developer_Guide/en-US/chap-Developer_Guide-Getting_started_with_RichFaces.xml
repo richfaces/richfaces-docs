@@ -296,74 +296,108 @@
 				</para>
 				
 <programlisting language="XML" role="XML">&lt;activeProfiles&gt;
-	&lt;activeProfile&gt;jsf-app-profile&lt;/activeProfile&gt;
+    &lt;activeProfile&gt;jboss-public-repository&lt;/activeProfile&gt;
 &lt;/activeProfiles&gt;
 </programlisting>
 			</step>
-			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Generate_project_from_archetype">
-				<title>Generate project from archetype</title>
+			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Generate_the_project_from_the_archetype">
+				<title>Generate the project from the archetype</title>
+				
+<!--
+<remark>ONCE 4.0 ARCHETYPE IS COMPLETE:</remark>
 				<para>
-					The project can now be generated with the <filename>maven-archetype-jsfwebapp</filename> <remark>(may be renamed in a later release)</remark> archetype. Create a new directory for your project, then run the following Maven command: 
-<screen>mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-jsfwebapp -DarchetypeVersion=4.0.0-SNAPSHOT -DgroupId=<replaceable>org.docs.richfaces</replaceable> -DartifactId=<replaceable>jsf-app</replaceable>
-</screen>
+					The project can now be generated with the <filename>maven-archetype-jsfwebapp</filename> <remark>(may be renamed in a later release)</remark> archetype. Create a new directory for your project, then run the following Maven command:
 				</para>
+<screen>mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-jsfwebapp -DarchetypeVersion=4.0.0-SNAPSHOT -DgroupId=<replaceable>org.docs.richfaces</replaceable> -DartifactId=<replaceable>jsf-app</replaceable></screen>
+-->
+
 				<para>
-					The following parameters can be used to customize your project: 
-					<variablelist>
-						<varlistentry>
-							<term><command>-DgroupId</command></term>
-							<listitem>
-								<para>
-									Defines the package for the Managed Beans
-								</para>
-							</listitem>
-						</varlistentry>
-						<varlistentry>
-							<term><command>-DartifactId</command></term>
-							<listitem>
-								<para>
-									Defines the name of the project
-								</para>
-							</listitem>
-						</varlistentry>
-					</variablelist>
+					The project can now be generated with the <filename>maven-archetype-jsfwebapp</filename> archetype. The archetype for RichFaces 4.0 is still in development; use the archetype for RichFaces 3.3.3 to generate a project until the 4.0 archetype is released. Create a new directory for your project, then run the following Maven command:
 				</para>
+<screen>mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-jsfwebapp -DarchetypeVersion=3.3.3-SNAPSHOT -DgroupId=<replaceable>org.docs.richfaces</replaceable> -DartifactId=<replaceable>jsf-app</replaceable></screen>
 				<para>
-					The command generates a JSF project with the following structure: 
+					The following parameters can be used to customize your project:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><command>-DgroupId</command></term>
+						<listitem>
+							<para>
+								Defines the package for the Managed Beans
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><command>-DartifactId</command></term>
+						<listitem>
+							<para>
+								Defines the name of the project
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				<para>
+					The command generates a JSF project with the following structure:
+				</para>
 <screen><replaceable>jsf-app</replaceable>
-├── pom.xml
-└── src
-    ├── main
-    │   ├── java
-    │   │   └── org
-    │   │       └── docs
-    │   │           └── richfaces
-    │   │               └── Bean.java
-    │   ├── resources
-    │   └── webapp
-    │       ├── WEB-INF
-    │       │   ├── faces-config.xml
-    │       │   └── web.xml
-    │       ├── index.xhtml
-    │       └── pages
-    │           └── index.xhtml
-    └── test
-        └── java
-            └── org
-                └── docs
-                    └── richfaces
-                        └── BeanTest.java
-</screen>
-				</para>
+├── <filename>pom.xml</filename>
+└── <filename>src</filename>
+    ├── <filename>main</filename>
+    │   ├── <filename>java</filename>
+    │   │   └── <filename>org</filename>
+    │   │       └── <filename>docs</filename>
+    │   │           └── <filename>richfaces</filename>
+    │   │               └── <filename>Bean.java</filename>
+    │   ├── <filename>resources</filename>
+    │   └── <filename>webapp</filename>
+    │       ├── <filename>WEB-INF</filename>
+    │       │   ├── <filename>faces-config.xml</filename>
+    │       │   └── <filename>web.xml</filename>
+    │       ├── <filename>index.xhtml</filename>
+    │       └── <filename>pages</filename>
+    │           └── <filename>index.xhtml</filename>
+    └── <filename>test</filename>
+        └── <filename>java</filename>
+            └── <filename>org</filename>
+                └── <filename>docs</filename>
+                    └── <filename>richfaces</filename>
+                        └── <filename>BeanTest.java</filename></screen>
 			</step>
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_dependencies">
 				<title>Add dependencies</title>
 				<para>
-					The <filename>jsf-app</filename> directory contains a project descriptor file, <filename>pom.xml</filename>. To add RichFaces libraries to your project, edit the project descriptor to add dependencies to the <sgmltag>&lt;dependencies&gt;</sgmltag> element as follows:
+					Your root directory of your project contains a project descriptor file, <filename>pom.xml</filename>. To add RichFaces libraries to your project, edit the project descriptor to add dependencies to the <sgmltag>&lt;dependencies&gt;</sgmltag> element as follows:
 				</para>
 				
 <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_RichFaces_with_Maven-Add_dependencies.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</step>
+			
+<!--
+<remark>REMOVE ONCE 4.0 ARCHETYPE IS COMPLETE</remark>
+-->
+			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Update_the_generated_project">
+				<title>Update the generated project</title>
+				<para>
+					After the project has been generated from the old archetype, it must be updated to use RichFaces &VERSION; and JSF 2.
+				</para>
+				<substeps>
+					<step>
+						<title>Replace <filename>index.jsp</filename> pages</title>
+						<para>
+							RichFaces &VERSION; does not support JSP. Any <filename>index.jsp</filename> pages that were generated must be replaced with <filename>index.xhtml</filename> page equivalents.
+						</para>
+					</step>
+					<step>
+						<title>Deactivate the VDL view handler</title>
+						<para>
+							The <acronym>VDL</acronym> (View Definition Language) view handler must be deactivated for your project to work with JSF 2. To deactivate the viewhandler, edit the project's <filename>web.xml</filename> settings file with the following context parameter:
+						</para>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_RichFaces_with_Maven-Update_the_generated_project.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					</step>
+				</substeps>
+			</step>
+			
+			
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Build_the_project">
 				<title>Build the project</title>
 				<para>
