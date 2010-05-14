@@ -32,11 +32,13 @@
 						<para>
 							RichFaces supports the following JSF implementations and frameworks: 
 							<itemizedlist>
+								<!--
 								<listitem>
 									<para>
 										Facelets 1.1.1 &#8211; 1.2
 									</para>
 								</listitem>
+								-->
 								<listitem>
 									<para>
 										MyFaces 1.2.5
@@ -47,11 +49,13 @@
 										Seam 1.2 and higher
 									</para>
 								</listitem>
+								<!--
 								<listitem>
 									<para>
 										Sun JSF-RI 1.2_12
 									</para>
 								</listitem>
+								-->
 							</itemizedlist>
 						</para>
 					</listitem>
@@ -197,9 +201,15 @@
 			</para>
 			<section id="sect-Developer_Guide-Downloading_RichFaces-Compiling_the_source">
 				<title>Compiling the source</title>
+				<!-- Update download location in Enterprise docs, or remove this section altogether -->
 				<para>
 					Instead of downloading the pre-compiled binaries, you can download the source files and compile them yourself. Download the source files (also available in <filename class="extension">.bin.zip</filename> or <filename class="extension">.bin.tar.gz</filename> archives) from the JBoss RichFaces Downloads area at <ulink url="http://www.jboss.org/richfaces/download.html">http://www.jboss.org/richfaces/download.html</ulink>.
 				</para>
+				<!-- Remove SVN details in Enterprise docs -->
+				<para>
+					Alternatively, the source files can be downloaded from the anonymous SVN repository at <ulink url="http://anonsvn.jboss.org/repos/richfaces/root/">http://anonsvn.jboss.org/repos/richfaces/root/</ulink> using the following command:
+				</para>
+<screen>svn co http://anonsvn.jboss.org/repos/richfaces/root/</screen>
 			</section>
 
 		</section>
@@ -223,6 +233,7 @@
 				<para>
 					Add <filename>core-ui.jar</filename>, <filename>richfaces-api.jar</filename>, and <filename>richfaces-impl.jar</filename> into your project by dragging them from the location where you unzipped the RichFaces archive to the <filename>WebContent/WEB-INF/lib/</filename> directory of your project in <application>JBoss Tools</application>.
 				</para>
+				<!--
 				<note>
 					<title>Other required libraries</title>
 					<para>
@@ -256,6 +267,7 @@
 						</listitem>
 					</itemizedlist>
 				</note>
+				-->
 			</step>
 			<step id="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries">
 				<title>Reference the tag libraries</title>
@@ -370,6 +382,11 @@
 				</para>
 				
 <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_RichFaces_with_Maven-Add_dependencies.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				
+				<!-- Remove the following for Enterprise documentation -->
+				<para>
+					If you wish to include modules for test-driven JSF development, add any dependencies for the tests to the <filename>pom.xml</filename> file. For full details on how to use the <productname>jsf-test</productname> project, refer to <ulink url="http://community.jboss.org/docs/DOC-13155">http://community.jboss.org/wiki/TestDrivenJSFDevelopment</ulink>.
+				</para>
 			</step>
 			
 <!--
@@ -380,13 +397,11 @@
 				<para>
 					After the project has been generated from the old archetype, it must be updated to use RichFaces &VERSION; and JSF 2.
 				</para>
+				<para>
+					RichFaces &VERSION; uses Facelets and does not support JSP. Any <filename>index.jsp</filename> pages that were generated need to forward <filename>home.jsf</filename> page equivalents.
+				</para>
+				<!--
 				<substeps>
-					<step>
-						<title>Replace <filename>index.jsp</filename> pages</title>
-						<para>
-							RichFaces &VERSION; does not support JSP. Any <filename>index.jsp</filename> pages that were generated must be replaced with <filename>index.xhtml</filename> page equivalents.
-						</para>
-					</step>
 					<step>
 						<title>Deactivate the VDL view handler</title>
 						<para>
@@ -395,8 +410,8 @@
 <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_RichFaces_with_Maven-Update_the_generated_project.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 					</step>
 				</substeps>
+				-->
 			</step>
-			
 			
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Build_the_project">
 				<title>Build the project</title>
@@ -407,21 +422,39 @@
 					The <computeroutput>BUILD SUCCESSFUL</computeroutput> message indicates the project has been assembled and is ready to import into an IDE (integrated development environment).
 				</para>
 			</step>
+			
 			<step id="step-Developer_Guide-Build_the_project-Building_for_Eclipse_and_JBoss_Tools">
 				<title>Import the project into an IDE</title>
 				<para>
-					Import the Maven project into your IDE.
+					Import the Maven project into your IDE. For <application>Eclipse</application> and <application>JBoss Tools</application>, you can either use <application>Maven</application> to prepare the project, or import the project using the <productname>M2Eclipse</productname> plug-in.
 				</para>
-				<para>
-					For <application>Eclipse</application> and <application>JBoss Tools</application>, you need to have the <productname>M2Eclipse</productname> plug-in installed. You can then import the <application>Maven</application> project through a wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <guilabel>Maven Projects</guilabel> as the input source and choose the <filename>pom.xml</filename> file for your project.
-				</para>
+				<stepalternatives>
+					<step>
+						<title>Using <application>Maven</application> to prepare the project for <application>Eclipse</application></title>
+						<para>
+							Enter the following command in the root directory of the project:
+						</para>
+<screen>mvn eclipse:eclipse -DdownloadSources=true -Dwtpversion=2.0</screen>
+						<para>
+							The command generates the required <application>Eclipse</application> project files. You can then import the project into <application>Eclipse</application> and <application>JBoss Tools</application> through the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>General</guimenu><guimenuitem>Existing Projects into Workspace</guimenuitem></menuchoice> as the import source and choose the root directory for your project.
+						</para>
+					</step>
+					<step>
+						<title>Using the <productname>M2Eclipse</productname> plug-in</title>
+						<para>
+							Alternatively, you can import a <application>Maven</application> project into <application>Eclipse</application> and <application>JBoss Tools</application> using the <productname>M2Eclipse</productname> plug-in. With the plug-in installed, open the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>Maven</guimenu><guimenuitem>Existing Maven Projects</guimenuitem></menuchoice> as the import source and choose the <filename>pom.xml</filename> file for your project.
+						</para>
+					</step>
+				</stepalternatives>
 			</step>
+			<!--
 			<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_tag_library_references">
 				<title>Add tag library references</title>
 				<para>
 					After importing, edit the <filename><replaceable>jsf-app</replaceable>/src/main/webapp/pages/index.xhtml</filename> file to include the tag library declaration as described in <xref linkend="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries" /> of <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project" />.
 				</para>
 			</step>
+			-->
 		</procedure>
 		
 		<para>
