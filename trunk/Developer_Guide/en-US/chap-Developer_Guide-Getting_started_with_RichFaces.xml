@@ -167,11 +167,17 @@
 		</section>
 		<section id="sect-Component_Reference-Using_RichFaces_with_Maven-Using_the_RichFaces_project_archetype">
 			<title>Using the <productname>RichFaces</productname> project archetype</title>
+			<para>
+				A Maven archetype is a template for creating projects. <productname>Maven</productname> uses an archetype to generate a directory structure and files for a particular project, as well as creating <filename>pom.xml</filename> files that contain build instructions.
+			</para>
+			<para>
+				The RichFaces Component Development Kit includes a Maven archetype for generating the basic structure and requirements for a RichFaces application project. The archetype is named <filename>richfaces-archetype-simpleapp</filename> and is included as part of the RichFaces Component Development Kit (<acronym>CDK</acronym>), but Maven can obtain it from the JBoss repository at <filename>https://repository.jboss.org/nexus/content/groups/public/</filename>. Follow the procedure in this section to generate a new Maven-based RichFaces project using the archetype.
+			</para>
 			<procedure>
 				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_required_repositories">
-					<title>Add required repositories</title>
+					<title>Add required repository</title>
 					<para>
-						A structure for the project with minimal content can be created with the Maven archetype named <filename>maven-archetype-jsfwebapp</filename> <remark>(may be renamed in a later release)</remark> included as part of the RichFaces Component Development Kit (<acronym>CDK</acronym>). The archetype and the project itself require the JBoss repository to be provided (<filename>https://repository.jboss.org/nexus/content/groups/public/</filename>). To make the repositories accessible to Maven, add a profile in the <filename><replaceable>maven_installation_folder</replaceable>/conf/settings.xml</filename> file under the <sgmltag>&lt;profiles&gt;</sgmltag> element:
+						 The details for the JBoss repository need to be added to <productname>Maven</productname> so it can access the archetype. Add a profile in the <filename><replaceable>maven_installation_folder</replaceable>/conf/settings.xml</filename> file under the <sgmltag>&lt;profiles&gt;</sgmltag> element:
 					</para>
 				
 	<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_RichFaces_with_Maven-Add_required_repositories.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
@@ -185,19 +191,17 @@
 				</step>
 				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Generate_the_project_from_the_archetype">
 					<title>Generate the project from the archetype</title>
-				
-	<!--
-	<remark>ONCE 4.0 ARCHETYPE IS COMPLETE:</remark>
 					<para>
-						The project can now be generated with the <filename>maven-archetype-jsfwebapp</filename> <remark>(may be renamed in a later release)</remark> archetype. Create a new directory for your project, then run the following Maven command:
+						The project can now be generated with the <filename>richfaces-archetype-simpleapp</filename> archetype. Create a new directory for your project, then run the following Maven command in the directory:
 					</para>
-	<screen>mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-jsfwebapp -DarchetypeVersion=4.0.0-SNAPSHOT -DgroupId=<replaceable>org.docs.richfaces</replaceable> -DartifactId=<replaceable>jsf-app</replaceable></screen>
-	-->
+	<screen>mvn archetype:generate -DarchetypeGroupId=org.richfaces.archetypes -DarchetypeArtifactId=richfaces-archetype-simpleapp -DarchetypeVersion=4.0.0-SNAPSHOT -DgroupId=<replaceable>org.docs.richfaces</replaceable> -DartifactId=<replaceable>new_project</replaceable></screen>
 
+<!--
 					<para>
-						The project can now be generated with the <filename>maven-archetype-jsfwebapp</filename> archetype. The archetype for <productname>RichFaces 4.0</productname> is still in development; use the archetype for <productname>RichFaces 3.3.3</productname> to generate a project until the 4.0 archetype is released. Create a new directory for your project, then run the following Maven command:
+						The project can now be generated with the <filename>richfaces-archetype-simpleapp</filename> archetype. The archetype for <productname>RichFaces 4.0</productname> is still in development; use the archetype for <productname>RichFaces 3.3.3</productname> to generate a project until the 4.0 archetype is released. Create a new directory for your project, then run the following Maven command:
 					</para>
 	<screen>mvn archetype:generate -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-jsfwebapp -DarchetypeVersion=3.3.3-SNAPSHOT -DgroupId=<replaceable>org.docs.richfaces</replaceable> -DartifactId=<replaceable>jsf-app</replaceable></screen>
+-->
 					<para>
 						The following parameters can be used to customize your project:
 					</para>
@@ -220,49 +224,51 @@
 						</varlistentry>
 					</variablelist>
 					<para>
-						The command generates a JSF project with the following structure:
+						The command generates a new RichFaces project with the following structure:
 					</para>
-	<screen><replaceable>jsf-app</replaceable>
+	<screen><replaceable>new_project</replaceable>
 	├── <filename>pom.xml</filename>
 	└── <filename>src</filename>
-		├── <filename>main</filename>
-		│   ├── <filename>java</filename>
-		│   │   └── <filename>org</filename>
-		│   │       └── <filename>docs</filename>
-		│   │           └── <filename>richfaces</filename>
-		│   │               └── <filename>Bean.java</filename>
-		│   ├── <filename>resources</filename>
-		│   └── <filename>webapp</filename>
-		│       ├── <filename>WEB-INF</filename>
-		│       │   ├── <filename>faces-config.xml</filename>
-		│       │   └── <filename>web.xml</filename>
-		│       ├── <filename>index.xhtml</filename>
-		│       └── <filename>pages</filename>
-		│           └── <filename>index.xhtml</filename>
+		└── <filename>main</filename>
+		    ├── <filename>java</filename>
+		    │   └── <filename>org</filename>
+		    │       └── <filename>docs</filename>
+		    │           └── <filename>richfaces</filename>
+		    │               └── <filename>RichBean.java</filename>
+		    └── <filename>webapp</filename>
+		        ├── <filename>index.xhtml</filename>
+		        ├── <filename>templates</filename>
+		        │   └── <filename>template.xhtml</filename>
+		        └── <filename>WEB-INF</filename>
+		            ├── <filename>faces-config.xml</filename>
+		            └── <filename>web.xml</filename><!--
 		└── <filename>test</filename>
 		    └── <filename>java</filename>
 		        └── <filename>org</filename>
 		            └── <filename>docs</filename>
 		                └── <filename>richfaces</filename>
-		                    └── <filename>BeanTest.java</filename></screen>
+		                    └── <filename>BeanTest.java</filename>--></screen>
 				</step>
+				
 				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_dependencies">
-					<title>Add dependencies</title>
+					<!-- Remove this step for Enterprise documentation -->
+					<title>Add test dependencies (optional)</title>
 					<para>
-						Your root directory of your project contains a project descriptor file, <filename>pom.xml</filename>. To add RichFaces libraries to your project, edit the project descriptor to add dependencies to the <sgmltag>&lt;dependencies&gt;</sgmltag> element as follows:
+						Your root directory of your project contains a project descriptor file, <filename>pom.xml</filename>.
+<!--
+						To add RichFaces libraries to your project, edit the project descriptor to add dependencies to the <sgmltag>&lt;dependencies&gt;</sgmltag> element as follows:
 					</para>
 				
 	<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_RichFaces_with_Maven-Add_dependencies.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				
-					<!-- Remove the following for Enterprise documentation -->
+					
 					<para>
+-->
 						If you wish to include modules for test-driven JSF development, add any dependencies for the tests to the <filename>pom.xml</filename> file. For full details on how to use the <productname>jsf-test</productname> project, refer to <ulink url="http://community.jboss.org/docs/DOC-13155">http://community.jboss.org/wiki/TestDrivenJSFDevelopment</ulink>.
 					</para>
 				</step>
 			
-	<!--
-	<remark>REMOVE ONCE 4.0 ARCHETYPE IS COMPLETE</remark>
-	-->
+<!--
 				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Update_the_generated_project">
 					<title>Update the generated project</title>
 					<para>
@@ -271,7 +277,6 @@
 					<para>
 						RichFaces &VERSION; uses Facelets and does not support JSP. Any <filename>index.jsp</filename> pages that were generated need to forward <filename>home.jsf</filename> page equivalents.
 					</para>
-					<!--
 					<substeps>
 						<step>
 							<title>Deactivate the VDL view handler</title>
@@ -281,8 +286,8 @@
 	<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_RichFaces_with_Maven-Update_the_generated_project.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 						</step>
 					</substeps>
-					-->
 				</step>
+-->
 			
 				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Build_the_project">
 					<title>Build the project</title>
@@ -290,15 +295,19 @@
 						Build the project from the command line by entering the <command>mvn install</command> command.
 					</para>
 					<para>
-						The <computeroutput>BUILD SUCCESSFUL</computeroutput> message indicates the project has been assembled and is ready to import into an IDE (integrated development environment).
+						The <computeroutput>BUILD SUCCESSFUL</computeroutput> message indicates the project has been assembled and is ready to import into an IDE (integrated development environment), such as <productname>JBoss Tools</productname>.
 					</para>
 				</step>
 			
 				<step id="step-Developer_Guide-Build_the_project-Building_for_Eclipse_and_JBoss_Tools">
 					<title>Import the project into an IDE</title>
 					<para>
-						Import the Maven project into your IDE. For <application>Eclipse</application> and <application>JBoss Tools</application>, you can either use <application>Maven</application> to prepare the project, or import the project using the <productname>M2Eclipse</productname> plug-in.
+						Import the Maven project into your IDE. For <application>Eclipse</application> and <application>JBoss Tools</application>, you can import the project using the <productname>M2Eclipse</productname> plug-in.
 					</para>
+					<para>
+						To install the plug-in, choose <menuchoice><guimenu>Help</guimenu><guimenuitem>Install New Software</guimenuitem></menuchoice> from the menu. Type <literal>Maven</literal> to locate the <guilabel>Maven Integration for Eclipse Update Site</guilabel> entry, then type <literal>Maven</literal> in the filter to show the available plug-ins. Follow the prompts to install the <guilabel>Maven Integration for Eclipse</guilabel> plug-in.
+					</para>
+					<!--
 					<stepalternatives>
 						<step>
 							<title>Using <application>Maven</application> to prepare the project for <application>Eclipse</application></title>
@@ -313,19 +322,24 @@
 						<step>
 							<title>Using the <productname>M2Eclipse</productname> plug-in</title>
 							<para>
-								Alternatively, you can import a <application>Maven</application> project into <application>Eclipse</application> and <application>JBoss Tools</application> using the <productname>M2Eclipse</productname> plug-in. With the plug-in installed, open the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>Maven</guimenu><guimenuitem>Existing Maven Projects</guimenuitem></menuchoice> as the import source and choose the <filename>pom.xml</filename> file for your project.
+								Alternatively, you can import a <application>Maven</application> project into <application>Eclipse</application> and <application>JBoss Tools</application> using the <productname>M2Eclipse</productname> plug-in. 
+-->
+							<para>
+								With the plug-in installed, open the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>Maven</guimenu><guimenuitem>Existing Maven Projects</guimenuitem></menuchoice> as the import source and choose the <filename>pom.xml</filename> file for your project.
 							</para>
+<!--
 						</step>
 					</stepalternatives>
+-->
 				</step>
-				<!--
+<!--
 				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_tag_library_references">
 					<title>Add tag library references</title>
 					<para>
 						After importing, edit the <filename><replaceable>jsf-app</replaceable>/src/main/webapp/pages/index.xhtml</filename> file to include the tag library declaration as described in <xref linkend="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries" /> of <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project" />.
 					</para>
 				</step>
-				-->
+-->
 			</procedure>
 		
 			<para>
