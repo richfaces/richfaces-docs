@@ -346,9 +346,6 @@
 	
 	<section id="sect-Developer_Guide-RichFaces_overview-Differences_between_JSF_and_RichFaces_mechanisms">
 		<title>Differences between <acronym>JSF</acronym> and RichFaces mechanisms</title>
-		<para>
-			<remark>Needs additional clarification.</remark>
-		</para>
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -426,6 +423,41 @@
 				<para>
 					Create a new directory named <filename>RichFaces</filename>, then unzip the archive containing the source code there.
 				</para>
+			</step>
+			<step>
+				<title>Configure <productname>Maven</productname> with JBoss developer settings</title>
+				<para>
+					To compile the RichFaces source code, <productname>Maven</productname> requires access to JBoss development repositories. Edit the <filename><replaceable>maven_installation_folder</replaceable>/conf/settings.xml</filename> file and add the following settings:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term>Server definitions</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Compiling_from_source_code-Maven_server_definitions.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+							<para>
+								Change the <code><replaceable>username</replaceable></code> and <code><replaceable>password</replaceable></code> in your server definitions to your <orgname>JBoss.org</orgname> username and password.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Mirror definitions</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Compiling_from_source_code-Maven_mirror_definitions.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Profile definitions</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Compiling_from_source_code-Maven_profile_definitions.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Activate profile</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Compiling_from_source_code-Maven_activate_profile.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+				</variablelist>
 			</step>
 			<step>
 				<title>Compile using <productname>Maven</productname></title>
