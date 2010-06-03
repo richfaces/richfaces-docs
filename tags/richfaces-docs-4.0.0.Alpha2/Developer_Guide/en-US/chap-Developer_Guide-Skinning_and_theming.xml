@@ -1,0 +1,1062 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter id="chap-Developer_Guide-Skinning_and_theming">
+	<title>Skinning and theming</title>
+	<para>
+		Read this chapter for a guide to skinning and theming RichFaces applications, including how to implement themes, and details on customizing and extending skins.
+	</para>
+	<section id="sect-Developer_Guide-Skinning_and_theming-What_are_skins">
+		<title>What are skins?</title>
+		<para>
+			Application skins are used with the RichFaces framework to change the appearance of an application through setting the colors and decoration of controls and components. Typically the appearance of web applications is handled through the <acronym>CSS</acronym> (Cascading Style Sheet) files associated with the application, but skinning allows the settings in a CSS file to be abstracted and easily edited. Using skins avoids repetitive coding and duplication in CSS files through the use of style variables and generalization. CSS files are not completely replaced: skins work as a high-level extension to standard CSS.
+		</para>
+		<para>
+			Each skin has a set of <varname>skin-parameters</varname>, which are used to define the theme palette and other elements of the user interface. These parameters work together with regular CSS declarations, and can be referred to from within CSS using JavaServer Faces Expression Language (<acronym>EL</acronym>).
+		</para>
+		<para>
+			The skinning feature of RichFaces also allows themes to be changed at runtime, so users can personalize an application's appearance.
+		</para>
+	</section>
+	
+	<section id="sect-Developer_Guide-Skinning_and_theming-Using_skins">
+		<title>Using skins</title>
+		<para>
+			RichFaces includes a number of predefined skins. These skins can be used in RichFaces web applications by specifying the skin name in the <varname>org.richfaces.SKIN</varname> context parameter in the <filename>web.xml</filename> settings file. The predefined skins are as follows:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<literal>DEFAULT</literal>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>plain</literal>, which contains no skin parameters and is intended for embedding RichFaces components into existing projects with their own styles.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>emeraldTown</literal>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>blueSky</literal>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>wine</literal>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>japanCherry</literal>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>ruby</literal>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>classic</literal>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>deepMarine</literal>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>laguna</literal>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>darkX</literal>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>glassX</literal>
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			To add one of these skins to your application, add the <literal>org.richfaces.SKIN</literal> context parameter to the <filename>web.xml</filename> configuration file:
+		</para>
+<programlisting>&lt;context-param&gt;
+    &lt;param-name&gt;org.richfaces.SKIN&lt;/param-name&gt;
+    &lt;param-value&gt;<replaceable>skin_name</replaceable>&lt;/param-value&gt;
+&lt;/context-param&gt;</programlisting>
+	</section>
+	
+	<section id="sect-Developer_Guide-Skinning_and_theming-Customizing_skins">
+		<title>Customizing skins</title>
+		<para>
+			RichFaces skins are designed to use a combination of styling elements. Themes for components can be applied using any of the following style classes:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>A default style class inserted into the framework</term>
+				<listitem>
+					<para>
+						Style classes contain skin parameters linked to constant theme styles in the skin. Each component has a class style defining a default representation level. Application interfaces can be modified by altering the values of skin parameters in the skin itself.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>A style class extending the skin</term>
+				<listitem>
+					<para>
+						A custom style class can be added to the skin, working in conjunction with CSS classes of the same name. All components referencing the class are extended in the same way.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>User style class</term>
+				<listitem>
+					<para>
+						Components can use the <varname>styleClass</varname> attribute to redefine specific component elements. As such, the appearance of an individual component can be customized according to a CSS style parameter specified in the class.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<example id="exam-Developer_Guide-Using_skins-Simple_skinning_example">
+			<title>Simple skinning example</title>
+			<para>
+				Using any component, such as a panel, without specifying a <varname>styleClass</varname> will use the default skin parameters for that component.
+			</para>
+		
+<programlisting language="XML" role="XML">&lt;rich:panel&gt;...&lt;/rich:panel&gt;</programlisting>
+			<para>
+				When rendered for display, the panel consists of two HTML elements: a wrapper <sgmltag>&lt;div&gt;</sgmltag> element and a <sgmltag>&lt;div&gt;</sgmltag> element for the body of the panel. The wrapper element for a panel without a specified <varname>styleClass</varname> is rendered as follows:
+			</para>
+		
+<programlisting language="XML" role="XML">&lt;div class="dr-pnl rich-panel"&gt;
+	...
+&lt;/div&gt;</programlisting>
+			<para>
+				<literal>dr-pnl</literal> refers to a CSS class specified in the framework. The CSS class uses skin parameters for generic theme styles:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>background-color</varname> CSS class attribute is defined by the <literal>generalBackgroundColor</literal> skin parameter.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>border-color</varname> CSS class attribute is defined by the <literal>panelBorderColor</literal> skin parameter.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				Changing the definitions for <literal>generalBackgroundColor</literal> or <literal>panelBorderColor</literal> in the skin will cause all panels in the application to change.
+			</para>
+			<para>
+				If a <varname>styleClass</varname> attribute is used, the specified style class is applied to the component, which could extend or override the default styles.
+			</para>
+	
+<programlisting language="XML" role="XML">&lt;rich:panel styleClass="customClass"&gt;...&lt;/rich:panel&gt;</programlisting>
+			<para>
+				The <literal>customClass</literal> style is added to the CSS, and is applied to the component when it is rendered for display:
+			</para>
+		
+<programlisting language="XML" role="XML">&lt;div class="dr-pnl rich-panel customClass"&gt;
+    ...
+&lt;/div&gt;</programlisting>
+		</example>
+	</section>
+	
+	<section id="sect-Developer_Guide-Skinning_and_theming-Skin_parameter_tables_in_RichFaces">
+		<title>Skin parameter tables in RichFaces</title>
+		<para>
+			<xref linkend="tabl-Developer_Guide-Skin_parameter_tables_in_RichFaces-Parameter_settings_for_the_blueSky_skin" /> lists the default values for the parameter settings in the <literal>blueSky</literal> skin. These values can be customized and extended for a unique application theme as described in <xref linkend="sect-Developer_Guide-Skinning_and_theming-Customizing_skins" />.
+		</para>
+		<table id="tabl-Developer_Guide-Skin_parameter_tables_in_RichFaces-Parameter_settings_for_the_blueSky_skin">
+			<title>Parameter settings for the <literal>blueSky</literal> skin</title>
+			<tgroup cols="2">
+				<thead>
+					<row>
+						<entry>
+							Parameter name
+						</entry>
+						<entry>
+							Default value
+						</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry><varname>
+							headerBackgroundColor
+						</varname></entry>
+						<entry><literal>
+							#BED6F8
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							headerGradientColor
+						</varname></entry>
+						<entry><literal>
+							#F2F7FF
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							headTextColor
+						</varname></entry>
+						<entry><literal>
+							#000000
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							headerWeightFont
+						</varname></entry>
+						<entry><literal>
+							bold
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							generalBackgroundColor
+						</varname></entry>
+						<entry><literal>
+							#FFFFFF
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							generalTextColor
+						</varname></entry>
+						<entry><literal>
+							#000000
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							generalSizeFont
+						</varname></entry>
+						<entry><literal>
+							11px
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							generalFamilyFont
+						</varname></entry>
+						<entry><literal>
+							Arial, Verdana, sans-serif
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							controlTextColor
+						</varname></entry>
+						<entry><literal>
+							#000000
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							controlBackgroundColor
+						</varname></entry>
+						<entry><literal>
+							#ffffff
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							additionalBackgroundColor
+						</varname></entry>
+						<entry><literal>
+							#ECF4FE
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							shadowBackgroundColor
+						</varname></entry>
+						<entry><literal>
+							#000000
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							shadowOpacity
+						</varname></entry>
+						<entry><literal>
+							1
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							panelBorderColor
+						</varname></entry>
+						<entry><literal>
+							#BED6F8
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							subBorderColor
+						</varname></entry>
+						<entry><literal>
+							#ffffff
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							tabBackgroundColor
+						</varname></entry>
+						<entry><literal>
+							#C6DEFF
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							tabDisabledTextColor
+						</varname></entry>
+						<entry><literal>
+							#8DB7F3
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							trimColor
+						</varname></entry>
+						<entry><literal>
+							#D6E6FB
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							tipBackgroundColor
+						</varname></entry>
+						<entry><literal>
+							#FAE6B0
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							tipBorderColor
+						</varname></entry>
+						<entry><literal>
+							#E5973E
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							selectControlColor
+						</varname></entry>
+						<entry><literal>
+							#E79A00
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							generalLinkColor
+						</varname></entry>
+						<entry><literal>
+							#0078D0
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							hoverLinkColor
+						</varname></entry>
+						<entry><literal>
+							#0090FF
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							visitedLinkColor
+						</varname></entry>
+						<entry><literal>
+							#0090FF
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							headerSizeFont
+						</varname></entry>
+						<entry><literal>
+							11px
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							headerFamilyFont
+						</varname></entry>
+						<entry><literal>
+							Arial, Verdana, sans-serif
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							tabSizeFont
+						</varname></entry>
+						<entry><literal>
+							11px
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							tabFamilyFont
+						</varname></entry>
+						<entry><literal>
+							Arial, Verdana, sans-serif
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							buttonSizeFont
+						</varname></entry>
+						<entry><literal>
+							11px
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							buttonFamilyFont
+						</varname></entry>
+						<entry><literal>
+							Arial, Verdana, sans-serif
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							tableBackgroundColor
+						</varname></entry>
+						<entry><literal>
+							#FFFFFF
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							tableFooterBackgroundColor
+						</varname></entry>
+						<entry><literal>
+							#cccccc
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							tableSubfooterBackgroundColor
+						</varname></entry>
+						<entry><literal>
+							#f1f1f1
+						</literal></entry>
+					</row>
+					<row>
+						<entry><varname>
+							tableBorderColor
+						</varname></entry>
+						<entry><literal>
+							#C0C0C0
+						</literal></entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	
+	<section id="sect-Developer_Guide-Skinning_and_theming-Changing_skins_at_runtime">
+		<title>Changing skins at runtime</title>
+		<para>
+			The user can change skins at runtime if a managed bean is used to access the skin.
+		</para>
+		<procedure>
+			<step>
+				<title>Create the skin bean</title>
+				<para>The skin bean is a simple interface to manage the skin:</para>
+<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-Create_the_skin_bean.js" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</step>
+			<step>
+				<title>Reference the skin bean</title>
+				<para>Use <acronym>EL</acronym> (Expression Language) to reference the skin bean from the <filename>web.xml</filename> settings file.</para>
+<programlisting language="XML" role="XML">&lt;context-param&gt;
+    &lt;param-name&gt;org.richfaces.SKIN&lt;/param-name&gt;
+    &lt;param-value&gt;#{skinBean.skin}&lt;/param-value&gt;
+&lt;/context-param&gt;</programlisting>
+			</step>
+			<step>
+				<title>Set initial skin</title>
+				<para>
+					The application needs an initial skin to display before the user chooses an alternative skin. The initial skin is specified in the <filename>web.xml</filename> configuration file.
+				</para>
+<programlisting language="XML" role="XML">&lt;managed-bean&gt;
+    &lt;managed-bean-name&gt;skinBean&lt;/managed-bean-name&gt;
+    &lt;managed-bean-class&gt;SkinBean&lt;/managed-bean-class&gt;
+    &lt;managed-bean-scope&gt;session&lt;/managed-bean-scope&gt;
+    &lt;managed-property&gt;
+        &lt;property-name&gt;skin&lt;/property-name&gt;
+        &lt;value&gt;classic&lt;/value&gt;
+    &lt;/managed-property&gt;
+&lt;/managed-bean&gt;</programlisting>
+			</step>
+		</procedure>
+		<example id="exam-Developer_Guide-Skinning_and_theming-Skin_changing_example">
+			<title>Skin changing example</title>
+			<para>
+				This example renders a list of radio buttons from which the user can choose their desired skin. The chosen skin is then applied to the panel bar items.
+			</para>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-Skin_changing_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<blockquote>
+				<figure id="figu-Developer_Guide-Skinning_and_theming-Skin_changing_example">
+					<title>Skin changing example</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/figu-Developer_Guide-Skinning_and_theming-Skin_changing_example.png" format="PNG" />
+						</imageobject>
+						<textobject>
+							<para>
+								A list of radio buttons from which the user can choose their desired skin. The chosen skin is then applied to the panel bar items.
+							</para>
+						</textobject>
+					</mediaobject>
+				</figure>
+			</blockquote>
+		</example>
+	</section>
+	
+	<section id="sect-Developer_Guide-Creating_a_new_skin">
+		<title>Creating a new skin</title>
+		<procedure>
+			<step>
+				<title>Create the skin file</title>
+				<para>The name of the skin file should follow the format <filename><replaceable>new_skin_name</replaceable>.skin.properties</filename> and is placed in either the <filename>META-INF/skins/</filename> directory or the classpath directory of your project.</para>
+			</step>
+			<step>
+				<title>Define skin constants</title>
+				<para>Add skin parameter constants and values to the file. <xref linkend="exam-Developer_Guide-Skinning_and_theming-blueSky.skin.properties_file" /> shows how the skin parameters listed in <xref linkend="tabl-Developer_Guide-Skin_parameter_tables_in_RichFaces-Parameter_settings_for_the_blueSky_skin" /> are included in the skin file.</para>
+				<example id="exam-Developer_Guide-Skinning_and_theming-blueSky.skin.properties_file">
+					<title><filename>blueSky.skin.properties</filename> file</title>
+					<para>
+						The <filename>blueSky.skin.properties</filename> file lists all the skin parameter constants for the skin. It can be extracted from the <filename>/META-INF/skins</filename> directory in the <package>richfaces-impl-<replaceable>version</replaceable>.jar</package> package.
+					</para>
+<programlisting>#Colors
+headerBackgroundColor=#BED6F8
+headerGradientColor=#F2F7FF
+headerTextColor=#000000
+headerWeightFont=bold
+
+generalBackgroundColor=#FFFFFF
+generalTextColor=#000000
+generalSizeFont=11px
+generalFamilyFont=Arial, Verdana, sans-serif 
+
+controlTextColor=#000000
+controlBackgroundColor=#ffffff
+additionalBackgroundColor=#ECF4FE
+
+shadowBackgroundColor=#000000
+shadowOpacity=1
+
+panelBorderColor=#BED6F8
+subBorderColor=#ffffff
+
+tabBackgroundColor=#C6DEFF
+tabDisabledTextColor=#8DB7F3
+
+trimColor=#D6E6FB
+
+tipBackgroundColor=#FAE6B0 
+tipBorderColor=#E5973E 
+
+selectControlColor=#E79A00
+
+generalLinkColor=#0078D0
+hoverLinkColor=#0090FF
+visitedLinkColor=#0090FF
+
+# Fonts
+headerSizeFont=11px
+headerFamilyFont=Arial, Verdana, sans-serif
+
+tabSizeFont=11
+tabFamilyFont=Arial, Verdana, sans-serif
+
+buttonSizeFont=11
+buttonFamilyFont=Arial, Verdana, sans-serif
+
+tableBackgroundColor=#FFFFFF
+tableFooterBackgroundColor=#cccccc
+tableSubfooterBackgroundColor=#f1f1f1
+tableBorderColor=#C0C0C0
+tableBorderWidth=1px
+
+#Calendar colors
+calendarWeekBackgroundColor=#F5F5F5
+
+calendarHolidaysBackgroundColor=#FFEBDA
+calendarHolidaysTextColor=#FF7800
+
+calendarCurrentBackgroundColor=#FF7800
+calendarCurrentTextColor=#FFEBDA
+
+calendarSpecBackgroundColor=#E4F5E2
+calendarSpecTextColor=#000000
+
+warningColor=#FFE6E6
+warningBackgroundColor=#FF0000
+
+editorBackgroundColor=#F1F1F1
+editBackgroundColor=#FEFFDA
+
+#Gradients
+gradientType=plain
+</programlisting>
+				</example>
+				<para>
+					Alternatively, instead of redefining an entire new skin, your skin can use an existing skin as a base on which to build new parameters. Specify a base skin by using the <varname>baseSkin</varname> parameter in the skin file, as shown in <xref linkend="exam-Developer_Guide-Skinning_and_theming-Using_a_base_skin" />.
+				</para>
+				<example id="exam-Developer_Guide-Skinning_and_theming-Using_a_base_skin">
+					<title>Using a base skin</title>
+					<para>
+						This example takes the <literal>blueSky</literal> skin as a base and only changes the <varname>generalSizeFont</varname> parameter.
+					</para>
+<programlisting>baseSkin=blueSky
+generalSizeFont=12pt</programlisting>
+				</example>
+			</step>
+			<step>
+				<title>Reference skin definition</title>
+				<para>Add a skin definition <sgmltag>&lt;context-param&gt;</sgmltag> to the <filename>web.xml</filename> settings file of your application:</para>
+<programlisting>&lt;context-param&gt;
+    &lt;param-name&gt;org.richfaces.SKIN&lt;/param-name&gt;
+    &lt;param-value&gt;<replaceable>new_skin_name</replaceable>&lt;/param-value&gt;
+&lt;/context-param&gt;</programlisting>
+			</step>
+		</procedure>
+	</section>
+	
+	<section id="sect-Developer_Guide-Skinning_and_theming-Skinning_standard_controls">
+		<title>Skinning standard controls</title>
+		<section id="sect-Developer_Guide-Skinning_and_theming-Skinning_standard_JSF_components">
+			<title>Skinning standard JSF components</title>
+			<para>
+				The RichFaces framework can also use skinning to theme JSF (JavaServer Faces) components in addition to RichFaces components. Follow these additional steps to skin JSF components.
+			</para>
+			<procedure>
+				<step>
+					<title>Register a custom render kit</title>
+					<para>The custom render kit is created by registering it in the <filename>faces-config.xml</filename> configuration file:</para>
+<programlisting>&lt;render-kit&gt;
+    &lt;render-kit-id&gt;<replaceable>new_skin_name</replaceable>&lt;/render-kit-id&gt;
+    &lt;render-kit-class&gt;org.ajax4jsf.framework.renderer.ChameleonRenderKitImpl&lt;/render-kit-class&gt;
+&lt;/render-kit&gt;</programlisting>
+				</step>
+				<step>
+					<title>Register custom renderers for the JSF component</title>
+					<para>Add custom renderers in the <filename>faces-config.xml</filename> configuration file for each JSF component you want to skin:</para>
+<programlisting>&lt;renderer&gt;
+    &lt;component-family&gt;javax.faces.Command&lt;/component-family&gt;
+    &lt;renderer-type&gt;javax.faces.Link&lt;/renderer-type&gt;
+    &lt;renderer-class&gt;<replaceable>new_skin_name</replaceable>.HtmlCommandLinkRenderer&lt;/renderer-class&gt;
+&lt;/renderer&gt;</programlisting>
+				</step>
+				<step>
+					<title>Reference the render kit in the skin file</title>
+					<para>Add the following to the top of the skin parameters file: <code>render.kit=<replaceable>new_skin_name</replaceable></code></para>
+				</step>
+			</procedure>
+		</section>
+		
+		<section id="sect-Developer_Guide-Skinning_and_theming-Skinning_standard_HTML_controls">
+			<title>Skinning standard HTML controls</title>
+			<para>
+				Standard HTML controls and components used alongside RichFaces and JSF components can also be themed to create a cohesive user interface. The following HTML elements accept skinning:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<sgmltag>&lt;a&gt;</sgmltag> (including <sgmltag>a:hover</sgmltag>, <sgmltag>a:visited</sgmltag> and other elements)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;fieldset&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;hr&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;input&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;isindex&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;keygen&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;legend&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;select&gt;</sgmltag>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;textarea&gt;</sgmltag>
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				Skinning for standard HTML controls can be included in one of two ways:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term>Automatic skinning</term>
+					<listitem>
+						<para>
+							The skinning style properties are automatically applied to controls based on their element names and attribute types. Specify the <literal>org.richfaces.CONTROL_SKINNING</literal> context parameter in the <filename>web.xml</filename> configuration file:
+						</para>
+	<programlisting language="XML" role="XML">&lt;context-param&gt;
+		&lt;param-name&gt;org.richfaces.CONTROL_SKINNING&lt;/param-name&gt;
+		&lt;param-value&gt;enable&lt;/param-value&gt;
+	&lt;/context-param&gt;</programlisting>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Skinning with CSS classes</term>
+					<listitem>
+						<para>
+							The skinning style properties are determined through CSS. This method is available by default, but can be disabled through the <literal>org.richfaces.CONTROL_SKINNING_CLASSES</literal> context parameter in the <filename>web.xml</filename> configuration file:
+						</para>
+	<programlisting language="XML" role="XML">&lt;context-param&gt;
+		&lt;param-name&gt;org.richfaces.CONTROL_SKINNING_CLASSES&lt;/param-name&gt;
+		&lt;param-value&gt;disable&lt;/param-value&gt;
+	&lt;/context-param&gt;</programlisting>
+						<para>
+							When enabled, the parameter offers a predefined CSS class named <literal>rich-container</literal>. Reference the class from any container-like component, and the standard HTML controls in the container will be skinned. Standard HTML controls can also be specifically defined in the CSS; refer to the <filename>org/richfaces/renderkit/html/css/basic_classes.xcss</filename> file in the <package>richfaces-ui.jar</package> package for examples of specially-defined CSS classes with skin parameters for HTML controls.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<section id="sect-Developer_Guide-Skinning_and_theming-Skinning_levels_for_standard_HTML_controls">
+				<title>Skinning levels for standard HTML controls</title>
+				<para>
+					There are two levels of skinning for HTML controls, depending on whether the browser viewing the application includes rich visual styling capabilities, and whether the browser supports features of CSS2 and CSS3.
+				</para>
+				<remark>Browser lists may need to be updated.</remark>
+				<itemizedlist>
+					<title>Basic skinning</title>
+					<listitem>
+						<para>
+							<productname>Apple Safari</productname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<productname>Microsoft Internet Explorer 6</productname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<productname>Microsoft Internet Explorer 7</productname> in <literal>BackCompat</literal> mode (refer to <citetitle pubwork="article"><varname>compatMode</varname> Property</citetitle> at <ulink url="http://msdn.microsoft.com/en-us/library/ms533687(VS.85).aspx">http://msdn.microsoft.com/en-us/library/ms533687(VS.85).aspx</ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<productname>Opera</productname>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<itemizedlist>
+					<title>Extended skinning</title>
+					<listitem>
+						<para>
+							<productname>Microsoft Internet Explorer 7</productname> in standards-compliant mode
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<productname>Mozilla Firefox</productname>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>
+					If the browser type cannot be identified, the extended level is used. Set the level explicitly by adding the following context parameter to the <filename>web.xml</filename> configuration file, and specifying the <sgmltag>&lt;param-value&gt;</sgmltag> element as either <literal>basic</literal> or <literal>extended</literal>:
+				</para>
+<programlisting language="XML" role="XML">&lt;context-param&gt;
+    &lt;param-name&gt;org.richfaces.CONTROL_SKINNING_LEVEL&lt;/param-name&gt;
+    &lt;param-value&gt;basic&lt;/param-value&gt;
+&lt;/context-param&gt;</programlisting>
+<!--
+			<para>
+				Browsers with rich visual styling for controls (such as Opera and Safari) will not work correctly with standard HTML control skinning. The RichFaces framework includes a client-side script (<filename>skinning.js</filename>) for determining the styling capabilities of the browser and enabling extended skinning accordingly.
+			</para>
+			<procedure id="proc-Developer_Guide-Skinning_and_theming-Using_the_skinning.js_script">
+				<title>Using the skinning.js script</title>
+				<step>
+					<title>Activate the script on the page</title>
+					<para>Add the following code to the head of the page:</para>
+<programlisting language="XML" role="XML">&lt;script type="text/javascript"&gt;
+    window.RICH_FACES_EXTENDED_SKINNING_ON = true;
+&lt;/script&gt;</programlisting>
+				</step>
+			</procedure>
+-->
+			</section>
+		</section>
+	</section>
+	
+	<section id="sect-Developer_Guide-Skinning_and_theming-Defining_skins_for_individual_components">
+		<title>Defining skins for individual components</title>
+		<para>
+			RichFaces uses <acronym>XCSS</acronym> (XML-formatted CSS) files to add extra functionality to the skinning process. XCSS files can contain all the styling information for each RichFaces component in the library.
+		</para>
+		<para>
+			XCSS files contain mappings between CSS properties and skin parameters. The <varname>name</varname> attribute of the <sgmltag>&lt;u:selector&gt;</sgmltag> element is the name of the CSS selector. Each <sgmltag>&lt;u:style&gt;</sgmltag> element defines a CSS property with the <varname>name</varname> attribute as its name. Using the <varname>skin</varname> attribute specifies a skin parameter from the current skin file, while using the <varname>value</varname> attribute enters the literal value in the CSS file. An example of this is shown in <xref linkend="exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings" />.
+		</para>
+		<example id="exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings">
+			<title>XCSS style mappings</title>
+			<para>
+				The XCSS code for the CSS selector named <literal>.rich-component-name</literal> is as follows:
+			</para>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<para>
+				This renders the following CSS code to be read by a standard browser:
+			</para>
+<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings.css" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<para>
+				CSS selectors with identical skinning properties can be listed in a single <varname>name</varname> attribute of a <sgmltag>&lt;u:selector&gt;</sgmltag> element, separated by commas.
+			</para>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-XCSS_style_mappings-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+		</example>
+		<para>
+			Style properties can be modified using XML-based XCSS code, or using embedded standard CSS code, as shown in <xref linkend="exam-Developer_Guide-Skinning_and_theming-Using_XCSS_code_or_standard_CSS_code" />
+		</para>
+		<example id="exam-Developer_Guide-Skinning_and_theming-Using_XCSS_code_or_standard_CSS_code">
+			<title>Using XCSS code or standard CSS code</title>
+			<formalpara>
+				<title>Using XCSS code</title>
+				<para>
+					XCSS code follows an XML structure, using <sgmltag>&lt;u:selector&gt;</sgmltag> elements to define style classes and <sgmltag>&lt;u:style&gt;</sgmltag> elements for each style parameter.
+				</para>
+			</formalpara>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-Using_XCSS_code_or_standard_CSS_code-XCSS.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<formalpara>
+				<title>Using standard CSS code</title>
+				<para>
+					CSS code can be included in an XCSS file through the use of a <sgmltag>&lt;f:verbatim&gt;</sgmltag> element with a character data (CDATA) section.
+				</para>
+			</formalpara>
+<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Developer_Guide-Skinning_and_theming-Using_XCSS_code_or_standard_CSS_code-CSS.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+		</example>
+	</section>
+	
+	<section id="sect-Developer_Guide-Skinning_and_theming-Extended_skinning">
+		<title>Plug-n-skin</title>
+		<para>
+			<emphasis>Plug-n-skin</emphasis> is an alternate method to create, customize, and add a skin. The skin can be based on an existing RichFaces skin, and can include support for skinning standard HTML controls.
+		</para>
+		<procedure>
+			<step>
+				<title>Create a template</title>
+				<para>Use the <productname>Maven</productname> build and deployment tool to create the skin template by using the following command:</para>
+<screen>mvn archetype:create -DarchetypeGroupId=org.richfaces.cdk -DarchetypeArtifactId=maven-archetype-plug-n-skin -DarchetypeVersion=<replaceable>RF-VERSION</replaceable> -DartifactId=<replaceable>ARTIFACT-ID</replaceable> -DgroupId=<replaceable>GROUP-ID</replaceable> -Dversion=<replaceable>VERSION</replaceable></screen>
+				<para>
+					Use the following parameters for the command:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><parameter>archetypeVersion</parameter></term>
+						<listitem>
+							<para>
+								The version of RichFaces, for example, <literal>4.0.0.GA</literal>.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>artifactId</parameter></term>
+						<listitem>
+							<para>
+								The artifact identifier or name of the project. The Maven template will be created in a directory using this name.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>groupId</parameter></term>
+						<listitem>
+							<para>
+								The group identifier of the project.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>version</parameter></term>
+						<listitem>
+							<para>
+								The version of your project, for example, <literal>1.0</literal>.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</step>
+			<step>
+				<title>Add the skin to the CDK</title>
+				<para>Change to the newly-created directory. Ensure it contains the <filename>pom.xml</filename> project file, then enter the following command to create a new skin and add it to the <acronym>CDK</acronym> (Component Development Kit):</para>
+<screen>mvn cdk:add-skin -Dname=<replaceable>SKIN-NAME</replaceable> -Dpackage=<replaceable>SKIN-PACKAGE</replaceable></screen>
+				<para>
+					Use the following parameters for the command:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><parameter>name</parameter></term>
+						<listitem>
+							<para>
+								The name of your new skin.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>package</parameter></term>
+						<listitem>
+							<para>
+								The base package of the skin. By default, the group identifier is used.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				<para>
+					Use the following optional keys for advanced features:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><parameter>baseSkin</parameter></term>
+						<listitem>
+							<para>
+								The skin to use as a base for the new skin.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><parameter>createExt</parameter></term>
+						<listitem>
+							<para>
+								Use <code>createExt=true</code> to add extended CSS classes for skinning standard HTML controls.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				<para>
+					The command creates the following files:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><filename>src/main/java/<replaceable>SKIN-PACKAGE</replaceable>/<replaceable>SKIN-NAME</replaceable>/images/BaseImage.java</filename></term>
+						<listitem>
+							<para>
+								The base class to store images.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><filename>src/test/java/<replaceable>SKIN-PACKAGE</replaceable>/<replaceable>SKIN-NAME</replaceable>/images/BaseImage.java</filename></term>
+						<listitem>
+							<para>
+								A test version of the base class to store images.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><filename>src/main/resources/<replaceable>SKIN-PACKAGE</replaceable>/<replaceable>SKIN-NAME</replaceable>/css/</filename></term>
+						<listitem>
+							<para>
+								The directory that holds the XCSS files that define the themes for RichFaces components affected by the new skin.
+							</para>
+							<para>
+								If the <code>createExt=true</code> parameter was used with the command, the following XCSS files are included for defining styles for standard HTML controls:
+							</para>
+							<itemizedlist>
+								<listitem>
+									<para>
+										<filename>extended_classes.xcss</filename>
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										<filename>extended.xcss</filename>
+									</para>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><filename>src/main/resources/<replaceable>SKIN-PACKAGE</replaceable>/<replaceable>SKIN-NAME</replaceable>/css/<replaceable>SKIN-NAME</replaceable>.properties</filename></term>
+						<listitem>
+							<para>
+								The file that contains the skin properties.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><filename>src/main/resources/META-INF/skins/<replaceable>SKIN-NAME</replaceable>.xcss</filename></term>
+						<listitem>
+							<para>
+								A global XCSS file that imports the component-specific XCSS files.
+							</para>
+							<para>
+								If the <code>createExt=true</code> parameter was used with the command, the following <filename><replaceable>skin-name</replaceable>-ext.xcss</filename> file is included, which imports the XCSS files for standard HTML controls.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><filename>src/main/config/resources/<replaceable>SKIN-NAME</replaceable>-resources.xml</filename></term>
+						<listitem>
+							<para>
+								The file that contains the description of all the files listed above.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</step>
+			<step>
+				<title>Edit XCSS files</title>
+				<para>
+					Edit the XCSS files contained in the <filename>src/main/resources/META-INF/skins/</filename> directory. Refer to <xref linkend="sect-Developer_Guide-Skinning_and_theming-Defining_skins_for_individual_components" /> for instructions on how to edit XCSS files.
+				</para>
+			</step>
+			<step>
+				<title>Build the skin</title>
+				<para>
+					After editing the XCSS files, build the skin by running the following command in the root directory of your skin project (the directory that contains the <filename>pom.xml</filename> file).
+				</para>
+<screen>mvn clean install</screen>
+			</step>
+			<step>
+				<title>Add the skin to the project configuration</title>
+				<para>Add the following context parameter to your project's <filename>web.xml</filename> configuration file to use the new skin in your application:</para>
+<programlisting>&lt;context-param&gt;
+    &lt;param-name&gt;org.ajax4jsf.SKIN&lt;/param-name&gt;
+    &lt;param-value&gt;<replaceable>SKIN-NAME</replaceable>&lt;/param-value&gt;
+&lt;/context-param&gt;</programlisting>
+			</step>
+		</procedure>
+	</section>
+
+</chapter>
+
