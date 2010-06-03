@@ -33,7 +33,7 @@
     <version>4.0.0-SNAPSHOT</version>
     <name>Richfaces Docs: Parent</name>
     <packaging>pom</packaging>
-    
+
     <build>
         <pluginManagement>
             <plugins>
@@ -58,12 +58,6 @@
                     <configuration>
                         <sourceDocumentName>${docname}.xml</sourceDocumentName>
                         <sourceDirectory>.</sourceDirectory>
-                        <imageResource>
-                            <directory>${translation}</directory>
-                            <includes>
-                                <include>images/*</include>
-                            </includes>
-                        </imageResource>
                         <options>
                             <xincludeSupported>true</xincludeSupported>
                             <xmlTransformerType>saxon</xmlTransformerType>
@@ -81,12 +75,18 @@
                                 </property>
                             </transformerParameters>
                         </options>
+                        <imageResource>
+                            <directory>${basedir}/${translation}</directory>
+                            <includes>
+                                <include>images/*</include>
+                            </includes>
+                        </imageResource>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
     </build>
-    
+
     <scm>
         <connection>scm:svn:http://anonsvn.jboss.org/repos/richfaces/root/docs/trunk/parent</connection>
         <developerConnection>scm:svn:https://svn.jboss.org/repos/richfaces/root/docs/trunk/parent</developerConnection>
