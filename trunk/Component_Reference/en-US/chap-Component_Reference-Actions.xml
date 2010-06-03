@@ -73,36 +73,37 @@
 			Variables from JavaScript functions can be used for the <varname>value</varname> attribute. In such an implementation, the <varname>noEscape</varname> attribute should be set to <literal>true</literal>. Using <code>noEscape="true"</code>, the <varname>value</varname> attribute can contain any JavaScript expression or JavaScript function invocation, and the result will be sent to the server as the <varname>value</varname> attribute.
 		</para>
 	</section>
-	
-	<section id="sect-Component_Reference-Actions-a4jajaxListener">
-		<title><sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					listener-class: <classname>org.ajax4jsf.event.AjaxListener</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					event-class: <classname>org.ajax4jsf.event.AjaxEvent</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					tag-class: <classname>org.ajax4jsf.taglib.html.jsp.AjaxListenerTag</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
-		<para>
-			The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component adds an action listener to a parent component. It works similar to the JavaServer Faces <sgmltag>&lt;f:actionListener&gt;</sgmltag> or <sgmltag>&lt;f:valueChangeListener&gt;</sgmltag> components, except that the invocation of <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> is not canceled if validation of the <emphasis>Update Model</emphasis> phase fails. The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component is guaranteed to be invoked with each Ajax response.
-		</para>
-		<para>
-			Basic usage requires only the <varname>type</varname> attribute, which defines the fully-qualified Java class name for the listener. This Java class should implement the <classname>org.ajax4jsf.event.AjaxListener</classname> interface, which is a base listener for all listeners and is capable of receiving Ajax events. The object from which the event originated could be accessed using the <methodname>java.util.EventObject.getSource()</methodname> method.
-		</para>
-		<para>
-			The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component is not invoked for non-Ajax requests, or when the RichFaces works in the <emphasis>Ajax request generates non-Ajax response</emphasis> mode, so the <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> invocation is a good indicator that an Ajax response is going to be processed.
-		</para>
-	</section>
+    
+<!-- TODO NOT IN A2 -->	
+<!--	<section id="sect-Component_Reference-Actions-a4jajaxListener">-->
+<!--		<title><sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag></title>-->
+<!--		<itemizedlist>-->
+<!--			<listitem>-->
+<!--				<para>-->
+<!--					listener-class: <classname>org.ajax4jsf.event.AjaxListener</classname>-->
+<!--				</para>-->
+<!--			</listitem>-->
+<!--			<listitem>-->
+<!--				<para>-->
+<!--					event-class: <classname>org.ajax4jsf.event.AjaxEvent</classname>-->
+<!--				</para>-->
+<!--			</listitem>-->
+<!--			<listitem>-->
+<!--				<para>-->
+<!--					tag-class: <classname>org.ajax4jsf.taglib.html.jsp.AjaxListenerTag</classname>-->
+<!--				</para>-->
+<!--			</listitem>-->
+<!--		</itemizedlist>-->
+<!--		<para>-->
+<!--			The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component adds an action listener to a parent component. It works similar to the JavaServer Faces <sgmltag>&lt;f:actionListener&gt;</sgmltag> or <sgmltag>&lt;f:valueChangeListener&gt;</sgmltag> components, except that the invocation of <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> is not canceled if validation of the <emphasis>Update Model</emphasis> phase fails. The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component is guaranteed to be invoked with each Ajax response.-->
+<!--		</para>-->
+<!--		<para>-->
+<!--			Basic usage requires only the <varname>type</varname> attribute, which defines the fully-qualified Java class name for the listener. This Java class should implement the <classname>org.ajax4jsf.event.AjaxListener</classname> interface, which is a base listener for all listeners and is capable of receiving Ajax events. The object from which the event originated could be accessed using the <methodname>java.util.EventObject.getSource()</methodname> method.-->
+<!--		</para>-->
+<!--		<para>-->
+<!--			The <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> component is not invoked for non-Ajax requests, or when the RichFaces works in the <emphasis>Ajax request generates non-Ajax response</emphasis> mode, so the <sgmltag>&lt;a4j:ajaxListener&gt;</sgmltag> invocation is a good indicator that an Ajax response is going to be processed.-->
+<!--		</para>-->
+<!--	</section>-->
 	
 	<section id="sect-Component_Reference-Actions-a4jcommandButton">
 		<title><sgmltag>&lt;a4j:commandButton&gt;</sgmltag></title>
@@ -200,8 +201,9 @@
 		</para>
 	</section>
 	
+    <!-- FIXME this is really rich:componentControl -->
 	<section id="sect-Component_Reference-Actions-a4jcomponentControl">
-		<title><sgmltag>&lt;a4j:componentControl&gt;</sgmltag></title>
+		<title><sgmltag>&lt;rich:componentControl&gt;</sgmltag></title>
 		<remark>The following reference data is taken from the old <sgmltag>&lt;rich:componentControl&gt;</sgmltag> reference. The details may be different now that the component is part of the <classname>a4j</classname> tag library.</remark>
 		<itemizedlist>
 			<listitem>
@@ -231,17 +233,17 @@
 			</listitem>
 		</itemizedlist>
 		<para>
-			The <sgmltag>&lt;a4j:componentControl&gt;</sgmltag> allows JavaScript API functions to be called on components after defined events. Initialization variants and activation events can be customized, and parameters can be passed to the target component.
+			The <sgmltag>&lt;rich:componentControl&gt;</sgmltag> allows JavaScript API functions to be called on components after defined events. Initialization variants and activation events can be customized, and parameters can be passed to the target component.
 		</para>
 		<para>
 			The <varname>event</varname>, <varname>for</varname>, and <varname>operation</varname> attributes are all that is required to attach JavaScript functions to the parent component. The <varname>event</varname> attribute specifies the event that triggers the JavaScript API function call. The <varname>for</varname> attribute defines the target component, and the <varname>operation</varname> attribute specifies the JavaScript function to perform.
 		</para>
 		<example id="exam-Component_Reference-a4jcomponentControl-a4jcomponentControl_basic_usage">
-			<title>a4j:componentControl basic usage</title>
+			<title>rich:componentControl basic usage</title>
 			
 <programlisting language="XML" role="XML">&lt;h:commandButton value="Show Modal Panel"&gt;
     &lt;!--componentControl is attached to the commandButton--&gt;
-    &lt;a4j:componentControl for="ccModalPanelID" event="onclick" operation="show"/&gt; 
+    &lt;rich:componentControl for="ccModalPanelID" event="onclick" operation="show"/&gt; 
 &lt;/h:commandButton&gt;
 </programlisting>
 			<para>
@@ -249,10 +251,10 @@
 			</para>
 		</example>
 		<para>
-			The <varname>attachTo</varname> attribute can be used to attach the event to a component other than the parent component. If no <varname>attachTo</varname> attribute is supplied, the <sgmltag>&lt;a4j:componentControl&gt;</sgmltag> component's parent is used, as in <xref linkend="exam-Component_Reference-a4jcomponentControl-a4jcomponentControl_basic_usage" />.
+			The <varname>attachTo</varname> attribute can be used to attach the event to a component other than the parent component. If no <varname>attachTo</varname> attribute is supplied, the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> component's parent is used, as in <xref linkend="exam-Component_Reference-a4jcomponentControl-a4jcomponentControl_basic_usage" />.
 		</para>
 		<example id="exam-Component_Reference-a4jcomponentControl-Attaching_a4jcomponentControl_to_a_component">
-			<title>Attaching <sgmltag>&lt;a4j:componentControl&gt;</sgmltag> to a component</title>
+			<title>Attaching <sgmltag>&lt;rich:componentControl&gt;</sgmltag> to a component</title>
 			
 <programlisting language="XML" role="XML">&lt;rich:componentControl attachTo="doExpandCalendarID" event="onclick" operation="Expand" for="ccCalendarID" /&gt;
 </programlisting>
@@ -290,7 +292,7 @@
 			The <varname>name</varname> attribute can be used to define a normal JavaScript function that triggers the specified operation on the target component.
 		</para>
 		<para>
-			The <varname>attachTiming</varname> attribute can determine the page loading phase during which the <sgmltag>&lt;a4j:componentControl&gt;</sgmltag> is attached to the source component:
+			The <varname>attachTiming</varname> attribute can determine the page loading phase during which the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> is attached to the source component:
 		</para>
 		<variablelist>
 			<varlistentry>
@@ -327,37 +329,38 @@
 		</para>
 	</section>
 	
-	<section id="sect-Component_Reference-Actions-a4jhtmlCommandLink">
-		<title><sgmltag>&lt;a4j:htmlCommandLink&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					component-type: <classname>org.ajax4jsf.HtmlCommandLink</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					component-family: <classname>javax.faces.Command</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					component-class: <classname>org.ajax4jsf.component.html.HtmlCommandLink</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					renderer-type: <classname>org.ajax4jsf.HtmlCommandLinkRenderer</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
-		<para>
-			The <sgmltag>&lt;a4j:htmlCommandLink&gt;</sgmltag> component functions similarly to the standard <sgmltag>&lt;h:commandLink&gt;</sgmltag> component, but addresses some of the potential issues that can occur.
-		</para>
-		<para>
-			When using the standard component, hidden fields were not rendered to child elements if they were deemed unnecessary, so command links relating to content on the initial page could become broken if they were later updated through Ajax. The <sgmltag>&lt;a4j:htmlCommandLink&gt;</sgmltag> component addresses this by always rendering all hidden fields.
-		</para>
-	</section>
+<!-- FIXME NOT IS A2 -->    
+<!--	<section id="sect-Component_Reference-Actions-a4jhtmlCommandLink">-->
+<!--		<title><sgmltag>&lt;a4j:htmlCommandLink&gt;</sgmltag></title>-->
+<!--		<itemizedlist>-->
+<!--			<listitem>-->
+<!--				<para>-->
+<!--					component-type: <classname>org.ajax4jsf.HtmlCommandLink</classname>-->
+<!--				</para>-->
+<!--			</listitem>-->
+<!--			<listitem>-->
+<!--				<para>-->
+<!--					component-family: <classname>javax.faces.Command</classname>-->
+<!--				</para>-->
+<!--			</listitem>-->
+<!--			<listitem>-->
+<!--				<para>-->
+<!--					component-class: <classname>org.ajax4jsf.component.html.HtmlCommandLink</classname>-->
+<!--				</para>-->
+<!--			</listitem>-->
+<!--			<listitem>-->
+<!--				<para>-->
+<!--					renderer-type: <classname>org.ajax4jsf.HtmlCommandLinkRenderer</classname>-->
+<!--				</para>-->
+<!--			</listitem>-->
+<!--		</itemizedlist>-->
+<!--		<para>-->
+<!--			The <sgmltag>&lt;a4j:htmlCommandLink&gt;</sgmltag> component functions similarly to the standard <sgmltag>&lt;h:commandLink&gt;</sgmltag> component, but addresses some of the potential issues that can occur.-->
+<!--		</para>-->
+<!--		<para>-->
+<!--			When using the standard component, hidden fields were not rendered to child elements if they were deemed unnecessary, so command links relating to content on the initial page could become broken if they were later updated through Ajax. The <sgmltag>&lt;a4j:htmlCommandLink&gt;</sgmltag> component addresses this by always rendering all hidden fields.-->
+<!--		</para>-->
+<!--	</section>-->
 	
 	<section id="sect-Component_Reference-Actions-a4jjsFunction">
 		<title><sgmltag>&lt;a4j:jsFunction&gt;</sgmltag></title>
@@ -501,8 +504,9 @@
 				</para>
 			</listitem>
 		</itemizedlist>
+        <!-- FIXME Move a4j:repeat -->
 		<para>
-			The <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component is used to iterate changes through a repeated collection of components. It allows specific rows of items to be updated without sending Ajax requests for the entire collection. The <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component forms the basis for many of the tabular components detailed in <xref linkend="chap-Component_Reference-Tables_and_grids" />.
+			REVIEW COMMENT - a4j:repeat is not an action, should be moved.  The <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component is used to iterate changes through a repeated collection of components. It allows specific rows of items to be updated without sending Ajax requests for the entire collection. The <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component forms the basis for many of the tabular components detailed in <xref linkend="chap-Component_Reference-Tables_and_grids" />.
 		</para>
 		<para>
 			The contents of the collection are determined using Expression Language (<acronym>EL</acronym>). The data model for the contents is specified with the <varname>value</varname> attribute. The <varname>var</varname> attribute names the object to use when iterating through the collection. This object is then referenced in the relevant child components. After an Ajax request, only the rows specified with the <varname>ajaxKeys</varname> attribute are updated rather than the entire collection. <xref linkend="exam-Component_Reference-Tables_and_grids-a4jrepeat_example" /> shows how to use <sgmltag>&lt;a4j:repeat&gt;</sgmltag> to maintain a simple table.
@@ -519,17 +523,18 @@
 		</para>
 	</section>
 	
+    <!-- FIXME - a4j:support is now a4j:ajax in 4.0 -->
 	<section id="sect-Component_Reference-Actions-a4jsupport">
-		<title><sgmltag>&lt;a4j:support&gt;</sgmltag></title>
+		<title><sgmltag>&lt;a4j:ajax&gt;</sgmltag></title>
 		<itemizedlist>
 			<listitem>
 				<para>
-					component-type: <classname>org.ajax4jsf.Support</classname>
+					component-type: <classname>org.ajax4jsf.Ajax</classname>
 				</para>
 			</listitem>
 			<listitem>
 				<para>
-					component-family: <classname>org.ajax4jsf.AjaxSupport</classname>
+					component-family: <classname>org.ajax4jsf.Ajax</classname>
 				</para>
 			</listitem>
 			<listitem>
@@ -544,20 +549,20 @@
 			</listitem>
 		</itemizedlist>
 		<para>
-			The <sgmltag>&lt;a4j:support&gt;</sgmltag> component allows Ajax capability to be added to any non-Ajax component. It is placed as a direct child to the component that requires Ajax support. The <sgmltag>&lt;a4j:support&gt;</sgmltag> component uses the common attributes listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
+			REVIEW COMMENT: a4j:support is a4j:ajax in 4.0, paths need to be updated.  The <sgmltag>&lt;a4j:ajax&gt;</sgmltag> component allows Ajax capability to be added to any non-Ajax component. It is placed as a direct child to the component that requires Ajax support. The <sgmltag>&lt;a4j:ajax&gt;</sgmltag> component uses the common attributes listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
 		</para>
 		<note>
 			<title>Attaching JavaScript functions</title>
 			<para>
-				When attaching the <sgmltag>&lt;a4j:support&gt;</sgmltag> component to non-Ajax JavaServer Faces command components, such as <sgmltag>&lt;h:commandButton&gt;</sgmltag> and <sgmltag>&lt;h:commandLink&gt;</sgmltag>, it is important to set <code>disabledDefault="true"</code>. If this attribute is not set, a non-Ajax request is sent after the Ajax request and the page is refreshed unexpectedly.
+				When attaching the <sgmltag>&lt;a4j:ajax&gt;</sgmltag> component to non-Ajax JavaServer Faces command components, such as <sgmltag>&lt;h:commandButton&gt;</sgmltag> and <sgmltag>&lt;h:commandLink&gt;</sgmltag>, it is important to set <code>disabledDefault="true"</code>. If this attribute is not set, a non-Ajax request is sent after the Ajax request and the page is refreshed unexpectedly.
 			</para>
 		</note>
 		<example id="exam-Component_Reference-a4jsupport-a4jsupport_example">
-			<title><sgmltag>&lt;a4j:support&gt;</sgmltag> example</title>
+			<title><sgmltag>&lt;a4j:ajax&gt;</sgmltag> example</title>
 			
 <programlisting language="XML" role="XML">&lt;h:panelGrid columns="2"&gt;
     &lt;h:inputText id="myinput" value="#{userBean.name}"&gt;
-        &lt;a4j:support event="onkeyup" reRender="outtext" /&gt;
+        &lt;a4j:ajax event="onkeyup" reRender="outtext" /&gt;
     &lt;/h:inputText&gt;
     &lt;h:outputText id="outtext" value="#{userBean.name}" /&gt;
 &lt;/h:panelGrid&gt;
