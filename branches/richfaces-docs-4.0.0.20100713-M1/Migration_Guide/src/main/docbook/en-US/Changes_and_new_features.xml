@@ -1,0 +1,1006 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Migration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Migration_Guide-Changes_and_new_features">
+	<title>Changes and new features</title>
+	<para>
+		There have been several changes made to the RichFaces framework for version &VERSION; that may affect migrated projects.
+	</para>
+	<section id="sect-Migration_Guide-Changes_and_new_features-JSF_2_integration">
+		<title>JSF 2 integration</title>
+		<para>
+			RichFaces &VERSION; has full support for JavaServer Faces (<acronym>JSF</acronym>) 2. Due to limited support for JavaServer Pages (JSP) in JSF2, RichFaces no longer fully supports JSP either.
+		</para>
+	</section>
+	
+	<section id="sect-Migration_Guide-Changes_and_new_features-Standardized_attributes">
+		<title>Standardized attributes</title>
+		<para>
+			Several component and event attribute names have been changed from those used in previous versions of RichFaces. The names have been changed to be more consistent with attribute names used by JavaServer Faces 2, so as to provide standardized usage. Many of the name changes also provide more consistency and cleanliness within the framework itself. Other attributes have been deprecated in favor of consistent functionality.
+		</para>
+		<section id="sect-Migration_Guide-Standardized_attributes-Name_changes">
+			<title>Name changes</title>
+			<variablelist>
+				<varlistentry>
+					<term><varname>process</varname></term>
+					<listitem>
+						<para>
+							Changed to <varname>execute</varname> in &VERSION;.
+						</para>
+						<variablelist>
+							<varlistentry>
+								<term>Affected <classname>a4j</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;a4j:support&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandButton&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandLink&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:form&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:jsFunction&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:poll&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:push&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>Affected <classname>rich</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;rich:calendar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataFilterSlider&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataScroller&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dropSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:menuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:progressBar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:suggestionBox&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tab&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:toggleControl&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tree&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:treeNode&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>reRender</varname></term>
+					<listitem>
+						<para>
+							Changed to <varname>render</varname> in &VERSION;.
+						</para>
+						<variablelist>
+							<varlistentry>
+								<term>Affected <classname>a4j</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;a4j:support&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandButton&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandLink&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:form&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:jsFunction&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:poll&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:push&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>Affected <classname>rich</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:calendar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataFilterSlider&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataScroller&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataTable&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dragSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dropSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:menuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:progressBar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:scrollableDataTable&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:suggestionBox&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tab&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tree&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:treeNode&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>eventsQueue</varname></term>
+					<listitem>
+						<para>
+							Changed to <varname>queue</varname> in &VERSION;.
+						</para>
+						<variablelist>
+							<varlistentry>
+								<term>Affected <classname>a4j</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;a4j:support&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandButton&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandLink&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:form&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:jsFunction&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:poll&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:push&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>Affected <classname>rich</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:calendar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataFilterSlider&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataScroller&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dragSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dropSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:menuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:progressBar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:scrollableDataTable&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:suggestionBox&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tab&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:toggleControl&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tree&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>limitToList</varname></term>
+					<listitem>
+						<para>
+							Changed to <varname>limitRender</varname> in &VERSION;.
+						</para>
+						<variablelist>
+							<varlistentry>
+								<term>Affected <classname>a4j</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;a4j:support&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandButton&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandLink&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:form&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:jsFunction&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:poll&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:push&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>Affected <classname>rich</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:calendar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataFilterSlider&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataScroller&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dragSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dropSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:menuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:progressBar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:scrollableDataTable&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:suggestionBox&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tab&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:toggleControl&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tree&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:treeNode&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>onbeforedomupdate</varname></term>
+					<listitem>
+						<para>
+							Changed to <varname>onsuccess</varname> in &VERSION;.
+						</para>
+						<variablelist>
+							<varlistentry>
+								<term>Affected <classname>a4j</classname> components</term>
+								<listitem>
+									<para>
+										All components.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>Affected <classname>rich</classname> components</term>
+								<listitem>
+									<para>
+										All components.
+									</para>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+					</listitem>
+				</varlistentry>
+				<!--
+				<varlistentry>
+					<term></term>
+					<listitem>
+						<para>
+							
+						</para>
+						<variablelist>
+							<varlistentry>
+								<term>Affected <classname>a4j</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+									</simplelist>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>Affected <classname>rich</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+									</simplelist>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+					</listitem>
+				</varlistentry>
+				-->
+			</variablelist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Standardized_attributes-Deprecated_attributes">
+			<title>Deprecated attributes</title>
+			<variablelist>
+				<varlistentry>
+					<term><varname>ignoreDupResponses</varname></term>
+					<listitem>
+						<para>
+							Deprecated. Functionality moved to <varname>queue</varname> in &VERSION;.
+						</para>
+						<variablelist>
+							<varlistentry>
+								<term>Affected <classname>a4j</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;a4j:support&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandButton&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandLink&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:form&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:jsFunction&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:poll&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:push&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:queue&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>Affected <classname>rich</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:calendar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataFilterSlider&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataScroller&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dragSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dropSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:menuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:progressBar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:scrollableDataTable&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:suggestionBox&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tab&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:toggleControl&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tree&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:treeNode&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>requestDelay</varname></term>
+					<listitem>
+						<para>
+							Deprecated. Functionality moved to <varname>queue</varname> in &VERSION;.
+						</para>
+						<variablelist>
+							<varlistentry>
+								<term>Affected <classname>a4j</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;a4j:support&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandButton&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandLink&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:form&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:jsFunction&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:queue&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>Affected <classname>rich</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:calendar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataFilterSlider&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataScroller&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dragSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dropSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:menuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:scrollableDataTable&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:suggestionBox&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tab&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tree&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>ajaxSingle</varname></term>
+					<listitem>
+						<para>
+							Deprecated. Use <code>execute="@this"</code> in &VERSION; instead.
+						</para>
+						<variablelist>
+							<varlistentry>
+								<term>Affected <classname>a4j</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;a4j:support&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandButton&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:commandLink&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:form&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:jsFunction&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:poll&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;a4j:push&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term>Affected <classname>rich</classname> components</term>
+								<listitem>
+									<simplelist type="vert" columns="3">
+										<member>
+												<sgmltag>&lt;rich:calendar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataFilterSlider&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dataScroller&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:dropSupport&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:fileUpload&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:menuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:progressBar&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:suggestionBox&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tab&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:toggleControl&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:toolTip&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:tree&gt;</sgmltag>
+										</member>
+										<member>
+												<sgmltag>&lt;rich:treeNode&gt;</sgmltag>
+										</member>
+									</simplelist>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+
+	</section>
+	
+	<section id="sect-Migration_Guide-Changes_and_new_features-Performance">
+		<title>Performance</title>
+		<para>
+			The <productname>RichFaces</productname> framework has been extensively refined to provide better performance for applications. This includes improvements to bandwidth requirements for generated markup, size and number of required resources for Javascript and Cascading Style Sheets (<acronym>CSS</acronym>), and other general performance improvements.
+		</para>
+		<section id="sect-Migration_Guide-Performance-Bandwidth_for_generated_markup">
+			<title>Bandwidth for generated markup</title>
+			<para>
+				Several considerations have been made to improve the use of bandwidth when generating markup.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<acronym>XHTML</acronym> markup has been simplified and streamlined using best practices, such as avoiding tables for layout.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Default attribute values are not rendered.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Javascript use has been simplified with shorter function names and only one proxy call per form.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Performance-Resource_requirements">
+			<title>Resource requirements</title>
+			<para>
+				The three Javascript libraries previously used by the <productname>RichFaces</productname> framework have been consolidated and standardized into a single library for better performance.
+			</para>
+			<para>
+				Usage of Cascading Style Sheets (<acronym>CSS</acronym>) has been simplified, trimming out duplicate or otherwise unnecessary entries and better utilizing the cascading approach for style values.
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Migration_Guide-Changes_and_new_features-Feature_changes">
+		<title>Feature changes</title>
+		<para>
+			Features have been altered or added to existing components and behaviors in the <productname>RichFaces</productname> &VERSION; framework. Refer to the <citetitle>Developer Guide</citetitle> for full details on how to make use of any new features.
+		</para>
+		<section id="sect-Migration_Guide-Feature_changes-Server_side_process_and_render_mechanisms">
+			<title>Server-side process and render mechanisms</title>
+			<para>
+				Some of the mechanisms for server-side processing and rendering have been altered.
+			</para>
+			<section id="sect-Migration_Guide-Server_side_process_and_render_mechanisms-Regions">
+				<title>Regions</title>
+				<para>
+					It is now possible to define zones for processing on the server-side without specifying <varname>execute</varname> definitions for every component. The <code>execute="@region"</code> property can be used to process regions defined on the server side.
+				</para>
+				<important>
+					<title>Important</title>
+					<para>
+						This approach is different to that in <acronym>JSF 2</acronym>, which uses default values of <code>execute="@this"</code> and <code>render="@this"</code> if no other value is defined.
+					</para>
+				</important>
+			</section>
+			
+			<section id="sect-Migration_Guide-Server_side_process_and_render_mechanisms-execute">
+				<title><varname>execute</varname></title>
+				<para>
+					The <varname>execute</varname> property has been extended to include the <literal>@region</literal> keyword, which facilitates the region rendering changes described in <xref linkend="sect-Migration_Guide-Server_side_process_and_render_mechanisms-Regions" />.
+				</para>
+			</section>
+			
+			<section id="sect-Migration_Guide-Server_side_process_and_render_mechanisms-render">
+				<title><varname>render</varname></title>
+				<para>
+					The <varname>render</varname> property can also be defined from the server side, using actions and listeners.
+				</para>
+			</section>
+
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-onbegin_event_attribute">
+			<title><varname>onbegin</varname> event attribute</title>
+			<para>
+				The <varname>onbegin</varname> attribute has been added to support <acronym>JSF</acronym> events with the type <literal>begin</literal>.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jcommandButton_and_a4jcommandLink">
+			<title><sgmltag>&lt;a4j:commandButton&gt;</sgmltag> and <sgmltag>&lt;a4j:commandLink&gt;</sgmltag></title>
+			<para>
+				Both the <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> and <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> components use the <varname>onclick</varname> event attribute instead of the <varname>onbegin</varname> attribute.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jlog">
+			<title>&lt;a4j:log&gt;</title>
+			<para>
+				The <sgmltag>&lt;a4j:log&gt;</sgmltag> component has had several features modified.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						It is now possible to switch levels on the client side.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The log can now be displayed inline with page markup, in a new browser window, or in the browser console.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						An application context parameter can now be defined to log all application pages.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jmessage_and_a4jmessages">
+			<title><sgmltag>&lt;a4j:message&gt;</sgmltag> and <sgmltag>&lt;a4j:messages&gt;</sgmltag></title>
+			<para>
+				Both the <sgmltag>&lt;a4j:message&gt;</sgmltag> and <sgmltag>&lt;a4j:messages&gt;</sgmltag> components can be automatically updated by any Ajax request, except those requests with <code>limitRender = true</code>. Attributes from previously-passed states are now cleared.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4joutputPanel">
+			<title><sgmltag>&lt;a4j:outputPanel&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component has had several features modified.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The default value for the <varname>layout</varname> attribute is now <literal>block</literal>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The default value for the <varname>ajaxRendered</varname> attribute is now <literal>false</literal>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If a child component is not to be rendered, a placeholder element will be included to preserve the layout.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jpush_and_a4jpoll">
+			<title><sgmltag>&lt;a4J:push&gt;</sgmltag> and <sgmltag>&lt;a4j:poll&gt;</sgmltag></title>
+			<para>
+				Both the <sgmltag>&lt;a4j:push&gt;</sgmltag> and <sgmltag>&lt;a4j:poll&gt;</sgmltag> components now raise a client-side event. For <sgmltag>&lt;a4j:push&gt;</sgmltag>, this is the <varname>ondataavailable</varname> event, while for <sgmltag>&lt;a4j:poll&gt;</sgmltag> it is the <varname>ontimeevent</varname>.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-a4jstatus">
+			<title>&lt;a4j:status&gt;</title>
+			<para>
+				The <sgmltag>&lt;a4j:status&gt;</sgmltag> component has had several features modified.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <sgmltag>&lt;a4j:status&gt;</sgmltag> component now has a representation in the Document Object Model (<acronym>DOM</acronym>) tree.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <sgmltag>&lt;a4j:status&gt;</sgmltag> component no longer needs to be associated with a <sgmltag>&lt;a4j:region&gt;</sgmltag>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <sgmltag>&lt;a4j:status&gt;</sgmltag> component can now report request errors. An additional <varname>errorText</varname> attribute and <literal>error</literal> facet have been added to show if an error was raised when a request completed.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The event attributes now include <varname>onstart</varname>, <varname>onstop</varname>, <varname>onerror</varname>, and <varname>onsuccess</varname>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Multiple statuses can be presented for the same view or form, or a separate status attached to each component.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		<!--
+		<section id="sect-Migration_Guide-Feature_changes-richtogglePanel">
+			<title>&lt;rich:togglePanel&gt;</title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-richtabPanel">
+			<title>&lt;rich:tabPanel&gt;</title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-richtoolBar">
+			<title>&lt;rich:toolBar&gt;</title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+		
+		<section id="sect-Migration_Guide-Feature_changes-richtoolTip">
+			<title>&lt;rich:toolTip&gt;</title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+		-->
+	</section>
+	
+	<section id="sect-Migration_Guide-Changes_and_new_features-New_components_and_behaviors">
+		<title>New components and behaviors</title>
+		<para>
+			Several new components and behaviors have been added to <productname>RichFaces</productname> &VERSION;, some of which replace the functionality of deprecated elements. For full details on how to use these new components and behaviors, refer to the <citetitle>Developer Guide</citetitle>.
+		</para>
+		<!--     dataTable, dataLists, trees possibly included here as they may be consolidated     -->
+		
+		<section id="sect-Migration_Guide-New_components_and_behaviors-richbusyBehavior">
+			<title><sgmltag>&lt;rich:busyBehavior&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;rich:busyBehavior&gt;</sgmltag> component is used when heavy processing takes place to provide feedback to the user. It can be attached to a component's events to trigger appropriate messages.
+			</para>
+		</section>
+		
+		<!--
+		<section id="sect-Migration_Guide-New_components_and_behaviors-richpopupPanel">
+			<title><sgmltag>&lt;rich:popupPanel&gt;</sgmltag></title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+		-->
+	</section>
+	
+	<section id="sect-Migration_Guide-Changes_and_new_features-Deprecated_components_and_behaviors">
+		<title>Deprecated components and behaviors</title>
+		<para>
+			Some components and behaviors have been deprecated in <productname>RichFaces</productname> &VERSION;. For the most part these items have their functionality replicated by another component or behavior.
+		</para>
+		<section id="sect-Migration_Guide-Deprecated_components_and_behaviors-a4jpage">
+			<title><sgmltag>&lt;a4j:page&gt;</sgmltag></title>
+			<para>
+				<productname>RichFaces</productname> &VERSION; drops support for the <sgmltag>&lt;a4j:page&gt;</sgmltag> component. The component was previously used for solving incompatibility in the JavaServer Pages (<acronym>JSP</acronym>) environment with Apache MyFaces in early Ajax4jsf versions.
+			</para>
+		</section>
+		<!--
+		<section id="sect-Migration_Guide-Deprecated_components_and_behaviors-richmodalPanel">
+			<title><sgmltag>&lt;rich:modalPanel&gt;</sgmltag></title>
+			<para>
+				Incomplete.
+			</para>
+		</section>
+		-->
+	</section>
+
+</chapter>
+

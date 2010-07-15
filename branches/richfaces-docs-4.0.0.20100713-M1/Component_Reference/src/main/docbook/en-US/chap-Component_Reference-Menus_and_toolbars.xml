@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter id="chap-Component_Reference-Menus_and_toolbars">
+	<title>Menus and toolbars</title>
+	<para>
+		Incomplete
+	</para>
+	<section id="sect-Component_Reference-Menus_and_toolbars-richcontextMenu">
+		<title><sgmltag>&lt;rich:contextMenu&gt;</sgmltag></title>
+		<para>
+			Incomplete
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Menus_and_toolbars-richdropDownMenu">
+		<title><sgmltag>&lt;rich:dropDownMenu&gt;</sgmltag></title>
+		<para>
+			Incomplete
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Menus_and_toolbars-richmenuGroup">
+		<title><sgmltag>&lt;rich:menuGroup&gt;</sgmltag></title>
+		<para>
+			Incomplete
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Menus_and_toolbars-richmenuItem">
+		<title><sgmltag>&lt;rich:menuItem&gt;</sgmltag></title>
+		<para>
+			Incomplete
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Menus_and_toolbars-richmenuSeparator">
+		<title><sgmltag>&lt;rich:menuSeparator&gt;</sgmltag></title>
+		<para>
+			Incomplete
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Menus_and_toolbars-richpanelMenu">
+		<title><sgmltag>&lt;rich:panelMenu&gt;</sgmltag></title>
+		<para>
+			The <classname>&lt;rich:panelMenu&gt;</classname> component can be used in conjunction with <classname>&lt;rich:panelMenuItem&gt;</classname> and <classname>&lt;rich:panelMenuGroup&gt;</classname> to create an expanding, hierarchical menu. The <classname>&lt;rich:panelMenu&gt;</classname> component's appearance can be highly customized, and the hierarchy can stretch to any number of sub-levels.
+		</para>
+		<para>
+			The <code>selectedChild</code> attribute is used to point to the name of the currently selected menu item.
+		</para>
+		<para>
+			By default, the event to expand the menu is a mouse click. This can be changed by setting <code>event</code> to specify the preferred event. Several sub-menus can be expanded a once unless the <code>expandSingle</code> is set to <literal>true</literal>, which only allows one sub-menu at a time to be expanded.
+		</para>
+		<para>
+			The <code>mode</code> attribute defines the submission mode for normal menu items that link to content, and the <code>expandMode</code> attribute defines the submission mode for menu items that expand and collapse. The settings for these attributes apply to the entire menu unless a menu item defines its own individual <code>mode</code> or <code>expandMode</code>. The values for <code>mode</code> and <code>expandMode</code> are:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<literal>server</literal>, the default setting, which submits the form normally and completely refreshes the page;
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>ajax</literal>, which performs an Ajax form submission, and re-renders elements specified with the <code>render</code> attribute; and
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>none</literal>, which causes the <code>action</code> and <code>actionListener</code> items to be ignored, and the behavior is fully defined by the nested components instead of responses from submissions.
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+	
+	<section id="sect-Component_Reference-Menus_and_toolbars-richpanelMenuGroup">
+		<title><sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag></title>
+		<para>
+			The <classname>&lt;rich:panelMenuGroup&gt;</classname> component defines a group of <classname>&lt;rich:panelMenuItem&gt;</classname> components inside a <classname>&lt;rich:panelMenu&gt;</classname>.
+		</para>
+		<para>
+			If the <code>expandMode</code> is unspecified, the submission behavior for the group is inherited from the parent <classname>&lt;rich:panelMenu&gt;</classname>. Otherwise, the <code>expandMode</code> setting is used instead of the parent's behavior.
+		</para>
+		<para>
+			Icons for the menu group can be chosen from a set of standard icons. There are three attributes that relate to the different menu states that the icon represents: <code>iconExpanded</code>, <code>iconCollapsed</code>, and <code>iconDisabled</code>. The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenuGroup-Standard_icons" />.
+		</para>
+		<figure id="figu-Component_Reference-richpanelMenuGroup-Standard_icons">
+			<title><sgmltag>&lt;Standard icons&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richpanelMenuGroup-Standard_icons.png" format="PNG" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>
+			Alternatively, a path can be defined that points to an image file to use as an icon.
+		</para>
+		<example id="exam-Component_Reference-richpanelMenuGroup-Using_custom_icons">
+			<title>Using custom icons</title>
+			
+<programlisting language="XML" role="XML">
+&lt;rich:panelMenu&gt;
+  &lt;rich:PanelMenuGroup label="Group 1" iconExpanded="\images\img1.png" iconCollapsed="\images\img2.png"&gt;&gt;
+    &lt;!--Nested menu components--&gt;
+  &lt;/rich:panelMenuGroup&gt;
+&lt;/rich:panelMenu&gt;
+</programlisting>
+		</example>
+	</section>
+	
+	<section id="sect-Component_Reference-Menus_and_toolbars-richpanelMenuItem">
+		<title><sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag></title>
+		<para>
+			The <classname>&lt;rich:panelMenuItem&gt;</classname> component represents a single item inside a <classname>&lt;rich:panelMenuGroup&gt;</classname> component, which is in turn part of a <classname>&lt;rich:panelMenu&gt;</classname> component.
+		</para>
+		<para>
+			If the <code>mode</code> is unspecified, the submission behavior for the item is inherited from the parent <classname>&lt;rich:panelMenu&gt;</classname>. Otherwise, the <code>mode</code> setting is used instead of the parent's behavior.
+		</para>
+		<para>
+			Icons for menu items can be chosen from a set of standard icons. There are two attributes that relate to the different menu states that the icon represents: <code>icon</code> and <code>iconDisabled</code>. The standard icons are shown in <xref linkend="figu-Component_Reference-Basic_column_example-Basic_column_example" />.
+		</para>
+		<figure id="figu-Component_Reference-richpanelMenuItem-Standard_icons">
+			<title>Standard icons</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richpanelMenuItem-Standard_icons.png" format="PNG" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>
+			Alternatively, a path can be defined that points to an image file to use as an icon.
+		</para>
+		<example id="exam-Component_Reference-richpanelMenuItem-Using_custom_icons">
+			<title>Using custom icons</title>
+			
+<programlisting language="XML" role="XML">
+&lt;rich:panelMenu&gt;
+  ...
+    &lt;rich:panelMenuItem value="Item 1.1" icon="\images\img1.png" iconDisabled="\images\img2.png" /&gt;
+  ...
+&lt;/rich:panelMenu&gt;
+</programlisting>
+		</example>
+	</section>
+	
+	<section id="sect-Component_Reference-Menus_and_toolbars-richtoolBar">
+		<title><sgmltag>&lt;rich:toolBar&gt;</sgmltag></title>
+		<para>
+			Incomplete
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Menus_and_toolbars-richtoolBarGroup">
+		<title><sgmltag>&lt;rich:toolBarGroup&gt;</sgmltag></title>
+		<para>
+			Incomplete
+		</para>
+	</section>
+
+</chapter>
+
