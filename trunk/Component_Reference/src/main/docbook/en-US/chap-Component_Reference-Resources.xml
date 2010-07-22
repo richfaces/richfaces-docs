@@ -206,16 +206,16 @@
 			The <sgmltag>&lt;a4j:keepAlive&gt;</sgmltag> component allows the state of a managed bean to be retained between Ajax requests.
 		</para>
 		<para>
-			Managed beans can be declared with the <literal>request</literal> scope in the <filename>faces-config.xml</filename> configuration file, using the <sgmltag>&lt;managed-bean-scope&gt;</sgmltag> tag. Any references to the bean instance after the request has ended will cause the server to throw an illegal argument exception. The <sgmltag>&lt;a4j:keepAlive&gt;</sgmltag> component avoids this be maintaining the state of the whole bean object for subsequent requests.
+			Managed beans can be declared with the <literal>request</literal> scope in the <filename>faces-config.xml</filename> configuration file, using the <sgmltag>&lt;managed-bean-scope&gt;</sgmltag> tag. Any references to the bean instance after the request has ended will cause the server to throw an illegal argument exception (<exceptionname>IllegalArgumentException</exceptionname>). The <sgmltag>&lt;a4j:keepAlive&gt;</sgmltag> component avoids this be maintaining the state of the whole bean object for subsequent requests.
 		</para>
 		<para>
-			The <varname>beanName</varname> attribute uses JSF Expression Language (<acronym>EL</acronym>) to define the request scope bean name to keep alive. The expression must resolve to a managed bean instance. The <varname>ajaxOnly</varname> attribute determines whether or not the value of the bean should be available during non-Ajaxx requests; if <code>ajaxOnly="true"</code>, the request-scope bean keeps its value during Ajax requests, but any non-Ajax requests will re-create the bean as a regular request-scope bean.
+			The <varname>beanName</varname> attribute defines the request-scope managed bean name to keep alive. The <varname>ajaxOnly</varname> attribute determines whether or not the value of the bean should be available during non-Ajaxx requests; if <code>ajaxOnly="true"</code>, the request-scope bean keeps its value during Ajax requests, but any non-Ajax requests will re-create the bean as a regular request-scope bean.
 		</para>
 		<example id="exam-Component_Reference-a4jkeepAlive-a4jkeepAlive_example">
 			<title><sgmltag>&lt;a4j:keepAlive&gt;</sgmltag> example</title>
 			
 <programlisting language="XML" role="XML">
-&lt;a4j:keepAlive beanName="#{myClass.testBean}" /&gt;
+&lt;a4j:keepAlive beanName="testBean" /&gt;
 </programlisting>
 		</example>
 	</section>
