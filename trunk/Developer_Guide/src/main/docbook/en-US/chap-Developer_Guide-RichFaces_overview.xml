@@ -1,0 +1,590 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter id="chap-Developer_Guide-RichFaces_overview">
+	<title>RichFaces overview</title>
+	<!-- In development notification -->
+	<important>
+		<title>Documentation in development</title>
+		<para>
+			Some concepts covered in this chapter may refer to the previous version of <productname>Richfaces</productname>, version 3.3.3. This chapter is scheduled for review to ensure all information is up to date.
+		</para>
+	</important>
+	<para>
+		The RichFaces framework is a component library which enhances JSF Ajax capabilities, such that you don't need to write any extra JavaScript code or replace any existing components with new Ajax widgets. RichFaces also enables page-wide Ajax support instead of the traditional component-wide support. Events can be defined on pages that invoke Ajax requests. After an Ajax request, the areas of a page that are synchronized with the JSF Component Tree can themselves change data on the server according to events fired on the client.
+	</para>
+	<para>
+		<xref linkend="figu-Developer_Guide-RichFaces_overview-Request_processing_flow" /> illustrates how requests are processed in the RichFaces framework.
+	</para>
+	<figure id="figu-Developer_Guide-RichFaces_overview-Request_processing_flow">
+		<title>Request processing flow</title>
+		<mediaobject>
+			<imageobject role="html">
+				<imagedata contentwidth="660px" fileref="images/figu-Developer_Guide-RichFaces_overview-Request_processing_flow.png" format="PNG" width="444" />
+			</imageobject>
+			<imageobject role="fo">
+				<imagedata contentwidth="150mm" fileref="images/figu-Developer_Guide-RichFaces_overview-Request_processing_flow.png" format="PNG" width="444" />
+			</imageobject>
+			<textobject>
+				<para>
+					The RichFaces request processing flow.
+				</para>
+			</textobject>
+		</mediaobject>
+	</figure>
+	<para>
+		Using JSF tags, RichFaces allows different parts of a JSF page to be updated with an Ajax request. JSF pages using RichFaces do not change from "regular" JSF pages, and additional JavaScript code is not required.
+	</para>
+	<section id="sect-Component_Reference-RichFaces_overview-Full_technical_requirements">
+		<title>Full technical requirements</title>
+		<para>
+			RichFaces has been developed with an open architecture to be compatible with a wide variety of environments.
+		</para>
+		<section id="sect-Component_Reference-RichFaces_overview-Server_requirements">
+			<title>Server requirements</title>
+			<para>
+				A Java application server or servlet container is required for running RichFaces applications. RichFaces supports the following servers:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Apache Tomcat 6.0 and higher
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						BEA WebLogic 9.1 &#8211; 10.0
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						JBoss 4.2 and higher
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Geronimo 2.0 and higher
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Glassfish (J2EE 5 and JEE 6)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Resin 3.1
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Sun Application Server 9 (J2EE 1.5)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Websphere 7.0 and higher
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		<section id="sect-Component_Reference-RichFaces_overview-Client_requirements">
+			<title>Client requirements</title>
+			<para>
+				Clients accessing RichFaces applications require a web browser. Richfaces supports the following web browsers:
+			</para>
+			<itemizedlist id="item-Developer_Guide-Technical_Requirements-Linux_environments">
+				<title>Linux environments</title>
+				<listitem>
+					<para>
+						Firefox 3.0 and higher
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Google Chrome
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Opera 9.5 and higher
+					</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist id="item-Developer_Guide-Technical_Requirements-Mac_OS_environments">
+				<title>Mac OS environments</title>
+				<listitem>
+					<para>
+						Firefox 3.5 and higher
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Google Chrome
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Safari 3.0 and higher
+					</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist id="item-Developer_Guide-Technical_Requirements-Microsoft_Windows_environments">
+				<title>Microsoft Windows environments</title>
+				<listitem>
+					<para>
+						Firefox 3.0 and higher
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Google Chrome
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Internet Explorer 7.0 and higher
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Opera 9.5 and higher
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Safari 3.0 and higher
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		<section id="sect-Component_Reference-RichFaces_overview-Development_requirements">
+			<title>Development requirements</title>
+			<para>
+				Developing applications with the RichFaces framework requires the Java Development Kit (<acronym>JDK</acronym>), an implementation of JavaServer Faces (<acronym>JSF</acronym>), and a development environment.
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term>Java Development Kit (<acronym>JDK</acronym>)</term>
+					<listitem>
+						<para>
+							RichFaces supports the following JDK versions: 
+							<itemizedlist>
+								<listitem>
+									<para>
+										JDK 1.5 and higher
+									</para>
+								</listitem>
+							</itemizedlist>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>JavaServer Faces (<acronym>JSF</acronym>)</term>
+					<listitem>
+						<para>
+							RichFaces supports the following JSF implementations and frameworks: 
+							<itemizedlist>
+								<!--
+								<listitem>
+									<para>
+										Facelets 1.1.1 &#8211; 1.2
+									</para>
+								</listitem>
+								-->
+								<listitem>
+									<para>
+										MyFaces 2 and higher
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										Seam 2 and higher
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										Sun JSF-RI 2 and higher
+									</para>
+								</listitem>
+							</itemizedlist>
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Development environment</term>
+					<listitem>
+						<para>
+							RichFaces can be developed using most Java development environments. The following are recommended, and used for examples in this guide:
+							<itemizedlist>
+								<listitem>
+									<para>
+										JBoss Tools 3.1 and higher
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										Maven 2.1.0 and higher (2.2.1 recommended)
+									</para>
+								</listitem>
+							</itemizedlist>
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+		
+	</section>
+	
+	<section id="sect-Developer_Guide-RichFaces_overview-Architecture">
+		<title>Architecture</title>
+		<para>
+			The important elements of the RichFaces framework are as follows: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Ajax Action Components
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Ajax Containers
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Skins and Theming
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						RichFaces JavaScript Engine
+					</para>
+				</listitem>
+			</itemizedlist>
+			 Read this section for details on each element.
+		</para>
+		<!--
+		<section id="sect-Developer_Guide-Architecture-Ajax_Filter">
+			<title>Ajax Filter</title>
+			<para>
+				To get all benefits of RichFaces, a filter should be registered in the <filename>web.xml</filename> file of your application. The filter recognizes multiple request types. Filter configuration is covered in detail in <xref linkend="sect-Developer_Guide-Advanced_features-Filters" />. <xref linkend="figu-Developer_Guide-Ajax_Filter-Request_processing_sequences" /> shows the difference between processing a regular JSF request and an Ajax request with a filter. With the regular JSF request, the whole JSF tree is encoded. With the Ajax request, the filter parses the content of an Ajax response before sending it to the client side, and encoding depends on the size of the Ajax region.
+			</para>
+			<figure id="figu-Developer_Guide-Ajax_Filter-Request_processing_sequences">
+				<title>Request processing sequences</title>
+				<mediaobject>
+					<imageobject role="html">
+						<imagedata contentwidth="660px" fileref="images/figu-Developer_Guide-RichFaces_overview-Request_processing_sequences.png" format="PNG" width="444" />
+					</imageobject>
+					<imageobject role="fo">
+						<imagedata contentwidth="150mm" fileref="images/figu-Developer_Guide-RichFaces_overview-Request_processing_sequences.png" format="PNG" width="444" />
+					</imageobject>
+					<textobject>
+						<para>
+							The difference between processing a regular JSF request and an Ajax request with a filter.
+						</para>
+					</textobject>
+				</mediaobject>
+			</figure>
+			<para>
+				Both with and without a filter, the required static or dynamic resources that your application requests are registered in the <classname>ResourseBuilder</classname> class. <xref linkend="figu-Developer_Guide-Ajax_Filter-Resource_request_sequence" /> shows the differences in resource requests for a regular JSF request and an Ajax request with a filter. When a request for a resource occurs, the RichFaces filter checks the <classname>ResourceCache</classname> for the resource. If the resource is in the cache, it is sent to the client. Otherwise, the filter searches for the resource among those that are registered by the <classname>ResourceBuilder</classname>. If the resource is registered, the RichFaces filter will send a request to the <classname>ResourceBuilder</classname> to deliver the resource.
+			</para>
+			<figure id="figu-Developer_Guide-Ajax_Filter-Resource_request_sequence">
+				<title>Resource request sequence</title>
+				<mediaobject>
+					<imageobject role="html">
+						<imagedata contentwidth="660px" fileref="images/figu-Developer_Guide-RichFaces_overview-Resource_request_sequence.png" format="PNG" width="444" />
+					</imageobject>
+					<imageobject role="fo">
+						<imagedata contentwidth="150mm" fileref="images/figu-Developer_Guide-RichFaces_overview-Resource_request_sequence.png" format="PNG" width="444" />
+					</imageobject>
+					<textobject>
+						<para>
+							The difference between resource requests for a regular JSF request and an Ajax request with a filter.
+						</para>
+					</textobject>
+				</mediaobject>
+			</figure>
+		</section>
+		-->
+		
+		<section id="sect-Developer_Guide-Architecture-Ajax_Action_Components">
+			<title>Ajax Action Components</title>
+			<para>
+				The RichFaces framework includes several Ajax Action Components: <sgmltag>&lt;a4j:commandButton&gt;</sgmltag>, <sgmltag>&lt;a4j:commandLink&gt;</sgmltag>, <sgmltag>&lt;a4j:poll&gt;</sgmltag>, <sgmltag>&lt;a4j:support&gt;</sgmltag>, and more. Use Ajax Action Components to send Ajax requests from the client side.
+			</para>
+		</section>
+		
+		<section id="sect-Developer_Guide-Architecture-Ajax_Containers">
+			<title>Ajax Containers</title>
+			<para>
+				<classname>AjaxContainer</classname> <remark>(name possibly changed in release)</remark> is an interface that describes an area on a JSF page that is decoded during an Ajax request. <classname>AjaxViewRoot</classname> and <classname>AjaxRegion</classname> are implementations of this interface.
+			</para>
+		</section>
+		
+		<section id="sect-Developer_Guide-Architecture-Skins_and_theming">
+			<title>Skins and theming</title>
+			<para>
+				RichFaces includes extensive support for application skinning. Skinning is a high-level extension to traditional <acronym>CSS</acronym> (Cascading Style Sheets) which allows the color scheme and appearance of an application to be easily managed. The skins simplify look-and-feel design by allowing multiple elements of the interface to be handled as manageable features, which have associated color palettes and styling. Application skins can additionally be changed on the fly during run-time, allowing user experiences to be personalized and customized.
+			</para>
+			<para>
+				For full details on skinning and how to create skins for the components in your application, refer to <xref linkend="chap-Developer_Guide-Skinning_and_theming" />.
+			</para>
+		</section>
+		
+		<section id="sect-Developer_Guide-Architecture-RichFaces_JavaScript_Engine">
+			<title>RichFaces JavaScript Engine</title>
+			<para>
+				The RichFaces JavaScript Engine runs on the client side. It can update different areas on a JSF page based on an Ajax response. It is not necessary to use the JavaScript code directly, as it is available automatically.
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Developer_Guide-RichFaces_overview-Technologies">
+		<title>Technologies</title>
+		<para>
+			RichFaces originated from the <emphasis>Ajax4jsf</emphasis> project, an open-source web application framework that added Ajax capabilities to the JavaServer Faces (<acronym>JSF</acronym>) framework. The RichFaces components were split into a separate commercial component library, then later both the Ajax4jsf and RichFaces libraries were re-combined under the RichFaces name.
+		</para>
+		<para>
+			RichFaces 4.0 features full JSF2 integration and uses standard web application technologies such as JavaScript, <acronym>XML</acronym> (Extensible Markup Language), and <acronym>XHTML</acronym> (Extensible Hypertext Markup Language).
+		</para>
+	</section>
+	
+	<section id="sect-Developer_Guide-RichFaces_overview-Differences_between_JSF_and_RichFaces_mechanisms">
+		<title>Differences between <acronym>JSF</acronym> and RichFaces mechanisms</title>
+		<itemizedlist>
+			<listitem>
+				<para>
+					JavaServer Faces (<acronym>JSF</acronym>) declares render and execute processes on the client side, while RichFaces declares server-side definitions of lists. 
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					RichFaces components uses their own renderers. In the <emphasis>Render Response Phase</emphasis>, the RichFaces framework makes a traversal of the component tree, calls its own renderer, and passes the result to the Faces Response.
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+	
+	<section id="sect-Developer_Guide-RichFaces_overview-Restrictions">
+		<title>Restrictions</title>
+		<para>
+			The following restrictions apply to applications implementing the RichFaces framework: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Any Ajax framework should not append or delete elements on a page, but should instead replace them. For successful updates, an element with the same identifier as in the response must exist on the page. If it is necessary to append code to a page, include a placeholder for it (an empty element).
+						<!-- For the same reason, it is recommended that messages be placed in the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component.-->
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<sgmltag>&lt;f:verbatim&gt;</sgmltag> should not be used for self-rendered containers, since it is transient and not saved in the tree.
+					</para>
+				</listitem>
+				<!--
+				<listitem>
+					<para>
+						Ajax requests are made by XMLHTTPRequest functions in XML format, but this XML bypasses most validations and the corrections that might be made in a browser. As such, a strict standards-compliant code for HTML and XHTML should be used, without skipping any required elements or attributes. Any necessary XML corrections are automatically made by the XML filter on the server, but unexpected effects can be produced through incorrect HTML code.
+					</para>
+				</listitem>
+				-->
+				<listitem>
+					<para>
+						The RichFaces <classname>ViewHandler</classname> puts itself in front of the Facelets <classname>ViewHandlers</classname> chain.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-RichFaces_overview-Compiling_from_source_code">
+		<title>Compiling from source code</title>
+		<para>
+			The source code for the RichFaces framework can be downloaded and compiled manually rather than using the pre-compiled binaries.
+		</para>
+		<procedure>
+			<step>
+				<title>Download source code</title>
+				<stepalternatives>
+					<step>
+						<title>JBoss RichFaces Downloads area</title>
+						<!-- Update download location in Enterprise docs, or remove this section altogether -->
+						<para>
+							Download the source files (also available in <filename class="extension">.bin.zip</filename> or <filename class="extension">.bin.tar.gz</filename> archives) from the JBoss RichFaces Downloads area at <ulink url="http://www.jboss.org/richfaces/download.html">http://www.jboss.org/richfaces/download.html</ulink>.
+						</para>
+					</step>
+					<step>
+						<title>Anonymous SVN repository</title>
+						<!-- Remove SVN details in Enterprise docs -->
+						<para>
+							Alternatively, the source files can be downloaded from the anonymous SVN repository at <ulink url="http://anonsvn.jboss.org/repos/richfaces/root/">http://anonsvn.jboss.org/repos/richfaces/root/</ulink> using the following command:
+						</para>
+						<screen>svn co http://anonsvn.jboss.org/repos/richfaces/root/</screen>
+					</step>
+				</stepalternatives>
+			</step>
+			<step>
+				<title>Unzip archive</title>
+				<para>
+					Create a new directory named <filename>RichFaces</filename>, then unzip the archive containing the source code there.
+				</para>
+			</step>
+			<step>
+				<title>Configure <productname>Maven</productname> with JBoss developer settings</title>
+				<para>
+					To compile the RichFaces source code, <productname>Maven</productname> requires access to JBoss development repositories. Edit the <filename><replaceable>maven_installation_folder</replaceable>/conf/settings.xml</filename> file and add the following settings:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term>Server definitions</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Compiling_from_source_code-Maven_server_definitions.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+							<para>
+								Change the <code><replaceable>username</replaceable></code> and <code><replaceable>password</replaceable></code> in your server definitions to your <orgname>JBoss.org</orgname> username and password.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Mirror definitions</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Compiling_from_source_code-Maven_mirror_definitions.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Profile definitions</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Compiling_from_source_code-Maven_profile_definitions.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Activate profile</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Compiling_from_source_code-Maven_activate_profile.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</step>
+			<step>
+				<title>Compile using <productname>Maven</productname></title>
+				<para>
+					In the root directory of the unzipped source code, enter the following command to compile and build the RichFaces framework:
+				</para>
+				<screen>mvn clean install</screen>
+				<para>
+					Add any of the following options after the command to customize the build:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><command>-P release,docs</command></term>
+						<listitem>
+							<para>
+								Maven additionally builds the documentation and release artifacts.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><command>-D skipTests=true</command></term>
+						<listitem>
+							<para>
+								Maven skips the unit and functional tests, which completes the build faster.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><command>-D checkstyle.skip=true</command></term>
+						<listitem>
+							<para>
+								Maven skips the scans for checking style, which completes the build faster.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><command>-D skip-source</command></term>
+						<listitem>
+							<para>
+								Maven does not produce any source <filename>jar</filename> files from the build.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><command>-D skip-enforce</command></term>
+						<listitem>
+							<para>
+								Maven does not check for the correct JDK version, Maven version, and <literal>SNAPSHOT</literal> plug-in, and forces the build.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><command>-D jsf-profile=<replaceable>implementation</replaceable></command></term>
+						<listitem>
+							<para>
+								Maven tests builds and tests against the specified JSF implementation. The <replaceable>implementation</replaceable> value can be any of the following:
+							</para>
+							<itemizedlist>
+								<listitem>
+									<para>
+										<literal>jsf_ri</literal>: The latest release of <productname>JSF RI (Mojarra)</productname>. This is the default implemenation.
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										<literal>jsf_ri_javax</literal>: The latest release of <productname>javax.faces</productname>.
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										<literal>jsf_ri_snapshot</literal>: The latest snapshot version of <productname>JSF RI (Mojarra)</productname>.
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										<literal>myfaces</literal>: The latest release of <productname>MyFaces</productname>.
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										<literal>myfaces</literal>: The latest snapshot version of <productname>MyFaces</productname>.
+									</para>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</step>
+			<step>
+				<title>Access compiled binaries</title>
+				<para>
+					The compiled libraries are located in the following sub-directories of the root RichFaces directory:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<filename>ui/assembly/target/dist/richfaces-ui-<replaceable>version</replaceable>-SNAPSHOT.jar</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename>framework/api/target/richfaces-api-<replaceable>version</replaceable>-SNAPSHOT.jar</filename>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<filename>framework/impl/target/richfaces-impl-<replaceable>version</replaceable>-SNAPSHOT.jar</filename>
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>
+					If Maven built the framework using the <command>-P release</command> option, the distribution package containing all three compiled libraries and reference documentation is located at <filename>ui/assembly/target/dist/richfaces-ui-<replaceable>version</replaceable>-SNAPSHOT-bin.zip</filename>.
+				</para>
+			</step>
+		</procedure>
+		<para>
+			You can now add the compiled libraries to your project as described in <xref linkend="step-Developer_Guide-Creating_a_project-Add_the_RichFaces_libraries_to_the_project" /> of <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_JBoss_Tools" />.
+		</para>
+						
+	</section>
+
+</chapter>
+

@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+<chapter id="chap-Component_Reference-Panels_and_containers">
+	<title>Panels and containers</title>
+	<para>
+		This chapter details those components which act as panels and containers to hold groups of other components.
+	</para>
+	<section id="sect-Component_Reference-Panels_and_containers-richmodalPanel">
+		<title><sgmltag>&lt;rich:modalPanel&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:modalPanel&gt;</sgmltag> component provides a modal panel or window that blocks interaction with the rest of the application while active. It can be easily positioned on the screen, dragged to a new position by the user, and re-sized.
+		</para>
+		<important>
+			<title>Placement</title>
+			<para>
+				The <sgmltag>&lt;rich:modalPanel&gt;</sgmltag> component should always be placed outside the original <sgmltag>&lt;h:form&gt;</sgmltag>, and must include its own <sgmltag>&lt;h:form&gt;</sgmltag> if performing submissions.
+			</para>
+		</important>
+		<para>
+			By default, the modal panel can be both re-sized and re-positioned by the user. The minimum possible size for the panel can be set with the These abilities can be deactivated by setting <code>resizable</code> or <code>movable</code> to <literal>false</literal> as necessary. The state of the modal panel, including size and position on screen, can be maintained and restored after submitting and reloading by setting <code>keepVisualState="true"</code>.
+		</para>
+		<para>
+			If <code>showWhenRendered="true"</code> then the modal panel will display when the page is first loaded.
+		</para>
+		<example id="exam-Component_Reference-richmodalPanel-richmodalPanel_example">
+			<title><sgmltag>&lt;rich:modalPanel&gt;</sgmltag> example</title>
+			
+<programlisting language="XML" role="XML">
+&lt;a onclick="Richfaces.showModalPanel('pnl');" href="#"&gt;Show ModalPanel&lt;/a&gt;
+&lt;a4j:form&gt;
+  &lt;rich:modalPanel id="pnl" &gt;
+    &lt;a onclick="Richfaces.hideModalPanel('pnl');" href="#"&gt;Hide ModalPanel&lt;/a&gt;
+  &lt;/rich:modalPanel&gt;
+&lt;/a4j:form&gt;
+</programlisting>
+		</example>
+	</section>
+	
+	<section id="sect-Component_Reference-Panels_and_containers-richpanel">
+		<title><sgmltag>&lt;rich:panel&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:panel&gt;</sgmltag> component is a bordered panel with an optional header.
+		</para>
+		<para>
+			No attributes need to be listed for basic usage. To add a header to the panel, use the <code>header</code> attribute to specify the text to appear in the header. Alternatively the header can be constructed using a header facet.
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Panels_and_containers-richpanelBar">
+		<title><sgmltag>&lt;rich:panelBar&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:panelBar&gt;</sgmltag> is a series of panels stacked on top of each other, each collapsed such that only the header of the panel is showing. When the header of a panel is clicked, it is expanded to show the content of the panel. Clicking on a different header will collapse the previous panel and epand the selected one. Another name for the component is "accordion". Each panel in contained in a <sgmltag>&lt;rich:panelBar&gt;</sgmltag> component is a <sgmltag>&lt;rich:panelBarItem&gt;</sgmltag> component.
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Panels_and_containers-richpanelBarItem">
+		<title><sgmltag>&lt;rich:panelBarItem&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:panelBarItem&gt;</sgmltag> component is a panel for use with the <sgmltag>&lt;rich:panelBar&gt;</sgmltag> component.
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Panels_and_containers-richsimpleTogglePanel">
+		<title><sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag> component is a collapsible panel that shows or hides content when the header bar is activated. It is a simplified version of <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component.
+		</para>
+		<para>
+			Basic usage requires only the <code>label</code> attribute to be specified, which provides the title for the header element.
+		</para>
+		<para>
+			The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<literal>server</literal>, the default setting, which causes the <sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag> component to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>ajax</literal>, which causes the <sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>client</literal>, which causes <sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag> components to update on the client side, re-rendering themselves and any additional components listed with the <code>render</code> attribute.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			If the <sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag> component uses <code>opened="true"</code>, the panel is open and expanded, otherwise it is closed and collapsed.
+		</para>
+		<para>
+			The <code>openMarker</code> and <code>closeMarker</code> attributes can be used to define custom icons for the expanding header.
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Panels_and_containers-richtabPanel">
+		<title><sgmltag>&lt;rich:tabPanel&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component provides a set of tabbed panels for displaying one panel of content at a time. The tabs can be highly customized and themed.
+		</para>
+		<note>
+			<title>Form elements required</title>
+			<para>
+				All <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> components should be wrapped in a form element so that content is correctly submitted.
+			</para>
+		</note>
+		<para>
+			The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<literal>server</literal>, the default setting, which causes the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>ajax</literal>, which causes the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<literal>client</literal>, which causes <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> components to update on the client side, re-rendering themselves and any additional components listed with the <code>render</code> attribute.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			The <code>selectedTab</code> attribute holds the active tab name.
+		</para>
+		<para>
+			The tabs themselves can be aligned using the <code>headerAlignment</code> attribute. The attribute can be set to <code>left</code>, <code>center</code>, or <code>right</code>, aligning the header tabs to the left, center, or right of the top edge of the panel respectively. If no alignment is specified, left-alignment is the default behavior.
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Panels_and_containers-richtab">
+		<title><sgmltag>&lt;rich:tab&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:tab&gt;</sgmltag> component represents an individual tab inside a <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component, including the tab's content. Clicking on the tab header will bring its corresponding content to the front of other tabs.
+		</para>
+		<para>
+			Basic usage of the <sgmltag>&lt;rich:tab&gt;</sgmltag> component requires the <code>label</code> attribute, which provides the text on the tab header. The content of the tab is then detailed inside the <sgmltag>&lt;rich:tab&gt;</sgmltag> tags.
+		</para>
+		<para>
+			An individual tab can be disabled by setting <code>disabled="true"</code>. Disabled tabs cannot be activated or switched to.
+		</para>
+		<para>
+			The switching mode for performing submissions can be inherited from <code>switchMode</code> attribute of the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component, or set individually for each <sgmltag>&lt;rich:tab&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richtabPanel" /> for details on the <code>switchMode</code> attribute.
+		</para>
+		<para>
+			There are two event handlers that are unique to the <sgmltag>&lt;rich:tab&gt;</sgmltag> component. The <code>ontabenter</code> attribute points to the function to perform when the mouse enters the tab, while the <code>ontableave</code> attribute points to the function to perform when the mouse leaves the tab.
+		</para>
+	</section>
+	
+	<section id="sect-Component_Reference-Panels_and_containers-richtogglePanel">
+		<title><sgmltag>&lt;rich:togglePanel&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component is a wrapper component with named facets. Each facet is displayed after activating a corresponding <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component.
+		</para>
+		<para>
+			The initial state of the component can be configured using the <code>initialState</code> attribute, which points to a facet name to display. Alternatively, setting <code>initialState="empty"</code>, the initial state will be blank until the user selects an option.
+		</para>
+		<para>
+			The order in which the facets are shown can be defined using the <code>statusOrder</code> attribute, listing the facet names separated by commas, as shown in <xref linkend="exam-Component_Reference-richtogglePanel-State_order_example" />.
+		</para>
+		<example id="exam-Component_Reference-richtogglePanel-State_order_example">
+			<title>State order example</title>
+			
+<programlisting language="XML" role="XML">
+&lt;rich:togglePanel id="panel" initialState="panelB" switchType="client" stateOrder="panelA,panelB,panelC"&gt;
+  &lt;f:facet name="panelA"&gt;
+    ...
+  &lt;/f:facet&gt;
+  &lt;f:facet name="panelB"&gt;
+    ...
+  &lt;/f:facet&gt;
+  &lt;f:facet name="panelC"&gt;
+    ...
+  &lt;/f:facet&gt;
+&lt;/rich:togglePanel&gt; 
+&lt;rich:toggleControl for="panel" value="Switch"/&gt;
+</programlisting>
+		</example>
+	</section>
+	
+	<section id="sect-Component_Reference-Panels_and_containers-richtoggleControl">
+		<title><sgmltag>&lt;rich:toggleControl&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component works with a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to switch between panel states. It can be located either inside or outside the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component, and can be used to switch to a specific state or cycle through a set of states.
+		</para>
+		<para>
+			Basic usage for the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> requires the <code>for</code> attribute, which points to the <code>id</code> attribute of the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> that it controls. The <code>value</code> attribute specifies the label of the toggle button.
+		</para>
+		<para>
+			The <code>switchToState</code> attribute can be used to explicitly set a target panel for the toggle to activate. If no <code>switchToState</code> attribute is defined, the toggle will switch to the next panel listed in the <code>switchOrder</code> attribute of the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component. <xref linkend="exam-Component_Reference-richtoggleControl-Switching_panel_states" /> shows the use of the <code>switchToState</code> attribute.
+		</para>
+		<example id="exam-Component_Reference-richtoggleControl-Switching_panel_states">
+			<title>Switching panel states</title>
+			
+<programlisting language="XML" role="XML">
+&lt;rich:togglePanel id="panel" initialState="empty" switchType="client"&gt;
+  &lt;f:facet name="first"&gt;
+    &lt;h:panelGroup&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value="Empty" switchToState="empty"/&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value=" Second" switchToState="second"/&gt;
+      &lt;!--Some content--&gt;
+    &lt;/h:panelGroup&gt;
+  &lt;/f:facet&gt;
+  &lt;f:facet name="second"&gt;
+    &lt;h:panelGroup&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value="Empty" switchToState="empty"/&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value=" first" switchToState="first"/&gt;
+      &lt;!--Some content--&gt;
+    &lt;/h:panelGroup&gt;
+  &lt;/f:facet&gt;
+  &lt;f:facet name="empty"&gt;
+    &lt;h:panelGroup&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value="first" switchToState="first"/&gt;
+      &lt;rich:toggleControl for="helloForm:panel" value=" second" switchToState="second"/&gt;
+    &lt;/h:panelGroup&gt;
+  &lt;/f:facet&gt;
+&lt;/rich:togglePanel&gt;
+</programlisting>
+		</example>
+	</section>
+
+</chapter>
+
