@@ -3,11 +3,24 @@
 ]>
 <chapter id="chap-Component_Reference-Rich_inputs">
 	<title>Rich inputs</title>
+	<!--  In development notification  -->
+	<important>
+		<title>Documentation in development</title>
+		<para>
+			Some concepts covered in this chapter may refer to the previous version of <productname>Richfaces</productname>, version 3.3.3. This chapter is scheduled for review to ensure all information is up to date.
+		</para>
+	</important>
+	<para>
+		This chapter details those components which act as panels and containers to hold groups of other components.
+	</para>
+	
+	<!-- TODO not in M2 -->
+	<!--
 	<para>
 		This chapter details rich components for user input and interaction.
 	</para>
-	<section id="sect-Component_Reference-Rich_inputs-richCalendar">
-		<title><sgmltag>&lt;rich:Calendar&gt;</sgmltag></title>
+	<section id="sect-Component_Reference-Rich_inputs-richcalendar">
+		<title><sgmltag>&lt;rich:calendar&gt;</sgmltag></title>
 		<para>
 			The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component allows the user to enter a date and time through an in-line or pop-up calendar. The pop-up calendar can navigate through months and years, and its look and feel can be highly customized.
 		</para>
@@ -82,7 +95,10 @@
 			The entire calendar can be set as read-only with <code>readonly="true"</code>. This allows months and years to be browsed through with the arrow controls, but dates and times cannot be selected.
 		</para>
 	</section>
+	-->
 	
+	<!-- TODO not in M2 -->
+	<!--
 	<section id="sect-Component_Reference-Rich_inputs-richcolorPicker">
 		<title><sgmltag>&lt;rich:colorPicker&gt;</sgmltag></title>
 		<para>
@@ -158,7 +174,10 @@
 			</listitem>
 		</itemizedlist>
 	</section>
+	-->
 	
+	<!-- TODO not in M2 -->
+	<!--
 	<section id="sect-Component_Reference-Rich_inputs-richeditor">
 		<title><sgmltag>&lt;rich:editor&gt;</sgmltag></title>
 		<para>
@@ -247,106 +266,185 @@
 			</listitem>
 		</itemizedlist>
 	</section>
+	-->
 	
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceInput">
 		<title><sgmltag>&lt;rich:inplaceInput&gt;</sgmltag></title>
 		<para>
 			The <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component allows information to be entered in-line in blocks of text, improving readability of the text. Changes can be rendered either in-line or for the whole block, and inputs can be focused with keyboard navigation. The component has three functional states: the "view" state, where the component displays its initial setting, such as "click to edit"; the "edit" state, where the user can input text; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
 		</para>
-		<para>
-			When in the initial "view" state, the starting label can be set using the <varname>defaultLabel</varname> attribute, such as <code>defaultLabel="click to edit"</code>.
-		</para>
-		<para>
-			Basic usage requires the <varname>value</varname> attribute to point to the expression for the current value of the component.
-		</para>
-		<para>
-			By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event. When switching to "edit" mode, the existing text can be automatically highlighted to make editing easier by setting <code>selectOnEdit="true"</code>.
-		</para>
-		<para>
-			The user can confirm and save their input by pressing the <keycap>Enter</keycap> key or cancel by pressing the <keycap>Esc</keycap> key. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. These buttons can be positioned using the <varname>controlsHorizontalPosition</varname> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <varname>controlsVerticalPosition</varname> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <varname>saveControlIcon</varname> and <varname>cancelControlIcon</varname>. Further customization is possible through the use of facets.
-		</para>
-		<para>
-			There are several event handlers that are specific to the <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<varname>oneditactivation</varname> is triggered before the "edit" state is activated.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>oneditactivated</varname> is triggered after the "edit" state is activated.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>onviewactivation</varname> is triggered before the "view" or "changed" state is activated.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>onviewactivated</varname> is triggered after the "view" or "changed" state is activated.
-				</para>
-			</listitem>
-		</itemizedlist>
+		
+		<section id="sect-Component_Reference-richinplaceInput-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Basic usage requires the <varname>value</varname> attribute to point to the expression for the current value of the component.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richinplaceInput-Interactivity_options">
+			<title>Interactivity options</title>
+			<para>
+				When in the initial "view" state, the starting label can be set using the <varname>defaultLabel</varname> attribute, such as <code><varname>defaultLabel</varname>="click to edit"</code>.
+			</para>
+		
+			<para>
+				By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event. When switching to "edit" mode, the existing text can be automatically highlighted to make editing easier by setting <code><varname>selectOnEdit</varname>="true"</code>.
+			</para>
+			<para>
+				The user can confirm and save their input by pressing the <keycap>Enter</keycap> key or cancel by pressing the <keycap>Esc</keycap> key. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. These buttons can be positioned using the <varname>controlsHorizontalPosition</varname> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <varname>controlsVerticalPosition</varname> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <varname>saveControlIcon</varname> and <varname>cancelControlIcon</varname>. Further customization is possible through the use of facets.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richinplaceInput-richinplaceInput_events">
+			<title><sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> events</title>
+			<para>
+				There are several event handlers that are specific to the <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<varname>oneditactivation</varname> is triggered before the "edit" state is activated.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>oneditactivated</varname> is triggered after the "edit" state is activated.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>onviewactivation</varname> is triggered before the "view" or "changed" state is activated.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>onviewactivated</varname> is triggered after the "view" or "changed" state is activated.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-richinplaceInput-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.inplaceInput</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlInplaceInput</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.inplaceInput</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.inplaceInputRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.inplaceInputTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceSelect">
 		<title><sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component is similar to the <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component, but the uses a drop-down selection box to enter text instead of a regular text field. Changes can be rendered either in-line or for the whole block, and inputs can be focused with keyboard navigation. The component has three functional states: the "view" state, where the component displays its initial setting, such as "click to edit"; the "edit" state, where the user can select a value from a drop-down list; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
+			The <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component is similar to the <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component, except that the <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component uses a drop-down selection box to enter text instead of a regular text field. Changes can be rendered either in-line or for the whole block, and inputs can be focused with keyboard navigation. The component has three functional states: the "view" state, where the component displays its initial setting, such as "click to edit"; the "edit" state, where the user can select a value from a drop-down list; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
 		</para>
-		<para>
-			When in the initial "view" state, the starting label can be set using the <varname>defaultLabel</varname> attribute, such as <code>defaultLabel="click to edit"</code>.
-		</para>
-		<para>
-			Basic usage requires the <varname>value</varname> attribute to point to the expression for the current value of the component and a list of items. The list of items can be defined using the JSF components <sgmltag>&lt;f:selectItem/&gt;</sgmltag> and <sgmltag>&lt;f:selectItems/&gt;</sgmltag>.
-		</para>
-		<example id="exam-Component_Reference-richinplaceSelect-Defining_list_items_for_richinplaceSelect">
-			<title>Defining list items for <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
-			
-<programlisting language="XML" role="XML">
-&lt;rich:inplaceSelect value="#{bean.inputValue}" defaultLabel="click to edit" &gt;
-    &lt;f:selectItems value="#{bean.selectItems}" /&gt;
-    &lt;f.selectItem itemValue="1" itemLabel="Item 1" /&gt;
-    &lt;f.selectItem itemValue="2" itemLabel="Item 2" /&gt;
-    &lt;f.selectItem itemValue="3" itemLabel="Item 3" /&gt;
-    &lt;f.selectItem itemValue="4" itemLabel="Item 4" /&gt;
-&lt;/rich:comboBox&gt;
-</programlisting>
-		</example>
-		<para>
-			By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event. When switching to "edit" mode, the drop-down list of possible values will automatically be displayed; this can be deactivated by setting <code>openOnEdit="false"</code>.
-		</para>
-		<para>
-			Once the user selects an option from the drop-down list, the item becomes the new value for the component and the state is switched to the "changed" state. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. These buttons can be positioned using the <varname>controlsHorizontalPosition</varname> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <varname>controlsVerticalPosition</varname> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <varname>saveControlIcon</varname> and <varname>cancelControlIcon</varname>. Further customization is possible through the use of facets.
-		</para>
-		<para>
-			There are several event handlers that are specific to the <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<varname>oneditactivation</varname> is triggered before the "edit" state is activated.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>oneditactivated</varname> is triggered after the "edit" state is activated.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>onviewactivation</varname> is triggered before the "view" or "changed" state is activated.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>onviewactivated</varname> is triggered after the "view" or "changed" state is activated.
-				</para>
-			</listitem>
-		</itemizedlist>
+		
+		<section id="sect-Component_Reference-richinplaceSelect-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Basic usage requires the <varname>value</varname> attribute to point to the expression for the current value of the component and a list of items. The list of items can be defined using the JSF components <sgmltag>&lt;f:selectItem/&gt;</sgmltag> and <sgmltag>&lt;f:selectItems/&gt;</sgmltag>.
+			</para>
+			<example id="exam-Component_Reference-richinplaceSelect-Defining_list_items_for_richinplaceSelect">
+				<title>Defining list items for <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richinplaceSelect-Defining_list_items_for_richinplaceSelect.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richinplaceSelect-Interactivity_options">
+			<title>Interactivity options</title>
+			<para>
+				When in the initial "view" state, the starting label can be set using the <varname>defaultLabel</varname> attribute, such as <code>defaultLabel="click to edit"</code>.
+			</para>
+			<para>
+				By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event. When switching to "edit" mode, the drop-down list of possible values will automatically be displayed; this can be deactivated by setting <code><varname>openOnEdit</varname>="false"</code>.
+			</para>
+			<para>
+				Once the user selects an option from the drop-down list, the item becomes the new value for the component and the state is switched to the "changed" state. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. These buttons can be positioned using the <varname>controlsHorizontalPosition</varname> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <varname>controlsVerticalPosition</varname> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <varname>saveControlIcon</varname> and <varname>cancelControlIcon</varname>. Further customization is possible through the use of facets.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richinplaceInput-richinplaceSelect_events">
+			<title><sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> events</title>
+			<para>
+				There are several event handlers that are specific to the <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<varname>oneditactivation</varname> is triggered before the "edit" state is activated.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>oneditactivated</varname> is triggered after the "edit" state is activated.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>onviewactivation</varname> is triggered before the "view" or "changed" state is activated.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>onviewactivated</varname> is triggered after the "view" or "changed" state is activated.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-richinplaceSelect-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.inplaceSelect</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlInplaceSelect</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.inplaceSelect</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.inplaceSelectRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.inplaceSelectTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
 	<section id="sect-Component_Reference-Rich_inputs-richinputNumberSlider">
@@ -354,14 +452,63 @@
 		<para>
 			The <sgmltag>&lt;rich:inputNumberSlider&gt;</sgmltag> component provides a slider for changing numerical values. Optional features include a tool-tip to display the value while sliding, and a text field for typing the numerical value which can then be validated against the slider's range.
 		</para>
-		<para>
-			Basic use of the component with no attributes specified will render a slider with a minimum value of 0, a maximum of 100, and a gradient step of 1, together with a text field for typing the desired numerical value. The text field can be removed by setting <code>showInput="false"</code>, and the properties of the slider can be set with the attributes <varname>minValue</varname>, <varname>maxValue</varname>, and <varname>step</varname>. The slider is labeled with the minimum and maximum boundary values, and a tool-tip showing the current value is shown while sliding the slider; these items can be turned off by setting <code>showBoundaryValues="false"</code> and <code>showToolTip="false"</code> respectively.
-		</para>
-		<para>
-			Arrow controls can be added to either side of the slider to adjust the value incrementally by setting <code>showArrows="true"</code>. Clicking the arrows move the slider indicator in that direction by the gradient step, and clicking and holding the arrows moves the indicator continuously. The time delay for each step when updating continuously can be defined using the <varname>delay</varname> attribute.
-		</para>
+		<section id="sect-Component_Reference-richinputNumberSlider-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Basic use of the component with no attributes specified will render a slider with a minimum value of 0, a maximum of 100, and a gradient step of 1, together with a text field for typing the desired numerical value. The slider is labeled with the minimum and maximum boundary values, and a tool-tip showing the current value is shown while sliding the slider.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richinputNumberSlider-Interactivity_options">
+			<title>Interactivity options</title>
+			<para>
+				The text field can be removed by setting <code>showInput="false"</code>.
+			</para>
+			<para>
+				The properties of the slider can be set with the attributes <varname>minValue</varname>, <varname>maxValue</varname>, and <varname>step</varname>.
+			</para>
+			<para>
+				The minimum and maximum labels on the slider can be hidden by setting <code><varname>showBoundaryValues</varname>="false"</code>. The tool-tip showing the current value can be hidden by setting <code><varname>showToolTip</varname>="false"</code>.
+			</para>
+			<para>
+				Arrow controls can be added to either side of the slider to adjust the value incrementally by setting <code>showArrows="true"</code>. Clicking the arrows move the slider indicator in that direction by the gradient step, and clicking and holding the arrows moves the indicator continuously. The time delay for each step when updating continuously can be defined using the <varname>delay</varname> attribute.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richinputNumberSlider-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.inputNumberSlider</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlInputNumberSlider</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.inputNumberSlider</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.inputNumberSliderRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.inputNumberSliderTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
+	<!-- TODO not in M2 -->
+	<!--
 	<section id="sect-Component_Reference-Rich_inputs-richinputNumberSpinner">
 		<title><sgmltag>&lt;rich:inputNumberSpinner&gt;</sgmltag></title>
 		<para>
@@ -399,6 +546,7 @@
 			Instead of returning just one value from an object, the entire object can be returned to the client and handled appropriately. This is done by specifying <code>usingSuggestObjects="true"</code> and setting the <varname>onobjectchange</varname> attribute to a JavaScript method to handle the object, passing the <literal>suggestion</literal> object as a parameter.
 		</para>
 	</section>
+	-->
 
 </chapter>
 

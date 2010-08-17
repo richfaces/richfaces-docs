@@ -3,9 +3,19 @@
 ]>
 <chapter id="chap-Component_Reference-Panels_and_containers">
 	<title>Panels and containers</title>
+	<!--  In development notification  -->
+	<important>
+		<title>Documentation in development</title>
+		<para>
+			Some concepts covered in this chapter may refer to the previous version of <productname>Richfaces</productname>, version 3.3.3. This chapter is scheduled for review to ensure all information is up to date.
+		</para>
+	</important>
 	<para>
 		This chapter details those components which act as panels and containers to hold groups of other components.
 	</para>
+	
+	<!-- TODO not in M2 -->
+	<!--
 	<section id="sect-Component_Reference-Panels_and_containers-richmodalPanel">
 		<title><sgmltag>&lt;rich:modalPanel&gt;</sgmltag></title>
 		<para>
@@ -36,24 +46,161 @@
 </programlisting>
 		</example>
 	</section>
+	-->
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richpanel">
 		<title><sgmltag>&lt;rich:panel&gt;</sgmltag></title>
 		<para>
 			The <sgmltag>&lt;rich:panel&gt;</sgmltag> component is a bordered panel with an optional header.
 		</para>
-		<para>
-			No attributes need to be listed for basic usage. To add a header to the panel, use the <code>header</code> attribute to specify the text to appear in the header. Alternatively the header can be constructed using a header facet.
-		</para>
+		<figure id="figu-Component_Reference-richpanel-richpanel">
+			<title><sgmltag>&lt;rich:panel&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richpanel-richpanel.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:Panel&gt;</sgmltag> component displaying details on a camera model.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		<section id="sect-Component_Reference-richpanel-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				No attributes need to be listed for basic usage. a <sgmltag>&lt;rich:panel&gt;</sgmltag> without any attributes defined renders a bordered region with no header.
+			</para>
+		</section>
+		<section id="sect-Component_Reference-richpanel-Adding_a_header">
+			<title>Adding a header</title>
+			<para>
+				To add a header to the panel, use the <varname>header</varname> attribute to specify the text to appear in the header. Alternatively the header can be constructed using a header facet. <xref linkend="exam-Component_Reference-richpanel-Adding_a_header" /> demonstrates the two different approaches.
+			</para>
+			<example id="exam-Component_Reference-richpanel-Adding_a_header">
+				<title>Adding a header</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpanel-Adding_a_header-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpanel-Adding_a_header-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<para>
+				Both the examples render an identical panel.
+			</para>
+			<blockquote>
+				<figure id="figu-Component_Reference-richpanel-Adding_a_header">
+					<title>Adding a header</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/figu-Component_Reference-richpanel-Adding_a_header.png" format="PNG" />
+						</imageobject>
+						<textobject>
+							<para>
+								A panel with a header that reads <phrase>"This is the panel header"</phrase> and content that reads <phrase>"This is the panel content"</phrase>.
+							</para>
+						</textobject>
+					</mediaobject>
+				</figure>
+			</blockquote>
+		</section>
+		
+		<section id="sect-Component_Reference-richpanel-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.panel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlPanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.panel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.panelRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.panelTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richpanelBar">
 		<title><sgmltag>&lt;rich:panelBar&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:panelBar&gt;</sgmltag> is a series of panels stacked on top of each other, each collapsed such that only the header of the panel is showing. When the header of a panel is clicked, it is expanded to show the content of the panel. Clicking on a different header will collapse the previous panel and epand the selected one. Another name for the component is "accordion". Each panel in contained in a <sgmltag>&lt;rich:panelBar&gt;</sgmltag> component is a <sgmltag>&lt;rich:panelBarItem&gt;</sgmltag> component.
+			The <sgmltag>&lt;rich:panelBar&gt;</sgmltag> is a series of panels stacked on top of each other, each collapsed such that only the header of the panel is showing. When the header of a panel is clicked, it is expanded to show the content of the panel. Clicking on a different header will collapse the previous panel and epand the selected one. Similar controls are sometimes known as "accordion" controls. Each panel contained in a <sgmltag>&lt;rich:panelBar&gt;</sgmltag> component is a <sgmltag>&lt;rich:panelBarItem&gt;</sgmltag> component.
 		</para>
+		<figure id="figu-Component_Reference-richpanelBar-richpanelBar">
+			<title><sgmltag>&lt;rich:panelBar&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richpanelBar-richpanelBar.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:panelBar&gt;</sgmltag> component displaying details on different cameras. Only the first panel is expanded.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		
+		<section id="sect-Component_Reference-richpanelBar-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The <sgmltag>&lt;rich:panelBar&gt;</sgmltag> component requires no attributes for basic usage. The component can contain any number of <sgmltag>&lt;rich:panelBarItem&gt;</sgmltag> components as children. The headers of the <sgmltag>&lt;rich:panelBarItem&gt;</sgmltag> components control the expanding and collapsing when clicked. Only a single <sgmltag>&lt;rich:panelBarItem&gt;</sgmltag> can be displayed at a time.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richpanelBar-Controlling_panel_size">
+			<title>Controlling panel size</title>
+			<para>
+				Unlike the <sgmltag>&lt;rich:panel&gt;</sgmltag> component, the size of the <sgmltag>&lt;rich:panelBar&gt;</sgmltag> can be specified using <varname>width</varname> and <varname>height</varname> attributes. If unspecified, these values default to 100%.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richpanelBar-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.panelBar</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlPanelBar</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.panelBar</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.panelBarRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.panelBarTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
+	<!-- TODO not in M2 -->
+	<!--
 	<section id="sect-Component_Reference-Panels_and_containers-richpanelBarItem">
 		<title><sgmltag>&lt;rich:panelBarItem&gt;</sgmltag></title>
 		<para>
@@ -96,46 +243,10 @@
 			The <code>openMarker</code> and <code>closeMarker</code> attributes can be used to define custom icons for the expanding header.
 		</para>
 	</section>
+	-->
 	
-	<section id="sect-Component_Reference-Panels_and_containers-richtabPanel">
-		<title><sgmltag>&lt;rich:tabPanel&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component provides a set of tabbed panels for displaying one panel of content at a time. The tabs can be highly customized and themed.
-		</para>
-		<note>
-			<title>Form elements required</title>
-			<para>
-				All <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> components should be wrapped in a form element so that content is correctly submitted.
-			</para>
-		</note>
-		<para>
-			The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<literal>server</literal>, the default setting, which causes the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>ajax</literal>, which causes the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>client</literal>, which causes <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> components to update on the client side, re-rendering themselves and any additional components listed with the <code>render</code> attribute.
-				</para>
-			</listitem>
-		</itemizedlist>
-		<para>
-			The <code>selectedTab</code> attribute holds the active tab name.
-		</para>
-		<para>
-			The tabs themselves can be aligned using the <code>headerAlignment</code> attribute. The attribute can be set to <code>left</code>, <code>center</code>, or <code>right</code>, aligning the header tabs to the left, center, or right of the top edge of the panel respectively. If no alignment is specified, left-alignment is the default behavior.
-		</para>
-	</section>
-	
+	<!-- TODO not in M2 -->
+	<!--
 	<section id="sect-Component_Reference-Panels_and_containers-richtab">
 		<title><sgmltag>&lt;rich:tab&gt;</sgmltag></title>
 		<para>
@@ -154,38 +265,139 @@
 			There are two event handlers that are unique to the <sgmltag>&lt;rich:tab&gt;</sgmltag> component. The <code>ontabenter</code> attribute points to the function to perform when the mouse enters the tab, while the <code>ontableave</code> attribute points to the function to perform when the mouse leaves the tab.
 		</para>
 	</section>
+	-->
+	
+	<section id="sect-Component_Reference-Panels_and_containers-richtabPanel">
+		<title><sgmltag>&lt;rich:tabPanel&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component provides a set of tabbed panels for displaying one panel of content at a time. The tabs can be highly customized and themed.
+		</para>
+		<note>
+			<title>Form elements required</title>
+			<para>
+				All <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> components should be wrapped in a form element so that content is correctly submitted.
+			</para>
+		</note>
+		<section id="sect-Component_Reference-richtabPanel-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<literal>server</literal>, the default setting, which causes the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>ajax</literal>, which causes the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>client</literal>, which causes <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> components to update on the client side, re-rendering themselves and any additional components listed with the <code>render</code> attribute.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				The <code>selectedTab</code> attribute holds the active tab name.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richtabPanel-Tab_alignment">
+			<title>Tab alignment</title>
+			<para>
+				The tabs themselves can be aligned using the <code>headerAlignment</code> attribute. The attribute can be set to <code>left</code>, <code>center</code>, or <code>right</code>, aligning the header tabs to the left, center, or right of the top edge of the panel respectively. If no alignment is specified, left-alignment is the default behavior.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richtabPanel-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.tabPanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmltabPanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.tabPanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.tabPanelRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.tabPanelTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+	</section>
 	
 	<section id="sect-Component_Reference-Panels_and_containers-richtogglePanel">
 		<title><sgmltag>&lt;rich:togglePanel&gt;</sgmltag></title>
 		<para>
 			The <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component is a wrapper component with named facets. Each facet is displayed after activating a corresponding <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component.
 		</para>
-		<para>
-			The initial state of the component can be configured using the <code>initialState</code> attribute, which points to a facet name to display. Alternatively, setting <code>initialState="empty"</code>, the initial state will be blank until the user selects an option.
-		</para>
-		<para>
-			The order in which the facets are shown can be defined using the <code>statusOrder</code> attribute, listing the facet names separated by commas, as shown in <xref linkend="exam-Component_Reference-richtogglePanel-State_order_example" />.
-		</para>
-		<example id="exam-Component_Reference-richtogglePanel-State_order_example">
-			<title>State order example</title>
-			
-<programlisting language="XML" role="XML">
-&lt;rich:togglePanel id="panel" initialState="panelB" switchType="client" stateOrder="panelA,panelB,panelC"&gt;
-  &lt;f:facet name="panelA"&gt;
-    ...
-  &lt;/f:facet&gt;
-  &lt;f:facet name="panelB"&gt;
-    ...
-  &lt;/f:facet&gt;
-  &lt;f:facet name="panelC"&gt;
-    ...
-  &lt;/f:facet&gt;
-&lt;/rich:togglePanel&gt; 
-&lt;rich:toggleControl for="panel" value="Switch"/&gt;
-</programlisting>
-		</example>
+		
+		<section id="sect-Component_Reference-richtogglePanel-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The initial state of the component can be configured using the <code>initialState</code> attribute, which points to a facet name to display. Alternatively, setting <code>initialState="empty"</code>, the initial state will be blank until the user selects an option.
+			</para>
+			<para>
+				The order in which the facets are shown can be defined using the <code>statusOrder</code> attribute, listing the facet names separated by commas, as shown in <xref linkend="exam-Component_Reference-richtogglePanel-State_order_example" />.
+			</para>
+			<example id="exam-Component_Reference-richtogglePanel-State_order_example">
+				<title>State order example</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtogglePanel-State_order_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richtogglePanel-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.TogglePanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlTogglePanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.TogglePanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.TogglePanelRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.TogglePanelTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
+	<!-- TODO not in M2 -->
+	<!--
 	<section id="sect-Component_Reference-Panels_and_containers-richtoggleControl">
 		<title><sgmltag>&lt;rich:toggleControl&gt;</sgmltag></title>
 		<para>
@@ -206,14 +418,14 @@
     &lt;h:panelGroup&gt;
       &lt;rich:toggleControl for="helloForm:panel" value="Empty" switchToState="empty"/&gt;
       &lt;rich:toggleControl for="helloForm:panel" value=" Second" switchToState="second"/&gt;
-      &lt;!--Some content--&gt;
+      &lt;!-Some content-&gt;
     &lt;/h:panelGroup&gt;
   &lt;/f:facet&gt;
   &lt;f:facet name="second"&gt;
     &lt;h:panelGroup&gt;
       &lt;rich:toggleControl for="helloForm:panel" value="Empty" switchToState="empty"/&gt;
       &lt;rich:toggleControl for="helloForm:panel" value=" first" switchToState="first"/&gt;
-      &lt;!--Some content--&gt;
+      &lt;!-Some content-&gt;
     &lt;/h:panelGroup&gt;
   &lt;/f:facet&gt;
   &lt;f:facet name="empty"&gt;
@@ -226,6 +438,7 @@
 </programlisting>
 		</example>
 	</section>
+	-->
 
 </chapter>
 

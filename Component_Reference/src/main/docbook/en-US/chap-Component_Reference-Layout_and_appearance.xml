@@ -3,23 +3,287 @@
 ]>
 <chapter id="chap-Component_Reference-Layout_and_appearance">
 	<title>Layout and appearance</title>
+	<!--  In development notification  -->
+	<important>
+		<title>Documentation in development</title>
+		<para>
+			Some concepts covered in this chapter may refer to the previous version of <productname>Richfaces</productname>, version 3.3.3. This chapter is scheduled for review to ensure all information is up to date.
+		</para>
+	</important>
 	<para>
-		Incomplete
+		Read this chapter to alter the layout and appearance of web applications using special components.
 	</para>
+	
+	<!-- TODO not in M2 -->
+	<!--
 	<section id="sect-Component_Reference-Layout_and_appearance-richeffect">
 		<title><sgmltag>&lt;rich:effect&gt;</sgmltag></title>
 		<para>
 			Incomplete
 		</para>
 	</section>
+	-->
 	
 	<section id="sect-Component_Reference-Layout_and_appearance-richjQuery">
 		<title><sgmltag>&lt;rich:jQuery&gt;</sgmltag></title>
 		<para>
-			Milestone2
+			The <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component applies styles and custom behavior to both <acronym>JSF</acronym> (JavaServer Faces) objects and regular <acronym>DOM</acronym> (Document Object Model) objects. It uses the <phrase>jQuery</phrase> JavaScript framework to add functionality without conflicting with the <filename>prototype.js</filename> library.
 		</para>
+		<section id="sect-Component_Reference-richjQuery-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The query triggered by the <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component is specified using the <varname>query</varname> attribute.
+			</para>
+			<para>
+				The query can be triggered in three different ways. Use the <varname>timing</varname> attribute to specify the point at which the query is triggered:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>immediate</literal></term>
+					<listitem>
+						<para>
+							The query is triggered immediately.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>onload</literal></term>
+					<listitem>
+						<para>
+							The query is triggered when the document is loaded.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>onJScall</literal></term>
+					<listitem>
+						<para>
+							The query is triggered when a JavaScript function is invoked. The JavaScript function is specified using the <varname>name</varname> attribute.
+						</para>
+						<para>
+							If the <varname>name</varname> attribute is included when the <varname>timing</varname> attribute is set to either <literal>immediate</literal> or <literal>onload</literal>, the query can be triggered using the JavaScript function <emphasis>in addition</emphasis> to the specified trigger timing.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<example id="exam-Component_Reference-richjQuery-richjQuery_example">
+				<title><sgmltag>&lt;rich:jQuery&gt;</sgmltag> example</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richjQuery-richjQuery_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					In the example, the selector picks out the odd <sgmltag>&lt;tr&gt;</sgmltag> elements that are children of the element with an <code><varname>id</varname>="customlist"</code> attribute. The query <code>addClass(odd)</code> is then performed on the selection during page loading (<literal>onload</literal>) such that the <literal>odd</literal> CSS class is added to the selected elements.
+				</para>
+			</example>
+			<para>
+				Any objects or lists of objects used in the query are specified using the <varname>selector</varname> attribute. The <varname>selector</varname> attribute references objects using the following method:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>selector</varname> attribute can refer to the <varname>id</varname> attribute of any JSF component or client.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If the <varname>selector</varname> attribute does not match the <varname>id</varname> identifier attribute of any JSF components or clients on the page, it instead uses syntax defined by the <orgname>World Wide Web Consortium (<acronym>W3C</acronym>)</orgname> for the <acronym>CSS</acronym> rule selector. <xref linkend="exam-Component_Reference-richjQuery-Example_selector_values" /> shows a list of examples of the selector syntax. Refer to the syntax specification at <ulink url="http://www.w3.org/TR/CSS2/selector.html">http://www.w3.org/TR/CSS2/selector.html</ulink> for full details.
+					</para>
+					<example id="exam-Component_Reference-richjQuery-Example_selector_values">
+						<title>Example selector values</title>
+						<variablelist>
+							<varlistentry>
+								<term><code>p:has(a)</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;p&gt;</sgmltag> elements which contain an <sgmltag>&lt;a&gt;</sgmltag> element are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><code>p.foo:has(a)</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;p&gt;</sgmltag> elements of class <literal>foo</literal> which contain an <sgmltag>&lt;a&gt;</sgmltag> element are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><code>p#secret</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;p&gt;</sgmltag> elements with an <literal>id</literal> identifier of <literal>secret</literal> are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><code>ul &gt; li</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;li&gt;</sgmltag> elements that are children of <sgmltag>&lt;ul&gt;</sgmltag> elements are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><code>input[name=bar]</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;input&gt;</sgmltag> elements with a <varname>name</varname> attribute whose value is <literal>bar</literal> are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><code>input[type=radio][@checked]</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;input&gt;</sgmltag> elements with both a <code><varname>type</varname>="radio"</code> attribute and a <varname>checked</varname> attribute are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><code>p,span,td</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;p&gt;</sgmltag> elements, <sgmltag>&lt;span&gt;</sgmltag> elements, and <sgmltag>&lt;td&gt;</sgmltag> elements are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><code>p span</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;span&gt;</sgmltag> elements that are direct or indirect children of <sgmltag>&lt;p&gt;</sgmltag> elements are selected. Use <code>p &gt; span</code> for direct children only.
+									</para>
+								</listitem>
+							</varlistentry>
+							<!--
+							<varlistentry>
+								<term><code>p//span</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;span&gt;</sgmltag> elements that are direct or indirect children of <sgmltag>&lt;p&gt;</sgmltag> elements are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><code>p/../span</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;span&gt;</sgmltag> elements that are grandchildren of <sgmltag>&lt;p&gt;</sgmltag> elements are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							-->
+							<varlistentry>
+								<term><code>p[foo^=bar]</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;p&gt;</sgmltag> elements that contain a <varname>foo</varname> attribute with a textual value <emphasis>beginning</emphasis> with <literal>bar</literal> are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><code>p[foo$=bar]</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;p&gt;</sgmltag> elements that contain a <varname>foo</varname> attribute with a textual value <emphasis>ending</emphasis> with <literal>bar</literal> are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+							<varlistentry>
+								<term><code>p[foo*=bar]</code></term>
+								<listitem>
+									<para>
+										All <sgmltag>&lt;p&gt;</sgmltag> elements that contain a <varname>foo</varname> attribute with a textual value that contains the sub-string <literal>bar</literal> in any position are selected.
+									</para>
+								</listitem>
+							</varlistentry>
+						</variablelist>
+					</example>
+				</listitem>
+			</itemizedlist>
+			<para>
+				Because the <varname>selector</varname> attribute can be either an <varname>id</varname> identifier attribute or CSS selector syntax, conflicting values could arise. <xref linkend="exam-Component_Reference-richjQuery-Avoiding_syntax_confusion" /> demonstrates how to use double backslashes to escape colon characters in <varname>id</varname> identifier values.
+			</para>
+			<example id="exam-Component_Reference-richjQuery-Avoiding_syntax_confusion">
+				<title>Avoiding syntax confusion</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richjQuery-Avoiding_syntax_confusion_0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The <varname>id</varname> identifier for the <sgmltag>&lt;h:panelGrid&gt;</sgmltag> element is <literal>form:menu</literal>, which can conflict with CSS selector syntax. Double backslashes can be used to escape the colon character such that the identifier is read correctly instead of being interpreted as CSS selector syntax.
+				</para>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richjQuery-Avoiding_syntax_confusion_1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richjQuery-Calling_a_richjQuery_as_a_JavaScript_function">
+			<title>Calling a <sgmltag>&lt;richjQuery&gt;</sgmltag> as a JavaScript function</title>
+			<para>
+				If the <varname>name</varname> attribute is specified, the <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component generates a JavaScript function that can be called by any other JavaScript on the page.
+			</para>
+			<para>
+				Calls to the function must pass a direct reference (<literal>this</literal>) to the calling object as a parameter. If the function requires extra parameters itself, these are provided in JavaScript Object Notation (JSON) syntax as a second parameter in the JavaScript call. The <literal>param</literal> namespace is then used in the <sgmltag>&lt;rich:jQuery&gt;</sgmltag> query to access the passed function parameters. <xref linkend="exam-Component_Reference-richjQuery-Calling_a_richjQuery_component_as_a_function" /> demonstrates the use of the <varname>name</varname> attribute and how to pass function parameters through the JavaScript calls.
+			</para>
+			<example id="exam-Component_Reference-richjQuery-Calling_a_richjQuery_component_as_a_function">
+				<title>Calling a <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component as a function</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richjQuery-Calling_a_richjQuery_component_as_a_function.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The example enlarges the images when the mouse moves over them. The <literal>enlargePic</literal> and <literal>releasePic</literal> components are called like ordinary JavaScript functions from the image elements.
+				</para>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richjQuery-Dynamic_rendering">
+			<title>Dynamic rendering</title>
+			<para>
+				The <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component applies style and behavioral changes to DOM objects dynamically. As such, changes applied during an Ajax response are overwritten, and will need to be re-applied once the Ajax response is complete.
+			</para>
+			<para>
+				Any queries with the <varname>timing</varname> attribute set to <literal>onload</literal> may not update during an Ajax response, as the DOM document is not completely reloaded. To ensure the query is re-applied after an Ajax response, include the <varname>name</varname> attribute in the <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component and invoke it using JavaScript from the <varname>oncomplete</varname> event attribute of the component that triggered the Ajax interaction.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richjQuery-Using_the_jQuery_JavaScript_framework">
+			<title>Using the jQuery JavaScript framework</title>
+			<para>
+				RichFaces includes the jQuery JavaScript framework. The features of the framework can be accessed directly without using a <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component by including the library on the page using the <sgmltag>&lt;a4j:loadScript&gt;</sgmltag> component:
+			</para>
+			<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richjQuery-Using_the_jQuery_JavaScript_framework.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<para>
+				Refer to the <citetitle>jQuery documentation</citetitle> at <ulink url="http://docs.jquery.com">http://docs.jquery.com</ulink> for full details on jQuery syntax and usage.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richjQuery-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.JQuery</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlJQuery</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.JQuery</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.JQueryRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.JQueryTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
+	<!-- TODO not in M2 -->
+	<!--
 	<section id="sect-Component_Reference-Layout_and_appearance-richseparator">
 		<title><sgmltag>&lt;rich:separator&gt;</sgmltag></title>
 		<para>
@@ -54,6 +318,7 @@
 			Incomplete
 		</para>
 	</section>
+	-->
 
 </chapter>
 
