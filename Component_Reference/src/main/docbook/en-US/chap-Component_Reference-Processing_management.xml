@@ -8,227 +8,249 @@
 	</para>
 	<section id="sect-Component_Reference-Processing_management-a4jqueue">
 		<title><sgmltag>&lt;a4j:queue&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.QueueRenderer</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HtmlQueue</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-family</parameter>: <classname>org.ajax4jsf.Queue</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>tag-class</parameter>: <classname>org.ajax4jsf.taglib.html.jsp.QueueTag</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:queue&gt;</sgmltag> component manages a queue of Ajax requests to control message processing.
 		</para>
-		<para>
-			The queue can be disabled by setting the <varname>disabled</varname> attribute to <literal>true</literal>. The <varname>size</varname> attribute specifies the number of requests that can be stored in the queue at a time; smaller queue sizes help prevent server overloads. When the queue's size is exceeded, the <varname>sizeExceededBehavior</varname> determines the way in which the queue handles the requests:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<literal>dropNext</literal> drops the next request currently in the queue.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>dropNew</literal> drops the incoming request.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>fireNext</literal> immediately sends the next request currently in the queue.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>fireNew</literal> immediately sends the incoming request.
-				</para>
-			</listitem>
-		</itemizedlist>
-		<para>
-			The <sgmltag>&lt;a4j:queue&gt;</sgmltag> component features several events relating to queuing actions:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					The <varname>oncomplete</varname> event attribute is fired after a request is completed. The request object is passed as a parameter to the event handler, so the queue is accessible using <code>request.queue</code> and the element which was the source of the request is accessible using <code>this</code>.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					The <varname>onrequestqueue</varname> event attribute is fired after a new request has been added to the queue.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					The <varname>onrequestdequeue</varname> event attribute is fired after a request has been removed from the queue.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					The <varname>onsizeexceeded</varname> event attribute is fired when the queue has been exceeded.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					The <varname>onsubmit</varname> event attribute is fired before the request is sent.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					The <varname>onsuccess</varname> event attribute is fired after a successful request bu before the <acronym>DOM</acronym> is updated on the client side.
-				</para>
-			</listitem>
-		</itemizedlist>
+		
+		<section id="sect-Component_Reference-a4jqueue-Queue_size">
+			<title>Queue size</title>
+			<para>
+				The <varname>size</varname> attribute specifies the number of requests that can be stored in the queue at a time; smaller queue sizes help prevent server overloads. When the queue's size is exceeded, the <varname>sizeExceededBehavior</varname> determines the way in which the queue handles the requests:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<literal>dropNext</literal> drops the next request currently in the queue.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>dropNew</literal> drops the incoming request.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>fireNext</literal> immediately sends the next request currently in the queue.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>fireNew</literal> immediately sends the incoming request.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-a4jqueue-a4jqueue_client-side_events">
+			<title><sgmltag>&lt;a4j:queue&gt;</sgmltag> client-side events</title>
+			<para>
+				The <sgmltag>&lt;a4j:queue&gt;</sgmltag> component features several events relating to queuing actions:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>oncomplete</varname> event attribute is fired after a request is completed. The request object is passed as a parameter to the event handler, so the queue is accessible using <code>request.queue</code> and the element which was the source of the request is accessible using <code>this</code>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>onrequestqueue</varname> event attribute is fired after a new request has been added to the queue.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>onrequestdequeue</varname> event attribute is fired after a request has been removed from the queue.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>onsizeexceeded</varname> event attribute is fired when the queue has been exceeded.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>onsubmit</varname> event attribute is fired before the request is sent.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>onsuccess</varname> event attribute is fired after a successful request but before the <acronym>DOM</acronym> is updated on the client side.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-a4jqueue-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.QueueRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HtmlQueue</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.ajax4jsf.Queue</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.ajax4jsf.taglib.html.jsp.QueueTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
 	<section id="sect-Component_Reference-Processing_management-a4jlog">
 		<title><sgmltag>&lt;a4j:log&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<parameter>component-type</parameter>: <classname>org.ajax4jsf.Log</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.AjaxLog</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-family</parameter>: <classname>org.ajax4jsf.Log</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.LogRenderer</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:log&gt;</sgmltag> component generates JavaScript that opens a debug window, logging application information such as requests, responses, and <acronym>DOM</acronym> changes.
 		</para>
-		<para>
-			The <varname>popup</varname> attribute causes the logging data to appear in a new pop-up window if set to <literal>true</literal>, or in place on the current page if set to <literal>false</literal>. The window is set to be opened by pressing the key combination <keycombo action="simul"><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>L</keycap></keycombo>; this can be partially reconfigured with the <varname>hotkey</varname> attribute, which specifies the letter key to use in combination with <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap></keycombo> instead of <keycap>L</keycap>.
-		</para>
-		<para>
-			The amount of data logged can be determined with the <varname>level</varname> attribute:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<literal>ERROR</literal>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>FATAL</literal>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>INFO</literal>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>WARN</literal>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>ALL</literal>, the default setting, logs all data.
-				</para>
-			</listitem>
-		</itemizedlist>
-		<example id="exam-Component_Reference-a4jlog-a4jlog_example">
-			<title><sgmltag>&lt;a4j:log&gt;</sgmltag> example</title>
-			
-<programlisting language="XML" role="XML">
-&lt;a4j:log level="ALL" popup="false" width="400" height="200" /&gt;
-</programlisting>
-		</example>
-		<note>
-			<title>Log renewal</title>
-			<para>
-				The log is automatically renewed after each Ajax request. It does not need to be explicitly re-rendered.
+		
+		<section id="sect-Component_Reference-a4jlog-Log_monitoring">
+			<title>Log monitoring</title><para>
+				The <varname>popup</varname> attribute causes the logging data to appear in a new pop-up window if set to <literal>true</literal>, or in place on the current page if set to <literal>false</literal>. The window is set to be opened by pressing the key combination <keycombo action="simul"><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>L</keycap></keycombo>; this can be partially reconfigured with the <varname>hotkey</varname> attribute, which specifies the letter key to use in combination with <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap></keycombo> instead of <keycap>L</keycap>.
 			</para>
-		</note>
+			<para>
+				The amount of data logged can be determined with the <varname>level</varname> attribute:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<literal>ERROR</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>FATAL</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>INFO</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>WARN</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>ALL</literal>, the default setting, logs all data.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<example id="exam-Component_Reference-a4jlog-a4jlog_example">
+				<title><sgmltag>&lt;a4j:log&gt;</sgmltag> example</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jlog-a4jlog_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<note>
+				<title>Log renewal</title>
+				<para>
+					The log is automatically renewed after each Ajax request. It does not need to be explicitly re-rendered.
+				</para>
+			</note>
+		</section>
+		
+		<section id="sect-Component_Reference-a4jlog-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.ajax4jsf.Log</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.AjaxLog</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.ajax4jsf.Log</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.LogRenderer</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
 	<section id="sect-Component_Reference-Processing_management-a4jstatus">
 		<title><sgmltag>&lt;a4j:status&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<parameter>component-type</parameter>: <classname>org.ajax4jsf.Status</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HtmlAjaxStatus</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-family</parameter>: <classname>javax.faces.Panel</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxStatusRenderer</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:status&gt;</sgmltag> component displays the status of current Ajax requests; the status can be either in progress or complete.
 		</para>
-		<para>
-			The <varname>startText</varname> attribute defines the text shown after the request has been started and is currently in progress. This text can be styled with the <varname>startStyle</varname> and <varname>startStyleClass</varname> attributes. Similarly, the <varname>stopText</varname> attribute defines the text shown once the request is complete, and text is styled with the <varname>stopStyle</varname> and <varname>stopStyleClass</varname> attributes. Alternatively, the text styles can be customized using facets, with the facet name set to either <literal>start</literal> or <literal>stop</literal> as required. If the <varname>stopText</varname> attribute is not defined, and no facet exists for the stopped state, the status is simply not shown; in this way only the progress of the request is displayed to the user.
-		</para>
-		<example id="exam-Component_Reference-a4jstatus-Basic_a4jstatus_usage">
-			<title>Basic <sgmltag>&lt;a4j:status&gt;</sgmltag> usage</title>
-			
-<programlisting language="XML" role="XML">
-&lt;a4j:status startText="In progress..." stopText="Complete" /&gt;
-</programlisting>
-		</example>
-		<para>
-			The <sgmltag>&lt;a4j:status&gt;</sgmltag> component works for each Ajax component inside the local region. If no region is defined, every request made on the page will activate the <sgmltag>&lt;a4j:status&gt;</sgmltag> component. Alternatively, the <sgmltag>&lt;a4j:status&gt;</sgmltag> component can be linked to specific components in one of two ways:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					The <varname>for</varname> attribute can be used to specify the component for which the status is to be monitored.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					With an <varname>id</varname> identifier attribute specified for the <sgmltag>&lt;a4j:status&gt;</sgmltag>, individual components can have their statuses monitored by referencing the identifier with their own <varname>status</varname> attributes.
-				</para>
-			</listitem>
-		</itemizedlist>
-		<example id="exam-Component_Reference-a4jstatus-Updating_a_common_a4jstatus_component">
-			<title>Updating a common <sgmltag>&lt;a4j:status&gt;</sgmltag> component</title>
-			
-<programlisting language="XML" role="XML">
-<xi:include href="extras/exam-Component_Reference-a4jstatus-Updating_a_common_a4jstatus_component.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
-</programlisting>
-		</example>
+		
+		<section id="sect-Component_Reference-a4jstatus-Customizing_the_text">
+			<title>Customizing the text</title>
+			<para>
+				The <varname>startText</varname> attribute defines the text shown after the request has been started and is currently in progress. This text can be styled with the <varname>startStyle</varname> and <varname>startStyleClass</varname> attributes. Similarly, the <varname>stopText</varname> attribute defines the text shown once the request is complete, and text is styled with the <varname>stopStyle</varname> and <varname>stopStyleClass</varname> attributes. Alternatively, the text styles can be customized using facets, with the facet name set to either <literal>start</literal> or <literal>stop</literal> as required. If the <varname>stopText</varname> attribute is not defined, and no facet exists for the stopped state, the status is simply not shown; in this way only the progress of the request is displayed to the user.
+			</para>
+			<example id="exam-Component_Reference-a4jstatus-Basic_a4jstatus_usage">
+				<title>Basic <sgmltag>&lt;a4j:status&gt;</sgmltag> usage</title>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jstatus-Basic_a4jstatus_usage.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-a4jstatus-Specifying_a_region">
+			<title>Specifying a region</title>
+			<para>
+				The <sgmltag>&lt;a4j:status&gt;</sgmltag> component works for each Ajax component inside the local region. If no region is defined, every request made on the page will activate the <sgmltag>&lt;a4j:status&gt;</sgmltag> component. Alternatively, the <sgmltag>&lt;a4j:status&gt;</sgmltag> component can be linked to specific components in one of two ways:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>for</varname> attribute can be used to specify the component for which the status is to be monitored.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						With an <varname>id</varname> identifier attribute specified for the <sgmltag>&lt;a4j:status&gt;</sgmltag>, individual components can have their statuses monitored by referencing the identifier with their own <varname>status</varname> attributes.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<example id="exam-Component_Reference-a4jstatus-Updating_a_common_a4jstatus_component">
+				<title>Updating a common <sgmltag>&lt;a4j:status&gt;</sgmltag> component</title>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jstatus-Updating_a_common_a4jstatus_component.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-a4jstatus-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.ajax4jsf.Status</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HtmlAjaxStatus</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>javax.faces.Panel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxStatusRenderer</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 
 </chapter>

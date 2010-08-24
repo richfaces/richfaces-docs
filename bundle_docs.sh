@@ -23,19 +23,12 @@ cp -r $DOCSDIR/Developer_Guide/target/docbook/publish/* $DOCSDIR/$VERSION/Develo
 echo "[BUNDLE_DOCS] -> Copying Migration Guide..."
 mkdir $DOCSDIR/$VERSION/Migration_Guide
 cp -r $DOCSDIR/Migration_Guide/target/docbook/publish/* $DOCSDIR/$VERSION/Migration_Guide/
-
-echo "[BUNDLE_DOCS] Building CDK docs..."
-cd ../..
-cd ./cdk/trunk/docs/Component_Development_Kit_Guide/
-mvn clean install
-
-echo "[BUNDLE_DOCS] Copying docs to bundle:"
 echo "[BUNDLE_DOCS] -> Copying Component Development Kit Guide..."
 mkdir $DOCSDIR/$VERSION/Component_Development_Kit_Guide
-cp -r ./target/docbook/publish/* $DOCSDIR/$VERSION/Component_Development_Kit_Guide/
+cp -r $DOCSDIR/Component_Development_Kit_Guide/target/docbook/publish/* $DOCSDIR/$VERSION/Component_Development_Kit_Guide/
 
 echo "[BUNDLE_DOCS] Zipping bundle..."
-cd $DOCSDIR
-zip -r $VERSION.zip $DOCSDIR/$VERSION
+cd $DOCSDIR/$VERSION/
+zip -r $VERSION.zip *
 
 echo "[BUNDLE_DOCS] Bundle complete."

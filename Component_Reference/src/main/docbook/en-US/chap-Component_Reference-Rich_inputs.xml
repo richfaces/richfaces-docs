@@ -114,67 +114,119 @@
 			The <sgmltag>&lt;rich:colorPicker&gt;</sgmltag> component has the unique event handler <varname>onbeforeshow</varname>, which is triggered immediately before the color picker is opened. The <varname>showEvent</varname> attribute can be used to bind the opening of the color picker to a specific event; it is bound to the <varname>onclick</varname> event by default.
 		</para>
 	</section>
-	
-	<section id="sect-Component_Reference-Rich_inputs-richcomboBox">
-		<title><sgmltag>&lt;rich:comboBox&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:comboBox&gt;</sgmltag> component is a typical combo-box with built-in Ajax capabilities. It supports client-side suggestions, browser-like selection, Seam entity converter support, and customization of the look and feel.
-		</para>
-		<para>
-			The <varname>value</varname> attribute stores the selected value for the combo-box. Suggestions shown in the drop-down list for the combo-box can be specified in one of two ways:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					Using the <varname>suggestionValues</varname> attribute, and defining a collection of suggestions:
-				</para>
-				<example id="exam-Component_Reference-richcomboBox-Defining_suggestion_values">
-					<title>Defining suggestion values</title>
-					
-<programlisting language="XML" role="XML">
-&lt;rich:comboBox value="#{bean.state}" suggestionValues="#{bean.suggestions}"
-</programlisting>
-				</example>
-			</listitem>
-			<listitem>
-				<para>
-					Using the JSF components <sgmltag>&lt;f:selectItem&gt;</sgmltag> and <sgmltag>&lt;f:selectItems&gt;</sgmltag> to define a list of items:
-				</para>
-				<example id="exam-Component_Reference-richcomboBox-Defining_list_items_for_richinplaceSelect">
-					<title>Defining list items for <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
-					
-<programlisting language="XML" role="XML">
-&lt;rich:comboBox value="#{bean.item}" valueChangeListener="#{bean.selectionChanged}" &gt;
-    &lt;f:selectItems value="#{bean.selectItems}" /&gt;
-    &lt;f.selectItem itemValue="Item 1" /&gt;
-    &lt;f.selectItem itemValue="Item 2" /&gt;
-    &lt;f.selectItem itemValue="Item 3" /&gt;
-    &lt;f.selectItem itemValue="Item 4" /&gt;
-&lt;/rich:comboBox&gt;
-</programlisting>
-				</example>
-			</listitem>
-		</itemizedlist>
-		<para>
-			Users can type into the combo-box's text field to enter a value, which also searches through the suggestion items in the drop-down box. By default, the first suggestion item is selected as the user types. This behavior can be deactivated by setting <code>selectFirstOnUpdate="false"</code>. Setting <code>directInputSuggestions="true"</code> causes the combo-box to fill the text field box with a matching suggestion as the user types. Alternatively, the text field can be disabled by setting <code>enableManualInput="false"</code>, which forces the users to pick from items in the drop-down box.
-		</para>
-		<para>
-			The <sgmltag>&lt;rich:comboBox&gt;</sgmltag> component has two unique event handlers:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<varname>onlistcall</varname> triggers before the drop-down list is shown, allowing the operation to be canceled.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>onselect</varname> triggers when a suggestion is selected from the drop-down list, before the update request is sent.
-				</para>
-			</listitem>
-		</itemizedlist>
-	</section>
 	-->
+	
+	<!--<rich:autocomplete>-->
+	<section id="sect-Component_Reference-Rich_inputs-richautocomplete">
+		<title><sgmltag>&lt;rich:autocomplete&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component is an auto-completing input-box with built-in Ajax capabilities. It supports client-side suggestions, browser-like selection, and customization of the look and feel.
+		</para>
+		<figure id="figu-Component_Reference-richautocomplete-richautocomplete">
+			<title><sgmltag>&lt;rich:autocomplete&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richautocomplete-richautocomplete.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component. The letter <wordasword>A</wordasword> has been entered, such that the suggestion list only shows those options beginning with <wordasword>A</wordasword>.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		
+		<section id="sect-Component_Reference-richautocomplete-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The <varname>value</varname> attribute stores the text entered by the user for the auto-complete box. Suggestions shown in the auto-complete list can be specified using the <varname>autocompleteList</varname> attribute, which points to a collection of suggestions:
+			</para>
+			<example id="exam-Component_Reference-richautocomplete-Defining_suggestion_values">
+				<title>Defining suggestion values</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocomplete-Defining_suggestion_values.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<!--
+			<itemizedlist>
+				<listitem>
+					<para>
+						Using the JSF components <sgmltag>&lt;f:selectItem&gt;</sgmltag> and <sgmltag>&lt;f:selectItems&gt;</sgmltag> to define a list of items:
+					</para>
+					<example id="exam-Component_Reference-richautocomplete-Defining_list_items_for_richinplaceSelect">
+						<title>Defining list items for <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
+						<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocomplete-Defining_list_items_for_richinplaceSelect.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					</example>
+				</listitem>
+			</itemizedlist>
+			-->
+		</section>
+		
+		<section id="sect-Component_Reference-richautocomplete-Interactivity_options">
+			<title>Interactivity options</title>
+			<!-- TODO
+			<para>
+				The input box can display an instructional label before text is entered. This can be set through the <varname>defaultLabel</varname> attribute.
+			</para>
+			-->
+			<para>
+				Users can type into the combo-box's text field to enter a value, which also searches through the suggestion items in the drop-down box. By default, the first suggestion item is selected as the user types. This behavior can be deactivated by setting <code><varname>selectFirst</varname>="false"</code>.
+			</para>
+			<para>
+				Setting <code><varname>autoFill</varname>="true"</code> causes the combo-box to fill the text field box with a matching suggestion as the user types.
+			</para>
+		</section>
+		
+		<!-- TODO
+		<section id="sect-Component_Reference-richautocomplete-richautocomplete_events">
+			<title><sgmltag>&lt;rich:autocomplete&gt;</sgmltag> events</title>
+			<para>
+				The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component has two unique event handlers:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<varname>onlistcall</varname> triggers before the drop-down list is shown, allowing the operation to be canceled.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>onselect</varname> triggers when a suggestion is selected from the drop-down list, before the update request is sent.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		-->
+		
+		<section id="sect-Component_Reference-richautocomplete-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.autocomplete</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAutocomplete</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.autocomplete</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.autocompleteRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.autocompleteTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+	</section>
 	
 	<!-- TODO not in M2 -->
 	<!--
@@ -268,6 +320,7 @@
 	</section>
 	-->
 	
+	<!--<rich:inplaceInput>-->
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceInput">
 		<title><sgmltag>&lt;rich:inplaceInput&gt;</sgmltag></title>
 		<para>
@@ -283,18 +336,20 @@
 		
 		<section id="sect-Component_Reference-richinplaceInput-Interactivity_options">
 			<title>Interactivity options</title>
+			<!--
 			<para>
 				When in the initial "view" state, the starting label can be set using the <varname>defaultLabel</varname> attribute, such as <code><varname>defaultLabel</varname>="click to edit"</code>.
 			</para>
-		
+			-->
 			<para>
-				By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event. When switching to "edit" mode, the existing text can be automatically highlighted to make editing easier by setting <code><varname>selectOnEdit</varname>="true"</code>.
+				By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event.
 			</para>
 			<para>
 				The user can confirm and save their input by pressing the <keycap>Enter</keycap> key or cancel by pressing the <keycap>Esc</keycap> key. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. These buttons can be positioned using the <varname>controlsHorizontalPosition</varname> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <varname>controlsVerticalPosition</varname> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <varname>saveControlIcon</varname> and <varname>cancelControlIcon</varname>. Further customization is possible through the use of facets.
 			</para>
 		</section>
 		
+		<!-- TODO
 		<section id="sect-Component_Reference-richinplaceInput-richinplaceInput_events">
 			<title><sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> events</title>
 			<para>
@@ -323,6 +378,7 @@
 				</listitem>
 			</itemizedlist>
 		</section>
+		-->
 		
 		<section id="sect-Component_Reference-richinplaceInput-Reference_data">
 			<title>Reference data</title>
@@ -356,6 +412,7 @@
 		</section>
 	</section>
 	
+	<!--<rich:inplaceSelect>-->
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceSelect">
 		<title><sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
 		<para>
@@ -447,15 +504,16 @@
 		</section>
 	</section>
 	
+	<!--<rich:inputNumberSlider>-->
 	<section id="sect-Component_Reference-Rich_inputs-richinputNumberSlider">
 		<title><sgmltag>&lt;rich:inputNumberSlider&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:inputNumberSlider&gt;</sgmltag> component provides a slider for changing numerical values. Optional features include a tool-tip to display the value while sliding, and a text field for typing the numerical value which can then be validated against the slider's range.
+			The <sgmltag>&lt;rich:inputNumberSlider&gt;</sgmltag> component provides a slider for changing numerical values. Optional features include control arrows to step through the values, a tool-tip to display the value while sliding, and a text field for typing the numerical value which can then be validated against the slider's range.
 		</para>
 		<section id="sect-Component_Reference-richinputNumberSlider-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Basic use of the component with no attributes specified will render a slider with a minimum value of 0, a maximum of 100, and a gradient step of 1, together with a text field for typing the desired numerical value. The slider is labeled with the minimum and maximum boundary values, and a tool-tip showing the current value is shown while sliding the slider.
+				Basic use of the component with no attributes specified will render a slider with a minimum value of 0, a maximum of 100, and a gradient step of 1, together with a text field for typing the desired numerical value. The slider is labeled with the minimum and maximum boundary values, and a tool-tip showing the current value is shown while sliding the slider. The <varname>value</varname> attribute is used for storing the currently selected value of the slider.
 			</para>
 		</section>
 		
@@ -471,7 +529,7 @@
 				The minimum and maximum labels on the slider can be hidden by setting <code><varname>showBoundaryValues</varname>="false"</code>. The tool-tip showing the current value can be hidden by setting <code><varname>showToolTip</varname>="false"</code>.
 			</para>
 			<para>
-				Arrow controls can be added to either side of the slider to adjust the value incrementally by setting <code>showArrows="true"</code>. Clicking the arrows move the slider indicator in that direction by the gradient step, and clicking and holding the arrows moves the indicator continuously. The time delay for each step when updating continuously can be defined using the <varname>delay</varname> attribute.
+				Arrow controls can be added to either side of the slider to adjust the value incrementally by setting <code><varname>showArrows</varname>="true"</code>. Clicking the arrows move the slider indicator in that direction by the gradient step, and clicking and holding the arrows moves the indicator continuously. The time delay for each step when updating continuously can be defined using the <varname>delay</varname> attribute.
 			</para>
 		</section>
 		
@@ -524,7 +582,10 @@
 			The ability to change the value by typing into the text field can be disabled by setting <code>enableManualInput="false"</code>.
 		</para>
 	</section>
+	-->
 	
+	<!--<rich:suggestionBox>-->
+	<!--
 	<section id="sect-Component_Reference-Rich_inputs-richsuggestionBox">
 		<title><sgmltag>&lt;rich:suggestionBox&gt;</sgmltag></title>
 		<para>

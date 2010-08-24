@@ -59,110 +59,117 @@
 	
 	<section id="sect-Component_Reference-Containers-a4jinclude">
 		<title><sgmltag>&lt;a4j:include&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<parameter>component-type</parameter>: <classname>org.ajax4jsf.Include</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.Include</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-family</parameter>: <classname>javax.faces.Output</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxIncludeRenderer</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:include&gt;</sgmltag> component allows one view to be included as part of another page. This is useful for applications where multiple views might appear on the one page, with navigation between the views. Views can use partial page navigation in Ajax mode, or standard <acronym>JSF</acronym> navigation for navigation between views.
 		</para>
-		<para>
-			The <varname>viewId</varname> attribute is required to reference the resource that will be included as a view on the page. It uses a full context-relative path to point to the resource, similar to the paths used for the <sgmltag>&lt;from-view-id&gt;</sgmltag> and <sgmltag>&lt;to-view-id&gt;</sgmltag> tags in the <filename>faces-config.xml</filename> <acronym>JSF</acronym> navigation rules.
-		</para>
-		<example id="exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude">
-			<title>A wizard using <sgmltag>&lt;a4j:include&gt;</sgmltag></title>
+		
+		<section id="sect-Component_Reference-a4jinclude-Basic_usage">
+			<title>Basic usage</title>
 			<para>
-				The page uses <sgmltag>&lt;a4j:include&gt;</sgmltag> to include the first step of the wizard:
+				The <varname>viewId</varname> attribute is required to reference the resource that will be included as a view on the page. It uses a full context-relative path to point to the resource, similar to the paths used for the <sgmltag>&lt;from-view-id&gt;</sgmltag> and <sgmltag>&lt;to-view-id&gt;</sgmltag> tags in the <filename>faces-config.xml</filename> <acronym>JSF</acronym> navigation rules.
 			</para>
-			
-<programlisting language="XML" role="XML">
-<xi:include href="extras/exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude-0.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
-</programlisting>
-			<para>
-				The first step is fully contained in a separate file, <filename>wstep1.xhtml</filename>. Subsequent steps are set up similarly with additional <guibutton>Previous</guibutton> buttons.
-			</para>
-			
-<programlisting language="XML" role="XML">
-<xi:include href="extras/exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude-1.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
-</programlisting>
-			<para>
-				The navigation is defined in the <filename>faces-config.xml</filename> configuration file:
-			</para>
-			
-<programlisting language="XML" role="XML">
-<xi:include href="extras/exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude-2.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
-</programlisting>
-		</example>
+			<example id="exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude">
+				<title>A wizard using <sgmltag>&lt;a4j:include&gt;</sgmltag></title>
+				<para>
+					The page uses <sgmltag>&lt;a4j:include&gt;</sgmltag> to include the first step of the wizard:
+				</para>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude-0.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The first step is fully contained in a separate file, <filename>wstep1.xhtml</filename>. Subsequent steps are set up similarly with additional <guibutton>Previous</guibutton> buttons.
+				</para>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude-1.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The navigation is defined in the <filename>faces-config.xml</filename> configuration file:
+				</para>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jinclude-A_wizard_using_a4jinclude-2.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-a4jinclude-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.ajax4jsf.Include</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.Include</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>javax.faces.Output</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxIncludeRenderer</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
 	<section id="sect-Component_Reference-Containers-a4joutputPanel">
 		<title><sgmltag>&lt;a4j:outputPanel&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<parameter>component-type</parameter>: <classname>org.ajax4jsf.OutputPanel</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HtmlAjaxOutputPanel</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-family</parameter>: <classname>javax.faces.Panel</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxOutputPanelRenderer</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component is used to group together components in to update them as a whole, rather than having to specify the components individually.
 		</para>
-		<para>
-			The <varname>layout</varname> attribute can be used to determine how the component is rendered in <acronym>HTML</acronym>:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<code>layout="inline"</code> is the default behavior, which will render the component as a pair of <sgmltag>&lt;span&gt;</sgmltag> tags containing the child components.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<code>layout="block"</code> will render the component as a pair of <sgmltag>&lt;div&gt;</sgmltag> tags containing the child components, which will use any defined <sgmltag>&lt;div&gt;</sgmltag> element styles.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<code>layout="none"</code> will render the component as a pair of <sgmltag>&lt;span&gt;</sgmltag> tags with an identifier equal to that of a child component. If the child component is rendered then the <sgmltag>&lt;span&gt;</sgmltag> are not included, leaving no markup representing the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> in <acronym>HTML</acronym>.
-				</para>
-			</listitem>
-		</itemizedlist>
-		<para>
-			Setting <code>ajaxRendered="true"</code> will cause the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> to be updated with each Ajax response for the page, even when not listed explicitly by the requesting component. This can in turn be overridden by specific attributes on any requesting components.
-		</para>
+		
+		<section id="sect-Component_Reference-a4joutputPanel-Panel_appearance">
+			<title>Panel appearance</title>
+			<para>
+				The <varname>layout</varname> attribute can be used to determine how the component is rendered in <acronym>HTML</acronym>:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<code>layout="inline"</code> is the default behavior, which will render the component as a pair of <sgmltag>&lt;span&gt;</sgmltag> tags containing the child components.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<code>layout="block"</code> will render the component as a pair of <sgmltag>&lt;div&gt;</sgmltag> tags containing the child components, which will use any defined <sgmltag>&lt;div&gt;</sgmltag> element styles.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<code>layout="none"</code> will render the component as a pair of <sgmltag>&lt;span&gt;</sgmltag> tags with an identifier equal to that of a child component. If the child component is rendered then the <sgmltag>&lt;span&gt;</sgmltag> are not included, leaving no markup representing the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> in <acronym>HTML</acronym>.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				Setting <code>ajaxRendered="true"</code> will cause the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> to be updated with each Ajax response for the page, even when not listed explicitly by the requesting component. This can in turn be overridden by specific attributes on any requesting components.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-a4joutputPanel-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.ajax4jsf.OutputPanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HtmlAjaxOutputPanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>javax.faces.Panel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxOutputPanelRenderer</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
 	<!-- TODO not in M2 -->
@@ -225,34 +232,38 @@
 	
 	<section id="sect-Component_Reference-Containers-a4jregion">
 		<title><sgmltag>&lt;a4j:region&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<parameter>component-type</parameter>: <classname>org.ajax4jsf.AjaxRegion</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HtmlAjaxRegion</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-family</parameter>: <classname>org.ajax4jsf.AjaxRegion</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxRegionRenderer</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:region&gt;</sgmltag> component specifies a part of the document object model (<acronym>DOM</acronym>) tree to be processed on the server. The processing includes data handling during decoding, conversion, validation, and model updating. When not using <sgmltag>&lt;a4j:region&gt;</sgmltag>, the entire view functions as a region.
 		</para>
 		<para>
 			The whole form is still submitted to the server, but only the specified region is processed. Regions can be nested, in which case only the immediate region of the component initiating the request will be processed.
 		</para>
+		
+		<section id="sect-Component_Reference-a4jregion-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.ajax4jsf.AjaxRegion</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HtmlAjaxRegion</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.ajax4jsf.AjaxRegion</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxRegionRenderer</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 
 </chapter>
