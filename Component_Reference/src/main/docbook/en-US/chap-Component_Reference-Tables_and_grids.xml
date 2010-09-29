@@ -35,24 +35,95 @@
 			</example>
 		</section>
 		
-		<!-- TODO
 		<section id="sect-Component_Reference-a4jrepeat-Limited_views_and_partial_updates">
 			<title>Limited views and partial updates</title>
 			<para>
 				The <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component uses other attributes common to iteration components, such as the <varname>first</varname> attribute for specifying the first item for iteration, and the <varname>rows</varname> attribute for specifying the number of rows of items to display.
 			</para>
 			<para>
-				After an Ajax request, only the rows specified with the <varname>ajaxKeys</varname> attribute are updated rather than the entire collection.
+				Specific cells, rows, and columns can be updated without sending Ajax requests for the entire collection. Components that cause the change can specify which part of the table to update through the <varname>render</varname> attribute. The <varname>render</varname> attribute specifies which part of a table to update:
 			</para>
-			<example id="exam-Component_Reference-a4jrepeat-Limited_views_and_partial_updates">
-				<title>Limited views and partial updates</title>
-				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-Tables_and_grids-Limited_views_and_partial_updates.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<para>
-					The table rows are limited using the <varname>first</varname> and <varname>rows</varname> attributes. Only those rows specified through the <varname>ajaxKeys</varname> are updated after an Ajax request.
-				</para>
-			</example>
+			<variablelist>
+				<varlistentry>
+					<term><code><varname>render</varname>=<replaceable>cellId</replaceable></code></term>
+					<listitem>
+						<para>
+							Update the cell with an identifier of <replaceable>cellId</replaceable> within the row that contains the current component.
+						</para>
+						<para>
+							Instead of a specific identifier, the <replaceable>cellId</replaceable> reference could be a variable: <code><varname>render</varname>=#{<replaceable>bean.cellToUpdate</replaceable>}</code>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><code><varname>render</varname>=<replaceable>tableId</replaceable>:<replaceable>rowId</replaceable></code></term>
+					<listitem>
+						<para>
+							Update the row with an identifier of <replaceable>rowId</replaceable> within the table with an identifier of <replaceable>tableId</replaceable>. Alternatively, if the current component is contained within the table, use <code><varname>render</varname>=<replaceable>rowId</replaceable></code>.
+						</para>
+						<para>
+							Instead of a specific identifier, the <replaceable>tableId</replaceable> of <replaceable>rowId</replaceable> references could be variables: <code><varname>render</varname>=<replaceable>tableId</replaceable>:#{<replaceable>bean.rowToUpdate</replaceable>}</code>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><code><varname>render</varname>=<replaceable>tableId</replaceable>:<replaceable>rowId</replaceable>:<replaceable>cellId</replaceable></code></term>
+					<listitem>
+						<para>
+							Update the cell with an identifier of <replaceable>cellId</replaceable>, within the row with and identifier of <replaceable>rowId</replaceable>, within the table with an identifier of <replaceable>tableId</replaceable>.
+						</para>
+						<para>
+							Instead of a specific identifier, any of the references could be variables: <code><varname>render</varname>=<replaceable>tableId</replaceable>:#{<replaceable>bean.rowToUpdate</replaceable>}:<replaceable>cellId</replaceable></code>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<para>
+				Alternatively, keywords can be used with the <varname>render</varname> attribute:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><code><varname>render</varname>=@column</code></term>
+					<listitem>
+						<para>
+							Update the column that contains the current component.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><code><varname>render</varname>=@row</code></term>
+					<listitem>
+						<para>
+							Update the row that contains the current component.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><code><varname>render</varname>=<replaceable>tableId</replaceable>:@body</code></term>
+					<listitem>
+						<para>
+							Update the body of the table with the identifier of <replaceable>tableId</replaceable>. Alternatively, if the current component is contained within the table, use <code><varname>render</varname>=@body</code> instead.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><code><varname>render</varname>=<replaceable>tableId</replaceable>:@header</code></term>
+					<listitem>
+						<para>
+							Update the header of the table with the identifier of <replaceable>tableId</replaceable>. Alternatively, if the current component is contained within the table, use <code><varname>render</varname>=@header</code> instead.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><code><varname>render</varname>=<replaceable>tableId</replaceable>:@footer</code></term>
+					<listitem>
+						<para>
+							Update the footer of the table with the identifier of <replaceable>tableId</replaceable>. Alternatively, if the current component is contained within the table, use <code><varname>render</varname>=@footer</code> instead.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
 		</section>
-		-->
 		
 		<section id="sect-Component_Reference-a4jrepeat-Reference_data">
 			<title>Reference data</title>
@@ -396,6 +467,9 @@
 		<para>
 			The <sgmltag>&lt;rich:dataGrid&gt;</sgmltag> component is used to arrange data objects in a grid. Values in the grid can be updated dynamically from the data model, and Ajax updates can be limited to specific rows. The component supports <literal>header</literal>, <literal>footer</literal>, and <literal>caption</literal> facets.
 		</para>
+		<para>
+			The <sgmltag>&lt;rich:dataGrid&gt;</sgmltag> component is similar in function to the JavaServer Faces <sgmltag>&lt;h:panelGrid&gt;</sgmltag> component. However, the <sgmltag>&lt;rich:dataGrid&gt;</sgmltag> component additionally allows iteration through the data model rather than just aligning child components in a grid layout.
+		</para>
 		<figure id="figu-Component_Reference-richdataGrid-The_richdataGrid_component">
 			<title>The <sgmltag>&lt;rich:dataGrid&gt;</sgmltag> component</title>
 			<mediaobject>
@@ -455,12 +529,8 @@
 		<section id="sect-Component_Reference-richdataGrid-Patial_updates">
 			<title>Patial updates</title>
 			<para>
-				As the component is based on the <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component, it can be partially updated with Ajax. The <varname>ajaxKeys</varname> attribute allows row keys to be defined, which are updated after an Ajax request.
+				As <sgmltag>&lt;rich:dataGrid&gt;</sgmltag> the component is based on the <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component, it can be partially updated with Ajax. Refer to <xref linkend="sect-Component_Reference-a4jrepeat-Limited_views_and_partial_updates" /> for details on partially updating the <sgmltag>&lt;rich:dataGrid&gt;</sgmltag> component.
 			</para>
-			<example id="exam-Component_Reference-richdataGrid-ajaxKeys_example">
-				<title><varname>ajaxKeys</varname> example</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richdataGrid-ajaxKeys_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			</example>
 		</section>
 		
 		<section id="sect-Component_Reference-richdataGrid-Reference_data">
@@ -586,7 +656,7 @@
 		<section id="sect-Component_Reference-richdataTable-Partial_updates">
 			<title>Partial updates</title>
 			<para>
-				The <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component is based on the <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component, and as such it can be partially updated using Ajax. The <varname>ajaxKeys</varname> attribute defines the rows to be updated during an Ajax request.
+				As <sgmltag>&lt;rich:dataTable&gt;</sgmltag> the component is based on the <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component, it can be partially updated with Ajax. Refer to <xref linkend="sect-Component_Reference-a4jrepeat-Limited_views_and_partial_updates" /> for details on partially updating the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component.
 			</para>
 		</section>
 		
@@ -951,7 +1021,7 @@
 			</variablelist>
 		</section>
 		
-		<!-- TODO
+		<!--
 		<section id="sect-Component_Reference-richlist-Bullet_point_type">
 			<title>Bullet point type</title>
 			<para>
@@ -985,6 +1055,64 @@
 			</variablelist>
 		</section>
 		-->
+		
+		<!--
+		<section id="sect-Component_Reference-richdataOrderedList-Numeration_type">
+			<title>Numeration type</title>
+			<para>
+				The <varname>type</varname> attribute defines the appearance of the numerating list markers for the list. The possible values for the <varname>type</varname> attribute are as follows:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>A</literal></term>
+					<listitem>
+						<para>
+							Numerates the list items as <wordasword>A</wordasword>, <wordasword>B</wordasword>, <wordasword>C</wordasword>, etc.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>a</literal></term>
+					<listitem>
+						<para>
+							Numerates the list items as <wordasword>a</wordasword>, <wordasword>b</wordasword>, <wordasword>c</wordasword>, etc.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>I</literal></term>
+					<listitem>
+						<para>
+							Numerates the list items as <wordasword>I</wordasword>, <wordasword>II</wordasword>, <wordasword>III</wordasword>, etc.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>i</literal></term>
+					<listitem>
+						<para>
+							Numerates the list items as <wordasword>i</wordasword>, <wordasword>ii</wordasword>, <wordasword>iii</wordasword>, etc.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>1</literal></term>
+					<listitem>
+						<para>
+							Numerates the list items as <wordasword>1</wordasword>, <wordasword>2</wordasword>, <wordasword>3</wordasword>, etc.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+		-->
+		
+		<section id="sect-Component_Reference-richlist-Bullet_and_numeration_appearance">
+			<title>Bullet and numeration appearance</title>
+			<para>
+				The appearance of bullet points for unordered lists or numeration for ordered lists can be customized through CSS, using the <property>list-style-type</property> property.
+			</para>
+		</section>
 		
 		<section id="sect-Component_Reference-richlist-Customizing_the_list">
 			<title>Customizing the list</title>
@@ -1043,203 +1171,6 @@
 			</itemizedlist>
 		</section>
 	</section>
-	
-	<!--<rich:dataDefinitionList>-->
-	<!-- TODO
-	<section id="sect-Component_Reference-Tables_and_grids-richdataDefinitionList">
-		<title><sgmltag>&lt;rich:dataDefinitionList&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:dataDefinitionList&gt;</sgmltag> component renders a list of items with definitions. The component uses a data model for managing the list items, which can be updated dynamically.
-		</para>
-		
-		<section id="sect-Component_Reference-richdataDefinitionList-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				The <varname>var</varname> attribute names a variable for iterating through the items in the data model. The items to iterate through are determined with the <varname>value</varname> attribute by using EL (Expression Lanugage).
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richdataDefinitionList-Customizing_the_list">
-			<title>Customizing the list</title>
-			<para>
-				The <varname>first</varname> attribute specifies which item in the data model to start from, and the <varname>rows</varname> attribute specifies the number of items to list. The <varname>title</varname> attribute is used for a floating tool-tip. <xref linkend="exam-Component_Reference-richdataDefinitionList-richdataDefinitionList_example" /> shows a simple example using the <sgmltag>&lt;rich:dataDefinitionList&gt;</sgmltag> component.
-			</para>
-			<example id="exam-Component_Reference-richdataDefinitionList-richdataDefinitionList_example">
-				<title><sgmltag>&lt;rich:dataDefinitionList&gt;</sgmltag> example</title>
-				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-Tables_and_grids-richdataDefinitionList_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<blockquote>
-					<figure id="figu-Component_Reference-richdataDefinitionList_example-richdataDefinitionList_example">
-						<title><sgmltag>&lt;rich:dataDefinitionList&gt;</sgmltag> example</title>
-						<mediaobject>
-							<imageobject>
-								<imagedata fileref="images/figu-Component_Reference-Tables_and_grids-richdataDefinitionList_example.png" format="PNG" />
-							</imageobject>
-							<textobject>
-								<para>
-									A list of cars with their price and mileage displayed as a data definition.
-								</para>
-							</textobject>
-						</mediaobject>
-					</figure>
-				</blockquote>
-			</example>
-		</section>
-		
-		<section id="sect-Component_Reference-richdataDefinitionList-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.DataDefinitionList</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlDataDefinitionList</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.DataDefinitionList</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.DataDefinitionListRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.DataDefinitionListTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-	-->
-	
-	<!--<rich:dataOrderedList>-->
-	<!-- TODO
-	<section id="sect-Component_Reference-Tables_and_grids-richdataOrderedList">
-		<title><sgmltag>&lt;rich:dataOrderedList&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:dataOrderedList&gt;</sgmltag> component renders an ordered list of items from a data model. Specific rows can be updated dynamically without updating the entire list.
-		</para>
-		
-		<section id="sect-Component_Reference-richdataOrderedList-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				The <varname>var</varname> attribute names a variable for iterating through the items in the data model. The items to iterate through are determined with the <varname>value</varname> attribute by using EL (Expression Lanugage).
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richdataOrderedList-Numeration_type">
-			<title>Numeration type</title>
-			<para>
-				The <varname>type</varname> attribute defines the appearance of the numerating list markers for the list. The possible values for the <varname>type</varname> attribute are as follows:
-			</para>
-			<variablelist>
-				<varlistentry>
-					<term><literal>A</literal></term>
-					<listitem>
-						<para>
-							Numerates the list items as <wordasword>A</wordasword>, <wordasword>B</wordasword>, <wordasword>C</wordasword>, etc.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>a</literal></term>
-					<listitem>
-						<para>
-							Numerates the list items as <wordasword>a</wordasword>, <wordasword>b</wordasword>, <wordasword>c</wordasword>, etc.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>I</literal></term>
-					<listitem>
-						<para>
-							Numerates the list items as <wordasword>I</wordasword>, <wordasword>II</wordasword>, <wordasword>III</wordasword>, etc.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>i</literal></term>
-					<listitem>
-						<para>
-							Numerates the list items as <wordasword>i</wordasword>, <wordasword>ii</wordasword>, <wordasword>iii</wordasword>, etc.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>1</literal></term>
-					<listitem>
-						<para>
-							Numerates the list items as <wordasword>1</wordasword>, <wordasword>2</wordasword>, <wordasword>3</wordasword>, etc.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-		</section>
-		
-		<section id="sect-Component_Reference-richdataOrderedList-Customizing_the_list">
-			<title>Customizing the list</title>
-			<para>
-				The <varname>first</varname> attribute specifies which item in the data model to start from, and the <varname>rows</varname> attribute specifies the number of items to list. The <varname>title</varname> attribute defines a pop-up title. To only update a sub-set of the rows in the list, use the <varname>ajaxKeys</varname> attribute, which points to an object that contains the specified rows.
-			</para>
-			<example id="exam-Component_Reference-richdataOrderedList-richdataOrderedList_example">
-				<title><sgmltag>&lt;rich:dataOrderedList&gt;</sgmltag> example</title>
-				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-Tables_and_grids-richdataOrderedList_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<blockquote>
-					<figure id="figu-Component_Reference-richdataOrderedList_example-richdataOrderedList_example">
-						<title><sgmltag>&lt;rich:dataOrderedList&gt;</sgmltag> example</title>
-						<mediaobject>
-							<imageobject>
-								<imagedata fileref="images/figu-Component_Reference-Tables_and_grids-richdataOrderedList_example.png" format="PNG" />
-							</imageobject>
-							<textobject>
-								<para>
-									A list of cars displayed in a numbered list.
-								</para>
-							</textobject>
-						</mediaobject>
-					</figure>
-				</blockquote>
-			</example>
-		</section>
-		
-		<section id="sect-Component_Reference-richdataOrderedList-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.DataOrderedList</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlDataOrderedList</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.DataOrderedList</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.DataOrderedListRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.DataOrderedListTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-	-->
 	
 	<section id="sect-Component_Reference-Tables_and_grids-Table_filtering">
 		<title>Table filtering</title>

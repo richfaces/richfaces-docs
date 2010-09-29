@@ -122,6 +122,9 @@
 		<para>
 			The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component is an auto-completing input-box with built-in Ajax capabilities. It supports client-side suggestions, browser-like selection, and customization of the look and feel.
 		</para>
+		<para>
+			To attach an auto-completion behavior to other components, use the <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior. Refer to <xref linkend="sect-Component_Reference-Rich_inputs-richautocompleteBehavior" /> for full details on the <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior.
+		</para>
 		<figure id="figu-Component_Reference-richautocomplete-richautocomplete">
 			<title><sgmltag>&lt;rich:autocomplete&gt;</sgmltag></title>
 			<mediaobject>
@@ -139,7 +142,7 @@
 		<section id="sect-Component_Reference-richautocomplete-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <varname>value</varname> attribute stores the text entered by the user for the auto-complete box. Suggestions shown in the auto-complete list can be specified using the <varname>autocompleteList</varname> attribute, which points to a collection of suggestions:
+				The <varname>value</varname> attribute stores the text entered by the user for the auto-complete box. Suggestions shown in the auto-complete list can be specified using the <varname>autocompleteMethod</varname> attribute, which points to a collection of suggestions.
 			</para>
 			<example id="exam-Component_Reference-richautocomplete-Defining_suggestion_values">
 				<title>Defining suggestion values</title>
@@ -222,6 +225,54 @@
 				<listitem>
 					<para>
 						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.autocompleteTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+	</section>
+	
+	<!--<rich:autocompleteBehavior>-->
+	<section id="sect-Component_Reference-Rich_inputs-richautocompleteBehavior">
+		<title><sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior is an auto-completing list of input suggestions that can be attached to other components.
+		</para>
+		<para>
+			Use the <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component for a standard auto-completing combo-box control. Refer to <xref linkend="sect-Component_Reference-Rich_inputs-richautocomplete" /> for full details on the <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component.
+		</para>
+		
+		<section id="sect-Component_Reference-richautocompleteBehavior-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Attach the <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior as a sub-element to another component to provide auto-complete suggestions for that component. Suggestions shown in the auto-complete list can be specified using the <varname>autocompleteMethod</varname> attribute, which points to a collection of suggestions. <xref linkend="exam-Component_Reference-richautocompleteBehavior-Defining_suggestion_values" /> demonstrates a <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior attached to a standard JSF <sgmltag>&lt;h:inputText&gt;</sgmltag> component.
+			</para>
+			<example id="exam-Component_Reference-richautocompleteBehavior-Defining_suggestion_values">
+				<title>Defining suggestion values</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocompleteBehavior-Defining_suggestion_values.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richautocompleteBehavior-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.autocompleteBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAutocompleteBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.autocompleteBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.autocompleteBehaviorTag</classname>
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -418,6 +469,19 @@
 		<para>
 			The <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component is similar to the <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component, except that the <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component uses a drop-down selection box to enter text instead of a regular text field. Changes can be rendered either in-line or for the whole block, and inputs can be focused with keyboard navigation. The component has three functional states: the "view" state, where the component displays its initial setting, such as "click to edit"; the "edit" state, where the user can select a value from a drop-down list; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
 		</para>
+		<figure id="figu-Component_Reference-richinplaceSelect-richinplaceSelect">
+			<title><sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richinplaceSelect-richinplaceSelect.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						The figure shows the process of interaction with a <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component. The first line shows the component displayed as a <guilabel>click to edit</guilabel> label. Once the label is clicked, the component becomes a drop-down list, shown in the second line. The final line shows the new selection in the text, which can be clicked and changed again if necessary.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
 		
 		<section id="sect-Component_Reference-richinplaceSelect-Basic_usage">
 			<title>Basic usage</title>
@@ -510,6 +574,20 @@
 		<para>
 			The <sgmltag>&lt;rich:inputNumberSlider&gt;</sgmltag> component provides a slider for changing numerical values. Optional features include control arrows to step through the values, a tool-tip to display the value while sliding, and a text field for typing the numerical value which can then be validated against the slider's range.
 		</para>
+		<figure id="figu-Component_Reference-richinputNumberSlider-richinputNumberSlider">
+			<title><sgmltag>&lt;rich:inputNumberSlider&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richinputNumberSlider-richinputNumberSlider.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						Two <sgmltag>&lt;rich:inputNumberSlider&gt;</sgmltag> components, one oriented horizontally and the other oriented vertically.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		
 		<section id="sect-Component_Reference-richinputNumberSlider-Basic_usage">
 			<title>Basic usage</title>
 			<para>
@@ -565,24 +643,77 @@
 		</section>
 	</section>
 	
-	<!-- TODO not in M2 -->
-	<!--
+	<!-- <rich:inputNumberSpinner> -->
 	<section id="sect-Component_Reference-Rich_inputs-richinputNumberSpinner">
 		<title><sgmltag>&lt;rich:inputNumberSpinner&gt;</sgmltag></title>
 		<para>
 			The <sgmltag>&lt;rich:inputNumberSpinner&gt;</sgmltag> component is a single-line input field with buttons to increase and decrease a numerical value. The value can be changed using the corresponding directional keys on a keyboard, or by typing into the field.
 		</para>
-		<para>
-			Basic use of the component with no attributes specified will render a number spinner with a minimum value of 1, a maximum value of 100, and a gradient step of 1. These default properties can be re-defined with the attributes <varname>minValue</varname>, <varname>maxValue</varname>, and <varname>step</varname> respectively. The starting value of the spinner is the minimum value unless otherwise specified with the <varname>value</varname> attribute.
-		</para>
-		<para>
-			When changing the value using the buttons, raising the value above the maximum or cause the spinner to restart at the minimum value. Likewise, when lowering below the minimum value the spinner will reset to the maximum value. This behavior can be deactivated by setting <code>cycled="false"</code>, which will cause the buttons to stop responding when the reach the maximum or minimum value.
-		</para>
-		<para>
-			The ability to change the value by typing into the text field can be disabled by setting <code>enableManualInput="false"</code>.
-		</para>
+		<figure id="figu-Component_Reference-richinputNumberSpinner-richinputNumberSpinner">
+			<title><sgmltag>&lt;rich:inputNumberSpinner&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richinputNumberSpinner-richinputNumberSpinner.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:inputNumberSpinner&gt;</sgmltag> component. The spinner currently has a value of 20, and the arrow buttons are used to increment or decrement the value.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		
+		<section id="sect-Component_Reference-richinputNumberSpinner-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Basic use of the component with no attributes specified will render a number spinner with a minimum value of 1, a maximum value of 100, and a gradient step of 1.
+			</para>
+			<para>
+				These default properties can be re-defined with the attributes <varname>minValue</varname>, <varname>maxValue</varname>, and <varname>step</varname> respectively. The starting value of the spinner is the minimum value unless otherwise specified with the <varname>value</varname> attribute.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richinputNumberSpinner-Interactivity_options">
+			<title>Interactivity options</title>
+			<para>
+				When changing the value using the buttons, raising the value above the maximum or cause the spinner to restart at the minimum value. Likewise, when lowering below the minimum value the spinner will reset to the maximum value. This behavior can be deactivated by setting <code>cycled="false"</code>, which will cause the buttons to stop responding when the reach the maximum or minimum value.
+			</para>
+			<para>
+				The ability to change the value by typing into the text field can be disabled by setting <code>enableManualInput="false"</code>.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richinputNumberSpinner-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.inputNumberSpinner</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlInputNumberSpinner</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.inputNumberSpinner</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.inputNumberSpinnerRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.inputNumberSpinnerTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
-	-->
 	
 	<!--<rich:suggestionBox>-->
 	<!--

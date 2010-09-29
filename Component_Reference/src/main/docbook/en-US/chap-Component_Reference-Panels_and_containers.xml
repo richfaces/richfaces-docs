@@ -468,44 +468,151 @@
 		</section>
 	</section>
 	
-	<!-- TODO not in M2 -->
-	<!--
-	<section id="sect-Component_Reference-Panels_and_containers-richsimpleTogglePanel">
-		<title><sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag></title>
+	<!--<rich:collapsiblePanel>-->
+	<section id="sect-Component_Reference-Panels_and_containers-richcollapsiblePanel">
+		<title><sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag> component is a collapsible panel that shows or hides content when the header bar is activated. It is a simplified version of <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component.
+			The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component is a collapsible panel that shows or hides content when the header bar is activated. It is a simplified version of <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component.
 		</para>
-		<para>
-			Basic usage requires only the <varname>label</varname> attribute to be specified, which provides the title for the header element.
-		</para>
-		<para>
-			The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<literal>server</literal>, the default setting, which causes the <sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag> component to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>ajax</literal>, which causes the <sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>client</literal>, which causes <sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag> components to update on the client side, re-rendering themselves and any additional components listed with the <code>render</code> attribute.
-				</para>
-			</listitem>
-		</itemizedlist>
-		<para>
-			If the <sgmltag>&lt;rich:simpleTogglePanel&gt;</sgmltag> component uses <code>opened="true"</code>, the panel is open and expanded, otherwise it is closed and collapsed.
-		</para>
-		<para>
-			The <code>openMarker</code> and <code>closeMarker</code> attributes can be used to define custom icons for the expanding header.
-		</para>
+		<figure id="figu-Component_Reference-richcollapsiblePanel-richcollapsiblePanel">
+			<title><sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richcollapsiblePanel-richcollapsiblePanel.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component displaying details on a camera model.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		
+		<section id="sect-Component_Reference-richcollapsiblePanel-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Basic usage requires only the <varname>label</varname> attribute to be specified, which provides the title for the header element.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richcollapsiblePanel-Expanding_and_collapsing_the_panel">
+			<title>Expanding and collapsing the panel</title>
+			<para>
+				If the <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component uses <code><varname>expanded</varname>="true"</code>, the panel is open and expanded, otherwise it is closed and collapsed.
+			</para>
+			<para>
+				The <varname>toggleElement</varname> attribute is used to specify which user interface element triggers the expansion when clicked. It can have one of the following values:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>heading</literal></term>
+					<listitem>
+						<para>
+							This is the default setting. Clicking anywhere on the header of the panel will cause it to expand or collapse.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>panel</literal></term>
+					<listitem>
+						<para>
+							Clicking anywhere on the entire panel will cause it to expand or collapse.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>control</literal></term>
+					<listitem>
+						<para>
+							The panel can only be expanded or collapsed by clicking on the control in the right-hand side of the header.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<para>
+				The switching mode for performing submissions is determined by the <varname>switchType</varname> attribute, which can have one of the following three values:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>server</literal></term>
+					<listitem>
+						<para>
+							This is the default setting. The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component performs a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>ajax</literal></term>
+					<listitem>
+						<para>
+							The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component performs an Ajax form submission, and only the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>client</literal></term>
+					<listitem>
+						<para>
+							The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component updates on the client side, re-rendering itself and any additional components listed with the <varname>render</varname> attribute.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+		
+		<section id="sect-Component_Reference-richcollapsiblePanel-Appearance">
+			<title>Appearance</title>
+			<para>
+				The appearance of the <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component can be customized using facets. The <literal>headerExpanded</literal> and <literal>headerCollapsed</literal> facets are used to style the appearance of the panel when it is expanded and collapsed respectively. The <literal>expandControl</literal> facet styles the control in the panel header used for expanding, and the <literal>collapseControl</literal> facet styles the control for collapsing.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richcollapsiblePanel-richcollapsiblePanel_server-side_events">
+			<title><sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> server-side events</title>
+			<para>
+				The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component uses the following unique server-side events:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>ChangeExpandEvent</varname> event occurs on the server side when the <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component is expanded or collapsed through Ajax using the <literal>server</literal> mode. It can be processed using the <varname>ChangeExpandListener</varname> attribute.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-richcollapsiblePanel-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.collapsiblePanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlcollapsiblePanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.collapsiblePanel</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.collapsiblePanelRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.collapsiblePanelTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
 	</section>
-	-->
 	
 	<!--<rich:tab>-->
 	<section id="sect-Component_Reference-Panels_and_containers-richtab">
@@ -903,30 +1010,6 @@
 		
 		<section id="sect-Component_Reference-richtogglePanel-Toggling_between_panels">
 			<title>Toggling between components</title>
-			<para>
-				The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
-			</para>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<literal>server</literal>, the default setting, which causes the child components to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<literal>ajax</literal>, which causes the child components to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<literal>client</literal>, which causes the child components to update on the client side. JavaScript changes the styles such that one component becomes hidden while the other is shown.
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-		
-		<section id="sect-Component_Reference-richtogglePanel-Switching_panels">
-			<title>Switching panels</title>
 			<para>
 				The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
 			</para>
