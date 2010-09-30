@@ -3,9 +3,19 @@
 ]>
 <chapter id="chap-Component_Reference-Output_and_messages">
 	<title>Output and messages</title>
+	<!--  In development notification  -->
+	<important>
+		<title>Documentation in development</title>
+		<para>
+			Some concepts covered in this chapter may refer to the previous version of <productname>Richfaces</productname>, version 3.3.3. This chapter is scheduled for review to ensure all information is up to date.
+		</para>
+	</important>
 	<para>
 		Read this chapter for details on components that display messages and other feedback to the user.
 	</para>
+	
+	<!-- <rich:message> -->
+	<!--
 	<section id="sect-Component_Reference-Output_and_messages-richmessage">
 		<title><sgmltag>&lt;rich:message&gt;</sgmltag></title>
 		<itemizedlist>
@@ -109,7 +119,10 @@
 </programlisting>
 		</example>
 	</section>
+	-->
 	
+	<!-- <rich:messages> -->
+	<!--
 	<section id="sect-Component_Reference-Output_and_messages-richmessages">
 		<title><sgmltag>&lt;rich:messages&gt;</sgmltag></title>
 		<itemizedlist>
@@ -213,30 +226,177 @@
 </programlisting>
 		</example>
 	</section>
+	-->
 	
-	<!--  
-	
+	<!-- <rich:paint2D> -->
+	<!--
 	<section id="sect-Component_Reference-Output_and_messages-richpaint2D">
 		<title><sgmltag>&lt;rich:paint2D&gt;</sgmltag></title>
 		<para>
 			Incomplete
 		</para>
 	</section>
+	-->
 	
+	<!-- <rich:progressBar> -->
 	<section id="sect-Component_Reference-Output_and_messages-richprogressBar">
 		<title><sgmltag>&lt;rich:progressBar&gt;</sgmltag></title>
 		<para>
 			The <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component displays a progress bar to indicate the status of a process to the user. It can update either through Ajax or on the client side, and the look and feel can be fully customized.
 		</para>
+		<figure id="figu-Component_Reference-richprogressBar-richprogressBar">
+			<title><sgmltag>&lt;rich:progressBar&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richprogressBar-richprogressBar.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component. The bar has progressed to 50% of the total time.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		
+		<section id="sect-Component_Reference-richprogressBar-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Basic usage of the <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component requires only the <varname>value</varname> attribute, which points to the method that provides the current progress.
+			</para>
+			<example id="exam-Component_Reference-richprogressBar-Basic_usage">
+				<title>Basic usage</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richprogressBar-Customizing_the_appearance">
+			<title>Customizing the appearance</title>
+			<para>
+				By default, the minimum value of the progress bar is <literal>0</literal> and the maximum value of the progress bar is <literal>100</literal>. These values can be customized using the <varname>minValue</varname> and <varname>maxValue</varname> attributes respectively.
+			</para>
+			<para>
+				The progress bar can be labeled in one of two ways:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term>Using the <varname>label</varname> attribute</term>
+					<listitem>
+						<para>
+							The content of the <varname>label</varname> attribute is displayed over the progress bar.
+						</para>
+						<example id="exam-Component_Reference-richprogressBar-Using_the_label_attribute">
+							<title>Using the <varname>label</varname> attribute</title>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Using_the_label_attribute.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</example>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Using nested child components</term>
+					<listitem>
+						<para>
+							Child components, such as the JSF <sgmltag>&lt;h:outputText&gt;</sgmltag> component, can be nested in the <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component to display over the progress bar.
+						</para>
+						<example id="exam-Component_Reference-richprogressBar-Using_nested_child_components">
+							<title>Using nested child components</title>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Using_nested_child_components.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</example>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<para>
+				For labeling, the <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component recognizes three macro-substitution parameters:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>{value}</literal></term>
+					<listitem>
+						<para>
+							The current progress value.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>{minValue}</literal></term>
+					<listitem>
+						<para>
+							The minimum value for the progress bar.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>{maxValue}</literal></term>
+					<listitem>
+						<para>
+							The maximum value for the progress bar.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<example id="exam-Component_Reference-richprogressBar-Using_macro-substitution_for_labeling">
+				<title>Using macro-substitution for labeling</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Using_macro-substitution_for_labeling.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<para>
+				Additionally, you can use the <literal>{param}</literal> parameter to specify any custom parameters you require. Define the parameters in the bean for the progress method, then reference it with the <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component's <varname>parameters</varname> attribute, as shown in <xref linkend="exam-Component_Reference-richprogressBar-Using_the_param_parameter" />.
+			</para>
+			<example id="exam-Component_Reference-richprogressBar-Using_the_param_parameter">
+				<title>Using the <varname>param</varname> parameter</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Using_the_param_parameter.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<para>
+				To define customized initial and complete states for the progress bar, use the <literal>initial</literal> and <literal>complete</literal> facets. The <literal>initial</literal> facet displays when the progress value is less than or equal to the minimum value, and the <literal>complete</literal> facet displays when the progress value is greater than or equal to the maximum value.
+			</para>
+			<example id="exam-Component_Reference-richprogressBar-Initial_and_complete_states">
+				<title>Initial and complete states</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Initial_and_complete_states.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richprogressBar-Using_set_intervals">
+			<title>Using set intervals</title>
+			<para>
+				The <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component can be set to constantly poll for updates at a constant interval. Use the <varname>interval</varname> component to set the interval in milliseconds. The progress bar is updated whenever the polled value changes. Polling is only active when the <varname>enabled</varname> attribute is set to <literal>true</literal>.
+			</para>
+			<example id="exam-Component_Reference-richprogressBar-Using_set_intervals">
+				<title>Using set intervals</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Using_set_intervals.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richaccordion-Update_mode">
+			<title>Update mode</title>
+			<para>
+				The mode for updating the progress bar is determined by the <code>mode</code> attribute, which can have one of the following values:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>ajax</literal></term>
+					<listitem>
+						<para>
+							The progress bar updates in the same way as the <sgmltag>&lt;a4j:poll&gt;</sgmltag> component. The <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component repeatedly polls the server for the current progress value.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>client</literal></term>
+					<listitem>
+						<para>
+							The progress bar updates on the client side, set using the JavaScript API.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
 	</section>
 	
+	<!-- <rich:toolTip> -->
+	<!--
 	<section id="sect-Component_Reference-Output_and_messages-richtoolTip">
 		<title><sgmltag>&lt;rich:toolTip&gt;</sgmltag></title>
 		<para>
 			Incomplete
 		</para>
 	</section>
-	
-	  -->
+	-->
 </chapter>
 
