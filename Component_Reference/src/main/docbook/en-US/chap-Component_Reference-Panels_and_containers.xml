@@ -641,10 +641,46 @@
 		<section id="sect-Component_Reference-richtab-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Basic usage of the <sgmltag>&lt;rich:tab&gt;</sgmltag> component requires the <varname>header</varname> attribute, which provides the text on the tab header. The content of the tab is then detailed inside the <sgmltag>&lt;rich:tab&gt;</sgmltag> tags.
+				Basic usage of the <sgmltag>&lt;rich:tab&gt;</sgmltag> component requires the <varname>name</varname> attribute to uniquely identify the tab within the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component. As the tabs are switched, the <varname>name</varname> identifier of the currently selected tab is stored in the <varname>activeItem</varname> attribute of the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richtab-Header_labeling">
+			<title>Header labeling</title>
+			<para>
+				In addition to the <varname>name</varname> identifier, the <varname>header</varname> attribute must be defined. The <varname>header</varname> attribute provides the text on the tab header. The content of the tab is then detailed inside the <sgmltag>&lt;rich:tab&gt;</sgmltag> tags.
 			</para>
 			<para>
-				Alternatively the <literal>header</literal> facet could be used in place of the <varname>label</varname> attribute. This would allow for additional styles and custom content to be applied to the tab.
+				Alternatively, the <literal>header</literal> facet could be used in place of the <varname>header</varname> attribute. This would allow for additional styles and custom content to be applied to the tab. The component also supports three facets to customize the appearance depending on the current state of the tab:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>headerActive</literal> facet</term>
+					<listitem>
+						<para>
+							This facet is used when the tab is the currently active tab.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>headerInactive</literal> facet</term>
+					<listitem>
+						<para>
+							This facet is used when the tab is not currently active.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>headerDisabled</literal> facet</term>
+					<listitem>
+						<para>
+							This facet is used when the tab is disabled.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<para>
+				The <literal>header</literal> facet is used in place of any state-based facet that has not been defined.
 			</para>
 		</section>
 		
@@ -657,8 +693,6 @@
 				An individual tab can be disabled by setting <code><varname>disabled</varname>="true"</code>. Disabled tabs cannot be activated or switched to.
 			</para>
 		</section>
-
-		<!-- FIXME details on header facets -->
 		
 		<section id="sect-Component_Reference-richtab-richtab_client-side_events">
 			<title><sgmltag>&lt;rich:tab&gt;</sgmltag> client-side events</title>
@@ -743,6 +777,9 @@
 		<section id="sect-Component_Reference-richtabPanel-Switching_tabs">
 			<title>Switching panels</title>
 			<para>
+				The <code>activeItem</code> attribute holds the active tab name. This name is a reference to the <varname>name</varname> identifier of the active child <sgmltag>&lt;rich:tab&gt;</sgmltag> component.
+			</para>
+			<para>
 				The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
 			</para>
 			<variablelist>
@@ -771,9 +808,6 @@
 					</listitem>
 				</varlistentry>
 			</variablelist>
-			<para>
-				The <code>activeItem</code> attribute holds the active tab name.
-			</para>
 		</section>
 
 		<!-- FIXME details on name attribute -->
