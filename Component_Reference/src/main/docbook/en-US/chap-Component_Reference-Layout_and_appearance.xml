@@ -27,65 +27,35 @@
 	<section id="sect-Component_Reference-Layout_and_appearance-richjQuery">
 		<title><sgmltag>&lt;rich:jQuery&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component applies styles and custom behavior to both <acronym>JSF</acronym> (JavaServer Faces) objects and regular <acronym>DOM</acronym> (Document Object Model) objects. It uses the <phrase>jQuery</phrase> JavaScript framework to add functionality without conflicting with the <filename>prototype.js</filename> library.
+			The <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component applies styles and custom behavior to both <acronym>JSF</acronym> (JavaServer Faces) objects and regular <acronym>DOM</acronym> (Document Object Model) objects. It uses the <phrase>jQuery</phrase> JavaScript framework to add functionality to web applications.
 		</para>
+		
 		<section id="sect-Component_Reference-richjQuery-Basic_usage">
 			<title>Basic usage</title>
 			<para>
 				The query triggered by the <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component is specified using the <varname>query</varname> attribute.
 			</para>
 			<para>
-				The query can be triggered in three different ways. Use the <varname>timing</varname> attribute to specify the point at which the query is triggered:
+				With the query defined, the component is used to trigger the query as either a <firstterm>timed query</firstterm> or a <firstterm>named query</firstterm>. The query can be bound to an event to act as an <firstterm>event handler</firstterm>. These different approaches are covered in the following sections.
 			</para>
-			<variablelist>
-				<varlistentry>
-					<term><literal>immediate</literal></term>
-					<listitem>
-						<para>
-							The query is triggered immediately.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>onload</literal></term>
-					<listitem>
-						<para>
-							The query is triggered when the document is loaded.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>onJScall</literal></term>
-					<listitem>
-						<para>
-							The query is triggered when a JavaScript function is invoked. The JavaScript function is specified using the <varname>name</varname> attribute.
-						</para>
-						<para>
-							If the <varname>name</varname> attribute is included when the <varname>timing</varname> attribute is set to either <literal>immediate</literal> or <literal>onload</literal>, the query can be triggered using the JavaScript function <emphasis>in addition</emphasis> to the specified trigger timing.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-			<example id="exam-Component_Reference-richjQuery-richjQuery_example">
-				<title><sgmltag>&lt;rich:jQuery&gt;</sgmltag> example</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richjQuery-richjQuery_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<para>
-					In the example, the selector picks out the odd <sgmltag>&lt;tr&gt;</sgmltag> elements that are children of the element with an <code><varname>id</varname>="customlist"</code> attribute. The query <code>addClass(odd)</code> is then performed on the selection during page loading (<literal>onload</literal>) such that the <literal>odd</literal> CSS class is added to the selected elements.
-				</para>
-			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richjQuery-Defining_a_selector">
+			<title>Defining a selector</title>
 			<para>
 				Any objects or lists of objects used in the query are specified using the <varname>selector</varname> attribute. The <varname>selector</varname> attribute references objects using the following method:
 			</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-						The <varname>selector</varname> attribute can refer to the <varname>id</varname> attribute of any JSF component or client.
+						The <varname>selector</varname> attribute can refer to the <varname>id</varname> identifier of any JSF component or client.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						If the <varname>selector</varname> attribute does not match the <varname>id</varname> identifier attribute of any JSF components or clients on the page, it instead uses syntax defined by the <orgname>World Wide Web Consortium (<acronym>W3C</acronym>)</orgname> for the <acronym>CSS</acronym> rule selector. <xref linkend="exam-Component_Reference-richjQuery-Example_selector_values" /> shows a list of examples of the selector syntax. Refer to the syntax specification at <ulink url="http://www.w3.org/TR/CSS2/selector.html">http://www.w3.org/TR/CSS2/selector.html</ulink> for full details.
+						If the <varname>selector</varname> attribute does not match the <varname>id</varname> identifier attribute of any JSF components or clients on the page, it instead uses syntax defined by the <orgname>World Wide Web Consortium (<acronym>W3C</acronym>)</orgname> for the <acronym>CSS</acronym> rule selector. <!--<xref linkend="exam-Component_Reference-richjQuery-Example_selector_values" /> shows a list of examples of the selector syntax.--> Refer to the syntax specification at <ulink url="http://api.jquery.com/category/selectors/">http://api.jquery.com/category/selectors/</ulink> for full details.
 					</para>
+					<!--
 					<example id="exam-Component_Reference-richjQuery-Example_selector_values">
 						<title>Example selector values</title>
 						<variablelist>
@@ -153,24 +123,6 @@
 									</para>
 								</listitem>
 							</varlistentry>
-							<!--
-							<varlistentry>
-								<term><code>p//span</code></term>
-								<listitem>
-									<para>
-										All <sgmltag>&lt;span&gt;</sgmltag> elements that are direct or indirect children of <sgmltag>&lt;p&gt;</sgmltag> elements are selected.
-									</para>
-								</listitem>
-							</varlistentry>
-							<varlistentry>
-								<term><code>p/../span</code></term>
-								<listitem>
-									<para>
-										All <sgmltag>&lt;span&gt;</sgmltag> elements that are grandchildren of <sgmltag>&lt;p&gt;</sgmltag> elements are selected.
-									</para>
-								</listitem>
-							</varlistentry>
-							-->
 							<varlistentry>
 								<term><code>p[foo^=bar]</code></term>
 								<listitem>
@@ -197,6 +149,7 @@
 							</varlistentry>
 						</variablelist>
 					</example>
+					-->
 				</listitem>
 			</itemizedlist>
 			<para>
@@ -211,14 +164,95 @@
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richjQuery-Avoiding_syntax_confusion_1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</example>
 		</section>
-		
-		<section id="sect-Component_Reference-richjQuery-Calling_a_richjQuery_as_a_JavaScript_function">
-			<title>Calling a <sgmltag>&lt;richjQuery&gt;</sgmltag> as a JavaScript function</title>
+
+		<section id="sect-Component_Reference-richjQuery-Event_handlers">
+			<title>Event handlers</title>
 			<para>
-				If the <varname>name</varname> attribute is specified, the <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component generates a JavaScript function that can be called by any other JavaScript on the page.
+				Queries set as event handlers are triggered when the component specified in the <varname>selector</varname> attribute raises an event. The query is bound to the event defined using the <varname>event</varname> attribute.
 			</para>
 			<para>
-				Calls to the function must pass a direct reference (<literal>this</literal>) to the calling object as a parameter. If the function requires extra parameters itself, these are provided in JavaScript Object Notation (JSON) syntax as a second parameter in the JavaScript call. The <literal>param</literal> namespace is then used in the <sgmltag>&lt;rich:jQuery&gt;</sgmltag> query to access the passed function parameters. <xref linkend="exam-Component_Reference-richjQuery-Calling_a_richjQuery_component_as_a_function" /> demonstrates the use of the <varname>name</varname> attribute and how to pass function parameters through the JavaScript calls.
+				Use the <varname>attachType</varname> attribute to specify how the event-handling queries are attached to the events:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>bind</literal></term>
+					<listitem>
+						<para>
+							This is the default for attaching queries to events. The event handler is bound to all elements currently defined by the <varname>selector</varname> attribute.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>live</literal></term>
+					<listitem>
+						<para>
+							The event handler is bound to all current and future elements defined by the <varname>selector</varname> attribute.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>one</literal></term>
+					<listitem>
+						<para>
+							The event handler is bound to all elements currently defined by the <varname>selector</varname> attribute. After the first invocation of the event, the event handler is unbound such that it no longer fires when the event is raised.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+		
+		<section id="sect-Component_Reference-richjQuery-Timed_queries">
+			<title>Timed queries</title>
+			<para>
+				Timed queries are triggered at specified times. This can be useful for calling simple methods when a page is rendered, or for adding specific functionality to an element. Use the <varname>timing</varname> attribute to specify the point at which the timed query is triggered:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>ondomready</literal></term>
+					<listitem>
+						<para>
+							This is the default behavior. The query is triggered when the document is loaded and the DOM is ready. The query is called as a <methodname>jQuery()</methodname> function.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>immediate</literal></term>
+					<listitem>
+						<para>
+							The query is triggered immediately. The query is called as an in-line script.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<example id="exam-Component_Reference-richjQuery-richjQuery_example">
+				<title><sgmltag>&lt;rich:jQuery&gt;</sgmltag> example</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richjQuery-richjQuery_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					In the example, the selector picks out the odd <sgmltag>&lt;tr&gt;</sgmltag> elements that are children of the element with an <code><varname>id</varname>="customlist"</code> attribute. The query <code>addClass(odd)</code> is then performed on the selection during page loading (<literal>onload</literal>) such that the <literal>odd</literal> CSS class is added to the selected elements.
+				</para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/Component_Reference-richjQuery-richjQuery_example.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							A table highlighted in a "zebra" fashion, with every odd row colored.
+						</para>
+					</textobject>
+				</mediaobject>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-richjQuery-Named_queries">
+			<title>Named queries</title>
+			<para>
+				Named queries are given a name such that they can be triggered by other functions or handlers. Use the <varname>name</varname> attribute to name the query. The query can then be accessed as though it were a JavaScript function using the specified <varname>name</varname> attribute as the function name.
+			</para>
+			<para>
+				Calls to the function must pass a direct reference (<literal>this</literal>) to the calling object as a parameter. This is treated the same as an item defined through the <varname>selector</varname> attribute.
+			</para>
+			<para>
+				If the function requires extra parameters itself, these are provided in JavaScript Object Notation (JSON) syntax as a second parameter in the JavaScript call. The <literal>options</literal> namespace is then used in the <sgmltag>&lt;rich:jQuery&gt;</sgmltag> query to access the passed function parameters. <xref linkend="exam-Component_Reference-richjQuery-Calling_a_richjQuery_component_as_a_function" /> demonstrates the use of the <varname>name</varname> attribute and how to pass function parameters through the JavaScript calls.
 			</para>
 			<example id="exam-Component_Reference-richjQuery-Calling_a_richjQuery_component_as_a_function">
 				<title>Calling a <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component as a function</title>
@@ -235,18 +269,7 @@
 				The <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component applies style and behavioral changes to DOM objects dynamically. As such, changes applied during an Ajax response are overwritten, and will need to be re-applied once the Ajax response is complete.
 			</para>
 			<para>
-				Any queries with the <varname>timing</varname> attribute set to <literal>onload</literal> may not update during an Ajax response, as the DOM document is not completely reloaded. To ensure the query is re-applied after an Ajax response, include the <varname>name</varname> attribute in the <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component and invoke it using JavaScript from the <varname>oncomplete</varname> event attribute of the component that triggered the Ajax interaction.
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richjQuery-Using_the_jQuery_JavaScript_framework">
-			<title>Using the jQuery JavaScript framework</title>
-			<para>
-				RichFaces includes the jQuery JavaScript framework. The features of the framework can be accessed directly without using a <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component by including the library on the page using the <sgmltag>&lt;a4j:loadScript&gt;</sgmltag> component:
-			</para>
-			<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richjQuery-Using_the_jQuery_JavaScript_framework.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			<para>
-				Refer to the <citetitle>jQuery documentation</citetitle> at <ulink url="http://docs.jquery.com">http://docs.jquery.com</ulink> for full details on jQuery syntax and usage.
+				Any timed queries with the <varname>timing</varname> attribute set to <literal>ondomready</literal> may not update during an Ajax response, as the DOM document is not completely reloaded. To ensure the query is re-applied after an Ajax response, include the <varname>name</varname> attribute in the <sgmltag>&lt;rich:jQuery&gt;</sgmltag> component and invoke it using JavaScript from the <varname>oncomplete</varname> event attribute of the component that triggered the Ajax interaction.
 			</para>
 		</section>
 		
