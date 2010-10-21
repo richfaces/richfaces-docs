@@ -11,93 +11,188 @@
 		</para>
 	</important>
 	<para>
-		This chapter details those components which act as panels and containers to hold groups of other components.
-	</para>
-	
-	<!-- TODO not in M3 -->
-	<!--
-	<para>
 		This chapter details rich components for user input and interaction.
 	</para>
+	
+	<!-- <rich:calendar> -->
 	<section id="sect-Component_Reference-Rich_inputs-richcalendar">
 		<title><sgmltag>&lt;rich:calendar&gt;</sgmltag></title>
 		<para>
 			The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component allows the user to enter a date and time through an in-line or pop-up calendar. The pop-up calendar can navigate through months and years, and its look and feel can be highly customized.
 		</para>
-		<para>
-			The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component supports two different ways of loading data through defining the <varname>mode</varname> attribute. When not specified, the component uses <literal>client</literal> mode, which loads an initial portion of data within a set date range. The range can be defined by using the <varname>preloadDateRangeBegin</varname> and <varname>preloadDateRangeEnd</varname> attributes. Additional data requests are not sent. Alternatively, with <code>mode="ajax"</code> the <sgmltag>&lt;rich:calendar&gt;</sgmltag> requests portions of data for rendering from a special data model. The data model can be defined through the <varname>dataModel</varname> attribute, which points to an object that implements the <classname>CalendarDataModel</classname> interface. If the <varname>dataModel</varname> attribute is not defined or has a value of <literal>null</literal>, the <literal>ajax</literal> mode functions the same as the <literal>client</literal> mode.
-		</para>
-		<para>
-			The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component is presented as a pop-up by default, appearing as a text field with a button to expand the full pop-up calendar. Specifying <code>popup="false</code> will render the calendar in-line on the page instead, which displays the full calendar without the text field or display button. The appearance of the display button can be altered from the standard calendar icon by defining the <varname>buttonIcon</varname> and <varname>buttonIconDisabled</varname> attributes to replace the icon with a specified file, or by defining the <varname>buttonLabel</varname> attribute to display text on the button without an icon. If <varname>buttonLabel</varname> is specified then both <varname>buttonIcon</varname> and <varname>buttonIconDisabled</varname> attributes are ignored. The text field box can also be hidden by setting <code>showInput="false"</code>.
-		</para>
-		<para>
-			The position at which the pop-up calendar displays relative to the text field and button can be configured using the <varname>jointPoint</varname> and <varname>direction</varname> attributes. The <varname>jointPoint</varname> attribute refers to the corner of the text field and button with which the calendar will be aligned and the <varname>direction</varname> specifies which direction the pop-up calendar will span relative to the joint point. The default settings are <code>jointPoint="bottom-left"</code> and <code>direction="bottom-right"</code>, causing the pop-up calendar to align with the bottom-left corner of the text field and span to the bottom-right, underneath the text field and button. The diagram shows the joint points and directions that can be used. Alternatively, both <varname>jointPoint</varname> and <varname>direction</varname> can be set to <literal>auto</literal> to allow smart pop-up positioning.
-		</para>
-		<para>
-			The calendar features a <guibutton>Today</guibutton> button for locating today's date on the calendar. This can be set to three different values using the <varname>todayControlMode</varname> attribute:
-		</para>
-		<itemizedlist>
-			<listitem>
+
+		<figure id="figu-Component_Reference-richcalendar-richcalendar">
+			<title><sgmltag>&lt;rich:calendar&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richcalendar-richcalendar.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						An expanded <sgmltag>&lt;rich:calendar&gt;</sgmltag> component, displaying the calendar month of December, 2010.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+
+		<section id="sect-Component_Reference-richcalendar-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Basic usage of the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component requires only the <varname>value</varname> attribute, which holds the currently selected date. <xref linkend="exam-Component_Reference-richcalendar-Basic_usage" /> shows a basic declaration, with the value pointing to a data model.
+			</para>
+			<example id="exam-Component_Reference-richcalendar-Basic_usage">
+				<title>Basic usage</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcalendar-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-richcalendar-Using_a_data_model">
+			<title>Using a data model</title>
+			<para>
+				The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component supports two different ways of loading data through defining the <varname>mode</varname> attribute. When not specified, the component uses <literal>client</literal> mode, which loads an initial portion of data within a set date range. The range can be defined by using the <varname>preloadDateRangeBegin</varname> and <varname>preloadDateRangeEnd</varname> attributes. Additional data requests are not sent.
+			</para>
+			<para>
+				Alternatively, with <code>mode="ajax"</code> the <sgmltag>&lt;rich:calendar&gt;</sgmltag> requests portions of data for rendering from a special data model. The data model can be defined through the <varname>dataModel</varname> attribute, which points to an object that implements the <classname>CalendarDataModel</classname> interface. If the <varname>dataModel</varname> attribute is not defined or has a value of <literal>null</literal>, the <literal>ajax</literal> mode functions the same as the <literal>client</literal> mode.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richcalendar-Behavior_and_appearance">
+			<title>Behavior and appearance</title>
+			<para>
+				The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component is presented as a pop-up by default, appearing as a text field with a button to expand the full pop-up calendar. To render the calendar in-line on the page instead, set <code>popup="false</code>. This displays the full calendar without the text field or display button.
+			</para>
+			<para>
+				To change the appearance of the display button from the standard calendar icon, use the <varname>buttonIcon</varname> and <varname>buttonIconDisabled</varname> attributes to replace the icon with a specified file. Alternatively, use the <varname>buttonLabel</varname> attribute to display text on the button without an icon. If <varname>buttonLabel</varname> is specified then both the <varname>buttonIcon</varname> and <varname>buttonIconDisabled</varname> attributes are ignored. To hide the text field box, set <code>showInput="false"</code>.
+			</para>
+			<para>
+				To change the default position at which the pop-up calendar is shown relative to the text field and button, use the <varname>jointPoint</varname> and <varname>direction</varname> attributes. The <varname>jointPoint</varname> attribute refers to the corner of the text field and button with which the calendar will be aligned and the <varname>direction</varname> specifies which direction the pop-up calendar will span relative to the joint point. The default settings are <code>jointPoint="bottom-left"</code> and <code>direction="bottom-right"</code>, causing the pop-up calendar to align with the bottom-left corner of the text field and span to the bottom-right, underneath the text field and button. The diagram shows the joint points and directions that can be used. Alternatively, set both <varname>jointPoint</varname> and <varname>direction</varname> attributes to <literal>auto</literal> to allow smart pop-up positioning. <xref linkend="figu-Component_Reference-richcalendar-Pop-up_positioning" /> shows the different possible settings for the <varname>jointPoint</varname> and <varname>direction</varname> attributes.
+			</para>
+			<figure id="figu-Component_Reference-richcalendar-Pop-up_positioning">
+				<title>Pop-up positioning</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/figu-Component_Reference-richcalendar-Pop-up_positioning.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							Pop-up positioning is determined using the <varname>jointPoint</varname> and <varname>direction</varname> attributes.
+						</para>
+					</textobject>
+				</mediaobject>
 				<para>
-					<literal>hidden</literal>, which does not display the button;
+					Pop-up positioning is determined using the <varname>jointPoint</varname> and <varname>direction</varname> attributes. Values for the <varname>jointPoint</varname> attribute are shown in red, while values for the <varname>direction</varname> attribute are shown in black.
 				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>select</literal>, the default setting, which scrolls the calendar to the current month and selects today's date; and
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>scroll</literal>, which scrolls the calendar to the current month but does not select today's date.
-				</para>
-			</listitem>
-		</itemizedlist>
-		<para>
-			The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can additionally allow a time of day to be specified with the date. After selecting a date the option to set a time becomes available. The default time can be set with the <varname>defaultTime</varname> attribute. If the time is altered and a new date is selected, it will not reset unless <code>resetTimeOnDateSelect="true"</code> is specified.
-		</para>
-		<para>
-			There are several event handlers that are unique to the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component.
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<varname>ondateselect</varname> is triggered when the date is selected by the user, before the update request is sent.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>ondateselected</varname> is triggered after the date is selected by the user.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>oncurrentdateselect</varname> is triggered when any of the year- or month-changing buttons are pressed, before the update request is sent.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>oncurrentdateselected</varname> is triggered after any of the year- or month-changing buttons are pressed.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>ontimeselect</varname> is triggered when the time is set by the user, before the update request is sent.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>ontimeselected</varname> is triggered after the time has been set by the user.
-				</para>
-			</listitem>
-		</itemizedlist>
-		<para>
-			The entire calendar can be set as read-only with <code>readonly="true"</code>. This allows months and years to be browsed through with the arrow controls, but dates and times cannot be selected.
-		</para>
+			</figure>
+			<para>
+				The calendar features a <guibutton>Today</guibutton> button for locating today's date on the calendar. This can be set to three different values using the <varname>todayControlMode</varname> attribute:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<literal>hidden</literal>, which does not display the button;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>select</literal>, the default setting, which scrolls the calendar to the current month and selects today's date; and
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>scroll</literal>, which scrolls the calendar to the current month but does not select today's date.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				To make the entire calendar read-only, set <code>readonly="true"</code>. This allows months and years to be browsed through with the arrow controls, but dates and times cannot be selected.
+			</para>
+			<!-- TODO not in M4 -->
+			<!--
+			<para>
+				The styling and appearance of the calendar can be fully customized using facets. 
+			</para>
+			-->
+		</section>
+
+		<section id="sect-Component_Reference-richcalendar-Time_of_day">
+			<title>Time of day</title>
+			<para>
+				The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can additionally allow a time of day to be specified with the date. After selecting a date the option to set a time becomes available. The default time can be set with the <varname>defaultTime</varname> attribute. If the time is altered and a new date is selected, it will not reset unless <code>resetTimeOnDateSelect="true"</code> is specified.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richcalendar-richcalendar_events">
+			<title><sgmltag>&lt;rich:calendar&gt;</sgmltag> events</title>
+			<para>
+				There are several event handlers that are unique to the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<varname>ondateselect</varname> is triggered when the date is selected by the user, before the update request is sent.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>ondateselected</varname> is triggered after the date is selected by the user.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>oncurrentdateselect</varname> is triggered when any of the year- or month-changing buttons are pressed, before the update request is sent.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>oncurrentdateselected</varname> is triggered after any of the year- or month-changing buttons are pressed.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>ontimeselect</varname> is triggered when the time is set by the user, before the update request is sent.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>ontimeselected</varname> is triggered after the time has been set by the user.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-richcalendar-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.calendar</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlCalendar</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.calendar</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.calendarRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.calendarTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
-	-->
 	
-	<!-- TODO not in M3 -->
+	<!-- TODO not in M4 -->
 	<!--
 	<section id="sect-Component_Reference-Rich_inputs-richcolorPicker">
 		<title><sgmltag>&lt;rich:colorPicker&gt;</sgmltag></title>
@@ -231,7 +326,7 @@
 		</section>
 	</section>
 	
-	<!-- TODO not in M3 -->
+	<!-- TODO not in M4 -->
 	<!--<rich:autocompleteBehavior>-->
 	<!--
 	<section id="sect-Component_Reference-Rich_inputs-richautocompleteBehavior">
@@ -282,7 +377,7 @@
 	</section>
 	-->
 	
-	<!-- TODO not in M3 -->
+	<!-- TODO not in M4 -->
 	<!--
 	<section id="sect-Component_Reference-Rich_inputs-richeditor">
 		<title><sgmltag>&lt;rich:editor&gt;</sgmltag></title>
@@ -402,13 +497,13 @@
 			</para>
 			<para>
 				The user can confirm and save their input by pressing the <keycap>Enter</keycap> key or cancel by pressing the <keycap>Esc</keycap> key. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. 
-				<!-- TODO not in M3
+				<!-- TODO not in M4
 				These buttons can be positioned using the <varname>controlsHorizontalPosition</varname> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <varname>controlsVerticalPosition</varname> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <varname>saveControlIcon</varname> and <varname>cancelControlIcon</varname>. Further customization is possible through the use of facets.
 				-->
 			</para>
 		</section>
 		
-		<!-- TODO not in M3
+		<!-- TODO not in M4
 		<section id="sect-Component_Reference-richinplaceInput-richinplaceInput_events">
 			<title><sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> events</title>
 			<para>
@@ -471,7 +566,7 @@
 		</section>
 	</section>
 	
-	<!-- TODO not in M3 -->
+	<!-- TODO not in M4 -->
 	<!--<rich:inplaceSelect>-->
 	<!--
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceSelect">
@@ -725,32 +820,87 @@
 			</itemizedlist>
 		</section>
 	</section>
-	
-	<!-- TODO not in M3 -->
-	<!--<rich:suggestionBox>-->
-	<!--
-	<section id="sect-Component_Reference-Rich_inputs-richsuggestionBox">
-		<title><sgmltag>&lt;rich:suggestionBox&gt;</sgmltag></title>
+
+	<!-- <rich:selectOne> -->
+	<section id="sect-Component_Reference-Rich_inputs-richselectOne">
+		<title><sgmltag>&lt;rich:selectOne&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:suggestionBox&gt;</sgmltag> component adds a feature-rich drop-down list of suggestions to any text input component.
+			The <sgmltag>&lt;rich:selectOne&gt;</sgmltag> component provides a drop-down list box for selecting a single value from multiple options. The component supports keyboard navigation and can optionally accept typed input as a combo-box.
 		</para>
-		<para>
-			The <sgmltag>&lt;rich:suggestionBox&gt;</sgmltag> component needs the attributes defined for basic use: <varname>for</varname>, which identifies the component to attach the suggestion box to; <varname>suggestionAction</varname>, which defines the method for getting the collection of suggestion data; and <varname>var</varname>, which defines a collection name for access to the currently highlighted row. Typically the suggestions are presented as a list with one or more columns of suggestion data; the layout of these columns is defined inside the <sgmltag>&lt;rich:suggestionBox&gt;</sgmltag> tags using <sgmltag>&lt;h:column&gt;</sgmltag> and other <acronym>JSF</acronym> components.
-		</para>
-		<para>
-			For suggestion lists with multiple columns, the <varname>fetchValue</varname> attribute can be used to specify which column is used when selecting the value for the input component.
-		</para>
-		<para>
-			The <varname>tokens</varname> attribute can be used to define separator characters, which are used when multiple values need to be entered and a new suggestion made for each value. For example, <code>tokens=","</code> (a comma) will begin a new suggestion query each time a comma is typed. Multiple separators can be defined with spaces in between (<code>tokens=", . ; [ ]"</code>) or linking to a bean property that holds the collection of separator tokens.
-		</para>
-		<para>
-			The <varname>minChars</varname> attribute can be used to limit sending the Ajax request until a certain amount of characters has been entered. If the query returns no results, an appropriate message to display can be set with the <varname>nothingLabel</varname> attribute.
-		</para>
-		<para>
-			Instead of returning just one value from an object, the entire object can be returned to the client and handled appropriately. This is done by specifying <code>usingSuggestObjects="true"</code> and setting the <varname>onobjectchange</varname> attribute to a JavaScript method to handle the object, passing the <literal>suggestion</literal> object as a parameter.
-		</para>
+
+		<figure id="figu-Component_Reference-richselectOne-richselectOne">
+			<title><sgmltag>&lt;rich:selectOne&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richselectOne-richselectOne.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:selectOne&gt;</sgmltag> component used as a combo-box.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+
+		<section id="sect-Component_Reference-richselectOne-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Simple usage of the <sgmltag>&lt;rich:selectOne&gt;</sgmltag> component does not need any attributes declared, but child tags to manage the list of selections are required. An <sgmltag>&lt;f:selectItem&gt;</sgmltag> tag manages the currently selected value, while an <sgmltag>&lt;f:selectItems&gt;</sgmltag> tag points to the list of selection items.
+			</para>
+			<example id="exam-Component_Reference-richselectOne-Selection_items">
+				<title>Selection items</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richselectOne-Selection_items.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<para>
+				The arrow keys on a keyboard can be used to highlight different items in the list, even if the list is closed with the control still focused. If the control loses focus or the <keycap function="enter">Enter</keycap> key is pressed, the highlighted option is chosen as the value and the list is closed. Pressing the <keycap function="escape">Esc</keycap> key will close the list but not change the value.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richselectOne-Using_richselectOne_as_a_combo-box">
+			<title>Using <sgmltag>&lt;rich:selectOne&gt;</sgmltag> as a combo-box</title>
+			<para>
+				Combo-boxes are drop-down lists that allow the user to type into a text field to scroll through or filter the list. By default, the <sgmltag>&lt;rich:selectOne&gt;</sgmltag> component functions as a drop-down list. To add keyboard support to make it function like a combo-box, set <code>enableManualInput="true"</code>.
+			</para>
+			<para>
+				Once the user begins typing, the first available matching option is highlighted. If the typed text does not match any values in the list, no value is chosen and the drop-down list displays as empty. Other keyboard interaction remains the same as the basic drop-down list.
+			</para>
+			<para>
+				Typing text into a combo-box causes the list to scroll to the relevant item by default. This behavior can be changed so that the typed text filters the contents of the list instead, showing only those items that begin with the typed text. To use typed text as a filter for combo-box lists, set <code>filterOnUpdates="true"</code>.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richselectOne-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.selectOne</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlSelectOne</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.selectOne</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.selectOneRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.selectOneTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
 	</section>
-	-->
 
 </chapter>
 

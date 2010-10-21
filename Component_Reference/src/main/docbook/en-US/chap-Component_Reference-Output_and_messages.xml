@@ -369,10 +369,10 @@
 			</example>
 		</section>
 		
-		<section id="sect-Component_Reference-richaccordion-Update_mode">
+		<section id="sect-Component_Reference-richprogressBar-Update_mode">
 			<title>Update mode</title>
 			<para>
-				The mode for updating the progress bar is determined by the <code>mode</code> attribute, which can have one of the following values:
+				The mode for updating the progress bar is determined by the <varname>mode</varname> attribute, which can have one of the following values:
 			</para>
 			<variablelist>
 				<varlistentry>
@@ -393,16 +393,256 @@
 				</varlistentry>
 			</variablelist>
 		</section>
+		
+		<section id="sect-Component_Reference-richprogressBar-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.ProgressBar</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlProgressBar</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.component.ProgressBar</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.ProgressBarRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.ProgressBarTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 	
 	<!-- <rich:toolTip> -->
-	<!--
 	<section id="sect-Component_Reference-Output_and_messages-richtoolTip">
 		<title><sgmltag>&lt;rich:toolTip&gt;</sgmltag></title>
 		<para>
-			Incomplete
+			The <sgmltag>&lt;rich:toolTip&gt;</sgmltag> component provides an informational tool-tip. The tool-tip can be attached to any control and is displayed when hovering the mouse cursor over the control.
 		</para>
+		<figure id="figu-Component_Reference-richtoolTip-richtoolTip">
+			<title><sgmltag>&lt;rich:toolTip&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richtoolTip-richtoolTip.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:toolTip&gt;</sgmltag> component, displayed while hovering the mouse cursor over a button control.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+
+		<section id="sect-Component_Reference-richtoolTip-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				For basic usage, define the tool-tip text using the <varname>value</varname> attribute. The <sgmltag>&lt;rich:toolTip&gt;</sgmltag> component is then automatically attached to the parent element, and is usually shown when the mouse cursor hovers.
+			</para>
+			<para>
+				Alternatively, the content of the tool-tip can be defined inside the <sgmltag>&lt;rich:toolTip&gt;</sgmltag> tags, and the <varname>value</varname> attribute is not used. This allows HTML tags to be used to define the content, and provides for rich content such as images, links, buttons, and other RichFaces components.
+			</para>
+			<example id="exam-Component_Reference-richtoolTip-Defining_tool-tip_content">
+				<title>Defining tool-tip content</title>
+				<variablelist>
+					<varlistentry>
+						<term>Basic content</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoolTip-Defining_tool-tip_content-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Rich content</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoolTip-Defining_tool-tip_content-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-richtoolTip-Attaching_the_tool-tip_to_another_component">
+			<title>Attaching the tool-tip to another component</title>
+			<para>
+				If not otherwise specified, the tool-tip is attached to the parent element in which it is defined. The <varname>for</varname> attribute is used to attach the tool-tip to another component, pointing to the target component's <varname>id</varname> identifier. This allows the <sgmltag>&lt;rich:toolTip&gt;</sgmltag> component to be specified outside the target element. This approach is demonstrated in <xref linkend="exam-Component_Reference-richtoolTip-Attaching_the_tool-tip" />.
+			</para>
+			<example id="exam-Component_Reference-richtoolTip-Attaching_the_tool-tip">
+				<title>Attaching the tool-tip</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoolTip-Attaching_the_tool-tip.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<para>
+				The <sgmltag>&lt;rich:toolTip&gt;</sgmltag> component can alternatively be left unattached, and is instead invoked through an event handler on the target component. To leave the <sgmltag>&lt;rich:toolTip&gt;</sgmltag> component unattached, set <code>attached="false"</code>, and define the event handler to trigger the tool-tip on the target component. This approach is demonstrated in <xref linkend="exam-Component_Reference-richtoolTip-Unattached_tool-tips" />. When leaving the <sgmltag>&lt;rich:toolTip&gt;</sgmltag> component unattached, ensure it has an <varname>id</varname> identifier defined. If the <sgmltag>&lt;rich:toolTip&gt;</sgmltag> component is nested inside the target element, it must be the last child. If it is defined outside the target element, it must be nested in an <sgmltag>&lt;a4j:form&gt;</sgmltag> component.
+			</para>
+			<example id="exam-Component_Reference-richtoolTip-Unattached_tool-tips">
+				<title>Unattached tool-tips</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoolTip-Unattached_tool-tips.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-richtoolTip-Appearance">
+			<title>Appearance</title>
+			<para>
+				By default, the <sgmltag>&lt;rich:toolTip&gt;</sgmltag> component is positioned intelligently based on the position of the mouse cursor. Use the <varname>direction</varname> attribute to specify a corner of the target component at which to display the tool-tip instead. Possible values include <literal>top-left</literal>, <literal>top-right</literal>, <literal>bottom-left</literal>, and <literal>bottom-right</literal>. Use the <varname>horizontalOffset</varname> and <varname>verticalOffset</varname> attributes to specify the horizontal offset and vertical offset at which to display the tool-tip.
+			</para>
+			<para>
+				Use the <varname>hideEvent</varname> attribute to specify when the tool-tip is hidden. The default value is <literal>none</literal>, so the tool-tip remains shown. However, it can be linked to an event on the target component, such as the <literal>mouseout</literal> event.
+			</para>
+			<para>
+				Set <code>followMouse="true"</code> to cause the tool-tip to follow the user's mouse movements.
+			</para>
+			<para>
+				Advanced appearance features are demonstrated in <xref linkend="exam-Component_Reference-richtoolTip-Advanced_tool-tip_usage" />.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richtoolTip-Update_mode">
+			<title>Update mode</title>
+			<para>
+				The mode for updating the tool-tip is determined by the <varname>mode</varname> attribute, which can have one of the following values:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>ajax</literal></term>
+					<listitem>
+						<para>
+							The tool-tip content is requested from the server with every activation.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>client</literal></term>
+					<listitem>
+						<para>
+							The tool-tip content is rendered once on the server. An external submit causes the content to re-render.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<para>
+				When using <code>mode="ajax"</code>, define the <literal>defaultContent</literal> facet. The tool-tip displays the content of the <literal>defaultContent</literal> facet while loading the actual content from the server.
+			</para>
+			<example id="exam-Component_Reference-richtoolTip-Advanced_tool-tip_usage">
+				<title>Advanced tool-tip usage</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoolTip-Advanced_tool-tip_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-richtoolTip-richtoolTip_client-side_events">
+			<title><sgmltag>&lt;rich:toolTip&gt;</sgmltag> client-side events</title>
+			<para>
+				The <sgmltag>&lt;rich:toolTip&gt;</sgmltag> component supports the following client-side events:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>onclick</literal></term>
+					<listitem>
+						<para>
+							This event is activated when the tool-tip is clicked with the mouse.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>ondblclick</literal></term>
+					<listitem>
+						<para>
+							This event is activated when the tool-tip is double-clicked with the mouse.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>onmouseout</literal></term>
+					<listitem>
+						<para>
+							This event is activated when the mouse cursor leaves the tool-tip.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>onmousemove</literal></term>
+					<listitem>
+						<para>
+							This event is activated when the mouse cursor moves over the tool-tip.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>onmouseover</literal></term>
+					<listitem>
+						<para>
+							This event is activated when the mouse cursor hovers over the tool-tip.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>onshow</literal></term>
+					<listitem>
+						<para>
+							This event is activated when the tool-tip is shown.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>oncomplete</literal></term>
+					<listitem>
+						<para>
+							This event is activated when the tool-tip is completed.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>onhide</literal></term>
+					<listitem>
+						<para>
+							This event is activated when the tool-tip is hidden.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+		
+		<section id="sect-Component_Reference-richtoolTip-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.component.toolTip</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlToolTip</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.component.toolTip</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.html.toolTipRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.HtmlToolTipTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
 	</section>
-	-->
 </chapter>
 
