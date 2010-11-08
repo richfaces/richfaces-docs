@@ -14,221 +14,6 @@
 		This chapter details those components which act as panels and containers to hold groups of other components.
 	</para>
 	
-	<!--<rich:accordion>-->
-	<section id="sect-Component_Reference-Panels_and_containers-richaccordion">
-		<title><sgmltag>&lt;rich:accordion&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:accordion&gt;</sgmltag> is a series of panels stacked on top of each other, each collapsed such that only the header of the panel is showing. When the header of a panel is clicked, it is expanded to show the content of the panel. Clicking on a different header will collapse the previous panel and epand the selected one. Each panel contained in a <sgmltag>&lt;rich:accordion&gt;</sgmltag> component is a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component.
-		</para>
-		<figure id="figu-Component_Reference-richaccordion-richaccordion">
-			<title>A <sgmltag>&lt;rich:accordion&gt;</sgmltag> component containing three <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/figu-Component_Reference-richaccordion-richaccordion.png" format="PNG" />
-				</imageobject>
-				<textobject>
-					<para>
-						A <sgmltag>&lt;rich:accordion&gt;</sgmltag> component containing three <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components. Only the first panel is expanded.
-					</para>
-				</textobject>
-			</mediaobject>
-		</figure>
-		
-		<section id="sect-Component_Reference-richaccordion-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				The <sgmltag>&lt;rich:accordion&gt;</sgmltag> component requires no attributes for basic usage. The component can contain any number of <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components as children. The headers of the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components control the expanding and collapsing when clicked. Only a single <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> can be displayed at a time. Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richaccordionItem" /> for details on the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component.
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richaccordion-Switching_panels">
-			<title>Switching panels</title>
-			<para>
-				The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
-			</para>
-			<variablelist>
-				<varlistentry>
-					<term><literal>server</literal></term>
-					<listitem>
-						<para>
-							The default setting. Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>ajax</literal></term>
-					<listitem>
-						<para>
-							Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>client</literal></term>
-					<listitem>
-						<para>
-							Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to update on the client side. JavaScript changes the styles such that one panel component becomes hidden while the other is shown.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-		</section>
-		
-		<!-- TODO
-		<section id="sect-Component_Reference-richaccordion-Controlling_panel_size">
-			<title>Controlling panel size</title>
-			<para>
-				Unlike the <sgmltag>&lt;rich:panel&gt;</sgmltag> component, the size of the <sgmltag>&lt;rich:accordion&gt;</sgmltag> can be specified using <varname>width</varname> and <varname>height</varname> attributes. If unspecified, these values default to 100%.
-			</para>
-		</section>
-		-->
-		
-		<section id="sect-Component_Reference-richaccordion-richaccordion_client-side_events">
-			<title><sgmltag>&lt;rich:accordion&gt;</sgmltag> client-side events</title>
-			<para>
-				In addition to the standard Ajax events and HTML events, the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component uses the client-side events common to all switchable panels:
-			</para>
-			<itemizedlist>
-				<listitem>
-					<para>
-						The <varname>onitemchange</varname> event points to the function to perform when the switchable item is changed.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						The <varname>onbeforeitemchange</varname> event points to the function to perform when before the switchable item is changed.
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-		
-		<section id="sect-Component_Reference-richaccordion-richaccordion_server-side_events">
-			<title><sgmltag>&lt;rich:accordion&gt;</sgmltag> server-side events</title>
-			<para>
-				The <sgmltag>&lt;rich:accordion&gt;</sgmltag> component uses the server-side events common to all switchable panels:
-			</para>
-			<itemizedlist>
-				<listitem>
-					<para>
-						The <varname>ItemChangeEvent</varname> event occurs on the server side when an item is changed through Ajax using the <literal>server</literal> mode. It can be processed using the <varname>ItemChangeListener</varname> attribute.
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-		
-		<section id="sect-Component_Reference-richaccordion-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.accordion</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAccordion</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.accordion</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.accordionRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.accordionTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-	
-	<!--<rich:accordionItem>-->
-	<section id="sect-Component_Reference-Panels_and_containers-richaccordionItem">
-		<title><sgmltag>&lt;rich:accordionItem&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component is a panel for use with the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richaccordion" /> for details on the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component.
-		</para>
-		<figure id="figu-Component_Reference-richaccordionItem-richaccordion">
-			<title>A <sgmltag>&lt;rich:accordion&gt;</sgmltag> component containing three <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/figu-Component_Reference-richaccordion-richaccordion.png" format="PNG" />
-				</imageobject>
-				<textobject>
-					<para>
-						A <sgmltag>&lt;rich:accordion&gt;</sgmltag> component containing three <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components. Only the first panel is expanded.
-					</para>
-				</textobject>
-			</mediaobject>
-		</figure>
-		
-		<section id="sect-Component_Reference-richaccordionItem-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				Basic usage of the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component requires the <varname>label</varname> attribute, which provides the text on the panel header. The panel header is all that is visible when the accordion item is collapsed.
-			</para>
-			<para>
-				Alternatively the <literal>header</literal> facet could be used in place of the <varname>label</varname> attribute. This would allow for additional styles and custom content to be applied to the tab.
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richaccordionItem-richaccordionItem_client-side_events">
-			<title><sgmltag>&lt;rich:accordionItem&gt;</sgmltag> client-side events</title>
-			<para>
-				In addition to the standard HTML events, the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component uses the client-side events common to all switchable panel items:
-			</para>
-			<itemizedlist>
-				<listitem>
-					<para>
-						The <varname>onenter</varname> event points to the function to perform when the mouse enters the panel.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						The <varname>onleave</varname> attribute points to the function to perform when the mouse leaves the panel.
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-		
-		<section id="sect-Component_Reference-richaccordionItem-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.accordionItem</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAccordionItem</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.accordionItem</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.accordionItemRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.accordionItemTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-	
 	<!--<rich:panel>-->
 	<section id="sect-Component_Reference-Panels_and_containers-richpanel">
 		<title><sgmltag>&lt;rich:panel&gt;</sgmltag></title>
@@ -462,6 +247,221 @@
 				<listitem>
 					<para>
 						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.popupPanelTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+	</section>
+	
+	<!--<rich:accordion>-->
+	<section id="sect-Component_Reference-Panels_and_containers-richaccordion">
+		<title><sgmltag>&lt;rich:accordion&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:accordion&gt;</sgmltag> is a series of panels stacked on top of each other, each collapsed such that only the header of the panel is showing. When the header of a panel is clicked, it is expanded to show the content of the panel. Clicking on a different header will collapse the previous panel and epand the selected one. Each panel contained in a <sgmltag>&lt;rich:accordion&gt;</sgmltag> component is a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component.
+		</para>
+		<figure id="figu-Component_Reference-richaccordion-richaccordion">
+			<title>A <sgmltag>&lt;rich:accordion&gt;</sgmltag> component containing three <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richaccordion-richaccordion.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:accordion&gt;</sgmltag> component containing three <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components. Only the first panel is expanded.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		
+		<section id="sect-Component_Reference-richaccordion-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The <sgmltag>&lt;rich:accordion&gt;</sgmltag> component requires no attributes for basic usage. The component can contain any number of <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components as children. The headers of the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components control the expanding and collapsing when clicked. Only a single <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> can be displayed at a time. Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richaccordionItem" /> for details on the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richaccordion-Switching_panels">
+			<title>Switching panels</title>
+			<para>
+				The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>server</literal></term>
+					<listitem>
+						<para>
+							The default setting. Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>ajax</literal></term>
+					<listitem>
+						<para>
+							Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>client</literal></term>
+					<listitem>
+						<para>
+							Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to update on the client side. JavaScript changes the styles such that one panel component becomes hidden while the other is shown.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</section>
+		
+		<!-- TODO
+		<section id="sect-Component_Reference-richaccordion-Controlling_panel_size">
+			<title>Controlling panel size</title>
+			<para>
+				Unlike the <sgmltag>&lt;rich:panel&gt;</sgmltag> component, the size of the <sgmltag>&lt;rich:accordion&gt;</sgmltag> can be specified using <varname>width</varname> and <varname>height</varname> attributes. If unspecified, these values default to 100%.
+			</para>
+		</section>
+		-->
+		
+		<section id="sect-Component_Reference-richaccordion-richaccordion_client-side_events">
+			<title><sgmltag>&lt;rich:accordion&gt;</sgmltag> client-side events</title>
+			<para>
+				In addition to the standard Ajax events and HTML events, the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component uses the client-side events common to all switchable panels:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>onitemchange</varname> event points to the function to perform when the switchable item is changed.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>onbeforeitemchange</varname> event points to the function to perform when before the switchable item is changed.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-richaccordion-richaccordion_server-side_events">
+			<title><sgmltag>&lt;rich:accordion&gt;</sgmltag> server-side events</title>
+			<para>
+				The <sgmltag>&lt;rich:accordion&gt;</sgmltag> component uses the server-side events common to all switchable panels:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>ItemChangeEvent</varname> event occurs on the server side when an item is changed through Ajax using the <literal>server</literal> mode. It can be processed using the <varname>ItemChangeListener</varname> attribute.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-richaccordion-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.accordion</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAccordion</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.accordion</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.accordionRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.accordionTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+	</section>
+	
+	<!--<rich:accordionItem>-->
+	<section id="sect-Component_Reference-Panels_and_containers-richaccordionItem">
+		<title><sgmltag>&lt;rich:accordionItem&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component is a panel for use with the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richaccordion" /> for details on the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component.
+		</para>
+		<figure id="figu-Component_Reference-richaccordionItem-richaccordion">
+			<title>A <sgmltag>&lt;rich:accordion&gt;</sgmltag> component containing three <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richaccordion-richaccordion.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:accordion&gt;</sgmltag> component containing three <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components. Only the first panel is expanded.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		
+		<section id="sect-Component_Reference-richaccordionItem-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Basic usage of the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component requires the <varname>label</varname> attribute, which provides the text on the panel header. The panel header is all that is visible when the accordion item is collapsed.
+			</para>
+			<para>
+				Alternatively the <literal>header</literal> facet could be used in place of the <varname>label</varname> attribute. This would allow for additional styles and custom content to be applied to the tab.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richaccordionItem-richaccordionItem_client-side_events">
+			<title><sgmltag>&lt;rich:accordionItem&gt;</sgmltag> client-side events</title>
+			<para>
+				In addition to the standard HTML events, the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component uses the client-side events common to all switchable panel items:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>onenter</varname> event points to the function to perform when the mouse enters the panel.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>onleave</varname> attribute points to the function to perform when the mouse leaves the panel.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-richaccordionItem-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.accordionItem</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAccordionItem</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.accordionItem</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.accordionItemRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.accordionItemTag</classname>
 					</para>
 				</listitem>
 			</itemizedlist>

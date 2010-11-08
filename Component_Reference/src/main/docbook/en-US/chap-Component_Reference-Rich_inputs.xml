@@ -14,6 +14,172 @@
 		This chapter details rich components for user input and interaction.
 	</para>
 	
+	<!--<rich:autocomplete>-->
+	<section id="sect-Component_Reference-Rich_inputs-richautocomplete">
+		<title><sgmltag>&lt;rich:autocomplete&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component is an auto-completing input-box with built-in Ajax capabilities. It supports client-side suggestions, browser-like selection, and customization of the look and feel.
+		</para>
+		<para>
+			To attach an auto-completion behavior to other components, use the <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior. Refer to <xref linkend="sect-Component_Reference-Rich_inputs-richautocompleteBehavior" /> for full details on the <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior.
+		</para>
+		<figure id="figu-Component_Reference-richautocomplete-richautocomplete">
+			<title><sgmltag>&lt;rich:autocomplete&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richautocomplete-richautocomplete.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component. The letter <wordasword>A</wordasword> has been entered, such that the suggestion list only shows those options beginning with <wordasword>A</wordasword>.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+		
+		<section id="sect-Component_Reference-richautocomplete-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The <varname>value</varname> attribute stores the text entered by the user for the auto-complete box. Suggestions shown in the auto-complete list can be specified using the <varname>autocompleteMethod</varname> attribute, which points to a collection of suggestions.
+			</para>
+			<example id="exam-Component_Reference-richautocomplete-Defining_suggestion_values">
+				<title>Defining suggestion values</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocomplete-Defining_suggestion_values.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<!--
+			<itemizedlist>
+				<listitem>
+					<para>
+						Using the JSF components <sgmltag>&lt;f:selectItem&gt;</sgmltag> and <sgmltag>&lt;f:selectItems&gt;</sgmltag> to define a list of items:
+					</para>
+					<example id="exam-Component_Reference-richautocomplete-Defining_list_items_for_richinplaceSelect">
+						<title>Defining list items for <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
+						<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocomplete-Defining_list_items_for_richinplaceSelect.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					</example>
+				</listitem>
+			</itemizedlist>
+			-->
+		</section>
+		
+		<section id="sect-Component_Reference-richautocomplete-Interactivity_options">
+			<title>Interactivity options</title>
+			<!-- TODO
+			<para>
+				The input box can display an instructional label before text is entered. This can be set through the <varname>defaultLabel</varname> attribute.
+			</para>
+			-->
+			<para>
+				Users can type into the combo-box's text field to enter a value, which also searches through the suggestion items in the drop-down box. By default, the first suggestion item is selected as the user types. This behavior can be deactivated by setting <code><varname>selectFirst</varname>="false"</code>.
+			</para>
+			<para>
+				Setting <code><varname>autoFill</varname>="true"</code> causes the combo-box to fill the text field box with a matching suggestion as the user types.
+			</para>
+		</section>
+		
+		<!-- TODO
+		<section id="sect-Component_Reference-richautocomplete-richautocomplete_events">
+			<title><sgmltag>&lt;rich:autocomplete&gt;</sgmltag> events</title>
+			<para>
+				The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component has two unique event handlers:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<varname>onlistcall</varname> triggers before the drop-down list is shown, allowing the operation to be canceled.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>onselect</varname> triggers when a suggestion is selected from the drop-down list, before the update request is sent.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		-->
+		
+		<section id="sect-Component_Reference-richautocomplete-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.autocomplete</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAutocomplete</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.autocomplete</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.autocompleteRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.autocompleteTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+	</section>
+	
+	<!-- TODO not in M4 -->
+	<!--<rich:autocompleteBehavior>-->
+	<!--
+	<section id="sect-Component_Reference-Rich_inputs-richautocompleteBehavior">
+		<title><sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior is an auto-completing list of input suggestions that can be attached to other components.
+		</para>
+		<para>
+			Use the <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component for a standard auto-completing combo-box control. Refer to <xref linkend="sect-Component_Reference-Rich_inputs-richautocomplete" /> for full details on the <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component.
+		</para>
+		
+		<section id="sect-Component_Reference-richautocompleteBehavior-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Attach the <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior as a sub-element to another component to provide auto-complete suggestions for that component. Suggestions shown in the auto-complete list can be specified using the <varname>autocompleteMethod</varname> attribute, which points to a collection of suggestions. <xref linkend="exam-Component_Reference-richautocompleteBehavior-Defining_suggestion_values" /> demonstrates a <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior attached to a standard JSF <sgmltag>&lt;h:inputText&gt;</sgmltag> component.
+			</para>
+			<example id="exam-Component_Reference-richautocompleteBehavior-Defining_suggestion_values">
+				<title>Defining suggestion values</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocompleteBehavior-Defining_suggestion_values.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richautocompleteBehavior-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.autocompleteBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAutocompleteBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.autocompleteBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.autocompleteBehaviorTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+	</section>
+	-->
+	
 	<!-- <rich:calendar> -->
 	<section id="sect-Component_Reference-Rich_inputs-richcalendar">
 		<title><sgmltag>&lt;rich:calendar&gt;</sgmltag></title>
@@ -211,172 +377,6 @@
 	</section>
 	-->
 	
-	<!--<rich:autocomplete>-->
-	<section id="sect-Component_Reference-Rich_inputs-richautocomplete">
-		<title><sgmltag>&lt;rich:autocomplete&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component is an auto-completing input-box with built-in Ajax capabilities. It supports client-side suggestions, browser-like selection, and customization of the look and feel.
-		</para>
-		<para>
-			To attach an auto-completion behavior to other components, use the <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior. Refer to <xref linkend="sect-Component_Reference-Rich_inputs-richautocompleteBehavior" /> for full details on the <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior.
-		</para>
-		<figure id="figu-Component_Reference-richautocomplete-richautocomplete">
-			<title><sgmltag>&lt;rich:autocomplete&gt;</sgmltag></title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/figu-Component_Reference-richautocomplete-richautocomplete.png" format="PNG" />
-				</imageobject>
-				<textobject>
-					<para>
-						A <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component. The letter <wordasword>A</wordasword> has been entered, such that the suggestion list only shows those options beginning with <wordasword>A</wordasword>.
-					</para>
-				</textobject>
-			</mediaobject>
-		</figure>
-		
-		<section id="sect-Component_Reference-richautocomplete-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				The <varname>value</varname> attribute stores the text entered by the user for the auto-complete box. Suggestions shown in the auto-complete list can be specified using the <varname>autocompleteMethod</varname> attribute, which points to a collection of suggestions.
-			</para>
-			<example id="exam-Component_Reference-richautocomplete-Defining_suggestion_values">
-				<title>Defining suggestion values</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocomplete-Defining_suggestion_values.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			</example>
-			<!--
-			<itemizedlist>
-				<listitem>
-					<para>
-						Using the JSF components <sgmltag>&lt;f:selectItem&gt;</sgmltag> and <sgmltag>&lt;f:selectItems&gt;</sgmltag> to define a list of items:
-					</para>
-					<example id="exam-Component_Reference-richautocomplete-Defining_list_items_for_richinplaceSelect">
-						<title>Defining list items for <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
-						<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocomplete-Defining_list_items_for_richinplaceSelect.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-					</example>
-				</listitem>
-			</itemizedlist>
-			-->
-		</section>
-		
-		<section id="sect-Component_Reference-richautocomplete-Interactivity_options">
-			<title>Interactivity options</title>
-			<!-- TODO
-			<para>
-				The input box can display an instructional label before text is entered. This can be set through the <varname>defaultLabel</varname> attribute.
-			</para>
-			-->
-			<para>
-				Users can type into the combo-box's text field to enter a value, which also searches through the suggestion items in the drop-down box. By default, the first suggestion item is selected as the user types. This behavior can be deactivated by setting <code><varname>selectFirst</varname>="false"</code>.
-			</para>
-			<para>
-				Setting <code><varname>autoFill</varname>="true"</code> causes the combo-box to fill the text field box with a matching suggestion as the user types.
-			</para>
-		</section>
-		
-		<!-- TODO
-		<section id="sect-Component_Reference-richautocomplete-richautocomplete_events">
-			<title><sgmltag>&lt;rich:autocomplete&gt;</sgmltag> events</title>
-			<para>
-				The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component has two unique event handlers:
-			</para>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<varname>onlistcall</varname> triggers before the drop-down list is shown, allowing the operation to be canceled.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<varname>onselect</varname> triggers when a suggestion is selected from the drop-down list, before the update request is sent.
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-		-->
-		
-		<section id="sect-Component_Reference-richautocomplete-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.autocomplete</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAutocomplete</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.autocomplete</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.autocompleteRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.autocompleteTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-	
-	<!-- TODO not in M4 -->
-	<!--<rich:autocompleteBehavior>-->
-	<!--
-	<section id="sect-Component_Reference-Rich_inputs-richautocompleteBehavior">
-		<title><sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior is an auto-completing list of input suggestions that can be attached to other components.
-		</para>
-		<para>
-			Use the <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component for a standard auto-completing combo-box control. Refer to <xref linkend="sect-Component_Reference-Rich_inputs-richautocomplete" /> for full details on the <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component.
-		</para>
-		
-		<section id="sect-Component_Reference-richautocompleteBehavior-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				Attach the <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior as a sub-element to another component to provide auto-complete suggestions for that component. Suggestions shown in the auto-complete list can be specified using the <varname>autocompleteMethod</varname> attribute, which points to a collection of suggestions. <xref linkend="exam-Component_Reference-richautocompleteBehavior-Defining_suggestion_values" /> demonstrates a <sgmltag>&lt;rich:autocompleteBehavior&gt;</sgmltag> behavior attached to a standard JSF <sgmltag>&lt;h:inputText&gt;</sgmltag> component.
-			</para>
-			<example id="exam-Component_Reference-richautocompleteBehavior-Defining_suggestion_values">
-				<title>Defining suggestion values</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocompleteBehavior-Defining_suggestion_values.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			</example>
-		</section>
-		
-		<section id="sect-Component_Reference-richautocompleteBehavior-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.autocompleteBehavior</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAutocompleteBehavior</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.autocompleteBehavior</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.autocompleteBehaviorTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-	-->
-	
 	<!-- TODO not in M4 -->
 	<!--
 	<section id="sect-Component_Reference-Rich_inputs-richeditor">
@@ -566,9 +566,7 @@
 		</section>
 	</section>
 	
-	<!-- TODO not in M4 -->
 	<!--<rich:inplaceSelect>-->
-	<!--
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceSelect">
 		<title><sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
 		<para>
@@ -672,7 +670,6 @@
 			</itemizedlist>
 		</section>
 	</section>
-	-->
 	
 	<!--<rich:inputNumberSlider>-->
 	<section id="sect-Component_Reference-Rich_inputs-richinputNumberSlider">
