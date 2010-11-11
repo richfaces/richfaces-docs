@@ -1,0 +1,18 @@
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap">
+   <f:facet name="header">
+      <rich:column>
+         <h:outputText value="State Name">
+      </rich:column>
+      <rich:column>
+         <h:outputText value="State Capital">
+      </rich:column>
+   </f:facet>
+   <rich:column filterValue="#{capitalsBean.currentStateFilterValue}"
+                filterBy="#{cap.state}" filterEvent="onkeyup">
+      <h:outputText value="#{cap.state}"/>
+   </rich:column> 
+   <rich:column filterValue="#{capitalsBean.currentNameFilterValue}"
+                filterBy="#{cap.name}" filterEvent="onkeyup">
+      <h:outputText value="#{cap.name}"/> 
+   </rich:column>
+</rich:dataTable>
