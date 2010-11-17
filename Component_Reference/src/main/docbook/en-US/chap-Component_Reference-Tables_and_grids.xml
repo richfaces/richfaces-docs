@@ -1189,9 +1189,8 @@
 			</para>
 		</important>
 
-		<!-- TODO: not in M4
 		<para>
-			Tables entries can be filtered by the user using either the basic method built in to the <sgmltag>&lt;rich:column&gt;</sgmltag> component, or by defining external filters. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richcolumn" /> for details on using the <sgmltag>&lt;rich:column&gt;</sgmltag> component in tables.
+			Tables entries can be filtered by the user through either the basic method built in to the <sgmltag>&lt;rich:column&gt;</sgmltag> component, or by defining external filters. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richcolumn" /> for details on using the <sgmltag>&lt;rich:column&gt;</sgmltag> component in tables.
 		</para>
 		<section id="sect-Component_Reference-Table_filtering-Basic_filtering">
 			<title>Basic filtering</title>
@@ -1251,7 +1250,6 @@
 				</mediaobject>
 			</example>
 		</section>
-		-->
 	</section>
 	
 	<section id="sect-Component_Reference-Tables_and_grids-Table_sorting">
@@ -1263,6 +1261,82 @@
 				This section is currently under development. Any features it describes may not be available in the current release of RichFaces.
 			</para>
 		</important>
+
+		<para>
+			Tables entries can be sorted by the user through either the basic method built in to the <sgmltag>&lt;rich:column&gt;</sgmltag> component, or by defining external sorting algorithms. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richcolumn" /> for details on using the <sgmltag>&lt;rich:column&gt;</sgmltag> component in tables.
+		</para>
+
+		<section id="sect-Component_Reference-Tables_and_grids-Basic_sorting">
+			<title>Basic sorting</title>
+			<para>
+				The built-in sorting functionality of the <sgmltag>&lt;rich:column&gt;</sgmltag> component allows a user to click the header of a column to sort it in ascending or descending order.
+			</para>
+			<note>
+			   <title>Sorting non-English tables</title>
+			   <para>
+			      To sort a table whose contents are not in English, add the <literal>org.richfaces.datatableUsesViewLocale</literal> context parameter to the project's <filename>web.xml</filename> settings file. Set the value of the context parameter to <literal>true</literal>.
+			   </para>
+			</note>
+			<para>
+				Set the <varname>sortBy</varname> attribute to indicate which value to use when sorting the column. Expressions in the <varname>sortBy</varname> attribute must refer to the variable declared in the table's <varname>var</varname> attribute, which is used to fill the contents of the table.
+			</para>
+			<example id="exam-Component_Reference-Table_sorting-Basic_sorting">
+				<title>Basic sorting</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-Table_sorting-Basic_sorting.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The example uses the basic sorting method on both columns in the table.
+				</para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/figu-Component_Reference-Table_sorting-Basic_sorting.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							A table of state capitals sorted alphabetically by state.
+						</para>
+					</textobject>
+				</mediaobject>
+			</example>
+			<para>
+				Use the <varname>sortOrder</varname> attribute to set how the table's contents are sorted when it is first loaded. By default, the value of the <varname>sortOrder</varname> attribute is <literal>unsorted</literal>, so that table entries appear in the order the are contained in the data model. Use <code>sortOrder="ascending"</code> to sort the entries in ascending alphabetical or numerical order. Use <code>sortOrder="descending"</code> to sort the entries in descending alphabetical or numerical order. The <varname>sortOrder</varname> attribute can also be used to externally set the sort order of a table when using the external sorting method; refer to <xref linkend="sect-Component_Reference-Table_sorting-External_sorting" /> for details.
+			</para>
+			<para>
+				Use the <varname>sortMode</varname> attribute to determine how multiple columns are sorted. By default, the value of the <varname>sortMode</varname> attribute is <literal>single</literal>, so tables are only sorted by a single column. Each time the header of a column is clicked the entire table is re-sorted according to that column. Set <code>sortMode="multiple"</code> to allow tables to be sorted by a primary column, then by a secondary column, and so on.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-Table_sorting-External_sorting">
+			<title>External sorting</title>
+			<para>
+				If you require more advanced sorting using custom functions or expressions, use the external sorting properties of the <sgmltag>&lt;rich:column&gt;</sgmltag> component.
+			</para>
+			<para>
+				Deactivate the built-in sorting by setting <code>selfSorted="false"</code> for the <sgmltag>&lt;rich:column&gt;</sgmltag> component. You can then bind the <varname>sortOrder</varname> attribute to bean properties and manage the sorting order externally.
+			</para>
+			<example id="exam-Component_Reference-Table_sorting-External_sorting">
+				<title>External sorting</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-Table_sorting-External_sorting.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The example uses an external control to manage the table's sorting.
+				</para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/figu-Component_Reference-Table_sorting-External_sorting.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							A table of vehicle details, sorted using an external control.
+						</para>
+					</textobject>
+				</mediaobject>
+			</example>
+			<para>
+				When using the <code>sortMode="multiple"</code> configuration, set the priority by which columns are sorted with the <varname>sortPriorities</varname> attribute.
+			</para>
+			<para>
+				Use the <varname>sortExpression</varname> attribute to define a bean property to use for sorting the column. The expression checks each table entry against the sorting expression during rendering.
+			</para>
+		</section>
 	</section>
 
 </chapter>
