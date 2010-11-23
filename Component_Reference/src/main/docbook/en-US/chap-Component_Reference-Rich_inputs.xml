@@ -606,10 +606,34 @@
 				By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event. When switching to "edit" mode, the drop-down list of possible values will automatically be displayed; this can be deactivated by setting <code><varname>openOnEdit</varname>="false"</code>.
 			</para>
 			<para>
-				Once the user selects an option from the drop-down list, the item becomes the new value for the component and the state is switched to the "changed" state. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. These buttons can be positioned using the <varname>controlsHorizontalPosition</varname> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <varname>controlsVerticalPosition</varname> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <varname>saveControlIcon</varname> and <varname>cancelControlIcon</varname>. Further customization is possible through the use of facets.
+				Once a new value for the control is saved, the state switches to the "changed" state. Saving a new value for the control can be performed in three different ways:
 			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Once the user selects an item from the drop-down list, the item is saved as the new control value. This is the default setting.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If <code>saveOnBlur="true"</code> is set, the selected item is saved as the new control value when the control loses focus.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If <code>showControls="true"</code> is set, buttons are added to the control to confirm or cancel the selection. The new control value is only saved once the user confirms the selection using the button.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<!-- TODO not in M4 -->
+			<!--
+			<para>
+				These buttons can be positioned using the <varname>controlsHorizontalPosition</varname> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <varname>controlsVerticalPosition</varname> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <varname>saveControlIcon</varname> and <varname>cancelControlIcon</varname>. Further customization is possible through the use of facets.
+			</para>
+			-->
 		</section>
-		
+
+		<!--
 		<section id="sect-Component_Reference-richinplaceInput-richinplaceSelect_events">
 			<title><sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> events</title>
 			<para>
@@ -638,6 +662,7 @@
 				</listitem>
 			</itemizedlist>
 		</section>
+		-->
 		
 		<section id="sect-Component_Reference-richinplaceSelect-Reference_data">
 			<title>Reference data</title>
@@ -847,18 +872,18 @@
 			<example id="exam-Component_Reference-richselect-Selection_items">
 				<title>Selection items</title>
 				<variablelist>
-				   <varlistentry>
-				      <term>Using multiple <sgmltag>&lt;f:selectItem&gt;</sgmltag> tags</term>
-				      <listitem>
-				         <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richselect-Selection_items-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				      </listitem>
-				   </varlistentry>
-				   <varlistentry>
-				      <term>Using a single <sgmltag>&lt;f:selectItems&gt;</sgmltag> tag</term>
-				      <listitem>
-				         <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richselect-Selection_items-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				      </listitem>
-				   </varlistentry>
+					<varlistentry>
+						<term>Using multiple <sgmltag>&lt;f:selectItem&gt;</sgmltag> tags</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richselect-Selection_items-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Using a single <sgmltag>&lt;f:selectItems&gt;</sgmltag> tag</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richselect-Selection_items-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
 				</variablelist>
 			</example>
 			<para>
@@ -872,7 +897,7 @@
 				Use the <varname>defaultLabel</varname> attribute to set a place-holder label, such as <code>defaultLabel="select an option"</code>.
 			</para>
 			<para>
-			   Server-side processing occurs in the same manner as for an <sgmltag>&lt;h:selectOneMenu&gt;</sgmltag> component. As such, custom objects used for selection items should use the same converters as for an <sgmltag>&lt;h:selectOneMenu&gt;</sgmltag> component.
+				Server-side processing occurs in the same manner as for an <sgmltag>&lt;h:selectOneMenu&gt;</sgmltag> component. As such, custom objects used for selection items should use the same converters as for an <sgmltag>&lt;h:selectOneMenu&gt;</sgmltag> component.
 			</para>
 		</section>
 
