@@ -101,158 +101,6 @@
 		</section>
 	</section>
 	
-	<!--<rich:popupPanel>-->
-	<section id="sect-Component_Reference-Panels_and_containers-richpopupPanel">
-		<title><sgmltag>&lt;rich:popupPanel&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component provides a pop-up panel or window that appears in front of the rest of the application. The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component functions either as a modal window which blocks interaction with the rest of the application while active, or as a non-modal window. It can be positioned on the screen, dragged to a new position by the user, and re-sized.
-		</para>
-		
-		<section id="sect-Component_Reference-richpopupPanel-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> does not require any compulsory attributes, though certain use cases require different attributes.
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richpopupPanel-Showing_and_hiding_the_pop-up">
-			<title>Showing and hiding the pop-up</title>
-			<para>
-				If <code>show="true"</code> then the pop-up panel will display when the page is first loaded.
-			</para>
-			<para>
-				The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can be shown and hidden manually using the <code>show()</code> and <code>hide()</code> methods from the JavaScript API. These can be implemented using two different approaches:
-			</para>
-			<itemizedlist>
-				<listitem>
-					<para>
-						Using the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> component. For details on the component, refer to <xref linkend="sect-Component_Reference-Actions-richcomponentControl" />.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						Using the <code>rich:component</code> function. For details on the function, refer to <xref linkend="sect-Component_Reference-Functions-richcomponent" />.
-					</para>
-				</listitem>
-			</itemizedlist>
-			<para>
-				For explicit referencing when using the functions, the component can be given an <varname>id</varname> identifier. The component can, however, be referenced using other means, such as through a selector.
-			</para>
-			<para>
-				<xref linkend="exam-Component_Reference-richpopupPanel-richpopupPanel_example" /> demonstrates basic use of both the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> component and the <code>rich:component</code> function to show and hide the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component.
-			</para>
-			<example id="exam-Component_Reference-richpopupPanel-richpopupPanel_example">
-				<title><sgmltag>&lt;rich:popupPanel&gt;</sgmltag> example</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpopupPanel-richpopupPanel_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			</example>
-			<important>
-				<title>Placement</title>
-				<para>
-					The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component should usually be placed outside the original form, and include its own form if performing submissions. An exception to this is when using the <varname>domElementAttachment</varname> attribute, as described in <xref linkend="sect-Component_Reference-richpopupPanel-Size_and_positioning" />.
-				</para>
-			</important>
-		</section>
-		
-		<section id="sect-Component_Reference-richpopupPanel-Modal_and_non-modal_panels">
-			<title>Modal and non-modal panels</title>
-			<para>
-				By default, the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> appears as a modal window that blocks interaction with the other objects on the page. To implement a non-modal window instead, set <code><varname>modal</varname>="false"</code>. This will allow interaction with other objects outside the pop-up panel.
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richpopupPanel-Size_and_positioning">
-			<title>Size and positioning</title>
-			<para>
-				The pop-up panel can be both re-sized and re-positioned by the user. The minimum possible size for the panel can be set with the <varname>minWith</varname> and <varname>minHeight</varname> attributes. These abilities can be deactivated by setting <code>resizable</code> or <code>movable</code> to <literal>false</literal> as necessary.
-				<!--
-				The state of the modal panel, including size and position on screen, can be maintained and restored after submitting and reloading by setting <code>keepVisualState="true"</code>.
-				-->
-			</para>
-			<para>
-				The pop-up panel can be automatically sized when it is shown if the <varname>autosized</varname> attribute is set to <literal>true</literal>.
-			</para>
-			<para>
-				The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component is usually rendered in front of any other objects on the page. This is achieved by attaching the component to the <sgmltag>&lt;body&gt;</sgmltag> element of the page, and setting a very high <emphasis>"z-index"</emphasis> (the stack order of the object). This approach is taken because relatively-positioned elements could still overlap the pop-up panel if they exist at higher levels of the <acronym>DOM</acronym> hierarchy, even if their z-index is less than the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component. However, to avoid form limitation of the pop-up panel on pages where no such elements exist, the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can be reattached to its original <acronym>DOM</acronym> element by setting <varname>domElementAttachment</varname> to either <literal>parent</literal> or <literal>form</literal>.
-			</para>
-			<para>
-				Embedded objects inserted into the <acronym>HTML</acronym> with the <sgmltag>&lt;embed&gt;</sgmltag> tag will typically be rendered in front of a <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component. The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can be forcibly rendered in front of these objects by setting <code><varname>overlapEmbedObjects</varname>="true"</code>.
-			</para>
-			<note>
-				<title>Using <varname>overlapEmbedObjects</varname></title>
-				<para>
-					Due to the additional script processing required when using the <varname>overlapEmbedObjects</varname> attribute, applications can suffer from decreased performance. As such, <varname>overlapEmbedObjects</varname> should only be set to <literal>true</literal> when <sgmltag>&lt;embed&gt;</sgmltag> tags are being used. Do not set it to <literal>true</literal> for applications that do not require it.
-				</para>
-			</note>
-		</section>
-		
-		<section id="sect-Component_Reference-richpopupPanel-Contents_of_the_pop-up">
-			<title>Contents of the pop-up</title>
-			<para>
-			    The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can contain any other rich component just like a normal panel.
-			</para>
-			<para>
-				Contents of the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component which are positioned relatively may be trimmed if they extend beyond the borders of the pop-up panel. For certain in-line controls this behavior may be preferable, but for other dynamic controls it could be undesirable. If the <varname>trimOverlayedElements</varname> attribute is set to <literal>false</literal> then child components will not be trimmed if they extend beyond the borders of the pop-up panel.
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richpopupPanel-Header_and_controls">
-			<title>Header and controls</title>
-			<para>
-				A panel header and associated controls can be added to the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component through the use of facets. The <literal>header</literal> facet displays a title for the panel, and the <literal>controls</literal> facet can be customized to allow window controls such as a button for closing the pop-up. <xref linkend="exam-Component_Reference-richpopupPanel-Header_and_controls" /> demonstrates the use of the facets.
-			</para>
-			<example id="exam-Component_Reference-richpopupPanel-Header_and_controls">
-				<title>Header and controls</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpopupPanel-Header_and_controls.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<blockquote>
-					<figure id="figu-Component_Reference-richpopupPanel-Header_and_controls">
-						<title>Header and controls</title>
-						<mediaobject>
-							<imageobject>
-								<imagedata fileref="images/figu-Component_Reference-richpopupPanel-Header_and_controls.png" format="PNG" />
-							</imageobject>
-							<textobject>
-								<para>
-									The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component, rendered with a title header and a button control for closing the pop-up.
-								</para>
-							</textobject>
-						</mediaobject>
-					</figure>
-				</blockquote>
-			</example>
-		</section>
-		
-		<section id="sect-Component_Reference-richpopupPanel-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.popupPanel</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlpopupPanel</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.popupPanel</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.popupPanelRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.popupPanelTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-	
 	<!--<rich:accordion>-->
 	<section id="sect-Component_Reference-Panels_and_containers-richaccordion">
 		<title><sgmltag>&lt;rich:accordion&gt;</sgmltag></title>
@@ -385,87 +233,75 @@
 				</listitem>
 			</itemizedlist>
 		</section>
-	</section>
+		
+		<!--<rich:accordionItem>-->
+		<section id="sect-Component_Reference-Panels_and_containers-richaccordionItem">
+			<title><sgmltag>&lt;rich:accordionItem&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component is a panel for use with the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component.
+			</para>
+		
+			<section id="sect-Component_Reference-richaccordionItem-Basic_usage">
+				<title>Basic usage</title>
+				<para>
+					Basic usage of the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component requires the <varname>label</varname> attribute, which provides the text on the panel header. The panel header is all that is visible when the accordion item is collapsed.
+				</para>
+				<para>
+					Alternatively the <literal>header</literal> facet could be used in place of the <varname>label</varname> attribute. This would allow for additional styles and custom content to be applied to the tab.
+				</para>
+			</section>
+		
+			<section id="sect-Component_Reference-richaccordionItem-richaccordionItem_client-side_events">
+				<title><sgmltag>&lt;rich:accordionItem&gt;</sgmltag> client-side events</title>
+				<para>
+					In addition to the standard HTML events, the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component uses the client-side events common to all switchable panel items:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							The <varname>onenter</varname> event points to the function to perform when the mouse enters the panel.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							The <varname>onleave</varname> attribute points to the function to perform when the mouse leaves the panel.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+		
+			<section id="sect-Component_Reference-richaccordionItem-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.accordionItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAccordionItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.accordionItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>renderer-type</parameter>: <classname>org.richfaces.accordionItemRenderer</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.accordionItemTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+		</section>
 	
-	<!--<rich:accordionItem>-->
-	<section id="sect-Component_Reference-Panels_and_containers-richaccordionItem">
-		<title><sgmltag>&lt;rich:accordionItem&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component is a panel for use with the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richaccordion" /> for details on the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component.
-		</para>
-		<figure id="figu-Component_Reference-richaccordionItem-richaccordion">
-			<title>A <sgmltag>&lt;rich:accordion&gt;</sgmltag> component containing three <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/figu-Component_Reference-richaccordion-richaccordion.png" format="PNG" />
-				</imageobject>
-				<textobject>
-					<para>
-						A <sgmltag>&lt;rich:accordion&gt;</sgmltag> component containing three <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components. Only the first panel is expanded.
-					</para>
-				</textobject>
-			</mediaobject>
-		</figure>
-		
-		<section id="sect-Component_Reference-richaccordionItem-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				Basic usage of the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component requires the <varname>label</varname> attribute, which provides the text on the panel header. The panel header is all that is visible when the accordion item is collapsed.
-			</para>
-			<para>
-				Alternatively the <literal>header</literal> facet could be used in place of the <varname>label</varname> attribute. This would allow for additional styles and custom content to be applied to the tab.
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richaccordionItem-richaccordionItem_client-side_events">
-			<title><sgmltag>&lt;rich:accordionItem&gt;</sgmltag> client-side events</title>
-			<para>
-				In addition to the standard HTML events, the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component uses the client-side events common to all switchable panel items:
-			</para>
-			<itemizedlist>
-				<listitem>
-					<para>
-						The <varname>onenter</varname> event points to the function to perform when the mouse enters the panel.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						The <varname>onleave</varname> attribute points to the function to perform when the mouse leaves the panel.
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-		
-		<section id="sect-Component_Reference-richaccordionItem-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.accordionItem</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlAccordionItem</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.accordionItem</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.accordionItemRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.accordionItemTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
 	</section>
 	
 	<!--<rich:collapsiblePanel>-->
@@ -617,128 +453,152 @@
 		
 	</section>
 	
-	<!--<rich:tab>-->
-	<section id="sect-Component_Reference-Panels_and_containers-richtab">
-		<title><sgmltag>&lt;rich:tab&gt;</sgmltag></title>
+	<!--<rich:popupPanel>-->
+	<section id="sect-Component_Reference-Panels_and_containers-richpopupPanel">
+		<title><sgmltag>&lt;rich:popupPanel&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:tab&gt;</sgmltag> component represents an individual tab inside a <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component, including the tab's content. Clicking on the tab header will bring its corresponding content to the front of other tabs. Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richtabPanel" /> for details on the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component.
+			The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component provides a pop-up panel or window that appears in front of the rest of the application. The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component functions either as a modal window which blocks interaction with the rest of the application while active, or as a non-modal window. It can be positioned on the screen, dragged to a new position by the user, and re-sized.
 		</para>
 		
-		<figure id="figu-Component_Reference-richtab-richtabPanel_component">
-			<title>A <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component containing three <sgmltag>&lt;rich:tab&gt;</sgmltag> components</title>
-			<mediaobject>
-				<imageobject>
-					<imagedata fileref="images/figu-Component_Reference-richtabPanel-richtabPanel_component.png" format="PNG" />
-				</imageobject>
-				<textobject>
-					<para>
-						A <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component containing three <sgmltag>&lt;rich:tab&gt;</sgmltag> components.
-					</para>
-				</textobject>
-			</mediaobject>
-		</figure>
-		
-		<section id="sect-Component_Reference-richtab-Basic_usage">
+		<section id="sect-Component_Reference-richpopupPanel-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Basic usage of the <sgmltag>&lt;rich:tab&gt;</sgmltag> component requires the <varname>name</varname> attribute to uniquely identify the tab within the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component. As the tabs are switched, the <varname>name</varname> identifier of the currently selected tab is stored in the <varname>activeItem</varname> attribute of the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component.
-			</para>
-		</section>
-
-		<section id="sect-Component_Reference-richtab-Header_labeling">
-			<title>Header labeling</title>
-			<para>
-				In addition to the <varname>name</varname> identifier, the <varname>header</varname> attribute must be defined. The <varname>header</varname> attribute provides the text on the tab header. The content of the tab is then detailed inside the <sgmltag>&lt;rich:tab&gt;</sgmltag> tags.
-			</para>
-			<para>
-				Alternatively, the <literal>header</literal> facet could be used in place of the <varname>header</varname> attribute. This would allow for additional styles and custom content to be applied to the tab. The component also supports three facets to customize the appearance depending on the current state of the tab:
-			</para>
-			<variablelist>
-				<varlistentry>
-					<term><literal>headerActive</literal> facet</term>
-					<listitem>
-						<para>
-							This facet is used when the tab is the currently active tab.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>headerInactive</literal> facet</term>
-					<listitem>
-						<para>
-							This facet is used when the tab is not currently active.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>headerDisabled</literal> facet</term>
-					<listitem>
-						<para>
-							This facet is used when the tab is disabled.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-			<para>
-				The <literal>header</literal> facet is used in place of any state-based facet that has not been defined.
+				The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> does not require any compulsory attributes, though certain use cases require different attributes.
 			</para>
 		</section>
 		
-		<section id="sect-Component_Reference-richtab-Switching_tabs">
-			<title>Switching tabs</title>
+		<section id="sect-Component_Reference-richpopupPanel-Showing_and_hiding_the_pop-up">
+			<title>Showing and hiding the pop-up</title>
 			<para>
-				The switching mode for performing submissions can be inherited from the <varname>switchType</varname> attribute of the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component, or set individually for each <sgmltag>&lt;rich:tab&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richtabPanel" /> for details on the <varname>switchType</varname> attribute.
+				If <code>show="true"</code> then the pop-up panel will display when the page is first loaded.
 			</para>
 			<para>
-				An individual tab can be disabled by setting <code><varname>disabled</varname>="true"</code>. Disabled tabs cannot be activated or switched to.
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richtab-richtab_client-side_events">
-			<title><sgmltag>&lt;rich:tab&gt;</sgmltag> client-side events</title>
-			<para>
-				In addition to the standard HTML events, the <sgmltag>&lt;rich:tab&gt;</sgmltag> component uses the client-side events common to all switchable panel items:
+				The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can be shown and hidden manually using the <code>show()</code> and <code>hide()</code> methods from the JavaScript API. These can be implemented using two different approaches:
 			</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-						The <varname>onenter</varname> event points to the function to perform when the mouse enters the tab.
+						Using the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> component. For details on the component, refer to <xref linkend="sect-Component_Reference-Actions-richcomponentControl" />.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						The <varname>onleave</varname> attribute points to the function to perform when the mouse leaves the tab.
+						Using the <code>rich:component</code> function. For details on the function, refer to <xref linkend="sect-Component_Reference-Functions-richcomponent" />.
 					</para>
 				</listitem>
 			</itemizedlist>
+			<para>
+				For explicit referencing when using the functions, the component can be given an <varname>id</varname> identifier. The component can, however, be referenced using other means, such as through a selector.
+			</para>
+			<para>
+				<xref linkend="exam-Component_Reference-richpopupPanel-richpopupPanel_example" /> demonstrates basic use of both the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> component and the <code>rich:component</code> function to show and hide the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component.
+			</para>
+			<example id="exam-Component_Reference-richpopupPanel-richpopupPanel_example">
+				<title><sgmltag>&lt;rich:popupPanel&gt;</sgmltag> example</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpopupPanel-richpopupPanel_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<important>
+				<title>Placement</title>
+				<para>
+					The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component should usually be placed outside the original form, and include its own form if performing submissions. An exception to this is when using the <varname>domElementAttachment</varname> attribute, as described in <xref linkend="sect-Component_Reference-richpopupPanel-Size_and_positioning" />.
+				</para>
+			</important>
 		</section>
 		
-		<section id="sect-Component_Reference-richtab-Reference_data">
+		<section id="sect-Component_Reference-richpopupPanel-Modal_and_non-modal_panels">
+			<title>Modal and non-modal panels</title>
+			<para>
+				By default, the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> appears as a modal window that blocks interaction with the other objects on the page. To implement a non-modal window instead, set <code><varname>modal</varname>="false"</code>. This will allow interaction with other objects outside the pop-up panel.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richpopupPanel-Size_and_positioning">
+			<title>Size and positioning</title>
+			<para>
+				The pop-up panel can be both re-sized and re-positioned by the user. The minimum possible size for the panel can be set with the <varname>minWith</varname> and <varname>minHeight</varname> attributes. These abilities can be deactivated by setting <code>resizable</code> or <code>movable</code> to <literal>false</literal> as necessary.
+				<!--
+				The state of the modal panel, including size and position on screen, can be maintained and restored after submitting and reloading by setting <code>keepVisualState="true"</code>.
+				-->
+			</para>
+			<para>
+				The pop-up panel can be automatically sized when it is shown if the <varname>autosized</varname> attribute is set to <literal>true</literal>.
+			</para>
+			<para>
+				The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component is usually rendered in front of any other objects on the page. This is achieved by attaching the component to the <sgmltag>&lt;body&gt;</sgmltag> element of the page, and setting a very high <emphasis>"z-index"</emphasis> (the stack order of the object). This approach is taken because relatively-positioned elements could still overlap the pop-up panel if they exist at higher levels of the <acronym>DOM</acronym> hierarchy, even if their z-index is less than the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component. However, to avoid form limitation of the pop-up panel on pages where no such elements exist, the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can be reattached to its original <acronym>DOM</acronym> element by setting <varname>domElementAttachment</varname> to either <literal>parent</literal> or <literal>form</literal>.
+			</para>
+			<para>
+				Embedded objects inserted into the <acronym>HTML</acronym> with the <sgmltag>&lt;embed&gt;</sgmltag> tag will typically be rendered in front of a <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component. The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can be forcibly rendered in front of these objects by setting <code><varname>overlapEmbedObjects</varname>="true"</code>.
+			</para>
+			<note>
+				<title>Using <varname>overlapEmbedObjects</varname></title>
+				<para>
+					Due to the additional script processing required when using the <varname>overlapEmbedObjects</varname> attribute, applications can suffer from decreased performance. As such, <varname>overlapEmbedObjects</varname> should only be set to <literal>true</literal> when <sgmltag>&lt;embed&gt;</sgmltag> tags are being used. Do not set it to <literal>true</literal> for applications that do not require it.
+				</para>
+			</note>
+		</section>
+		
+		<section id="sect-Component_Reference-richpopupPanel-Contents_of_the_pop-up">
+			<title>Contents of the pop-up</title>
+			<para>
+			    The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can contain any other rich component just like a normal panel.
+			</para>
+			<para>
+				Contents of the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component which are positioned relatively may be trimmed if they extend beyond the borders of the pop-up panel. For certain in-line controls this behavior may be preferable, but for other dynamic controls it could be undesirable. If the <varname>trimOverlayedElements</varname> attribute is set to <literal>false</literal> then child components will not be trimmed if they extend beyond the borders of the pop-up panel.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richpopupPanel-Header_and_controls">
+			<title>Header and controls</title>
+			<para>
+				A panel header and associated controls can be added to the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component through the use of facets. The <literal>header</literal> facet displays a title for the panel, and the <literal>controls</literal> facet can be customized to allow window controls such as a button for closing the pop-up. <xref linkend="exam-Component_Reference-richpopupPanel-Header_and_controls" /> demonstrates the use of the facets.
+			</para>
+			<example id="exam-Component_Reference-richpopupPanel-Header_and_controls">
+				<title>Header and controls</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpopupPanel-Header_and_controls.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<blockquote>
+					<figure id="figu-Component_Reference-richpopupPanel-Header_and_controls">
+						<title>Header and controls</title>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/figu-Component_Reference-richpopupPanel-Header_and_controls.png" format="PNG" />
+							</imageobject>
+							<textobject>
+								<para>
+									The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component, rendered with a title header and a button control for closing the pop-up.
+								</para>
+							</textobject>
+						</mediaobject>
+					</figure>
+				</blockquote>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richpopupPanel-Reference_data">
 			<title>Reference data</title>
 			<itemizedlist>
 				<listitem>
 					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.tab</classname>
+						<parameter>component-type</parameter>: <classname>org.richfaces.popupPanel</classname>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlTab</classname>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlpopupPanel</classname>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.tab</classname>
+						<parameter>component-family</parameter>: <classname>org.richfaces.popupPanel</classname>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.tabRenderer</classname>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.popupPanelRenderer</classname>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.tabTag</classname>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.popupPanelTag</classname>
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -964,71 +824,123 @@
 				</listitem>
 			</itemizedlist>
 		</section>
+		
+		<!--<rich:tab>-->
+		<section id="sect-Component_Reference-Panels_and_containers-richtab">
+			<title><sgmltag>&lt;rich:tab&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;rich:tab&gt;</sgmltag> component represents an individual tab inside a <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component, including the tab's content. Clicking on the tab header will bring its corresponding content to the front of other tabs.
+			</para>
+			
+			<section id="sect-Component_Reference-richtab-Basic_usage">
+				<title>Basic usage</title>
+				<para>
+					Basic usage of the <sgmltag>&lt;rich:tab&gt;</sgmltag> component requires the <varname>name</varname> attribute to uniquely identify the tab within the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component. As the tabs are switched, the <varname>name</varname> identifier of the currently selected tab is stored in the <varname>activeItem</varname> attribute of the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component.
+				</para>
+			</section>
+
+			<section id="sect-Component_Reference-richtab-Header_labeling">
+				<title>Header labeling</title>
+				<para>
+					In addition to the <varname>name</varname> identifier, the <varname>header</varname> attribute must be defined. The <varname>header</varname> attribute provides the text on the tab header. The content of the tab is then detailed inside the <sgmltag>&lt;rich:tab&gt;</sgmltag> tags.
+				</para>
+				<para>
+					Alternatively, the <literal>header</literal> facet could be used in place of the <varname>header</varname> attribute. This would allow for additional styles and custom content to be applied to the tab. The component also supports three facets to customize the appearance depending on the current state of the tab:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><literal>headerActive</literal> facet</term>
+						<listitem>
+							<para>
+								This facet is used when the tab is the currently active tab.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><literal>headerInactive</literal> facet</term>
+						<listitem>
+							<para>
+								This facet is used when the tab is not currently active.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><literal>headerDisabled</literal> facet</term>
+						<listitem>
+							<para>
+								This facet is used when the tab is disabled.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				<para>
+					The <literal>header</literal> facet is used in place of any state-based facet that has not been defined.
+				</para>
+			</section>
+		
+			<section id="sect-Component_Reference-richtab-Switching_tabs">
+				<title>Switching tabs</title>
+				<para>
+					The switching mode for performing submissions can be inherited from the <varname>switchType</varname> attribute of the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component, or set individually for each <sgmltag>&lt;rich:tab&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richtabPanel" /> for details on the <varname>switchType</varname> attribute.
+				</para>
+				<para>
+					An individual tab can be disabled by setting <code><varname>disabled</varname>="true"</code>. Disabled tabs cannot be activated or switched to.
+				</para>
+			</section>
+		
+			<section id="sect-Component_Reference-richtab-richtab_client-side_events">
+				<title><sgmltag>&lt;rich:tab&gt;</sgmltag> client-side events</title>
+				<para>
+					In addition to the standard HTML events, the <sgmltag>&lt;rich:tab&gt;</sgmltag> component uses the client-side events common to all switchable panel items:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							The <varname>onenter</varname> event points to the function to perform when the mouse enters the tab.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							The <varname>onleave</varname> attribute points to the function to perform when the mouse leaves the tab.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+		
+			<section id="sect-Component_Reference-richtab-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.tab</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlTab</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.tab</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>renderer-type</parameter>: <classname>org.richfaces.tabRenderer</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.tabTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+		</section>
+	
 	</section>
 	
-	<!--<rich:toggleControl>-->
-	<section id="sect-Component_Reference-Panels_and_containers-richtoggleControl">
-		<title><sgmltag>&lt;rich:toggleControl&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior can be attached to any interface component. It works with a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to switch between different <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components.
-		</para>
-		<para>
-			Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richtogglePanel" /> and <xref linkend="sect-Component_Reference-Panels_and_containers-richtogglePanelItem" /> for details on how to use the components together.
-		</para>
-		
-		<section id="sect-Component_Reference-richtoggleControl-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> can be used to switch through <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components in a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> container. If the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component is positioned inside a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component, no attributes need to be defined, as the control is assumed to switch through the <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components of its parent.
-			</para>
-			<para>
-				A <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component can be located outside the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component it needs to switch. Where this is the case, the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> is identified using the <varname>activePanel</varname> attribute. the  Cycling through components requires the <varname>for</varname> attribute, which points to the <varname>id</varname> identifier of the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> that it controls.
-			</para>
-		</section>
-		
-		<section id="sect-Component_Reference-richtoggleControl-Specifying_the_next_state">
-			<title>Specifying the next state</title>
-			<para>
-				The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component will cycle through <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components in the order they are defined within the view. However, the next item to switch to can be explicitly defined by including a <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component within a <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> and using the <varname>targetItem</varname> attribute. The <varname>targetItem</varname> attribute points to the <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> to switch to when the state is next changed. <xref linkend="exam-Component_Reference-richtoggleControl-richtoggleControl_example" /> demonstrates how to specify the next switchable state in this way.
-			</para>
-			<example id="exam-Component_Reference-richtoggleControl-richtoggleControl_example">
-				<title><sgmltag>&lt;rich:toggleControl&gt;</sgmltag> example</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoggleControl-richtoggleControl_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			</example>
-		</section>
-		
-		<section id="sect-Component_Reference-richtoggleControl-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.ToggleControl</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlToggleControl</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.ToggleControl</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.ToggleControlRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.ToggleControlTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-
 	<!--<rich:togglePanel>-->
 	<section id="sect-Component_Reference-Panels_and_containers-richtogglePanel">
 		<title><sgmltag>&lt;rich:togglePanel&gt;</sgmltag></title>
@@ -1115,48 +1027,109 @@
 				</listitem>
 			</itemizedlist>
 		</section>
-	</section>
-	
-	<!--<rich:togglePanelItem>-->
-	<section id="sect-Component_Reference-Panels_and_containers-richtogglePanelItem">
-		<title><sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> component is a switchable panel for use with the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component. Switching between <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components is handled by the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior.
-		</para>
-		<para>
-			Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richtoggleControl" /> and <xref linkend="sect-Component_Reference-Panels_and_containers-richtogglePanel" /> for details on how to use the components together.
-		</para>
 		
-		<section id="sect-Component_Reference-richtogglePanelItem-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.TogglePanelItem</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlTogglePanelItem</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.TogglePanelItem</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.TogglePanelItemRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.TogglePanelItemTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
+		<!--<rich:toggleControl>-->
+		<section id="sect-Component_Reference-Panels_and_containers-richtoggleControl">
+			<title><sgmltag>&lt;rich:toggleControl&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior can be attached to any interface component. It works with a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to switch between different <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components.
+			</para>
+			<para>
+				Refer to <xref linkend="sect-Component_Reference-Panels_and_containers-richtogglePanel" /> and <xref linkend="sect-Component_Reference-Panels_and_containers-richtogglePanelItem" /> for details on how to use the components together.
+			</para>
+		
+			<section id="sect-Component_Reference-richtoggleControl-Basic_usage">
+				<title>Basic usage</title>
+				<para>
+					The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> can be used to switch through <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components in a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> container. If the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component is positioned inside a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component, no attributes need to be defined, as the control is assumed to switch through the <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components of its parent.
+				</para>
+				<para>
+					A <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component can be located outside the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component it needs to switch. Where this is the case, the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> is identified using the <varname>activePanel</varname> attribute. the  Cycling through components requires the <varname>for</varname> attribute, which points to the <varname>id</varname> identifier of the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> that it controls.
+				</para>
+			</section>
+		
+			<section id="sect-Component_Reference-richtoggleControl-Specifying_the_next_state">
+				<title>Specifying the next state</title>
+				<para>
+					The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component will cycle through <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components in the order they are defined within the view. However, the next item to switch to can be explicitly defined by including a <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component within a <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> and using the <varname>targetItem</varname> attribute. The <varname>targetItem</varname> attribute points to the <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> to switch to when the state is next changed. <xref linkend="exam-Component_Reference-richtoggleControl-richtoggleControl_example" /> demonstrates how to specify the next switchable state in this way.
+				</para>
+				<example id="exam-Component_Reference-richtoggleControl-richtoggleControl_example">
+					<title><sgmltag>&lt;rich:toggleControl&gt;</sgmltag> example</title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoggleControl-richtoggleControl_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				</example>
+			</section>
+		
+			<section id="sect-Component_Reference-richtoggleControl-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.ToggleControl</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlToggleControl</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.ToggleControl</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>renderer-type</parameter>: <classname>org.richfaces.ToggleControlRenderer</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.ToggleControlTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
 		</section>
+
+		<!--<rich:togglePanelItem>-->
+		<section id="sect-Component_Reference-Panels_and_containers-richtogglePanelItem">
+			<title><sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> component is a switchable panel for use with the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component. Switching between <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components is handled by the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior.
+			</para>
+		
+			<section id="sect-Component_Reference-richtogglePanelItem-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.TogglePanelItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlTogglePanelItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.TogglePanelItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>renderer-type</parameter>: <classname>org.richfaces.TogglePanelItemRenderer</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.TogglePanelItemTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+		</section>
+	
 	</section>
 	
 </chapter>
