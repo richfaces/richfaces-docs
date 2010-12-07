@@ -73,81 +73,71 @@
 
 	<!-- TODO not in M5 -->
 	<!--<rich:panelMenu>-->
-	<!--
 	<section id="sect-Component_Reference-Menus_and_toolbars-richpanelMenu">
 		<title><sgmltag>&lt;rich:panelMenu&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<parameter>component-type</parameter>: <classname>org.richfaces.PanelMenu</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlPanelMenu</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-family</parameter>: <classname>org.richfaces.PanelMenu</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>renderer-type</parameter>: <classname>org.richfaces.PanelMenuRenderer</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.PanelMenuTag</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
 		<para>
-			The <classname>&lt;rich:panelMenu&gt;</classname> component can be used in conjunction with <classname>&lt;rich:panelMenuItem&gt;</classname> and <classname>&lt;rich:panelMenuGroup&gt;</classname> to create an expanding, hierarchical menu. The <classname>&lt;rich:panelMenu&gt;</classname> component's appearance can be highly customized, and the hierarchy can stretch to any number of sub-levels.
+			The <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component is used in conjunction with <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> to create an expanding, hierarchical menu. The <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component's appearance can be highly customized, and the hierarchy can stretch to any number of sub-levels.
 		</para>
-		<para>
-			The <code>selectedChild</code> attribute is used to point to the name of the currently selected menu item.
-		</para>
-		<para>
-			By default, the event to expand the menu is a mouse click. This can be changed by setting <code>event</code> to specify the preferred event. Several sub-menus can be expanded a once unless the <code>expandSingle</code> is set to <literal>true</literal>, which only allows one sub-menu at a time to be expanded.
-		</para>
-		<para>
-			The <code>mode</code> attribute defines the submission mode for normal menu items that link to content, and the <code>expandMode</code> attribute defines the submission mode for menu items that expand and collapse. The settings for these attributes apply to the entire menu unless a menu item defines its own individual <code>mode</code> or <code>expandMode</code>. The values for <code>mode</code> and <code>expandMode</code> are:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<literal>server</literal>, the default setting, which submits the form normally and completely refreshes the page;
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>ajax</literal>, which performs an Ajax form submission, and re-renders elements specified with the <code>render</code> attribute; and
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>none</literal>, which causes the <code>action</code> and <code>actionListener</code> items to be ignored, and the behavior is fully defined by the nested components instead of responses from submissions.
-				</para>
-			</listitem>
-		</itemizedlist>
-		-->
-	
-		<!--<rich:panelMenuGroup>-->
-		<!--
-		<section id="sect-Component_Reference-Menus_and_toolbars-richpanelMenuGroup">
-			<title><sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag></title>
+
+		<example id="exam-Component_Reference-richpanelMenu-richpanelMenu">
+			<title>richpanelMenu</title>
+			<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpanelMenu-richpanelMenu.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richpanelMenu-richpanelMenu.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A panel menu. The first menu group is collapsed. The second menu group is expanded; it contains menu items and a further menu group, which is currently selected and expanded. The third menu item is not a group and as such is not expandable.
+					</para>
+				</textobject>
+			</mediaobject>
+		</example>
+
+		<section id="sect-Component_Reference-richpanelMenu-Basic_usage">
+			<title>Basic usage</title>
 			<para>
-				The <classname>&lt;rich:panelMenuGroup&gt;</classname> component defines a group of <classname>&lt;rich:panelMenuItem&gt;</classname> components inside a <classname>&lt;rich:panelMenu&gt;</classname>.
+				The <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component does not need any extra attributes declared for basic usage. However, it does require child <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components. Refer to <xref linkend="sect-Component_Reference-Menus_and_toolbars-richpanelMenuGroup" /> and <xref linkend="sect-Component_Reference-Menus_and_toolbars-richpanelMenuItem" /> for details on these child components.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richpanelMenu-Interactivity_options">
+			<title>Interactivity options</title>
+			<para>
+				The <varname>selectedChild</varname> attribute is used to point to the name of the currently selected menu item.
 			</para>
 			<para>
-				If the <code>expandMode</code> is unspecified, the submission behavior for the group is inherited from the parent <classname>&lt;rich:panelMenu&gt;</classname>. Otherwise, the <code>expandMode</code> setting is used instead of the parent's behavior.
+				By default, the event to expand the menu is a mouse click. Set the <varname>event</varname> attribute to specify a different event for expanding menus. Multiple levels of sub-menus can be expanded in one action. Set <code>expandSingle="true"</code> to only expand one sub-menu at a time.
 			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richpanelMenu-Appearance">
+			<title>Appearance</title>
 			<para>
-				Icons for the menu group can be chosen from a set of standard icons. There are three attributes that relate to the different menu states that the icon represents: <code>iconExpanded</code>, <code>iconCollapsed</code>, and <code>iconDisabled</code>. The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenuGroup-Standard_icons" />.
+				Icons for the panel menu can be chosen from a set of standard icons. There are several attributes that relate to the different menu states that the icon represents for different menu levels:
 			</para>
-			<figure id="figu-Component_Reference-richpanelMenuGroup-Standard_icons">
+			<variablelist>
+			   <varlistentry>
+			      <term><varname>iconExpandedTopGroup</varname>, <varname>iconCollapsedTopGroup</varname>, and <varname>iconDisabledTopGroup</varname></term>
+			      <listitem>
+			         <para>
+			            These attributes determine the icons for the top level menu. They relate to an expanded menu group, a collapsed menu group, and a disabled menu item respectively.
+			         </para>
+			      </listitem>
+			   </varlistentry>
+			   <varlistentry>
+			      <term><varname>iconExpandedGroup</varname>, <varname>iconCollapsedGroup</varname>, and <varname>iconDisabledGroup</varname></term>
+			      <listitem>
+			         <para>
+			            These attributes determine the icons for sub-menus that are not the top-level menu. They relate to an expanded menu group, a collapsed menu group, and a disabled menu item respectively.
+			         </para>
+			      </listitem>
+			   </varlistentry>
+			</variablelist>
+			<para>
+			   <xref linkend="exam-Component_Reference-richpanelMenu-richpanelMenu" /> demonstrates the use of icon declaration at the panel menu level. The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenu-Standard_icons" />.
+			</para>
+			<figure id="figu-Component_Reference-richpanelMenu-Standard_icons">
 				<title><sgmltag>&lt;Standard icons&gt;</sgmltag></title>
 				<mediaobject>
 					<imageobject>
@@ -156,88 +146,225 @@
 				</mediaobject>
 			</figure>
 			<para>
-				Alternatively, a path can be defined that points to an image file to use as an icon.
+				Alternatively, point the icon attributes to the paths of image files. The image files are then used as icons.
 			</para>
-			<example id="exam-Component_Reference-richpanelMenuGroup-Using_custom_icons">
-				<title>Using custom icons</title>
-			
-<programlisting language="XML" role="XML">
-&lt;rich:panelMenu&gt;
-  &lt;rich:PanelMenuGroup label="Group 1" iconExpanded="\images\img1.png" iconCollapsed="\images\img2.png"&gt;&gt;
-	 &lt;!- -Nested menu components- -&gt;
-  &lt;/rich:panelMenuGroup&gt;
-&lt;/rich:panelMenu&gt;
-</programlisting>
-			</example>
+			<para>
+			   Any icons specified by child <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components overwrite the icons declared with the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+			</para>
 		</section>
-		-->
-		
-		<!--<rich:panelMenuItem>-->
-		<!--
-		<section id="sect-Component_Reference-Menus_and_toolbars-richpanelMenuItem">
-			<title><sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag></title>
+			
+		<section id="sect-Component_Reference-richpanelMenu-Submission_modes">
+			<title>Submission modes</title>
+			<para>
+				The <varname>mode</varname> attribute defines the submission mode for normal menu items that link to content, and the <varname>expandMode</varname> attribute defines the submission mode for menu items that expand and collapse. The settings for these attributes apply to the entire menu unless a menu item defines its own individual <varname>mode</varname> or <varname>expandMode</varname>. The possible values for <varname>mode</varname> and <varname>expandMode</varname> are as follows:
+			</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.PanelMenuItem</classname>
+						<literal>server</literal>, the default setting, which submits the form normally and completely refreshes the page.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlPanelMenuItem</classname>
+						<literal>ajax</literal>, which performs an Ajax form submission, and re-renders elements specified with the <varname>render</varname> attribute.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.PanelMenuItem</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.PanelMenuItemRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.PanelMenuItemTag</classname>
+						<literal>none</literal>, which causes the <varname>action</varname> and <varname>actionListener</varname> items to be ignored, and the behavior is fully defined by the nested components instead of responses from submissions.
 					</para>
 				</listitem>
 			</itemizedlist>
+		</section>
+
+		<section id="sect-Component_Reference-richpanelMenu-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.PanelMenu</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlPanelMenu</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.PanelMenu</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.PanelMenuRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.PanelMenuTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+	
+		<!--<rich:panelMenuGroup>-->
+		<section id="sect-Component_Reference-Menus_and_toolbars-richpanelMenuGroup">
+			<title><sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag></title>
 			<para>
-				The <classname>&lt;rich:panelMenuItem&gt;</classname> component represents a single item inside a <classname>&lt;rich:panelMenuGroup&gt;</classname> component, which is in turn part of a <classname>&lt;rich:panelMenu&gt;</classname> component.
+				The <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> component defines a group of <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components inside a <sgmltag>&lt;rich:panelMenu&gt;</sgmltag>.
 			</para>
-			<para>
-				If the <code>mode</code> is unspecified, the submission behavior for the item is inherited from the parent <classname>&lt;rich:panelMenu&gt;</classname>. Otherwise, the <code>mode</code> setting is used instead of the parent's behavior.
-			</para>
-			<para>
-				Icons for menu items can be chosen from a set of standard icons. There are two attributes that relate to the different menu states that the icon represents: <code>icon</code> and <code>iconDisabled</code>. The standard icons are shown in <xref linkend="figu-Component_Reference-Basic_column_example-Basic_column_example" />.
-			</para>
-			<figure id="figu-Component_Reference-richpanelMenuItem-Standard_icons">
-				<title>Standard icons</title>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="images/figu-Component_Reference-richpanelMenuItem-Standard_icons.png" format="PNG" />
-					</imageobject>
-				</mediaobject>
-			</figure>
-			<para>
-				Alternatively, a path can be defined that points to an image file to use as an icon.
-			</para>
-			<example id="exam-Component_Reference-richpanelMenuItem-Using_custom_icons">
-				<title>Using custom icons</title>
+
+			<section id="sect-Component_Reference-richpanelMenuGroup-Basic_usage">
+			   <title>Basic usage</title>
+			   <para>
+			      The <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> component needs the <varname>label</varname> attribute declared, which specifies the text to show for the menu entry. Additionally, the <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> component at least one <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> or <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components as child elements.
+			   </para>
+			</section>
+
+			<section id="sect-Component_Reference-richpanelMenuGroup-Appearance">
+				<title>Appearance</title>
+				<para>
+					Icons for the menu group can be chosen from a set of standard icons. There are three attributes that relate to the different menu states that the icon represents: <varname>iconExpanded</varname>, <varname>iconCollapsed</varname>, and <varname>iconDisabled</varname>. The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenuGroup-Standard_icons" />.
+				</para>
+				<figure id="figu-Component_Reference-richpanelMenuGroup-Standard_icons">
+					<title><sgmltag>&lt;Standard icons&gt;</sgmltag></title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/figu-Component_Reference-richpanelMenuGroup-Standard_icons.png" format="PNG" />
+						</imageobject>
+					</mediaobject>
+				</figure>
+				<para>
+					Alternatively, point the icon attributes to the paths of image files. The image files are then used as icons.
+				</para>
+				<example id="exam-Component_Reference-richpanelMenuGroup-Using_custom_icons">
+					<title>Using custom icons</title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpanelMenuGroup-Using_custom_icons.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				</example>
+			   <para>
+			      Any icons specified by child <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components overwrite the icons declared with the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+			   </para>
+			</section>
 			
-<programlisting language="XML" role="XML">
-&lt;rich:panelMenu&gt;
-  ...
-	 &lt;rich:panelMenuItem value="Item 1.1" icon="\images\img1.png" iconDisabled="\images\img2.png" /&gt;
-  ...
-&lt;/rich:panelMenu&gt;
-</programlisting>
-			</example>
+			<section id="sect-Component_Reference-richpanelMenuGroup-Submission_modes">
+				<title>Submission modes</title>
+				<para>
+					If the <varname>expandMode</varname> is unspecified, the submission behavior for the group is inherited from the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag>. Otherwise, the <varname>expandMode</varname> setting is used instead of the parent's behavior.
+				</para>
+			</section>
+			
+			<section id="sect-Component_Reference-richpanelMenuGroup-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.PanelMenuGroup</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlPanelMenuGroup</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.PanelMenuGroup</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>renderer-type</parameter>: <classname>org.richfaces.PanelMenuGroupRenderer</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.PanelMenuGroupTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+		</section>
+		
+		<!--<rich:panelMenuItem>-->
+		<section id="sect-Component_Reference-Menus_and_toolbars-richpanelMenuItem">
+			<title><sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> component represents a single item inside a <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> component, which is in turn part of a <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+			</para>
+
+			<section id="sect-Component_Reference-richpanelMenuItem-Basic_usage">
+			   <title>Basic usage</title>
+			   <para>
+			      The <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> component needs the <varname>label</varname> attribute declared, which specifies the text to show for the menu entry.
+			   </para>
+			</section>
+
+			<section id="sect-Component_Reference-richpanelMenuItem-Appearance">
+				<title>Appearance</title>
+				<para>
+					Icons for menu items can be chosen from a set of standard icons. There are two attributes that relate to the different menu states that the icon represents: <varname>icon</varname> and <varname>iconDisabled</varname>. The standard icons are shown in <xref linkend="figu-Component_Reference-Basic_column_example-Basic_column_example" />.
+				</para>
+				<figure id="figu-Component_Reference-richpanelMenuItem-Standard_icons">
+					<title>Standard icons</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/figu-Component_Reference-richpanelMenuItem-Standard_icons.png" format="PNG" />
+						</imageobject>
+					</mediaobject>
+				</figure>
+				<para>
+					Alternatively, point the icon attributes to the paths of image files. The image files are then used as icons.
+				</para>
+				<example id="exam-Component_Reference-richpanelMenuItem-Using_custom_icons">
+					<title>Using custom icons</title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpanelMenuItem-Using_custom_icons.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				</example>
+			   <para>
+			      Any icons specified by child <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components overwrite the icons declared with the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+			   </para>
+			</section>
+			
+			<section id="sect-Component_Reference-richpanelMenuItem-Submission_modes">
+				<title>Submission modes</title>
+				<para>
+					If the <varname>mode</varname> is unspecified, the submission behavior for the item is inherited from the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag>. Otherwise, the <varname>mode</varname> setting is used instead of the parent's behavior.
+				</para>
+			</section>
+			
+			<section id="sect-Component_Reference-richpanelMenuItem-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.PanelMenuItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlPanelMenuItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.PanelMenuItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>renderer-type</parameter>: <classname>org.richfaces.PanelMenuItemRenderer</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.PanelMenuItemTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
 		</section>
 		
 	</section>
-	-->
 	
 	<!--<rich:toolBar>-->
 	<section id="sect-Component_Reference-Menus_and_toolbars-richtoolbar">
