@@ -417,89 +417,134 @@
 			The <sgmltag>&lt;rich:editor&gt;</sgmltag> component provides a fully-featured word processor. It features manageable global configurations, and support for Seam text, custom plug-ins, and a customized look and feel. The editor is fully based on the TinyMCE JavaScript editor control, supporting all TinyMCE's parameters, and is adapted for the <acronym>JSF</acronym> environment with some additional capabilities.
 		</para>
 	</section>
-	
+	-->
+
+	<!--rich:fileUpload>-->
 	<section id="sect-Component_Reference-Rich_inputs-richfileUpload">
 		<title><sgmltag>&lt;rich:fileUpload&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component allows the user to upload files to a server. It features multiple uploads, automatic uploads, progress bars, restrictions on file types and sizes to be uploaded, and an embedded flash module.
+			The <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component allows the user to upload files to a server. It features multiple uploads, automatic uploads, progress bars, restrictions on file types and sizes to be uploaded, and an embedded Flash module.
 		</para>
-		<para>
-			Files are uploaded to either the temporary folder (different for each operating system) or to <acronym>RAM</acronym> (random-access memory), depending on the value of the <parameter>createTempFile</parameter> parameter of the Ajax4jsf Filter section in the <filename>web.xml</filename> for the project.
-		</para>
-		<para>
-			Basic usage requires the <varname>uploadData</varname> attribute, pointing to the collection of uploaded files.
-		</para>
-		<example id="exam-Component_Reference-richfileUpload-Basic_usage_of_richfileUpload">
-			<title>Basic usage of <sgmltag>&lt;rich:fileUpload&gt;</sgmltag></title>
-			
-<programlisting language="XML" role="XML">
-&lt;rich:fileUpload uploadData="#{bean.data}" /&gt;
-</programlisting>
-		</example>
-		<para>
-			The <varname>fileUploadListener</varname> attribute can be used to call a function on the server side after each file is uploaded.
-		</para>
-		<para>
-			The <varname>immediateUpload</varname> attribute can be set to <literal>true</literal> to upload files as soon as they are added to the list, rather than waiting for the user to press the <guibutton>Upload</guibutton>. The <varname>autoclear</varname> attribute can be set to <literal>true</literal> to automatically remove files from the list once they have been successfully uploaded.
-		</para>
-		<para>
-			The <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component can place restrictions on the files that can be uploaded. The <varname>acceptedTypes</varname> attribute restricts the file types to just those listed. The <varname>maxFilesQuantity</varname> attribute restricts the maximum number of files that can be uploaded. Size restrictions can be placed on individual files by setting the <parameter>maxRequestSize</parameter> parameter of the Ajax4jsf Filter section in the <filename>web.xml</filename> file for the project.
-		</para>
-		<para>
-			There are a number of event handlers specifc to the <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<varname>onadd</varname> is triggered before a file is added to the list.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>onupload</varname> is triggered before a file is uploaded.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>onuploadcomplete</varname> is triggered after all files in the list have finished uploading.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>onuploadcanceled</varname> is triggered after an upload has been canceled.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>onerror</varname> is triggered when an error occurs during the upload process.
-				</para>
-			</listitem>
-		</itemizedlist>
-		<para>
-			The <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component has an embedded Flash module that adds extra functionality. To enable the Flash module, set <code>allowFlash="true"</code>. The Flash module adds additional features to file selection, such as the ability to choose multiple files at once and the filtering of files by their type. Additionally, the Flash module provides a smoother animation of the progress bar during the upload process, as the progress polling is performed by Flash rather than Ajax.
-		</para>
-		<para>
-			The text labels used in the component can be completely customized. Labels for the various controls of the component can be set using <varname>addControlLabel</varname>, <varname>clearAllControlLabel</varname>, <varname>clearControlLabel</varname>, <varname>stopEntryControlLabel</varname>, and <varname>uploadControlLabel</varname>. The status label for the upload can be set using the <varname>label</varname> attribute and the following wildcards:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<code>{B} {KB} {MB}</code>: the full size of the file to be uploaded, measured in bytes, kilobytes and megabytes respectively.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<code>{_B} {_KB} {_MB}</code>: the amount of data uploaded so far, measured in bytes, kilobytes and megabytes respectively.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<code>{ss} {mm} {hh}</code>: the elapsed time in seconds, minutes and hours respectively.
-				</para>
-			</listitem>
-		</itemizedlist>
+
+		<section id="sect-Component_Reference-richfileUpload-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Basic usage requires the <varname>uploadData</varname> attribute, pointing to the collection of uploaded files.
+			</para>
+			<example id="exam-Component_Reference-richfileUpload-Basic_usage">
+				<title>Basic usage</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richfileUpload-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-richfileUpload-Interactivity_options">
+			<title>Interactivity options</title>
+			<para>
+				Files are uploaded to either the temporary folder (different for each operating system) or to <acronym>RAM</acronym> (random-access memory), depending on the value of the <parameter>createTempFile</parameter> parameter of the Ajax4jsf Filter section in the <filename>web.xml</filename> for the project.
+			</para>
+			<para>
+				Use the <varname>fileUploadListener</varname> attribute to call a function on the server side after each file is uploaded.
+			</para>
+			<para>
+				Set the <varname>immediateUpload</varname> attribute to <literal>true</literal> to upload files as soon as they are added to the list, rather than waiting for the user to press the <guibutton>Upload</guibutton> button. Set the <varname>autoclear</varname> attribute to <literal>true</literal> to automatically remove files from the list once they have been successfully uploaded.
+			</para>
+			<para>
+				The <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component can place restrictions on the files that can be uploaded. The <varname>acceptedTypes</varname> attribute restricts the file types to just those listed. The <varname>maxFilesQuantity</varname> attribute restricts the maximum number of files that can be uploaded. To enforce size restrictions on individual files, set the <parameter>maxRequestSize</parameter> parameter of the Ajax4jsf Filter section in the <filename>web.xml</filename> file for the project.
+			</para>
+			<para>
+				The text labels used in the component can be completely customized. Labels for the various controls of the component can be set using <varname>addControlLabel</varname>, <varname>clearAllControlLabel</varname>, <varname>clearControlLabel</varname>, <varname>stopEntryControlLabel</varname>, and <varname>uploadControlLabel</varname>. The status label for the upload can be set using the <varname>label</varname> attribute and the following wildcards:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<code>{B} {KB} {MB}</code>: the full size of the file to be uploaded, measured in bytes, kilobytes and megabytes respectively.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<code>{_B} {_KB} {_MB}</code>: the amount of data uploaded so far, measured in bytes, kilobytes and megabytes respectively.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<code>{ss} {mm} {hh}</code>: the elapsed time in seconds, minutes and hours respectively.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+
+		<section id="sect-Component_Reference-richfileUpload-Flash_module">
+			<title>Flash module</title>
+			<para>
+				The <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component has an embedded Flash module that adds extra functionality. To enable the Flash module, set <code>allowFlash="true"</code>. The Flash module adds additional features to file selection, such as the ability to choose multiple files at once and the filtering of files by their type. Additionally, the Flash module provides a smoother animation of the progress bar during the upload process, as the progress polling is performed by Flash rather than Ajax.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richfileUpload-richfileUpload_client-side_events">
+			<title><sgmltag>&lt;rich:fileUpload&gt;</sgmltag> client-side events</title>
+			<para>
+				There are a number of event handlers specific to the <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<varname>onadd</varname> is triggered before a file is added to the list.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>onupload</varname> is triggered before a file is uploaded.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>onuploadcomplete</varname> is triggered after all files in the list have finished uploading.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>onuploadcanceled</varname> is triggered after an upload has been canceled.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<varname>onerror</varname> is triggered when an error occurs during the upload process.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-richfileUpload-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.fileUpload</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlFileUpload</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.fileUpload</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.renderkit.inplaceFileUpload</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.fileUploadTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
-	-->
 	
 	<!--<rich:inplaceInput>-->
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceInput">
