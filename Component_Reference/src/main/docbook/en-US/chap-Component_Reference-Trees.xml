@@ -41,23 +41,275 @@
 	<section id="sect-Component_Reference-Trees-richtree">
 		<title><sgmltag>&lt;rich:tree&gt;</sgmltag></title>
 		<para>
-			Incomplete
+			The <sgmltag>&lt;rich:tree&gt;</sgmltag> component provides a hierarchical tree control. Each <sgmltag>&lt;rich:tree&gt;</sgmltag> component typically consists of <sgmltag>&lt;rich:treeNode&gt;</sgmltag> child components. The appearance and behavior of the tree and its nodes can be fully customized.
 		</para>
-	</section>
+
+		<section id="sect-Component_Reference-richtree-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The <sgmltag>&lt;rich:tree&gt;</sgmltag> component requires the <varname>value</varname> attribute to point to the data model for populating the tree. The data model must be either an <interfacename>org.richfaces.model.TreeNode</interfacename> interface, an <varname>org.richfaces.model.TreeDataModel</varname> interface, or a <interfacename>javax.swing.tree.TreeNode</interfacename> interface. The <varname>var</varname> attribute declares the variable used for iterating through the data model, so that child <sgmltag>&lt;rich:treeNode&gt;</sgmltag> components can reference each iteration.
+			</para>
+			<para>
+				In addition to these attributes, the <sgmltag>&lt;rich:tree&gt;</sgmltag> component needs one or more <sgmltag>&lt;rich:treeNode&gt;</sgmltag> components to work with the data model.
+			</para>
+			<example id="exam-Component_Reference-richtree-Basic_usage">
+				<title>Basic usage</title>
+				<para>
+					This example demonstrates basic usage of the <sgmltag>&lt;rich:tree&gt;</sgmltag> component using an <interfacename>org.richfaces.model.TreeNode</interfacename> data model.
+				</para>
+				<para>
+					The data model is constructed as follows:
+				</para>
+				<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-richtree-Basic_usage.js" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The tree then accesses the nodes of the model using the <literal>station</literal> variable:
+				</para>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtree-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/exam-Component_Reference-richtree-Basic_usage.png" format="PNG" />
+					</imageobject>
+				</mediaobject>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-richtree-Appearance">
+			<title>Appearance</title>
+			<para>
+				Different nodes in the tree can have different appearances, such as node icons, depending on the type of data the node contains. Use the <varname>nodeFace</varname> attribute to differentiate the types of nodes; the node is then rendered according to the <sgmltag>&lt;rich:treeNode&gt;</sgmltag> component with the corresponding <varname>type</varname> attribute. <xref linkend="exam-Component_Reference-richtree-Appearance" /> shows a <sgmltag>&lt;rich:tree&gt;</sgmltag> component with three different child <sgmltag>&lt;rich:treeNode&gt;</sgmltag> components defined to represent three different node appearances. Refer to <xref linkend="sect-Component_Reference-richtreeNode-Appearance" /> for details on customizing the appearance of <sgmltag>&lt;rich:treeNode&gt;</sgmltag> components.
+			</para>
+			<example id="exam-Component_Reference-richtree-nodeFace_attribute">
+				<title><varname>nodeFace</varname> attribute</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtree-nodeFace_attribute.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/exam-Component_Reference-richtree-nodeFace_attribute.png" format="PNG" />
+					</imageobject>
+				</mediaobject>
+			</example>
+			<para>
+				Alternatively, use Expression Language (<acronym>EL</acronym>) with the <varname>nodeFace</varname> attribute, as shown in <xref linkend="exam-Component_Reference-richtree-nodeFace_attribute_with_Expression_Language" />.
+			</para>
+			<example id="exam-Component_Reference-richtree-nodeFace_attribute_with_Expression_Language">
+				<title><varname>nodeface</varname> attribute with Expression Language</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtree-nodeFace_attribute_with_Expression_Language.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<para>
+				If the <varname>nodeFace</varname> attribute returns null, the node is rendered as a "<emphasis>typeless</emphasis>" node. The <emphasis>typeless</emphasis> node is the first child <sgmltag>&lt;rich:treeNode&gt;</sgmltag> component with a valid <varname>rendered</varname> attribute, but without a defined <varname>type</varname> attribute.
+			</para>
+			<para>
+				Icons for different nodes and node states can be defined for the whole tree using the following attributes:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><varname>icon</varname></term>
+					<listitem>
+						<para>
+							The <varname>icon</varname> attribute points to the icon to use for any node that contains child nodes.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>iconLeaf</varname></term>
+					<listitem>
+						<para>
+							The <varname>iconLeaf</varname> attribute points to the icon to use for any node that does not contain any child nodes.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>iconExpanded</varname> and <varname>iconCollapsed</varname></term>
+					<listitem>
+						<para>
+							The <varname>iconExpanded</varname> and <varname>iconCollapsed</varname> attributes point to the icons to use for expanded and collapsed nodes respectively. If these attributes are defined, the <varname>icon</varname> attribute is not used.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<para>
+				Alternatively, use facets with the same names as the attributes to define the icons, as shown in <xref linkend="exam-Component_Reference-richtree-Icon_facets" />.
+			</para>
+			<example id="exam-Component_Reference-richtree-Icon_facets">
+				<title>Icon facets</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtree-Icon_facets.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richtree-Expanding_and_collapsing_tree_nodes">
+			<title>Expanding and collapsing tree nodes</title>
+			<para>
+				The switching mode for performing submissions is determined by the <varname>switchType</varname> attribute, which can have one of the following three values:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>ajax</literal></term>
+					<listitem>
+						<para>
+							This is the default setting. The <sgmltag>&lt;rich:tree&gt;</sgmltag> component performs an Ajax form submission, and only the content of the tree is rendered.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>server</literal></term>
+					<listitem>
+						<para>
+							The <sgmltag>&lt;rich:tree&gt;</sgmltag> component performs a common submission, completely re-rendering the page.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>client</literal></term>
+					<listitem>
+						<para>
+							The <sgmltag>&lt;rich:tree&gt;</sgmltag> component updates on the client side, re-rendering itself and any additional components listed with the <varname>render</varname> attribute.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+
+			<section id="sect-Component_Reference-richtree-Identifying_nodes">
+				<title>Identifying nodes</title>
+				<para>
+					During requests.
+				</para>
+			</section>
+		</section>
+
+		<!-- TODO not in M5 -->
+		<!--
+		<section id="sect-Component_Reference-richtree-Built-in_drag_and_drop">
+			<title>Built-in drag and drop</title>
+			<para>
+				
+			</para>
+		</section>
+		-->
+
+		<section id="sect-Component_Reference-richtree-Event_handling">
+			<title>Event handling</title>
+			<para>
+				In addition to the standard Ajax events and HMTL events, the <sgmltag>&lt;rich:tree&gt;</sgmltag> component uses the following client-side events:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>onexpand</varname> event is triggered when a node is expanded.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>oncollapse</varname> event is triggered when a node is collapsed.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>ondragstart</varname> event is triggered when an element starts being dragged.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>ondragexit</varname> event is triggered when an element is dragged out of the tree.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>ondragenter</varname> event is triggered when an element is dragged into the tree.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>ondragend</varname> event is triggered when an element is dropped.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				The <sgmltag>&lt;rich:tree&gt;</sgmltag> component uses the following server-side listeners:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>changeExpandListener</varname> listener processes expand and collapse events.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>dragListener</varname> listener processes drag events.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>dropListener</varname> listener processes drop events.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>nodeSelectListener</varname> listener processes the request when a node is selected.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-richtree-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.tree</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.Htmltree</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.tree</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.treeRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.treeTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	
-	<section id="sect-Component_Reference-Trees-richtreeNode">
-		<title><sgmltag>&lt;rich:treeNode&gt;</sgmltag></title>
-		<para>
-			Incomplete
-		</para>
+		<section id="sect-Component_Reference-Trees-richtreeNode">
+			<title><sgmltag>&lt;rich:treeNode&gt;</sgmltag></title>
+			<para>
+				Incomplete
+			</para>
+
+			<section id="sect-Component_Reference-richtreeNode-Basic_usage">
+				<title>Basic usage</title>
+				<para>
+					Incomplete
+				</para>
+			</section>
+
+			<section id="sect-Component_Reference-richtreeNode-Appearance">
+				<title>Appearance</title>
+				<para>
+					Use the <varname>rendered</varname> attribute to determine whether the node should actually be rendered in the tree or not. Using the <varname>rendered</varname> attribute in combination with the other <sgmltag>&lt;rich:treeNode&gt;</sgmltag> attributes
+				</para>
+			</section>
+		</section>
 	</section>
-	
+
+	<!--
 	<section id="sect-Component_Reference-Trees-richtreeNodesAdapter">
 		<title><sgmltag>&lt;rich:treeNodesAdapter&gt;</sgmltag></title>
 		<para>
 			Incomplete
 		</para>
 	</section>
-
+	-->
+	
 </chapter>
 
