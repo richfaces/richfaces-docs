@@ -15,38 +15,10 @@
 	</para>
 	
 	<!-- <rich:message> -->
-	<!--
 	<section id="sect-Component_Reference-Output_and_messages-richmessage">
 		<title><sgmltag>&lt;rich:message&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<parameter>component-type</parameter>: <classname>org.richfaces.RichMessage</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlRichMessage</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-family</parameter>: <classname>org.richfaces.component.RichMessage</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>renderer-type</parameter>: <classname>org.richfaces.RichMessageRenderer</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.RichMessageTag</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
 		<para>
-			The <sgmltag>&lt;rich:message&gt;</sgmltag> component renders a single for message relating to another specific component. The message consists of two parts, both of which are optional: the marker icon and the textual label. The appearance of the message can be customized, and tool-tips can be used for further information about the message.
+			The <sgmltag>&lt;rich:message&gt;</sgmltag> component renders a single message relating to another specific component. The message consists of two parts, both of which are optional: the marker icon and the textual label. The appearance of the message can be customized, and tool-tips can be used for further information about the message.
 		</para>
 		<figure id="figu-Component_Reference-richmessage-richmessage_component">
 			<title>rich:message component</title>
@@ -61,97 +33,109 @@
 				</textobject>
 			</mediaobject>
 		</figure>
-		<para>
-			The <varname>passedLabel</varname> attribute contains a message to display when there are no errors; that is, when validation passes successfully. The <varname>showSummary</varname> attribute specifies whether to display only a summary of the full message. The full message can be displayed in a tool-tip when hovering the mouse over the summary.
-		</para>
-		<para>
-			The <sgmltag>&lt;a4j:message&gt;</sgmltag> component is automatically rendered after an Ajax request, even without the use of an <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component.
-		</para>
-		<para>
-			Facets are used to define the marker icons for different message states:
-		</para>
-		<variablelist>
-			<varlistentry>
-				<term><literal>errorMarker</literal></term>
+		
+		<section id="sect-Component_Reference-richmessage-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The <sgmltag>&lt;rich:message&gt;</sgmltag> component needs the <varname>for</varname> attribute to point to the <varname>id</varname> identifier of the related component. The message is displayed depending on the state of the linked component's requests.
+			</para>
+			<para>
+				The <sgmltag>&lt;rich:message&gt;</sgmltag> component is automatically rendered after an Ajax request, even without the use of an <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richmessage-Appearance">
+			<title>Appearance</title>
+			<para>
+				The <varname>passedLabel</varname> attribute contains a message to display when there are no errors; that is, when validation passes successfully. The <varname>showSummary</varname> attribute specifies whether to display only a summary of the full message. The full message can be displayed in a tool-tip when hovering the mouse over the summary.
+			</para>
+			<para>
+				Facets are used to define the marker icons for different message states:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>errorMarker</literal></term>
+					<listitem>
+						<para>
+							Defines the icon for messages with the <literal>error</literal> severity class.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>fatalMarker</literal></term>
+					<listitem>
+						<para>
+							Defines the icon for messages with the <literal>fatal</literal> severity class.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>infoMarker</literal></term>
+					<listitem>
+						<para>
+							Defines the icon for messages with the <literal>info</literal> severity class.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>passedMarker</literal></term>
+					<listitem>
+						<para>
+							Defines the icon for messages that are not of the <literal>error</literal>, <literal>fatal</literal>, <literal>info</literal>, or <literal>warn</literal> severity classes.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>warnMarker</literal></term>
+					<listitem>
+						<para>
+							Defines the icon for messages with the <literal>warn</literal> severity class.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<example id="exam-Component_Reference-richmessage-richmessage_example">
+				<title>rich:message example</title>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richmessage-richmessage_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richmessage-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
 				<listitem>
 					<para>
-						Defines the icon for messages with the <literal>error</literal> severity class.
+						<parameter>component-type</parameter>: <classname>org.richfaces.component.RichMessage</classname>
 					</para>
 				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term><literal>fatalMarker</literal></term>
 				<listitem>
 					<para>
-						Defines the icon for messages with the <literal>fatal</literal> severity class.
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlRichMessage</classname>
 					</para>
 				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term><literal>infoMarker</literal></term>
 				<listitem>
 					<para>
-						Defines the icon for messages with the <literal>info</literal> severity class.
+						<parameter>component-family</parameter>: <classname>org.richfaces.component.RichMessage</classname>
 					</para>
 				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term><literal>passedMarker</literal></term>
 				<listitem>
 					<para>
-						Defines the icon for messages that are not of the <literal>error</literal>, <literal>fatal</literal>, <literal>info</literal>, or <literal>warn</literal> severity classes.
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.RichMessageRenderer</classname>
 					</para>
 				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term><literal>warnMarker</literal></term>
 				<listitem>
 					<para>
-						Defines the icon for messages with the <literal>warn</literal> severity class.
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.RichMessageTag</classname>
 					</para>
 				</listitem>
-			</varlistentry>
-		</variablelist>
-		<example id="exam-Component_Reference-richmessage-richmessage_example">
-			<title>rich:message example</title>
-			
-<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richmessage-richmessage_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
-</programlisting>
-		</example>
+			</itemizedlist>
+		</section>
 	</section>
-	-->
 	
 	<!-- <rich:messages> -->
-	<!--
 	<section id="sect-Component_Reference-Output_and_messages-richmessages">
 		<title><sgmltag>&lt;rich:messages&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<parameter>component-type</parameter>: <classname>org.richfaces.component.RichMessages</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlRichMessages</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-family</parameter>: <classname>org.richfaces.component.RichMessages</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>renderer-type</parameter>: <classname>org.richfaces.RichMessagesRenderer</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.RichMessagesTag</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;rich:messages&gt;</sgmltag> components works similarly to the <sgmltag>&lt;rich:message&gt;</sgmltag> component, but can display validation messages for a group of components instead of just a single component. Refer to <xref linkend="sect-Component_Reference-Output_and_messages-richmessage" /> for details on the <sgmltag>&lt;rich:message&gt;</sgmltag> component.
 		</para>
@@ -168,65 +152,105 @@
 				</textobject>
 			</mediaobject>
 		</figure>
-		<para>
-			The <sgmltag>&lt;rich:messages&gt;</sgmltag> component displays error messages for each validating component in the same container. The <varname>passedLabel</varname> attribute contains a message to display when there are no errors; that is, when validation for all components passes successfully. The <varname>layout</varname> attribute defines how the messages are presented: either using <literal>list</literal> for a list layout, or <literal>table</literal> for a tabular layout.
-		</para>
-		<para>
-			The <sgmltag>&lt;a4j:message&gt;</sgmltag> component is automatically rendered after an Ajax request, even without the use of an <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component.
-		</para>
-		<para>
-			All messages use the same state icons, specified by using facets in the same way as for the <sgmltag>&lt;rich:message&gt;</sgmltag> component:
-		</para>
-		<variablelist>
-			<varlistentry>
-				<term><literal>errorMarker</literal></term>
+		
+		<section id="sect-Component_Reference-richmessages-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The <sgmltag>&lt;rich:messages&gt;</sgmltag> component doesn't require any extra attributes for basic usage. It displays all messages relating to requests from components in the same container element.
+			</para>
+			<para>
+				The <sgmltag>&lt;rich:message&gt;</sgmltag> component is automatically rendered after an Ajax request, even without the use of an <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richmessages-Appearance">
+			<title>Appearance</title>
+			<para>
+				The <sgmltag>&lt;rich:messages&gt;</sgmltag> component displays error messages for each validating component in the same container. The <varname>passedLabel</varname> attribute contains a message to display when there are no errors; that is, when validation for all components passes successfully. The <varname>layout</varname> attribute defines how the messages are presented: either using <literal>list</literal> for a list layout, or <literal>table</literal> for a tabular layout.
+			</para>
+			<para>
+				All messages use the same state icons, specified by using facets in the same way as for the <sgmltag>&lt;rich:message&gt;</sgmltag> component:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><literal>errorMarker</literal></term>
+					<listitem>
+						<para>
+							Defines the icon for messages with the <literal>error</literal> severity class.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>fatalMarker</literal></term>
+					<listitem>
+						<para>
+							Defines the icon for messages with the <literal>fatal</literal> severity class.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>infoMarker</literal></term>
+					<listitem>
+						<para>
+							Defines the icon for messages with the <literal>info</literal> severity class.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>passedMarker</literal></term>
+					<listitem>
+						<para>
+							Defines the icon for messages that are not of the <literal>error</literal>, <literal>fatal</literal>, <literal>info</literal>, or <literal>warn</literal> severity classes.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>warnMarker</literal></term>
+					<listitem>
+						<para>
+							Defines the icon for messages with the <literal>warn</literal> severity class.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<example id="exam-Component_Reference-richmessages-richmessages_example">
+				<title>rich:messages example</title>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richmessages-richmessages_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</programlisting>
+			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richmessages-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
 				<listitem>
 					<para>
-						Defines the icon for messages with the <literal>error</literal> severity class.
+						<parameter>component-type</parameter>: <classname>org.richfaces.component.RichMessages</classname>
 					</para>
 				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term><literal>fatalMarker</literal></term>
 				<listitem>
 					<para>
-						Defines the icon for messages with the <literal>fatal</literal> severity class.
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlRichMessages</classname>
 					</para>
 				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term><literal>infoMarker</literal></term>
 				<listitem>
 					<para>
-						Defines the icon for messages with the <literal>info</literal> severity class.
+						<parameter>component-family</parameter>: <classname>org.richfaces.component.RichMessages</classname>
 					</para>
 				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term><literal>passedMarker</literal></term>
 				<listitem>
 					<para>
-						Defines the icon for messages that are not of the <literal>error</literal>, <literal>fatal</literal>, <literal>info</literal>, or <literal>warn</literal> severity classes.
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.RichMessagesRenderer</classname>
 					</para>
 				</listitem>
-			</varlistentry>
-			<varlistentry>
-				<term><literal>warnMarker</literal></term>
 				<listitem>
 					<para>
-						Defines the icon for messages with the <literal>warn</literal> severity class.
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.RichMessagesTag</classname>
 					</para>
 				</listitem>
-			</varlistentry>
-		</variablelist>
-		<example id="exam-Component_Reference-richmessages-richmessages_example">
-			<title>rich:messages example</title>
-			
-<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richmessages-richmessages_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
-</programlisting>
-		</example>
+			</itemizedlist>
+		</section>
 	</section>
-	-->
 	
 	<!-- <rich:paint2D> -->
 	<!--
