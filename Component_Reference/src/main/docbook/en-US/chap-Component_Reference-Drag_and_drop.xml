@@ -3,49 +3,153 @@
 ]>
 <chapter id="chap-Component_Reference-Drag_and_drop">
 	<title>Drag and drop</title>
+	<!--  In development notification  -->
+	<important>
+		<title>Documentation in development</title>
+		<para>
+			Some concepts covered in this chapter may refer to the previous version of <productname>Richfaces</productname>, version 3.3.3. This chapter is scheduled for review to ensure all information is up to date.
+		</para>
+	</important>
+	
 	<para>
-		Incomplete
+		Read this chapter for details on adding drag and drop support to controls.
 	</para>
-	<section id="sect-Component_Reference-Drag_and_drop-richdragIndicator">
-		<title><sgmltag>&lt;rich:dragIndicator&gt;</sgmltag></title>
+
+	<!-- <rich:dragBehavior> -->
+	<section id="sect-Component_Reference-Drag_and_drop-richdragBehavior">
+		<title><sgmltag>&lt;rich:dragBehavior&gt;</sgmltag></title>
 		<para>
-			Incomplete
+			The <sgmltag>&lt;rich:dragBehavior&gt;</sgmltag> behavior can be added to a component to indicate it is capable of being dragged by the user. The dragged item can then be dropped into a compatible drop area, designated using the <sgmltag>&lt;rich:dropBehavior&gt;</sgmltag> behavior.
 		</para>
+
+		<section id="sect-Component_Reference-richdragBehavior-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				To add drag support to a component, attach the <sgmltag>&lt;rich:dragBehavior&gt;</sgmltag> behavior as a child element.
+			</para>
+			<para>
+				The <varname>type</varname> attribute must be specified, and can be any identifying string. Dragged items can only be dropped in drop zones where the <varname>type</varname> attribute of the <sgmltag>&lt;rich:dragBehavior&gt;</sgmltag> behavior is listed in the <varname>acceptedTypes</varname> attribute of the <sgmltag>&lt;rich:dropBehavior&gt;</sgmltag> behavior.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richdragBehavior-Dragging_bound_data">
+			<title>Dragging bound data</title>
+			<para>
+				To bind data to the dragged object, use the <varname>dragValue</varname> attribute. The <varname>dragValue</varname> attribute specifies an item in a data model, which is then bound to the parent component when it is dragged. This facilitates handling event data during a drop event.
+			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richdragBehavior-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.DragBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlDragBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.DragBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.DragBehaviorRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.DragBehaviorTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
-	
-	<section id="sect-Component_Reference-Drag_and_drop-richdragSupport">
-		<title><sgmltag>&lt;rich:dragSupport&gt;</sgmltag></title>
+
+	<!-- <rich:dropBehavior> -->
+	<section id="sect-Component_Reference-Drag_and_drop-richdropBehavior">
+		<title><sgmltag>&lt;rich:dropBehavior&gt;</sgmltag></title>
 		<para>
-			Incomplete
+			The <sgmltag>&lt;rich:dropBehavior&gt;</sgmltag> behavior can be added to a component so that the component can accept dragged items. The dragged items must support the <sgmltag>&lt;rich:dragBehavior&gt;</sgmltag> behavior, and be of a compatible drop type.
 		</para>
-	</section>
-	
-	<section id="sect-Component_Reference-Drag_and_drop-richdropSupport">
-		<title><sgmltag>&lt;rich:dropSupport&gt;</sgmltag></title>
-		<para>
-			Incomplete
-		</para>
-	</section>
-	
-	<section id="sect-Component_Reference-Drag_and_drop-richdragListener">
-		<title><sgmltag>&lt;rich:dragListener&gt;</sgmltag></title>
-		<para>
-			Incomplete
-		</para>
-	</section>
-	
-	<section id="sect-Component_Reference-Drag_and_drop-richdropListener">
-		<title><sgmltag>&lt;rich:dropListener&gt;</sgmltag></title>
-		<para>
-			Incomplete
-		</para>
-	</section>
-	
-	<section id="sect-Component_Reference-Drag_and_drop-richdndParam">
-		<title><sgmltag>&lt;rich:dndParam&gt;</sgmltag></title>
-		<para>
-			Incomplete
-		</para>
+
+		<section id="sect-Component_Reference-richdropBehavior-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				To allow dragged items to be dropped on a component, attach the <sgmltag>&lt;rich:dropBehavior&gt;</sgmltag> behavior as a child element to the component.
+			</para>
+			<para>
+				The <varname>acceptedTypes</varname> attribute must be specified. The <varname>acceptedTypes</varname> attribute is a comma-separated list of strings that match the types of dragged items. Dragged items can only be dropped in drop zones where the <varname>type</varname> attribute of the <sgmltag>&lt;rich:dragBehavior&gt;</sgmltag> behavior is listed in the <varname>acceptedTypes</varname> attribute of the <sgmltag>&lt;rich:dropBehavior&gt;</sgmltag> behavior.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richdropBehavior-Handling_dropped_data">
+			<title>Handling dropped data</title>
+			<para>
+				To provide additional parameters for a drop event, use the <varname>dropValue</varname> attribute.
+			</para>
+			<para>
+				The <sgmltag>&lt;rich:dropBehavior&gt;</sgmltag> behavior raises the <varname>DropEvent</varname> server-side event when an object is dropped. The event uses the following parameters:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <parameter>dragComponent</parameter> identifies the component being dragged (the parent of the <sgmltag>&lt;rich:dragBehavior&gt;</sgmltag> behavior).
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <parameter>dropComponent</parameter> parameter identifies the drop zone component (the parent of the <sgmltag>&lt;rich:dropBehavior&gt;</sgmltag> behavior).
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <parameter>dragSource</parameter> parameter is the content of the <sgmltag>&lt;rich:dragBehavior&gt;</sgmltag> behavior's <varname>dragValue</varname> attribute.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <parameter>dropSource</parameter> parameter is the content of the <sgmltag>&lt;rich:dropBehavior&gt;</sgmltag> behavior's <varname>dropValue</varname> attribute.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+		
+		<section id="sect-Component_Reference-richdropBehavior-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.DropBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlDropBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.DropBehavior</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.DropBehaviorRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.DropBehaviorTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
 
 </chapter>
