@@ -31,6 +31,19 @@
 		<para>
 			The <sgmltag>&lt;rich:dropDownMenu&gt;</sgmltag> component is used for creating a drop-down, hierarchical menu. It can be used with the <sgmltag>&lt;rich:toolbar&gt;</sgmltag> component to create menus in an application's toolbar.
 		</para>
+		<figure id="figu-Component_Reference-richdropDownMenu-richdropDownMenu">
+			<title><sgmltag>&lt;rich:dropDownMenu&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richdropDownMenu-richdropDownMenu.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:dropDownMenu&gt;</sgmltag> component in a toolbar.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
 
 		<section id="sect-Component_Reference-richdropDownMenu-Basic_usage">
 			<title>Basic usage</title>
@@ -66,7 +79,7 @@
 				By default, the menu drops down when the title is clicked. To drop down with a different event, use the <varname>event</varname> attribute to define the event instead.
 			</para>
 			<para>
-				Use the <varname>submitMode</varname> attribute to determine how the menu requests are submitted:
+				Use the <varname>mode</varname> attribute to determine how the menu requests are submitted:
 			</para>
 			<itemizedlist>
 				<listitem>
@@ -81,7 +94,7 @@
 				</listitem>
 				<listitem>
 					<para>
-						<literal>none</literal> causes the <varname>action</varname> and <varname>actionListener</varname> items to be ignored, and the behavior is fully defined by the nested components instead of responses from submissions.
+						<literal>client</literal> causes the <varname>action</varname> and <varname>actionListener</varname> items to be ignored, and the behavior is fully defined by the nested components instead of responses from submissions.
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -122,31 +135,220 @@
 	<section id="sect-Component_Reference-Menus_and_toolbars-Menu_sub-components">
 		<title>Menu sub-components</title>
 		<para>
-			The <sgmltag>&lt;rich:menuGroup&gt;</sgmltag>, <sgmltag>&lt;rich:menuItem&gt;</sgmltag>, and <sgmltag>&lt;rich:menuSeparator&gt;</sgmltag> components are used to construct menus for the <sgmltag>&lt;rich:dropDownMenu&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Menus_and_toolbars-richdropDownMenu" /> for more details on the <sgmltag>&lt;rich:dropDownMenu&gt;</sgmltag> component.
+			The <sgmltag>&lt;rich:menuItem&gt;</sgmltag>, <sgmltag>&lt;rich:menuGroup&gt;</sgmltag>, and <sgmltag>&lt;rich:menuSeparator&gt;</sgmltag> components are used to construct menus for the <sgmltag>&lt;rich:dropDownMenu&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Menus_and_toolbars-richdropDownMenu" /> for more details on the <sgmltag>&lt;rich:dropDownMenu&gt;</sgmltag> component.
 		</para>
-		
-		<!--<rich:menuGroup>-->
-		<section id="sect-Component_Reference-Menus_and_toolbars-richmenuGroup">
-			<title><sgmltag>&lt;rich:menuGroup&gt;</sgmltag></title>
-			<para>
-				Incomplete
-			</para>
-		</section>
 	
 		<!--<rich:menuItem>-->
 		<section id="sect-Component_Reference-Menus_and_toolbars-richmenuItem">
 			<title><sgmltag>&lt;rich:menuItem&gt;</sgmltag></title>
 			<para>
-				Incomplete
+				The <sgmltag>&lt;rich:menuItem&gt;</sgmltag> component represents a single item in a menu control.
 			</para>
+
+			<section id="sect-Component_Reference-richmenuItem-Basic_usage">
+				<title>Basic usage</title>
+				<para>
+					The <sgmltag>&lt;rich:menuItem&gt;</sgmltag> component requires the <varname>value</varname> attribute for basic usage. The <varname>value</varname> attribute is the text label for the menu item.
+				</para>
+			</section>
+
+			<section id="sect-Component_Reference-richmenuItem-Appearance">
+				<title>Appearance</title>
+				<para>
+					Icons can be added to menu items through the use of two icon attributes. The <varname>icon</varname> attribute specifies the normal icon, while the <varname>iconDisabled</varname> attribute specifies the icon for a disabled item.
+				</para>
+				<para>
+					Alternatively, define facets with the names <literal>icon</literal> and <literal>iconDisabled</literal> to set the icons. If facets are defined, the <varname>icon</varname> and <varname>iconDisabled</varname> attributes are ignored. Using facets for icons allows more complex usage; example shows a checkbox being used in place of an icon.
+				</para>
+				<example id="exam-Component_Reference-richmenuItem-Icon_facets">
+					<title>Icon facets</title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richmenuItem-Icon_facets.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				</example>
+			</section>
+			
+			<section id="sect-Component_Reference-richmenuItem-Submission_modes">
+				<title>Submission modes</title>
+				<para>
+					Use the <varname>submitMode</varname> attribute to determine how the menu item requests are submitted:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<literal>server</literal>, the default setting, submits the form normally and completely refreshes the page.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<literal>ajax</literal> performs an Ajax form submission, and re-renders elements specified with the <varname>render</varname> attribute.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<literal>client</literal> causes the <varname>action</varname> and <varname>actionListener</varname> items to be ignored, and the behavior is fully defined by the nested components instead of responses from submissions.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="sect-Component_Reference-richmenuItem-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.MenuItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlMenuItem</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.DropDownMenu</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>renderer-type</parameter>: <classname>org.richfaces.MenuItemRenderer</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.MenuItemTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+		</section>
+		
+		<!--<rich:menuGroup>-->
+		<section id="sect-Component_Reference-Menus_and_toolbars-richmenuGroup">
+			<title><sgmltag>&lt;rich:menuGroup&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;rich:menuGroup&gt;</sgmltag> component represents an expandable sub-menu in a menu control. The <sgmltag>&lt;rich:menuGroup&gt;</sgmltag> component can contain a number of <sgmltag>&lt;rich:menuItem&gt;</sgmltag> components, or further nested <sgmltag>&lt;rich:menuGroup&gt;</sgmltag> components.
+			</para>
+
+			<section id="sect-Component_Reference-richmenuGroup-Basic_usage">
+				<title>Basic usage</title>
+				<para>
+					The <sgmltag>&lt;rich:menuGroup&gt;</sgmltag> component requires the <varname>value</varname> attribute for basic usage. The <varname>value</varname> attribute is the text label for the menu item.
+				</para>
+				<para>
+					Additionally, the <sgmltag>&lt;rich:menuGroup&gt;</sgmltag> component must contain child <sgmltag>&lt;rich:menuItem&gt;</sgmltag> components or <sgmltag>&lt;rich:menuGroup&gt;</sgmltag> components.
+				</para>
+			</section>
+
+			<section id="sect-Component_Reference-richmenuGroup-Appearance">
+				<title>Appearance</title>
+				<para>
+					Icons can be added to menu groups through the use of two icon attributes. The <varname>icon</varname> attribute specifies the normal icon, while the <varname>iconDisabled</varname> attribute specifies the icon for a disabled group.
+				</para>
+				<para>
+					Alternatively, define facets with the names <literal>icon</literal> and <literal>iconDisabled</literal> to set the icons. If facets are defined, the <varname>icon</varname> and <varname>iconDisabled</varname> attributes are ignored.
+				</para>
+			</section>
+			
+			<section id="sect-Component_Reference-richmenuGroup-Submission_modes">
+				<title>Submission modes</title>
+				<para>
+					Use the <varname>submitMode</varname> attribute to determine how the menu item requests are submitted:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<literal>server</literal>, the default setting, submits the form normally and completely refreshes the page.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<literal>ajax</literal> performs an Ajax form submission, and re-renders elements specified with the <varname>render</varname> attribute.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<literal>client</literal> causes the <varname>action</varname> and <varname>actionListener</varname> items to be ignored, and the behavior is fully defined by the nested components instead of responses from submissions.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+
+			<section id="sect-Component_Reference-richmenuGroup-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.MenuGroup</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlMenuGroup</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.DropDownMenu</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>renderer-type</parameter>: <classname>org.richfaces.MenuGroupRenderer</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.MenuGroupTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
 		</section>
 		
 		<!--<rich:menuSeparator>-->
 		<section id="sect-Component_Reference-Menus_and_toolbars-richmenuSeparator">
 			<title><sgmltag>&lt;rich:menuSeparator&gt;</sgmltag></title>
 			<para>
-				Incomplete
+				The <sgmltag>&lt;rich:menuSeparator&gt;</sgmltag> component represents a separating divider in a menu control.
 			</para>
+
+			<section id="sect-Component_Reference-richmenuSeparator-Basic_usage">
+				<title>Basic usage</title>
+				<para>
+					The <sgmltag>&lt;rich:menuSeparator&gt;</sgmltag> component does not require any attributes for basic usage. Add it as a child to a menu component to separator menu items and menu groups.
+				</para>
+			</section>
+
+			<section id="sect-Component_Reference-richmenuGroup-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.MenuSeparator</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlMenuSeparator</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.DropDownMenu</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>renderer-type</parameter>: <classname>org.richfaces.MenuSeparatorRenderer</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.MenuSeparatorTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
 		</section>
 		
 	</section>
