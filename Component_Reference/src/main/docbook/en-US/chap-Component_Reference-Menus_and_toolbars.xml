@@ -48,10 +48,10 @@
 		<section id="sect-Component_Reference-richdropDownMenu-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <sgmltag>&lt;rich:dropDownMenu&gt;</sgmltag> component only requires the <varname>value</varname> attribute for basic usage. Use the <varname>value</varname> attribute to define the text label that appears as the title of the menu. Clicking on the title drops the menu down.
+				The <sgmltag>&lt;rich:dropDownMenu&gt;</sgmltag> component only requires the <varname>label</varname> attribute for basic usage. Use the <varname>label</varname> attribute to define the text label that appears as the title of the menu. Clicking on the title drops the menu down.
 			</para>
 			<para>
-				Alternatively, use the <literal>label</literal> facet to define the menu title. If the <literal>label</literal> facet is used, the <varname>value</varname> attribute is not necessary.
+				Alternatively, use the <literal>label</literal> facet to define the menu title. If the <literal>label</literal> facet is used, the <varname>label</varname> attribute is not necessary.
 			</para>
 		</section>
 
@@ -62,22 +62,85 @@
 			</para>
 		</section>
 
-		<!-- TODO not in M5 -->
-		<!--
 		<section id="sect-Component_Reference-richdropDownMenu-Appearance">
 			<title>Appearance</title>
 			<para>
-				To determine the direction and location of the menu when it appears, use the <varname>direction</varname> and <varname>jointPoint</varname> attributes.
+				Use the <varname>jointPoint</varname> and <varname>direction</varname> attributes to determine the direction and location of the menu when it appears. The <varname>jointPoint</varname> and <varname>direction</varname> attributes both use the following settings:
 			</para>
-			
+			<variablelist>
+				<varlistentry>
+					<term><literal>topLeft</literal></term>
+					<term><literal>topRight</literal></term>
+					<term><literal>bottomLeft</literal></term>
+					<term><literal>bottomRight</literal></term>
+					<listitem>
+						<para>
+							When used with the <varname>jointPoint</varname> attribute, the menu is attached to the top-left, top-right, bottom-left, or bottom-right of the control as appropriate.
+						</para>
+						<para>
+							When used with the <varname>direction</varname> attribute, the menu appears to the top-left, top-right, bottom-left, or bottom-right of the joint location as appropriate.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>auto</literal></term>
+					<listitem>
+						<para>
+							The direction or joint location is determined automatically.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><literal>autoLeft</literal></term>
+					<term><literal>autoRight</literal></term>
+					<term><literal>autoTop</literal></term>
+					<term><literal>autoBottom</literal></term>
+					<listitem>
+						<para>
+							When used with the <varname>jointPoint</varname> attribute, the joint location is determined automatically, but defaults to either the left, right, top, or bottom of the control as appropriate.
+						</para>
+						<para>
+							When used with the <varname>direction</varname> attribute, the menu direction is determined automatically, but defaults to either the left, right, top, or bottom of the joint location as appropriate.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
 		</section>
-		-->
 		
 		<section id="sect-Component_Reference-richdropDownMenu-Expanding_and_collapsing_the_menu">
 			<title>Expanding and collapsing the menu</title>
 			<para>
-				By default, the menu drops down when the title is clicked. To drop down with a different event, use the <varname>event</varname> attribute to define the event instead.
+				By default, the menu drops down when the title is clicked. To drop down with a different event, use the <varname>eventShow</varname> attribute to define the event instead.
 			</para>
+			<para>
+				Menus can be navigated using the keyboard. Additionally, menus can be navigated programmatically using the JavaScript <acronym>API</acronym>. The JavaScript API allows the following methods:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term><methodname>show()</methodname></term>
+					<listitem>
+						<para>
+							The <methodname>show()</methodname> method shows the menu.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><methodname>hide()</methodname></term>
+					<listitem>
+						<para>
+							The <methodname>hide()</methodname> method hides the menu.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><methodname>activateItem(menuItemId)</methodname></term>
+					<listitem>
+						<para>
+							The <methodname>activateItem(menuItemId)</methodname> activates the menu item with the <parameter>menuItemId</parameter> identifier.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelistentry>
 			<para>
 				Use the <varname>mode</varname> attribute to determine how the menu requests are submitted:
 			</para>
@@ -94,7 +157,7 @@
 				</listitem>
 				<listitem>
 					<para>
-						<literal>client</literal> causes the <varname>action</varname> and <varname>actionListener</varname> items to be ignored, and the behavior is fully defined by the nested components instead of responses from submissions.
+						<literal>client</literal> causes the <varname>action</varname> and <varname>actionListener</varname> items to be ignored, and the behavior is fully defined by the nested components or custom JavaScript instead of responses from submissions.
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -142,13 +205,13 @@
 		<section id="sect-Component_Reference-Menus_and_toolbars-richmenuItem">
 			<title><sgmltag>&lt;rich:menuItem&gt;</sgmltag></title>
 			<para>
-				The <sgmltag>&lt;rich:menuItem&gt;</sgmltag> component represents a single item in a menu control.
+				The <sgmltag>&lt;rich:menuItem&gt;</sgmltag> component represents a single item in a menu control. The <sgmltag>&lt;rich:menuItem&gt;</sgmltag> component can be also be used as a seperate component without a parent menu component, such as on a toolbar.
 			</para>
 
 			<section id="sect-Component_Reference-richmenuItem-Basic_usage">
 				<title>Basic usage</title>
 				<para>
-					The <sgmltag>&lt;rich:menuItem&gt;</sgmltag> component requires the <varname>value</varname> attribute for basic usage. The <varname>value</varname> attribute is the text label for the menu item.
+					The <sgmltag>&lt;rich:menuItem&gt;</sgmltag> component requires the <varname>label</varname> attribute for basic usage. The <varname>label</varname> attribute is the text label for the menu item.
 				</para>
 			</section>
 
@@ -247,8 +310,12 @@
 				<para>
 					Alternatively, define facets with the names <literal>icon</literal> and <literal>iconDisabled</literal> to set the icons. If facets are defined, the <varname>icon</varname> and <varname>iconDisabled</varname> attributes are ignored.
 				</para>
+				<para>
+					The <sgmltag>&lt;rich:menuGroup&gt;</sgmltag> component can be positioned using the <varname>jointPoint</varname> and <varname>direction</varname> attributes, the same as the parent menu control. For details on the <varname>jointPoint</varname> and <varname>direction</varname> attributes, refer to <xref linkend="sect-Component_Reference-richdropDownMenu-Appearance"/>.
+				</para>
 			</section>
 			
+			<!--
 			<section id="sect-Component_Reference-richmenuGroup-Submission_modes">
 				<title>Submission modes</title>
 				<para>
@@ -272,6 +339,7 @@
 					</listitem>
 				</itemizedlist>
 			</section>
+			-->
 
 			<section id="sect-Component_Reference-richmenuGroup-Reference_data">
 				<title>Reference data</title>
