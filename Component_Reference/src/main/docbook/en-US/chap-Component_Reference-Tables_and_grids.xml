@@ -621,12 +621,53 @@
 			<para>
 				The bound table or grid should also have the <varname>rows</varname> attribute defined to limit the number of rows per page.
 			</para>
+			<para>
+				The <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component must be re-rendered whenever a filter changes on the bound table, so that the scroller matches the current model for the table.
+			</para>
+			<example id="exam-Component_Reference-richdataScroller-Basic_usage">
+			   <title>Basic usage</title>
+			   <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richdataScroller-Basic_usage.xml_Sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
 		</section>
 		
-		<section id="sect-Component_Reference-richdataScroller-Appearance">
-			<title>Appearance</title>
+		<section id="sect-Component_Reference-richdataScroller-Appearance_and_interactivity">
+			<title>Appearance and interactivity</title>
 			<para>
-				The <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> must be placed in the footer of the table or grid it needs to control. Alternatively, use the <varname>for</varname> attribute to bind the parent table or grid to the scroller.
+				The <varname>page</varname> attribute is a value-binding attribute used to define and save the current page number.
+			</para>
+			<para>
+				The <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component provides a range of controllers for scrolling through tables and grids:
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term>Controls for scrolling by a specific amount</term>
+					<listitem>
+						<para>
+							The component includes controls for switching to the first page, the last page, the next page, and the previous page, as well as controls for fast-forwarding or rewinding by a set amount. Use the <varname>fastStep</varname> attribute to set the number of pages to skip when fast-forwarding or rewinding.
+						</para>
+						<para>
+							The appearance of these controls can be customized using the following facets: <literal>first</literal>, <literal>last</literal>, <literal>next</literal>, <literal>previous</literal>, <literal>fastforward</literal>, and <literal>rewind</literal>. Additionally, there are facets for the controls' disabled states: <literal>first_disabled</literal>, <literal>last_disabled</literal>, <literal>next_disabled</literal>, <literal>previous_disabled</literal>, <literal>fastforward_disabled</literal>, and <literal>rewind_disabled</literal>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Page controls</term>
+					<listitem>
+						<para>
+							The component also features a series of numbered controls to jump to a specific page. Use the <varname>maxPages</varname> attribute to limit the number of page controls that appear. The current page control is highlighted.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<para>
+				The <varname>pageIndexVar</varname> and <varname>pagesVar</varname> attributes are request-scope variables for the current page and the total number of pages. Use these attributes with the <literal>pages</literal> facet to provide information about the pages of the table, as shown in <xref linkend="exam-Component_Reference-richdataScroller-pages_facet" />.
+			</para>
+			<example id="exam-Component_Reference-richdataScroller-pages_facet">
+				<title><literal>pages</literal> facet</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richdataScroller-pages_facet.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+			<para>
+			   To add optional separators between controls, define the separators with the <literal>controlsSeparator</literal> facet.
 			</para>
 		</section>
 		
@@ -1042,20 +1083,20 @@
 	<section id="sect-Component_Reference-Tables_and_grids-richlist">
 		<title><sgmltag>&lt;rich:list&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:list&gt;</sgmltag> component renders a list of items. The list can be an numerically ordered list, an unordered bullet-point list, or a data definition list. The component uses a data model for managing the list items, which can be updated dynamically.
+			The <sgmltag>&lt;rich:list&gt;</sgmltag> component renders a list of items. The list can be an numerically ordered list, an un-ordered bullet-point list, or a data definition list. The component uses a data model for managing the list items, which can be updated dynamically.
 		</para>
 		
 		<section id="sect-Component_Reference-richlist-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <varname>var</varname> attribute names a variable for iterating through the items in the data model. The items to iterate through are determined with the <varname>value</varname> attribute by using EL (Expression Lanugage).
+				The <varname>var</varname> attribute names a variable for iterating through the items in the data model. The items to iterate through are determined with the <varname>value</varname> attribute by using EL (Expression Language).
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-richlist-Type_of_list">
 			<title>Type of list</title>
 			<para>
-				By default, the list is displayed as an unordered bullet-point list. The <varname>type</varname> attribute is used to specify different list types:
+				By default, the list is displayed as an un-ordered bullet-point list. The <varname>type</varname> attribute is used to specify different list types:
 			</para>
 			<variablelist>
 				<varlistentry>
