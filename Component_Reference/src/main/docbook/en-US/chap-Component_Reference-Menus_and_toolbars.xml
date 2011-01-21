@@ -454,38 +454,100 @@
 		<section id="sect-Component_Reference-richpanelMenu-Interactivity_options">
 			<title>Interactivity options</title>
 			<para>
-				The <varname>selectedChild</varname> attribute is used to point to the name of the currently selected menu item.
+				The <varname>activeItem</varname> attribute is used to point to the name of the currently selected menu item.
 			</para>
 			<para>
-				By default, the event to expand the menu is a mouse click. Set the <varname>event</varname> attribute to specify a different event for expanding menus. Multiple levels of sub-menus can be expanded in one action. Set <code>expandSingle="true"</code> to only expand one sub-menu at a time.
+				By default, the event to expand the menu is a mouse click. Set the <varname>expandEvent</varname> attribute to specify a different event to expand menus. Multiple levels of sub-menus can be expanded in one action. Set <code>expandSingle="true"</code> to only expand one sub-menu at a time.
+			</para>
+			<para>
+				Similarly, the default event to collapse the menu is a mouse click. Set the <varname>collapseEvent</varname> attribute to specify a different event to collapse menus.
+			</para>
+			<para>
+				As with other control components, set <code>disabled="true"</code> to disable the <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> comonent. Child menu components can be disabled in the same way.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-richpanelMenu-Appearance">
 			<title>Appearance</title>
 			<para>
-				Icons for the panel menu can be chosen from a set of standard icons. There are several attributes that relate to the different menu states that the icon represents for different menu levels:
+				Icons for the panel menu can be chosen from a set of standard icons. Icons can be set for the top panel menu, child panel menus, and child item. There are three different menu states that the icon represents, as well as icons for both the left and right side of the item title:
 			</para>
 			<variablelist>
-			   <varlistentry>
-			      <term><varname>iconExpandedTopGroup</varname>, <varname>iconCollapsedTopGroup</varname>, and <varname>iconDisabledTopGroup</varname></term>
-			      <listitem>
-			         <para>
-			            These attributes determine the icons for the top level menu. They relate to an expanded menu group, a collapsed menu group, and a disabled menu item respectively.
-			         </para>
-			      </listitem>
-			   </varlistentry>
-			   <varlistentry>
-			      <term><varname>iconExpandedGroup</varname>, <varname>iconCollapsedGroup</varname>, and <varname>iconDisabledGroup</varname></term>
-			      <listitem>
-			         <para>
-			            These attributes determine the icons for sub-menus that are not the top-level menu. They relate to an expanded menu group, a collapsed menu group, and a disabled menu item respectively.
-			         </para>
-			      </listitem>
-			   </varlistentry>
+				<varlistentry>
+					<term><varname>topExpandedIconLeft</varname></term>
+					<term><varname>topExpandedIconRight</varname></term>
+					<listitem>
+						<para>
+							These attributes determine the icons for the top level menu when it is expanded.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>topCollapsedIconLeft</varname></term>
+					<term><varname>topCollapsedIconRight</varname></term>
+					<listitem>
+						<para>
+							These attributes determine the icons for the top level menu when it is collapsed.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>topDisabledIconLeft</varname></term>
+					<term><varname>topDisabledIconRight</varname></term>
+					<listitem>
+						<para>
+							These attributes determine the icons for the top level menu when it is disabled.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>groupExpandedIconLeft</varname></term>
+					<term><varname>groupExpandedIconRight</varname></term>
+					<listitem>
+						<para>
+							These attributes determine the icons for sub-menus that are not the top-level menu when they are expanded.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>groupCollapsedIconLeft</varname></term>
+					<term><varname>groupCollapsedIconRight</varname></term>
+					<listitem>
+						<para>
+							These attributes determine the icons for sub-menus that are not the top-level menu when they are collapsed.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>groupDisabledIconLeft</varname></term>
+					<term><varname>groupDisabledIconRight</varname></term>
+					<listitem>
+						<para>
+							These attributes determine the icons for sub-menus that are not the top-level menu when they are disabled.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>itemIconLeft</varname></term>
+					<term><varname>itemIconRight</varname></term>
+					<listitem>
+						<para>
+							These attributes determine the icons for items in the menus.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>itemIconDisabledLeft</varname></term>
+					<term><varname>itemIconDisabledRight</varname></term>
+					<listitem>
+						<para>
+							These attributes determine the icons for items in the menus when they are disabled.
+						</para>
+					</listitem>
+				</varlistentry>
 			</variablelist>
 			<para>
-			   <xref linkend="exam-Component_Reference-richpanelMenu-richpanelMenu" /> demonstrates the use of icon declaration at the panel menu level. The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenu-Standard_icons" />.
+				<xref linkend="exam-Component_Reference-richpanelMenu-richpanelMenu" /> demonstrates the use of icon declaration at the panel menu level. The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenu-Standard_icons" />.
 			</para>
 			<figure id="figu-Component_Reference-richpanelMenu-Standard_icons">
 				<title><sgmltag>&lt;Standard icons&gt;</sgmltag></title>
@@ -499,14 +561,14 @@
 				Alternatively, point the icon attributes to the paths of image files. The image files are then used as icons.
 			</para>
 			<para>
-			   Any icons specified by child <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components overwrite the icons declared with the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+				Any icons specified by child <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components overwrite the relevant icons declared with the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
 			</para>
 		</section>
 			
 		<section id="sect-Component_Reference-richpanelMenu-Submission_modes">
 			<title>Submission modes</title>
 			<para>
-				The <varname>mode</varname> attribute defines the submission mode for normal menu items that link to content, and the <varname>expandMode</varname> attribute defines the submission mode for menu items that expand and collapse. The settings for these attributes apply to the entire menu unless a menu item defines its own individual <varname>mode</varname> or <varname>expandMode</varname>. The possible values for <varname>mode</varname> and <varname>expandMode</varname> are as follows:
+				The <varname>itemMode</varname> attribute defines the submission mode for normal menu items that link to content, and the <varname>groupMode</varname> attribute defines the submission mode for menu items that expand and collapse. The settings for these attributes apply to the entire menu unless a menu item defines its own individual <varname>itemMode</varname> or <varname>groupMode</varname>. The possible values for <varname>itemMode</varname> and <varname>groupMode</varname> are as follows:
 			</para>
 			<itemizedlist>
 				<listitem>
@@ -566,16 +628,48 @@
 			</para>
 
 			<section id="sect-Component_Reference-richpanelMenuGroup-Basic_usage">
-			   <title>Basic usage</title>
-			   <para>
-			      The <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> component needs the <varname>label</varname> attribute declared, which specifies the text to show for the menu entry. Additionally, the <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> component at least one <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> or <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components as child elements.
-			   </para>
+				<title>Basic usage</title>
+				<para>
+					The <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> component needs the <varname>label</varname> attribute declared, which specifies the text to show for the menu entry. Additionally, the <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> component at least one <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> or <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components as child elements.
+				</para>
 			</section>
 
 			<section id="sect-Component_Reference-richpanelMenuGroup-Appearance">
 				<title>Appearance</title>
 				<para>
-					Icons for the menu group can be chosen from a set of standard icons. There are three attributes that relate to the different menu states that the icon represents: <varname>iconExpanded</varname>, <varname>iconCollapsed</varname>, and <varname>iconDisabled</varname>. The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenuGroup-Standard_icons" />.
+					Icons for the menu group can be chosen from a set of standard icons. There are three different menu states that the icon represents, as well as icons for both the left and right side of the item title:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><varname>iconLeftExpanded</varname></term>
+						<term><varname>iconRightExpanded</varname></term>
+						<listitem>
+							<para>
+								These attributes determine the icons for a menu group when it is expanded. If unspecified, the menu group uses the <varname>groupExpandedIconLeft</varname> and <varname>groupExpandedIconRight</varname> parameters defined in the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><varname>iconLeftCollapsed</varname></term>
+						<term><varname>iconRightCollapsed</varname></term>
+						<listitem>
+							<para>
+								These attributes determine the icons for a menu group menu when it is collapsed. If unspecified, the menu group uses the <varname>groupCollapsedIconLeft</varname> and <varname>groupCollapsedIconRight</varname> parameters defined in the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><varname>iconLeftDisabled</varname></term>
+						<term><varname>iconRightDisabled</varname></term>
+						<listitem>
+							<para>
+								These attributes determine the icons for a menu group menu when it is disabled. If unspecified, the menu group uses the <varname>groupDisabledIconLeft</varname> and <varname>groupDisabledIconRight</varname> parameters defined in the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				<para>
+					The standard icons are shown in <xref linkend="figu-Component_Reference-richpanelMenuGroup-Standard_icons" />.
 				</para>
 				<figure id="figu-Component_Reference-richpanelMenuGroup-Standard_icons">
 					<title><sgmltag>&lt;Standard icons&gt;</sgmltag></title>
@@ -592,15 +686,12 @@
 					<title>Using custom icons</title>
 					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpanelMenuGroup-Using_custom_icons.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				</example>
-			   <para>
-			      Any icons specified by child <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components overwrite the icons declared with the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
-			   </para>
 			</section>
 			
 			<section id="sect-Component_Reference-richpanelMenuGroup-Submission_modes">
 				<title>Submission modes</title>
 				<para>
-					If the <varname>expandMode</varname> is unspecified, the submission behavior for the group is inherited from the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag>. Otherwise, the <varname>expandMode</varname> setting is used instead of the parent's behavior.
+					If the <varname>mode</varname> attribute is unspecified, the submission behavior for the group is inherited from the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag>. Otherwise, the <varname>mode</varname> setting is used instead of the parent's behavior. Refer to <xref linkend="sect-Component_Reference-richpanelMenu-Submission_modes" /> for submission mode settings.
 				</para>
 			</section>
 			
@@ -644,16 +735,38 @@
 			</para>
 
 			<section id="sect-Component_Reference-richpanelMenuItem-Basic_usage">
-			   <title>Basic usage</title>
-			   <para>
-			      The <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> component needs the <varname>label</varname> attribute declared, which specifies the text to show for the menu entry.
-			   </para>
+				<title>Basic usage</title>
+				<para>
+					The <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> component needs the <varname>label</varname> attribute declared, which specifies the text to show for the menu entry.
+				</para>
 			</section>
 
 			<section id="sect-Component_Reference-richpanelMenuItem-Appearance">
 				<title>Appearance</title>
 				<para>
-					Icons for menu items can be chosen from a set of standard icons. There are two attributes that relate to the different menu states that the icon represents: <varname>icon</varname> and <varname>iconDisabled</varname>. The standard icons are shown in <xref linkend="figu-Component_Reference-Basic_column_example-Basic_column_example" />.
+					Icons for menu items can be chosen from a set of standard icons. There are two different menu states that the icon represents, as well as icons for both the left and right side of the item title:
+				</para>
+				<variablelist>
+					<varlistentry>
+						<term><varname>iconLeft</varname></term>
+						<term><varname>iconRight</varname></term>
+						<listitem>
+							<para>
+								These attributes determine the icons for a menu item. If unspecified, the menu group uses the <varname>itemIconLeft</varname> and <varname>itemIconRight</varname> parameters defined in the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><varname>iconLeftDisabled</varname></term>
+						<term><varname>iconRightDisabled</varname></term>
+						<listitem>
+							<para>
+								These attributes determine the icons for a menu item when it is disabled. If unspecified, the menu group uses the <varname>itemIconDisabledLeft</varname> and <varname>itemIconDisabledRight</varname> parameters defined in the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				<para>The standard icons are shown in <xref linkend="figu-Component_Reference-Basic_column_example-Basic_column_example" />.
 				</para>
 				<figure id="figu-Component_Reference-richpanelMenuItem-Standard_icons">
 					<title>Standard icons</title>
@@ -670,9 +783,9 @@
 					<title>Using custom icons</title>
 					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpanelMenuItem-Using_custom_icons.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				</example>
-			   <para>
-			      Any icons specified by child <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components overwrite the icons declared with the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
-			   </para>
+				<para>
+					Any icons specified by child <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components overwrite the icons declared with the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
+				</para>
 			</section>
 			
 			<section id="sect-Component_Reference-richpanelMenuItem-Submission_modes">
