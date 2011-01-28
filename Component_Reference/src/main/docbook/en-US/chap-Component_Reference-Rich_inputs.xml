@@ -230,7 +230,6 @@
 			</example>
 		</section>
 
-		<!--
 		<section id="sect-Component_Reference-richcalendar-Using_a_data_model">
 			<title>Using a data model</title>
 			<para>
@@ -240,12 +239,25 @@
 				Alternatively, with <code>mode="ajax"</code> the <sgmltag>&lt;rich:calendar&gt;</sgmltag> requests portions of data for rendering from a special data model. The data model can be defined through the <varname>dataModel</varname> attribute, which points to an object that implements the <classname>CalendarDataModel</classname> interface. If the <varname>dataModel</varname> attribute is not defined or has a value of <literal>null</literal>, the <literal>ajax</literal> mode functions the same as the <literal>client</literal> mode.
 			</para>
 		</section>
-		-->
 
+		<section id="sect-Component_Reference-richcalendar-Client-side_customization">
+			<title>Client-side customization</title>
+			<para>
+				Instead of using a data model, the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can be customized on the client-side. <xref linkend="exam-Component_Reference-richcalendar-Client-side_customization" /> demonstrates how client-side customization can be used to style different days in a calendar.
+			</para>
+			<example id="exam-Component_Reference-richcalendar-Client-side_customization">
+			   <title>Client-side customization</title>
+			   <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcalendar-Client-side_customization.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
 		<section id="sect-Component_Reference-richcalendar-Behavior_and_appearance">
 			<title>Behavior and appearance</title>
 			<para>
 				The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component is presented as a pop-up by default, appearing as a text field with a button to expand the full pop-up calendar. To render the calendar in-line on the page instead, set <code>popup="false</code>. This displays the full calendar without the text field or display button.
+			</para>
+			<para>
+				To add keyboard support for manual input, set <code>enableManualInput="true"</code>. To disable the calendar from any user input, set <code>disabled="true"</code>.
 			</para>
 			<para>
 				To change the appearance of the display button from the standard calendar icon, use the <varname>buttonIcon</varname> and <varname>buttonIconDisabled</varname> attributes to replace the icon with a specified file. Alternatively, use the <varname>buttonLabel</varname> attribute to display text on the button without an icon. If <varname>buttonLabel</varname> is specified then both the <varname>buttonIcon</varname> and <varname>buttonIconDisabled</varname> attributes are ignored. To hide the text field box, set <code>showInput="false"</code>.
@@ -296,14 +308,21 @@
 				To make the entire calendar read-only, set <code>readonly="true"</code>. This allows months and years to be browsed through with the arrow controls, but dates and times cannot be selected.
 			</para>
 			<para>
-				The locale for the calendar can be defined at the component level. All calendar labels will be localized according to this locale.
+				The styling and appearance of the calendar can be fully customized using facets. The <literal>header</literal> and <literal>footer</literal> facets define the calendar's header and footer. The <literal>optionalHeader</literal> and <literal>optionalFooter</literal> facets define the calendar's optional header and optional footer. The <literal>weekNumber</literal> facet controls the appearance of the week numbers, and the <literal>weekDay</literal> facet controls the appearance of the individual day cells on the calendar. <xref linkend="figu-Component_Reference-richcalendar-Facet_elements" /> shows some of the elements available for customization through the various facets.
 			</para>
-			<!-- TODO not in M4 -->
-			<!--
-			<para>
-				The styling and appearance of the calendar can be fully customized using facets. 
-			</para>
-			-->
+			<figure id="figu-Component_Reference-richcalendar-Facet_elements">
+			   <title>Facet elements</title>
+			   <mediaobject>
+			      <imageobject>
+			         <imagedata fileref="images/figu-Component_Reference-richcalendar-Facet_elements.png" format="PNG" />
+			      </imageobject>
+			      <textobject>
+			         <para>
+			            A <sgmltag>&lt;rich:calendar&gt;</sgmltag> control with labeled facet elements.
+			         </para>
+			      </textobject>
+			   </mediaobject>
+			</figure>
 		</section>
 
 		<section id="sect-Component_Reference-richcalendar-Time_of_day">
@@ -317,6 +336,16 @@
 					In RichFaces 4, the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component supports times that include seconds. Previous versions of RichFaces only supported hours and minutes.
 				</para>
 			</note>
+		</section>
+
+		<section id="sect-Component_Reference-richcalendar-Localization_and_formatting">
+			<title>Localization and formatting</title>
+			<para>
+				Date and time strings can be formatted in a set pattern. Use standard locale formatting strings specified by <citetitle>ISO 8601</citetitle> (for example, <literal>d/M/yy HH:mm a</literal>) with the <varname>datePattern</varname> attribute to format date and time strings.
+			</para>
+			<para>
+				To set the locale of the calendar, use the <varname>locale</varname> attribute. The calendar will render month and day names in the relevant language. For example, to set the calendar to the US locale, specify <code>locale="en/US"</code>.
+			</para>
 		</section>
 		
 		<!-- TODO not in M4 -->
@@ -360,6 +389,167 @@
 			</itemizedlist>
 		</section>
 		-->
+
+		<section id="sect-Component_Reference-richcalendar-JavaScript_API">
+		   <title>JavaScript API</title>
+		   <para>
+		      The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
+		   </para>
+		   <variablelist>
+		      <varlistentry>
+		         <term><function>selectDate(date)</function></term>
+		         <listitem>
+		            <para>
+		               Select the specified date. If the date is not in the currently displayed month, a request is performed to display the correct month.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>isDateEnabled(date)</function></term>
+		         <listitem>
+		            <para>
+		               Check if the specified date is able to be selected.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>enableDate(date)</function></term>
+		         <listitem>
+		            <para>
+		               Enable the specified date cell control on the calendar.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>disableDate(date)</function></term>
+		         <listitem>
+		            <para>
+		               Disable the specified date cell control on the calendar.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>enableDates(date[])</function></term>
+		         <listitem>
+		            <para>
+		               Enable the specified dates' cell controls on the calendar.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>disableDates(date[])</function></term>
+		         <listitem>
+		            <para>
+		               Disable the specified dates' cell controls on the calendar.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>nextMonth()</function></term>
+		         <listitem>
+		            <para>
+		               Display the next month.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>nextYear()</function></term>
+		         <listitem>
+		            <para>
+		               Display the next year.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>prevMonth()</function></term>
+		         <listitem>
+		            <para>
+		               Display the previous month.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>prevYear()</function></term>
+		         <listitem>
+		            <para>
+		               Display the previous year.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>getCurrentMonth()</function></term>
+		         <listitem>
+		            <para>
+		               Return the number of the month currently being displayed.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>getCurrentYear()</function></term>
+		         <listitem>
+		            <para>
+		               Return the number of the year currently being displayed.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>today()</function></term>
+		         <listitem>
+		            <para>
+		               Select today's date.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>getSelectedDate()</function></term>
+		         <listitem>
+		            <para>
+		               Return the currently selected date.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>Object getData()</function></term>
+		         <listitem>
+		            <para>
+		               Return additional data for the date.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>resetSelectedDate()</function></term>
+		         <listitem>
+		            <para>
+		               Clear the selected day value.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>doCollapse()</function></term>
+		         <listitem>
+		            <para>
+		               Collapse the pop-up calendar element.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>doExpand()</function></term>
+		         <listitem>
+		            <para>
+		               Expand the pop-up calendar element.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>doSwitch()</function></term>
+		         <listitem>
+		            <para>
+		               Invert the state of the pop-up calendar element.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		   </variablelist>
+		</section>
 		
 		<section id="sect-Component_Reference-richcalendar-Reference_data">
 			<title>Reference data</title>
