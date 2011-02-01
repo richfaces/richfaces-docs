@@ -14,30 +14,6 @@
 		Read this chapter for details on components that use tree structures.
 	</para>
 
-	<!-- TODO not in M5 -->
-	<!--
-	<section id="sect-Component_Reference-Trees-richchangeExpandListener">
-		<title><sgmltag>&lt;rich:changeExpandListener&gt;</sgmltag></title>
-		<para>
-			Incomplete
-		</para>
-	</section>
-	
-	<section id="sect-Component_Reference-Trees-richnodeSelectListener">
-		<title><sgmltag>&lt;rich:nodeSelectListener&gt;</sgmltag></title>
-		<para>
-			Incomplete
-		</para>
-	</section>
-	
-	<section id="sect-Component_Reference-Trees-richrecursiveTreeNodesAdapter">
-		<title><sgmltag>&lt;rich:recursiveTreeNodesAdapter&gt;</sgmltag></title>
-		<para>
-			Incomplete
-		</para>
-	</section>
-	-->
-	
 	<section id="sect-Component_Reference-Trees-richtree">
 		<title><sgmltag>&lt;rich:tree&gt;</sgmltag></title>
 		<para>
@@ -394,14 +370,120 @@
 		</section>
 	</section>
 
-	<!--
-	<section id="sect-Component_Reference-Trees-richtreeNodesAdapter">
-		<title><sgmltag>&lt;rich:treeNodesAdapter&gt;</sgmltag></title>
+	<section id="sect-Component_Reference-Trees-Tree_adaptors">
+		<title>Tree adaptors</title>
 		<para>
-			Incomplete
+			Use a tree adaptor to create a tree and populate it with data from a defined data model.
 		</para>
+
+		<section id="sect-Component_Reference-Tree_adaptors-richtreeModelAdaptor">
+			<title><sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component takes a defined data model and uses it to populate an associated <sgmltag>&lt;rich:tree&gt;</sgmltag> component.
+			</para>
+
+			<section id="sect-Component_Reference-richtreeModelAdaptor-Basic_usage">
+				<title>Basic usage</title>
+				<para>
+					The <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component is added as a nested child component to the <sgmltag>&lt;rich:tree&gt;</sgmltag> component it will populate.
+				</para>
+				<para>
+					The <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component requires the <varname>nodes</varname> attribute for basic usage. The <varname>nodes</varname> attribute defines a collection of elements to iterate through for populating the tree.
+				</para>
+			</section>
+
+			<section id="sect-Component_Reference-richtreeModelAdaptor-Multiple_levels">
+				<title>Multiple levels</title>
+				<para>
+					<sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components can further be nested in other <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components to subsequently populate lower levels of the tree.
+				</para>
+				<para>
+					Use the <varname>var</varname> attribute to access the current collection element at each level. <xref linkend="exam-Component_Reference-richtreeModelAdaptor-Nested_richtreeModelAdaptor_components" /> demonstrates a series of nested <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components, each using the parent's <varname>var</varname> attribute to reference the current element.
+				</para>
+				<example id="exam-Component_Reference-richtreeModelAdaptor-Nested_richtreeModelAdaptor_components">
+					<title><sgmltag>Nested &lt;rich:treeModelAdaptor&gt; components</sgmltag></title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtreeModelAdaptor-Nested_richtreeModelAdaptor_components.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				</example>
+			</section>
+
+			<section id="sect-Component_Reference-richtreeModelAdaptor-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.treeModelAdaptor</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmltreeModelAdaptor</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.treeModelAdaptor</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.treeModelAdaptorTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+		</section>
+
+		<section id="sect-Component_Reference-Tree_adaptors-richtreeModelRecursiveAdaptor">
+			<title><sgmltag>&lt;rich:treeModelRecursiveAdaptor&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;rich:treeModelRecursiveAdaptor&gt;</sgmltag> component recursively populates a tree with hierarchical nodes, such as for a file system with multiple levels of directories and files.
+			</para>
+
+			<section id="sect-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage">
+				<title>Basic usage</title>
+				<para>
+					The <sgmltag>&lt;rich:treeModelRecursiveAdaptor&gt;</sgmltag> component is an extension of the <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component. As such, the <sgmltag>&lt;rich:treeModelRecursiveAdaptor&gt;</sgmltag> component uses all of the same attributes. Refer to <xref linkend="sect-Component_Reference-Tree_adaptors-richtreeModelAdaptor" /> for details on the <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component.
+				</para>
+				<para>
+					In addition, the <sgmltag>&lt;rich:treeModelRecursiveAdaptor&gt;</sgmltag> component requires the <varname>root</varname> attribute. The <varname>root</varname> attribute defines the collection to use at the top of the recursion.
+				</para>
+				<para>
+					<xref linkend="exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage" /> demonstrates how the <sgmltag>&lt;rich:treeModelRecursiveAdaptor&gt;</sgmltag> component can be used in conjunction with the <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component to recursively iterate through a file system and create a tree of directories and files.
+				</para>
+				<example id="exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage">
+					<title>Basic usage</title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				</example>
+			</section>
+
+			<section id="sect-Component_Reference-richtreeModelRecursiveAdaptor-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>component-type</parameter>: <classname>org.richfaces.treeModelRecursiveAdaptor</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmltreeModelRecursiveAdaptor</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.richfaces.treeModelRecursiveAdaptor</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.treeModelRecursiveAdaptorTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+		</section>
+		
 	</section>
-	-->
 	
 </chapter>
 
