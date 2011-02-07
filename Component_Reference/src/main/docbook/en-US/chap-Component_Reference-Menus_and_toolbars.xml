@@ -470,7 +470,7 @@
 		<section id="sect-Component_Reference-richpanelMenu-Appearance">
 			<title>Appearance</title>
 			<para>
-				Icons for the panel menu can be chosen from a set of standard icons. Icons can be set for the top panel menu, child panel menus, and child item. There are three different menu states that the icon represents, as well as icons for both the left and right side of the item title:
+				Icons for the panel menu can be chosen from a set of standard icons. Icons can be set for the top panel menu, child panel menus, and child item. There are three different menu states that the icon represents, as well as icons for both the left and right side of the item title. The icons can also be managed using facets.
 			</para>
 			<variablelist>
 				<varlistentry>
@@ -478,7 +478,7 @@
 					<term><varname>topGroupExpandedRightIcon</varname></term>
 					<listitem>
 						<para>
-							These attributes determine the icons for the top level menu when it is expanded.
+							These attributes determine the icons for the top level menu when it is expanded. The related facet is the <literal>topGroupExpandedClass</literal> facet.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -487,7 +487,7 @@
 					<term><varname>topGroupCollapsedRightIcon</varname></term>
 					<listitem>
 						<para>
-							These attributes determine the icons for the top level menu when it is collapsed.
+							These attributes determine the icons for the top level menu when it is collapsed. The related facet is the <literal>topGroupCollapsedClass</literal> facet.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -496,7 +496,25 @@
 					<term><varname>topGroupDisabledRightIcon</varname></term>
 					<listitem>
 						<para>
-							These attributes determine the icons for the top level menu when it is disabled.
+							These attributes determine the icons for the top level menu when it is disabled. The related facet is the <literal>topGroupDisabledClass</literal> facet.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>topItemLeftIcon</varname></term>
+					<term><varname>topItemRightIcon</varname></term>
+					<listitem>
+						<para>
+							These attributes determine the icons for a top level menu item. The related facet is the <literal>topItemClass</literal> facet.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><varname>topItemDisabledLeftIcon</varname></term>
+					<term><varname>topItemDisabledRightIcon</varname></term>
+					<listitem>
+						<para>
+							These attributes determine the icons for a top level menu item when it is disabled. The related facet is the <literal>topItemDisabledClass</literal> facet.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -505,7 +523,7 @@
 					<term><varname>groupExpandedRightIcon</varname></term>
 					<listitem>
 						<para>
-							These attributes determine the icons for sub-menus that are not the top-level menu when they are expanded.
+							These attributes determine the icons for sub-menus that are not the top-level menu when they are expanded. The related facet is the <literal>groupExpandedClass</literal> facet.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -514,7 +532,7 @@
 					<term><varname>groupCollapsedRightIcon</varname></term>
 					<listitem>
 						<para>
-							These attributes determine the icons for sub-menus that are not the top-level menu when they are collapsed.
+							These attributes determine the icons for sub-menus that are not the top-level menu when they are collapsed. The related facet is the <literal>groupCollapsedClass</literal> facet.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -523,7 +541,7 @@
 					<term><varname>groupDisabledRightIcon</varname></term>
 					<listitem>
 						<para>
-							These attributes determine the icons for sub-menus that are not the top-level menu when they are disabled.
+							These attributes determine the icons for sub-menus that are not the top-level menu when they are disabled. The related facet is the <literal>groupDisabledClass</literal> facet.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -532,7 +550,7 @@
 					<term><varname>itemRightIcon</varname></term>
 					<listitem>
 						<para>
-							These attributes determine the icons for items in the menus.
+							These attributes determine the icons for items in the menus. The related facet is the <literal>itemClass</literal> facet.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -541,7 +559,7 @@
 					<term><varname>itemDisabledRightIcon</varname></term>
 					<listitem>
 						<para>
-							These attributes determine the icons for items in the menus when they are disabled.
+							These attributes determine the icons for items in the menus when they are disabled. The related facet is the <literal>itemDisabledClass</literal> facet.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -637,8 +655,9 @@
 			<section id="sect-Component_Reference-richpanelMenuGroup-Appearance">
 				<title>Appearance</title>
 				<para>
-					Icons for the menu group can be chosen from a set of standard icons. There are three different menu states that the icon represents, as well as icons for both the left and right side of the item title:
+					Icons for the menu group are inherited from the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-richpanelMenu-Appearance" /> for details on icon attributes and facets. Alternatively, the menu group's icons can be re-defined at the <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> component level, and these settings will be used instead of the parent component's settings.
 				</para>
+				<!--
 				<variablelist>
 					<varlistentry>
 						<term><varname>leftExpandedIcon</varname></term>
@@ -686,6 +705,7 @@
 					<title>Using custom icons</title>
 					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpanelMenuGroup-Using_custom_icons.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				</example>
+			-->
 			</section>
 			
 			<section id="sect-Component_Reference-richpanelMenuGroup-Submission_modes">
@@ -744,6 +764,10 @@
 			<section id="sect-Component_Reference-richpanelMenuItem-Appearance">
 				<title>Appearance</title>
 				<para>
+					Icons for the menu item are inherited from the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> or <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-richpanelMenu-Appearance" /> for details on icon attributes and facets. Alternatively, the menu item's icons can be re-defined at the <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> component level, and these settings will be used instead of the parent component's settings.
+				</para>
+				<!--
+				<para>
 					Icons for menu items can be chosen from a set of standard icons. There are two different menu states that the icon represents, as well as icons for both the left and right side of the item title:
 				</para>
 				<variablelist>
@@ -786,6 +810,7 @@
 				<para>
 					Any icons specified by child <sgmltag>&lt;rich:panelMenuGroup&gt;</sgmltag> and <sgmltag>&lt;rich:panelMenuItem&gt;</sgmltag> components overwrite the icons declared with the parent <sgmltag>&lt;rich:panelMenu&gt;</sgmltag> component.
 				</para>
+				-->
 			</section>
 			
 			<section id="sect-Component_Reference-richpanelMenuItem-Submission_modes">
