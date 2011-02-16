@@ -19,23 +19,23 @@
 	<section id="sect-Component_Reference-Drag_and_drop-richdragSource">
 		<title><sgmltag>&lt;rich:dragSource&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:dragSource&gt;</sgmltag> behavior can be added to a component to indicate it is capable of being dragged by the user. The dragged item can then be dropped into a compatible drop area, designated using the <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> behavior.
+			The <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component can be added to a component to indicate it is capable of being dragged by the user. The dragged item can then be dropped into a compatible drop area, designated using the <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component.
 		</para>
 
 		<section id="sect-Component_Reference-richdragSource-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				To add drag support to a component, attach the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> behavior as a child element.
+				To add drag support to a component, attach the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component as a child element.
 			</para>
 			<para>
-				The <varname>type</varname> attribute must be specified, and can be any identifying string. Dragged items can only be dropped in drop zones where the <varname>type</varname> attribute of the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> behavior is listed in the <varname>acceptedTypes</varname> attribute of the <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> behavior.
+				The <varname>type</varname> attribute must be specified, and can be any identifying string. Dragged items can only be dropped in drop zones where the <varname>type</varname> attribute of the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component is listed in the <varname>acceptedTypes</varname> attribute of the <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component.
 			</para>
 		</section>
 
 		<section id="sect-Component_Reference-richdragSource-Dragging_an_object">
 			<title>Dragging an object</title>
 			<para>
-				Use the <varname>dragIndicator</varname> parameter to customize the appearance of a dragged object while it is being dragged. The <varname>dragIndicator</varname> parameter must point to the <varname>id</varname> identifier of a <sgmltag>&lt;rich:dragIndicator&gt;</sgmltag> component.
+				Use the <varname>dragIndicator</varname> parameter to customize the appearance of a dragged object while it is being dragged. The <varname>dragIndicator</varname> parameter must point to the <varname>id</varname> identifier of a <sgmltag>&lt;rich:dragIndicator&gt;</sgmltag> component. If the <varname>dragIndicator</varname> attribute is not defined, the drag indicator appears as a clone of the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component's parent control.
 			</para>
 			<para>
 				To bind data to the dragged object, use the <varname>dragValue</varname> attribute. The <varname>dragValue</varname> attribute specifies an item in a data model, which is then bound to the parent component when it is dragged. This facilitates handling event data during a drop event.
@@ -78,16 +78,16 @@
 	<section id="sect-Component_Reference-Drag_and_drop-richdropTarget">
 		<title><sgmltag>&lt;rich:dropTarget&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> behavior can be added to a component so that the component can accept dragged items. The dragged items must support the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> behavior, and be of a compatible drop type.
+			The <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component can be added to a component so that the component can accept dragged items. The dragged items must support the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component, and be of a compatible drop type.
 		</para>
 
 		<section id="sect-Component_Reference-richdropTarget-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				To allow dragged items to be dropped on a component, attach the <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> behavior as a child element to the component.
+				To allow dragged items to be dropped on a component, attach the <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component as a child element to the component.
 			</para>
 			<para>
-				The <varname>acceptedTypes</varname> attribute must be specified. The <varname>acceptedTypes</varname> attribute is a comma-separated list of strings that match the types of dragged items. Dragged items can only be dropped in drop zones where the <varname>type</varname> attribute of the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> behavior is listed in the <varname>acceptedTypes</varname> attribute of the <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> behavior.
+				The <varname>acceptedTypes</varname> attribute must be specified. The <varname>acceptedTypes</varname> attribute is a comma-separated list of strings that match the types of dragged items. Dragged items can only be dropped in drop zones where the <varname>type</varname> attribute of the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component is listed in the <varname>acceptedTypes</varname> attribute of the <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component.
 			</para>
 			<para>
 				The <varname>acceptedTypes</varname> attribute can optionally be set to either <literal>@none</literal> or <literal>@all</literal>. If set to <literal>@none</literal>, the component will not accept any type of dropped object. If set to <literal>@all</literal>, the component accepts all dropped objects. If the <varname>acceptedTypes</varname> attribute is not specified, the default value is <literal>null</literal>, which is the same as a <literal>@none</literal> setting.
@@ -100,22 +100,22 @@
 				To provide additional parameters for a drop event, use the <varname>dropValue</varname> attribute.
 			</para>
 			<para>
-				The <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> behavior raises the <varname>DropEvent</varname> server-side event when an object is dropped. The event uses the following parameters:
+				The <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component raises the <varname>DropEvent</varname> server-side event when an object is dropped. The event uses the following parameters:
 			</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-						The <parameter>dragSource</parameter> identifies the component being dragged (the parent of the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> behavior).
+						The <parameter>dragSource</parameter> identifies the component being dragged (the parent of the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component).
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						The <parameter>dragValue</parameter> parameter is the content of the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> behavior's <varname>dragValue</varname> attribute.
+						The <parameter>dragValue</parameter> parameter is the content of the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component's <varname>dragValue</varname> attribute.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						The <parameter>dropValue</parameter> parameter is the content of the <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> behavior's <varname>dropValue</varname> attribute.
+						The <parameter>dropValue</parameter> parameter is the content of the <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component's <varname>dropValue</varname> attribute.
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -189,7 +189,7 @@
 					<term><varname>acceptClass</varname></term>
 					<listitem>
 						<para>
-							The <varname>acceptClass</varname> attribute specifies the style when the dragged element is over an acceptable drop target. It indicates that the <varname>type</varname> attribute of the element's <sgmltag>&lt;rich:dragSource&gt;</sgmltag> behavior matches <varname>acceptedTypes</varname> attribute of the drop target's <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> behavior.
+							The <varname>acceptClass</varname> attribute specifies the style when the dragged element is over an acceptable drop target. It indicates that the <varname>type</varname> attribute of the element's <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component matches <varname>acceptedTypes</varname> attribute of the drop target's <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -197,7 +197,7 @@
 					<term><varname>rejectClass</varname></term>
 					<listitem>
 						<para>
-							The <varname>rejectClass</varname> attribute specifies the style when the dragged element is over a drop target that is not acceptable. It indicates that the <varname>type</varname> attribute of the element's <sgmltag>&lt;rich:dragSource&gt;</sgmltag> behavior is not found in the <varname>acceptedTypes</varname> attribute of the drop target's <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> behavior.
+							The <varname>rejectClass</varname> attribute specifies the style when the dragged element is over a drop target that is not acceptable. It indicates that the <varname>type</varname> attribute of the element's <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component is not found in the <varname>acceptedTypes</varname> attribute of the drop target's <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component.
 						</para>
 					</listitem>
 				</varlistentry>
