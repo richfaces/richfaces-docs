@@ -222,7 +222,7 @@
 		<section id="sect-Component_Reference-richcalendar-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Basic usage of the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component requires only the <varname>value</varname> attribute, which holds the currently selected date. <xref linkend="exam-Component_Reference-richcalendar-Basic_usage" /> shows a basic declaration, with the value pointing to a data model.
+				Basic usage of the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component requires only the <varname>value</varname> attribute, which holds the currently selected date. <xref linkend="exam-Component_Reference-richcalendar-Basic_usage" /> shows a basic declaration, with the value pointing to a bean property. The bean property holds the selected date.
 			</para>
 			<example id="exam-Component_Reference-richcalendar-Basic_usage">
 				<title>Basic usage</title>
@@ -230,27 +230,6 @@
 			</example>
 		</section>
 
-		<section id="sect-Component_Reference-richcalendar-Using_a_data_model">
-			<title>Using a data model</title>
-			<para>
-				The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component supports two different ways of loading data through defining the <varname>mode</varname> attribute. When not specified, the component uses <literal>client</literal> mode, which loads an initial portion of data within a set date range. The range can be defined by using the <varname>preloadDateRangeBegin</varname> and <varname>preloadDateRangeEnd</varname> attributes. Additional data requests are not sent.
-			</para>
-			<para>
-				Alternatively, with <code>mode="ajax"</code> the <sgmltag>&lt;rich:calendar&gt;</sgmltag> requests portions of data for rendering from a special data model. The data model can be defined through the <varname>dataModel</varname> attribute, which points to an object that implements the <classname>CalendarDataModel</classname> interface. If the <varname>dataModel</varname> attribute is not defined or has a value of <literal>null</literal>, the <literal>ajax</literal> mode functions the same as the <literal>client</literal> mode.
-			</para>
-		</section>
-
-		<section id="sect-Component_Reference-richcalendar-Client-side_customization">
-			<title>Client-side customization</title>
-			<para>
-				Instead of using a data model, the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can be customized on the client-side. <xref linkend="exam-Component_Reference-richcalendar-Client-side_customization" /> demonstrates how client-side customization can be used to style different days in a calendar.
-			</para>
-			<example id="exam-Component_Reference-richcalendar-Client-side_customization">
-			   <title>Client-side customization</title>
-			   <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcalendar-Client-side_customization.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			</example>
-		</section>
-		
 		<section id="sect-Component_Reference-richcalendar-Behavior_and_appearance">
 			<title>Behavior and appearance</title>
 			<para>
@@ -307,6 +286,8 @@
 			<para>
 				To make the entire calendar read-only, set <code>readonly="true"</code>. This allows months and years to be browsed through with the arrow controls, but dates and times cannot be selected.
 			</para>
+			<!-- Not supported -->
+			<!--
 			<para>
 				The styling and appearance of the calendar can be fully customized using facets. The <literal>header</literal> and <literal>footer</literal> facets define the calendar's header and footer. The <literal>optionalHeader</literal> and <literal>optionalFooter</literal> facets define the calendar's optional header and optional footer. The <literal>weekNumber</literal> facet controls the appearance of the week numbers, and the <literal>weekDay</literal> facet controls the appearance of the individual day cells on the calendar. <xref linkend="figu-Component_Reference-richcalendar-Facet_elements" /> shows some of the elements available for customization through the various facets.
 			</para>
@@ -323,6 +304,7 @@
 			      </textobject>
 			   </mediaobject>
 			</figure>
+			-->
 		</section>
 
 		<section id="sect-Component_Reference-richcalendar-Time_of_day">
@@ -390,6 +372,30 @@
 		</section>
 		-->
 
+		<section id="sect-Component_Reference-richcalendar-Using_a_data_model">
+			<title>Using a data model</title>
+			<para>
+				The look and feel of the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can be customized through the use of a data model on the server side. The component supports two different ways of loading data from the server side through defining the <varname>mode</varname> attribute.
+			</para>
+			<para>
+				When the <varname>mode</varname> attribute is not specified, the component uses the <literal>client</literal> mode. The <literal>client</literal> mode loads an initial portion of data within a set date range. The range can be defined by using the <varname>preloadDateRangeBegin</varname> and <varname>preloadDateRangeEnd</varname> attributes. Additional data requests are not sent.
+			</para>
+			<para>
+				Alternatively, with <code>mode="ajax"</code> the <sgmltag>&lt;rich:calendar&gt;</sgmltag> requests portions of data for rendering from a special data model. The data model can be defined through the <varname>dataModel</varname> attribute, which points to an object that implements the <classname>CalendarDataModel</classname> interface. If the <varname>dataModel</varname> attribute is not defined or has a value of <literal>null</literal>, the <literal>ajax</literal> mode functions the same as the <literal>client</literal> mode.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richcalendar-Client-side_customization">
+			<title>Client-side customization</title>
+			<para>
+				Instead of using a data model, the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can be customized on the client-side. <xref linkend="exam-Component_Reference-richcalendar-Client-side_customization" /> demonstrates how client-side customization can be used to style different days in a calendar.
+			</para>
+			<example id="exam-Component_Reference-richcalendar-Client-side_customization">
+			   <title>Client-side customization</title>
+			   <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcalendar-Client-side_customization.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
+		
 		<section id="sect-Component_Reference-richcalendar-JavaScript_API">
 		   <title>JavaScript API</title>
 		   <para>
