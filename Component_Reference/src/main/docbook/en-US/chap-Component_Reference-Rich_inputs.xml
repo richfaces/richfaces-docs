@@ -328,6 +328,44 @@
 			<para>
 				To set the locale of the calendar, use the <varname>locale</varname> attribute. The calendar will render month and day names in the relevant language. For example, to set the calendar to the US locale, specify <code>locale="en/US"</code>.
 			</para>
+			<para>
+				Use an application resource bundle to localize the calendar control labels. Define the following strings in the resource bundle:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <property>RICH_CALENDAR_APPLY_LABEL</property> string is the label for the <guibutton>Apply</guibutton> button.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <property>RICH_CALENDAR_TODAY_LABEL</property> string is the label for the <guibutton>Today</guibutton> button.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <property>RICH_CALENDAR_CLOSE_LABEL</property> string is the label for the <guibutton>Close</guibutton> button.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <property>RICH_CALENDAR_OK_LABEL</property> string is the label for the <guibutton>OK</guibutton> button.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <property>RICH_CALENDAR_CLEAN_LABEL</property> string is the label for the <guibutton>Clean</guibutton> button.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <property>RICH_CALENDAR_CANCEL_LABEL</property> string is the label for the <guibutton>Cancel</guibutton> button.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				Alternatively, use the <classname>org.richfaces.renderkit.calendar</classname> resource bundle with Java Archive files (<acronym>JAR</acronym>s) defining the same properties.
+			</para>
 		</section>
 		
 		<!-- TODO not in M4 -->
@@ -388,7 +426,7 @@
 		<section id="sect-Component_Reference-richcalendar-Client-side_customization">
 			<title>Client-side customization</title>
 			<para>
-				Instead of using a data model, the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can be customized on the client-side. <xref linkend="exam-Component_Reference-richcalendar-Client-side_customization" /> demonstrates how client-side customization can be used to style different days in a calendar.
+				Instead of using a data model, the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can be customized on the client-side using JavaScript. Use the <varname>dayClassFunction</varname> attribute to reference the function that determines the CSS style class for each day cell. Use the <varname>dayDisableFunction</varname> to reference the function that enables or disables a day cell. <xref linkend="exam-Component_Reference-richcalendar-Client-side_customization" /> demonstrates how client-side customization can be used to style different days in a calendar.
 			</para>
 			<example id="exam-Component_Reference-richcalendar-Client-side_customization">
 			   <title>Client-side customization</title>
@@ -403,6 +441,30 @@
 		   </para>
 		   <variablelist>
 		      <varlistentry>
+		         <term><function>showPopup()</function></term>
+		         <listitem>
+		            <para>
+		               Expand the pop-up calendar element.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>hidePopup()</function></term>
+		         <listitem>
+		            <para>
+		               Collapse the pop-up calendar element.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>switchPopup()</function></term>
+		         <listitem>
+		            <para>
+		               Invert the state of the pop-up calendar element.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
 		         <term><function>selectDate(date)</function></term>
 		         <listitem>
 		            <para>
@@ -410,6 +472,7 @@
 		            </para>
 		         </listitem>
 		      </varlistentry>
+		      <!--
 		      <varlistentry>
 		         <term><function>isDateEnabled(date)</function></term>
 		         <listitem>
@@ -450,6 +513,7 @@
 		            </para>
 		         </listitem>
 		      </varlistentry>
+		      -->
 		      <varlistentry>
 		         <term><function>nextMonth()</function></term>
 		         <listitem>
@@ -527,30 +591,6 @@
 		         <listitem>
 		            <para>
 		               Clear the selected day value.
-		            </para>
-		         </listitem>
-		      </varlistentry>
-		      <varlistentry>
-		         <term><function>doCollapse()</function></term>
-		         <listitem>
-		            <para>
-		               Collapse the pop-up calendar element.
-		            </para>
-		         </listitem>
-		      </varlistentry>
-		      <varlistentry>
-		         <term><function>doExpand()</function></term>
-		         <listitem>
-		            <para>
-		               Expand the pop-up calendar element.
-		            </para>
-		         </listitem>
-		      </varlistentry>
-		      <varlistentry>
-		         <term><function>doSwitch()</function></term>
-		         <listitem>
-		            <para>
-		               Invert the state of the pop-up calendar element.
 		            </para>
 		         </listitem>
 		      </varlistentry>
