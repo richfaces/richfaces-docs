@@ -4,151 +4,125 @@
 <chapter id="chap-Component_Reference-Validation">
 	<title>Validation</title>
 	<para>
-		This chapter covers those components that validate user input. The components enhance <acronym>JSF</acronym> validation capabilities with Ajax support and the use of <application>Hibernate</application> validators.
+		JavaServer Faces 2 provides built-in support for bean validation as per the Java Specification Request JSR-303 standard. As such, containers must validate model objects. Validation is performed at different application tiers according to annotation-based constraints. Refer to <ulink url="http://jcp.org/en/jsr/detail?id=303">http://jcp.org/en/jsr/detail?id=303</ulink> for further details on the JSR-303 specification.
 	</para>
-	
-	<section id="sect-Component_Reference-Validation-richajaxValidator">
-		<title><sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag></title>
+	<para>
+		<xref linkend="exam-Component_Reference-Validation-JSR-303_validation_annotations" /> shows an example JSF managed bean. The bean includes JSR-303 annotations for validation. Validation annotations defined in this way are registered on components bound to the bean properties, and validation is triggered in the <emphasis>Process Validation</emphasis> phase.
+	</para>
+	<example id="exam-Component_Reference-Validation-JSR-303_validation_annotations">
+		<title>JSR-303 validation annotations</title>
+		<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-Validation-JSR-303_validation_annotations.js" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+	</example>
+	<para>
+		However, this built-in validation is only applied on the server side. RichFaces Client-Side Validation provides validation on the client side without the need to reproduce the server-side annotations. RichFaces Client-Side Validation consists of the <sgmltag>&lt;rich:validator&gt;</sgmltag> and <sgmltag>&lt;rich:graphValidator&gt;</sgmltag> behaviors. 
+	</para>
+	<note>
+		<title>Requirements</title>
 		<para>
-			The <sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag> component provides Ajax validation for <acronym>JSF</acronym> inputs. It is added as a child component to a <acronym>JSF</acronym> tag, and the <varname>event</varname> attribute specifies when to trigger the validation.
+			Bean validation in both JavaServer Faces and RichFaces requires the <emphasis>JSR-303</emphasis> implementation. The implementation is bundled with <productname>JEE 6 Application Server</productname>.
 		</para>
-		<example id="exam-Component_Reference-richajaxValidator-richajaxValidator_example">
-			<title><sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag> example</title>
-			<para>
-				This example shows the use of <sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag> with standard <acronym>JSF</acronym> validators. The validators check the length of the entered name, and the range of the entered age.
-			</para>
-			<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richajaxValidator-richajaxValidator_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-		</example>
-		
-		<section id="sect-Component_Reference-richajaxValidator-Custom_validators">
-			<title>Custom validators</title>
-			<para>
-				The <sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag> component can also work with custom validators made using the <acronym>JSF</acronym> Validation <acronym>API</acronym> in the <package>javax.faces.validator</package> package, or with Hibernate Validator. Refer to the <citetitle>Hibernate Validator documentation</citetitle> for details on how to use Hibernate Validator.
-			</para>
-			<example id="exam-Component_Reference-richajaxValidator-Using_richajaxValidator_with_Hibernate_Validator">
-				<title>Using <sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag> with Hibernate Validator</title>
-				<para>
-					This example shows the use of <sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag> with Hibernate Validator. It validates the entered name, email, and age.
-				</para>
-				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richajaxValidator-Using_richajaxValidator_with_Hibernate_Validator-0.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<para>
-					The validation is performed using the <classname>ValidationBean</classname> class:
-				</para>
-				<programlisting language="Java" role="JAVA"><xi:include href="extras/exam-Component_Reference-ValidationBean.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<blockquote>
-					<figure id="figu-Component_Reference-Using_richajaxValidator_with_Hibernate_Validator-richajaxValidator_example_result">
-						<title><sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag> example result</title>
-						<mediaobject>
-							<imageobject>
-								<imagedata fileref="images/figu-Component_Reference-richajaxValidator-richajaxValidator_example_result.png" format="PNG" width="444" />
-							</imageobject>
-							<textobject>
-								<para>
-									The result of the <sgmltag>&lt;rich:ajaxValidator&gt;</sgmltag> example: three text entry fields with corresponding validation messages.
-								</para>
-							</textobject>
-						</mediaobject>
-					</figure>
-				</blockquote>
-			</example>
-		</section>
-		
-		<section id="sect-Component_Reference-richajaxValidator-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.ajaxValidator</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlajaxValidator</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.ajaxValidator</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.ajaxValidatorRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.ajaxValidatorTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-	
-	<section id="sect-Component_Reference-Validation-richbeanValidator">
-		<title><sgmltag>&lt;rich:beanValidator&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:beanValidator&gt;</sgmltag> component provides model-based constraints using Hibernate Validator. This allows Hibernate Validator to be used similar to its use with Seam-based applications.
+			If using <productname>Tomcat</productname> or another simple servlet container, add the <filename>validation-api</filename> Java Archive and a validation provider (such as <productname>Hibernate Validator</productname>) to your application libraries.
 		</para>
-		<section id="sect-Component_Reference-richbeanValidator-Basic_usage">
+	</note>
+	
+	<section id="sect-Component_Reference-Validation-richvalidator">
+		<title><sgmltag>&lt;rich:validator&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior adds client-side validation to a control based on registered server-side validators. The <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior triggers all client validator annotations listed in the relevant managed bean.
+		</para>
+
+		<section id="sect-Component_Reference-richvalidator-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <varname>summary</varname> attribute is used for displaying messages about validation errors.
+				The <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior is added as a child element to any input control. The value of the input control must reference a managed bean. The <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior validates the content of the input control on the client-side based on registered server-side validators included in the managed bean.
 			</para>
-			<example id="exam-Component_Reference-richbeanValidator-richbeanValidator_example">
-				<title><sgmltag>&lt;rich:beanValidator&gt;</sgmltag> example</title>
+			<example id="exam-Component_Reference-richvalidator-Basic_usage">
+				<title>Basic usage</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richvalidator-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				<para>
-					This example shows the bean-based validation of a simple form, containing the user's name, email, and age. The <sgmltag>&lt;rich:beanValidator&gt;</sgmltag> component is defined in the same way as for <acronym>JSF</acronym> validators.
+					The <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior is added to an <sgmltag>&lt;h:inputText&gt;</sgmltag> control. The validator uses the registered server-side validators included in the managed bean referenced by the input control.
 				</para>
-				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richbeanValidator-richbeanValidator_example-0.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<para>
-					The accompanying bean contains the validation data:
-				</para>
-				<programlisting language="Java" role="JAVA"><xi:include href="extras/exam-Component_Reference-ValidationBean.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<blockquote>
-					<figure id="figu-Component_Reference-richbeanValidator_example-richbeanValidator_example_result">
-						<title><sgmltag>&lt;rich:beanValidator&gt;</sgmltag> example result</title>
-						<mediaobject>
-							<imageobject>
-								<imagedata fileref="images/figu-Component_Reference-richbeanValidator-richbeanValidator_example_result.png" format="PNG" width="444" />
-							</imageobject>
-							<textobject>
-								<para>
-									The result of the <sgmltag>&lt;rich:beanValidator&gt;</sgmltag> example: three text entry fields with corresponding validation messages.
-								</para>
-							</textobject>
-						</mediaobject>
-					</figure>
-				</blockquote>
 			</example>
 		</section>
+
+		<section id="sect-Component_Reference-richvalidator-Messages_from_client-side_validators">
+			<title>Messages from client-side validators</title>
+			<para>
+				Use the <sgmltag>&lt;rich:message&gt;</sgmltag> and <sgmltag>&lt;rich:messages&gt;</sgmltag> components to display validation messages. The <varname>for</varname> attribute of the <sgmltag>&lt;rich:message&gt;</sgmltag> component references the <varname>id</varname> identifier of the input control being validated.
+			</para>
+			<example id="exam-Component_Reference-richvalidator-Messages">
+				<title>Messages</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richvalidator-Messages.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					Failed validation checks are reported using <sgmltag>&lt;rich:message&gt;</sgmltag> components. The validation annotations in the managed bean are outlined in <xref linkend="exam-Component_Reference-Validation-JSR-303_validation_annotations" />.
+				</para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/figu-Component_Reference-richvalidator-Messages.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							Failed validation checks are reported using <sgmltag>&lt;rich:message&gt;</sgmltag> components.
+						</para>
+					</textobject>
+				</mediaobject>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-richvalidator-Validation_triggers">
+			<title>Validation triggers</title>
+			<para>
+				Use the <varname>event</varname> attribute to specify which event on the input control triggers the validation process. By default, the <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior triggers validation when the input control is changed (<code>event="change"</code>).
+			</para>
+			<example id="exam-Component_Reference-richvalidator-Validation_triggers">
+				<title>Validation triggers</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richvalidator-Validation_triggers.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The <varname>event</varname> attribute is changed to the <literal>keyup</literal> event, such that validation takes place after each key press.
+				</para>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-richvalidator-Fall-backs">
+			<title>Fall-backs</title>
+			<para>
+				If no client-side validation method exists for a registered server-side validator, Ajax fall-back is used. The <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior invokes all available client-side validators. If all the client-side validators return valid, RichFaces performs an Ajax request to invoke the remaining validators on the server side.
+			</para>
+			<note>
+				<title>JSF client-side validators</title>
+				<para>
+					JSF client-side validators, such as <sgmltag>&lt;f:validateLength&gt;</sgmltag> and <sgmltag>&lt;f:validateDoubleRange&gt;</sgmltag> validators, can be declared alongside <sgmltag>&lt;rich:validator&gt;</sgmltag> behaviors. However, because this duplicates the validation processes at both the view and model level, it is not recommended.
+				</para>
+			</note>
+		</section>
 		
-		<section id="sect-Component_Reference-richbeanValidator-Reference_data">
+		<section id="sect-Component_Reference-richvalidator-Reference_data">
 			<title>Reference data</title>
 			<itemizedlist>
 				<listitem>
 					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.beanValidator</classname>
+						<parameter>component-type</parameter>: <classname>org.richfaces.validator</classname>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlbeanValidator</classname>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.Htmlvalidator</classname>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.beanValidator</classname>
+						<parameter>component-family</parameter>: <classname>org.richfaces.validator</classname>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.beanValidatorRenderer</classname>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.validatorRenderer</classname>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.beanValidatorTag</classname>
+						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.validatorTag</classname>
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -158,7 +132,7 @@
 	<section id="sect-Component_Reference-Validation-richgraphValidator">
 		<title><sgmltag>&lt;rich:graphValidator&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:graphValidator&gt;</sgmltag> component is used to wrap a group of input components for overall validation with Hibernate Validators. This is different from the <sgmltag>&lt;rich:beanValidator&gt;</sgmltag> component, which is used as a child element to individual input components.
+			The <sgmltag>&lt;rich:graphValidator&gt;</sgmltag> behavior is used to wrap a group of input components for overall validation with Hibernate Validators. <!--This is different from the <sgmltag>&lt;rich:beanValidator&gt;</sgmltag> component, which is used as a child element to individual input components.-->
 		</para>
 		
 		<section id="sect-Component_Reference-richgraphValidator-Basic_usage">
@@ -169,7 +143,7 @@
 			<example id="exam-Component_Reference-richgraphValidator-richgraphValidator_example">
 				<title><sgmltag>&lt;rich:graphValidator&gt;</sgmltag> example</title>
 				<para>
-					This example shows the validation of a simple form, containing the user's name, email, and age. The <sgmltag>&lt;rich:graphValidator&gt;</sgmltag> component wraps the input components to validate them together.
+					This example shows the validation of a simple form, containing the user's name, email, and age. The <sgmltag>&lt;rich:graphValidator&gt;</sgmltag> behavior wraps the input components to validate them together.
 				</para>
 				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richgraphValidator-richgraphValidator_example-0.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				<para>
