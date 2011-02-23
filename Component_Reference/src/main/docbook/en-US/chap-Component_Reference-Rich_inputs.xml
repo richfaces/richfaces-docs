@@ -114,6 +114,47 @@
 		</section>
 		-->
 		
+		<section id="sect-Component_Reference-richautocomplete-JavaScript_API">
+		   <title>JavaScript API</title>
+		   <para>
+		      The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
+		   </para>
+		   <variablelist>
+		      <varlistentry>
+		         <term><function>getValue()</function></term>
+		         <listitem>
+		            <para>
+		               Get the current value of the text field.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>setValue(newValue)</function></term>
+		         <listitem>
+		            <para>
+		               Set the value of the text field to the <parameter>newValue</parameter> string passed as a parameter.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>showPopup()</function></term>
+		         <listitem>
+		            <para>
+		               Show the pop-up list of completion values.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>hidePopup()</function></term>
+		         <listitem>
+		            <para>
+		               Hide the pop-up list.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		   </variablelist>
+		</section>
+		
 		<section id="sect-Component_Reference-richautocomplete-Reference_data">
 			<title>Reference data</title>
 			<itemizedlist>
@@ -465,10 +506,34 @@
 		         </listitem>
 		      </varlistentry>
 		      <varlistentry>
-		         <term><function>selectDate(date)</function></term>
+		         <term><function>getValue()</function></term>
 		         <listitem>
 		            <para>
-		               Select the specified date. If the date is not in the currently displayed month, a request is performed to display the correct month.
+		               Return the selected date value of the calendar.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>getValueAsString()</function></term>
+		         <listitem>
+		            <para>
+		               Return the selected date value of the calendar as a formatted string.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>setValue(newValue)</function></term>
+		         <listitem>
+		            <para>
+		               Set the selected date value to the <parameter>newValue</parameter> date passed as a parameter. If the new date is not in the currently displayed month, a request is performed to display the correct month.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>resetValue()</function></term>
+		         <listitem>
+		            <para>
+		               Clear the selected date value.
 		            </para>
 		         </listitem>
 		      </varlistentry>
@@ -514,6 +579,7 @@
 		         </listitem>
 		      </varlistentry>
 		      -->
+		      <!--
 		      <varlistentry>
 		         <term><function>nextMonth()</function></term>
 		         <listitem>
@@ -546,6 +612,15 @@
 		            </para>
 		         </listitem>
 		      </varlistentry>
+		      -->
+		      <varlistentry>
+		         <term><function>today()</function></term>
+		         <listitem>
+		            <para>
+		               Select today's date.
+		            </para>
+		         </listitem>
+		      </varlistentry>
 		      <varlistentry>
 		         <term><function>getCurrentMonth()</function></term>
 		         <listitem>
@@ -563,34 +638,42 @@
 		         </listitem>
 		      </varlistentry>
 		      <varlistentry>
-		         <term><function>today()</function></term>
+		         <term><function>showSelectedDate()</function></term>
 		         <listitem>
 		            <para>
-		               Select today's date.
+		               Show the calendar month that contains the currently selected date.
 		            </para>
 		         </listitem>
 		      </varlistentry>
 		      <varlistentry>
-		         <term><function>getSelectedDate()</function></term>
+		         <term><function>showDateEditor()</function></term>
 		         <listitem>
 		            <para>
-		               Return the currently selected date.
+		               Show the date editor pop-up.
 		            </para>
 		         </listitem>
 		      </varlistentry>
 		      <varlistentry>
-		         <term><function>Object getData()</function></term>
+		         <term><function>hideDateEditor()</function></term>
 		         <listitem>
 		            <para>
-		               Return additional data for the date.
+		               Hide the date editor pop-up.
 		            </para>
 		         </listitem>
 		      </varlistentry>
 		      <varlistentry>
-		         <term><function>resetSelectedDate()</function></term>
+		         <term><function>showTimeEditor()</function></term>
 		         <listitem>
 		            <para>
-		               Clear the selected day value.
+		               Show the time editor pop-up.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>hideTimeEditor()</function></term>
+		         <listitem>
+		            <para>
+		               Hide the time editor pop-up.
 		            </para>
 		         </listitem>
 		      </varlistentry>
@@ -839,7 +922,7 @@
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceInput">
 		<title><sgmltag>&lt;rich:inplaceInput&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component allows information to be entered in-line in blocks of text, improving readability of the text. Multiple input regions can be navigated with keyboard navigation. The component has three functional states: the "view" state, where the component displays its initial setting, such as "click to edit"; the "edit" state, where the user can input text; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
+			The <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component allows information to be entered in-line in blocks of text, improving readability of the text. Multiple input regions can be navigated with keyboard navigation. The component has three functional states: the <emphasis>view</emphasis> state, where the component displays its initial setting, such as "click to edit"; the <emphasis>edit</emphasis> state, where the user can input text; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
 		</para>
 		
 		<section id="sect-Component_Reference-richinplaceInput-Basic_usage">
@@ -852,14 +935,14 @@
 		<section id="sect-Component_Reference-richinplaceInput-Interactivity_options">
 			<title>Interactivity options</title>
 			<para>
-				When in the initial "view" state, the starting label can be set using the <varname>defaultLabel</varname> attribute. Once the user has entered text, the label is stored in the model specified by the <varname>value</varname> attribute. The use of the default label and value is shown in <xref linkend="exam-Component_Reference-richinplaceInput-Default_label_and_value" />.
+				When in the initial <emphasis>view</emphasis> state, the starting label can be set using the <varname>defaultLabel</varname> attribute. Once the user has entered text, the label is stored in the model specified by the <varname>value</varname> attribute. The use of the default label and value is shown in <xref linkend="exam-Component_Reference-richinplaceInput-Default_label_and_value" />.
 			</para>
 			<example id="exam-Component_Reference-richinplaceInput-Default_label_and_value">
 				<title>Default label and value</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richinplaceInput-Default_label_and_value.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</example>
 			<para>
-				By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event.
+				By default, the event to switch the component to the <emphasis>edit</emphasis> state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event.
 			</para>
 			<para>
 				The user can confirm and save their input by pressing the <keycap>Enter</keycap> key or cancel by pressing the <keycap>Esc</keycap> key. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. 
@@ -878,27 +961,92 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-						<varname>oneditactivation</varname> is triggered before the "edit" state is activated.
+						<varname>oneditactivation</varname> is triggered before the <emphasis>edit</emphasis> state is activated.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<varname>oneditactivated</varname> is triggered after the "edit" state is activated.
+						<varname>oneditactivated</varname> is triggered after the <emphasis>edit</emphasis> state is activated.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<varname>onviewactivation</varname> is triggered before the "view" or "changed" state is activated.
+						<varname>onviewactivation</varname> is triggered before the <emphasis>view</emphasis> or "changed" state is activated.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<varname>onviewactivated</varname> is triggered after the "view" or "changed" state is activated.
+						<varname>onviewactivated</varname> is triggered after the <emphasis>view</emphasis> or "changed" state is activated.
 					</para>
 				</listitem>
 			</itemizedlist>
 		</section>
 		-->
+		
+		<section id="sect-Component_Reference-richinplaceInput-JavaScript_API">
+		   <title>JavaScript API</title>
+		   <para>
+		      The <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
+		   </para>
+		   <variablelist>
+		      <varlistentry>
+		         <term><function>getValue()</function></term>
+		         <listitem>
+		            <para>
+		               Get the current value of the input control.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>setValue(newValue)</function></term>
+		         <listitem>
+		            <para>
+		               Set the value of the input control to the <parameter>newValue</parameter> string passed as a parameter.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>isEditState()</function></term>
+		         <listitem>
+		            <para>
+		               Returns <literal>true</literal> if the control is currently in the <emphasis>edit</emphasis> state, or <literal>false</literal> if the control is currently in the <emphasis>view</emphasis> state.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>isValueChanged()</function></term>
+		         <listitem>
+		            <para>
+		               Returns <literal>true</literal> if the control's value has been changed from the default.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>save()</function></term>
+		         <listitem>
+		            <para>
+		               Saves the current item as the control's value.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>cancel()</function></term>
+		         <listitem>
+		            <para>
+		               Cancel editing the value.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>getInput()</function></term>
+		         <listitem>
+		            <para>
+		               Return the input entered into the control by the user.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		   </variablelist>
+		</section>
 		
 		<section id="sect-Component_Reference-richinplaceInput-Reference_data">
 			<title>Reference data</title>
@@ -936,7 +1084,7 @@
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceSelect">
 		<title><sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component is similar to the <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component, except that the <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component uses a drop-down selection box to enter text instead of a regular text field. Changes can be rendered either in-line or for the whole block, and inputs can be focused with keyboard navigation. The component has three functional states: the "view" state, where the component displays its initial setting, such as "click to edit"; the "edit" state, where the user can select a value from a drop-down list; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
+			The <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component is similar to the <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component, except that the <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component uses a drop-down selection box to enter text instead of a regular text field. Changes can be rendered either in-line or for the whole block, and inputs can be focused with keyboard navigation. The component has three functional states: the <emphasis>view</emphasis> state, where the component displays its initial setting, such as "click to edit"; the <emphasis>edit</emphasis> state, where the user can select a value from a drop-down list; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
 		</para>
 		<figure id="figu-Component_Reference-richinplaceSelect-richinplaceSelect">
 			<title><sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
@@ -966,10 +1114,10 @@
 		<section id="sect-Component_Reference-richinplaceSelect-Interactivity_options">
 			<title>Interactivity options</title>
 			<para>
-				When in the initial "view" state, the starting label can be set using the <varname>defaultLabel</varname> attribute, such as <code>defaultLabel="click to edit"</code>.
+				When in the initial <emphasis>view</emphasis> state, the starting label can be set using the <varname>defaultLabel</varname> attribute, such as <code>defaultLabel="click to edit"</code>.
 			</para>
 			<para>
-				By default, the event to switch the component to the "edit" state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event. When switching to "edit" mode, the drop-down list of possible values will automatically be displayed; this can be deactivated by setting <code><varname>openOnEdit</varname>="false"</code>.
+				By default, the event to switch the component to the <emphasis>edit</emphasis> state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event. When switching to <emphasis>edit</emphasis> mode, the drop-down list of possible values will automatically be displayed; this can be deactivated by setting <code><varname>openOnEdit</varname>="false"</code>.
 			</para>
 			<para>
 				Once a new value for the control is saved, the state switches to the "changed" state. Saving a new value for the control can be performed in three different ways:
@@ -1008,27 +1156,124 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-						<varname>oneditactivation</varname> is triggered before the "edit" state is activated.
+						<varname>oneditactivation</varname> is triggered before the <emphasis>edit</emphasis> state is activated.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<varname>oneditactivated</varname> is triggered after the "edit" state is activated.
+						<varname>oneditactivated</varname> is triggered after the <emphasis>edit</emphasis> state is activated.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<varname>onviewactivation</varname> is triggered before the "view" or "changed" state is activated.
+						<varname>onviewactivation</varname> is triggered before the <emphasis>view</emphasis> or "changed" state is activated.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<varname>onviewactivated</varname> is triggered after the "view" or "changed" state is activated.
+						<varname>onviewactivated</varname> is triggered after the <emphasis>view</emphasis> or "changed" state is activated.
 					</para>
 				</listitem>
 			</itemizedlist>
 		</section>
 		-->
+		
+		<section id="sect-Component_Reference-richinplaceSelect-JavaScript_API">
+		   <title>JavaScript API</title>
+		   <para>
+		      The <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
+		   </para>
+		   <variablelist>
+		      <varlistentry>
+		         <term><function>getValue()</function></term>
+		         <listitem>
+		            <para>
+		               Get the current value of the select control.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>setValue(newValue)</function></term>
+		         <listitem>
+		            <para>
+		               Set the value of the select control to the <parameter>newValue</parameter> string passed as a parameter.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>isEditState()</function></term>
+		         <listitem>
+		            <para>
+		               Returns <literal>true</literal> if the control is currently in the <emphasis>edit</emphasis> state, or <literal>false</literal> if the control is currently in the <emphasis>view</emphasis> state.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>isValueChanged()</function></term>
+		         <listitem>
+		            <para>
+		               Returns <literal>true</literal> if the control's value has been changed from the default.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>save()</function></term>
+		         <listitem>
+		            <para>
+		               Saves the current item as the control's value.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>cancel()</function></term>
+		         <listitem>
+		            <para>
+		               Cancel editing the value.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>getInput()</function></term>
+		         <listitem>
+		            <para>
+		               Return the input entered into the control by the user.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>getLabel()</function></term>
+		         <listitem>
+		            <para>
+		               Return the default label of the control.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>setLabel(newLabel)</function></term>
+		         <listitem>
+		            <para>
+		               Set the default label of the control to the <parameter>newLabel</parameter> string passed as a parameter.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>showPopup()</function></term>
+		         <listitem>
+		            <para>
+		               Show the pop-up list of possible values.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>hidePopup()</function></term>
+		         <listitem>
+		            <para>
+		               Hide the pop-up list.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		   </variablelist>
+		</section>
 		
 		<section id="sect-Component_Reference-richinplaceSelect-Reference_data">
 			<title>Reference data</title>
@@ -1105,6 +1350,47 @@
 			</para>
 		</section>
 		
+		<section id="sect-Component_Reference-richinputNumberSlider-JavaScript_API">
+		   <title>JavaScript API</title>
+		   <para>
+		      The <sgmltag>&lt;rich:inputNumberSlider&gt;</sgmltag> component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
+		   </para>
+		   <variablelist>
+		      <varlistentry>
+		         <term><function>getValue()</function></term>
+		         <listitem>
+		            <para>
+		               Get the current value of the slider control.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>setValue(newValue)</function></term>
+		         <listitem>
+		            <para>
+		               Set the value of the slider control to the <parameter>newValue</parameter> integer passed as a parameter.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>increase()</function></term>
+		         <listitem>
+		            <para>
+		               Increase the value of the slider control by the gradient step amount.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>decrease()</function></term>
+		         <listitem>
+		            <para>
+		               Decrease the value of the slider control by the gradient step amount.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		   </variablelist>
+		</section>
+		
 		<section id="sect-Component_Reference-richinputNumberSlider-Reference_data">
 			<title>Reference data</title>
 			<itemizedlist>
@@ -1175,6 +1461,47 @@
 			<para>
 				The ability to change the value by typing into the text field can be disabled by setting <code>enableManualInput="false"</code>.
 			</para>
+		</section>
+		
+		<section id="sect-Component_Reference-richinputNumberSpinner-JavaScript_API">
+		   <title>JavaScript API</title>
+		   <para>
+		      The <sgmltag>&lt;rich:inputNumberSpinner&gt;</sgmltag> component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
+		   </para>
+		   <variablelist>
+		      <varlistentry>
+		         <term><function>getValue()</function></term>
+		         <listitem>
+		            <para>
+		               Get the current value of the spinner control.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>setValue(newValue)</function></term>
+		         <listitem>
+		            <para>
+		               Set the value of the spinner control to the <parameter>newValue</parameter> integer passed as a parameter.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>increase()</function></term>
+		         <listitem>
+		            <para>
+		               Increase the value of the spinner control by the gradient step amount.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>decrease()</function></term>
+		         <listitem>
+		            <para>
+		               Decrease the value of the spinner control by the gradient step amount.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		   </variablelist>
 		</section>
 		
 		<section id="sect-Component_Reference-richinputNumberSpinner-Reference_data">
@@ -1281,6 +1608,55 @@
 				Typing text into the text box causes the list to scroll to the relevant item by default. This behavior can be changed so that the typed text filters the contents of the list instead, showing only those items that begin with the typed text. To use typed text as a filter for manual-input lists, set <code>filterOnUpdates="true"</code>.
 			</para>
 			-->
+		</section>
+		
+		<section id="sect-Component_Reference-richselect-JavaScript_API">
+		   <title>JavaScript API</title>
+		   <para>
+		      The <sgmltag>&lt;rich:select&gt;</sgmltag> component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
+		   </para>
+		   <variablelist>
+		      <varlistentry>
+		         <term><function>getValue()</function></term>
+		         <listitem>
+		            <para>
+		               Get the current value of the text field.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>setValue(newValue)</function></term>
+		         <listitem>
+		            <para>
+		               Set the value of the text field to the <parameter>newValue</parameter> string passed as a parameter.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>getLabel()</function></term>
+		         <listitem>
+		            <para>
+		               Return the default label of the control.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>showPopup()</function></term>
+		         <listitem>
+		            <para>
+		               Show the pop-up list of completion values.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>hidePopup()</function></term>
+		         <listitem>
+		            <para>
+		               Hide the pop-up list.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		   </variablelist>
 		</section>
 		
 		<section id="sect-Component_Reference-richselect-Reference_data">
