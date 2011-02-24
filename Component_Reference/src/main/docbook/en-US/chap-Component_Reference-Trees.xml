@@ -425,22 +425,25 @@
 	<section id="sect-Component_Reference-Trees-Tree_adaptors">
 		<title>Tree adaptors</title>
 		<para>
-			Use a tree adaptor to create a tree and populate it with data from a defined data model.
+			Use a tree adaptor to populate a tree model declaratively from a non-hierarchical model, such as a list or a map.
 		</para>
 
 		<section id="sect-Component_Reference-Tree_adaptors-richtreeModelAdaptor">
 			<title><sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag></title>
 			<para>
-				The <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component takes a defined data model and uses it to populate an associated <sgmltag>&lt;rich:tree&gt;</sgmltag> component.
+				The <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component takes an object which implements the <interfacename>Map</interfacename> or <interfacename>Iterable</interfacename> interfaces. It adds all the object entries to the parent node as child nodes.
 			</para>
 
 			<section id="sect-Component_Reference-richtreeModelAdaptor-Basic_usage">
 				<title>Basic usage</title>
 				<para>
-					The <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component is added as a nested child component to the <sgmltag>&lt;rich:tree&gt;</sgmltag> component it will populate.
+					The <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component is added as a nested child component to a <sgmltag>&lt;rich:tree&gt;</sgmltag> component, or to another tree adaptor component.
 				</para>
 				<para>
-					The <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component requires the <varname>nodes</varname> attribute for basic usage. The <varname>nodes</varname> attribute defines a collection of elements to iterate through for populating the tree.
+					The <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component requires the <varname>nodes</varname> attribute for basic usage. The <varname>nodes</varname> attribute defines a collection of elements to iterate through for populating the nodes.
+				</para>
+				<para>
+					Define the appearance of each node added by the adaptor with a child <sgmltag>&lt;rich:treeNode&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Trees-richtreeNode" /> for details on the <sgmltag>&lt;rich:treeNode&gt;</sgmltag> component.
 				</para>
 			</section>
 
@@ -450,12 +453,15 @@
 					<sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components can further be nested in other <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components to subsequently populate lower levels of the tree.
 				</para>
 				<para>
-					Use the <varname>var</varname> attribute to access the current collection element at each level. <xref linkend="exam-Component_Reference-richtreeModelAdaptor-Nested_richtreeModelAdaptor_components" /> demonstrates a series of nested <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components, each using the parent's <varname>var</varname> attribute to reference the current element.
+					To access the current element at each iteration, use the <varname>var</varname> attribute of either the parent <sgmltag>&lt;rich:tree&gt;</sgmltag> component or the <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component itself. <xref linkend="exam-Component_Reference-richtreeModelAdaptor-Nested_richtreeModelAdaptor_components" /> demonstrates a series of nested <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components, each using the parent's <varname>var</varname> attribute to reference the current element.
 				</para>
 				<example id="exam-Component_Reference-richtreeModelAdaptor-Nested_richtreeModelAdaptor_components">
 					<title><sgmltag>Nested &lt;rich:treeModelAdaptor&gt; components</sgmltag></title>
 					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtreeModelAdaptor-Nested_richtreeModelAdaptor_components.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				</example>
+				<para>
+					Each <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component is mapped to a list of objects. During the iteration, the corresponding object properties are used to define the node labels and actions, and are in turn used for iterating through nested lists.
+				</para>
 			</section>
 
 			<section id="sect-Component_Reference-richtreeModelAdaptor-Reference_data">
@@ -488,7 +494,7 @@
 		<section id="sect-Component_Reference-Tree_adaptors-richtreeModelRecursiveAdaptor">
 			<title><sgmltag>&lt;rich:treeModelRecursiveAdaptor&gt;</sgmltag></title>
 			<para>
-				The <sgmltag>&lt;rich:treeModelRecursiveAdaptor&gt;</sgmltag> component recursively populates a tree with hierarchical nodes, such as for a file system with multiple levels of directories and files.
+				The <sgmltag>&lt;rich:treeModelRecursiveAdaptor&gt;</sgmltag> component iterates through recursive collections in order to populate a tree with hierarchical nodes, such as for a file system with multiple levels of directories and files.
 			</para>
 
 			<section id="sect-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage">
@@ -505,6 +511,30 @@
 				<example id="exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage">
 					<title>Basic usage</title>
 					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					<para>
+						The <sgmltag>&lt;rich:treeModelRecursiveAdaptor&gt;</sgmltag> component references the <classname>FileSystemBean</classname> class as the source for the data.
+					</para>
+					<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-richtreeModelRecursiveAdaptor-FileSystemBean.java" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					<para>
+						The <classname>FileSystemBean</classname> class in turn uses the <classname>FileSystemNode</classname> class to recursively iterate through the collection.
+					</para>
+					<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-richtreeModelRecursiveAdaptor-FileSystemNode.java" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					<para>
+						The <function>getDirectories()</function> function is used recursively until the object has the collection of children. The model adaptor calls the <function>getFiles()</function> function at each level in order to add the file nodes.
+					</para>
+					<para>
+						The resulting tree hierarchically lists the directories and files in the collection.
+					</para>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage.png" format="PNG" />
+						</imageobject>
+						<textobject>
+							<para>
+								A hierarchical tree detailing a file system.
+							</para>
+						</textobject>
+					</mediaobject>
 				</example>
 			</section>
 
