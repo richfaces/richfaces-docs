@@ -63,6 +63,7 @@
 					</imageobject>
 				</mediaobject>
 			</example>
+			<!--
 			<para>
 				Alternatively, use Expression Language (<acronym>EL</acronym>) with the <varname>nodeType</varname> attribute, as shown in <xref linkend="exam-Component_Reference-richtree-nodeType_attribute_with_Expression_Language" />.
 			</para>
@@ -70,6 +71,7 @@
 				<title><varname>nodeType</varname> attribute with Expression Language</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtree-nodeType_attribute_with_Expression_Language.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</example>
+			-->
 			<para>
 				If the <varname>nodeType</varname> attribute returns null, the node is rendered as a "<emphasis>typeless</emphasis>" (or default) node. The <emphasis>typeless</emphasis> node is the first child <sgmltag>&lt;rich:treeNode&gt;</sgmltag> component with a valid <varname>rendered</varname> attribute, but without a defined <varname>type</varname> attribute.
 			</para>
@@ -178,8 +180,15 @@
 			</variablelist>
 		</section>
 
-		<section id="sect-Component_Reference-richtree-Identifying_nodes">
-			<title>Identifying nodes</title>
+		<section id="sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute">
+			<title>Identifying nodes with the <varname>rowKeyConverter</varname> attribute</title>
+			<para>
+				If the <sgmltag>&lt;rich:tree&gt;</sgmltag> component uses a custom data model, the data model provides unique keys for tree nodes so they can be identified during a client request. The <sgmltag>&lt;rich:tree&gt;</sgmltag> component can use strings as key values. These strings may contain special characters that are not allowed by browsers, such as the left angle bracket (&lt;) and ampersand (&amp;). To allow these characters in the keys, a row key converter must be provided.
+			</para>
+			<para>
+				To apply a converter to the <sgmltag>&lt;rich:tree&gt;</sgmltag> component, define it with the <varname>rowKeyConverter</varname> attribute.
+			</para>
+			<!--
 			<para>
 				The <sgmltag>&lt;rich:tree&gt;</sgmltag> component uses a data model to represent the node structure on the page. To identify a particular node during a client request, the model provides unique keys for tree nodes. The <sgmltag>&lt;rich:tree&gt;</sgmltag> component can use strings as key values. These strings may contain special characters that are not allowed by browsers, such as the left angle bracket (&lt;) and ampersand (&amp;). To allow these characters in the keys, the following converter is provided:
 			</para>
@@ -192,6 +201,7 @@
 						</para>
 					</listitem>
 				</varlistentry>
+				-->
 				<!-- TODO not in M5
 				<varlistentry>
 					<term><classname>org.richfaces.TreeAdaptorRowKeyConverter</classname></term>
@@ -209,7 +219,6 @@
 						</para>
 					</listitem>
 				</varlistentry>
-				-->
 			</variablelist>
 			<para>
 				To apply a converter to the <sgmltag>&lt;rich:tree&gt;</sgmltag> component, define it with the <varname>rowKeyConverter</varname> attribute. <xref linkend="exam-Component_Reference-richtree-Identifying_nodes" /> demonstrates the use of a converter to identify tree nodes.
@@ -222,6 +231,7 @@
 				</para>
 				<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-richtree-Identifying_nodes.js" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</example>
+			-->
 		</section>
 
 		<!-- TODO not in M6 -->
@@ -464,6 +474,16 @@
 				</para>
 			</section>
 
+			<section id="sect-Component_Reference-richtreeModelAdaptor-Identifying_nodes">
+			<title>Identifying nodes</title>
+				<para>
+					Adaptors that use <interfacename>Map</interfacename> interfaces or models with non-string keys require a row key converter in order to correctly identify nodes. Refer to <xref linkend="sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute" /> for details on the use of the <varname>rowKeyConverter</varname> attribute.
+				</para>
+				<para>
+					Adaptors that use <interfacename>Iterable</interfacename> interfaces have simple integer row keys. A default converter is provided and does not need to be referenced explicitly.
+				</para>
+			</section>
+
 			<section id="sect-Component_Reference-richtreeModelAdaptor-Reference_data">
 				<title>Reference data</title>
 				<itemizedlist>
@@ -536,6 +556,16 @@
 						</textobject>
 					</mediaobject>
 				</example>
+			</section>
+
+			<section id="sect-Component_Reference-richtreeModelRecursiveAdaptor-Identifying_nodes">
+			<title>Identifying nodes</title>
+				<para>
+					Adaptors that use <interfacename>Map</interfacename> interfaces or models with non-string keys require a row key converter in order to correctly identify nodes. Refer to <xref linkend="sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute" /> for details on the use of the <varname>rowKeyConverter</varname> attribute.
+				</para>
+				<para>
+					Adaptors that use <interfacename>Iterable</interfacename> interfaces have simple integer row keys. A default converter is provided and does not need to be referenced explicitly.
+				</para>
 			</section>
 
 			<section id="sect-Component_Reference-richtreeModelRecursiveAdaptor-Reference_data">
