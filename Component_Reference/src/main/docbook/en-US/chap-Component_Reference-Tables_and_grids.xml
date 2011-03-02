@@ -978,9 +978,14 @@
 			The <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component builds on the functionality of the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component, adding features such as data scrolling, row and column selection, and rearranging of columns.
 		</para>
 		<para>
-			The <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component includes the following attributes not included in the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component:
+			The <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component includes the following main attributes not included in the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component:
 		</para>
 		<itemizedlist>
+			<listitem>
+				<para>
+					<varname>clientRows</varname>
+				</para>
+			</listitem>
 			<listitem>
 				<para>
 					<varname>frozenColumns</varname>
@@ -989,11 +994,6 @@
 			<listitem>
 				<para>
 					<varname>height</varname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>noDataLabel</varname>
 				</para>
 			</listitem>
 			<listitem>
@@ -1016,16 +1016,19 @@
 					<varname>selectionMode</varname>
 				</para>
 			</listitem>
+			<!--
 			<listitem>
 				<para>
 					<varname>tableState</varname>
 				</para>
 			</listitem>
+			-->
 		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component does <emphasis>not</emphasis> include the following attributes available with the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component:
 		</para>
 		<itemizedlist>
+			<!--
 			<listitem>
 				<para>
 					<varname>columns</varname>
@@ -1036,7 +1039,39 @@
 					<varname>columnsWidth</varname>
 				</para>
 			</listitem>
+			-->
+			<listitem>
+				<para>
+					<varname>breakBefore</varname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<varname>columnGroup</varname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<varname>colSpan</varname>
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					<varname>rowSpan</varname>
+				</para>
+			</listitem>
 		</itemizedlist>
+
+		<note>
+			<title>Complex sub-tables</title>
+			<para>
+				Due to the complex mark-up involved in the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component, it does not support the use of the <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component. The <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component is only available with the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component.
+			</para>
+			<para>
+				Similarly, complex row and column spanning using the <varname>breakBefore</varname>, <varname>columnGroup</varname>, <varname>colSpan</varname>, and <varname>rowSpan</varname> attributes is also not available with the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component.
+			</para>
+		</note>
+		
 		<section id="sect-Component_Reference-richextendedDataTable-Basic_usage">
 			<title>Basic usage</title>
 			<para>
@@ -1047,7 +1082,7 @@
 		<section id="sect-Component_Reference-richextendedDataTable-Table_appearance">
 			<title>Table appearance</title>
 			<para>
-				The <varname>height</varname> attribute defines the height of the table on the page. This is set to <literal>100%</literal> by default. The width of the table can be set by using the <varname>width</varname> attribute. As with the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component, the look of the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component can be customized and skinned using the <literal>header</literal>, <literal>footer</literal>, and <literal>caption</literal> facets.
+				The <varname>height</varname> attribute defines the height of the table on the page. This is set to <literal>100%</literal> by default. The width of the table can be set by using the <varname>width</varname> attribute. As with the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component, the look of the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component can be customized and skinned using the <literal>header</literal> and <literal>footer</literal> facets.
 			</para>
 		</section>
 		
@@ -1055,59 +1090,71 @@
 			<title>Extended features</title>
 			<example id="exam-Component_Reference-richextendedDataTable-richextendedDataTable_example">
 				<title><sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> example</title>
+				<para>
+					This example <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component demonstrates horizontal and vertical scrolling and frozen columns. Each feature is detailed in this section.
+				</para>
 				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-Tables_and_grids-richextendedDataTable_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<blockquote>
-					<figure id="figu-Component_Reference-richextendedDataTable_example-richextendedDataTable_example">
-						<title><sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> example</title>
-						<mediaobject>
-							<imageobject>
-								<imagedata fileref="images/figu-Component_Reference-Tables_and_grids-richextendedDataTable_example.png" format="PNG" width="444" />
-							</imageobject>
-							<textobject>
-								<para>
-									A data table made using the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component. It features scrolling data, column sorting, and a column filter.
-								</para>
-							</textobject>
-						</mediaobject>
-					</figure>
-				</blockquote>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/figu-Component_Reference-Tables_and_grids-richextendedDataTable_example.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							A data table made using the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component. It features horizontal and vertical scrolling and frozen columns.
+						</para>
+					</textobject>
+				</mediaobject>
 			</example>
-			<para>
-				<xref linkend="exam-Component_Reference-richextendedDataTable-richextendedDataTable_example" /> shows an example extended data table. The implementation features a scrolling data table, selection of one or more rows, sorting by columns, grouping by column, and a filter on the <guilabel>Name</guilabel> column.
-			</para>
+
+			<section id="sect-Component_Reference-richextendedDataTable-Scrolling">
+				<title>Scrolling</title>
+				<para>
+					The example table shown in <xref linkend="exam-Component_Reference-richextendedDataTable-richextendedDataTable_example" /> features both horizontal and vertical scrolling. Scrolling occurs automatically when the contents of the table exceed the dimensions specified with the <varname>height</varname> and <varname>width</varname> attributes. Headers and footers remain in place and visible when the table is scrolled.
+				</para>
+				<para>
+					Large tables can use Ajax "lazy" loading to cache data on the client during scrolling. Use the <varname>clientRows</varname> attribute to specify the number of rows to load. The specified number of rows are loaded on the initial rendering and with every vertical scroll. If the <varname>clientRows</varname> attribute is not specified, all the rows are loaded on the client without the use of Ajax.
+				</para>
+				<para>
+					In addition to Ajax scrolling, the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component can also be used with the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component in the same way as a regular <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richdataScroller" /> for full details on using the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component.
+				</para>
+			</section>
+
+			<section id="sect-Component_Reference-richextendedDataTable-Frozen_columns">
+				<title>Frozen columns</title>
+				<para>
+					The example table shown in <xref linkend="exam-Component_Reference-richextendedDataTable-richextendedDataTable_example" /> has the first two columns frozen so that they remain visible if the user scrolls horizontally through the table. Note that the horizontal scrollbar does not encompass these frozen columns. To freeze columns, use the <varname>frozenColumns</varname> attribute to specify the number of columns on the left-hand side of the table to freeze.
+				</para>
+			</section>
 			
 			<section id="sect-Component_Reference-richextendedDataTable-Row_selection">
 				<title>Row selection</title>
 				<para>
-					Row selection is determined by the <varname>selectionMode</varname> attribute. Setting the attribute to <literal>none</literal> allows for no row selection capability. Setting the <varname>selectionMode</varname> attribute to <literal>single</literal> allows the user to select a single row at a time using the mouse. With the <varname>selectionMode</varname> attribute set to <literal>multi</literal>, the user can select multiple rows by holding down the <keycap function="shift">Shift</keycap> or <keycap function="control">Ctrl</keycap> keys while clicking. The <varname>selection</varname> attribute points to the object that tracks which rows are selected. <xref linkend="figu-Component_Reference-richextendedDataTable-Selecting_multiple_rows" /> shows the table from the example with multiple rows selected.
+					Row selection is determined by the <varname>selectionMode</varname> attribute. Setting the attribute to <literal>none</literal> allows for no row selection capability. The example table shown in <xref linkend="exam-Component_Reference-richextendedDataTable-richextendedDataTable_example" /> does not allow row selection.
 				</para>
-				<figure id="figu-Component_Reference-richextendedDataTable-Selecting_multiple_rows">
+				<para>
+					Setting the <varname>selectionMode</varname> attribute to <literal>single</literal> allows the user to select a single row at a time using the mouse. With the <varname>selectionMode</varname> attribute set to <literal>multi</literal>, the user can select multiple rows. Holding down the <keycap function="control">Ctrl</keycap> key while clicking selects additional rows with each click. Holding down the <keycap function="shift">Shift</keycap> key while clicking selects all the rows in a range.
+				</para>
+				<para>
+					The <varname>selection</varname> attribute points to a collection of objects. It holds the <varname>rowKey</varname> identifiers to track which rows are selected. <xref linkend="exam-Component_Reference-richextendedDataTable-Selecting_multiple_rows" /> shows how to implement multiple row selection in the same table from <xref linkend="exam-Component_Reference-richextendedDataTable-richextendedDataTable_example" />.
+				</para>
+				<example id="exam-Component_Reference-richextendedDataTable-Selecting_multiple_rows">
 					<title>Selecting multiple rows</title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richextendedDataTable-Selecting_multiple_rows.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					<para>
+						The accompanying <classname>ExtSelectionBean</classname> bean handles which rows are selected. The rows are identified by their <varname>rowKey</varname> identifiers.
+					</para>
+					<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-richextendedDataTable-Selecting_multiple_rows.java" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 					<mediaobject>
 						<imageobject>
-							<imagedata fileref="images/figu-Component_Reference-Tables_and_grids-Selecting_multiple_rows.png" format="PNG" width="444" />
+							<imagedata fileref="images/figu-Component_Reference-Tables_and_grids-Selecting_multiple_rows.png" format="PNG" />
 						</imageobject>
 						<textobject>
 							<para>
-								The example table with rows numbered 1, 2, 3, and 5 selected.
+								The example table with the first, second, third, and fifth rows selected.
 							</para>
 						</textobject>
 					</mediaobject>
-				</figure>
-			</section>
-			
-			<section id="sect-Component_Reference-richextendedDataTable-Filtering">
-				<title>Filtering</title>
-				<para>
-					The example table features a text field as part of the header of a column. A user can type their criteria into the text field to customize the filter of the column below. For full details on filtering tables, refer to <xref linkend="sect-Component_Reference-Tables_and_grids-Table_filtering" />.
-				</para>
-			</section>
-			
-			<section id="sect-Component_Reference-richextendedDataTable-Sorting">
-				<title>Sorting</title>
-				<para>
-					The example table features controls in the column headers for sorting the the table according to the relevant column. The value of the data model to sort by is specified with the <varname>sortBy</varname> attribute. For full details on sorting tables, refer to <xref linkend="sect-Component_Reference-Tables_and_grids-Table_sorting" />.
-				</para>
+				</example>
 			</section>
 			
 			<!--
@@ -1155,7 +1202,7 @@
 			<section id="sect-Component_Reference-richextendedDataTable-Rearranging_columns">
 				<title>Rearranging columns</title>
 				<para>
-					Columns in a <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component can be rearranged by the user by dragging each column to a different position. The <varname>label</varname> attribute for the <sgmltag>&lt;rich:column&gt;</sgmltag> component is displayed during dragging, as shown in
+					Columns in a <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component can be rearranged by the user by dragging each column to a different position. A graphical representation of the column is displayed during dragging. <xref linkend="figu-Component_Reference-richextendedDataTable-Dragging_columns" /> illustrates the <guilabel>Price</guilabel> column being dragged to a new location. The small blue arrow indicates where the column will be moved to if it is dropped in the current position. <xref linkend="figu-Component_Reference-richextendedDataTable-Rearranged_columns" /> shows the result of dragging the <guilabel>Price</guilabel> column.
 				</para>
 				<figure id="figu-Component_Reference-richextendedDataTable-Dragging_columns">
 					<title>Dragging columns</title>
@@ -1165,17 +1212,39 @@
 						</imageobject>
 						<textobject>
 							<para>
-								Dragging the <guilabel>Name</guilabel> column rearranges the order of the columns.
+								The <guilabel>Price</guilabel> column is dragged to a new position.
+							</para>
+						</textobject>
+					</mediaobject>
+				</figure>
+				<figure id="figu-Component_Reference-richextendedDataTable-Rearranged_columns">
+					<title>Rearranged columns</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/figu-Component_Reference-Tables_and_grids-Rearranged_columns.png" format="PNG" width="444" />
+						</imageobject>
+						<textobject>
+							<para>
+								The <guilabel>Price</guilabel> column has been moved to the right of the <guilabel>Mileage</guilabel> column.
 							</para>
 						</textobject>
 					</mediaobject>
 				</figure>
 			</section>
-			
+
+			<!--
 			<section id="sect-Component_Reference-richextendedDataTable-Saving_the_state">
 				<title>Saving the state</title>
 				<para>
 					Once the contents of the table have been rearranged and customized by the user, the <varname>tableState</varname> attribute can be used to preserve the customization so it can be restored later. The <varname>tableState</varname> attribute points to a backing-bean property which can in turn be saved to a database separate from standard JSF state-saving mechanisms.
+				</para>
+			</section>
+			-->
+			
+			<section id="sect-Component_Reference-richextendedDataTable-Filtering_and_sorting">
+				<title>Filtering and sorting</title>
+				<para>
+					The <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component can include filtering and sorting in the same way as a regular <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component. For full details on filtering tables, refer to <xref linkend="sect-Component_Reference-Tables_and_grids-Table_filtering" />. For full details on sorting tables, refer to <xref linkend="sect-Component_Reference-Tables_and_grids-Table_sorting" />.
 				</para>
 			</section>
 			
