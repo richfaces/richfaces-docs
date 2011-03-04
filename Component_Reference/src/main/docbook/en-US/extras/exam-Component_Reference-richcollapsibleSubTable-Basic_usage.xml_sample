@@ -1,0 +1,55 @@
+<rich:dataTable value="#{carsBean.inventoryVendorLists}" var="list">
+   <f:facet name="header">
+      <rich:columnGroup>
+         <rich:column colspan="6">
+            <h:outputText value="Cars marketplace" />
+         </rich:column>
+         <rich:column breakRowBefore="true">
+            <h:outputText value="Model" />
+         </rich:column>
+         <rich:column>
+            <h:outputText value="Price" />
+         </rich:column>
+         <rich:column>
+            <h:outputText value="Mileage" />
+         </rich:column>
+         <rich:column>
+            <h:outputText value="VIN Code" />
+         </rich:column>
+         <rich:column>
+            <h:outputText value="Items stock" />
+         </rich:column>
+         <rich:column>
+            <h:outputText value="Days Live" />
+         </rich:column>
+      </rich:columnGroup>
+   </f:facet>
+   <rich:column colspan="6">
+      <rich:collapsibleSubTableToggler for="sbtbl" />
+      <h:outputText value="#{list.vendor}" />
+   </rich:column>
+   <rich:collapsibleSubTable value="#{list.vendorItems}" var="item" id="sbtbl"
+      expandMode="client">
+      <rich:column>
+         <h:outputText value="#{item.model}" />
+      </rich:column>
+      <rich:column>
+         <h:outputText value="#{item.price}" />
+      </rich:column>
+      <rich:column>
+         <h:outputText value="#{item.mileage}" />
+      </rich:column>
+      <rich:column>
+         <h:outputText value="#{item.vin}" />
+      </rich:column>
+      <rich:column>
+         <h:outputText value="#{item.stock}" />
+      </rich:column>
+      <rich:column>
+         <h:outputText value="#{item.daysLive}" />
+      </rich:column>
+      <f:facet name="footer">
+         <h:outputText value="Total of #{list.vendor} Cars: #{list.count}" />
+      </f:facet>
+   </rich:collapsibleSubTable>
+</rich:dataTable>
