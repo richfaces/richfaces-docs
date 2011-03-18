@@ -575,10 +575,56 @@
 	
 	<section id="sect-Component_Reference-Actions-a4jpush">
 		<title><sgmltag>&lt;a4j:push&gt;</sgmltag></title>
+		<!--
 		<para>
-			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component periodically performs an Ajax request to the server, simulating "push" functionality. While it is not strictly pushing updates, the request is made to minimal code only, not to the <acronym>JSF</acronym> tree, checking for the presence of new messages in the queue. The request registers <classname>EventListener</classname>, which receives messages about events, but does not poll registered beans. If a message exists, a complete request is performed. This is different from the <sgmltag>&lt;a4j:poll&gt;</sgmltag> component, which performs a full request at every interval.
+			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component periodically performs an Ajax request to the server, simulating "push" functionality.
 		</para>
-		
+		<para>
+			While it is not strictly pushing updates, the request is made to minimal code only, not to the <acronym>JSF</acronym> tree, checking for the presence of new messages in the queue. The request registers <classname>EventListener</classname>, which receives messages about events, but does not poll registered beans. If a message exists, a complete request is performed. This is different from the <sgmltag>&lt;a4j:poll&gt;</sgmltag> component, which performs a full request at every interval.
+		</para>
+		-->
+		<para>
+			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component performs real-time updates on the client side from events raised at the server side. The events are pushed out to the client through the Java Message Service (<acronym>JMS</acronym>). When the <sgmltag>&lt;a4j:push&gt;</sgmltag> component is triggered by a server event, it can in turn cause Ajax updates and changes.
+		</para>
+
+		<section id="sect-Component_Reference-a4jpush-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				RichFaces requires the use of the <filename>jquery-atmosphere.js</filename> client plug-in for push functionality. The plug-in is added automatically by the push component renderer, but needs to additionally be added as a build dependency to your project.
+			</para>
+			<para>
+				The JMS instance on the back-end must be configured to work with your <sgmltag>&lt;a4j:push&gt;</sgmltag> components. Create topics on the JMS server for the push functionality to check for new messages. Refer to <citetitle>JMS Documentation</citetitle> for details on configuring JMS.
+			</para>
+			<para>
+				Use the <sgmltag>&lt;a4j:push&gt;</sgmltag> component's <varname>address</varname> attribute to reference the topic on the JMS server that contains the pushed messages.
+			</para>
+			<para>
+				The <sgmltag>&lt;a4j:push&gt;</sgmltag> component should also include the <varname>error</varname> event attribute to inform the user when an error has occurred with the push notifications.
+			</para>
+			<example id="exam-Component_Reference-a4jpush-Basic_usage">
+				<title>Basic usage</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The example demonstrates a simple use of the <sgmltag>&lt;a4j:push&gt;</sgmltag> component to manage a list of users in a chat room. The <sgmltag>&lt;a4j:push&gt;</sgmltag> component refers to the <code>#{chatBean.listSubtopic}@chat</code> address, which has been created on the JMS server. When a new message arrives, the <sgmltag>&lt;a4j:ajax&gt;</sgmltag> behavior causes the user list to update. If an error occurs, the user is alerted.
+				</para>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-a4jpush-Handling_a_push_notification">
+			<title>Handling a push notification</title>
+			<para>
+				A push notification sent to the <sgmltag>&lt;a4j:push&gt;</sgmltag> behavior will cause it to trigger any <sgmltag>&lt;a4j:ajax&gt;</sgmltag> components attached as sub-elements. Alternatively, use the <varname>dataavailable</varname> event attribute to define a handler. 
+			</para>
+			<example id="exam-Component_Reference-a4jpush-Handling_a_push_notification">
+				<title>Handling a push notification</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Handling_a_push_notification.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The example uses the <varname>dataavailable</varname> event attribute with JavaScript to update messages in a chat room.
+				</para>
+			</example>
+		</section>
+
+		<!--
 		<section id="sect-Component_Reference-a4jpush-Timing_options">
 			<title>Timing options</title>
 			<para>
@@ -588,6 +634,7 @@
 				The <varname>timeout</varname> attribute defines the response waiting time in milliseconds. If a response isn't received within the timeout period, the connection is aborted and the next request is sent. By default, the timeout is not set. In combination with the <varname>interval</varname> attribute, checks for the queue state can short polls or long connections.
 			</para>
 		</section>
+		-->
 		
 		<section id="sect-Component_Reference-a4jpush-Reference_data">
 			<title>Reference data</title>

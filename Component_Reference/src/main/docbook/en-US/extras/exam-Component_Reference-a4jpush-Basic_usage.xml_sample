@@ -1,0 +1,8 @@
+<rich:list value="#{chatBean.users}" var="user" id="users" type="unordered">
+   #{user.nick}
+</rich:list>
+...
+<a4j:push address="#{chatBean.listSubtopic}@chat"
+          onerror="alert(event.rf.data)">
+   <a4j:ajax event="dataavailable" render="users" execute="@none" />
+</a4j:push>
