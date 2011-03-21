@@ -3,33 +3,26 @@
 ]>
 <chapter id="chap-Developer_Guide-Skinning_and_theming">
 	<title>Skinning and theming</title>
-	<!-- In development notification -->
-	<important>
-		<title>Documentation in development</title>
-		<para>
-			Some concepts covered in this chapter may refer to the previous version of <productname>Richfaces</productname>, version 3.3.3. This chapter is scheduled for review to ensure all information is up to date.
-		</para>
-	</important>
 	<para>
 		Read this chapter for a guide to skinning and theming RichFaces applications, including how to implement themes, and details on customizing and extending skins.
 	</para>
 	<section id="sect-Developer_Guide-Skinning_and_theming-What_are_skins">
 		<title>What are skins?</title>
 		<para>
-			Application skins are used with the RichFaces framework to change the appearance of an application through setting the colors and decoration of controls and components. Typically the appearance of web applications is handled through the <acronym>CSS</acronym> (Cascading Style Sheet) files associated with the application, but skinning allows the settings in a CSS file to be abstracted and easily edited. Using skins avoids repetitive coding and duplication in CSS files through the use of style variables and generalization. CSS files are not completely replaced: skins work as a high-level extension to standard CSS.
+			Application skins are used with the RichFaces framework to change the appearance of an application through setting the colors and decoration of controls and components. Typically the appearance of web applications is handled through the <acronym>CSS</acronym> (Cascading Style Sheet) files associated with the application, but skinning allows the settings in a CSS file to be abstracted and easily edited. Skins consist of a small, generalized set of font and color parameters that can be applied to multiple different styles. This avoids repetitive coding and duplication in CSS files. CSS files are not completely replaced: skins work as a high-level extension to standard CSS.
 		</para>
 		<para>
 			Each skin has a set of <varname>skin-parameters</varname>, which are used to define the theme palette and other elements of the user interface. These parameters work together with regular CSS declarations, and can be referred to from within CSS using JavaServer Faces Expression Language (<acronym>EL</acronym>).
 		</para>
 		<para>
-			The skinning feature of RichFaces also allows themes to be changed at runtime, so users can personalize an application's appearance.
+			The skinning feature of RichFaces also allows skins to be changed at runtime, so users can personalize an application's appearance on the fly.
 		</para>
 	</section>
 	
 	<section id="sect-Developer_Guide-Skinning_and_theming-Using_skins">
 		<title>Using skins</title>
 		<para>
-			RichFaces includes a number of predefined skins. These skins can be used in RichFaces web applications by specifying the skin name in the <varname>org.richfaces.SKIN</varname> context parameter in the <filename>web.xml</filename> settings file. The predefined skins are as follows:
+			RichFaces includes a number of predefined skins. These skins can be used in RichFaces web applications by specifying the skin name in the <varname>org.richfaces.skin</varname> context parameter in the <filename>web.xml</filename> settings file. The predefined skins are as follows:
 		</para>
 		<itemizedlist>
 			<listitem>
@@ -77,6 +70,7 @@
 					<literal>deepMarine</literal>
 				</para>
 			</listitem>
+			<!--
 			<listitem>
 				<para>
 					<literal>laguna</literal>
@@ -92,6 +86,7 @@
 					<literal>glassX</literal>
 				</para>
 			</listitem>
+			-->
 		</itemizedlist>
 		<para>
 			To add one of these skins to your application, add the <literal>org.richfaces.SKIN</literal> context parameter to the <filename>web.xml</filename> configuration file:
@@ -105,7 +100,7 @@
 	<section id="sect-Developer_Guide-Skinning_and_theming-Customizing_skins">
 		<title>Customizing skins</title>
 		<para>
-			RichFaces skins are designed to use a combination of styling elements. Themes for components can be applied using any of the following style classes:
+			RichFaces skins are implemented using the following three-level scheme:
 		</para>
 		<variablelist>
 			<varlistentry>
@@ -139,44 +134,55 @@
 				Using any component, such as a panel, without specifying a <varname>styleClass</varname> will use the default skin parameters for that component.
 			</para>
 		
-<programlisting language="XML" role="XML">&lt;rich:panel&gt;...&lt;/rich:panel&gt;</programlisting>
+<programlisting language="XML" role="XML">&lt;rich:panel&gt;This is a panel without a header&lt;/rich:panel&gt;</programlisting>
 			<para>
 				When rendered for display, the panel consists of two HTML elements: a wrapper <sgmltag>&lt;div&gt;</sgmltag> element and a <sgmltag>&lt;div&gt;</sgmltag> element for the body of the panel. The wrapper element for a panel without a specified <varname>styleClass</varname> is rendered as follows:
 			</para>
-		
-<programlisting language="XML" role="XML">&lt;div class="dr-pnl rich-panel"&gt;
-	...
-&lt;/div&gt;</programlisting>
+			<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_skins-Rendered_panel.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			<para>
-				<literal>dr-pnl</literal> refers to a CSS class specified in the framework. The CSS class uses skin parameters for generic theme styles:
+				<classname>rf-p</classname> and <classname>rf-p-b</classname> refer to CSS classes specified in the framework. The CSS classes use skin parameters for generic theme styles:
 			</para>
+			<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_skins-Panel_styles.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			<itemizedlist>
 				<listitem>
 					<para>
-						The <varname>background-color</varname> CSS class attribute is defined by the <literal>generalBackgroundColor</literal> skin parameter.
+						The <property>background-color</property> CSS class attribute is defined by the <parameter>generalBackgroundColor</parameter> skin parameter.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						The <varname>border-color</varname> CSS class attribute is defined by the <literal>panelBorderColor</literal> skin parameter.
+						The <property>color</property> CSS class attribute is defined by the <parameter>panelBorderColor</parameter> skin parameter.
 					</para>
 				</listitem>
 			</itemizedlist>
 			<para>
-				Changing the definitions for <literal>generalBackgroundColor</literal> or <literal>panelBorderColor</literal> in the skin will cause all panels in the application to change.
+				To customize the panel appearance according to the three-level scheme, adjust the styles according to the following approach:
 			</para>
-			<para>
-				If a <varname>styleClass</varname> attribute is used, the specified style class is applied to the component, which could extend or override the default styles.
-			</para>
-	
-<programlisting language="XML" role="XML">&lt;rich:panel styleClass="customClass"&gt;...&lt;/rich:panel&gt;</programlisting>
-			<para>
-				The <literal>customClass</literal> style is added to the CSS, and is applied to the component when it is rendered for display:
-			</para>
-		
-<programlisting language="XML" role="XML">&lt;div class="dr-pnl rich-panel customClass"&gt;
-    ...
+			<procedure>
+				<step>
+					<para>
+						Change the definitions for the <parameter>generalBackgroundColor</parameter> or <parameter>panelBorderColor</parameter> parameters in the skin. This will cause all panels in the application to change to the new settings.
+					</para>
+				</step>
+				<step>
+					<para>
+						Redefine the <classname>rf-p</classname> class in the application CSS. This will also cause all panels in the application to change to the new settings, though the skin itself has not been altered. Any properties not mapped to skin parameters should be redefined in this way.
+					</para>
+				</step>
+				<step>
+					<para>
+						Specify a different <varname>styleClass</varname> attribute to style the individual component. If a <varname>styleClass</varname> attribute is used, the specified style class is applied to the component, which could extend or override the default styles.
+					</para>
+					<programlisting language="XML" role="XML">&lt;rich:panel styleClass="customClass"&gt;...&lt;/rich:panel&gt;</programlisting>
+					<para>
+						The <literal>customClass</literal> style is added to the CSS, and is applied to the component when it is rendered for display:
+					</para>
+<programlisting language="XML" role="XML">&lt;div class="rf-p customClass"&gt;
+   ...
 &lt;/div&gt;</programlisting>
+				</step>
+			</procedure>
+
 		</example>
 	</section>
 	
@@ -200,273 +206,273 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							headerBackgroundColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#BED6F8
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							headerGradientColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#F2F7FF
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							headTextColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#000000
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							headerWeightFont
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							bold
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							generalBackgroundColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#FFFFFF
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							generalTextColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#000000
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							generalSizeFont
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							11px
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							generalFamilyFont
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							Arial, Verdana, sans-serif
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							controlTextColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#000000
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							controlBackgroundColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#ffffff
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							additionalBackgroundColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#ECF4FE
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							shadowBackgroundColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#000000
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							shadowOpacity
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							1
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							panelBorderColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#BED6F8
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							subBorderColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#ffffff
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							tabBackgroundColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#C6DEFF
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							tabDisabledTextColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#8DB7F3
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							trimColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#D6E6FB
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							tipBackgroundColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#FAE6B0
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							tipBorderColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#E5973E
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							selectControlColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#E79A00
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							generalLinkColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#0078D0
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							hoverLinkColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#0090FF
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							visitedLinkColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#0090FF
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							headerSizeFont
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							11px
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							headerFamilyFont
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							Arial, Verdana, sans-serif
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							tabSizeFont
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							11px
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							tabFamilyFont
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							Arial, Verdana, sans-serif
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							buttonSizeFont
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							11px
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							buttonFamilyFont
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							Arial, Verdana, sans-serif
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							tableBackgroundColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#FFFFFF
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							tableFooterBackgroundColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#cccccc
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							tableSubfooterBackgroundColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#f1f1f1
 						</literal></entry>
 					</row>
 					<row>
-						<entry><varname>
+						<entry><parameter>
 							tableBorderColor
-						</varname></entry>
+						</parameter></entry>
 						<entry><literal>
 							#C0C0C0
 						</literal></entry>
@@ -489,28 +495,47 @@
 			</step>
 			<step>
 				<title>Reference the skin bean</title>
-				<para>Use <acronym>EL</acronym> (Expression Language) to reference the skin bean from the <filename>web.xml</filename> settings file.</para>
+				<para>
+					Add the <code>@ManagedBean</code> and <code>@SessionScoped</code> references to the class.
+				</para>
+				<stepalternatives>
+					<step>
+						<para>
+							Alternatively, use <acronym>EL</acronym> (Expression Language) to reference the skin bean from the <filename>web.xml</filename> settings file.
+						</para>
 <programlisting language="XML" role="XML">&lt;context-param&gt;
-    &lt;param-name&gt;org.richfaces.SKIN&lt;/param-name&gt;
+    &lt;param-name&gt;org.richfaces.skin&lt;/param-name&gt;
     &lt;param-value&gt;#{skinBean.skin}&lt;/param-value&gt;
 &lt;/context-param&gt;</programlisting>
+					</step>
+				</stepalternatives>
 			</step>
 			<step>
 				<title>Set initial skin</title>
 				<para>
-					The application needs an initial skin to display before the user chooses an alternative skin. The initial skin is specified in the <filename>web.xml</filename> configuration file.
+					The application needs an initial skin to display before the user chooses an alternative skin. Specify the skin in your class with <code>@ManagedProperty</code>.
 				</para>
+<programlisting language="Java" role="JAVA">@ManagedProperty(value="blueSky")
+Private String skin;</programlisting>
+				<stepalternatives>
+					<step>
+						<para>
+							Alternatively, specify the initial skin in the <filename>web.xml</filename> configuration file.
+						</para>
 <programlisting language="XML" role="XML">&lt;managed-bean&gt;
     &lt;managed-bean-name&gt;skinBean&lt;/managed-bean-name&gt;
     &lt;managed-bean-class&gt;SkinBean&lt;/managed-bean-class&gt;
     &lt;managed-bean-scope&gt;session&lt;/managed-bean-scope&gt;
     &lt;managed-property&gt;
         &lt;property-name&gt;skin&lt;/property-name&gt;
-        &lt;value&gt;classic&lt;/value&gt;
+        &lt;value&gt;blueSky&lt;/value&gt;
     &lt;/managed-property&gt;
 &lt;/managed-bean&gt;</programlisting>
+					</step>
+				</stepalternatives>
 			</step>
 		</procedure>
+		<!-- TODO
 		<example id="exam-Developer_Guide-Skinning_and_theming-Skin_changing_example">
 			<title>Skin changing example</title>
 			<para>
@@ -533,6 +558,7 @@
 				</figure>
 			</blockquote>
 		</example>
+	-->
 	</section>
 	
 	<section id="sect-Developer_Guide-Creating_a_new_skin">
@@ -620,8 +646,7 @@ editorBackgroundColor=#F1F1F1
 editBackgroundColor=#FEFFDA
 
 #Gradients
-gradientType=plain
-</programlisting>
+gradientType=plain</programlisting>
 				</example>
 				<para>
 					Alternatively, instead of redefining an entire new skin, your skin can use an existing skin as a base on which to build new parameters. Specify a base skin by using the <varname>baseSkin</varname> parameter in the skin file, as shown in <xref linkend="exam-Developer_Guide-Skinning_and_theming-Using_a_base_skin" />.

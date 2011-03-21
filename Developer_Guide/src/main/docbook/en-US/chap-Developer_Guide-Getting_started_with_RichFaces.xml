@@ -4,11 +4,12 @@
 <chapter id="chap-Developer_Guide-Getting_started_with_RichFaces">
 	<title>Getting started with RichFaces</title>
 	<para>
-		Follow the instructions in this chapter to configure the RichFaces framework and get started with application development. RichFaces applications can be developed using <productname>JBoss Tools</productname>, as described in <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_JBoss_Tools" />; or using <productname>Maven</productname>, as described in <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_Maven" />. 
+		Follow the instructions in this chapter to configure the RichFaces framework and get started with application development.
 	</para>
 	<para>
 		If you have existing projects that use a previous version of RichFaces, refer to the <citetitle>RichFaces Migration Guide</citetitle>.
 	</para>
+	
 	<section id="sect-Developer_Guide-Getting_started_with_RichFaces-Technical_Requirements">
 		<title>Technical Requirements</title>
 		<para>
@@ -22,29 +23,43 @@
 			</listitem>
 			<listitem>
 				<para>
-					<productname>JBoss Tools 3.1</productname>
+					An application server compliant with Java Platform, Enterprise Edition 5 (<acronym>JEE5</acronym>), such as <productname>JBoss Application Server 6</productname> or <productname>Apache Tomcat 6</productname>.
 				</para>
 			</listitem>
 			<listitem>
 				<para>
-					A <productname>JavaServer Faces 2</productname>  (<acronym>JSF 2</acronym>) implementation
+					A compliant web browser, such as <productname>Firefox 3.5</productname> or <productname>Internet Explorer 7</productname>
+				</para>
+			</listitem>
+		</itemizedlist>
+		<!--
+		<para>
+			RichFaces supports additional products not listed here. Refer to <xref linkend="sect-Component_Reference-RichFaces_overview-Full_technical_requirements" /> for a full list of technical requirements and supported envrionments, browsers, and tools.
+		</para>
+		-->
+		
+	</section>
+
+	<section id="sect-Developer_Guide-Getting_started_with_RichFaces-Development_environments">
+		<title>Development environments</title>
+		<para>
+			RichFaces applications can be developed using a range of tools, including integrated development environments (<acronym>IDE</acronym>s). This chapter covers only two such environments in detail:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<productname>JBoss Tools</productname>, as described in <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_JBoss_Tools" />. 
 				</para>
 			</listitem>
 			<listitem>
 				<para>
-					An application server, such as <productname>JBoss Application Server 6</productname> or <productname>Apache Tomcat 6</productname>.
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					A web browser, such as <productname>Firefox 3.5</productname> or <productname>Internet Explorer 7</productname>
+					<productname>Maven</productname>, as described in <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_Maven" />. 
 				</para>
 			</listitem>
 		</itemizedlist>
 		<para>
-			RichFaces supports additional products not listed here. Refer to <xref linkend="sect-Component_Reference-RichFaces_overview-Full_technical_requirements" /> for a full list of technical requirements and supported envrionments, browsers, and tools.
+			Other environments, such as <productname>Idea</productname> or <productname>NetBeans</productname>, could also be used for RichFaces development, but are not detailed in this book.
 		</para>
-		
 	</section>
 	
 	<section id="sect-Developer_Guide-Getting_started_with_RichFaces-Setting_up_RichFaces">
@@ -56,13 +71,50 @@
 			<step>
 				<title>Download RichFaces archive</title>
 				<para>
-					Download RichFaces from the JBoss RichFaces Downloads area at <ulink url="http://www.jboss.org/richfaces/download.html">http://www.jboss.org/richfaces/download.html</ulink>. The binary files (available in <filename class="extension">.bin.zip</filename> or <filename class="extension">.bin.tar.gz</filename> archives) contain a compiled, ready-to-use version of RichFaces with a set of basic skins.
+					Download RichFaces from the JBoss RichFaces Downloads area at <ulink url="http://www.jboss.org/richfaces/download.html">http://www.jboss.org/richfaces/download.html</ulink>. The binary files (available in <filename class="extension">.bin.zip</filename> or <filename class="extension">.bin.tar.gz</filename> archives) contain the following:
 				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							compiled, ready-to-use Java Archives (<acronym>JAR</acronym> files) of the RichFaces libraries
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							library source JAR files
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							documentation, including Java documentation and JavaScript documentation
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							archetypes
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							example source code
+						</para>
+					</listitem>
+				</itemizedlist>
+				<!-- TODO not in Final
+				<stepalternatives>
+					<step>
+						<title>Using the Component Development Kit (<acronym>CDK</acronym>) distribution</title>
+						<para>
+							Instead of using the standard distribution, you could download the distribution that includes the Component Development Kit (<acronym>CDK</acronym>). This distribution provides a tool for creating and developing new components using the RichFaces framework.
+						</para>
+					</step>
+				</stepalternatives>
+				-->
 				<stepalternatives>
 					<step>
 						<title>Compiling from source</title>
 						<para>
-							Instead of downloading the pre-compiled binaries, you can download the source files and compile them yourself. Refer to <xref linkend="sect-Component_Reference-RichFaces_overview-Compiling_from_source_code" /> for further instructions.
+							Instead of using the pre-compiled binaries, you can compile the source files yourself. Refer to <xref linkend="sect-Component_Reference-RichFaces_overview-Compiling_from_source_code" /> for further instructions.
 						</para>
 					</step>
 				</stepalternatives>
@@ -80,13 +132,16 @@
 	<section id="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_JBoss_Tools">
 		<title>Creating a project with <productname>JBoss Tools</productname></title>
 		<para>
-			Follow the procedure in this section to create a new RichFaces application with <productname>JBoss Tools</productname>.
+			Follow the procedure in this section to create a new RichFaces application with <productname>JBoss Tools</productname> Ensure you are using the latest version of <productname>JBoss Tools</productname>.
 		</para>
 		<procedure>
 			<step id="step-Developer_Guide-Creating_a_project-Create_a_new_project">
 				<title>Create a new project</title>
 				<para>
-					Create a new project based on the JSF 2 environment. In <productname>JBoss Tools</productname>, select <menuchoice><guimenu>File</guimenu><guimenu>New</guimenu><guimenuitem>JSF Project</guimenuitem></menuchoice> from the menu. Name the project, select <guilabel>JSF 2</guilabel> from the <guilabel>JSF Environment</guilabel> drop-down box, and click the <guibutton>Finish</guibutton> button to create the project.
+					Create a new project based on the JSF 2 environment using the RichFaces 4 template. In <productname>JBoss Tools</productname>, select <menuchoice><guimenu>File</guimenu><guimenu>New</guimenu><guimenuitem>JSF Project</guimenuitem></menuchoice> from the menu. Name the project, select <guilabel>JSF 2 + RichFaces 4</guilabel> from the <guilabel>JSF Environment</guilabel> drop-down box, and click the <guibutton>Finish</guibutton> button to create the project.
+				</para>
+				<para>
+					If necessary, update the JSF 2 JAR files to the latest versions.
 				</para>
 			</step>
 			<step id="step-Developer_Guide-Creating_a_project-Add_the_RichFaces_libraries_to_the_project">
@@ -94,53 +149,15 @@
 				<para>
 					Add <filename>core-ui.jar</filename>, <filename>richfaces-api.jar</filename>, and <filename>richfaces-impl.jar</filename> into your project by copying them from the location where you unzipped the RichFaces archive to the <filename>WebContent/WEB-INF/lib/</filename> directory of your project in <application>JBoss Tools</application>.
 				</para>
-				<!--
-				<note>
-					<title>Other required libraries</title>
-					<para>
-						RichFaces also requires the following libraries to be referenced in your project. Typically they are already included when creating a JSF project in <application>JBoss Tools</application>.
-					</para>
-					<itemizedlist>
-						<listitem>
-							<para>
-								<filename>commons-beanutils.jar</filename>
-							</para>
-						</listitem>
-						<listitem>
-							<para>
-								<filename>commons-collections.jar</filename>
-							</para>
-						</listitem>
-						<listitem>
-							<para>
-								<filename>commons-digester.jar</filename>
-							</para>
-						</listitem>
-						<listitem>
-							<para>
-								<filename>commons-logging.jar</filename>
-							</para>
-						</listitem>
-						<listitem>
-							<para>
-								<filename>jhighlight.jar</filename>
-							</para>
-						</listitem>
-					</itemizedlist>
-				</note>
-				-->
 			</step>
 			<step id="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries">
 				<title>Reference the tag libraries</title>
 				<para>
 					The RichFaces tag libraries need to be referenced on each XHTML page in your project:
 				</para>
-				
-<programlisting language="XML" role="XML">&lt;ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:a4j="http://richfaces.org/a4j"
+<programlisting language="XML" role="XML">&lt;ui:composition xmlns:a4j="http://richfaces.org/a4j"
                 xmlns:rich="http://richfaces.org/rich"&gt;
-    ...
+   ...
 &lt;/ui:composition&gt;
 </programlisting>
 			</step>
@@ -172,7 +189,7 @@
 		<section id="sect-Component_Using_RichFaces_with_Maven-Setting_up_Maven">
 			<title>Setting up <productname>Maven</productname></title>
 			<para>
-				<productname>Maven</productname> can be downloaded and installed from Apache's website at <ulink url="http://maven.apache.org/download.html">http://maven.apache.org/download.html</ulink>. Version 2.2.1 is recommended.
+				<productname>Maven</productname> can be downloaded and installed from Apache's website at <ulink url="http://maven.apache.org/download.html">http://maven.apache.org/download.html</ulink>. Due to the use of dependency importing, <productname>Maven</productname> version 2.0.9 or above is required.
 			</para>
 			<para>
 				Once <productname>Maven</productname> has been installed, no further configuration is required to begin building Maven projects.
@@ -184,7 +201,7 @@
 				A Maven archetype is a template for creating projects. <productname>Maven</productname> uses an archetype to generate a directory structure and files for a particular project, as well as creating <filename>pom.xml</filename> files that contain build instructions.
 			</para>
 			<para>
-				The RichFaces Component Development Kit includes a Maven archetype named <filename>richfaces-archetype-simpleapp</filename> for generating the basic structure and requirements for a RichFaces application project. Maven can obtain the archetype from the JBoss repository at <filename>https://repository.jboss.org/nexus/content/groups/public/</filename>. The archetype is also included with the RichFaces source code. Follow the procedure in this section to generate a new Maven-based RichFaces project using the archetype.
+				The RichFaces Component Development Kit includes a Maven archetype named <filename>richfaces-archetype-simpleapp</filename> for generating the basic structure and requirements for a RichFaces application project. Maven can obtain the archetype from the JBoss repository at <filename>https://repository.jboss.org/nexus/content/groups/public/</filename>. The archetype is also included with the RichFaces source code in the <filename>archetypes</filename> directory. Follow the procedure in this section to generate a new Maven-based RichFaces project using the archetype.
 			</para>
 			<procedure>
 				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_required_repositories">
@@ -197,10 +214,12 @@
 					<para>
 						The profile then needs to be activated in the <sgmltag>&lt;activeProfiles&gt;</sgmltag> element:
 					</para>
-				
 <programlisting language="XML" role="XML">&lt;activeProfiles&gt;
 	&lt;activeProfile&gt;jboss-public-repository&lt;/activeProfile&gt;
 &lt;/activeProfiles&gt;</programlisting>
+					<para>
+						For further details, refer to the <citetitle>JBoss RichFaces Wiki</citetitle>.
+					</para>
 				</step>
 				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Generate_the_project_from_the_archetype">
 					<title>Generate the project from the archetype</title>
@@ -254,30 +273,13 @@
 		        │   └── <filename>template.xhtml</filename>
 		        └── <filename>WEB-INF</filename>
 		            ├── <filename>faces-config.xml</filename>
-		            └── <filename>web.xml</filename><!--
-		└── <filename>test</filename>
-		    └── <filename>java</filename>
-		        └── <filename>org</filename>
-		            └── <filename>docs</filename>
-		                └── <filename>richfaces</filename>
-		                    └── <filename>BeanTest.java</filename>--></screen>
+		            └── <filename>web.xml</filename></screen>
 				</step>
 				
 				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_dependencies">
-					<!-- Remove this step for Enterprise documentation -->
 					<title>Add test dependencies (optional)</title>
 					<para>
-						Your root directory of your project contains a project descriptor file, <filename>pom.xml</filename>.
-<!--
-						To add RichFaces libraries to your project, edit the project descriptor to add dependencies to the <sgmltag>&lt;dependencies&gt;</sgmltag> element as follows:
-					</para>
-				
-	<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Using_RichFaces_with_Maven-Add_dependencies.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				
-					
-					<para>
--->
-						If you wish to include modules for test-driven JSF development, add any dependencies for the tests to the <filename>pom.xml</filename> file. For full details on how to use the <productname>jsf-test</productname> project, refer to <ulink url="http://community.jboss.org/docs/DOC-13155">http://community.jboss.org/wiki/TestDrivenJSFDevelopment</ulink>.
+						Your root directory of your project contains a project descriptor file, <filename>pom.xml</filename>. If you wish to include modules for test-driven JSF development, add any dependencies for the tests to the <filename>pom.xml</filename> file. For full details on how to use the <productname>jsf-test</productname> project, refer to <ulink url="http://community.jboss.org/docs/DOC-13155">http://community.jboss.org/wiki/TestDrivenJSFDevelopment</ulink>.
 					</para>
 				</step>
 			
@@ -320,30 +322,21 @@
 					<para>
 						To install the plug-in, choose <menuchoice><guimenu>Help</guimenu><guimenuitem>Install New Software</guimenuitem></menuchoice> from the menu. Type <literal>Maven</literal> to locate the <guilabel>Maven Integration for Eclipse Update Site</guilabel> entry, then type <literal>Maven</literal> in the filter to show the available plug-ins. Follow the prompts to install the <guilabel>Maven Integration for Eclipse</guilabel> plug-in.
 					</para>
-					<!--
+					<para>
+						With the plug-in installed, open the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>Maven</guimenu><guimenuitem>Existing Maven Projects</guimenuitem></menuchoice> as the import source and choose the <filename>pom.xml</filename> file for your project.
+					</para>
 					<stepalternatives>
 						<step>
 							<title>Using <application>Maven</application> to prepare the project for <application>Eclipse</application></title>
 							<para>
-								Enter the following command in the root directory of the project:
+								Alternatively, the project can be prepared using Maven then imported normally. Enter the following command in the root directory of the project:
 							</para>
 	<screen>mvn eclipse:eclipse -DdownloadSources=true -Dwtpversion=2.0</screen>
 							<para>
 								The command generates the required <application>Eclipse</application> project files. You can then import the project into <application>Eclipse</application> and <application>JBoss Tools</application> through the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>General</guimenu><guimenuitem>Existing Projects into Workspace</guimenuitem></menuchoice> as the import source and choose the root directory for your project.
 							</para>
 						</step>
-						<step>
-							<title>Using the <productname>M2Eclipse</productname> plug-in</title>
-							<para>
-								Alternatively, you can import a <application>Maven</application> project into <application>Eclipse</application> and <application>JBoss Tools</application> using the <productname>M2Eclipse</productname> plug-in. 
--->
-							<para>
-								With the plug-in installed, open the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>Maven</guimenu><guimenuitem>Existing Maven Projects</guimenuitem></menuchoice> as the import source and choose the <filename>pom.xml</filename> file for your project.
-							</para>
-<!--
-						</step>
 					</stepalternatives>
--->
 				</step>
 <!--
 				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_tag_library_references">
@@ -363,10 +356,17 @@
 	</section>
 	
 	<section id="sect-Developer_Guide-Getting_started_with_RichFaces-Using_RichFaces_in_existing_JSF2_projects">
-		<title>Using RichFaces in existing JSF2 projects</title>
+		<title>Using RichFaces in existing JSF 2 projects</title>
 		<para>
-			RichFaces can be added to existing JSF2 projects by adding references to the new RichFaces libraries. Refer to <xref linkend="step-Developer_Guide-Creating_a_project-Add_the_RichFaces_libraries_to_the_project" /> and <xref linkend="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries" /> in <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_JBoss_Tools" /> for details.
+			RichFaces can be added to existing JSF 2 projects by adding the new RichFaces libraries. Refer to <xref linkend="step-Developer_Guide-Creating_a_project-Add_the_RichFaces_libraries_to_the_project" /> and <xref linkend="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries" /> in <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_JBoss_Tools" /> for details.
 		</para>
+
+		<note>
+			<title>Application-level settings</title>
+			<para>
+				In RichFaces 4, it is not necessary to add any extra settings to the <filename>web.xml</filename> or <filename>config.xml</filename> settings files to use the framework.
+			</para>
+		</note>
 	</section>
 
 </chapter>

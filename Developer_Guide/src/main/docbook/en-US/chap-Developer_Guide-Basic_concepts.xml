@@ -3,20 +3,13 @@
 ]>
 <chapter id="chap-Developer_Guide-Basic_concepts">
 	<title>Basic concepts</title>
-	<!-- In development notification -->
-	<important>
-		<title>Documentation in development</title>
-		<para>
-			Some concepts covered in this chapter may refer to the previous version of <productname>Richfaces</productname>, version 3.3.3. This chapter is scheduled for review to ensure all information is up to date.
-		</para>
-	</important>
 	<para>
 		Read this chapter for the basic concepts of using RichFaces in conjunction with Ajax and JavaServer Faces.
 	</para>
 	<section id="sect-Developer_Guide-Basic_concepts-Sending_an_Ajax_request">
 		<title>Sending an Ajax request</title>
 		<para>
-			Many of the tags in the <classname>a4j</classname> and <classname>rich</classname> tag libraries are capable of sending Ajax requests from a JavaServer Faces (JSF) page. RichFaces tags hide the usual JavaScript activities that are required for an XMHTTPRequest object building and an Ajax request sending. Additionally the tags can determine which components of a JSF page are to be re-rendered as a result of the Ajax response; refer to <xref linkend="sect-Developer_Guide-Receiving_events_and_updates-Partial_page_updates" /> for details.
+			Many of the tags in the <classname>a4j</classname> and <classname>rich</classname> tag libraries are capable of sending Ajax requests from a JavaServer Faces (JSF) page.
 		</para>
 		<itemizedlist>
 			<listitem>
@@ -42,19 +35,13 @@
 		</itemizedlist>
 	</section>
 	
+	<!--
 	<section id="sect-Developer_Guide-Basic_concepts-Receiving_events_and_updates">
 		<title>Receiving events and client-side updates</title>
 		<para>
 			Updates are made only to those regions specified using the <varname>execute</varname>. If no specific regions are declared, the whole page is updated when an Ajax response is received.
 		</para>
-		<!--
-		<note>
-			<title>Rendering outside the active region</title>
-			<para>
-				If the content of an Ajax response needs to be rendered outside the active region, then the value of the <varname>renderRegionOnly</varname> attribute should be set to <literal>false</literal>. Otherwise, your Ajax updates are limited to elements of the active region. If not defined, the default setting is <code>renderRegionOnly="false"</code>.
-			</para>
-		</note>
-		-->
+
 		<section id="sect-Developer_Guide-Receiving_events_and_updates-Partial_page_updates">
 			<title>Partial page updates</title>
 			<para>
@@ -71,6 +58,120 @@
 			</para>
 		</section>
 
+	</section>
+	-->
+
+	<section id="sect-Developer_Guide-Basic_concepts-Partial_tree_processing">
+		<title>Partial tree processing</title>
+		<para>
+			Use the <varname>execute</varname> attribute to specify which parts of the JSF tree to process during an Ajax request. The <varname>execute</varname> attribute can point to an <varname>id</varname> identifier of a specific component to process. Components can also be identified through the use of Expression Language (<acronym>EL</acronym>).
+		</para>
+		<para>
+			Alternatively, the <varname>execute</varname> attribute accepts the following keywords:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><code>@all</code></term>
+				<listitem>
+					<para>
+						Every component is processed.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><code>@none</code></term>
+				<listitem>
+					<para>
+						No components are processed.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><code>@this</code></term>
+				<listitem>
+					<para>
+						The requesting component with the <varname>execute</varname> attribute is processed.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><code>@form</code></term>
+				<listitem>
+					<para>
+						The form that contains the requesting component is processed.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><code>@region</code></term>
+				<listitem>
+					<para>
+						The region that contains the requesting component is processed. Use the <sgmltag>&lt;a4j:region&gt;</sgmltag> component as a wrapper element to specify regions.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			Some components make use of additional keywords. These are detailed under the relevant component entry in the <citetitle>RichFaces Component Reference</citetitle>.
+		</para>
+	</section>
+
+	<section id="sect-Developer_Guide-Basic_concepts-Partial_view_updates">
+		<title>Partial view updates</title>
+		<para>
+			Use the <varname>render</varname> attribute to specify which components to render for an Ajax update. The <varname>render</varname> attribute can point to an <varname>id</varname> identifier of a specific component to update. Components can also be identified through the use of Expression Language (<acronym>EL</acronym>).
+		</para>
+		<para>
+			Alternatively, the <varname>render</varname> attribute accepts the following keywords:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><code>@all</code></term>
+				<listitem>
+					<para>
+						Every component is updated.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><code>@none</code></term>
+				<listitem>
+					<para>
+						No components are updated.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><code>@this</code></term>
+				<listitem>
+					<para>
+						The requesting component with the <varname>execute</varname> attribute is updated.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><code>@form</code></term>
+				<listitem>
+					<para>
+						The form that contains the requesting component is updated.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><code>@region</code></term>
+				<listitem>
+					<para>
+						The region that contains the requesting component is updated. Use the <sgmltag>&lt;a4j:region&gt;</sgmltag> component as a wrapper element to specify regions.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			Some components make use of additional keywords. These are detailed under the relevant component entry in the <citetitle>RichFaces Component Reference</citetitle>.
+		</para>
+		<para>
+			Use the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component with the <code>ajaxRendered="true"</code> setting to always update a section irrespective of the requesting component's <varname>render</varname> attribute. The <sgmltag>&lt;rich:message&gt;</sgmltag> and <sgmltag>&lt;rich:messages&gt;</sgmltag> components are based on the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component, and as such will also always be updated. To override this behavior, use the <code>limitRender="true"</code> setting on the requesting component.
+		</para>
 	</section>
 	
 	<!--
