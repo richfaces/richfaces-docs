@@ -1,6 +1,6 @@
 @ManagedBean
 @RequestScoped
-public class UserBean {
+public class UserBean implements Cloneable {
 
    @Size(min = 5, max = 15, message="Wrong size for password")
    private String password;

@@ -1,4 +1,4 @@
-public class ActionparamBean {
+public class ParamBean {
     private String name = "John";
 
     public String getName() {

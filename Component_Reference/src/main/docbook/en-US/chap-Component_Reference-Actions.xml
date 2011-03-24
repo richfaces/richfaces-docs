@@ -10,18 +10,30 @@
 	<section id="sect-Component_Reference-Actions-a4jajax">
 		<title><sgmltag>&lt;a4j:ajax&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;a4j:ajax&gt;</sgmltag> component allows Ajax capability to be added to any non-Ajax component. It is placed as a direct child to the component that requires Ajax support. The <sgmltag>&lt;a4j:ajax&gt;</sgmltag> component uses the common attributes listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
+			The <sgmltag>&lt;a4j:ajax&gt;</sgmltag> behavior allows Ajax capability to be added to a non-Ajax component. The non-Ajax component must implement the <interfacename>ClientBehaviorHolder</interfacename> interface for all the event attributes that support behavior rendering.
 		</para>
-		<note>
-			<title>Attaching JavaScript functions</title>
+
+		<section id="sect-Component_Reference-a4jajax-Basic_usage">
+			<title>Basic usage</title>
 			<para>
-				When attaching the <sgmltag>&lt;a4j:ajax&gt;</sgmltag> component to non-Ajax JavaServer Faces command components, such as <sgmltag>&lt;h:commandButton&gt;</sgmltag> and <sgmltag>&lt;h:commandLink&gt;</sgmltag>, it is important to set <code>disabledDefault="true"</code>. If this attribute is not set, a non-Ajax request is sent after the Ajax request and the page is refreshed unexpectedly.
+				The <sgmltag>&lt;a4j:ajax&gt;</sgmltag> behavior is placed as a direct child to the component that requires Ajax support.
 			</para>
-		</note>
-		<example id="exam-Component_Reference-a4jajax-a4jajax_example">
-			<title><sgmltag>&lt;a4j:ajax&gt;</sgmltag> example</title>
-			<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jajax-a4jajax_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-		</example>
+			<para>
+				Point the <varname>event</varname> attribute to the standard JSF event that triggers the behavior. If the <varname>event</varname> attribute is not defined, the behavior is triggered on the event that normally provides interaction behavior for the parent component.
+			</para>
+			<!--
+			<note>
+				<title>Attaching JavaScript functions</title>
+				<para>
+					When attaching the <sgmltag>&lt;a4j:ajax&gt;</sgmltag> behavior to non-Ajax JavaServer Faces command components, such as the <sgmltag>&lt;h:commandButton&gt;</sgmltag> and <sgmltag>&lt;h:commandLink&gt;</sgmltag> components, it is important to set <code>disabledDefault="true"</code>. If this attribute is not set, a non-Ajax request is sent after the Ajax request and the page is refreshed unexpectedly.
+				</para>
+			</note>
+			-->
+			<example id="exam-Component_Reference-a4jajax-a4jajax_example">
+				<title><sgmltag>&lt;a4j:ajax&gt;</sgmltag> example</title>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jajax-a4jajax_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
+		</section>
 		
 		<section id="sect-Component_Reference-a4jajax-Reference_data">
 			<title>Reference data</title>
@@ -50,51 +62,53 @@
 		</section>
 	</section>
 
-	<section id="sect-Component_Reference-Actions-a4jactionParam">
-		<title><sgmltag>&lt;a4j:actionParam&gt;</sgmltag></title>
+	<section id="sect-Component_Reference-Actions-a4jparam">
+		<title><sgmltag>&lt;a4j:param&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;a4j:actionParam&gt;</sgmltag> behavior combines the functionality of the JavaServer Faces (<acronym>JSF</acronym>) components <sgmltag>&lt;f:param&gt;</sgmltag> and <sgmltag>&lt;f:actionListener&gt;</sgmltag>.
+			The <sgmltag>&lt;a4j:param&gt;</sgmltag> behavior combines the functionality of the JavaServer Faces (<acronym>JSF</acronym>) components <sgmltag>&lt;f:param&gt;</sgmltag> and <sgmltag>&lt;f:actionListener&gt;</sgmltag>.
 		</para>
 		
-		<section id="sect-Component_Reference-a4jactionParam-Basic_usage">
+		<section id="sect-Component_Reference-a4jparam-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Basic usage of the <sgmltag>&lt;a4j:actionParam&gt;</sgmltag> requires three main attributes:
+				Basic usage of the <sgmltag>&lt;a4j:param&gt;</sgmltag> requires three main attributes:
 			</para>
 			<itemizedlist>
+				<!--
 				<listitem>
 					<para>
 						<varname>name</varname>, for the name of the parameter;
 					</para>
 				</listitem>
+				-->
 				<listitem>
 					<para>
-						<varname>value</varname>, for the initial value of the parameter; and
+						The <varname>value</varname> attribute is the initial value of the parameter.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<varname>assignTo</varname>, for defining the bean property. The property will be updated if the parent command component performs an action event during the <emphasis>Process Request</emphasis> phase.
+						The <varname>assignTo</varname> attribute defines the bean property. The property is updated if the parent command component performs an action event during the <emphasis>Process Request</emphasis> phase.
 					</para>
 				</listitem>
 			</itemizedlist>
 			<para>
-				<xref linkend="exam-Component_Reference-a4jactionParam-a4jactionParam_example" /> shows a simple implementation along with the accompanying managed bean.
+				<xref linkend="exam-Component_Reference-a4jparam-a4jparam_example" /> shows a simple implementation along with the accompanying managed bean.
 			</para>
-			<example id="exam-Component_Reference-a4jactionParam-a4jactionParam_example">
-				<title><sgmltag>&lt;a4j:actionParam&gt;</sgmltag> example</title>
-				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jactionParam-a4jactionParam_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<programlisting language="Java" role="JAVA"><xi:include href="extras/exam-Component_Reference-a4jactionParam-a4jactionParam_example.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<example id="exam-Component_Reference-a4jparam-a4jparam_example">
+				<title><sgmltag>&lt;a4j:param&gt;</sgmltag> example</title>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jparam-a4jparam_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<programlisting language="Java" role="JAVA"><xi:include href="extras/exam-Component_Reference-a4jparam-a4jparam_example.java" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				<para>
 					When the <guibutton>Set name to Alex</guibutton> button is pressed, the application sets the <varname>name</varname> parameter of the bean to <literal>Alex</literal>, and displays the name in the output field.
 				</para>
 			</example>
 		</section>
 		
-		<section id="sect-Component_Reference-a4jactionParam-Interoperability">
+		<section id="sect-Component_Reference-a4jparam-Interoperability">
 			<title>Interoperability</title>
 			<para>
-				The <sgmltag>&lt;a4j:actionParam&gt;</sgmltag> behavior can be used with non-Ajax components in addition to Ajax components. In this way, data model values can be updated without an JavaScript code on the server side.
+				The <sgmltag>&lt;a4j:param&gt;</sgmltag> tag can be used with non-Ajax components in addition to Ajax components. This includes components which are working through the <code>GET</code> request, such as the <sgmltag>&lt;h:link&gt;</sgmltag> and <sgmltag>&lt;h:button&gt;</sgmltag> components. In this way, data model values can also be updated without any Java code on the server side.
 			</para>
 			<para>
 				The <varname>converter</varname> attribute can be used to specify how to convert the value before it is submitted to the data model. The property is assigned the new value during the <emphasis>Update Model</emphasis> phase.
@@ -105,22 +119,33 @@
 					If the validation of the form fails, the <emphasis>Update Model</emphasis> phase will be skipped and the property will not be updated.
 				</para>
 			</note>
+		</section>
+
+		<section id="sect-Component_Reference-a4jparam-Passing_client-side_parameters">
+			<title>Passing client-side parameters</title>
 			<para>
 				Variables from JavaScript functions can be used for the <varname>value</varname> attribute. In such an implementation, the <varname>noEscape</varname> attribute should be set to <literal>true</literal>. Using <code>noEscape="true"</code>, the <varname>value</varname> attribute can contain any JavaScript expression or JavaScript function invocation, and the result will be sent to the server as the <varname>value</varname> attribute.
 			</para>
+			<example id="exam-Component_Reference-a4jparam-Passing_client-side_parameters">
+				<title>Passing client-side parameters</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jparam-Passing_client-side_parameters.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The command button triggers the <sgmltag>&lt;a4j:param&gt;</sgmltag> behaviors and renders the output text. The <sgmltag>&lt;a4j:param&gt;</sgmltag> behaviors pass client-side parameters for the screen width and height through the backing bean. These parameters are then used to populate the output text values.
+				</para>
+			</example>
 		</section>
 		
-		<section id="sect-Component_Reference-a4jactionParam-Reference_data">
+		<section id="sect-Component_Reference-a4jparam-Reference_data">
 			<title>Reference data</title>
 			<itemizedlist>
 				<listitem>
 					<para>
-						<parameter>component-type</parameter>: <classname>org.ajax4jsf.ActionParameter</classname>
+						<parameter>component-type</parameter>: <classname>org.ajax4jsf.parameter</classname>
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HTMLActionParameter</classname>
+						<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HTMLParameter</classname>
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -164,7 +189,7 @@
 	<section id="sect-Component_Reference-Actions-a4jcommandButton">
 		<title><sgmltag>&lt;a4j:commandButton&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> is similar to the JavaServer Faces (<acronym>JSF</acronym>) component <sgmltag>&lt;h:commandButton&gt;</sgmltag>, but additionally includes Ajax support. When the command button is clicked it submits an Ajax form, and when a response is received the command button can be dynamically rendered.
+			The <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> component is similar to the JavaServer Faces (<acronym>JSF</acronym>) <sgmltag>&lt;h:commandButton&gt;</sgmltag> component, but additionally includes Ajax support.
 		</para>
 		<figure id="figu-Component_Reference-a4jcommandButton-a4jcommandButton">
 			<title><sgmltag>&lt;a4j:commandButton&gt;</sgmltag></title>
@@ -179,18 +204,29 @@
 				</textobject>
 			</mediaobject>
 		</figure>
+		<note>
+			<title>The <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> component executes the complete form</title>
+			<para>
+				Button controls are typically used to perform complete form submissions for data storing. As a consequence, the <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> component has the <code>execute="@form"</code> setting by default. To limit rendering to a different scope, redefine the <varname>execute</varname> attribute.
+			</para>
+		</note>
 		
 		<section id="sect-Component_Reference-a4jcommandButton-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> requires only the <varname>value</varname> and <varname>render</varname> attributes to function. The <varname>value</varname> attribute specifies the text of the button and the <varname>render</varname> attribute specifies which areas are to be updated. The <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> uses the <varname>click</varname> event instead of the <varname>submit</varname> event, but otherwise uses all common Ajax attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
+				The <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> requires only the <varname>value</varname> attribute to function. Use the <varname>value</varname> attribute to specify the text of the button.
 			</para>
+			<para>
+				By default, the <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> uses the <varname>click</varname> event instead of the <varname>submit</varname> event.
+			</para>
+			<!--
 			<note>
 				<title>Set <code>disabledDefault="true"</code></title>
 				<para>
 					When attaching a JavaScript function to a <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> with the help of a <sgmltag>&lt;rich:componentControl&gt;</sgmltag>, do not use the <varname>attachTo</varname> attribute of <sgmltag>&lt;rich:componentControl&gt;</sgmltag>. The attribute adds event handlers using <classname>Event.observe</classname> but <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> does not include this event.
 				</para>
 			</note>
+			-->
 		</section>
 
 		<section id="sect-Component_Reference-a4jcommandButton-Reference_data">
@@ -224,7 +260,7 @@
 	<section id="sect-Component_Reference-Actions-a4jcommandLink">
 		<title><sgmltag>&lt;a4j:commandLink&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> is similar to the JavaServer Faces (<acronym>JSF</acronym>) component <sgmltag>&lt;h:commandLink&gt;</sgmltag>, but additionally includes Ajax support. When the command link is clicked it generates an Ajax form submit, and when a response is received the command link can be dynamically rendered.
+			The <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> component is similar to the JavaServer Faces (<acronym>JSF</acronym>) <sgmltag>&lt;h:commandLink&gt;</sgmltag> component, except that it includes plugged-in Ajax behavior.
 		</para>
 		<figure id="figu-Component_Reference-a4jcommandLink-a4jcommandLink">
 			<title><sgmltag>&lt;a4j:commandLink&gt;</sgmltag></title>
@@ -239,11 +275,20 @@
 				</textobject>
 			</mediaobject>
 		</figure>
+		<note>
+			<title>The <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> component executes the complete form</title>
+			<para>
+				Link controls are typically used to perform complete form submissions for data storing. As a consequence, the <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> component has the <code>execute="@form"</code> setting by default. To limit rendering to a different scope, redefine the <varname>execute</varname> attribute.
+			</para>
+		</note>
 		
 		<section id="sect-Component_Reference-a4jcommandLink-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> requires only the <varname>value</varname> and <varname>render</varname> attributes to function. The <varname>value</varname> attribute specifies the text of the link and the <varname>render</varname> attribute specifies which areas are to be updated. The <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> uses the <varname>click</varname> event instead of the <varname>submit</varname> event, but otherwise uses all common Ajax attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />.
+				The <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> requires only the <varname>value</varname> attribute to function. Use the <varname>value</varname> attribute to specify the text of the link.
+			</para>
+			<para>
+				The <sgmltag>&lt;a4j:commandLink&gt;</sgmltag> uses the <varname>click</varname> event instead of the <varname>submit</varname> event.
 			</para>
 		</section>
 		
@@ -268,133 +313,6 @@
 				<listitem>
 					<para>
 						<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxCommandLinkRenderer</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-	
-	<section id="sect-Component_Reference-Actions-richcomponentControl">
-		<title><sgmltag>&lt;rich:componentControl&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:componentControl&gt;</sgmltag> allows JavaScript API functions to be called on components after defined events. Initialization variants and activation events can be customized, and parameters can be passed to the target component.
-		</para>
-		
-		<section id="sect-Component_Reference-richcomponentControl-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				The <varname>event</varname>, <varname>for</varname>, and <varname>operation</varname> attributes are all that is required to attach JavaScript functions to the parent component. The <varname>event</varname> attribute specifies the event that triggers the JavaScript API function call. The <varname>for</varname> attribute defines the target component, and the <varname>operation</varname> attribute specifies the JavaScript function to perform.
-			</para>
-			<example id="exam-Component_Reference-richcomponentControl-richcomponentControl_basic_usage">
-				<title><sgmltag>&lt;rich:componentControl&gt;</sgmltag> basic usage</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcomponentControl-richcomponentControl_basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<para>
-					The example contains a single command button, which when clicked shows the modal panel with the identifier <literal>ccModalPanelID</literal>.
-				</para>
-			</example>
-		</section>
-		
-		<section id="sect-Component_Reference-richcomponentControl-Attaching_to_a_component">
-			<title>Attaching to a component</title>
-			<para>
-				The <varname>attachTo</varname> attribute can be used to attach the event to a component other than the parent component. If no <varname>attachTo</varname> attribute is supplied, the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> component's parent is used, as in <xref linkend="exam-Component_Reference-richcomponentControl-richcomponentControl_basic_usage" />.
-			</para>
-			<example id="exam-Component_Reference-richcomponentControl-Attaching_richcomponentControl_to_a_component">
-				<title>Attaching <sgmltag>&lt;rich:componentControl&gt;</sgmltag> to a component</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcomponentControl-Attaching_richcomponentControl_to_a_component.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<para>
-					In the example, the <literal>click</literal> event of the component with the identifier <literal>ccCalendarID</literal> will trigger the <literal>Expand</literal> operation for the component with the identifier <literal>doExpandCalendarID</literal>.
-				</para>
-			</example>
-		</section>
-		
-		<section id="sect-Component_Reference-richcomponentControl-Parameters_and_JavaScript">
-			<title>Parameters and JavaScript</title>
-			<para>
-				The operation can receive parameters either through the <varname>params</varname> attribute, or by using <sgmltag>&lt;f:param&gt;</sgmltag> elements.
-			</para>
-			<example id="exam-Component_Reference-richcomponentControl-Using_parameters">
-				<title>Using parameters</title>
-				<variablelist>
-					<varlistentry>
-						<term>The <varname>params</varname> attribute</term>
-						<listitem>
-							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcomponentControl-Using_parameters-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-						</listitem>
-					</varlistentry>
-					<varlistentry>
-						<term><sgmltag>&lt;f:param&gt;</sgmltag> elements</term>
-						<listitem>
-							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcomponentControl-Using_parameters-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-						</listitem>
-					</varlistentry>
-				</variablelist>
-			</example>
-			<para>
-				The <varname>name</varname> attribute can be used to define a normal JavaScript function that triggers the specified operation on the target component.
-			</para>
-		</section>
-		
-		
-		<section id="sect-Component_Reference-richcomponentControl-Timing">
-			<title>Timing</title>
-			<para>
-				The <varname>attachTiming</varname> attribute can determine the page loading phase during which the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> is attached to the source component:
-			</para>
-			<variablelist>
-				<varlistentry>
-					<term><literal>immediate</literal></term>
-					<listitem>
-						<para>
-							attached during execution of the script.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>available</literal></term>
-					<listitem>
-						<para>
-							attached after the target component is initialized.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>load</literal></term>
-					<listitem>
-						<para>
-							attached after the page is loaded.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-		</section>
-		
-		<section id="sect-Component_Reference-richcomponentControl-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.ComponentControl</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlComponentControl</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.ComponentControl</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.ComponentControlRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.ComponentControlTag</classname>
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -449,27 +367,30 @@
 	<section id="sect-Component_Reference-Actions-a4jjsFunction">
 		<title><sgmltag>&lt;a4j:jsFunction&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component allows Ajax requests to be performed directly from JavaScript code, and server-side data to be invoked and returned in JavaScript Object Notation (<acronym>JSON</acronym>) format to use in client-side JavaScript calls.
+			The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component performs Ajax requests directly from JavaScript code and retrieves server-side data. The server-side data is returned in JavaScript Object Notation (<acronym>JSON</acronym>) format prior to the execution of any JavaScript code defined using the <varname>oncomplete</varname> attribute.
 		</para>
 		
 		<section id="sect-Component_Reference-a4jjsFunction-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component has all the common Ajax action attributes as listed in <xref linkend="chap-Component_Reference-Common_Ajax_attributes" />; the <varname>action</varname> and <varname>actionListener</varname> attributes can be invoked and parts of the page can be re-rendered after a successful call to the JavaScript function. <xref linkend="exam-Component_Reference-a4jjsFunction-a4jjsFunction_example" /> shows how an Ajax request can be initiated from the JavaScript and a partial page update performed. The JavaScript function can be invoked with the data returned by the Ajax response.
+				The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component requires the <varname>data</varname> attribute. Use the <varname>data</varname> attribute to define where the retrieved server-side data is stored.
+			</para>
+			<para>
+				<xref linkend="exam-Component_Reference-a4jjsFunction-a4jjsFunction_example" /> shows how an Ajax request can be initiated from the JavaScript and a partial page update performed. The JavaScript function can be invoked with the data returned by the Ajax response.
 			</para>
 			<example id="exam-Component_Reference-a4jjsFunction-a4jjsFunction_example">
 				<title><sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> example</title>
 				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jjsFunction-a4jjsFunction_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The output text for the name is changed depending on which table cell the user hovers over with the mouse. The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component manages the updating and display of the name.
+				</para>
 			</example>
 		</section>
 		
 		<section id="sect-Component_Reference-a4jjsFunction-Parameters_and_JavaScript">
 			<title>Parameters and JavaScript</title>
 			<para>
-				The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component allows the use of the <sgmltag>&lt;a4j:actionParam&gt;</sgmltag> component or the JavaServer Faces <sgmltag>&lt;f:param&gt;</sgmltag> component to pass any number of parameters for the JavaScript function.
-			</para>
-			<para>
-				The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component is similar to the <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> component, but it can be activated from the JavaScript code. This allows some server-side functionality to be invoked and the returned data to subsequently be used in a JavaScript function invoked by the <varname>complete</varname> event attribute. In this way, the <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component can be used instead of the <sgmltag>&lt;a4j:commandButton&gt;</sgmltag> component.
+				The <sgmltag>&lt;a4j:jsFunction&gt;</sgmltag> component allows the use of the <sgmltag>&lt;a4j:param&gt;</sgmltag> component or the JavaServer Faces <sgmltag>&lt;f:param&gt;</sgmltag> component to pass any number of parameters for the JavaScript function.
 			</para>
 		</section>
 		
@@ -510,9 +431,6 @@
 			<title>Timing options</title>
 			<para>
 				The <varname>interval</varname> attribute specifies the time in milliseconds between requests. The default for this value is 1000 ms (1 second).
-			</para>
-			<para>
-				The <varname>timeout</varname> attribute defines the response waiting time in milliseconds. If a response isn't received within the timeout period, the connection is aborted and the next request is sent. By default, the timeout is not set.
 			</para>
 			<para>
 				The <sgmltag>&lt;a4j:poll&gt;</sgmltag> component can be enabled and disabled using the <varname>enabled</varname> attribute. Using Expression Language (<acronym>EL</acronym>), the <varname>enabled</varname> attribute can point to a bean property to apply a particular attribute value.
@@ -584,28 +502,101 @@
 		</para>
 		-->
 		<para>
-			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component performs real-time updates on the client side from events raised at the server side. The events are pushed out to the client through the Java Message Service (<acronym>JMS</acronym>). When the <sgmltag>&lt;a4j:push&gt;</sgmltag> component is triggered by a server event, it can in turn cause Ajax updates and changes.
+			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component performs real-time updates on the client side from events raised at the server side. The events are pushed out to the client through the Java Message Service (<acronym>JMS</acronym>). When the <sgmltag>&lt;a4j:push&gt;</sgmltag> component is triggered by a server event, it can in turn cause Ajax updates and changes. 
+		</para>
+		<para>
+			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component uses the Comet model for pushing data to the client.
 		</para>
 
 		<section id="sect-Component_Reference-a4jpush-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				RichFaces requires the use of the <filename>jquery-atmosphere.js</filename> client plug-in for push functionality. The plug-in is added automatically by the push component renderer, but needs to additionally be added as a build dependency to your project.
+				RichFaces requires the use of the <filename>jquery-atmosphere.js</filename> client plug-in for push functionality. Add the server-side Atmosphere framework as a build dependency to your project.
 			</para>
 			<para>
-				The JMS instance on the back-end must be configured to work with your <sgmltag>&lt;a4j:push&gt;</sgmltag> components. Create topics on the JMS server for the push functionality to check for new messages. Refer to <citetitle>JMS Documentation</citetitle> for details on configuring JMS.
+				The JMS instance on the back-end must be configured to work with your <sgmltag>&lt;a4j:push&gt;</sgmltag> components. Refer to the <citetitle>JBoss Application Server Administration Console Guide</citetitle> for details on managing JBoss Application Server through the Administration Console.
+			</para>
+			<example id="exam-Component_Reference-a4jpush-JMS_server_configuration">
+				<title>JMS server configuration</title>
+				<para>
+					This example describes the JMS server configuration required for a simple chat room. The chat room requires topics on the JMS server for the push functionality to check for new messages. Create a new JMS topic using the following settings:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<guilabel>Name:</guilabel> chat
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<guilabel>JNDI name:</guilabel> /topic/chat
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Use the default settings for other options.
+						</para>
+					</listitem>
+				</itemizedlist>
+				<para>
+					Add a single role for the topic in the same form using the following settings:
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<guilabel>Name:</guilabel> guest
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<guilabel>Send:</guilabel> true
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<guilabel>Consume:</guilabel> true
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<guilabel>Create subscriber:</guilabel> true
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<guilabel>Delete subscriber:</guilabel> true
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<guilabel>Create durable subscriber:</guilabel> true
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<guilabel>Delete durable subscriber:</guilabel> true
+						</para>
+					</listitem>
+				</itemizedlist>
+			</example>
+			<para>
+				Ensure the <guilabel>Create durable subscriber</guilabel> and <guilabel>Delete durable subscriber</guilabel> options are set to <guilabel>true</guilabel> for push functionality. Durable subscriptions receive all events, including those events which were sent while the push component was not connected.
 			</para>
 			<para>
-				Use the <sgmltag>&lt;a4j:push&gt;</sgmltag> component's <varname>address</varname> attribute to reference the topic on the JMS server that contains the pushed messages.
+				Refer to <citetitle>JMS Documentation</citetitle> for details on configuring the JMS Server. 
 			</para>
 			<para>
-				The <sgmltag>&lt;a4j:push&gt;</sgmltag> component should also include the <varname>onerror</varname> event attribute to inform the user when an error has occurred with the push notifications.
+				With the JMS server configured, use the <sgmltag>&lt;a4j:push&gt;</sgmltag> component's <varname>address</varname> attribute to reference the topic on the JMS server that contains the pushed messages.
 			</para>
 			<example id="exam-Component_Reference-a4jpush-Basic_usage">
 				<title>Basic usage</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Basic_usage.java" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				<para>
-					The example demonstrates a simple use of the <sgmltag>&lt;a4j:push&gt;</sgmltag> component to manage a list of users in a chat room. The <sgmltag>&lt;a4j:push&gt;</sgmltag> component refers to the <code>#{chatBean.listSubtopic}@chat</code> address, which has been created on the JMS server. When a new message arrives, the <sgmltag>&lt;a4j:ajax&gt;</sgmltag> behavior causes the user list to update. If an error occurs, the user is alerted.
+					The example demonstrates a simple use of the <sgmltag>&lt;a4j:push&gt;</sgmltag> component to manage a list of users in a chat room. The <sgmltag>&lt;a4j:push&gt;</sgmltag> component refers to the <code>#{chatBean.listSubtopic}@chat</code> address, which has been created on the JMS server. It then uses the sub-topics to separate messages across different topics.
+				</para>
+				<para>
+					When a new message arrives, the <sgmltag>&lt;a4j:ajax&gt;</sgmltag> behavior causes the user list to update. If an error occurs, the user is alerted.
 				</para>
 			</example>
 		</section>
@@ -613,13 +604,16 @@
 		<section id="sect-Component_Reference-a4jpush-Handling_a_push_notification">
 			<title>Handling a push notification</title>
 			<para>
-				A push notification sent to the <sgmltag>&lt;a4j:push&gt;</sgmltag> behavior will cause it to trigger any <sgmltag>&lt;a4j:ajax&gt;</sgmltag> components attached as sub-elements. Alternatively, use the <varname>ondataavailable</varname> event attribute to define a handler. 
+				A push notification sent to the <sgmltag>&lt;a4j:push&gt;</sgmltag> behavior will cause it to trigger any event handlers defined using the <varname>ondataavailable</varname> event attribute. 
+			</para>
+			<para>
+				The <sgmltag>&lt;a4j:push&gt;</sgmltag> component should also include the <varname>onerror</varname> event attribute to inform the user when an error has occurred with the push notifications.
 			</para>
 			<example id="exam-Component_Reference-a4jpush-Handling_a_push_notification">
 				<title>Handling a push notification</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Handling_a_push_notification.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				<para>
-					The example uses the <varname>dataavailable</varname> event attribute with JavaScript to update messages in a chat room.
+					The example uses the <varname>dataavailable</varname> event attribute with JavaScript to update messages in a chat room. The <parameter>event.rf.data</parameter> parameter contains JMS message data serialized to JavaScript.
 				</para>
 			</example>
 		</section>

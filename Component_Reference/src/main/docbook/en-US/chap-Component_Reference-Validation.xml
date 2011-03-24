@@ -32,14 +32,11 @@
 		<section id="sect-Component_Reference-richvalidator-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior is added as a child element to any input control. The value of the input control must reference a managed bean. The <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior validates the content of the input control on the client-side based on registered server-side validators included in the managed bean.
+				The <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior is added as a child element to any input control. The value of the input control must reference a managed bean. The content of the input control validates on the client-side based on registered server-side validators included in the managed bean.
 			</para>
 			<example id="exam-Component_Reference-richvalidator-Basic_usage">
 				<title>Basic usage</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richvalidator-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<para>
-					The <sgmltag>&lt;rich:validator&gt;</sgmltag> behavior is added to an <sgmltag>&lt;h:inputText&gt;</sgmltag> control. The validator uses the registered server-side validators included in the managed bean referenced by the input control.
-				</para>
 			</example>
 			<note>
 				<title>JSF validation tags</title>
@@ -135,6 +132,9 @@
 			<title>Validation without model updates</title>
 			<para>
 				The <sgmltag>&lt;rich:graphValidator&gt;</sgmltag> component performs a <methodname>clone()</methodname> method on the referenced bean instance during the validation phase. The cloned object is validated and triggers any required validation messages. As such, the model object remains clean, and the lifecycle is interrupted properly after the <emphasis>Process Validations</emphasis> phase. 
+			</para>
+			<para>
+				Ensure the referenced object implements the <interfacename>Cloneable</interfacename> interface, and allows a deep clone if required.
 			</para>
 		</note>
 		

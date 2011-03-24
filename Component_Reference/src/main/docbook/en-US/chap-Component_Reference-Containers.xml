@@ -56,7 +56,8 @@
 		</important>
 	</section>
 	-->
-	
+
+	<!--
 	<section id="sect-Component_Reference-Containers-a4jinclude">
 		<title><sgmltag>&lt;a4j:include&gt;</sgmltag></title>
 		<para>
@@ -111,12 +112,20 @@
 			</itemizedlist>
 		</section>
 	</section>
+	-->
 	
 	<section id="sect-Component_Reference-Containers-a4joutputPanel">
 		<title><sgmltag>&lt;a4j:outputPanel&gt;</sgmltag></title>
 		<para>
 			The <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component is used to group together components in to update them as a whole, rather than having to specify the components individually.
 		</para>
+		
+		<section id="sect-Component_Reference-a4joutputPanel-Aiding_complex_Ajax_rendering">
+			<title>Aiding complex Ajax rendering</title>
+			<para>
+				Use the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component to wrap behaviors when using complex Ajax rendering. Parent components may not render correctly when attached behaviors trigger updates. Point the behaviors to the wrapping <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component instead of the parent components. The <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component is properly encoded to ensure the wrapped components are correctly rendered.
+			</para>
+		</section>
 		
 		<section id="sect-Component_Reference-a4joutputPanel-Panel_appearance">
 			<title>Panel appearance</title>
@@ -134,11 +143,13 @@
 						<code>layout="block"</code> will render the component as a pair of <sgmltag>&lt;div&gt;</sgmltag> tags containing the child components, which will use any defined <sgmltag>&lt;div&gt;</sgmltag> element styles.
 					</para>
 				</listitem>
+				<!--
 				<listitem>
 					<para>
 						<code>layout="none"</code> will render the component as a pair of <sgmltag>&lt;span&gt;</sgmltag> tags with an identifier equal to that of a child component. If the child component is rendered then the <sgmltag>&lt;span&gt;</sgmltag> are not included, leaving no markup representing the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> in <acronym>HTML</acronym>.
 					</para>
 				</listitem>
+				-->
 			</itemizedlist>
 			<para>
 				Setting <code>ajaxRendered="true"</code> will cause the <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> to be updated with each Ajax response for the page, even when not listed explicitly by the requesting component. This can in turn be overridden by specific attributes on any requesting components.
@@ -233,10 +244,10 @@
 	<section id="sect-Component_Reference-Containers-a4jregion">
 		<title><sgmltag>&lt;a4j:region&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;a4j:region&gt;</sgmltag> component specifies a part of the document object model (<acronym>DOM</acronym>) tree to be processed on the server. The processing includes data handling during decoding, conversion, validation, and model updating. When not using <sgmltag>&lt;a4j:region&gt;</sgmltag>, the entire view functions as a region.
+			The <sgmltag>&lt;a4j:region&gt;</sgmltag> component specifies a part of the JSF component tree to be processed on the server. The region causes all the <classname>a4j</classname> and <classname>rich</classname> Ajax controls to execute: decoding, validating, and updating the model. The region causes these components to execute even if not explicitly declared. As such, processing areas can more easily be marked using a declarative approach.
 		</para>
 		<para>
-			The whole form is still submitted to the server, but only the specified region is processed. Regions can be nested, in which case only the immediate region of the component initiating the request will be processed.
+			Regions can be nested, in which case only the parent region of the component initiating the request will be processed.
 		</para>
 		
 		<section id="sect-Component_Reference-a4jregion-Reference_data">

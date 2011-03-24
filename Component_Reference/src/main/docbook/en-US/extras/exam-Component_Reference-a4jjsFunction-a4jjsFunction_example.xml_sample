@@ -1,7 +1,28 @@
+<table width="400">
+   <tbody>
+      <tr>
+         <td>
+            <span onmouseover="updateName('Kate')"
+                  onmouseout="updateName('')">Kate</span>
+         </td>
+         <td>
+            <span onmouseover="updateName('John')"
+                  onmouseout="updateName('')">John</span>
+         </td>
+         <td>
+            <span onmouseover="updateName('Alex')"
+                  onmouseout="updateName('')">Alex</span>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="3">
+            Name: <b><h:outputText id="showname" value="#{functionBean.text}" /></b>
+         </td>
+      </tr>
+   </tbody>
+</table>
 <h:form>
-    ...
-    <a4j:jsFunction name="callScript" data="#{bean.someProperty1}" reRender="someComponent" oncomplete="myScript(data.subProperty1, data.subProperty2)">
-        <a4j:actionParam name="param_name" assignTo="#{bean.someProperty2}"/>
-    </a4j:jsFunction>
-    ...
+   <a4j:jsFunction name="updateName" render="showname">
+      <a4j:param name="name" assignTo="#{functionBean.text}"/>
+   </a4j:jsFunction>
 </h:form>
