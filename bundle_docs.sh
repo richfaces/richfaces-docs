@@ -20,15 +20,9 @@ cp -r $DOCSDIR/Component_Reference/target/docbook/publish/* $DOCSDIR/$VERSION/Co
 echo "[BUNDLE_DOCS] -> Copying Developer Guide..."
 mkdir $DOCSDIR/$VERSION/Developer_Guide
 cp -r $DOCSDIR/Developer_Guide/target/docbook/publish/* $DOCSDIR/$VERSION/Developer_Guide/
-echo "[BUNDLE_DOCS] -> Copying Migration Guide..."
-mkdir $DOCSDIR/$VERSION/Migration_Guide
-cp -r $DOCSDIR/Migration_Guide/target/docbook/publish/* $DOCSDIR/$VERSION/Migration_Guide/
-echo "[BUNDLE_DOCS] -> Copying Component Development Kit Guide..."
-mkdir $DOCSDIR/$VERSION/Component_Development_Kit_Guide
-cp -r $DOCSDIR/Component_Development_Kit_Guide/target/docbook/publish/* $DOCSDIR/$VERSION/Component_Development_Kit_Guide/
 
-echo "[BUNDLE_DOCS] Zipping bundle..."
-cd $DOCSDIR/$VERSION/
-zip -r $VERSION.zip *
+# echo "[BUNDLE_DOCS] Zipping bundle..."
+# cd $DOCSDIR/$VERSION/
+# zip -r $VERSION.zip *
 
 echo "[BUNDLE_DOCS] Bundle complete."
