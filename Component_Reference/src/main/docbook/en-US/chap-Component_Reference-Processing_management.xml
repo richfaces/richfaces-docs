@@ -12,36 +12,71 @@
 			The <sgmltag>&lt;a4j:queue&gt;</sgmltag> component manages the JSF queue of Ajax requests. It provides additional options for a finer control of request processing.
 		</para>
 
-		<!--
-		<section id="sect-Component_Reference-a4jqueue-Queue_size">
-			<title>Queue size</title>
+		<section id="sect-Component_Reference-a4jqueue-Basic_usage">
+			<title>Basic usage</title>
 			<para>
-				The <varname>size</varname> attribute specifies the number of requests that can be stored in the queue at a time; smaller queue sizes help prevent server overloads. When the queue's size is exceeded, the <varname>sizeExceededBehavior</varname> determines the way in which the queue handles the requests:
+				The <sgmltag>&lt;a4j:queue&gt;</sgmltag> component works in the same basic way as the standard JSF queue. It can be enabled and disabled through the <varname>enabled</varname> attribute.
+			</para>
+
+			<note>
+				<title>Requests from other libraries</title>
+				<para>
+					The <sgmltag>&lt;a4j:queue&gt;</sgmltag> component does not handle standard JSF requests or requests from component libraries other than RichFaces.
+				</para>
+			</note>
+		</section>
+
+		<section id="sect-Component_Reference-a4jqueue-Delaying_requests">
+			<title>Delaying requests</title>
+			<para>
+				Use the <varname>requestDelay</varname> attribute to add a delay between each request in the queue. Set the <varname>requestDelay</varname> attribute to the number of milliseconds to wait in between each request. Delaying requests avoids unnecessary processing for actions that would otherwise cause multiple requests, such as typing. Similar requests in the queue are combined while waiting for the request delay.
+			</para>
+			<example id="exam-Component_Reference-a4jqueue-Delaying_requests">
+				<title>Delaying requests</title>
+				<programlisting language="XML" role="XML">&lt;a4j:queue requestDelay="1500"/&gt;</programlisting>
+				<para>
+					The queue delays each request by 1500 milliseconds.
+				</para>
+			</example>
+		</section>
+
+		<section id="sect-Component_Reference-a4jqueue-Duplicate_responses">
+			<title>Duplicate responses</title>
+			<para>
+				The client side can update unnecessarily if duplicate responses require the similar updates. Set <code>ignoreDupResponses="true"</code> to ignore duplicate responses. With this setting, the client will not update from a request if a similar request is in the queue.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-a4jqueue-Queue_scopes">
+			<title>Queue scopes</title>
+			<para>
+				Define the queue scope to make it the default queue for all requests in that scope. The scope depends on the placement of the queue and any naming identifiers.
 			</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-						<literal>dropNext</literal> drops the next request currently in the queue.
+						An unnamed <sgmltag>&lt;a4j:queue&gt;</sgmltag> component placed outside any forms becomes the default queue for all requests on the page.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<literal>dropNew</literal> drops the incoming request.
+						An unnamed <sgmltag>&lt;a4j:queue&gt;</sgmltag> component placed inside a form becomes the default queue for all requests within that form.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<literal>fireNext</literal> immediately sends the next request currently in the queue.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<literal>fireNew</literal> immediately sends the incoming request.
+						Use the <varname>name</varname> identifier attribute to name an <sgmltag>&lt;a4j:queue&gt;</sgmltag> component. Named queues can be accessed with the <sgmltag>&lt;a4j:attachQueue&gt;</sgmltag> component to act as a queue for specific components and behaviors. Refer to <xref linkend="sect-Component_Reference-Processing_management-a4jattachQueue" /> for details.
 					</para>
 				</listitem>
 			</itemizedlist>
+			<example id="exam-Component_Reference-a4jqueue-Queue_scopes">
+				<title>Queue scopes</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jqueue-Queue_scopes.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The queue outside the form is scoped to the view. The queue inside the form is scoped only to that form.
+				</para>
+			</example>
 		</section>
-		-->
 		
 		<section id="sect-Component_Reference-a4jqueue-a4jqueue_client-side_events">
 			<title><sgmltag>&lt;a4j:queue&gt;</sgmltag> client-side events</title>
@@ -92,6 +127,82 @@
 				</listitem>
 			</itemizedlist>
 		</section>
+
+		<section id="sect-Component_Reference-Processing_management-a4jattachQueue">
+			<title><sgmltag>&lt;a4j:attachQueue&gt;</sgmltag></title>
+			<para>
+				The <sgmltag>&lt;a4j:attachQueue&gt;</sgmltag> behavior is used together with a named <sgmltag>&lt;a4j:queue&gt;</sgmltag> component to pass requests from components to a specific queue. It can also override the scope-wide queue settings for an individual component.
+			</para>
+
+			<section id="sect-Component_Reference-a4jattachQueue-Overriding_scope_settings">
+				<title>Overriding scope settings</title>
+				<para>
+					Queues can be scoped to various levels as described in <xref linkend="sect-Component_Reference-a4jqueue-Queue_scopes" />. Use an <sgmltag>&lt;a4j:attachQueue&gt;</sgmltag> behavior in the same scope as a queue to override the queue settings for a particular control.
+				</para>
+				<example id="exam-Component_Reference-a4jattachQueue-Overriding_scope_settings">
+					<title>Overriding scope settings</title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jattachQueue-Overriding_scope_settings.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					<para>
+						The request delay is overridden by the <sgmltag>&lt;a4j:attachQueue&gt;</sgmltag> behavior on the submit button.
+					</para>
+				</example>
+			</section>
+
+			<section id="sect-Component_Reference-a4jattachQueue-Using_a_named_queue">
+				<title>Using a named queue</title>
+				<para>
+					Name an <sgmltag>&lt;a4j:queue&gt;</sgmltag> component using the <varname>name</varname> attribute. It can then be used by specific components through the <sgmltag>&lt;a4j:attachQueue&gt;</sgmltag> behavior. Use the <varname>name</varname> attribute of the <sgmltag>&lt;a4j:attachQueue&gt;</sgmltag> behavior to identify the name of the destination queue.
+				</para>
+				<example id="exam-Component_Reference-a4jattachQueue-Using_a_named_queue">
+					<title>Using a named queue</title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jattachQueue-Using_a_named_queue.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					<para>
+						The requests from the button are attached to the <literal>viewQueue</literal> queue, rather than the <literal>formQueue</literal> queue.
+					</para>
+				</example>
+			</section>
+
+			<section id="sect-Component_Reference-a4jattachQueue-Grouping_requests">
+				<title>Grouping requests</title>
+				<para>
+					Use grouping to process multiple requests together. Specify a grouping identifier with the <varname>requestGroupingId</varname> attribute. Requests from multiple <sgmltag>&lt;a4j:attachQueue&gt;</sgmltag> behaviors can use the same identifier to group requests together.
+				</para>
+				<example id="exam-Component_Reference-a4jattachQueue-Grouping_requests">
+					<title>Grouping requests</title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jattachQueue-Grouping_requests.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					<para>
+						Requests from both the text input boxes are grouped together with the <literal>registrationForm</literal> identifier.
+					</para>
+				</example>
+			</section>
+		
+			<section id="sect-Component_Reference-a4jattachQueue-Reference_data">
+				<title>Reference data</title>
+				<itemizedlist>
+					<listitem>
+						<para>
+							<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.AttachQueueRenderer</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.HtmlAttachQueue</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>component-family</parameter>: <classname>org.ajax4jsf.AttachQueue</classname>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<parameter>tag-class</parameter>: <classname>org.ajax4jsf.taglib.html.jsp.AttachQueueTag</classname>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</section>
+		</section>
+		
 	</section>
 	
 	<section id="sect-Component_Reference-Processing_management-a4jlog">
