@@ -124,19 +124,29 @@
 			<para>
 				The <sgmltag>&lt;rich:accordion&gt;</sgmltag> component requires no attributes for basic usage. The component can contain any number of <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components as children. The headers of the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components control the expanding and collapsing when clicked. Only a single <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> can be displayed at a time. Refer to <xref linkend="sect-Component_Reference-Panels-richaccordionItem" /> for details on the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component.
 			</para>
+			
+			<note>
+				<title>Form elements required</title>
+				<para>
+					All <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> components should be wrapped in a form element when using either <literal>ajax</literal> or <literal>server</literal> mode, as usual for submitting components.
+				</para>
+			</note>
 		</section>
 		
 		<section id="sect-Component_Reference-richaccordion-Switching_panels">
 			<title>Switching panels</title>
 			<para>
-				The switching mode for performing submissions is determined by the <code>switchType</code> attribute, which can have one of the following three values:
+				The <varname>activeItem</varname> attribute holds the active panel name. This name is a reference to the <varname>name</varname> identifier of the active child <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component.
+			</para>
+			<para>
+				The switching mode for performing submissions is determined by the <varname>switchType</varname> attribute, which can have one of the following three values:
 			</para>
 			<variablelist>
 				<varlistentry>
 					<term><literal>server</literal></term>
 					<listitem>
 						<para>
-							The default setting. Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to perform a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
+							The default setting. Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to perform a common submission, completely refreshing the page. Only one panel at a time is rendered to the client side.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -144,7 +154,7 @@
 					<term><literal>ajax</literal></term>
 					<listitem>
 						<para>
-							Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
+							Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to perform an Ajax form submission, and the content of the panel is rendered. Only one panel at a time is rendered to the client side.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -152,7 +162,7 @@
 					<term><literal>client</literal></term>
 					<listitem>
 						<para>
-							Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to update on the client side. JavaScript changes the styles such that one panel component becomes hidden while the other is shown.
+							Activation of a <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:accordion&gt;</sgmltag> component to perform updates on the client side. All the panels are rendered on the client side during the initial page render. JavaScript changes the styles such that one panel component becomes hidden while the other is shown.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -231,6 +241,17 @@
 		            </para>
 		         </listitem>
 		      </varlistentry>
+		      <varlistentry>
+		         <term><function>firstItem()</function></term>
+		         <term><function>prevItem()</function></term>
+		         <term><function>nextItem()</function></term>
+		         <term><function>lastItem()</function></term>
+		         <listitem>
+		            <para>
+		               Switch to and display the first item, the previous item, the next item, or the last item.
+		            </para>
+		         </listitem>
+		      </varlistentry>
 		   </variablelist>
 		</section>
 		
@@ -274,16 +295,16 @@
 		<section id="sect-Component_Reference-Panels-richaccordionItem">
 			<title><sgmltag>&lt;rich:accordionItem&gt;</sgmltag></title>
 			<para>
-				The <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component is a panel for use with the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component.
+				The <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component is a panel for use with the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component. <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> components can be added dynamically using iteration models with the <sgmltag>&lt;c:forEach&gt;</sgmltag> tag.
 			</para>
 		
 			<section id="sect-Component_Reference-richaccordionItem-Basic_usage">
 				<title>Basic usage</title>
 				<para>
-					Basic usage of the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component requires the <varname>label</varname> attribute, which provides the text on the panel header. The panel header is all that is visible when the accordion item is collapsed.
+					Basic usage of the <sgmltag>&lt;rich:accordionItem&gt;</sgmltag> component requires the <varname>header</varname> attribute, which provides the text on the panel header. The panel header is all that is visible when the accordion item is collapsed.
 				</para>
 				<para>
-					Alternatively the <literal>header</literal> facet could be used in place of the <varname>label</varname> attribute. This would allow for additional styles and custom content to be applied to the tab.
+					Alternatively the <literal>header</literal> facet could be used in place of the <varname>header</varname> attribute. This would allow for additional styles and custom content to be applied to the tab.
 				</para>
 			</section>
 		
@@ -412,7 +433,7 @@
 					<term><literal>server</literal></term>
 					<listitem>
 						<para>
-							This is the default setting. The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component performs a common submission, completely re-rendering the page. Only one panel at a time is uploaded to the client side.
+							This is the default setting. The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component performs a common submission, completely refreshing the page. Only one panel at a time is rendered to the client side.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -420,7 +441,7 @@
 					<term><literal>ajax</literal></term>
 					<listitem>
 						<para>
-							The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component performs an Ajax form submission, and only the content of the panel is rendered. Only one panel at a time is uploaded to the client side.
+							The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component performs an Ajax form submission, and only the content of the panel is refreshed. Only one panel at a time is rendered to the client side.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -428,7 +449,7 @@
 					<term><literal>client</literal></term>
 					<listitem>
 						<para>
-							The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component updates on the client side, re-rendering itself and any additional components listed with the <varname>render</varname> attribute.
+							The <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component changes the state on the client side without any additional requests being sent.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -438,7 +459,7 @@
 		<section id="sect-Component_Reference-richcollapsiblePanel-Appearance">
 			<title>Appearance</title>
 			<para>
-				The appearance of the <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component can be customized using facets. The <literal>headerExpandedClass</literal> and <literal>headerCollapsedClass</literal> facets are used to style the appearance of the panel when it is expanded and collapsed respectively. The <literal>expandControl</literal> facet styles the control in the panel header used for expanding, and the <literal>collapseControl</literal> facet styles the control for collapsing.
+				The appearance of the <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component can be customized using facets. The <literal>headerExpandedClass</literal> and <literal>headerCollapsedClass</literal> facets are used to style the appearance of the panel when it is expanded and collapsed respectively. The <literal>expandControl</literal> facet defines the content in the panel header used for expanding, and the <literal>collapseControl</literal> facet defines the content in the panel header used for collapsing.
 			</para>
 		</section>
 		
@@ -450,7 +471,7 @@
 			<itemizedlist>
 				<listitem>
 					<para>
-						The <varname>ChangeExpandEvent</varname> event occurs on the server side when the <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component is expanded or collapsed through Ajax using the <literal>server</literal> mode. It can be processed using the <varname>ChangeExpandListener</varname> attribute.
+						The <varname>PanelToggleEvent</varname> event occurs on the server side when the <sgmltag>&lt;rich:collapsiblePanel&gt;</sgmltag> component is expanded or collapsed in either the <literal>ajax</literal> or <literal>server</literal> modes. It can be processed using the <varname>panelTogglerListener</varname> attribute.
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -546,7 +567,7 @@
 				</listitem>
 			</itemizedlist>
 			<para>
-				For explicit referencing when using the functions, the component can be given an <varname>id</varname> identifier. The component can, however, be referenced using other means, such as through a selector.
+				For explicit referencing when using the functions, the component can be given an <varname>id</varname> identifier.
 			</para>
 			<para>
 				<xref linkend="exam-Component_Reference-richpopupPanel-richpopupPanel_example" /> demonstrates basic use of both the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> component and the <code>rich:component</code> function to show and hide the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component.
@@ -558,7 +579,10 @@
 			<important>
 				<title>Placement</title>
 				<para>
-					The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component should usually be placed outside the original form, and include its own form if performing submissions. An exception to this is when using the <varname>domElementAttachment</varname> attribute, as described in <xref linkend="sect-Component_Reference-richpopupPanel-Size_and_positioning" />.
+					The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component is usually rendered in front of any other objects on the page. This is achieved by attaching the component to the <sgmltag>&lt;body&gt;</sgmltag> element of the page, and setting a very high <emphasis>"z-index"</emphasis> (the stack order of the object). This approach is taken because relatively-positioned elements could still overlap the pop-up panel if they exist at higher levels of the <acronym>DOM</acronym> hierarchy, even if their z-index is less than the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component.
+				</para>
+				<para>
+					To avoid form limitation of the pop-up panel on pages where no such elements exist, the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can be reattached to its original <acronym>DOM</acronym> element by setting <varname>domElementAttachment</varname> to either <literal>parent</literal> or <literal>form</literal>.
 				</para>
 			</important>
 		</section>
@@ -581,28 +605,15 @@
 			<para>
 				The pop-up panel can be automatically sized when it is shown if the <varname>autosized</varname> attribute is set to <literal>true</literal>.
 			</para>
-			<para>
-				The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component is usually rendered in front of any other objects on the page. This is achieved by attaching the component to the <sgmltag>&lt;body&gt;</sgmltag> element of the page, and setting a very high <emphasis>"z-index"</emphasis> (the stack order of the object). This approach is taken because relatively-positioned elements could still overlap the pop-up panel if they exist at higher levels of the <acronym>DOM</acronym> hierarchy, even if their z-index is less than the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component. However, to avoid form limitation of the pop-up panel on pages where no such elements exist, the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can be reattached to its original <acronym>DOM</acronym> element by setting <varname>domElementAttachment</varname> to either <literal>parent</literal> or <literal>form</literal>.
-			</para>
-			<para>
-				Embedded objects inserted into the <acronym>HTML</acronym> with the <sgmltag>&lt;embed&gt;</sgmltag> tag will typically be rendered in front of a <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component. The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can be forcibly rendered in front of these objects by setting <code><varname>overlapEmbedObjects</varname>="true"</code>.
-			</para>
 			<note>
-				<title>Using <varname>overlapEmbedObjects</varname></title>
+				<title>Embedded objects in the panel</title>
 				<para>
-					Due to the additional script processing required when using the <varname>overlapEmbedObjects</varname> attribute, applications can suffer from decreased performance. As such, <varname>overlapEmbedObjects</varname> should only be set to <literal>true</literal> when <sgmltag>&lt;embed&gt;</sgmltag> tags are being used. Do not set it to <literal>true</literal> for applications that do not require it.
+					Embedded objects inserted into the <acronym>HTML</acronym> with the <sgmltag>&lt;embed&gt;</sgmltag> tag could be rendered in front of a <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component in some browsers. The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can be forcibly rendered in front of these objects by setting <code>overlapEmbedObjects="true"</code>.
+				</para>
+				<para>
+					However, due to the additional script processing required when using the <varname>overlapEmbedObjects</varname> attribute, applications can suffer from decreased performance. As such, <varname>overlapEmbedObjects</varname> should only be set to <literal>true</literal> when <sgmltag>&lt;embed&gt;</sgmltag> or <sgmltag>&lt;object&gt;</sgmltag> tags are being used in the parent view. Do not set it to <literal>true</literal> for applications that do not require it.
 				</para>
 			</note>
-		</section>
-		
-		<section id="sect-Component_Reference-richpopupPanel-Contents_of_the_pop-up">
-			<title>Contents of the pop-up</title>
-			<para>
-			    The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can contain any other rich component just like a normal panel.
-			</para>
-			<para>
-				Contents of the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component which are positioned relatively may be trimmed if they extend beyond the borders of the pop-up panel. For certain in-line controls this behavior may be preferable, but for other dynamic controls it could be undesirable. If the <varname>trimOverlayedElements</varname> attribute is set to <literal>false</literal> then child components will not be trimmed if they extend beyond the borders of the pop-up panel.
-			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-richpopupPanel-Header_and_controls">
@@ -629,6 +640,16 @@
 					</figure>
 				</blockquote>
 			</example>
+		</section>
+		
+		<section id="sect-Component_Reference-richpopupPanel-Contents_of_the_pop-up">
+			<title>Contents of the pop-up</title>
+			<para>
+			    The <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component can contain any other rich component just like a normal panel.
+			</para>
+			<para>
+				Contents of the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> component which are positioned relatively may be trimmed if they extend beyond the borders of the pop-up panel. For certain in-line controls this behavior may be preferable, but for other dynamic controls it could be undesirable. If the <varname>trimOverlayedElements</varname> attribute is set to <literal>false</literal> then child components will not be trimmed if they extend beyond the borders of the pop-up panel. For example, if using a calendar, select, or other pop-up component, set <code>trimOverlayedElements="false"</code>.
+			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-richpopupPanel-JavaScript_API">
@@ -747,10 +768,7 @@
 		<note>
 			<title>Form elements required</title>
 			<para>
-				All <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> components should be wrapped in a form element so that the contents of the tab are processed correctly during a tab change in either <literal>ajax</literal> or <literal>server</literal> mode.
-			</para>
-			<para>
-				Alternatively, the contents of a <sgmltag>&lt;rich:tab&gt;</sgmltag> component within the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component could be wrapped in a form element, such that they will be processed using the inner submitting component only. In this case, the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component will automatically add form tags around the tab's contents, and the contents will not be processed during switching.
+				All <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> components should be wrapped in a form element when using either <literal>ajax</literal> or <literal>server</literal> mode, as usual for submitting components.
 			</para>
 		</note>
 		
@@ -767,7 +785,7 @@
 					<term><literal>server</literal></term>
 					<listitem>
 						<para>
-							The default setting. Activation of a <sgmltag>&lt;rich:tab&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to perform a common submission, completely re-rendering the page. Only one tab at a time is uploaded to the client side.
+							The default setting. Activation of a <sgmltag>&lt;rich:tab&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to perform a common submission, completely refreshing the page. Only one tab at a time is rendered to the client side.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -775,7 +793,7 @@
 					<term><literal>ajax</literal></term>
 					<listitem>
 						<para>
-							Activation of a <sgmltag>&lt;rich:tab&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to perform an Ajax form submission, and the content of the tab is rendered. Only one tab at a time is uploaded to the client side.
+							Activation of a <sgmltag>&lt;rich:tab&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to perform an Ajax form submission, and the content of the tab panel is refreshed. Only one tab at a time is rendered to the client side.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -783,7 +801,7 @@
 					<term><literal>client</literal></term>
 					<listitem>
 						<para>
-							Activation of a <sgmltag>&lt;rich:tab&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to update on the client side. JavaScript changes the styles such that one tab becomes hidden while the other is shown.
+							Activation of a <sgmltag>&lt;rich:tab&gt;</sgmltag> component causes the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component to update on the client side. All the tabs are rendered to the client during the initial page render. JavaScript changes the styles such that one tab becomes hidden while the other is shown.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -944,6 +962,17 @@
 		            </para>
 		         </listitem>
 		      </varlistentry>
+		      <varlistentry>
+		         <term><function>firstItem()</function></term>
+		         <term><function>prevItem()</function></term>
+		         <term><function>nextItem()</function></term>
+		         <term><function>lastItem()</function></term>
+		         <listitem>
+		            <para>
+		               Switch to and display the first item, the previous item, the next item, or the last item.
+		            </para>
+		         </listitem>
+		      </varlistentry>
 		   </variablelist>
 		</section>
 		
@@ -993,21 +1022,17 @@
 			<section id="sect-Component_Reference-richtab-Basic_usage">
 				<title>Basic usage</title>
 				<para>
-					Basic usage of the <sgmltag>&lt;rich:tab&gt;</sgmltag> component requires the <varname>name</varname> attribute to uniquely identify the tab within the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component. As the tabs are switched, the <varname>name</varname> identifier of the currently selected tab is stored in the <varname>activeItem</varname> attribute of the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component.
-				</para>
-			</section>
-
-			<section id="sect-Component_Reference-richtab-Header_labeling">
-				<title>Header labeling</title>
-				<para>
-					In addition to the <varname>name</varname> identifier, the <varname>header</varname> attribute must be defined. The <varname>header</varname> attribute provides the text on the tab header. The content of the tab is then detailed inside the <sgmltag>&lt;rich:tab&gt;</sgmltag> tags.
+					Basic usage of the <sgmltag>&lt;rich:tab&gt;</sgmltag> component requires only the tab header and tab content. No additional attributes are required.
 				</para>
 				<para>
-					Alternatively, the <literal>header</literal> facet could be used in place of the <varname>header</varname> attribute. This would allow for additional styles and custom content to be applied to the tab. The component also supports three facets to customize the appearance depending on the current state of the tab:
+					The <varname>header</varname> attribute provides the text on the tab header. The content of the tab is then detailed inside the <sgmltag>&lt;rich:tab&gt;</sgmltag> tags.
+				</para>
+				<para>
+					Alternatively, the <literal>header</literal> facet could be used in place of the <varname>header</varname> attribute. This would allow custom components to be applied to the tab header. The component also supports three facets to customize the appearance depending on the current state of the tab:
 				</para>
 				<variablelist>
 					<varlistentry>
-						<term><literal>headerActiveClass</literal> facet</term>
+						<term><literal>headerActive</literal> facet</term>
 						<listitem>
 							<para>
 								This facet is used when the tab is the currently active tab.
@@ -1015,7 +1040,7 @@
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term><literal>headerInactiveClass</literal> facet</term>
+						<term><literal>headerInactive</literal> facet</term>
 						<listitem>
 							<para>
 								This facet is used when the tab is not currently active.
@@ -1023,7 +1048,7 @@
 						</listitem>
 					</varlistentry>
 					<varlistentry>
-						<term><literal>headerDisabledClass</literal> facet</term>
+						<term><literal>headerDisabled</literal> facet</term>
 						<listitem>
 							<para>
 								This facet is used when the tab is disabled.
@@ -1095,6 +1120,13 @@
 					</listitem>
 				</itemizedlist>
 			</section>
+
+			<section id="sect-Component_Reference-richtab-Style_classes_and_skin_parameters">
+				<title>Style classes and skin parameters</title>
+				<para>
+					The <sgmltag>&lt;rich:tab&gt;</sgmltag> component uses the same styles as those applied to the parent <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-richtabPanel-Style_classes_and_skin_parameters" /> for details.
+				</para>
+			</section>
 		</section>
 	
 	</section>
@@ -1103,23 +1135,35 @@
 	<section id="sect-Component_Reference-Panels-richtogglePanel">
 		<title><sgmltag>&lt;rich:togglePanel&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component is a wrapper for multiple <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components. Each child component is displayed after being activated with the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior.
+			The <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component is used as a base for the other switchable components, the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component and the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component. It provides an abstract switchable component without any associated markup. As such, the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component could be customized to provide a switchable component when neither an accordion component or a tab panel component is appropriate.
+		</para>
+		<para>
+			The <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component acts as a wrapper for multiple <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components. Each child component is displayed after being activated with the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior.
 		</para>
 		<para>
 			Refer to <xref linkend="sect-Component_Reference-Panels-richtoggleControl" /> and <xref linkend="sect-Component_Reference-Panels-richtogglePanel" /> for details on how to use the components together.
-		</para>
-		<para>
-			The <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component is used as a base for the other switchable components, the <sgmltag>&lt;rich:accordion&gt;</sgmltag> component and the <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> component. It provides an abstract switchable component without any associated markup. As such, the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component could be customized to provide a switchable component when neither an accordion component or a tab panel component is appropriate.
 		</para>
 		
 		<section id="sect-Component_Reference-richtogglePanel-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The initial state of the component can be configured using the <varname>activeItem</varname> attribute, which points to a child component to display. Alternatively, if no <varname>activeItem</varname> attribute is defined, the initial state will be blank until the user activates a child component using the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component.
+				The initial state of the component can be configured using the <varname>activeItem</varname> attribute, which points to a child component to display. Alternatively, if no <varname>activeItem</varname> attribute is defined, the initial state will be blank until the user activates a panel component with a connected <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior.
 			</para>
 			<para>
-				The child components are shown in the order in which they are defined in the view.
+				The child components are shown in the order in which they are defined in the view, as shown in <xref linkend="exam-Component_Reference-richtogglePanel-Basic_usage" />.
 			</para>
+			
+			<note>
+				<title>Form elements required</title>
+				<para>
+					All <sgmltag>&lt;rich:tabPanel&gt;</sgmltag> components should be wrapped in a form element when using either <literal>ajax</literal> or <literal>server</literal> mode, as usual for submitting components.
+				</para>
+			</note>
+
+			<example id="exam-Component_Reference-richtogglePanel-Basic_usage">
+				<title>Basic usage</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtogglePanel-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
 		</section>
 		
 		<section id="sect-Component_Reference-richtogglePanel-Toggling_between_panels">
@@ -1132,7 +1176,7 @@
 					<term><literal>server</literal></term>
 					<listitem>
 						<para>
-							The default setting. Activation of a child component causes the parent <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to perform a common submission, completely re-rendering the page. Only one child at a time is uploaded to the client side.
+							The default setting. Activation of a child component causes the parent <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to perform a common submission, completely refreshing the page. Only one child at a time is rendered to the client side.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -1140,7 +1184,7 @@
 					<term><literal>ajax</literal></term>
 					<listitem>
 						<para>
-							Activation of a child component causes the parent <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to perform an Ajax form submission, and the content of the child is rendered. Only one child at a time is uploaded to the client side.
+							Activation of a child component causes the parent <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to perform an Ajax form submission, and the content of the panel is refreshed. Only one child at a time is rendered to the client side.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -1148,7 +1192,7 @@
 					<term><literal>client</literal></term>
 					<listitem>
 						<para>
-							Activation of a child component causes the parent <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to update on the client side. JavaScript changes the styles such that one child component becomes hidden while the other is shown.
+							Activation of a child component causes the parent <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to update on the client side. All the items are rendered to the client side during the initial page render. JavaScript changes the styles such that one child component becomes hidden while the other is shown.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -1182,6 +1226,17 @@
 		         <listitem>
 		            <para>
 		               Switch to and display the item identified by the <parameter>itemName</parameter> string passed as a parameter.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>firstItem()</function></term>
+		         <term><function>prevItem()</function></term>
+		         <term><function>nextItem()</function></term>
+		         <term><function>lastItem()</function></term>
+		         <listitem>
+		            <para>
+		               Switch to and display the first item, the previous item, the next item, or the last item.
 		            </para>
 		         </listitem>
 		      </varlistentry>
@@ -1223,31 +1278,56 @@
 		<section id="sect-Component_Reference-Panels-richtoggleControl">
 			<title><sgmltag>&lt;rich:toggleControl&gt;</sgmltag></title>
 			<para>
-				The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior can be attached to any interface component. It works with a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to switch between different <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components.
+				The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior can be attached to any interface component, whether inside or outside the controlled panel itself. It works with a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component to switch between different <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components. Refer to <xref linkend="sect-Component_Reference-Panels-richtogglePanel" /> and <xref linkend="sect-Component_Reference-Panels-richtogglePanelItem" /> for details on how to use the components together.
 			</para>
 			<para>
-				Refer to <xref linkend="sect-Component_Reference-Panels-richtogglePanel" /> and <xref linkend="sect-Component_Reference-Panels-richtogglePanelItem" /> for details on how to use the components together.
+				The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> implements the JSF <classname>BehaviorHolder</classname> component, which provides events to attached components and behaviors.
 			</para>
 		
 			<section id="sect-Component_Reference-richtoggleControl-Basic_usage">
 				<title>Basic usage</title>
 				<para>
-					The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> can be used to switch through <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components in a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> container. If the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component is positioned inside a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component, no attributes need to be defined, as the control is assumed to switch through the <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components of its parent.
+					If the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component is positioned inside a <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component, no panel attachment attributes need to be defined, as the control is assumed to switch through the <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components of its parent <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component.
 				</para>
 				<para>
-					A <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component can be located outside the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component it needs to switch. Where this is the case, the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> is identified using the <varname>activePanel</varname> attribute. the  Cycling through components requires the <varname>for</varname> attribute, which points to the <varname>id</varname> identifier of the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> that it controls.
+					A <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component can be located outside the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component it needs to switch. Where this is the case, the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> is identified using the <varname>activePanel</varname> attribute.
 				</para>
 			</section>
 		
 			<section id="sect-Component_Reference-richtoggleControl-Specifying_the_next_state">
 				<title>Specifying the next state</title>
 				<para>
-					The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component will cycle through <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components in the order they are defined within the view. However, the next item to switch to can be explicitly defined by including a <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component within a <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> and using the <varname>targetItem</varname> attribute. The <varname>targetItem</varname> attribute points to the <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> to switch to when the state is next changed. <xref linkend="exam-Component_Reference-richtoggleControl-richtoggleControl_example" /> demonstrates how to specify the next switchable state in this way.
+					The <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component can switch the attached <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component in multiple ways:
 				</para>
-				<example id="exam-Component_Reference-richtoggleControl-richtoggleControl_example">
-					<title><sgmltag>&lt;rich:toggleControl&gt;</sgmltag> example</title>
-					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoggleControl-richtoggleControl_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				</example>
+				<itemizedlist>
+					<listitem>
+						<para>
+							By default, the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component will cycle through <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components in the order they are defined within the view.
+						</para>
+						<example id="exam-Component_Reference-richtoggleControl-Default_switching">
+							<title>Default switching</title>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoggleControl-Default_switching.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</example>
+					</listitem>
+					<listitem>
+						<para>
+							The next item to switch to can be explicitly defined by including a <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> component within a <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> component. Point the <varname>targetItem</varname> to the <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> to switch to when the state is next changed.
+						</para>
+						<example id="exam-Component_Reference-richtoggleControl-Explicit_switching">
+							<title>Explicit switching</title>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoggleControl-Explicit_switching.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</example>
+					</listitem>
+					<listitem>
+						<para>
+							Alternatively, use the <varname>targetItem</varname> attribute with keywords to switch items. The <literal>@first</literal>, <literal>@previous</literal>, <literal>@next</literal>, and <literal>@last</literal> keywords switch to the first item, the previous item, the next item, and the last item respectively.
+						</para>
+						<example id="exam-Component_Reference-richtoggleControl-Keyword-based_switching">
+							<title>Keyword-based switching</title>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoggleControl-Keyword-based_switching.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</example>
+					</listitem>
+				</itemizedlist>
 			</section>
 		
 			<section id="sect-Component_Reference-richtoggleControl-Reference_data">
@@ -1286,7 +1366,7 @@
 		<section id="sect-Component_Reference-Panels-richtogglePanelItem">
 			<title><sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag></title>
 			<para>
-				The <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> component is a switchable panel for use with the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component. Switching between <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components is handled by the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior.
+				The <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> component is a switchable panel for use with the <sgmltag>&lt;rich:togglePanel&gt;</sgmltag> component. Use the <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> component to define the content for a panel using nested components. Switching between <sgmltag>&lt;rich:togglePanelItem&gt;</sgmltag> components is handled by the <sgmltag>&lt;rich:toggleControl&gt;</sgmltag> behavior.
 			</para>
 		
 			<section id="sect-Component_Reference-richtogglePanelItem-Reference_data">
