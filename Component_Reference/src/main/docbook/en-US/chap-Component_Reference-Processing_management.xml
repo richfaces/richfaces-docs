@@ -9,9 +9,10 @@
 	<section id="sect-Component_Reference-Processing_management-a4jqueue">
 		<title><sgmltag>&lt;a4j:queue&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;a4j:queue&gt;</sgmltag> component manages a queue of Ajax requests to control message processing.
+			The <sgmltag>&lt;a4j:queue&gt;</sgmltag> component manages the JSF queue of Ajax requests. It provides additional options for a finer control of request processing.
 		</para>
-		
+
+		<!--
 		<section id="sect-Component_Reference-a4jqueue-Queue_size">
 			<title>Queue size</title>
 			<para>
@@ -40,16 +41,17 @@
 				</listitem>
 			</itemizedlist>
 		</section>
+		-->
 		
 		<section id="sect-Component_Reference-a4jqueue-a4jqueue_client-side_events">
 			<title><sgmltag>&lt;a4j:queue&gt;</sgmltag> client-side events</title>
 			<para>
-				The <sgmltag>&lt;a4j:queue&gt;</sgmltag> component features several events relating to queuing actions:
+				The <sgmltag>&lt;a4j:queue&gt;</sgmltag> component features several events relating to queuing actions in addition to the common JSF events:
 			</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-						The <varname>complete</varname> event attribute is fired after a request is completed. The request object is passed as a parameter to the event handler, so the queue is accessible using <code>request.queue</code> and the element which was the source of the request is accessible using <code>this</code>.
+						The <varname>complete</varname> event attribute is fired after a request is completed. The request object is passed as a parameter to the event handler, so the queue is accessible using <code>request.queue</code> and the element which was the source of the request is accessible using <literal>this</literal>.
 					</para>
 				</listitem>
 				<listitem>
@@ -60,21 +62,6 @@
 				<listitem>
 					<para>
 						The <varname>requestdequeue</varname> event attribute is fired after a request has been removed from the queue.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						The <varname>sizeexceeded</varname> event attribute is fired when the queue has been exceeded.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						The <varname>submit</varname> event attribute is fired before the request is sent.
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						The <varname>success</varname> event attribute is fired after a successful request but before the <acronym>DOM</acronym> is updated on the client side.
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -112,49 +99,79 @@
 		<para>
 			The <sgmltag>&lt;a4j:log&gt;</sgmltag> component generates JavaScript that opens a debug window, logging application information such as requests, responses, and <acronym>DOM</acronym> changes.
 		</para>
+
+		<section id="sect-Component_Reference-a4jlog-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				The <sgmltag>&lt;a4j:log&gt;</sgmltag> component doesn't require any additional attributes for basic functionality.
+			</para>
+		</section>
 		
 		<section id="sect-Component_Reference-a4jlog-Log_monitoring">
-			<title>Log monitoring</title><para>
-				The <varname>popup</varname> attribute causes the logging data to appear in a new pop-up window if set to <literal>true</literal>, or in place on the current page if set to <literal>false</literal>. The window is set to be opened by pressing the key combination <keycombo action="simul"><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>L</keycap></keycombo>; this can be partially reconfigured with the <varname>hotkey</varname> attribute, which specifies the letter key to use in combination with <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap></keycombo> instead of <keycap>L</keycap>.
+			<title>Log monitoring</title>
+			<para>
+				The <varname>mode</varname> attribute determines how the log appears on the page.
 			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Set <code>mode="inline"</code> to place the logging data in-line on the current page. This is the default setting.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Set <code>mode="popup"</code> to present the logging data in a new pop-up window. The window is set to be opened by pressing the key combination <keycombo action="simul"><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>L</keycap></keycombo>; this can be partially reconfigured with the <varname>hotkey</varname> attribute, which specifies the letter key to use in combination with <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap></keycombo> instead of <keycap>L</keycap>.
+					</para>
+				</listitem>
+			</itemizedlist>
 			<para>
 				The amount of data logged can be determined with the <varname>level</varname> attribute:
 			</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-						<literal>ERROR</literal>
+						Set <code>level="ERROR"</code> to log all errors.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<literal>FATAL</literal>
+						Set <code>level="FATAL"</code> to log only fatal messages.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<literal>INFO</literal>
+						Set <code>level="INFO"</code> to log only informational messages.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<literal>WARN</literal>
+						Set <code>level="WARN"</code> to log only warning messages.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<literal>ALL</literal>, the default setting, logs all data.
+						Set <code>level="ALL"</code> to log all data. This is the default setting.
 					</para>
 				</listitem>
 			</itemizedlist>
 			<example id="exam-Component_Reference-a4jlog-a4jlog_example">
 				<title><sgmltag>&lt;a4j:log&gt;</sgmltag> example</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jlog-a4jlog_example.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/figu-Component_Reference-a4jlog-a4jlog_example.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							The log readout displays all messages.
+						</para>
+					</textobject>
+				</mediaobject>
 			</example>
 			<note>
 				<title>Log renewal</title>
 				<para>
-					The log is automatically renewed after each Ajax request. It does not need to be explicitly re-rendered.
+					The log is automatically renewed after each Ajax request. It does not need to be explicitly re-rendered. To clear previous requests, implement a <guilabel>Clear</guilabel> button or similar functionality.
 				</para>
 			</note>
 		</section>
@@ -187,6 +204,9 @@
 
 		<section id="sect-Component_Reference-a4jlog-Style_classes_and_skin_parameters">
 			<title>Style classes and skin parameters</title>
+			<para>
+				The <sgmltag>&lt;a4j:log&gt;</sgmltag> component is intended primarily for debugging during development. However it is still possible to style the component if desired.
+			</para>
 			<xi:include href="skinning/tabl-a4jlog.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 		</section>
 	</section>
@@ -194,14 +214,34 @@
 	<section id="sect-Component_Reference-Processing_management-a4jstatus">
 		<title><sgmltag>&lt;a4j:status&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;a4j:status&gt;</sgmltag> component displays the status of current Ajax requests; the status can be either in progress or complete.
+			The <sgmltag>&lt;a4j:status&gt;</sgmltag> component displays the status of current Ajax requests. The status can be either in progress, complete, or an error is shown after a failed request.
 		</para>
 		
 		<section id="sect-Component_Reference-a4jstatus-Customizing_the_text">
 			<title>Customizing the text</title>
 			<para>
-				The <varname>startText</varname> attribute defines the text shown after the request has been started and is currently in progress. This text can be styled with the <varname>startStyle</varname> and <varname>startStyleClass</varname> attributes. Similarly, the <varname>stopText</varname> attribute defines the text shown once the request is complete, and text is styled with the <varname>stopStyle</varname> and <varname>stopStyleClass</varname> attributes. Alternatively, the text styles can be customized using facets, with the facet name set to either <literal>start</literal> or <literal>stop</literal> as required. If the <varname>stopText</varname> attribute is not defined, and no facet exists for the stopped state, the status is simply not shown; in this way only the progress of the request is displayed to the user.
+				The text display can be customized depending on the current status.
 			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>startText</varname> attribute defines the text shown after the request has been started and is currently in progress. Set the styles for the text with the <varname>startStyle</varname> and <varname>startStyleClass</varname> attributes. Alternatively, use the <literal>start</literal> facet to customize the text appearance.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>stopText</varname> attribute defines the text shown once the request is complete. Set the styles for the text with the <varname>stopStyle</varname> and <varname>stopStyleClass</varname> attributes. Alternatively, use the <literal>stop</literal> facet to customize the text appearance.
+					</para>
+					<para>
+						If the <varname>stopText</varname> attribute is not defined, and no facet exists for the stopped state, the complete status is simply not shown. In this way, only the progress of the request is displayed to the user, along with any errors.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>errorText</varname> attribute defines the text shown when an error has occurred. Set the styles for the text with the <varname>errorStyle</varname> and <varname>errorStyleClass</varname> attributes. Alternatively, use the <literal>error</literal> facet to customize the text appearance.
+					</para>
+				</listitem>
+			</itemizedlist>
 			<example id="exam-Component_Reference-a4jstatus-Basic_a4jstatus_usage">
 				<title>Basic <sgmltag>&lt;a4j:status&gt;</sgmltag> usage</title>
 				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jstatus-Basic_a4jstatus_usage.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
@@ -211,23 +251,26 @@
 		<section id="sect-Component_Reference-a4jstatus-Specifying_a_region">
 			<title>Specifying a region</title>
 			<para>
-				The <sgmltag>&lt;a4j:status&gt;</sgmltag> component works for each Ajax component inside the local region. If no region is defined, every request made on the page will activate the <sgmltag>&lt;a4j:status&gt;</sgmltag> component. Alternatively, the <sgmltag>&lt;a4j:status&gt;</sgmltag> component can be linked to specific components in one of two ways:
+				The <sgmltag>&lt;a4j:status&gt;</sgmltag> component monitors the status of the region relevant to where it is placed.
 			</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-						The <varname>for</varname> attribute can be used to specify the component for which the status is to be monitored.
+						If unnamed and placed outside any forms, it monitors the status at the view level.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						With an <varname>id</varname> identifier attribute specified for the <sgmltag>&lt;a4j:status&gt;</sgmltag>, individual components can have their statuses monitored by referencing the identifier with their own <varname>status</varname> attributes.
+						If unnamed and placed inside a form, it monitors the status at the form level.
 					</para>
 				</listitem>
 			</itemizedlist>
-			<example id="exam-Component_Reference-a4jstatus-Updating_a_common_a4jstatus_component">
-				<title>Updating a common <sgmltag>&lt;a4j:status&gt;</sgmltag> component</title>
-				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jstatus-Updating_a_common_a4jstatus_component.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			<para>
+				However, if identified with the <varname>name</varname> attribute, the <sgmltag>&lt;a4j:status&gt;</sgmltag> component can monitor any Ajax component or behavior. Use the <varname>status</varname> attribute on the Ajax component or behavior to reference the <varname>name</varname> identifier of the <sgmltag>&lt;a4j:status&gt;</sgmltag> component.
+			</para>
+			<example id="exam-Component_Reference-a4jstatus-Updating_a_referenced_a4jstatus_component">
+				<title>Updating a referenced <sgmltag>&lt;a4j:status&gt;</sgmltag> component</title>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jstatus-Updating_a_referenced_a4jstatus_component.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</example>
 		</section>
 		
@@ -241,7 +284,7 @@
 		         <term><function>start()</function></term>
 		         <listitem>
 		            <para>
-		               Start monitoring the status.
+		               Switches status to the <literal>start</literal> state.
 		            </para>
 		         </listitem>
 		      </varlistentry>
@@ -249,7 +292,15 @@
 		         <term><function>stop()</function></term>
 		         <listitem>
 		            <para>
-		               Stop monitoring the status.
+		               Switches status to the <literal>stop</literal> state.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>error()</function></term>
+		         <listitem>
+		            <para>
+		               Switches status to the <literal>error</literal> state.
 		            </para>
 		         </listitem>
 		      </varlistentry>

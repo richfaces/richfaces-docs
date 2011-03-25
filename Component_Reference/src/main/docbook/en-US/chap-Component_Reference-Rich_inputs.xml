@@ -13,6 +13,9 @@
 		<para>
 			The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component is an auto-completing input-box with built-in Ajax capabilities. It supports client-side suggestions, browser-like selection, and customization of the look and feel.
 		</para>
+		<para>
+			The auto-complete box is a standard JSF <classname>UIInput</classname> control with added validation.
+		</para>
 		<!-- TODO not in Final -->
 		<!--
 		<para>
@@ -36,11 +39,48 @@
 		<section id="sect-Component_Reference-richautocomplete-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <varname>value</varname> attribute stores the text entered by the user for the auto-complete box. Suggestions shown in the auto-complete list can be specified using the <varname>autocompleteMethod</varname> attribute, which points to a collection of suggestions.
+				The <varname>value</varname> attribute stores the text entered by the user for the auto-complete box. Suggestions shown in the auto-complete list can be specified using one of two different methods:
 			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <varname>autocompleteMethod</varname> attribute points to a method which returns a list of suggestions according to a supplied prefix.
+					</para>
+					<note>
+						<title><literal>client</literal> and <literal>lazyClient</literal> modes</title>
+						<para>
+							The prefix is normally ignored in <literal>client</literal> and <literal>lazyClient</literal> modes. In these modes, the component requests the suggestion list once only, and performs filtering on the client.
+						</para>
+					</note>
+				</listitem>
+				<listitem>
+					<para>
+						The <varname>autocompleteList</varname> attribute points to a collection of suggestions.
+					</para>
+				</listitem>
+			</itemizedlist>
 			<example id="exam-Component_Reference-richautocomplete-Defining_suggestion_values">
 				<title>Defining suggestion values</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocomplete-Defining_suggestion_values.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<variablelist>
+					<varlistentry>
+						<term>Using the <varname>autocompleteMethod</varname> attribute</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocomplete-Defining_suggestion_values-0.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+							<para>
+								The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component uses the <methodname>bean.autocomplete</methodname> method to provide suggestions, based on the entered prefix.
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term>Using the <varname>autocompleteList</varname> attribute</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richautocomplete-Defining_suggestion_values-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+							<para>
+								The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component retrieve the suggestion list from <methodname>bean.suggestions</methodname>.
+							</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
 			</example>
 			<!--
 			<itemizedlist>
@@ -55,6 +95,35 @@
 				</listitem>
 			</itemizedlist>
 			-->
+		</section>
+			
+		<section id="sect-Component_Reference-richautocomplete-Submission_modes">
+			<title>Submission modes</title>
+			<para>
+				Use the <varname>mode</varname> attribute to determine how the suggestion list is requested:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <literal>client</literal> setting pre-loads data to the client and uses the input to filter the possible suggestions.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <literal>ajax</literal> setting fetches suggestions with every input change using Ajax requests.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <literal>lazyClient</literal> setting pre-loads data to the client and uses the input to filter the possible suggestions. The filtering does not start until the input length matches a minimum value. Set the minimum value with the <varname>minChars</varname> attribute. 
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <literal>cachedAjax</literal> setting pre-loads data via Ajax requests when the input length matches a minimum value. Set the minimum value with the <varname>minChars</varname> attribute. All suggestions are handled on the client until the input prefix is changed, at which point a new request is made based on the new input prefix.
+					</para>
+				</listitem>
+			</itemizedlist>
 		</section>
 		
 		<section id="sect-Component_Reference-richautocomplete-Interactivity_options">
@@ -72,8 +141,8 @@
 			</para>
 		</section>
 
-		<section id="sect-Component_Reference-richautocomplete-Customizing_the_filter">
-			<title>Customizing the filter</title>
+		<section id="sect-Component_Reference-richautocomplete-Customizing_the_filter_in_client_and_lazyClient_modes">
+			<title>Customizing the filter in <literal>client</literal> and <literal>lazyClient</literal> modes</title>
 			<para>
 				The <sgmltag>&lt;rich:autocomplete&gt;</sgmltag> component uses the JavaScript <function>startsWith()</function> method to create the list of suggestions. The filtering is performed on the client side. Alternatively, use the <varname>clientFilter</varname> attribute to specify a custom filtering function. The custom function must accept two parameters: the <varname>subString</varname> parameter is the filtering value as typed into the text box by the user, and the <varname>value</varname> parameter is an item in the list of suggestions against which the <varname>subString</varname> must be checked. Each item is iterated through and passed to the function as the <varname>value</varname> parameter. The custom function must return a boolean value indicating whether the passed item meets the conditions of the filter, and the suggestion list is constructed from successful items.
 			</para>
@@ -272,7 +341,7 @@
 		<section id="sect-Component_Reference-richcalendar-Behavior_and_appearance">
 			<title>Behavior and appearance</title>
 			<para>
-				The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component is presented as a pop-up by default, appearing as a text field with a button to expand the full pop-up calendar. To render the calendar in-line on the page instead, set <code>popup="false</code>. This displays the full calendar without the text field or display button.
+				The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component is presented as a pop-up by default, appearing as a text field with a button to expand the full pop-up calendar. To render the calendar in-line on the page instead, set <code>popup="false</code>. This displays the full calendar without the text field and display button.
 			</para>
 			<para>
 				To add keyboard support for manual input, set <code>enableManualInput="true"</code>. To disable the calendar from any user input, set <code>disabled="true"</code>.
@@ -313,12 +382,17 @@
 				</listitem>
 				<listitem>
 					<para>
-						<literal>select</literal>, the default setting, which scrolls the calendar to the current month and selects today's date; and
+						<literal>select</literal>, the default setting, which scrolls the calendar to the current month and selects the date; and
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-						<literal>scroll</literal>, which scrolls the calendar to the current month but does not select today's date.
+						<literal>scroll</literal>, which scrolls the calendar to the month but does not select the date.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>inactive</literal>, which displays the date but performs no action when clicked.
 					</para>
 				</listitem>
 			</itemizedlist>
@@ -350,6 +424,9 @@
 			<title>Time of day</title>
 			<para>
 				The <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can additionally allow a time of day to be specified with the date. After selecting a date the option to set a time becomes available. The default time can be set with the <varname>defaultTime</varname> attribute. If the time is altered and a new date is selected, it will not reset unless <code>resetTimeOnDateSelect="true"</code> is specified.
+			</para>
+			<para>
+				The date selection feature is activated if the time is present in the <varname>datePattern</varname> attribute for the calendar.
 			</para>
 			<note>
 				<title>Support for seconds</title>
@@ -455,10 +532,10 @@
 				The look and feel of the <sgmltag>&lt;rich:calendar&gt;</sgmltag> component can be customized through the use of a data model on the server side. The component supports two different ways of loading data from the server side through defining the <varname>mode</varname> attribute.
 			</para>
 			<para>
-				When the <varname>mode</varname> attribute is not specified, the component uses the <literal>client</literal> mode. The <literal>client</literal> mode loads an initial portion of data within a set date range. The range can be defined by using the <varname>preloadDateRangeBegin</varname> and <varname>preloadDateRangeEnd</varname> attributes. Additional data requests are not sent.
+				When the <varname>mode</varname> attribute is not specified, the component uses the <literal>client</literal> mode. The <literal>client</literal> mode loads an initial portion of data within a set date range. The range can be defined by using the <varname>preloadDateRangeBegin</varname> and <varname>preloadDateRangeEnd</varname> attributes. Additional data requests for months outside the range are not sent.
 			</para>
 			<para>
-				Alternatively, with <code>mode="ajax"</code> the <sgmltag>&lt;rich:calendar&gt;</sgmltag> requests portions of data for rendering from a special data model. The data model can be defined through the <varname>dataModel</varname> attribute, which points to an object that implements the <classname>CalendarDataModel</classname> interface. If the <varname>dataModel</varname> attribute is not defined or has a value of <literal>null</literal>, the <literal>ajax</literal> mode functions the same as the <literal>client</literal> mode.
+				Alternatively, with <code>mode="ajax"</code> the <sgmltag>&lt;rich:calendar&gt;</sgmltag> requests portions of data from the data model every time the month is switched. The data model can be defined through the <varname>dataModel</varname> attribute, which points to an object that implements the <classname>CalendarDataModel</classname> interface. If the <varname>dataModel</varname> attribute is not defined or has a value of <literal>null</literal>, the <literal>ajax</literal> mode functions the same as the <literal>client</literal> mode.
 			</para>
 		</section>
 
@@ -748,13 +825,13 @@
 	<section id="sect-Component_Reference-Rich_inputs-richfileUpload">
 		<title><sgmltag>&lt;rich:fileUpload&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component allows the user to upload files to a server. It features multiple uploads, progress bars, restrictions on file types, and restrictions on sizes to be uploaded.
+			The <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component allows the user to upload files to a server. It features multiple uploads, progress bars, restrictions on file types, and restrictions on sizes of the files to be uploaded.
 		</para>
 
 		<section id="sect-Component_Reference-richfileUpload-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Basic usage requires the <varname>fileUploadListener</varname> attribute. Use the attribute to call a function on the server side after each file is uploaded.
+				Basic usage requires the <varname>fileUploadListener</varname> attribute. Use the attribute to reference a listener function on the server side after each file is uploaded. The listener should process files as required, such as storing them in the <filename>session/db/filesystem/</filename> directory. The component itself does not store uploaded files, so if the listener is not implemented they are not stored anywhere.
 			</para>
 			<example id="exam-Component_Reference-richfileUpload-Basic_usage">
 				<title>Basic usage</title>
@@ -765,10 +842,10 @@
 		<section id="sect-Component_Reference-richfileUpload-Upload_settings">
 			<title>Upload settings</title>
 			<para>
-				Files are uploaded to either the temporary folder (different for each operating system) or to <acronym>RAM</acronym> (random-access memory), depending on the value of the <parameter>org.richfaces.fileUpload.createTempFile</parameter> parameter of the <filename>web.xml</filename> settings file for the project. If the parameter is set to <literal>true</literal>, the files are uploaded to the temporary folder.
+				Files are uploaded to either the temporary folder (different for each operating system) or to <acronym>RAM</acronym> (random-access memory), depending on the value of the <parameter>org.richfaces.fileUpload.createTempFiles</parameter> context parameter of the <filename>web.xml</filename> settings file for the project. If the parameter is set to <literal>true</literal>, the files are uploaded to the temporary folder.
 			</para>
 			<para>
-				To limit the maximum size of the uploaded files, define the byte size with the <parameter>org.richfaces.fileUpload.maxRequestSize</parameter> parameter of the <filename>web.xml</filename> settings file for the project.
+				To limit the maximum size of the uploaded files, define the byte size with the <parameter>org.richfaces.fileUpload.maxRequestSizes</parameter> context parameter of the <filename>web.xml</filename> settings file for the project.
 			</para>
 		</section>
 
@@ -842,7 +919,7 @@
 			</itemizedlist>
 			-->
 			<para>
-				The progress of a file upload operation can be represented using either a referencing <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component, or the <literal>progress</literal> facet. Refer to <xref linkend="sect-Component_Reference-Output_and_messages-richprogressBar" /> for details on the <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component.
+				The <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component provides a built-in progress bar to indicate the progress of each file that is uploaded. This progress bar can be replaced with a  <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component added to the <literal>progress</literal> facet. Refer to <xref linkend="sect-Component_Reference-Output_and_messages-richprogressBar" /> for details on the <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component.
 			</para>
 			<para>
 				To disable the <sgmltag>&lt;rich:fileUpload&gt;</sgmltag> component, use the <varname>disabled</varname> attribute.
@@ -936,14 +1013,17 @@
 		<section id="sect-Component_Reference-richinplaceInput-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Basic usage requires the <varname>value</varname> attribute to point to the expression for the current value of the component.
+				Basic usage requires the <varname>value</varname> attribute to point to the expression for the current value of the component. Validation and conversion rules for the JSF <classname>UIInput</classname> control apply as usual.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-richinplaceInput-Interactivity_options">
 			<title>Interactivity options</title>
 			<para>
-				When in the initial <emphasis>view</emphasis> state, the starting label can be set using the <varname>defaultLabel</varname> attribute. Once the user has entered text, the label is stored in the model specified by the <varname>value</varname> attribute. The use of the default label and value is shown in <xref linkend="exam-Component_Reference-richinplaceInput-Default_label_and_value" />.
+				When in the initial <emphasis>view</emphasis> state, the starting label can be set using the <varname>defaultLabel</varname> attribute. Alternatively, if the initial value is already set through the <varname>value</varname> attribute, this is displayed instead.
+			</para>
+			<para>
+				Once the user has entered text, the label is stored in the model specified by the <varname>value</varname> attribute. The use of the default label and value is shown in <xref linkend="exam-Component_Reference-richinplaceInput-Default_label_and_value" />.
 			</para>
 			<example id="exam-Component_Reference-richinplaceInput-Default_label_and_value">
 				<title>Default label and value</title>
@@ -953,10 +1033,27 @@
 				By default, the event to switch the component to the <emphasis>edit</emphasis> state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event.
 			</para>
 			<para>
-				The user can confirm and save their input by pressing the <keycap>Enter</keycap> key or cancel by pressing the <keycap>Esc</keycap> key. Alternatively, buttons for confirming or canceling can be added to the component by setting <code>showControls="true"</code>. 
-				<!-- TODO not in M4
-				These buttons can be positioned using the <varname>controlsHorizontalPosition</varname> attribute with settings of <literal>left</literal>, <literal>right</literal>, or <literal>center</literal>, and the <varname>controlsVerticalPosition</varname> attribute with settings <literal>bottom</literal>, <literal>center</literal>, or <literal>top</literal>. The confirmation control icons can be altered using the <varname>saveControlIcon</varname> and <varname>cancelControlIcon</varname>. Further customization is possible through the use of facets.
-				-->
+				The user can confirm and save their input in multiple ways:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						By default, pressing the <keycap>Enter</keycap> key will confirm and save the input.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If <code>showControls="true"</code> is set, buttons for confirming or canceling are added to the component.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If <code>saveOnBlur="true"</code> is set, the input is saved on the component's blur event.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				Pressing the <keycap>Esc</keycap> key cancels editing in all cases.
 			</para>
 		</section>
 		
@@ -1049,7 +1146,7 @@
 		         <term><function>getInput()</function></term>
 		         <listitem>
 		            <para>
-		               Return the input entered into the control by the user.
+		               Return the DOM element for the input.
 		            </para>
 		         </listitem>
 		      </varlistentry>
@@ -1097,8 +1194,28 @@
 	<section id="sect-Component_Reference-Rich_inputs-richinplaceSelect">
 		<title><sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component is similar to the <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component, except that the <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component uses a drop-down selection box to enter text instead of a regular text field. Changes can be rendered either in-line or for the whole block, and inputs can be focused with keyboard navigation. The component has three functional states: the <emphasis>view</emphasis> state, where the component displays its initial setting, such as "click to edit"; the <emphasis>edit</emphasis> state, where the user can select a value from a drop-down list; and the "changed" state, where the new value for the component has been confirmed but can be edited again if required.
+			The <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component is similar to the <sgmltag>&lt;rich:inplaceInput&gt;</sgmltag> component, except that the <sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag> component uses a drop-down selection box to enter text instead of a regular text field. Changes can be rendered either in-line or for the whole block, and inputs can be focused with keyboard navigation. The component is based on the JSF <classname>UISelectOne</classname> component, so all the standard rules for value definition, processing, conversion, and validation apply.
 		</para>
+		<para>
+			The component has three functional states:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					When in the <emphasis>view</emphasis> state, the component displays its initial setting, such as "click to edit".
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					When in the <emphasis>edit</emphasis> state, the user can select a value from a drop-down list.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					When in the <emphasis>changed</emphasis> state, the new value for the component has been confirmed, but it can be edited again if required.
+				</para>
+			</listitem>
+		</itemizedlist>
 		<figure id="figu-Component_Reference-richinplaceSelect-richinplaceSelect">
 			<title><sgmltag>&lt;rich:inplaceSelect&gt;</sgmltag></title>
 			<mediaobject>
@@ -1127,18 +1244,18 @@
 		<section id="sect-Component_Reference-richinplaceSelect-Interactivity_options">
 			<title>Interactivity options</title>
 			<para>
-				When in the initial <emphasis>view</emphasis> state, the starting label can be set using the <varname>defaultLabel</varname> attribute, such as <code>defaultLabel="click to edit"</code>.
+				When in the initial <emphasis>view</emphasis> state, the starting label can be set using the <varname>defaultLabel</varname> attribute, such as <code>defaultLabel="click to edit"</code>. Alternatively, if the initial value is already set through the <varname>value</varname> attribute, this is displayed instead.
 			</para>
 			<para>
 				By default, the event to switch the component to the <emphasis>edit</emphasis> state is a single mouse click. This can be changed using the <varname>editEvent</varname> attribute to specify a different event. When switching to <emphasis>edit</emphasis> mode, the drop-down list of possible values will automatically be displayed; this can be deactivated by setting <code><varname>openOnEdit</varname>="false"</code>.
 			</para>
 			<para>
-				Once a new value for the control is saved, the state switches to the "changed" state. Saving a new value for the control can be performed in three different ways:
+				Once a new value for the control is saved, the state switches to the "changed" state. Saving a new value for the control can be performed in a number of ways:
 			</para>
 			<itemizedlist>
 				<listitem>
 					<para>
-						Once the user selects an item from the drop-down list, the item is saved as the new control value. This is the default setting.
+						Once the user selects an item from the drop-down list, the item is saved as the new control value. This is the default setting. If <code>saveOnSelect="false"</code> is set, the component applies the selected item but remains in the <emphasis>edit</emphasis> state so a different selection could be chosen. The value is then applied when the <keycap>Enter</keycap> key is pressed.
 					</para>
 				</listitem>
 				<listitem>
@@ -1152,6 +1269,9 @@
 					</para>
 				</listitem>
 			</itemizedlist>
+			<para>
+				Pressing the <keycap>Esc</keycap> key cancels editing in all cases.
+			</para>
 			<!-- TODO not in M4 -->
 			<!--
 			<para>
@@ -1348,7 +1468,7 @@
 		<section id="sect-Component_Reference-richinputNumberSlider-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Basic use of the component with no attributes specified will render a slider with a minimum value of 0, a maximum of 100, and a gradient step of 1, together with a text field for typing the desired numerical value. The slider is labeled with the minimum and maximum boundary values, and a tool-tip showing the current value is shown while sliding the slider. The <varname>value</varname> attribute is used for storing the currently selected value of the slider.
+				Basic use of the component with no attributes specified will render a slider with a minimum value of 0, a maximum of 100, and a gradient step of 1, together with a text field for typing the desired numerical value. The slider is labeled with the minimum and maximum boundary values, and a tool-tip showing the current value is shown while sliding the slider. The <varname>value</varname> attribute is used for storing the currently selected value of the slider. Standard conversion and validation for the JSF <classname>UIInput</classname> component is applied.
 			</para>
 		</section>
 		
@@ -1568,7 +1688,7 @@
 	<section id="sect-Component_Reference-Rich_inputs-richselect">
 		<title><sgmltag>&lt;rich:select&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:select&gt;</sgmltag> component provides a drop-down list box for selecting a single value from multiple options. The component supports keyboard navigation and can optionally accept typed input. The <sgmltag>&lt;rich:select&gt;</sgmltag> component functions similarly to the JavaServer Faces <sgmltag>&lt;h:selectOneMenu&gt;</sgmltag> component.
+			The <sgmltag>&lt;rich:select&gt;</sgmltag> component provides a drop-down list box for selecting a single value from multiple options. The <sgmltag>&lt;rich:select&gt;</sgmltag> component can be configured as a combo-box, where it will accept typed input. The component also supports keyboard navigation. The <sgmltag>&lt;rich:select&gt;</sgmltag> component functions similarly to the JSF <classname>UISelectOne</classname> component.
 		</para>
 
 		<figure id="figu-Component_Reference-richselect-richselect">
@@ -1588,7 +1708,7 @@
 		<section id="sect-Component_Reference-richselect-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Simple usage of the <sgmltag>&lt;rich:select&gt;</sgmltag> component does not need any attributes declared, but child tags to manage the list of selections are required. The child tags can either be a number of <sgmltag>&lt;f:selectItem&gt;</sgmltag> tags or a <sgmltag>&lt;f:selectItems&gt;</sgmltag> tag which points to a data model containing a list of selection items. The <varname>value</varname> attribute is used to store the current selection.
+				Simple usage of the <sgmltag>&lt;rich:select&gt;</sgmltag> component requires the <varname>value</varname> attribute to store the selected value. Additionally, child tags to manage the list of selections are required. The child tags can either be a number of <sgmltag>&lt;f:selectItem&gt;</sgmltag> tags or a <sgmltag>&lt;f:selectItems&gt;</sgmltag> tag which points to a data model containing a list of selection items. The <varname>value</varname> attribute is used to store the current selection.
 			</para>
 			<example id="exam-Component_Reference-richselect-Selection_items">
 				<title>Selection items</title>
@@ -1612,6 +1732,25 @@
 			</para>
 		</section>
 
+		<section id="sect-Component_Reference-richselect-Using_manual_input">
+			<title>Using manual input</title>
+			<para>
+				The <sgmltag>&lt;rich:select&gt;</sgmltag> component allows the user to type into a text field to scroll through or filter the list. By default, the <sgmltag>&lt;rich:select&gt;</sgmltag> component functions as a drop-down list with no manual input. To add keyboard support for manual input, set <code>enableManualInput="true"</code>.
+			</para>
+			<para>
+				Once the user begins typing, the first available matching option is highlighted. If the typed text does not match any values in the list, no value is chosen and the drop-down list displays as empty. Other keyboard interaction remains the same as the basic drop-down list.
+			</para>
+			<para>
+				The standard JSF <sgmltag>&lt;h:selectOne&gt;</sgmltag> component does not offer this extended keyboard support. However, since the <sgmltag>&lt;rich:select&gt;</sgmltag> component is still based on the JSF <classname>UISelectOne</classname> component, it will not accept a value that does not match any items in the drop-down list. If an invalid value is entered, it is highlighted as erroneous and validation messages appear with the submission.
+			</para>
+			<!-- TODO: not in M4 -->
+			<!--
+			<para>
+				Typing text into the text box causes the list to scroll to the relevant item by default. This behavior can be changed so that the typed text filters the contents of the list instead, showing only those items that begin with the typed text. To use typed text as a filter for manual-input lists, set <code>filterOnUpdates="true"</code>.
+			</para>
+			-->
+		</section>
+
 		<section id="sect-Component_Reference-richselect-Advanced_options">
 			<title>Advanced options</title>
 			<para>
@@ -1620,22 +1759,6 @@
 			<para>
 				Server-side processing occurs in the same manner as for an <sgmltag>&lt;h:selectOneMenu&gt;</sgmltag> component. As such, custom objects used for selection items should use the same converters as for an <sgmltag>&lt;h:selectOneMenu&gt;</sgmltag> component.
 			</para>
-		</section>
-
-		<section id="sect-Component_Reference-richselect-Using_manual_input">
-			<title>Using manual input</title>
-			<para>
-				Selection lists can allow the user to type into a text field to scroll through or filter the list. By default, the <sgmltag>&lt;rich:select&gt;</sgmltag> component functions as a drop-down list with no manual input. To add keyboard support for manual input, set <code>enableManualInput="true"</code>.
-			</para>
-			<para>
-				Once the user begins typing, the first available matching option is highlighted. If the typed text does not match any values in the list, no value is chosen and the drop-down list displays as empty. Other keyboard interaction remains the same as the basic drop-down list.
-			</para>
-			<!-- TODO: not in M4 -->
-			<!--
-			<para>
-				Typing text into the text box causes the list to scroll to the relevant item by default. This behavior can be changed so that the typed text filters the contents of the list instead, showing only those items that begin with the typed text. To use typed text as a filter for manual-input lists, set <code>filterOnUpdates="true"</code>.
-			</para>
-			-->
 		</section>
 		
 		<section id="sect-Component_Reference-richselect-JavaScript_API">
