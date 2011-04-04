@@ -11,7 +11,10 @@
 	<section id="sect-Component_Reference-Actions-a4jrepeat">
 		<title><sgmltag>&lt;a4j:repeat&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component is used to iterate changes through a repeated collection of components. It allows specific rows of items to be updated without sending Ajax requests for the entire collection. The <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component forms the basis for many of the tabular components detailed in <xref linkend="chap-Component_Reference-Tables_and_grids" />.
+			The non-visual <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component is used to iterate through a data model. The component renders child content for every iteration according to the current object data.
+		</para>
+		<para>
+			The <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component extends the standard <classname>UIRepeat</classname> component to allow partial updates within iterations while sending Ajax requests. The component acts as a base for all the data iteration components detailed in this chapter.
 		</para>
 		
 		<section id="sect-Component_Reference-a4jrepeat-Basic_usage">
@@ -34,43 +37,42 @@
 				The <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component uses other attributes common to iteration components, such as the <varname>first</varname> attribute for specifying the first item for iteration, and the <varname>rows</varname> attribute for specifying the number of rows of items to display.
 			</para>
 			<para>
-				Specific cells, rows, and columns can be updated without sending Ajax requests for the entire collection. Components that cause the change can specify which part of the table to update through the <varname>render</varname> attribute. The <varname>render</varname> attribute specifies which part of a table to update:
+				Specific cells, rows, and columns can be updated without sending Ajax requests for the entire collection. Components that cause the change can specify which part of the table to update through the <varname>render</varname> attribute. The <varname>render</varname> attribute specifies which part of a table to update. The updated parts relate to where the action component is placed relative to the table:
 			</para>
 			<variablelist>
 				<varlistentry>
-					<term><code><varname>render</varname>=<replaceable>cellId</replaceable></code></term>
+					<term>Action components inside the table</term>
 					<listitem>
 						<para>
-							Update the cell with an identifier of <replaceable>cellId</replaceable> within the row that contains the current component.
+							Use <code><varname>render</varname>=<replaceable>componentID</replaceable></code> where the component identified by <replaceable>componentID</replaceable> is in the same row as the action component. The action component updates the single specified component, as demonstrated in <xref linkend="exam-Component_Reference-a4jrepeat-Update_a_single_component" />.
 						</para>
-						<para>
-							Instead of a specific identifier, the <replaceable>cellId</replaceable> reference could be a variable: <code><varname>render</varname>=#{<replaceable>bean.cellToUpdate</replaceable>}</code>.
-						</para>
+						<example id="exam-Component_Reference-a4jrepeat-Update_a_single_component">
+							<title>Update a single component</title>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jrepeat-Update_a_single_component.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</example>
 					</listitem>
 				</varlistentry>
 				<varlistentry>
-					<term><code><varname>render</varname>=<replaceable>tableId</replaceable>:<replaceable>rowId</replaceable></code></term>
+					<term>Action components outside the table</term>
 					<listitem>
 						<para>
-							Update the row with an identifier of <replaceable>rowId</replaceable> within the table with an identifier of <replaceable>tableId</replaceable>. Alternatively, if the current component is contained within the table, use <code><varname>render</varname>=<replaceable>rowId</replaceable></code>.
+							Use <code><varname>render</varname>=<replaceable>tableId</replaceable>:<replaceable>rowId</replaceable>:<replaceable>cellId</replaceable></code> to specify the cell to update. The action component updates the cell with an identifier of <replaceable>cellId</replaceable>, which is within the row with an identifier of <replaceable>rowId</replaceable>, which is within the table with an identifier of <replaceable>tableId</replaceable>.
 						</para>
 						<para>
-							Instead of a specific identifier, the <replaceable>tableId</replaceable> of <replaceable>rowId</replaceable> references could be variables: <code><varname>render</varname>=<replaceable>tableId</replaceable>:#{<replaceable>bean.rowToUpdate</replaceable>}</code>.
+							Instead of a specific identifier, any of the references could be variables, as demonstrated in <xref linkend="exam-Component_Reference-a4jrepeat-Use_variables_to_specify_references" />.
 						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><code><varname>render</varname>=<replaceable>tableId</replaceable>:<replaceable>rowId</replaceable>:<replaceable>cellId</replaceable></code></term>
-					<listitem>
-						<para>
-							Update the cell with an identifier of <replaceable>cellId</replaceable>, within the row with and identifier of <replaceable>rowId</replaceable>, within the table with an identifier of <replaceable>tableId</replaceable>.
-						</para>
-						<para>
-							Instead of a specific identifier, any of the references could be variables: <code><varname>render</varname>=<replaceable>tableId</replaceable>:#{<replaceable>bean.rowToUpdate</replaceable>}:<replaceable>cellId</replaceable></code>.
-						</para>
+						<example id="exam-Component_Reference-a4jrepeat-Use_variables_to_specify_references">
+							<title>Use variables to specify references</title>
+							<programlisting><varname>render</varname>=<replaceable>tableId</replaceable>:#{@rows(<replaceable>bean.rowToUpdate</replaceable>)}:<replaceable>cellId</replaceable></programlisting>
+							<para>
+								The <function>@rows</function> function accepts a collection of row keys to be updated.
+							</para>
+						</example>
 					</listitem>
 				</varlistentry>
 			</variablelist>
+			
+			<!-- component specific
 			<para>
 				Alternatively, keywords can be used with the <varname>render</varname> attribute:
 			</para>
@@ -116,6 +118,7 @@
 					</listitem>
 				</varlistentry>
 			</variablelist>
+			-->
 		</section>
 		
 		<section id="sect-Component_Reference-a4jrepeat-Reference_data">
@@ -149,12 +152,12 @@
 	<section id="sect-Component_Reference-Tables_and_grids-richdataTable">
 		<title><sgmltag>&lt;rich:dataTable&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component is used to render a table, including the table's header and footer. It works in conjunction with the <sgmltag>&lt;rich:column&gt;</sgmltag> and <sgmltag>&lt;rich:columnGroup&gt;</sgmltag> components to list the contents of a data model.
+			The <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component is used to render a table, including the table's caption. It works in conjunction with the <sgmltag>&lt;rich:column&gt;</sgmltag> and <sgmltag>&lt;rich:columnGroup&gt;</sgmltag> components to list the contents of a data model.
 		</para>
 		<note>
 			<title><sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag></title>
 			<para>
-				The <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component does not include extended table features, such as data scrolling, row selection, and column reordering. These features are available as part of the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component; refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richextendedDataTable" /> for further details.
+				The <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component does not include extended table features, such as data scrolling (including lazy Ajax loading), row selection, and column reordering. These features are available as part of the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component; refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richextendedDataTable" /> for further details.
 			</para>
 		</note>
 		
@@ -162,6 +165,9 @@
 			<title>Basic usage</title>
 			<para>
 				The <varname>value</varname> attribute points to the data model, and the <varname>var</varname> attribute specifies a variable to use when iterating through the data model.
+			</para>
+			<para>
+				In addition, the table requires a set of <sgmltag>&lt;rich:column&gt;</sgmltag> components to define the content of the table.
 			</para>
 		</section>
 		
@@ -201,6 +207,12 @@
 			<para>
 				As <sgmltag>&lt;rich:dataTable&gt;</sgmltag> the component is based on the <sgmltag>&lt;a4j:repeat&gt;</sgmltag> component, it can be partially updated with Ajax. Refer to <xref linkend="sect-Component_Reference-a4jrepeat-Limited_views_and_partial_updates" /> for details on partially updating the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component.
 			</para>
+			<para>
+				The <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component supports master-detail markup with collapsible sub-table sections. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richcollapsibleSubTable" /> for full details on using the <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component.
+			</para>
+			<para>
+				Use the <varname>rows</varname> attribute to specify the number of rows to show at a time. The table is then presented in pages of rows. Pages can be navigated by using a control such as the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richdataScroller" /> for full details on using the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component.
+			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-richdataTable-JavaScript_API">
@@ -226,7 +238,7 @@
 		         </listitem>
 		      </varlistentry>
 		      <varlistentry>
-		         <term><function>switchSubTables()</function></term>
+		         <term><function>switchSubTable(subtableId)</function></term>
 		         <listitem>
 		            <para>
 		               Switch the expanded or collapsed state of any sub-tables contained in the data table.
@@ -561,7 +573,10 @@
 	<section id="sect-Component_Reference-Tables_and_grids-richcollapsibleSubTable">
 		<title><sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component acts as a child element to a <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component. It allows sections of a table to be grouped into collapsible sections. The <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component works with the <sgmltag>&lt;rich:collapsibleSubTableToggler&gt;</sgmltag> component, which allows the user to expand and collapse the sub tables.
+			The <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component acts as a child element to a <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component. The <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component iterates through the child collections in the currently iterated object to create master-detail tables.
+		</para>
+		<para>
+			Additionally, the detail part of the table can be collapsed or expanded through different modes. The <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component works with the <sgmltag>&lt;rich:collapsibleSubTableToggler&gt;</sgmltag> component, which expands and collapses the sub-tables.
 		</para>
 
 		<section id="sect-Component_Reference-richcollapsibleSubTable-Basic_usage">
@@ -678,6 +693,13 @@
 					Refer to <xref linkend="exam-Component_Reference-richcollapsibleSubTable-Basic_usage" /> for an example using the <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component. In the example, the toggle control is placed in a column that spans the width of the table. Output text next to the toggle control displays the car vendor's name for that sub-table.
 				</para>
 			</section>
+
+			<section id="sect-Component_Reference-richcollapsibleSubTableToggler-Appearance">
+				<title>Appearance</title>
+				<para>
+					The icons and labels of the <sgmltag>&lt;rich:collapsibleSubTableToggler&gt;</sgmltag> component can be customized. Use the <varname>collapsedIcon</varname> and <varname>expandedIcon</varname> attributes to specify icons for the toggler when it is collapsed and expanded respectively. Use the <varname>collapsedLabel</varname> and <varname>expandedLabel</varname> attributes to specify labels for the toggler when it is collapsed and expanded respectively.
+				</para>
+			</section>
 		
 			<section id="sect-Component_Reference-richcollapsibleSubTableToggler-Reference_data">
 				<title>Reference data</title>
@@ -721,7 +743,7 @@
 	<section id="sect-Component_Reference-Tables_and_grids-richextendedDataTable">
 		<title><sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component builds on the functionality of the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component, adding features such as data scrolling, row and column selection, and rearranging of columns.
+			The <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component builds on the functionality of the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component, adding features such as scrolling for the table body (both horizontal and vertical), Ajax loading for vertical scrolling, frozen columns, row selection, and rearranging of columns. It also supports all the basic table features such as sorting, filtering, and paging using the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component. 
 		</para>
 		<para>
 			The <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component includes the following main attributes not included in the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component:
@@ -762,50 +784,6 @@
 					<varname>selectionMode</varname>
 				</para>
 			</listitem>
-			<!--
-			<listitem>
-				<para>
-					<varname>tableState</varname>
-				</para>
-			</listitem>
-			-->
-		</itemizedlist>
-		<para>
-			The <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component does <emphasis>not</emphasis> include the following attributes available with the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component:
-		</para>
-		<itemizedlist>
-			<!--
-			<listitem>
-				<para>
-					<varname>columns</varname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>columnsWidth</varname>
-				</para>
-			</listitem>
-			-->
-			<listitem>
-				<para>
-					<varname>breakBefore</varname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>columnGroup</varname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>colSpan</varname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<varname>rowSpan</varname>
-				</para>
-			</listitem>
 		</itemizedlist>
 
 		<note>
@@ -814,21 +792,21 @@
 				Due to the complex mark-up involved in the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component, it does not support the use of the <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component. The <sgmltag>&lt;rich:collapsibleSubTable&gt;</sgmltag> component is only available with the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component.
 			</para>
 			<para>
-				Similarly, complex row and column spanning using the <varname>breakBefore</varname>, <varname>columnGroup</varname>, <varname>colSpan</varname>, and <varname>rowSpan</varname> attributes is also not available with the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component.
+				Similarly, complex row and column spanning using the <varname>breakBefore</varname>, <varname>colSpan</varname>, and <varname>rowSpan</varname> attributes is also not available with the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component.
 			</para>
 		</note>
 		
 		<section id="sect-Component_Reference-richextendedDataTable-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Basic use of the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component requires the <varname>value</varname> and <varname>var</varname> attributes, the same as with the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richdataTable" /> for details.
+				Basic use of the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component requires the <varname>value</varname> and <varname>var</varname> attributes, the same as with the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component. In addition, a set of columns must be included to define the table content. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richdataTable" /> for details.
 			</para>
 		</section>
 		
 		<section id="sect-Component_Reference-richextendedDataTable-Table_appearance">
 			<title>Table appearance</title>
 			<para>
-				The <varname>height</varname> attribute defines the height of the table on the page. This is set to <literal>100%</literal> by default. The width of the table can be set by using the <varname>width</varname> attribute. As with the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component, the look of the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component can be customized and skinned using the <literal>header</literal> and <literal>footer</literal> facets.
+				As with the <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component, the look of the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component can be customized using the <literal>header</literal> and <literal>footer</literal> facets.
 			</para>
 		</section>
 		
@@ -861,7 +839,7 @@
 					Large tables can use Ajax "lazy" loading to cache data on the client during scrolling. Use the <varname>clientRows</varname> attribute to specify the number of rows to load. The specified number of rows are loaded on the initial rendering and with every vertical scroll. If the <varname>clientRows</varname> attribute is not specified, all the rows are loaded on the client without the use of Ajax.
 				</para>
 				<para>
-					In addition to Ajax scrolling, the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component can also be used with the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component in the same way as a regular <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richdataScroller" /> for full details on using the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component.
+					In addition to Ajax scrolling, the <sgmltag>&lt;rich:extendedDataTable&gt;</sgmltag> component can also be used with the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component in the same way as a regular <sgmltag>&lt;rich:dataTable&gt;</sgmltag> component. If both the <varname>clientRows</varname> and <varname>rows</varname> attributes are included, Ajax loading occurs as defined by the <varname>clientRows</varname> attribute, but the loading is limited to the current table page as determined by the <varname>rows</varname> attribute. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richdataScroller" /> for full details on using the <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> component.
 				</para>
 			</section>
 
@@ -1488,7 +1466,7 @@
 		<section id="sect-Component_Reference-richdataScroller-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> must be placed in the <literal>footer</literal> facet of the table or grid it needs to control. Alternatively, use the <varname>for</varname> attribute to bind the parent table or grid to the scroller.
+				The <sgmltag>&lt;rich:dataScroller&gt;</sgmltag> must be placed in a facet of the table or grid it needs to control. Alternatively, use the <varname>for</varname> attribute to bind the parent table or grid to the scroller.
 			</para>
 			<para>
 				The bound table or grid should also have the <varname>rows</varname> attribute defined to limit the number of rows per page.
@@ -1531,6 +1509,8 @@
 					</listitem>
 				</varlistentry>
 			</variablelist>
+			<!-- TODO not in Final -->
+			<!--
 			<para>
 				The <varname>pageIndexVar</varname> and <varname>pagesVar</varname> attributes are request-scope variables for the current page and the total number of pages. Use these attributes with the <literal>pages</literal> facet to provide information about the pages of the table, as shown in <xref linkend="exam-Component_Reference-richdataScroller-pages_facet" />.
 			</para>
@@ -1538,6 +1518,7 @@
 				<title><literal>pages</literal> facet</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richdataScroller-pages_facet.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</example>
+			-->
 			<para>
 			   To add optional separators between controls, define the separators with the <literal>controlsSeparator</literal> facet.
 			</para>
@@ -1722,9 +1703,12 @@
 			</para>
 		</important>
 
+		<!-- TODO: Not in Final -->
+		<!--
 		<para>
 			Tables entries can be filtered by the user through either the basic method built in to the <sgmltag>&lt;rich:column&gt;</sgmltag> component, or by defining external filters. Refer to <xref linkend="sect-Component_Reference-Tables_and_grids-richcolumn" /> for details on using the <sgmltag>&lt;rich:column&gt;</sgmltag> component in tables.
 		</para>
+
 		<section id="sect-Component_Reference-Table_filtering-Basic_filtering">
 			<title>Basic filtering</title>
 			<para>
@@ -1759,11 +1743,15 @@
 			<para>
 				If you require more advanced filtering using custom functions or expressions, use the external filtering properties of the <sgmltag>&lt;rich:column&gt;</sgmltag> component.
 			</para>
+		-->
 			<para>
-				Use the <varname>filterExpression</varname> attribute to define an expression that can be evaluated as a boolean value. The expression checks if each table entry satisfies the filtering condition when the table is rendered.
+				Use the <varname>filterExpression</varname> attribute to define an expression that can be evaluated as a boolean value. The expression checks if each table entry satisfies the filtering condition when the table is rendered. For example, the expression might be a JSTL (JavaServer Pages Standard Tag Library) function such as <function>contains</function> or <function>equals</function>.
 			</para>
 			<para>
-				Use the <varname>filterMethod</varname> attribute to define a method binding. The method needs to accept an object as a parameter and return a boolean value. Similar to the <varname>filterExpression</varname> attribute, the table is rendered only with those entries that satisfy the filtering condition. By defining a custom filtering method, you can implement complex business logic to filter a table.
+				Use the <varname>filter</varname> attribute to define a filter interface. The attribute must use EL (Expression Language) to point to an object which implements the <interfacename>org.richfaces.model.Filter&lt;T&gt;</interfacename> interface. The object must provide a single <methodname>accept(T t)</methodname> method. The method takes each iteration object as a parameter and returns a boolean value, which determines whether the object satisfies the filter. By defining a custom filter, you can implement complex business logic to filter a table.
+			</para>
+			<para>
+				Use the <varname>filterValue</varname> attribute to point to an object which holds the current filtering value for the column. The  attribute can be used to store filtering conditions in a session. Alternatively, use the <varname>filterValue</varname> attribute when using the JavaScript API for filtering. The attribute can store a value to pass as parameter to a JavaScript filter method.
 			</para>
 			<example id="exam-Component_Reference-Table_filtering-External_filtering">
 				<title>External filtering</title>
@@ -1782,7 +1770,7 @@
 					</textobject>
 				</mediaobject>
 			</example>
-		</section>
+		<!--</section>-->
 	</section>
 	
 	<section id="sect-Component_Reference-Tables_and_grids-Table_sorting">
@@ -1838,15 +1826,21 @@
 				Use the <varname>sortMode</varname> attribute to determine how multiple columns are sorted. By default, the value of the <varname>sortMode</varname> attribute is <literal>single</literal>, so tables are only sorted by a single column. Each time the header of a column is clicked the entire table is re-sorted according to that column. Set <code>sortMode="multiple"</code> to allow tables to be sorted by a primary column, then by a secondary column, and so on.
 			</para>
 		</section>
-		-->
 
 		<section id="sect-Component_Reference-Table_sorting-External_sorting">
 			<title>External sorting</title>
+		-->
 			<para>
-				Bind the <varname>sortOrder</varname> attribute to bean properties to manage the sorting order externally. The bean must handle all the sorting algorithms. <xref linkend="exam-Component_Reference-Table_sorting-External_sorting" /> demonstrates table sorting using an external control.
+				Set the <varname>sortBy</varname> attribute to indicate which iteration object property to use when sorting the column. By default, the target will be sorted using the <methodname>compare()</methodname> method.
 			</para>
-			<example id="exam-Component_Reference-Table_sorting-External_sorting">
-				<title>External sorting</title>
+			<para>
+				If using custom-defined rules for sorting, use the <varname>comparator</varname> attribute instead. Set the <varname>comparator</varname> attribute to point to your comparator method, which will be used when sorting the data model.
+			</para>
+			<para>
+				Bind the <varname>sortOrder</varname> attribute to bean properties to manage the sorting order. The bean must handle all the sorting algorithms. <xref linkend="exam-Component_Reference-Table_sorting-External_sorting" /> demonstrates table sorting using an external control.
+			</para>
+			<example id="exam-Component_Reference-Table_sorting-Sorting">
+				<title>Sorting</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-Table_sorting-External_sorting.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				<para>
 					The example uses an external control to manage the table's sorting.
@@ -1863,12 +1857,9 @@
 				</mediaobject>
 			</example>
 			<para>
-				When using the <code>sortMode="multiple"</code> configuration, set the priority by which columns are sorted with the <varname>sortPriorities</varname> attribute.
+				When multiple columns are capable of being sorted at the same time, set the priority by which the columns are sorted with the <varname>sortPriorities</varname> attribute. The attribute must contain a list of column identifiers in the order of the sorting sequence.
 			</para>
-			<para>
-				Use the <varname>sortExpression</varname> attribute to define a bean property to use for sorting the column. The expression checks each table entry against the sorting expression during rendering.
-			</para>
-		</section>
+		<!--</section>-->
 	</section>
 
 </chapter>
