@@ -192,6 +192,8 @@
 	</section>
 	-->
 	
+	<!-- <a4j:keepAlive> -->
+	<!--
 	<section id="sect-Component_Reference-Resources-a4jkeepAlive">
 		<title><sgmltag>&lt;a4j:keepAlive&gt;</sgmltag></title>
 		<para>
@@ -240,124 +242,123 @@
 			</itemizedlist>
 		</section>
 	</section>
+	-->
 	
-	<!-- TODO not in M2 -->
-	<!--
+	<!-- <a4j:mediaOutput> -->
 	<section id="sect-Component_Reference-Resources-a4jmediaOutput">
 		<title><sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag></title>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<parameter>component-type</parameter>: <classname>org.ajax4jsf.Push</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.AjaxPush</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>component-family</parameter>: <classname>org.ajax4jsf.components.AjaxPush</classname>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxPushRenderer</classname>
-				</para>
-			</listitem>
-		</itemizedlist>
 		<para>
 			The <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> component is used for generating images, video, sounds, and other resources defined on the fly.
 		</para>
-		<para>
-			The <varname>createContent</varname> attribute points to the method used for generating the displayed content. If necessary, the <varname>value</varname> attribute can be used to pass input data to the content generation method specified with <varname>createContent</varname>. The <varname>cacheable</varname> attribute specifies whether the resulting content will be cached or not.
-		</para>
-		<para>
-			The <varname>mimeType</varname> attribute describes the type of output content, and corresponds to the type in the header of the <acronym>HTTP</acronym> request. The <varname>element</varname> attribute defines <acronym>XHTML</acronym> element used to display the content:
-		</para>
-		<itemizedlist>
-			<listitem>
-				<para>
-					<literal>img</literal>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>object</literal>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>applet</literal>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>script</literal>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>link</literal>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<literal>a</literal>
-				</para>
-			</listitem>
-		</itemizedlist>
-		<example id="exam-Component_Reference-a4jmediaOutput-a4jmediaOutput_example">
-			<title><sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> example</title>
+		<section id="sect-Component_Reference-a4jmediaOutput-Basic_usage">
+			<title>Basic usage</title>
 			<para>
-				This example uses the <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> component to generate a <acronym>JPEG</acronym> image of verification digits. The code on the application page is a single element:
+				The <varname>createContent</varname> attribute points to the method used for generating the displayed content.
 			</para>
-			
-<programlisting language="XML" role="XML">
-&lt;a4j:mediaOutput element="img" cacheable="false" session="false" createContent="#{mediaBean.paint}" value="#{mediaData}" mimeType="image/jpeg" /&gt;
-</programlisting>
 			<para>
-				The <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> component uses the <methodname>MediaBean.paint</methodname> method to create the image. The method generates a random number, which is then converted into an output stream and rendered to a <acronym>JPEG</acronym> image. The <classname>MediaBean</classname> class is as follows:
+				If necessary, the <varname>value</varname> attribute can be used to pass input data to the content generation method specified with <varname>createContent</varname>. The <varname>cacheable</varname> attribute specifies whether the resulting content will be cached or not.
 			</para>
-			
-<programlisting language="Java" role="JAVA">
-<xi:include href="extras/exam-Component_Reference-a4jmediaOutput-a4jmediaOutput_example-0.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
-</programlisting>
+		</section>
+
+		<section id="sect-Component_Reference-a4jmediaOutput-Handling_content">
+			<title>Handling content</title>
 			<para>
-				Another class, <classname>MediaData</classname> is required by the <varname>value</varname> attribute for keeping data to be used as input for the content creation method. The <classname>MediaData</classname> class is as follows:
+				The <varname>mimeType</varname> attribute describes the type of output content, and corresponds to the type in the header of the <acronym>HTTP</acronym> request. The <varname>element</varname> attribute defines <acronym>XHTML</acronym> element used to display the content:
 			</para>
-			
-<programlisting language="Java" role="JAVA">
-<xi:include href="extras/exam-Component_Reference-a4jmediaOutput-a4jmediaOutput_example-1.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
-</programlisting>
-			<para>
-				The <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> component uses the <classname>MediaBean</classname> and <classname>MediaData</classname> classes to generate a new image on each page refresh, which appears as shown in <xref linkend="figu-Component_Reference-a4jmediaOutput_example-a4jmediaOutput_example_result" />
-			</para>
-			<blockquote>
-				<figure id="figu-Component_Reference-a4jmediaOutput_example-a4jmediaOutput_example_result">
-					<title><sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> example result</title>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result.png" format="PNG" />
-						</imageobject>
-						<textobject>
-							<para>
-								The generated image containing a random verification number.
-							</para>
-						</textobject>
-					</mediaobject>
-				</figure>
-			</blockquote>
-		</example>
-		<note>
-			<title><classname>Serializable</classname> interface</title>
-			<para>
-				A bean class passed using the <varname>value</varname> attribute of <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> should implement the <classname>Serializable</classname> interface so that it will be encoded to the <acronym>URL</acronym> of the resource.
-			</para>
-		</note>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<literal>img</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>object</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>applet</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>script</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>link</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<literal>a</literal>
+					</para>
+				</listitem>
+			</itemizedlist>
+			<example id="exam-Component_Reference-a4jmediaOutput-a4jmediaOutput_example">
+				<title><sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> example</title>
+				<para>
+					This example uses the <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> component to generate a <acronym>JPEG</acronym> image of verification digits. The code on the application page is a single element:
+				</para>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-a4jmediaOutput-a4jmediaOutput_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> component uses the <methodname>MediaBean.paint</methodname> method to create the image. The method generates a random number, which is then converted into an output stream and rendered to a <acronym>JPEG</acronym> image. The <classname>MediaBean</classname> class is as follows:
+				</para>
+				<programlisting language="Java" role="JAVA"><xi:include href="extras/exam-Component_Reference-a4jmediaOutput-a4jmediaOutput_example-0.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					Another class, <classname>MediaData</classname> is required by the <varname>value</varname> attribute for keeping data to be used as input for the content creation method. The <classname>MediaData</classname> class is as follows:
+				</para>
+				<programlisting language="Java" role="JAVA"><xi:include href="extras/exam-Component_Reference-a4jmediaOutput-a4jmediaOutput_example-1.js" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> component uses the <classname>MediaBean</classname> and <classname>MediaData</classname> classes to generate a new image on each page refresh.
+				</para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result.png" format="PNG" />
+					</imageobject>
+					<textobject>
+						<para>
+							The generated image containing a random verification number.
+						</para>
+					</textobject>
+				</mediaobject>
+			</example>
+			<note>
+				<title><classname>Serializable</classname> interface</title>
+				<para>
+					A bean class passed using the <varname>value</varname> attribute of <sgmltag>&lt;a4j:mediaOutput&gt;</sgmltag> should implement the <classname>Serializable</classname> interface so that it will be encoded to the <acronym>URL</acronym> of the resource.
+				</para>
+			</note>
+		</section>
+
+		<section id="sect-Component_Reference-a4jmediaOutput-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.ajax4jsf.Push</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.ajax4jsf.component.html.AjaxPush</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.ajax4jsf.components.AjaxPush</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.ajax4jsf.components.AjaxPushRenderer</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
 	</section>
-	-->
 
 </chapter>
 
