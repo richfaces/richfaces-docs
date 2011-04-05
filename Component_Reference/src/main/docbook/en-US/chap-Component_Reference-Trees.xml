@@ -122,7 +122,7 @@
 					<term><literal>server</literal></term>
 					<listitem>
 						<para>
-							The <sgmltag>&lt;rich:tree&gt;</sgmltag> component performs a common submission, completely re-rendering the page.
+							The <sgmltag>&lt;rich:tree&gt;</sgmltag> component performs a common submission, completely refreshing the page.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -130,13 +130,13 @@
 					<term><literal>client</literal></term>
 					<listitem>
 						<para>
-							The <sgmltag>&lt;rich:tree&gt;</sgmltag> component updates on the client side, re-rendering itself and any additional components listed with the <varname>render</varname> attribute.
+							The <sgmltag>&lt;rich:tree&gt;</sgmltag> component updates on the client side through JavaScript, without any additional requests or updates. All nodes are rendered to the client during the initial page rendering.
 						</para>
 					</listitem>
 				</varlistentry>
 			</variablelist>
 			<para>
-				By default, the event to expand or collapse a tree node is a mouse click. To specify a different event, use the <varname>toggleNodeEvent</varname> attribute.
+				By default, tree nodes are expanded and collapsed through the <guibutton>+</guibutton> and <guibutton>-</guibutton> controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the <varname>toggleNodeEvent</varname> attribute.
 			</para>
 		</section>
 
@@ -158,7 +158,7 @@
 					<term><literal>server</literal></term>
 					<listitem>
 						<para>
-							The <sgmltag>&lt;rich:tree&gt;</sgmltag> component performs a common submission, completely re-rendering the page.
+							The <sgmltag>&lt;rich:tree&gt;</sgmltag> component performs a common submission, completely refreshing the page.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -166,7 +166,7 @@
 					<term><literal>client</literal></term>
 					<listitem>
 						<para>
-							The <sgmltag>&lt;rich:tree&gt;</sgmltag> component updates on the client side, re-rendering itself and any additional components listed with the <varname>render</varname> attribute.
+							The <sgmltag>&lt;rich:tree&gt;</sgmltag> component updates on the client side using JavaScript, without any additional requests or updates.
 						</para>
 					</listitem>
 				</varlistentry>
@@ -363,8 +363,15 @@
 			<section id="sect-Component_Reference-richtreeNode-Basic_usage">
 				<title>Basic usage</title>
 				<para>
-					The <sgmltag>&lt;rich:treeNode&gt;</sgmltag> component must be a child of a <sgmltag>&lt;rich:tree&gt;</sgmltag> component. It does not need any attributes declared for basic usage, but can provide markup templates for tree nodes of particular types. Refer to <xref linkend="exam-Component_Reference-richtree-Basic_usage" /> for an example of basic <sgmltag>&lt;rich:treeNode&gt;</sgmltag> component usage.
+					The <sgmltag>&lt;rich:treeNode&gt;</sgmltag> component must be a child of a <sgmltag>&lt;rich:tree&gt;</sgmltag> component or a tree adaptor component. It does not need any attributes declared for basic usage, but can provide markup templates for tree nodes of particular types. Default markup is used if the tree node type is not specified. Refer to <xref linkend="exam-Component_Reference-richtree-Basic_usage" /> for an example of basic <sgmltag>&lt;rich:treeNode&gt;</sgmltag> component usage.
 				</para>
+				<example id="exam-Component_Reference-richtreeNode-Basic_usage">
+					<title>Basic usage</title>
+					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtreeNode-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+					<para>
+						The example renders a simple tree of countries. Each country node expands to show state nodes for that country, and each state node expands to show city nodes for that state.
+					</para>
+				</example>
 			</section>
 
 			<section id="sect-Component_Reference-richtreeNode-Appearance">
@@ -373,8 +380,9 @@
 					Refer to <xref linkend="sect-Component_Reference-richtree-Appearance" /> for the <sgmltag>&lt;rich:tree&gt;</sgmltag> component for details and examples on styling nodes and icons. Icon styling for individual <sgmltag>&lt;rich:treeNode&gt;</sgmltag> components uses the same attributes as the parent <sgmltag>&lt;rich:tree&gt;</sgmltag> component: <varname>iconLeaf</varname>, <varname>iconExpanded</varname>, and <varname>iconCollapsed</varname>. Icon-related attributes specified for child <sgmltag>&lt;rich:treeNode&gt;</sgmltag> components overwrite any global icon attributes of the parent <sgmltag>&lt;rich:tree&gt;</sgmltag> component.
 				</para>
 				<para>
-					Use the <varname>rendered</varname> attribute to determine whether the node should actually be rendered in the tree or not. Using the <varname>rendered</varname> attribute in combination with the <sgmltag>&lt;rich:treeNode&gt;</sgmltag> <varname>type</varname> attribute can allow further style differentiation between node content, as shown in <xref linkend="exam-Component_Reference-richtreeNode-rendered_attribute" />.
+					Use the <varname>rendered</varname> attribute to determine whether the node should actually be rendered in the tree or not. Using the <varname>rendered</varname> attribute in combination with the <sgmltag>&lt;rich:treeNode&gt;</sgmltag> <varname>type</varname> attribute can allow further style differentiation between node content.
 				</para>
+				<!--
 				<example id="exam-Component_Reference-richtreeNode-rendered_attribute">
 					<title><varname>rendered</varname> attribute</title>
 					<para>
@@ -387,6 +395,7 @@
 						</imageobject>
 					</mediaobject>
 				</example>
+				-->
 			</section>
 
 			<section id="sect-Component_Reference-richtreeNode-Interactivity">
@@ -469,7 +478,7 @@
 					<sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components can further be nested in other <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components to subsequently populate lower levels of the tree.
 				</para>
 				<para>
-					To access the current element at each iteration, use the <varname>var</varname> attribute of either the parent <sgmltag>&lt;rich:tree&gt;</sgmltag> component or the <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component itself. <xref linkend="exam-Component_Reference-richtreeModelAdaptor-Nested_richtreeModelAdaptor_components" /> demonstrates a series of nested <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components, each using the parent's <varname>var</varname> attribute to reference the current element.
+					To access the current element at each iteration, use the <varname>var</varname> attribute of either the parent <sgmltag>&lt;rich:tree&gt;</sgmltag> component<!-- or the <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> component itself-->. <xref linkend="exam-Component_Reference-richtreeModelAdaptor-Nested_richtreeModelAdaptor_components" /> demonstrates a series of nested <sgmltag>&lt;rich:treeModelAdaptor&gt;</sgmltag> components, each using the parent's <varname>var</varname> attribute to reference the current element.
 				</para>
 				<example id="exam-Component_Reference-richtreeModelAdaptor-Nested_richtreeModelAdaptor_components">
 					<title><sgmltag>Nested &lt;rich:treeModelAdaptor&gt; components</sgmltag></title>
