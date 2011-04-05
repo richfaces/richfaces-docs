@@ -11,7 +11,10 @@
 	<section id="sect-Component_Reference-Output_and_messages-richmessage">
 		<title><sgmltag>&lt;rich:message&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:message&gt;</sgmltag> component renders a single message relating to another specific component. The message consists of two parts, both of which are optional: the marker icon and the textual label. The appearance of the message can be customized, and tool-tips can be used for further information about the message.
+			The <sgmltag>&lt;rich:message&gt;</sgmltag> component renders a single <classname>FacesMessage</classname> message instance added for the component. The appearance of the message can be customized, and tool-tips can be used for further information about the message.
+		</para>
+		<para>
+			The <sgmltag>&lt;rich:message&gt;</sgmltag> component is rendered in the same way as the standard <sgmltag>&lt;h:message&gt;</sgmltag> component, but allows separate styling of the message summary and detail. It allows unified icons to be set using background images in predefined classes.
 		</para>
 		<figure id="figu-Component_Reference-richmessage-richmessage_component">
 			<title>rich:message component</title>
@@ -30,67 +33,34 @@
 		<section id="sect-Component_Reference-richmessage-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <sgmltag>&lt;rich:message&gt;</sgmltag> component needs the <varname>for</varname> attribute to point to the <varname>id</varname> identifier of the related component. The message is displayed depending on the state of the linked component's requests.
+				The <sgmltag>&lt;rich:message&gt;</sgmltag> component needs the <varname>for</varname> attribute to point to the <varname>id</varname> identifier of the related component. The message is displayed after the <classname>FacesMessage</classname> message instance is created and added for the client identifier of the related component.
 			</para>
 			<para>
-				The <sgmltag>&lt;rich:message&gt;</sgmltag> component is automatically rendered after an Ajax request, even without the use of an <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component.
+				The <sgmltag>&lt;rich:message&gt;</sgmltag> component is automatically rendered after an Ajax request. This occurs without the use of an <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component or a specific reference through the <varname>render</varname> attribute of the Ajax request source.
 			</para>
+			<example id="exam-Component_Reference-richmessage-richmessage_example">
+				<title>rich:message example</title>
+				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richmessage-richmessage_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The example contains a text input for zip codes. The simple validation requires the entered zip code to be between 4 and 9 characters long. The <sgmltag>&lt;rich:message&gt;</sgmltag> component references the input box, and reports any messages relating to the input validation.
+				</para>
+			</example>
 		</section>
 		
 		<section id="sect-Component_Reference-richmessage-Appearance">
 			<title>Appearance</title>
 			<para>
-				The <varname>passedLabel</varname> attribute contains a message to display when there are no errors; that is, when validation passes successfully. The <varname>showSummary</varname> attribute specifies whether to display only a summary of the full message. The full message can be displayed in a tool-tip when hovering the mouse over the summary.
+				The <varname>showSummary</varname> attribute specifies whether to display only a summary of the full message. The full message can be displayed in a tool-tip when hovering the mouse over the summary.
 			</para>
 			<para>
-				Facets are used to define the marker icons for different message states:
+				Use CSS (Cascading Style Sheets) to customize the appearance and icon for the <sgmltag>&lt;rich:message&gt;</sgmltag> component. To use a custom icon, set the <property>background-image</property> property to the icon graphic, as shown in <xref linkend="exam-Component_Reference-richmessage-Message_icons" />. Refer to <xref linkend="sect-Component_Reference-richmessage-Style_classes_and_skin_parameters" /> for a complete list of style classes for the <sgmltag>&lt;rich:message&gt;</sgmltag> component.
 			</para>
-			<variablelist>
-				<varlistentry>
-					<term><literal>errorMarker</literal></term>
-					<listitem>
-						<para>
-							Defines the icon for messages with the <literal>error</literal> severity class.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>fatalMarker</literal></term>
-					<listitem>
-						<para>
-							Defines the icon for messages with the <literal>fatal</literal> severity class.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>infoMarker</literal></term>
-					<listitem>
-						<para>
-							Defines the icon for messages with the <literal>info</literal> severity class.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>passedMarker</literal></term>
-					<listitem>
-						<para>
-							Defines the icon for messages that are not of the <literal>error</literal>, <literal>fatal</literal>, <literal>info</literal>, or <literal>warn</literal> severity classes.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>warnMarker</literal></term>
-					<listitem>
-						<para>
-							Defines the icon for messages with the <literal>warn</literal> severity class.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-			<example id="exam-Component_Reference-richmessage-richmessage_example">
-				<title>rich:message example</title>
-				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richmessage-richmessage_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	</programlisting>
+			<example id="exam-Component_Reference-richmessage-Message_icons">
+				<title>Message icons</title>
+				<programlisting><xi:include href="extras/exam-Component_Reference-richmessage-Message_icons.css" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The example demonstrates how an icon for an error message could be added using CSS.
+				</para>
 			</example>
 		</section>
 		
@@ -135,7 +105,7 @@
 	<section id="sect-Component_Reference-Output_and_messages-richmessages">
 		<title><sgmltag>&lt;rich:messages&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:messages&gt;</sgmltag> components works similarly to the <sgmltag>&lt;rich:message&gt;</sgmltag> component, but can display validation messages for a group of components instead of just a single component. Refer to <xref linkend="sect-Component_Reference-Output_and_messages-richmessage" /> for details on the <sgmltag>&lt;rich:message&gt;</sgmltag> component.
+			The <sgmltag>&lt;rich:messages&gt;</sgmltag> components works similarly to the <sgmltag>&lt;rich:message&gt;</sgmltag> component, but can display all the validation messages added for the current view instead of just a single message. Refer to <xref linkend="sect-Component_Reference-Output_and_messages-richmessage" /> for details on the <sgmltag>&lt;rich:message&gt;</sgmltag> component.
 		</para>
 		<figure id="figu-Component_Reference-richmessages-richmessages_component">
 			<title>rich:messages component</title>
@@ -154,68 +124,27 @@
 		<section id="sect-Component_Reference-richmessages-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				The <sgmltag>&lt;rich:messages&gt;</sgmltag> component doesn't require any extra attributes for basic usage. It displays all messages relating to requests from components in the same container element.
+				The <sgmltag>&lt;rich:messages&gt;</sgmltag> component doesn't require any extra attributes for basic usage. It displays all messages relating to requests from components.
 			</para>
 			<para>
-				The <sgmltag>&lt;rich:message&gt;</sgmltag> component is automatically rendered after an Ajax request, even without the use of an <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component.
+				To limit the messages to a specific component, use the <varname>for</varname> attribute to reference the component's identifier.
+			</para>
+			<para>
+				To show only those messages that are not attached to specific components, set <code>globalOnly="true"</code>.
+			</para>
+			<para>
+				The <sgmltag>&lt;rich:messages&gt;</sgmltag> component is automatically rendered after an Ajax request. This occurs without the use of an <sgmltag>&lt;a4j:outputPanel&gt;</sgmltag> component or a specific reference through the <varname>render</varname> attribute of the Ajax request source.
 			</para>
 		</section>
 
 		<section id="sect-Component_Reference-richmessages-Appearance">
 			<title>Appearance</title>
 			<para>
-				The <sgmltag>&lt;rich:messages&gt;</sgmltag> component displays error messages for each validating component in the same container. The <varname>passedLabel</varname> attribute contains a message to display when there are no errors; that is, when validation for all components passes successfully. The <varname>layout</varname> attribute defines how the messages are presented: either using <literal>list</literal> for a list layout, or <literal>table</literal> for a tabular layout.
+				The <sgmltag>&lt;rich:messages&gt;</sgmltag> component displays error messages for each validating component in the same container.
 			</para>
 			<para>
-				All messages use the same state icons, specified by using facets in the same way as for the <sgmltag>&lt;rich:message&gt;</sgmltag> component:
+				The <sgmltag>&lt;rich:messages&gt;</sgmltag> component can be further styled through CSS, the same as for the <sgmltag>&lt;rich:message&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-richmessage-Appearance" /> for an example of message styling, and refer to <xref linkend="sect-Component_Reference-richmessages-Style_classes_and_skin_parameters" /> for a complete list of style classes for the <sgmltag>&lt;rich:message&gt;</sgmltag> component.
 			</para>
-			<variablelist>
-				<varlistentry>
-					<term><literal>errorMarker</literal></term>
-					<listitem>
-						<para>
-							Defines the icon for messages with the <literal>error</literal> severity class.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>fatalMarker</literal></term>
-					<listitem>
-						<para>
-							Defines the icon for messages with the <literal>fatal</literal> severity class.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>infoMarker</literal></term>
-					<listitem>
-						<para>
-							Defines the icon for messages with the <literal>info</literal> severity class.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>passedMarker</literal></term>
-					<listitem>
-						<para>
-							Defines the icon for messages that are not of the <literal>error</literal>, <literal>fatal</literal>, <literal>info</literal>, or <literal>warn</literal> severity classes.
-						</para>
-					</listitem>
-				</varlistentry>
-				<varlistentry>
-					<term><literal>warnMarker</literal></term>
-					<listitem>
-						<para>
-							Defines the icon for messages with the <literal>warn</literal> severity class.
-						</para>
-					</listitem>
-				</varlistentry>
-			</variablelist>
-			<example id="exam-Component_Reference-richmessages-richmessages_example">
-				<title>rich:messages example</title>
-				<programlisting language="XML" role="XML"><xi:include href="extras/exam-Component_Reference-richmessages-richmessages_example.xml_sample" parse="text" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	</programlisting>
-			</example>
 		</section>
 		
 		<section id="sect-Component_Reference-richmessages-Reference_data">
@@ -251,9 +180,7 @@
 
 		<section id="sect-Component_Reference-richmessages-Style_classes_and_skin_parameters">
 			<title>Style classes and skin parameters</title>
-			<para>
-				The <sgmltag>&lt;rich:messages&gt;</sgmltag> component uses the same styling as the <sgmltag>&lt;rich:message&gt;</sgmltag> component. Refer to <xref linkend="sect-Component_Reference-richmessage-Style_classes_and_skin_parameters" /> for details.
-			</para>
+			<xi:include href="skinning/tabl-richmessages.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 		</section>
 	</section>
 	
@@ -290,7 +217,7 @@
 		<section id="sect-Component_Reference-richprogressBar-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				Basic usage of the <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component requires only the <varname>value</varname> attribute, which points to the method that provides the current progress.
+				Basic usage of the <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component requires the <varname>value</varname> attribute, which points to the property that holds the current progress value. When the value is greater than or equal to the minimum value (<literal>0</literal> by default), the progress bar becomes active, and starts sending Ajax requests if in <literal>ajax</literal> mode.
 			</para>
 			<example id="exam-Component_Reference-richprogressBar-Basic_usage">
 				<title>Basic usage</title>
@@ -332,6 +259,7 @@
 					</listitem>
 				</varlistentry>
 			</variablelist>
+			<!--
 			<note>
 				<title>Macro-substitution</title>
 				<para>
@@ -378,23 +306,13 @@
 				<title>Using the <varname>param</varname> parameter</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Using_the_param_parameter.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</example>
+			-->
 			<para>
-				To define customized initial and complete states for the progress bar, use the <literal>initial</literal> and <literal>complete</literal> facets. The <literal>initial</literal> facet displays when the progress value is less than or equal to the minimum value, and the <literal>complete</literal> facet displays when the progress value is greater than or equal to the maximum value.
+				Define the <literal>initial</literal> and <literal>finish</literal> facets to customize the progress bar's appearance before progress has started and after progress has finished. When the current progress bar value is less than the minimum value, the <literal>initial</literal> facet is displayed. When the current progress bar is greater than the maximum value, the <literal>finish</literal> facet is displayed.
 			</para>
 			<example id="exam-Component_Reference-richprogressBar-Initial_and_complete_states">
-				<title>Initial and complete states</title>
+				<title>Initial and finished states</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Initial_and_complete_states.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			</example>
-		</section>
-		
-		<section id="sect-Component_Reference-richprogressBar-Using_set_intervals">
-			<title>Using set intervals</title>
-			<para>
-				The <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component can be set to constantly poll for updates at a constant interval. Use the <varname>interval</varname> component to set the interval in milliseconds. The progress bar is updated whenever the polled value changes. Polling is only active when the <varname>enabled</varname> attribute is set to <literal>true</literal>.
-			</para>
-			<example id="exam-Component_Reference-richprogressBar-Using_set_intervals">
-				<title>Using set intervals</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Using_set_intervals.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</example>
 		</section>
 		
@@ -416,11 +334,22 @@
 					<term><literal>client</literal></term>
 					<listitem>
 						<para>
-							The progress bar updates on the client side, set using the JavaScript API.
+							The progress bar must be explicitly updated on the client side through the JavaScript API.
 						</para>
 					</listitem>
 				</varlistentry>
 			</variablelist>
+		</section>
+		
+		<section id="sect-Component_Reference-richprogressBar-Using_set_intervals">
+			<title>Using set intervals</title>
+			<para>
+				The <sgmltag>&lt;rich:progressBar&gt;</sgmltag> component can be set to constantly poll for updates at a constant interval. Use the <varname>interval</varname> component to set the interval in milliseconds. The progress bar is updated whenever the polled value changes. Polling is only active when the <varname>enabled</varname> attribute is set to <literal>true</literal>.
+			</para>
+			<example id="exam-Component_Reference-richprogressBar-Using_set_intervals">
+				<title>Using set intervals</title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richprogressBar-Using_set_intervals.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+			</example>
 		</section>
 		
 		<section id="sect-Component_Reference-richprogressBar-JavaScript_API">
@@ -575,14 +504,14 @@
 		<section id="sect-Component_Reference-richtooltip-Attaching_the_tool-tip_to_another_component">
 			<title>Attaching the tool-tip to another component</title>
 			<para>
-				If not otherwise specified, the tool-tip is attached to the parent element in which it is defined. The <varname>for</varname> attribute is used to attach the tool-tip to another component, pointing to the target component's <varname>id</varname> identifier. This allows the <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component to be specified outside the target element. This approach is demonstrated in <xref linkend="exam-Component_Reference-richtooltip-Attaching_the_tool-tip" />.
+				If not otherwise specified, the tool-tip is attached to the parent element in which it is defined. The <varname>target</varname> attribute is used to attach the tool-tip to another component, pointing to the target component's <varname>id</varname> identifier. This allows the <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component to be specified outside the target element. This approach is demonstrated in <xref linkend="exam-Component_Reference-richtooltip-Attaching_the_tool-tip" />.
 			</para>
 			<example id="exam-Component_Reference-richtooltip-Attaching_the_tool-tip">
 				<title>Attaching the tool-tip</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richtoolTip-Attaching_the_tool-tip.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 			</example>
 			<para>
-				The <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component can alternatively be left unattached, and is instead invoked through an event handler on the target component. To leave the <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component unattached, set <code>attached="false"</code>, and define the event handler to trigger the tool-tip on the target component. This approach is demonstrated in <xref linkend="exam-Component_Reference-richtooltip-Unattached_tool-tips" />. When leaving the <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component unattached, ensure it has an <varname>id</varname> identifier defined. If the <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component is nested inside the target element, it must be the last child. If it is defined outside the target element, it must be nested in an <sgmltag>&lt;a4j:form&gt;</sgmltag> component.
+				The <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component can alternatively be left unattached, and is instead invoked through an event handler on the target component. To leave the <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component unattached, set <code>attached="false"</code>, and define the event handler to trigger the tool-tip on the target component. This approach is demonstrated in <xref linkend="exam-Component_Reference-richtooltip-Unattached_tool-tips" />. When leaving the <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component unattached, ensure it has an <varname>id</varname> identifier defined. If it is defined outside the target element, it must be nested in an <sgmltag>&lt;a4j:form&gt;</sgmltag> component.
 			</para>
 			<example id="exam-Component_Reference-richtooltip-Unattached_tool-tips">
 				<title>Unattached tool-tips</title>
@@ -593,10 +522,10 @@
 		<section id="sect-Component_Reference-richtooltip-Appearance">
 			<title>Appearance</title>
 			<para>
-				By default, the <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component is positioned intelligently based on the position of the mouse cursor. Use the <varname>direction</varname> attribute to specify a corner of the target component at which to display the tool-tip instead. Possible values include <literal>top-left</literal>, <literal>top-right</literal>, <literal>bottom-left</literal>, and <literal>bottom-right</literal>. Use the <varname>horizontalOffset</varname> and <varname>verticalOffset</varname> attributes to specify the horizontal offset and vertical offset at which to display the tool-tip.
+				By default, the <sgmltag>&lt;rich:tooltip&gt;</sgmltag> component is positioned intelligently based on the position of the mouse cursor. Use the <varname>jointPoint</varname> attribute to specify a corner of the target component at which to display the tool-tip instead, and use the <varname>direction</varname> attribute to specify the direction the tool-tip will appear relative to that corner. Possible values for both attributes are <literal>top-left</literal>, <literal>top-right</literal>, <literal>bottom-left</literal>, and <literal>bottom-right</literal>. Use the <varname>horizontalOffset</varname> and <varname>verticalOffset</varname> attributes to specify the horizontal offset and vertical offset at which to display the tool-tip.
 			</para>
 			<para>
-				Use the <varname>hideEvent</varname> attribute to specify when the tool-tip is hidden. The default value is <literal>none</literal>, so the tool-tip remains shown. However, it can be linked to an event on the target component, such as the <literal>mouseout</literal> event.
+				Use the <varname>showEvent</varname> attribute to specify when the tool-tip is shown. By default it appears when the attached component is hovered-over with the mouse. Use the <varname>hideEvent</varname> attribute to specify when the tool-tip is hidden. The default value is <literal>none</literal>, so the tool-tip remains shown. However, it can be linked to an event on the target component, such as the <literal>mouseout</literal> event.
 			</para>
 			<para>
 				Set <code>followMouse="true"</code> to cause the tool-tip to follow the user's mouse movements.
@@ -726,7 +655,7 @@
 		         </listitem>
 		      </varlistentry>
 		      <varlistentry>
-		         <term><function>hide(event)</function></term>
+		         <term><function>hide()</function></term>
 		         <listitem>
 		            <para>
 		               Hide the tool-tip.

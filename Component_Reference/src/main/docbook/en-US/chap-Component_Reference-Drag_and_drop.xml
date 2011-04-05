@@ -30,7 +30,7 @@
 				Use the <varname>dragIndicator</varname> parameter to customize the appearance of a dragged object while it is being dragged. The <varname>dragIndicator</varname> parameter must point to the <varname>id</varname> identifier of a <sgmltag>&lt;rich:dragIndicator&gt;</sgmltag> component. If the <varname>dragIndicator</varname> attribute is not defined, the drag indicator appears as a clone of the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component's parent control.
 			</para>
 			<para>
-				To bind data to the dragged object, use the <varname>dragValue</varname> attribute. The <varname>dragValue</varname> attribute specifies an item in a data model, which is then bound to the parent component when it is dragged. This facilitates handling event data during a drop event.
+				To bind data to the dragged object, use the <varname>dragValue</varname> attribute. The <varname>dragValue</varname> attribute specifies a server-side object, which is then bound to the parent component when it is dragged. This facilitates handling event data during a drop event.
 			</para>
 		</section>
 		
@@ -70,7 +70,7 @@
 	<section id="sect-Component_Reference-Drag_and_drop-richdropTarget">
 		<title><sgmltag>&lt;rich:dropTarget&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component can be added to a component so that the component can accept dragged items. The dragged items must support the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component, and be of a compatible drop type.
+			The <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component can be added to a component so that the component can accept dragged items. The dragged items must be defined with a compatible drop type for the <sgmltag>&lt;rich:dragSource&gt;</sgmltag> component.
 		</para>
 
 		<section id="sect-Component_Reference-richdropTarget-Basic_usage">
@@ -89,7 +89,7 @@
 		<section id="sect-Component_Reference-richdropTarget-Handling_dropped_data">
 			<title>Handling dropped data</title>
 			<para>
-				To provide additional parameters for a drop event, use the <varname>dropValue</varname> attribute.
+				To provide additional parameters for the server-side drop event, use the <varname>dropValue</varname> attribute.
 			</para>
 			<para>
 				The <sgmltag>&lt;rich:dropTarget&gt;</sgmltag> component raises the <varname>DropEvent</varname> server-side event when an object is dropped. The event uses the following parameters:
@@ -159,21 +159,8 @@
 		<section id="sect-Component_Reference-richdragIndicator-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				If included without any attributes specified, the drag indicator will appear as an empty dotted outline, as shown in 
+				To use a drag indicator, define the inner content that appears during a drag event. No additional attributes are required. If a drag indicator is not used, a clone of the drag source is used instead.
 			</para>
-			<figure id="figu-Component_Reference-richdragIndicator-An_empty_drag_indicator">
-				<title>An empty drag indicator</title>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="images/figu-Component_Reference-richdragIndicator-An_empty_drag_indicator.png" format="PNG" />
-					</imageobject>
-					<textobject>
-						<para>
-							An empty drag indicator appears as an empty dotted outline.
-						</para>
-					</textobject>
-				</mediaobject>
-			</figure>
 		</section>
 
 		<section id="sect-Component_Reference-richdragIndicator-Styling_the_indicator">
