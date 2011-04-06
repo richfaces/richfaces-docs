@@ -7,88 +7,6 @@
 		Read this chapter for details on special functions for use with particular components. Using JavaServer Faces Expression Language (<acronym>JSF</acronym> <acronym>EL</acronym>), these functions can be accessed through the <varname>data</varname> attribute of components. Refer to <xref linkend="sect-Component_Reference-Events_and_JavaScript_interactions-data" /> for details on the <varname>data</varname> attribute.
 	</para>
 	
-	<section id="sect-Component_Reference-Functions-richcomponentControl">
-		<title><sgmltag>&lt;rich:componentControl&gt;</sgmltag></title>
-		<para>
-			The <sgmltag>&lt;rich:componentControl&gt;</sgmltag> behavior allows JavaScript API functions to be called on target components. The functions are called after defined events are triggered on the component to with the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> behavior is attached. Initialization variants and activation events can be customized, and parameters can be passed to the target component.
-		</para>
-		
-		<section id="sect-Component_Reference-richcomponentControl-Basic_usage">
-			<title>Basic usage</title>
-			<para>
-				The <varname>operation</varname> attribute is required to attach JavaScript functions to the parent component, along with either the <varname>target</varname> or <varname>selector</varname> attributes. Use the <varname>operation</varname> attribute to specify the JavaScript API function to perform. Use the <varname>target</varname> attribute to define the <varname>id</varname> identifier of the target component, or use the <varname>selector</varname> attribute to define a number of target components through the use of valid jQuery selectors.
-			</para>
-			<para>
-				Use the <varname>event</varname> attribute to specify the event that triggers the JavaScript API function call if it is different from the default triggering event for the parent component.
-			</para>
-			<example id="exam-Component_Reference-richcomponentControl-richcomponentControl_basic_usage">
-				<title><sgmltag>&lt;rich:componentControl&gt;</sgmltag> basic usage</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcomponentControl-richcomponentControl_basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<para>
-					The example contains a single command button, which when clicked shows the modal panel with the identifier <literal>ccModalPanelID</literal>.
-				</para>
-			</example>
-		</section>
-
-		<!--
-		<section id="sect-Component_Reference-richcomponentControl-Attaching_to_a_component">
-			<title>Attaching to a component</title>
-			<para>
-				The <varname>attachTo</varname> attribute can be used to attach the event to a component other than the parent component. If no <varname>attachTo</varname> attribute is supplied, the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> component's parent is used, as in <xref linkend="exam-Component_Reference-richcomponentControl-richcomponentControl_basic_usage" />.
-			</para>
-			<example id="exam-Component_Reference-richcomponentControl-Attaching_richcomponentControl_to_a_component">
-				<title>Attaching <sgmltag>&lt;rich:componentControl&gt;</sgmltag> to a component</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcomponentControl-Attaching_richcomponentControl_to_a_component.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<para>
-					In the example, the <literal>click</literal> event of the component with the identifier <literal>ccCalendarID</literal> will trigger the <literal>Expand</literal> operation for the component with the identifier <literal>doExpandCalendarID</literal>.
-				</para>
-			</example>
-		</section>
-		-->
-		
-		<section id="sect-Component_Reference-richcomponentControl-Passing_parameters_to_API_methods">
-			<title>Passing parameters to API methods</title>
-			<para>
-				The operation can receive parameters through nested <sgmltag>&lt;f:param&gt;</sgmltag> elements.
-			</para>
-			<example id="exam-Component_Reference-richcomponentControl-Using_parameters">
-				<title>Using parameters</title>
-					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richcomponentControl-Using_parameters-1.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-			</example>
-		</section>
-		
-		<section id="sect-Component_Reference-richcomponentControl-Reference_data">
-			<title>Reference data</title>
-			<itemizedlist>
-				<listitem>
-					<para>
-						<parameter>component-type</parameter>: <classname>org.richfaces.ComponentControl</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-class</parameter>: <classname>org.richfaces.component.html.HtmlComponentControl</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>component-family</parameter>: <classname>org.richfaces.ComponentControl</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>renderer-type</parameter>: <classname>org.richfaces.ComponentControlRenderer</classname>
-					</para>
-				</listitem>
-				<listitem>
-					<para>
-						<parameter>tag-class</parameter>: <classname>org.richfaces.taglib.ComponentControlTag</classname>
-					</para>
-				</listitem>
-			</itemizedlist>
-		</section>
-	</section>
-	
 	<section id="sect-Component_Reference-Functions-richclientId">
 		<title><function>rich:clientId</function></title>
 		<para>
@@ -99,7 +17,7 @@
 	<section id="sect-Component_Reference-Functions-richcomponent">
 		<title><function>rich:component</function></title>
 		<para>
-			The <function>rich:component('id')</function> function is a shortcut for the equivalent <code>#{rich:clientId('id')}.component</code> code. It returns the UIComponent instance from the client, based on the passed server-side component identifier (<code>'id'</code>). If the specified component identifier is not found, <literal>null</literal> is returned instead.
+			The <function>rich:component('id')</function> function is equivalent to the <code>RichFaces.$('clientId')</code> code. It returns the client object instance based on the passed server-side component identifier (<code>'id'</code>). If the specified component identifier is not found, <literal>null</literal> is returned instead. The function can be used to get an object from a component to call a JavaScript API function without using the <sgmltag>&lt;rich:componentControl&gt;</sgmltag> component.
 		</para>
 	</section>
 	
