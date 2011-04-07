@@ -318,38 +318,61 @@
 					</para>
 				</step>
 			
-				<step id="step-Developer_Guide-Build_the_project-Building_for_Eclipse_and_JBoss_Tools">
+				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Import_the_project_into_an_IDE">
 					<title>Import the project into an IDE</title>
 					<para>
-						Import the Maven project into your IDE. For <application>Eclipse</application> and <application>JBoss Tools</application>, you can import the project using the <productname>M2Eclipse</productname> plug-in.
-					</para>
-					<para>
-						To install the plug-in, choose <menuchoice><guimenu>Help</guimenu><guimenuitem>Install New Software</guimenuitem></menuchoice> from the menu. Type <literal>Maven</literal> to locate the <guilabel>Maven Integration for Eclipse Update Site</guilabel> entry, then type <literal>Maven</literal> in the filter to show the available plug-ins. Follow the prompts to install the <guilabel>Maven Integration for Eclipse</guilabel> plug-in.
-					</para>
-					<para>
-						With the plug-in installed, open the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>Maven</guimenu><guimenuitem>Existing Maven Projects</guimenuitem></menuchoice> as the import source and choose the <filename>pom.xml</filename> file for your project.
+						To import the project into <productname>Eclipse</productname>, either use Maven to prepare the project or import it directly using <productname>JBoss Tools</productname>.
 					</para>
 					<stepalternatives>
 						<step>
-							<title>Using <application>Maven</application> to prepare the project for <application>Eclipse</application></title>
+							<title>Use <application>Maven</application> to prepare the project for <application>Eclipse</application></title>
+							<substeps>
+								<step>
+									<para>
+										Enter the following command in the root directory of the project:
+									</para>
+									<screen>mvn eclipse:eclipse -DdownloadSources=true -Dwtpversion=2.0</screen>
+									<para>
+										The command generates the required <application>Eclipse</application> project files.
+									</para>
+								</step>
+								<step>
+									Import the project into <application>Eclipse</application> and <application>JBoss Tools</application> through the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>General</guimenu><guimenuitem>Existing Projects into Workspace</guimenuitem></menuchoice> as the import source and choose the root directory for your project.
+								</step>
+							</substeps>
+						</step>
+						<step>
+							<title>Import directly using <productname>JBoss Tools</productname></title>
 							<para>
-								Alternatively, the project can be prepared using Maven then imported normally. Enter the following command in the root directory of the project:
+								<productname>JBoss Tools</productname> contains the following plug-ins to import Maven projects:
 							</para>
-	<screen>mvn eclipse:eclipse -DdownloadSources=true -Dwtpversion=2.0</screen>
-							<para>
-								The command generates the required <application>Eclipse</application> project files. You can then import the project into <application>Eclipse</application> and <application>JBoss Tools</application> through the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>General</guimenu><guimenuitem>Existing Projects into Workspace</guimenuitem></menuchoice> as the import source and choose the root directory for your project.
-							</para>
+							<itemizedlist>
+								<listitem>
+									<para>
+										JBoss Maven Integration
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										JBoss Maven JSF Integration
+									</para>
+								</listitem>
+							</itemizedlist>
+							<substeps>
+								<step>
+									<para>
+										Install <productname>JBoss Tools</productname> using the instructions on the <citetitle>JBoss Tools Downloads</citetitle> site at <ulink url="http://www.jboss.org/tools/download.html" />.
+									</para>	
+								</step>
+								<step>
+									<para>
+										With the plug-ins installed, open the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>Maven</guimenu><guimenuitem>Existing Maven Projects</guimenuitem></menuchoice> as the import source and choose the <filename>pom.xml</filename> file for your project.
+									</para>
+								</step>
+							</substeps>
 						</step>
 					</stepalternatives>
 				</step>
-<!--
-				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Add_tag_library_references">
-					<title>Add tag library references</title>
-					<para>
-						After importing, edit the <filename><replaceable>jsf-app</replaceable>/src/main/webapp/pages/index.xhtml</filename> file to include the tag library declaration as described in <xref linkend="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries" /> of <xref linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project" />.
-					</para>
-				</step>
--->
 			</procedure>
 		
 			<para>
