@@ -317,13 +317,9 @@
 						The <computeroutput>BUILD SUCCESSFUL</computeroutput> message indicates the project has been assembled and is ready to import into an IDE (integrated development environment), such as <productname>JBoss Tools</productname>.
 					</para>
 				</step>
-			
-				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Import_the_project_into_an_IDE">
-					<title>Import the project into an IDE</title>
-					<para>
-						To import the project into <productname>Eclipse</productname>, either use Maven to prepare the project or import it directly using <productname>JBoss Tools</productname>.
-					</para>
-					<stepalternatives>
+
+				<!--deprecated-->
+				<!--
 						<step>
 							<title>Use <application>Maven</application> to prepare the project for <application>Eclipse</application></title>
 							<substeps>
@@ -341,37 +337,58 @@
 								</step>
 							</substeps>
 						</step>
+				-->
+			
+				<step id="step-Developer_Guide-Using_RichFaces_with_Maven-Import_the_project_into_an_IDE">
+					<title>Import the project into an IDE</title>
+					<para>
+						To import the project into <productname>Eclipse</productname> and <productname>JBoss Tools</productname>, use the JBoss Maven Integration plug-ins. These plug-ins work with plug-ins from the M2Eclipse project to import Maven projects.
+					</para>
+					<substeps>
 						<step>
-							<title>Import directly using <productname>JBoss Tools</productname></title>
-							<para>
-								<productname>JBoss Tools</productname> contains the following plug-ins to import Maven projects:
-							</para>
-							<itemizedlist>
-								<listitem>
-									<para>
-										JBoss Maven Integration
-									</para>
-								</listitem>
-								<listitem>
-									<para>
-										JBoss Maven JSF Integration
-									</para>
-								</listitem>
-							</itemizedlist>
+							<title>Install the plug-ins</title>
 							<substeps>
 								<step>
 									<para>
-										Install <productname>JBoss Tools</productname> using the instructions on the <citetitle>JBoss Tools Downloads</citetitle> site at <ulink url="http://www.jboss.org/tools/download.html" />.
-									</para>	
+										Choose <menuchoice><guimenu>Help</guimenu><guimenuitem>Install New Software</guimenuitem></menuchoice> from the Eclipse menu.
+									</para>
 								</step>
 								<step>
 									<para>
-										With the plug-ins installed, open the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu. Select <menuchoice><guimenu>Maven</guimenu><guimenuitem>Existing Maven Projects</guimenuitem></menuchoice> as the import source and choose the <filename>pom.xml</filename> file for your project.
+										Select the JBoss Tools update site to use, then open the <guilabel>Maven Support</guilabel> group and select the <guilabel>JBoss Maven Integration</guilabel> and <guilabel>JBoss Maven JSF Configurator</guilabel> plug-ins.
+									</para>
+								</step>
+								<step>
+									<para>
+										Follow the prompts to install the integration plug-ins. Include the transitive dependencies <guilabel>Maven Integration for Eclipse</guilabel> and <guilabel>Maven Integration for WTP</guilabel>. Both of these dependencies are from the M2Eclipse project.
+									</para>
+								</step>
+								<step>
+									<para>
+										Restart Eclipse to finish the installation.
 									</para>
 								</step>
 							</substeps>
 						</step>
-					</stepalternatives>
+						<step>
+							<title>Open the importing wizard</title>
+							<para>
+								With the plug-ins installed, open the importing wizard by choosing <menuchoice><guimenu>File</guimenu><guimenuitem>Import</guimenuitem></menuchoice> from the menu.
+							</para>
+						</step>
+						<step>
+							<title>Select the project</title>
+							<para>
+								Select <menuchoice><guimenu>Maven</guimenu><guimenuitem>Existing Maven Projects</guimenuitem></menuchoice> as the import source and choose the directory with the <filename>pom.xml</filename> file for your project.
+							</para>
+						</step>
+					</substeps>
+					<note>
+						<title>Exporting from Maven</title>
+						<para>
+							The ability to prepare the project for Eclipse and export it using Maven is deprecated in RichFaces 4.0. The process does not support JBoss integration-specific features, such as JSF Facets.
+						</para>
+					</note>
 				</step>
 			</procedure>
 		
