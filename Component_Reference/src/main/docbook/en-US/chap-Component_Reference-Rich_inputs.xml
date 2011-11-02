@@ -831,6 +831,43 @@
 				To limit the maximum size of the uploaded files, define the byte size with the <parameter>org.richfaces.fileUpload.maxRequestSizes</parameter> context parameter of the <filename>web.xml</filename> settings file for the project.
 			</para>
 		</section>
+        
+        <section id="sect-Component_Reference-richfileUpload-Sanitizing_file_upload_input">
+            <title>Sanitizing file upload input</title>
+            <para>
+                Any file is accepted by rich:fileUpload component by default. There are three parameters available for limiting what can user upload to the server:
+            </para>
+            <variablelist>
+                <varlistentry>
+                    <term><varname>maxFilesQuantity</varname></term>
+                    <listitem>
+                        <para>
+                            The <varname>maxFilesQuantity</varname> parameter defines maximum number of files allowed to be uploaded.
+                            After a number of files in the list equals to the value of this attribute, "Add" button disappears and nothing could be uploaded even if you clear the whole list.
+                            In order to upload files again you should rerender the component.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><varname>acceptedTypes</varname></term>
+                    <listitem>
+                        <para>
+                            The <varname>acceptedTypes</varname> parameter defines comma separated list of file extensions accepted by component.
+                            The component does not provide any feedback when rejecting file.
+                            For introducing feedback for rejection, use <varname>ontyperejected</varname> parameter.
+                        </para>
+                    </listitem>
+                </varlistentry>
+                <varlistentry>
+                    <term><varname>ontyperejected</varname></term>
+                    <listitem>
+                        <para>
+                            The <varname>ontyperejected</varname> parameter defines event handler when file does not meet conditions stated by <varname>acceptedTypes</varname> parameter.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </section>
 
 		<section id="sect-Component_Reference-richfileUpload-Interactivity_options">
 			<title>Interactivity options</title>
