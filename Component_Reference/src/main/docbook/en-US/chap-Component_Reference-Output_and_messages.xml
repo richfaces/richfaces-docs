@@ -238,6 +238,108 @@
 			<xi:include href="skinning/tabl-richmessages.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 		</section>
 	</section>
+    
+    <section id="sect-Component_Reference-Output_and_messages-richnotify">
+        <title><sgmltag>&lt;rich:notify&gt;</sgmltag></title>
+        <para>
+            The <sgmltag>&lt;rich:notify&gt;</sgmltag> component serves for advanced user interaction, giving user instant feedback on what's happening in application in form of notifications.
+        </para>
+        <para>
+            Each time this component is rendered, floating notification box is displayed in the selected corner of the browser screen.
+        </para>
+        
+        <section id="sect-Component_Reference-richnotify-Basic_usage">
+            <title>Basic usage</title>
+            <para>
+                The <sgmltag>&lt;rich:notify&gt;</sgmltag> has two message customization attributes: <parameter>summary</parameter> is short text summarizing the message communicated with user, while <parameter>detail</parameter> configures detailed body of the message.
+            </para>
+            <para>
+                Both attributes have their counterparts in form of facets with same names as respective attributes.
+            </para>
+        </section>
+
+        <section id="sect-Component_Reference-richnotify-Customizing_notifications">
+            <title>Customizing notifications</title>
+            <para>
+                By default, notifications appears immediately after request which renders them in case of AJAX requests or once page is completely loaded in full-page request.
+            </para>
+            <para>
+                They are waiting for 8 seconds and then they disappear. User can close notification with close button in the top-right corner of each notification.
+            </para>
+            <para>
+                But there are several attributes that can change default behavior:
+            </para>
+             <itemizedlist>
+                <listitem>
+                    <para>
+                        <parameter>sticky</parameter>: notifications does not disappear automatically, they needs to be closed explicitly with close button (this attribute can't be used together with <parameter>nonblocking</parameter> and <parameter>stayTime</parameter>)
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>stayTime</parameter>: configures how long notification stays on the screen before it disappears (in miliseconds) 
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>styleClass</parameter>: defines the class customizing the notification
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>nonblocking</parameter>: defines notifications which can't be closed manually, user needs to wait before they disappear, but once notification is hovered with mouse, it becomes partially transparent and user can click through
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>nonblockingOpacity</parameter>: defines opacity of nonblocking notifications when mouse hovers over notification
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>showShadow</parameter>: defines whether shadow will be displayed under the notification
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <para>
+                Note that nonblocking notifications can be clicked through, but because they are using jQuery mechanism to bypass events, only jQuery event handlers are triggered. It specifically means that standard links won't be triggered.
+            </para>
+        </section>
+        
+        <section id="sect-Component_Reference-richnotify-Reference_data">
+            <title>Reference data</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <parameter>component-type</parameter>: <classname>org.richfaces.Notify</classname>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>component-class</parameter>: <classname>org.richfaces.component.UINotify</classname>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>component-family</parameter>: <classname>org.richfaces.Notify</classname>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>renderer-type</parameter>: <classname>org.richfaces.NotifyRenderer</classname>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </section>
+
+        <section id="sect-Component_Reference-richnotify-Style_classes_and_skin_parameters">
+            <title>Style classes and skin parameters</title>
+            <para>Note that skinning is common for both <sgmltag>&lt;rich:notify&gt;</sgmltag>, <sgmltag>&lt;rich:notifyMessage&gt;</sgmltag> and <sgmltag>&lt;rich:notifyMessages&gt;</sgmltag></para>
+            <xi:include href="skinning/tabl-richnotify.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+        </section>
+    </section>
+    
+    
 	
 	<!-- <rich:paint2D> -->
 	<!--
