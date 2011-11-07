@@ -453,6 +453,135 @@
         </section>
     </section>
     
+    <section id="sect-Component_Reference-Output_and_messages-richnotifyStack">
+        <title><sgmltag>&lt;rich:notifyStack&gt;</sgmltag></title>
+        <para>
+            Notifications emited by <sgmltag>&lt;rich:notify&gt;</sgmltag>, <sgmltag>&lt;rich:notifyMessage&gt;</sgmltag> and <sgmltag>&lt;rich:notifyMessages&gt;</sgmltag> are displayed in top-right corner of the screen by default.
+        </para>
+        <para>
+            It is <sgmltag>&lt;rich:notifyStack&gt;</sgmltag> which defines where messages will appear and handles their stacking.
+        </para>
+        <para>
+            Stack does also provide way how to remove messages from screen - when stack is re-rendered, current notifications are destroyed, freeing place for new notifications.
+        </para>
+        
+        <section id="sect-Component_Reference-richnotifyStack-Basic_usage">
+            <title>Basic usage</title>
+            <para>
+                They are three alternative ways how to bind notification with stack:
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis>wrapping</emphasis>: nesting component bounds notifications with stack which is wrapping them
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>binding by id</emphasis>: notification can be bound directly to stack using it's <code>componentId</code> and attribute <parameter>stack</parameter> attribute of notification
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>using default stack</emphasis>: default stack is used when no other binding is defined for given notification
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <programlisting language="XML" role="XML">
+                <![CDATA[
+<rich:notifyStack position="bottomRight">
+    <rich:notifyMessages />
+</rich:notifyStack>
+                    ]]>
+            </programlisting>
+            <para>
+                Sample above defines stack explicitly, where notifications uses wrapping stack.
+            </para>
+            <para>
+                Following sample uses notification, which is rendered into top-left screen corner. Notification is bound to stack using <code>componentId</code>.
+            </para>
+            <programlisting language="XML" role="XML">
+                <![CDATA[
+<rich:notifyStack id="leftStack" position="topLeft" />
+
+<rich:notify stack="leftStack" />
+                    ]]>
+            </programlisting>
+        </section>
+        
+        <section id="sect-Component_Reference-richnotifyStack-Positioning_notifications">
+            <title>Positioning notifications</title>
+            <para>
+                To redefine positioning of notification, one needs to define stack and bind it with given notification. 
+            </para>
+            <para>
+                <sgmltag>&lt;rich:notifyStack&gt;</sgmltag> uses <parameter>position</parameter> attribute which places stack and its notifications into one of four corners: <code>topRight</code> (default), <code>bottomRight</code>, <code>bottomLeft</code>, <code>topLeft</code>.
+            </para>
+        </section>
+        
+        <section id="sect-Component_Reference-richnotifyStack-Stacking_notifications">
+            <title>Stacking notifications</title>
+            <para>
+                There are two attributes which influences how notifications are placed into stack: 
+            </para>
+            <para>
+                <sgmltag>&lt;rich:notifyStack&gt;</sgmltag> uses <parameter>position</parameter> attribute which places stack and its notifications into one of four corners: <code>topRight</code> (default), <code>bottomRight</code>, <code>bottomLeft</code>, <code>topLeft</code>.
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <parameter>method</parameter>: defines where new notifications are placed and how they are removed. Options: <code>first</code> (default), <code>last</code>.
+                    </para>
+                    <para>
+                        <parameter>direction</parameter>: defines in which direction will be messages stacked. Options: <code>vertical</code> (default), <code>horizontal</code>
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <para>
+                Following sample shows stack which will place new notification as first - incoming message will appear first, causing all notifications currently in stack to shift. Adequately, messages on the end of stack will be then removed from stack as first.
+            </para>
+            <programlisting language="XML" role="XML">
+                <![CDATA[
+<rich:notifyStack method="first" />
+                    ]]>
+            </programlisting>
+            <para>
+                On the other hand, stacking method <code>last</code> does provide method to place messages on the end of stack, and when removing notification, it is removed from start, causing all other notifications to shift.
+            </para>
+        </section>
+        
+        <section id="sect-Component_Reference-richnotifyStack-Reference_data">
+            <title>Reference data</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <parameter>component-type</parameter>: <classname>org.richfaces.NotifyStack</classname>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>component-class</parameter>: <classname>org.richfaces.component.UINotifyStack</classname>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>component-family</parameter>: <classname>org.richfaces.NotifyStack</classname>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <parameter>renderer-type</parameter>: <classname>org.richfaces.NotifyStackRenderer</classname>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </section>
+
+        <section id="sect-Component_Reference-richnotifyStack-Style_classes_and_skin_parameters">
+            <title>Style classes and skin parameters</title>
+            <xi:include href="skinning/tabl-richnotifyStack.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+        </section>
+    </section>
+    
     
 	
 	<!-- <rich:paint2D> -->
