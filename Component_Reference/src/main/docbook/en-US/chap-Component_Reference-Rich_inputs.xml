@@ -2260,7 +2260,7 @@
 	<section id="sect-Component_Reference-Rich_inputs-richorderingList">
 		<title><sgmltag>&lt;rich:orderingList&gt;</sgmltag></title>
 		<para>
-            The <sgmltag>&lt;rich:orderingList&gt;</sgmltag> is a component for ordering items in a list. This component allows one to reorder a list and sort it on the client side.
+            The <sgmltag>&lt;rich:orderingList&gt;</sgmltag> is a component for ordering items in a list (client-side).
 		</para>
 
 		<figure id="figu-Component_Reference-richorderingList-richorderingList">
@@ -2280,7 +2280,7 @@
 		<section id="sect-Component_Reference-richorderingList-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				To use the <sgmltag>&lt;rich:orderingList&gt;</sgmltag> bind the <varname>value</varname> attribute to the list to be ordered.  This <varname>var</varname> attribute specifies a variable to use when iterating through the list values.  The <varname>var</varname> attribute is used within the <varname>itemLabel</varname> to assign the object value to be displayed.  Similarly, the <varname>var</varname> attribute is used within the <varname>itemValue</varname> attribute to specify the object value mapped by the display value.  If the itemValue is not of type <classname>String</classname>, a converter must be specified for this itemValue using either the <varname>converter</varname> attribute, or a nested <sgmltag>&lt;f:converter&gt;</sgmltag> tag.
+				To use the <sgmltag>&lt;rich:orderingList&gt;</sgmltag> bind the <varname>value</varname> attribute to the list to be ordered.  The <varname>var</varname> attribute specifies a variable to use when iterating through the list values.  The <varname>var</varname> attribute is used within the <varname>itemLabel</varname> to assign the object value to be displayed.  Similarly, the <varname>var</varname> attribute is used within the <varname>itemValue</varname> attribute to specify the object value mapped by the display value.  If the itemValue is not of type <classname>String</classname>, a converter must be specified for this itemValue using either the <varname>converter</varname> attribute, or a nested <sgmltag>&lt;f:converter&gt;</sgmltag> tag.
 			</para>
 			<example id="exam-Component_Reference-richorderingList-ItemLabel_use">
 				<title>ItemLabel/ItemValue use</title>
@@ -2294,14 +2294,14 @@
 				</variablelist>
 			</example>
 			<para>
-				The arrow keys on a keyboard can be used to highlight different items in the list.  Pressing <keycap>ctrl</keycap> modifier with the arrow keys will move the selected item up or down within the list.
+				The arrow keys on a keyboard can be used to highlight different items in the list.  Pressing the <keycap>ctrl</keycap> modifier with the arrow keys will move the selected item up or down within the list.
 			</para>
 		</section>
 
 		<section id="sect-Component_Reference-richorderingList-Column_layout">
 			<title>Column Layout</title>
 			<para>
-				In addition to the above simple itemLabel display, the <sgmltag>&lt;rich:orderingList&gt;</sgmltag> supports a columnar layout of the itemValues to be sorted.  This is achieved by nesting <sgmltag>&lt;rich:column&gt;</sgmltag> tags within the ordering list, and referencing the <varname>var</varname> attribute from within the <sgmltag>&lt;rich:column&gt;</sgmltag> EL.
+				In addition to the above simple itemLabel display, the <sgmltag>&lt;rich:orderingList&gt;</sgmltag> supports a columnar layout of the itemValues to be sorted.  This is achieved by nesting <sgmltag>&lt;rich:column&gt;</sgmltag> tags within the orderingList, and referencing the <varname>var</varname> attribute from within the <sgmltag>&lt;rich:column&gt;</sgmltag> EL.
 			</para>
 			<example id="exam-Component_Reference-richorderingList-richcolumn">
 				<title>Nested <sgmltag>&lt;rich:column&gt;</sgmltag> tags</title>
@@ -2405,6 +2405,163 @@
         <section id="sect-Component_Reference-richorderingList-Style_classes_and_skin_parameters">
 			<title>Style classes and skin parameters</title>
 			<xi:include href="skinning/tabl-richorderingList.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+    </section>
+    
+    <!-- <rich:pickList> -->
+	<section id="sect-Component_Reference-Rich_inputs-pickList">
+		<title><sgmltag>&lt;rich:pickList&gt;</sgmltag></title>
+		<para>
+            The <sgmltag>&lt;rich:pickList&gt;</sgmltag> is a component for selecting items from a list.  Additionally, it allows for the selected items to be ordered (client-side).  From the client side perspective, items are added/removed from the source list, and removed/added to the target list.  However it is important to note that the server-side source of items is never modified, and always represents the list of all items available for selection.  If the list of unselected items is required, it can be determined by subtracting the collection of all selected items from the collection of all available items.
+		</para>
+
+		<figure id="figu-Component_Reference-richpickList-richpickList">
+			<title><sgmltag>&lt;rich:select&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richpickList-richpickList.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:pickList&gt;</sgmltag> component.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+
+		<section id="sect-Component_Reference-richpickList-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				To use the <sgmltag>&lt;rich:pickList&gt;</sgmltag> bind the <varname>value</varname> attribute to the target list, where the selected items will be stored.  The list of source items is provided by nesting a <classname>SelectItem</classname> source, such as a <sgmltag>&lt;f:selectItems&gt;</sgmltag> tag, or a list of <sgmltag>&lt;f:selectItem&gt;</sgmltag> tags.  If the itemValue of the <classname>SelectItem</classname> is not of type <classname>String</classname>, a converter must be specified for this itemValue using either the <varname>converter</varname> attribute, or a nested <sgmltag>&lt;f:converter&gt;</sgmltag> tag.
+			</para>
+			<example id="exam-Component_Reference-richpickList-ItemLabel_use">
+				<title>Simple pickList use</title>
+				<variablelist>
+					<varlistentry>
+						<term>Using the default <classname>SelectItem</classname> itemLabel to generate the pickList source and target items.</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpickList-ItemLabel_use.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</example>
+			<para>
+                The items in the target list can be ordered client-side by setting the <varname>orderable</varname> attribute of the <sgmltag>&lt;rich:pickList&gt;</sgmltag> tag to <code>true</code>.  The arrow keys on a keyboard can then be used to highlight different items in the target list, and pressing the <keycap>ctrl</keycap> modifier with the arrow keys will move the selected item up or down within the target list.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richpickList-Column_layout">
+			<title>Column Layout</title>
+			<para>
+				In addition to the above simple <classname>SelectItem</classname> itemLabel display, the <sgmltag>&lt;rich:pickList&gt;</sgmltag> supports a columnar layout of the items to be selected.  This is achieved by adding a <varname>var</varname> attribute used to represent the collection of nested <classname>SelectItems</classname>, and nesting <sgmltag>&lt;rich:column&gt;</sgmltag> tags within the pickList.  The <varname>var</varname> attribute of the <sgmltag>&lt;f:selectItem&gt;</sgmltag> is then referenced from within the <sgmltag>&lt;rich:column&gt;</sgmltag> EL.
+			</para>
+			<example id="exam-Component_Reference-richpickList-richcolumn">
+				<title>Nested <sgmltag>&lt;rich:column&gt;</sgmltag> tags</title>
+				<variablelist>
+					<varlistentry>
+						<term>Using <sgmltag>&lt;rich:column&gt;</sgmltag> tags nested within the <sgmltag>&lt;rich:pickList&gt;</sgmltag></term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richpickList-richcolumn_use.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</example>
+		</section>
+
+        <section id="sect-Component_Reference-richpickList-JavaScript_API">
+		   <title>JavaScript API</title>
+		   <para>
+		      The <sgmltag>&lt;rich:pickList&gt;</sgmltag> component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
+		   </para>
+		   <variablelist>
+		      <varlistentry>
+		         <term><function>getSourceList()</function></term>
+		         <listitem>
+		            <para>
+		               Returns the javascript list object backing the <sgmltag>&lt;rich:pickList&gt;</sgmltag> source list.  This list can be used to select/unselect item(s).
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>getTargetList()</function></term>
+		         <listitem>
+		            <para>
+		               Returns the javascript list object backing the <sgmltag>&lt;rich:pickList&gt;</sgmltag> target list.  This list can be used to select/unselect item(s).
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>add()</function></term>
+		         <listitem>
+		            <para>
+		               Add the currently selected items to the target list, removing them from the source list.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>addAll()</function></term>
+		         <listitem>
+		            <para>
+		               Add all the source items to the target list, removing them from the source list.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>remove()</function></term>
+		         <listitem>
+		            <para>
+		               Remove the currently selected items from the target list, adding them to the source list.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>removeAll()</function></term>
+		         <listitem>
+		            <para>
+		               Remove all the source items from the target list, adding them to the source list.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+              <varlistentry>
+		         <term><function>toggleButtons()</function></term>
+		         <listitem>
+		            <para>
+		               Activate/de-activate the pickList buttons based on the current component item state.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		   </variablelist>
+		</section>
+
+        <section id="sect-Component_Reference-richpickList-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.PickList</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.UIPickList</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.SelectMany</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.PickListRenderer</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+
+        <section id="sect-Component_Reference-richpickList-Style_classes_and_skin_parameters">
+			<title>Style classes and skin parameters</title>
+			<xi:include href="skinning/tabl-richpickList.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 		</section>
     </section>
 
