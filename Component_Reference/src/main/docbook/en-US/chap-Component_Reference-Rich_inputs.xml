@@ -2256,5 +2256,157 @@
 		
 	</section>
 
+    <!-- <rich:orderingList> -->
+	<section id="sect-Component_Reference-Rich_inputs-richorderingList">
+		<title><sgmltag>&lt;rich:orderingList&gt;</sgmltag></title>
+		<para>
+            The <sgmltag>&lt;rich:orderingList&gt;</sgmltag> is a component for ordering items in a list. This component allows one to reorder a list and sort it on the client side.
+		</para>
+
+		<figure id="figu-Component_Reference-richorderingList-richorderingList">
+			<title><sgmltag>&lt;rich:select&gt;</sgmltag></title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/figu-Component_Reference-richorderingList-richorderingList.png" format="PNG" />
+				</imageobject>
+				<textobject>
+					<para>
+						A <sgmltag>&lt;rich:orderingList&gt;</sgmltag> component.
+					</para>
+				</textobject>
+			</mediaobject>
+		</figure>
+
+		<section id="sect-Component_Reference-richorderingList-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				To use the <sgmltag>&lt;rich:orderingList&gt;</sgmltag> bind the <varname>value</varname> attribute to the list to be ordered.  This <varname>var</varname> attribute specifies a variable to use when iterating through the list values.  The <varname>var</varname> attribute is used within the <varname>itemLabel</varname> to assign the object value to be displayed.  Similarly, the <varname>var</varname> attribute is used within the <varname>itemValue</varname> attribute to specify the object value mapped by the display value.  If the itemValue is not of type <classname>String</classname>, a converter must be specified for this itemValue using either the <varname>converter</varname> attribute, or a nested <sgmltag>&lt;f:converter&gt;</sgmltag> tag.
+			</para>
+			<example id="exam-Component_Reference-richorderingList-ItemLabel_use">
+				<title>ItemLabel/ItemValue use</title>
+				<variablelist>
+					<varlistentry>
+						<term>Using the <varname>itemLabel</varname> and <varname>itemValue</varname> attributes</term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richorderingList-ItemLabel_use.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</example>
+			<para>
+				The arrow keys on a keyboard can be used to highlight different items in the list.  Pressing <keycap>ctrl</keycap> modifier with the arrow keys will move the selected item up or down within the list.
+			</para>
+		</section>
+
+		<section id="sect-Component_Reference-richorderingList-Column_layout">
+			<title>Column Layout</title>
+			<para>
+				In addition to the above simple itemLabel display, the <sgmltag>&lt;rich:orderingList&gt;</sgmltag> supports a columnar layout of the itemValues to be sorted.  This is achieved by nesting <sgmltag>&lt;rich:column&gt;</sgmltag> tags within the ordering list, and referencing the <varname>var</varname> attribute from within the <sgmltag>&lt;rich:column&gt;</sgmltag> EL.
+			</para>
+			<example id="exam-Component_Reference-richorderingList-richcolumn">
+				<title>Nested <sgmltag>&lt;rich:column&gt;</sgmltag> tags</title>
+				<variablelist>
+					<varlistentry>
+						<term>Using <sgmltag>&lt;rich:column&gt;</sgmltag> tags nested within the <sgmltag>&lt;rich:orderingList&gt;</sgmltag></term>
+						<listitem>
+							<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richorderingList-richcolumn_use.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</example>
+			<para>
+				When using <sgmltag>&lt;rich:column&gt;</sgmltag> tags to layout the <sgmltag>&lt;rich:orderingList&gt;</sgmltag> items, the <varname>itemLabel</varname> attribute is irrelevant, and may be left out.
+			</para>
+		</section>
+
+        <section id="sect-Component_Reference-richorderingList-JavaScript_API">
+		   <title>JavaScript API</title>
+		   <para>
+		      The <sgmltag>&lt;rich:orderingList&gt;</sgmltag> component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
+		   </para>
+		   <variablelist>
+		      <varlistentry>
+		         <term><function>getList()</function></term>
+		         <listitem>
+		            <para>
+		               Returns the javascript list object backing the <sgmltag>&lt;rich:orderingList&gt;</sgmltag>.  This list can be used to select/unselect item(s).
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>up()</function></term>
+		         <listitem>
+		            <para>
+		               Move the currently selected item(s) up one step.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>down()</function></term>
+		         <listitem>
+		            <para>
+		               Move the currently selected item(s) down one step.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>upTop()</function></term>
+		         <listitem>
+		            <para>
+		               Move the currently selected item(s) to the top of the list.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		      <varlistentry>
+		         <term><function>downBottom()</function></term>
+		         <listitem>
+		            <para>
+		               Move the currently selected item(s) to the bottom of the list.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+              <varlistentry>
+		         <term><function>toggleButtons()</function></term>
+		         <listitem>
+		            <para>
+		               Activate/de-activate the orderingList buttons based on the current component item state.
+		            </para>
+		         </listitem>
+		      </varlistentry>
+		   </variablelist>
+		</section>
+
+        <section id="sect-Component_Reference-richorderingList-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.OrderingList</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.UIOrderingList</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.SelectMany</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.OrderingListRenderer</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+
+        <section id="sect-Component_Reference-richorderingList-Style_classes_and_skin_parameters">
+			<title>Style classes and skin parameters</title>
+			<xi:include href="skinning/tabl-richorderingList.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+    </section>
+
 </chapter>
 
