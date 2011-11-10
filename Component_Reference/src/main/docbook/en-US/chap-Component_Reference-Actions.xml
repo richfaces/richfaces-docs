@@ -532,16 +532,8 @@
 	
 	<section id="sect-Component_Reference-Actions-a4jpush">
 		<title><sgmltag>&lt;a4j:push&gt;</sgmltag></title>
-		<!--
 		<para>
-			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component periodically performs an Ajax request to the server, simulating "push" functionality.
-		</para>
-		<para>
-			While it is not strictly pushing updates, the request is made to minimal code only, not to the <acronym>JSF</acronym> tree, checking for the presence of new messages in the queue. The request registers <classname>EventListener</classname>, which receives messages about events, but does not poll registered beans. If a message exists, a complete request is performed. This is different from the <sgmltag>&lt;a4j:poll&gt;</sgmltag> component, which performs a full request at every interval.
-		</para>
-		-->
-		<para>
-			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component performs real-time updates on the client side from events raised at the server side. The events are pushed out to the client through the Java Message Service (<acronym>JMS</acronym>). When the <sgmltag>&lt;a4j:push&gt;</sgmltag> component is triggered by a server event, it can in turn cause Ajax updates and changes. 
+			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component performs real-time updates on the client side from events raised at the server side. The events are pushed out to the client through the RichFaces messaging queue (which is bound to Java Messaging Service - <acronym>JMS</acronym>). When the <sgmltag>&lt;a4j:push&gt;</sgmltag> component is triggered by a server event, it can in turn cause Ajax updates and changes. 
 		</para>
 		<para>
 			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component uses the Comet model for pushing data to the client.
@@ -550,8 +542,90 @@
 		<section id="sect-Component_Reference-a4jpush-Basic_usage">
 			<title>Basic usage</title>
 			<para>
-				RichFaces requires the use of the <filename>jquery-atmosphere.js</filename> client plug-in for push functionality. Add the server-side Atmosphere framework as a build dependency to your project.
+				The <sgmltag>&lt;a4j:push&gt;</sgmltag> uses Atmosphere framework on both client-side and server-side. In order to use Atmosphere on server-side, it is necessary to add Atmosphere libraries into project.  
 			</para>
+            <para>
+                It is possible to trigger push events on server-side in several ways, which will be described later:
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis>JMS</emphasis> - RichFaces Push consumes messages from enterprise messaging system and exposes them to client (tightly couples with JMS runtime) 
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>TopicsContext</emphasis> - accesses RichFaces message queue directly
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Push CDI</emphasis> - uses CDI Events mechanism to access TopicsContext
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <para>
+                On the client side, push notification may be processed by following ways: 
+            </para>
+             <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>ondataavailable</code> event attribute - <sgmltag>&lt;a4j:push&gt;</sgmltag> (serialized message is available through <parameter>event.rf.data</parameter>)
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Attaching behavior to <code>dataavailable</code> event - any behavior may be attached (<sgmltag>&lt;a4j:ajax&gt;</sgmltag>, <sgmltag>&lt;rich:componentControl&gt;</sgmltag>, etc.)  
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </section>
+        
+        <section id="sect-Component_Reference-a4jpush-Push_Topics">
+            <title>Push Topics</title>
+            <para>
+                No matter which type way of producing messages is chosen, message is delivered to the client based on the topic name (with optional subtopic). 
+            </para>
+            <para>
+                Examples of topic names might be <code>someTopic</code> or topic including subtopic <code>subtopic@anotherTopic</code>.
+            </para>
+            <para>
+                Push topic name format is very close to JMS topic names and thus enables seamless transport of JMS messages to RichFaces message queue.
+            </para>
+        </section>
+        
+        <section id="sect-Component_Reference-a4jpush-Handling_a_push_notification">
+            <title>Handling a push notification</title>
+            <para>
+                A push notification from server sent to the <sgmltag>&lt;a4j:push&gt;</sgmltag> component on client will cause it to trigger any event handlers defined using the <varname>dataavailable</varname> event handler. 
+            </para>
+            <para>
+                The <sgmltag>&lt;a4j:push&gt;</sgmltag> component should also include the <varname>error</varname> event handler to inform the user when an error has occurred with the push notifications.
+            </para>
+            <para>
+                Topic name may be determined dynamically in runtime, using Expression Language expressions.
+            </para>
+            <example id="exam-Component_Reference-a4jpush-Handling_a_push_notification">
+                <title>Handling a push notification</title>
+                <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Handling_a_push_notification.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+                <para>
+                    The example uses the <varname>dataavailable</varname> event attribute with JavaScript to update messages in a chat room. The <parameter>event.rf.data</parameter> parameter contains JMS message data serialized to JavaScript.
+                </para>
+            </example>
+            <para>
+                <sgmltag>&lt;a4j:push&gt;</sgmltag> can be used for both, immediate processing of message (like in example above) or it can trigger partial page update.
+            </para>
+            <example id="exam-Component_Reference-a4jpush-Updating_DOM_for_each_push_notification">
+                <title>Updating DOM for each push notification</title>
+                <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Updating_DOM_for_each_push_notification.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+                <para>
+                    The example uses the <varname>dataavailable</varname> event handler to trigger ajax update of the part of the page.
+                </para>
+            </example>
+        </section>
+        
+        <section id="sect-Component_Reference-a4jpush-Push_and_JMS_integration">
+			<title>Push and JMS integration</title>
 			<para>
 				The JMS instance on the back-end must be configured to work with your <sgmltag>&lt;a4j:push&gt;</sgmltag> components. Refer to the <citetitle>JBoss Application Server Administration Console Guide</citetitle> for details on managing JBoss Application Server through the Administration Console.
 			</para>
@@ -639,35 +713,51 @@
 				</para>
 			</example>
 		</section>
-
-		<section id="sect-Component_Reference-a4jpush-Handling_a_push_notification">
-			<title>Handling a push notification</title>
-			<para>
-				A push notification sent to the <sgmltag>&lt;a4j:push&gt;</sgmltag> behavior will cause it to trigger any event handlers defined using the <varname>ondataavailable</varname> event attribute. 
-			</para>
-			<para>
-				The <sgmltag>&lt;a4j:push&gt;</sgmltag> component should also include the <varname>onerror</varname> event attribute to inform the user when an error has occurred with the push notifications.
-			</para>
-			<example id="exam-Component_Reference-a4jpush-Handling_a_push_notification">
-				<title>Handling a push notification</title>
-				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Handling_a_push_notification.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-				<para>
-					The example uses the <varname>dataavailable</varname> event attribute with JavaScript to update messages in a chat room. The <parameter>event.rf.data</parameter> parameter contains JMS message data serialized to JavaScript.
-				</para>
-			</example>
-		</section>
-
-		<!--
-		<section id="sect-Component_Reference-a4jpush-Timing_options">
-			<title>Timing options</title>
-			<para>
-				The <varname>interval</varname> attribute specifies the time in milliseconds between checking for messages. The default for this value is 1000 ms (1 second). It is possible to set the interval value to <literal>0</literal>, in which case it is constantly checking for new messages.
-			</para>
-			<para>
-				The <varname>timeout</varname> attribute defines the response waiting time in milliseconds. If a response isn't received within the timeout period, the connection is aborted and the next request is sent. By default, the timeout is not set. In combination with the <varname>interval</varname> attribute, checks for the queue state can short polls or long connections.
-			</para>
-		</section>
-		-->
+        
+        <section id="sect-Component_Reference-a4jpush-Using_Push_without_JMS">
+            <title>Using Push without JMS</title>
+            <para>
+                Since JMS coupling may be unwated in certain cases, RichFaces provides switch which turns off JMS integration: 
+            </para>
+            <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Using_Push_without_JMS.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+            <para>
+                This switch is important in situations when you want to use alternative situations of sending push notifications: <emphasis>Push CDI</emphasis> or <code>TopicsContext</code> programmatic interface.
+            </para>
+        </section>
+        
+        <section id="sect-Component_Reference-a4jpush-Using_TopicsContext_to_publish_message">
+            <title>Using TopicsContext to publish message</title>
+            <para>
+                 Alternative way of producing messages is using RichFaces' <code>TopicsContext</code> interface directly as in following sample:
+            </para>
+            <programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Using_TopicsContext_to_publish_message.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+            <para>
+                Sending message using <code>TopicsContext</code> involves creating <code>TopicKey</code> instance (denominator of given message topic) and looking up for <code>TopicsContext</code> used for topic registration and message publishing.
+            </para>
+            <para>
+                Note that for using <code>TopicsContext</code> is it necessary having <code>FacesContext</code> instance available in current thread.
+            </para>
+        </section>
+        
+        <section id="sect-Component_Reference-a4jpush-Push_CDI_Integration">
+            <title>Integrating Push with CDI events</title>
+            <para>
+                Second alternative way of producing messages is using CDI Events mechanism.
+            </para>
+            <para>
+                Push notifications can be produced by annotating CDI event with <code>@Push</code> annotation, which specifies end-point (topic name).
+            </para>
+            <para>
+                Payload of the message is the serialized object sent with CDI event using <code>Event.fire(T object)</code>.
+            </para>
+            <programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Integrating_Push_with_CDI_events.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+            <para>
+                Note that for using CDI events for producing push notifications, is it necessary having <code>FacesContext</code> instance available in current thread.
+            </para>
+            <para>
+                Note that associations for CDI events and their handlers are constructed in application deployment. Therefore topics can't be dynamically associated using <code>Event.select(Annotation...)</code> @Push CDI qualifier. 
+            </para>
+        </section>
 		
 		<section id="sect-Component_Reference-a4jpush-Reference_data">
 			<title>Reference data</title>
