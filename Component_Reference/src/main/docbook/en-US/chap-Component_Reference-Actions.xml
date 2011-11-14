@@ -533,7 +533,7 @@
 	<section id="sect-Component_Reference-Actions-a4jpush">
 		<title><sgmltag>&lt;a4j:push&gt;</sgmltag></title>
 		<para>
-			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component performs real-time updates on the client side from events raised at the server side. The events are pushed out to the client through the RichFaces messaging queue (which is bound to Java Messaging Service - <acronym>JMS</acronym>). When the <sgmltag>&lt;a4j:push&gt;</sgmltag> component is triggered by a server event, it can in turn cause Ajax updates and changes. 
+			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component performs real-time updates on the client side from events triggered at the server side. The events are pushed out to the client through the RichFaces messaging queue (which is bound to Java Messaging Service - <acronym>JMS</acronym>). When the <sgmltag>&lt;a4j:push&gt;</sgmltag> component is triggered by a server event, it can in turn cause Ajax updates and changes. 
 		</para>
 		<para>
 			The <sgmltag>&lt;a4j:push&gt;</sgmltag> component uses the Comet model for pushing data to the client.
@@ -545,7 +545,7 @@
 				The <sgmltag>&lt;a4j:push&gt;</sgmltag> uses Atmosphere framework on both client-side and server-side. In order to use Atmosphere on server-side, it is necessary to add Atmosphere libraries into project.  
 			</para>
             <para>
-                It is possible to trigger push events on server-side in several ways, which will be described later:
+                It is possible to trigger push events on server-side in several ways:
             </para>
             <itemizedlist>
                 <listitem>
@@ -587,11 +587,11 @@
                 No matter which type way of producing messages is chosen, message is delivered to the client based on the topic name (with optional subtopic). 
             </para>
             <para>
-                Examples of topic names might be <code>someTopic</code> or topic including subtopic <code>subtopic@anotherTopic</code>.
+                Examples of topic names might be <code>someTopic</code> or <code>subtopic@anotherTopic</code>.
             </para>
-            <para>
+            <note>
                 Push topic name format is very close to JMS topic names and thus enables seamless transport of JMS messages to RichFaces message queue.
-            </para>
+            </note>
         </section>
         
         <section id="sect-Component_Reference-a4jpush-Handling_a_push_notification">
@@ -619,7 +619,7 @@
                 <title>Updating DOM for each push notification</title>
                 <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Updating_DOM_for_each_push_notification.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
                 <para>
-                    The example uses the <varname>dataavailable</varname> event handler to trigger ajax update of the part of the page.
+                    The example uses the <varname>dataavailable</varname> event handler to trigger AJAX request and partial page update.
                 </para>
             </example>
         </section>
@@ -706,10 +706,7 @@
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				<programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Basic_usage.java" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				<para>
-					The example demonstrates a simple use of the <sgmltag>&lt;a4j:push&gt;</sgmltag> component to manage a list of users in a chat room. The <sgmltag>&lt;a4j:push&gt;</sgmltag> component refers to the <code>#{chatBean.listSubtopic}@chat</code> address, which has been created on the JMS server. It then uses the sub-topics to separate messages across different topics.
-				</para>
-				<para>
-					When a new message arrives, the <sgmltag>&lt;a4j:ajax&gt;</sgmltag> behavior causes the user list to update. If an error occurs, the user is alerted.
+					The example demonstrates a simple use of the <sgmltag>&lt;a4j:push&gt;</sgmltag> causing immediate update of page content.
 				</para>
 			</example>
 		</section>
@@ -717,7 +714,7 @@
         <section id="sect-Component_Reference-a4jpush-Using_Push_without_JMS">
             <title>Using Push without JMS</title>
             <para>
-                Since JMS coupling may be unwated in certain cases, RichFaces provides switch which turns off JMS integration: 
+                Since JMS coupling may be unwanted in certain cases, RichFaces provides switch which turns off JMS integration: 
             </para>
             <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Using_Push_without_JMS.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             <para>
@@ -728,15 +725,15 @@
         <section id="sect-Component_Reference-a4jpush-Using_TopicsContext_to_publish_message">
             <title>Using TopicsContext to publish message</title>
             <para>
-                 Alternative way of producing messages is using RichFaces' <code>TopicsContext</code> interface directly as in following sample:
+                 Alternative way of producing messages is using <code>TopicsContext</code> interface directly as in following sample:
             </para>
             <programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Using_TopicsContext_to_publish_message.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             <para>
                 Sending message using <code>TopicsContext</code> involves creating <code>TopicKey</code> instance (denominator of given message topic) and looking up for <code>TopicsContext</code> used for topic registration and message publishing.
             </para>
-            <para>
-                Note that for using <code>TopicsContext</code> is it necessary having <code>FacesContext</code> instance available in current thread.
-            </para>
+            <important>
+                For using <code>TopicsContext</code> is it necessary having <code>FacesContext</code> instance available in current thread.
+            </important>
         </section>
         
         <section id="sect-Component_Reference-a4jpush-Push_CDI_Integration">
@@ -748,15 +745,15 @@
                 Push notifications can be produced by annotating CDI event with <code>@Push</code> annotation, which specifies end-point (topic name).
             </para>
             <para>
-                Payload of the message is the serialized object sent with CDI event using <code>Event.fire(T object)</code>.
+                Payload of the message is the serialized object sent using CDI event interface (<code>Event.fire(T object)</code>).
             </para>
             <programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Integrating_Push_with_CDI_events.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-            <para>
-                Note that for using CDI events for producing push notifications, is it necessary having <code>FacesContext</code> instance available in current thread.
-            </para>
-            <para>
-                Note that associations for CDI events and their handlers are constructed in application deployment. Therefore topics can't be dynamically associated using <code>Event.select(Annotation...)</code> @Push CDI qualifier. 
-            </para>
+            <important>
+                For using CDI events for producing push notifications, is it necessary having <code>FacesContext</code> instance available in current thread.
+            </important>
+            <note>
+                Associations for CDI events and their handlers are constructed in application deployment. Therefore topics can't be dynamically associated using <code>Event.select(Annotation...)</code> @Push CDI qualifier. 
+            </note>
         </section>
 		
 		<section id="sect-Component_Reference-a4jpush-Reference_data">
