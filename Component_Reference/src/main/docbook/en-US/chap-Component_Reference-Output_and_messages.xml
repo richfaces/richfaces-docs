@@ -251,23 +251,29 @@
         <section id="sect-Component_Reference-richnotify-Basic_usage">
             <title>Basic usage</title>
             <para>
-                The <sgmltag>&lt;rich:notify&gt;</sgmltag> has two message customization attributes: <parameter>summary</parameter> is short text summarizing the message communicated with user, while <parameter>detail</parameter> configures detailed body of the message.
+                The <sgmltag>&lt;rich:notify&gt;</sgmltag> has two message customization attributes: <parameter>summary</parameter> is short text summarizing the message, while <parameter>detail</parameter> configures detailed body of the message.
             </para>
             <para>
-                Both attributes have their counterparts in form of facets with same names as respective attributes.
+                Both attributes have their counterparts in form of facets with same names as attributes.
             </para>
         </section>
 
         <section id="sect-Component_Reference-richnotify-Customizing_notifications">
             <title>Customizing notifications</title>
             <para>
-                By default, notifications appears immediately after request which renders them in case of AJAX requests or once page is completely loaded in full-page request.
+                Notification appears on the page each them they are rendered, on full-page or ajax requests.
             </para>
             <para>
-                They are waiting for 8 seconds and then they disappear. User can close notification with close button in the top-right corner of each notification.
+                Notifications are waiting on the screen for 8 seconds and then they disappear.
             </para>
             <para>
-                But there are several attributes that can change default behavior:
+                Notification stacks and creates sequences. For customizition of stacking see <sgmltag>&lt;rich:notifyStack&gt;</sgmltag> component.
+            </para>
+            <para>
+                User can close notification with close button in the top-right corner of each notification.
+            </para>
+            <para>
+                There are several attributes that can change default behavior:
             </para>
              <itemizedlist>
                 <listitem>
@@ -287,12 +293,12 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <parameter>nonblocking</parameter>: defines notifications which can't be closed manually, user needs to wait before they disappear, but once notification is hovered with mouse, it becomes partially transparent and user can click through
+                        <parameter>nonblocking</parameter>: defines notifications which becomes partially transparent and user can click through. Non-blocking notifications don't have close button.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <parameter>nonblockingOpacity</parameter>: defines opacity of nonblocking notifications when mouse hovers over notification
+                        <parameter>nonblockingOpacity</parameter>: defines opacity of nonblocking notifications when mouse hovers over notification (decimal number between 0 and 1)
                     </para>
                 </listitem>
                 <listitem>
@@ -301,9 +307,9 @@
                     </para>
                 </listitem>
             </itemizedlist>
-            <para>
-                Note that nonblocking notifications can be clicked through, but because they are using jQuery mechanism to bypass events, only jQuery event handlers are triggered. It specifically means that standard links won't be triggered.
-            </para>
+            <note>
+                Nonblocking notifications can be clicked through, but because they are using jQuery mechanism to bypass events, only jQuery event handlers are triggered. It specifically means that standard links won't be triggered.
+            </note>
         </section>
         
         <section id="sect-Component_Reference-richnotify-Reference_data">
@@ -347,16 +353,16 @@
         <section id="sect-Component_Reference-richnotifyMessage-Basic_usage">
             <title>Basic usage</title>
             <para>
-                The <sgmltag>&lt;rich:notifyMessage&gt;</sgmltag> component is built on top of <sgmltag>&lt;rich:notify&gt;</sgmltag>, the difference is in usage of Faces messages system to define notifications.
+                The <sgmltag>&lt;rich:notifyMessage&gt;</sgmltag> component is built on top of <sgmltag>&lt;rich:notify&gt;</sgmltag>, the difference is in usage.
             </para>
             <para>
-                Behavior does not differ from <sgmltag>&lt;rich:message&gt;</sgmltag>: one notification is displayed for first <code>FacesMessage</code> in stack, raisen either programatically or during component conversion/validation.
+                Component displays <code>FacesMessage</code>s associated with given component, similarry to <sgmltag>&lt;rich:message&gt;</sgmltag>: one notification is displayed for first <code>FacesMessage</code> in stack, raisen either programatically or during component conversion or validation.
             </para>
             <para>
-                Notification icon and text color is determined by severity of message for which has been notification raised.
+                Severify of message which triggers notification determines color and icon of notification.
             </para>
             <para>
-                For customization of notifications behavior refer to Customizing notifications.
+                For customization of notifications behavior refer to <link linkend="sect-Component_Reference-richnotify-Customizing_notifications">Customizing notifications</link> of <sgmltag>&lt;rich:notify&gt;</sgmltag>.
             </para>
         </section>
         
@@ -401,7 +407,7 @@
     <section id="sect-Component_Reference-Output_and_messages-richnotifyMessages">
         <title><sgmltag>&lt;rich:notifyMessages&gt;</sgmltag></title>
         <para>
-            The <sgmltag>&lt;rich:notifyMessages&gt;</sgmltag> component is same as <sgmltag>&lt;rich:notifyMessage&gt;</sgmltag>, but all available messages are displayed instead of the first one only.
+            The <sgmltag>&lt;rich:notifyMessages&gt;</sgmltag> component is same as <sgmltag>&lt;rich:notifyMessage&gt;</sgmltag>, but each of available messages generates one notification. 
         </para>
         <para>
             <sgmltag>&lt;rich:notifyMessages&gt;</sgmltag> shares the same set of attributes with <sgmltag>&lt;rich:notifyMessage&gt;</sgmltag> 
@@ -409,7 +415,7 @@
         <figure id="figu-Component_Reference-richnotifyMessages-richnotifyMessages">
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/figu-Component_Reference-richnotifyMessages-richnotifyMessages.png" width="300" height="222" format="PNG" />
+                    <imagedata fileref="images/figu-Component_Reference-richnotifyMessages-richnotifyMessages.png" width="200" format="PNG" />
                 </imageobject>
                 <textobject>
                     <para>
@@ -462,7 +468,7 @@
             It is <sgmltag>&lt;rich:notifyStack&gt;</sgmltag> which defines where messages will appear and handles their stacking.
         </para>
         <para>
-            Stack does also provide way how to remove messages from screen - when stack is re-rendered, current notifications are destroyed, freeing place for new notifications.
+            Stack also provides way how to remove messages from screen - when stack is re-rendered, current notifications are destroyed, freeing place for new notifications.
         </para>
         
         <section id="sect-Component_Reference-richnotifyStack-Basic_usage">
@@ -473,12 +479,12 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>wrapping</emphasis>: nesting component bounds notifications with stack which is wrapping them
+                        <emphasis>wrapping</emphasis>: nesting <sgmltag>&lt;rich:notify&gt;</sgmltag>, <sgmltag>&lt;rich:notifyMessage&gt;</sgmltag> or <sgmltag>&lt;rich:notifyMessages&gt;</sgmltag> bounds notifications with stack which is wrapping them
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>binding by id</emphasis>: notification can be bound directly to stack using it's <code>componentId</code> and attribute <parameter>stack</parameter> attribute of notification
+                        <emphasis>binding by id</emphasis>: notification can be bound directly to stack using it's <code>componentId</code> in attribute <parameter>stack</parameter>
                     </para>
                 </listitem>
                 <listitem>
@@ -487,26 +493,14 @@
                     </para>
                 </listitem>
             </itemizedlist>
-            <programlisting language="XML" role="XML">
-                <![CDATA[
-<rich:notifyStack position="bottomRight">
-    <rich:notifyMessages />
-</rich:notifyStack>
-                    ]]>
-            </programlisting>
+            <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richnotifyStack-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             <para>
-                Sample above defines stack explicitly, where notifications uses wrapping stack.
+                The sample above defines stack explicitly, where notifications uses stack in that they are wrapped.
             </para>
             <para>
-                Following sample uses notification, which is rendered into top-left screen corner. Notification is bound to stack using <code>componentId</code>.
+                The sample bellow uses notification, which is rendered into top-left screen corner. Notification is bound to stack using its id.
             </para>
-            <programlisting language="XML" role="XML">
-                <![CDATA[
-<rich:notifyStack id="leftStack" position="topLeft" />
-
-<rich:notify stack="leftStack" />
-                    ]]>
-            </programlisting>
+            <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richnotifyStack-Binding_by_stack_id.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
         </section>
         
         <section id="sect-Component_Reference-richnotifyStack-Positioning_notifications">
@@ -524,9 +518,6 @@
             <para>
                 There are two attributes which influences how notifications are placed into stack: 
             </para>
-            <para>
-                <sgmltag>&lt;rich:notifyStack&gt;</sgmltag> uses <parameter>position</parameter> attribute which places stack and its notifications into one of four corners: <code>topRight</code> (default), <code>bottomRight</code>, <code>bottomLeft</code>, <code>topLeft</code>.
-            </para>
             <itemizedlist>
                 <listitem>
                     <para>
@@ -540,11 +531,7 @@
             <para>
                 Following sample shows stack which will place new notification as first - incoming message will appear first, causing all notifications currently in stack to shift. Adequately, messages on the end of stack will be then removed from stack as first.
             </para>
-            <programlisting language="XML" role="XML">
-                <![CDATA[
-<rich:notifyStack method="first" />
-                    ]]>
-            </programlisting>
+            <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richnotifyStack-Stacking_method_first.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             <para>
                 On the other hand, stacking method <code>last</code> does provide method to place messages on the end of stack, and when removing notification, it is removed from start, causing all other notifications to shift.
             </para>
