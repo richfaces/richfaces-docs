@@ -731,8 +731,14 @@
             <para>
                 Sending message using <code>TopicsContext</code> involves creating <code>TopicKey</code> instance (denominator of given message topic) and looking up for <code>TopicsContext</code> used for topic registration and message publishing.
             </para>
-            <important>
-                For using <code>TopicsContext</code> is it necessary having <code>FacesContext</code> instance available in current thread.
+            <important id="important-Component_Reference-a4jpush-Limitations_for_using_TopicsContext_interface">
+                <title>Limitations for using <code>TopicsContext</code> interface</title>
+                <para>
+                    For using <code>TopicsContext</code> is it necessary having <code>FacesContext</code> instance available in current thread.
+                </para>
+                <para>
+                    The method <code>TopicsContext.lookup()</code> can be called only in context of web application class loader (<code>ServiceTracker</code> needs to be accessible for given application).
+                </para>
             </important>
         </section>
         
@@ -749,10 +755,10 @@
             </para>
             <programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Integrating_Push_with_CDI_events.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             <important>
-                For using CDI events for producing push notifications, is it necessary having <code>FacesContext</code> instance available in current thread.
+                For using CDI events for producing push notifications, same <link linkend="important-Component_Reference-a4jpush-Limitations_for_using_TopicsContext_interface">limitations</link> applies as for using <code>TopicsContext</code> interface.
             </important>
             <note>
-                Associations for CDI events and their handlers are constructed in application deployment. Therefore topics can't be dynamically associated using <code>Event.select(Annotation...)</code> @Push CDI qualifier. 
+                Associations for CDI events and their handlers are constructed in application deployment. Therefore topics can't be dynamically associated using <code>Event.select(Annotation...)</code> and <code>@Push</code> CDI qualifier. 
             </note>
         </section>
 		
