@@ -804,7 +804,7 @@
             <title><sgmltag>&lt;rich:editor&gt;</sgmltag></title>
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="images/figu-Component_Reference-richeditor-richeditor.png" format="PNG" />
+                    <imagedata fileref="images/figu-Component_Reference-richeditor-richeditor.png"  width="400" format="PNG" />
                 </imageobject>
                 <textobject>
                     <para>
@@ -817,13 +817,7 @@
             <sgmltag>&lt;rich:editor&gt;</sgmltag> component is based on CKEditor implementation.
         </para>
         <para>
-            When rendering <sgmltag>&lt;rich:editor&gt;</sgmltag>, textarea is rendered to the page and once the page is completely loaded (ready state), textarea is enhanced by CKEditor script and replaced with full-featured WYSIWYG editor. 
-        </para>
-        <para>
-            Note that ResourceServlet has to be registered manually in order to serve editor resources correctly (JavaScript, CSS, images). Check RichFaces Developer's Guide out for details.
-        </para>
-        <para>
-            Note that <sgmltag>&lt;rich:editor&gt;</sgmltag> requires having <sgmltag>&lt;h:body&gt;</sgmltag> component as ancestor in the view for rendering editor's JavaScript resource dependencies correctly.
+            When rendering <sgmltag>&lt;rich:editor&gt;</sgmltag>, textarea is rendered to the page and once the page is completely loaded (ready state), textarea is enhanced using CKEditor script and replaced with full-featured WYSIWYG editor. 
         </para>
         
         <section id="sect-Component_Reference-richeditor-Basic_usage">
@@ -831,20 +825,28 @@
             <para>
                 Basic usage requires the <varname>value</varname> attribute to point to the expression for the current value of the component.
             </para>
-            <programlisting language="XML" role="XML">
-                <![CDATA[
-<rich:editor value="#{backingBean.editedValue}" />
-                    ]]>
-            </programlisting>
+            <example>
+                <title>Basic usage of <sgmltag>&lt;rich:editor&gt;</sgmltag></title>
+                <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richeditor-Basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+                <para>
+                    Note that editor does produce HTML markup and to be able render it's output, markup needs to be output as unescaped (as with <sgmltag>&lt;h:outputText&gt;</sgmltag> component in example above).
+                </para>
+            </example>
             <para>
                 Dimensions of editor can be managed using <parameter>width</parameter> and <parameter>height</parameter> attributes.
             </para>
             <para>
-                Attribute <parameter>readonly</parameter> can be used to switch editor into read-only mode.
+                The <parameter>readonly</parameter> attribute can be used to switch editor into read-only mode.
             </para>
             <para>
-                <parameter>tabindex</parameter> is used as for any other form inputs.
+                The <parameter>tabindex</parameter> attribute specifies the position of the current element in the tabbing order for the current document.
             </para>
+            <note>
+                <code>ResourceServlet</code> has to be registered for <code>url-pattern</code> <code>/org.richfaces.resources/*</code> in order to serve editor resources (JavaScript, CSS, images) correctly. Check  <emphasis>RichFaces Developer's Guide</emphasis> out for details.
+            </note>
+            <note>
+                The <sgmltag>&lt;rich:editor&gt;</sgmltag> requires having <sgmltag>&lt;h:body&gt;</sgmltag> component present in the view and being its ancestor for rendering resource dependencies correctly.
+            </note>
         </section>
         
         <section id="sect-Component_Reference-richeditor-Styling">
@@ -860,7 +862,7 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <parameter>editorStyle, editorClass</parameter>: customizes style of the editor
+                        <parameter>editorStyle, editorClass</parameter>: customizes style of the CKEditor instance
                     </para>
                 </listitem>
                 <listitem>
@@ -869,46 +871,55 @@
                     </para>
                 </listitem>
             </itemizedlist>
-            <para>
-                Attributes above gives possibility to customize style of both, editor and underlying textarea. 
-            </para>
         </section>
         
         <section id="sect-Component_Reference-richeditor-Editor_skins">
             <title>Editor skins</title>
             <para>
-                <sgmltag>&lt;rich:editor&gt;</sgmltag> comes with two axis of skinnability.
+                The <sgmltag>&lt;rich:editor&gt;</sgmltag> comes with skinnability using attribute <code>skin</code> and two approaches:
             </para>
             <para>
-                At first, standard skin called <code>richfaces</code> is optimized to suit rest of the component suite look &amp; feel and behaves regarding to which RichFaces skin is currently chosen.
+                At first, <sgmltag>&lt;rich:editor&gt;</sgmltag> has default skin called <code>richfaces</code> that is optimized to suit rest of the component suite look &amp; feel and behaves regarding to which RichFaces skin is currently chosen (refer to <emphasis>RichFaces Developer's Guide</emphasis> for details about <emphasis>Skinning and theming</emphasis>).
             </para>
-            <figure id="figu-Component_Reference-richeditor-richfaces_skin">
-                <mediaobject>
-                    <imageobject>
-                        <imagedata fileref="images/figu-Component_Reference-richeditor-richfaces_skin.png" format="PNG" />
-                    </imageobject>
-                    <textobject>
-                        <para>
-                            A <sgmltag>&lt;rich:editor&gt;</sgmltag> with default <code>richfaces</code> editor skin rendered against several RichFaces Skin options.
-                        </para>
-                    </textobject>
-                </mediaobject>
-            </figure>
+            <example>
+                <title>The skin <code>richfaces</code> of <sgmltag>&lt;rich:editor&gt;</sgmltag></title>
+                <figure id="figu-Component_Reference-richeditor-richfaces_skin">
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/figu-Component_Reference-richeditor-richfaces_skin.png" width="400" format="PNG" />
+                        </imageobject>
+                        <textobject>
+                            <para>
+                                A <sgmltag>&lt;rich:editor&gt;</sgmltag> with default <code>richfaces</code> editor skin rendered against several RichFaces Skin options.
+                            </para>
+                        </textobject>
+                    </mediaobject>
+                </figure>
+                <para>
+                    A <sgmltag>&lt;rich:editor&gt;</sgmltag> with default <code>richfaces</code> editor skin rendered against several RichFaces Skin options.
+                </para>
+            </example>
             <para>
                 Second option gives you possibility to use any other skin for CKEditor, either from standard distribution or downloaded one or custom one. In distribution, there are three skins bundled: <code>kama, v2, office2003</code>.
             </para>
-            <figure id="figu-Component_Reference-richeditor-distribution_skins">
-                <mediaobject>
-                    <imageobject>
-                        <imagedata fileref="images/figu-Component_Reference-richeditor-distribution_skins.png" format="PNG" />
-                    </imageobject>
-                    <textobject>
-                        <para>
-                            A CKEditor distribution skins <code>kama</code>, <code>v2</code> and <code>office2003</code>.
-                        </para>
-                    </textobject>
-                </mediaobject>
-            </figure>
+            <example>
+                <title>Examples of <sgmltag>&lt;rich:editor&gt;</sgmltag> skins in CKEditor distribution</title>
+                <figure id="figu-Component_Reference-richeditor-distribution_skins">
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="images/figu-Component_Reference-richeditor-distribution_skins.png" width="400" format="PNG" />
+                        </imageobject>
+                        <textobject>
+                            <para>
+                                A CKEditor distribution skins <code>kama</code>, <code>v2</code> and <code>office2003</code>.
+                            </para>
+                        </textobject>
+                    </mediaobject>
+                </figure>
+                <para>
+                    A CKEditor distribution skins <code>kama</code>, <code>v2</code> and <code>office2003</code>.
+                </para>
+            </example>
         </section>
         
         <section id="sect-Component_Reference-richeditor-Advanced_configuration">
@@ -917,69 +928,38 @@
                 Basic set of <sgmltag>&lt;rich:editor&gt;</sgmltag> attributes allows to support common use-cases for WYSIWYG editor.
             </para>
             <para>
-                CKEditor imlementation supports much more configuration options that the ones which are exposed to basic set of attributes.
+                However CKEditor imlementation supports much more configuration options.
             </para>
             <para>
                 Attribute <parameter>config</parameter> gives possibility to define any advanced configuration option which CKEditor supports.
             </para>
             <para>
-                Configuration is written in JavaScript object format and its value interpolated for EL expressions (making configuration dynamic).
+                Configuration is written in JavaScript object format and its value is interpolated for EL expressions (making configuration dynamic).
             </para>
             <para>
-                There are two options to define configuration: <parameter>config</parameter> attribute and component facet with name <parameter>config</parameter>. Facet takes precedence over attribute when both defined.
+                There are two options to define configuration: <parameter>config</parameter> attribute and facet with name <parameter>config</parameter>. Facet takes precedence over attribute when both defined.
             </para>
-            <programlisting language="XML" role="XML">
-                <![CDATA[
-<rich:editor config="startupFocus: #{userPreferences.startupFocus}" />
-
-<rich:editor>
-    <f:facet name="config">
-        startupFocus: #{userPreferences.startupFocus}
-    </f:facet>
-</rich:editor>
-                    ]]>
-            </programlisting>
+            <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richeditor-Advanced_configuration.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             <para>
                 In samples above, <sgmltag>&lt;rich:editor&gt;</sgmltag> is configured to take focus after load of the page regarding to user preferences. Definitions using either attribute or facet are adequate.
             </para>
-            <para>
-                For further configuration options, refer to CKEditor 3 Developer Guide ( http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Setting_Configurations ) and CKEditor 3 configuration reference ( http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html ).
-            </para>
+            <note>
+                For further configuration options, refer to <ulink url="http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Setting_Configurations">CKEditor 3 Developer Guide</ulink> and <ulink url="http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html">CKEditor 3 configuration reference</ulink>.
+            </note>
         </section>
         
         <section id="sect-Component_Reference-richeditor-Toolbar_customization">
             <title>Toolbar customization</title>
             <para>
-                <sgmltag>&lt;rich:editor&gt;</sgmltag> supports <parameter>toolbar</parameter> attribute able to switch between toolbar configurations. 
+                <sgmltag>&lt;rich:editor&gt;</sgmltag> supports <parameter>toolbar</parameter> attribute able to switch between configurations of toolbar's button set. 
             </para>
             <para>
-                There are two configurations available: <code>basic</code> (default), <code>full</code>. 
+                There are two configurations available: <code>basic</code> (default), <code>full</code> (enables all of the features). 
             </para>
             <para>
-                It is possible to define custom toolbar using CKEditor toolbar definition notion:
+                It is possible to define custom toolbar using CKEditor toolbar configuration in <code>config</code> facet:
             </para>
-            <programlisting language="XML" role="XML">
-                <![CDATA[
-<rich:editor toolbar="CustomToolbar">
-    <f:facet name="config">
-            toolbar_CustomToolbar:
-                [
-                    { name: 'document', items : [ 'NewPage','Preview' ] },
-                    { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
-                    { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','Scayt' ] },
-                    { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'
-                             ,'Iframe' ] },
-                            '/',
-                    { name: 'styles', items : [ 'Styles','Format' ] },
-                    { name: 'basicstyles', items : [ 'Bold','Italic','Strike','-','RemoveFormat' ] },
-                    { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote' ] },
-                    { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
-                    { name: 'tools', items : [ 'Maximize' ] }
-                ]
-            </f:facet>
-</rich:editor>
-                    ]]>
-            </programlisting>
+            <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richeditor-Toolbar_customization.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             <para>
                 Note that toolbar name (<code>CustomToolbar</code>) needs to match the <code>toolbar_&lt;name&gt;</code> configuration option.
             </para>
@@ -991,25 +971,25 @@
                 <sgmltag>&lt;rich:editor&gt;</sgmltag> comes with attribute <parameter>lang</parameter> which allows to change localization of editor.
             </para>
             <para>
-                For language configuration options, refer to http://www.w3.org/TR/html4/struct/dirlang.html.
+                For language configuration options, refer to <ulink url="http://www.w3.org/TR/html4/struct/dirlang.html">http://www.w3.org/TR/html4/struct/dirlang.html</ulink>.
             </para>
             <para>
-                <parameter>lang</parameter> attribute is influences following settings:
+                The <parameter>lang</parameter> attribute influences following settings:
             </para>
             <itemizedlist>
                 <listitem>
                     <para>
-                        underlying textarea - specifies the i18n settings for received and submitted content 
+                        <emphasis>underlying textarea</emphasis> - specifies the i18n settings for received and submitted content 
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        editor value - specifies the i18n settings for value edited in WYSIWYG mode
+                        <emphasis>editor value</emphasis> - specifies the i18n settings for value edited in WYSIWYG mode
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        default settings of localization of editor controls and interface
+                        <emphasis>default settings of localization</emphasis> of editor controls and interface
                     </para>
                 </listitem>
             </itemizedlist>
@@ -1017,13 +997,9 @@
                 However localization of interface is in first place localized using the browser configuration (usually determined by client system settings).
             </para>
             <para>
-                To force editor to use specific localization of interface, you can use custom CKEditor configuration option <code>language</code> as in following sample:
+                To force editor to use specific localization of interface, you can use advanced CKEditor configuration option <code>language</code> as in following sample:
             </para>
-            <programlisting language="XML" role="XML">
-                <![CDATA[
-<rich:editor lang="fr" config="language: 'fr'" />
-                    ]]>
-            </programlisting>
+            <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richeditor-Internationalization_and_localization.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             <para>
                 The sample above force editor to use french interface, supressing the browser preferred settings.
             </para>
@@ -1032,7 +1008,7 @@
          <section id="sect-Component_Reference-richeditor-Client_side_event_handlers">
             <title>Client-side event handlers</title>
             <para>
-                <sgmltag>&lt;rich:editor&gt;</sgmltag> component produces set of events for handling component specific interaction.
+                The <sgmltag>&lt;rich:editor&gt;</sgmltag> component produces set of events for handling component specific interaction.
             </para>
             <itemizedlist>
                 <listitem>
@@ -1064,20 +1040,7 @@
             <para>
                 Events can be handled either by registering JavaScript event handler or by attaching JSF behavior:
             </para>
-            <programlisting language="XML" role="XML">
-                <![CDATA[
-<rich:editor value="#{backingBean.editorValue}">
-    <a4j:ajax event="change" render="editorOutput" />
-    <a4j:ajax event="dirty" render="editorOutput">
-        <a4j:attachQueue requestDelay="1000" />
-    </a4j:ajax>
-</rich:editor>
-
-<a4j:outputPanel id="editorOutput">
-    <h:outputText escape="false" value="#{backingBean.editorValue}" />
-</a4j:outputPanel>
-                    ]]>
-            </programlisting>
+            <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richeditor-Client_side_event_handlers.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             <para>
                 Example above shows editor and its output, which is updated each 1 sec after each instant change or immediately after user focus leaves editor area.
             </para>
@@ -1109,7 +1072,7 @@
                  <term><function>getEditor()</function></term>
                  <listitem>
                     <para>
-                       Returns the CKEditor object associated to given instance of <sgmltag>&lt;rich:editor&gt;</sgmltag> component.
+                       Returns the CKEditor object instance associated to given <sgmltag>&lt;rich:editor&gt;</sgmltag> component.
                     </para>
                  </listitem>
               </varlistentry>
@@ -1117,7 +1080,7 @@
                  <term><function>getInput()</function></term>
                  <listitem>
                     <para>
-                       Returns the textarea associated textarea.
+                       Returns the associated textarea.
                     </para>
                  </listitem>
               </varlistentry>
@@ -1149,7 +1112,7 @@
                  <term><function>isDirty()</function></term>
                  <listitem>
                     <para>
-                       Returns <literal>true</literal> if editor is focused and it was edited from last focus event (reset by blur event and using setValue(newValue) call and when component re-rendered)
+                       Returns <literal>true</literal> if editor is focused and it was edited from last focus event (reset by blur event, by using <code>setValue(newValue)</code> call and when component is re-rendered)
                     </para>
                  </listitem>
               </varlistentry>
@@ -1157,7 +1120,7 @@
                  <term><function>isValueChanged()</function></term>
                  <listitem>
                     <para>
-                       Returns <literal>true</literal> if the control's value has been changed from the default (reset by setValue(newValue) call and when component re-rendered)
+                       Returns <literal>true</literal> if the control's value has been changed from the default (reset by <code>setValue(newValue)</code> call and when component is re-rendered)
                     </para>
                  </listitem>
               </varlistentry>
