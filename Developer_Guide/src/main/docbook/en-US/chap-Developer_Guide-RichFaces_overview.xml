@@ -327,6 +327,11 @@
 						JSF 2 does not allow resources such as JavaScript or Cascading Style Sheets (<acronym>CSS</acronym>) to be added if the element requiring the resource is not initially present in the JSF tree. As such, components added to the tree via Ajax must have any required resources already loaded. In RichFaces, any components added to the JSF tree should have components with corresponding resources included on the main page initially. To facilitate this, components can use the <code>rendered="false"</code> setting to not be rendered on the page.
 					</para>
 				</listitem>
+                <listitem>
+                    <para>
+                        JSF does render resource links (stylesheets, scripts) in order of occurence, thus if you add <code>&lt;h:outputStylesheet&gt;</code> to the <code>&lt;h:head&gt;</code> section, JSF will render it before the RichFaces resource links (dependencies of RichFaces components). To be able to overwrite RichFaces stylesheets and re-use RichFaces JavaScript implementation, you need to render <code>&lt;h:outputStylesheet target=&quot;head&quot;&gt;</code> to the <code>&lt;h:body&gt;</code> section (safe solution is to place it on the end of the section; however to keep readability, you can use start of the section).  
+                    </para>
+                </listitem>
 				<listitem>
 					<para>
 						Switching RichFaces skins via Ajax during runtime should be avoided, as this requires all the stylesheets to be reloaded.
