@@ -3,6 +3,10 @@ import org.richfaces.model.TreeNodeImpl;
 public class DataHolderTreeNodeImpl extends TreeNodeImpl {
     private Object data;
 
+    public DataHolderTreeNodeImpl() {
+        super();
+    }
+
     public DataHolderTreeNodeImpl(boolean leaf, Object data) {
         super(leaf);
         this.data = data;
