@@ -1,29 +1,33 @@
 <rich:dataTable value="#{capitalsBean.capitals}" var="cap" id="table">
-   <f:facet name="header">
-      <rich:column>
-         <h:outputText value="State Name">
-      </rich:column>
-      <rich:column>
-         <h:outputText value="State Time Zone">
-      </rich:column>
-   </f:facet>
-   <rich:column filterMethod="#{filteringBean.filterStates}">
-		<f:facet name="header">
-			<h:inputText value="#{filteringBean.filterValue}" id="input">
-				<a4j:ajax event="keyup" render="table"
-					          ignoreDupResponses="true" requestDelay="700"/>
-			</h:inputText>
-		</f:facet>
-      <h:outputText value="#{cap.state}"/>
-   </rich:column> 
-   <rich:column filterExpression=
-      "#{fn:containsIgnoreCase(cap.timeZone, filteringBean.filterZone)}">
-		<f:facet name="header">
-			<h:selectOneMenu value="#{filteringBean.filterZone}">
-				<f:selectItems value="#{filteringBean.filterZones}" />
-				<a4j:ajax event="change" render="table" />
-			</h:selectOneMenu>
-		</f:facet>
-      <h:outputText value="#{cap.timeZone}"/> 
-   </rich:column>
+
+    <f:facet name="header">
+        <rich:columnGroup>
+            <rich:column>
+                <h:outputText value="State Name" />
+            </rich:column>
+            <rich:column>
+                <h:outputText value="State Time Zone" />
+            </rich:column>
+        </rich:columnGroup>
+    </f:facet>
+    <rich:column filter="#{filteringBean.stateFilter}">
+        <f:facet name="header">
+            <h:inputText value="#{filteringBean.stateFilterValue}" id="input">
+                <a4j:ajax event="keyup" render="table@body">
+                    <a4j:attachQueue  requestDelay="700"
+                        ignoreDupResponses="true" />
+                </a4j:ajax>
+            </h:inputText>
+        </f:facet>
+        <h:outputText value="#{cap.state}" />
+    </rich:column>
+    <rich:column filterExpression="#{fn:containsIgnoreCase(cap.timeZone, filteringBean.zoneFilterValue)}">
+        <f:facet name="header">
+            <h:selectOneMenu value="#{filteringBean.zoneFilterValue}">
+                <f:selectItems value="#{filteringBean.zoneList}" />
+                <a4j:ajax event="change" render="table@body" />
+            </h:selectOneMenu>
+        </f:facet>
+        <h:outputText value="#{cap.timeZone}" />
+    </rich:column>
 </rich:dataTable>
