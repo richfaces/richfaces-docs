@@ -16,93 +16,94 @@
       site: http://www.fsf.org.
    -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-   <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-   <parent>
-      <groupId>org.richfaces</groupId>
-      <artifactId>richfaces-parent</artifactId>
-      <version>11</version>
-   </parent>
+    <parent>
+        <groupId>org.richfaces</groupId>
+        <artifactId>richfaces-parent</artifactId>
+        <version>11</version>
+    </parent>
 
-   <groupId>org.richfaces.docs</groupId>
-   <artifactId>docs-parent</artifactId>
-   <version>4.1.1-SNAPSHOT</version>
-   <name>Richfaces Docs: Parent</name>
-   <packaging>pom</packaging>
-   <url>http://richfaces.org</url>
+    <groupId>org.richfaces.docs</groupId>
+    <artifactId>docs-parent</artifactId>
+    <version>4.1.1-SNAPSHOT</version>
+    <name>Richfaces Docs: Parent</name>
+    <packaging>pom</packaging>
+    <url>http://richfaces.org</url>
 
-   <build>
-      <pluginManagement>
-         <plugins>
-            <plugin>
-		         <groupId>org.jboss.maven.plugins</groupId>
-		         <artifactId>maven-jdocbook-plugin</artifactId>
-		         <version>2.2.1</version>
-		         <extensions>true</extensions>
-		         <dependencies>
-		            <dependency>
-		               <groupId>org.jboss.pressgang</groupId>
-		               <artifactId>pressgang-xslt</artifactId>
-		               <version>1.2.0</version>
-		            </dependency>
-		            <dependency>
-		               <groupId>org.jboss</groupId>
-		               <artifactId>jbossorg-jdocbook-style</artifactId>
-		               <version>1.1.1</version>
-		               <type>jdocbook-style</type>
-		            </dependency>
-		         </dependencies>
-		         <configuration>
-		            <sourceDirectory>${project.basedir}/src/main/docbook</sourceDirectory>
-		            <sourceDocumentName>${docname}.xml</sourceDocumentName>
-		            <masterTranslation>en-US</masterTranslation>
-		            <imageResource>
-		               <directory>${project.basedir}/src/main/docbook/en-US</directory>
-		               <includes>
-		                  <include>images/*.png</include>
-		               </includes>
-		            </imageResource>
-		            <formats>
-		               <format>
-		                  <formatName>pdf</formatName>
-		                  <stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
-		                  <finalName>${pdf.name}</finalName>
-		               </format>
-		               <format>
-		                  <formatName>html</formatName>
-		                  <stylesheetResource>classpath:/xslt/org/jboss/xhtml.xsl</stylesheetResource>
-		                  <finalName>index.html</finalName>
-		               </format>
-		               <format>
-		                  <formatName>html_single</formatName>
-		                  <stylesheetResource>classpath:/xslt/org/jboss/xhtml-single.xsl</stylesheetResource>
-		                  <finalName>index.html</finalName>
-		               </format>
-		            </formats>
-		            <options>
-						   <xincludeSupported>true</xincludeSupported>
-						   <xmlTransformerType>saxon</xmlTransformerType>
-						   <docbookVersion>1.72.0</docbookVersion>
-						   <localeSeparator>-</localeSeparator>
-						   <injectionDateFormat>dd/MM/yyy</injectionDateFormat>
-						   <transformerParameters>
-							   <property>
-                           <name>javax.xml.parsers.DocumentBuilderFactory</name>
-                           <value>org.apache.xerces.jaxp.DocumentBuilderFactoryImpl</value>
-                        </property>
-                        <property>
-                           <name>javax.xml.parsers.SAXParserFactory</name>
-                           <value>org.apache.xerces.jaxp.SAXParserFactoryImpl</value>
-                        </property>
-                     </transformerParameters>
-                  </options>
-               </configuration>
-            </plugin>
-         </plugins>
-      </pluginManagement>
-   </build>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jboss.maven.plugins</groupId>
+                    <artifactId>maven-jdocbook-plugin</artifactId>
+                    <version>2.2.1</version>
+                    <extensions>true</extensions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.jboss.pressgang</groupId>
+                            <artifactId>pressgang-xslt</artifactId>
+                            <version>1.2.0</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.jboss</groupId>
+                            <artifactId>jbossorg-jdocbook-style</artifactId>
+                            <version>1.1.1</version>
+                            <type>jdocbook-style</type>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <sourceDirectory>${project.basedir}/src/main/docbook</sourceDirectory>
+                        <sourceDocumentName>${docname}.xml</sourceDocumentName>
+                        <masterTranslation>en-US</masterTranslation>
+                        <imageResource>
+                            <directory>${project.basedir}/src/main/docbook/en-US</directory>
+                            <includes>
+                                <include>images/*.png</include>
+                            </includes>
+                        </imageResource>
+                        <formats>
+                            <format>
+                                <formatName>pdf</formatName>
+                                <stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
+                                <finalName>${pdf.name}</finalName>
+                            </format>
+                            <format>
+                                <formatName>html</formatName>
+                                <stylesheetResource>classpath:/xslt/org/jboss/xhtml.xsl</stylesheetResource>
+                                <finalName>index.html</finalName>
+                            </format>
+                            <format>
+                                <formatName>html_single</formatName>
+                                <stylesheetResource>classpath:/xslt/org/jboss/xhtml-single.xsl</stylesheetResource>
+                                <finalName>index.html</finalName>
+                            </format>
+                        </formats>
+                        <options>
+                            <xincludeSupported>true</xincludeSupported>
+                            <xmlTransformerType>saxon</xmlTransformerType>
+                            <docbookVersion>1.72.0</docbookVersion>
+                            <localeSeparator>-</localeSeparator>
+                            <injectionDateFormat>dd/MM/yyy</injectionDateFormat>
+                            <transformerParameters>
+                                <property>
+                                    <name>javax.xml.parsers.DocumentBuilderFactory</name>
+                                    <value>org.apache.xerces.jaxp.DocumentBuilderFactoryImpl</value>
+                                </property>
+                                <property>
+                                    <name>javax.xml.parsers.SAXParserFactory</name>
+                                    <value>org.apache.xerces.jaxp.SAXParserFactoryImpl</value>
+                                </property>
+                            </transformerParameters>
+                        </options>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
    <!--
    <profiles>
@@ -218,9 +219,9 @@
    </profiles>
    -->
 
-   <scm>
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/richfaces/modules/docs/trunk/parent</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/richfaces/modules/docs/trunk/parent</developerConnection>
-      <url>http://fisheye.jboss.org/browse/richfaces/modules/docs/trunk/parent</url>
-   </scm>
+    <scm>
+        <connection>scm:svn:http://anonsvn.jboss.org/repos/richfaces/modules/docs/trunk/parent</connection>
+        <developerConnection>scm:svn:https://svn.jboss.org/repos/richfaces/modules/docs/trunk/parent</developerConnection>
+        <url>http://fisheye.jboss.org/browse/richfaces/modules/docs/trunk/parent</url>
+    </scm>
 </project>

@@ -1,32 +1,32 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-   <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-   <groupId>org.richfaces.docs</groupId>
-   <artifactId>richfaces-component-reference</artifactId>
-   <version>4.1.1-SNAPSHOT</version>
-   <packaging>jdocbook</packaging>
-   <name>RichFaces Component Reference</name>
+    <parent>
+        <groupId>org.richfaces.docs</groupId>
+        <artifactId>docs-parent</artifactId>
+        <version>4.1.1-SNAPSHOT</version>
+        <relativePath>../parent/pom.xml</relativePath>
+    </parent>
 
-   <parent>
-      <groupId>org.richfaces.docs</groupId>
-      <artifactId>docs-parent</artifactId>
-      <version>4.1.1-SNAPSHOT</version>
-      <relativePath>../parent/pom.xml</relativePath>
-   </parent>
-  
-   <properties>
+    <artifactId>richfaces-component-reference</artifactId>
+    <packaging>jdocbook</packaging>
+    <name>RichFaces Component Reference</name>
+
+
+    <properties>
         <docname>Component_Reference</docname>
         <bookname>Component Reference</bookname>
-   </properties>
+    </properties>
 
-   <build>
-      <defaultGoal>process-classes</defaultGoal>
-      <plugins>
-         <plugin>
-            <groupId>org.jboss.maven.plugins</groupId>
-            <artifactId>maven-jdocbook-plugin</artifactId>
-         </plugin>
+    <build>
+        <defaultGoal>process-classes</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.jboss.maven.plugins</groupId>
+                <artifactId>maven-jdocbook-plugin</artifactId>
+            </plugin>
          <!--
          <plugin>
             <artifactId>maven-antrun-plugin</artifactId>
@@ -66,44 +66,44 @@
             </executions>
          </plugin>
          -->
-      </plugins>
-   </build>
+        </plugins>
+    </build>
 
-   <profiles>
+    <profiles>
 
-      <profile>
-         <id>translations</id>
-         <build>
-            <plugins>
-               <plugin>
-                  <groupId>org.jboss.maven.plugins</groupId>
-                  <artifactId>maven-jdocbook-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                           <goal>translate</goal>
-                        </goals>
-                     </execution>
-                  </executions>
+        <profile>
+            <id>translations</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jboss.maven.plugins</groupId>
+                        <artifactId>maven-jdocbook-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>translate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
 
-                  <configuration>
-                     <translations>
-                        <translation>it-IT</translation>
-                        <translation>zh-CN</translation>
-                        <translation>zh-TW</translation>
-                        <translation>es-ES</translation>
-                        <translation>ko-KR</translation>
-                        <translation>de-DE</translation>
-                        <translation>pt-BR</translation>
-                     </translations>
-                  </configuration>
-               </plugin>
-            </plugins>
-         </build>
-      </profile>
+                        <configuration>
+                            <translations>
+                                <translation>it-IT</translation>
+                                <translation>zh-CN</translation>
+                                <translation>zh-TW</translation>
+                                <translation>es-ES</translation>
+                                <translation>ko-KR</translation>
+                                <translation>de-DE</translation>
+                                <translation>pt-BR</translation>
+                            </translations>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
-   </profiles>
+    </profiles>
 
     <scm>
         <connection>scm:svn:http://anonsvn.jboss.org/repos/richfaces/modules/docs/trunk/Component_Reference</connection>
