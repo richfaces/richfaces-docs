@@ -188,6 +188,160 @@
 		</section>
 	</section>
 
+    <!--<rich:contextMenu>-->
+   	<section id="sect-Component_Reference-Menus_and_toolbars-richcontextMenu">
+   		<title><sgmltag>&lt;rich:contextMenu&gt;</sgmltag></title>
+   		<para>
+        The <sgmltag>&lt;rich:contextMenu&gt;</sgmltag> component is used for creating a hierarchical context menu that are activated on events like <literal>onmouseover</literal> , <literal>onclick</literal> etc. The component can be applied to any element on the page.
+   		</para>
+   		<figure id="figu-Component_Reference-richcontextMenu-richcontextMenu">
+   			<title><sgmltag>&lt;rich:contextMenu&gt;</sgmltag></title>
+   			<mediaobject>
+   				<imageobject>
+   					<imagedata fileref="images/figu-Component_Reference-richcontextMenu-richcontextMenu.png" format="PNG" />
+   				</imageobject>
+   				<textobject>
+   					<para>
+   						A <sgmltag>&lt;rich:contextMenu&gt;</sgmltag> shown activated over a <sgmltag>&lt;h:graphicImage&gt;</sgmltag>.
+   					</para>
+   				</textobject>
+   			</mediaobject>
+   		</figure>
+
+   		<section id="sect-Component_Reference-richcontextMenu-Basic_usage">
+   			<title>Basic usage</title>
+   			<para>
+   				To set the content of the context menu and any sub-menus, use the <sgmltag>&lt;rich:menuItem&gt;</sgmltag>, <sgmltag>&lt;rich:menuGroup&gt;</sgmltag>, and <sgmltag>&lt;rich:menuSeparator&gt;</sgmltag> components. These components are detailed in <xref linkend="sect-Component_Reference-Menus_and_toolbars-Menu_sub-components" />.
+   			</para>
+   		</section>
+   
+   		<section id="sect-Component_Reference-richcontextMenu-Appearance">
+   			<title>Appearance</title>
+   			<para>
+   				Use the <varname>direction</varname> attribute to determine the direction of the menu when it appears. The <varname>direction</varname> attribute uses the following settings:
+   			</para>
+   			<variablelist>
+   				<varlistentry>
+   					<term><literal>topLeft</literal></term>
+   					<term><literal>topRight</literal></term>
+   					<term><literal>bottomLeft</literal></term>
+   					<term><literal>bottomRight</literal></term>
+   					<listitem>
+   						<para>
+   							The menu appears to the top-left, top-right, bottom-left, or bottom-right of the activation point.
+   						</para>
+   					</listitem>
+   				</varlistentry>
+   				<varlistentry>
+   					<term><literal>auto</literal></term>
+   					<listitem>
+   						<para>
+   							The direction is determined automatically.
+   						</para>
+   					</listitem>
+   				</varlistentry>
+   				<varlistentry>
+   					<term><literal>autoLeft</literal></term>
+   					<term><literal>autoRight</literal></term>
+   					<term><literal>autoTop</literal></term>
+   					<term><literal>autoBottom</literal></term>
+   					<listitem>
+   						<para>
+   							The menu direction is determined automatically, but defaults to either the left, right, top, or bottom of the activation point as appropriate.
+   						</para>
+   					</listitem>
+   				</varlistentry>
+   			</variablelist>
+   		</section>
+   		
+   		<section id="sect-Component_Reference-richcontextMenu-Expanding_and_collapsing_the_menu">
+   			<title>Expanding and collapsing the menu</title>
+   			<para>
+   				By default, the menu is activated when the <literal>contextmenu</literal> event is observed (ie. a right-click). To activate on a different event, use the <varname>showEvent</varname> attribute to define the event instead.
+   			</para>
+   			<para>
+   				Menus can be navigated using the keyboard. Additionally, menus can be navigated programmatically using the JavaScript <acronym>API</acronym>. The JavaScript API allows the following methods:
+   			</para>
+   			<variablelist>
+   				<varlistentry>
+   					<term><methodname>show()</methodname></term>
+   					<listitem>
+   						<para>
+   							The <methodname>show()</methodname> method shows the menu.
+   						</para>
+   					</listitem>
+   				</varlistentry>
+   				<varlistentry>
+   					<term><methodname>hide()</methodname></term>
+   					<listitem>
+   						<para>
+   							The <methodname>hide()</methodname> method hides the menu.
+   						</para>
+   					</listitem>
+   				</varlistentry>
+   				<varlistentry>
+   					<term><methodname>activateItem(menuItemId)</methodname></term>
+   					<listitem>
+   						<para>
+   							The <methodname>activateItem(menuItemId)</methodname> activates the menu item with the <parameter>menuItemId</parameter> identifier.
+   						</para>
+   					</listitem>
+   				</varlistentry>
+   			</variablelist>
+   			<para>
+   				Use the <varname>mode</varname> attribute to determine how the menu requests are submitted:
+   			</para>
+   			<itemizedlist>
+   				<listitem>
+   					<para>
+   						<literal>server</literal>, the default setting, submits the form normally and completely refreshes the page.
+   					</para>
+   				</listitem>
+   				<listitem>
+   					<para>
+   						<literal>ajax</literal> performs an Ajax form submission, and re-renders elements specified with the <varname>render</varname> attribute.
+   					</para>
+   				</listitem>
+   				<listitem>
+   					<para>
+   						<literal>client</literal> causes the <varname>action</varname> and <varname>actionListener</varname> items to be ignored, and the behavior is fully defined by the nested components or custom JavaScript instead of responses from submissions.
+   					</para>
+   				</listitem>
+   			</itemizedlist>
+   		</section>
+   
+   		<section id="sect-Component_Reference-richcontextMenu-Reference_data">
+   			<title>Reference data</title>
+   			<itemizedlist>
+   				<listitem>
+   					<para>
+   						<parameter>component-type</parameter>: <classname>org.richfaces.ContextMenu</classname>
+   					</para>
+   				</listitem>
+   				<listitem>
+   					<para>
+   						<parameter>component-class</parameter>: <classname>org.richfaces.component.UIContextMenu</classname>
+   					</para>
+   				</listitem>
+   				<listitem>
+   					<para>
+   						<parameter>component-family</parameter>: <classname>org.richfaces.ContextMenu</classname>
+   					</para>
+   				</listitem>
+   				<listitem>
+   					<para>
+   						<parameter>renderer-type</parameter>: <classname>org.richfaces.ContextMenuRenderer</classname>
+   					</para>
+   				</listitem>
+   			</itemizedlist>
+   		</section>
+   
+   		<section id="sect-Component_Reference-richcontextMenu-Style_classes_and_skin_parameters">
+   			<title>Style classes and skin parameters</title>
+   			<xi:include href="skinning/tabl-richcontextMenu.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+   		</section>
+   	</section>
+    
 	<section id="sect-Component_Reference-Menus_and_toolbars-Menu_sub-components">
 		<title>Menu sub-components</title>
 		<para>
