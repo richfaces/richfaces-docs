@@ -90,6 +90,124 @@
 				</listitem>
 			</itemizedlist>
 		</section>
+        
+    
+        <section id="sect-Component_Reference-Functionality_extension-richhotKey">
+            <title><sgmltag>&lt;rich:hotKey&gt;</sgmltag></title>
+            <para>
+                The <sgmltag>&lt;rich:hotKey&gt;</sgmltag> component allows to register hot keys for the page or particular elements and to define client-side processing functions for these keys.
+            </para>
+            
+            <section id="sect-Component_Reference-richhotKey-Basic_usage">
+                <title>Basic usage</title>
+                <para>
+                    There are two ways to register <sgmltag>&lt;rich:hotKey&gt;</sgmltag>:
+                </para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            place it anywhere on the page. In this case the <sgmltag>&lt;rich:hotKey&gt;</sgmltag> component is attached to the whole page. This is default scenario.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            attach it with <varname>selector</varname> attribute to all the elements defined using this selector. This attribute uses syntax for CSS rule selector defined by W3C consortium with some jQuery extensions.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <para>
+                    The <varname>key</varname> attribute defines the hot key itself which is processed by the component. 
+                </para>
+                <para>
+                    Key sequences can be defined using <code>+</code> key separator. Single modifiers needs to be defined in alphabetical order, e.g. alt+ctrl+shift. 
+                </para>
+                <para>
+                    The hot key handling can be disabled by setting <varname>rendered</varname> to <code>false</code>. 
+                </para>
+                
+                <example id="exam-Component_Reference-richhotkey-richhotkey_basic_usage">
+                    <title><sgmltag>&lt;rich:hotKey&gt;</sgmltag> basic usage</title>
+                    <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richhotkey-richhotkey_basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+                    <para>
+                        The example contains <sgmltag>&lt;rich:hotKey&gt;</sgmltag> which handles Ctrl+A key sequence on whole page. When sequence is pressed, <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> is displayed.
+                    </para>
+                </example>
+            </section>
+            
+            <section id="sect-Component_Reference-richhotKey-Event_processing">
+                <title>Event processing</title>
+                <para>
+                    The <varname>preventDefault</varname> attribute specifies, whenever hot key binding should prevent default browser-specific actions to be taken (e.g. Ctrl+A hot key selecting all available text). This attribute has default value <code>true</code>.
+                </para>
+                <para>
+                    The <varname>enabledInInput</varname> attribute enables hot key event handling when form inputs is focused. This attribute is <code>false</code> by default.
+                </para>
+            </section>
+            
+            <section id="sect-Component_Reference-richhotKey-Event_handlers">
+                <title>Event handlers</title>
+                <para>
+                    Following event handlers could be used to trigger client-side behaviors or to invoke javascript directly:
+                </para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <varname>keydown</varname> (default) is used when hot key sequence is initiated (keys are down)
+                        </para> 
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <varname>keyup</varname> is used when hot key sequence is finished (keys are up)
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                
+                <example id="exam-Component_Reference-richhotKey-richhotkKey_event_handlers">
+                    <title><sgmltag>&lt;rich:hotKey&gt;</sgmltag> event handlers</title>
+                    <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richhotkey-richhotkKey_event_handlers.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+                </example>
+            </section>
+
+            <note>
+                <title>Hot Key in Editor</title>
+                <para>
+                    The <sgmltag>&lt;rich:editor&gt;</sgmltag> uses <sgmltag>&lt;iframe&gt;</sgmltag> for editable area.
+                </para>
+                <para>
+                    The <sgmltag>&lt;iframe&gt;</sgmltag> doesn't allow to propagate events outside of <sgmltag>&lt;rich:editor&gt;</sgmltag>,
+                    making <sgmltag>&lt;rich:hotKey&gt;</sgmltag> unusable for handling events from <sgmltag>&lt;rich:editor&gt;</sgmltag>.
+                </para>
+                <para>
+                    The CKEditor specific event handling mechanisms could be used instead.
+                </para>
+            </note>
+            
+            <section id="sect-Component_Reference-richhotKey-Reference_data">
+    			<title>Reference data</title>
+    			<itemizedlist>
+    				<listitem>
+    					<para>
+    						<parameter>component-type</parameter>: <classname>org.richfaces.HotKey</classname>
+    					</para>
+    				</listitem>
+    				<listitem>
+    					<para>
+    						<parameter>component-class</parameter>: <classname>org.richfaces.component.UIHotKey</classname>
+    					</para>
+    				</listitem>
+    				<listitem>
+    					<para>
+    						<parameter>component-family</parameter>: <classname>org.richfaces.HotKey</classname>
+    					</para>
+    				</listitem>
+    				<listitem>
+    					<para>
+    						<parameter>renderer-type</parameter>: <classname>org.richfaces.HotKeyRenderer</classname>
+    					</para>
+    				</listitem>
+    			</itemizedlist>
+    		</section>
+        </section>
 
 		<section id="sect-Component_Reference-Functionality_extension-richhashParam">
 			<title><sgmltag>&lt;rich:hashParam&gt;</sgmltag></title>
@@ -152,13 +270,6 @@
 		</para>
 	</section>
 	
-	<section id="sect-Component_Reference-Functionality_extension-richhotkey">
-		<title><sgmltag>&lt;rich:hotkey&gt;</sgmltag></title>
-		<para>
-			Incomplete
-		</para>
-	</section>
-	
 	<section id="sect-Component_Reference-Functionality_extension-richvirtualEarth">
 		<title><sgmltag>&lt;rich:virtualEarth&gt;</sgmltag></title>
 		<para>
@@ -166,6 +277,6 @@
 		</para>
 	</section>
 	-->
-
+    
 </chapter>
 
