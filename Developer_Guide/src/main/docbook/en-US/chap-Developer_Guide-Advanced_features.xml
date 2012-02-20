@@ -274,30 +274,26 @@ Many sections in this document have been commented-out and marked as TODO as the
     <section id="sect-Developer_Guide-Advanced_features-Resource_loading">
 		<title>Resource loading</title>
 		<para>
-			Resources which RichFaces uses in components, like style sheets, JavaScript code or images are handled by standard JSF resource handling. 
-		</para>
-        <para>
-            However JSF resource handling feature falls short when using static resources which refers to another resources (style sheets refering to images, JavaScript refering to style sheets).
-            These resources doesn't carry informations necessary to address JSF resources (servlet context path, servlet mapping, library name).
-        </para>
-        <para>
-            RichFaces provides <sgmltag>ResourceServlet</sgmltag> which handles framework static resources:
+            RichFaces improves standard JSF resource handling in order to achieve following features:
         </para>
         <itemizedlist>
             <listitem>
                 <para>
-                    third-party JavaScript libraries or style sheets
+                    resource optimization - serves optimized component resource dependencies (JavaScript, CSS)
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    pre-generated dynamic resources (ECSS, dynamic images)
+                    resource mapping - re-routes resource requests (maps one resource to another)
                 </para>
             </listitem>
         </itemizedlist>
         
         <section id="sect-Developer_Guide-Advanced_features-Configuring_ResourceServlet">
             <title>Configuring ResourceServlet</title>
+            <para>
+                For leveraging RichFaces resource loading improvements, <sgmltag>ResourceServlet</sgmltag> needs to be registered. 
+            </para>
             <para>
                 <sgmltag>ResourceServlet</sgmltag> is automatically registered in Servlet 3.0 and higher environments.
             </para>
@@ -310,195 +306,138 @@ Many sections in this document have been commented-out and marked as TODO as the
             </para>
         </section>
         
-        <section id="sect-Developer_Guide-Advanced_features-Resource_mapping">
-            <title>Resource mapping</title>
+        <section id="sect-Developer_Guide-Advanced_features-Resource_optimization">
+            <title>Resource optimization</title>
             <para>
-                RichFaces resources are determined by notion of resource libraries and loaded by standard JSF resource handling mechanism.
+                The resource optimization features provides optimized component dependencies - JavaScript, CSS - which are compressed and aggregated to packages.
             </para>
             <para>
-                There are situations where it may be favourable to use alternative resource location:
+                Loading compressed resource packages may lead into significant performance boost, since many small files are aggregated into one big file.
             </para>
-            <itemizedlist>
-                <listitem>
-                    <para>
-                        loading pre-processed resources (packed or compressed resource)
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        loading modified resource (patched or alternative resource)
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        loading resource from external location (static HTTP server, Content Delivery Network)
-                    </para>
-                </listitem>
-            </itemizedlist>
-            <section id="sect-Developer_Guide-Advanced_features-Configuring_resource_mapping">
-                <title>Configuring resource mapping</title>
+            <example>
+                <title>Enabling resource optimization</title>
                 <para>
-                    Resource mapping feature is in default state disabled. You can enable it with contextual parameter <code>org.richfaces.resourceMapping.enabled</code> with value <code>true</code>.
+                    To enable resource optimization, add following configuration to <code>web.xml</code>:
                 </para>
+                <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Advanced_features-Resource_optimization-Enabling.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+            </example>
+            
+            <example>
+                <title>Resource optimization in development JSF project stage</title>
                 <para>
-                    Resource mapping is controlled by two configurations:
+                    Resource optimization is influenced by project stage:
                 </para>
                 <itemizedlist>
                     <listitem>
                         <para>
-                            mapped resources location
+                            resources are not compressed in development and during unit-test to allow debugging
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            resource mapping configuration file
+                            resources are compressed in production and during system-test to minimize network bandwidth 
                         </para>
                     </listitem>
                 </itemizedlist>
                 <para>
-                    While mapped resources location determines the base URL from which all resource locations are derived, resource mapping file contains resource-specific locations.
+                    Be sure to switch to development project stage during development:
                 </para>
-            </section>
-            
-            <section>
-                    <title>Mapped resources location</title>
-                    <para>
-                        Absolute resource location is determined from base URL, which is string that contains EL expression <code>#{resourceLocation}</code>.
-                    </para>
-                    <para>
-                        This base URL can be configured using contextual parameter <code>org.richfaces.resourceMapping.location</code>.
-                    </para>
-                    <note>
-                        Several resources can point to one location, which will in turn cause browser to load only one resource. That can be radical performance improvement, because client will need only one resource request per several resources. The aggregated resource needs to be properly formatted. 
-                    </note>
-                </section>
-                
-                <section>
-                    <title>Resource mapping configuration file</title>
-                    <para>
-                        Resource mapping configuration is properties file with records in format:
-                    </para>
-                    <programlisting>resourceLibrary:resourceName=resourceLocation</programlisting>
-                    <para>
-                        It is possible to define custom resource mapping configuration file using contextual parameter identifying class-path location where file resides: <code>org.richfaces.resourceMapping.mappingFile</code>
-                    </para>
-                    <para>
-                        The <code>resourceLocation</code> can be absolute resource URL, allowing to relocate selected resources to another server. 
-                    </para>
-                </section>
-                
-                <example>
-                    <title>Example of resource mapping web.xml configuration</title>
-                    
-                    <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Advanced_features-Configuring_resource_mapping_web_xml.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-                    <para>
-                        First <code>context-param</code> is enabling resource mapping. Both other context-params are configuring the behavior.
-                    </para>
-                    <para>
-                        Second <code>context-param</code> instructs RichFaces to look for <code>META-INF/custom-mapping.properties</code> file on class-path (either in your WAR: <code>WEB-INF/classes/META-INF/custom-mapping.properties</code> or any JAR on class-path in <code>META-INF/custom-mapping.properties</code>).
-                    </para>
-                    <para>
-                        Last <code>context-param</code> configures the root resource location and uses expressions <code>#{facesContext.externalContext.requestContextPath}</code> to retrieve context path and <code>#{resourceLocation}</code> to retrieve location of specific resource (as provided from resource mapping configuration file).
-                    </para>
-                </example>
-                <example>
-                    <title>Example of resource mapping configuration file</title>
-                    <para>
-                        The contents of <code>META-INF/custom-mapping.properties</code> file:
-                    </para>
-                    <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Advanced_features-Configuring_resource_mapping_custom_mappping_properties.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-                    <para>
-                        First property in the <code>META-INF/custom-mapping.properties</code> specifies resource mapping for resource with qualifier <code>javax.faces:jsf.js</code> which stands for Java Server Faces 2.0 JavaScript implementation. It instructs resource handler to look for <code>patched-jsf.js</code> source file (in this sample located on WAR relative location <code>resources/com.acme/patched-jsf.js</code>).
-                    </para>
-                    <para>
-                        Using the resource location root, it will specifically look for <code>#{facesContext.externalContext.requestContextPath}/resources/com.acme/patched-jsf.js</code>
-                    </para>
-                    <para>
-                        Second property defines mapping for <code>jquery.js</code> resource. This line instructs resource handler to locate this resource on external URL, specifically from CDN.
-                    </para>
-                </example>
+                <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Advanced_features-Resource_optimization-Switching_to_development.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+            </example>
         </section>
         
-        <section id="sect-Developer_Guide-Advanced_features-Resource_loading_strategies">
-            <title>Resource loading strategies</title>
+        <section id="sect-Developer_Guide-Advanced_features-Resource_mapping">
+            <title>Resource mapping</title>
             <para>
-                Resource loading strategies are special configuration of resource mapping.
+                The resource mapping feature could map existing JSF resource (determined by library and name) to another resource. 
             </para>
             <para>
-                RichFaces framework bundles static versions of all components' resources which are processed to optimize performance in certain scenarios:
+                It can help to solve all of following cases:
             </para>
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>static resources</emphasis> - suitable for environments, where dynamic generation is not enough performant or can't be processed at all 
+                        providing alternative versions of a resource
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>compression</emphasis> - suitable as network bandwidth and client performance optimization and client side code obfuscation 
+                        map several resources to one
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>packing</emphasis> - suitable for providing dependencies for all components in one package, limiting number of requests to one per resource type
+                        using external resources
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        moving resources to servers with static content
                     </para>
                 </listitem>
             </itemizedlist>
-            <para>
-                Previous features aren't configured directly, it is necessary to choose project stages in which given feature will be applied.
-            </para>
-            <note>
+            
+            <section>
+                <title>Resource mapping configuration file</title>
                 <para>
-                    Resource mapping needs to be enabled for using resource loading strategies.
-                </para>
-            </note>
-                    
-            <section id="sect-Developer_Guide-Advanced_features-Configuring_resource_loading_strategies">
-                <title>Configuring resource loading strategies</title>
-                <para>
-                    It is necessary to choose stages, where compression is applied and where packed resource will be used. If both compression and packing are disabled, simple static resources will be served. 
+                    Configuring resource mapping means adding new records to file on class-path <code>META-INF/richfaces/static-resource-mappings.properties</code> file.
                 </para>
                 <para>
-                    It is possible to provide following options for project stages: <code>Development, UnitTest, SystemTest, Production</code> or keywords <code>None</code> and <code>All</code>.
+                    Each record expresses one relocation.
                 </para>
                 <para>
-                    For configuration, you can use any combination of project stages (separated by commas) or keywords <code>None</code> (for feature turned off in all stages) or <code>All</code> (for feature turned off in all stages).
+                    Following sample shows JSF resource with name <code>resourceLibrary:resourceName</code> relocated to <code>anotherResourceLibrary:anotherResourceName</code>:
                 </para>
-                <para>
-                    Compression is configured in <code>web.xml</code> using <code>context-param</code> <code>org.richfaces.resourceMapping.compressedStages</code>.
-                    Compression is by default set to <code>Production,SystemTest</code>, enabling this feature for production and system testing.
-                </para>
-                <para>
-                    Packing is configured in <code>web.xml</code> using <code>context-param</code> <code>org.richfaces.resourceMapping.packedStages</code>.
-                    Packing is by default set to <code>All</code>, enabling this feature in all stages.
-                </para>
+                <programlisting>resourceLibrary\:resourceName=anotherResourceLibrary/anotherResourceName</programlisting>
                 <note>
+                    <title>Mapping resource name to relative URL</title>
                     <para>
-                        It specifically means that with resource mapping enabled, packed resources are served and compression is turned off in development and unit tests and turned on in production and for system tests.
+                        Definition above contains JSF resource name on left side of the expression and relative path on right side.
                     </para>
                     <para>
-                        For serving static versions of regular resources, you will need to turn off both compression and packing.
+                        Expression on the right side is path relative to JSF resource root, thus <code>anotherResourceLibrary/anotherResourceName</code> actually maps to JSF resource <code>anotherResourceLibrary:anotherResourceName</code>.
                     </para>
                 </note>
+                <note>
+                    <title>Additional mapping files</title>
+                    <para>
+                        It is possible to define additional resource mapping configuration files using contextual parameter identifying class-path location where files resides: <code>org.richfaces.resourceMapping.mappingFile</code> (comma-separated list of class-path files).
+                    </para>
+                </note>
+            </section>
+            
+            <section>
+                <title>Examples of resource mapping</title>
+                
                 <example>
-                    <title>Resource loading strategies configuration</title>
+                    <title>Providing alternative file</title>
                     <para>
-                        Following sample turns off packing in all stages, so only compression will be applied.
+                        All requests for <code>jquery.js</code> are served as requests for <code>jquery-alternative-version.js</code>:
                     </para>
-                    <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Advanced_features-Configuring_resource_loading_strategies.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+                    <programlisting>jquery.js=jquery-alternative-version.js</programlisting>
                 </example>
-                <important>
-				    <title>Custom resource mapping and Resource loading strategies</title>
+                
+                <example>
+                    <title>Mapping several resources to one</title>
                     <para>
-                        Resource loading strategies are just special case of resource mapping, thus once you will provide custom resource mapping configuration or location, bundled default resources won't be referenced correctly. 
+                        Both <code>some:jquery.js</code> and <code>another:jquery.js</code> are mapped to <code>final:jquery.js</code>:
                     </para>
+                    <programlisting><xi:include parse="text" href="extras/prog-Developer_Guide-Advanced_features-Resource_mapping-Mapping_several_resources_to_one.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+                </example>
+                
+                <example>
+                    <title>Using external resources</title>
                     <para>
-                        For using compressed/packed resources you will need to copy properties from one of files located in <code>richfaces-components-ui.jar:/META-INF/richfaces/staticResourceMapping/</code>.
+                        Resource locations starting with <code>http://</code> or <code>https://</code> are served as absolute resource locations:
                     </para>
-                </important>
+                    <programlisting>jquery.js=http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js</programlisting>
+                    <para>
+                        Resource mapping instructs to load <code>jquery.js</code> from CDN.
+                    </para>
+                </example>
             </section>
         </section>
-	</section>
+    </section>
 
 </chapter>
 
