@@ -301,9 +301,6 @@ Many sections in this document have been commented-out and marked as TODO as the
                 In Servlet 2.5 and lower environments, it is necessary to register <sgmltag>ResourceServlet</sgmltag> manually in <sgmltag>WEB-INF/web.xml</sgmltag> configuration file:
             </para>
             <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Advanced_features-Configuring_ResourceServlet.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-            <para>
-                This servlet is strictly limited in what it can process to the RichFaces resource libraries only.
-            </para>
         </section>
         
         <section id="sect-Developer_Guide-Advanced_features-Resource_optimization">
@@ -312,7 +309,7 @@ Many sections in this document have been commented-out and marked as TODO as the
                 The resource optimization features provides optimized component dependencies - JavaScript, CSS - which are compressed and aggregated to packages.
             </para>
             <para>
-                Loading compressed resource packages may lead into significant performance boost, since many small files are aggregated into one big file.
+                Loading compressed resource packages may lead into significant performance boost, since many small files are aggregated into one big file - the number of HTTP connections necessary to download application resources is decreased to minimum.
             </para>
             <example>
                 <title>Enabling resource optimization</title>
@@ -349,7 +346,7 @@ Many sections in this document have been commented-out and marked as TODO as the
         <section id="sect-Developer_Guide-Advanced_features-Resource_mapping">
             <title>Resource mapping</title>
             <para>
-                The resource mapping feature could map existing JSF resource (determined by library and name) to another resource. 
+                The resource mapping feature maps existing JSF resource (determined by library and name) to another resource. 
             </para>
             <para>
                 It can help to solve all of following cases:
@@ -380,10 +377,10 @@ Many sections in this document have been commented-out and marked as TODO as the
             <section>
                 <title>Resource mapping configuration file</title>
                 <para>
-                    Configuring resource mapping means adding new records to file on class-path <code>META-INF/richfaces/static-resource-mappings.properties</code> file.
+                    Configuring resource mapping means adding new records to file on class-path file <code>META-INF/richfaces/static-resource-mappings.properties</code>.
                 </para>
                 <para>
-                    Each record expresses one relocation.
+                    Each line in configuration file represents one relocation.
                 </para>
                 <para>
                     Following sample shows JSF resource with name <code>resourceLibrary:resourceName</code> relocated to <code>anotherResourceLibrary:anotherResourceName</code>:
@@ -395,13 +392,13 @@ Many sections in this document have been commented-out and marked as TODO as the
                         Definition above contains JSF resource name on left side of the expression and relative path on right side.
                     </para>
                     <para>
-                        Expression on the right side is path relative to JSF resource root, thus <code>anotherResourceLibrary/anotherResourceName</code> actually maps to JSF resource <code>anotherResourceLibrary:anotherResourceName</code>.
+                        Expression on the right side represents path relative to JSF resource root, thus <code>anotherResourceLibrary/anotherResourceName</code> actually maps to JSF resource <code>anotherResourceLibrary:anotherResourceName</code>.
                     </para>
                 </note>
                 <note>
                     <title>Additional mapping files</title>
                     <para>
-                        It is possible to define additional resource mapping configuration files using contextual parameter identifying class-path location where files resides: <code>org.richfaces.resourceMapping.mappingFile</code> (comma-separated list of class-path files).
+                        It is possible to define additional resource mapping configuration files using contextual parameter identifying class-path locations where files resides: <code>org.richfaces.resourceMapping.mappingFile</code> (comma-separated list of class-path files).
                     </para>
                 </note>
             </section>
@@ -428,12 +425,12 @@ Many sections in this document have been commented-out and marked as TODO as the
                 <example>
                     <title>Using external resources</title>
                     <para>
-                        Resource locations starting with <code>http://</code> or <code>https://</code> are served as absolute resource locations:
+                        Mappings with resource path starting with <code>http://</code> or <code>https://</code> are served as absolute resource locations:
+                    </para>
+                    <para>
+                        Folliwing sample instructs to load <code>jquery.js</code> from CDN:
                     </para>
                     <programlisting>jquery.js=http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js</programlisting>
-                    <para>
-                        Resource mapping instructs to load <code>jquery.js</code> from CDN.
-                    </para>
                 </example>
             </section>
         </section>
