@@ -274,7 +274,7 @@ Many sections in this document have been commented-out and marked as TODO as the
     <section id="sect-Developer_Guide-Advanced_features-Resource_loading">
 		<title>Resource loading</title>
 		<para>
-            RichFaces improves standard JSF resource handling in order to achieve following features:
+            The RichFaces improves a standard JSF resource handling in order to achieve following features:
         </para>
         <itemizedlist>
             <listitem>
@@ -284,7 +284,7 @@ Many sections in this document have been commented-out and marked as TODO as the
             </listitem>
             <listitem>
                 <para>
-                    resource mapping - re-routes resource requests (maps one resource to another)
+                    resource mapping - re-routes resource requests (maps an one resource to an another resource)
                 </para>
             </listitem>
         </itemizedlist>
@@ -292,13 +292,13 @@ Many sections in this document have been commented-out and marked as TODO as the
         <section id="sect-Developer_Guide-Advanced_features-Configuring_ResourceServlet">
             <title>Configuring ResourceServlet</title>
             <para>
-                For leveraging RichFaces resource loading improvements, <sgmltag>ResourceServlet</sgmltag> needs to be registered. 
+                For leveraging RichFaces resource loading improvements, the <sgmltag>ResourceServlet</sgmltag> needs to be registered. 
             </para>
             <para>
-                <sgmltag>ResourceServlet</sgmltag> is automatically registered in Servlet 3.0 and higher environments.
+                <sgmltag>ResourceServlet</sgmltag> is automatically registered in the Servlet 3.0 and higher environments.
             </para>
             <para>
-                In Servlet 2.5 and lower environments, it is necessary to register <sgmltag>ResourceServlet</sgmltag> manually in <sgmltag>WEB-INF/web.xml</sgmltag> configuration file:
+                In the Servlet 2.5 and lower environments, it is necessary to register the <sgmltag>ResourceServlet</sgmltag> manually in the <sgmltag>WEB-INF/web.xml</sgmltag> configuration file:
             </para>
             <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Advanced_features-Configuring_ResourceServlet.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
         </section>
@@ -306,15 +306,15 @@ Many sections in this document have been commented-out and marked as TODO as the
         <section id="sect-Developer_Guide-Advanced_features-Resource_optimization">
             <title>Resource optimization</title>
             <para>
-                The resource optimization features provides optimized component dependencies - JavaScript, CSS - which are compressed and aggregated to packages.
+                The resource optimization feature provides optimized component dependencies - JavaScript, CSS - which are compressed and aggregated to resource packages.
             </para>
             <para>
-                Loading compressed resource packages may lead into significant performance boost, since many small files are aggregated into one big file - the number of HTTP connections necessary to download application resources is decreased to minimum.
+                The loading of compressed resource packages may lead into significant client performance boost, since many small files are aggregated into one big file - the number of HTTP connections necessary to download application resources is significantly decreased.
             </para>
             <example>
                 <title>Enabling resource optimization</title>
                 <para>
-                    To enable resource optimization, add following configuration to <code>web.xml</code>:
+                    To enable the resource optimization, add a following configuration to <code>web.xml</code>:
                 </para>
                 <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Advanced_features-Resource_optimization-Enabling.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             </example>
@@ -322,22 +322,22 @@ Many sections in this document have been commented-out and marked as TODO as the
             <example>
                 <title>Resource optimization in development JSF project stage</title>
                 <para>
-                    Resource optimization is influenced by project stage:
+                    Resource optimization is influenced by a project stage:
                 </para>
                 <itemizedlist>
                     <listitem>
                         <para>
-                            resources are not compressed in development and during unit-test to allow debugging
+                            resources are not compressed in a development and during an unit-test to enable a client-side debugging
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            resources are compressed in production and during system-test to minimize network bandwidth 
+                            resources are compressed in a production and during a system-test to minimize a network bandwidth 
                         </para>
                     </listitem>
                 </itemizedlist>
                 <para>
-                    Be sure to switch to development project stage during development:
+                    Switch to the development project stage during a development:
                 </para>
                 <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/prog-Developer_Guide-Advanced_features-Resource_optimization-Switching_to_development.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
             </example>
@@ -346,10 +346,10 @@ Many sections in this document have been commented-out and marked as TODO as the
         <section id="sect-Developer_Guide-Advanced_features-Resource_mapping">
             <title>Resource mapping</title>
             <para>
-                The resource mapping feature maps existing JSF resource (determined by library and name) to another resource. 
+                The resource mapping feature maps an existing JSF resource (determined by library and name) to a another resource. 
             </para>
             <para>
-                It can help to solve all of following cases:
+                This feature can help to solve of following cases:
             </para>
             <itemizedlist>
                 <listitem>
@@ -377,28 +377,28 @@ Many sections in this document have been commented-out and marked as TODO as the
             <section>
                 <title>Resource mapping configuration file</title>
                 <para>
-                    Configuring resource mapping means adding new records to file on class-path file <code>META-INF/richfaces/static-resource-mappings.properties</code>.
+                    Configuring the resource mapping means adding new records to the class-path file <code>META-INF/richfaces/static-resource-mappings.properties</code>.
                 </para>
                 <para>
-                    Each line in configuration file represents one relocation.
+                    Each line in the configuration file represents one relocation.
                 </para>
                 <para>
-                    Following sample shows JSF resource with name <code>resourceLibrary:resourceName</code> relocated to <code>anotherResourceLibrary:anotherResourceName</code>:
+                    A following sample shows a JSF resource with name <code>resourceLibrary:resourceName</code> relocated to a resource <code>anotherResourceLibrary:anotherResourceName</code>:
                 </para>
                 <programlisting>resourceLibrary\:resourceName=anotherResourceLibrary/anotherResourceName</programlisting>
                 <note>
                     <title>Mapping resource name to relative URL</title>
                     <para>
-                        Definition above contains JSF resource name on left side of the expression and relative path on right side.
+                        The definition above contains a JSF resource name on the left side of the expression and a relative path on the right side.
                     </para>
                     <para>
-                        Expression on the right side represents path relative to JSF resource root, thus <code>anotherResourceLibrary/anotherResourceName</code> actually maps to JSF resource <code>anotherResourceLibrary:anotherResourceName</code>.
+                        The expression on the right side represents a path relative to a JSF resource root, thus resource path <code>anotherResourceLibrary/anotherResourceName</code> actually maps to a JSF resource with name <code>anotherResourceLibrary:anotherResourceName</code>.
                     </para>
                 </note>
                 <note>
                     <title>Additional mapping files</title>
                     <para>
-                        It is possible to define additional resource mapping configuration files using contextual parameter identifying class-path locations where files resides: <code>org.richfaces.resourceMapping.mappingFile</code> (comma-separated list of class-path files).
+                        It is possible to define additional resource mapping configuration files using a contextual parameter identifying class-path locations where files resides: <code>org.richfaces.resourceMapping.mappingFile</code> (a comma-separated list of class-path files).
                     </para>
                 </note>
             </section>
@@ -425,10 +425,10 @@ Many sections in this document have been commented-out and marked as TODO as the
                 <example>
                     <title>Using external resources</title>
                     <para>
-                        Mappings with resource path starting with <code>http://</code> or <code>https://</code> are served as absolute resource locations:
+                        Mappings with a resource path starting with <code>http://</code> or <code>https://</code> are served as absolute resource locations:
                     </para>
                     <para>
-                        Folliwing sample instructs to load <code>jquery.js</code> from CDN:
+                        A following sample instructs to load <code>jquery.js</code> from CDN:
                     </para>
                     <programlisting>jquery.js=http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js</programlisting>
                 </example>
