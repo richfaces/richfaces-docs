@@ -695,6 +695,29 @@
             </example>
         </section>
         
+        <section id="sect-Component_Reference-a4jpush-Handling_a_push_subscription">
+            <title>Handling a push subscription</title>
+            <para>
+                The <sgmltag>&lt;a4j:push&gt;</sgmltag> component establishes connection with server on complete page load (when document is ready). 
+            </para>
+            <para>
+                It means that the application starts to handle push messages once the page is completely loaded. 
+            </para>
+            <para>
+                However time-critical applications may require keeping client stricly synchronized with the server state.
+            </para>
+            <para>
+                For such applications you may use <varname>onsubscribed</varname> event handler, which is triggered every time the given component is successfully subscribed to the address/topic it listens to (on a page load and on each AJAX re-render). 
+            </para>
+            <example id="exam-Component_Reference-a4jpush-Handling_a_push_subscription">
+                <title>The time-critical updates in stock application</title>
+                <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-a4jpush-Handling_a_push_subscription.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+                <para>
+                    This example uses the <varname>subscribed</varname> event to update the table content once the push component is subscribed to the topic, ensuring that the table content is not stale.
+                </para>
+            </example>
+        </section>
+        
         <section id="sect-Component_Reference-a4jpush-Using_TopicsContext_to_publish_message">
             <title>Using TopicsContext to publish message</title>
             <para>
