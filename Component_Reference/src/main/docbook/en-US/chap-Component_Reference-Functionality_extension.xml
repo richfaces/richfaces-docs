@@ -137,12 +137,25 @@
             <section id="sect-Component_Reference-richhotKey-Event_processing">
                 <title>Event processing</title>
                 <para>
-                    The <varname>preventDefault</varname> attribute specifies whenever hot key binding should prevent default browser-specific actions to be taken (e.g. <code>Ctrl+A</code> hot key selecting all available text, Ctrl+B opening bookmarks bar, etc.). This attribute has default value <code>true</code>.
-                </para>
-                <para>
                     The <varname>enabledInInput</varname> attribute enables the hot key event processing when form inputs are focused. This attribute is <code>false</code> by default.
                 </para>
+                <para>
+                    The <varname>preventDefault</varname> attribute specifies whenever hot key binding should prevent default browser-specific actions to be taken (e.g. <code>Ctrl+A</code> hot key selecting all available text, Ctrl+B opening bookmarks bar, etc.). This attribute has default value <code>true</code>.
+                </para>
             </section>
+            
+            <note>
+                <title>Cross-browser support for preventing default actions</title>
+                <para>
+                    Even though RichFaces instructs browser prevent default action, browser implementations does not support preventing browser's native actions for selected key combinations. 
+                </para>
+                <para>
+                    Althought the inability to prevent default action is not usual, you may experience that both programatically-defined action and browser's native action are triggered (e.g. native popup appears).   
+                </para>
+                <para>
+                    To keep application accessible, it is convenient to do not depend on hot keys or hot key combinations heavily. Best practice is using hot key only as shortcut for given action. 
+                </para>
+            </note>
             
             <section id="sect-Component_Reference-richhotKey-Event_handlers">
                 <title>Event handlers</title>
