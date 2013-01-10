@@ -90,188 +90,187 @@
 				</listitem>
 			</itemizedlist>
 		</section>
+	</section>
+
+    <section id="sect-Component_Reference-Functionality_extension-richhotKey">
+        <title><sgmltag>&lt;rich:hotKey&gt;</sgmltag></title>
+        <para>
+            The <sgmltag>&lt;rich:hotKey&gt;</sgmltag> component allows to register hot keys for the page or particular elements and to define client-side processing functions for these keys.
+        </para>
         
-    
-        <section id="sect-Component_Reference-Functionality_extension-richhotKey">
-            <title><sgmltag>&lt;rich:hotKey&gt;</sgmltag></title>
+        <section id="sect-Component_Reference-richhotKey-Basic_usage">
+            <title>Basic usage</title>
             <para>
-                The <sgmltag>&lt;rich:hotKey&gt;</sgmltag> component allows to register hot keys for the page or particular elements and to define client-side processing functions for these keys.
+                There are two ways to register <sgmltag>&lt;rich:hotKey&gt;</sgmltag>:
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        place it anywhere on the page. In this case the <sgmltag>&lt;rich:hotKey&gt;</sgmltag> component is attached to the whole page. This is default scenario.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        attach it to the specific elements by defining <varname>selector</varname> attribute. This attribute uses syntax of the jQuery Selectors (superset of CSS selectors defined by W3C consortium) and additionally it expands JSF component IDs to client-side IDs (see a VDL documentation for the <varname>selector</varname> attribute). 
+                    </para>
+                </listitem>
+            </itemizedlist>
+            <para>
+                The <varname>key</varname> attribute defines the hot key itself, which is processed by the component. 
+            </para>
+            <para>
+                The key sequences can be defined using a "<code>+</code>" key separator. The key sequence modifiers needs to be defined in an alphabetical order, e.g. <code>alt+ctrl+shift</code>. 
+            </para>
+            <para>
+                The hot key processing can be disabled by setting <varname>rendered</varname> to <code>false</code>. 
             </para>
             
-            <section id="sect-Component_Reference-richhotKey-Basic_usage">
-                <title>Basic usage</title>
+            <example id="exam-Component_Reference-richhotkey-richhotkey_basic_usage">
+                <title><sgmltag>&lt;rich:hotKey&gt;</sgmltag> basic usage</title>
+                <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richhotkey-richhotkey_basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
                 <para>
-                    There are two ways to register <sgmltag>&lt;rich:hotKey&gt;</sgmltag>:
+                    The example contains <sgmltag>&lt;rich:hotKey&gt;</sgmltag> which handles <code>Ctrl+Z</code> key sequence on the whole page. When the key sequence is pressed, the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> is displayed.
                 </para>
-                <itemizedlist>
-                    <listitem>
-                        <para>
-                            place it anywhere on the page. In this case the <sgmltag>&lt;rich:hotKey&gt;</sgmltag> component is attached to the whole page. This is default scenario.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>
-                            attach it to the specific elements by defining <varname>selector</varname> attribute. This attribute uses syntax of the jQuery Selectors (superset of CSS selectors defined by W3C consortium) and additionally it expands JSF component IDs to client-side IDs (see a VDL documentation for the <varname>selector</varname> attribute). 
-                        </para>
-                    </listitem>
-                </itemizedlist>
-                <para>
-                    The <varname>key</varname> attribute defines the hot key itself, which is processed by the component. 
-                </para>
-                <para>
-                    The key sequences can be defined using a "<code>+</code>" key separator. The key sequence modifiers needs to be defined in an alphabetical order, e.g. <code>alt+ctrl+shift</code>. 
-                </para>
-                <para>
-                    The hot key processing can be disabled by setting <varname>rendered</varname> to <code>false</code>. 
-                </para>
-                
-                <example id="exam-Component_Reference-richhotkey-richhotkey_basic_usage">
-                    <title><sgmltag>&lt;rich:hotKey&gt;</sgmltag> basic usage</title>
-                    <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richhotkey-richhotkey_basic_usage.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+            </example>
+        </section>
+        
+        <section id="sect-Component_Reference-richhotKey-Event_processing">
+            <title>Event processing</title>
+            <para>
+                The <varname>enabledInInput</varname> attribute enables the hot key event processing when form inputs are focused. This attribute is <code>false</code> by default.
+            </para>
+            <para>
+                The <varname>preventDefault</varname> attribute specifies whether the hot key binding should prevent default browser-specific actions to be taken (e.g. <code>Ctrl+A</code> hot key selecting all available text, Ctrl+B opening bookmarks bar, etc.). This attribute has default value <code>true</code>.
+            </para>
+        </section>
+        
+        <note>
+            <title>Cross-browser support for preventing default actions</title>
+            <para>
+                Even though RichFaces instructs browser prevent default action, browser implementations does not support preventing browser's native actions for selected key combinations. 
+            </para>
+            <para>
+                Althought the inability to prevent default action is not usual, you may experience that both programatically-defined action and browser's native action are triggered (e.g. native popup appears).   
+            </para>
+            <para>
+                To keep application accessible, it is convenient to do not depend on hot keys or hot key combinations heavily. Best practice is using hot key only as shortcut for given action. 
+            </para>
+        </note>
+        
+        <section id="sect-Component_Reference-richhotKey-Event_handlers">
+            <title>Event handlers</title>
+            <para>
+                The following event handlers could be used to trigger client-side behaviors or to invoke javascript directly:
+            </para>
+            <itemizedlist>
+                <listitem>
                     <para>
-                        The example contains <sgmltag>&lt;rich:hotKey&gt;</sgmltag> which handles <code>Ctrl+Z</code> key sequence on the whole page. When the key sequence is pressed, the <sgmltag>&lt;rich:popupPanel&gt;</sgmltag> is displayed.
+                        <varname>keydown</varname> (default event) is fired when the hot key sequence is initiated (the keys are down)
+                    </para> 
+                </listitem>
+                <listitem>
+                    <para>
+                        <varname>keyup</varname> is fired when the hot key sequence is finished (the keys are up)
                     </para>
-                </example>
-            </section>
+                </listitem>
+            </itemizedlist>
             
-            <section id="sect-Component_Reference-richhotKey-Event_processing">
-                <title>Event processing</title>
-                <para>
-                    The <varname>enabledInInput</varname> attribute enables the hot key event processing when form inputs are focused. This attribute is <code>false</code> by default.
-                </para>
-                <para>
-                    The <varname>preventDefault</varname> attribute specifies whether the hot key binding should prevent default browser-specific actions to be taken (e.g. <code>Ctrl+A</code> hot key selecting all available text, Ctrl+B opening bookmarks bar, etc.). This attribute has default value <code>true</code>.
-                </para>
-            </section>
-            
-            <note>
-                <title>Cross-browser support for preventing default actions</title>
-                <para>
-                    Even though RichFaces instructs browser prevent default action, browser implementations does not support preventing browser's native actions for selected key combinations. 
-                </para>
-                <para>
-                    Althought the inability to prevent default action is not usual, you may experience that both programatically-defined action and browser's native action are triggered (e.g. native popup appears).   
-                </para>
-                <para>
-                    To keep application accessible, it is convenient to do not depend on hot keys or hot key combinations heavily. Best practice is using hot key only as shortcut for given action. 
-                </para>
-            </note>
-            
-            <section id="sect-Component_Reference-richhotKey-Event_handlers">
-                <title>Event handlers</title>
-                <para>
-                    The following event handlers could be used to trigger client-side behaviors or to invoke javascript directly:
-                </para>
-                <itemizedlist>
-                    <listitem>
-                        <para>
-                            <varname>keydown</varname> (default event) is fired when the hot key sequence is initiated (the keys are down)
-                        </para> 
-                    </listitem>
-                    <listitem>
-                        <para>
-                            <varname>keyup</varname> is fired when the hot key sequence is finished (the keys are up)
-                        </para>
-                    </listitem>
-                </itemizedlist>
-                
-                <example id="exam-Component_Reference-richhotKey-richhotkKey_event_handlers">
-                    <title><sgmltag>&lt;rich:hotKey&gt;</sgmltag> event handlers</title>
-                    <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richhotkey-richhotkKey_event_handlers.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
-                </example>
-            </section>
-
-            <note>
-                <title>Hot Key in Editor</title>
-                <para>
-                    The <sgmltag>&lt;rich:editor&gt;</sgmltag> uses <sgmltag>&lt;iframe&gt;</sgmltag> for the editable area.
-                </para>
-                <para>
-                    The <sgmltag>&lt;iframe&gt;</sgmltag> doesn't allow to propagate events outside of <sgmltag>&lt;rich:editor&gt;</sgmltag>,
-                    making <sgmltag>&lt;rich:hotKey&gt;</sgmltag> unusable for handling events from <sgmltag>&lt;rich:editor&gt;</sgmltag>.
-                </para>
-                <para>
-                    The CKEditor specific event handling mechanism could be used instead.
-                </para>
-            </note>
-            
-            <section id="sect-Component_Reference-richhotKey-Reference_data">
-    			<title>Reference data</title>
-    			<itemizedlist>
-    				<listitem>
-    					<para>
-    						<parameter>component-type</parameter>: <classname>org.richfaces.HotKey</classname>
-    					</para>
-    				</listitem>
-    				<listitem>
-    					<para>
-    						<parameter>component-class</parameter>: <classname>org.richfaces.component.UIHotKey</classname>
-    					</para>
-    				</listitem>
-    				<listitem>
-    					<para>
-    						<parameter>component-family</parameter>: <classname>org.richfaces.HotKey</classname>
-    					</para>
-    				</listitem>
-    				<listitem>
-    					<para>
-    						<parameter>renderer-type</parameter>: <classname>org.richfaces.HotKeyRenderer</classname>
-    					</para>
-    				</listitem>
-    			</itemizedlist>
-    		</section>
+            <example id="exam-Component_Reference-richhotKey-richhotkKey_event_handlers">
+                <title><sgmltag>&lt;rich:hotKey&gt;</sgmltag> event handlers</title>
+                <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richhotkey-richhotkKey_event_handlers.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+            </example>
         </section>
 
-		<section id="sect-Component_Reference-Functionality_extension-richhashParam">
-			<title><sgmltag>&lt;rich:hashParam&gt;</sgmltag></title>
-			<para>
-				The <sgmltag>&lt;rich:hashParam&gt;</sgmltag> component allows client-side parameters to be grouped into a hash map. The hash map can then be passed to the client JavaScript API functions of any RichFaces component.
-			</para>
-
-			<section id="sect-Component_Reference-richhashParam-Basic_usage">
-				<title>Basic usage</title>
-				<para>
-					Nest parameter tags in the <sgmltag>&lt;rich:hashParam&gt;</sgmltag> component to group them in the hash map. The hash map itself can then be passed as a function parameter.
-				</para>
-				<example id="exam-Component_Reference-richhashParam-richhashParam">
-					<title><sgmltag>&lt;rich:hashParam&gt;</sgmltag></title>
-					<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richhashParam-richhashParam.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+        <note>
+            <title>Hot Key in Editor</title>
+            <para>
+                The <sgmltag>&lt;rich:editor&gt;</sgmltag> uses <sgmltag>&lt;iframe&gt;</sgmltag> for the editable area.
+            </para>
+            <para>
+                The <sgmltag>&lt;iframe&gt;</sgmltag> doesn't allow to propagate events outside of <sgmltag>&lt;rich:editor&gt;</sgmltag>,
+                making <sgmltag>&lt;rich:hotKey&gt;</sgmltag> unusable for handling events from <sgmltag>&lt;rich:editor&gt;</sgmltag>.
+            </para>
+            <para>
+                The CKEditor specific event handling mechanism could be used instead.
+            </para>
+        </note>
+        
+        <section id="sect-Component_Reference-richhotKey-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
 					<para>
-						The example illustrates the use of the <sgmltag>&lt;rich:hashParam&gt;</sgmltag> component to group multiple parameters into a hash map. The parameters are passed through to the <function>show</function> function pop-up panel with the <literal>popupPanel</literal> identifier.
+						<parameter>component-type</parameter>: <classname>org.richfaces.HotKey</classname>
 					</para>
-				</example>
-			</section>
-		
-			<section id="sect-Component_Reference-richhashParam-Reference_data">
-				<title>Reference data</title>
-				<itemizedlist>
-					<listitem>
-						<para>
-							<parameter>component-type</parameter>: <classname>org.richfaces.HashParam</classname>
-						</para>
-					</listitem>
-					<listitem>
-						<para>
-							<parameter>component-class</parameter>: <classname>org.richfaces.component.UIHashParam</classname>
-						</para>
-					</listitem>
-					<listitem>
-						<para>
-							<parameter>component-family</parameter>: <classname>org.richfaces.HashParam</classname>
-						</para>
-					</listitem>
-					<listitem>
-						<para>
-							<parameter>renderer-type</parameter>: <classname>org.richfaces.HashParamRenderer</classname>
-						</para>
-					</listitem>
-					<listitem>
-						<para>
-							<parameter>handler-class</parameter>: <classname>org.richfaces.view.facelets.HashParamTag</classname>
-						</para>
-					</listitem>
-				</itemizedlist>
-			</section>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.UIHotKey</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.HotKey</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.HotKeyRenderer</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+    </section>
+
+	<section id="sect-Component_Reference-Functionality_extension-richhashParam">
+		<title><sgmltag>&lt;rich:hashParam&gt;</sgmltag></title>
+		<para>
+			The <sgmltag>&lt;rich:hashParam&gt;</sgmltag> component allows client-side parameters to be grouped into a hash map. The hash map can then be passed to the client JavaScript API functions of any RichFaces component.
+		</para>
+
+		<section id="sect-Component_Reference-richhashParam-Basic_usage">
+			<title>Basic usage</title>
+			<para>
+				Nest parameter tags in the <sgmltag>&lt;rich:hashParam&gt;</sgmltag> component to group them in the hash map. The hash map itself can then be passed as a function parameter.
+			</para>
+			<example id="exam-Component_Reference-richhashParam-richhashParam">
+				<title><sgmltag>&lt;rich:hashParam&gt;</sgmltag></title>
+				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richhashParam-richhashParam.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+				<para>
+					The example illustrates the use of the <sgmltag>&lt;rich:hashParam&gt;</sgmltag> component to group multiple parameters into a hash map. The parameters are passed through to the <function>show</function> function pop-up panel with the <literal>popupPanel</literal> identifier.
+				</para>
+			</example>
+		</section>
+	
+		<section id="sect-Component_Reference-richhashParam-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.HashParam</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.UIHashParam</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.HashParam</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.HashParamRenderer</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>handler-class</parameter>: <classname>org.richfaces.view.facelets.HashParamTag</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
 		</section>
 	</section>
 
