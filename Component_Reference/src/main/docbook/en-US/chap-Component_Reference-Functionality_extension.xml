@@ -92,6 +92,134 @@
 		</section>
 	</section>
 
+    <section id="sect-Component_Reference-Functionality_extension-richfocus">
+        <title><sgmltag>&lt;rich:focus&gt;</sgmltag></title>
+        <para>
+            The <sgmltag>&lt;rich:focus&gt;</sgmltag> component allows to focus components on a page. It is intented to be used with any input field.
+        </para>
+        
+        <section id="sect-Component_Reference-richfocus-Placement">
+            <title>Placement</title>
+	        <para>
+	        	The component will behave differently when placed:
+	    	</para>
+	    	<itemizedlist>
+	            <listitem>
+	                <para>
+	                    in a form - defines behavior for components in the given form 
+	                </para>
+	            </listitem>
+	            <listitem>
+	                <para>
+	                    in a view (outside of forms) - defines behavior for components in all forms in the view
+	                </para>
+	            </listitem>
+	    	</itemizedlist>
+	    	<para>
+	    		There can be only one focus per form.
+	    	</para>
+	    	<para>
+	    		If both, form- and view-based focuses are defined, a form one takes a priority. 
+	    	</para>
+    	</section>
+    	
+    	<section id="sect-Component_Reference-richfocus-Applying_focus">
+            <title>Applying Focus</title>
+	        <para>
+	        	A focus is applied each time it is rendered - either on form submission or after AJAX request. Only focuses inside a form which is submitted at a time are applied.
+	    	</para>
+	    	<para>
+	    		You can turn focusing after AJAX request off by setting <varname>ajaxRendered</varname> attribute to <varname>false</varname>.
+	    	</para>
+    	</section>
+    	
+    	<section id="sect-Component_Reference-richfocus-Validation_aware">
+            <title>Validation-Aware</title>
+	        <para>
+	        	The <sgmltag>&lt;rich:focus&gt;</sgmltag> component reflects results of validation of components in a view. Focus is given to a first input component in a page which is invalid. 
+	    	</para>
+	    	<para>
+	    		If no component is invalid, then first component in the form will be focused.
+	    	</para>
+	    	<para>
+	    		The order of input components is determined on client-side and it reflects <varname>tabindex</varname> and position in a page. You can prioritize focusing of specific component by increasing its tabindex.
+	    	</para>
+	    	<para>
+	    		You can turn validation awareness off by setting <varname>validationAware</varname> attribute to <varname>false</varname>.  
+	    	</para>
+    	</section>
+    	
+    	<section id="sect-Component_Reference-richfocus-Preserving_focus">
+            <title>Preserving Focus</title>
+	        <para>
+	        	Focus can be configured to keep focus on input component which has been focused before sending JSF request (using either AJAX or form submission).
+	    	</para>
+	    	<example id="exam-Component_Reference-richfocus-richfocus_preserving_focus">
+                <title><sgmltag>&lt;rich:focus&gt;</sgmltag> preserving focus</title>
+                <programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-richfocus-richfocus_preserving_focus.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+                <para>
+                    In the example above, everytime user hits Search (or hits enter), the focus is given back to query input after the request.
+                </para>
+            </example>
+	    	<para>
+	    		This configuration will take a priority over any other focus setup.
+	    	</para>
+    	</section>
+    	
+    	<section id="sect-Component_Reference-richfocus-Delaying_focus">
+            <title>Delaying Focus</title>
+	        <para>
+	        	In certain situation, a focus needs to be applied with a delay - once suitable conditions are met.
+	    	</para>
+	    	<para>
+	    		By configuring a focus with attribute <varname>delayed</varname> to <varname>true</varname>, the focus won't be applied on initial page request.
+	    	</para>
+	    	<para>
+	    		Then it is possible to call <varname>applyFocus()</varname> JavaScript API method in order to let the focus apply.
+	    	</para>
+    	</section>
+    	
+    	<section id="sect-Component_Reference-richfocus-Focus_Manager">
+            <title>Focus Manager</title>
+	        <para>
+	        	For situation when no of the options above helps you to achieve focus behavior you would like to use, you can use server-side component <varname>FocusManager</varname>. 
+	    	</para>
+	    	<para>
+	    		A component to focus chosen by <varname>FocusManager</varname> will take a priority over any other configuration.
+	    	</para>
+	    	<example id="exam-Component_Reference-richfocus-Focus_Manager">
+                <title><sgmltag>&lt;rich:focus&gt;</sgmltag> preserving focus</title>
+                <programlisting language="Java" role="JAVA"><xi:include parse="text" href="extras/exam-Component_Reference-richfocus-Focus_Manager.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
+            </example>
+    	</section>
+        
+        <section id="sect-Component_Reference-richfocus-Reference_data">
+			<title>Reference data</title>
+			<itemizedlist>
+				<listitem>
+					<para>
+						<parameter>component-type</parameter>: <classname>org.richfaces.Focus</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-class</parameter>: <classname>org.richfaces.component.UIFocus</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>component-family</parameter>: <classname>org.richfaces.Focus</classname>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<parameter>renderer-type</parameter>: <classname>org.richfaces.FocusRenderer</classname>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</section>
+	</section>
+
     <section id="sect-Component_Reference-Functionality_extension-richhotKey">
         <title><sgmltag>&lt;rich:hotKey&gt;</sgmltag></title>
         <para>
