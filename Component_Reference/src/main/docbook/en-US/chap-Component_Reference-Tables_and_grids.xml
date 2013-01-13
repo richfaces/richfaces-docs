@@ -1674,7 +1674,7 @@
 		</para>
 
         <section id="sect-Component_Reference-Table_filtering-filtering">
-            <title>Filters Definition</title>
+            <title>Filter Definition</title>
             <para>
                 To define a filter for a column use either the <varname>filter</varname> or <varname>filterExpression</varname> attributes, then use the <varname>filterValue</varname> attribute to point to an object which holds the current filtering value for the column. The  attribute can be used to store filtering conditions in a session.
             </para>
@@ -1764,51 +1764,61 @@
 			</para>
 		</note>
 
-		<!--
-		<section id="sect-Component_Reference-Tables_and_grids-Basic_sorting">
-			<title>Basic sorting</title>
+		<section id="sect-Component_Reference-Tables_and_grids-Comparator">
+			<title>Comparator Definition</title>
 			<para>
-				The built-in sorting functionality of the <sgmltag>&lt;rich:column&gt;</sgmltag> component allows a user to click the header of a column to sort it in ascending or descending order.
+                Use the <varname>comparator</varname> attribute of the <sgmltag>&lt;rich:column&gt;</sgmltag> to specify the comparator to use when sorting.
+                If no <varname>comparator</varname> is specified, the sorting algorithm will invoke the entries <varname>compareTo</varname> method of the <varname>sortBy</varname> values if they implement the <varname>java.lang.Comparable</varname> interface.
+                As a final fall back, the algorithm implements a null sort, sorting elements based on whether or not they are null.
+            </para>
+        </section>
+
+		<section id="sect-Component_Reference-Tables_and_grids-Basic_sorting">
+			<title>Built-in sort controls</title>
+            <note>
+                <title>Availability of built-in sort controls</title>
+                <para>
+                    The built-in sort controls are only available with the <varname>extendedDataTable</varname> component.
+                    Support for built-in sort controls in the <varname>dataTable</varname> component will be added in a subsequent release.
+                </para>
+            </note>
+            <para>
+				The built-in sorting controls of the <sgmltag>&lt;rich:column&gt;</sgmltag> component allows a user to click the sort icons of a column to sort it in ascending or descending order.
 			</para>
 			<para>
 				Set the <varname>sortBy</varname> attribute to indicate which value to use when sorting the column. Expressions in the <varname>sortBy</varname> attribute must refer to the variable declared in the table's <varname>var</varname> attribute, which is used to fill the contents of the table.
 			</para>
-			<example id="exam-Component_Reference-Table_sorting-Basic_sorting">
+			<example id="exam-Component_Reference-Table_sorting-Built_in_sorting">
 				<title>Basic sorting</title>
 				<programlisting language="XML" role="XML"><xi:include parse="text" href="extras/exam-Component_Reference-Table_sorting-Basic_sorting.xml_sample" xmlns:xi="http://www.w3.org/2001/XInclude" /></programlisting>
 				<para>
 					The example uses the basic sorting method on both columns in the table.
 				</para>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="images/figu-Component_Reference-Table_sorting-Basic_sorting.png" format="PNG" />
-					</imageobject>
-					<textobject>
-						<para>
-							A table of state capitals sorted alphabetically by state.
-						</para>
-					</textobject>
-				</mediaobject>
 			</example>
 			<para>
-				Use the <varname>sortOrder</varname> attribute to set how the table's contents are sorted when it is first loaded. By default, the value of the <varname>sortOrder</varname> attribute is <literal>unsorted</literal>, so that table entries appear in the order the are contained in the data model. Use <code>sortOrder="ascending"</code> to sort the entries in ascending alphabetical or numerical order. Use <code>sortOrder="descending"</code> to sort the entries in descending alphabetical or numerical order. The <varname>sortOrder</varname> attribute can also be used to externally set the sort order of a table when using the external sorting method; refer to <xref linkend="sect-Component_Reference-Table_sorting-External_sorting" /> for details.
+				Use the <varname>sortOrder</varname> attribute to set how the table's contents are sorted when it is first loaded.
+                By default, the value of the <varname>sortOrder</varname> attribute is <literal>unsorted</literal>, so that table entries appear in the order the are contained in the data model.
+                Use <code>sortOrder="ascending"</code> to sort the entries in ascending alphabetical or numerical order. Use <code>sortOrder="descending"</code> to sort the entries in descending alphabetical or numerical order.
+                The <varname>sortOrder</varname> attribute can also be used to externally set the sort order of a table when using the external sorting method; refer to <xref linkend="sect-Component_Reference-Table_sorting-External_sorting" /> for details.
 			</para>
-			<para>
-				Use the <varname>sortMode</varname> attribute to determine how multiple columns are sorted. By default, the value of the <varname>sortMode</varname> attribute is <literal>single</literal>, so tables are only sorted by a single column. Each time the header of a column is clicked the entire table is re-sorted according to that column. Set <code>sortMode="multiple"</code> to allow tables to be sorted by a primary column, then by a secondary column, and so on.
-			</para>
+			<!--<para>-->
+				<!--Use the <varname>sortMode</varname> attribute to determine how multiple columns are sorted. By default, the value of the <varname>sortMode</varname> attribute is <literal>single</literal>, so tables are only sorted by a single column. -->
+                <!--Each time the header of a column is clicked the entire table is re-sorted according to that column. -->
+                <!--Set <code>sortMode="multiple"</code> to allow tables to be sorted by a primary column, then by a secondary column, and so on.-->
+			<!--</para>-->
 		</section>
 
 		<section id="sect-Component_Reference-Table_sorting-External_sorting">
-			<title>External sorting</title>
-		-->
+			<title>External sort controls</title>
 			<para>
-				Set the <varname>sortBy</varname> attribute to indicate which iteration object property to use when sorting the column. By default, the target will be sorted using the <methodname>compare()</methodname> method.
+				Set the <varname>sortBy</varname> attribute to indicate which iteration object property to use when sorting the column.
+                If using custom-defined rules for sorting, use the <varname>comparator</varname> attribute instead.
+                Set the <varname>comparator</varname> attribute to point to your comparator method, which will be used when sorting the data model.
 			</para>
 			<para>
-				If using custom-defined rules for sorting, use the <varname>comparator</varname> attribute instead. Set the <varname>comparator</varname> attribute to point to your comparator method, which will be used when sorting the data model.
-			</para>
-			<para>
-				Bind the <varname>sortOrder</varname> attribute to bean properties to manage the sorting order. The bean must handle all the sorting algorithms. <xref linkend="exam-Component_Reference-Table_sorting-Sorting" /> demonstrates table sorting using an external control.
+				Bind the <varname>sortOrder</varname> attribute to bean properties to manage the sorting order.
+                The bean must handle all the sorting algorithms.
+                <xref linkend="exam-Component_Reference-Table_sorting-Sorting" /> demonstrates table sorting using an external control.
 			</para>
 			<example id="exam-Component_Reference-Table_sorting-Sorting">
 				<title>Sorting</title>
@@ -1816,21 +1826,11 @@
 				<para>
 					The example uses an external control to manage the table's sorting.
 				</para>
-				<mediaobject>
-					<imageobject>
-						<imagedata fileref="images/figu-Component_Reference-Table_sorting-External_sorting.png" format="PNG" />
-					</imageobject>
-					<textobject>
-						<para>
-							A table of vehicle details, sorted using an external control.
-						</para>
-					</textobject>
-				</mediaobject>
 			</example>
 			<para>
 				When multiple columns are capable of being sorted at the same time, set the priority by which the columns are sorted with the <varname>sortPriorities</varname> attribute. The attribute must contain a list of column identifiers in the order of the sorting sequence.
 			</para>
-		<!--</section>-->
+		</section>
 	</section>
 
 </chapter>
