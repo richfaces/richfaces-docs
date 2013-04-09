@@ -36,6 +36,56 @@
     <build>
         <pluginManagement>
             <plugins>
+                <!-- Generate the docbook xml from the asciidoc -->
+                <plugin>
+                    <groupId>org.asciidoctor</groupId>
+                    <artifactId>asciidoctor-maven-plugin</artifactId>
+                    <version>0.1.2-SNAPSHOT</version>
+                    <executions>
+                        <execution>
+                            <id>output-html</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>process-asciidoc</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <sourceDirectory>${basedir}/src/main/docbook</sourceDirectory>
+                        <outputDirectory>${basedir}/target/docbook/en-US</outputDirectory>
+                        <backend>docbook</backend>
+                        <doctype>book</doctype>
+                    </configuration>
+                </plugin>
+                <!-- copy the asciidoc source tree for docbook xml processing -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>copy-resources</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${basedir}/target/docbook/en-US</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${basedir}/src/main/docbook/en-US</directory>
+                                        <!-- Filter the docbook xml while the asciidoc -> docbook conversion is in transition -->
+                                        <filtering>true</filtering>
+                                        <excludes>
+                                            <exclude>**/Developer_Guide.xml</exclude>
+                                            <exclude>**/Component_Reference.xml</exclude>
+                                        </excludes>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- Process the docbook xml -->
                 <plugin>
                     <groupId>org.jboss.maven.plugins</groupId>
                     <artifactId>maven-jdocbook-plugin</artifactId>
@@ -55,11 +105,11 @@
                         </dependency>
                     </dependencies>
                     <configuration>
-                        <sourceDirectory>${project.basedir}/src/main/docbook</sourceDirectory>
+                        <sourceDirectory>${project.basedir}/target/docbook</sourceDirectory>
                         <sourceDocumentName>${docname}.xml</sourceDocumentName>
                         <masterTranslation>en-US</masterTranslation>
                         <imageResource>
-                            <directory>${project.basedir}/src/main/docbook/en-US</directory>
+                            <directory>${project.basedir}/target/docbook/en-US</directory>
                             <includes>
                                 <include>images/*.png</include>
                             </includes>
