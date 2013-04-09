@@ -32,5 +32,5 @@ convert_comp_ref() {
     echo "Conversion finished: Component Reference"
 }
 
-#convert_dev_guide
-convert_comp_ref
+convert_dev_guide
+#convert_comp_ref
