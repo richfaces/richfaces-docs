@@ -8,7 +8,7 @@ The RichFaces framework is a rich component library for JavaServer Faces ( JSF).
 
 RichFaces leverages several parts of the JSF 2 framework including lifecycle, validation, conversion facilities, and management of static and dynamic resources. The RichFaces framework includes components with built-in Ajax support and a customizable look-and-feel that can be incorporated into JSF applications.
 
-RichFaces provides a number of advantages for enterprise web application development: * Create complex application views using out-of-the-box components. The RichFaces user interface ( UI) library ( rich) contains components for adding rich interactive features to JSF applications. It extends the RichFaces framework to include a large set of Ajax-enabled components that come with extensive skinning support. Additionally, the RichFaces framework is designed to be used seamlessly with other 3d-party libraries on the same page, so you have more options for developing applications.
+RichFaces provides a number of advantages for enterprise web application development: * Create complex application views using out-of-the-box components. The RichFaces user interface ( UI) library ( +rich+) contains components for adding rich interactive features to JSF applications. It extends the RichFaces framework to include a large set of Ajax-enabled components that come with extensive skinning support. Additionally, the RichFaces framework is designed to be used seamlessly with other 3d-party libraries on the same page, so you have more options for developing applications.
 * Write your own customized rich components with built-in Ajax support. The Component Development Kit ( CDK), used for the RichFaces UI library creation, includes a code-generation facility and a templating facility using XHTML(extended hyper-text markup language) syntax.
 * Generate binary resources on the fly. Extensions to JSF 2 resource-handling facilities can generate images, sounds, Microsoft Excelspreadsheets, and more during run-time.
 * Create a modern rich user-interface with skinning technology. RichFaces provides a skinning feature that allows you to define and manage different color schemes and other parameters of the look and feel. It is possible to access the skin parameters from page code during run-time. RichFaces comes packaged with a number of skins to get you started, but you can also easily create your own customized skins too.
@@ -427,13 +427,13 @@ The RichFaces framework includes several Ajax Action Components and Submitting B
 
 ==== Ajax Containers
 
-AjaxContaineris an interface that marks part of the JSF tree that is decoded during an Ajax request. It only marks the JSF tree if the component or behavior sending the request does not explicitly specify an alternative. AjaxRegionis an implementation of this interface.
++AjaxContainer+ is an interface that marks part of the JSF tree that is decoded during an Ajax request. It only marks the JSF tree if the component or behavior sending the request does not explicitly specify an alternative. +AjaxRegion+ is an implementation of this interface.
 
 [[sect-Developer_Guide-Architecture-Ajax_Output]]
 
 ==== Ajax Output
 
-AjaxContaineris an interface that marks part of the JSF tree that will be updated and rendered on the client for every Ajax request. It only marks the JSF tree if the component or behavior sending the request does not explicitly turn off automatic updates.
++AjaxContainer+ is an interface that marks part of the JSF tree that will be updated and rendered on the client for every Ajax request. It only marks the JSF tree if the component or behavior sending the request does not explicitly turn off automatic updates.
 
 [[sect-Developer_Guide-Architecture-Skins_and_theming]]
 
@@ -469,7 +469,7 @@ For example, binding Ajax options to Java Bean properties in RichFaces allows yo
 
 === Restrictions
 
-The following restrictions apply to applications implementing the RichFaces framework: * As with most Ajax frameworks, you should not attempt to append or delete elements on a page using RichFaces Ajax, but should instead replace them. As such, elements that are rendered conditionally should not be targeted in the renderattributes for Ajax controls. For successful updates, an element with the same identifier as in the response must exist on the page. If it is necessary to append code to a page, include a placeholder for it (an empty element).
+The following restrictions apply to applications implementing the RichFaces framework: * As with most Ajax frameworks, you should not attempt to append or delete elements on a page using RichFaces Ajax, but should instead replace them. As such, elements that are rendered conditionally should not be targeted in the +render+ attributes for Ajax controls. For successful updates, an element with the same identifier as in the response must exist on the page. If it is necessary to append code to a page, include a placeholder for it (an empty element).
 * JSF 2 does not allow resources such as JavaScript or Cascading Style Sheets ( CSS) to be added if the element requiring the resource is not initially present in the JSF tree. As such, components added to the tree via Ajax must have any required resources already loaded. In RichFaces, any components added to the JSF tree should have components with corresponding resources included on the main page initially. To facilitate this, components can use the +rendered="false"+ setting to not be rendered on the page.
 * JSF does render resource links (stylesheets, scripts) in order of occurence, thus if you add +<h:outputStylesheet>+ to the +<h:head>+ section, JSF will render it before the RichFaces resource links (dependencies of RichFaces components). To be able to overwrite RichFaces stylesheets and re-use RichFaces JavaScript implementation, you need to render +<h:outputStylesheet target="head">+ to the +<h:body>+ section (safe solution is to place it on the end of the section; however to keep readability, you can use start of the section).
 * Switching RichFaces skins via Ajax during runtime should be avoided, as this requires all the stylesheets to be reloaded.
@@ -487,25 +487,25 @@ Read this chapter for the basic concepts of using RichFaces in conjunction with 
 
 === Sending an Ajax request
 
-Many of the tags in the a4jand richtag libraries are capable of sending Ajax requests from a JavaServer Faces (JSF) page.
+Many of the tags in the +a4j+ and +rich+ tag libraries are capable of sending Ajax requests from a JavaServer Faces (JSF) page.
 
-* The <a4j:commandButton>and <a4j:commandLink>tags are used to send an Ajax request on the clickJavaScript event.
+* The <a4j:commandButton>and <a4j:commandLink>tags are used to send an Ajax request on the +click+ JavaScript event.
 * The <a4j:poll>tag is used to send an Ajax request periodically using a timer.
-* The <a4j:ajax>tag allows you to add Ajax functionality to standard JSF components and send Ajax request on a chosen JavaScript event, such as keyupor mouseover, for example.
-* Most components in the richtag library have built-in Ajax support. Refer to the RichFaces Component Referencefor details on the use of each component.
+* The <a4j:ajax>tag allows you to add Ajax functionality to standard JSF components and send Ajax request on a chosen JavaScript event, such as +keyup+ or +mouseover+, for example.
+* Most components in the +rich+ tag library have built-in Ajax support. Refer to the RichFaces Component Referencefor details on the use of each component.
 
 
 [[sect-Developer_Guide-Basic_concepts-Partial_tree_processing]]
 
 === Partial tree processing
 
-Use the executeattribute to specify which parts of the JSF tree to process during an Ajax request. The executeattribute can point to an ididentifier of a specific component to process. Components can also be identified through the use of Expression Language ( EL).
+Use the +execute+ attribute to specify which parts of the JSF tree to process during an Ajax request. The +execute+ attribute can point to an +id+ identifier of a specific component to process. Components can also be identified through the use of Expression Language ( EL).
 
-Alternatively, the executeattribute accepts the following keywords:
+Alternatively, the +execute+ attribute accepts the following keywords:
 
 +@all+:: Every component is processed.
 +@none+:: No components are processed.
-+@this+:: The requesting component with the executeattribute is processed.
++@this+:: The requesting component with the +execute+ attribute is processed.
 +@form+:: The form that contains the requesting component is processed.
 +@region+:: The region that contains the requesting component is processed. Use the <a4j:region>component as a wrapper element to specify regions.
 Some components make use of additional keywords. These are detailed under the relevant component entry in the RichFaces Component Reference.
@@ -514,24 +514,24 @@ Some components make use of additional keywords. These are detailed under the re
 
 === Partial view updates
 
-Use the renderattribute to specify which components to render for an Ajax update. The renderattribute can point to an ididentifier of a specific component to update. Components can also be identified through the use of Expression Language ( EL).
+Use the +render+ attribute to specify which components to render for an Ajax update. The +render+ attribute can point to an +id+ identifier of a specific component to update. Components can also be identified through the use of Expression Language ( EL).
 
-Alternatively, the renderattribute accepts the following keywords:
+Alternatively, the +render+ attribute accepts the following keywords:
 
 +@all+:: Every component is updated.
 +@none+:: No components are updated.
-+@this+:: The requesting component with the executeattribute is updated.
++@this+:: The requesting component with the +execute+ attribute is updated.
 +@form+:: The form that contains the requesting component is updated.
 +@region+:: The region that contains the requesting component is updated. Use the <a4j:region>component as a wrapper element to specify regions.
 Some components make use of additional keywords. These are detailed under the relevant component entry in the RichFaces Component Reference.
 
-Use the <a4j:outputPanel>component with the +ajaxRendered="true"+ setting to always update a section irrespective of the requesting component's renderattribute. The <rich:message>and <rich:messages>components are based on the <a4j:outputPanel>component, and as such will also always be updated. To override this behavior, use the +limitRender="true"+ setting on the requesting component.
+Use the <a4j:outputPanel>component with the +ajaxRendered="true"+ setting to always update a section irrespective of the requesting component's +render+ attribute. The <rich:message>and <rich:messages>components are based on the <a4j:outputPanel>component, and as such will also always be updated. To override this behavior, use the +limitRender="true"+ setting on the requesting component.
 
 [[sect-Developer_Guide-Basic_concepts-Component_overview]]
 
 === Component overview
 
-The RichFaces framework is made up of two tag libraries: the a4jlibrary and the richlibrary. The a4jtag library represents _Ajax4jsf_, which provides page-level Ajax support with core Ajax components. This allows developers to make use of custom Ajax behavior with existing components. The richtag library provides Ajax support at the component level instead, and includes ready-made, self-contained components. These components don't require additional configuration in order to send requests or update.
+The RichFaces framework is made up of two tag libraries: the +a4j+ library and the +rich+ library. The +a4j+ tag library represents _Ajax4jsf_, which provides page-level Ajax support with core Ajax components. This allows developers to make use of custom Ajax behavior with existing components. The +rich+ tag library provides Ajax support at the component level instead, and includes ready-made, self-contained components. These components don't require additional configuration in order to send requests or update.
 
 For details on the use of the various components, refer to RichFaces Component Reference.
 
@@ -560,7 +560,7 @@ RichFaces allows standard handlers to be defined for processing different applic
 
 ==== Client-side errors
 
-JSF provides a global +onError+ handler on the client. The handler provides the relevant error code and other associated data. The RichFaces Ajax components provide the errorattribute if extra functionality needs to be defined.
+JSF provides a global +onError+ handler on the client. The handler provides the relevant error code and other associated data. The RichFaces Ajax components provide the +error+ attribute if extra functionality needs to be defined.
 
 Additional processing is available through a number of components, such as the following:
 
@@ -572,7 +572,7 @@ Additional processing is available through a number of components, such as the f
 
 ==== Server-side errors
 
-Use the JSF 2 ExceptionHandlerclass to handle server-side errors such as session expiration.
+Use the JSF 2 +ExceptionHandler+ class to handle server-side errors such as session expiration.
 
 [[sect-Developer_Guide-Advanced_features-Other_functions]]
 
@@ -723,7 +723,7 @@ Read this chapter for a guide to skinning and theming RichFaces applications, in
 
 Application skins are used with the RichFaces framework to change the appearance of an application through setting the colors and decoration of controls and components. Typically the appearance of web applications is handled through the CSS(Cascading Style Sheet) files associated with the application, but skinning allows the settings in a CSS file to be abstracted and easily edited. Skins consist of a small, generalized set of font and color parameters that can be applied to multiple different styles. This avoids repetitive coding and duplication in CSS files. CSS files are not completely replaced: skins work as a high-level extension to standard CSS.
 
-Each skin has a set of skin-parameters, which are used to define the theme palette and other elements of the user interface. These parameters work together with regular CSS declarations, and can be referred to from within CSS using JavaServer Faces Expression Language ( EL).
+Each skin has a set of +skin-parameters+, which are used to define the theme palette and other elements of the user interface. These parameters work together with regular CSS declarations, and can be referred to from within CSS using JavaServer Faces Expression Language ( EL).
 
 The skinning feature of RichFaces also allows skins to be changed at runtime, so users can personalize an application's appearance on the fly.
 
@@ -731,7 +731,7 @@ The skinning feature of RichFaces also allows skins to be changed at runtime, so
 
 === Using skins
 
-RichFaces includes a number of predefined skins. These skins can be used in RichFaces web applications by specifying the skin name in the org.richfaces.skincontext parameter in the _web.xml_settings file. The predefined skins are as follows:
+RichFaces includes a number of predefined skins. These skins can be used in RichFaces web applications by specifying the skin name in the +org.richfaces.skin+ context parameter in the _web.xml_settings file. The predefined skins are as follows:
 
 * +DEFAULT+
 * +plain+, which contains no skin parameters and is intended for embedding RichFaces components into existing projects with their own styles.
@@ -761,7 +761,7 @@ RichFaces skins are implemented using the following three-level scheme:
 
 Component stylesheets:: Stylesheets are provided for each component. CSS style parameters map to skin parameters defined in the skin property file. This mapping is accomplished through the use of ECSS files. Refer to <<sect-Developer_Guide-Skinning_and_theming-ECSS_files>> for details on ECSS files.
 Skin property files:: Skin property files map skin parameters to constant styles. Skin properties are defined in _skin.properties_files. Refer to <<sect-Developer_Guide-Skinning_overview-Skin_parameter_tables>> for a listing of the skin parameters used in a typical skin.
-Custom style classes:: Individual components can use the styleClassattribute to redefine specific elements. These components then use the styles defined in a CSS file instead of the standard look for components as defined by the ECSS stylesheets.
+Custom style classes:: Individual components can use the +styleClass+ attribute to redefine specific elements. These components then use the styles defined in a CSS file instead of the standard look for components as defined by the ECSS stylesheets.
 [[sect-Developer_Guide-Skinning_overview-Skin_parameter_tables]]
 
 ==== Skin parameter tables
@@ -774,57 +774,57 @@ Custom style classes:: Individual components can use the styleClassattribute to 
 [options="header"]
 |===============
 |Parameter name|Default value
-|headerBackgroundColor|+#BED6F8+
-|headerGradientColor|+#F2F7FF+
-|headTextColor|+#000000+
-|headerWeightFont|+bold+
-|generalBackgroundColor|+#FFFFFF+
-|generalTextColor|+#000000+
-|generalSizeFont|+11px+
-|generalFamilyFont|+Arial, Verdana, sans-serif+
-|controlTextColor|+#000000+
-|controlBackgroundColor|+#FFFFFF+
-|additionalBackgroundColor|+#ECF4FE+
-|shadowBackgroundColor|+#000000+
-|shadowOpacity|+1+
-|panelBorderColor|+#BED6F8+
-|subBorderColor|+#FFFFFF+
-|calendarWeekBackgroundColor|+#F5F5F5+
-|calendarHolidaysBackgroundColor|+#FFEBDA+
-|calendarHolidaysTextColor|+#FF7800+
-|calendarCurrentBackgroundColor|+#FF7800+
-|calendarCurrentTextColor|+#FFEBDA+
-|calendarSpecBackgroundColor|+#E4F5E2+
-|calendarSpecTextColor|+#000000+
-|editorBackgroundColor|+#F1F1F1+
-|editBackgroundColor|+#FEFFDA+
-|errorColor|+#FF0000+
-|gradientType|+plain+
-|tabBackgroundColor|+#C6DEFF+
-|tabDisabledTextColor|+#8DB7F3+
-|tableHeaderBackgroundColor|+#D6E6FB+
-|tableSubHeaderBackgroundColor|+#ECF4FE+
-|tableBorderWidth|+1px+
-|tableHeaderTextColor|+#0B356C+
-|trimColor|+#D6E6FB+
-|tipBackgroundColor|+#FAE6B0+
-|tipBorderColor|+#E5973E+
-|selectControlColor|+#E79A00+
-|generalLinkColor|+#0078D0+
-|hoverLinkColor|+#0090FF+
-|visitedLinkColor|+#0090FF+
-|headerSizeFont|+11px+
-|headerFamilyFont|+Arial, Verdana, sans-serif+
-|tabSizeFont|+11px+
-|tabFamilyFont|+Arial, Verdana, sans-serif+
-|buttonSizeFont|+11px+
-|buttonFamilyFont|+Arial, Verdana, sans-serif+
-|tableBackgroundColor|+#FFFFFF+
-|tableFooterBackgroundColor|+#CCCCCC+
-|tableSubfooterBackgroundColor|+#F1F1F1+
-|tableBorderColor|+#C0C0C0+
-|warningColor|+#FFE6E6+
-|warningBackgroundColor|+#FF0000+
+|+headerBackgroundColor+|+#BED6F8+
+|+headerGradientColor+|+#F2F7FF+
+|+headTextColor+|+#000000+
+|+headerWeightFont+|+bold+
+|+generalBackgroundColor+|+#FFFFFF+
+|+generalTextColor+|+#000000+
+|+generalSizeFont+|+11px+
+|+generalFamilyFont+|+Arial, Verdana, sans-serif+
+|+controlTextColor+|+#000000+
+|+controlBackgroundColor+|+#FFFFFF+
+|+additionalBackgroundColor+|+#ECF4FE+
+|+shadowBackgroundColor+|+#000000+
+|+shadowOpacity+|+1+
+|+panelBorderColor+|+#BED6F8+
+|+subBorderColor+|+#FFFFFF+
+|+calendarWeekBackgroundColor+|+#F5F5F5+
+|+calendarHolidaysBackgroundColor+|+#FFEBDA+
+|+calendarHolidaysTextColor+|+#FF7800+
+|+calendarCurrentBackgroundColor+|+#FF7800+
+|+calendarCurrentTextColor+|+#FFEBDA+
+|+calendarSpecBackgroundColor+|+#E4F5E2+
+|+calendarSpecTextColor+|+#000000+
+|+editorBackgroundColor+|+#F1F1F1+
+|+editBackgroundColor+|+#FEFFDA+
+|+errorColor+|+#FF0000+
+|+gradientType+|+plain+
+|+tabBackgroundColor+|+#C6DEFF+
+|+tabDisabledTextColor+|+#8DB7F3+
+|+tableHeaderBackgroundColor+|+#D6E6FB+
+|+tableSubHeaderBackgroundColor+|+#ECF4FE+
+|+tableBorderWidth+|+1px+
+|+tableHeaderTextColor+|+#0B356C+
+|+trimColor+|+#D6E6FB+
+|+tipBackgroundColor+|+#FAE6B0+
+|+tipBorderColor+|+#E5973E+
+|+selectControlColor+|+#E79A00+
+|+generalLinkColor+|+#0078D0+
+|+hoverLinkColor+|+#0090FF+
+|+visitedLinkColor+|+#0090FF+
+|+headerSizeFont+|+11px+
+|+headerFamilyFont+|+Arial, Verdana, sans-serif+
+|+tabSizeFont+|+11px+
+|+tabFamilyFont+|+Arial, Verdana, sans-serif+
+|+buttonSizeFont+|+11px+
+|+buttonFamilyFont+|+Arial, Verdana, sans-serif+
+|+tableBackgroundColor+|+#FFFFFF+
+|+tableFooterBackgroundColor+|+#CCCCCC+
+|+tableSubfooterBackgroundColor+|+#F1F1F1+
+|+tableBorderColor+|+#C0C0C0+
+|+warningColor+|+#FFE6E6+
+|+warningBackgroundColor+|+#FF0000+
 |===============
 
 [[sect-Developer_Guide-Skinning_and_theming-Round_corners]]
@@ -874,7 +874,7 @@ Skins in RichFaces can be customized on each of the three levels:
 
 Skin property files:: Application interfaces can be modified by altering the values of skin parameters in the skin itself. Edit the constant values defined in the _skin.properties_file to change the style of every component mapped to that skin property.
 Component stylesheets:: Mappings and other style attributes listed in a component's ECSS file can be edited. Edit the ECSS file to change the styles of all components of that type.
-Custom components style classes:: Individual components can use the styleClassattribute to use a unique style class. Add the new style class to the application CSS and reference it from an individual component with the styleClassattribute.
+Custom components style classes:: Individual components can use the +styleClass+ attribute to use a unique style class. Add the new style class to the application CSS and reference it from an individual component with the +styleClass+ attribute.
 Overwriting stylesheets in application:: You can load custom stylesheets using +<h:outputStylesheet>+ which rewrites of extends styles defined for style classes of components.
 [NOTE]
 .Customizing skins by rewriting/extending component style classes
@@ -917,7 +917,7 @@ Define the skin constantsDefine all the skin constantsAdd skin parameter constan
 ._blueSky.skin.properties_file
 ========
 
-Extend a base skinInstead of redefining an entire new skin, your skin can use an existing skin as a base on which to build new parameters. Specify a base skin by using the baseSkinparameter in the skin file, as shown in <<exam-Developer_Guide-Skinning_and_theming-Using_a_base_skin>>.
+Extend a base skinInstead of redefining an entire new skin, your skin can use an existing skin as a base on which to build new parameters. Specify a base skin by using the +baseSkin+ parameter in the skin file, as shown in <<exam-Developer_Guide-Skinning_and_theming-Using_a_base_skin>>.
 
 [[exam-Developer_Guide-Skinning_and_theming-Using_a_base_skin]]
 
@@ -1026,7 +1026,7 @@ Standard HTML controls are skinned in this way by default. To override this beha
 
 [[sect-Developer_Guide-Skinning_standard_controls-Skinning_with_the_rfs-ctn_class]]
 
-==== Skinning with the rfs-ctnclass
+==== Skinning with the +rfs-ctn+ class
 
 The skinning style properties can be determined through a separate CSS class. This method is not available by default, but is enabled through the +org.richfaces.enableControlSkinningClasses+ context parameter in the _web.xml_configuration file:
 
@@ -1039,7 +1039,7 @@ The skinning style properties can be determined through a separate CSS class. Th
 </context-param>
 ----
 
-When enabled, a stylesheet with predefined classes offers a special CSS class named rfs-ctn. Reference the rfs-ctnclass from any container element (such as a <div>element) to skin all the standard HTML controls in the container.
+When enabled, a stylesheet with predefined classes offers a special CSS class named +rfs-ctn+. Reference the +rfs-ctn+ class from any container element (such as a <div>element) to skin all the standard HTML controls in the container.
 
 Standard HTML controls can also be specifically defined in the CSS. Refer to the _$$/core/impl/src/main/resources/META-INF/resources/skinning_both.ecss$$_file in the richfaces-ui.jarpackage for examples of specially-defined CSS classes with skin parameters for HTML controls.
 
@@ -1065,37 +1065,37 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-log:: This class defines styles for the log.
-|generalTextColor|color
-|.rf-log-popup:: This class defines styles for the log when it appears as a pop-up.
+|+.rf-log+:: This class defines styles for the log.
+|+generalTextColor+|color
+|+.rf-log-popup+:: This class defines styles for the log when it appears as a pop-up.
 |No skin parameters.
-|.rf-log-popup-cnt:: This class defines styles for the content of the log pop-up.
+|+.rf-log-popup-cnt+:: This class defines styles for the content of the log pop-up.
 |No skin parameters.
-|.rf-log-inline:: This class defines styles for the log when it appears in-line.
+|+.rf-log-inline+:: This class defines styles for the log when it appears in-line.
 |No skin parameters.
-|.rf-log-contents:: This class defines styles for the log contents.
+|+.rf-log-contents+:: This class defines styles for the log contents.
 |No skin parameters.
-|.rf-log-entry-lbl:: This class defines styles for a label in the log.
+|+.rf-log-entry-lbl+:: This class defines styles for a label in the log.
 |No skin parameters.
-|.rf-log-entry-lbl-debug:: This class defines styles for the debuglabel in the log.
+|+.rf-log-entry-lbl-debug+:: This class defines styles for the debuglabel in the log.
 |No skin parameters.
-|.rf-log-entry-lbl-info:: This class defines styles for the informationlabel in the log.
+|+.rf-log-entry-lbl-info+:: This class defines styles for the informationlabel in the log.
 |No skin parameters.
-|.rf-log-entry-lbl-warn:: This class defines styles for the warninglabel in the log.
+|+.rf-log-entry-lbl-warn+:: This class defines styles for the warninglabel in the log.
 |No skin parameters.
-|.rf-log-entry-lbl-error:: This class defines styles for the errorlabel in the log.
+|+.rf-log-entry-lbl-error+:: This class defines styles for the errorlabel in the log.
 |No skin parameters.
-|.rf-log-entry-msg:: This class defines styles for a message in the log.
+|+.rf-log-entry-msg+:: This class defines styles for a message in the log.
 |No skin parameters.
-|.rf-log-entry-msg-debug:: This class defines styles for the debugmessage in the log.
+|+.rf-log-entry-msg-debug+:: This class defines styles for the debugmessage in the log.
 |No skin parameters.
-|.rf-log-entry-msg-info:: This class defines styles for the informationmessage in the log.
+|+.rf-log-entry-msg-info+:: This class defines styles for the informationmessage in the log.
 |No skin parameters.
-|.rf-log-entry-msg-warn:: This class defines styles for the warningmessage in the log.
+|+.rf-log-entry-msg-warn+:: This class defines styles for the warningmessage in the log.
 |No skin parameters.
-|.rf-log-entry-msg-error:: This class defines styles for the errormessage in the log.
+|+.rf-log-entry-msg-error+:: This class defines styles for the errormessage in the log.
 |No skin parameters.
-|.rf-log-entry-msg-xml:: This class defines styles for an XML message in the log.
+|+.rf-log-entry-msg-xml+:: This class defines styles for an XML message in the log.
 |No skin parameters.
 |===============
 
@@ -1113,36 +1113,36 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-au-fnt:: This class defines styles for the auto-complete box font.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-au-inp:: This class defines styles for the auto-complete input box.
-|controlBackgroundColor|background-color
-|.rf-au-fld:: This class defines styles for the auto-complete field.
-|panelBorderColor|border-color
-|controlBackgroundColor|background-color
-|.rf-au-fld-btn:: This class defines styles for a button in the auto-complete field.
+|+.rf-au-fnt+:: This class defines styles for the auto-complete box font.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-au-inp+:: This class defines styles for the auto-complete input box.
+|+controlBackgroundColor+|background-color
+|+.rf-au-fld+:: This class defines styles for the auto-complete field.
+|+panelBorderColor+|border-color
+|+controlBackgroundColor+|background-color
+|+.rf-au-fld-btn+:: This class defines styles for a button in the auto-complete field.
 |No skin parameters.
-|.rf-au-btn:: This class defines styles for the auto-complete box button.
-|headerBackgroundColor|background-color
-|panelBorderColor|border-left-color
-|.rf-au-btn-arrow:: This class defines styles for the button arrow.
+|+.rf-au-btn+:: This class defines styles for the auto-complete box button.
+|+headerBackgroundColor+|background-color
+|+panelBorderColor+|border-left-color
+|+.rf-au-btn-arrow+:: This class defines styles for the button arrow.
 |No skin parameters.
-|.rf-au-btn-arrow-dis:: This class defines styles for the button arrow when it is disabled.
+|+.rf-au-btn-arrow-dis+:: This class defines styles for the button arrow when it is disabled.
 |No skin parameters.
-|.rf-au-lst-scrl:: This class defines styles for the scrollbar in the auto-complete list.
+|+.rf-au-lst-scrl+:: This class defines styles for the scrollbar in the auto-complete list.
 |No skin parameters.
-|.rf-au-itm:: This class defines styles for an item in the auto-complete list.
+|+.rf-au-itm+:: This class defines styles for an item in the auto-complete list.
 |No skin parameters.
-|.rf-au-itm-sel:: This class defines styles for a selected item in the auto-complete list.
-|headerBackgroundColor|background-color
-|generalTextColor|border-color
-|.rf-au-shdw:: This class defines styles for the auto-complete box shadow.
+|+.rf-au-itm-sel+:: This class defines styles for a selected item in the auto-complete list.
+|+headerBackgroundColor+|background-color
+|+generalTextColor+|border-color
+|+.rf-au-shdw+:: This class defines styles for the auto-complete box shadow.
 |No skin parameters.
-|.rf-au-shdw-t:: .rf-au-shdw-l:: .rf-au-shdw-r:: .rf-au-shdw-b:: These classes define styles for the top, left, right, and bottom part of the auto-complete box shadow.
+|+.rf-au-shdw-t+:: +.rf-au-shdw-l+:: +.rf-au-shdw-r+:: +.rf-au-shdw-b+:: These classes define styles for the top, left, right, and bottom part of the auto-complete box shadow.
 |No skin parameters.
-|.rf-au-tbl:: This class defines styles for a table in the auto-complete box.
+|+.rf-au-tbl+:: This class defines styles for a table in the auto-complete box.
 |No skin parameters.
 |===============
 
@@ -1156,155 +1156,155 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-cal-extr:: This class defines the styles for a pop-up calendar exterior.
-|panelBorderColor|border-color
-|.rf-cal-btn:: This class defines styles for a calendar button.
+|+.rf-cal-extr+:: This class defines the styles for a pop-up calendar exterior.
+|+panelBorderColor+|border-color
+|+.rf-cal-btn+:: This class defines styles for a calendar button.
 |No skin parameters.
-|.rf-cal-hdr:: This class defines the styles for a calendar header.
-|panelBorderColor|border-bottom-color
-|additionalBackgroundColor|background-color
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-cal-hdr-optnl:: This class defines the styles for an optional header.
-|panelBorderColor|border-bottom-color
-|additionalBackgroundColor|background-color
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-cal-hdr-month:: This class defines the styles for the month header.
-|headerBackgroundColor|background-color
-|headerSizeFont|font-size
-|headerFamilyFont|font-family
-|headerWeightFont|font-weight
-|headerTextColor|color
-|.rf-cal-ftr:: This class defines the styles for a calendar footer.
-|panelBorderColor|border-right-color, border-bottom-color
-|additionalBackgroundColor|background
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-cal-ftr-optnl:: This class defines the styles for an optional footer.
-|panelBorderColor|border-right-color, border-bottom-color
-|additionalBackgroundColor|background
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-cal-tl:: This class defines the styles for calendar toolbars.
-|headerBackgroundColor|background-color
-|headerSizeFont|font-size
-|headerFamilyFont|font-family
-|headerWeightFont|font-weight
-|headerTextColor|color
-|.rf-cal-tl-ftr:: This class defines the styles for a toolbar item in the calendar footer.
-|additionalBackgroundColor|background
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-cal-tl-btn:: This class defines styles for a toolbar button.
+|+.rf-cal-hdr+:: This class defines the styles for a calendar header.
+|+panelBorderColor+|border-bottom-color
+|+additionalBackgroundColor+|background-color
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-cal-hdr-optnl+:: This class defines the styles for an optional header.
+|+panelBorderColor+|border-bottom-color
+|+additionalBackgroundColor+|background-color
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-cal-hdr-month+:: This class defines the styles for the month header.
+|+headerBackgroundColor+|background-color
+|+headerSizeFont+|font-size
+|+headerFamilyFont+|font-family
+|+headerWeightFont+|font-weight
+|+headerTextColor+|color
+|+.rf-cal-ftr+:: This class defines the styles for a calendar footer.
+|+panelBorderColor+|border-right-color, border-bottom-color
+|+additionalBackgroundColor+|background
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-cal-ftr-optnl+:: This class defines the styles for an optional footer.
+|+panelBorderColor+|border-right-color, border-bottom-color
+|+additionalBackgroundColor+|background
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-cal-tl+:: This class defines the styles for calendar toolbars.
+|+headerBackgroundColor+|background-color
+|+headerSizeFont+|font-size
+|+headerFamilyFont+|font-family
+|+headerWeightFont+|font-weight
+|+headerTextColor+|color
+|+.rf-cal-tl-ftr+:: This class defines the styles for a toolbar item in the calendar footer.
+|+additionalBackgroundColor+|background
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-cal-tl-btn+:: This class defines styles for a toolbar button.
 |No skin parameters.
-|.rf-cal-tl-btn-dis:: This class defines styles for a disabled toolbar button.
+|+.rf-cal-tl-btn-dis+:: This class defines styles for a disabled toolbar button.
 |No skin parameters.
-|.rf-cal-tl-btn-hov:: This class defines the styles for toolbar items when it is hovered over with the mouse cursor.
-|calendarWeekBackgroundColor|background-color
-|generalTextColor|color
-|tableBackgroundColor|border-color
-|panelBorderColor|border-right-color, border-bottom-color
-|.rf-cal-tl-btn-press:: This class defines the styles for toolbar items when it is pressed.
-|panelBorderColor|border-color
-|panelBorderColor|border-right-color, border-bottom-color
-|.rf-cal-tl-close:: This class defines styles for a Closebutton in a toolbar.
+|+.rf-cal-tl-btn-hov+:: This class defines the styles for toolbar items when it is hovered over with the mouse cursor.
+|+calendarWeekBackgroundColor+|background-color
+|+generalTextColor+|color
+|+tableBackgroundColor+|border-color
+|+panelBorderColor+|border-right-color, border-bottom-color
+|+.rf-cal-tl-btn-press+:: This class defines the styles for toolbar items when it is pressed.
+|+panelBorderColor+|border-color
+|+panelBorderColor+|border-right-color, border-bottom-color
+|+.rf-cal-tl-close+:: This class defines styles for a Closebutton in a toolbar.
 |No skin parameters.
-|.rf-cal-c:: This class defines the styles for regular calendar cells.
-|panelBorderColor|border-bottom-color, border-right-color
-|tableBackgroundColor|background-color
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-cal-c-cnt:: This class defines styles for the content of a cell.
+|+.rf-cal-c+:: This class defines the styles for regular calendar cells.
+|+panelBorderColor+|border-bottom-color, border-right-color
+|+tableBackgroundColor+|background-color
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-cal-c-cnt+:: This class defines styles for the content of a cell.
 |No skin parameters.
-|.rf-cal-today:: This class defines the styles for the cell representing today's date.
-|calendarCurrentBackgroundColor|background-color
-|calendarCurrentTextColor|color
-|.rf-cal-sel:: This class defines the styles for the selected day.
-|headerBackgroundColor|background-color
-|headerTextColor|color
-|.rf-cal-hov:: This class defines the styles for a cell when it is hovered over with the mouse cursor.
-|calendarSpecBackgroundColor|background-color
-|calendarSpecTextColor|color
-|.rf-cal-week:: This class defines the styles for week numbers.
-|panelBorderColor|border-bottom-color, border-right-color
-|calendarWeekBackgroundColor|background-color
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-cal-holiday:: This class defines the styles for weekends and holidays.
-|calendarHolidaysBackgroundColor|background-color
-|calendarHolidaysTextColor|color
-|.rf-cal-boundary-day:: This class defines styles for an active boundary button.
+|+.rf-cal-today+:: This class defines the styles for the cell representing today's date.
+|+calendarCurrentBackgroundColor+|background-color
+|+calendarCurrentTextColor+|color
+|+.rf-cal-sel+:: This class defines the styles for the selected day.
+|+headerBackgroundColor+|background-color
+|+headerTextColor+|color
+|+.rf-cal-hov+:: This class defines the styles for a cell when it is hovered over with the mouse cursor.
+|+calendarSpecBackgroundColor+|background-color
+|+calendarSpecTextColor+|color
+|+.rf-cal-week+:: This class defines the styles for week numbers.
+|+panelBorderColor+|border-bottom-color, border-right-color
+|+calendarWeekBackgroundColor+|background-color
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-cal-holiday+:: This class defines the styles for weekends and holidays.
+|+calendarHolidaysBackgroundColor+|background-color
+|+calendarHolidaysTextColor+|color
+|+.rf-cal-boundary-day+:: This class defines styles for an active boundary button.
 |No skin parameters.
-|.rf-cal-sp-inp:: This class defines the styles for a spinner input field in the pop-up element for time selection.
-|buttonSizeFont|font-size
-|buttonFamilyFont|font-family
-|.rf-cal-sp-inp-cntr:: This class defines the styles for a wrapper <td>element for a spinner input field in the pop-up element for time selection.
-|controlBackgroundColor|background-color
-|panelBorderColor|border-color
-|subBorderColor|border-right-color, border-bottom-color
-|.rf-cal-sp-btn:: This class defines the styles for a wrapper <td>element for spinner buttons in the pop-up element for time selection.
-|headerBackgroundColor|background-color, border-color
-|.rf-cal-sp-up:: This class defines styles for the Upspinner button.
+|+.rf-cal-sp-inp+:: This class defines the styles for a spinner input field in the pop-up element for time selection.
+|+buttonSizeFont+|font-size
+|+buttonFamilyFont+|font-family
+|+.rf-cal-sp-inp-cntr+:: This class defines the styles for a wrapper <td>element for a spinner input field in the pop-up element for time selection.
+|+controlBackgroundColor+|background-color
+|+panelBorderColor+|border-color
+|+subBorderColor+|border-right-color, border-bottom-color
+|+.rf-cal-sp-btn+:: This class defines the styles for a wrapper <td>element for spinner buttons in the pop-up element for time selection.
+|+headerBackgroundColor+|background-color, border-color
+|+.rf-cal-sp-up+:: This class defines styles for the Upspinner button.
 |No skin parameters.
-|.rf-cal-sp-down:: This class defines styles for the Downspinner button.
+|+.rf-cal-sp-down+:: This class defines styles for the Downspinner button.
 |No skin parameters.
-|.rf-cal-sp-press:: This class defines styles for a spinner button when it is pressed.
+|+.rf-cal-sp-press+:: This class defines styles for a spinner button when it is pressed.
 |No skin parameters.
-|.rf-cal-edtr-shdw:: This class defines the styles for the calendar editor shadow.
-|tableBackgroundColor|background
-|.rf-cal-edtr-layout-shdw:: This class defines the styles for the layout shadow of a calendar editor.
-|shadowBackgroundColor|background-color
-|.rf-cal-edtr-btn:: This class defines styles for a button in the calendar editor.
+|+.rf-cal-edtr-shdw+:: This class defines the styles for the calendar editor shadow.
+|+tableBackgroundColor+|background
+|+.rf-cal-edtr-layout-shdw+:: This class defines the styles for the layout shadow of a calendar editor.
+|+shadowBackgroundColor+|background-color
+|+.rf-cal-edtr-btn+:: This class defines styles for a button in the calendar editor.
 |No skin parameters.
-|.rf-cal-edtr-btn-over:: This class defines the styles for the calendar editor button when it is hovered over with the mouse cursor.
-|panelBorderColor|border-color
-|calendarSpecBackgroundColor|background
-|.rf-cal-edtr-btn-sel:: This class defines the styles for the calendar editor button when it is selected.
-|calendarCurrentBackgroundColor|background-color
-|calendarCurrentTextColor|color
-|.rf-cal-edtr-tl-over:: This class defines the styles for a toolbar item in the calendar editor when it is hovered over with the mouse cursor.
-|additionalBackgroundColor|background
-|tableBackgroundColor|border-color
-|panelBorderColor|border-right-color, border-bottom-color
-|.rf-cal-edtr-tl-press:: This class defines the styles for a toolbar item in the calendar editor when it is pressed.
-|additionalBackgroundColor|background
-|panelBorderColor|border-color
-|tableBackgroundColor|border-right-color, border-bottom-color
-|.rf-cal-time-inp:: This class defines styles for the time input field.
+|+.rf-cal-edtr-btn-over+:: This class defines the styles for the calendar editor button when it is hovered over with the mouse cursor.
+|+panelBorderColor+|border-color
+|+calendarSpecBackgroundColor+|background
+|+.rf-cal-edtr-btn-sel+:: This class defines the styles for the calendar editor button when it is selected.
+|+calendarCurrentBackgroundColor+|background-color
+|+calendarCurrentTextColor+|color
+|+.rf-cal-edtr-tl-over+:: This class defines the styles for a toolbar item in the calendar editor when it is hovered over with the mouse cursor.
+|+additionalBackgroundColor+|background
+|+tableBackgroundColor+|border-color
+|+panelBorderColor+|border-right-color, border-bottom-color
+|+.rf-cal-edtr-tl-press+:: This class defines the styles for a toolbar item in the calendar editor when it is pressed.
+|+additionalBackgroundColor+|background
+|+panelBorderColor+|border-color
+|+tableBackgroundColor+|border-right-color, border-bottom-color
+|+.rf-cal-time-inp+:: This class defines styles for the time input field.
 |No skin parameters.
-|.rf-cal-time-btn:: This class defines the styles for a button in the pop-up element for the calendar's time section.
-|tableBackgroundColor|border-color
-|panelBorderColor|border-right-color, border-bottom-color
-|.rf-cal-time-btn-press:: This class defines the styles for a pressed button in the pop-up element for the calendar's time section.
-|tableBackgroundColor|border-right-color, border-bottom-color
-|panelBorderColor|border-color
-|calendarWeekBackgroundColor|background-color
-|.rf-cal-timepicker-cnt:: This class defines the styles for the content of the pop-up element during time selection.
-|panelBorderColor|border-color
-|additionalBackgroundColor|background
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-cal-timepicker-inp:: This class defines the styles for an input field in the time picker.
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-cal-timepicker-ok:: This class defines styles for the OKbutton in the time picker.
+|+.rf-cal-time-btn+:: This class defines the styles for a button in the pop-up element for the calendar's time section.
+|+tableBackgroundColor+|border-color
+|+panelBorderColor+|border-right-color, border-bottom-color
+|+.rf-cal-time-btn-press+:: This class defines the styles for a pressed button in the pop-up element for the calendar's time section.
+|+tableBackgroundColor+|border-right-color, border-bottom-color
+|+panelBorderColor+|border-color
+|+calendarWeekBackgroundColor+|background-color
+|+.rf-cal-timepicker-cnt+:: This class defines the styles for the content of the pop-up element during time selection.
+|+panelBorderColor+|border-color
+|+additionalBackgroundColor+|background
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-cal-timepicker-inp+:: This class defines the styles for an input field in the time picker.
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-cal-timepicker-ok+:: This class defines styles for the OKbutton in the time picker.
 |No skin parameters.
-|.rf-cal-timepicker-cancel:: This class defines styles for the Cancelbutton in the time picker.
+|+.rf-cal-timepicker-cancel+:: This class defines styles for the Cancelbutton in the time picker.
 |No skin parameters.
-|.rf-cal-monthpicker-cnt:: This class defines the styles for the content of the pop-up element during month or year selection.
-|panelBorderColor|border-color
-|tableBackgroundColor|background
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-cal-monthpicker-ok:: This class defines the styles for the OKbutton for the month picker.
-|additionalBackgroundColor|background
-|panelBorderColor|border-top-color
-|.rf-cal-monthpicker-cancel:: This class defines the styles for the Cancelbutton for the month picker.
-|additionalBackgroundColor|background
-|panelBorderColor|border-top-color
-|.rf-cal-monthpicker-split:: This class defines the styles for the splitter in the month picker.
-|panelBorderColor|border-right-color
+|+.rf-cal-monthpicker-cnt+:: This class defines the styles for the content of the pop-up element during month or year selection.
+|+panelBorderColor+|border-color
+|+tableBackgroundColor+|background
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-cal-monthpicker-ok+:: This class defines the styles for the OKbutton for the month picker.
+|+additionalBackgroundColor+|background
+|+panelBorderColor+|border-top-color
+|+.rf-cal-monthpicker-cancel+:: This class defines the styles for the Cancelbutton for the month picker.
+|+additionalBackgroundColor+|background
+|+panelBorderColor+|border-top-color
+|+.rf-cal-monthpicker-split+:: This class defines the styles for the splitter in the month picker.
+|+panelBorderColor+|border-right-color
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-richeditor]]
@@ -1317,36 +1317,36 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.cke_skin_richfaces:: 
-|panelBorderColor|border-color
-|.cke_skin_richfaces .cke_wrapper:: 
-|editorMainBackgroundColor|background-color
-|.cke_skin_richfaces .cke_dialog_body:: 
-|panelBorderColor|border-color
-|generalBackgroundColor|background
-|.cke_skin_richfaces .cke_dialog_title:: 
-|headerBackgroundColor|repeat-x
-|headerWeightFont|font-weight
-|headerTextColor|color
-|headerFamilyFont|font-family
-|headerSizeFont|font-size
-|.cke_skin_richfaces .cke_path a, .cke_skin_richfaces .cke_path .cke_empty:: 
-|editorMainTextColor|color
-|.cke_skin_richfaces .cke_button a.cke_on:: 
-|additionalBackgroundColor|background-color
-|panelBorderColor|border-color
-|.cke_skin_richfaces .cke_button a:hover, .cke_skin_richfaces .cke_button a:focus, .cke_skin_richfaces .cke_button a:active:: 
-|panelBorderColor|border-color
-|tabBackgroundColor|background-color
-|.cke_skin_richfaces .cke_rcombo a:: .cke_skin_richfaces .cke_rcombo a:active:: .cke_skin_richfaces .cke_rcombo a:hover:: 
-|panelBorderColor|border-color
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|controlTextColor|color
-|controlBackgroundColor|background-color
-|.cke_skin_richfaces .cke_rcombo .cke_openbutton:: 
-|headerBackgroundColor|background-color
-|panelBorderColor|border-left-color
+|+.cke_skin_richfaces+:: 
+|+panelBorderColor+|border-color
+|+.cke_skin_richfaces .cke_wrapper+:: 
+|+editorMainBackgroundColor+|background-color
+|+.cke_skin_richfaces .cke_dialog_body+:: 
+|+panelBorderColor+|border-color
+|+generalBackgroundColor+|background
+|+.cke_skin_richfaces .cke_dialog_title+:: 
+|+headerBackgroundColor+|repeat-x
+|+headerWeightFont+|font-weight
+|+headerTextColor+|color
+|+headerFamilyFont+|font-family
+|+headerSizeFont+|font-size
+|+.cke_skin_richfaces .cke_path a+, +.cke_skin_richfaces .cke_path .cke_empty+:: 
+|+editorMainTextColor+|color
+|+.cke_skin_richfaces .cke_button a.cke_on+:: 
+|+additionalBackgroundColor+|background-color
+|+panelBorderColor+|border-color
+|+.cke_skin_richfaces .cke_button a:hover+, +.cke_skin_richfaces .cke_button a:focus+, +.cke_skin_richfaces .cke_button a:active+:: 
+|+panelBorderColor+|border-color
+|+tabBackgroundColor+|background-color
+|+.cke_skin_richfaces .cke_rcombo a+:: +.cke_skin_richfaces .cke_rcombo a:active+:: +.cke_skin_richfaces .cke_rcombo a:hover+:: 
+|+panelBorderColor+|border-color
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+controlTextColor+|color
+|+controlBackgroundColor+|background-color
+|+.cke_skin_richfaces .cke_rcombo .cke_openbutton+:: 
+|+headerBackgroundColor+|background-color
+|+panelBorderColor+|border-left-color
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-richfileUpload]]
@@ -1359,64 +1359,64 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-fu:: This class defines styles for the file upload control.
-|generalBackgroundColor|background-color
-|panelBorderColor|border-color
-|.rf-fu-hdr:: This class defines styles for the header of the file upload control.
-|headerBackgroundColor|background-color, border-color
-|.rf-fu-lst:: This class defines styles for lists in the file upload control.
+|+.rf-fu+:: This class defines styles for the file upload control.
+|+generalBackgroundColor+|background-color
+|+panelBorderColor+|border-color
+|+.rf-fu-hdr+:: This class defines styles for the header of the file upload control.
+|+headerBackgroundColor+|background-color, border-color
+|+.rf-fu-lst+:: This class defines styles for lists in the file upload control.
 |No skin parameters.
-|.rf-fu-cntr-hdn:: This class defines styles for the file upload container when it is hidden.
+|+.rf-fu-cntr-hdn+:: This class defines styles for the file upload container when it is hidden.
 |No skin parameters.
-|.rf-fu-btns-lft:: .rf-fu-btns-rgh:: These classes define styles for buttons on the left and right of the file upload control.
+|+.rf-fu-btns-lft+:: +.rf-fu-btns-rgh+:: These classes define styles for buttons on the left and right of the file upload control.
 |No skin parameters.
-|.rf-fu-btn-add:: This class defines styles for the Addbutton in the file upload control.
-|trimColor|background-color
-|panelBorderColor|border-color
-|.rf-fu-btn-cnt-add:: This class defines styles for the content of the Addbutton in the file upload control.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-fu-btn-add-dis:: This class defines styles for the Addbutton in the file upload control when it is disabled.
-|tableFooterBackgroundColor|background-color
-|tableFooterBackgroundColor|border-color
-|.rf-fu-btn-cnt-add-dis:: This class defines styles for the content of the Addbutton in the file upload control when it is disabled.
-|tabDisabledTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-fu-btn-upl:: This class defines styles for the Uploadbutton in the file upload control.
-|trimColor|background-color
-|panelBorderColor|border-color
-|.rf-fu-btn-cnt-upl:: This class defines styles for the content of the Uploadbutton in the file upload control.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-fu-btn-clr:: This class defines styles for the Clearbutton in the file upload control.
-|trimColor|background-color
-|panelBorderColor|border-color
-|.rf-fu-btn-cnt-clr:: This class defines styles for the content of the Clearbutton in the file upload control.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-fu-itm:: This class defines styles for an item in the file upload control.
-|panelBorderColor|border-bottom-color
-|.rf-fu-itm-lft:: .rf-fu-itm-rgh:: These classes define styles for items on the left and right of the file upload control.
+|+.rf-fu-btn-add+:: This class defines styles for the Addbutton in the file upload control.
+|+trimColor+|background-color
+|+panelBorderColor+|border-color
+|+.rf-fu-btn-cnt-add+:: This class defines styles for the content of the Addbutton in the file upload control.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-fu-btn-add-dis+:: This class defines styles for the Addbutton in the file upload control when it is disabled.
+|+tableFooterBackgroundColor+|background-color
+|+tableFooterBackgroundColor+|border-color
+|+.rf-fu-btn-cnt-add-dis+:: This class defines styles for the content of the Addbutton in the file upload control when it is disabled.
+|+tabDisabledTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-fu-btn-upl+:: This class defines styles for the Uploadbutton in the file upload control.
+|+trimColor+|background-color
+|+panelBorderColor+|border-color
+|+.rf-fu-btn-cnt-upl+:: This class defines styles for the content of the Uploadbutton in the file upload control.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-fu-btn-clr+:: This class defines styles for the Clearbutton in the file upload control.
+|+trimColor+|background-color
+|+panelBorderColor+|border-color
+|+.rf-fu-btn-cnt-clr+:: This class defines styles for the content of the Clearbutton in the file upload control.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-fu-itm+:: This class defines styles for an item in the file upload control.
+|+panelBorderColor+|border-bottom-color
+|+.rf-fu-itm-lft+:: +.rf-fu-itm-rgh+:: These classes define styles for items on the left and right of the file upload control.
 |No skin parameters.
-|.rf-fu-itm-lbl:: This class defines styles for the label of an item in the file upload control.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-fu-itm-st:: This class defines styles for the status of an item in the file upload control.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-fu-itm-lnk:: This class defines styles for a link item in the file upload control.
-|generalLinkColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-fu-inp:: This class defines styles for the input field in the file upload control.
+|+.rf-fu-itm-lbl+:: This class defines styles for the label of an item in the file upload control.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-fu-itm-st+:: This class defines styles for the status of an item in the file upload control.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-fu-itm-lnk+:: This class defines styles for a link item in the file upload control.
+|+generalLinkColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-fu-inp+:: This class defines styles for the input field in the file upload control.
 |No skin parameters.
-|.rf-fu-inp-cntr:: This class defines styles for the input field container in the file upload control.
+|+.rf-fu-inp-cntr+:: This class defines styles for the input field container in the file upload control.
 |No skin parameters.
 |===============
 
@@ -1430,38 +1430,38 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-ii:: This class defines styles for the in-place input when it is in the default state.
-|editorBackgroundColor|background-color
-|generalTextColor|border-bottom-color
-|.rf-ii-act:: This class defines styles for the in-place input when it is in the editing state.
+|+.rf-ii+:: This class defines styles for the in-place input when it is in the default state.
+|+editorBackgroundColor+|background-color
+|+generalTextColor+|border-bottom-color
+|+.rf-ii-act+:: This class defines styles for the in-place input when it is in the editing state.
 |No skin parameters.
-|.rf-ii-chng:: This class defines styles for the in-place input when it is in the changed state.
+|+.rf-ii-chng+:: This class defines styles for the in-place input when it is in the changed state.
 |No skin parameters.
-|.rf-ii-dis:: This class defines styles for the in-place input when it is in the disabled state.
+|+.rf-ii-dis+:: This class defines styles for the in-place input when it is in the disabled state.
 |No skin parameters.
-|.rf-ii-fld:: This class defines styles for the in-place input field.
-|editBackgroundColor|background-color, border-bottom-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-ii-lbl:: This class defines styles for the label of the in-place input.
-|generalTextColor|color
-|generalSizeFont|font-size
-|.rf-ii-dflt-lbl:: This class defines styles for the default label of the in-place input.
+|+.rf-ii-fld+:: This class defines styles for the in-place input field.
+|+editBackgroundColor+|background-color, border-bottom-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-ii-lbl+:: This class defines styles for the label of the in-place input.
+|+generalTextColor+|color
+|+generalSizeFont+|font-size
+|+.rf-ii-dflt-lbl+:: This class defines styles for the default label of the in-place input.
 |No skin parameters.
-|.rf-ii-btn:: This class defines styles for the buttons for the in-place input.
-|tabBackgroundColor|background-color
-|panelBorderColor|border-color
-|.rf-ii-btn-p:: This class defines styles for the buttons for the in-place input when they are pressed.
-|tabBackgroundColor|background-color
-|panelBorderColor|border-color
-|.rf-ii-btn-set:: .rf-ii-btn-prepos:: .rf-ii-btn-pos:: These classes define the positioning of the buttons.
+|+.rf-ii-btn+:: This class defines styles for the buttons for the in-place input.
+|+tabBackgroundColor+|background-color
+|+panelBorderColor+|border-color
+|+.rf-ii-btn-p+:: This class defines styles for the buttons for the in-place input when they are pressed.
+|+tabBackgroundColor+|background-color
+|+panelBorderColor+|border-color
+|+.rf-ii-btn-set+:: +.rf-ii-btn-prepos+:: +.rf-ii-btn-pos+:: These classes define the positioning of the buttons.
 |No skin parameters.
-|.rf-ii-btn-shdw:: This class defines styles for the button shadows for the in-place input.
+|+.rf-ii-btn-shdw+:: This class defines styles for the button shadows for the in-place input.
 |No skin parameters.
-|.rf-ii-btn-shdw-t:: .rf-ii-btn-shdw-b:: .rf-ii-btn-shdw-l:: .rf-ii-btn-shdw-r:: These classes define the top, bottom, left, and right edge of the button shadows.
+|+.rf-ii-btn-shdw-t+:: +.rf-ii-btn-shdw-b+:: +.rf-ii-btn-shdw-l+:: +.rf-ii-btn-shdw-r+:: These classes define the top, bottom, left, and right edge of the button shadows.
 |No skin parameters.
-|.rf-ii-none:: This class defines styles for the in-place input when it cannot be edited.
+|+.rf-ii-none+:: This class defines styles for the in-place input when it cannot be edited.
 |No skin parameters.
 |===============
 
@@ -1475,49 +1475,49 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-insl:: This class defines styles for the number slider itself.
+|+.rf-insl+:: This class defines styles for the number slider itself.
 |No skin parameters.
-|.rf-insl-trc:: This class defines styles for the number slider track.
-|controlBackgroundColor|background-color
-|panelBorderColor|border-bottom-color
-|.rf-insl-trc-cntr:: This class defines styles for the container of the number slider track.
+|+.rf-insl-trc+:: This class defines styles for the number slider track.
+|+controlBackgroundColor+|background-color
+|+panelBorderColor+|border-bottom-color
+|+.rf-insl-trc-cntr+:: This class defines styles for the container of the number slider track.
 |No skin parameters.
-|.rf-insl-mn:: This class defines styles for the minimumlabel on the number slider.
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|generalTextColor|color
-|panelBorderColor|border-left-color
-|.rf-insl-mx:: This class defines styles for the maximumlabel on the number slider.
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|generalTextColor|color
-|panelBorderColor|border-right-color
-|.rf-insl-inp:: This class defines styles for the input field on the number slider.
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|generalTextColor|color
-|.rf-insl-inp-cntr:: This class defines styles for the container of the input field.
+|+.rf-insl-mn+:: This class defines styles for the minimumlabel on the number slider.
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+generalTextColor+|color
+|+panelBorderColor+|border-left-color
+|+.rf-insl-mx+:: This class defines styles for the maximumlabel on the number slider.
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+generalTextColor+|color
+|+panelBorderColor+|border-right-color
+|+.rf-insl-inp+:: This class defines styles for the input field on the number slider.
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+generalTextColor+|color
+|+.rf-insl-inp-cntr+:: This class defines styles for the container of the input field.
 |No skin parameters.
-|.rf-insl-hnd:: This class defines styles for the handle on the number slider.
+|+.rf-insl-hnd+:: This class defines styles for the handle on the number slider.
 |No skin parameters.
-|.rf-insl-hnd-cntr:: This class defines styles for the container of the handle.
+|+.rf-insl-hnd-cntr+:: This class defines styles for the container of the handle.
 |No skin parameters.
-|.rf-insl-hnd-sel:: This class defines styles for the handle when it is selected.
+|+.rf-insl-hnd-sel+:: This class defines styles for the handle when it is selected.
 |No skin parameters.
-|.rf-insl-hnd-dis:: This class defines styles for the handle when it is selected.
+|+.rf-insl-hnd-dis+:: This class defines styles for the handle when it is selected.
 |No skin parameters.
-|.rf-insl-dec:: .rf-insl-inc:: These classes define styles for the step controls to decrease and increase the number.
+|+.rf-insl-dec+:: +.rf-insl-inc+:: These classes define styles for the step controls to decrease and increase the number.
 |No skin parameters.
-|.rf-insl-dec-sel:: .rf-insl-inc-sel:: These classes define styles for the step controls when they are selected.
+|+.rf-insl-dec-sel+:: +.rf-insl-inc-sel+:: These classes define styles for the step controls when they are selected.
 |No skin parameters.
-|.rf-insl-dec-dis:: .rf-insl-inc-dis:: These classes define styles for the step controls when they are disabled.
+|+.rf-insl-dec-dis+:: +.rf-insl-inc-dis+:: These classes define styles for the step controls when they are disabled.
 |No skin parameters.
-|.rf-insl-tt:: This class defines styles for the tool-tip on the number slider.
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|generalTextColor|color
-|tipBorderColor|border
-|tipBackgroundColor|background-color
+|+.rf-insl-tt+:: This class defines styles for the tool-tip on the number slider.
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+generalTextColor+|color
+|+tipBorderColor+|border
+|+tipBackgroundColor+|background-color
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-richinputNumberSpinner]]
@@ -1530,19 +1530,19 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-insp:: This class defines styles for the number spinner itself.
-|panelBorderColor|border-color
-|.rf-insp-inp:: This class defines styles for the input field on the number spinner.
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|generalTextColor|color
-|controlBackgroundColor|background-color
-|.rf-insp-btns:: This class defines styles for the buttons on the number spinner.
-|headerBackgroundColor|background-color
-|panelBorderColor|border-left-color
-|.rf-insp-dec:: .rf-insp-inc:: These classes define styles for the step controls to decrease and increase the number.
+|+.rf-insp+:: This class defines styles for the number spinner itself.
+|+panelBorderColor+|border-color
+|+.rf-insp-inp+:: This class defines styles for the input field on the number spinner.
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+generalTextColor+|color
+|+controlBackgroundColor+|background-color
+|+.rf-insp-btns+:: This class defines styles for the buttons on the number spinner.
+|+headerBackgroundColor+|background-color
+|+panelBorderColor+|border-left-color
+|+.rf-insp-dec+:: +.rf-insp-inc+:: These classes define styles for the step controls to decrease and increase the number.
 |No skin parameters.
-|.rf-insp-dec-dis:: .rf-insp-inc-dis:: These classes define styles for the step controls when they are disabled.
+|+.rf-insp-dec-dis+:: +.rf-insp-inc-dis+:: These classes define styles for the step controls when they are disabled.
 |No skin parameters.
 |===============
 
@@ -1560,52 +1560,52 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-is-d-s:: This class defines styles for the in-place select when it is in the default state.
-|editorBackgroundColor|background-color
-|generalTextColor|border-bottom-color
-|.rf-is-e-s:: This class defines styles for the in-place select when it is in the editing state.
+|+.rf-is-d-s+:: This class defines styles for the in-place select when it is in the default state.
+|+editorBackgroundColor+|background-color
+|+generalTextColor+|border-bottom-color
+|+.rf-is-e-s+:: This class defines styles for the in-place select when it is in the editing state.
 |No skin parameters.
-|.rf-is-c-s:: This class defines styles for the in-place select when it is in the changed state.
+|+.rf-is-c-s+:: This class defines styles for the in-place select when it is in the changed state.
 |No skin parameters.
-|.rf-is-dis-s:: This class defines styles for the in-place select when it is in the disabled state.
+|+.rf-is-dis-s+:: This class defines styles for the in-place select when it is in the disabled state.
 |No skin parameters.
-|.rf-is-fld:: This class defines styles for the in-place select field.
-|editBackgroundColor|background
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-is-opt:: This class defines styles for an option for the in-place select.
-|generalTextColor|border-color
-|.rf-is-sel:: This class defines styles for the selected option of the in-place select.
-|generalTextColor|border-color
-|.rf-is-lbl:: This class defines styles for the label of the in-place select.
+|+.rf-is-fld+:: This class defines styles for the in-place select field.
+|+editBackgroundColor+|background
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-is-opt+:: This class defines styles for an option for the in-place select.
+|+generalTextColor+|border-color
+|+.rf-is-sel+:: This class defines styles for the selected option of the in-place select.
+|+generalTextColor+|border-color
+|+.rf-is-lbl+:: This class defines styles for the label of the in-place select.
 |No skin parameters.
-|.rf-is-dflt-lbl:: This class defines styles for the default label of the in-place select.
+|+.rf-is-dflt-lbl+:: This class defines styles for the default label of the in-place select.
 |No skin parameters.
-|.rf-is-edit:: This class defines styles for the in-place select when it is being edited.
+|+.rf-is-edit+:: This class defines styles for the in-place select when it is being edited.
 |No skin parameters.
-|.rf-is-btn:: This class defines styles for the buttons for the in-place select.
-|tabBackgroundColor|background-color
-|panelBorderColor|border-color
-|.rf-is-btn-p:: This class defines styles for the buttons for the in-place select when they are pressed.
-|tabBackgroundColor|background-color
-|panelBorderColor|border-color
-|.rf-is-btn-set:: .rf-is-btn-prepos:: .rf-is-btn-pos:: These classes define the positioning of the buttons.
+|+.rf-is-btn+:: This class defines styles for the buttons for the in-place select.
+|+tabBackgroundColor+|background-color
+|+panelBorderColor+|border-color
+|+.rf-is-btn-p+:: This class defines styles for the buttons for the in-place select when they are pressed.
+|+tabBackgroundColor+|background-color
+|+panelBorderColor+|border-color
+|+.rf-is-btn-set+:: +.rf-is-btn-prepos+:: +.rf-is-btn-pos+:: These classes define the positioning of the buttons.
 |No skin parameters.
-|.rf-is-lst-pos:: This class defines the positioning of the list.
+|+.rf-is-lst-pos+:: This class defines the positioning of the list.
 |No skin parameters.
-|.rf-is-lst-dec:: This class defines styles for a decreasing list for the in-place select.
-|editBackgroundColor|background-color
-|panelBorderColor|border-color
-|.rf-is-lst-scrl:: This class defines styles for the list scrollbar.
+|+.rf-is-lst-dec+:: This class defines styles for a decreasing list for the in-place select.
+|+editBackgroundColor+|background-color
+|+panelBorderColor+|border-color
+|+.rf-is-lst-scrl+:: This class defines styles for the list scrollbar.
 |No skin parameters.
-|.rf-is-shdw:: This class defines styles for the in-place select shadow.
+|+.rf-is-shdw+:: This class defines styles for the in-place select shadow.
 |No skin parameters.
-|.rf-is-shdw-t:: .rf-is-shdw-b:: .rf-is-shdw-l:: .rf-is-shdw-r:: These classes define the top, bottom, left, and right edge of the in-place select shadows.
+|+.rf-is-shdw-t+:: +.rf-is-shdw-b+:: +.rf-is-shdw-l+:: +.rf-is-shdw-r+:: These classes define the top, bottom, left, and right edge of the in-place select shadows.
 |No skin parameters.
-|.rf-is-btn-shdw:: This class defines styles for the button shadows for the in-place select.
+|+.rf-is-btn-shdw+:: This class defines styles for the button shadows for the in-place select.
 |No skin parameters.
-|.rf-is-none:: This class defines styles for the in-place select when it cannot be edited.
+|+.rf-is-none+:: This class defines styles for the in-place select when it cannot be edited.
 |No skin parameters.
 |===============
 
@@ -1619,34 +1619,34 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-sel:: This class defines styles for the select control itself.
+|+.rf-sel+:: This class defines styles for the select control itself.
 |No skin parameters.
-|.rf-sel-cntr:: This class defines styles for the container of the select control.
-|panelBorderColor|border-color
-|.rf-sel-inp:: This class defines styles for the select control input field.
-|controlBackgroundColor|background-color
-|.rf-sel-fld-err:: This class defines styles for the input field when an error occurs.
+|+.rf-sel-cntr+:: This class defines styles for the container of the select control.
+|+panelBorderColor+|border-color
+|+.rf-sel-inp+:: This class defines styles for the select control input field.
+|+controlBackgroundColor+|background-color
+|+.rf-sel-fld-err+:: This class defines styles for the input field when an error occurs.
 |No skin parameters.
-|.rf-sel-opt:: This class defines styles for an option in the select control.
-|generalTextColor|color
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-sel-sel:: This class defines styles for the selected option of the select control.
-|generalTextColor|border-color
-|.rf-sel-dflt-lbl:: This class defines styles for the default label of the select control.
+|+.rf-sel-opt+:: This class defines styles for an option in the select control.
+|+generalTextColor+|color
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-sel-sel+:: This class defines styles for the selected option of the select control.
+|+generalTextColor+|border-color
+|+.rf-sel-dflt-lbl+:: This class defines styles for the default label of the select control.
 |No skin parameters.
-|.rf-sel-btn:: This class defines styles for the button of the select control.
-|headerBackgroundColor|background-color
-|panelBorderColor|border-left-color
-|.rf-sel-btn-arrow:: This class defines styles for the arrow on the button.
+|+.rf-sel-btn+:: This class defines styles for the button of the select control.
+|+headerBackgroundColor+|background-color
+|+panelBorderColor+|border-left-color
+|+.rf-sel-btn-arrow+:: This class defines styles for the arrow on the button.
 |No skin parameters.
-|.rf-sel-btn-dis:: This class defines styles for the button of the select control when it is disabled.
+|+.rf-sel-btn-dis+:: This class defines styles for the button of the select control when it is disabled.
 |No skin parameters.
-|.rf-sel-lst-scrl:: This class defines styles for the list scrollbar.
+|+.rf-sel-lst-scrl+:: This class defines styles for the list scrollbar.
 |No skin parameters.
-|.rf-sel-shdw:: This class defines styles for the select control shadow.
+|+.rf-sel-shdw+:: This class defines styles for the select control shadow.
 |No skin parameters.
-|.rf-sel-shdw-t:: .rf-sel-shdw-b:: .rf-sel-shdw-l:: .rf-sel-shdw-r:: These classes define the top, bottom, left, and right edge of the select control shadows.
+|+.rf-sel-shdw-t+:: +.rf-sel-shdw-b+:: +.rf-sel-shdw-l+:: +.rf-sel-shdw-r+:: These classes define the top, bottom, left, and right edge of the select control shadows.
 |No skin parameters.
 |===============
 
@@ -1660,37 +1660,37 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-ord:: This class defines styles for the orderingList control itself.
+|+.rf-ord+:: This class defines styles for the orderingList control itself.
 |No skin parameters.
-|.rf-ord-cntr:: This class defines styles for the container of the orderingList control.
+|+.rf-ord-cntr+:: This class defines styles for the container of the orderingList control.
 |No skin parameters.
-|.rf-ord-cptn:: This class defines styles for the caption of the orderingList control.
-|headerTextColor|color
-|headerSizeFont|font-size
-|headerFamilyFont|font-family
-|headerWeightFont|font-weight
-|.rf-ord-lst:: This class defines styles for the items list of the orderingList control.
+|+.rf-ord-cptn+:: This class defines styles for the caption of the orderingList control.
+|+headerTextColor+|color
+|+headerSizeFont+|font-size
+|+headerFamilyFont+|font-family
+|+headerWeightFont+|font-weight
+|+.rf-ord-lst+:: This class defines styles for the items list of the orderingList control.
 |No skin parameters.
-|.rf-ord-hdr:: This class defines styles for the header of the items list.
-|headerBackgroundColor|background-color
-|headerTextColor|color
-|headerSizeFont|font-size
-|headerFamilyFont|font-family
-|headerWeightFont|font-weight
-|.rf-ord-opt:: This class defines styles for an option in the orderingList control.
-|generalTextColor|color
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-ord-sel:: This class defines styles for the selected option of the orderingList control.
-|generalTextColor|border-color
-|.rf-ord-dflt-lbl:: This class defines styles for the default label of the orderingList control.
+|+.rf-ord-hdr+:: This class defines styles for the header of the items list.
+|+headerBackgroundColor+|background-color
+|+headerTextColor+|color
+|+headerSizeFont+|font-size
+|+headerFamilyFont+|font-family
+|+headerWeightFont+|font-weight
+|+.rf-ord-opt+:: This class defines styles for an option in the orderingList control.
+|+generalTextColor+|color
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-ord-sel+:: This class defines styles for the selected option of the orderingList control.
+|+generalTextColor+|border-color
+|+.rf-ord-dflt-lbl+:: This class defines styles for the default label of the orderingList control.
 |No skin parameters.
-|.rf-ord-btn:: This class defines styles for the button of the orderingList control.
-|headerBackgroundColor|background-color
-|panelBorderColor|border-left-color
-|.rf-ord-btn-dis:: This class defines styles for the button of the orderingList control when it is disabled.
+|+.rf-ord-btn+:: This class defines styles for the button of the orderingList control.
+|+headerBackgroundColor+|background-color
+|+panelBorderColor+|border-left-color
+|+.rf-ord-btn-dis+:: This class defines styles for the button of the orderingList control when it is disabled.
 |No skin parameters.
-|.rf-ord-lst-scrl:: This class defines styles for the list scrollbar.
+|+.rf-ord-lst-scrl+:: This class defines styles for the list scrollbar.
 |No skin parameters.
 |===============
 
@@ -1704,35 +1704,35 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-pick:: This class defines styles for the pickList control itself.
+|+.rf-pick+:: This class defines styles for the pickList control itself.
 |No skin parameters.
-|.rf-pick-src-cptn, .rf-pick-tgt-cptn:: These classes define styles for the source and target captions of the pickList control.
-|headerTextColor|color
-|headerSizeFont|font-size
-|headerFamilyFont|font-family
-|headerWeightFont|font-weight
-|.rf-pick-lst:: This class defines styles for the items list of the pickList control.
+|+.rf-pick-src-cptn, .rf-pick-tgt-cptn+:: These classes define styles for the source and target captions of the pickList control.
+|+headerTextColor+|color
+|+headerSizeFont+|font-size
+|+headerFamilyFont+|font-family
+|+headerWeightFont+|font-weight
+|+.rf-pick-lst+:: This class defines styles for the items list of the pickList control.
 |No skin parameters.
-|.rf-pick-hdr:: This class defines styles for the header of the items list.
-|headerBackgroundColor|background-color
-|headerTextColor|color
-|headerSizeFont|font-size
-|headerFamilyFont|font-family
-|headerWeightFont|font-weight
-|.rf-pick-opt:: This class defines styles for an option in the pickList control.
-|generalTextColor|color
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-pick-sel:: This class defines styles for the selected option of the pickList control.
-|generalTextColor|border-color
-|.rf-pick-dflt-lbl:: This class defines styles for the default label of the pickList control.
+|+.rf-pick-hdr+:: This class defines styles for the header of the items list.
+|+headerBackgroundColor+|background-color
+|+headerTextColor+|color
+|+headerSizeFont+|font-size
+|+headerFamilyFont+|font-family
+|+headerWeightFont+|font-weight
+|+.rf-pick-opt+:: This class defines styles for an option in the pickList control.
+|+generalTextColor+|color
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-pick-sel+:: This class defines styles for the selected option of the pickList control.
+|+generalTextColor+|border-color
+|+.rf-pick-dflt-lbl+:: This class defines styles for the default label of the pickList control.
 |No skin parameters.
-|.rf-pick-btn:: This class defines styles for the button of the pickList control.
-|headerBackgroundColor|background-color
-|panelBorderColor|border-left-color
-|.rf-pick-btn-dis:: This class defines styles for the button of the pickList control when it is disabled.
+|+.rf-pick-btn+:: This class defines styles for the button of the pickList control.
+|+headerBackgroundColor+|background-color
+|+panelBorderColor+|border-left-color
+|+.rf-pick-btn-dis+:: This class defines styles for the button of the pickList control when it is disabled.
 |No skin parameters.
-|.rf-pick-lst-scrl:: This class defines styles for the list scrollbar.
+|+.rf-pick-lst-scrl+:: This class defines styles for the list scrollbar.
 |No skin parameters.
 |===============
 
@@ -1750,19 +1750,19 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-p:: This class defines styles for the panel itself.
-|generalBackgroundColor|background-color
-|panelBorderColor|color
-|.rf-p-hdr:: This class defines styles for the header of a panel.
-|headerBackgroundColor|background-color, border-color
-|headerTextColor|color
-|headerSizeFont|font-size
-|headerWeightFont|font-weight
-|headerFamilyFont|font-family
-|.rf-p-b:: This class defines styles for the body of a panel.
-|generalTextColor|color
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
+|+.rf-p+:: This class defines styles for the panel itself.
+|+generalBackgroundColor+|background-color
+|+panelBorderColor+|color
+|+.rf-p-hdr+:: This class defines styles for the header of a panel.
+|+headerBackgroundColor+|background-color, border-color
+|+headerTextColor+|color
+|+headerSizeFont+|font-size
+|+headerWeightFont+|font-weight
+|+headerFamilyFont+|font-family
+|+.rf-p-b+:: This class defines styles for the body of a panel.
+|+generalTextColor+|color
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-richaccordion]]
@@ -1775,36 +1775,36 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-ac:: This class defines styles for the accordion control itself.
-|panelBorderColor|border-color
-|generalBackgroundColor|background
-|.rf-ac-itm-hdr:: This class defines styles for the header of an accordion item.
-|panelBorderColor|border-bottom-color
-|headerBackgroundColor|background-color
-|headerTextColor|color
-|headerWeightFont|font-weight
-|headerFamilyFont|font-family
-|headerSizeFont|font-size
-|.rf-ac-itm-hdr-act:: .rf-ac-itm-hdr-inact:: These classes define styles for the header when the item is either active (expanded) or inactive (collapsed).
+|+.rf-ac+:: This class defines styles for the accordion control itself.
+|+panelBorderColor+|border-color
+|+generalBackgroundColor+|background
+|+.rf-ac-itm-hdr+:: This class defines styles for the header of an accordion item.
+|+panelBorderColor+|border-bottom-color
+|+headerBackgroundColor+|background-color
+|+headerTextColor+|color
+|+headerWeightFont+|font-weight
+|+headerFamilyFont+|font-family
+|+headerSizeFont+|font-size
+|+.rf-ac-itm-hdr-act+:: +.rf-ac-itm-hdr-inact+:: These classes define styles for the header when the item is either active (expanded) or inactive (collapsed).
 |No skin parameters.
-|.rf-ac-itm-hdr-dis:: This class defines styles for the header when it is disabled.
-|tabDisabledTextColor|color
-|.rf-ac-itm-gr:: This class defines styles for an item group.
+|+.rf-ac-itm-hdr-dis+:: This class defines styles for the header when it is disabled.
+|+tabDisabledTextColor+|color
+|+.rf-ac-itm-gr+:: This class defines styles for an item group.
 |No skin parameters.
-|.rf-ac-itm-cnt:: This class defines styles for the content of an accordion item.
-|panelBorderColor|border-bottom-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-ac-itm-ico:: This class defines styles for the item icon.
+|+.rf-ac-itm-cnt+:: This class defines styles for the content of an accordion item.
+|+panelBorderColor+|border-bottom-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-ac-itm-ico+:: This class defines styles for the item icon.
 |No skin parameters.
-|.rf-ac-itm-exp-ico:: This class defines styles for the expanded icon for an item.
+|+.rf-ac-itm-exp-ico+:: This class defines styles for the expanded icon for an item.
 |No skin parameters.
-|.rf-ac-itm-ico-act:: .rf-ac-itm-ico-inact:: These classes define styles for the icon when the item is either active (expanded) or inactive (collapsed).
+|+.rf-ac-itm-ico-act+:: +.rf-ac-itm-ico-inact+:: These classes define styles for the icon when the item is either active (expanded) or inactive (collapsed).
 |No skin parameters.
-|.rf-ac-itm-lbl:: This class defines styles for the item label.
+|+.rf-ac-itm-lbl+:: This class defines styles for the item label.
 |No skin parameters.
-|.rf-ac-itm-lbl-act:: .rf-ac-itm-lbl-inact:: These classes define styles for the label when the item is either active (expanded) or inactive (collapsed).
+|+.rf-ac-itm-lbl-act+:: +.rf-ac-itm-lbl-inact+:: These classes define styles for the label when the item is either active (expanded) or inactive (collapsed).
 |No skin parameters.
 |===============
 
@@ -1818,32 +1818,32 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-cp:: This class defines styles for the collapsible panel itself.
-|panelBorderColor|color
-|generalBackgroundColor|background
-|.rf-cp-hdr:: This class defines styles for the header of a collapsible panel.
-|headerBackgroundColor|background-color, border-color
-|headerTextColor|color
-|headerWeightFont|font-weight
-|headerFamilyFont|font-family
-|headerSizeFont|font-size
-|.rf-cp-hdr-exp:: .rf-cp-hdr-colps:: These classes define styles for the header when the item is either expanded or collapsed.
+|+.rf-cp+:: This class defines styles for the collapsible panel itself.
+|+panelBorderColor+|color
+|+generalBackgroundColor+|background
+|+.rf-cp-hdr+:: This class defines styles for the header of a collapsible panel.
+|+headerBackgroundColor+|background-color, border-color
+|+headerTextColor+|color
+|+headerWeightFont+|font-weight
+|+headerFamilyFont+|font-family
+|+headerSizeFont+|font-size
+|+.rf-cp-hdr-exp+:: +.rf-cp-hdr-colps+:: These classes define styles for the header when the item is either expanded or collapsed.
 |No skin parameters.
-|.rf-cp-gr:: This class defines styles for a collapsible panel group.
+|+.rf-cp-gr+:: This class defines styles for a collapsible panel group.
 |No skin parameters.
-|.rf-cp-b:: This class defines styles for the body of a collapsible panel.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-cp-ico:: This class defines styles for the panel icon.
+|+.rf-cp-b+:: This class defines styles for the body of a collapsible panel.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-cp-ico+:: This class defines styles for the panel icon.
 |No skin parameters.
-|.rf-cp-exp-ico:: This class defines styles for the expanded icon for a panel.
+|+.rf-cp-exp-ico+:: This class defines styles for the expanded icon for a panel.
 |No skin parameters.
-|.rf-cp-ico-exp:: .rf-cp-ico-colps:: These classes define styles for the icon when the panel is either expanded or collapsed.
+|+.rf-cp-ico-exp+:: +.rf-cp-ico-colps+:: These classes define styles for the icon when the panel is either expanded or collapsed.
 |No skin parameters.
-|.rf-cp-lbl:: This class defines styles for the panel label.
+|+.rf-cp-lbl+:: This class defines styles for the panel label.
 |No skin parameters.
-|.rf-cp-lbl-exp:: .rf-cp-lbl-colps:: These classes define styles for the label when the panel is either expanded or collapsed.
+|+.rf-cp-lbl-exp+:: +.rf-cp-lbl-colps+:: These classes define styles for the label when the panel is either expanded or collapsed.
 |No skin parameters.
 |===============
 
@@ -1857,29 +1857,29 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-pp-btn:: This class defines styles for the pop-up panel button.
+|+.rf-pp-btn+:: This class defines styles for the pop-up panel button.
 |No skin parameters.
-|.rf-pp-shade:: This class defines styles for the shading that covers the page when presenting a modal pop-up panel.
+|+.rf-pp-shade+:: This class defines styles for the shading that covers the page when presenting a modal pop-up panel.
 |No skin parameters.
-|.rf-pp-cntr:: This class defines styles for the container for the pop-up panel.
-|panelBorderColor|border
-|generalBackgroundColor|background
-|.rf-pp-hdr:: This class defines styles for the header of the pop-up panel.
-|headerBackgroundColor|background
-|.rf-pp-hdr-cnt:: This class defines styles for the content of the header.
-|headerTextColor|color
-|headerWeightFont|font-weight
-|headerFamilyFont|font-family
-|headerSizeFont|font-size
-|.rf-pp-cnt:: This class defines styles for the content of the pop-up panel.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-pp-cnt-scrlr:: This class defines styles for the scroll bars of the pop-up panel.
-|generalBackgroundColor|background
-|.rf-pp-hndlr:: This class defines styles for borders of the pop-up panel. The border handler is used to re-size the panel.
+|+.rf-pp-cntr+:: This class defines styles for the container for the pop-up panel.
+|+panelBorderColor+|border
+|+generalBackgroundColor+|background
+|+.rf-pp-hdr+:: This class defines styles for the header of the pop-up panel.
+|+headerBackgroundColor+|background
+|+.rf-pp-hdr-cnt+:: This class defines styles for the content of the header.
+|+headerTextColor+|color
+|+headerWeightFont+|font-weight
+|+headerFamilyFont+|font-family
+|+headerSizeFont+|font-size
+|+.rf-pp-cnt+:: This class defines styles for the content of the pop-up panel.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-pp-cnt-scrlr+:: This class defines styles for the scroll bars of the pop-up panel.
+|+generalBackgroundColor+|background
+|+.rf-pp-hndlr+:: This class defines styles for borders of the pop-up panel. The border handler is used to re-size the panel.
 |No skin parameters.
-|.rf-pp-hndlr-t:: .rf-pp-hndlr-b:: .rf-pp-hndlr-l:: .rf-pp-hndlr-r:: .rf-pp-hndlr-tl:: .rf-pp-hndlr-tr:: .rf-pp-hndlr-bl:: .rf-pp-hndlr-br:: These classes define styles for the top, bottom, left, right, top-left, top-right, bottom-left, and bottom-right edges of the border handler.
+|+.rf-pp-hndlr-t+:: +.rf-pp-hndlr-b+:: +.rf-pp-hndlr-l+:: +.rf-pp-hndlr-r+:: +.rf-pp-hndlr-tl+:: +.rf-pp-hndlr-tr+:: +.rf-pp-hndlr-bl+:: +.rf-pp-hndlr-br+:: These classes define styles for the top, bottom, left, right, top-left, top-right, bottom-left, and bottom-right edges of the border handler.
 |No skin parameters.
 |===============
 
@@ -1893,45 +1893,45 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-tab-hdr:: This class defines styles for a tab header.
-|panelBorderColor|border
-|tabBackgroundColor|background-color
-|generalTextColor|color
-|.rf-tab-hdr-act:: This class defines styles for a tab header when it is active.
-|additionalBackgroundColor|background-color
-|.rf-tab-hdr-inact:: This class defines styles for a tab header when it is inactive.
+|+.rf-tab-hdr+:: This class defines styles for a tab header.
+|+panelBorderColor+|border
+|+tabBackgroundColor+|background-color
+|+generalTextColor+|color
+|+.rf-tab-hdr-act+:: This class defines styles for a tab header when it is active.
+|+additionalBackgroundColor+|background-color
+|+.rf-tab-hdr-inact+:: This class defines styles for a tab header when it is inactive.
 |No skin parameters.
-|.rf-tab-hdr-dis:: This class defines styles for a tab header when it is disabled.
-|tabDisabledTextColor|color
-|.rf-tab-hdr-tabline-vis:: This class defines styles for the header tab line when it is visible.
-|additionalBackgroundColor|background-color
-|panelBorderColor|border-color
-|.rf-tab-hdr-tabs:: This class defines styles for the tabs in the header.
+|+.rf-tab-hdr-dis+:: This class defines styles for a tab header when it is disabled.
+|+tabDisabledTextColor+|color
+|+.rf-tab-hdr-tabline-vis+:: This class defines styles for the header tab line when it is visible.
+|+additionalBackgroundColor+|background-color
+|+panelBorderColor+|border-color
+|+.rf-tab-hdr-tabs+:: This class defines styles for the tabs in the header.
 |No skin parameters.
-|.rf-tab-hdr-spcr:: This class defines styles for the tab header spacer.
-|panelBorderColor|border-bottom
-|.rf-tab-lbl:: This class defines styles for the tab label.
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-tab-hdn:: This class defines styles for the tab when it is hidden.
+|+.rf-tab-hdr-spcr+:: This class defines styles for the tab header spacer.
+|+panelBorderColor+|border-bottom
+|+.rf-tab-lbl+:: This class defines styles for the tab label.
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-tab-hdn+:: This class defines styles for the tab when it is hidden.
 |No skin parameters.
-|.rf-tab-hdr-scrl-lft:: .rf-tab-hdr-scrl-rgh:: These classes define styles for the left and right controls for the tab header scroller.
-|additionalBackgroundColor|background
-|panelBorderColor|border
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-tab-hdr-tablst:: This class define styles for the tab header list.
-|additionalBackgroundColor|background
-|panelBorderColor|border
-|generalFamilyFont|font-family
-|.rf-tab-hdr-brd:: This class define styles for the tab header border.
-|tabBackgroundColor|background
-|panelBorderColor|border
-|.rf-tab-cnt:: This class define styles for the content of the tab panel.
-|generalBackgroundColor|background
-|panelBorderColor|border
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
+|+.rf-tab-hdr-scrl-lft+:: +.rf-tab-hdr-scrl-rgh+:: These classes define styles for the left and right controls for the tab header scroller.
+|+additionalBackgroundColor+|background
+|+panelBorderColor+|border
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-tab-hdr-tablst+:: This class define styles for the tab header list.
+|+additionalBackgroundColor+|background
+|+panelBorderColor+|border
+|+generalFamilyFont+|font-family
+|+.rf-tab-hdr-brd+:: This class define styles for the tab header border.
+|+tabBackgroundColor+|background
+|+panelBorderColor+|border
+|+.rf-tab-cnt+:: This class define styles for the content of the tab panel.
+|+generalBackgroundColor+|background
+|+panelBorderColor+|border
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-Tables_and_grids]]
@@ -1948,73 +1948,73 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-dt:: This class defines styles for the table.
-|tableBackgroundColor|background-color
-|tableBorderWidth|border-left-width, border-top-width
-|tableBorderColor|border-left-color, border-top-color
-|.rf-dt-cap:: This class defines styles for the table caption.
+|+.rf-dt+:: This class defines styles for the table.
+|+tableBackgroundColor+|background-color
+|+tableBorderWidth+|border-left-width, border-top-width
+|+tableBorderColor+|border-left-color, border-top-color
+|+.rf-dt-cap+:: This class defines styles for the table caption.
 |No skin parameters.
-|.rf-dt-r:: This class defines styles for a table row.
+|+.rf-dt-r+:: This class defines styles for a table row.
 |No skin parameters.
-|.rf-dt-fst-r:: This class defines styles for the first row in a table.
+|+.rf-dt-fst-r+:: This class defines styles for the first row in a table.
 |No skin parameters.
-|.rf-dt-c:: This class defines styles for a table cell.
-|tableBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-dt-nd:: This class defines styles for a node.
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-dt-hdr:: This class defines styles for a table header.
+|+.rf-dt-c+:: This class defines styles for a table cell.
+|+tableBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-dt-nd+:: This class defines styles for a node.
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-dt-hdr+:: This class defines styles for a table header.
 |No skin parameters.
-|.rf-dt-hdr-fst:: This class defines styles for the first header.
+|+.rf-dt-hdr-fst+:: This class defines styles for the first header.
 |No skin parameters.
-|.rf-dt-hdr-c:: This class defines styles for a header cell.
-|tableHeaderBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|tableHeaderTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-dt-shdr:: This class defines styles for a table sub-header.
+|+.rf-dt-hdr-c+:: This class defines styles for a header cell.
+|+tableHeaderBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+tableHeaderTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-dt-shdr+:: This class defines styles for a table sub-header.
 |No skin parameters.
-|.rf-dt-shdr-fst:: This class defines styles for the first sub-header.
+|+.rf-dt-shdr-fst+:: This class defines styles for the first sub-header.
 |No skin parameters.
-|.rf-dt-shdr-c:: This class defines styles for a sub-header cell.
-|tableHeaderBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|tableHeaderTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-dt-ftr:: This class defines styles for a table footer.
+|+.rf-dt-shdr-c+:: This class defines styles for a sub-header cell.
+|+tableHeaderBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+tableHeaderTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-dt-ftr+:: This class defines styles for a table footer.
 |No skin parameters.
-|.rf-dt-ftr-fst:: This class defines styles for the first footer.
+|+.rf-dt-ftr-fst+:: This class defines styles for the first footer.
 |No skin parameters.
-|.rf-dt-ftr-c:: This class defines styles for a footer cell.
-|tableFooterBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-dt-sftr:: This class defines styles for a table sub-footer.
+|+.rf-dt-ftr-c+:: This class defines styles for a footer cell.
+|+tableFooterBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-dt-sftr+:: This class defines styles for a table sub-footer.
 |No skin parameters.
-|.rf-dt-sftr-fst:: This class defines styles for the first sub-footer.
+|+.rf-dt-sftr-fst+:: This class defines styles for the first sub-footer.
 |No skin parameters.
-|.rf-dt-sftr-c:: This class defines styles for a sub-footer cell.
-|tableFooterBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
+|+.rf-dt-sftr-c+:: This class defines styles for a sub-footer cell.
+|+tableFooterBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-richcollapsibleSubTable]]
@@ -2027,65 +2027,65 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-cst:: This class defines styles for the table.
+|+.rf-cst+:: This class defines styles for the table.
 |No skin parameters.
-|.rf-cst-r:: This class defines styles for a table row.
+|+.rf-cst-r+:: This class defines styles for a table row.
 |No skin parameters.
-|.rf-cst-fst-r:: This class defines styles for the first row in a table.
+|+.rf-cst-fst-r+:: This class defines styles for the first row in a table.
 |No skin parameters.
-|.rf-cst-c:: This class defines styles for a table cell.
-|tableBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-cst-hdr:: This class defines styles for a table header.
+|+.rf-cst-c+:: This class defines styles for a table cell.
+|+tableBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-cst-hdr+:: This class defines styles for a table header.
 |No skin parameters.
-|.rf-cst-hdr-fst:: This class defines styles for the first header.
+|+.rf-cst-hdr-fst+:: This class defines styles for the first header.
 |No skin parameters.
-|.rf-cst-hdr-fst-r:: This class defines styles for the first row in the header.
+|+.rf-cst-hdr-fst-r+:: This class defines styles for the first row in the header.
 |No skin parameters.
-|.rf-cst-hdr-c:: This class defines styles for a header cell.
-|tableSubHeaderBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-cst-shdr:: This class defines styles for a table sub-header.
+|+.rf-cst-hdr-c+:: This class defines styles for a header cell.
+|+tableSubHeaderBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-cst-shdr+:: This class defines styles for a table sub-header.
 |No skin parameters.
-|.rf-cst-shdr-fst:: This class defines styles for the first sub-header.
+|+.rf-cst-shdr-fst+:: This class defines styles for the first sub-header.
 |No skin parameters.
-|.rf-cst-shdr-c:: This class defines styles for a sub-header cell.
-|tableSubHeaderBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-cst-ftr:: This class defines styles for a table footer.
+|+.rf-cst-shdr-c+:: This class defines styles for a sub-header cell.
+|+tableSubHeaderBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-cst-ftr+:: This class defines styles for a table footer.
 |No skin parameters.
-|.rf-cst-ftr-fst:: This class defines styles for the first footer.
+|+.rf-cst-ftr-fst+:: This class defines styles for the first footer.
 |No skin parameters.
-|.rf-cst-ftr-c:: This class defines styles for a footer cell.
-|tableSubFooterBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-cst-sftr:: This class defines styles for a table sub-footer.
+|+.rf-cst-ftr-c+:: This class defines styles for a footer cell.
+|+tableSubFooterBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-cst-sftr+:: This class defines styles for a table sub-footer.
 |No skin parameters.
-|.rf-cst-sftr-fst:: This class defines styles for the first sub-footer.
+|+.rf-cst-sftr-fst+:: This class defines styles for the first sub-footer.
 |No skin parameters.
-|.rf-cst-sftr-c:: This class defines styles for a sub-footer cell.
-|tableSubFooterBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
+|+.rf-cst-sftr-c+:: This class defines styles for a sub-footer cell.
+|+tableSubFooterBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-richcollapsibleSubTableToggler]]
@@ -2107,69 +2107,69 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-edt:: This class defines styles for the table.
-|tableBorderWidth, tableBorderColor|border
-|tableBackgroundColor|background-color
-|.rich-edt-cnt:: This class defines styles for the table content.
+|+.rf-edt+:: This class defines styles for the table.
+|+tableBorderWidth+, +tableBorderColor+|border
+|+tableBackgroundColor+|background-color
+|+.rich-edt-cnt+:: This class defines styles for the table content.
 |No skin parameters.
-|.rf-edt-c:: This class defines styles for a table cell.
-|tableBorderWidth, tableBorderColor|border-bottom
-|tableBorderWidth, tableBorderColor|border-right
-|.rf-edt-c-cnt:: This class defines styles for the contents of a cell.
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-edt-tbl-hdr:: This class defines styles for the table header.
-|tableBorderWidth, tableBorderColor|border-bottom
-|tableHeaderTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|tableHeaderTextColor|color
-|.rich-edt-hdr:: This class defines styles for a header.
+|+.rf-edt-c+:: This class defines styles for a table cell.
+|+tableBorderWidth+, +tableBorderColor+|border-bottom
+|+tableBorderWidth+, +tableBorderColor+|border-right
+|+.rf-edt-c-cnt+:: This class defines styles for the contents of a cell.
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-edt-tbl-hdr+:: This class defines styles for the table header.
+|+tableBorderWidth+, +tableBorderColor+|border-bottom
+|+tableHeaderTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+tableHeaderTextColor+|color
+|+.rich-edt-hdr+:: This class defines styles for a header.
 |No skin parameters.
-|.rf-edt-hdr-c:: This class defines styles for a table header cell.
-|tableBorderWidth, tableBorderColor|border-bottom
-|tableBorderWidth, tableBorderColor|border-right
-|.rf-edt-hdr-c-cnt:: This class defines styles for the contents of a header cell.
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|tableHeaderTextColor|color
-|.rf-edt-tbl-ftr:: This class defines styles for the table footer.
-|tableBorderWidth, tableBorderColor|border-top
-|tableFooterBackgroundColor|background-color
-|.rich-edt-ftr:: This class defines styles for a footer.
-|tableBorderWidth, tableBorderColor|border-top
-|tableFooterBackgroundColor|background-color
-|.rich-edt-ftr-cnt:: This class defines styles for the content of a footer.
+|+.rf-edt-hdr-c+:: This class defines styles for a table header cell.
+|+tableBorderWidth+, +tableBorderColor+|border-bottom
+|+tableBorderWidth+, +tableBorderColor+|border-right
+|+.rf-edt-hdr-c-cnt+:: This class defines styles for the contents of a header cell.
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+tableHeaderTextColor+|color
+|+.rf-edt-tbl-ftr+:: This class defines styles for the table footer.
+|+tableBorderWidth+, +tableBorderColor+|border-top
+|+tableFooterBackgroundColor+|background-color
+|+.rich-edt-ftr+:: This class defines styles for a footer.
+|+tableBorderWidth+, +tableBorderColor+|border-top
+|+tableFooterBackgroundColor+|background-color
+|+.rich-edt-ftr-cnt+:: This class defines styles for the content of a footer.
 |No skin parameters.
-|.rf-edt-ftr-c:: This class defines styles for a table footer cell.
-|tableBorderWidth, tableBorderColor|border-bottom
-|tableBorderWidth, tableBorderColor|border-right
-|.rf-edt-ftr-c-cnt:: This class defines styles for the contents of a footer cell.
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|generalTextColor|color
-|.rf-edt-ftr-emp:: This class defines styles for an empty footer cell.
-|tableBorderWidth, tableBorderColor|border-right
-|.rich-edt-ftr-fzn:: This class defines styles for a frozen footer.
+|+.rf-edt-ftr-c+:: This class defines styles for a table footer cell.
+|+tableBorderWidth+, +tableBorderColor+|border-bottom
+|+tableBorderWidth+, +tableBorderColor+|border-right
+|+.rf-edt-ftr-c-cnt+:: This class defines styles for the contents of a footer cell.
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+generalTextColor+|color
+|+.rf-edt-ftr-emp+:: This class defines styles for an empty footer cell.
+|+tableBorderWidth+, +tableBorderColor+|border-right
+|+.rich-edt-ftr-fzn+:: This class defines styles for a frozen footer.
 |No skin parameters.
-|.rich-edt-b:: This class defines styles for the body of the table.
+|+.rich-edt-b+:: This class defines styles for the body of the table.
 |No skin parameters.
-|.rf-edt-r-sel:: This class defines styles for the selected row.
-|tableBorderWidth, tableBorderColor|border-right
-|.rich-edt-r-act:: This class defines styles for the active row.
+|+.rf-edt-r-sel+:: This class defines styles for the selected row.
+|+tableBorderWidth+, +tableBorderColor+|border-right
+|+.rich-edt-r-act+:: This class defines styles for the active row.
 |No skin parameters.
-|.rich-edt-rsz:: This class defines styles for the table resizer.
+|+.rich-edt-rsz+:: This class defines styles for the table resizer.
 |No skin parameters.
-|.rich-edt-rsz-cntr:: This class defines styles for the resize container.
+|+.rich-edt-rsz-cntr+:: This class defines styles for the resize container.
 |No skin parameters.
-|.rich-edt-rsz-mkr:: This class defines styles for the resize marker.
-|generalTextColor|border-left
-|.rf-edt-rord:: This class defines styles for the re-order functionality.
-|tableBorderWidth, tableBorderColor|border
-|tableHeaderBackgroundColor/ tableBackgroundColor|background-color
-|.rich-edt-rord-mkr:: This class defines styles for the re-order marker.
+|+.rich-edt-rsz-mkr+:: This class defines styles for the resize marker.
+|+generalTextColor+|border-left
+|+.rf-edt-rord+:: This class defines styles for the re-order functionality.
+|+tableBorderWidth+, +tableBorderColor+|border
+|+tableHeaderBackgroundColor+ / +tableBackgroundColor+|background-color
+|+.rich-edt-rord-mkr+:: This class defines styles for the re-order marker.
 |No skin parameters.
-|.rich-edt-spcr:: This class defines a spacer for Internet Explorer 7compatibility.
+|+.rich-edt-spcr+:: This class defines a spacer for Internet Explorer 7compatibility.
 |No skin parameters.
 |===============
 
@@ -2183,53 +2183,53 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-dg:: This class defines styles for the grid.
-|tableBackgroundColor|background-color
-|tableBorderWidth|border-left-width, border-top-width
-|tableBorderColor|border-left-color, border-top-color
-|.rf-dg-cap:: This class defines styles for the grid caption.
+|+.rf-dg+:: This class defines styles for the grid.
+|+tableBackgroundColor+|background-color
+|+tableBorderWidth+|border-left-width, border-top-width
+|+tableBorderColor+|border-left-color, border-top-color
+|+.rf-dg-cap+:: This class defines styles for the grid caption.
 |No skin parameters.
-|.rf-dg-r:: This class defines styles for a grid row.
+|+.rf-dg-r+:: This class defines styles for a grid row.
 |No skin parameters.
-|.rf-dg-c:: This class defines styles for a grid cell.
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-dg-nd-c:: This class defines styles for a node cell.
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-dg-th:: This class defines styles for the grid header section.
-|tableBorderWidth|border-bottom-width
-|tableBorderColor|border-bottom-color
-|.rf-dg-h:: This class defines styles for a grid header.
+|+.rf-dg-c+:: This class defines styles for a grid cell.
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-dg-nd-c+:: This class defines styles for a node cell.
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-dg-th+:: This class defines styles for the grid header section.
+|+tableBorderWidth+|border-bottom-width
+|+tableBorderColor+|border-bottom-color
+|+.rf-dg-h+:: This class defines styles for a grid header.
 |No skin parameters.
-|.rf-dg-h-f:: This class defines styles for the first header.
+|+.rf-dg-h-f+:: This class defines styles for the first header.
 |No skin parameters.
-|.rf-dg-h-r:: This class defines styles for a header row.
+|+.rf-dg-h-r+:: This class defines styles for a header row.
 |No skin parameters.
-|.rf-dg-h-c:: This class defines styles for a header cell.
-|tableHeaderBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|tableHeaderTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-dg-f:: This class defines styles for a grid footer.
+|+.rf-dg-h-c+:: This class defines styles for a header cell.
+|+tableHeaderBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+tableHeaderTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-dg-f+:: This class defines styles for a grid footer.
 |No skin parameters.
-|.rf-dg-f-f:: This class defines styles for the first footer.
+|+.rf-dg-f-f+:: This class defines styles for the first footer.
 |No skin parameters.
-|.rf-dg-f-c:: This class defines styles for a footer cell.
-|tableFooterBackgroundColor|background-color
-|tableBorderWidth|border-bottom-width, border-right-width
-|tableBorderColor|border-bottom-color, border-right-color
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
+|+.rf-dg-f-c+:: This class defines styles for a footer cell.
+|+tableFooterBackgroundColor+|background-color
+|+tableBorderWidth+|border-bottom-width, border-right-width
+|+tableBorderColor+|border-bottom-color, border-right-color
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-richlist]]
@@ -2242,22 +2242,22 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-ulst-itm:: This class defines styles for an item in an unordered list.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-olst-itm:: This class defines styles for an item in an unordered list.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-dlst-trm:: This class defines styles for the term of an item in a definition list.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-dlst-dfn:: This class defines styles for the definition of an item in a definition list.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
+|+.rf-ulst-itm+:: This class defines styles for an item in an unordered list.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-olst-itm+:: This class defines styles for an item in an unordered list.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-dlst-trm+:: This class defines styles for the term of an item in a definition list.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-dlst-dfn+:: This class defines styles for the definition of an item in a definition list.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-richdataScroller]]
@@ -2270,41 +2270,41 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-ds:: This class defines styles for the data scroller.
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|tableBackgroundColor|background
-|.rf-ds-btn:: This class defines styles for buttons in the data scroller.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|tableBorderColor|border-color
-|headerBackgroundColor|background-color
-|.rf-ds-btn-first:: This class defines styles for the firstbutton.
+|+.rf-ds+:: This class defines styles for the data scroller.
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+tableBackgroundColor+|background
+|+.rf-ds-btn+:: This class defines styles for buttons in the data scroller.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+tableBorderColor+|border-color
+|+headerBackgroundColor+|background-color
+|+.rf-ds-btn-first+:: This class defines styles for the firstbutton.
 |No skin parameters.
-|.rf-ds-btn-fastrwd:: This class defines styles for the fast rewindbutton.
+|+.rf-ds-btn-fastrwd+:: This class defines styles for the fast rewindbutton.
 |No skin parameters.
-|.rf-ds-btn-prev:: This class defines styles for the previousbutton.
+|+.rf-ds-btn-prev+:: This class defines styles for the previousbutton.
 |No skin parameters.
-|.rf-ds-btn-next:: This class defines styles for the nextbutton.
+|+.rf-ds-btn-next+:: This class defines styles for the nextbutton.
 |No skin parameters.
-|.rf-ds-btn-fastfwd:: This class defines styles for the fast forwardbutton.
+|+.rf-ds-btn-fastfwd+:: This class defines styles for the fast forwardbutton.
 |No skin parameters.
-|.rf-ds-btn-last:: This class defines styles for the lastbutton.
+|+.rf-ds-btn-last+:: This class defines styles for the lastbutton.
 |No skin parameters.
-|.rf-ds-nmb-btn:: This class defines styles for page number buttons in the data scroller.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|tableBorderColor|border-color
-|tableBackgroundColor|background-color
-|.rf-ds-press:: This class defines styles for a data scroller when a control is pressed.
-|tableBorderColor|border-color
-|tableBackgroundColor|background
-|.rf-ds-act:: This class defines styles for an active data scroller.
-|tableBorderColor|color
-|.rf-ds-dis:: This class defines styles for a disabled data scroller.
-|tableBorderColor|color
+|+.rf-ds-nmb-btn+:: This class defines styles for page number buttons in the data scroller.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+tableBorderColor+|border-color
+|+tableBackgroundColor+|background-color
+|+.rf-ds-press+:: This class defines styles for a data scroller when a control is pressed.
+|+tableBorderColor+|border-color
+|+tableBackgroundColor+|background
+|+.rf-ds-act+:: This class defines styles for an active data scroller.
+|+tableBorderColor+|color
+|+.rf-ds-dis+:: This class defines styles for a disabled data scroller.
+|+tableBorderColor+|color
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-Trees]]
@@ -2331,36 +2331,36 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-trn:: This class defines styles for a tree node.
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-trn-lbl:: This class defines styles for a tree node label.
+|+.rf-trn+:: This class defines styles for a tree node.
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-trn-lbl+:: This class defines styles for a tree node label.
 |No skin parameters.
-|.rf-trn-cnt:: This class defines styles for tree node content.
+|+.rf-trn-cnt+:: This class defines styles for tree node content.
 |No skin parameters.
-|.rf-trn-sel:: This class defines styles for a selected tree node.
-|additionalBackgroundColor|background
-|.rf-trn-ldn:: This class defines styles for a tree node when it is loading.
-|additionalBackgroundColor|background
-|.rf-trn-hnd:: This class defines styles for a tree node handle.
+|+.rf-trn-sel+:: This class defines styles for a selected tree node.
+|+additionalBackgroundColor+|background
+|+.rf-trn-ldn+:: This class defines styles for a tree node when it is loading.
+|+additionalBackgroundColor+|background
+|+.rf-trn-hnd+:: This class defines styles for a tree node handle.
 |No skin parameters.
-|.rf-trn-hnd-lf:: This class defines styles for the handle of a leaf node.
+|+.rf-trn-hnd-lf+:: This class defines styles for the handle of a leaf node.
 |No skin parameters.
-|.rf-trn-hnd-colps:: This class defines styles for the handle of a collapsed node.
+|+.rf-trn-hnd-colps+:: This class defines styles for the handle of a collapsed node.
 |No skin parameters.
-|.rf-trn-hnd-exp:: This class defines styles for the handle of an expanded node.
+|+.rf-trn-hnd-exp+:: This class defines styles for the handle of an expanded node.
 |No skin parameters.
-|.rf-trn-hnd-ldn-fct:: This class defines styles for the loading facet of a tree node handle.
+|+.rf-trn-hnd-ldn-fct+:: This class defines styles for the loading facet of a tree node handle.
 |No skin parameters.
-|.rf-trn-ico:: This class defines styles for tree node icon.
+|+.rf-trn-ico+:: This class defines styles for tree node icon.
 |No skin parameters.
-|.rf-trn-ico-lf:: This class defines styles for the icon of a leaf node.
+|+.rf-trn-ico-lf+:: This class defines styles for the icon of a leaf node.
 |No skin parameters.
-|.rf-trn-ico-colps:: This class defines styles for the icon of a collapsed node.
+|+.rf-trn-ico-colps+:: This class defines styles for the icon of a collapsed node.
 |No skin parameters.
-|.rf-trn-ico-exp:: This class defines styles for the icon of an expanded node.
+|+.rf-trn-ico-exp+:: This class defines styles for the icon of an expanded node.
 |No skin parameters.
-|.rf-trn-ico-cst:: This class defines styles for a custom node icon.
+|+.rf-trn-ico-cst+:: This class defines styles for a custom node icon.
 |No skin parameters.
 |===============
 
@@ -2378,42 +2378,42 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-ddm-lbl:: This class defines styles for the label of the drop-down menu.
-|headerFamilyFont|font-family
-|.rf-ddm-dis:: This class defines styles for the drop-down menu when it is disabled.
-|tabDisabledTextColor|color
-|.rf-ddm-lbl-dis:: This class defines styles for the label of the drop-down menu when it is disabled.
-|headerFamilyFont|font-family
-|.rf-ddm-pos:: This class defines the positioning of the drop-down menu.
+|+.rf-ddm-lbl+:: This class defines styles for the label of the drop-down menu.
+|+headerFamilyFont+|font-family
+|+.rf-ddm-dis+:: This class defines styles for the drop-down menu when it is disabled.
+|+tabDisabledTextColor+|color
+|+.rf-ddm-lbl-dis+:: This class defines styles for the label of the drop-down menu when it is disabled.
+|+headerFamilyFont+|font-family
+|+.rf-ddm-pos+:: This class defines the positioning of the drop-down menu.
 |No skin parameters.
-|.rf-ddm-lbl-unsel:: This class defines styles for the label of the drop-down menu when it is unselected.
+|+.rf-ddm-lbl-unsel+:: This class defines styles for the label of the drop-down menu when it is unselected.
 |No skin parameters.
-|.rf-ddm-lst:: This class defines styles for the drop-down list.
-|panelBorderColor|border-color
-|additionalBackgroundColor|background-color
-|.rf-ddm-lst-bg:: This class defines styles for the background of the drop-down list.
-|additionalBackgroundColor|border-color
-|.rf-ddm-sublst:: This class defines the positioning of the menu when used as a sub-menu.
+|+.rf-ddm-lst+:: This class defines styles for the drop-down list.
+|+panelBorderColor+|border-color
+|+additionalBackgroundColor+|background-color
+|+.rf-ddm-lst-bg+:: This class defines styles for the background of the drop-down list.
+|+additionalBackgroundColor+|border-color
+|+.rf-ddm-sublst+:: This class defines the positioning of the menu when used as a sub-menu.
 |No skin parameters.
-|.rf-ddm-itm:: This class defines styles for a menu item.
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-ddm-itm-sel:: This class defines styles for a menu item when it is selected.
-|headerBackgroundColor|border-color
-|tabBackgroundColor|background-color
-|.rf-ddm-itm-unsel:: This class defines styles for a menu item when it is unselected.
+|+.rf-ddm-itm+:: This class defines styles for a menu item.
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-ddm-itm-sel+:: This class defines styles for a menu item when it is selected.
+|+headerBackgroundColor+|border-color
+|+tabBackgroundColor+|background-color
+|+.rf-ddm-itm-unsel+:: This class defines styles for a menu item when it is unselected.
 |No skin parameters.
-|.rf-ddm-itm-dis:: This class defines styles for a menu item when it is disabled.
-|tabDisabledTextColor|color
-|.rf-ddm-itm-lbl:: This class defines styles for the label in a menu item.
-|generalTextColor|color
-|.rf-ddm-itm-ic:: This class defines styles for the icon in a menu item.
+|+.rf-ddm-itm-dis+:: This class defines styles for a menu item when it is disabled.
+|+tabDisabledTextColor+|color
+|+.rf-ddm-itm-lbl+:: This class defines styles for the label in a menu item.
+|+generalTextColor+|color
+|+.rf-ddm-itm-ic+:: This class defines styles for the icon in a menu item.
 |No skin parameters.
-|.rf-ddm-emptyIcon:: This class defines styles for an empty icon in a menu item.
+|+.rf-ddm-emptyIcon+:: This class defines styles for an empty icon in a menu item.
 |No skin parameters.
-|.rf-ddm-sep:: This class defines styles for a menu separator.
-|panelBorderColor|border-top-color
-|.rf-ddm-nd:: This class defines styles for a menu node.
+|+.rf-ddm-sep+:: This class defines styles for a menu separator.
+|+panelBorderColor+|border-top-color
+|+.rf-ddm-nd+:: This class defines styles for a menu node.
 |No skin parameters.
 |===============
 
@@ -2427,42 +2427,42 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-ctx-lbl:: This class defines styles for the top level container of the context menu.
-|headerFamilyFont|font-family
-|.rf-ctx-dis:: This class defines styles for the context menu when it is disabled.
-|tabDisabledTextColor|color
-|.rf-ctx-lbl-dis:: This class defines styles for the top level of the context menu when it is disabled.
-|headerFamilyFont|font-family
-|.rf-ctx-pos:: This class defines the positioning of the context menu.
+|+.rf-ctx-lbl+:: This class defines styles for the top level container of the context menu.
+|+headerFamilyFont+|font-family
+|+.rf-ctx-dis+:: This class defines styles for the context menu when it is disabled.
+|+tabDisabledTextColor+|color
+|+.rf-ctx-lbl-dis+:: This class defines styles for the top level of the context menu when it is disabled.
+|+headerFamilyFont+|font-family
+|+.rf-ctx-pos+:: This class defines the positioning of the context menu.
 |No skin parameters.
-|.rf-ctx-lbl-unsel:: This class defines styles for the top level of the context menu when it is unselected.
+|+.rf-ctx-lbl-unsel+:: This class defines styles for the top level of the context menu when it is unselected.
 |No skin parameters.
-|.rf-ctx-lst:: This class defines styles for the context list.
-|panelBorderColor|border-color
-|additionalBackgroundColor|background-color
-|.rf-ctx-lst-bg:: This class defines styles for the background of the context list.
-|additionalBackgroundColor|border-color
-|.rf-ctx-sublst:: This class defines the positioning of the menu when used as a sub-menu.
+|+.rf-ctx-lst+:: This class defines styles for the context list.
+|+panelBorderColor+|border-color
+|+additionalBackgroundColor+|background-color
+|+.rf-ctx-lst-bg+:: This class defines styles for the background of the context list.
+|+additionalBackgroundColor+|border-color
+|+.rf-ctx-sublst+:: This class defines the positioning of the menu when used as a sub-menu.
 |No skin parameters.
-|.rf-ctx-itm:: This class defines styles for a menu item.
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-ctx-itm-sel:: This class defines styles for a menu item when it is selected.
-|headerBackgroundColor|border-color
-|tabBackgroundColor|background-color
-|.rf-ctx-itm-unsel:: This class defines styles for a menu item when it is unselected.
+|+.rf-ctx-itm+:: This class defines styles for a menu item.
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-ctx-itm-sel+:: This class defines styles for a menu item when it is selected.
+|+headerBackgroundColor+|border-color
+|+tabBackgroundColor+|background-color
+|+.rf-ctx-itm-unsel+:: This class defines styles for a menu item when it is unselected.
 |No skin parameters.
-|.rf-ctx-itm-dis:: This class defines styles for a menu item when it is disabled.
-|tabDisabledTextColor|color
-|.rf-ctx-itm-lbl:: This class defines styles for the label in a menu item.
-|generalTextColor|color
-|.rf-ctx-itm-ic:: This class defines styles for the icon in a menu item.
+|+.rf-ctx-itm-dis+:: This class defines styles for a menu item when it is disabled.
+|+tabDisabledTextColor+|color
+|+.rf-ctx-itm-lbl+:: This class defines styles for the label in a menu item.
+|+generalTextColor+|color
+|+.rf-ctx-itm-ic+:: This class defines styles for the icon in a menu item.
 |No skin parameters.
-|.rf-ctx-emptyIcon:: This class defines styles for an empty icon in a menu item.
+|+.rf-ctx-emptyIcon+:: This class defines styles for an empty icon in a menu item.
 |No skin parameters.
-|.rf-ctx-sep:: This class defines styles for a menu separator.
-|panelBorderColor|border-top-color
-|.rf-ctx-nd:: This class defines styles for a menu node.
+|+.rf-ctx-sep+:: This class defines styles for a menu separator.
+|+panelBorderColor+|border-top-color
+|+.rf-ctx-nd+:: This class defines styles for a menu node.
 |No skin parameters.
 |===============
 
@@ -2476,95 +2476,95 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-pm:: This class defines styles for the panel menu itself.
+|+.rf-pm+:: This class defines styles for the panel menu itself.
 |No skin parameters.
-|.rf-pm-gr:: This class defines styles for a panel menu group.
-|panelBorderColor|border-top-color
-|.rf-pm-exp:: .rf-pm-colps:: These classes define styles for the panel menu when it is expanded or collapsed.
+|+.rf-pm-gr+:: This class defines styles for a panel menu group.
+|+panelBorderColor+|border-top-color
+|+.rf-pm-exp+:: +.rf-pm-colps+:: These classes define styles for the panel menu when it is expanded or collapsed.
 |No skin parameters.
-|.rf-pm-ico:: This class defines styles for the panel menu icons.
+|+.rf-pm-ico+:: This class defines styles for the panel menu icons.
 |No skin parameters.
-|.rf-pm-ico-exp:: .rf-pm-ico-colps:: These classes define styles for the panel menu icons when they are expanded or collapsed.
+|+.rf-pm-ico-exp+:: +.rf-pm-ico-colps+:: These classes define styles for the panel menu icons when they are expanded or collapsed.
 |No skin parameters.
-|.rf-pm-hdr-exp:: .rf-pm-hdr-colps:: These classes define styles for the panel menu headers when they are expanded or collapsed.
+|+.rf-pm-hdr-exp+:: +.rf-pm-hdr-colps+:: These classes define styles for the panel menu headers when they are expanded or collapsed.
 |No skin parameters.
-|.rf-pm-itm:: This class defines styles for a panel menu item.
-|panelBorderColor|border-top-color
-|generalTextColor|color
-|.rf-pm-itm-gr:: This class defines styles for a panel menu item as part of a panel menu group.
+|+.rf-pm-itm+:: This class defines styles for a panel menu item.
+|+panelBorderColor+|border-top-color
+|+generalTextColor+|color
+|+.rf-pm-itm-gr+:: This class defines styles for a panel menu item as part of a panel menu group.
 |No skin parameters.
-|.rf-pm-itm:hover:: This class defines styles for a panel menu item when the mouse hovers over it.
-|additionalBackgroundColor|background-color
-|.rf-pm-itm-sel:: This class defines styles for a panel menu item when it is selected.
+|+.rf-pm-itm:hover+:: This class defines styles for a panel menu item when the mouse hovers over it.
+|+additionalBackgroundColor+|background-color
+|+.rf-pm-itm-sel+:: This class defines styles for a panel menu item when it is selected.
 |No skin parameters.
-|.rf-pm-itm-dis:: This class defines styles for a panel menu item when it is disabled.
-|tabDisabledTextColor|color
-|.rf-pm-itm-ico:: This class defines styles for the icon in a panel menu item.
+|+.rf-pm-itm-dis+:: This class defines styles for a panel menu item when it is disabled.
+|+tabDisabledTextColor+|color
+|+.rf-pm-itm-ico+:: This class defines styles for the icon in a panel menu item.
 |No skin parameters.
-|.rf-pm-itm-exp-ico:: This class defines styles for the icon in a panel menu item when it is expanded.
+|+.rf-pm-itm-exp-ico+:: This class defines styles for the icon in a panel menu item when it is expanded.
 |No skin parameters.
-|.rf-pm-itm-lbl:: This class defines styles for the label in a panel menu item.
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-pm-gr:: This class defines styles for a panel menu group.
-|panelBorderColor|border-top-color
-|.rf-pm-gr-gr:: This class defines styles for a panel menu group as part of another panel menu group.
+|+.rf-pm-itm-lbl+:: This class defines styles for the label in a panel menu item.
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-pm-gr+:: This class defines styles for a panel menu group.
+|+panelBorderColor+|border-top-color
+|+.rf-pm-gr-gr+:: This class defines styles for a panel menu group as part of another panel menu group.
 |No skin parameters.
-|.rf-pm-gr-sel:: This class defines styles for a panel menu group when it is selected.
+|+.rf-pm-gr-sel+:: This class defines styles for a panel menu group when it is selected.
 |No skin parameters.
-|.rf-pm-gr-hdr:: This class defines styles for the header of a panel menu group.
-|generalTextColor|color
-|.rf-pm-gr-hdr:hover:: This class defines styles for the header of a panel menu group when the mouse hovers over it.
-|additionalBackgroundColor|background
-|.rf-pm-gr-hdr-dis:: This class defines styles for the header of a panel menu group when it is disabled.
-|tabDisabledTextColor|color
-|.rf-pm-gr-ico:: This class defines styles for the icon in a panel menu group.
+|+.rf-pm-gr-hdr+:: This class defines styles for the header of a panel menu group.
+|+generalTextColor+|color
+|+.rf-pm-gr-hdr:hover+:: This class defines styles for the header of a panel menu group when the mouse hovers over it.
+|+additionalBackgroundColor+|background
+|+.rf-pm-gr-hdr-dis+:: This class defines styles for the header of a panel menu group when it is disabled.
+|+tabDisabledTextColor+|color
+|+.rf-pm-gr-ico+:: This class defines styles for the icon in a panel menu group.
 |No skin parameters.
-|.rf-pm-gr-exp-ico:: This class defines styles for the icon in a panel menu group when it is expanded.
+|+.rf-pm-gr-exp-ico+:: This class defines styles for the icon in a panel menu group when it is expanded.
 |No skin parameters.
-|.rf-pm-gr-lbl:: This class defines styles for the label in a panel menu group.
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-pm-gr-cnt:: This class defines styles for the content of a panel menu group.
+|+.rf-pm-gr-lbl+:: This class defines styles for the label in a panel menu group.
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-pm-gr-cnt+:: This class defines styles for the content of a panel menu group.
 |No skin parameters.
-|.rf-pm-top-itm:: This class defines styles for the top panel menu item.
-|panelBorderColor|border-color
-|generalTextColor|color
-|.rf-pm-top-itm-gr:: This class defines styles for the top panel menu item as part of a panel menu group.
+|+.rf-pm-top-itm+:: This class defines styles for the top panel menu item.
+|+panelBorderColor+|border-color
+|+generalTextColor+|color
+|+.rf-pm-top-itm-gr+:: This class defines styles for the top panel menu item as part of a panel menu group.
 |No skin parameters.
-|.rf-pm-top-itm:hover:: This class defines styles for the top panel menu item when the mouse hovers over it.
-|headerTextColor|color
-|.rf-pm-top-itm-sel:: This class defines styles for the top panel menu item when it is selected.
+|+.rf-pm-top-itm:hover+:: This class defines styles for the top panel menu item when the mouse hovers over it.
+|+headerTextColor+|color
+|+.rf-pm-top-itm-sel+:: This class defines styles for the top panel menu item when it is selected.
 |No skin parameters.
-|.rf-pm-top-itm-dis:: This class defines styles for the top panel menu item when it is disabled.
-|tabDisabledTextColor|color
-|.rf-pm-top-itm-ico:: This class defines styles for the icon in the top panel menu item.
+|+.rf-pm-top-itm-dis+:: This class defines styles for the top panel menu item when it is disabled.
+|+tabDisabledTextColor+|color
+|+.rf-pm-top-itm-ico+:: This class defines styles for the icon in the top panel menu item.
 |No skin parameters.
-|.rf-pm-top-itm-exp-ico:: This class defines styles for the icon in the top panel menu item when it is expanded.
+|+.rf-pm-top-itm-exp-ico+:: This class defines styles for the icon in the top panel menu item when it is expanded.
 |No skin parameters.
-|.rf-pm-top-itm-lbl:: This class defines styles for the label in the top panel menu item.
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-pm-top-gr:: This class defines styles for the top panel menu group.
-|panelBorderColor|border-color
-|.rf-pm-top-gr-gr:: This class defines styles for the top panel menu group as part of another panel menu group.
+|+.rf-pm-top-itm-lbl+:: This class defines styles for the label in the top panel menu item.
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-pm-top-gr+:: This class defines styles for the top panel menu group.
+|+panelBorderColor+|border-color
+|+.rf-pm-top-gr-gr+:: This class defines styles for the top panel menu group as part of another panel menu group.
 |No skin parameters.
-|.rf-pm-top-gr-sel:: This class defines styles for the top panel menu group when it is selected.
+|+.rf-pm-top-gr-sel+:: This class defines styles for the top panel menu group when it is selected.
 |No skin parameters.
-|.rf-pm-top-gr-hdr:: This class defines styles for the header of the top panel menu group.
-|headerTextColor|color
-|headerBackgroundColor|background-color
-|.rf-pm-top-gr-hdr-dis:: This class defines styles for the header of the top panel menu group when it is disabled.
-|tabDisabledTextColor|color
-|additionalBackgroundColor|background-color
-|.rf-pm-top-gr-ico:: This class defines styles for the icon in the top panel menu group.
+|+.rf-pm-top-gr-hdr+:: This class defines styles for the header of the top panel menu group.
+|+headerTextColor+|color
+|+headerBackgroundColor+|background-color
+|+.rf-pm-top-gr-hdr-dis+:: This class defines styles for the header of the top panel menu group when it is disabled.
+|+tabDisabledTextColor+|color
+|+additionalBackgroundColor+|background-color
+|+.rf-pm-top-gr-ico+:: This class defines styles for the icon in the top panel menu group.
 |No skin parameters.
-|.rf-pm-top-gr-exp-ico:: This class defines styles for the icon in the top panel menu group when it is expanded.
+|+.rf-pm-top-gr-exp-ico+:: This class defines styles for the icon in the top panel menu group when it is expanded.
 |No skin parameters.
-|.rf-pm-top-gr-lbl:: This class defines styles for the label in the top panel menu group.
-|generalSizeFont|font-size
-|generalFamilyFont|font-family
-|.rf-pm-top-gr-cnt:: This class defines styles for the content of the top panel menu group.
+|+.rf-pm-top-gr-lbl+:: This class defines styles for the label in the top panel menu group.
+|+generalSizeFont+|font-size
+|+generalFamilyFont+|font-family
+|+.rf-pm-top-gr-cnt+:: This class defines styles for the content of the top panel menu group.
 |No skin parameters.
 |===============
 
@@ -2578,20 +2578,20 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-tb:: This class defines styles for the toolbar itself.
-|panelBorderColor|border-color
-|headerTextColor|color
-|headerBackgroundColor|background-color
-|headerFamilyFont|font-family
-|headerSizeFont|font-size
-|headerWeightFont|font-weight
-|.rf-tb-itm:: This class defines styles for an item in the toolbar.
+|+.rf-tb+:: This class defines styles for the toolbar itself.
+|+panelBorderColor+|border-color
+|+headerTextColor+|color
+|+headerBackgroundColor+|background-color
+|+headerFamilyFont+|font-family
+|+headerSizeFont+|font-size
+|+headerWeightFont+|font-weight
+|+.rf-tb-itm+:: This class defines styles for an item in the toolbar.
 |No skin parameters.
-|.rf-tb-sep:: This class defines styles for a separator in the toolbar.
+|+.rf-tb-sep+:: This class defines styles for a separator in the toolbar.
 |No skin parameters.
-|.rf-tb-sep-grid:: .rf-tb-sep-line:: .rf-tb-sep-disc:: .rf-tb-sep-square:: These classes define styles for grid, line, disc, and square separators.
+|+.rf-tb-sep-grid+:: +.rf-tb-sep-line+:: +.rf-tb-sep-disc+:: +.rf-tb-sep-square+:: These classes define styles for grid, line, disc, and square separators.
 |No skin parameters.
-|.rf-tb-cntr:: This class defines styles for the container of the toolbar.
+|+.rf-tb-cntr+:: This class defines styles for the container of the toolbar.
 |No skin parameters.
 |===============
 
@@ -2609,20 +2609,20 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-msg:: This class defines styles for the message itself.
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-msg-err:: This class defines styles for an error message.
-|errorColor|color
-|.rf-msg-ftl:: This class defines styles for a fatal message.
-|errorColor|color
-|.rf-msg-inf:: This class defines styles for an information message.
-|generalTextColor|color
-|.rf-msg-wrn:: This class defines styles for a warning message.
-|warningTextColor|color
-|.rf-msg-ok:: This class defines styles for a basic OKmessage.
-|generalTextColor|color
-|.rf-msg-sum:: .rf-msg-det:: These classes define styles for the summary or details of a message.
+|+.rf-msg+:: This class defines styles for the message itself.
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-msg-err+:: This class defines styles for an error message.
+|+errorColor+|color
+|+.rf-msg-ftl+:: This class defines styles for a fatal message.
+|+errorColor+|color
+|+.rf-msg-inf+:: This class defines styles for an information message.
+|+generalTextColor+|color
+|+.rf-msg-wrn+:: This class defines styles for a warning message.
+|+warningTextColor+|color
+|+.rf-msg-ok+:: This class defines styles for a basic OKmessage.
+|+generalTextColor+|color
+|+.rf-msg-sum+:: +.rf-msg-det+:: These classes define styles for the summary or details of a message.
 |No skin parameters.
 |===============
 
@@ -2636,20 +2636,20 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-msgs:: This class defines styles for the message itself.
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
-|.rf-msgs-err:: This class defines styles for an error message.
-|errorColor|color
-|.rf-msgs-ftl:: This class defines styles for a fatal message.
-|errorColor|color
-|.rf-msgs-inf:: This class defines styles for an information message.
-|generalTextColor|color
-|.rf-msgs-wrn:: This class defines styles for a warning message.
-|warningTextColor|color
-|.rf-msgs-ok:: This class defines styles for a basic OKmessage.
-|generalTextColor|color
-|.rf-msgs-sum:: .rf-msgs-det:: These classes define styles for the summary or details of a message.
+|+.rf-msgs+:: This class defines styles for the message itself.
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
+|+.rf-msgs-err+:: This class defines styles for an error message.
+|+errorColor+|color
+|+.rf-msgs-ftl+:: This class defines styles for a fatal message.
+|+errorColor+|color
+|+.rf-msgs-inf+:: This class defines styles for an information message.
+|+generalTextColor+|color
+|+.rf-msgs-wrn+:: This class defines styles for a warning message.
+|+warningTextColor+|color
+|+.rf-msgs-ok+:: This class defines styles for a basic OKmessage.
+|+generalTextColor+|color
+|+.rf-msgs-sum+:: +.rf-msgs-det+:: These classes define styles for the summary or details of a message.
 |No skin parameters.
 |===============
 
@@ -2663,24 +2663,24 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-ntf:: This class defines styles for notification
+|+.rf-ntf+:: This class defines styles for notification
 |No skin parameters.
-|.rf-ntf-shdw:: This class defines style of the shadow under notification box.
-|headerBackgroundColor|background-color
-|headerTextColor|color
-|.rf-ntf-cnt:: This class defines style of the content of notification box.
-|panelBorderColor|border-color
-|generalBackgroundColor|background-color
-|panelTextColor|color
-|.rf-ntf-ico:: This class defines style for notification icon.
+|+.rf-ntf-shdw+:: This class defines style of the shadow under notification box.
+|+headerBackgroundColor+|background-color
+|+headerTextColor+|color
+|+.rf-ntf-cnt+:: This class defines style of the content of notification box.
+|+panelBorderColor+|border-color
+|+generalBackgroundColor+|background-color
+|+panelTextColor+|color
+|+.rf-ntf-ico+:: This class defines style for notification icon.
 |No skin parameters.
-|.rf-ntf-sum:: This class defines style for notification message summary.
+|+.rf-ntf-sum+:: This class defines style for notification message summary.
 |No skin parameters.
-|.rf-ntf-det:: This class defines style for notification message detail.
+|+.rf-ntf-det+:: This class defines style for notification message detail.
 |No skin parameters.
-|.rf-ntf-cls:: This class defines style for element wrapping close button.
+|+.rf-ntf-cls+:: This class defines style for element wrapping close button.
 |No skin parameters.
-|.rf-ntf-cls-ico:: This class defines style for close button icon.
+|+.rf-ntf-cls-ico+:: This class defines style for close button icon.
 |No skin parameters.
 |===============
 
@@ -2694,15 +2694,15 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-ntf-inf:: This class defines styles for an informative message.
-|generalTextColor|color
-|.rf-ntf-wrn:: This class defines styles for a warning notifications.
+|+.rf-ntf-inf+:: This class defines styles for an informative message.
+|+generalTextColor+|color
+|+.rf-ntf-wrn+:: This class defines styles for a warning notifications.
 |No skin parameters.
-|.rf-ntf-err:: This class defines styles for a error notifications.
+|+.rf-ntf-err+:: This class defines styles for a error notifications.
 |No skin parameters.
-|.rf-ntf-ftl:: This class defines styles for a fatal notifications.
+|+.rf-ntf-ftl+:: This class defines styles for a fatal notifications.
 |No skin parameters.
-|.rf-ntf-inf .rf-ntf-ico:: .rf-ntf-wrn .rf-ntf-ico:: .rf-ntf-err .rf-ntf-ico:: .rf-ntf-ftl .rf-ntf-ico:: These classes define style for notification icon based on severity of notification message.
+|+.rf-ntf-inf .rf-ntf-ico+:: +.rf-ntf-wrn .rf-ntf-ico+:: +.rf-ntf-err .rf-ntf-ico+:: +.rf-ntf-ftl .rf-ntf-ico+:: These classes define style for notification icon based on severity of notification message.
 |No skin parameters.
 |===============
 
@@ -2716,13 +2716,13 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-ntf-pos-tl:: This class defines where top-left stack of notification will be positioned
+|+.rf-ntf-pos-tl+:: This class defines where top-left stack of notification will be positioned
 |No skin parameters.
-|.rf-ntf-pos-tr:: This class defines where top-right stack of notification will be positioned
+|+.rf-ntf-pos-tr+:: This class defines where top-right stack of notification will be positioned
 |No skin parameters.
-|.rf-ntf-pos-bl:: This class defines where bottom-left stack of notification will be positioned
+|+.rf-ntf-pos-bl+:: This class defines where bottom-left stack of notification will be positioned
 |No skin parameters.
-|.rf-ntf-pos-br:: This class defines where bottom-right stack of notification will be positioned
+|+.rf-ntf-pos-br+:: This class defines where bottom-right stack of notification will be positioned
 |No skin parameters.
 |===============
 
@@ -2736,15 +2736,15 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-pb-lbl:: This class defines styles for labels on the progress bar.
+|+.rf-pb-lbl+:: This class defines styles for labels on the progress bar.
 |No skin parameters.
-|.rf-pb-prgs:: This class defines styles for the progressed portion of the progress bar.
-|panelBorderColor|border-color
-|selectControlColor|background-color
-|.rf-pb-init:: .rf-pb-fin:: These classes define styles for the initial state and finished state.
-|generalTextColor|color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
+|+.rf-pb-prgs+:: This class defines styles for the progressed portion of the progress bar.
+|+panelBorderColor+|border-color
+|+selectControlColor+|background-color
+|+.rf-pb-init+:: +.rf-pb-fin+:: These classes define styles for the initial state and finished state.
+|+generalTextColor+|color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-richtooltip]]
@@ -2757,16 +2757,16 @@ Each of the RichFacescomponents are listed below, along with their style classes
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|.rf-tt:: This class defines styles for the tool-tip itself.
+|+.rf-tt+:: This class defines styles for the tool-tip itself.
 |No skin parameters.
-|.rf-tt-loading:: This class defines styles for the tool-tip when it is loading.
+|+.rf-tt-loading+:: This class defines styles for the tool-tip when it is loading.
 |No skin parameters.
-|.rf-tt-cnt:: This class defines styles for the tool-tip content.
+|+.rf-tt-cnt+:: This class defines styles for the tool-tip content.
 |No skin parameters.
-|.rf-tt-cntr:: This class defines styles for the progressed portion of the progress bar.
-|tipBorderColor|border-color
-|generalFamilyFont|font-family
-|generalSizeFont|font-size
+|+.rf-tt-cntr+:: This class defines styles for the progressed portion of the progress bar.
+|+tipBorderColor+|border-color
+|+generalFamilyFont+|font-family
+|+generalSizeFont+|font-size
 |===============
 
 [[sect-Developer_Guide-Style_classes_and_skin_parameters-Drag_and_drop]]
@@ -2815,7 +2815,7 @@ For details on disabling the built-in sort and filter controls, refer to section
 
 ==== NotifyMessage string escaping
 
-Prior to version 4.3.0.Final, the message summary and details of the <rich:notifyMessage>and <rich:notifyMessages>components were not escaped. In the 4.3.0.Final release, an attribute escapewas added with a default value true.
+Prior to version 4.3.0.Final, the message summary and details of the <rich:notifyMessage>and <rich:notifyMessages>components were not escaped. In the 4.3.0.Final release, an attribute +escape+ was added with a default value true.
 
 [[appe-Developer_Guide-Migration_Notes-4_3_0-Select_Input_Validation]]
 
