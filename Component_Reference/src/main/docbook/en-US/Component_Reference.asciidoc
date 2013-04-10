@@ -9,31 +9,31 @@ This book is a guide to the various components available in the RichFaces 5.0.0-
 For full references for all component classes and properties, refer to the following supplementary documentation:
 
 * VDL (View Definition Language) Documentation
-* Available at link:$$http://docs.jboss.org/richfaces/latest_4_0_X/vdldoc/$$[]
+* Available at link:$$http://docs.jboss.org/richfaces/latest_4_0_X/vdldoc/$$
 
 
 * API (Application Programming Interface) Documentation
 * RichFaces Components API
-* Available at link:$$http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-api/$$[]
+* Available at link:$$http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-api/$$
 
 
 * RichFaces Components UI
-* Available at link:$$http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-ui/$$[]
+* Available at link:$$http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-ui/$$
 
 
 * RichFaces Core API
-* Available at link:$$http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-core-api/$$[]
+* Available at link:$$http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-core-api/$$
 
 
 * RichFaces Core Implementation
-* Available at link:$$http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-core-impl/$$[]
+* Available at link:$$http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-core-impl/$$
 
 
 
 
 
 
-For further examples for each component, refer to the RichFaces Showcaseat link:$$http://richfaces-showcase.appspot.com/$$[].
+For further examples for each component, refer to the RichFaces Showcaseat link:$$http://richfaces-showcase.appspot.com/$$.
 
 [[sect-Component_Reference-Introduction-Libraries]]
 
@@ -91,7 +91,9 @@ The +render+ attribute provides a reference to one or more components on the pag
 [[exam-Component_Reference-render-render_example]]
 
 .render example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:form id="form1">
@@ -154,7 +156,9 @@ RichFaces Ajax-enabled components and Ajax behaviors with +limitRender="true"+ s
 [[exam-Component_Reference-limitRender-Rendering_example]]
 
 .Rendering example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:form id="form1">
@@ -229,7 +233,9 @@ The +data+ attribute allows additional data to be handled with the +oncomplete+ 
 [[exam-Component_Reference-data-Data_reference_example]]
 
 .Data reference example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:commandButton value="Update" oncomplete="showTheName(event.data.name)" data="#{userBean.name}" />
@@ -258,8 +264,8 @@ RichFaces allows one to register callbacks for the events listed above using jQu
 
 The event callback can be registered either on a form or a whole page:
 
+
 [source, Java]
-[source, JAVA]
 ----
 <h:outputScript>
 jQuery(document).ready(function() {
@@ -267,8 +273,8 @@ jQuery(document).ready(function() {
 	    // the callback will be triggered before the form is submitted using JSF AJAX
     	console.log("ajaxsubmit");
 	});
-
-
+	
+	
     jQuery(document).on("ajaxcomplete", function() {
         // the callback will be triggered for each completed JSF AJAX for the current page
     	console.log("ajaxcomplete");
@@ -304,7 +310,9 @@ Point the +event+ attribute to the standard JSF event that triggers the behavior
 [[exam-Component_Reference-a4jajax-a4jajax_example]]
 
 .+<a4j:ajax>+ example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:panelGrid columns="2">
@@ -350,7 +358,9 @@ Basic usage of the +<a4j:param>+ requires three main attributes:
 [[exam-Component_Reference-a4jparam-a4jparam_example]]
 
 .+<a4j:param>+ example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:form id="form">
@@ -362,8 +372,8 @@ Basic usage of the +<a4j:param>+ requires three main attributes:
 
 ----
 
+
 [source, Java]
-[source, JAVA]
 ----
 public class ParamBean {
     private String name = "John";
@@ -378,6 +388,8 @@ public class ParamBean {
 }
 
 ----
+
+When the Set name to Alexbutton is pressed, the application sets the +name+ parameter of the bean to +Alex+, and displays the name in the output field.
 
 ====
 
@@ -404,7 +416,9 @@ Variables from JavaScript functions can be used for the +value+ attribute. In su
 [[exam-Component_Reference-a4jparam-Passing_client-side_parameters]]
 
 .Passing client-side parameters
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:form>
@@ -424,6 +438,8 @@ Variables from JavaScript functions can be used for the +value+ attribute. In su
 </h:form>
 
 ----
+
+The command button triggers the +<a4j:param>+ behaviors and renders the output text. The +<a4j:param>+ behaviors pass client-side parameters for the screen width and height through the backing bean. These parameters are then used to populate the output text values.
 
 ====
 
@@ -454,7 +470,9 @@ The +<a4j:commandButton>+ component is similar to the JavaServer Faces ( JSF) +<
 [[figu-Component_Reference-a4jcommandButton-a4jcommandButton]]
 
 .+<a4j:commandButton>+
-image::
+image::images/figu-Component_Reference-a4jcommandButton-a4jcommandButton.png[]
+
+
 [NOTE]
 .The +<a4j:commandButton>+ component executes the complete form
 ====
@@ -488,7 +506,9 @@ The +<a4j:commandLink>+ component is similar to the JavaServer Faces ( JSF) +<h:
 [[figu-Component_Reference-a4jcommandLink-a4jcommandLink]]
 
 .+<a4j:commandLink>+
-image::
+image::images/figu-Component_Reference-a4jcommandLink-a4jcommandLink.png[]
+
+
 [NOTE]
 .The +<a4j:commandLink>+ component executes the complete form
 ====
@@ -530,7 +550,9 @@ The +<a4j:jsFunction>+ component requires the +data+ attribute. Use the +data+ a
 [[exam-Component_Reference-a4jjsFunction-a4jjsFunction_example]]
 
 .+<a4j:jsFunction>+ example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <table width="400">
@@ -563,6 +585,8 @@ The +<a4j:jsFunction>+ component requires the +data+ attribute. Use the +data+ a
 </h:form>
 
 ----
+
+The output text for the name is changed depending on which table cell the user hovers over with the mouse. The +<a4j:jsFunction>+ component manages the updating and display of the name.
 
 ====
 
@@ -629,7 +653,7 @@ The +<a4j:push>+ uses an Atmosphere framework for transporting messages. In orde
 
 In a Maven-based project, you should add +atmosphere-runtime+ as a runtime dependency (its version is managed by +richfaces-bom+ that your project should be importing, check "RichFaces Developer Guide" for details of starting with Maven-based project):
 
-[source, XML]
+
 [source, XML]
 ----
 <dependency>
@@ -650,7 +674,7 @@ In the Servlets 3.0 and higher environments, the servlet will be registered auto
 
 However in the Servlets 2.5 and lower environments, the servlet needs to be registered manually in +web.xml+:
 
-[source, XML]
+
 [source, XML]
 ----
 <!-- Push Servlet - listens for user sessions -->
@@ -678,7 +702,7 @@ When you attempt to register the Push servlet manually in Servlet 3.0 environmen
 
 However, be sure to setup the Push servlet to support asynchronous requests - modify the servlet registration from the previous +web.xml+ snippet as follows:
 
-[source, XML]
+
 [source, XML]
 ----
 <servlet>
@@ -699,7 +723,7 @@ Although a container you use supports Servlets 3.0, you may experience problems 
 
 It is possible to force the Atmosphere to use a blocking I/O approach with the following +web.xml+ configuration:
 
-[source, XML]
+
 [source, XML]
 ----
 <context-param>
@@ -771,7 +795,9 @@ The +<a4j:push>+ component should also include the +onerror+ event handler to in
 [[exam-Component_Reference-a4jpush-Handling_a_push_message]]
 
 .Handling a push message
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:push address="chat"
@@ -780,12 +806,16 @@ The +<a4j:push>+ component should also include the +onerror+ event handler to in
 
 ----
 
+This example uses the +dataavailable+ event attribute with some JavaScript to update messages in a chat room. The +event.rf.data+ parameter contains Push message data serialized to JavaScript.
+
 ====
 
 [[exam-Component_Reference-a4jpush-Updating_DOM_for_each_push_notification]]
 
 .Updating DOM for each push message
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:push address="chat"
@@ -793,6 +823,8 @@ The +<a4j:push>+ component should also include the +onerror+ event handler to in
     <a4j:ajax event="datavailable" render="chat" />
 </a4j:push>
 ----
+
+This example uses the +dataavailable+ event handler to trigger an AJAX request and a partial page update.
 
 ====
 
@@ -811,7 +843,9 @@ For such applications you may use +onsubscribed+ event handler, which is trigger
 [[exam-Component_Reference-a4jpush-Handling_a_push_subscription]]
 
 .The time-critical updates in stock application
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:push address="stockUpdates"
@@ -822,6 +856,8 @@ For such applications you may use +onsubscribed+ event handler, which is trigger
 
 ----
 
+This example uses the +subscribed+ event to update the table content once the push component is subscribed to the topic, ensuring that the table content is not stale.
+
 ====
 
 [[sect-Component_Reference-a4jpush-Using_TopicsContext_to_publish_message]]
@@ -830,8 +866,8 @@ For such applications you may use +onsubscribed+ event handler, which is trigger
 
 Messages could be produced using the +TopicsContext+ interface directly as in the following sample:
 
+
 [source, Java]
-[source, JAVA]
 ----
 private TopicKey topicKey = new TopicKey("chat");
 
@@ -858,8 +894,8 @@ Push notifications can be produced by annotating a CDI event injection point wit
 
 The payload of the message is the serialized object sent using the CDI event interface ( +Event.fire(T object)+).
 
+
 [source, Java]
-[source, JAVA]
 ----
 @Inject
 @Push(topic = "chat")
@@ -880,7 +916,7 @@ An integration of the RichFaces Push and the Java Messaging Service ( JMS) allow
 
 The JMS integration needs to be enabled in +web.xml+ with a following configuration:
 
-[source, XML]
+
 [source, XML]
 ----
 <context-param>
@@ -902,7 +938,29 @@ Refer to the JBoss Application Server Administration Console Guidefor details on
 [[exam-Component_Reference-a4jpush-JMS_server_configuration]]
 
 .JMS server configuration
-========
+====
+
+This simple example describes the JMS server configuration required for a pushing server date to the client.
+
+The JMS server needs to be setup in order to propagate JMS messages to Push components. Create a new JMS topic using the following settings:
+
+* Name:datePush
+* JNDI name:/topic/datePush
+* Use the default settings for other options.
+
+
+Add a single role for the topic in the same form using the following settings:
+
+* Name:guest
+* Send:true
+* Consume:true
+* Create subscriber:true
+* Delete subscriber:true
+* Create durable subscriber:true
+* Delete durable subscriber:true
+
+
+====
 
 Ensure the Create durable subscriberand the Delete durable subscriberoptions are set to truefor proper push functionality.
 
@@ -930,8 +988,8 @@ When RichFaces obtains a connection, an empty user name is used with an empty pa
 Use following +web.xml+ parameters or equivalent JVM parameters to change default values: +org.richfaces.push.jms.connectionUsername+, +org.richfaces.push.jms.connectionPassword+.
 
 
-                    ,
-
+                    , 
+                
 ====
 
 ===== Sending and receiving Push messages using JMS
@@ -943,8 +1001,10 @@ The message could be then published using +publisher.publish(message);+ like in 
 [[exam-Component_Reference-a4jpush-Sending_messages_using_JMS]]
 
 .Sending messages using JMS
-====[source, Java]
-[source, JAVA]
+====
+
+
+[source, Java]
 ----
 TopicConnection connection;
 TopicSession session;
@@ -981,12 +1041,14 @@ Receiving messages from a JMS queue doesn't differ from receiving messages sent 
 [[exam-Component_Reference-a4jpush-Receiving_messages_using_JMS]]
 
 .Receiving messages using JMS
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:push id="datePush" address="datePush"
             ondataavailable="jQuery(#{rich:element('serverDate')}).text(event.rf.data)" />
-
+            
 <a4j:outputPanel id="serverDate" layout="block">
     <i>waiting for event...</i>
 </a4j:outputPanel>
@@ -1043,17 +1105,23 @@ The +mimeType+ attribute describes the type of output content, and corresponds t
 [[exam-Component_Reference-a4jmediaOutput-a4jmediaOutput_example]]
 
 .+<a4j:mediaOutput>+ example
-====[source, XML]
+====
+
+This example uses the +<a4j:mediaOutput>+ component to generate a JPEGimage of verification digits. The code on the application page is a single element:
+
+
 [source, XML]
 ----
 <a4j:mediaOutput element="img" cacheable="false" session="false"
-                 createContent="#{mediaBean.paint}" value="#{mediaData}"
+                 createContent="#{mediaBean.paint}" value="#{mediaData}" 
                  mimeType="image/jpeg" />
 
 ----
 
+The +<a4j:mediaOutput>+ component uses the MediaBean.paintmethod to create the image. The method generates a random number, which is then converted into an output stream and rendered to a JPEGimage. The +MediaBean+ class is as follows:
+
+
 [source, Java]
-[source, JAVA]
 ----
 package demo;
 
@@ -1073,7 +1141,7 @@ public class MediaBean {
         Random generator = new Random();
         Integer digits = generator.nextInt(high - low + 1) + low;
 
-        if (data instanceof MediaData) {
+        if (data instanceof MediaData) {            
             MediaData paintData = (MediaData) data;
             BufferedImage img = new BufferedImage(paintData.getWidth(),paintData.getHeight(),BufferedImage.TYPE_INT_RGB);
             Graphics2D graphics2D = img.createGraphics();
@@ -1089,8 +1157,10 @@ public class MediaBean {
 
 ----
 
+Another class, +MediaData+ is required by the +value+ attribute for keeping data to be used as input for the content creation method. The +MediaData+ class is as follows:
+
+
 [source, Java]
-[source, JAVA]
 ----
 package demo;
 
@@ -1116,6 +1186,12 @@ public class MediaData implements Serializable {
 }
 
 ----
+
+The +<a4j:mediaOutput>+ component uses the +MediaBean+ and +MediaData+ classes to generate a new image on each page refresh.
+
+image::images/figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result.png[]
+
+The generated image containing a random verification number.
 
 ====
 
@@ -1203,8 +1279,10 @@ JavaServer Faces 2 provides built-in support for bean validation as per the Java
 [[exam-Component_Reference-Validation-JSR-303_validation_annotations]]
 
 .JSR-303 validation annotations
-====[source, Java]
-[source, JAVA]
+====
+
+
+[source, Java]
 ----
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -1217,14 +1295,14 @@ public class UserBean {
 
    @Size(min=3, max=12)
    private String name = null;
-
+   
    @Pattern(regexp = "^[\\w\\-]([\\.\\w])+[\\w]+@([\\w\\-]+\\.)+[a-zA-Z]{2,4}$" , message="Bad email")
    private String email = null;
-
+   
    @Min(value = 18)
    @Max(value = 99)
    private Integer age;
-
+   
 //...
 //Getters and Setters
 }
@@ -1256,7 +1334,9 @@ The +<rich:validator>+ behavior is added as a child element to any input control
 [[exam-Component_Reference-richvalidator-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:inputText value="#{userBean.name}">
@@ -1282,40 +1362,48 @@ Use the +<rich:message>+ and +<rich:messages>+ components to display validation 
 [[exam-Component_Reference-richvalidator-Messages]]
 
 .Messages
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:panel header="User information">
    <h:panelGrid columns="3">
-
+   
       <h:outputText value="Name:" />
       <h:inputText value="#{validationBean.name}" id="name">
          <rich:validator />
       </h:inputText>
       <rich:message for="name" />
-
+      
       <h:outputText value="Email" />
       <h:inputText value="#{validationBean.email}" id="email">
          <rich:validator />
       </h:inputText>
       <rich:message for="email" />
-
+      
       <h:outputText value="Age" />
       <h:inputText value="#{validationBean.age}" id="age">
          <rich:validator />
       </h:inputText>
       <rich:message for="age" />
-
+      
       <h:outputText value="I agree the terms" />
       <h:selectBooleanCheckbox value="#{validationBean.agree}" id="agree">
          <rich:validator/>
       </h:selectBooleanCheckbox>
       <rich:message for="agree" />
-
+      
    </h:panelGrid>
 </rich:panel>
 
 ----
+
+Failed validation checks are reported using +<rich:message>+ components. The validation annotations in the managed bean are outlined in <<exam-Component_Reference-Validation-JSR-303_validation_annotations>>.
+
+image::images/figu-Component_Reference-richvalidator-Messages.png[]
+
+Failed validation checks are reported using +<rich:message>+ components.
 
 ====
 
@@ -1328,7 +1416,9 @@ Use the +event+ attribute to specify which event on the input control triggers t
 [[exam-Component_Reference-richvalidator-Validation_triggers]]
 
 .Validation triggers
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:inputText value="#{userBean.name}">
@@ -1336,6 +1426,8 @@ Use the +event+ attribute to specify which event on the input control triggers t
 </h:inputText>
 
 ----
+
+The +event+ attribute is changed to the +keyup+ event, such that validation takes place after each key press.
 
 ====
 
@@ -1379,7 +1471,11 @@ The +<rich:graphValidator>+ element must wrap all the input controls that are re
 [[exam-Component_Reference-richgraphValidator-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+The example demonstrates a simple form for changing a password. The two entered passwords must match, so a +<rich:graphValidator>+ component is used for cross-field validation.
+
+
 [source, XML]
 ----
 <h:form>
@@ -1402,8 +1498,10 @@ The +<rich:graphValidator>+ element must wrap all the input controls that are re
 
 ----
 
+The input controls validate against the following bean:
+
+
 [source, Java]
-[source, JAVA]
 ----
 @ManagedBean
 @RequestScoped
@@ -1414,7 +1512,7 @@ public class UserBean implements Cloneable {
    @Size(min = 5, max = 15, message="Wrong size for confirmation")
    private String confirm;
    private String status = "";
-
+   
    @AssertTrue(message = "Different passwords entered!")
    public boolean isPasswordsEquals() {
       return password.equals(confirm);
@@ -1428,6 +1526,14 @@ public class UserBean implements Cloneable {
 }
 
 ----
+
+When validation occurs, the whole object is validated against the annotation contstraints. The +@AssertTrue+ annotation relies on the isPasswordsEqual()function to check whether the two entered passwords are equal.
+
+If the entered passwords do not match, an error message is displayed:
+
+image::images/figu-Component_Reference-richgraphValidator-Basic_usage.png[]
+
+Failed validation checks are reported using +<rich:message>+ components.
 
 ====
 
@@ -1474,11 +1580,15 @@ Use the +requestDelay+ attribute to add a delay between each request in the queu
 [[exam-Component_Reference-a4jqueue-Delaying_requests]]
 
 .Delaying requests
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:queue requestDelay="1500"/>
 ----
+
+The queue delays each request by 1500 milliseconds.
 
 ====
 
@@ -1502,7 +1612,9 @@ Define the queue scope to make it the default queue for all requests in that sco
 [[exam-Component_Reference-a4jqueue-Queue_scopes]]
 
 .Queue scopes
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:queue name="viewQueue" requestDelay="2000"/>
@@ -1512,6 +1624,8 @@ Define the queue scope to make it the default queue for all requests in that sco
 </h:form>
 
 ----
+
+The queue outside the form is scoped to the view. The queue inside the form is scoped only to that form.
 
 ====
 
@@ -1551,7 +1665,9 @@ Queues can be scoped to various levels as described in <<sect-Component_Referenc
 [[exam-Component_Reference-a4jattachQueue-Overriding_scope_settings]]
 
 .Overriding scope settings
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:queue requestDelay="2000"/>
@@ -1568,6 +1684,8 @@ Queues can be scoped to various levels as described in <<sect-Component_Referenc
 
 ----
 
+The request delay is overridden by the +<a4j:attachQueue>+ behavior on the submit button.
+
 ====
 
 [[sect-Component_Reference-a4jattachQueue-Using_a_named_queue]]
@@ -1579,7 +1697,9 @@ Name an +<a4j:queue>+ component using the +name+ attribute. It can then be used 
 [[exam-Component_Reference-a4jattachQueue-Using_a_named_queue]]
 
 .Using a named queue
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:queue name="viewQueue"/>
@@ -1594,6 +1714,8 @@ Name an +<a4j:queue>+ component using the +name+ attribute. It can then be used 
 
 ----
 
+The requests from the button are attached to the +viewQueue+ queue, rather than the +formQueue+ queue.
+
 ====
 
 [[sect-Component_Reference-a4jattachQueue-Grouping_requests]]
@@ -1605,7 +1727,9 @@ Use grouping to process multiple requests together. Specify a grouping identifie
 [[exam-Component_Reference-a4jattachQueue-Grouping_requests]]
 
 .Grouping requests
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:form>
@@ -1619,6 +1743,8 @@ Use grouping to process multiple requests together. Specify a grouping identifie
 </h:form>
 
 ----
+
+Requests from both the text input boxes are grouped together with the +registrationForm+ identifier.
 
 ====
 
@@ -1667,12 +1793,18 @@ The amount of data logged can be determined with the +level+ attribute:
 [[exam-Component_Reference-a4jlog-a4jlog_example]]
 
 .+<a4j:log>+ example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:log level="ALL" mode="inline" />
 
 ----
+
+image::images/figu-Component_Reference-a4jlog-a4jlog_example.png[]
+
+The log readout displays all messages.
 
 ====
 
@@ -1759,7 +1891,9 @@ If the +stopText+ attribute is not defined, and no facet exists for the stopped 
 [[exam-Component_Reference-a4jstatus-Basic_a4jstatus_usage]]
 
 .Basic +<a4j:status>+ usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <a4j:status startText="In progress..." stopText="Complete" />
@@ -1783,7 +1917,9 @@ However, if identified with the +name+ attribute, the +<a4j:status>+ component c
 [[exam-Component_Reference-a4jstatus-Updating_a_referenced_a4jstatus_component]]
 
 .Updating a referenced +<a4j:status>+ component
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:panel>
@@ -1822,9 +1958,9 @@ However, if identified with the +name+ attribute, the +<a4j:status>+ component c
 
 The +<a4j:status>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+start()+:: Switches status to the +start+ state.
-+stop()+:: Switches status to the +stop+ state.
-+error()+:: Switches status to the +error+ state.
+`start()`:: Switches status to the +start+ state.
+`stop()`:: Switches status to the +stop+ state.
+`error()`:: Switches status to the +error+ state.
 [[sect-Component_Reference-a4jstatus-Reference_data]]
 
 ==== Reference data
@@ -1856,7 +1992,9 @@ The auto-complete box is a standard JSF +UIInput+ control with added validation.
 [[figu-Component_Reference-richautocomplete-richautocomplete]]
 
 .+<rich:autocomplete>+
-image::
+image::images/figu-Component_Reference-richautocomplete-richautocomplete.png[]
+
+
 [[sect-Component_Reference-richautocomplete-Basic_usage]]
 
 ==== Basic usage
@@ -1876,7 +2014,25 @@ The prefix is normally ignored in +client+ and +lazyClient+ modes. In these mode
 [[exam-Component_Reference-richautocomplete-Defining_suggestion_values]]
 
 .Defining suggestion values
-========
+====
+
+Using the +autocompleteMethod+  attribute:: 
+[source, XML]
+----
+<rich:autocomplete value="#{bean.state}" autocompleteMethod="#{bean.autocomplete}" />
+
+----
+
+The +<rich:autocomplete>+ component uses the bean.autocompletemethod to provide suggestions, based on the entered prefix.
+Using the +autocompleteList+  attribute:: 
+[source, XML]
+----
+<rich:autocomplete value="#{bean.state}" autocompleteList="#{bean.suggestions}" />
+
+----
+
+The +<rich:autocomplete>+ component retrieve the suggestion list from bean.suggestions.
+====
 
 [[sect-Component_Reference-richautocomplete-Submission_modes]]
 
@@ -1910,18 +2066,22 @@ When declaring tokens, avoid using any characters that are present in the list o
 
 ==== Customizing the filter in +client+ and +lazyClient+ modes
 
-The +<rich:autocomplete>+ component uses the JavaScript +startsWith()+ method to create the list of suggestions. The filtering is performed on the client side. Alternatively, use the +clientFilterFunction+ attribute to specify a custom filtering function. The custom function must accept two parameters: the +subString+ parameter is the filtering value as typed into the text box by the user, and the +value+ parameter is an item in the list of suggestions against which the +subString+ must be checked. Each item is iterated through and passed to the function as the +value+ parameter. The custom function must return a boolean value indicating whether the passed item meets the conditions of the filter, and the suggestion list is constructed from successful items.
+The +<rich:autocomplete>+ component uses the JavaScript `startsWith()` method to create the list of suggestions. The filtering is performed on the client side. Alternatively, use the +clientFilterFunction+ attribute to specify a custom filtering function. The custom function must accept two parameters: the +subString+ parameter is the filtering value as typed into the text box by the user, and the +value+ parameter is an item in the list of suggestions against which the +subString+ must be checked. Each item is iterated through and passed to the function as the +value+ parameter. The custom function must return a boolean value indicating whether the passed item meets the conditions of the filter, and the suggestion list is constructed from successful items.
 
 [[exam-Component_Reference-richautocomplete-Customizing_the_filter]]
 
 .Customizing the filter
-====[source, XML]
+====
+
+This example demonstrates how to use a custom filter with the +clientFilterFunction+ attribute. The custom filter determines if the sub-string is contained anywhere in the suggestion item, instead of just at the start.
+
+
 [source, XML]
 ----
 <script>
    function customFilter(subString, value){
       if(subString.length>=1) {
-         if(value.indexOf(subString)!=-1)
+         if(value.indexOf(subString)!=-1) 
             return true;
       }else return false;
    };
@@ -1941,10 +2101,10 @@ The +<rich:autocomplete>+ component uses the JavaScript +startsWith()+ method to
 
 The +<rich:autocomplete>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getValue()+:: Get the current value of the text field.
-+setValue(newValue)+:: Set the value of the text field to the +newValue+ string passed as a parameter.
-+showPopup()+:: Show the pop-up list of completion values.
-+hidePopup()+:: Hide the pop-up list.
+`getValue()`:: Get the current value of the text field.
+`setValue(newValue)`:: Set the value of the text field to the +newValue+ string passed as a parameter.
+`showPopup()`:: Show the pop-up list of completion values.
+`hidePopup()`:: Hide the pop-up list.
 [[sect-Component_Reference-richautocomplete-Reference_data]]
 
 ==== Reference data
@@ -2008,7 +2168,9 @@ The +<rich:calendar>+ component allows the user to enter a date and time through
 [[figu-Component_Reference-richcalendar-richcalendar]]
 
 .+<rich:calendar>+
-image::
+image::images/figu-Component_Reference-richcalendar-richcalendar.png[]
+
+
 [[sect-Component_Reference-richcalendar-Basic_usage]]
 
 ==== Basic usage
@@ -2018,7 +2180,9 @@ Basic usage of the +<rich:calendar>+ component requires only the +value+ attribu
 [[exam-Component_Reference-richcalendar-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:calendar value="#{bean.dateTest}" />
@@ -2100,7 +2264,9 @@ Instead of using a data model, the +<rich:calendar>+ component can be customized
 [[exam-Component_Reference-richcalendar-Client-side_customization]]
 
 .Client-side customization
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <style>
@@ -2120,7 +2286,7 @@ Instead of using a data model, the +<rich:calendar>+ component can be customized
          curDt = day.date.getDate();
       }
       if (curDt.getTime() - day.date.getTime() &lt; 0) return true;
-      else return false;
+      else return false;  
    }
    function disabledClassesProv(day){
       if (curDt.getTime() - day.date.getTime() &gt;= 0) return 'rf-ca-boundary-dates';
@@ -2130,8 +2296,8 @@ Instead of using a data model, the +<rich:calendar>+ component can be customized
       return res;
    }
 </script>
-<rich:calendar dayDisableFunction="disablementFunction"
-               dayClassFunction="disabledClassesProv"
+<rich:calendar dayDisableFunction="disablementFunction" 
+               dayClassFunction="disabledClassesProv" 
                boundaryDatesMode="scroll" />
 
 ----
@@ -2144,21 +2310,21 @@ Instead of using a data model, the +<rich:calendar>+ component can be customized
 
 The +<rich:calendar>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+showPopup()+:: Expand the pop-up calendar element.
-+hidePopup()+:: Collapse the pop-up calendar element.
-+switchPopup()+:: Invert the state of the pop-up calendar element.
-+getValue()+:: Return the selected date value of the calendar.
-+getValueAsString()+:: Return the selected date value of the calendar as a formatted string.
-+setValue(newValue)+:: Set the selected date value to the +newValue+ date passed as a parameter. If the new date is not in the currently displayed month, a request is performed to display the correct month.
-+resetValue()+:: Clear the selected date value.
-+today()+:: Select today's date.
-+getCurrentMonth()+:: Return the number of the month currently being displayed.
-+getCurrentYear()+:: Return the number of the year currently being displayed.
-+showSelectedDate()+:: Show the calendar month that contains the currently selected date.
-+showDateEditor()+:: Show the date editor pop-up.
-+hideDateEditor()+:: Hide the date editor pop-up.
-+showTimeEditor()+:: Show the time editor pop-up.
-+hideTimeEditor()+:: Hide the time editor pop-up.
+`showPopup()`:: Expand the pop-up calendar element.
+`hidePopup()`:: Collapse the pop-up calendar element.
+`switchPopup()`:: Invert the state of the pop-up calendar element.
+`getValue()`:: Return the selected date value of the calendar.
+`getValueAsString()`:: Return the selected date value of the calendar as a formatted string.
+`setValue(newValue)`:: Set the selected date value to the +newValue+ date passed as a parameter. If the new date is not in the currently displayed month, a request is performed to display the correct month.
+`resetValue()`:: Clear the selected date value.
+`today()`:: Select today's date.
+`getCurrentMonth()`:: Return the number of the month currently being displayed.
+`getCurrentYear()`:: Return the number of the year currently being displayed.
+`showSelectedDate()`:: Show the calendar month that contains the currently selected date.
+`showDateEditor()`:: Show the date editor pop-up.
+`hideDateEditor()`:: Hide the date editor pop-up.
+`showTimeEditor()`:: Show the time editor pop-up.
+`hideTimeEditor()`:: Hide the time editor pop-up.
 [[sect-Component_Reference-richcalendar-Reference_data]]
 
 ==== Reference data
@@ -2340,7 +2506,9 @@ The +<rich:editor>+ component is used for creating a WYSIWYG editor on a page.
 [[figu-Component_Reference-richeditor-richeditor]]
 
 .+<rich:editor>+
-image::
+image::images/figu-Component_Reference-richeditor-richeditor.png[width="400"]
+
+
 +<rich:editor>+ component is based on the CKEditor implementation.
 
 When rendering a +<rich:editor>+, a textarea is rendered to the page and once the page is completely loaded (ready state), the textarea is enhanced using a CKEditor script and replaced with a full-featured WYSIWYG editor.
@@ -2352,13 +2520,17 @@ When rendering a +<rich:editor>+, a textarea is rendered to the page and once th
 Basic usage requires the +value+ attribute to point to the expression for the current value of the component.
 
 .Basic usage of +<rich:editor>+
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:editor value="#{backingBean.editedValue}" />
 
 <h:outputText escape="false" value="#{backingBean.editedValue}" />
 ----
+
+Note that the editor produces HTML markup and to be able to render it's output, the markup needs to be unescaped (as with +<h:outputText>+ component in example above).
 
 ====
 
@@ -2372,14 +2544,14 @@ The +tabindex+ attribute specifies the position of the current element in the ta
 ====
 
                 The +ResourceServlet+  has to be registered for the +url-pattern++/org.richfaces.resources/\*+  in order to serve the editor resources (JavaScript, CSS, images) correctly. Check the _RichFaces Developer's Guide_  for further details.
-
+            
 ====
 
 [NOTE]
 ====
 
                 The +<rich:editor>+  requires the +<h:body>+  component to be present in the view and must be an ancestor of the editor in order for the resource dependencies to render correctly.
-
+            
 ====
 
 [[sect-Component_Reference-richeditor-Styling]]
@@ -2402,12 +2574,32 @@ The +<rich:editor>+ is skinnable using the +skin+ attribute and either of the tw
 By default, +<rich:editor>+ has a skin called +richfaces+ that is optimized to match rest of the component suite look & feel and changes to match the active RichFaces skin (refer to _RichFaces Developer's Guide_ for details about _Skinning and theming_).
 
 .The skin +richfaces+ of +<rich:editor>+
-========
+====
+
+[[figu-Component_Reference-richeditor-richfaces_skin]]
+
+.
+image::images/figu-Component_Reference-richeditor-richfaces_skin.png[width="400"]
+
+
+A +<rich:editor>+ with the default +richfaces+ editor skin rendered against several RichFaces Skin options.
+
+====
 
 Alternatively, you can use any other CKeditor skin, either from the standard distribution, a downloaded skin, or a custom skin. In the distribution, there are three skins bundled: +kama, v2, office2003+.
 
 .Examples of +<rich:editor>+ skins in CKEditor distribution
-========
+====
+
+[[figu-Component_Reference-richeditor-distribution_skins]]
+
+.
+image::images/figu-Component_Reference-richeditor-distribution_skins.png[width="400"]
+
+
+A CKEditor distribution skins +kama+, +v2+ and +office2003+.
+
+====
 
 [[sect-Component_Reference-richeditor-Advanced_configuration]]
 
@@ -2419,7 +2611,7 @@ Use the +config+ attribute to define any of these advanced configuration options
 
 There are two ways to define the configuration: the +config+ attribute or a facet named +config+. The facet takes precedence over attribute when both are defined.
 
-[source, XML]
+
 [source, XML]
 ----
 <rich:editor config="startupFocus: #{userPreferences.startupFocus}" />
@@ -2437,7 +2629,7 @@ In the above samples, the +<rich:editor>+ is configured to take focus after load
 ====
 
                 For further configuration options, refer to link:$$http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Setting_Configurations$$[CKEditor 3 Developer Guide]  and link:$$http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html$$[CKEditor 3 configuration reference].
-
+            
 ====
 
 [[sect-Component_Reference-richeditor-Toolbar_customization]]
@@ -2448,7 +2640,7 @@ The +<rich:editor>+ supports a +toolbar+ attribute, which is able to change the 
 
 It is also possible to define a custom toolbar using the CKEditor toolbar configuration in a +config+ facet:
 
-[source, XML]
+
 [source, XML]
 ----
 <rich:editor toolbar="CustomToolbar">
@@ -2458,7 +2650,7 @@ It is also possible to define a custom toolbar using the CKEditor toolbar config
         { name: 'document', items : [ 'NewPage','Preview' ] },
         { name: 'clipboard', items : [ 'Cut','Copy','Paste','-','Undo','Redo' ] },
         { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','Scayt' ] },
-        { name: 'insert', items : [ 'Image', 'Flash', 'Table', 'HorizontalRule',
+        { name: 'insert', items : [ 'Image', 'Flash', 'Table', 'HorizontalRule', 
                  'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
                 '/',
         { name: 'styles', items : [ 'Styles','Format' ] },
@@ -2488,7 +2680,7 @@ The +lang+ attribute influences following settings:
 
 However the interface first localized using the browser configuration (usually determined by client system settings). To force the editor to use a specific localization for the interface, you use the advanced CKEditor configuration option +language+, as in following sample:
 
-[source, XML]
+
 [source, XML]
 ----
 <rich:editor lang="fr" config="language: 'fr'" />
@@ -2511,7 +2703,7 @@ The +<rich:editor>+ component produces set of events for handling component spec
 
 Events can be handled either by registering a JavaScript event handler or by attaching JSF behavior:
 
-[source, XML]
+
 [source, XML]
 ----
 <rich:editor value="#{backingBean.editorValue}">
@@ -2534,17 +2726,17 @@ The example above shows the editor and its output, which is updated every second
 
 The +<rich:editor>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getValue()+:: Get the current value of the input control.
-+setValue(newValue)+:: Set the value of the input control to the +newValue+ string passed as a parameter.
-+getEditor()+:: Returns the CKEditor object instance associated to given +<rich:editor>+ component.
-+getInput()+:: Returns the associated textarea.
-+focus()+:: Gives focus to this component
-+blur()+:: Removes focus from this component
-+isFocused()+:: Returns +true+ if this component is focused
-+isDirty()+:: Returns +true+ if editor is focused and it was edited from last focus event (reset by blur event, by using +setValue(newValue)+ call and when component is re-rendered)
-+isValueChanged()+:: Returns +true+ if the control's value has been changed from the default (reset by +setValue(newValue)+ call and when component is re-rendered)
-+isReadonly()+:: Returns +true+ if editor content is editable.
-+setReadonly(readonly)+:: When +readonly+ is +true+, editor will be switched to editable state. Otherwise, it will be switched to readonly state.
+`getValue()`:: Get the current value of the input control.
+`setValue(newValue)`:: Set the value of the input control to the +newValue+ string passed as a parameter.
+`getEditor()`:: Returns the CKEditor object instance associated to given +<rich:editor>+ component.
+`getInput()`:: Returns the associated textarea.
+`focus()`:: Gives focus to this component
+`blur()`:: Removes focus from this component
+`isFocused()`:: Returns +true+ if this component is focused
+`isDirty()`:: Returns +true+ if editor is focused and it was edited from last focus event (reset by blur event, by using +setValue(newValue)+ call and when component is re-rendered)
+`isValueChanged()`:: Returns +true+ if the control's value has been changed from the default (reset by +setValue(newValue)+ call and when component is re-rendered)
+`isReadonly()`:: Returns +true+ if editor content is editable.
+`setReadonly(readonly)`:: When +readonly+ is +true+, editor will be switched to editable state. Otherwise, it will be switched to readonly state.
 [[sect-Component_Reference-richeditor-Reference_data]]
 
 ==== Reference data
@@ -2565,34 +2757,34 @@ The +<rich:editor>+ component can be controlled through the JavaScript API. The 
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|+.cke_skin_richfaces+::
+|+.cke_skin_richfaces+:: 
 |+panelBorderColor+|border-color
-|+.cke_skin_richfaces .cke_wrapper+::
+|+.cke_skin_richfaces .cke_wrapper+:: 
 |+editorMainBackgroundColor+|background-color
-|+.cke_skin_richfaces .cke_dialog_body+::
+|+.cke_skin_richfaces .cke_dialog_body+:: 
 |+panelBorderColor+|border-color
 |+generalBackgroundColor+|background
-|+.cke_skin_richfaces .cke_dialog_title+::
+|+.cke_skin_richfaces .cke_dialog_title+:: 
 |+headerBackgroundColor+|repeat-x
 |+headerWeightFont+|font-weight
 |+headerTextColor+|color
 |+headerFamilyFont+|font-family
 |+headerSizeFont+|font-size
-|+.cke_skin_richfaces .cke_path a+, +.cke_skin_richfaces .cke_path .cke_empty+::
+|+.cke_skin_richfaces .cke_path a+, +.cke_skin_richfaces .cke_path .cke_empty+:: 
 |+editorMainTextColor+|color
-|+.cke_skin_richfaces .cke_button a.cke_on+::
+|+.cke_skin_richfaces .cke_button a.cke_on+:: 
 |+additionalBackgroundColor+|background-color
 |+panelBorderColor+|border-color
-|+.cke_skin_richfaces .cke_button a:hover+, +.cke_skin_richfaces .cke_button a:focus+, +.cke_skin_richfaces .cke_button a:active+::
+|+.cke_skin_richfaces .cke_button a:hover+, +.cke_skin_richfaces .cke_button a:focus+, +.cke_skin_richfaces .cke_button a:active+:: 
 |+panelBorderColor+|border-color
 |+tabBackgroundColor+|background-color
-|+.cke_skin_richfaces .cke_rcombo a+:: +.cke_skin_richfaces .cke_rcombo a:active+:: +.cke_skin_richfaces .cke_rcombo a:hover+::
+|+.cke_skin_richfaces .cke_rcombo a+:: +.cke_skin_richfaces .cke_rcombo a:active+:: +.cke_skin_richfaces .cke_rcombo a:hover+:: 
 |+panelBorderColor+|border-color
 |+generalSizeFont+|font-size
 |+generalFamilyFont+|font-family
 |+controlTextColor+|color
 |+controlBackgroundColor+|background-color
-|+.cke_skin_richfaces .cke_rcombo .cke_openbutton+::
+|+.cke_skin_richfaces .cke_rcombo .cke_openbutton+:: 
 |+headerBackgroundColor+|background-color
 |+panelBorderColor+|border-left-color
 |===============
@@ -2612,7 +2804,9 @@ Basic usage requires the +fileUploadListener+ attribute. Use the attribute to re
 [[exam-Component_Reference-richfileUpload-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:fileUpload fileUploadListener="#{bean.listener}" />
@@ -2769,7 +2963,9 @@ Once the user has entered text, the label is stored in the model specified by th
 [[exam-Component_Reference-richinplaceInput-Default_label_and_value]]
 
 .Default label and value
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:inplaceInput value="#{bean.value}" defaultLabel="click to edit"/>
@@ -2795,13 +2991,13 @@ Pressing the Esckey cancels editing in all cases.
 
 The +<rich:inplaceInput>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getValue()+:: Get the current value of the input control.
-+setValue(newValue)+:: Set the value of the input control to the +newValue+ string passed as a parameter.
-+isEditState()+:: Returns +true+ if the control is currently in the _edit_ state, or +false+ if the control is currently in the _view_ state.
-+isValueChanged()+:: Returns +true+ if the control's value has been changed from the default.
-+save()+:: Saves the current item as the control's value.
-+cancel()+:: Cancel editing the value.
-+getInput()+:: Return the DOM element for the input.
+`getValue()`:: Get the current value of the input control.
+`setValue(newValue)`:: Set the value of the input control to the +newValue+ string passed as a parameter.
+`isEditState()`:: Returns +true+ if the control is currently in the _edit_ state, or +false+ if the control is currently in the _view_ state.
+`isValueChanged()`:: Returns +true+ if the control's value has been changed from the default.
+`save()`:: Saves the current item as the control's value.
+`cancel()`:: Cancel editing the value.
+`getInput()`:: Return the DOM element for the input.
 [[sect-Component_Reference-richinplaceInput-Reference_data]]
 
 ==== Reference data
@@ -2873,7 +3069,9 @@ The component has three functional states:
 [[figu-Component_Reference-richinplaceSelect-richinplaceSelect]]
 
 .+<rich:inplaceSelect>+
-image::
+image::images/figu-Component_Reference-richinplaceSelect-richinplaceSelect.png[]
+
+
 [[sect-Component_Reference-richinplaceSelect-Basic_usage]]
 
 ==== Basic usage
@@ -2883,7 +3081,9 @@ Basic usage requires the +value+ attribute to point to the expression for the cu
 [[exam-Component_Reference-richinplaceSelect-Defining_list_items_for_richinplaceSelect]]
 
 .Defining list items for +<rich:inplaceSelect>+
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:inplaceSelect value="#{bean.inputValue}" defaultLabel="click to edit" >
@@ -2921,17 +3121,17 @@ Pressing the Esckey cancels editing in all cases.
 
 The +<rich:inplaceSelect>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getValue()+:: Get the current value of the select control.
-+setValue(newValue)+:: Set the value of the select control to the +newValue+ string passed as a parameter.
-+isEditState()+:: Returns +true+ if the control is currently in the _edit_ state, or +false+ if the control is currently in the _view_ state.
-+isValueChanged()+:: Returns +true+ if the control's value has been changed from the default.
-+save()+:: Saves the current item as the control's value.
-+cancel()+:: Cancel editing the value.
-+getInput()+:: Return the input entered into the control by the user.
-+getLabel()+:: Return the default label of the control.
-+setLabel(newLabel)+:: Set the default label of the control to the +newLabel+ string passed as a parameter.
-+showPopup()+:: Show the pop-up list of possible values.
-+hidePopup()+:: Hide the pop-up list.
+`getValue()`:: Get the current value of the select control.
+`setValue(newValue)`:: Set the value of the select control to the +newValue+ string passed as a parameter.
+`isEditState()`:: Returns +true+ if the control is currently in the _edit_ state, or +false+ if the control is currently in the _view_ state.
+`isValueChanged()`:: Returns +true+ if the control's value has been changed from the default.
+`save()`:: Saves the current item as the control's value.
+`cancel()`:: Cancel editing the value.
+`getInput()`:: Return the input entered into the control by the user.
+`getLabel()`:: Return the default label of the control.
+`setLabel(newLabel)`:: Set the default label of the control to the +newLabel+ string passed as a parameter.
+`showPopup()`:: Show the pop-up list of possible values.
+`hidePopup()`:: Hide the pop-up list.
 [[sect-Component_Reference-richinplaceSelect-Reference_data]]
 
 ==== Reference data
@@ -3010,7 +3210,9 @@ The +<rich:inputNumberSlider>+ component provides a slider for changing numerica
 [[figu-Component_Reference-richinputNumberSlider-richinputNumberSlider]]
 
 .+<rich:inputNumberSlider>+
-image::
+image::images/figu-Component_Reference-richinputNumberSlider-richinputNumberSlider.png[]
+
+
 [[sect-Component_Reference-richinputNumberSlider-Basic_usage]]
 
 ==== Basic usage
@@ -3035,10 +3237,10 @@ Arrow controls can be added to either side of the slider to adjust the value inc
 
 The +<rich:inputNumberSlider>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getValue()+:: Get the current value of the slider control.
-+setValue(newValue)+:: Set the value of the slider control to the +newValue+ integer passed as a parameter.
-+increase()+:: Increase the value of the slider control by the gradient step amount.
-+decrease()+:: Decrease the value of the slider control by the gradient step amount.
+`getValue()`:: Get the current value of the slider control.
+`setValue(newValue)`:: Set the value of the slider control to the +newValue+ integer passed as a parameter.
+`increase()`:: Increase the value of the slider control by the gradient step amount.
+`decrease()`:: Decrease the value of the slider control by the gradient step amount.
 [[sect-Component_Reference-richinputNumberSlider-Reference_data]]
 
 ==== Reference data
@@ -3113,7 +3315,9 @@ The +<rich:inputNumberSpinner>+ component is a single-line input field with butt
 [[figu-Component_Reference-richinputNumberSpinner-richinputNumberSpinner]]
 
 .+<rich:inputNumberSpinner>+
-image::
+image::images/figu-Component_Reference-richinputNumberSpinner-richinputNumberSpinner.png[]
+
+
 [[sect-Component_Reference-richinputNumberSpinner-Basic_usage]]
 
 ==== Basic usage
@@ -3136,10 +3340,10 @@ The ability to change the value by typing into the text field can be disabled by
 
 The +<rich:inputNumberSpinner>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getValue()+:: Get the current value of the spinner control.
-+setValue(newValue)+:: Set the value of the spinner control to the +newValue+ integer passed as a parameter.
-+increase()+:: Increase the value of the spinner control by the gradient step amount.
-+decrease()+:: Decrease the value of the spinner control by the gradient step amount.
+`getValue()`:: Get the current value of the spinner control.
+`setValue(newValue)`:: Set the value of the spinner control to the +newValue+ integer passed as a parameter.
+`increase()`:: Increase the value of the spinner control by the gradient step amount.
+`decrease()`:: Decrease the value of the spinner control by the gradient step amount.
 [[sect-Component_Reference-richinputNumberSpinner-Reference_data]]
 
 ==== Reference data
@@ -3185,7 +3389,9 @@ The +<rich:select>+ component provides a drop-down list box for selecting a sing
 [[figu-Component_Reference-richselect-richselect]]
 
 .+<rich:select>+
-image::
+image::images/figu-Component_Reference-richselect-richselect.png[]
+
+
 [[sect-Component_Reference-richselect-Basic_usage]]
 
 ==== Basic usage
@@ -3195,7 +3401,31 @@ Simple usage of the +<rich:select>+ component requires the +value+ attribute to 
 [[exam-Component_Reference-richselect-Selection_items]]
 
 .Selection items
-========
+====
+
+Using multiple +<f:selectItem>+  tags:: 
+[source, XML]
+----
+<rich:select>
+   <f:selectItem itemValue="0" itemLabel="Option 1" />
+   <f:selectItem itemValue="1" itemLabel="Option 2" />
+   <f:selectItem itemValue="2" itemLabel="Option 3" />
+   <f:selectItem itemValue="3" itemLabel="Option 4" />
+   <f:selectItem itemValue="4" itemLabel="Option 5" />
+</rich:select>
+
+----
+
+Using a single +<f:selectItems>+  tag:: 
+[source, XML]
+----
+<rich:select>
+   <f:selectItems value="#{bean.options}" />
+</rich:select>
+
+----
+
+====
 
 The arrow keys on a keyboard can be used to highlight different items in the list. If the control loses focus or the Enterkey is pressed, the highlighted option is chosen as the value and the list is closed. Pressing the Esckey will close the list but not change the value.
 
@@ -3223,11 +3453,11 @@ Server-side processing occurs in the same manner as for an +<h:selectOneMenu>+ c
 
 The +<rich:select>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getValue()+:: Get the current value of the text field.
-+setValue(newValue)+:: Set the value of the text field to the +newValue+ string passed as a parameter.
-+getLabel()+:: Return the default label of the control.
-+showPopup()+:: Show the pop-up list of completion values.
-+hidePopup()+:: Hide the pop-up list.
+`getValue()`:: Get the current value of the text field.
+`setValue(newValue)`:: Set the value of the text field to the +newValue+ string passed as a parameter.
+`getLabel()`:: Return the default label of the control.
+`showPopup()`:: Show the pop-up list of completion values.
+`hidePopup()`:: Hide the pop-up list.
 [[sect-Component_Reference-richselect-Reference_data]]
 
 ==== Reference data
@@ -3288,7 +3518,9 @@ The +<rich:orderingList>+ is a component for ordering items in a list (client-si
 [[figu-Component_Reference-richorderingList-richorderingList]]
 
 .+<rich:select>+
-image::
+image::images/figu-Component_Reference-richorderingList-richorderingList.png[]
+
+
 [[sect-Component_Reference-richorderingList-Basic_usage]]
 
 ==== Basic usage
@@ -3298,7 +3530,17 @@ To use the +<rich:orderingList>+ bind the +value+ attribute to the list to be or
 [[exam-Component_Reference-richorderingList-ItemLabel_use]]
 
 .ItemLabel/ItemValue use
-========
+====
+
+Using the +itemLabel+  and +itemValue+  attributes:: 
+[source, XML]
+----
+<rich:orderingList value="#{listSelectBean.capitals}" var="capital" itemValue="#{capital}" itemLabel="#{capital.name}">
+    <f:converter converterId="CapitalsConverter" />
+</rich:orderingList>
+----
+
+====
 
 The arrow keys on a keyboard can be used to highlight different items in the list. Pressing the ctrlmodifier with the arrow keys will move the selected item up or down within the list.
 
@@ -3311,7 +3553,29 @@ In addition to the above simple itemLabel display, the +<rich:orderingList>+ sup
 [[exam-Component_Reference-richorderingList-richcolumn]]
 
 .Nested +<rich:column>+ tags
-========
+====
+
+Using +<rich:column>+  tags nested within the +<rich:orderingList>+:: 
+[source, XML]
+----
+<rich:orderingList value="#{listSelectBean.capitals}" var="capital"  listWidth="300px">
+    <f:converter converterId="CapitalsConverter" />
+    <rich:column>
+        <f:facet name="header">Flag</f:facet>
+        <h:graphicImage value="#{capital.stateFlag}" alt="flag"  width="33"/>
+    </rich:column>
+    <rich:column>
+        <f:facet name="header">Name</f:facet>
+        #{capital.name}
+    </rich:column>
+    <rich:column>
+        <f:facet name="header">State</f:facet>
+        #{capital.state}
+    </rich:column>
+</rich:orderingList>
+----
+
+====
 
 When using +<rich:column>+ tags to layout the +<rich:orderingList>+ items, the +itemLabel+ attribute is irrelevant, and may be left out.
 
@@ -3321,12 +3585,12 @@ When using +<rich:column>+ tags to layout the +<rich:orderingList>+ items, the +
 
 The +<rich:orderingList>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getList()+:: Returns the javascript list object backing the +<rich:orderingList>+. This list can be used to select/unselect item(s).
-+up()+:: Move the currently selected item(s) up one step.
-+down()+:: Move the currently selected item(s) down one step.
-+upTop()+:: Move the currently selected item(s) to the top of the list.
-+downBottom()+:: Move the currently selected item(s) to the bottom of the list.
-+toggleButtons()+:: Activate/de-activate the orderingList buttons based on the current component item state.
+`getList()`:: Returns the javascript list object backing the +<rich:orderingList>+. This list can be used to select/unselect item(s).
+`up()`:: Move the currently selected item(s) up one step.
+`down()`:: Move the currently selected item(s) down one step.
+`upTop()`:: Move the currently selected item(s) to the top of the list.
+`downBottom()`:: Move the currently selected item(s) to the bottom of the list.
+`toggleButtons()`:: Activate/de-activate the orderingList buttons based on the current component item state.
 [[sect-Component_Reference-richorderingList-Reference_data]]
 
 ==== Reference data
@@ -3390,7 +3654,9 @@ The +<rich:pickList>+ is a component for selecting items from a list. Additional
 [[figu-Component_Reference-richpickList-richpickList]]
 
 .+<rich:select>+
-image::
+image::images/figu-Component_Reference-richpickList-richpickList.png[]
+
+
 [[sect-Component_Reference-richpickList-Basic_usage]]
 
 ==== Basic usage
@@ -3400,7 +3666,21 @@ To use the +<rich:pickList>+ bind the +value+ attribute to the target list, wher
 [[exam-Component_Reference-richpickList-ItemLabel_use]]
 
 .Simple pickList use
-========
+====
+
+Using the default +SelectItem+  itemLabel to generate the pickList source and target items.:: 
+[source, XML]
+----
+<rich:pickList value="#{listSelectBean.selectedCapitals}"
+               sourceCaption="Available cities" targetCaption="Selected cities"
+               listWidth="170px" listHeight="100px"
+               orderable="true">
+    <f:selectItems value="#{listSelectBean.capitals}" var="capital" itemValue="#{capital}" itemLabel="#{capital.name}" />
+    <f:converter converterId="CapitalsConverter" />
+</rich:pickList>
+----
+
+====
 
 The items in the target list can be ordered client-side by setting the +orderable+ attribute of the +<rich:pickList>+ tag to +true+. The arrow keys on a keyboard can then be used to highlight different items in the target list, and pressing the ctrlmodifier with the arrow keys will move the selected item up or down within the target list.
 
@@ -3413,7 +3693,30 @@ In addition to the above simple +SelectItem+ itemLabel display, the +<rich:pickL
 [[exam-Component_Reference-richpickList-richcolumn]]
 
 .Nested +<rich:column>+ tags
-========
+====
+
+Using +<rich:column>+  tags nested within the +<rich:pickList>+:: 
+[source, XML]
+----
+<rich:pickList value="#{listSelectBean.selectedCapitals}" var="capital" listHeight="200px">
+    <f:selectItems value="#{listSelectBean.capitals}" />
+    <f:converter converterId="CapitalsConverter" />
+    <rich:column>
+        <f:facet name="header">Flag</f:facet>
+        <h:graphicImage value="#{capital.stateFlag}" alt="flag" width="33"/>
+    </rich:column>
+    <rich:column>
+        <f:facet name="header">Name</f:facet>
+        #{capital.name}
+    </rich:column>
+    <rich:column>
+        <f:facet name="header">State</f:facet>
+        #{capital.state}
+    </rich:column>
+</rich:pickList>
+----
+
+====
 
 [[sect-Component_Reference-richpickList-JavaScript_API]]
 
@@ -3421,13 +3724,13 @@ In addition to the above simple +SelectItem+ itemLabel display, the +<rich:pickL
 
 The +<rich:pickList>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getSourceList()+:: Returns the javascript list object backing the +<rich:pickList>+ source list. This list can be used to select/unselect item(s).
-+getTargetList()+:: Returns the javascript list object backing the +<rich:pickList>+ target list. This list can be used to select/unselect item(s).
-+add()+:: Add the currently selected items to the target list, removing them from the source list.
-+addAll()+:: Add all the source items to the target list, removing them from the source list.
-+remove()+:: Remove the currently selected items from the target list, adding them to the source list.
-+removeAll()+:: Remove all the source items from the target list, adding them to the source list.
-+toggleButtons()+:: Activate/de-activate the pickList buttons based on the current component item state.
+`getSourceList()`:: Returns the javascript list object backing the +<rich:pickList>+ source list. This list can be used to select/unselect item(s).
+`getTargetList()`:: Returns the javascript list object backing the +<rich:pickList>+ target list. This list can be used to select/unselect item(s).
+`add()`:: Add the currently selected items to the target list, removing them from the source list.
+`addAll()`:: Add all the source items to the target list, removing them from the source list.
+`remove()`:: Remove the currently selected items from the target list, adding them to the source list.
+`removeAll()`:: Remove all the source items from the target list, adding them to the source list.
+`toggleButtons()`:: Activate/de-activate the pickList buttons based on the current component item state.
 [[sect-Component_Reference-richpickList-Reference_data]]
 
 ==== Reference data
@@ -3495,7 +3798,9 @@ The +<rich:panel>+ component is a bordered panel with an optional header.
 [[figu-Component_Reference-richpanel-richpanel]]
 
 .+<rich:panel>+
-image::
+image::images/figu-Component_Reference-richpanel-richpanel.png[]
+
+
 [[sect-Component_Reference-richpanel-Basic_usage]]
 
 ==== Basic usage
@@ -3511,7 +3816,9 @@ To add a header to the panel, use the +header+ attribute to specify the text to 
 [[exam-Component_Reference-richpanel-Adding_a_header]]
 
 .Adding a header
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:panel header="This is the panel header">
@@ -3520,7 +3827,7 @@ To add a header to the panel, use the +header+ attribute to specify the text to 
 
 ----
 
-[source, XML]
+
 [source, XML]
 ----
 <rich:panel>
@@ -3531,6 +3838,19 @@ To add a header to the panel, use the +header+ attribute to specify the text to 
 </rich:panel>
 
 ----
+
+Both the examples render an identical panel.
+
+[quote]
+____
+[[figu-Component_Reference-richpanel-Adding_a_header]]
+
+.Adding a header
+image::images/figu-Component_Reference-richpanel-Adding_a_header.png[]
+
+
+
+____
 
 ====
 
@@ -3578,7 +3898,9 @@ The +<rich:accordion>+ is a series of panels stacked on top of each other, each 
 [[figu-Component_Reference-richaccordion-richaccordion]]
 
 .A +<rich:accordion>+ component containing three +<rich:accordionItem>+ components
-image::
+image::images/figu-Component_Reference-richaccordion-richaccordion.png[]
+
+
 [[sect-Component_Reference-richaccordion-Basic_usage]]
 
 ==== Basic usage
@@ -3627,10 +3949,10 @@ The +<rich:accordion>+ component uses the server-side events common to all switc
 
 The +<rich:accordion>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions, which are common to all switchable panels:
 
-+getItems()+:: Return an array of the items contained in the accordion control.
-+getItemsNames()+:: Return an array of the names of the items contained in the accordion control.
-+switchToItem(itemName)+:: Switch to and display the item identified by the +itemName+ string passed as a parameter.
-+firstItem()+:: +prevItem()+:: +nextItem()+:: +lastItem()+:: Get the name of the first item, the previous item, the next item, or the last item.
+`getItems()`:: Return an array of the items contained in the accordion control.
+`getItemsNames()`:: Return an array of the names of the items contained in the accordion control.
+`switchToItem(itemName)`:: Switch to and display the item identified by the +itemName+ string passed as a parameter.
+`firstItem()`:: `prevItem()`:: `nextItem()`:: `lastItem()`:: Get the name of the first item, the previous item, the next item, or the last item.
 [[sect-Component_Reference-richaccordion-Reference_data]]
 
 ==== Reference data
@@ -3728,7 +4050,9 @@ The +<rich:collapsiblePanel>+ component is a collapsible panel that shows or hid
 [[figu-Component_Reference-richcollapsiblePanel-richcollapsiblePanel]]
 
 .+<rich:collapsiblePanel>+
-image::
+image::images/figu-Component_Reference-richcollapsiblePanel-richcollapsiblePanel.png[]
+
+
 [[sect-Component_Reference-richcollapsiblePanel-Basic_usage]]
 
 ==== Basic usage
@@ -3765,7 +4089,7 @@ The +<rich:collapsiblePanel>+ component uses the following unique server-side ev
 
 The +<rich:collapsiblePanel>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+switchPanel()+:: Switch the state of the collapsible panel (expanded or collapsed).
+`switchPanel()`:: Switch the state of the collapsible panel (expanded or collapsed).
 [[sect-Component_Reference-richcollapsiblePanel-Reference_data]]
 
 ==== Reference data
@@ -3853,7 +4177,9 @@ For explicit referencing when using the functions, the component can be given an
 [[exam-Component_Reference-richpopupPanel-richpopupPanel_example]]
 
 .+<rich:popupPanel>+ example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:commandButton value="Show the panel">
@@ -3885,7 +4211,7 @@ By default, the +<rich:popupPanel>+ appears as a modal window that blocks intera
 
 ==== Size and positioning
 
-The pop-up panel can be both re-sized and re-positioned by the user. The minimum possible size for the panel can be set with the +minWith+ and +minHeight+ attributes. These abilities can be deactivated by setting +resizable+ or +movable+ to +false+ as necessary.
+The pop-up panel can be both re-sized and re-positioned by the user. The minimum possible size for the panel can be set with the +minWith+ and +minHeight+ attributes. These abilities can be deactivated by setting +resizable+ or +movable+ to +false+ as necessary. 
 
 //////////////////////////////////////
 
@@ -3912,7 +4238,9 @@ A panel header and associated controls can be added to the +<rich:popupPanel>+ c
 [[exam-Component_Reference-richpopupPanel-Header_and_controls]]
 
 .Header and controls
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:commandLink value="Show pop-up">
@@ -3933,6 +4261,17 @@ A panel header and associated controls can be added to the +<rich:popupPanel>+ c
 
 ----
 
+[quote]
+____
+[[figu-Component_Reference-richpopupPanel-Header_and_controls]]
+
+.Header and controls
+image::images/figu-Component_Reference-richpopupPanel-Header_and_controls.png[]
+
+
+
+____
+
 ====
 
 [[sect-Component_Reference-richpopupPanel-Contents_of_the_pop-up]]
@@ -3949,12 +4288,12 @@ Contents of the +<rich:popupPanel>+ component which are positioned relatively ma
 
 The +<rich:popupPanel>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getTop()+:: Return the top co-ordinate for the position of the pop-up panel.
-+getLeft()+:: Return the left co-ordinate for the position of the pop-up panel.
-+moveTo(top,left)+:: Move the pop-up panel to the co-ordinates specified with the +top+ and +left+ parameters.
-+resize(width,height)+:: Resize the pop-up panel to the size specified with the +width+ and +height+ parameters.
-+show()+:: Show the pop-up panel.
-+hide()+:: Hide the pop-up panel.
+`getTop()`:: Return the top co-ordinate for the position of the pop-up panel.
+`getLeft()`:: Return the left co-ordinate for the position of the pop-up panel.
+`moveTo(top,left)`:: Move the pop-up panel to the co-ordinates specified with the +top+ and +left+ parameters.
+`resize(width,height)`:: Resize the pop-up panel to the size specified with the +width+ and +height+ parameters.
+`show()`:: Show the pop-up panel.
+`hide()`:: Hide the pop-up panel.
 [[sect-Component_Reference-richpopupPanel-Reference_data]]
 
 ==== Reference data
@@ -4010,7 +4349,9 @@ The +<rich:tabPanel>+ component provides a set of tabbed panels for displaying o
 [[figu-Component_Reference-richtabPanel-richtabPanel_component]]
 
 .A +<rich:tabPanel>+ component containing three +<rich:tab>+ components
-image::
+image::images/figu-Component_Reference-richtabPanel-richtabPanel_component.png[]
+
+
 [NOTE]
 .Form elements required
 ====
@@ -4053,10 +4394,10 @@ The +<rich:tabPanel>+ component uses the server-side events common to all switch
 
 The +<rich:tabPanel>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions, which are common to all switchable panels:
 
-+getItems()+:: Return an array of the tabs contained in the tab panel.
-+getItemsNames()+:: Return an array of the names of the tabs contained in the tab panel.
-+switchToItem(itemName)+:: Switch to and display the item identified by the +itemName+ string passed as a parameter.
-+firstItem()+:: +prevItem()+:: +nextItem()+:: +lastItem()+:: Get the name of the first item, the previous item, the next item, or the last item.
+`getItems()`:: Return an array of the tabs contained in the tab panel.
+`getItemsNames()`:: Return an array of the names of the tabs contained in the tab panel.
+`switchToItem(itemName)`:: Switch to and display the item identified by the +itemName+ string passed as a parameter.
+`firstItem()`:: `prevItem()`:: `nextItem()`:: `lastItem()`:: Get the name of the first item, the previous item, the next item, or the last item.
 [[sect-Component_Reference-richtabPanel-Reference_data]]
 
 ==== Reference data
@@ -4201,7 +4542,9 @@ All +<rich:tabPanel>+ components should be wrapped in a form element when using 
 [[exam-Component_Reference-richtogglePanel-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:togglePanel id="layout" activeItem="item1">
@@ -4241,10 +4584,10 @@ The switching mode for performing submissions is determined by the +switchType+ 
 
 The +<rich:togglePanel>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions, which are common to all switchable panels:
 
-+getItems()+:: Return an array of the items contained in the toggle panel.
-+getItemsNames()+:: Return an array of the names of the items contained in the toggle panel.
-+switchToItem(itemName)+:: Switch to and display the item identified by the +itemName+ string passed as a parameter.
-+firstItem()+:: +prevItem()+:: +nextItem()+:: +lastItem()+:: Get the name of the first item, the previous item, the next item, or the last item.
+`getItems()`:: Return an array of the items contained in the toggle panel.
+`getItemsNames()`:: Return an array of the names of the items contained in the toggle panel.
+`switchToItem(itemName)`:: Switch to and display the item identified by the +itemName+ string passed as a parameter.
+`firstItem()`:: `prevItem()`:: `nextItem()`:: `lastItem()`:: Get the name of the first item, the previous item, the next item, or the last item.
 [[sect-Component_Reference-richtogglePanel-Reference_data]]
 
 ==== Reference data
@@ -4296,7 +4639,9 @@ The +<rich:toggleControl>+ component can switch the attached +<rich:togglePanel>
 [[exam-Component_Reference-richtoggleControl-Default_switching]]
 
 .Default switching
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:togglePanel id="layout">
@@ -4319,7 +4664,9 @@ The +<rich:toggleControl>+ component can switch the attached +<rich:togglePanel>
 [[exam-Component_Reference-richtoggleControl-Explicit_switching]]
 
 .Explicit switching
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:togglePanel activeItem="item1">
@@ -4345,7 +4692,9 @@ The +<rich:toggleControl>+ component can switch the attached +<rich:togglePanel>
 [[exam-Component_Reference-richtoggleControl-Keyword-based_switching]]
 
 .Keyword-based switching
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:togglePanel activeItem="item1">
@@ -4419,7 +4768,9 @@ The contents of the collection are determined using Expression Language ( EL). T
 [[exam-Component_Reference-a4jrepeat-a4jrepeat_example]]
 
 .+<a4j:repeat>+ example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <table>
@@ -4435,6 +4786,8 @@ The contents of the collection are determined using Expression Language ( EL). T
 
 ----
 
+Each row of a table contains two cells: one showing the item code, and the other showing the item price. The table is generated by iterating through items in the +repeatBeans.items+ data model.
+
 ====
 
 [[sect-Component_Reference-a4jrepeat-Limited_views_and_partial_updates]]
@@ -4449,7 +4802,9 @@ Action components inside the table:: Use +render=componentID+ where the componen
 [[exam-Component_Reference-a4jrepeat-Update_a_single_component]]
 
 .Update a single component
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:column>
@@ -4469,7 +4824,7 @@ Instead of a specific identifier, any of the references could be variables, as d
 Use variables to specify referencesrender=tableId:@rows(bean.rowToUpdate):cellId
 								The @rows function accepts a collection of row keys to be updated.
                                 Similarly the table@body shorthand can be used to specify that the entire table body should be updated.
-
+							
 ++++++++++++++++++++++++++++++++++++++
 
 [[sect-Component_Reference-a4jrepeat-Reference_data]]
@@ -4514,7 +4869,9 @@ The +keepSaved+ attribute defines whether this iteration component will reset sa
 [[exam-Component_Reference-richdataTable-richdataTable_example]]
 
 .+<rich:dataTable>+ example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5">
@@ -4549,8 +4906,19 @@ The +keepSaved+ attribute defines whether this iteration component will reset sa
     </f:facet>
 </rich:dataTable>
 
-
+	
 ----
+
+[quote]
+____
+[[figu-Component_Reference-richdataTable_example-richdataTable_example]]
+
+.+<rich:dataTable>+ example
+image::images/figu-Component_Reference-richdataTable_example.png[]
+
+
+
+____
 
 ====
 
@@ -4572,11 +4940,11 @@ Use the +rows+ attribute to specify the number of rows to show at a time. The ta
 
 The +<rich:dataTable>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+expandAllSubTables()+:: Expand any sub-tables contained in the data table.
-+collapseAllSubTables()+:: Collapse any sub-tables contained in the data table.
-+switchSubTable(subtableId)+:: Switch the expanded or collapsed state of any sub-tables contained in the data table.
-+filter(columnId, newFilterValue, \[isClearPreviousFilters\])+:: Filter the table based on the column specified with the +columnId+ parameter. Use the +newFilterValue+ parameter as the filter value. The optional +isClearPreviousFilters+ parameter is a boolean value which, if set to +true+, will clear any previous filters applied to the table.
-+sort(columnId, \[direction\], \[isClearPreviousSorting\])+:: Sort the table based on the column specified with the +columnId+ parameter. The option +direction+ parameter specifies whether to sort in ascending or descending order. The optional +isClearPreviousSorting+ parameter is a boolean value which, if set to +true+, will clear any previous sorting applied to the table.
+`expandAllSubTables()`:: Expand any sub-tables contained in the data table.
+`collapseAllSubTables()`:: Collapse any sub-tables contained in the data table.
+`switchSubTable(subtableId)`:: Switch the expanded or collapsed state of any sub-tables contained in the data table.
+`filter(columnId, newFilterValue, \[isClearPreviousFilters\])`:: Filter the table based on the column specified with the +columnId+ parameter. Use the +newFilterValue+ parameter as the filter value. The optional +isClearPreviousFilters+ parameter is a boolean value which, if set to +true+, will clear any previous filters applied to the table.
+`sort(columnId, \[direction\], \[isClearPreviousSorting\])`:: Sort the table based on the column specified with the +columnId+ parameter. The option +direction+ parameter specifies whether to sort in ascending or descending order. The optional +isClearPreviousSorting+ parameter is a boolean value which, if set to +true+, will clear any previous sorting applied to the table.
 [[sect-Component_Reference-richdataTable-Reference_data]]
 
 ==== Reference data
@@ -4682,10 +5050,12 @@ In general usage, the +<rich:column>+ component is used in the same was as the J
 [[exam-Component_Reference-richcolumn-Basic_column_example]]
 
 .Basic column example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5">
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
     <rich:column>
         <f:facet name="header">State Flag</f:facet>
         <h:graphicImage value="#{cap.stateFlag}"/>
@@ -4706,6 +5076,17 @@ In general usage, the +<rich:column>+ component is used in the same was as the J
 
 ----
 
+[quote]
+____
+[[figu-Component_Reference-Basic_column_example-Basic_column_example]]
+
+.Basic column example
+image::images/figu-Component_Reference-richcolumn-Basic_column_example.png[]
+
+
+
+____
+
 ====
 
 [[sect-Component_Reference-richcolumn-Spanning_columns]]
@@ -4717,14 +5098,16 @@ Columns can be merged by using the +colspan+ attribute to specify how many norma
 [[exam-Component_Reference-richcolumn-Column_spanning_example]]
 
 .Column spanning example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5">
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
 	<rich:column colspan="3">
         <h:graphicImage value="#{cap.stateFlag}"/>
     </rich:column>
-    <rich:column breakBefore="true">
+    <rich:column breakBefore="true"> 
         <h:outputText value="#{cap.state}"/>
     </rich:column>
     <rich:column >
@@ -4737,6 +5120,17 @@ Columns can be merged by using the +colspan+ attribute to specify how many norma
 
 ----
 
+[quote]
+____
+[[figu-Component_Reference-Column_spanning_example-Column_spanning_example]]
+
+.Column spanning example
+image::images/figu-Component_Reference-richcolumn-Column_spanning_example.png[]
+
+
+
+____
+
 ====
 
 [[sect-Component_Reference-richcolumn-Spanning_rows]]
@@ -4748,15 +5142,17 @@ Similarly, the +rowspan+ attribute can be used to merge and span rows. Again the
 [[exam-Component_Reference-richcolumn-Row_spanning_example]]
 
 .Row spanning example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5">
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
     <rich:column rowspan="3">
         <f:facet name="header">State Flag</f:facet>
         <h:graphicImage value="#{cap.stateFlag}"/>
     </rich:column>
-    <rich:column>
+    <rich:column> 
         <f:facet name="header">State Info</f:facet>
         <h:outputText value="#{cap.state}"/>
     </rich:column>
@@ -4769,6 +5165,17 @@ Similarly, the +rowspan+ attribute can be used to merge and span rows. Again the
 </rich:dataTable>
 
 ----
+
+[quote]
+____
+[[figu-Component_Reference-Row_spanning_example-Row_spanning_example]]
+
+.Row spanning example
+image::images/figu-Component_Reference-richcolumn-Row_spanning_example.png[]
+
+
+
+____
 
 ====
 
@@ -4798,10 +5205,12 @@ The +<rich:columnGroup>+ can also be used to create complex headers in a table. 
 [[exam-Component_Reference-richcolumnGroup-Complex_headers_using_column_groups]]
 
 .Complex headers using column groups
-====[source, XML]
+====
+
+
 [source, XML]
 ----
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist">
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist"> 
     <f:facet name="header">
         <rich:columnGroup>
             <rich:column rowspan="2">
@@ -4837,6 +5246,17 @@ The +<rich:columnGroup>+ can also be used to create complex headers in a table. 
 
 ----
 
+[quote]
+____
+[[figu-Component_Reference-Complex_headers_using_column_groups-Complex_headers_using_column_groups]]
+
+.Complex headers using column groups
+image::images/figu-Component_Reference-richcolumnGroup-Complex_headers_using_column_groups.png[]
+
+
+
+____
+
 ====
 
 [[sect-Component_Reference-richcolumnGroup-Reference_data]]
@@ -4868,7 +5288,9 @@ In addition, the +<rich:collapsibleSubTable>+ component typically needs a corres
 [[exam-Component_Reference-richcollapsibleSubTable-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:dataTable value="#{carsBean.inventoryVendorLists}" var="list">
@@ -4928,6 +5350,12 @@ In addition, the +<rich:collapsibleSubTable>+ component typically needs a corres
 </rich:dataTable>
 
 ----
+
+The resulting tables contains multiple sub-tables, grouping the list of cars by vendor. Each sub-table can be expanded or collapsed using the toggle with the vendor's name. The screenshot shows all sub-tables collapsed except for the sub-table for Ford cars.
+
+image::images/figu-Component_Reference-richcollapsibleSubTable-Basic_usage.png[]
+
+A data table containing multiple collapsible sub-tables.
 
 ====
 
@@ -5107,7 +5535,11 @@ As with the +<rich:dataTable>+ component, the look of the +<rich:extendedDataTab
 [[exam-Component_Reference-richextendedDataTable-richextendedDataTable_example]]
 
 .+<rich:extendedDataTable>+ example
-====[source, XML]
+====
+
+This example +<rich:extendedDataTable>+ component demonstrates horizontal and vertical scrolling and frozen columns. Each feature is detailed in this section.
+
+
 [source, XML]
 ----
 <rich:extendedDataTable value="#{carsBean.allInventoryItems}"
@@ -5162,6 +5594,10 @@ As with the +<rich:dataTable>+ component, the look of the +<rich:extendedDataTab
 
 ----
 
+image::images/figu-Component_Reference-Tables_and_grids-richextendedDataTable_example.png[]
+
+A data table made using the +<rich:extendedDataTable>+ component. It features horizontal and vertical scrolling and frozen columns.
+
 ====
 
 [[sect-Component_Reference-richextendedDataTable-Scrolling]]
@@ -5193,19 +5629,23 @@ The +selection+ attribute points to a collection of objects. It holds the +rowKe
 [[exam-Component_Reference-richextendedDataTable-Selecting_multiple_rows]]
 
 .Selecting multiple rows
-====[source, XML]
+====
+
+
 [source, XML]
 ----
-<rich:extendedDataTable value="#{extTableSelectionBean.inventoryItems}"
+<rich:extendedDataTable value="#{extTableSelectionBean.inventoryItems}" 
                         var="car" selection="#{extTableSelectionBean.selection}"
-                        id="table" frozenColumns="2"
+                        id="table" frozenColumns="2" 
                         style="height:300px; width:500px;" selectionMode="multiple">
    ...
 
 ----
 
+The accompanying +ExtSelectionBean+ bean handles which rows are selected. The rows are identified by their +rowKey+ identifiers.
+
+
 [source, Java]
-[source, JAVA]
 ----
 package org.richfaces.demo.tables;
 
@@ -5272,6 +5712,10 @@ public class ExtTableSelectionBean implements Serializable{
 
 ----
 
+image::images/figu-Component_Reference-Tables_and_grids-Selecting_multiple_rows.png[]
+
+The example table with the first, second, third, and fifth rows selected.
+
 ====
 
 [[sect-Component_Reference-richextendedDataTable-Rearranging_columns]]
@@ -5283,11 +5727,15 @@ Columns in a +<rich:extendedDataTable>+ component can be rearranged by the user 
 [[figu-Component_Reference-richextendedDataTable-Dragging_columns]]
 
 .Dragging columns
-image::
+image::images/figu-Component_Reference-Tables_and_grids-Dragging_columns.png[width="444"]
+
+
 [[figu-Component_Reference-richextendedDataTable-Rearranged_columns]]
 
 .Rearranged columns
-image::
+image::images/figu-Component_Reference-Tables_and_grids-Rearranged_columns.png[width="444"]
+
+
 [[sect-Component_Reference-richextendedDataTable-State_saving]]
 
 ===== State saving
@@ -5306,14 +5754,14 @@ The +<rich:extendedDataTable>+ component can include filtering and sorting in th
 
 The +<rich:extendedDataTable>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+sort()+:: Sort the data table.
-+filter()+:: Filter the data table.
-+clearSorting()+:: Clear any sorting that is currently applied to the table.
-+clearFiltering()+:: Clear any filtering that is currently applied to the table.
-+selectRow(index)+:: Select the row specified by the +index+ parameter.
-+selectRows(\[startIndex, stopIndex\])+:: Select all the rows in the table. Optionally, select only those rows between the indexes specified with the +startIndex+ and +stopIndex+ parameters.
-+deselectRow+:: Deselect the row that is currently selected.
-+setActiveRow(index)+:: Set the active row to that specified by the +index+ parameter.
+`sort()`:: Sort the data table.
+`filter()`:: Filter the data table.
+`clearSorting()`:: Clear any sorting that is currently applied to the table.
+`clearFiltering()`:: Clear any filtering that is currently applied to the table.
+`selectRow(index)`:: Select the row specified by the +index+ parameter.
+`selectRows(\[startIndex, stopIndex\])`:: Select all the rows in the table. Optionally, select only those rows between the indexes specified with the +startIndex+ and +stopIndex+ parameters.
+`deselectRow`:: Deselect the row that is currently selected.
+`setActiveRow(index)`:: Set the active row to that specified by the +index+ parameter.
 [[sect-Component_Reference-richextendedDataTable-Reference_data]]
 
 ==== Reference data
@@ -5412,7 +5860,9 @@ The +<rich:dataGrid>+ component is similar in function to the JavaServer Faces +
 [[figu-Component_Reference-richdataGrid-The_richdataGrid_component]]
 
 .The +<rich:dataGrid>+ component
-image::
+image::images/figu-Component_Reference-richdataGrid-The_richdataGrid_component.png[]
+
+
 [[sect-Component_Reference-richdataGrid-Basic_usage]]
 
 ==== Basic usage
@@ -5428,7 +5878,9 @@ The number of columns for the grid is specifed with the +columns+ attribute, and
 [[exam-Component_Reference-richdataGrid-richdataGrid_example]]
 
 .+<rich:dataGrid>+ example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:panel style="width:150px;height:200px;">
@@ -5456,6 +5908,17 @@ The number of columns for the grid is specifed with the +columns+ attribute, and
 </rich:panel>
 
 ----
+
+[quote]
+____
+[[figu-Component_Reference-richdataGrid_example-richdataGrid_example]]
+
+.+<rich:dataGrid>+ example
+image::images/figu-Component_Reference-richdataGrid-richdataGrid_example.png[]
+
+
+
+____
 
 ====
 
@@ -5557,22 +6020,30 @@ By default, the list is displayed as an un-ordered bullet-point list. The +type+
 [[figu-Component_Reference-richlist-Unordered_list]]
 
 .Unordered list
-image::
+image::images/figu-Component_Reference-richlist-Unordered_list.png[]
+
+
 +ordered+:: The list is presented as a numbered series of items, similar to the +<ol>+ HTML element.
 [[figu-Component_Reference-richlist-Ordered_list]]
 
 .Ordered list
-image::
+image::images/figu-Component_Reference-richlist-Ordered_list.png[]
+
+
 +definitions+:: The list is presented as a series of data definitions. Part of the data model, specified as the term, is listed prominently. The other associated data is listed after each term.
 [[figu-Component_Reference-richlist-Data_definition_list]]
 
 .Data definition list
-image::
+image::images/figu-Component_Reference-richlist-Data_definition_list.png[]
+
+
 The term is marked using the +term+ facet. The facet is required for all definition lists. Use of the facet is shown in <<exam-Component_Reference-richlist-Data_definition_list>>.
 [[exam-Component_Reference-richlist-Data_definition_list]]
 
 .Data definition list
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:form>
@@ -5606,7 +6077,9 @@ The +first+ attribute specifies which item in the data model to start from, and 
 [[exam-Component_Reference-richlist-richlist_example]]
 
 .+<rich:list>+ example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:form>
@@ -5620,6 +6093,17 @@ The +first+ attribute specifies which item in the data model to start from, and 
 </h:form>
 
 ----
+
+[quote]
+____
+[[figu-Component_Reference-richlist-richlist_example]]
+
+.+<rich:list>+ example
+image::images/figu-Component_Reference-richlist-Unordered_list.png[]
+
+
+
+____
 
 ====
 
@@ -5671,7 +6155,9 @@ The +<rich:dataScroller>+ component is used for navigating through multiple page
 [[figu-Component_Reference-richdataScroller-The_richdataScroller_component]]
 
 .The +<rich:dataScroller>+ component
-image::
+image::images/figu-Component_Reference-richdataScroller-The_richdataScroller_component.png[]
+
+
 [[sect-Component_Reference-richdataScroller-Basic_usage]]
 
 ==== Basic usage
@@ -5685,7 +6171,9 @@ The +<rich:dataScroller>+ component must be re-rendered whenever a filter change
 [[exam-Component_Reference-richdataScroller-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:dataTable id="table" value="#{capitalsBean.capitals}" var="cap" rows="5">
@@ -5724,13 +6212,13 @@ To add optional separators between controls, define the separators with the +con
 
 The +<rich:dataScroller>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+switchToPage(pageIndex)+:: Switch to the page specified with the +pageIndex+ parameter.
-+next()+:: Switch to the next page.
-+previous()+:: Switch to the previous page.
-+first()+:: Switch to the first page.
-+last()+:: Switch to the last page.
-+fastForward()+:: Step forward through the pages by the +fastStep+ amount.
-+fastRewind()+:: Step backward through the pages by the +fastStep+ amount.
+`switchToPage(pageIndex)`:: Switch to the page specified with the +pageIndex+ parameter.
+`next()`:: Switch to the next page.
+`previous()`:: Switch to the previous page.
+`first()`:: Switch to the first page.
+`last()`:: Switch to the last page.
+`fastForward()`:: Step forward through the pages by the +fastStep+ amount.
+`fastRewind()`:: Step backward through the pages by the +fastStep+ amount.
 [[sect-Component_Reference-richdataScroller-Reference_data]]
 
 ==== Reference data
@@ -5801,7 +6289,7 @@ Tables entries can be filtered by the user through either the basic built-in fil
 
 To define a filter for a column use either the +filter+ or +filterExpression+ attributes, then use the +filterValue+ attribute to point to an object which holds the current filtering value for the column. The attribute can be used to store filtering conditions in a session.
 
-Use the +filterExpression+ attribute to define an expression that can be evaluated as a boolean value. The expression checks if each table entry satisfies the filtering condition when the table is rendered. For example, the expression might be a JSTL (JavaServer Pages Standard Tag Library) function such as +contains+ or +equals+.
+Use the +filterExpression+ attribute to define an expression that can be evaluated as a boolean value. The expression checks if each table entry satisfies the filtering condition when the table is rendered. For example, the expression might be a JSTL (JavaServer Pages Standard Tag Library) function such as `contains` or `equals`.
 
 Use the +filter+ attribute to define a filter interface. The attribute must use EL (Expression Language) to point to an object which implements the org.richfaces.model.Filter<T>interface. The object must provide a single accept(T t)method. The method takes each iteration object as a parameter and returns a boolean value, which determines whether the object satisfies the filter. By defining a custom filter, you can implement complex business logic to filter a table.
 
@@ -5817,7 +6305,7 @@ The built-in filter controls are only available with the +extendedDataTable+ com
 
 The built-in filter controls of the +<rich:column>+ component allow the user to enter text to use as the filtering value. The value of the built-in filter control is bound to the +filterValue+ attribute, which can either be an initial filtering value on the page, or a value binding on the server. The filterValue is then applied to the filter defined either by the +filterExpression+ or +filter+ column attributes.
 
-The filterValue is of type +String+. Conversion is either done implicitly via EL in the +filterExpression+, or explicitly within the +filter+ function. The filter is processed and the table is rendered when the +onblur+ event occurs for the column.
+The filterValue is of type +String+. Conversion is either done implicitly via EL in the +filterExpression+, or explicitly within the +filter+ function. The filter is processed and the table is rendered when the +onblur+ event occurs for the column. 
 
 //////////////////////////////////////
 
@@ -5834,7 +6322,9 @@ The filterValue is of type +String+. Conversion is either done implicitly via EL
 [[exam-Component_Reference-Table_filtering-Basic_filtering]]
 
 .Basic filtering
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:extendedDataTable value="#{carsBean.allInventoryItems}" var="car" filterVar="filterValue">
@@ -5855,6 +6345,8 @@ The filterValue is of type +String+. Conversion is either done implicitly via EL
 </rich:extendedDataTable>
 ----
 
+The example uses the basic filtering method on both columns in the table.
+
 ====
 
 [[sect-Component_Reference-Table_filtering-External_filtering]]
@@ -5868,7 +6360,7 @@ If you require more advanced filter controls use the external filtering properti
 ====
 The built-in filter controls can be disabled on a column-by-column basis by setting the column attribute +filterType="custom"+. Alternatively one can disable filter controls for the whole application via the following context-param in the web.xml:
 
-[source, XML]
+
 [source, XML]
 ----
 <context-param>
@@ -5883,7 +6375,9 @@ The built-in filter controls can be disabled on a column-by-column basis by sett
 [[exam-Component_Reference-Table_filtering-External_filtering]]
 
 .Filtering example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:dataTable value="#{capitalsBean.capitals}" var="cap" id="table">
@@ -5921,13 +6415,19 @@ The built-in filter controls can be disabled on a column-by-column basis by sett
 </rich:dataTable>
 ----
 
+The example uses a filter expression on the first column and a filter method on the second column.
+
+image::images/figu-Component_Reference-Table_filtering-External_filtering.png[]
+
+A table of state capitals filtered by states beginning with the letter " a", further filtered to those states in the GMT-5 time zone.
+
 ====
 
 [[sect-Component_Reference-Tables_and_grids-Table_sorting]]
 
 === Table sorting
 
-Tables entries can be sorted
+Tables entries can be sorted 
 
 //////////////////////////////////////
 
@@ -5964,7 +6464,9 @@ Set the +sortBy+ attribute to indicate which value to use when sorting the colum
 [[exam-Component_Reference-Table_sorting-Built_in_sorting]]
 
 .Basic sorting
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:dataTable value="#{capitalsBean.capitals}" var="cap" width="300px">
@@ -5973,16 +6475,18 @@ Set the +sortBy+ attribute to indicate which value to use when sorting the colum
          <h:outputText value="State Name"/>
       </f:facet>
       <h:outputText value="#{cap.state}"/>
-   </rich:column>
+   </rich:column> 
    <rich:column sortBy="#{cap.name}">
       <f:facet name="header">
          <h:outputText value="State Capital"/>
       </f:facet>
-      <h:outputText value="#{cap.name}"/>
+      <h:outputText value="#{cap.name}"/> 
    </rich:column>
 </rich:dataTable>
 
 ----
+
+The example uses the basic sorting method on both columns in the table.
 
 ====
 
@@ -5999,7 +6503,7 @@ Set the +sortBy+ attribute to indicate which iteration object property to use wh
 ====
 The built-in sort controls can be disabled on a column-by-column basis by setting the column attribute +sortType="custom"+. Alternatively one can disable sort controls for the whole application via the following context-param in the web.xml:
 
-[source, XML]
+
 [source, XML]
 ----
 <context-param>
@@ -6016,7 +6520,9 @@ Bind the +sortOrder+ attribute to bean properties to manage the sorting order. T
 [[exam-Component_Reference-Table_sorting-Sorting]]
 
 .Sorting
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:dataTable value="#{capitalsBean.capitals}" var="cap" id="table">
@@ -6048,6 +6554,8 @@ Bind the +sortOrder+ attribute to bean properties to manage the sorting order. T
 </rich:dataTable>
 ----
 
+The example uses an external control to manage the table's sorting.
+
 ====
 
 When multiple columns are capable of being sorted at the same time, set the priority by which the columns are sorted with the +sortPriorities+ attribute. The attribute must contain a list of column identifiers in the order of the sorting sequence.
@@ -6075,8 +6583,14 @@ Ideally, the +<rich:tree>+ component needs one or more +<rich:treeNode>+ compone
 [[exam-Component_Reference-richtree-Basic_usage]]
 
 .Basic usage
-====[source, Java]
-[source, JAVA]
+====
+
+This example demonstrates basic usage of the +<rich:tree>+ component using an org.richfaces.model.TreeNodedata model.
+
+First extend the +org.richfaces.model.TreeNodeImpl+ and add the data fields you require, with appropriate accessor methods, as in:
+
+
+[source, Java]
 ----
 import org.richfaces.model.TreeNodeImpl;
 
@@ -6103,8 +6617,10 @@ public class DataHolderTreeNodeImpl extends TreeNodeImpl {
 }
 ----
 
+Then, the data model is constructed as follows:
+
+
 [source, Java]
-[source, JAVA]
 ----
 private DataHolderTreeNodeImpl stationRoot;
 private DataHolderTreeNodeImpl rootNodes;
@@ -6129,7 +6645,9 @@ public DataHolderTreeNodeImpl getRootNodes() {
 
 ----
 
-[source, XML]
+The tree then accesses the nodes of the model using the +station+ variable:
+
+
 [source, XML]
 ----
 <rich:tree value="#{stations.stationNodes}" var="station">
@@ -6139,6 +6657,8 @@ public DataHolderTreeNodeImpl getRootNodes() {
 </rich:tree>
 
 ----
+
+image::images/exam-Component_Reference-richtree-Basic_usage.png[]
 
 ====
 
@@ -6151,7 +6671,9 @@ Different nodes in the tree can have different appearances, such as node icons, 
 [[exam-Component_Reference-richtree-nodeType_attribute]]
 
 .+nodeType+ attribute
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:tree style="width:300px" value="#{library.data}" var="item" nodeType="#{item.type}">
@@ -6167,6 +6689,8 @@ Different nodes in the tree can have different appearances, such as node icons, 
 </rich:tree>
 
 ----
+
+image::images/exam-Component_Reference-richtree-nodeType_attribute.png[]
 
 ====
 
@@ -6267,7 +6791,9 @@ The +<rich:treeNode>+ component must be a child of a +<rich:tree>+ component or 
 [[exam-Component_Reference-richtreeNode-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:tree nodeType="#{node.type}" var="node"
@@ -6284,6 +6810,8 @@ The +<rich:treeNode>+ component must be a child of a +<rich:tree>+ component or 
 </rich:tree>
 
 ----
+
+The example renders a simple tree of countries. Each country node expands to show state nodes for that country, and each state node expands to show city nodes for that state.
 
 ====
 
@@ -6428,7 +6956,9 @@ In addition, the +<rich:treeModelRecursiveAdaptor>+ component requires the +root
 [[exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:tree var="item">
@@ -6444,8 +6974,10 @@ In addition, the +<rich:treeModelRecursiveAdaptor>+ component requires the +root
 
 ----
 
+The +<rich:treeModelRecursiveAdaptor>+ component references the +FileSystemBean+ class as the source for the data.
+
+
 [source, Java]
-[source, JAVA]
 ----
 @ManagedBean
 @RequestScoped
@@ -6464,8 +6996,10 @@ public class FileSystemBean {
 
 ----
 
+The +FileSystemBean+ class in turn uses the +FileSystemNode+ class to recursively iterate through the collection.
+
+
 [source, Java]
-[source, JAVA]
 ----
 public class FileSystemNode {
    ...
@@ -6489,16 +7023,24 @@ public class FileSystemNode {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         Set<String> resourcePaths = externalContext.getResourcePaths(this.path);
-
+        
       if (resourcePaths == null) {
          resourcePaths = Collections.emptySet();
       }
       return resourcePaths;
-   }
+   }   
    ...
 }
 
 ----
+
+The `getDirectories()` function is used recursively until the object has the collection of children. The model adaptor calls the `getFiles()` function at each level in order to add the file nodes.
+
+The resulting tree hierarchically lists the directories and files in the collection.
+
+image::images/exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage.png[]
+
+A hierarchical tree detailing a file system.
 
 ====
 
@@ -6535,7 +7077,9 @@ The +<rich:dropDownMenu>+ component is used for creating a drop-down, hierarchic
 [[figu-Component_Reference-richdropDownMenu-richdropDownMenu]]
 
 .+<rich:dropDownMenu>+
-image::
+image::images/figu-Component_Reference-richdropDownMenu-richdropDownMenu.png[]
+
+
 [[sect-Component_Reference-richdropDownMenu-Basic_usage]]
 
 ==== Basic usage
@@ -6647,7 +7191,9 @@ The +<rich:contextMenu>+ component is used for creating a hierarchical context m
 [[figu-Component_Reference-richcontextMenu-richcontextMenu]]
 
 .+<rich:contextMenu>+
-image::
+image::images/figu-Component_Reference-richcontextMenu-richcontextMenu.png[]
+
+
 [[sect-Component_Reference-richcontextMenu-Basic_usage]]
 
 ==== Basic usage
@@ -6769,7 +7315,9 @@ Alternatively, define facets with the names +icon+ and +iconDisabled+ to set the
 [[exam-Component_Reference-richmenuItem-Icon_facets]]
 
 .Icon facets
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:menuItem value="Show comments">
@@ -6799,7 +7347,7 @@ Use the +submitMode+ attribute to determine how the menu item requests are submi
 
 The +<rich:menuItem>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+activate()+:: Activate the menu item as though it were selected.
+`activate()`:: Activate the menu item as though it were selected.
 [[sect-Component_Reference-richmenuItem-Reference_data]]
 
 ===== Reference data
@@ -6838,8 +7386,8 @@ The +<rich:menuGroup>+ component can be positioned using the +jointPoint+ and +d
 
 The +<rich:menuGroup>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+show()+:: Show the menu group.
-+hide()+:: Hide the menu group.
+`show()`:: Show the menu group.
+`hide()`:: Hide the menu group.
 [[sect-Component_Reference-richmenuGroup-Reference_data]]
 
 ===== Reference data
@@ -6881,10 +7429,12 @@ The +<rich:panelMenu>+ component is used in conjunction with +<rich:panelMenuIte
 [[exam-Component_Reference-richpanelMenu-richpanelMenu]]
 
 .richpanelMenu
-====[source, XML]
+====
+
+
 [source, XML]
 ----
-<rich:panelMenu mode="ajax"
+<rich:panelMenu mode="ajax" 
                 topGroupExpandedRightIcon="chevronUp"
                 topGroupCollapsedRightIcon="chevronDown"
                 groupExpandedLeftIcon="disc"
@@ -6909,6 +7459,10 @@ The +<rich:panelMenu>+ component is used in conjunction with +<rich:panelMenuIte
 </rich:panelMenu>
 
 ----
+
+image::images/figu-Component_Reference-richpanelMenu-richpanelMenu.png[]
+
+A panel menu. The first menu group is collapsed. The second menu group is expanded; it contains menu items and a further menu group, which is currently selected and expanded. The third menu item is not a group and as such is not expandable.
 
 ====
 
@@ -6936,70 +7490,70 @@ As with other control components, set +disabled="true"+ to disable the +<rich:pa
 
 Icons for the panel menu can be chosen from a set of standard icons. Icons can be set for the top panel menu, child panel menus, and child item. There are three different menu states that the icon represents, as well as icons for both the left and right side of the item title.
 
-+topGroupExpandedLeftIcon+:: +topGroupExpandedRightIcon+:: These attributes determine the icons for the top level menu when it is expanded.
++topGroupExpandedLeftIcon+:: +topGroupExpandedRightIcon+:: These attributes determine the icons for the top level menu when it is expanded. 
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+topGroupCollapsedLeftIcon+:: +topGroupCollapsedRightIcon+:: These attributes determine the icons for the top level menu when it is collapsed.
++topGroupCollapsedLeftIcon+:: +topGroupCollapsedRightIcon+:: These attributes determine the icons for the top level menu when it is collapsed. 
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+topGroupDisabledLeftIcon+:: +topGroupDisabledRightIcon+:: These attributes determine the icons for the top level menu when it is disabled.
++topGroupDisabledLeftIcon+:: +topGroupDisabledRightIcon+:: These attributes determine the icons for the top level menu when it is disabled. 
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+topItemLeftIcon+:: +topItemRightIcon+:: These attributes determine the icons for a top level menu item.
++topItemLeftIcon+:: +topItemRightIcon+:: These attributes determine the icons for a top level menu item. 
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+topItemDisabledLeftIcon+:: +topItemDisabledRightIcon+:: These attributes determine the icons for a top level menu item when it is disabled.
++topItemDisabledLeftIcon+:: +topItemDisabledRightIcon+:: These attributes determine the icons for a top level menu item when it is disabled. 
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+groupExpandedLeftIcon+:: +groupExpandedRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are expanded.
++groupExpandedLeftIcon+:: +groupExpandedRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are expanded. 
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+groupCollapsedLeftIcon+:: +groupCollapsedRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are collapsed.
++groupCollapsedLeftIcon+:: +groupCollapsedRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are collapsed. 
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+groupDisabledLeftIcon+:: +groupDisabledRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are disabled.
++groupDisabledLeftIcon+:: +groupDisabledRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are disabled. 
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+itemLeftIcon+:: +itemRightIcon+:: These attributes determine the icons for items in the menus.
++itemLeftIcon+:: +itemRightIcon+:: These attributes determine the icons for items in the menus. 
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+itemDisabledLeftIcon+:: +itemDisabledRightIcon+:: These attributes determine the icons for items in the menus when they are disabled.
++itemDisabledLeftIcon+:: +itemDisabledRightIcon+:: These attributes determine the icons for items in the menus when they are disabled. 
 
 //////////////////////////////////////
 
@@ -7011,7 +7565,9 @@ Icons for the panel menu can be chosen from a set of standard icons. Icons can b
 [[figu-Component_Reference-richpanelMenu-Standard_icons]]
 
 .+<Standard icons>+
-image::
+image::images/figu-Component_Reference-richpanelMenuGroup-Standard_icons.png[]
+
+
 Alternatively, point the icon attributes to the paths of image files. The image files are then used as icons.
 
 Any icons specified by child +<rich:panelMenuGroup>+ and +<rich:panelMenuItem>+ components overwrite the relevant icons declared with the parent +<rich:panelMenu>+ component.
@@ -7039,9 +7595,9 @@ The +<rich:panelMenu>+ component fires the +ItemChangeEvent+ event on the server
 
 The +<rich:panelMenu>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+expandAll()+:: Expand all the panel menu groups in the component.
-+collapseAll()+:: Collapse all the panel menu groups in the component.
-+selectItem(id)+:: Select the menu item with the +id+ identifier.
+`expandAll()`:: Expand all the panel menu groups in the component.
+`collapseAll()`:: Collapse all the panel menu groups in the component.
+`selectItem(id)`:: Select the menu item with the +id+ identifier.
 [[sect-Component_Reference-richpanelMenu-Reference_data]]
 
 ==== Reference data
@@ -7193,9 +7749,9 @@ The +<rich:panelMenuGroup>+ component fires the +ActionEvent+ event on the serve
 
 The +<rich:panelMenuGroup>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+expand()+:: Expand this panel menu group.
-+collapse()+:: Collapse this panel menu group.
-+select(id)+:: Select the menu item with the +id+ identifier.
+`expand()`:: Expand this panel menu group.
+`collapse()`:: Collapse this panel menu group.
+`select(id)`:: Select the menu item with the +id+ identifier.
 [[sect-Component_Reference-richpanelMenuGroup-Reference_data]]
 
 ===== Reference data
@@ -7242,7 +7798,7 @@ The +<rich:panelMenuItem>+ component fires the +ActionEvent+ event on the server
 
 The +<rich:panelMenuItem>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+select()+:: Select this menu item.
+`select()`:: Select this menu item.
 [[sect-Component_Reference-richpanelMenuItem-Reference_data]]
 
 ===== Reference data
@@ -7262,7 +7818,9 @@ The +<rich:toolbar>+ component is a horizontal toolbar. Any JavaServer Faces ( J
 [[figu-Component_Reference-richtoolbar-richtoolbar]]
 
 .+<rich:toolbar>+
-image::
+image::images/figu-Component_Reference-richtoolbar-richtoolbar.png[]
+
+
 [[sect-Component_Reference-richtoolbar-Basic_usage]]
 
 ==== Basic usage
@@ -7272,7 +7830,9 @@ The +<rich:toolbar>+ component does not require any attributes to be defined for
 [[exam-Component_Reference-richtoolbar-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:toolbar>
@@ -7368,7 +7928,9 @@ Groups of toolbar items can be located on either the left-hand side or the right
 [[exam-Component_Reference-richtoolbarGroup-richtoolbarGroup]]
 
 .+<rich:toolbarGroup>+
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:toolBar height="26" itemSeparator="grid">
@@ -7389,6 +7951,12 @@ Groups of toolbar items can be located on either the left-hand side or the right
 </rich:toolBar>
 
 ----
+
+The example shows how to locate a toolbar group to the right-hand side of the parent toolbar. It also demonstrates how item separators on the parent toolbar work with toolbar groups.
+
+image::images/figu-Component_Reference-richtoolbarGroup-richtoolbarGroup.png[]
+
+A toolbar using icons. Two toolbar groups are located on the left-hand side of the toolbar and separated by a grid pattern. The third toolbar group is located to the right-hand side.
 
 ====
 
@@ -7419,7 +7987,9 @@ The +<rich:message>+ component is rendered in the same way as the standard +<h:m
 [[figu-Component_Reference-richmessage-richmessage_component]]
 
 .rich:message component
-image::
+image::images/figu-Component_Reference-richmessage-richmessage_component.png[]
+
+
 [[sect-Component_Reference-richmessage-Basic_usage]]
 
 ==== Basic usage
@@ -7431,7 +8001,9 @@ The +<rich:message>+ component is automatically rendered after an Ajax request. 
 [[exam-Component_Reference-richmessage-richmessage_example]]
 
 .rich:message example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:outputText value="Zip:" />
@@ -7442,6 +8014,8 @@ The +<rich:message>+ component is automatically rendered after an Ajax request. 
 <rich:message for="zip" ajaxRendered="true"/>
 
 ----
+
+The example contains a text input for zip codes. The simple validation requires the entered zip code to be between 4 and 9 characters long. The +<rich:message>+ component references the input box, and reports any messages relating to the input validation.
 
 ====
 
@@ -7456,12 +8030,16 @@ Use CSS (Cascading Style Sheets) to customize the appearance and icon for the +<
 [[exam-Component_Reference-richmessage-Message_icons]]
 
 .Message icons
-====----
+====
+
+----
 .rf-msg-err{
    background-image: url('#{facesContext.externalContext.requestContextPath}/images/icons/error.gif');
 }
 
 ----
+
+The example demonstrates how an icon for an error message could be added using CSS.
 
 ====
 
@@ -7511,7 +8089,9 @@ The +<rich:messages>+ components works similarly to the +<rich:message>+ compone
 [[figu-Component_Reference-richmessages-richmessages_component]]
 
 .rich:messages component
-image::
+image::images/figu-Component_Reference-richmessages-richmessages_component.png[]
+
+
 [[sect-Component_Reference-richmessages-Basic_usage]]
 
 ==== Basic usage
@@ -7537,13 +8117,15 @@ The layout of the messages can also be customized through CSS. By default, the m
 [[figu-Component_Reference-richmessages-Messages_in_a_block]]
 
 .Messages in a block
-image::
+image::images/figu-Component_Reference-richmessages-Messages_in_a_block.png[]
+
+
 Override the displayproperty for all CSS message classes to customize the layout as follows:
 
 Display messages in a list with no icons:: To display the messages in a list format without the default icons, override the message styles as follows:
 ----
-.rf-msg-err, .rf-msgs-err, .rf-msg-ftl, .rf-msgs-ftl, .rf-msg-inf,
-.rf-msgs-inf, .rf-msg-wrn, .rf-msgs-wrn, .rf-msg-ok, .rf-msgs-ok {
+.rf-msg-err, .rf-msgs-err, .rf-msg-ftl, .rf-msgs-ftl, .rf-msg-inf, 
+.rf-msgs-inf, .rf-msg-wrn, .rf-msgs-wrn, .rf-msg-ok, .rf-msgs-ok { 
    display: list-item;
    margin-left: 20px;
    padding-left: 0px; }
@@ -7555,10 +8137,12 @@ Display messages in a list with no icons:: To display the messages in a list for
 [[figu-Component_Reference-richmessages-Messages_in_a_list]]
 
 .Messages in a list
-image::
+image::images/figu-Component_Reference-richmessages-Messages_in_a_list.png[]
+
+
 Display in-line messages:: To display the messages in line with text, override the message styles as follows:
 ----
-.rf-msg-err, .rf-msgs-err, .rf-msg-ftl, .rf-msgs-ftl, .rf-msg-inf,
+.rf-msg-err, .rf-msgs-err, .rf-msg-ftl, .rf-msgs-ftl, .rf-msg-inf, 
 .rf-msgs-inf, .rf-msg-wrn, .rf-msgs-wrn, .rf-msg-ok, .rf-msgs-ok { display:inline; }
 
 ----
@@ -7566,7 +8150,9 @@ Display in-line messages:: To display the messages in line with text, override t
 [[figu-Component_Reference-richmessages-In-line_messages]]
 
 .In-line messages
-image::
+image::images/figu-Component_Reference-richmessages-In-line_messages.png[]
+
+
 [[sect-Component_Reference-richmessages-Reference_data]]
 
 ==== Reference data
@@ -7638,7 +8224,7 @@ There are several attributes that can change default behavior:
 ====
 
                 Nonblocking notifications can be clicked through, but because they are using jQuery mechanism to bypass events, only jQuery event handlers are triggered. IThis means that standard links won't be triggered.
-
+            
 ====
 
 [[sect-Component_Reference-richnotify-Reference_data]]
@@ -7743,7 +8329,9 @@ The +<rich:notifyMessages>+ component is the same as the +<rich:notifyMessage>+ 
 [[figu-Component_Reference-richnotifyMessages-richnotifyMessages]]
 
 .
-image::
+image::images/figu-Component_Reference-richnotifyMessages-richnotifyMessages.png[width="200"]
+
+
 [[sect-Component_Reference-richnotifyMessages-Reference_data]]
 
 ==== Reference data
@@ -7781,7 +8369,7 @@ They are three alternative ways to bind notifications with a stack:
 * _using default stack_: a default stack is used when no other binding is defined for a given notification
 
 
-[source, XML]
+
 [source, XML]
 ----
 <rich:notifyStack position="bottomRight">
@@ -7793,7 +8381,7 @@ The sample above defines the stack explicitly, where notifications use the stack
 
 The sample bellow uses a notification rendered into the top-left corner of the screen. The notification is bound to a stack using it's id.
 
-[source, XML]
+
 [source, XML]
 ----
 <rich:notifyStack id="leftStack" position="topLeft" />
@@ -7821,7 +8409,7 @@ There are two attributes which influences how notifications are placed into a st
 
 The following sample shows a stack which will place new notifications up front - the incoming message will appear first, causing all notifications currently in stack to shift. Subsequently, messages at the end of stack will be then removed.
 
-[source, XML]
+
 [source, XML]
 ----
 <rich:notifyStack method="first" />
@@ -7868,7 +8456,9 @@ The +<rich:progressBar>+ component displays a progress bar to indicate the statu
 [[figu-Component_Reference-richprogressBar-richprogressBar]]
 
 .+<rich:progressBar>+
-image::
+image::images/figu-Component_Reference-richprogressBar-richprogressBar.png[]
+
+
 [[sect-Component_Reference-richprogressBar-Basic_usage]]
 
 ==== Basic usage
@@ -7878,7 +8468,9 @@ Basic usage of the +<rich:progressBar>+ component requires the +value+ attribute
 [[exam-Component_Reference-richprogressBar-Basic_usage]]
 
 .Basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:progressBar value="#{bean.incValue}" />
@@ -7899,7 +8491,9 @@ Using the +label+  attribute:: The content of the +label+ attribute is displayed
 [[exam-Component_Reference-richprogressBar-Using_the_label_attribute]]
 
 .Using the +label+ attribute
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:progressBar value="#{bean.incValue}" id="progrs" label="#{bean.incValue} % complete"/>
@@ -7912,7 +8506,9 @@ Using nested child components:: Child components, such as the JSF +<h:outputText
 [[exam-Component_Reference-richprogressBar-Using_nested_child_components]]
 
 .Using nested child components
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:progressBar value="#{bean.incValue}">
@@ -7928,7 +8524,9 @@ Define the +initial+ and +finish+ facets to customize the progress bar's appeara
 [[exam-Component_Reference-richprogressBar-Initial_and_complete_states]]
 
 .Initial and finished states
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:progressBar value="#{bean.incValue1}">
@@ -7938,7 +8536,7 @@ Define the +initial+ and +finish+ facets to customize the progress bar's appeara
     <f:facet name="finish">
         <h:outputText value="Process has completed"/>
     </f:facet>
-</rich:progressBar>
+</rich:progressBar> 
 
 ----
 
@@ -7961,7 +8559,9 @@ The +<rich:progressBar>+ component can be set to constantly poll for updates at 
 [[exam-Component_Reference-richprogressBar-Using_set_intervals]]
 
 .Using set intervals
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:progressBar value="#{bean.incValue1}" id="progress" interval="900" enabled="#{bean.enabled1}"/>
@@ -7976,13 +8576,13 @@ The +<rich:progressBar>+ component can be set to constantly poll for updates at 
 
 The +<rich:progressBar>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+getValue()+:: Return the current value displayed on the progress bar.
-+setValue()+:: Set the current value to display on the progress bar.
-+getMinValue()+:: Return the minimum value for the progress bar.
-+getMaxValue()+:: Return the maximum value for the progress bar.
-+disable()+:: Disables the progress bar.
-+enable()+:: Enables the progress bar.
-+isEnabled()+:: Returns a boolean value indicating whether the progress bar is enabled.
+`getValue()`:: Return the current value displayed on the progress bar.
+`setValue()`:: Set the current value to display on the progress bar.
+`getMinValue()`:: Return the minimum value for the progress bar.
+`getMaxValue()`:: Return the maximum value for the progress bar.
+`disable()`:: Disables the progress bar.
+`enable()`:: Enables the progress bar.
+`isEnabled()`:: Returns a boolean value indicating whether the progress bar is enabled.
 [[sect-Component_Reference-richprogressBar-Reference_data]]
 
 ==== Reference data
@@ -8023,7 +8623,9 @@ The +<rich:tooltip>+ component provides an informational tool-tip. The tool-tip 
 [[figu-Component_Reference-richtooltip-richtooltip]]
 
 .+<rich:tooltip>+
-image::
+image::images/figu-Component_Reference-richtoolTip-richtoolTip.png[]
+
+
 [[sect-Component_Reference-richtooltip-Basic_usage]]
 
 ==== Basic usage
@@ -8035,7 +8637,29 @@ Alternatively, the content of the tool-tip can be defined inside the +<rich:tool
 [[exam-Component_Reference-richtooltip-Defining_tool-tip_content]]
 
 .Defining tool-tip content
-========
+====
+
+Basic content:: 
+[source, XML]
+----
+<rich:panel>
+    <rich:tooltip value="This is a tool-tip."/>
+</rich:panel>
+
+----
+
+Rich content:: 
+[source, XML]
+----
+<rich:panel>
+    <rich:tooltip>
+        This is a <b>tool-tip</b>.
+    </rich:tooltip>
+</rich:panel>
+
+----
+
+====
 
 [[sect-Component_Reference-richtooltip-Attaching_the_tool-tip_to_another_component]]
 
@@ -8046,7 +8670,9 @@ If not otherwise specified, the tool-tip is attached to the parent element in wh
 [[exam-Component_Reference-richtooltip-Attaching_the_tool-tip]]
 
 .Attaching the tool-tip
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:panel id="panelId">
@@ -8064,7 +8690,9 @@ The +<rich:tooltip>+ component can alternatively be left unattached, and is inst
 [[exam-Component_Reference-richtooltip-Unattached_tool-tips]]
 
 .Unattached tool-tips
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:panel id="panelId" onclick="#{rich:component('tooltipId')}.show(event);" />
@@ -8102,7 +8730,9 @@ When using +mode="ajax"+, define the +defaultContent+ facet. The tool-tip displa
 [[exam-Component_Reference-richtooltip-Advanced_tool-tip_usage]]
 
 .Advanced tool-tip usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:commandLink value="Simple Link" id="link">
@@ -8138,8 +8768,8 @@ The +<rich:tooltip>+ component supports the following client-side events:
 
 The +<rich:tooltip>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-+show(event)+:: Show the tool-tip.
-+hide()+:: Hide the tool-tip.
+`show(event)`:: Show the tool-tip.
+`hide()`:: Hide the tool-tip.
 [[sect-Component_Reference-richtooltip-Reference_data]]
 
 ==== Reference data
@@ -8326,7 +8956,7 @@ With the query defined, the component is used to trigger the query as either a t
 Any objects or lists of objects used in the query are specified using the +selector+ attribute. The +selector+ attribute references objects using the following method:
 
 * The +selector+ attribute can refer to the elements by using syntax of the jQuery Selectors (a superset of CSS selectors defined by W3C consortium) and additionally it expands JSF component IDs to client-side IDs (see the VDL documentation for the +selector+ attribute).
-* If the +selector+ attribute does not match the +id+ identifier attribute of any JSF components or clients on the page, it instead uses syntax defined by the World Wide Web Consortium (W3C)for the CSSrule selector.
+* If the +selector+ attribute does not match the +id+ identifier attribute of any JSF components or clients on the page, it instead uses syntax defined by the World Wide Web Consortium (W3C)for the CSSrule selector. 
 
 //////////////////////////////////////
 
@@ -8346,7 +8976,9 @@ Because the +selector+ attribute can be either an +id+ identifier attribute or C
 [[exam-Component_Reference-richjQuery-Avoiding_syntax_confusion]]
 
 .Avoiding syntax confusion
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:form id="form">
@@ -8358,7 +8990,9 @@ Because the +selector+ attribute can be either an +id+ identifier attribute or C
 
 ----
 
-[source, XML]
+The +id+ identifier for the +<h:panelGrid>+ element is +form:menu+, which can conflict with CSS selector syntax. Double backslashes can be used to escape the colon character such that the identifier is read correctly instead of being interpreted as CSS selector syntax.
+
+
 [source, XML]
 ----
 <rich:jQuery selector="#form\\:menu img" query="..." />
@@ -8389,7 +9023,9 @@ Timed queries are triggered at specified times. This can be useful for calling s
 [[exam-Component_Reference-richjQuery-richjQuery_example]]
 
 .+<rich:jQuery>+ example
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:dataTable id="customList" ... >
@@ -8399,6 +9035,12 @@ Timed queries are triggered at specified times. This can be useful for calling s
 <rich:jQuery selector="#customList tr:odd" timing="domready" query="addClass(odd)" />
 
 ----
+
+In the example, the selector picks out the odd +<tr>+ elements that are children of the element with an +id="customlist"+ attribute. The query +addClass(odd)+ is then performed on the selection during page loading ( +load+) such that the +odd+ CSS class is added to the selected elements.
+
+image::images/Component_Reference-richjQuery-richjQuery_example.png[]
+
+A table highlighted in a "zebra" fashion, with every odd row colored.
 
 ====
 
@@ -8415,7 +9057,9 @@ If the function requires extra parameters itself, these are provided in JavaScri
 [[exam-Component_Reference-richjQuery-Calling_a_richjQuery_component_as_a_function]]
 
 .Calling a +<rich:jQuery>+ component as a function
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:graphicImage width="50" value="/images/price.png" onmouseover="enlargePic(this, {pwidth:'60px'})" onmouseout="releasePic(this)"  />
@@ -8425,6 +9069,8 @@ If the function requires extra parameters itself, these are provided in JavaScri
 <rich:jQuery name="releasePic" query="animate({width:'50px'})"/>
 
 ----
+
+The example enlarges the images when the mouse moves over them. The +enlargePic+ and +releasePic+ components are called like ordinary JavaScript functions from the image elements.
 
 ====
 
@@ -8454,38 +9100,40 @@ Read this chapter for details on special functions for use with particular compo
 
 [[sect-Component_Reference-Functions-richclientId]]
 
-=== +rich:clientId+
+=== `rich:clientId`
 
-The +rich:clientId('id')+ function returns the client identifier related to the passed component identifier ( +'id'+). If the specified component identifier is not found, +null+ is returned instead.
+The `rich:clientId('id')` function returns the client identifier related to the passed component identifier ( +'id'+). If the specified component identifier is not found, +null+ is returned instead.
 
 [[sect-Component_Reference-Functions-richcomponent]]
 
-=== +rich:component+
+=== `rich:component`
 
-The +rich:component('id')+ function is equivalent to the +RichFaces.$('clientId')+ code. It returns the client object instance based on the passed server-side component identifier ( +'id'+). If the specified component identifier is not found, +null+ is returned instead. The function can be used to get an object from a component to call a JavaScript API function without using the +<rich:componentControl>+ component.
+The `rich:component('id')` function is equivalent to the +RichFaces.$('clientId')+ code. It returns the client object instance based on the passed server-side component identifier ( +'id'+). If the specified component identifier is not found, +null+ is returned instead. The function can be used to get an object from a component to call a JavaScript API function without using the +<rich:componentControl>+ component.
 
 [[sect-Component_Reference-Functions-richelement]]
 
-=== +rich:element+
+=== `rich:element`
 
-The +rich:element('id')+ function is a shortcut for the equivalent +document.getElementById(#{rich:clientId('id')})+ code. It returns the element from the client, based on the passed server-side component identifier. If the specified component identifier is not found, +null+ is returned instead.
+The `rich:element('id')` function is a shortcut for the equivalent +document.getElementById(#{rich:clientId('id')})+ code. It returns the element from the client, based on the passed server-side component identifier. If the specified component identifier is not found, +null+ is returned instead.
 
 [[sect-Component_Reference-Functions-richjquery]]
 
-=== +rich:jQuery+
+=== `rich:jQuery`
 
-The +rich:jQuery('id')+ function is a shortcut for the equivalent +jQuery('##{rich:clientId('id')})+ code. It returns the jQuery object for the element located by the passed server-side component identifier. If the specified component identifier is not found, +null+ is returned instead.
+The `rich:jQuery('id')` function is a shortcut for the equivalent +jQuery('##{rich:clientId('id')})+ code. It returns the jQuery object for the element located by the passed server-side component identifier. If the specified component identifier is not found, +null+ is returned instead.
 
 [[sect-Component_Reference-Functions-richfindComponent]]
 
-=== +rich:findComponent+
+=== `rich:findComponent`
 
-The +rich:findComponent('id')+ function returns the a UIComponent instance of the passed component identifier. If the specified component identifier is not found, +null+ is returned instead.
+The `rich:findComponent('id')` function returns the a UIComponent instance of the passed component identifier. If the specified component identifier is not found, +null+ is returned instead.
 
 [[exam-Component_Reference-richfindComponent-richfindComponent_example]]
 
-.+rich:findComponent+ example
-====[source, XML]
+.`rich:findComponent` example
+====
+
+
 [source, XML]
 ----
 <h:inputText id="myInput">
@@ -8499,14 +9147,18 @@ The +rich:findComponent('id')+ function returns the a UIComponent instance of th
 
 [[sect-Component_Reference-Functions-richisUserInRole]]
 
-=== +rich:isUserInRole+
+=== `rich:isUserInRole`
 
-The +rich:isUserInRole(Object)+ function checks whether the logged-in user belongs to a certain user role, such as being an administrator. User roles are defined in the _web.xml_settings file.
+The `rich:isUserInRole(Object)` function checks whether the logged-in user belongs to a certain user role, such as being an administrator. User roles are defined in the _web.xml_settings file.
 
 [[exam-Component_Reference-richisUserInRole-richisUserInRole_example]]
 
-.+rich:isUserInRole+ example
-====[source, XML]
+.`rich:isUserInRole` example
+====
+
+The `rich:isUserInRole(Object)` function can be used in conjunction with the +rendered+ attribute of a component to only display certain controls to authorized users.
+
+
 [source, XML]
 ----
 <rich:editor value="#{bean.text}" rendered="#{rich:isUserInRole('admin')}"/>
@@ -8538,15 +9190,19 @@ Use the +event+ attribute to specify the event that triggers the JavaScript API 
 [[exam-Component_Reference-richcomponentControl-richcomponentControl_basic_usage]]
 
 .+<rich:componentControl>+ basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:commandButton value="Show Modal Panel">
     <!--componentControl is attached to the commandButton-->
-    <rich:componentControl target="ccModalPanelID" event="click" operation="show"/>
+    <rich:componentControl target="ccModalPanelID" event="click" operation="show"/> 
 </h:commandButton>
 
 ----
+
+The example contains a single command button, which when clicked shows the modal panel with the identifier +ccModalPanelID+.
 
 ====
 
@@ -8559,7 +9215,9 @@ The operation can receive parameters through nested +<f:param>+ elements.
 [[exam-Component_Reference-richcomponentControl-Using_parameters]]
 
 .Using parameters
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:componentControl event="click" target="modalPanel" operation="show">
@@ -8626,7 +9284,9 @@ You can turn validation awareness off by setting the +validationAware+ attribute
 [[figu-Component_Reference-richfocus-Validation_aware]]
 
 .Validation-aware +<rich:focus>+
-image::
+image::images/figu-Component_Reference-richfocus-Validation_aware.png[]
+
+
 [[sect-Component_Reference-richfocus-Preserving_focus]]
 
 ==== Preserving Focus
@@ -8636,7 +9296,9 @@ Focus can be configured to keep focus on the input component which had focus bef
 [[exam-Component_Reference-richfocus-richfocus_preserving_focus]]
 
 .+<rich:focus>+ preserving focus
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:form>
@@ -8644,11 +9306,13 @@ Focus can be configured to keep focus on the input component which had focus bef
 
     <h:inputText id="query" value="#{query}" />
     <a4j:commandButton value="Search" render="output" />
-
+ 
     <h:outputText value="Searched query:" />
     <h:outputText id="output" value="#{query}" />
 </h:form>
 ----
+
+In the example above, everytime the user hits Search (or hits enter), the focus is given back to the query input after the request.
 
 ====
 
@@ -8675,8 +9339,10 @@ A component focus chosen by the +FocusManager+ will take priority over any focus
 [[exam-Component_Reference-richfocus-Focus_Manager]]
 
 .+<rich:focus>+ preserving focus
-====[source, Java]
-[source, JAVA]
+====
+
+
+[source, Java]
 ----
 FocusManager focusManager = ServiceTracker.getService(FocusManager.class);
 focusManager.focus("input2");
@@ -8719,7 +9385,9 @@ Hot key processing can be disabled by setting +rendered+ to +false+.
 [[exam-Component_Reference-richhotkey-richhotkey_basic_usage]]
 
 .+<rich:hotKey>+ basic usage
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:hotKey key="ctrl+z">
@@ -8730,6 +9398,8 @@ Hot key processing can be disabled by setting +rendered+ to +false+.
 	...
 </rich:popupPanel>
 ----
+
+The example contains +<rich:hotKey>+ which handles the +$$Ctrl+Z$$+ key sequence on the whole page. When the key sequence is pressed, the +<rich:popupPanel>+ is displayed.
 
 ====
 
@@ -8764,7 +9434,9 @@ The following event handlers could be used to trigger client-side behaviors or t
 [[exam-Component_Reference-richhotKey-richhotkKey_event_handlers]]
 
 .+<rich:hotKey>+ event handlers
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <rich:hotKey key="ctrl+a" onkeyup="alert('Ctrl+A was pressed')" />
@@ -8807,7 +9479,9 @@ Nest parameter tags in the +<rich:hashParam>+ component to group them in the has
 [[exam-Component_Reference-richhashParam-richhashParam]]
 
 .+<rich:hashParam>+
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:commandButton value="Show popup">
@@ -8825,6 +9499,8 @@ Nest parameter tags in the +<rich:hashParam>+ component to group them in the has
 </h:commandButton>
 
 ----
+
+The example illustrates the use of the +<rich:hashParam>+ component to group multiple parameters into a hash map. The parameters are passed through to the `show` function pop-up panel with the +popupPanel+ identifier.
 
 ====
 
@@ -8854,7 +9530,9 @@ This component brings a backward compatibility for HTML5 non-compliant browsers 
 [[exam-Component_Reference-richplaceholder-Input_components]]
 
 .+<rich:placeholder>+ with input components
-====[source, XML]
+====
+
+
 [source, XML]
 ----
 <h:outputLabel value="Input text:" />
@@ -8878,7 +9556,9 @@ This component brings a backward compatibility for HTML5 non-compliant browsers 
 [[figu-Component_Reference-richplaceholder-Input_components]]
 
 .+<rich:placeholder>+
-image::
+image::images/figu-Component_Reference-richplaceholder-Input_components.png[]
+
+
 [[sect-Component_Reference-richplaceholder-Reference_data]]
 
 ==== Reference data

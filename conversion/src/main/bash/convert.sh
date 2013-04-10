@@ -6,6 +6,7 @@ D2A_XSLT=$CONVERT_DIR/../xslt/d2a/d2a.xsl
 
 convert_dev_guide() {
     echo "Conversion started: Developer Guide"
+    date
 
     DEV_GUIDE_DIR=$CONVERT_DIR/../../../../Developer_Guide/src/main/docbook/en-US/
     DEV_GUIDE_XML=$DEV_GUIDE_DIR/Developer_Guide.xml
@@ -15,11 +16,13 @@ convert_dev_guide() {
     java -jar $SAXON_JAR -xi -s:$DEV_GUIDE_XML -o:$DEV_GUIDE_AD $D2A_XSLT &> $DEV_GUIDE_CONVERSION_LOG
     cat $DEV_GUIDE_CONVERSION_LOG
 
+    date
     echo "Conversion finished: Developer Guide"
 }
 
 convert_comp_ref() {
     echo "Conversion started: Component Reference"
+    date
 
     COMP_REF_DIR=$CONVERT_DIR/../../../../Component_Reference/src/main/docbook/en-US/
     COMP_REF_XML=$COMP_REF_DIR/Component_Reference.xml
@@ -29,8 +32,9 @@ convert_comp_ref() {
     java -jar $SAXON_JAR -xi -s:$COMP_REF_XML -o:$COMP_REF_AD $D2A_XSLT &> $COMP_REF_CONVERSION_LOG
     cat $COMP_REF_CONVERSION_LOG
 
+    date
     echo "Conversion finished: Component Reference"
 }
 
-#convert_dev_guide
+convert_dev_guide
 convert_comp_ref
