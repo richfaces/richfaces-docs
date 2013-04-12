@@ -87,7 +87,7 @@ If the +bypassUpdates+ attribute is set to +true+, the Update Model phase of the
 
 ==== +render+
 
-The +render+ attribute provides a reference to one or more components on the page that need updating after an Ajax interaction. It uses the UIComponent.findComponent()algorithm to find the components in the component tree using their +id+ identifiers as a reference. Components can be referenced by their +id+ identifier alone, or by their +clientId+ identifier to make locating components more efficient. <<exam-Component_Reference-render-render_example>> shows both ways of referencing components. Each command button will correctly render the referenced panel grids, but the second button locates the references more efficiently with explicit +clientId+ paths.
+The +render+ attribute provides a reference to one or more components on the page that need updating after an Ajax interaction. It uses the +UIComponent.findComponent()+ algorithm to find the components in the component tree using their +id+ identifiers as a reference. Components can be referenced by their +id+ identifier alone, or by their +clientId+ identifier to make locating components more efficient. <<exam-Component_Reference-render-render_example>> shows both ways of referencing components. Each command button will correctly render the referenced panel grids, but the second button locates the references more efficiently with explicit +clientId+ paths.
 
 [[exam-Component_Reference-render-render_example]]
 
@@ -390,7 +390,7 @@ public class ParamBean {
 
 ----
 
-When the Set name to Alexbutton is pressed, the application sets the +name+ parameter of the bean to +Alex+, and displays the name in the output field.
+When the btn:[Set name to Alex] button is pressed, the application sets the +name+ parameter of the bean to +Alex+, and displays the name in the output field.
 
 ====
 
@@ -933,7 +933,7 @@ The JMS instance on the back-end must be configured to work with your +<a4j:push
 [NOTE]
 .Configuring JMS on JBoss Application Server
 ====
-Refer to the JBoss Application Server Administration Console Guidefor details on managing JBoss Application Server through the Administration Console.
+Refer to the *_JBoss Application Server Administration Console Guide_* for details on managing JBoss Application Server through the Administration Console.
 ====
 
 [[exam-Component_Reference-a4jpush-JMS_server_configuration]]
@@ -970,7 +970,7 @@ Ensure the Create durable subscriberand the Delete durable subscriberoptions are
 ====
 Durable subscriptions receive all events, including those events which were sent while the push component was not connected.
 
-Refer to JMS Documentationfor details on configuring the JMS Server.
+Refer to *_JMS Documentation_* for details on configuring the JMS Server.
 ====
 
 [NOTE]
@@ -1119,7 +1119,7 @@ This example uses the +<a4j:mediaOutput>+ component to generate a JPEGimage of v
 
 ----
 
-The +<a4j:mediaOutput>+ component uses the MediaBean.paintmethod to create the image. The method generates a random number, which is then converted into an output stream and rendered to a JPEGimage. The +MediaBean+ class is as follows:
+The +<a4j:mediaOutput>+ component uses the +MediaBean.paint+ method to create the image. The method generates a random number, which is then converted into an output stream and rendered to a JPEGimage. The +MediaBean+ class is as follows:
 
 
 [source, Java]
@@ -1458,7 +1458,7 @@ The +<rich:graphValidator>+ component is used to wrap a set of input components 
 [NOTE]
 .Validation without model updates
 ====
-The +<rich:graphValidator>+ component performs a clone()method on the referenced bean instance during the validation phase. The cloned object is validated and triggers any required validation messages. As such, the model object remains clean, and the lifecycle is interrupted properly after the _Process Validations_ phase.
+The +<rich:graphValidator>+ component performs a +clone()+ method on the referenced bean instance during the validation phase. The cloned object is validated and triggers any required validation messages. As such, the model object remains clean, and the lifecycle is interrupted properly after the _Process Validations_ phase.
 
 Ensure the referenced object implements the Cloneableinterface, and allows a deep clone if required.
 ====
@@ -1528,7 +1528,7 @@ public class UserBean implements Cloneable {
 
 ----
 
-When validation occurs, the whole object is validated against the annotation contstraints. The +@AssertTrue+ annotation relies on the isPasswordsEqual()function to check whether the two entered passwords are equal.
+When validation occurs, the whole object is validated against the annotation contstraints. The +@AssertTrue+ annotation relies on the +isPasswordsEqual()+ function to check whether the two entered passwords are equal.
 
 If the entered passwords do not match, an error message is displayed:
 
@@ -2024,7 +2024,7 @@ Using the +autocompleteMethod+  attribute::
 
 ----
 
-The +<rich:autocomplete>+ component uses the bean.autocompletemethod to provide suggestions, based on the entered prefix.
+The +<rich:autocomplete>+ component uses the +bean.autocomplete+ method to provide suggestions, based on the entered prefix.
 Using the +autocompleteList+  attribute:: 
 [source, XML]
 ----
@@ -2032,7 +2032,7 @@ Using the +autocompleteList+  attribute::
 
 ----
 
-The +<rich:autocomplete>+ component retrieve the suggestion list from bean.suggestions.
+The +<rich:autocomplete>+ component retrieve the suggestion list from +bean.suggestions+.
 ====
 
 [[sect-Component_Reference-richautocomplete-Submission_modes]]
@@ -2202,7 +2202,7 @@ To add keyboard support for manual input, set +enableManualInput="true"+. To dis
 
 To change the appearance of the display button from the standard calendar icon, use the +buttonIcon+ and +buttonDisabledIcon+ attributes to replace the icon with a specified file. Alternatively, use the +buttonLabel+ attribute to display text on the button without an icon. If +buttonLabel+ is specified then both the +buttonIcon+ and +buttonDisabledIcon+ attributes are ignored. To hide the text field box, set +showInput="false"+.
 
-The calendar features a Todaybutton for locating today's date on the calendar. This can be set to three different values using the +todayControlMode+ attribute:
+The calendar features a btn:[Today] button for locating today's date on the calendar. This can be set to three different values using the +todayControlMode+ attribute:
 
 * +hidden+, which does not display the button;
 * +select+, the default setting, which scrolls the calendar to the current month and selects the date; and
@@ -2230,18 +2230,18 @@ In RichFaces 4, the +<rich:calendar>+ component supports times that include seco
 
 ==== Localization and formatting
 
-Date and time strings can be formatted in a set pattern. Use standard locale formatting strings specified by ISO 8601(for example, +d/M/yy HH:mm a+) with the +datePattern+ attribute to format date and time strings.
+Date and time strings can be formatted in a set pattern. Use standard locale formatting strings specified by *_ISO 8601_* (for example, +d/M/yy HH:mm a+) with the +datePattern+ attribute to format date and time strings.
 
 To set the locale of the calendar, use the +locale+ attribute. The calendar will render month and day names in the relevant language. For example, to set the calendar to the US locale, specify +locale="en/US"+.
 
 Use an application resource bundle to localize the calendar control labels. Define the following strings in the resource bundle:
 
-* The RICH_CALENDAR_APPLY_LABELstring is the label for the Applybutton.
-* The RICH_CALENDAR_TODAY_LABELstring is the label for the Todaybutton.
-* The RICH_CALENDAR_CLOSE_LABELstring is the label for the Closebutton.
-* The RICH_CALENDAR_OK_LABELstring is the label for the OKbutton.
-* The RICH_CALENDAR_CLEAN_LABELstring is the label for the Cleanbutton.
-* The RICH_CALENDAR_CANCEL_LABELstring is the label for the Cancelbutton.
+* The RICH_CALENDAR_APPLY_LABELstring is the label for the btn:[Apply] button.
+* The RICH_CALENDAR_TODAY_LABELstring is the label for the btn:[Today] button.
+* The RICH_CALENDAR_CLOSE_LABELstring is the label for the btn:[Close] button.
+* The RICH_CALENDAR_OK_LABELstring is the label for the btn:[OK] button.
+* The RICH_CALENDAR_CLEAN_LABELstring is the label for the btn:[Clean] button.
+* The RICH_CALENDAR_CANCEL_LABELstring is the label for the btn:[Cancel] button.
 
 
 Alternatively, use the +org.richfaces.calendar+ resource bundle with Java Archive files ( JARs) defining the same properties.
@@ -2399,7 +2399,7 @@ The +<rich:calendar>+ component can be controlled through the JavaScript API. Th
 |+.rf-cal-tl-btn-press+:: This class defines the styles for toolbar items when it is pressed.
 |+panelBorderColor+|border-color
 |+panelBorderColor+|border-right-color, border-bottom-color
-|+.rf-cal-tl-close+:: This class defines styles for a Closebutton in a toolbar.
+|+.rf-cal-tl-close+:: This class defines styles for a btn:[Close] button in a toolbar.
 |No skin parameters.
 |+.rf-cal-c+:: This class defines the styles for regular calendar cells.
 |+panelBorderColor+|border-bottom-color, border-right-color
@@ -2436,9 +2436,9 @@ The +<rich:calendar>+ component can be controlled through the JavaScript API. Th
 |+subBorderColor+|border-right-color, border-bottom-color
 |+.rf-cal-sp-btn+:: This class defines the styles for a wrapper +<td>+ element for spinner buttons in the pop-up element for time selection.
 |+headerBackgroundColor+|background-color, border-color
-|+.rf-cal-sp-up+:: This class defines styles for the Upspinner button.
+|+.rf-cal-sp-up+:: This class defines styles for the btn:[Up] spinner button.
 |No skin parameters.
-|+.rf-cal-sp-down+:: This class defines styles for the Downspinner button.
+|+.rf-cal-sp-down+:: This class defines styles for the btn:[Down] spinner button.
 |No skin parameters.
 |+.rf-cal-sp-press+:: This class defines styles for a spinner button when it is pressed.
 |No skin parameters.
@@ -2479,19 +2479,19 @@ The +<rich:calendar>+ component can be controlled through the JavaScript API. Th
 |+.rf-cal-timepicker-inp+:: This class defines the styles for an input field in the time picker.
 |+generalSizeFont+|font-size
 |+generalFamilyFont+|font-family
-|+.rf-cal-timepicker-ok+:: This class defines styles for the OKbutton in the time picker.
+|+.rf-cal-timepicker-ok+:: This class defines styles for the btn:[OK] button in the time picker.
 |No skin parameters.
-|+.rf-cal-timepicker-cancel+:: This class defines styles for the Cancelbutton in the time picker.
+|+.rf-cal-timepicker-cancel+:: This class defines styles for the btn:[Cancel] button in the time picker.
 |No skin parameters.
 |+.rf-cal-monthpicker-cnt+:: This class defines the styles for the content of the pop-up element during month or year selection.
 |+panelBorderColor+|border-color
 |+tableBackgroundColor+|background
 |+generalSizeFont+|font-size
 |+generalFamilyFont+|font-family
-|+.rf-cal-monthpicker-ok+:: This class defines the styles for the OKbutton for the month picker.
+|+.rf-cal-monthpicker-ok+:: This class defines the styles for the btn:[OK] button for the month picker.
 |+additionalBackgroundColor+|background
 |+panelBorderColor+|border-top-color
-|+.rf-cal-monthpicker-cancel+:: This class defines the styles for the Cancelbutton for the month picker.
+|+.rf-cal-monthpicker-cancel+:: This class defines the styles for the btn:[Cancel] button for the month picker.
 |+additionalBackgroundColor+|background
 |+panelBorderColor+|border-top-color
 |+.rf-cal-monthpicker-split+:: This class defines the styles for the splitter in the month picker.
@@ -2837,14 +2837,14 @@ Any file is accepted by rich:fileUpload component by default. There are three pa
 
 ==== Interactivity options
 
-Set the +immediateUpload+ attribute to +true+ to upload files as soon as they are added to the list, rather than waiting for the user to press the Uploadbutton.
+Set the +immediateUpload+ attribute to +true+ to upload files as soon as they are added to the list, rather than waiting for the user to press the btn:[Upload] button.
 
 The text labels used in the component can be completely customized. Labels for the various controls of the component can be set using the following parameters:
 
-+addLabel+:: The +addLabel+ parameter sets the label for the Addbutton.
-+clearAllLabel+:: The +clearAllLabel+ parameter sets the label for the Clear Allbutton.
-+clearLabel+:: The +clearLabel+ parameter sets the label for the Clearbutton.
-+uploadLabel+:: The +uploadLabel+ parameter sets the label for the Uploadbutton.
++addLabel+:: The +addLabel+ parameter sets the label for the btn:[Add] button.
++clearAllLabel+:: The +clearAllLabel+ parameter sets the label for the btn:[Clear All] button.
++clearLabel+:: The +clearLabel+ parameter sets the label for the btn:[Clear] button.
++uploadLabel+:: The +uploadLabel+ parameter sets the label for the btn:[Upload] button.
 The +<rich:fileUpload>+ component provides a built-in progress bar to indicate the progress of each file that is uploaded. This progress bar can be replaced with a +<rich:progressBar>+ component added to the +progress+ facet. Refer to <<sect-Component_Reference-Output_and_messages-richprogressBar>> for details on the +<rich:progressBar>+ component.
 
 To disable the +<rich:fileUpload>+ component, use the +disabled+ attribute.
@@ -2891,31 +2891,31 @@ There are a number of event handlers specific to the +<rich:fileUpload>+ compone
 |No skin parameters.
 |+.rf-fu-btns-lft+:: +.rf-fu-btns-rgh+:: These classes define styles for buttons on the left and right of the file upload control.
 |No skin parameters.
-|+.rf-fu-btn-add+:: This class defines styles for the Addbutton in the file upload control.
+|+.rf-fu-btn-add+:: This class defines styles for the btn:[Add] button in the file upload control.
 |+trimColor+|background-color
 |+panelBorderColor+|border-color
-|+.rf-fu-btn-cnt-add+:: This class defines styles for the content of the Addbutton in the file upload control.
+|+.rf-fu-btn-cnt-add+:: This class defines styles for the content of the btn:[Add] button in the file upload control.
 |+generalTextColor+|color
 |+generalFamilyFont+|font-family
 |+generalSizeFont+|font-size
-|+.rf-fu-btn-add-dis+:: This class defines styles for the Addbutton in the file upload control when it is disabled.
+|+.rf-fu-btn-add-dis+:: This class defines styles for the btn:[Add] button in the file upload control when it is disabled.
 |+tableFooterBackgroundColor+|background-color
 |+tableFooterBackgroundColor+|border-color
-|+.rf-fu-btn-cnt-add-dis+:: This class defines styles for the content of the Addbutton in the file upload control when it is disabled.
+|+.rf-fu-btn-cnt-add-dis+:: This class defines styles for the content of the btn:[Add] button in the file upload control when it is disabled.
 |+tabDisabledTextColor+|color
 |+generalFamilyFont+|font-family
 |+generalSizeFont+|font-size
-|+.rf-fu-btn-upl+:: This class defines styles for the Uploadbutton in the file upload control.
+|+.rf-fu-btn-upl+:: This class defines styles for the btn:[Upload] button in the file upload control.
 |+trimColor+|background-color
 |+panelBorderColor+|border-color
-|+.rf-fu-btn-cnt-upl+:: This class defines styles for the content of the Uploadbutton in the file upload control.
+|+.rf-fu-btn-cnt-upl+:: This class defines styles for the content of the btn:[Upload] button in the file upload control.
 |+generalTextColor+|color
 |+generalFamilyFont+|font-family
 |+generalSizeFont+|font-size
-|+.rf-fu-btn-clr+:: This class defines styles for the Clearbutton in the file upload control.
+|+.rf-fu-btn-clr+:: This class defines styles for the btn:[Clear] button in the file upload control.
 |+trimColor+|background-color
 |+panelBorderColor+|border-color
-|+.rf-fu-btn-cnt-clr+:: This class defines styles for the content of the Clearbutton in the file upload control.
+|+.rf-fu-btn-cnt-clr+:: This class defines styles for the content of the btn:[Clear] button in the file upload control.
 |+generalTextColor+|color
 |+generalFamilyFont+|font-family
 |+generalSizeFont+|font-size
@@ -4145,7 +4145,7 @@ The +<rich:collapsiblePanel>+ component can be controlled through the JavaScript
 
 ==== +<rich:panelToggleListener>+
 
-Use the +<rich:panelToggleListener>+ tag to register a +PanelToggleListener+ class on a parent +<rich:collapsiblePanel>+ component. The class provided as a listener must implement the org.richfaces.event.PanelToggleListenerinterface. The processPanelTogglemethod accepts an +org.richface.event.PanelToggleEvent+ event as a parameter.
+Use the +<rich:panelToggleListener>+ tag to register a +PanelToggleListener+ class on a parent +<rich:collapsiblePanel>+ component. The class provided as a listener must implement the org.richfaces.event.PanelToggleListenerinterface. The +processPanelToggle+ method accepts an +org.richface.event.PanelToggleEvent+ event as a parameter.
 
 [[sect-Component_Reference-Panels-richpopupPanel]]
 
@@ -4604,7 +4604,7 @@ The +<rich:togglePanel>+ component can be controlled through the JavaScript API.
 
 ==== +<rich:itemChangeListener>+
 
-Use the +<rich:itemChangeListener>+ tag to register an +ItemChangeListener+ class on a parent panel component. The class provided as a listener must implement the org.richfaces.event.ItemChangeListenerinterface. The processItemChangemethod accepts an +org.richface.event.ItemChangeEvent+ event as a parameter.
+Use the +<rich:itemChangeListener>+ tag to register an +ItemChangeListener+ class on a parent panel component. The class provided as a listener must implement the org.richfaces.event.ItemChangeListenerinterface. The +processItemChange+ method accepts an +org.richface.event.ItemChangeEvent+ event as a parameter.
 
 The +<rich:itemChangeListener>+ tag can be used with any of the switchable panel components:
 
@@ -6298,7 +6298,7 @@ To define a filter for a column use either the +filter+ or +filterExpression+ at
 
 Use the +filterExpression+ attribute to define an expression that can be evaluated as a boolean value. The expression checks if each table entry satisfies the filtering condition when the table is rendered. For example, the expression might be a JSTL (JavaServer Pages Standard Tag Library) function such as `contains` or `equals`.
 
-Use the +filter+ attribute to define a filter interface. The attribute must use EL (Expression Language) to point to an object which implements the org.richfaces.model.Filter<T>interface. The object must provide a single accept(T t)method. The method takes each iteration object as a parameter and returns a boolean value, which determines whether the object satisfies the filter. By defining a custom filter, you can implement complex business logic to filter a table.
+Use the +filter+ attribute to define a filter interface. The attribute must use EL (Expression Language) to point to an object which implements the org.richfaces.model.Filter<T>interface. The object must provide a single +accept(T t)+ method. The method takes each iteration object as a parameter and returns a boolean value, which determines whether the object satisfies the filter. By defining a custom filter, you can implement complex business logic to filter a table.
 
 [[sect-Component_Reference-Table_filtering-builtin_filtering]]
 
@@ -6718,7 +6718,7 @@ The mode for performing submissions when nodes are expanded or collapsed is dete
 +ajax+:: This is the default setting. The +<rich:tree>+ component performs an Ajax form submission, and only the content of the tree is rendered.
 +server+:: The +<rich:tree>+ component performs a common submission, completely refreshing the page.
 +client+:: The +<rich:tree>+ component updates on the client side through JavaScript, without any additional requests or updates. All nodes are rendered to the client during the initial page rendering.
-By default, tree nodes are expanded and collapsed through the +and -controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the +toggleNodeEvent+ attribute.
+By default, tree nodes are expanded and collapsed through the btn:[+] and btn:[-] controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the +toggleNodeEvent+ attribute.
 
 [[sect-Component_Reference-richtree-Selecting_tree_nodes]]
 
@@ -6781,7 +6781,7 @@ Styling for the +<rich:tree>+ component is mostly applied to the tree nodes. Ref
 
 ==== +<rich:treeSelectionChangeListener>+
 
-Use the +<rich:treeSelectionChangeListener>+ tag to register a +TreeSelectionChangeListener+ class on a parent +<rich:tree>+ component. The class provided as a listener must implement the org.richfaces.event.TreeSelectionChangeListenerinterface. The processTreeSelectionChangemethod accepts an +org.richface.event.TreeSelectionChangeEvent+ event as a parameter.
+Use the +<rich:treeSelectionChangeListener>+ tag to register a +TreeSelectionChangeListener+ class on a parent +<rich:tree>+ component. The class provided as a listener must implement the org.richfaces.event.TreeSelectionChangeListenerinterface. The +processTreeSelectionChange+ method accepts an +org.richface.event.TreeSelectionChangeEvent+ event as a parameter.
 
 [[sect-Component_Reference-Trees-richtreeNode]]
 
@@ -6902,7 +6902,7 @@ Use the +expanded+ attribute to determine whether the node is expanded or collap
 
 ===== +<rich:treeToggleListener>+
 
-Use the +<rich:treeToggleListener>+ tag to register a +TreeToggleListener+ class on a parent +<rich:treeNode>+ component. The class provided as a listener must implement the org.richfaces.event.TreeToggleListenerinterface. The processTreeTogglemethod accepts an +org.richface.event.TreeToggleEvent+ event as a parameter.
+Use the +<rich:treeToggleListener>+ tag to register a +TreeToggleListener+ class on a parent +<rich:treeNode>+ component. The class provided as a listener must implement the org.richfaces.event.TreeToggleListenerinterface. The +processTreeToggle+ method accepts an +org.richface.event.TreeToggleEvent+ event as a parameter.
 
 [[sect-Component_Reference-Trees-Tree_adaptors]]
 
@@ -7120,9 +7120,9 @@ By default, the menu drops down when the title is clicked. To drop down with a d
 
 Menus can be navigated using the keyboard. Additionally, menus can be navigated programmatically using the JavaScript API. The JavaScript API allows the following methods:
 
-show():: The show()method shows the menu.
-hide():: The hide()method hides the menu.
-activateItem(menuItemId):: The activateItem(menuItemId)activates the menu item with the +menuItemId+ identifier.
++show()+:: The +show()+ method shows the menu.
++hide()+:: The +hide()+ method hides the menu.
++activateItem(menuItemId)+:: The +activateItem(menuItemId)+ activates the menu item with the +menuItemId+ identifier.
 Use the +mode+ attribute to determine how the menu requests are submitted:
 
 * +server+, the default setting, submits the form normally and completely refreshes the page.
@@ -7224,9 +7224,9 @@ By default, the menu is activated when the +contextmenu+ event is observed (ie. 
 
 Menus can be navigated using the keyboard. Additionally, menus can be navigated programmatically using the JavaScript API. The JavaScript API allows the following methods:
 
-show():: The show()method shows the menu.
-hide():: The hide()method hides the menu.
-activateItem(menuItemId):: The activateItem(menuItemId)activates the menu item with the +menuItemId+ identifier.
++show()+:: The +show()+ method shows the menu.
++hide()+:: The +hide()+ method hides the menu.
++activateItem(menuItemId)+:: The +activateItem(menuItemId)+ activates the menu item with the +menuItemId+ identifier.
 Use the +mode+ attribute to determine how the menu requests are submitted:
 
 * +server+, the default setting, submits the form normally and completely refreshes the page.
@@ -9025,7 +9025,7 @@ Use the +attachType+ attribute to specify how the event-handling queries are att
 
 Timed queries are triggered at specified times. This can be useful for calling simple methods when a page is rendered, or for adding specific functionality to an element. Use the +timing+ attribute to specify the point at which the timed query is triggered:
 
-+domready+:: This is the default behavior. The query is triggered when the document is loaded and the DOM is ready. The query is called as a jQuery()function.
++domready+:: This is the default behavior. The query is triggered when the document is loaded and the DOM is ready. The query is called as a +jQuery()+ function.
 +immediate+:: The query is triggered immediately. The query is called as an in-line script.
 [[exam-Component_Reference-richjQuery-richjQuery_example]]
 
