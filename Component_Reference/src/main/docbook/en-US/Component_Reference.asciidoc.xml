@@ -142,10 +142,8 @@ Available at <ulink url="http://docs.jboss.org/richfaces/latest_4_0_X/vdldoc/">h
         <itemizedlist>
           <listitem>
             <simpara>
-              <emphasis role="strong">
-                <emphasis>RichFaces Components API</emphasis>
-              </emphasis>
-            </simpara>
+RichFaces Components API
+</simpara>
             <itemizedlist>
               <listitem>
                 <simpara>
@@ -160,11 +158,13 @@ Available at <ulink url="http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/ri
                 <emphasis>RichFaces Components UI</emphasis>
               </emphasis>
             </simpara>
-          </listitem>
-          <listitem>
-            <simpara>
+            <itemizedlist>
+              <listitem>
+                <simpara>
 Available at <ulink url="http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-ui/">http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-ui/</ulink>
 </simpara>
+              </listitem>
+            </itemizedlist>
           </listitem>
           <listitem>
             <simpara>
@@ -284,11 +284,11 @@ The form that contains the requesting component is processed.
             <listitem>
               <simpara>
 The region that contains the requesting component is processed. Use the <literal>&lt;a4j:region&gt;</literal> component as a wrapper element to specify regions.
+Some components make use of additional keywords. These are detailed under the relevant component entry in this book.
 </simpara>
             </listitem>
           </varlistentry>
         </variablelist>
-        <simpara>Some components make use of additional keywords. These are detailed under the relevant component entry in this book.</simpara>
       </section>
       <section id="sect-Component_Reference-Data_processing-bypassUpdates">
         <title>
@@ -991,63 +991,134 @@ public void sendMessage(String message) {
               <title>JMS server configuration</title>
               <simpara>This simple example describes the JMS server configuration required for a pushing server date to the client.</simpara>
               <simpara>The JMS server needs to be setup in order to propagate JMS messages to Push components. Create a new JMS topic using the following settings:</simpara>
-              <itemizedlist>
-                <listitem>
-                  <simpara>
-Name:datePush
+              <informaltable tabstyle="horizontal" frame="none" colsep="0" rowsep="0">
+                <tgroup cols="2">
+                  <colspec colwidth="15*"/>
+                  <colspec colwidth="85*"/>
+                  <tbody valign="top">
+                    <row>
+                      <entry>
+                        <simpara>
+Name
 </simpara>
-                </listitem>
-                <listitem>
-                  <simpara>
-JNDI name:/topic/datePush
+                      </entry>
+                      <entry>
+                        <simpara>
+datePush
 </simpara>
-                </listitem>
-                <listitem>
-                  <simpara>
-Use the default settings for other options.
+                      </entry>
+                    </row>
+                    <row>
+                      <entry>
+                        <simpara>
+JNDI
 </simpara>
-                </listitem>
-              </itemizedlist>
+                      </entry>
+                      <entry>
+                        <simpara>
+name:/topic/datePush
+</simpara>
+                      </entry>
+                    </row>
+                    <row>
+                      <entry>
+                        <simpara>
+Use
+</simpara>
+                      </entry>
+                      <entry>
+                        <simpara>
+the default settings for other options.
+</simpara>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
               <simpara>Add a single role for the topic in the same form using the following settings:</simpara>
-              <itemizedlist>
-                <listitem>
-                  <simpara>
-Name:guest
+              <informaltable tabstyle="horizontal" frame="none" colsep="0" rowsep="0">
+                <tgroup cols="2">
+                  <colspec colwidth="15*"/>
+                  <colspec colwidth="85*"/>
+                  <tbody valign="top">
+                    <row>
+                      <entry>
+                        <simpara>
+Name
 </simpara>
-                </listitem>
-                <listitem>
-                  <simpara>
-Send:true
+                      </entry>
+                      <entry>
+                        <simpara>
+guest
 </simpara>
-                </listitem>
-                <listitem>
-                  <simpara>
-Consume:true
+                      </entry>
+                    </row>
+                    <row>
+                      <entry>
+                        <simpara>
+Send
 </simpara>
-                </listitem>
-                <listitem>
-                  <simpara>
-Create subscriber:true
+                      </entry>
+                      <entry>
+                        <simpara>
+true
+Consume::true
 </simpara>
-                </listitem>
-                <listitem>
-                  <simpara>
-Delete subscriber:true
+                      </entry>
+                    </row>
+                    <row>
+                      <entry>
+                        <simpara>
+Create subscriber
 </simpara>
-                </listitem>
-                <listitem>
-                  <simpara>
-Create durable subscriber:true
+                      </entry>
+                      <entry>
+                        <simpara>
+true
 </simpara>
-                </listitem>
-                <listitem>
-                  <simpara>
-Delete durable subscriber:true
+                      </entry>
+                    </row>
+                    <row>
+                      <entry>
+                        <simpara>
+Delete subscriber
 </simpara>
-                </listitem>
-              </itemizedlist>
+                      </entry>
+                      <entry>
+                        <simpara>
+true
+</simpara>
+                      </entry>
+                    </row>
+                    <row>
+                      <entry>
+                        <simpara>
+Create durable subscriber
+</simpara>
+                      </entry>
+                      <entry>
+                        <simpara>
+true
+</simpara>
+                      </entry>
+                    </row>
+                    <row>
+                      <entry>
+                        <simpara>
+Delete durable subscriber
+</simpara>
+                      </entry>
+                      <entry>
+                        <simpara>
+true
+</simpara>
+                      </entry>
+                    </row>
+                  </tbody>
+                </tgroup>
+              </informaltable>
             </example>
-            <simpara>Ensure the Create durable subscriberand the Delete durable subscriberoptions are set to truefor proper push functionality.</simpara>
+            <simpara>Ensure the <literal>Create durable subscriber</literal> and the <literal>Delete durable subscriber</literal> options are set to <literal>true</literal> for proper push functionality.</simpara>
             <note>
               <title>Durable subscriptions</title>
               <simpara>Durable subscriptions receive all events, including those events which were sent while the push component was not connected.</simpara>
@@ -1061,7 +1132,6 @@ Delete durable subscriber:true
               <simpara>Use following <literal>web.xml</literal> parameters to change default values: <literal>org.richfaces.push.jms.connectionFactory</literal>, <literal>org.richfaces.push.jms.topicsNamespace</literal>.</simpara>
               <simpara>When RichFaces obtains a connection, an empty user name is used with an empty password.</simpara>
               <simpara>Use following <literal>web.xml</literal> parameters or equivalent JVM parameters to change default values: <literal>org.richfaces.push.jms.connectionUsername</literal>, <literal>org.richfaces.push.jms.connectionPassword</literal>.</simpara>
-              <literallayout class="monospaced">,</literallayout>
             </note>
           </section>
           <section id="_sending_and_receiving_push_messages_using_jms">
@@ -1438,7 +1508,6 @@ public class UserBean {
                 </textobject>
               </mediaobject>
             </informalfigure>
-            <simpara>Failed validation checks are reported using <literal>&lt;rich:message&gt;</literal> components.</simpara>
           </example>
         </section>
         <section id="sect-Component_Reference-richvalidator-Validation_triggers">
@@ -2508,7 +2577,7 @@ Hide the pop-up list.
           <simpara>The <literal>&lt;rich:calendar&gt;</literal> component is presented as a pop-up by default, appearing as a text field with a button to expand the full pop-up calendar. To render the calendar in-line on the page instead, set <literal>popup="false</literal>. This displays the full calendar without the text field and display button.</simpara>
           <simpara>To add keyboard support for manual input, set <literal>enableManualInput="true"</literal>. To disable the calendar from any user input, set <literal>disabled="true"</literal>.</simpara>
           <simpara>To change the appearance of the display button from the standard calendar icon, use the <literal>buttonIcon</literal> and <literal>buttonDisabledIcon</literal> attributes to replace the icon with a specified file. Alternatively, use the <literal>buttonLabel</literal> attribute to display text on the button without an icon. If <literal>buttonLabel</literal> is specified then both the <literal>buttonIcon</literal> and <literal>buttonDisabledIcon</literal> attributes are ignored. To hide the text field box, set <literal>showInput="false"</literal>.</simpara>
-          <simpara>The calendar features a Todaybutton for locating today’s date on the calendar. This can be set to three different values using the <literal>todayControlMode</literal> attribute:</simpara>
+          <simpara>The calendar features a <guibutton>Today</guibutton> button for locating today’s date on the calendar. This can be set to three different values using the <literal>todayControlMode</literal> attribute:</simpara>
           <itemizedlist>
             <listitem>
               <simpara><literal>hidden</literal>, which does not display the button;
@@ -2546,32 +2615,32 @@ Hide the pop-up list.
           <itemizedlist>
             <listitem>
               <simpara>
-The RICH_CALENDAR_APPLY_LABELstring is the label for the Applybutton.
+The RICH_CALENDAR_APPLY_LABELstring is the label for the <guibutton>Apply</guibutton> button.
 </simpara>
             </listitem>
             <listitem>
               <simpara>
-The RICH_CALENDAR_TODAY_LABELstring is the label for the Todaybutton.
+The RICH_CALENDAR_TODAY_LABELstring is the label for the <guibutton>Today</guibutton> button.
 </simpara>
             </listitem>
             <listitem>
               <simpara>
-The RICH_CALENDAR_CLOSE_LABELstring is the label for the Closebutton.
+The RICH_CALENDAR_CLOSE_LABELstring is the label for the <guibutton>Close</guibutton> button.
 </simpara>
             </listitem>
             <listitem>
               <simpara>
-The RICH_CALENDAR_OK_LABELstring is the label for the OKbutton.
+The RICH_CALENDAR_OK_LABELstring is the label for the <guibutton>OK</guibutton> button.
 </simpara>
             </listitem>
             <listitem>
               <simpara>
-The RICH_CALENDAR_CLEAN_LABELstring is the label for the Cleanbutton.
+The RICH_CALENDAR_CLEAN_LABELstring is the label for the <guibutton>Clean</guibutton> button.
 </simpara>
             </listitem>
             <listitem>
               <simpara>
-The RICH_CALENDAR_CANCEL_LABELstring is the label for the Cancelbutton.
+The RICH_CALENDAR_CANCEL_LABELstring is the label for the <guibutton>Cancel</guibutton> button.
 </simpara>
             </listitem>
           </itemizedlist>
@@ -3208,7 +3277,7 @@ Hide the time editor pop-up.
                     <simpara>border-right-color, border-bottom-color</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-cal-tl-close</literal>:: This class defines styles for a Closebutton in a toolbar.</simpara>
+                    <simpara><literal>.rf-cal-tl-close</literal>:: This class defines styles for a <guibutton>Close</guibutton> button in a toolbar.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>No skin parameters.</simpara>
@@ -3469,13 +3538,13 @@ Hide the time editor pop-up.
                 </row>
                 <row>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-cal-sp-up</literal>:: This class defines styles for the Upspinner button.</simpara>
+                    <simpara><literal>.rf-cal-sp-up</literal>:: This class defines styles for the <guibutton>Up</guibutton> spinner button.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>No skin parameters.</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-cal-sp-down</literal>:: This class defines styles for the Downspinner button.</simpara>
+                    <simpara><literal>.rf-cal-sp-down</literal>:: This class defines styles for the <guibutton>Down</guibutton> spinner button.</simpara>
                   </entry>
                 </row>
                 <row>
@@ -3757,13 +3826,13 @@ Hide the time editor pop-up.
                 </row>
                 <row>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-cal-timepicker-ok</literal>:: This class defines styles for the OKbutton in the time picker.</simpara>
+                    <simpara><literal>.rf-cal-timepicker-ok</literal>:: This class defines styles for the <guibutton>OK</guibutton> button in the time picker.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>No skin parameters.</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-cal-timepicker-cancel</literal>:: This class defines styles for the Cancelbutton in the time picker.</simpara>
+                    <simpara><literal>.rf-cal-timepicker-cancel</literal>:: This class defines styles for the <guibutton>Cancel</guibutton> button in the time picker.</simpara>
                   </entry>
                 </row>
                 <row>
@@ -3812,7 +3881,7 @@ Hide the time editor pop-up.
                     <simpara>font-family</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-cal-monthpicker-ok</literal>:: This class defines the styles for the OKbutton for the month picker.</simpara>
+                    <simpara><literal>.rf-cal-monthpicker-ok</literal>:: This class defines the styles for the <guibutton>OK</guibutton> button for the month picker.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>
@@ -3835,7 +3904,7 @@ Hide the time editor pop-up.
                 </row>
                 <row>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-cal-monthpicker-cancel</literal>:: This class defines the styles for the Cancelbutton for the month picker.</simpara>
+                    <simpara><literal>.rf-cal-monthpicker-cancel</literal>:: This class defines the styles for the <guibutton>Cancel</guibutton> button for the month picker.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>
@@ -4480,7 +4549,7 @@ The <literal>ontyperejected</literal> parameter defines event handler when file 
         </section>
         <section id="sect-Component_Reference-richfileUpload-Interactivity_options">
           <title>Interactivity options</title>
-          <simpara>Set the <literal>immediateUpload</literal> attribute to <literal>true</literal> to upload files as soon as they are added to the list, rather than waiting for the user to press the Uploadbutton.</simpara>
+          <simpara>Set the <literal>immediateUpload</literal> attribute to <literal>true</literal> to upload files as soon as they are added to the list, rather than waiting for the user to press the <guibutton>Upload</guibutton> button.</simpara>
           <simpara>The text labels used in the component can be completely customized. Labels for the various controls of the component can be set using the following parameters:</simpara>
           <variablelist>
             <varlistentry>
@@ -4489,7 +4558,7 @@ The <literal>ontyperejected</literal> parameter defines event handler when file 
               </term>
               <listitem>
                 <simpara>
-The <literal>addLabel</literal> parameter sets the label for the Addbutton.
+The <literal>addLabel</literal> parameter sets the label for the <guibutton>Add</guibutton> button.
 </simpara>
               </listitem>
             </varlistentry>
@@ -4499,7 +4568,7 @@ The <literal>addLabel</literal> parameter sets the label for the Addbutton.
               </term>
               <listitem>
                 <simpara>
-The <literal>clearAllLabel</literal> parameter sets the label for the Clear Allbutton.
+The <literal>clearAllLabel</literal> parameter sets the label for the <guibutton>Clear All</guibutton> button.
 </simpara>
               </listitem>
             </varlistentry>
@@ -4509,7 +4578,7 @@ The <literal>clearAllLabel</literal> parameter sets the label for the Clear Allb
               </term>
               <listitem>
                 <simpara>
-The <literal>clearLabel</literal> parameter sets the label for the Clearbutton.
+The <literal>clearLabel</literal> parameter sets the label for the <guibutton>Clear</guibutton> button.
 </simpara>
               </listitem>
             </varlistentry>
@@ -4519,7 +4588,7 @@ The <literal>clearLabel</literal> parameter sets the label for the Clearbutton.
               </term>
               <listitem>
                 <simpara>
-The <literal>uploadLabel</literal> parameter sets the label for the Uploadbutton.
+The <literal>uploadLabel</literal> parameter sets the label for the <guibutton>Upload</guibutton> button.
 The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in progress bar to indicate the progress of each file that is uploaded. This progress bar can be replaced with a <literal>&lt;rich:progressBar&gt;</literal> component added to the <literal>progress</literal> facet. Refer to <xref linkend="sect-Component_Reference-Output_and_messages-richprogressBar"/> for details on the <literal>&lt;rich:progressBar&gt;</literal> component.
 </simpara>
               </listitem>
@@ -4635,7 +4704,7 @@ The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in pro
                     <simpara>No skin parameters.</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-fu-btn-add</literal>:: This class defines styles for the Addbutton in the file upload control.</simpara>
+                    <simpara><literal>.rf-fu-btn-add</literal>:: This class defines styles for the <guibutton>Add</guibutton> button in the file upload control.</simpara>
                   </entry>
                 </row>
                 <row>
@@ -4658,7 +4727,7 @@ The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in pro
                     <simpara>border-color</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-fu-btn-cnt-add</literal>:: This class defines styles for the content of the Addbutton in the file upload control.</simpara>
+                    <simpara><literal>.rf-fu-btn-cnt-add</literal>:: This class defines styles for the content of the <guibutton>Add</guibutton> button in the file upload control.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>
@@ -4689,7 +4758,7 @@ The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in pro
                     <simpara>font-size</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-fu-btn-add-dis</literal>:: This class defines styles for the Addbutton in the file upload control when it is disabled.</simpara>
+                    <simpara><literal>.rf-fu-btn-add-dis</literal>:: This class defines styles for the <guibutton>Add</guibutton> button in the file upload control when it is disabled.</simpara>
                   </entry>
                 </row>
                 <row>
@@ -4712,7 +4781,7 @@ The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in pro
                     <simpara>border-color</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-fu-btn-cnt-add-dis</literal>:: This class defines styles for the content of the Addbutton in the file upload control when it is disabled.</simpara>
+                    <simpara><literal>.rf-fu-btn-cnt-add-dis</literal>:: This class defines styles for the content of the <guibutton>Add</guibutton> button in the file upload control when it is disabled.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>
@@ -4743,7 +4812,7 @@ The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in pro
                     <simpara>font-size</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-fu-btn-upl</literal>:: This class defines styles for the Uploadbutton in the file upload control.</simpara>
+                    <simpara><literal>.rf-fu-btn-upl</literal>:: This class defines styles for the <guibutton>Upload</guibutton> button in the file upload control.</simpara>
                   </entry>
                 </row>
                 <row>
@@ -4766,7 +4835,7 @@ The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in pro
                     <simpara>border-color</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-fu-btn-cnt-upl</literal>:: This class defines styles for the content of the Uploadbutton in the file upload control.</simpara>
+                    <simpara><literal>.rf-fu-btn-cnt-upl</literal>:: This class defines styles for the content of the <guibutton>Upload</guibutton> button in the file upload control.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>
@@ -4797,7 +4866,7 @@ The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in pro
                     <simpara>font-size</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-fu-btn-clr</literal>:: This class defines styles for the Clearbutton in the file upload control.</simpara>
+                    <simpara><literal>.rf-fu-btn-clr</literal>:: This class defines styles for the <guibutton>Clear</guibutton> button in the file upload control.</simpara>
                   </entry>
                 </row>
                 <row>
@@ -4820,7 +4889,7 @@ The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in pro
                     <simpara>border-color</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-fu-btn-cnt-clr</literal>:: This class defines styles for the content of the Clearbutton in the file upload control.</simpara>
+                    <simpara><literal>.rf-fu-btn-cnt-clr</literal>:: This class defines styles for the content of the <guibutton>Clear</guibutton> button in the file upload control.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>
@@ -13179,7 +13248,7 @@ The <literal>&lt;rich:tree&gt;</literal> component performs a common submission,
               <listitem>
                 <simpara>
 The <literal>&lt;rich:tree&gt;</literal> component updates on the client side through JavaScript, without any additional requests or updates. All nodes are rendered to the client during the initial page rendering.
-By default, tree nodes are expanded and collapsed through the <literal>and -controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the +toggleNodeEvent</literal> attribute.
+By default, tree nodes are expanded and collapsed through the <guibutton>+] and btn:[-</guibutton> controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the <literal>toggleNodeEvent</literal> attribute.
 </simpara>
               </listitem>
             </varlistentry>
