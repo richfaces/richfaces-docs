@@ -471,7 +471,7 @@ jQuery(document).ready(function() {
         <title>
           <literal>&lt;a4j:ajax&gt;</literal>
         </title>
-        <simpara>The <literal>&lt;a4j:ajax&gt;</literal> behavior allows Ajax capability to be added to a non-Ajax component. The non-Ajax component must implement the ClientBehaviorHolderinterface for all the event attributes that support behavior rendering.</simpara>
+        <simpara>The <literal>&lt;a4j:ajax&gt;</literal> behavior allows Ajax capability to be added to a non-Ajax component. The non-Ajax component must implement the <literal>ClientBehaviorHolder</literal> interface for all the event attributes that support behavior rendering.</simpara>
         <section id="sect-Component_Reference-a4jajax-Basic_usage">
           <title>Basic usage</title>
           <simpara>The <literal>&lt;a4j:ajax&gt;</literal> behavior is placed as a direct child to the component that requires Ajax support.</simpara>
@@ -604,7 +604,7 @@ The <literal>assignTo</literal> attribute defines the bean property. The propert
         <title>
           <literal>&lt;a4j:actionListener&gt;</literal>
         </title>
-        <simpara>Use the <literal>&lt;a4j:actionListener&gt;</literal> tag to register an <literal>ActionListener</literal> class on a parent action component. The class provided as a listener must implement the javax.faces.event.ActionListenerinterface. Multiple listener methods can be registered on an action component in this way.</simpara>
+        <simpara>Use the <literal>&lt;a4j:actionListener&gt;</literal> tag to register an <literal>ActionListener</literal> class on a parent action component. The class provided as a listener must implement the <literal>javax.faces.event.ActionListener</literal> interface. Multiple listener methods can be registered on an action component in this way.</simpara>
         <simpara>The <literal>&lt;a4j:actionListener&gt;</literal> tag differs from the standard JSF tag by allowing a listener method to be defined instead of just a class. Use the <literal>listener</literal> attribute to define the listener method.</simpara>
       </section>
       <section id="sect-Component_Reference-Actions-a4jcommandButton">
@@ -999,8 +999,8 @@ public void sendMessage(String message) {
                     <row>
                       <entry>
                         <simpara>
-Name
-</simpara>
+                          <guilabel>Name:</guilabel>
+                        </simpara>
                       </entry>
                       <entry>
                         <simpara>
@@ -1011,24 +1011,23 @@ datePush
                     <row>
                       <entry>
                         <simpara>
-JNDI
-</simpara>
+                          <guilabel>JNDI name:</guilabel>
+                        </simpara>
                       </entry>
                       <entry>
                         <simpara>
-name:/topic/datePush
+/topic/datePush
 </simpara>
                       </entry>
                     </row>
                     <row>
                       <entry>
                         <simpara>
-Use
 </simpara>
                       </entry>
                       <entry>
                         <simpara>
-the default settings for other options.
+Use the default settings for other options.
 </simpara>
                       </entry>
                     </row>
@@ -1044,8 +1043,8 @@ the default settings for other options.
                     <row>
                       <entry>
                         <simpara>
-Name
-</simpara>
+                          <guilabel>Name:</guilabel>
+                        </simpara>
                       </entry>
                       <entry>
                         <simpara>
@@ -1056,21 +1055,8 @@ guest
                     <row>
                       <entry>
                         <simpara>
-Send
-</simpara>
-                      </entry>
-                      <entry>
-                        <simpara>
-true
-Consume::true
-</simpara>
-                      </entry>
-                    </row>
-                    <row>
-                      <entry>
-                        <simpara>
-Create subscriber
-</simpara>
+                          <guilabel>Send:</guilabel>
+                        </simpara>
                       </entry>
                       <entry>
                         <simpara>
@@ -1081,8 +1067,8 @@ true
                     <row>
                       <entry>
                         <simpara>
-Delete subscriber
-</simpara>
+                          <guilabel>Consume:</guilabel>
+                        </simpara>
                       </entry>
                       <entry>
                         <simpara>
@@ -1093,8 +1079,8 @@ true
                     <row>
                       <entry>
                         <simpara>
-Create durable subscriber
-</simpara>
+                          <guilabel>Create subscriber:</guilabel>
+                        </simpara>
                       </entry>
                       <entry>
                         <simpara>
@@ -1105,8 +1091,32 @@ true
                     <row>
                       <entry>
                         <simpara>
-Delete durable subscriber
+                          <guilabel>Delete subscriber:</guilabel>
+                        </simpara>
+                      </entry>
+                      <entry>
+                        <simpara>
+true
 </simpara>
+                      </entry>
+                    </row>
+                    <row>
+                      <entry>
+                        <simpara>
+                          <guilabel>Create durable subscriber:</guilabel>
+                        </simpara>
+                      </entry>
+                      <entry>
+                        <simpara>
+true
+</simpara>
+                      </entry>
+                    </row>
+                    <row>
+                      <entry>
+                        <simpara>
+                          <guilabel>Delete durable subscriber:</guilabel>
+                        </simpara>
                       </entry>
                       <entry>
                         <simpara>
@@ -1118,7 +1128,7 @@ true
                 </tgroup>
               </informaltable>
             </example>
-            <simpara>Ensure the <literal>Create durable subscriber</literal> and the <literal>Delete durable subscriber</literal> options are set to <literal>true</literal> for proper push functionality.</simpara>
+            <simpara>Ensure the <guilabel>Create durable subscriber</guilabel> and the <guilabel>Delete durable subscriber</guilabel> options are set to <guilabel>true</guilabel> for proper push functionality.</simpara>
             <note>
               <title>Durable subscriptions</title>
               <simpara>Durable subscriptions receive all events, including those events which were sent while the push component was not connected.</simpara>
@@ -1552,7 +1562,7 @@ public class UserBean {
         <note>
           <title>Validation without model updates</title>
           <simpara>The <literal>&lt;rich:graphValidator&gt;</literal> component performs a <literal>clone()</literal> method on the referenced bean instance during the validation phase. The cloned object is validated and triggers any required validation messages. As such, the model object remains clean, and the lifecycle is interrupted properly after the <emphasis>Process Validations</emphasis> phase.</simpara>
-          <simpara>Ensure the referenced object implements the Cloneableinterface, and allows a deep clone if required.</simpara>
+          <simpara>Ensure the referenced object implements the <literal>Cloneable</literal> interface, and allows a deep clone if required.</simpara>
         </note>
         <section id="sect-Component_Reference-richgraphValidator-Basic_usage">
           <title>Basic usage</title>
@@ -1611,7 +1621,6 @@ public class UserBean implements Cloneable {
                 </textobject>
               </mediaobject>
             </informalfigure>
-            <simpara>Failed validation checks are reported using <literal>&lt;rich:message&gt;</literal> components.</simpara>
           </example>
         </section>
         <section id="sect-Component_Reference-richgraphValidator-Reference_data">
@@ -1879,7 +1888,7 @@ Set <literal>level="ALL"</literal> to log all data. This is the default setting.
           </example>
           <note>
             <title>Log renewal</title>
-            <simpara>The log is automatically renewed after each Ajax request. It does not need to be explicitly re-rendered. To clear previous requests, implement a Clearbutton or similar functionality.</simpara>
+            <simpara>The log is automatically renewed after each Ajax request. It does not need to be explicitly re-rendered. To clear previous requests, implement a <guilabel>Clear</guilabel> button or similar functionality.</simpara>
           </note>
         </section>
         <section id="sect-Component_Reference-a4jlog-Reference_data">
@@ -1910,132 +1919,318 @@ Set <literal>level="ALL"</literal> to log all data. This is the default setting.
               <colspec colname="col_3" colwidth="33*"/>
               <thead>
                 <row>
-                  <entry align="left" valign="top">Class (selector)</entry>
-                  <entry align="left" valign="top">Skin Parameters</entry>
-                  <entry align="left" valign="top">Mapped CSS properties</entry>
+                  <entry align="left" valign="middle">Class (selector)</entry>
+                  <entry align="left" valign="middle">Skin Parameters</entry>
+                  <entry align="left" valign="middle">Mapped CSS properties</entry>
                 </row>
               </thead>
               <tbody>
                 <row>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log</literal>:: This class defines styles for the log.</simpara>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
                   </entry>
-                  <entry align="left" valign="top">
+                  <entry align="left" valign="middle">
                     <simpara>
                       <literal>generalTextColor</literal>
                     </simpara>
                   </entry>
-                  <entry align="left" valign="top">
+                  <entry align="left" valign="middle">
                     <simpara>color</simpara>
                   </entry>
                 </row>
                 <row>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-popup</literal>:: This class defines styles for the log when it appears as a pop-up.</simpara>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-popup</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the log when it appears as a pop-up.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
                   </entry>
-                  <entry align="left" valign="top">
-                    <simpara>No skin parameters.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-popup-cnt</literal>:: This class defines styles for the content of the log pop-up.</simpara>
-                  </entry>
-                </row>
-                <row>
-                  <entry align="left" valign="top">
-                    <simpara>No skin parameters.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-inline</literal>:: This class defines styles for the log when it appears in-line.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
                     <simpara>No skin parameters.</simpara>
                   </entry>
                 </row>
                 <row>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-contents</literal>:: This class defines styles for the log contents.</simpara>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-popup-cnt</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the content of the log pop-up.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
                   </entry>
-                  <entry align="left" valign="top">
-                    <simpara>No skin parameters.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-lbl</literal>:: This class defines styles for a label in the log.</simpara>
-                  </entry>
-                </row>
-                <row>
-                  <entry align="left" valign="top">
-                    <simpara>No skin parameters.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-lbl-debug</literal>:: This class defines styles for the debuglabel in the log.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
                     <simpara>No skin parameters.</simpara>
                   </entry>
                 </row>
                 <row>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-lbl-info</literal>:: This class defines styles for the informationlabel in the log.</simpara>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-inline</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the log when it appears in-line.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
                   </entry>
-                  <entry align="left" valign="top">
-                    <simpara>No skin parameters.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-lbl-warn</literal>:: This class defines styles for the warninglabel in the log.</simpara>
-                  </entry>
-                </row>
-                <row>
-                  <entry align="left" valign="top">
-                    <simpara>No skin parameters.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-lbl-error</literal>:: This class defines styles for the errorlabel in the log.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
                     <simpara>No skin parameters.</simpara>
                   </entry>
                 </row>
                 <row>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-msg</literal>:: This class defines styles for a message in the log.</simpara>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-contents</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the log contents.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
                   </entry>
-                  <entry align="left" valign="top">
-                    <simpara>No skin parameters.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-msg-debug</literal>:: This class defines styles for the debugmessage in the log.</simpara>
-                  </entry>
-                </row>
-                <row>
-                  <entry align="left" valign="top">
-                    <simpara>No skin parameters.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-msg-info</literal>:: This class defines styles for the informationmessage in the log.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
                     <simpara>No skin parameters.</simpara>
                   </entry>
                 </row>
                 <row>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-msg-warn</literal>:: This class defines styles for the warningmessage in the log.</simpara>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-lbl</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for a label in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
                   </entry>
-                  <entry align="left" valign="top">
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
                     <simpara>No skin parameters.</simpara>
-                  </entry>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-msg-error</literal>:: This class defines styles for the errormessage in the log.</simpara>
                   </entry>
                 </row>
                 <row>
-                  <entry align="left" valign="top">
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-lbl-debug</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the <guilabel>debug</guilabel> label in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
+                  </entry>
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
                     <simpara>No skin parameters.</simpara>
                   </entry>
-                  <entry align="left" valign="top">
-                    <simpara><literal>.rf-log-entry-msg-xml</literal>:: This class defines styles for an XML message in the log.</simpara>
+                </row>
+                <row>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-lbl-info</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the <guilabel>information</guilabel> label in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
                   </entry>
-                  <entry align="left" valign="top">
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
+                    <simpara>No skin parameters.</simpara>
+                  </entry>
+                </row>
+                <row>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-lbl-warn</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the <guilabel>warning</guilabel> label in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
+                  </entry>
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
+                    <simpara>No skin parameters.</simpara>
+                  </entry>
+                </row>
+                <row>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-lbl-error</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the <guilabel>error</guilabel> label in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
+                  </entry>
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
+                    <simpara>No skin parameters.</simpara>
+                  </entry>
+                </row>
+                <row>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-msg</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for a message in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
+                  </entry>
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
+                    <simpara>No skin parameters.</simpara>
+                  </entry>
+                </row>
+                <row>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-msg-debug</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the <guilabel>debug</guilabel> message in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
+                  </entry>
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
+                    <simpara>No skin parameters.</simpara>
+                  </entry>
+                </row>
+                <row>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-msg-info</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the <guilabel>information</guilabel> message in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
+                  </entry>
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
+                    <simpara>No skin parameters.</simpara>
+                  </entry>
+                </row>
+                <row>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-msg-warn</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the <guilabel>warning</guilabel> message in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
+                  </entry>
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
+                    <simpara>No skin parameters.</simpara>
+                  </entry>
+                </row>
+                <row>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-msg-error</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for the <guilabel>error</guilabel> message in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
+                  </entry>
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
+                    <simpara>No skin parameters.</simpara>
+                  </entry>
+                </row>
+                <row>
+                  <entry align="left" valign="middle">
+                    <variablelist>
+                      <varlistentry>
+                        <term>
+                          <literal>.rf-log-entry-msg-xml</literal>
+                        </term>
+                        <listitem>
+                          <simpara>
+This class defines styles for an XML message in the log.
+</simpara>
+                        </listitem>
+                      </varlistentry>
+                    </variablelist>
+                  </entry>
+                  <entry align="left" valign="middle" namest="col_2" nameend="col_3">
                     <simpara>No skin parameters.</simpara>
                   </entry>
                 </row>
@@ -6011,7 +6206,7 @@ Decrease the value of the slider control by the gradient step amount.
                 </row>
                 <row>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-insl-mn</literal>:: This class defines styles for the minimumlabel on the number slider.</simpara>
+                    <simpara><literal>.rf-insl-mn</literal>:: This class defines styles for the <guilabel>minimum</guilabel> label on the number slider.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>
@@ -6052,7 +6247,7 @@ Decrease the value of the slider control by the gradient step amount.
                 </row>
                 <row>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-insl-mx</literal>:: This class defines styles for the maximumlabel on the number slider.</simpara>
+                    <simpara><literal>.rf-insl-mx</literal>:: This class defines styles for the <guilabel>maximum</guilabel> label on the number slider.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>
@@ -8366,7 +8561,7 @@ Switch the state of the collapsible panel (expanded or collapsed).
           <title>
             <literal>&lt;rich:panelToggleListener&gt;</literal>
           </title>
-          <simpara>Use the <literal>&lt;rich:panelToggleListener&gt;</literal> tag to register a <literal>PanelToggleListener</literal> class on a parent <literal>&lt;rich:collapsiblePanel&gt;</literal> component. The class provided as a listener must implement the org.richfaces.event.PanelToggleListenerinterface. The <literal>processPanelToggle</literal> method accepts an <literal>org.richface.event.PanelToggleEvent</literal> event as a parameter.</simpara>
+          <simpara>Use the <literal>&lt;rich:panelToggleListener&gt;</literal> tag to register a <literal>PanelToggleListener</literal> class on a parent <literal>&lt;rich:collapsiblePanel&gt;</literal> component. The class provided as a listener must implement the <literal>org.richfaces.event.PanelToggleListener</literal> interface. The <literal>processPanelToggle</literal> method accepts an <literal>org.richface.event.PanelToggleEvent</literal> event as a parameter.</simpara>
         </section>
       </section>
       <section id="sect-Component_Reference-Panels-richpopupPanel">
@@ -9368,7 +9563,7 @@ Get the name of the first item, the previous item, the next item, or the last it
           <title>
             <literal>&lt;rich:itemChangeListener&gt;</literal>
           </title>
-          <simpara>Use the <literal>&lt;rich:itemChangeListener&gt;</literal> tag to register an <literal>ItemChangeListener</literal> class on a parent panel component. The class provided as a listener must implement the org.richfaces.event.ItemChangeListenerinterface. The <literal>processItemChange</literal> method accepts an <literal>org.richface.event.ItemChangeEvent</literal> event as a parameter.</simpara>
+          <simpara>Use the <literal>&lt;rich:itemChangeListener&gt;</literal> tag to register an <literal>ItemChangeListener</literal> class on a parent panel component. The class provided as a listener must implement the <literal>org.richfaces.event.ItemChangeListener</literal> interface. The <literal>processItemChange</literal> method accepts an <literal>org.richface.event.ItemChangeEvent</literal> event as a parameter.</simpara>
           <simpara>The <literal>&lt;rich:itemChangeListener&gt;</literal> tag can be used with any of the switchable panel components:</simpara>
           <itemizedlist>
             <listitem>
@@ -11245,7 +11440,7 @@ public class ExtTableSelectionBean implements Serializable{
           </section>
           <section id="sect-Component_Reference-richextendedDataTable-Rearranging_columns">
             <title>Rearranging columns</title>
-            <simpara>Columns in a <literal>&lt;rich:extendedDataTable&gt;</literal> component can be rearranged by the user by dragging each column to a different position. A graphical representation of the column is displayed during dragging. <xref linkend="figu-Component_Reference-richextendedDataTable-Dragging_columns"/> illustrates the Pricecolumn being dragged to a new location. The small blue arrow indicates where the column will be moved to if it is dropped in the current position. <xref linkend="figu-Component_Reference-richextendedDataTable-Rearranged_columns"/> shows the result of dragging the Pricecolumn.</simpara>
+            <simpara>Columns in a <literal>&lt;rich:extendedDataTable&gt;</literal> component can be rearranged by the user by dragging each column to a different position. A graphical representation of the column is displayed during dragging. <xref linkend="figu-Component_Reference-richextendedDataTable-Dragging_columns"/> illustrates the <guilabel>Price</guilabel> column being dragged to a new location. The small blue arrow indicates where the column will be moved to if it is dropped in the current position. <xref linkend="figu-Component_Reference-richextendedDataTable-Rearranged_columns"/> shows the result of dragging the <guilabel>Price</guilabel> column.</simpara>
             <figure id="figu-Component_Reference-richextendedDataTable-Dragging_columns">
               <title>Dragging columns</title>
               <mediaobject>
@@ -12759,13 +12954,13 @@ Step backward through the pages by the <literal>fastStep</literal> amount.
                 </row>
                 <row>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-ds-btn-first</literal>:: This class defines styles for the firstbutton.</simpara>
+                    <simpara><literal>.rf-ds-btn-first</literal>:: This class defines styles for the <guilabel>first</guilabel> button.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>No skin parameters.</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-ds-btn-fastrwd</literal>:: This class defines styles for the fast rewindbutton.</simpara>
+                    <simpara><literal>.rf-ds-btn-fastrwd</literal>:: This class defines styles for the <guilabel>fast rewind</guilabel> button.</simpara>
                   </entry>
                 </row>
                 <row>
@@ -12773,7 +12968,7 @@ Step backward through the pages by the <literal>fastStep</literal> amount.
                     <simpara>No skin parameters.</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-ds-btn-prev</literal>:: This class defines styles for the previousbutton.</simpara>
+                    <simpara><literal>.rf-ds-btn-prev</literal>:: This class defines styles for the <guilabel>previous</guilabel> button.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>No skin parameters.</simpara>
@@ -12781,13 +12976,13 @@ Step backward through the pages by the <literal>fastStep</literal> amount.
                 </row>
                 <row>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-ds-btn-next</literal>:: This class defines styles for the nextbutton.</simpara>
+                    <simpara><literal>.rf-ds-btn-next</literal>:: This class defines styles for the <guilabel>next</guilabel> button.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>No skin parameters.</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-ds-btn-fastfwd</literal>:: This class defines styles for the fast forwardbutton.</simpara>
+                    <simpara><literal>.rf-ds-btn-fastfwd</literal>:: This class defines styles for the <guilabel>fast forward</guilabel> button.</simpara>
                   </entry>
                 </row>
                 <row>
@@ -12795,7 +12990,7 @@ Step backward through the pages by the <literal>fastStep</literal> amount.
                     <simpara>No skin parameters.</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-ds-btn-last</literal>:: This class defines styles for the lastbutton.</simpara>
+                    <simpara><literal>.rf-ds-btn-last</literal>:: This class defines styles for the <guilabel>last</guilabel> button.</simpara>
                   </entry>
                   <entry align="left" valign="top">
                     <simpara>No skin parameters.</simpara>
@@ -12908,7 +13103,7 @@ Step backward through the pages by the <literal>fastStep</literal> amount.
           <title>Filter Definition</title>
           <simpara>To define a filter for a column use either the <literal>filter</literal> or <literal>filterExpression</literal> attributes, then use the <literal>filterValue</literal> attribute to point to an object which holds the current filtering value for the column. The attribute can be used to store filtering conditions in a session.</simpara>
           <simpara>Use the <literal>filterExpression</literal> attribute to define an expression that can be evaluated as a boolean value. The expression checks if each table entry satisfies the filtering condition when the table is rendered. For example, the expression might be a JSTL (JavaServer Pages Standard Tag Library) function such as <literal>contains</literal> or <literal>equals</literal>.</simpara>
-          <simpara>Use the <literal>filter</literal> attribute to define a filter interface. The attribute must use EL (Expression Language) to point to an object which implements the org.richfaces.model.Filter&lt;T&gt;interface. The object must provide a single <literal>accept(T t)</literal> method. The method takes each iteration object as a parameter and returns a boolean value, which determines whether the object satisfies the filter. By defining a custom filter, you can implement complex business logic to filter a table.</simpara>
+          <simpara>Use the <literal>filter</literal> attribute to define a filter interface. The attribute must use EL (Expression Language) to point to an object which implements the <literal>org.richfaces.model.Filter&lt;T&gt;</literal> interface. The object must provide a single <literal>accept(T t)</literal> method. The method takes each iteration object as a parameter and returns a boolean value, which determines whether the object satisfies the filter. By defining a custom filter, you can implement complex business logic to filter a table.</simpara>
         </section>
         <section id="sect-Component_Reference-Table_filtering-builtin_filtering">
           <title>Built-in filter controls</title>
@@ -13097,11 +13292,11 @@ Step backward through the pages by the <literal>fastStep</literal> amount.
         <simpara>The <literal>&lt;rich:tree&gt;</literal> component provides a hierarchical tree control. Each <literal>&lt;rich:tree&gt;</literal> component typically consists of <literal>&lt;rich:treeNode&gt;</literal> child components. The appearance and behavior of the tree and its nodes can be fully customized.</simpara>
         <section id="sect-Component_Reference-richtree-Basic_usage">
           <title>Basic usage</title>
-          <simpara>The <literal>&lt;rich:tree&gt;</literal> component requires the <literal>value</literal> attribute to point to the data model for populating the tree. The data model must be either an org.richfaces.model.TreeNodeinterface, an <literal>org.richfaces.model.TreeDataModel</literal> interface, or a javax.swing.tree.TreeNodeinterface. The <literal>var</literal> attribute declares the variable used for iterating through the data model, so that child <literal>&lt;rich:treeNode&gt;</literal> components can reference each iteration.</simpara>
+          <simpara>The <literal>&lt;rich:tree&gt;</literal> component requires the <literal>value</literal> attribute to point to the data model for populating the tree. The data model must be either an <literal>org.richfaces.model.TreeNode</literal> interface, an <literal>org.richfaces.model.TreeDataModel</literal> interface, or a <literal>javax.swing.tree.TreeNode</literal> interface. The <literal>var</literal> attribute declares the variable used for iterating through the data model, so that child <literal>&lt;rich:treeNode&gt;</literal> components can reference each iteration.</simpara>
           <simpara>Ideally, the <literal>&lt;rich:tree&gt;</literal> component needs one or more <literal>&lt;rich:treeNode&gt;</literal> components to work with the data model. However if no <literal>&lt;rich:treeNode&gt;</literal> components are provided the tree creates default nodes instead.</simpara>
           <example id="exam-Component_Reference-richtree-Basic_usage">
             <title>Basic usage</title>
-            <simpara>This example demonstrates basic usage of the <literal>&lt;rich:tree&gt;</literal> component using an org.richfaces.model.TreeNodedata model.</simpara>
+            <simpara>This example demonstrates basic usage of the <literal>&lt;rich:tree&gt;</literal> component using an <literal>org.richfaces.model.TreeNode</literal> data model.</simpara>
             <simpara>First extend the <literal>org.richfaces.model.TreeNodeImpl</literal> and add the data fields you require, with appropriate accessor methods, as in:</simpara>
             <programlisting language="Java" linenumbering="unnumbered">import org.richfaces.model.TreeNodeImpl;
 
@@ -13248,7 +13443,7 @@ The <literal>&lt;rich:tree&gt;</literal> component performs a common submission,
               <listitem>
                 <simpara>
 The <literal>&lt;rich:tree&gt;</literal> component updates on the client side through JavaScript, without any additional requests or updates. All nodes are rendered to the client during the initial page rendering.
-By default, tree nodes are expanded and collapsed through the <guibutton>+] and btn:[-</guibutton> controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the <literal>toggleNodeEvent</literal> attribute.
+By default, tree nodes are expanded and collapsed through the <guibutton>+</guibutton> and <guibutton>-</guibutton> controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the <literal>toggleNodeEvent</literal> attribute.
 </simpara>
               </listitem>
             </varlistentry>
@@ -13354,7 +13549,7 @@ The <literal>selectionChangeListener</literal> listener processes the request wh
           </title>
           <formalpara>
             <title>rf-tr-nd-exp:: This class defines styles for an expanded tree node.</title>
-            <para>Use the <literal>&lt;rich:treeSelectionChangeListener&gt;</literal> tag to register a <literal>TreeSelectionChangeListener</literal> class on a parent <literal>&lt;rich:tree&gt;</literal> component. The class provided as a listener must implement the org.richfaces.event.TreeSelectionChangeListenerinterface. The <literal>processTreeSelectionChange</literal> method accepts an <literal>org.richface.event.TreeSelectionChangeEvent</literal> event as a parameter.</para>
+            <para>Use the <literal>&lt;rich:treeSelectionChangeListener&gt;</literal> tag to register a <literal>TreeSelectionChangeListener</literal> class on a parent <literal>&lt;rich:tree&gt;</literal> component. The class provided as a listener must implement the <literal>org.richfaces.event.TreeSelectionChangeListener</literal> interface. The <literal>processTreeSelectionChange</literal> method accepts an <literal>org.richface.event.TreeSelectionChangeEvent</literal> event as a parameter.</para>
           </formalpara>
         </section>
         <section id="sect-Component_Reference-Trees-richtreeNode">
@@ -13566,7 +13761,7 @@ The <literal>selectionChangeListener</literal> listener processes the request wh
             <title>
               <literal>&lt;rich:treeToggleListener&gt;</literal>
             </title>
-            <simpara>Use the <literal>&lt;rich:treeToggleListener&gt;</literal> tag to register a <literal>TreeToggleListener</literal> class on a parent <literal>&lt;rich:treeNode&gt;</literal> component. The class provided as a listener must implement the org.richfaces.event.TreeToggleListenerinterface. The <literal>processTreeToggle</literal> method accepts an <literal>org.richface.event.TreeToggleEvent</literal> event as a parameter.</simpara>
+            <simpara>Use the <literal>&lt;rich:treeToggleListener&gt;</literal> tag to register a <literal>TreeToggleListener</literal> class on a parent <literal>&lt;rich:treeNode&gt;</literal> component. The class provided as a listener must implement the <literal>org.richfaces.event.TreeToggleListener</literal> interface. The <literal>processTreeToggle</literal> method accepts an <literal>org.richface.event.TreeToggleEvent</literal> event as a parameter.</simpara>
           </section>
         </section>
       </section>
@@ -13577,7 +13772,7 @@ The <literal>selectionChangeListener</literal> listener processes the request wh
           <title>
             <literal>&lt;rich:treeModelAdaptor&gt;</literal>
           </title>
-          <simpara>The <literal>&lt;rich:treeModelAdaptor&gt;</literal> component takes an object which implements the Mapor Iterableinterfaces. It adds all the object entries to the parent node as child nodes.</simpara>
+          <simpara>The <literal>&lt;rich:treeModelAdaptor&gt;</literal> component takes an object which implements the <literal>Map</literal> or <literal>Iterable</literal> interfaces. It adds all the object entries to the parent node as child nodes.</simpara>
           <section id="sect-Component_Reference-richtreeModelAdaptor-Basic_usage">
             <title>Basic usage</title>
             <simpara>The <literal>&lt;rich:treeModelAdaptor&gt;</literal> component is added as a nested child component to a <literal>&lt;rich:tree&gt;</literal> component, or to another tree adaptor component.</simpara>
@@ -13586,8 +13781,8 @@ The <literal>selectionChangeListener</literal> listener processes the request wh
           </section>
           <section id="sect-Component_Reference-richtreeModelAdaptor-Identifying_nodes">
             <title>Identifying nodes</title>
-            <simpara>Adaptors that use Mapinterfaces or models with non-string keys require a row key converter in order to correctly identify nodes. Refer to <xref linkend="sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute"/> for details on the use of the <literal>rowKeyConverter</literal> attribute.</simpara>
-            <simpara>Adaptors that use Iterableinterfaces have simple integer row keys. A default converter is provided and does not need to be referenced explicitly.</simpara>
+            <simpara>Adaptors that use <literal>Map</literal> interfaces or models with non-string keys require a row key converter in order to correctly identify nodes. Refer to <xref linkend="sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute"/> for details on the use of the <literal>rowKeyConverter</literal> attribute.</simpara>
+            <simpara>Adaptors that use <literal>Iterable</literal> interfaces have simple integer row keys. A default converter is provided and does not need to be referenced explicitly.</simpara>
           </section>
           <section id="sect-Component_Reference-richtreeModelAdaptor-Reference_data">
             <title>Reference data</title>
@@ -13692,8 +13887,8 @@ public class FileSystemBean {
           </section>
           <section id="sect-Component_Reference-richtreeModelRecursiveAdaptor-Identifying_nodes">
             <title>Identifying nodes</title>
-            <simpara>Adaptors that use Mapinterfaces or models with non-string keys require a row key converter in order to correctly identify nodes. Refer to <xref linkend="sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute"/> for details on the use of the <literal>rowKeyConverter</literal> attribute.</simpara>
-            <simpara>Adaptors that use Iterableinterfaces have simple integer row keys. A default converter is provided and does not need to be referenced explicitly.</simpara>
+            <simpara>Adaptors that use <literal>Map</literal> interfaces or models with non-string keys require a row key converter in order to correctly identify nodes. Refer to <xref linkend="sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute"/> for details on the use of the <literal>rowKeyConverter</literal> attribute.</simpara>
+            <simpara>Adaptors that use <literal>Iterable</literal> interfaces have simple integer row keys. A default converter is provided and does not need to be referenced explicitly.</simpara>
           </section>
           <section id="sect-Component_Reference-richtreeModelRecursiveAdaptor-Reference_data">
             <title>Reference data</title>
@@ -15864,7 +16059,7 @@ Select this menu item.
                     <simpara>color</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-msg-ok</literal>:: This class defines styles for a basic OKmessage.</simpara>
+                    <simpara><literal>.rf-msg-ok</literal>:: This class defines styles for a basic <guilabel>OK</guilabel> message.</simpara>
                   </entry>
                 </row>
                 <row>
@@ -16089,7 +16284,7 @@ To display the messages in line with text, override the message styles as follow
                     <simpara>color</simpara>
                   </entry>
                   <entry align="left" valign="top">
-                    <simpara><literal>.rf-msgs-ok</literal>:: This class defines styles for a basic OKmessage.</simpara>
+                    <simpara><literal>.rf-msgs-ok</literal>:: This class defines styles for a basic <guilabel>OK</guilabel> message.</simpara>
                   </entry>
                 </row>
                 <row>

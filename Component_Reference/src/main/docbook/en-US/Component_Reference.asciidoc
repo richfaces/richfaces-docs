@@ -298,7 +298,7 @@ This chapter details the basic components that respond to a user action and subm
 
 === +<a4j:ajax>+
 
-The +<a4j:ajax>+ behavior allows Ajax capability to be added to a non-Ajax component. The non-Ajax component must implement the ClientBehaviorHolderinterface for all the event attributes that support behavior rendering.
+The +<a4j:ajax>+ behavior allows Ajax capability to be added to a non-Ajax component. The non-Ajax component must implement the +ClientBehaviorHolder+ interface for all the event attributes that support behavior rendering.
 
 [[sect-Component_Reference-a4jajax-Basic_usage]]
 
@@ -390,7 +390,7 @@ public class ParamBean {
 
 ----
 
-When the btn:[Set name to Alex] button is pressed, the application sets the +name+ parameter of the bean to +Alex+, and displays the name in the output field.
+When the guibutton:[Set name to Alex] button is pressed, the application sets the +name+ parameter of the bean to +Alex+, and displays the name in the output field.
 
 ====
 
@@ -458,7 +458,7 @@ The command button triggers the +<a4j:param>+ behaviors and renders the output t
 
 === +<a4j:actionListener>+
 
-Use the +<a4j:actionListener>+ tag to register an +ActionListener+ class on a parent action component. The class provided as a listener must implement the javax.faces.event.ActionListenerinterface. Multiple listener methods can be registered on an action component in this way.
+Use the +<a4j:actionListener>+ tag to register an +ActionListener+ class on a parent action component. The class provided as a listener must implement the +javax.faces.event.ActionListener+ interface. Multiple listener methods can be registered on an action component in this way.
 
 The +<a4j:actionListener>+ tag differs from the standard JSF tag by allowing a listener method to be defined instead of just a class. Use the +listener+ attribute to define the listener method.
 
@@ -946,26 +946,26 @@ This simple example describes the JMS server configuration required for a pushin
 The JMS server needs to be setup in order to propagate JMS messages to Push components. Create a new JMS topic using the following settings:
 
 [horizontal]
-Name:: datePush
-JNDI:: name:/topic/datePush
-Use:: the default settings for other options.
+guilabel:[Name:]:: datePush
+guilabel:[JNDI name:]:: /topic/datePush
+ :: Use the default settings for other options.
 
 
 Add a single role for the topic in the same form using the following settings:
 
 [horizontal]
-Name:: guest
-Send:: true
-Consume::true
-Create subscriber:: true
-Delete subscriber:: true
-Create durable subscriber:: true
-Delete durable subscriber:: true
+guilabel:[Name:]:: guest
+guilabel:[Send:]:: true
+guilabel:[Consume:]:: true
+guilabel:[Create subscriber:]:: true
+guilabel:[Delete subscriber:]:: true
+guilabel:[Create durable subscriber:]:: true
+guilabel:[Delete durable subscriber:]:: true
 
 
 ====
 
-Ensure the guilabel:[Create durable subscriber] and the guilabel:[Delete durable subscriber] options are set to +true+ for proper push functionality.
+Ensure the guilabel:[Create durable subscriber] and the guilabel:[Delete durable subscriber] options are set to guilabel:[true] for proper push functionality.
 
 [NOTE]
 .Durable subscriptions
@@ -989,7 +989,7 @@ Use following +web.xml+ parameters to change default values: +org.richfaces.push
 When RichFaces obtains a connection, an empty user name is used with an empty password.
 
 Use following +web.xml+ parameters or equivalent JVM parameters to change default values: +org.richfaces.push.jms.connectionUsername+, +org.richfaces.push.jms.connectionPassword+.
-                
+
 ====
 
 ===== Sending and receiving Push messages using JMS
@@ -1457,7 +1457,7 @@ The +<rich:graphValidator>+ component is used to wrap a set of input components 
 ====
 The +<rich:graphValidator>+ component performs a +clone()+ method on the referenced bean instance during the validation phase. The cloned object is validated and triggers any required validation messages. As such, the model object remains clean, and the lifecycle is interrupted properly after the _Process Validations_ phase.
 
-Ensure the referenced object implements the Cloneableinterface, and allows a deep clone if required.
+Ensure the referenced object implements the +Cloneable+ interface, and allows a deep clone if required.
 ====
 
 [[sect-Component_Reference-richgraphValidator-Basic_usage]]
@@ -1807,7 +1807,7 @@ The log readout displays all messages.
 [NOTE]
 .Log renewal
 ====
-The log is automatically renewed after each Ajax request. It does not need to be explicitly re-rendered. To clear previous requests, implement a Clearbutton or similar functionality.
+The log is automatically renewed after each Ajax request. It does not need to be explicitly re-rendered. To clear previous requests, implement a guilabel:[Clear] button or similar functionality.
 ====
 
 [[sect-Component_Reference-a4jlog-Reference_data]]
@@ -1829,41 +1829,41 @@ The +<a4j:log>+ component is intended primarily for debugging during development
 [[tabl-a4jlog-Style_classes_and_corresponding_skin_parameters]]
 
 .Style classes (selectors) and corresponding skin parameters
-[options="header"]
+[options="header", valign="middle", cols="1a,1,1"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
 |+.rf-log+:: This class defines styles for the log.
 |+generalTextColor+|color
 |+.rf-log-popup+:: This class defines styles for the log when it appears as a pop-up.
-|No skin parameters.
+2+|No skin parameters.
 |+.rf-log-popup-cnt+:: This class defines styles for the content of the log pop-up.
-|No skin parameters.
+2+|No skin parameters.
 |+.rf-log-inline+:: This class defines styles for the log when it appears in-line.
-|No skin parameters.
+2+|No skin parameters.
 |+.rf-log-contents+:: This class defines styles for the log contents.
-|No skin parameters.
+2+|No skin parameters.
 |+.rf-log-entry-lbl+:: This class defines styles for a label in the log.
-|No skin parameters.
-|+.rf-log-entry-lbl-debug+:: This class defines styles for the debuglabel in the log.
-|No skin parameters.
-|+.rf-log-entry-lbl-info+:: This class defines styles for the informationlabel in the log.
-|No skin parameters.
-|+.rf-log-entry-lbl-warn+:: This class defines styles for the warninglabel in the log.
-|No skin parameters.
-|+.rf-log-entry-lbl-error+:: This class defines styles for the errorlabel in the log.
-|No skin parameters.
+2+|No skin parameters.
+|+.rf-log-entry-lbl-debug+:: This class defines styles for the guilabel:[debug] label in the log.
+2+|No skin parameters.
+|+.rf-log-entry-lbl-info+:: This class defines styles for the guilabel:[information] label in the log.
+2+|No skin parameters.
+|+.rf-log-entry-lbl-warn+:: This class defines styles for the guilabel:[warning] label in the log.
+2+|No skin parameters.
+|+.rf-log-entry-lbl-error+:: This class defines styles for the guilabel:[error] label in the log.
+2+|No skin parameters.
 |+.rf-log-entry-msg+:: This class defines styles for a message in the log.
-|No skin parameters.
-|+.rf-log-entry-msg-debug+:: This class defines styles for the debugmessage in the log.
-|No skin parameters.
-|+.rf-log-entry-msg-info+:: This class defines styles for the informationmessage in the log.
-|No skin parameters.
-|+.rf-log-entry-msg-warn+:: This class defines styles for the warningmessage in the log.
-|No skin parameters.
-|+.rf-log-entry-msg-error+:: This class defines styles for the errormessage in the log.
-|No skin parameters.
+2+|No skin parameters.
+|+.rf-log-entry-msg-debug+:: This class defines styles for the guilabel:[debug] message in the log.
+2+|No skin parameters.
+|+.rf-log-entry-msg-info+:: This class defines styles for the guilabel:[information] message in the log.
+2+|No skin parameters.
+|+.rf-log-entry-msg-warn+:: This class defines styles for the guilabel:[warning] message in the log.
+2+|No skin parameters.
+|+.rf-log-entry-msg-error+:: This class defines styles for the guilabel:[error] message in the log.
+2+|No skin parameters.
 |+.rf-log-entry-msg-xml+:: This class defines styles for an XML message in the log.
-|No skin parameters.
+2+|No skin parameters.
 |===============
 
 [[sect-Component_Reference-Processing_management-a4jstatus]]
@@ -2012,7 +2012,7 @@ The prefix is normally ignored in +client+ and +lazyClient+ modes. In these mode
 .Defining suggestion values
 ====
 
-Using the +autocompleteMethod+  attribute:: 
+Using the +autocompleteMethod+  attribute::
 [source, XML]
 ----
 <rich:autocomplete value="#{bean.state}" autocompleteMethod="#{bean.autocomplete}" />
@@ -2020,7 +2020,7 @@ Using the +autocompleteMethod+  attribute::
 ----
 
 The +<rich:autocomplete>+ component uses the +bean.autocomplete+ method to provide suggestions, based on the entered prefix.
-Using the +autocompleteList+  attribute:: 
+Using the +autocompleteList+  attribute::
 [source, XML]
 ----
 <rich:autocomplete value="#{bean.state}" autocompleteList="#{bean.suggestions}" />
@@ -2077,7 +2077,7 @@ This example demonstrates how to use a custom filter with the +clientFilterFunct
 <script>
    function customFilter(subString, value){
       if(subString.length>=1) {
-         if(value.indexOf(subString)!=-1) 
+         if(value.indexOf(subString)!=-1)
             return true;
       }else return false;
    };
@@ -2197,7 +2197,7 @@ To add keyboard support for manual input, set +enableManualInput="true"+. To dis
 
 To change the appearance of the display button from the standard calendar icon, use the +buttonIcon+ and +buttonDisabledIcon+ attributes to replace the icon with a specified file. Alternatively, use the +buttonLabel+ attribute to display text on the button without an icon. If +buttonLabel+ is specified then both the +buttonIcon+ and +buttonDisabledIcon+ attributes are ignored. To hide the text field box, set +showInput="false"+.
 
-The calendar features a btn:[Today] button for locating today's date on the calendar. This can be set to three different values using the +todayControlMode+ attribute:
+The calendar features a guibutton:[Today] button for locating today's date on the calendar. This can be set to three different values using the +todayControlMode+ attribute:
 
 * +hidden+, which does not display the button;
 * +select+, the default setting, which scrolls the calendar to the current month and selects the date; and
@@ -2231,12 +2231,12 @@ To set the locale of the calendar, use the +locale+ attribute. The calendar will
 
 Use an application resource bundle to localize the calendar control labels. Define the following strings in the resource bundle:
 
-* The RICH_CALENDAR_APPLY_LABELstring is the label for the btn:[Apply] button.
-* The RICH_CALENDAR_TODAY_LABELstring is the label for the btn:[Today] button.
-* The RICH_CALENDAR_CLOSE_LABELstring is the label for the btn:[Close] button.
-* The RICH_CALENDAR_OK_LABELstring is the label for the btn:[OK] button.
-* The RICH_CALENDAR_CLEAN_LABELstring is the label for the btn:[Clean] button.
-* The RICH_CALENDAR_CANCEL_LABELstring is the label for the btn:[Cancel] button.
+* The RICH_CALENDAR_APPLY_LABELstring is the label for the guibutton:[Apply] button.
+* The RICH_CALENDAR_TODAY_LABELstring is the label for the guibutton:[Today] button.
+* The RICH_CALENDAR_CLOSE_LABELstring is the label for the guibutton:[Close] button.
+* The RICH_CALENDAR_OK_LABELstring is the label for the guibutton:[OK] button.
+* The RICH_CALENDAR_CLEAN_LABELstring is the label for the guibutton:[Clean] button.
+* The RICH_CALENDAR_CANCEL_LABELstring is the label for the guibutton:[Cancel] button.
 
 
 Alternatively, use the +org.richfaces.calendar+ resource bundle with Java Archive files ( JARs) defining the same properties.
@@ -2282,7 +2282,7 @@ Instead of using a data model, the +<rich:calendar>+ component can be customized
          curDt = day.date.getDate();
       }
       if (curDt.getTime() - day.date.getTime() &lt; 0) return true;
-      else return false;  
+      else return false;
    }
    function disabledClassesProv(day){
       if (curDt.getTime() - day.date.getTime() &gt;= 0) return 'rf-ca-boundary-dates';
@@ -2292,8 +2292,8 @@ Instead of using a data model, the +<rich:calendar>+ component can be customized
       return res;
    }
 </script>
-<rich:calendar dayDisableFunction="disablementFunction" 
-               dayClassFunction="disabledClassesProv" 
+<rich:calendar dayDisableFunction="disablementFunction"
+               dayClassFunction="disabledClassesProv"
                boundaryDatesMode="scroll" />
 
 ----
@@ -2394,7 +2394,7 @@ The +<rich:calendar>+ component can be controlled through the JavaScript API. Th
 |+.rf-cal-tl-btn-press+:: This class defines the styles for toolbar items when it is pressed.
 |+panelBorderColor+|border-color
 |+panelBorderColor+|border-right-color, border-bottom-color
-|+.rf-cal-tl-close+:: This class defines styles for a btn:[Close] button in a toolbar.
+|+.rf-cal-tl-close+:: This class defines styles for a guibutton:[Close] button in a toolbar.
 |No skin parameters.
 |+.rf-cal-c+:: This class defines the styles for regular calendar cells.
 |+panelBorderColor+|border-bottom-color, border-right-color
@@ -2431,9 +2431,9 @@ The +<rich:calendar>+ component can be controlled through the JavaScript API. Th
 |+subBorderColor+|border-right-color, border-bottom-color
 |+.rf-cal-sp-btn+:: This class defines the styles for a wrapper +<td>+ element for spinner buttons in the pop-up element for time selection.
 |+headerBackgroundColor+|background-color, border-color
-|+.rf-cal-sp-up+:: This class defines styles for the btn:[Up] spinner button.
+|+.rf-cal-sp-up+:: This class defines styles for the guibutton:[Up] spinner button.
 |No skin parameters.
-|+.rf-cal-sp-down+:: This class defines styles for the btn:[Down] spinner button.
+|+.rf-cal-sp-down+:: This class defines styles for the guibutton:[Down] spinner button.
 |No skin parameters.
 |+.rf-cal-sp-press+:: This class defines styles for a spinner button when it is pressed.
 |No skin parameters.
@@ -2474,19 +2474,19 @@ The +<rich:calendar>+ component can be controlled through the JavaScript API. Th
 |+.rf-cal-timepicker-inp+:: This class defines the styles for an input field in the time picker.
 |+generalSizeFont+|font-size
 |+generalFamilyFont+|font-family
-|+.rf-cal-timepicker-ok+:: This class defines styles for the btn:[OK] button in the time picker.
+|+.rf-cal-timepicker-ok+:: This class defines styles for the guibutton:[OK] button in the time picker.
 |No skin parameters.
-|+.rf-cal-timepicker-cancel+:: This class defines styles for the btn:[Cancel] button in the time picker.
+|+.rf-cal-timepicker-cancel+:: This class defines styles for the guibutton:[Cancel] button in the time picker.
 |No skin parameters.
 |+.rf-cal-monthpicker-cnt+:: This class defines the styles for the content of the pop-up element during month or year selection.
 |+panelBorderColor+|border-color
 |+tableBackgroundColor+|background
 |+generalSizeFont+|font-size
 |+generalFamilyFont+|font-family
-|+.rf-cal-monthpicker-ok+:: This class defines the styles for the btn:[OK] button for the month picker.
+|+.rf-cal-monthpicker-ok+:: This class defines the styles for the guibutton:[OK] button for the month picker.
 |+additionalBackgroundColor+|background
 |+panelBorderColor+|border-top-color
-|+.rf-cal-monthpicker-cancel+:: This class defines the styles for the btn:[Cancel] button for the month picker.
+|+.rf-cal-monthpicker-cancel+:: This class defines the styles for the guibutton:[Cancel] button for the month picker.
 |+additionalBackgroundColor+|background
 |+panelBorderColor+|border-top-color
 |+.rf-cal-monthpicker-split+:: This class defines the styles for the splitter in the month picker.
@@ -2540,14 +2540,14 @@ The +tabindex+ attribute specifies the position of the current element in the ta
 ====
 
                 The +ResourceServlet+  has to be registered for the +url-pattern++/org.richfaces.resources/\*+  in order to serve the editor resources (JavaScript, CSS, images) correctly. Check the _RichFaces Developer's Guide_  for further details.
-            
+
 ====
 
 [NOTE]
 ====
 
                 The +<rich:editor>+  requires the +<h:body>+  component to be present in the view and must be an ancestor of the editor in order for the resource dependencies to render correctly.
-            
+
 ====
 
 [[sect-Component_Reference-richeditor-Styling]]
@@ -2625,7 +2625,7 @@ In the above samples, the +<rich:editor>+ is configured to take focus after load
 ====
 
                 For further configuration options, refer to link:$$http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Setting_Configurations$$[CKEditor 3 Developer Guide]  and link:$$http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html$$[CKEditor 3 configuration reference].
-            
+
 ====
 
 [[sect-Component_Reference-richeditor-Toolbar_customization]]
@@ -2646,7 +2646,7 @@ It is also possible to define a custom toolbar using the CKEditor toolbar config
         { name: 'document', items : [ 'NewPage','Preview' ] },
         { name: 'clipboard', items : [ 'Cut','Copy','Paste','-','Undo','Redo' ] },
         { name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','Scayt' ] },
-        { name: 'insert', items : [ 'Image', 'Flash', 'Table', 'HorizontalRule', 
+        { name: 'insert', items : [ 'Image', 'Flash', 'Table', 'HorizontalRule',
                  'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
                 '/',
         { name: 'styles', items : [ 'Styles','Format' ] },
@@ -2753,34 +2753,34 @@ The +<rich:editor>+ component can be controlled through the JavaScript API. The 
 [options="header"]
 |===============
 |Class (selector)|Skin Parameters|Mapped CSS properties
-|+.cke_skin_richfaces+:: 
+|+.cke_skin_richfaces+::
 |+panelBorderColor+|border-color
-|+.cke_skin_richfaces .cke_wrapper+:: 
+|+.cke_skin_richfaces .cke_wrapper+::
 |+editorMainBackgroundColor+|background-color
-|+.cke_skin_richfaces .cke_dialog_body+:: 
+|+.cke_skin_richfaces .cke_dialog_body+::
 |+panelBorderColor+|border-color
 |+generalBackgroundColor+|background
-|+.cke_skin_richfaces .cke_dialog_title+:: 
+|+.cke_skin_richfaces .cke_dialog_title+::
 |+headerBackgroundColor+|repeat-x
 |+headerWeightFont+|font-weight
 |+headerTextColor+|color
 |+headerFamilyFont+|font-family
 |+headerSizeFont+|font-size
-|+.cke_skin_richfaces .cke_path a+, +.cke_skin_richfaces .cke_path .cke_empty+:: 
+|+.cke_skin_richfaces .cke_path a+, +.cke_skin_richfaces .cke_path .cke_empty+::
 |+editorMainTextColor+|color
-|+.cke_skin_richfaces .cke_button a.cke_on+:: 
+|+.cke_skin_richfaces .cke_button a.cke_on+::
 |+additionalBackgroundColor+|background-color
 |+panelBorderColor+|border-color
-|+.cke_skin_richfaces .cke_button a:hover+, +.cke_skin_richfaces .cke_button a:focus+, +.cke_skin_richfaces .cke_button a:active+:: 
+|+.cke_skin_richfaces .cke_button a:hover+, +.cke_skin_richfaces .cke_button a:focus+, +.cke_skin_richfaces .cke_button a:active+::
 |+panelBorderColor+|border-color
 |+tabBackgroundColor+|background-color
-|+.cke_skin_richfaces .cke_rcombo a+:: +.cke_skin_richfaces .cke_rcombo a:active+:: +.cke_skin_richfaces .cke_rcombo a:hover+:: 
+|+.cke_skin_richfaces .cke_rcombo a+:: +.cke_skin_richfaces .cke_rcombo a:active+:: +.cke_skin_richfaces .cke_rcombo a:hover+::
 |+panelBorderColor+|border-color
 |+generalSizeFont+|font-size
 |+generalFamilyFont+|font-family
 |+controlTextColor+|color
 |+controlBackgroundColor+|background-color
-|+.cke_skin_richfaces .cke_rcombo .cke_openbutton+:: 
+|+.cke_skin_richfaces .cke_rcombo .cke_openbutton+::
 |+headerBackgroundColor+|background-color
 |+panelBorderColor+|border-left-color
 |===============
@@ -2832,14 +2832,14 @@ Any file is accepted by rich:fileUpload component by default. There are three pa
 
 ==== Interactivity options
 
-Set the +immediateUpload+ attribute to +true+ to upload files as soon as they are added to the list, rather than waiting for the user to press the btn:[Upload] button.
+Set the +immediateUpload+ attribute to +true+ to upload files as soon as they are added to the list, rather than waiting for the user to press the guibutton:[Upload] button.
 
 The text labels used in the component can be completely customized. Labels for the various controls of the component can be set using the following parameters:
 
-+addLabel+:: The +addLabel+ parameter sets the label for the btn:[Add] button.
-+clearAllLabel+:: The +clearAllLabel+ parameter sets the label for the btn:[Clear All] button.
-+clearLabel+:: The +clearLabel+ parameter sets the label for the btn:[Clear] button.
-+uploadLabel+:: The +uploadLabel+ parameter sets the label for the btn:[Upload] button.
++addLabel+:: The +addLabel+ parameter sets the label for the guibutton:[Add] button.
++clearAllLabel+:: The +clearAllLabel+ parameter sets the label for the guibutton:[Clear All] button.
++clearLabel+:: The +clearLabel+ parameter sets the label for the guibutton:[Clear] button.
++uploadLabel+:: The +uploadLabel+ parameter sets the label for the guibutton:[Upload] button.
 The +<rich:fileUpload>+ component provides a built-in progress bar to indicate the progress of each file that is uploaded. This progress bar can be replaced with a +<rich:progressBar>+ component added to the +progress+ facet. Refer to <<sect-Component_Reference-Output_and_messages-richprogressBar>> for details on the +<rich:progressBar>+ component.
 
 To disable the +<rich:fileUpload>+ component, use the +disabled+ attribute.
@@ -2886,31 +2886,31 @@ There are a number of event handlers specific to the +<rich:fileUpload>+ compone
 |No skin parameters.
 |+.rf-fu-btns-lft+:: +.rf-fu-btns-rgh+:: These classes define styles for buttons on the left and right of the file upload control.
 |No skin parameters.
-|+.rf-fu-btn-add+:: This class defines styles for the btn:[Add] button in the file upload control.
+|+.rf-fu-btn-add+:: This class defines styles for the guibutton:[Add] button in the file upload control.
 |+trimColor+|background-color
 |+panelBorderColor+|border-color
-|+.rf-fu-btn-cnt-add+:: This class defines styles for the content of the btn:[Add] button in the file upload control.
+|+.rf-fu-btn-cnt-add+:: This class defines styles for the content of the guibutton:[Add] button in the file upload control.
 |+generalTextColor+|color
 |+generalFamilyFont+|font-family
 |+generalSizeFont+|font-size
-|+.rf-fu-btn-add-dis+:: This class defines styles for the btn:[Add] button in the file upload control when it is disabled.
+|+.rf-fu-btn-add-dis+:: This class defines styles for the guibutton:[Add] button in the file upload control when it is disabled.
 |+tableFooterBackgroundColor+|background-color
 |+tableFooterBackgroundColor+|border-color
-|+.rf-fu-btn-cnt-add-dis+:: This class defines styles for the content of the btn:[Add] button in the file upload control when it is disabled.
+|+.rf-fu-btn-cnt-add-dis+:: This class defines styles for the content of the guibutton:[Add] button in the file upload control when it is disabled.
 |+tabDisabledTextColor+|color
 |+generalFamilyFont+|font-family
 |+generalSizeFont+|font-size
-|+.rf-fu-btn-upl+:: This class defines styles for the btn:[Upload] button in the file upload control.
+|+.rf-fu-btn-upl+:: This class defines styles for the guibutton:[Upload] button in the file upload control.
 |+trimColor+|background-color
 |+panelBorderColor+|border-color
-|+.rf-fu-btn-cnt-upl+:: This class defines styles for the content of the btn:[Upload] button in the file upload control.
+|+.rf-fu-btn-cnt-upl+:: This class defines styles for the content of the guibutton:[Upload] button in the file upload control.
 |+generalTextColor+|color
 |+generalFamilyFont+|font-family
 |+generalSizeFont+|font-size
-|+.rf-fu-btn-clr+:: This class defines styles for the btn:[Clear] button in the file upload control.
+|+.rf-fu-btn-clr+:: This class defines styles for the guibutton:[Clear] button in the file upload control.
 |+trimColor+|background-color
 |+panelBorderColor+|border-color
-|+.rf-fu-btn-cnt-clr+:: This class defines styles for the content of the btn:[Clear] button in the file upload control.
+|+.rf-fu-btn-cnt-clr+:: This class defines styles for the content of the guibutton:[Clear] button in the file upload control.
 |+generalTextColor+|color
 |+generalFamilyFont+|font-family
 |+generalSizeFont+|font-size
@@ -3264,12 +3264,12 @@ The +<rich:inputNumberSlider>+ component can be controlled through the JavaScrip
 |+panelBorderColor+|border-bottom-color
 |+.rf-insl-trc-cntr+:: This class defines styles for the container of the number slider track.
 |No skin parameters.
-|+.rf-insl-mn+:: This class defines styles for the minimumlabel on the number slider.
+|+.rf-insl-mn+:: This class defines styles for the guilabel:[minimum] label on the number slider.
 |+generalSizeFont+|font-size
 |+generalFamilyFont+|font-family
 |+generalTextColor+|color
 |+panelBorderColor+|border-left-color
-|+.rf-insl-mx+:: This class defines styles for the maximumlabel on the number slider.
+|+.rf-insl-mx+:: This class defines styles for the guilabel:[maximum] label on the number slider.
 |+generalSizeFont+|font-size
 |+generalFamilyFont+|font-family
 |+generalTextColor+|color
@@ -3399,7 +3399,7 @@ Simple usage of the +<rich:select>+ component requires the +value+ attribute to 
 .Selection items
 ====
 
-Using multiple +<f:selectItem>+  tags:: 
+Using multiple +<f:selectItem>+  tags::
 [source, XML]
 ----
 <rich:select>
@@ -3412,7 +3412,7 @@ Using multiple +<f:selectItem>+  tags::
 
 ----
 
-Using a single +<f:selectItems>+  tag:: 
+Using a single +<f:selectItems>+  tag::
 [source, XML]
 ----
 <rich:select>
@@ -3528,7 +3528,7 @@ To use the +<rich:orderingList>+ bind the +value+ attribute to the list to be or
 .ItemLabel/ItemValue use
 ====
 
-Using the +itemLabel+  and +itemValue+  attributes:: 
+Using the +itemLabel+  and +itemValue+  attributes::
 [source, XML]
 ----
 <rich:orderingList value="#{listSelectBean.capitals}" var="capital" itemValue="#{capital}" itemLabel="#{capital.name}">
@@ -3551,7 +3551,7 @@ In addition to the above simple itemLabel display, the +<rich:orderingList>+ sup
 .Nested +<rich:column>+ tags
 ====
 
-Using +<rich:column>+  tags nested within the +<rich:orderingList>+:: 
+Using +<rich:column>+  tags nested within the +<rich:orderingList>+::
 [source, XML]
 ----
 <rich:orderingList value="#{listSelectBean.capitals}" var="capital"  listWidth="300px">
@@ -3664,7 +3664,7 @@ To use the +<rich:pickList>+ bind the +value+ attribute to the target list, wher
 .Simple pickList use
 ====
 
-Using the default +SelectItem+  itemLabel to generate the pickList source and target items.:: 
+Using the default +SelectItem+  itemLabel to generate the pickList source and target items.::
 [source, XML]
 ----
 <rich:pickList value="#{listSelectBean.selectedCapitals}"
@@ -3691,7 +3691,7 @@ In addition to the above simple +SelectItem+ itemLabel display, the +<rich:pickL
 .Nested +<rich:column>+ tags
 ====
 
-Using +<rich:column>+  tags nested within the +<rich:pickList>+:: 
+Using +<rich:column>+  tags nested within the +<rich:pickList>+::
 [source, XML]
 ----
 <rich:pickList value="#{listSelectBean.selectedCapitals}" var="capital" listHeight="200px">
@@ -4140,7 +4140,7 @@ The +<rich:collapsiblePanel>+ component can be controlled through the JavaScript
 
 ==== +<rich:panelToggleListener>+
 
-Use the +<rich:panelToggleListener>+ tag to register a +PanelToggleListener+ class on a parent +<rich:collapsiblePanel>+ component. The class provided as a listener must implement the org.richfaces.event.PanelToggleListenerinterface. The +processPanelToggle+ method accepts an +org.richface.event.PanelToggleEvent+ event as a parameter.
+Use the +<rich:panelToggleListener>+ tag to register a +PanelToggleListener+ class on a parent +<rich:collapsiblePanel>+ component. The class provided as a listener must implement the +org.richfaces.event.PanelToggleListener+ interface. The +processPanelToggle+ method accepts an +org.richface.event.PanelToggleEvent+ event as a parameter.
 
 [[sect-Component_Reference-Panels-richpopupPanel]]
 
@@ -4207,7 +4207,7 @@ By default, the +<rich:popupPanel>+ appears as a modal window that blocks intera
 
 ==== Size and positioning
 
-The pop-up panel can be both re-sized and re-positioned by the user. The minimum possible size for the panel can be set with the +minWith+ and +minHeight+ attributes. These abilities can be deactivated by setting +resizable+ or +movable+ to +false+ as necessary. 
+The pop-up panel can be both re-sized and re-positioned by the user. The minimum possible size for the panel can be set with the +minWith+ and +minHeight+ attributes. These abilities can be deactivated by setting +resizable+ or +movable+ to +false+ as necessary.
 
 //////////////////////////////////////
 
@@ -4599,7 +4599,7 @@ The +<rich:togglePanel>+ component can be controlled through the JavaScript API.
 
 ==== +<rich:itemChangeListener>+
 
-Use the +<rich:itemChangeListener>+ tag to register an +ItemChangeListener+ class on a parent panel component. The class provided as a listener must implement the org.richfaces.event.ItemChangeListenerinterface. The +processItemChange+ method accepts an +org.richface.event.ItemChangeEvent+ event as a parameter.
+Use the +<rich:itemChangeListener>+ tag to register an +ItemChangeListener+ class on a parent panel component. The class provided as a listener must implement the +org.richfaces.event.ItemChangeListener+ interface. The +processItemChange+ method accepts an +org.richface.event.ItemChangeEvent+ event as a parameter.
 
 The +<rich:itemChangeListener>+ tag can be used with any of the switchable panel components:
 
@@ -4908,7 +4908,7 @@ The +keepSaved+ attribute defines whether this iteration component will reset sa
     </f:facet>
 </rich:dataTable>
 
-	
+
 ----
 
 [quote]
@@ -5057,7 +5057,7 @@ In general usage, the +<rich:column>+ component is used in the same was as the J
 
 [source, XML]
 ----
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5">
     <rich:column>
         <f:facet name="header">State Flag</f:facet>
         <h:graphicImage value="#{cap.stateFlag}"/>
@@ -5105,11 +5105,11 @@ Columns can be merged by using the +colspan+ attribute to specify how many norma
 
 [source, XML]
 ----
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5">
 	<rich:column colspan="3">
         <h:graphicImage value="#{cap.stateFlag}"/>
     </rich:column>
-    <rich:column breakBefore="true"> 
+    <rich:column breakBefore="true">
         <h:outputText value="#{cap.state}"/>
     </rich:column>
     <rich:column >
@@ -5149,12 +5149,12 @@ Similarly, the +rowspan+ attribute can be used to merge and span rows. Again the
 
 [source, XML]
 ----
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5"> 
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5">
     <rich:column rowspan="3">
         <f:facet name="header">State Flag</f:facet>
         <h:graphicImage value="#{cap.stateFlag}"/>
     </rich:column>
-    <rich:column> 
+    <rich:column>
         <f:facet name="header">State Info</f:facet>
         <h:outputText value="#{cap.state}"/>
     </rich:column>
@@ -5212,7 +5212,7 @@ The +<rich:columnGroup>+ can also be used to create complex headers in a table. 
 
 [source, XML]
 ----
-<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist"> 
+<rich:dataTable value="#{capitalsBean.capitals}" var="cap" rows="5" id="sublist">
     <f:facet name="header">
         <rich:columnGroup>
             <rich:column rowspan="2">
@@ -5636,9 +5636,9 @@ The +selection+ attribute points to a collection of objects. It holds the +rowKe
 
 [source, XML]
 ----
-<rich:extendedDataTable value="#{extTableSelectionBean.inventoryItems}" 
+<rich:extendedDataTable value="#{extTableSelectionBean.inventoryItems}"
                         var="car" selection="#{extTableSelectionBean.selection}"
-                        id="table" frozenColumns="2" 
+                        id="table" frozenColumns="2"
                         style="height:300px; width:500px;" selectionMode="multiple">
    ...
 
@@ -5724,7 +5724,7 @@ The example table with the first, second, third, and fifth rows selected.
 
 ===== Rearranging columns
 
-Columns in a +<rich:extendedDataTable>+ component can be rearranged by the user by dragging each column to a different position. A graphical representation of the column is displayed during dragging. <<figu-Component_Reference-richextendedDataTable-Dragging_columns>> illustrates the Pricecolumn being dragged to a new location. The small blue arrow indicates where the column will be moved to if it is dropped in the current position. <<figu-Component_Reference-richextendedDataTable-Rearranged_columns>> shows the result of dragging the Pricecolumn.
+Columns in a +<rich:extendedDataTable>+ component can be rearranged by the user by dragging each column to a different position. A graphical representation of the column is displayed during dragging. <<figu-Component_Reference-richextendedDataTable-Dragging_columns>> illustrates the guilabel:[Price] column being dragged to a new location. The small blue arrow indicates where the column will be moved to if it is dropped in the current position. <<figu-Component_Reference-richextendedDataTable-Rearranged_columns>> shows the result of dragging the guilabel:[Price] column.
 
 [[figu-Component_Reference-richextendedDataTable-Dragging_columns]]
 
@@ -6252,17 +6252,17 @@ The +<rich:dataScroller>+ component can be controlled through the JavaScript API
 |+generalSizeFont+|font-size
 |+tableBorderColor+|border-color
 |+headerBackgroundColor+|background-color
-|+.rf-ds-btn-first+:: This class defines styles for the firstbutton.
+|+.rf-ds-btn-first+:: This class defines styles for the guilabel:[first] button.
 |No skin parameters.
-|+.rf-ds-btn-fastrwd+:: This class defines styles for the fast rewindbutton.
+|+.rf-ds-btn-fastrwd+:: This class defines styles for the guilabel:[fast rewind] button.
 |No skin parameters.
-|+.rf-ds-btn-prev+:: This class defines styles for the previousbutton.
+|+.rf-ds-btn-prev+:: This class defines styles for the guilabel:[previous] button.
 |No skin parameters.
-|+.rf-ds-btn-next+:: This class defines styles for the nextbutton.
+|+.rf-ds-btn-next+:: This class defines styles for the guilabel:[next] button.
 |No skin parameters.
-|+.rf-ds-btn-fastfwd+:: This class defines styles for the fast forwardbutton.
+|+.rf-ds-btn-fastfwd+:: This class defines styles for the guilabel:[fast forward] button.
 |No skin parameters.
-|+.rf-ds-btn-last+:: This class defines styles for the lastbutton.
+|+.rf-ds-btn-last+:: This class defines styles for the guilabel:[last] button.
 |No skin parameters.
 |+.rf-ds-nmb-btn+:: This class defines styles for page number buttons in the data scroller.
 |+generalTextColor+|color
@@ -6293,7 +6293,7 @@ To define a filter for a column use either the +filter+ or +filterExpression+ at
 
 Use the +filterExpression+ attribute to define an expression that can be evaluated as a boolean value. The expression checks if each table entry satisfies the filtering condition when the table is rendered. For example, the expression might be a JSTL (JavaServer Pages Standard Tag Library) function such as `contains` or `equals`.
 
-Use the +filter+ attribute to define a filter interface. The attribute must use EL (Expression Language) to point to an object which implements the org.richfaces.model.Filter<T>interface. The object must provide a single +accept(T t)+ method. The method takes each iteration object as a parameter and returns a boolean value, which determines whether the object satisfies the filter. By defining a custom filter, you can implement complex business logic to filter a table.
+Use the +filter+ attribute to define a filter interface. The attribute must use EL (Expression Language) to point to an object which implements the +org.richfaces.model.Filter<T>+ interface. The object must provide a single +accept(T t)+ method. The method takes each iteration object as a parameter and returns a boolean value, which determines whether the object satisfies the filter. By defining a custom filter, you can implement complex business logic to filter a table.
 
 [[sect-Component_Reference-Table_filtering-builtin_filtering]]
 
@@ -6307,7 +6307,7 @@ The built-in filter controls are only available with the +extendedDataTable+ com
 
 The built-in filter controls of the +<rich:column>+ component allow the user to enter text to use as the filtering value. The value of the built-in filter control is bound to the +filterValue+ attribute, which can either be an initial filtering value on the page, or a value binding on the server. The filterValue is then applied to the filter defined either by the +filterExpression+ or +filter+ column attributes.
 
-The filterValue is of type +String+. Conversion is either done implicitly via EL in the +filterExpression+, or explicitly within the +filter+ function. The filter is processed and the table is rendered when the +onblur+ event occurs for the column. 
+The filterValue is of type +String+. Conversion is either done implicitly via EL in the +filterExpression+, or explicitly within the +filter+ function. The filter is processed and the table is rendered when the +onblur+ event occurs for the column.
 
 //////////////////////////////////////
 
@@ -6429,7 +6429,7 @@ A table of state capitals filtered by states beginning with the letter " a", fur
 
 === Table sorting
 
-Tables entries can be sorted 
+Tables entries can be sorted
 
 //////////////////////////////////////
 
@@ -6477,12 +6477,12 @@ Set the +sortBy+ attribute to indicate which value to use when sorting the colum
          <h:outputText value="State Name"/>
       </f:facet>
       <h:outputText value="#{cap.state}"/>
-   </rich:column> 
+   </rich:column>
    <rich:column sortBy="#{cap.name}">
       <f:facet name="header">
          <h:outputText value="State Capital"/>
       </f:facet>
-      <h:outputText value="#{cap.name}"/> 
+      <h:outputText value="#{cap.name}"/>
    </rich:column>
 </rich:dataTable>
 
@@ -6578,7 +6578,7 @@ The +<rich:tree>+ component provides a hierarchical tree control. Each +<rich:tr
 
 ==== Basic usage
 
-The +<rich:tree>+ component requires the +value+ attribute to point to the data model for populating the tree. The data model must be either an org.richfaces.model.TreeNodeinterface, an +org.richfaces.model.TreeDataModel+ interface, or a javax.swing.tree.TreeNodeinterface. The +var+ attribute declares the variable used for iterating through the data model, so that child +<rich:treeNode>+ components can reference each iteration.
+The +<rich:tree>+ component requires the +value+ attribute to point to the data model for populating the tree. The data model must be either an +org.richfaces.model.TreeNode+ interface, an +org.richfaces.model.TreeDataModel+ interface, or a +javax.swing.tree.TreeNode+ interface. The +var+ attribute declares the variable used for iterating through the data model, so that child +<rich:treeNode>+ components can reference each iteration.
 
 Ideally, the +<rich:tree>+ component needs one or more +<rich:treeNode>+ components to work with the data model. However if no +<rich:treeNode>+ components are provided the tree creates default nodes instead.
 
@@ -6587,7 +6587,7 @@ Ideally, the +<rich:tree>+ component needs one or more +<rich:treeNode>+ compone
 .Basic usage
 ====
 
-This example demonstrates basic usage of the +<rich:tree>+ component using an org.richfaces.model.TreeNodedata model.
+This example demonstrates basic usage of the +<rich:tree>+ component using an +org.richfaces.model.TreeNode+ data model.
 
 First extend the +org.richfaces.model.TreeNodeImpl+ and add the data fields you require, with appropriate accessor methods, as in:
 
@@ -6713,7 +6713,7 @@ The mode for performing submissions when nodes are expanded or collapsed is dete
 +ajax+:: This is the default setting. The +<rich:tree>+ component performs an Ajax form submission, and only the content of the tree is rendered.
 +server+:: The +<rich:tree>+ component performs a common submission, completely refreshing the page.
 +client+:: The +<rich:tree>+ component updates on the client side through JavaScript, without any additional requests or updates. All nodes are rendered to the client during the initial page rendering.
-By default, tree nodes are expanded and collapsed through the btn:[&#43;] and btn:[-] controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the +toggleNodeEvent+ attribute.
+By default, tree nodes are expanded and collapsed through the guibutton:[\+] and guibutton:[-] controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the +toggleNodeEvent+ attribute.
 
 [[sect-Component_Reference-richtree-Selecting_tree_nodes]]
 
@@ -6776,7 +6776,7 @@ Styling for the +<rich:tree>+ component is mostly applied to the tree nodes. Ref
 
 ==== +<rich:treeSelectionChangeListener>+
 
-Use the +<rich:treeSelectionChangeListener>+ tag to register a +TreeSelectionChangeListener+ class on a parent +<rich:tree>+ component. The class provided as a listener must implement the org.richfaces.event.TreeSelectionChangeListenerinterface. The +processTreeSelectionChange+ method accepts an +org.richface.event.TreeSelectionChangeEvent+ event as a parameter.
+Use the +<rich:treeSelectionChangeListener>+ tag to register a +TreeSelectionChangeListener+ class on a parent +<rich:tree>+ component. The class provided as a listener must implement the +org.richfaces.event.TreeSelectionChangeListener+ interface. The +processTreeSelectionChange+ method accepts an +org.richface.event.TreeSelectionChangeEvent+ event as a parameter.
 
 [[sect-Component_Reference-Trees-richtreeNode]]
 
@@ -6897,7 +6897,7 @@ Use the +expanded+ attribute to determine whether the node is expanded or collap
 
 ===== +<rich:treeToggleListener>+
 
-Use the +<rich:treeToggleListener>+ tag to register a +TreeToggleListener+ class on a parent +<rich:treeNode>+ component. The class provided as a listener must implement the org.richfaces.event.TreeToggleListenerinterface. The +processTreeToggle+ method accepts an +org.richface.event.TreeToggleEvent+ event as a parameter.
+Use the +<rich:treeToggleListener>+ tag to register a +TreeToggleListener+ class on a parent +<rich:treeNode>+ component. The class provided as a listener must implement the +org.richfaces.event.TreeToggleListener+ interface. The +processTreeToggle+ method accepts an +org.richface.event.TreeToggleEvent+ event as a parameter.
 
 [[sect-Component_Reference-Trees-Tree_adaptors]]
 
@@ -6909,7 +6909,7 @@ Use a tree adaptor to populate a tree model declaratively from a non-hierarchica
 
 ==== +<rich:treeModelAdaptor>+
 
-The +<rich:treeModelAdaptor>+ component takes an object which implements the Mapor Iterableinterfaces. It adds all the object entries to the parent node as child nodes.
+The +<rich:treeModelAdaptor>+ component takes an object which implements the +Map+ or +Iterable+ interfaces. It adds all the object entries to the parent node as child nodes.
 
 [[sect-Component_Reference-richtreeModelAdaptor-Basic_usage]]
 
@@ -6925,9 +6925,9 @@ Define the appearance of each node added by the adaptor with a child +<rich:tree
 
 ===== Identifying nodes
 
-Adaptors that use Mapinterfaces or models with non-string keys require a row key converter in order to correctly identify nodes. Refer to <<sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute>> for details on the use of the +rowKeyConverter+ attribute.
+Adaptors that use +Map+ interfaces or models with non-string keys require a row key converter in order to correctly identify nodes. Refer to <<sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute>> for details on the use of the +rowKeyConverter+ attribute.
 
-Adaptors that use Iterableinterfaces have simple integer row keys. A default converter is provided and does not need to be referenced explicitly.
+Adaptors that use +Iterable+ interfaces have simple integer row keys. A default converter is provided and does not need to be referenced explicitly.
 
 [[sect-Component_Reference-richtreeModelAdaptor-Reference_data]]
 
@@ -7025,12 +7025,12 @@ public class FileSystemNode {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         Set<String> resourcePaths = externalContext.getResourcePaths(this.path);
-        
+
       if (resourcePaths == null) {
          resourcePaths = Collections.emptySet();
       }
       return resourcePaths;
-   }   
+   }
    ...
 }
 
@@ -7050,9 +7050,9 @@ A hierarchical tree detailing a file system.
 
 ===== Identifying nodes
 
-Adaptors that use Mapinterfaces or models with non-string keys require a row key converter in order to correctly identify nodes. Refer to <<sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute>> for details on the use of the +rowKeyConverter+ attribute.
+Adaptors that use +Map+ interfaces or models with non-string keys require a row key converter in order to correctly identify nodes. Refer to <<sect-Component_Reference-richtree-Identifying_nodes_with_the_rowKeyConverter_attribute>> for details on the use of the +rowKeyConverter+ attribute.
 
-Adaptors that use Iterableinterfaces have simple integer row keys. A default converter is provided and does not need to be referenced explicitly.
+Adaptors that use +Iterable+ interfaces have simple integer row keys. A default converter is provided and does not need to be referenced explicitly.
 
 [[sect-Component_Reference-richtreeModelRecursiveAdaptor-Reference_data]]
 
@@ -7436,7 +7436,7 @@ The +<rich:panelMenu>+ component is used in conjunction with +<rich:panelMenuIte
 
 [source, XML]
 ----
-<rich:panelMenu mode="ajax" 
+<rich:panelMenu mode="ajax"
                 topGroupExpandedRightIcon="chevronUp"
                 topGroupCollapsedRightIcon="chevronDown"
                 groupExpandedLeftIcon="disc"
@@ -7492,70 +7492,70 @@ As with other control components, set +disabled="true"+ to disable the +<rich:pa
 
 Icons for the panel menu can be chosen from a set of standard icons. Icons can be set for the top panel menu, child panel menus, and child item. There are three different menu states that the icon represents, as well as icons for both the left and right side of the item title.
 
-+topGroupExpandedLeftIcon+:: +topGroupExpandedRightIcon+:: These attributes determine the icons for the top level menu when it is expanded. 
++topGroupExpandedLeftIcon+:: +topGroupExpandedRightIcon+:: These attributes determine the icons for the top level menu when it is expanded.
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+topGroupCollapsedLeftIcon+:: +topGroupCollapsedRightIcon+:: These attributes determine the icons for the top level menu when it is collapsed. 
++topGroupCollapsedLeftIcon+:: +topGroupCollapsedRightIcon+:: These attributes determine the icons for the top level menu when it is collapsed.
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+topGroupDisabledLeftIcon+:: +topGroupDisabledRightIcon+:: These attributes determine the icons for the top level menu when it is disabled. 
++topGroupDisabledLeftIcon+:: +topGroupDisabledRightIcon+:: These attributes determine the icons for the top level menu when it is disabled.
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+topItemLeftIcon+:: +topItemRightIcon+:: These attributes determine the icons for a top level menu item. 
++topItemLeftIcon+:: +topItemRightIcon+:: These attributes determine the icons for a top level menu item.
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+topItemDisabledLeftIcon+:: +topItemDisabledRightIcon+:: These attributes determine the icons for a top level menu item when it is disabled. 
++topItemDisabledLeftIcon+:: +topItemDisabledRightIcon+:: These attributes determine the icons for a top level menu item when it is disabled.
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+groupExpandedLeftIcon+:: +groupExpandedRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are expanded. 
++groupExpandedLeftIcon+:: +groupExpandedRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are expanded.
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+groupCollapsedLeftIcon+:: +groupCollapsedRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are collapsed. 
++groupCollapsedLeftIcon+:: +groupCollapsedRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are collapsed.
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+groupDisabledLeftIcon+:: +groupDisabledRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are disabled. 
++groupDisabledLeftIcon+:: +groupDisabledRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are disabled.
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+itemLeftIcon+:: +itemRightIcon+:: These attributes determine the icons for items in the menus. 
++itemLeftIcon+:: +itemRightIcon+:: These attributes determine the icons for items in the menus.
 
 //////////////////////////////////////
 
 //////////////////////////////////////
 
 
-+itemDisabledLeftIcon+:: +itemDisabledRightIcon+:: These attributes determine the icons for items in the menus when they are disabled. 
++itemDisabledLeftIcon+:: +itemDisabledRightIcon+:: These attributes determine the icons for items in the menus when they are disabled.
 
 //////////////////////////////////////
 
@@ -8076,7 +8076,7 @@ The example demonstrates how an icon for an error message could be added using C
 |+generalTextColor+|color
 |+.rf-msg-wrn+:: This class defines styles for a warning message.
 |+warningTextColor+|color
-|+.rf-msg-ok+:: This class defines styles for a basic OKmessage.
+|+.rf-msg-ok+:: This class defines styles for a basic guilabel:[OK] message.
 |+generalTextColor+|color
 |+.rf-msg-sum+:: +.rf-msg-det+:: These classes define styles for the summary or details of a message.
 |No skin parameters.
@@ -8126,8 +8126,8 @@ Override the displayproperty for all CSS message classes to customize the layout
 
 Display messages in a list with no icons:: To display the messages in a list format without the default icons, override the message styles as follows:
 ----
-.rf-msg-err, .rf-msgs-err, .rf-msg-ftl, .rf-msgs-ftl, .rf-msg-inf, 
-.rf-msgs-inf, .rf-msg-wrn, .rf-msgs-wrn, .rf-msg-ok, .rf-msgs-ok { 
+.rf-msg-err, .rf-msgs-err, .rf-msg-ftl, .rf-msgs-ftl, .rf-msg-inf,
+.rf-msgs-inf, .rf-msg-wrn, .rf-msgs-wrn, .rf-msg-ok, .rf-msgs-ok {
    display: list-item;
    margin-left: 20px;
    padding-left: 0px; }
@@ -8144,7 +8144,7 @@ image::images/figu-Component_Reference-richmessages-Messages_in_a_list.png[]
 
 Display in-line messages:: To display the messages in line with text, override the message styles as follows:
 ----
-.rf-msg-err, .rf-msgs-err, .rf-msg-ftl, .rf-msgs-ftl, .rf-msg-inf, 
+.rf-msg-err, .rf-msgs-err, .rf-msg-ftl, .rf-msgs-ftl, .rf-msg-inf,
 .rf-msgs-inf, .rf-msg-wrn, .rf-msgs-wrn, .rf-msg-ok, .rf-msgs-ok { display:inline; }
 
 ----
@@ -8186,7 +8186,7 @@ image::images/figu-Component_Reference-richmessages-In-line_messages.png[]
 |+generalTextColor+|color
 |+.rf-msgs-wrn+:: This class defines styles for a warning message.
 |+warningTextColor+|color
-|+.rf-msgs-ok+:: This class defines styles for a basic OKmessage.
+|+.rf-msgs-ok+:: This class defines styles for a basic guilabel:[OK] message.
 |+generalTextColor+|color
 |+.rf-msgs-sum+:: +.rf-msgs-det+:: These classes define styles for the summary or details of a message.
 |No skin parameters.
@@ -8226,7 +8226,7 @@ There are several attributes that can change default behavior:
 ====
 
                 Nonblocking notifications can be clicked through, but because they are using jQuery mechanism to bypass events, only jQuery event handlers are triggered. IThis means that standard links won't be triggered.
-            
+
 ====
 
 [[sect-Component_Reference-richnotify-Reference_data]]
@@ -8538,7 +8538,7 @@ Define the +initial+ and +finish+ facets to customize the progress bar's appeara
     <f:facet name="finish">
         <h:outputText value="Process has completed"/>
     </f:facet>
-</rich:progressBar> 
+</rich:progressBar>
 
 ----
 
@@ -8641,7 +8641,7 @@ Alternatively, the content of the tool-tip can be defined inside the +<rich:tool
 .Defining tool-tip content
 ====
 
-Basic content:: 
+Basic content::
 [source, XML]
 ----
 <rich:panel>
@@ -8650,7 +8650,7 @@ Basic content::
 
 ----
 
-Rich content:: 
+Rich content::
 [source, XML]
 ----
 <rich:panel>
