@@ -142,8 +142,10 @@ Available at <ulink url="http://docs.jboss.org/richfaces/latest_4_0_X/vdldoc/">h
         <itemizedlist>
           <listitem>
             <simpara>
-RichFaces Components API
-</simpara>
+              <emphasis role="strong">
+                <emphasis>RichFaces Components API</emphasis>
+              </emphasis>
+            </simpara>
             <itemizedlist>
               <listitem>
                 <simpara>
@@ -284,11 +286,11 @@ The form that contains the requesting component is processed.
             <listitem>
               <simpara>
 The region that contains the requesting component is processed. Use the <literal>&lt;a4j:region&gt;</literal> component as a wrapper element to specify regions.
-Some components make use of additional keywords. These are detailed under the relevant component entry in this book.
 </simpara>
             </listitem>
           </varlistentry>
         </variablelist>
+        <simpara>Some components make use of additional keywords. These are detailed under the relevant component entry in this book.</simpara>
       </section>
       <section id="sect-Component_Reference-Data_processing-bypassUpdates">
         <title>
@@ -1325,11 +1327,10 @@ public class MediaData implements Serializable {
                   <imagedata fileref="images/figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result.png"/>
                 </imageobject>
                 <textobject>
-                  <phrase>images/figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result.png</phrase>
+                  <phrase>The generated image containing a random verification number.</phrase>
                 </textobject>
               </mediaobject>
             </informalfigure>
-            <simpara>The generated image containing a random verification number.</simpara>
           </example>
           <note>
             <title><literal>Serializable</literal> interface</title>
@@ -1839,7 +1840,7 @@ Set <literal>mode="inline"</literal> to place the logging data in-line on the cu
             </listitem>
             <listitem>
               <simpara>
-Set <literal>mode="popup"</literal> to present the logging data in a new pop-up window. The window is set to be opened by pressing the key combination CtrlShiftL; this can be partially reconfigured with the <literal>hotkey</literal> attribute, which specifies the letter key to use in combination with CtrlShiftinstead of L.
+Set <literal>mode="popup"</literal> to present the logging data in a new pop-up window. The window is set to be opened by pressing the key combination <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap><keycap>L</keycap></keycombo>; this can be partially reconfigured with the <literal>hotkey</literal> attribute, which specifies the letter key to use in combination with <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap></keycombo> instead of .
 </simpara>
             </listitem>
           </itemizedlist>
@@ -2257,18 +2258,7 @@ The <literal>startText</literal> attribute defines the text shown after the requ
               <simpara>
 The <literal>stopText</literal> attribute defines the text shown once the request is complete. Set the styles for the text with the <literal>stopStyle</literal> and <literal>stopStyleClass</literal> attributes. Alternatively, use the <literal>stop</literal> facet to customize the text appearance.
 </simpara>
-              <variablelist>
-                <varlistentry>
-                  <term>
-If the <literal>stopText</literal> attribute is not defined, and no facet exists for the stopped state, the complete status is simply not shown. In this way, only the progress of the request is displayed toinclude
-</term>
-                  <listitem>
-                    <simpara>
-the user, along with any errors.
-</simpara>
-                  </listitem>
-                </varlistentry>
-              </variablelist>
+              <simpara>If the <literal>stopText</literal> attribute is not defined, and no facet exists for the stopped state, the complete status is simply not shown. In this way, only the progress of the request is displayed to the user, along with any errors.</simpara>
             </listitem>
             <listitem>
               <simpara>
@@ -5523,7 +5513,7 @@ When <literal>readonly</literal> is <literal>true</literal>, editor will be swit
         <simpara>The <literal>&lt;rich:fileUpload&gt;</literal> component allows the user to upload files to a server. It features multiple uploads, progress bars, restrictions on file types, and restrictions on sizes of the files to be uploaded.</simpara>
         <section id="sect-Component_Reference-richfileUpload-Basic_usage">
           <title>Basic usage</title>
-          <simpara>Basic usage requires the <literal>fileUploadListener</literal> attribute. Use the attribute to reference a listener function on the server side after each file is uploaded. The listener should process files as required, such as storing them in the _session/db/filesystem/_directory. The component itself does not store uploaded files, so if the listener is not implemented they are not stored anywhere.</simpara>
+          <simpara>Basic usage requires the <literal>fileUploadListener</literal> attribute. Use the attribute to reference a listener function on the server side after each file is uploaded. The listener should process files as required, such as storing them in the <emphasis>session/db/filesystem/</emphasis> directory. The component itself does not store uploaded files, so if the listener is not implemented they are not stored anywhere.</simpara>
           <example id="exam-Component_Reference-richfileUpload-Basic_usage">
             <title>Basic usage</title>
             <programlisting language="XML" linenumbering="unnumbered">&lt;rich:fileUpload fileUploadListener="#{bean.listener}" /&gt;</programlisting>
@@ -5532,7 +5522,7 @@ When <literal>readonly</literal> is <literal>true</literal>, editor will be swit
         <section id="sect-Component_Reference-richfileUpload-Upload_settings">
           <title>Upload settings</title>
           <simpara>Files are uploaded to either the temporary folder (different for each operating system) or to RAM(random-access memory), depending on the value of the <literal>org.richfaces.fileUpload.createTempFiles</literal> context parameter of the <emphasis>web.xml</emphasis> settings file for the project. If the parameter is set to <literal>true</literal>, the files are uploaded to the temporary folder.</simpara>
-          <simpara>To limit the maximum size of the uploaded files, define the byte size with the <literal>org.richfaces.fileUpload.maxRequestSize</literal> context parameter of the _web.xml_settings file for the project.</simpara>
+          <simpara>To limit the maximum size of the uploaded files, define the byte size with the <literal>org.richfaces.fileUpload.maxRequestSize</literal> context parameter of the <emphasis>web.xml</emphasis> settings file for the project.</simpara>
         </section>
         <section id="sect-Component_Reference-richfileUpload-Sanitizing_file_upload_input">
           <title>Sanitizing file upload input</title>
@@ -5612,12 +5602,11 @@ The <literal>clearLabel</literal> parameter sets the label for the <guibutton>Cl
               <listitem>
                 <simpara>
 The <literal>uploadLabel</literal> parameter sets the label for the <guibutton>Upload</guibutton> button.
-z
-The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in progress bar to indicate the progress of each file that is uploaded. This progress bar can be replaced with a <literal>&lt;rich:progressBar&gt;</literal> component added to the <literal>progress</literal> facet. Refer to <xref linkend="sect-Component_Reference-Output_and_messages-richprogressBar"/> for details on the <literal>&lt;rich:progressBar&gt;</literal> component.
 </simpara>
               </listitem>
             </varlistentry>
           </variablelist>
+          <simpara>The <literal>&lt;rich:fileUpload&gt;</literal> component provides a built-in progress bar to indicate the progress of each file that is uploaded. This progress bar can be replaced with a <literal>&lt;rich:progressBar&gt;</literal> component added to the <literal>progress</literal> facet. Refer to <xref linkend="sect-Component_Reference-Output_and_messages-richprogressBar"/> for details on the <literal>&lt;rich:progressBar&gt;</literal> component.</simpara>
           <simpara>To disable the <literal>&lt;rich:fileUpload&gt;</literal> component, use the <literal>disabled</literal> attribute.</simpara>
         </section>
         <section id="sect-Component_Reference-richfileUpload-richfileUpload_client-side_events">
@@ -6333,7 +6322,7 @@ This class defines styles for the input field container in the file upload contr
           <itemizedlist>
             <listitem>
               <simpara>
-By default, pressing the Enterkey will confirm and save the input.
+By default, pressing the  key will confirm and save the input.
 </simpara>
             </listitem>
             <listitem>
@@ -6347,7 +6336,7 @@ If <literal>saveOnBlur="true"</literal> is set, the input is saved on the compon
 </simpara>
             </listitem>
           </itemizedlist>
-          <simpara>Pressing the Esckey cancels editing in all cases.</simpara>
+          <simpara>Pressing the  key cancels editing in all cases.</simpara>
         </section>
         <section id="sect-Component_Reference-richinplaceInput-JavaScript_API">
           <title>JavaScript API</title>
@@ -6859,7 +6848,7 @@ When in the <emphasis>changed</emphasis> state, the new value for the component 
           <itemizedlist>
             <listitem>
               <simpara>
-Once the user selects an item from the drop-down list, the item is saved as the new control value. This is the default setting. If <literal>saveOnSelect="false"</literal> is set, the component applies the selected item but remains in the <emphasis>edit</emphasis> state so a different selection could be chosen. The value is then applied when the Enterkey is pressed.
+Once the user selects an item from the drop-down list, the item is saved as the new control value. This is the default setting. If <literal>saveOnSelect="false"</literal> is set, the component applies the selected item but remains in the <emphasis>edit</emphasis> state so a different selection could be chosen. The value is then applied when the  key is pressed.
 </simpara>
             </listitem>
             <listitem>
@@ -6873,7 +6862,7 @@ If <literal>showControls="true"</literal> is set, buttons are added to the contr
 </simpara>
             </listitem>
           </itemizedlist>
-          <simpara>Pressing the Esckey cancels editing in all cases.</simpara>
+          <simpara>Pressing the  key cancels editing in all cases.</simpara>
         </section>
         <section id="sect-Component_Reference-richinplaceSelect-JavaScript_API">
           <title>JavaScript API</title>
@@ -8367,7 +8356,7 @@ Using a single <literal>&lt;f:selectItems&gt;</literal>  tag
    &lt;f:selectItems value="#{bean.options}" /&gt;
 &lt;/rich:select&gt;</programlisting>
           </example>
-          <simpara>The arrow keys on a keyboard can be used to highlight different items in the list. If the control loses focus or the Enterkey is pressed, the highlighted option is chosen as the value and the list is closed. Pressing the Esckey will close the list but not change the value.</simpara>
+          <simpara>The arrow keys on a keyboard can be used to highlight different items in the list. If the control loses focus or the  key is pressed, the highlighted option is chosen as the value and the list is closed. Pressing the  key will close the list but not change the value.</simpara>
         </section>
         <section id="sect-Component_Reference-richselect-Using_manual_input">
           <title>Using manual input</title>
@@ -12438,12 +12427,12 @@ Action components outside the table
               <listitem>
                 <simpara>
 Use <literal>render=tableId:rowId:cellId</literal> to specify the cell to update. The action component updates the cell with an identifier of <emphasis><literal>cellId</literal></emphasis>, which is within the row with an identifier of <emphasis><literal>rowId</literal></emphasis>, which is within the table with an identifier of <emphasis><literal>tableId</literal></emphasis>.
-Instead of a specific identifier, any of the references could be variables, as demonstrated in <xref linkend="exam-Component_Reference-a4jrepeat-Use_variables_to_specify_references"/>.
 </simpara>
               </listitem>
             </varlistentry>
           </variablelist>
-          <example>
+          <simpara>Instead of a specific identifier, any of the references could be variables, as demonstrated in <xref linkend="exam-Component_Reference-a4jrepeat-Use_variables_to_specify_references"/>.</simpara>
+          <example id="exam-Component_Reference-a4jrepeat-Use_variables_to_specify_references">
             <title>Use variables to specify references</title>
             <programlisting language="XML" linenumbering="unnumbered">render=tableId:@rows(bean.rowToUpdate):cellId</programlisting>
             <simpara>The @rows function accepts a collection of row keys to be updated.  Similarly the <ulink url="mailto:table@body">table@body</ulink> shorthand can be used to specify that the entire table body should be updated.</simpara>
@@ -14323,6 +14312,39 @@ This class defines styles for a sub-footer cell.
           </section>
           <section id="sect-Component_Reference-richcollapsibleSubTableToggler-Style_classes_and_skin_parameters">
             <title>Style classes and skin parameters</title>
+            <variablelist id="vlst-richcollapsibleSubTableToggler-Style_classes">
+              <title>Style classes (selectors)</title>
+              <varlistentry>
+                <term>
+                  <literal>.rf-csttg</literal>
+                </term>
+                <listitem>
+                  <simpara>
+This class defines styles for a toggle control.
+</simpara>
+                </listitem>
+              </varlistentry>
+              <varlistentry>
+                <term>
+                  <literal>.rf-csttg-exp</literal>
+                </term>
+                <listitem>
+                  <simpara>
+This class defines styles for a toggle control which expands the sub-table.
+</simpara>
+                </listitem>
+              </varlistentry>
+              <varlistentry>
+                <term>
+                  <literal>.rf-csttg-colps</literal>
+                </term>
+                <listitem>
+                  <simpara>
+This class defines styles for a toggle control which collapses the sub-table.
+</simpara>
+                </listitem>
+              </varlistentry>
+            </variablelist>
           </section>
         </section>
       </section>
@@ -14330,10 +14352,7 @@ This class defines styles for a sub-footer cell.
         <title>
           <literal>&lt;rich:extendedDataTable&gt;</literal>
         </title>
-        <formalpara>
-          <title>rf-csttg-colps:: This class defines styles for a toggle control which collapses the sub-table.</title>
-          <para>The <literal>&lt;rich:extendedDataTable&gt;</literal> component builds on the functionality of the <literal>&lt;rich:dataTable&gt;</literal> component, adding features such as scrolling for the table body (both horizontal and vertical), Ajax loading for vertical scrolling, frozen columns, row selection, and rearranging of columns. It also supports all the basic table features such as sorting, filtering, and paging using the <literal>&lt;rich:dataScroller&gt;</literal> component.</para>
-        </formalpara>
+        <simpara>The <literal>&lt;rich:extendedDataTable&gt;</literal> component builds on the functionality of the <literal>&lt;rich:dataTable&gt;</literal> component, adding features such as scrolling for the table body (both horizontal and vertical), Ajax loading for vertical scrolling, frozen columns, row selection, and rearranging of columns. It also supports all the basic table features such as sorting, filtering, and paging using the <literal>&lt;rich:dataScroller&gt;</literal> component.</simpara>
         <simpara>The <literal>&lt;rich:extendedDataTable&gt;</literal> component includes the following main attributes not included in the <literal>&lt;rich:dataTable&gt;</literal> component:</simpara>
         <itemizedlist>
           <listitem>
@@ -14445,11 +14464,10 @@ This class defines styles for a sub-footer cell.
                   <imagedata fileref="images/figu-Component_Reference-Tables_and_grids-richextendedDataTable_example.png"/>
                 </imageobject>
                 <textobject>
-                  <phrase>images/figu-Component_Reference-Tables_and_grids-richextendedDataTable_example.png</phrase>
+                  <phrase>A data table made using the &lt;rich:extendedDataTable&gt; component. It features horizontal and vertical scrolling and frozen columns.</phrase>
                 </textobject>
               </mediaobject>
             </informalfigure>
-            <simpara>A data table made using the <literal>&lt;rich:extendedDataTable&gt;</literal> component. It features horizontal and vertical scrolling and frozen columns.</simpara>
           </example>
           <section id="sect-Component_Reference-richextendedDataTable-Scrolling">
             <title>Scrolling</title>
@@ -14542,11 +14560,10 @@ public class ExtTableSelectionBean implements Serializable{
                     <imagedata fileref="images/figu-Component_Reference-Tables_and_grids-Selecting_multiple_rows.png"/>
                   </imageobject>
                   <textobject>
-                    <phrase>images/figu-Component_Reference-Tables_and_grids-Selecting_multiple_rows.png</phrase>
+                    <phrase>The example table with the first</phrase>
                   </textobject>
                 </mediaobject>
               </informalfigure>
-              <simpara>The example table with the first, second, third, and fifth rows selected.</simpara>
             </example>
           </section>
           <section id="sect-Component_Reference-richextendedDataTable-Rearranging_columns">
@@ -16954,11 +16971,10 @@ This class defines styles for a disabled data scroller.
                   <imagedata fileref="images/figu-Component_Reference-Table_filtering-External_filtering.png"/>
                 </imageobject>
                 <textobject>
-                  <phrase>images/figu-Component_Reference-Table_filtering-External_filtering.png</phrase>
+                  <phrase>A table of state capitals filtered by states beginning with the letter " a"</phrase>
                 </textobject>
               </mediaobject>
             </informalfigure>
-            <simpara>A table of state capitals filtered by states beginning with the letter " a", further filtered to those states in the GMT-5 time zone.</simpara>
           </example>
         </section>
       </section>
@@ -17210,11 +17226,11 @@ The <literal>&lt;rich:tree&gt;</literal> component performs a common submission,
               <listitem>
                 <simpara>
 The <literal>&lt;rich:tree&gt;</literal> component updates on the client side through JavaScript, without any additional requests or updates. All nodes are rendered to the client during the initial page rendering.
-By default, tree nodes are expanded and collapsed through the <guibutton>+</guibutton> and <guibutton>-</guibutton> controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the <literal>toggleNodeEvent</literal> attribute.
 </simpara>
               </listitem>
             </varlistentry>
           </variablelist>
+          <simpara>By default, tree nodes are expanded and collapsed through the <guibutton>+</guibutton> and <guibutton>-</guibutton> controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the <literal>toggleNodeEvent</literal> attribute.</simpara>
         </section>
         <section id="sect-Component_Reference-richtree-Selecting_tree_nodes">
           <title>Selecting tree nodes</title>
@@ -17309,15 +17325,55 @@ The <literal>selectionChangeListener</literal> listener processes the request wh
         <section id="sect-Component_Reference-richtree-Style_classes">
           <title>Style classes</title>
           <simpara>Styling for the <literal>&lt;rich:tree&gt;</literal> component is mostly applied to the tree nodes. Refer to <xref linkend="sect-Component_Reference-richtreeNode-Style_classes_and_skin_parameters"/> for details on styling tree nodes. In addition, the <literal>&lt;rich:tree&gt;</literal> component can make use of the style classes outlined in <xref linkend="vlst-richtree-Style_classes"/>.</simpara>
+          <variablelist id="vlst-richtree-Style_classes">
+            <title>Style classes (selectors)</title>
+            <varlistentry>
+              <term>
+                <literal>.rf-tr-nd</literal>
+              </term>
+              <listitem>
+                <simpara>
+This class defines styles for the nodes in a tree.
+</simpara>
+              </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>
+                <literal>.rf-tr-nd-last</literal>
+              </term>
+              <listitem>
+                <simpara>
+This class defines styles for last node in a tree.
+</simpara>
+              </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>
+                <literal>.rf-tr-nd-colps</literal>
+              </term>
+              <listitem>
+                <simpara>
+This class defines styles for a collapsed tree node.
+</simpara>
+              </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>
+                <literal>.rf-tr-nd-exp</literal>
+              </term>
+              <listitem>
+                <simpara>
+This class defines styles for an expanded tree node.
+</simpara>
+              </listitem>
+            </varlistentry>
+          </variablelist>
         </section>
         <section id="sect-Component_Reference-Actions-richtreeSelectionChangeListener">
           <title>
             <literal>&lt;rich:treeSelectionChangeListener&gt;</literal>
           </title>
-          <formalpara>
-            <title>rf-tr-nd-exp:: This class defines styles for an expanded tree node.</title>
-            <para>Use the <literal>&lt;rich:treeSelectionChangeListener&gt;</literal> tag to register a <literal>TreeSelectionChangeListener</literal> class on a parent <literal>&lt;rich:tree&gt;</literal> component. The class provided as a listener must implement the <literal>org.richfaces.event.TreeSelectionChangeListener</literal> interface. The <literal>processTreeSelectionChange</literal> method accepts an <literal>org.richface.event.TreeSelectionChangeEvent</literal> event as a parameter.</para>
-          </formalpara>
+          <simpara>Use the <literal>&lt;rich:treeSelectionChangeListener&gt;</literal> tag to register a <literal>TreeSelectionChangeListener</literal> class on a parent <literal>&lt;rich:tree&gt;</literal> component. The class provided as a listener must implement the <literal>org.richfaces.event.TreeSelectionChangeListener</literal> interface. The <literal>processTreeSelectionChange</literal> method accepts an <literal>org.richface.event.TreeSelectionChangeEvent</literal> event as a parameter.</simpara>
         </section>
         <section id="sect-Component_Reference-Trees-richtreeNode">
           <title>
@@ -17351,8 +17407,7 @@ The <literal>selectionChangeListener</literal> listener processes the request wh
           </section>
           <section id="sect-Component_Reference-richtreeNode-Interactivity">
             <title>Interactivity</title>
-            <simpara>Interactivity with individual nodes, such as expanding, collapsing, and other event handling, can be managed by the parent <literal>&lt;rich:tree&gt;</literal> component. Refer to <xref linkend="sect-Component_Reference-richtree-Expanding_and_collapsing_tree_nodes"/></simpara>
-            <simpara>and <xref linkend="sect-Component_Reference-richtree-Event_handling"/> for further details.</simpara>
+            <simpara>Interactivity with individual nodes, such as expanding, collapsing, and other event handling, can be managed by the parent <literal>&lt;rich:tree&gt;</literal> component. Refer to <xref linkend="sect-Component_Reference-richtree-Expanding_and_collapsing_tree_nodes"/> and <xref linkend="sect-Component_Reference-richtree-Event_handling"/> for further details.</simpara>
             <simpara>Use the <literal>expanded</literal> attribute to determine whether the node is expanded or collapsed.</simpara>
           </section>
           <section id="sect-Component_Reference-richtreeNode-Reference_data">
@@ -17826,11 +17881,10 @@ public class FileSystemBean {
                     <imagedata fileref="images/exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage.png"/>
                   </imageobject>
                   <textobject>
-                    <phrase>images/exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage.png</phrase>
+                    <phrase>A hierarchical tree detailing a file system.</phrase>
                   </textobject>
                 </mediaobject>
               </informalfigure>
-              <simpara>A hierarchical tree detailing a file system.</simpara>
             </example>
           </section>
           <section id="sect-Component_Reference-richtreeModelRecursiveAdaptor-Identifying_nodes">
@@ -17897,27 +17951,11 @@ public class FileSystemBean {
               <listitem>
                 <simpara>
 When used with the <literal>jointPoint</literal> attribute, the menu is attached to the top-left, top-right, bottom-left, or bottom-right of the control as appropriate.
-When used with the <literal>direction</literal> attribute, the menu appears to the top-left, top-right, bottom-left, or bottom-right of the joint location as appropriate.
 </simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term>
-                <literal>auto</literal>
-              </term>
-              <listitem>
-                <simpara>
-The direction or joint location is determined automatically.
-</simpara>
-              </listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><literal>autoLeft</literal>:: <literal>autoRight</literal>:: <literal>autoTop</literal>:: <literal>autoBottom</literal></term>
-              <listitem>
-                <simpara>
-When used with the <literal>jointPoint</literal> attribute, the joint location is determined automatically, but defaults to either the left, right, top, or bottom of the control as appropriate.
-When used with the <literal>direction</literal> attribute, the menu direction is determined automatically, but defaults to either the left, right, top, or bottom of the joint location as appropriate.
-</simpara>
+                <simpara>When used with the <literal>direction</literal> attribute, the menu appears to the top-left, top-right, bottom-left, or bottom-right of the joint location as appropriate.
+<literal>auto</literal>:: The direction or joint location is determined automatically.
+<literal>autoLeft</literal>:: <literal>autoRight</literal>:: <literal>autoTop</literal>:: <literal>autoBottom</literal>:: When used with the <literal>jointPoint</literal> attribute, the joint location is determined automatically, but defaults to either the left, right, top, or bottom of the control as appropriate.</simpara>
+                <simpara>When used with the <literal>direction</literal> attribute, the menu direction is determined automatically, but defaults to either the left, right, top, or bottom of the joint location as appropriate.</simpara>
               </listitem>
             </varlistentry>
           </variablelist>
@@ -17954,25 +17992,25 @@ The <literal>hide()</literal> method hides the menu.
               <listitem>
                 <simpara>
 The <literal>activateItem(menuItemId)</literal> activates the menu item with the <literal>menuItemId</literal> identifier.
-Use the <literal>mode</literal> attribute to determine how the menu requests are submitted:
 </simpara>
-                <itemizedlist>
-                  <listitem>
-                    <simpara><literal>server</literal>, the default setting, submits the form normally and completely refreshes the page.
-</simpara>
-                  </listitem>
-                  <listitem>
-                    <simpara><literal>ajax</literal> performs an Ajax form submission, and re-renders elements specified with the <literal>render</literal> attribute.
-</simpara>
-                  </listitem>
-                  <listitem>
-                    <simpara><literal>client</literal> causes the <literal>action</literal> and <literal>actionListener</literal> items to be ignored, and the behavior is fully defined by the nested components or custom JavaScript instead of responses from submissions.
-</simpara>
-                  </listitem>
-                </itemizedlist>
               </listitem>
             </varlistentry>
           </variablelist>
+          <simpara>Use the <literal>mode</literal> attribute to determine how the menu requests are submitted:</simpara>
+          <itemizedlist>
+            <listitem>
+              <simpara><literal>server</literal>, the default setting, submits the form normally and completely refreshes the page.
+</simpara>
+            </listitem>
+            <listitem>
+              <simpara><literal>ajax</literal> performs an Ajax form submission, and re-renders elements specified with the <literal>render</literal> attribute.
+</simpara>
+            </listitem>
+            <listitem>
+              <simpara><literal>client</literal> causes the <literal>action</literal> and <literal>actionListener</literal> items to be ignored, and the behavior is fully defined by the nested components or custom JavaScript instead of responses from submissions.
+</simpara>
+            </listitem>
+          </itemizedlist>
         </section>
         <section id="sect-Component_Reference-richdropDownMenu-Reference_data">
           <title>Reference data</title>
@@ -18501,25 +18539,25 @@ The <literal>hide()</literal> method hides the menu.
               <listitem>
                 <simpara>
 The <literal>activateItem(menuItemId)</literal> activates the menu item with the <literal>menuItemId</literal> identifier.
-Use the <literal>mode</literal> attribute to determine how the menu requests are submitted:
 </simpara>
-                <itemizedlist>
-                  <listitem>
-                    <simpara><literal>server</literal>, the default setting, submits the form normally and completely refreshes the page.
-</simpara>
-                  </listitem>
-                  <listitem>
-                    <simpara><literal>ajax</literal> performs an Ajax form submission, and re-renders elements specified with the <literal>render</literal> attribute.
-</simpara>
-                  </listitem>
-                  <listitem>
-                    <simpara><literal>client</literal> causes the <literal>action</literal> and <literal>actionListener</literal> items to be ignored, and the behavior is fully defined by the nested components or custom JavaScript instead of responses from submissions.
-</simpara>
-                  </listitem>
-                </itemizedlist>
               </listitem>
             </varlistentry>
           </variablelist>
+          <simpara>Use the <literal>mode</literal> attribute to determine how the menu requests are submitted:</simpara>
+          <itemizedlist>
+            <listitem>
+              <simpara><literal>server</literal>, the default setting, submits the form normally and completely refreshes the page.
+</simpara>
+            </listitem>
+            <listitem>
+              <simpara><literal>ajax</literal> performs an Ajax form submission, and re-renders elements specified with the <literal>render</literal> attribute.
+</simpara>
+            </listitem>
+            <listitem>
+              <simpara><literal>client</literal> causes the <literal>action</literal> and <literal>actionListener</literal> items to be ignored, and the behavior is fully defined by the nested components or custom JavaScript instead of responses from submissions.
+</simpara>
+            </listitem>
+          </itemizedlist>
         </section>
         <section id="sect-Component_Reference-richcontextMenu-Reference_data">
           <title>Reference data</title>
@@ -19162,11 +19200,10 @@ Hide the menu group.
                 <imagedata fileref="images/figu-Component_Reference-richpanelMenu-richpanelMenu.png"/>
               </imageobject>
               <textobject>
-                <phrase>images/figu-Component_Reference-richpanelMenu-richpanelMenu.png</phrase>
+                <phrase>A panel menu. The first menu group is collapsed. The second menu group is expanded; it contains menu items and a further menu group</phrase>
               </textobject>
             </mediaobject>
           </informalfigure>
-          <simpara>A panel menu. The first menu group is collapsed. The second menu group is expanded; it contains menu items and a further menu group, which is currently selected and expanded. The third menu item is not a group and as such is not expandable.</simpara>
         </example>
         <section id="sect-Component_Reference-richpanelMenu-Basic_usage">
           <title>Basic usage</title>
@@ -19191,8 +19228,6 @@ These attributes determine the icons for the top level menu when it is expanded.
 </simpara>
               </listitem>
             </varlistentry>
-          </variablelist>
-          <variablelist>
             <varlistentry>
               <term><literal>topGroupCollapsedLeftIcon</literal>:: <literal>topGroupCollapsedRightIcon</literal></term>
               <listitem>
@@ -19201,8 +19236,6 @@ These attributes determine the icons for the top level menu when it is collapsed
 </simpara>
               </listitem>
             </varlistentry>
-          </variablelist>
-          <variablelist>
             <varlistentry>
               <term><literal>topGroupDisabledLeftIcon</literal>:: <literal>topGroupDisabledRightIcon</literal></term>
               <listitem>
@@ -19211,8 +19244,6 @@ These attributes determine the icons for the top level menu when it is disabled.
 </simpara>
               </listitem>
             </varlistentry>
-          </variablelist>
-          <variablelist>
             <varlistentry>
               <term><literal>topItemLeftIcon</literal>:: <literal>topItemRightIcon</literal></term>
               <listitem>
@@ -19221,8 +19252,6 @@ These attributes determine the icons for a top level menu item.
 </simpara>
               </listitem>
             </varlistentry>
-          </variablelist>
-          <variablelist>
             <varlistentry>
               <term><literal>topItemDisabledLeftIcon</literal>:: <literal>topItemDisabledRightIcon</literal></term>
               <listitem>
@@ -19231,8 +19260,6 @@ These attributes determine the icons for a top level menu item when it is disabl
 </simpara>
               </listitem>
             </varlistentry>
-          </variablelist>
-          <variablelist>
             <varlistentry>
               <term><literal>groupExpandedLeftIcon</literal>:: <literal>groupExpandedRightIcon</literal></term>
               <listitem>
@@ -19241,8 +19268,6 @@ These attributes determine the icons for sub-menus that are not the top-level me
 </simpara>
               </listitem>
             </varlistentry>
-          </variablelist>
-          <variablelist>
             <varlistentry>
               <term><literal>groupCollapsedLeftIcon</literal>:: <literal>groupCollapsedRightIcon</literal></term>
               <listitem>
@@ -19251,8 +19276,6 @@ These attributes determine the icons for sub-menus that are not the top-level me
 </simpara>
               </listitem>
             </varlistentry>
-          </variablelist>
-          <variablelist>
             <varlistentry>
               <term><literal>groupDisabledLeftIcon</literal>:: <literal>groupDisabledRightIcon</literal></term>
               <listitem>
@@ -19261,8 +19284,6 @@ These attributes determine the icons for sub-menus that are not the top-level me
 </simpara>
               </listitem>
             </varlistentry>
-          </variablelist>
-          <variablelist>
             <varlistentry>
               <term><literal>itemLeftIcon</literal>:: <literal>itemRightIcon</literal></term>
               <listitem>
@@ -19271,8 +19292,6 @@ These attributes determine the icons for items in the menus.
 </simpara>
               </listitem>
             </varlistentry>
-          </variablelist>
-          <variablelist>
             <varlistentry>
               <term><literal>itemDisabledLeftIcon</literal>:: <literal>itemDisabledRightIcon</literal></term>
               <listitem>
@@ -20512,19 +20531,19 @@ Select this menu item.
 </simpara>
             </listitem>
             <listitem>
-              <simpara><literal>disc</literal> shows a small circular disc to separate items: image:
+              <simpara><literal>disc</literal> shows a small circular disc to separate items: <inlinemediaobject><imageobject><imagedata fileref="images/figu-Component_Reference-richtoolbar-disc.png"/></imageobject><textobject><phrase>images/figu-Component_Reference-richtoolbar-disc.png</phrase></textobject></inlinemediaobject>
 </simpara>
             </listitem>
             <listitem>
-              <simpara><literal>grid</literal> shows a grid pattern to separate items: image:
+              <simpara><literal>grid</literal> shows a grid pattern to separate items: <inlinemediaobject><imageobject><imagedata fileref="images/figu-Component_Reference-richtoolbar-grid.png"/></imageobject><textobject><phrase>images/figu-Component_Reference-richtoolbar-grid.png</phrase></textobject></inlinemediaobject>
 </simpara>
             </listitem>
             <listitem>
-              <simpara><literal>line</literal> shows a vertical line to separate items: image:
+              <simpara><literal>line</literal> shows a vertical line to separate items: <inlinemediaobject><imageobject><imagedata fileref="images/figu-Component_Reference-richtoolbar-line.png"/></imageobject><textobject><phrase>images/figu-Component_Reference-richtoolbar-line.png</phrase></textobject></inlinemediaobject>
 </simpara>
             </listitem>
             <listitem>
-              <simpara><literal>square</literal> shows a small square to separate items: image:
+              <simpara><literal>square</literal> shows a small square to separate items: <inlinemediaobject><imageobject><imagedata fileref="images/figu-Component_Reference-richtoolbar-square.png"/></imageobject><textobject><phrase>images/figu-Component_Reference-richtoolbar-square.png</phrase></textobject></inlinemediaobject>
 </simpara>
             </listitem>
           </itemizedlist>
@@ -20759,11 +20778,10 @@ This class defines styles for the container of the toolbar.
                     <imagedata fileref="images/figu-Component_Reference-richtoolbarGroup-richtoolbarGroup.png"/>
                   </imageobject>
                   <textobject>
-                    <phrase>images/figu-Component_Reference-richtoolbarGroup-richtoolbarGroup.png</phrase>
+                    <phrase>A toolbar using icons. Two toolbar groups are located on the left-hand side of the toolbar and separated by a grid pattern. The third toolbar group is located to the right-hand side.</phrase>
                   </textobject>
                 </mediaobject>
               </informalfigure>
-              <simpara>A toolbar using icons. Two toolbar groups are located on the left-hand side of the toolbar and separated by a grid pattern. The third toolbar group is located to the right-hand side.</simpara>
             </example>
           </section>
           <section id="sect-Component_Reference-richtoolbarGroup-Reference_data">
@@ -21388,7 +21406,7 @@ These classes define styles for the summary or details of a message.
             </listitem>
           </itemizedlist>
           <note>
-            <literallayout class="monospaced">Nonblocking notifications can be clicked through, but because they are using jQuery mechanism to bypass events, only jQuery event handlers are triggered. IThis means that standard links won't be triggered.</literallayout>
+            <simpara>Nonblocking notifications can be clicked through, but because they are using jQuery mechanism to bypass events, only jQuery event handlers are triggered. IThis means that standard links won’t be triggered.</simpara>
           </note>
         </section>
         <section id="sect-Component_Reference-richnotify-Reference_data">
@@ -21775,8 +21793,16 @@ These classes define style for notification icon based on severity of notificati
         </title>
         <simpara>The <literal>&lt;rich:notifyMessages&gt;</literal> component is the same as the <literal>&lt;rich:notifyMessage&gt;</literal> component, but each of the available messages generates one notification.</simpara>
         <simpara><literal>&lt;rich:notifyMessages&gt;</literal> shares the same set of attributes with <literal>&lt;rich:notifyMessage&gt;</literal></simpara>
-        <simpara id="figu-Component_Reference-richnotifyMessages-richnotifyMessages">.
-<inlinemediaobject><imageobject><imagedata fileref=":images/figu-Component_Reference-richnotifyMessages-richnotifyMessages.png" contentwidth="200"/></imageobject><textobject><phrase>:images/figu-Component_Reference-richnotifyMessages-richnotifyMessages.png</phrase></textobject></inlinemediaobject></simpara>
+        <informalfigure id="figu-Component_Reference-richnotifyMessages-richnotifyMessages">
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/figu-Component_Reference-richnotifyMessages-richnotifyMessages.png" contentwidth="200"/>
+            </imageobject>
+            <textobject>
+              <phrase>images/figu-Component_Reference-richnotifyMessages-richnotifyMessages.png</phrase>
+            </textobject>
+          </mediaobject>
+        </informalfigure>
         <section id="sect-Component_Reference-richnotifyMessages-Reference_data">
           <title>Reference data</title>
           <itemizedlist>
@@ -21840,13 +21866,28 @@ These classes define style for notification icon based on severity of notificati
         <section id="sect-Component_Reference-richnotifyStack-Stacking_notifications">
           <title>Stacking notifications</title>
           <simpara>There are two attributes which influences how notifications are placed into a stack:</simpara>
-          <itemizedlist>
-            <listitem>
-              <simpara><literal>method</literal>: defines where new notifications are placed and how they are removed. Options: <literal>first</literal> (default), <literal>last</literal>.
-<literal>direction</literal>: defines in which direction will be messages stacked. Options: <literal>vertical</literal> (default), <literal>horizontal</literal>
+          <variablelist>
+            <varlistentry>
+              <term>
+                <literal>method</literal>
+              </term>
+              <listitem>
+                <simpara>
+defines where new notifications are placed and how they are removed. Options: <literal>first</literal> (default), <literal>last</literal>.
 </simpara>
-            </listitem>
-          </itemizedlist>
+              </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>
+                <literal>direction</literal>
+              </term>
+              <listitem>
+                <simpara>
+defines in which direction will be messages stacked. Options: <literal>vertical</literal> (default), <literal>horizontal</literal>
+</simpara>
+              </listitem>
+            </varlistentry>
+          </variablelist>
           <simpara>The following sample shows a stack which will place new notifications up front - the incoming message will appear first, causing all notifications currently in stack to shift. Subsequently, messages at the end of stack will be then removed.</simpara>
           <programlisting language="XML" linenumbering="unnumbered">&lt;rich:notifyStack method="first" /&gt;</programlisting>
           <simpara>On the other hand, stacking method <literal>last</literal> provides a method to place messages on the end of the stack, and when removing a notification, it is removed from the start, causing all other notifications to shift.</simpara>
@@ -22386,11 +22427,11 @@ The tool-tip content is requested from the server with every activation.
               <listitem>
                 <simpara>
 The tool-tip content is rendered once on the server. An external submit causes the content to re-render.
-When using <literal>mode="ajax"</literal>, define the <literal>defaultContent</literal> facet. The tool-tip displays the content of the <literal>defaultContent</literal> facet while loading the actual content from the server.
 </simpara>
               </listitem>
             </varlistentry>
           </variablelist>
+          <simpara>When using <literal>mode="ajax"</literal>, define the <literal>defaultContent</literal> facet. The tool-tip displays the content of the <literal>defaultContent</literal> facet while loading the actual content from the server.</simpara>
           <example id="exam-Component_Reference-richtooltip-Advanced_tool-tip_usage">
             <title>Advanced tool-tip usage</title>
             <programlisting language="XML" linenumbering="unnumbered">&lt;h:commandLink value="Simple Link" id="link"&gt;
@@ -22746,16 +22787,36 @@ The <literal>dropValue</literal> parameter is the content of the <literal>&lt;ri
         </section>
         <section id="sect-Component_Reference-richdropTarget-Style_classes">
           <title>Style classes</title>
+          <variablelist id="vlst-richdropTarget-Style_classes">
+            <title>Style classes (selectors)</title>
+            <varlistentry>
+              <term>
+                <literal>.rf-drp-hvr</literal>
+              </term>
+              <listitem>
+                <simpara>
+This class defines styles for the drop target when a dragged item is hovering over it.
+</simpara>
+              </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>
+                <literal>.rf-drp-hlight</literal>
+              </term>
+              <listitem>
+                <simpara>
+This class defines styles for a highlighted drop target.
+</simpara>
+              </listitem>
+            </varlistentry>
+          </variablelist>
         </section>
       </section>
       <section id="sect-Component_Reference-Drag_and_drop-richdragIndicator">
         <title>
           <literal>&lt;rich:dragIndicator&gt;</literal>
         </title>
-        <formalpara>
-          <title>rf-drp-hlight:: This class defines styles for a highlighted drop target.</title>
-          <para>The <literal>&lt;rich:dragIndicator&gt;</literal> component defines a graphical element to display under the mouse cursor during a drag-and-drop operation.</para>
-        </formalpara>
+        <simpara>The <literal>&lt;rich:dragIndicator&gt;</literal> component defines a graphical element to display under the mouse cursor during a drag-and-drop operation.</simpara>
         <section id="sect-Component_Reference-richdragIndicator-Basic_usage">
           <title>Basic usage</title>
           <simpara>To use a drag indicator, define the inner content that appears during a drag event. No additional attributes are required. If a drag indicator is not used, a clone of the drag source is used instead.</simpara>
@@ -22815,15 +22876,55 @@ The <literal>draggingClass</literal> attribute specifies the style when the drag
         </section>
         <section id="sect-Component_Reference-richdragIndicator-Style_classes">
           <title>Style classes</title>
+          <variablelist id="vlst-richdragIndicator-Style_classes">
+            <title>Style classes (selectors)</title>
+            <varlistentry>
+              <term>
+                <literal>.rf-ind</literal>
+              </term>
+              <listitem>
+                <simpara>
+This class defines styles for the drag indicator.
+</simpara>
+              </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>
+                <literal>.rf-ind-drag.accept</literal>
+              </term>
+              <listitem>
+                <simpara>
+This class defines styles for the indicator when it is over an acceptable drop target.
+</simpara>
+              </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>
+                <literal>.rf-ind-drag.reject</literal>
+              </term>
+              <listitem>
+                <simpara>
+This class defines styles for the indicator when it is over an unacceptable drop target.
+</simpara>
+              </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>
+                <literal>.rf-ind-drag.default</literal>
+              </term>
+              <listitem>
+                <simpara>
+This class defines styles for the indicator when it is being dragged, and is not over any drop targets.
+</simpara>
+              </listitem>
+            </varlistentry>
+          </variablelist>
         </section>
       </section>
     </chapter>
     <chapter id="chap-Component_Reference-Layout_and_appearance">
       <title>Layout and appearance</title>
-      <formalpara>
-        <title>rf-ind-drag.default:: This class defines styles for the indicator when it is being dragged, and is not over any drop targets.</title>
-        <para>Read this chapter to alter the layout and appearance of web applications using special components.</para>
-      </formalpara>
+      <simpara>Read this chapter to alter the layout and appearance of web applications using special components.</simpara>
       <section id="sect-Component_Reference-Layout_and_appearance-richjQuery">
         <title>
           <literal>&lt;rich:jQuery&gt;</literal>
@@ -22846,10 +22947,10 @@ The <literal>selector</literal> attribute can refer to the elements by using syn
             <listitem>
               <simpara>
 If the <literal>selector</literal> attribute does not match the <literal>id</literal> identifier attribute of any JSF components or clients on the page, it instead uses syntax defined by the World Wide Web Consortium (W3C)for the CSSrule selector.
+Refer to the syntax specification at <ulink url="http://api.jquery.com/category/selectors/">http://api.jquery.com/category/selectors/</ulink> for full details.
 </simpara>
             </listitem>
           </itemizedlist>
-          <simpara>Refer to the syntax specification at <ulink url="http://api.jquery.com/category/selectors/">http://api.jquery.com/category/selectors/</ulink> for full details.</simpara>
           <simpara>Because the <literal>selector</literal> attribute can be either an <literal>id</literal> identifier attribute or CSS selector syntax, conflicting values could arise. <xref linkend="exam-Component_Reference-richjQuery-Avoiding_syntax_confusion"/> demonstrates how to use double backslashes to escape colon characters in <literal>id</literal> identifier values.</simpara>
           <example id="exam-Component_Reference-richjQuery-Avoiding_syntax_confusion">
             <title>Avoiding syntax confusion</title>
@@ -22939,11 +23040,10 @@ The query is triggered immediately. The query is called as an in-line script.
                   <imagedata fileref="images/Component_Reference-richjQuery-richjQuery_example.png"/>
                 </imageobject>
                 <textobject>
-                  <phrase>images/Component_Reference-richjQuery-richjQuery_example.png</phrase>
+                  <phrase>A table highlighted in a "zebra" fashion</phrase>
                 </textobject>
               </mediaobject>
             </informalfigure>
-            <simpara>A table highlighted in a "zebra" fashion, with every odd row colored.</simpara>
           </example>
         </section>
         <section id="sect-Component_Reference-richjQuery-Named_queries">
@@ -23436,11 +23536,11 @@ This class identifies which input elements have their placeholder text managed b
     </chapter>
     <appendix id="appe-Component_Reference-Revision_History">
       <title>Revision History</title>
-      <simpara>1.0Mon Apr 11 2011SeanRogers
-4.0.0.Final Release
-1.1Wed Nov 16 2011BrianLeathemLukasFryc
-4.1.0.Final Release
-1.2Wed Feb 22 2011BrianLeathemLukasFryc
+      <simpara>1.0 Mon Apr 11 2011 Sean Rogers
+4.0.0.Final Release</simpara>
+      <simpara>1.1 Wed Nov 16 2011 Brian Leathem Lukas Fryc
+4.1.0.Final Release</simpara>
+      <simpara>1.2 Wed Feb 22 2011 Brian Leathem Lukas Fryc
 4.2.0.Final Release</simpara>
     </appendix>
   </part>

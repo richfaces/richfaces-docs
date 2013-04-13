@@ -14,7 +14,7 @@ For full references for all component classes and properties, refer to the follo
 
 
 * *_API (Application Programming Interface) Documentation_*
-** RichFaces Components API
+** *_RichFaces Components API_*
 *** Available at http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-api/
 
 
@@ -71,6 +71,7 @@ Alternatively, the +execute+ attribute accepts the following keywords:
 +@this+:: The requesting component with the +execute+ attribute is processed. This is the default behavior for components.
 +@form+:: The form that contains the requesting component is processed.
 +@region+:: The region that contains the requesting component is processed. Use the +<a4j:region>+ component as a wrapper element to specify regions.
+
 Some components make use of additional keywords. These are detailed under the relevant component entry in this book.
 
 [[sect-Component_Reference-Data_processing-bypassUpdates]]
@@ -1189,9 +1190,7 @@ public class MediaData implements Serializable {
 
 The +<a4j:mediaOutput>+ component uses the +MediaBean+ and +MediaData+ classes to generate a new image on each page refresh.
 
-image::images/figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result.png[]
-
-The generated image containing a random verification number.
+image::images/figu-Component_Reference-a4jmediaOutput-a4jmediaOutput_example_result.png[The generated image containing a random verification number.]
 
 ====
 
@@ -1774,7 +1773,7 @@ The +<a4j:log>+ component doesn't require any additional attributes for basic fu
 The +mode+ attribute determines how the log appears on the page.
 
 * Set +mode="inline"+ to place the logging data in-line on the current page. This is the default setting.
-* Set +mode="popup"+ to present the logging data in a new pop-up window. The window is set to be opened by pressing the key combination CtrlShiftL; this can be partially reconfigured with the +hotkey+ attribute, which specifies the letter key to use in combination with CtrlShiftinstead of L.
+* Set +mode="popup"+ to present the logging data in a new pop-up window. The window is set to be opened by pressing the key combination key:[Ctrl,Shift,L]; this can be partially reconfigured with the +hotkey+ attribute, which specifies the letter key to use in combination with key:[Ctrl,Shift] instead of key:[L].
 
 
 The amount of data logged can be determined with the +level+ attribute:
@@ -1843,7 +1842,7 @@ The text display can be customized depending on the current status.
 * The +startText+ attribute defines the text shown after the request has been started and is currently in progress. Set the styles for the text with the +startStyle+ and +startStyleClass+ attributes. Alternatively, use the +start+ facet to customize the text appearance.
 * The +stopText+ attribute defines the text shown once the request is complete. Set the styles for the text with the +stopStyle+ and +stopStyleClass+ attributes. Alternatively, use the +stop+ facet to customize the text appearance.
 +
-If the +stopText+ attribute is not defined, and no facet exists for the stopped state, the complete status is simply not shown. In this way, only the progress of the request is displayed toinclude:: the user, along with any errors.
+If the +stopText+ attribute is not defined, and no facet exists for the stopped state, the complete status is simply not shown. In this way, only the progress of the request is displayed to the user, along with any errors.
 
 * The +errorText+ attribute defines the text shown when an error has occurred. Set the styles for the text with the +errorStyle+ and +errorStyleClass+ attributes. Alternatively, use the +error+ facet to customize the text appearance.
 
@@ -2528,7 +2527,7 @@ The +<rich:fileUpload>+ component allows the user to upload files to a server. I
 
 ==== Basic usage
 
-Basic usage requires the +fileUploadListener+ attribute. Use the attribute to reference a listener function on the server side after each file is uploaded. The listener should process files as required, such as storing them in the _session/db/filesystem/_directory. The component itself does not store uploaded files, so if the listener is not implemented they are not stored anywhere.
+Basic usage requires the +fileUploadListener+ attribute. Use the attribute to reference a listener function on the server side after each file is uploaded. The listener should process files as required, such as storing them in the _session/db/filesystem/_ directory. The component itself does not store uploaded files, so if the listener is not implemented they are not stored anywhere.
 
 [[exam-Component_Reference-richfileUpload-Basic_usage]]
 
@@ -2550,7 +2549,7 @@ Basic usage requires the +fileUploadListener+ attribute. Use the attribute to re
 
 Files are uploaded to either the temporary folder (different for each operating system) or to RAM(random-access memory), depending on the value of the +org.richfaces.fileUpload.createTempFiles+ context parameter of the _web.xml_ settings file for the project. If the parameter is set to +true+, the files are uploaded to the temporary folder.
 
-To limit the maximum size of the uploaded files, define the byte size with the +org.richfaces.fileUpload.maxRequestSize+ context parameter of the _web.xml_settings file for the project.
+To limit the maximum size of the uploaded files, define the byte size with the +org.richfaces.fileUpload.maxRequestSize+ context parameter of the _web.xml_ settings file for the project.
 
 [[sect-Component_Reference-richfileUpload-Sanitizing_file_upload_input]]
 
@@ -2573,7 +2572,7 @@ The text labels used in the component can be completely customized. Labels for t
 +clearAllLabel+:: The +clearAllLabel+ parameter sets the label for the guibutton:[Clear All] button.
 +clearLabel+:: The +clearLabel+ parameter sets the label for the guibutton:[Clear] button.
 +uploadLabel+:: The +uploadLabel+ parameter sets the label for the guibutton:[Upload] button.
-z
+
 The +<rich:fileUpload>+ component provides a built-in progress bar to indicate the progress of each file that is uploaded. This progress bar can be replaced with a +<rich:progressBar>+ component added to the +progress+ facet. Refer to <<sect-Component_Reference-Output_and_messages-richprogressBar>> for details on the +<rich:progressBar>+ component.
 
 To disable the +<rich:fileUpload>+ component, use the +disabled+ attribute.
@@ -2643,12 +2642,12 @@ By default, the event to switch the component to the _edit_ state is a single mo
 
 The user can confirm and save their input in multiple ways:
 
-* By default, pressing the Enterkey will confirm and save the input.
+* By default, pressing the key:[Enter] key will confirm and save the input.
 * If +showControls="true"+ is set, buttons for confirming or canceling are added to the component.
 * If +saveOnBlur="true"+ is set, the input is saved on the component's blur event.
 
 
-Pressing the Esckey cancels editing in all cases.
+Pressing the key:[Esc] key cancels editing in all cases.
 
 [[sect-Component_Reference-richinplaceInput-JavaScript_API]]
 
@@ -2734,12 +2733,12 @@ By default, the event to switch the component to the _edit_ state is a single mo
 
 Once a new value for the control is saved, the state switches to the "changed" state. Saving a new value for the control can be performed in a number of ways:
 
-* Once the user selects an item from the drop-down list, the item is saved as the new control value. This is the default setting. If +saveOnSelect="false"+ is set, the component applies the selected item but remains in the _edit_ state so a different selection could be chosen. The value is then applied when the Enterkey is pressed.
+* Once the user selects an item from the drop-down list, the item is saved as the new control value. This is the default setting. If +saveOnSelect="false"+ is set, the component applies the selected item but remains in the _edit_ state so a different selection could be chosen. The value is then applied when the key:[Enter] key is pressed.
 * If +saveOnBlur="true"+ is set, the selected item is saved as the new control value when the control loses focus.
 * If +showControls="true"+ is set, buttons are added to the control to confirm or cancel the selection. The new control value is only saved once the user confirms the selection using the button.
 
 
-Pressing the Esckey cancels editing in all cases.
+Pressing the key:[Esc] key cancels editing in all cases.
 
 [[sect-Component_Reference-richinplaceSelect-JavaScript_API]]
 
@@ -2931,7 +2930,7 @@ Using a single +<f:selectItems>+  tag::
 
 ====
 
-The arrow keys on a keyboard can be used to highlight different items in the list. If the control loses focus or the Enterkey is pressed, the highlighted option is chosen as the value and the list is closed. Pressing the Esckey will close the list but not change the value.
+The arrow keys on a keyboard can be used to highlight different items in the list. If the control loses focus or the key:[Enter] key is pressed, the highlighted option is chosen as the value and the list is closed. Pressing the key:[Esc] key will close the list but not change the value.
 
 [[sect-Component_Reference-richselect-Using_manual_input]]
 
@@ -3519,12 +3518,6 @@ By default, the +<rich:popupPanel>+ appears as a modal window that blocks intera
 
 The pop-up panel can be both re-sized and re-positioned by the user. The minimum possible size for the panel can be set with the +minWith+ and +minHeight+ attributes. These abilities can be deactivated by setting +resizable+ or +movable+ to +false+ as necessary.
 
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
-
 The pop-up panel can be automatically sized when it is shown if the +autosized+ attribute is set to +true+.
 
 [NOTE]
@@ -4050,8 +4043,10 @@ Action components inside the table:: Use +render=componentID+ where the componen
 ====
 
 Action components outside the table:: Use +render=tableId:rowId:cellId+ to specify the cell to update. The action component updates the cell with an identifier of _++cellId++_, which is within the row with an identifier of _++rowId++_, which is within the table with an identifier of _++tableId++_.
+
 Instead of a specific identifier, any of the references could be variables, as demonstrated in <<exam-Component_Reference-a4jrepeat-Use_variables_to_specify_references>>.
 
+[[exam-Component_Reference-a4jrepeat-Use_variables_to_specify_references]]
 .Use variables to specify references
 ====
 
@@ -4690,9 +4685,7 @@ This example +<rich:extendedDataTable>+ component demonstrates horizontal and ve
 
 ----
 
-image::images/figu-Component_Reference-Tables_and_grids-richextendedDataTable_example.png[]
-
-A data table made using the +<rich:extendedDataTable>+ component. It features horizontal and vertical scrolling and frozen columns.
+image::images/figu-Component_Reference-Tables_and_grids-richextendedDataTable_example.png[A data table made using the &lt;rich:extendedDataTable&gt; component. It features horizontal and vertical scrolling and frozen columns.]
 
 ====
 
@@ -4808,9 +4801,7 @@ public class ExtTableSelectionBean implements Serializable{
 
 ----
 
-image::images/figu-Component_Reference-Tables_and_grids-Selecting_multiple_rows.png[]
-
-The example table with the first, second, third, and fifth rows selected.
+image::images/figu-Component_Reference-Tables_and_grids-Selecting_multiple_rows.png[The example table with the first, second, third, and fifth rows selected.]
 
 ====
 
@@ -5217,18 +5208,6 @@ The built-in filter controls of the +<rich:column>+ component allow the user to 
 
 The filterValue is of type +String+. Conversion is either done implicitly via EL in the +filterExpression+, or explicitly within the +filter+ function. The filter is processed and the table is rendered when the +onblur+ event occurs for the column.
 
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
-
 [[exam-Component_Reference-Table_filtering-Basic_filtering]]
 
 .Basic filtering
@@ -5327,9 +5306,7 @@ The built-in filter controls can be disabled on a column-by-column basis by sett
 
 The example uses a filter expression on the first column and a filter method on the second column.
 
-image::images/figu-Component_Reference-Table_filtering-External_filtering.png[]
-
-A table of state capitals filtered by states beginning with the letter " a", further filtered to those states in the GMT-5 time zone.
+image::images/figu-Component_Reference-Table_filtering-External_filtering.png[A table of state capitals filtered by states beginning with the letter " a", further filtered to those states in the GMT-5 time zone.]
 
 ====
 
@@ -5338,10 +5315,6 @@ A table of state capitals filtered by states beginning with the letter " a", fur
 === Table sorting
 
 Tables entries can be sorted
-
-//////////////////////////////////////
-
-//////////////////////////////////////
 
 by defining external sorting algorithms. Refer to <<sect-Component_Reference-Tables_and_grids-richcolumn>> for details on using the +<rich:column>+ component in tables.
 
@@ -5621,6 +5594,7 @@ The mode for performing submissions when nodes are expanded or collapsed is dete
 +ajax+:: This is the default setting. The +<rich:tree>+ component performs an Ajax form submission, and only the content of the tree is rendered.
 +server+:: The +<rich:tree>+ component performs a common submission, completely refreshing the page.
 +client+:: The +<rich:tree>+ component updates on the client side through JavaScript, without any additional requests or updates. All nodes are rendered to the client during the initial page rendering.
+
 By default, tree nodes are expanded and collapsed through the guibutton:[\+] and guibutton:[-] controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the +toggleNodeEvent+ attribute.
 
 [[sect-Component_Reference-richtree-Selecting_tree_nodes]]
@@ -5676,10 +5650,6 @@ Styling for the +<rich:tree>+ component is mostly applied to the tree nodes. Ref
 
 include::skinning/vlst-richtree.asciidoc[]
 
-.rf-tr-nd:: This class defines styles for the nodes in a tree.
-.rf-tr-nd-last:: This class defines styles for last node in a tree.
-.rf-tr-nd-colps:: This class defines styles for a collapsed tree node.
-.rf-tr-nd-exp:: This class defines styles for an expanded tree node.
 [[sect-Component_Reference-Actions-richtreeSelectionChangeListener]]
 
 ==== +<rich:treeSelectionChangeListener>+
@@ -5737,13 +5707,7 @@ Use the +rendered+ attribute to determine whether the node should actually be re
 
 ===== Interactivity
 
-Interactivity with individual nodes, such as expanding, collapsing, and other event handling, can be managed by the parent +<rich:tree>+ component. Refer to <<sect-Component_Reference-richtree-Expanding_and_collapsing_tree_nodes>>
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-and <<sect-Component_Reference-richtree-Event_handling>> for further details.
+Interactivity with individual nodes, such as expanding, collapsing, and other event handling, can be managed by the parent +<rich:tree>+ component. Refer to <<sect-Component_Reference-richtree-Expanding_and_collapsing_tree_nodes>> and <<sect-Component_Reference-richtree-Event_handling>> for further details.
 
 Use the +expanded+ attribute to determine whether the node is expanded or collapsed.
 
@@ -5911,9 +5875,7 @@ The `getDirectories()` function is used recursively until the object has the col
 
 The resulting tree hierarchically lists the directories and files in the collection.
 
-image::images/exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage.png[]
-
-A hierarchical tree detailing a file system.
+image::images/exam-Component_Reference-richtreeModelRecursiveAdaptor-Basic_usage.png[A hierarchical tree detailing a file system.]
 
 ====
 
@@ -5974,10 +5936,13 @@ To set the content of the drop-down menu and any sub-menus, use the +<rich:menuI
 Use the +jointPoint+ and +direction+ attributes to determine the direction and location of the menu when it appears. The +jointPoint+ and +direction+ attributes both use the following settings:
 
 +topLeft+:: +topRight+:: +bottomLeft+:: +bottomRight+:: When used with the +jointPoint+ attribute, the menu is attached to the top-left, top-right, bottom-left, or bottom-right of the control as appropriate.
++
 When used with the +direction+ attribute, the menu appears to the top-left, top-right, bottom-left, or bottom-right of the joint location as appropriate.
 +auto+:: The direction or joint location is determined automatically.
 +autoLeft+:: +autoRight+:: +autoTop+:: +autoBottom+:: When used with the +jointPoint+ attribute, the joint location is determined automatically, but defaults to either the left, right, top, or bottom of the control as appropriate.
++
 When used with the +direction+ attribute, the menu direction is determined automatically, but defaults to either the left, right, top, or bottom of the joint location as appropriate.
+
 [[sect-Component_Reference-richdropDownMenu-Expanding_and_collapsing_the_menu]]
 
 ==== Expanding and collapsing the menu
@@ -5989,6 +5954,7 @@ Menus can be navigated using the keyboard. Additionally, menus can be navigated 
 +show()+:: The +show()+ method shows the menu.
 +hide()+:: The +hide()+ method hides the menu.
 +activateItem(menuItemId)+:: The +activateItem(menuItemId)+ activates the menu item with the +menuItemId+ identifier.
+
 Use the +mode+ attribute to determine how the menu requests are submitted:
 
 * +server+, the default setting, submits the form normally and completely refreshes the page.
@@ -6050,6 +6016,7 @@ Menus can be navigated using the keyboard. Additionally, menus can be navigated 
 +show()+:: The +show()+ method shows the menu.
 +hide()+:: The +hide()+ method hides the menu.
 +activateItem(menuItemId)+:: The +activateItem(menuItemId)+ activates the menu item with the +menuItemId+ identifier.
+
 Use the +mode+ attribute to determine how the menu requests are submitted:
 
 * +server+, the default setting, submits the form normally and completely refreshes the page.
@@ -6247,9 +6214,7 @@ The +<rich:panelMenu>+ component is used in conjunction with +<rich:panelMenuIte
 
 ----
 
-image::images/figu-Component_Reference-richpanelMenu-richpanelMenu.png[]
-
-A panel menu. The first menu group is collapsed. The second menu group is expanded; it contains menu items and a further menu group, which is currently selected and expanded. The third menu item is not a group and as such is not expandable.
+image::images/figu-Component_Reference-richpanelMenu-richpanelMenu.png[A panel menu. The first menu group is collapsed. The second menu group is expanded; it contains menu items and a further menu group, which is currently selected and expanded. The third menu item is not a group and as such is not expandable.]
 
 ====
 
@@ -6278,74 +6243,15 @@ As with other control components, set +disabled="true"+ to disable the +<rich:pa
 Icons for the panel menu can be chosen from a set of standard icons. Icons can be set for the top panel menu, child panel menus, and child item. There are three different menu states that the icon represents, as well as icons for both the left and right side of the item title.
 
 +topGroupExpandedLeftIcon+:: +topGroupExpandedRightIcon+:: These attributes determine the icons for the top level menu when it is expanded.
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
 +topGroupCollapsedLeftIcon+:: +topGroupCollapsedRightIcon+:: These attributes determine the icons for the top level menu when it is collapsed.
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
 +topGroupDisabledLeftIcon+:: +topGroupDisabledRightIcon+:: These attributes determine the icons for the top level menu when it is disabled.
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
 +topItemLeftIcon+:: +topItemRightIcon+:: These attributes determine the icons for a top level menu item.
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
 +topItemDisabledLeftIcon+:: +topItemDisabledRightIcon+:: These attributes determine the icons for a top level menu item when it is disabled.
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
 +groupExpandedLeftIcon+:: +groupExpandedRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are expanded.
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
 +groupCollapsedLeftIcon+:: +groupCollapsedRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are collapsed.
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
 +groupDisabledLeftIcon+:: +groupDisabledRightIcon+:: These attributes determine the icons for sub-menus that are not the top-level menu when they are disabled.
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
 +itemLeftIcon+:: +itemRightIcon+:: These attributes determine the icons for items in the menus.
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
 +itemDisabledLeftIcon+:: +itemDisabledRightIcon+:: These attributes determine the icons for items in the menus when they are disabled.
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
 
 <<exam-Component_Reference-richpanelMenu-richpanelMenu>> demonstrates the use of icon declaration at the panel menu level. The standard icons are shown in <<figu-Component_Reference-richpanelMenu-Standard_icons>>.
 
@@ -6545,10 +6451,10 @@ Set the width and height of the toolbar using the common +width+ and +height+ at
 Items on the toolbar can be separated by a graphical item separator. Use the +itemSeparator+ attribute to specify one of the standard separator styles:
 
 * +none+, the default appearance, does not show any item separators.
-* +disc+ shows a small circular disc to separate items: image:
-* +grid+ shows a grid pattern to separate items: image:
-* +line+ shows a vertical line to separate items: image:
-* +square+ shows a small square to separate items: image:
+* +disc+ shows a small circular disc to separate items: image:images/figu-Component_Reference-richtoolbar-disc.png[]
+* +grid+ shows a grid pattern to separate items: image:images/figu-Component_Reference-richtoolbar-grid.png[]
+* +line+ shows a vertical line to separate items: image:images/figu-Component_Reference-richtoolbar-line.png[]
+* +square+ shows a small square to separate items: image:images/figu-Component_Reference-richtoolbar-square.png[]
 
 
 Alternatively, use the +itemSeparator+ attribute to specify a URL to an image. The image is then used as an item separator. The appearance of the item separator can be additionally customized by using the +itemSeparator+ facet.
@@ -6624,9 +6530,7 @@ Groups of toolbar items can be located on either the left-hand side or the right
 
 The example shows how to locate a toolbar group to the right-hand side of the parent toolbar. It also demonstrates how item separators on the parent toolbar work with toolbar groups.
 
-image::images/figu-Component_Reference-richtoolbarGroup-richtoolbarGroup.png[]
-
-A toolbar using icons. Two toolbar groups are located on the left-hand side of the toolbar and separated by a grid pattern. The third toolbar group is located to the right-hand side.
+image::images/figu-Component_Reference-richtoolbarGroup-richtoolbarGroup.png[A toolbar using icons. Two toolbar groups are located on the left-hand side of the toolbar and separated by a grid pattern. The third toolbar group is located to the right-hand side.]
 
 ====
 
@@ -6851,7 +6755,7 @@ There are several attributes that can change default behavior:
 [NOTE]
 ====
 
-                Nonblocking notifications can be clicked through, but because they are using jQuery mechanism to bypass events, only jQuery event handlers are triggered. IThis means that standard links won't be triggered.
+Nonblocking notifications can be clicked through, but because they are using jQuery mechanism to bypass events, only jQuery event handlers are triggered. IThis means that standard links won't be triggered.
 
 ====
 
@@ -6915,7 +6819,6 @@ The +<rich:notifyMessages>+ component is the same as the +<rich:notifyMessage>+ 
 
 [[figu-Component_Reference-richnotifyMessages-richnotifyMessages]]
 
-.
 image::images/figu-Component_Reference-richnotifyMessages-richnotifyMessages.png[width="200"]
 
 
@@ -6990,8 +6893,8 @@ To redefine the position of a notification, one needs to define a stack and bind
 
 There are two attributes which influences how notifications are placed into a stack:
 
-* +method+: defines where new notifications are placed and how they are removed. Options: +first+ (default), +last+.
-+direction+: defines in which direction will be messages stacked. Options: +vertical+ (default), +horizontal+
++method+:: defines where new notifications are placed and how they are removed. Options: +first+ (default), +last+.
++direction+:: defines in which direction will be messages stacked. Options: +vertical+ (default), +horizontal+
 
 
 The following sample shows a stack which will place new notifications up front - the incoming message will appear first, causing all notifications currently in stack to shift. Subsequently, messages at the end of stack will be then removed.
@@ -7283,6 +7186,7 @@ The mode for updating the tool-tip is determined by the +mode+ attribute, which 
 
 +ajax+:: The tool-tip content is requested from the server with every activation.
 +client+:: The tool-tip content is rendered once on the server. An external submit causes the content to re-render.
+
 When using +mode="ajax"+, define the +defaultContent+ facet. The tool-tip displays the content of the +defaultContent+ facet while loading the actual content from the server.
 
 [[exam-Component_Reference-richtooltip-Advanced_tool-tip_usage]]
@@ -7428,8 +7332,6 @@ The +<rich:dropTarget>+ component raises the +DropEvent+ server-side event when 
 
 include::skinning/vlst-richdropTarget.asciidoc[]
 
-.rf-drp-hvr:: This class defines styles for the drop target when a dragged item is hovering over it.
-.rf-drp-hlight:: This class defines styles for a highlighted drop target.
 [[sect-Component_Reference-Drag_and_drop-richdragIndicator]]
 
 === +<rich:dragIndicator>+
@@ -7467,10 +7369,6 @@ The drag indicator can be styled depending on the current state of the dragged e
 
 include::skinning/vlst-richdragIndicator.asciidoc[]
 
-.rf-ind:: This class defines styles for the drag indicator.
-.rf-ind-drag.accept:: This class defines styles for the indicator when it is over an acceptable drop target.
-.rf-ind-drag.reject:: This class defines styles for the indicator when it is over an unacceptable drop target.
-.rf-ind-drag.default:: This class defines styles for the indicator when it is being dragged, and is not over any drop targets.
 [[chap-Component_Reference-Layout_and_appearance]]
 
 == Layout and appearance
@@ -7499,19 +7397,7 @@ Any objects or lists of objects used in the query are specified using the +selec
 
 * The +selector+ attribute can refer to the elements by using syntax of the jQuery Selectors (a superset of CSS selectors defined by W3C consortium) and additionally it expands JSF component IDs to client-side IDs (see the VDL documentation for the +selector+ attribute).
 * If the +selector+ attribute does not match the +id+ identifier attribute of any JSF components or clients on the page, it instead uses syntax defined by the World Wide Web Consortium (W3C)for the CSSrule selector. 
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
 Refer to the syntax specification at http://api.jquery.com/category/selectors/ for full details.
-
-
-//////////////////////////////////////
-
-//////////////////////////////////////
-
-
 
 Because the +selector+ attribute can be either an +id+ identifier attribute or CSS selector syntax, conflicting values could arise. <<exam-Component_Reference-richjQuery-Avoiding_syntax_confusion>> demonstrates how to use double backslashes to escape colon characters in +id+ identifier values.
 
@@ -7580,9 +7466,7 @@ Timed queries are triggered at specified times. This can be useful for calling s
 
 In the example, the selector picks out the odd +<tr>+ elements that are children of the element with an +id="customlist"+ attribute. The query +addClass(odd)+ is then performed on the selection during page loading ( +load+) such that the +odd+ CSS class is added to the selected elements.
 
-image::images/Component_Reference-richjQuery-richjQuery_example.png[]
-
-A table highlighted in a "zebra" fashion, with every odd row colored.
+image::images/Component_Reference-richjQuery-richjQuery_example.png[A table highlighted in a "zebra" fashion, with every odd row colored.]
 
 ====
 
