@@ -23,5 +23,5 @@ convert_comp_ref() {
              && xmllint --format $COMP_REF_XML -o $COMP_REF_XML
 }
 
-#convert_dev_guide
-convert_comp_ref
+convert_dev_guide
+#convert_comp_ref
