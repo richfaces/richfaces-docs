@@ -38,4 +38,4 @@ convert_comp_ref() {
 }
 
 convert_dev_guide
-#convert_comp_ref
+convert_comp_ref
