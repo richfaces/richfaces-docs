@@ -1,8 +1,8 @@
 
 #!/bin/bash
 
-ASCIIDOC_IMPL="$(readlink -f $(which asciidoctor))"
 SCRIPT_DIR=`dirname $(readlink -f $0)`
+ASCIIDOC_IMPL=$SCRIPT_DIR/../../../asciidoctor/bin/asciidoctor
 TEMPLATE_DIR=$SCRIPT_DIR/../backend/slim/docbook45
 
 convert_dev_guide() {
