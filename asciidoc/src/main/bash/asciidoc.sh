@@ -2,14 +2,17 @@
 #!/bin/bash
 
 SCRIPT_DIR=`dirname $(readlink -f $0)`
-ASCIIDOC_IMPL=$SCRIPT_DIR/../../../asciidoctor/bin/asciidoctor
-TEMPLATE_DIR=$SCRIPT_DIR/../backend/slim/docbook45
+PROJECT_DIR=$SCRIPT_DIR/../../../..
+PROJECT_DIR=$(readlink -f $PROJECT_DIR)
+ASCIIDOC_IMPL=$PROJECT_DIR/asciidoc/asciidoctor/bin/asciidoctor
+TEMPLATE_DIR=$PROJECT_DIR/asciidoc/src/backend/slim/docbook45
 
 convert_asciidoc() {
     BASENAME=$1
-    BASE_DIR=$SCRIPT_DIR/../../../../$BASENAME/src/main/docbook/en-US/
-    BASE_XML=$BASE_DIR/$BASENAME.asciidoc.xml
-    BASE_AD=$BASE_DIR/$BASENAME.asciidoc
+    echo "Generating docbook xml for $BASENAME"
+    SOURCE_DIR=$PROJECT_DIR/$BASENAME/src/main/docbook/en-US/
+    BASE_XML=$SOURCE_DIR/$BASENAME.asciidoc.xml
+    BASE_AD=$SOURCE_DIR/$BASENAME.asciidoc
 
     $ASCIIDOC_IMPL -a toc -a numbered -a docinfo -bdocbook -d book \
                    -T$TEMPLATE_DIR \
