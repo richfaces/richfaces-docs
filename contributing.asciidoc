@@ -1,0 +1,80 @@
+:toc:
+[[contributing-docs]]
+= Contributing to the RichFaces Documentation
+
+The [productname]#RichFaces# project uses a _docbook_ toolchain to generate it's documentation.  Starting with RichFaces 5, we are generating our docbook xml from _asciidoc_ source.
+
+[NOTE]
+====
+While we are waiting for the key and menu macros to be added to the [productname]#Asciidoctor# project, (see issue link:https://github.com/asciidoctor/asciidoctor/issues/172[issue 172] and link:https://github.com/asciidoctor/asciidoctor/issues/173[issue 173]), we use a fork of asciidoctor included as a git module.  This means we cannot use the asciidoctor maven plugin to process our asciidoc source.
+
+Instead we  generate the docbook xml from the asciidoc source manually, executing a ruby script.  The docbook xml output is stored in source control, so you *only need to execute this script when you make changes* to the asciidoc source.
+====
+
+== Building the RichFaces doc
+
+To build the RichFaces documentation, perform the following steps:
+
+. Generate the docbook xml (optional)
++
+[NOTE]
+====
+Make sure you have ruby >= 1.9.2 installed
+====
++
+We use the [productname]#Asciidoctor# tool to generate the docbook xml from the asciidoc source from the root of the RichFaces docs project, run the conversion script.
++
+----
+[docs]> ./asciidoc/src/main/ruby/RenderScript.rb
+----
+
+. Generate the PDF, html_single, and html files
++
+With the docbook generated we can execute our docbook toolchain to generate the PDF, html_single, and html files using the maven build.
++
+----
+mvn clean install
+----
+
+== Editing the documentation using guard and livereload
+
+The asciidoc source can be edited using any text editor.  However, if you'd like re receive rapid feedback on how the docs are evolving, you can enable guard and livereload to see your changes live in your browser.
+
+To use guard and livereload with the RichFaces docs, follow the following steps
+
+[NOTE]
+====
+These aren't meant to be exhaustive steps for installing and configuring guard and livereload, rather it's a recipe of how to use these tools as they are configured for working with the RichFaces docs.  For more detailed instructions, see this excellent resource: http://asciidoctor.org/docs/editing-asciidoc-with-live-preview/
+====
+
+. Initialize your ruby environment
++
+[NOTE]
+====
+Make sure you have ruby >= 1.9.2 installed, and the +bundle+ gem.  You will also need the livereload plugin installed in your browser.
+====
++
+The docs come with a bundled +Gemfile+ that is used to initialize your ruby environment as follows:
++
+----
+bundle install
+----
+
+. Start guard
++
+The docs come pre-configured with a Guardfile used to configure guard to listen for asciidoc changes, and generate html directly using asciidoctor.  To run guard do:
++
+----
+bundle exec guard start
+----
+
+. Connect your browser
++
+Connect your browser to livereload by navigating to either of the files: 
++
+--
+.. [filename]+Component_Reference/target/docbook/en-US/Component_Reference.html+
+.. [filename]+Developer_Guide/target/docbook/en-US/Developer_Guide.html+
+--
++
+Then activate the livereload plugin in your browser.  As you save changes to the asciidoc source, you will see those changes reflected in the browser within seconds.
