@@ -4,10 +4,10 @@
 require 'asciidoctor'
 require 'erb'
 
-guard 'shell' do
+guard :shell, :all_on_start => true do
 #  watch /^([^\/]*).*\/([^\/]*)\.asciidoc/ do |m|
-  watch /^([^\/]*).*\/(Developer_Guide|Component_Reference)\.asciidoc/ do |m|
-    "m[0] +  has changed"
+  watch /^([^\/]*)\/src\/.*\/(Developer_Guide|Component_Reference)\.asciidoc$/ do |m|
+    puts "#{m[0]} +  has changed"
     Asciidoctor.render_file(m[0], :to_file => m[1] + "/target/" + m[2] + ".html")
   end
 end
