@@ -145,15 +145,13 @@ If necessary, update the JSF 2 JAR files to the latest versions.
 [[step-Developer_Guide-Creating_a_project-Add_the_RichFaces_libraries_to_the_project]]
 Add <<sect-Developer_Guide-Getting_started_with_RichFaces-Technical_Requirements-Project_libraries_and_dependencies,RichFaces libraries and their mandatory dependencies>> to the project. Copy them from the location where you unzipped the RichFaces archive to the [filename]+WebContent/WEB-INF/lib/+ directory of your project in [application]#JBoss Tools#.
 +
-. *Reference the tag libraries*
+. *Reference the tag library*
 +
-[[step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries]]
-The RichFaces tag libraries need to be referenced on each XHTML page in your project:
+The RichFaces tag library need to be referenced on each XHTML page in your project:
 +
 [source, XML]
 ----
-<ui:composition xmlns:a4j="http://richfaces.org/a4j"
-                xmlns:rich="http://richfaces.org/rich">
+<ui:composition xmlns:r="http://richfaces.org/rich">
    ...
 </ui:composition>
 
@@ -404,7 +402,7 @@ Read this section for details on each element.
 
 ==== Ajax Action Components
 
-The RichFaces framework includes several Ajax Action Components and Submitting Bahaviors: [sgmltag]+<a4j:commandButton>+, [sgmltag]+<a4j:commandLink>+, [sgmltag]+<a4j:poll>+, [sgmltag]+<a4j:ajax>+, and more. Use Ajax Action Components to send Ajax requests from the client side.
+The RichFaces framework includes several Ajax Action Components and Submitting Bahaviors: [sgmltag]+<r:commandButton>+, [sgmltag]+<r:commandLink>+, [sgmltag]+<r:poll>+, [sgmltag]+<r:ajax>+, and more. Use Ajax Action Components to send Ajax requests from the client side.
 
 [[sect-Developer_Guide-Architecture-Ajax_Containers]]
 
@@ -472,12 +470,12 @@ Read this chapter for the basic concepts of using RichFaces in conjunction with 
 
 === Sending an Ajax request
 
-Many of the tags in the [classname]+a4j+ and [classname]+rich+ tag libraries are capable of sending Ajax requests from a JavaServer Faces (JSF) page.
+Many of the tags in the [classname]+r+ tag library are capable of sending Ajax requests from a JavaServer Faces (JSF) page.
 
-* The [sgmltag]+<a4j:commandButton>+ and [sgmltag]+<a4j:commandLink>+ tags are used to send an Ajax request on the [varname]+click+ JavaScript event.
-* The [sgmltag]+<a4j:poll>+ tag is used to send an Ajax request periodically using a timer.
-* The [sgmltag]+<a4j:ajax>+ tag allows you to add Ajax functionality to standard JSF components and send Ajax request on a chosen JavaScript event, such as [varname]+keyup+ or [varname]+mouseover+, for example.
-* Most components in the [classname]+rich+ tag library have built-in Ajax support. Refer to the *_RichFaces Component Reference_* for details on the use of each component.
+* The [sgmltag]+<r:commandButton>+ and [sgmltag]+<r:commandLink>+ tags are used to send an Ajax request on the [varname]+click+ JavaScript event.
+* The [sgmltag]+<r:poll>+ tag is used to send an Ajax request periodically using a timer.
+* The [sgmltag]+<r:ajax>+ tag allows you to add Ajax functionality to standard JSF components and send Ajax request on a chosen JavaScript event, such as [varname]+keyup+ or [varname]+mouseover+, for example.
+* Most components in the [classname]+r+ tag library have built-in Ajax support. Refer to the *_RichFaces Component Reference_* for details on the use of each component.
 
 
 [[sect-Developer_Guide-Basic_concepts-Partial_tree_processing]]
@@ -492,7 +490,7 @@ Alternatively, the [varname]+execute+ attribute accepts the following keywords:
 [code]+@none+:: No components are processed.
 [code]+@this+:: The requesting component with the [varname]+execute+ attribute is processed.
 [code]+@form+:: The form that contains the requesting component is processed.
-[code]+@region+:: The region that contains the requesting component is processed. Use the [sgmltag]+<a4j:region>+ component as a wrapper element to specify regions.
+[code]+@region+:: The region that contains the requesting component is processed. Use the [sgmltag]+<r:region>+ component as a wrapper element to specify regions.
 Some components make use of additional keywords. These are detailed under the relevant component entry in the *_RichFaces Component Reference_* .
 
 [[sect-Developer_Guide-Basic_concepts-Partial_view_updates]]
@@ -507,17 +505,17 @@ Alternatively, the [varname]+render+ attribute accepts the following keywords:
 [code]+@none+:: No components are updated.
 [code]+@this+:: The requesting component with the [varname]+execute+ attribute is updated.
 [code]+@form+:: The form that contains the requesting component is updated.
-[code]+@region+:: The region that contains the requesting component is updated. Use the [sgmltag]+<a4j:region>+ component as a wrapper element to specify regions.
+[code]+@region+:: The region that contains the requesting component is updated. Use the [sgmltag]+<r:region>+ component as a wrapper element to specify regions.
 
 Some components make use of additional keywords. These are detailed under the relevant component entry in the *_RichFaces Component Reference_* .
 
-Use the [sgmltag]+<a4j:outputPanel>+ component with the [code]+ajaxRendered="true"+ setting to always update a section irrespective of the requesting component's [varname]+render+ attribute. The [sgmltag]+<rich:message>+ and [sgmltag]+<rich:messages>+ components are based on the [sgmltag]+<a4j:outputPanel>+ component, and as such will also always be updated. To override this behavior, use the [code]+limitRender="true"+ setting on the requesting component.
+Use the [sgmltag]+<r:outputPanel>+ component with the [code]+ajaxRendered="true"+ setting to always update a section irrespective of the requesting component's [varname]+render+ attribute. The [sgmltag]+<r:message>+ and [sgmltag]+<r:messages>+ components are based on the [sgmltag]+<r:outputPanel>+ component, and as such will also always be updated. To override this behavior, use the [code]+limitRender="true"+ setting on the requesting component.
 
 [[sect-Developer_Guide-Basic_concepts-Component_overview]]
 
 === Component overview
 
-The RichFaces framework is made up of two tag libraries: the [classname]+a4j+ library and the [classname]+rich+ library. The [classname]+a4j+ tag library represents _Ajax4jsf_, which provides page-level Ajax support with core Ajax components. This allows developers to make use of custom Ajax behavior with existing components. The [classname]+rich+ tag library provides Ajax support at the component level instead, and includes ready-made, self-contained components. These components don't require additional configuration in order to send requests or update.
+The RichFaces framework is made up of the sinlge tag library: the [classname]+r+ library. The [classname]+r+ tag library includes both the low-level ajax functionality, as well as the high-level components for builidng web applications.  This allows developers to make use of custom Ajax behavior with existing componentsas well as leverage the many ready-made, self-contained components. These components don't require additional configuration in order to send requests or update.
 
 For details on the use of the various components, refer to *_RichFaces Component Reference_* .
 
@@ -550,8 +548,8 @@ JSF provides a global [code]+onError+ handler on the client. The handler provide
 
 Additional processing is available through a number of components, such as the following:
 
-* The [sgmltag]+<a4j:status>+ component has an additional error state.
-* The [sgmltag]+<a4j:queue>+ component can be used to process errors.
+* The [sgmltag]+<r:status>+ component has an additional error state.
+* The [sgmltag]+<r:queue>+ component can be used to process errors.
 
 
 [[sect-Developer_Guide-Advanced_features-Server-side_errors]]
@@ -863,7 +861,7 @@ RichFaces uses [acronym]#ECSS# files to add extra functionality to the skinning 
 .ECSS style mappings
 ====
 
-The ECSS code for the [sgmltag]+<rich:panel>+ component contains styles for the panel and its body:
+The ECSS code for the [sgmltag]+<r:panel>+ component contains styles for the panel and its body:
 
 
 [source, Java]
@@ -926,7 +924,7 @@ Using any component, such as a panel, without specifying a [varname]+styleClass+
 
 [source, XML]
 ----
-<rich:panel>This is a panel without a header</rich:panel>
+<r:panel>This is a panel without a header</r:panel>
 ----
 
 When rendered for display, the panel consists of two HTML elements: a wrapper [sgmltag]+<div>+ element and a [sgmltag]+<div>+ element for the body of the panel. The wrapper element for a panel without a specified [varname]+styleClass+ is rendered as follows:
@@ -953,7 +951,7 @@ To customize the panel appearance according to the three-level scheme, adjust th
 --
 [source, XML]
 ----
-<rich:panel styleClass="customClass">...</rich:panel>
+<r:panel styleClass="customClass">...</r:panel>
 ----
 
 The +customClass+ style is added to the CSS, and is applied to the component when it is rendered for display:
@@ -1136,275 +1134,179 @@ Standard HTML controls can also be specifically defined in the CSS. Refer to the
 
 Each of the [productname]#RichFaces# components are listed below, along with their style classes and skin parameters. For further details on each component, refer to the relevant section in the *_RichFaces Component Reference_* .
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-Processing_management]]
-
 === Processing management
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-a4jlog]]
+==== +<r:log>+
 
-==== +<a4j:log>+
-
-include::skinning/tabl-a4jlog.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-Rich_inputs]]
+include::skinning/log.asciidoc[]
 
 === Rich inputs
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richautocomplete]]
+==== +<r:autocomplete>+
 
-==== +<rich:autocomplete>+
+include::skinning/autocomplete.asciidoc[]
 
-include::skinning/tabl-richautocomplete.asciidoc[]
+==== +<r:calendar>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richcalendar]]
+include::skinning/calendar.asciidoc[]
 
-==== +<rich:calendar>+
+==== +<r:editor>+
 
-include::skinning/tabl-richcalendar.asciidoc[]
+include::skinning/editor.asciidoc[]
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richeditor]]
+==== +<r:fileUpload>+
 
-==== +<rich:editor>+
+include::skinning/fileUpload.asciidoc[]
 
-include::skinning/tabl-richeditor.asciidoc[]
+==== +<r:inplaceInput>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richfileUpload]]
+include::skinning/inplaceInput.asciidoc[]
 
-==== +<rich:fileUpload>+
+==== +<r:inputNumberSlider>+
 
-include::skinning/tabl-richfileUpload.asciidoc[]
+include::skinning/inputNumberSlider.asciidoc[]
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richinplaceInput]]
+==== +<r:inputNumberSpinner>+
 
-==== +<rich:inplaceInput>+
-
-include::skinning/tabl-richinplaceInput.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richinputNumberSlider]]
-
-==== +<rich:inputNumberSlider>+
-
-include::skinning/tabl-richinputNumberSlider.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richinputNumberSpinner]]
-
-==== +<rich:inputNumberSpinner>+
-
-include::skinning/tabl-richinputNumberSpinner.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-Rich_selects]]
+include::skinning/inputNumberSpinner.asciidoc[]
 
 === Rich selects
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richinplaceSelect]]
+==== +<r:inplaceSelect>+
 
-==== +<rich:inplaceSelect>+
+include::skinning/inplaceSelect.asciidoc[]
 
-include::skinning/tabl-richinplaceSelect.asciidoc[]
+==== +<r:select>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richselect]]
+include::skinning/select.asciidoc[]
 
-==== +<rich:select>+
+==== +<r:orderingList>+
 
-include::skinning/tabl-richselect.asciidoc[]
+include::skinning/orderingList.asciidoc[]
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richorderingList]]
+==== +<r:pickList>+
 
-==== +<rich:orderingList>+
-
-include::skinning/tabl-richorderingList.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richspickList]]
-
-==== +<rich:pickList>+
-
-include::skinning/tabl-richpickList.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-Panels_and_containers]]
+include::skinning/pickList.asciidoc[]
 
 === Panels and containers
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richpanel]]
+==== +<r:panel>+
 
-==== +<rich:panel>+
+include::skinning/panel.asciidoc[]
 
-include::skinning/tabl-richpanel.asciidoc[]
+==== +<r:accordion>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richaccordion]]
+include::skinning/accordion.asciidoc[]
 
-==== +<rich:accordion>+
+==== +<r:collapsiblePanel>+
 
-include::skinning/tabl-richaccordion.asciidoc[]
+include::skinning/collapsiblePanel.asciidoc[]
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richcollapsiblePanel]]
+==== +<r:popupPanel>+
 
-==== +<rich:collapsiblePanel>+
+include::skinning/popupPanel.asciidoc[]
 
-include::skinning/tabl-richcollapsiblePanel.asciidoc[]
+==== +<r:tabPanel>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richpopupPanel]]
-
-==== +<rich:popupPanel>+
-
-include::skinning/tabl-richpopupPanel.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richtabPanel]]
-
-==== +<rich:tabPanel>+
-
-include::skinning/tabl-richtabPanel.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-Tables_and_grids]]
+include::skinning/tabPanel.asciidoc[]
 
 === Tables and grids
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richdataTable]]
+==== +<r:dataTable>+
 
-==== +<rich:dataTable>+
+include::skinning/dataTable.asciidoc[]
 
-include::skinning/tabl-richdataTable.asciidoc[]
+==== +<r:collapsibleSubTable>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richcollapsibleSubTable]]
+include::skinning/collapsibleSubTable.asciidoc[]
 
-==== +<rich:collapsibleSubTable>+
+==== +<r:collapsibleSubTableToggler>+
 
-include::skinning/tabl-richcollapsibleSubTable.asciidoc[]
+include::skinning/collapsibleSubTableToggler.asciidoc[]
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richcollapsibleSubTableToggler]]
+==== +<r:extendedDataTable>+
 
-==== +<rich:collapsibleSubTableToggler>+
+include::skinning/extendedDataTable.asciidoc[]
 
-include::skinning/vlst-richcollapsibleSubTableToggler.asciidoc[]
+==== +<r:dataGrid>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richextendedDataTable]]
+include::skinning/dataGrid.asciidoc[]
 
-==== +<rich:extendedDataTable>+
+==== +<r:list>+
 
-include::skinning/tabl-richextendedDataTable.asciidoc[]
+include::skinning/list.asciidoc[]
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richdataGrid]]
+==== +<r:dataScroller>+
 
-==== +<rich:dataGrid>+
-
-include::skinning/tabl-richdataGrid.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richlist]]
-
-==== +<rich:list>+
-
-include::skinning/tabl-richlist.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richdataScroller]]
-
-==== +<rich:dataScroller>+
-
-include::skinning/tabl-richdataScroller.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-Trees]]
+include::skinning/dataScroller.asciidoc[]
 
 === Trees
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richtree]]
+==== +<r:tree>+
 
-==== +<rich:tree>+
+include::skinning/tree.asciidoc[]
 
-include::skinning/vlst-richtree.asciidoc[]
+==== +<r:treeNode>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richtreeNode]]
-
-==== +<rich:treeNode>+
-
-include::skinning/tabl-richtreeNode.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-Menus_and_toolbars]]
+include::skinning/treeNode.asciidoc[]
 
 === Menus and toolbars
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richdropDownMenu]]
+==== +<r:dropDownMenu>+
 
-==== +<rich:dropDownMenu>+
+include::skinning/dropDownMenu.asciidoc[]
 
-include::skinning/tabl-richdropDownMenu.asciidoc[]
+==== +<r:contextMenu>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richcontextMenu]]
+include::skinning/contextMenu.asciidoc[]
 
-==== +<rich:contextMenu>+
+==== +<r:panelMenu>+
 
-include::skinning/tabl-richcontextMenu.asciidoc[]
+include::skinning/panelMenu.asciidoc[]
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richpanelMenu]]
+==== +<r:toolbar>+
 
-==== +<rich:panelMenu>+
-
-include::skinning/tabl-richpanelMenu.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richtoolbar]]
-
-==== +<rich:toolbar>+
-
-include::skinning/tabl-richtoolbar.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-Output_and_messages]]
+include::skinning/toolbar.asciidoc[]
 
 === Output and messages
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richmessage]]
+==== +<r:message>+
 
-==== +<rich:message>+
+include::skinning/message.asciidoc[]
 
-include::skinning/tabl-richmessage.asciidoc[]
+==== +<r:messages>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richmessages]]
+include::skinning/messages.asciidoc[]
 
-==== +<rich:messages>+
+==== +<r:notify>+
 
-include::skinning/tabl-richmessages.asciidoc[]
+include::skinning/notify.asciidoc[]
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richnotify]]
+==== +<r:notifyMessage>+
 
-==== +<rich:notify>+
+include::skinning/notifyMessage.asciidoc[]
 
-include::skinning/tabl-richnotify.asciidoc[]
+==== +<r:notifyStack>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richnotifyMessage]]
+include::skinning/notifyStack.asciidoc[]
 
-==== +<rich:notifyMessage>+
+==== +<r:progressBar>+
 
-include::skinning/tabl-richnotifyMessage.asciidoc[]
+include::skinning/progressBar.asciidoc[]
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richnotifyStack]]
+==== +<r:tooltip>+
 
-==== +<rich:notifyStack>+
-
-include::skinning/tabl-richnotifyStack.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richprogressBar]]
-
-==== +<rich:progressBar>+
-
-include::skinning/tabl-richprogressBar.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richtooltip]]
-
-==== +<rich:tooltip>+
-
-include::skinning/tabl-richtooltip.asciidoc[]
-
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-Drag_and_drop]]
+include::skinning/tooltip.asciidoc[]
 
 === Drag and drop
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richdropTarget]]
+==== +<r:dropTarget>+
 
-==== +<rich:dropTarget>+
+include::skinning/dropTarget.asciidoc[]
 
-include::skinning/vlst-richdropTarget.asciidoc[]
+==== +<r:dragIndicator>+
 
-[[sect-Developer_Guide-Style_classes_and_skin_parameters-richdragIndicator]]
-
-==== +<rich:dragIndicator>+
-
-include::skinning/vlst-richdragIndicator.asciidoc[]
+include::skinning/dragIndicator.asciidoc[]
 
 [[appe-Developer_Guide-Migration_Notes]]
 
@@ -1429,10 +1331,10 @@ For details on disabling the built-in sort and filter controls, refer to section
 
 ==== NotifyMessage string escaping
 
-Prior to version 4.3.0.Final, the message summary and details of the [sgmltag]+<rich:notifyMessage>+ and [sgmltag]+<rich:notifyMessages>+ components were not escaped. In the 4.3.0.Final release, an attribute [varname]+escape+ was added with a default value true.
+Prior to version 4.3.0.Final, the message summary and details of the [sgmltag]+<r:notifyMessage>+ and [sgmltag]+<r:notifyMessages>+ components were not escaped. In the 4.3.0.Final release, an attribute [varname]+escape+ was added with a default value true.
 
 [[appe-Developer_Guide-Migration_Notes-4_3_0-Select_Input_Validation]]
 
 ==== Select input validation
 
-The [sgmltag]+<rich:select>+ now validates that manually entered input values match one of the values of the provided list (including support for client-side validation).
+The [sgmltag]+<r:select>+ now validates that manually entered input values match one of the values of the provided list (including support for client-side validation).

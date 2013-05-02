@@ -5,7 +5,7 @@
 <book lang="en">
   <bookinfo>
     <title>Developer Guide</title>
-    <date>2013-05-09</date>
+    <date>2013-05-02</date>
     <subtitle>Develop applications using RichFaces 4</subtitle>
     <productname class="trade">RichFaces</productname>
     <productnumber>5.0.0-SNAPSHOT</productnumber>
@@ -335,15 +335,14 @@
           <simpara>
             <emphasis role="strong">Add the RichFaces libraries to the project</emphasis>
           </simpara>
-          <simpara id="step-Developer_Guide-Creating_a_project-Add_the_RichFaces_libraries_to_the_project">Add <link linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Technical_Requirements-Project_libraries_and_dependencies">RichFaces libraries and their mandatory dependencies</link> to the project. Copy them from the location where you unzipped the RichFaces archive to the <literal><phrase role="filename">WebContent/WEB-INF/lib/</phrase></literal> directory of your project in <application>JBoss Tools</application>.</simpara>
+          <simpara>Add <link linkend="sect-Developer_Guide-Getting_started_with_RichFaces-Technical_Requirements-Project_libraries_and_dependencies">RichFaces libraries and their mandatory dependencies</link> to the project. Copy them from the location where you unzipped the RichFaces archive to the <literal><phrase role="filename">WebContent/WEB-INF/lib/</phrase></literal> directory of your project in <application>JBoss Tools</application>.</simpara>
         </listitem>
         <listitem>
           <simpara>
-            <emphasis role="strong">Reference the tag libraries</emphasis>
+            <emphasis role="strong">Reference the tag library</emphasis>
           </simpara>
-          <simpara id="step-Developer_Guide-Creating_a_project-Reference_the_tag_libraries">The RichFaces tag libraries need to be referenced on each XHTML page in your project:</simpara>
-          <programlisting language="XML" linenumbering="unnumbered">&lt;ui:composition xmlns:a4j="http://richfaces.org/a4j"
-                xmlns:rich="http://richfaces.org/rich"&gt;
+          <simpara>The RichFaces tag library need to be referenced on each XHTML page in your project:</simpara>
+          <programlisting language="XML" linenumbering="unnumbered">&lt;ui:composition xmlns:r="http://richfaces.org/rich"&gt;
    ...
 &lt;/ui:composition&gt;
 </programlisting>
@@ -634,7 +633,7 @@
       <simpara>Read this section for details on each element.</simpara>
       <section id="sect-Developer_Guide-Architecture-Ajax_Action_Components">
         <title>Ajax Action Components</title>
-        <simpara>The RichFaces framework includes several Ajax Action Components and Submitting Bahaviors: <literal><phrase role="sgmltag">&lt;a4j:commandButton&gt;</phrase></literal>, <literal><phrase role="sgmltag">&lt;a4j:commandLink&gt;</phrase></literal>, <literal><phrase role="sgmltag">&lt;a4j:poll&gt;</phrase></literal>, <literal><phrase role="sgmltag">&lt;a4j:ajax&gt;</phrase></literal>, and more. Use Ajax Action Components to send Ajax requests from the client side.</simpara>
+        <simpara>The RichFaces framework includes several Ajax Action Components and Submitting Bahaviors: <literal><phrase role="sgmltag">&lt;r:commandButton&gt;</phrase></literal>, <literal><phrase role="sgmltag">&lt;r:commandLink&gt;</phrase></literal>, <literal><phrase role="sgmltag">&lt;r:poll&gt;</phrase></literal>, <literal><phrase role="sgmltag">&lt;r:ajax&gt;</phrase></literal>, and more. Use Ajax Action Components to send Ajax requests from the client side.</simpara>
       </section>
       <section id="sect-Developer_Guide-Architecture-Ajax_Containers">
         <title>Ajax Containers</title>
@@ -688,19 +687,19 @@
     <simpara>Read this chapter for the basic concepts of using RichFaces in conjunction with Ajax and JavaServer Faces.</simpara>
     <section id="sect-Developer_Guide-Basic_concepts-Sending_an_Ajax_request">
       <title>Sending an Ajax request</title>
-      <simpara>Many of the tags in the <literal><phrase role="classname">a4j</phrase></literal> and <literal><phrase role="classname">rich</phrase></literal> tag libraries are capable of sending Ajax requests from a JavaServer Faces (JSF) page.</simpara>
+      <simpara>Many of the tags in the <literal><phrase role="classname">r</phrase></literal> tag library are capable of sending Ajax requests from a JavaServer Faces (JSF) page.</simpara>
       <itemizedlist>
         <listitem>
-          <simpara>The <literal><phrase role="sgmltag">&lt;a4j:commandButton&gt;</phrase></literal> and <literal><phrase role="sgmltag">&lt;a4j:commandLink&gt;</phrase></literal> tags are used to send an Ajax request on the <literal><phrase role="varname">click</phrase></literal> JavaScript event.</simpara>
+          <simpara>The <literal><phrase role="sgmltag">&lt;r:commandButton&gt;</phrase></literal> and <literal><phrase role="sgmltag">&lt;r:commandLink&gt;</phrase></literal> tags are used to send an Ajax request on the <literal><phrase role="varname">click</phrase></literal> JavaScript event.</simpara>
         </listitem>
         <listitem>
-          <simpara>The <literal><phrase role="sgmltag">&lt;a4j:poll&gt;</phrase></literal> tag is used to send an Ajax request periodically using a timer.</simpara>
+          <simpara>The <literal><phrase role="sgmltag">&lt;r:poll&gt;</phrase></literal> tag is used to send an Ajax request periodically using a timer.</simpara>
         </listitem>
         <listitem>
-          <simpara>The <literal><phrase role="sgmltag">&lt;a4j:ajax&gt;</phrase></literal> tag allows you to add Ajax functionality to standard JSF components and send Ajax request on a chosen JavaScript event, such as <literal><phrase role="varname">keyup</phrase></literal> or <literal><phrase role="varname">mouseover</phrase></literal>, for example.</simpara>
+          <simpara>The <literal><phrase role="sgmltag">&lt;r:ajax&gt;</phrase></literal> tag allows you to add Ajax functionality to standard JSF components and send Ajax request on a chosen JavaScript event, such as <literal><phrase role="varname">keyup</phrase></literal> or <literal><phrase role="varname">mouseover</phrase></literal>, for example.</simpara>
         </listitem>
         <listitem>
-          <simpara>Most components in the <literal><phrase role="classname">rich</phrase></literal> tag library have built-in Ajax support. Refer to the <emphasis role="strong"><emphasis>RichFaces Component Reference</emphasis></emphasis> for details on the use of each component.</simpara>
+          <simpara>Most components in the <literal><phrase role="classname">r</phrase></literal> tag library have built-in Ajax support. Refer to the <emphasis role="strong"><emphasis>RichFaces Component Reference</emphasis></emphasis> for details on the use of each component.</simpara>
         </listitem>
       </itemizedlist>
     </section>
@@ -756,7 +755,7 @@
             </literal>
           </term>
           <listitem>
-            <simpara>The region that contains the requesting component is processed. Use the <literal><phrase role="sgmltag">&lt;a4j:region&gt;</phrase></literal> component as a wrapper element to specify regions.
+            <simpara>The region that contains the requesting component is processed. Use the <literal><phrase role="sgmltag">&lt;r:region&gt;</phrase></literal> component as a wrapper element to specify regions.
 Some components make use of additional keywords. These are detailed under the relevant component entry in the <emphasis role="strong"><emphasis>RichFaces Component Reference</emphasis></emphasis> .</simpara>
           </listitem>
         </varlistentry>
@@ -814,16 +813,16 @@ Some components make use of additional keywords. These are detailed under the re
             </literal>
           </term>
           <listitem>
-            <simpara>The region that contains the requesting component is updated. Use the <literal><phrase role="sgmltag">&lt;a4j:region&gt;</phrase></literal> component as a wrapper element to specify regions.</simpara>
+            <simpara>The region that contains the requesting component is updated. Use the <literal><phrase role="sgmltag">&lt;r:region&gt;</phrase></literal> component as a wrapper element to specify regions.</simpara>
           </listitem>
         </varlistentry>
       </variablelist>
       <simpara>Some components make use of additional keywords. These are detailed under the relevant component entry in the <emphasis role="strong"><emphasis>RichFaces Component Reference</emphasis></emphasis> .</simpara>
-      <simpara>Use the <literal><phrase role="sgmltag">&lt;a4j:outputPanel&gt;</phrase></literal> component with the <literal><phrase role="code">ajaxRendered="true"</phrase></literal> setting to always update a section irrespective of the requesting component’s <literal><phrase role="varname">render</phrase></literal> attribute. The <literal><phrase role="sgmltag">&lt;rich:message&gt;</phrase></literal> and <literal><phrase role="sgmltag">&lt;rich:messages&gt;</phrase></literal> components are based on the <literal><phrase role="sgmltag">&lt;a4j:outputPanel&gt;</phrase></literal> component, and as such will also always be updated. To override this behavior, use the <literal><phrase role="code">limitRender="true"</phrase></literal> setting on the requesting component.</simpara>
+      <simpara>Use the <literal><phrase role="sgmltag">&lt;r:outputPanel&gt;</phrase></literal> component with the <literal><phrase role="code">ajaxRendered="true"</phrase></literal> setting to always update a section irrespective of the requesting component’s <literal><phrase role="varname">render</phrase></literal> attribute. The <literal><phrase role="sgmltag">&lt;r:message&gt;</phrase></literal> and <literal><phrase role="sgmltag">&lt;r:messages&gt;</phrase></literal> components are based on the <literal><phrase role="sgmltag">&lt;r:outputPanel&gt;</phrase></literal> component, and as such will also always be updated. To override this behavior, use the <literal><phrase role="code">limitRender="true"</phrase></literal> setting on the requesting component.</simpara>
     </section>
     <section id="sect-Developer_Guide-Basic_concepts-Component_overview">
       <title>Component overview</title>
-      <simpara>The RichFaces framework is made up of two tag libraries: the <literal><phrase role="classname">a4j</phrase></literal> library and the <literal><phrase role="classname">rich</phrase></literal> library. The <literal><phrase role="classname">a4j</phrase></literal> tag library represents <emphasis>Ajax4jsf</emphasis>, which provides page-level Ajax support with core Ajax components. This allows developers to make use of custom Ajax behavior with existing components. The <literal><phrase role="classname">rich</phrase></literal> tag library provides Ajax support at the component level instead, and includes ready-made, self-contained components. These components don’t require additional configuration in order to send requests or update.</simpara>
+      <simpara>The RichFaces framework is made up of the sinlge tag library: the <literal><phrase role="classname">r</phrase></literal> library. The <literal><phrase role="classname">r</phrase></literal> tag library includes both the low-level ajax functionality, as well as the high-level components for builidng web applications.  This allows developers to make use of custom Ajax behavior with existing componentsas well as leverage the many ready-made, self-contained components. These components don’t require additional configuration in order to send requests or update.</simpara>
       <simpara>For details on the use of the various components, refer to <emphasis role="strong"><emphasis>RichFaces Component Reference</emphasis></emphasis> .</simpara>
     </section>
   </chapter>
@@ -848,10 +847,10 @@ Some components make use of additional keywords. These are detailed under the re
         <simpara>Additional processing is available through a number of components, such as the following:</simpara>
         <itemizedlist>
           <listitem>
-            <simpara>The <literal><phrase role="sgmltag">&lt;a4j:status&gt;</phrase></literal> component has an additional error state.</simpara>
+            <simpara>The <literal><phrase role="sgmltag">&lt;r:status&gt;</phrase></literal> component has an additional error state.</simpara>
           </listitem>
           <listitem>
-            <simpara>The <literal><phrase role="sgmltag">&lt;a4j:queue&gt;</phrase></literal> component can be used to process errors.</simpara>
+            <simpara>The <literal><phrase role="sgmltag">&lt;r:queue&gt;</phrase></literal> component can be used to process errors.</simpara>
           </listitem>
         </itemizedlist>
       </section>
@@ -1813,7 +1812,7 @@ another\:jquery.js=final/jquery.js</screen>
         <simpara>RichFaces uses <acronym>ECSS</acronym> files to add extra functionality to the skinning process. ECSS files are CSS files which use Expression Language ( <acronym>EL</acronym>) to connect styles with skin properties.</simpara>
         <example id="exam-Developer_Guide-Skinning_and_theming-ECSS_style_mappings">
           <title>ECSS style mappings</title>
-          <simpara>The ECSS code for the <literal><phrase role="sgmltag">&lt;rich:panel&gt;</phrase></literal> component contains styles for the panel and its body:</simpara>
+          <simpara>The ECSS code for the <literal><phrase role="sgmltag">&lt;r:panel&gt;</phrase></literal> component contains styles for the panel and its body:</simpara>
           <programlisting language="Java" linenumbering="unnumbered">.rf-p{
    background-color:'#{richSkin.generalBackgroundColor}';
    color:'#{richSkin.panelBorderColor}';
@@ -1909,7 +1908,7 @@ another\:jquery.js=final/jquery.js</screen>
       <example id="exam-Developer_Guide-Using_skins-Simple_skinning_example">
         <title>Simple skinning example</title>
         <simpara>Using any component, such as a panel, without specifying a <literal><phrase role="varname">styleClass</phrase></literal> will use the default skin parameters for that component.</simpara>
-        <programlisting language="XML" linenumbering="unnumbered">&lt;rich:panel&gt;This is a panel without a header&lt;/rich:panel&gt;</programlisting>
+        <programlisting language="XML" linenumbering="unnumbered">&lt;r:panel&gt;This is a panel without a header&lt;/r:panel&gt;</programlisting>
         <simpara>When rendered for display, the panel consists of two HTML elements: a wrapper <literal><phrase role="sgmltag">&lt;div&gt;</phrase></literal> element and a <literal><phrase role="sgmltag">&lt;div&gt;</phrase></literal> element for the body of the panel. The wrapper element for a panel without a specified <literal><phrase role="varname">styleClass</phrase></literal> is rendered as follows:</simpara>
         <programlisting language="XML" linenumbering="unnumbered">&lt;div id="..." class="rf-p"&gt;
    &lt;div id="..." class="rf-p-b"&gt;
@@ -1918,22 +1917,14 @@ another\:jquery.js=final/jquery.js</screen>
 &lt;/div&gt;
 </programlisting>
         <simpara>To customize the panel appearance according to the three-level scheme, adjust the styles according to the following approach:</simpara>
-        <orderedlist numeration="arabic">
-          <listitem>
-            <simpara>Change the definitions for the <literal><phrase role="parameter">generalBackgroundColor</phrase></literal> or <literal><phrase role="parameter">panelBorderColor</phrase></literal> parameters in the skin. This will cause all panels in the application to change to the new settings.</simpara>
-          </listitem>
-          <listitem>
-            <simpara>Redefine the <literal><phrase role="classname">rf-p</phrase></literal> class in the application CSS. This will also cause all panels in the application to change to the new settings, though the skin itself has not been altered. Any properties not mapped to skin parameters should be redefined in this way.</simpara>
-          </listitem>
-          <listitem>
-            <simpara>Specify a different <literal><phrase role="varname">styleClass</phrase></literal> attribute to style the individual component. If a <literal><phrase role="varname">styleClass</phrase></literal> attribute is used, the specified style class is applied to the component, which could extend or override the default styles.</simpara>
-            <programlisting language="XML" linenumbering="unnumbered">&lt;rich:panel styleClass="customClass"&gt;...&lt;/rich:panel&gt;</programlisting>
-            <simpara>The <literal>customClass</literal> style is added to the CSS, and is applied to the component when it is rendered for display:</simpara>
-            <programlisting language="XML" linenumbering="unnumbered">&lt;div class="rf-p customClass"&gt;
+        <simpara>Change the definitions for the <literal><phrase role="parameter">generalBackgroundColor</phrase></literal> or <literal><phrase role="parameter">panelBorderColor</phrase></literal> parameters in the skin. This will cause all panels in the application to change to the new settings.</simpara>
+        <simpara>Redefine the <literal><phrase role="classname">rf-p</phrase></literal> class in the application CSS. This will also cause all panels in the application to change to the new settings, though the skin itself has not been altered. Any properties not mapped to skin parameters should be redefined in this way.</simpara>
+        <simpara>Specify a different <literal><phrase role="varname">styleClass</phrase></literal> attribute to style the individual component. If a <literal><phrase role="varname">styleClass</phrase></literal> attribute is used, the specified style class is applied to the component, which could extend or override the default styles.</simpara>
+        <programlisting language="XML" linenumbering="unnumbered">&lt;r:panel styleClass="customClass"&gt;...&lt;/r:panel&gt;</programlisting>
+        <simpara>The <literal>customClass</literal> style is added to the CSS, and is applied to the component when it is rendered for display:</simpara>
+        <programlisting language="XML" linenumbering="unnumbered">&lt;div class="rf-p customClass"&gt;
    ...
 &lt;/div&gt;</programlisting>
-          </listitem>
-        </orderedlist>
       </example>
       <section id="sect-Developer_Guide-Customizing_skins-Creating_a_new_skin">
         <title>Creating a new skin</title>
@@ -2075,13 +2066,13 @@ private String skin;</programlisting>
   <appendix id="appe-Developer_Guide-Style_classes_and_skin_parameters">
     <title>Style classes and skin parameters</title>
     <simpara>Each of the <productname>RichFaces</productname> components are listed below, along with their style classes and skin parameters. For further details on each component, refer to the relevant section in the <emphasis role="strong"><emphasis>RichFaces Component Reference</emphasis></emphasis> .</simpara>
-    <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-Processing_management">
+    <section id="_processing_management">
       <title>Processing management</title>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-a4jlog">
+      <section id="__literal_lt_r_log_gt_literal">
         <title>
-          <literal>&lt;a4j:log&gt;</literal>
+          <literal>&lt;r:log&gt;</literal>
         </title>
-        <table id="tabl-a4jlog-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="log-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -2415,13 +2406,13 @@ private String skin;</programlisting>
         </table>
       </section>
     </section>
-    <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-Rich_inputs">
+    <section id="_rich_inputs">
       <title>Rich inputs</title>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richautocomplete">
+      <section id="__literal_lt_r_autocomplete_gt_literal">
         <title>
-          <literal>&lt;rich:autocomplete&gt;</literal>
+          <literal>&lt;r:autocomplete&gt;</literal>
         </title>
-        <table id="tabl-richautocomplete-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="autocomplete-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -2821,11 +2812,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richcalendar">
+      <section id="__literal_lt_r_calendar_gt_literal">
         <title>
-          <literal>&lt;rich:calendar&gt;</literal>
+          <literal>&lt;r:calendar&gt;</literal>
         </title>
-        <table id="tabl-richcalendar-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="calendar-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -4944,11 +4935,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richeditor">
+      <section id="__literal_lt_r_editor_gt_literal">
         <title>
-          <literal>&lt;rich:editor&gt;</literal>
+          <literal>&lt;r:editor&gt;</literal>
         </title>
-        <table id="tabl-richeditor-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="editor-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -5382,11 +5373,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richfileUpload">
+      <section id="__literal_lt_r_fileupload_gt_literal">
         <title>
-          <literal>&lt;rich:fileUpload&gt;</literal>
+          <literal>&lt;r:fileUpload&gt;</literal>
         </title>
-        <table id="tabl-richfileUpload-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="fileUpload-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -6172,11 +6163,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richinplaceInput">
+      <section id="__literal_lt_r_inplaceinput_gt_literal">
         <title>
-          <literal>&lt;rich:inplaceInput&gt;</literal>
+          <literal>&lt;r:inplaceInput&gt;</literal>
         </title>
-        <table id="tabl-richinplaceInput-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="inplaceInput-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -6580,11 +6571,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richinputNumberSlider">
+      <section id="__literal_lt_r_inputnumberslider_gt_literal">
         <title>
-          <literal>&lt;rich:inputNumberSlider&gt;</literal>
+          <literal>&lt;r:inputNumberSlider&gt;</literal>
         </title>
-        <table id="tabl-richinputNumberSlider-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="inputNumberSlider-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -7114,11 +7105,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richinputNumberSpinner">
+      <section id="__literal_lt_r_inputnumberspinner_gt_literal">
         <title>
-          <literal>&lt;rich:inputNumberSpinner&gt;</literal>
+          <literal>&lt;r:inputNumberSpinner&gt;</literal>
         </title>
-        <table id="tabl-richinputNumberSpinner-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="inputNumberSpinner-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -7329,13 +7320,13 @@ private String skin;</programlisting>
         </table>
       </section>
     </section>
-    <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-Rich_selects">
+    <section id="_rich_selects">
       <title>Rich selects</title>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richinplaceSelect">
+      <section id="__literal_lt_r_inplaceselect_gt_literal">
         <title>
-          <literal>&lt;rich:inplaceSelect&gt;</literal>
+          <literal>&lt;r:inplaceSelect&gt;</literal>
         </title>
-        <table id="tabl-richinplaceSelect-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="inplaceSelect-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -7894,11 +7885,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richselect">
+      <section id="__literal_lt_r_select_gt_literal">
         <title>
-          <literal>&lt;rich:select&gt;</literal>
+          <literal>&lt;r:select&gt;</literal>
         </title>
-        <table id="tabl-richselect-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="select-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -8266,11 +8257,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richorderingList">
+      <section id="__literal_lt_r_orderinglist_gt_literal">
         <title>
-          <literal>&lt;rich:orderingList&gt;</literal>
+          <literal>&lt;r:orderingList&gt;</literal>
         </title>
-        <table id="tabl-richorderingList-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="orderingList-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -8712,11 +8703,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richspickList">
+      <section id="__literal_lt_r_picklist_gt_literal">
         <title>
-          <literal>&lt;rich:pickList&gt;</literal>
+          <literal>&lt;r:pickList&gt;</literal>
         </title>
-        <table id="tabl-richpickList-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="pickList-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -9138,13 +9129,13 @@ private String skin;</programlisting>
         </table>
       </section>
     </section>
-    <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-Panels_and_containers">
+    <section id="_panels_and_containers">
       <title>Panels and containers</title>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richpanel">
+      <section id="__literal_lt_r_panel_gt_literal">
         <title>
-          <literal>&lt;rich:panel&gt;</literal>
+          <literal>&lt;r:panel&gt;</literal>
         </title>
-        <table id="tabl-richpanel-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="panel-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -9340,11 +9331,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richaccordion">
+      <section id="__literal_lt_r_accordion_gt_literal">
         <title>
-          <literal>&lt;rich:accordion&gt;</literal>
+          <literal>&lt;r:accordion&gt;</literal>
         </title>
-        <table id="tabl-richaccordion-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="accordion-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -9759,11 +9750,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richcollapsiblePanel">
+      <section id="__literal_lt_r_collapsiblepanel_gt_literal">
         <title>
-          <literal>&lt;rich:collapsiblePanel&gt;</literal>
+          <literal>&lt;r:collapsiblePanel&gt;</literal>
         </title>
-        <table id="tabl-richcollapsiblePanel-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="collapsiblePanel-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -10112,11 +10103,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richpopupPanel">
+      <section id="__literal_lt_r_popuppanel_gt_literal">
         <title>
-          <literal>&lt;rich:popupPanel&gt;</literal>
+          <literal>&lt;r:popupPanel&gt;</literal>
         </title>
-        <table id="tabl-richpopupPanel-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="popupPanel-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -10456,11 +10447,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richtabPanel">
+      <section id="__literal_lt_r_tabpanel_gt_literal">
         <title>
-          <literal>&lt;rich:tabPanel&gt;</literal>
+          <literal>&lt;r:tabPanel&gt;</literal>
         </title>
-        <table id="tabl-richtabPanel-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="tabPanel-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -10998,13 +10989,13 @@ private String skin;</programlisting>
         </table>
       </section>
     </section>
-    <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-Tables_and_grids">
+    <section id="_tables_and_grids">
       <title>Tables and grids</title>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richdataTable">
+      <section id="__literal_lt_r_datatable_gt_literal">
         <title>
-          <literal>&lt;rich:dataTable&gt;</literal>
+          <literal>&lt;r:dataTable&gt;</literal>
         </title>
-        <table id="tabl-richdataTable-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="dataTable-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -11805,11 +11796,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richcollapsibleSubTable">
+      <section id="__literal_lt_r_collapsiblesubtable_gt_literal">
         <title>
-          <literal>&lt;rich:collapsibleSubTable&gt;</literal>
+          <literal>&lt;r:collapsibleSubTable&gt;</literal>
         </title>
-        <table id="tabl-richcollapsibleSubTable-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="collapsibleSubTable-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -12565,11 +12556,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richcollapsibleSubTableToggler">
+      <section id="__literal_lt_r_collapsiblesubtabletoggler_gt_literal">
         <title>
-          <literal>&lt;rich:collapsibleSubTableToggler&gt;</literal>
+          <literal>&lt;r:collapsibleSubTableToggler&gt;</literal>
         </title>
-        <variablelist id="vlst-richcollapsibleSubTableToggler-Style_classes">
+        <variablelist id="collapsibleSubTableToggler-Style_classes">
           <title>Style classes (selectors)</title>
           <varlistentry>
             <term>
@@ -12597,11 +12588,11 @@ private String skin;</programlisting>
           </varlistentry>
         </variablelist>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richextendedDataTable">
+      <section id="__literal_lt_r_extendeddatatable_gt_literal">
         <title>
-          <literal>&lt;rich:extendedDataTable&gt;</literal>
+          <literal>&lt;r:extendedDataTable&gt;</literal>
         </title>
-        <table id="tabl-richextendedDataTable-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="extendedDataTable-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -13405,11 +13396,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richdataGrid">
+      <section id="__literal_lt_r_datagrid_gt_literal">
         <title>
-          <literal>&lt;rich:dataGrid&gt;</literal>
+          <literal>&lt;r:dataGrid&gt;</literal>
         </title>
-        <table id="tabl-richdataGrid-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="dataGrid-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -13982,11 +13973,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richlist">
+      <section id="__literal_lt_r_list_gt_literal">
         <title>
-          <literal>&lt;rich:list&gt;</literal>
+          <literal>&lt;r:list&gt;</literal>
         </title>
-        <table id="tabl-richlist-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="list-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -14228,11 +14219,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richdataScroller">
+      <section id="__literal_lt_r_datascroller_gt_literal">
         <title>
-          <literal>&lt;rich:dataScroller&gt;</literal>
+          <literal>&lt;r:dataScroller&gt;</literal>
         </title>
-        <table id="tabl-richdataScroller-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="dataScroller-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -14721,13 +14712,13 @@ private String skin;</programlisting>
         </table>
       </section>
     </section>
-    <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-Trees">
+    <section id="_trees">
       <title>Trees</title>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richtree">
+      <section id="__literal_lt_r_tree_gt_literal">
         <title>
-          <literal>&lt;rich:tree&gt;</literal>
+          <literal>&lt;r:tree&gt;</literal>
         </title>
-        <variablelist id="vlst-richtree-Style_classes">
+        <variablelist id="tree-Style_classes">
           <title>Style classes (selectors)</title>
           <varlistentry>
             <term>
@@ -14763,11 +14754,11 @@ private String skin;</programlisting>
           </varlistentry>
         </variablelist>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richtreeNode">
+      <section id="__literal_lt_r_treenode_gt_literal">
         <title>
-          <literal>&lt;rich:treeNode&gt;</literal>
+          <literal>&lt;r:treeNode&gt;</literal>
         </title>
-        <table id="tabl-richtreeNode-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="treeNode-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -15120,13 +15111,13 @@ private String skin;</programlisting>
         </table>
       </section>
     </section>
-    <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-Menus_and_toolbars">
+    <section id="_menus_and_toolbars">
       <title>Menus and toolbars</title>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richdropDownMenu">
+      <section id="__literal_lt_r_dropdownmenu_gt_literal">
         <title>
-          <literal>&lt;rich:dropDownMenu&gt;</literal>
+          <literal>&lt;r:dropDownMenu&gt;</literal>
         </title>
-        <table id="tabl-richdropDownMenu-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="dropDownMenu-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -15625,11 +15616,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richcontextMenu">
+      <section id="__literal_lt_r_contextmenu_gt_literal">
         <title>
-          <literal>&lt;rich:contextMenu&gt;</literal>
+          <literal>&lt;r:contextMenu&gt;</literal>
         </title>
-        <table id="tabl-richcontextMenu-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="contextMenu-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -16128,11 +16119,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richpanelMenu">
+      <section id="__literal_lt_r_panelmenu_gt_literal">
         <title>
-          <literal>&lt;rich:panelMenu&gt;</literal>
+          <literal>&lt;r:panelMenu&gt;</literal>
         </title>
-        <table id="tabl-richpanelMenu-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="panelMenu-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -17197,11 +17188,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richtoolbar">
+      <section id="__literal_lt_r_toolbar_gt_literal">
         <title>
-          <literal>&lt;rich:toolbar&gt;</literal>
+          <literal>&lt;r:toolbar&gt;</literal>
         </title>
-        <table id="tabl-richtoolbar-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="toolbar-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -17394,13 +17385,13 @@ private String skin;</programlisting>
         </table>
       </section>
     </section>
-    <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-Output_and_messages">
+    <section id="_output_and_messages">
       <title>Output and messages</title>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richmessage">
+      <section id="__literal_lt_r_message_gt_literal">
         <title>
-          <literal>&lt;rich:message&gt;</literal>
+          <literal>&lt;r:message&gt;</literal>
         </title>
-        <table id="tabl-richmessage-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="message-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -17619,11 +17610,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richmessages">
+      <section id="__literal_lt_r_messages_gt_literal">
         <title>
-          <literal>&lt;rich:messages&gt;</literal>
+          <literal>&lt;r:messages&gt;</literal>
         </title>
-        <table id="tabl-richmessages-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="messages-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -17856,11 +17847,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richnotify">
+      <section id="__literal_lt_r_notify_gt_literal">
         <title>
-          <literal>&lt;rich:notify&gt;</literal>
+          <literal>&lt;r:notify&gt;</literal>
         </title>
-        <table id="tabl-richnotify-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="notify-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -18090,11 +18081,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richnotifyMessage">
+      <section id="__literal_lt_r_notifymessage_gt_literal">
         <title>
-          <literal>&lt;rich:notifyMessage&gt;</literal>
+          <literal>&lt;r:notifyMessage&gt;</literal>
         </title>
-        <table id="tabl-richnotifyMessage-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="notifyMessage-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -18214,11 +18205,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richnotifyStack">
+      <section id="__literal_lt_r_notifystack_gt_literal">
         <title>
-          <literal>&lt;rich:notifyStack&gt;</literal>
+          <literal>&lt;r:notifyStack&gt;</literal>
         </title>
-        <table id="tabl-richnotifyStack-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="notifyStack-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -18312,11 +18303,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richprogressBar">
+      <section id="__literal_lt_r_progressbar_gt_literal">
         <title>
-          <literal>&lt;rich:progressBar&gt;</literal>
+          <literal>&lt;r:progressBar&gt;</literal>
         </title>
-        <table id="tabl-richprogressBar-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="progressBar-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -18461,11 +18452,11 @@ private String skin;</programlisting>
           </tgroup>
         </table>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richtooltip">
+      <section id="__literal_lt_r_tooltip_gt_literal">
         <title>
-          <literal>&lt;rich:tooltip&gt;</literal>
+          <literal>&lt;r:tooltip&gt;</literal>
         </title>
-        <table id="tabl-richtooltip-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
+        <table id="tooltip-Style_classes_and_corresponding_skin_parameters" frame="all" rowsep="1" colsep="1">
           <title>Style classes (selectors) and corresponding skin parameters</title>
           <tgroup cols="3">
             <colspec colname="col_1" colwidth="33*"/>
@@ -18597,13 +18588,13 @@ private String skin;</programlisting>
         </table>
       </section>
     </section>
-    <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-Drag_and_drop">
+    <section id="_drag_and_drop">
       <title>Drag and drop</title>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richdropTarget">
+      <section id="__literal_lt_r_droptarget_gt_literal">
         <title>
-          <literal>&lt;rich:dropTarget&gt;</literal>
+          <literal>&lt;r:dropTarget&gt;</literal>
         </title>
-        <variablelist id="vlst-richdropTarget-Style_classes">
+        <variablelist id="dropTarget-Style_classes">
           <title>Style classes (selectors)</title>
           <varlistentry>
             <term>
@@ -18623,11 +18614,11 @@ private String skin;</programlisting>
           </varlistentry>
         </variablelist>
       </section>
-      <section id="sect-Developer_Guide-Style_classes_and_skin_parameters-richdragIndicator">
+      <section id="__literal_lt_r_dragindicator_gt_literal">
         <title>
-          <literal>&lt;rich:dragIndicator&gt;</literal>
+          <literal>&lt;r:dragIndicator&gt;</literal>
         </title>
-        <variablelist id="vlst-richdragIndicator-Style_classes">
+        <variablelist id="dragIndicator-Style_classes">
           <title>Style classes (selectors)</title>
           <varlistentry>
             <term>
@@ -18677,11 +18668,11 @@ private String skin;</programlisting>
       </section>
       <section id="appe-Developer_Guide-Migration_Notes-4_3_0-NotifyMessage_Sting_Escaping">
         <title>NotifyMessage string escaping</title>
-        <simpara>Prior to version 4.3.0.Final, the message summary and details of the <literal><phrase role="sgmltag">&lt;rich:notifyMessage&gt;</phrase></literal> and <literal><phrase role="sgmltag">&lt;rich:notifyMessages&gt;</phrase></literal> components were not escaped. In the 4.3.0.Final release, an attribute <literal><phrase role="varname">escape</phrase></literal> was added with a default value true.</simpara>
+        <simpara>Prior to version 4.3.0.Final, the message summary and details of the <literal><phrase role="sgmltag">&lt;r:notifyMessage&gt;</phrase></literal> and <literal><phrase role="sgmltag">&lt;r:notifyMessages&gt;</phrase></literal> components were not escaped. In the 4.3.0.Final release, an attribute <literal><phrase role="varname">escape</phrase></literal> was added with a default value true.</simpara>
       </section>
       <section id="appe-Developer_Guide-Migration_Notes-4_3_0-Select_Input_Validation">
         <title>Select input validation</title>
-        <simpara>The <literal><phrase role="sgmltag">&lt;rich:select&gt;</phrase></literal> now validates that manually entered input values match one of the values of the provided list (including support for client-side validation).</simpara>
+        <simpara>The <literal><phrase role="sgmltag">&lt;r:select&gt;</phrase></literal> now validates that manually entered input values match one of the values of the provided list (including support for client-side validation).</simpara>
       </section>
     </section>
   </appendix>
