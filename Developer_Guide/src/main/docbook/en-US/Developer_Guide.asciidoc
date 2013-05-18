@@ -126,28 +126,28 @@ Download RichFaces from the JBoss RichFaces Downloads area at http://www.jboss.o
 
 . *Unzip the archive*
 +
-Create a new directory named [filename]+RichFaces+, then unzip the archive that contains the binaries in that new directory.
+Create a new directory named [filename]+RichFaces+, then unzip the archive that contains the binaries into this new directory.
 
 [[sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_JBoss_Tools]]
 
 === Creating a project with [productname]#JBoss Tools#
 
-Follow the procedure in this section to create a new RichFaces application with [productname]#JBoss Tools# Ensure you are using the latest version of [productname]#JBoss Tools#.
+Follow the procedure in this section to create a new RichFaces application with [productname]#JBoss Tools#.  Ensure you are using the latest version of [productname]#JBoss Tools# to take advantage of the latest feautures and stability improvements.
 
 . *Create a new project*
 +
-Create a new project based on the JSF 2 environment using the RichFaces 4 template. In [productname]#JBoss Tools#, select FileNewJSF Projectfrom the menu. Name the project, select [guilabel]#JSF 2# from the [guilabel]#JSF Environment# drop-down box, and click the [guibutton]#Finish# button to create the project.
+Create a new project based on the JSF 2 environment using the RichFaces 4 template. In [productname]#JBoss Tools#, select File>>>"New JSF Project" from the menu. Name the project, select [guilabel]#JSF 2# from the [guilabel]#JSF Environment# drop-down box, and click the [guibutton]#Finish# button to create the project.
 +
 If necessary, update the JSF 2 JAR files to the latest versions.
 +
 . *Add the RichFaces libraries to the project*
 +
 [[step-Developer_Guide-Creating_a_project-Add_the_RichFaces_libraries_to_the_project]]
-Add <<sect-Developer_Guide-Getting_started_with_RichFaces-Technical_Requirements-Project_libraries_and_dependencies,RichFaces libraries and their mandatory dependencies>> to the project. Copy them from the location where you unzipped the RichFaces archive to the [filename]+WebContent/WEB-INF/lib/+ directory of your project in [application]#JBoss Tools#.
+Add the <<sect-Developer_Guide-Getting_started_with_RichFaces-Technical_Requirements-Project_libraries_and_dependencies,RichFaces libraries and their mandatory dependencies>> to the project. Copy them from the location where you unzipped the RichFaces archive to the [filename]+WebContent/WEB-INF/lib/+ directory of your project in [application]#JBoss Tools#.
 +
 . *Reference the tag library*
 +
-The RichFaces tag library need to be referenced on each XHTML page in your project:
+The RichFaces tag library must be referenced on each XHTML page in your project:
 +
 [source, XML]
 ----
@@ -157,7 +157,7 @@ The RichFaces tag library need to be referenced on each XHTML page in your proje
 
 ----
 
-You are now ready to begin constructing your RichFaces applications. RichFaces components can be dragged and dropped into your application's XHTML pages from the RichFaces palette in [productname]#JBoss Tools#. 
+You are now ready to begin developing your RichFaces application. RichFaces components can be dragged and dropped from the [productname]#JBoss Tools# RichFaces palette into your application's XHTML pages.
 
 [[sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_Maven]]
 
@@ -179,68 +179,11 @@ Once [productname]#Maven# has been installed, no further configuration is requir
 
 A Maven archetype is a template for creating projects. [productname]#Maven# uses an archetype to generate a directory structure and files for a particular project, as well as creating [filename]+pom.xml+ files that contain build instructions.
 
-The RichFaces Component Development Kit includes a Maven archetype named [filename]+richfaces-archetype-simpleapp+ for generating the basic structure and requirements for a RichFaces application project. Maven can obtain the archetype from the JBoss repository at https://repository.jboss.org/nexus/content/groups/public/. The archetype is also included with the RichFaces source code in the [filename]+archetypes+ directory. Follow the procedure in this section to generate a new Maven-based RichFaces project using the archetype.
-
-. *Add required repository*
-+
-The details for the JBoss repository need to be added to [productname]#Maven# so it can access the archetype. Add a profile in the [filename]+$$maven_installation_folder/conf/settings.xml$$+ file under the [sgmltag]+<profiles>+ element:
-+
-[source, XML]
-----
-<profiles>
-    ...
-    <profile>
-        <id>jboss-public-repository</id>
-        <repositories>
-            <repository>
-                <id>jboss-public-repository-group</id>
-                <name>JBoss Public Maven Repository Group</name>
-                <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-                <layout>default</layout>
-                <releases>
-                    <enabled>true</enabled>
-                    <updatePolicy>never</updatePolicy>
-                </releases>
-                <snapshots>
-                    <enabled>true</enabled>
-                    <updatePolicy>never</updatePolicy>
-                </snapshots>
-            </repository>
-        </repositories>
-        <pluginRepositories>
-            <pluginRepository>
-                <id>jboss-public-repository-group</id>
-                <name>JBoss Public Maven Repository Group</name>
-                <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-                <layout>default</layout>
-                <releases>
-                    <enabled>true</enabled>
-                    <updatePolicy>never</updatePolicy>
-                </releases>
-                <snapshots>
-                    <enabled>true</enabled>
-                    <updatePolicy>never</updatePolicy>
-                </snapshots>
-            </pluginRepository>
-        </pluginRepositories>
-    </profile>
-</profiles>
-----
-+
-The profile then needs to be activated in the [sgmltag]+<activeProfiles>+ element:
-+
-[source, XML]
-----
-<activeProfiles>
-   <activeProfile>jboss-public-repository</activeProfile>
-</activeProfiles>
-----
-+
-For further details, refer to the *_JBoss RichFaces Wiki_* .
+The RichFaces distribution includes a Maven archetype named [filename]+richfaces-archetype-simpleapp+ for generating the basic structure and requirements of a RichFaces application project. Maven can obtain the archetype from maven central at http://search.maven.org. The archetype is also included with the RichFaces distribution in the [filename]+archetypes+ directory. Follow the procedure in this section to generate a new Maven-based RichFaces project using the archetype.
 
 . Generate the project from the archetype
 +
-The project can now be generated with the [filename]+richfaces-archetype-simpleapp+ archetype. Create a new directory for your project, then run the following Maven command in the directory:
+The project can be generated with the [filename]+richfaces-archetype-simpleapp+ archetype. Create a new directory for your project, then run the following Maven command in the directory:
 +
 ----
 mvn archetype:generate -DarchetypeGroupId=org.richfaces.archetypes -DarchetypeArtifactId=richfaces-archetype-simpleapp -DarchetypeVersion=5.0.0-SNAPSHOT -DgroupId=org.docs.richfaces -DartifactId=new_project
@@ -255,27 +198,27 @@ The command generates a new RichFaces project with the following structure:
 +
 ----
 new_project
-	├── pom.xml
-	├── readme.txt
-	└── src
-		└── main
-		    ├── java
-		    │   └── org
-		    │       └── docs
-		    │           └── richfaces
-		    │               └── RichBean.java
-		    └── webapp
-		        ├── index.xhtml
-		        ├── templates
-		        │   └── template.xhtml
-		        └── WEB-INF
-		            ├── faces-config.xml
-		            └── web.xml
+├── pom.xml
+├── readme.txt
+└── src
+    └── main
+        ├── java
+        │   └── org
+        │       └── docs
+        │           └── richfaces
+        │               └── RichBean.java
+        └── webapp
+            ├── index.xhtml
+            ├── templates
+            │   └── template.xhtml
+            └── WEB-INF
+                ├── faces-config.xml
+                └── web.xml
 ----
 
 . *Add test dependencies (optional)*
 +
-Your root directory of your project contains a project descriptor file, [filename]+pom.xml+. If you wish to include modules for test-driven JSF development, add any dependencies for the tests to the [filename]+pom.xml+ file.
+Your root directory of your project contains a project descriptor file: [filename]+pom.xml+. If you wish to include modules for test-driven JSF development, add any dependencies for the tests to the [filename]+pom.xml+ file.
 +
 For testing the server-side part of your application, check out [productname]#link:$$http://www.jboss.org/arquillian$$[JBoss Arquillian project]#.
 +
@@ -283,13 +226,13 @@ If you want to test JSF from client's perspective with ability to access state o
 +
 For automation of client-side tests in real-browser, you may want to employ [productname]#link:$$http://community.jboss.org/wiki/ArquillianGraphene$$[Arquillian Graphene]# and [productname]#link:$$https://docs.jboss.org/author/display/ARQ/Drone$$[Arquillian Drone]# extensions.
 +
-For mocking JSF environment, there is set of tools in RichFaces [productname]#jsf-test# project. For full details on how to use the [productname]#jsf-test# project, refer to article link:$$http://community.jboss.org/docs/DOC-13155$$[Test Driven JSF Development].
+For mocking JSF environment, there is set of tools in the RichFaces [productname]#jsf-test# project. For full details on how to use the [productname]#jsf-test# project, refer to article link:$$http://community.jboss.org/docs/DOC-13155$$[Test Driven JSF Development].
 
 . *Build the project*
 +
 Build the project from the command line by entering the _mvn install_ command.
 +
-The BUILD SUCCESSFULmessage indicates the project has been assembled and is ready to import into an IDE (integrated development environment), such as [productname]#JBoss Tools#.
+The *BUILD SUCCESSFUL* message indicates the project has been assembled and is ready to import into an IDE (integrated development environment), such as [productname]#JBoss Tools#.
 
 . *Import the project into an IDE*
 +
