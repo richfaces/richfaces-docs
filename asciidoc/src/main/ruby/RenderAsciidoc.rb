@@ -19,7 +19,8 @@ def render_asciidoc(source, target, backend)
             'numbered' => '',
             'docinfo' => '',
             'backend' => backend,
-            'doctype' => 'book'
+            'doctype' => 'book',
+            'experimental' => ''
         }
     )
 end
