@@ -5,7 +5,7 @@
 <book lang="en">
   <bookinfo>
     <title>Component Reference</title>
-    <date>2013-05-29</date>
+    <date>2013-05-31</date>
     <subtitle>A reference guide to the components of the RichFaces 4 framework</subtitle>
     <productname class="trade">RichFaces</productname>
     <productnumber>5.0.0-SNAPSHOT</productnumber>
@@ -128,64 +128,19 @@
         </simpara>
         <itemizedlist>
           <listitem>
-            <simpara>Available at <ulink url="http://docs.jboss.org/richfaces/latest_4_0_X/vdldoc/">http://docs.jboss.org/richfaces/latest_4_0_X/vdldoc/</ulink></simpara>
+            <simpara>Available at <ulink url="http://docs.jboss.org/richfaces/latest_5_0_X/vdldoc/">http://docs.jboss.org/richfaces/latest_5_0_X/vdldoc/</ulink></simpara>
           </listitem>
         </itemizedlist>
       </listitem>
       <listitem>
         <simpara>
           <emphasis role="strong">
-            <emphasis>API (Application Programming Interface) Documentation</emphasis>
+            <emphasis>Javadoc</emphasis>
           </emphasis>
         </simpara>
         <itemizedlist>
           <listitem>
-            <simpara>
-              <emphasis role="strong">
-                <emphasis>RichFaces Components API</emphasis>
-              </emphasis>
-            </simpara>
-            <itemizedlist>
-              <listitem>
-                <simpara>Available at <ulink url="http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-api/">http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-api/</ulink></simpara>
-              </listitem>
-            </itemizedlist>
-          </listitem>
-          <listitem>
-            <simpara>
-              <emphasis role="strong">
-                <emphasis>RichFaces Components UI</emphasis>
-              </emphasis>
-            </simpara>
-            <itemizedlist>
-              <listitem>
-                <simpara>Available at <ulink url="http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-ui/">http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-components-ui/</ulink></simpara>
-              </listitem>
-            </itemizedlist>
-          </listitem>
-          <listitem>
-            <simpara>
-              <emphasis role="strong">
-                <emphasis>RichFaces Core API</emphasis>
-              </emphasis>
-            </simpara>
-            <itemizedlist>
-              <listitem>
-                <simpara>Available at <ulink url="http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-core-api/">http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-core-api/</ulink></simpara>
-              </listitem>
-            </itemizedlist>
-          </listitem>
-          <listitem>
-            <simpara>
-              <emphasis role="strong">
-                <emphasis>RichFaces Core Implementation</emphasis>
-              </emphasis>
-            </simpara>
-            <itemizedlist>
-              <listitem>
-                <simpara>Available at <ulink url="http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-core-impl/">http://docs.jboss.org/richfaces/latest_4_0_X/javadoc/richfaces-core-impl/</ulink></simpara>
-              </listitem>
-            </itemizedlist>
+            <simpara>Available at <ulink url="http://docs.jboss.org/richfaces/latest_5_0_X/javadoc/">http://docs.jboss.org/richfaces/latest_5_0_X/javadoc/</ulink></simpara>
           </listitem>
         </itemizedlist>
       </listitem>
@@ -831,11 +786,15 @@ jQuery(document).ready(function() {
           <section id="sect-Component_Reference-push-Installing_runtime_dependencies">
             <title>Installing runtime dependencies</title>
             <simpara>The <literal><phrase role="sgmltag">&lt;r:push&gt;</phrase></literal> uses an Atmosphere framework for transporting messages. In order to use the Atmosphere on the server-side, it is necessary to add Atmosphere libraries into a project.</simpara>
-            <simpara>In a Maven-based project, you should add <literal><phrase role="code">atmosphere-runtime</phrase></literal> as a runtime dependency (its version is managed by <literal><phrase role="code">richfaces-bom</phrase></literal> that your project should be importing, check "RichFaces Developer Guide" for details of starting with Maven-based project):</simpara>
-            <programlisting language="XML" linenumbering="unnumbered">&lt;dependency&gt;
-    &lt;groupId&gt;org.atmosphere&lt;/groupId&gt;
-    &lt;artifactId&gt;atmosphere-runtime&lt;/artifactId&gt;
+            <simpara>In a Maven-based project, you should add <literal><phrase role="code">richfaces-push-depchain</phrase></literal> as a runtime dependency:</simpara>
+            <programlisting language="XML" linenumbering="unnumbered"> &lt;dependency&gt;
+    &lt;groupId&gt;org.richfaces&lt;/groupId&gt;
+    &lt;artifactId&gt;richfaces-push-depchain&lt;/artifactId&gt;
+    &lt;type&gt;pom&lt;/type&gt;
+    &lt;version&gt;5.0.0-SNAPSHOT&lt;/version&gt;
+    &lt;scope&gt;runtime&lt;/scope&gt;
 &lt;/dependency&gt;</programlisting>
+            <simpara>By declarating a dependency chain, all the required runtime dependencies such as <literal><phrase role="code">atmosphere-runtime</phrase></literal> will be added transitively to your project.</simpara>
             <simpara>For non-Maven-based projects, it is necessary to add dependencies manually - check "RichFaces Developer Guide", section "Project libraries and dependencies" for details.</simpara>
           </section>
           <section id="sect-Component_Reference-push-Registering_Push_servlet">
@@ -846,7 +805,7 @@ jQuery(document).ready(function() {
             <programlisting language="XML" linenumbering="unnumbered">&lt;!-- Push Servlet - listens for user sessions --&gt;
 &lt;servlet&gt;
     &lt;servlet-name&gt;Push Servlet&lt;/servlet-name&gt;
-    &lt;servlet-class&gt;org.richfaces.webapp.PushServlet&lt;/servlet-class&gt;
+    &lt;servlet-class&gt;org.richfaces.servlet.PushServlet&lt;/servlet-class&gt;
     &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
 &lt;/servlet&gt;
 &lt;servlet-mapping&gt;
@@ -865,7 +824,7 @@ jQuery(document).ready(function() {
               <simpara>However, be sure to setup the Push servlet to support asynchronous requests - modify the servlet registration from the previous <literal><phrase role="code">web.xml</phrase></literal> snippet as follows:</simpara>
               <programlisting language="XML" linenumbering="unnumbered">&lt;servlet&gt;
     &lt;servlet-name&gt;Push Servlet&lt;/servlet-name&gt;
-    &lt;servlet-class&gt;org.richfaces.webapp.PushServlet&lt;/servlet-class&gt;
+    &lt;servlet-class&gt;org.richfaces.servlet.PushServlet&lt;/servlet-class&gt;
     &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
     &lt;async-supported&gt;true&lt;/async-supported&gt;
 &lt;/servlet&gt;</programlisting>
@@ -7647,7 +7606,7 @@ public class UserBean implements Cloneable {
     &lt;f.selectItem itemValue="2" itemLabel="Item 2" /&gt;
     &lt;f.selectItem itemValue="3" itemLabel="Item 3" /&gt;
     &lt;f.selectItem itemValue="4" itemLabel="Item 4" /&gt;
-&lt;/r:comboBox&gt;
+&lt;/r:inplaceSelect&gt;
 </programlisting>
           </example>
         </section>

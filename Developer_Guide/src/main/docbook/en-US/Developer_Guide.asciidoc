@@ -52,8 +52,8 @@ Note that these dependencies may further depend on their own runtime dependencie
 
 .Mandatory third-party dependencies
 * Java Server Faces 2.x implementation
-** [filename]+javax.faces.jar+ (version [code]+2.1.5+ or higher)
-** or [filename]+myfaces-impl.jar+ (version [code]+2.1.5+ or higher)
+** [filename]+javax.faces.jar+ (version [code]+2.1.19+ or higher)
+** or [filename]+myfaces-impl.jar+ (version [code]+2.1.10+ or higher)
 
 * Google Guava
 ** [filename]+guava.jar+ (version [code]+13.0.1+)
@@ -102,7 +102,7 @@ This does not apply to dependencies on the Servlet API: the JSP API and the EL A
 
 RichFaces applications can be developed using a range of tools, including integrated development environments ([acronym]++IDE++s). This chapter covers only two such environments in detail:
 
-* [productname]#JBoss Tools#, as described in <<sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_JBoss_Tools>>.
+* [productname]#JBoss Developer Studio#, as described in <<sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_JBoss_Tools>>.
 * [productname]#Maven#, as described in <<sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_Maven>>.
 
 
@@ -130,20 +130,20 @@ Create a new directory named [filename]+RichFaces+, then unzip the archive that 
 
 [[sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_JBoss_Tools]]
 
-=== Creating a project with [productname]#JBoss Tools#
+=== Creating a project with [productname]#JBoss Developer Studio#
 
-Follow the procedure in this section to create a new RichFaces application with [productname]#JBoss Tools#.  Ensure you are using the latest version of [productname]#JBoss Tools# to take advantage of the latest feautures and stability improvements.
+Follow the procedure in this section to create a new RichFaces application with [productname]#JBoss Developer Studio#.  Ensure you are using the latest version of [productname]#JBoss Developer Studio# to take advantage of the latest feautures and stability improvements.
 
 . *Create a new project*
 +
-Create a new project based on the JSF 2 environment using the RichFaces 4 template. In [productname]#JBoss Tools#, select menu:File[New JSF Project] from the menu. Name the project, select [guilabel]#JSF 2# from the [guilabel]#JSF Environment# drop-down box, and click the [guibutton]#Finish# button to create the project.
+Create a new project based on the JSF 2 environment using the RichFaces 5 template. In [productname]#JBoss Developer Studio#, select menu:File[New JSF Project] from the menu. Name the project, select [guilabel]#JSF 2# from the [guilabel]#JSF Environment# drop-down box, and click the [guibutton]#Finish# button to create the project.
 +
 If necessary, update the JSF 2 JAR files to the latest versions.
 +
 . *Add the RichFaces libraries to the project*
 +
 [[step-Developer_Guide-Creating_a_project-Add_the_RichFaces_libraries_to_the_project]]
-Add the <<sect-Developer_Guide-Getting_started_with_RichFaces-Technical_Requirements-Project_libraries_and_dependencies,RichFaces libraries and their mandatory dependencies>> to the project. Copy them from the location where you unzipped the RichFaces archive to the [filename]+WebContent/WEB-INF/lib/+ directory of your project in [application]#JBoss Tools#.
+Add the <<sect-Developer_Guide-Getting_started_with_RichFaces-Technical_Requirements-Project_libraries_and_dependencies,RichFaces libraries and their mandatory dependencies>> to the project. Copy them from the location where you unzipped the RichFaces archive to the [filename]+WebContent/WEB-INF/lib/+ directory of your project in [application]#JBoss Developer Studio#.
 +
 . *Reference the tag library*
 +
@@ -157,7 +157,7 @@ The RichFaces tag library must be referenced on each XHTML page in your project:
 
 ----
 
-You are now ready to begin developing your RichFaces application. RichFaces components can be dragged and dropped from the [productname]#JBoss Tools# RichFaces palette into your application's XHTML pages.
+You are now ready to begin developing your RichFaces application. RichFaces components can be dragged and dropped from the [productname]#JBoss Developer Studio# RichFaces palette into your application's XHTML pages.
 
 [[sect-Developer_Guide-Getting_started_with_RichFaces-Creating_a_project_with_Maven]]
 
@@ -169,7 +169,7 @@ You are now ready to begin developing your RichFaces application. RichFaces comp
 
 ==== Setting up [productname]#Maven#
 
-[productname]#Maven# can be downloaded and installed from Apache's website at http://maven.apache.org/download.html. Due to the use of dependency importing, [productname]#Maven# version 3.0.3 or above is required.
+[productname]#Maven# can be downloaded and installed from Apache's website at http://maven.apache.org/download.html. Due to the use of dependency importing, [productname]#Maven# version 3.0.4 or above is required.
 
 Once [productname]#Maven# has been installed, no further configuration is required to begin building Maven projects.
 
@@ -222,27 +222,25 @@ Your root directory of your project contains a project descriptor file: [filenam
 +
 For testing the server-side part of your application, check out [productname]#link:$$http://www.jboss.org/arquillian$$[JBoss Arquillian project]#.
 +
-If you want to test JSF from client's perspective with ability to access state of JSF internals, use [productname]#link:$$http://www.jboss.org/jsfunit$$[JBoss JSFUnit project]# (with Arquillian integration).
+If you want to test JSF from client's perspective with ability to access state of JSF internals, use [productname]#link:$$https://github.com/arquillian/arquillian-extension-warp/blob/master/README.md$$[Arquillian Warp]#.
 +
 For automation of client-side tests in real-browser, you may want to employ [productname]#link:$$http://community.jboss.org/wiki/ArquillianGraphene$$[Arquillian Graphene]# and [productname]#link:$$https://docs.jboss.org/author/display/ARQ/Drone$$[Arquillian Drone]# extensions.
-+
-For mocking JSF environment, there is set of tools in the RichFaces [productname]#jsf-test# project. For full details on how to use the [productname]#jsf-test# project, refer to article link:$$http://community.jboss.org/docs/DOC-13155$$[Test Driven JSF Development].
 
 . *Build the project*
 +
 Build the project from the command line by entering the _mvn install_ command.
 +
-The *BUILD SUCCESSFUL* message indicates the project has been assembled and is ready to import into an IDE (integrated development environment), such as [productname]#JBoss Tools#.
+The *BUILD SUCCESSFUL* message indicates the project has been assembled and is ready to import into an IDE (integrated development environment), such as [productname]#JBoss Developer Studio#.
 
 . *Import the project into an IDE*
 +
-To import the project into [productname]#Eclipse# and [productname]#JBoss Tools#, use the JBoss Maven Integration plug-ins. These plug-ins work with plug-ins from the M2Eclipse project to import Maven projects.
+To import the project into [productname]#Eclipse# and [productname]#JBoss Developer Studio#, use the JBoss Maven Integration plug-ins. These plug-ins work with plug-ins from the M2Eclipse project to import Maven projects.
 
 .. *Install the plug-ins*
 
 ... Choose menu:Help[Install New Software] from the Eclipse menu.
 
-... Select the JBoss Tools update site to use, then open the [guilabel]#Maven Support# group and select the [guilabel]#JBoss Maven Integration# and [guilabel]#JBoss Maven JSF Configurator# plug-ins.
+... Select the JBoss Developer Studio update site to use, then open the [guilabel]#Maven Support# group and select the [guilabel]#JBoss Maven Integration# and [guilabel]#JBoss Maven JSF Configurator# plug-ins.
 
 ... Follow the prompts to install the integration plug-ins. The installation will automatically include the transitive dependencies [guilabel]#Maven Integration for Eclipse# and [guilabel]#Maven Integration for WTP# . Both of these dependencies are from the M2Eclipse project.
 
@@ -273,7 +271,7 @@ RichFaces can be added to existing JSF 2 projects by adding the new RichFaces li
 [NOTE]
 .Application-level settings
 ====
-In RichFaces 4, it is not necessary to add any extra settings to the [filename]+web.xml+ or [filename]+config.xml+ settings files to use the framework.
+In RichFaces 5, it is not necessary to add any extra settings to the [filename]+web.xml+ or [filename]+config.xml+ settings files to use the framework.
 ====
 
 [[chap-Developer_Guide-RichFaces_overview]]
@@ -292,7 +290,7 @@ RichFaces has been developed with an open architecture to be compatible with a w
 
 ==== Server requirements
 
-RichFaces 4 requires either of the following server technologies:
+RichFaces 5 requires either of the following server technologies:
 
 * An application server compliant with Java Platform, Enterprise Edition 6 ([acronym]#JEE6# or [acronym]#JEE6#), such as [productname]#JBoss Application Server 7#.
 * A major servlet container, such as [productname]#Jetty 8# or [productname]#Apache Tomcat 7#.
@@ -317,13 +315,12 @@ Java Development Kit ([acronym]#JDK#):: RichFaces supports the following JDK ver
 JavaServer Faces ([acronym]#JSF#):: RichFaces supports the following JSF implementations and frameworks:
 +
 * [productname]#MyFaces 2.x#
-* [productname]#Seam 3.x#
 * [productname]#Mojara 2.x#
 
 Development environment:: RichFaces can be developed using most Java development environments.  The following are recommended, and used for examples in this guide:
 +
-* [productname]#JBoss Tools 3.3# and higher
-* [productname]#Maven 3.0.3# and higher
+* [productname]#JBoss Developer Studio 6.x# and higher
+* [productname]#Maven 3.0.4# and higher
 
 
 [[sect-Developer_Guide-RichFaces_overview-Architecture]]
@@ -377,7 +374,7 @@ The RichFaces Ajax Extensions plug in to the standard JSF 2 Ajax script facility
 
 === Technologies
 
-RichFaces 4 features full JSF 2 integration and uses standard web application technologies such as JavaScript, [acronym]#XML# (Extensible Markup Language), and [acronym]#XHTML# (Extensible Hypertext Markup Language).
+RichFaces 5 features full JSF 2 integration and uses standard web application technologies such as JavaScript, [acronym]#XML# (Extensible Markup Language), and [acronym]#XHTML# (Extensible Hypertext Markup Language).
 
 [[sect-Developer_Guide-RichFaces_overview-Differences_between_JSF_and_RichFaces_mechanisms]]
 
