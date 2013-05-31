@@ -635,16 +635,21 @@ Using the Push component requires configuration steps which depends on an enviro
 
 The [sgmltag]+<r:push>+ uses an Atmosphere framework for transporting messages. In order to use the Atmosphere on the server-side, it is necessary to add Atmosphere libraries into a project.
 
-In a Maven-based project, you should add [code]+atmosphere-runtime+ as a runtime dependency (its version is managed by [code]+richfaces-bom+ that your project should be importing, check "RichFaces Developer Guide" for details of starting with Maven-based project):
+In a Maven-based project, you should add [code]+richfaces-push-depchain+ as a runtime dependency:
 
 
 [source, XML]
 ----
-<dependency>
-    <groupId>org.atmosphere</groupId>
-    <artifactId>atmosphere-runtime</artifactId>
+ <dependency>
+    <groupId>org.richfaces</groupId>
+    <artifactId>richfaces-push-depchain</artifactId>
+    <type>pom</type>
+    <version>5.0.0-SNAPSHOT</version>
+    <scope>runtime</scope>
 </dependency>
 ----
+
+By declarating a dependency chain, all the required runtime dependencies such as [code]+atmosphere-runtime+ will be added transitively to your project.
 
 For non-Maven-based projects, it is necessary to add dependencies manually - check "RichFaces Developer Guide", section "Project libraries and dependencies" for details.
 
