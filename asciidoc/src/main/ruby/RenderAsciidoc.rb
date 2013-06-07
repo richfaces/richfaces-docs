@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-require_relative '../../../../asciidoc/asciidoctor/lib/asciidoctor'
+require 'asciidoctor'
 require 'erb'
 
 $template_dir = 'asciidoc/src/main/backend/slim/docbook45/'
