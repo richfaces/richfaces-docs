@@ -15,6 +15,7 @@ def render_asciidoc(source, target, backend)
         :header_footer => true,
         :compact => false,
         :attributes => {
+            'imagesdir' => 'images',
             'toc' => '',
             'numbered' => '',
             'docinfo' => '',
