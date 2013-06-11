@@ -2302,7 +2302,7 @@ The [parameter]+tabindex+ attribute specifies the position of the current elemen
 [NOTE]
 ====
 
-The [code]+ResourceServlet+  has to be registered for the [code]+url-pattern+[code]+/org.richfaces.resources/\*+  in order to serve the editor resources (JavaScript, CSS, images) correctly. Check the _RichFaces Developer's Guide_  for further details.
+The [code]+ResourceServlet+  has to be registered for the [code]+url-pattern+ [code]+/org.richfaces.resources/\*+  in order to serve the editor resources (JavaScript, CSS, images) correctly. Check the _RichFaces Developer's Guide_  for further details.
 
 ====
 
@@ -4166,8 +4166,8 @@ The [sgmltag]+<r:dataTable>+ component can be controlled through the JavaScript 
 [function]+expandAllSubTables()+:: Expand any sub-tables contained in the data table.
 [function]+collapseAllSubTables()+:: Collapse any sub-tables contained in the data table.
 [function]+switchSubTable(subtableId)+:: Switch the expanded or collapsed state of any sub-tables contained in the data table.
-[function]+filter(columnId, newFilterValue, \[isClearPreviousFilters\])+:: Filter the table based on the column specified with the [parameter]+columnId+ parameter. Use the [parameter]+newFilterValue+ parameter as the filter value. The optional [parameter]+isClearPreviousFilters+ parameter is a boolean value which, if set to +true+, will clear any previous filters applied to the table.
-[function]+sort(columnId, \[direction\], \[isClearPreviousSorting\])+:: Sort the table based on the column specified with the [parameter]+columnId+ parameter. The option [parameter]+direction+ parameter specifies whether to sort in ascending or descending order. The optional [parameter]+isClearPreviousSorting+ parameter is a boolean value which, if set to +true+, will clear any previous sorting applied to the table.
+[function]+filter(columnId, newFilterValue, [isClearPreviousFilters])+:: Filter the table based on the column specified with the [parameter]+columnId+ parameter. Use the [parameter]+newFilterValue+ parameter as the filter value. The optional [parameter]+isClearPreviousFilters+ parameter is a boolean value which, if set to +true+, will clear any previous filters applied to the table.
+[function]+sort(columnId, [direction], [isClearPreviousSorting])+:: Sort the table based on the column specified with the [parameter]+columnId+ parameter. The option [parameter]+direction+ parameter specifies whether to sort in ascending or descending order. The optional [parameter]+isClearPreviousSorting+ parameter is a boolean value which, if set to +true+, will clear any previous sorting applied to the table.
 [[sect-Component_Reference-dataTable-Reference_data]]
 
 ==== Reference data
@@ -4833,7 +4833,7 @@ The [sgmltag]+<r:extendedDataTable>+ component can be controlled through the Jav
 [function]+clearSorting()+:: Clear any sorting that is currently applied to the table.
 [function]+clearFiltering()+:: Clear any filtering that is currently applied to the table.
 [function]+selectRow(index)+:: Select the row specified by the [parameter]+index+ parameter.
-[function]+selectRows(\[startIndex, stopIndex\])+:: Select all the rows in the table. Optionally, select only those rows between the indexes specified with the [parameter]+startIndex+ and [parameter]+stopIndex+ parameters.
+[function]+selectRows([startIndex, stopIndex])+:: Select all the rows in the table. Optionally, select only those rows between the indexes specified with the [parameter]+startIndex+ and [parameter]+stopIndex+ parameters.
 [function]+deselectRow+:: Deselect the row that is currently selected.
 [function]+setActiveRow(index)+:: Set the active row to that specified by the [parameter]+index+ parameter.
 [[sect-Component_Reference-extendedDataTable-Reference_data]]
@@ -5580,7 +5580,7 @@ The mode for performing submissions when nodes are expanded or collapsed is dete
 +server+:: The [sgmltag]+<r:tree>+ component performs a common submission, completely refreshing the page.
 +client+:: The [sgmltag]+<r:tree>+ component updates on the client side through JavaScript, without any additional requests or updates. All nodes are rendered to the client during the initial page rendering.
 
-By default, tree nodes are expanded and collapsed through the [guibutton]#\+# and [guibutton]#-# controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the [varname]+toggleNodeEvent+ attribute.
+By default, tree nodes are expanded and collapsed through the [guibutton]#\+# and [guibutton]#-# controls. To expand or collapse a tree node using an action event such as a mouse click, specify the event with the [varname]++toggleNodeEvent++ attribute.
 
 [[sect-Component_Reference-tree-Selecting_tree_nodes]]
 
@@ -5686,7 +5686,7 @@ The example renders a simple tree of countries. Each country node expands to sho
 
 Refer to <<sect-Component_Reference-tree-Appearance>> for the [sgmltag]+<r:tree>+ component for details and examples on styling nodes and icons. Icon styling for individual [sgmltag]+<r:treeNode>+ components uses the same attributes as the parent [sgmltag]+<r:tree>+ component: [varname]+iconLeaf+, [varname]+iconExpanded+, and [varname]+iconCollapsed+. Icon-related attributes specified for child [sgmltag]+<r:treeNode>+ components overwrite any global icon attributes of the parent [sgmltag]+<r:tree>+ component.
 
-Use the [varname]+rendered+ attribute to determine whether the node should actually be rendered in the tree or not. Using the [varname]+rendered+ attribute in combination with the [sgmltag]+<r:treeNode>+[varname]+type+ attribute can allow further style differentiation between node content.
+Use the [varname]+rendered+ attribute to determine whether the node should actually be rendered in the tree or not. Using the [varname]+rendered+ attribute in combination with the [sgmltag]+<r:treeNode>+ [varname]+type+ attribute can allow further style differentiation between node content.
 
 [[sect-Component_Reference-treeNode-Interactivity]]
 
@@ -7507,37 +7507,37 @@ Any timed queries with the [varname]+timing+ attribute set to +domready+ may not
 
 == Functions
 
-Read this chapter for details on special functions for use with particular components. Using JavaServer Faces Expression Language ( [acronym]#JSF#[acronym]#EL#), these functions can be accessed through the [varname]+data+ attribute of components. Refer to <<sect-Component_Reference-Events_and_JavaScript_interactions-data>> for details on the [varname]+data+ attribute.
+Read this chapter for details on special functions for use with particular components. Using JavaServer Faces Expression Language ( [acronym]#JSF# [acronym]#EL#), these functions can be accessed through the [varname]+data+ attribute of components. Refer to <<sect-Component_Reference-Events_and_JavaScript_interactions-data>> for details on the [varname]+data+ attribute.
 
 [[sect-Component_Reference-Functions-clientId]]
 
 === [function]+r:clientId+
 
-The [function]`r:clientId('id')` function returns the client identifier related to the passed component identifier ( [code]`'id'`). If the specified component identifier is not found, +null+ is returned instead.
+The [function]+`r:clientId('id')`+ function returns the client identifier related to the passed component identifier ([code]+`'id'`+). If the specified component identifier is not found, +null+ is returned instead.
 
 [[sect-Component_Reference-Functions-component]]
 
 === [function]+r:component+
 
-The [function]`r:component('id')` function is equivalent to the [code]`RichFaces.$('clientId')` code. It returns the client object instance based on the passed server-side component identifier ( [code]`'id'`). If the specified component identifier is not found, +null+ is returned instead. The function can be used to get an object from a component to call a JavaScript API function without using the [sgmltag]+<r:componentControl>+ component.
+The [function]+`r:component('id')`+ function is equivalent to the [code]+`RichFaces.$('clientId')`+ code. It returns the client object instance based on the passed server-side component identifier ( [code]+`'id'`+). If the specified component identifier is not found, +null+ is returned instead. The function can be used to get an object from a component to call a JavaScript API function without using the [sgmltag]+<r:componentControl>+ component.
 
 [[sect-Component_Reference-Functions-element]]
 
 === [function]+r:element+
 
-The [function]`r:element('id')` function is a shortcut for the equivalent [code]`document.getElementById(#{r:clientId('id')})` code. It returns the element from the client, based on the passed server-side component identifier. If the specified component identifier is not found, +null+ is returned instead.
+The [function]+`r:element('id')`+ function is a shortcut for the equivalent [code]+`document.getElementById(#{r:clientId('id')})`+ code. It returns the element from the client, based on the passed server-side component identifier. If the specified component identifier is not found, +null+ is returned instead.
 
 [[sect-Component_Reference-Functions-jquery]]
 
 === [function]+r:jQuery+
 
-The [function]`r:jQuery('id')` function is a shortcut for the equivalent [code]`jQuery('##{r:clientId('id')})` code. It returns the jQuery object for the element located by the passed server-side component identifier. If the specified component identifier is not found, +null+ is returned instead.
+The [function]+`r:jQuery('id')`+ function is a shortcut for the equivalent [code]+`jQuery('##{r:clientId('id')})`+ code. It returns the jQuery object for the element located by the passed server-side component identifier. If the specified component identifier is not found, +null+ is returned instead.
 
 [[sect-Component_Reference-Functions-findComponent]]
 
 === [function]+r:findComponent+
 
-The [function]`r:findComponent('id')` function returns the a UIComponent instance of the passed component identifier. If the specified component identifier is not found, +null+ is returned instead.
+The [function]+`r:findComponent('id')`+ function returns the a UIComponent instance of the passed component identifier. If the specified component identifier is not found, +null+ is returned instead.
 
 [[exam-Component_Reference-findComponent-findComponent_example]]
 
