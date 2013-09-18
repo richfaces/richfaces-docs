@@ -6537,6 +6537,122 @@ Read this chapter for details on components that display messages and other feed
 
 [[sect-Component_Reference-Output_and_messages-message]]
 
+=== [sgmltag]+<r:chart>+
+
+The [sgmltag]+<r:chart>+ component allows the user to plot data and to create line, bar or pie charts. It might uses five children tags [sgmltag]+<r:series>+, [sgmltag]+<r:legend>+, [sgmltag]+<r:xaxis>+, [sgmltag]+<r:yaxis>+ and [sgmltag]+<r:point>+. Each of them customizes a part of chart. All of them are optional except at least one [sgmltag]+<r:series>+ tag is required. It allows to handle fired events using client-side JavaScript or server-side listener.
+
+[[sect-Component_Reference-chart-Basic_usage]]
+
+==== Basic usage
+
+The [sgmltag]+<r:chart>+ tag encapsulate children tags which customizes the chart. The chart type is selected by [sgmltag]+<r:series>+ attribute. The chart has many attributes which can customize its look all of them are optional. Only requirements to use the [sgmltag]+<r:chart>+ are selection of chart type and pass at least one series of data - explained below.
+
+
+[[exam-Component_Reference-chart_example]]
+
+.r:chart example
+====
+
+[source, XML]
+----
+<r:chart id="barChart" title="Countries by vehicles per capita">
+   <r:series type="bar">
+   	<r:repeat value="#{bean.records}" var="record">
+          <r:point x="#{record.country}" y="#{record.count}"/>
+   	</r:repeat>  
+   </r:series>
+   <r:yaxis label="Motor vehicles per 1000 people"/>
+</r:chart>
+
+----
+
+====
+
+[[sect-Component_Reference-chart-Data_input]]
+
+==== Data input
+
+The [sgmltag]+<r:chart>+ component offers two ways how to pass a data into it - facelet iteration and creating data model object.
+
+===== Facelet iteration
+
+Use [sgmltag]+<r:repeat>+ and a collection of objects inside the [sgmltag]+<r:series>+ tag and specify what you want to be plotted on x and y axis using [sgmltag]+<r:point>+ tag. This approach is shown in basic usage example. The [sgmltag]+<r:repeat>+ approach can be used also at [sgmltag]+<r:series>+ level.
+
+===== Create DataModel object
+When facelet iteration is used the ChartDataModel object is created inside by ChartRenderer. The alternative way is to create ChratDataModel and pass it using [sgmltag]+<r:series>+ data attribute. Create instance one of the child classes of ChartDataModel - NumberChartDataModel, StringChartDataModel or DateChartDataModel (not fully supported). Select class according to the data type used on x-axis. Add valuest to the model using put method and pass it to the [sgmltag]+<r:series>+ using data attribute
+
+
+If there is model passed using <r:series> data it is used, nested <r:point> tags are ignored. If data attribute is not used nested <r:point> tags are expected. 
+
+[[sect-Component_Reference-chart-Look_customization]]
+
+==== Chart look customization
+
+The chart configuration is split into tags to make facelet code clearer. To configure axes, their min, max values and label use [sgmltag]+<r:xaxis>+ or [sgmltag]+<r:yaxis>+ tag. The [sgmltag]+<r:legend>+ allows to set up the position of legend and labels order in it.
+
+To adjust chart component size you can use CSS class .richfaces-chart-container, to customize title use .richfaces-chart-title the placeholder. The chart itself is placed in div with class .richfaces-chart. 
+
+[[sect-Component_Reference-chart-Interactivity_options]]
+
+==== Interactivity options
+
+The <r:chart> component does not create static chart only. 
+
+* It allows to zoom line charts when [sgmltag]+<r:chart>+ attribute zoom is set true. To reset zoom you can use JavaScript API.
+* You can also add functions to handle events fired by component. Event handlers are set up using proper <r:chart> attributes. They handle events fired by all series. If you want to handle event only fired by particular series, set up handlers using <r:series> attributes.
+
+[[sect-Component_Reference-chart-chart_server-side_events]]
+
+==== [sgmltag]+<r:chart>+ server-side events
+
+* The [varname]+PlotClickEvent+ is fired when the user click a point in a chart. To set a listner use [varname]+ClickListener+ attribute.
+
+[[sect-Component_Reference-chart-chart_client-side_events]]
+
+==== [sgmltag]+<r:chart>+ client-side events
+
+* The [varname]+plothover+ event points to the function to perform when mouse cursor is above the point in a chart.
+* The [varname]+plotclick+ event points to the function to perform when the user click point in a chart.
+* The [varname]+mouseout+ event points to the function to perform when the mouse cursor leaves the chart grid.
+
+The plothover and plotclick handlers are given an event object containing data of point which fired an event.
+
+[source, JavaScript]
+----
+function log(e){
+           	console.log("Series index: "+
+                 	e.data.seriesIndex +" DataIndex: "+
+                 	e.data.dataIndex+' ['+e.data.x+','+e.data.y+']');
+}
+----
+
+==== JavaScript API
+
+To access the component using jQuery widget use componentID + chart
+
+[function]+resetZoom()+::  display chart without scaling
+[function]+getPlotObject()+:: returns JavaScript object containing chart data and options
+
+Example
+[source, XML]
+----
+<r:chart id=”price”>
+…
+----
+
+[source, JavaScript]
+----
+$(document.getElementById(“priceChart”)).chart(“resetZoom”)
+----
+
+==== Reference data
+
+* [parameter]+component-type+: 
+* [parameter]+component-class+: 
+* [parameter]+component-family+: 
+* [parameter]+renderer-type+: 
+
+
 === [sgmltag]+<r:message>+
 
 The [sgmltag]+<r:message>+ component renders a single [classname]+FacesMessage+ message instance added for the component. The appearance of the message can be customized, and tool-tips can be used for further information about the message.
