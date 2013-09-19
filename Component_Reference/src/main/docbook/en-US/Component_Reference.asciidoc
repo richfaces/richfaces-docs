@@ -6541,6 +6541,12 @@ Read this chapter for details on components that display messages and other feed
 
 The [sgmltag]+<r:chart>+ component allows the user to plot data and to create line, bar or pie charts. It might uses five children tags [sgmltag]+<r:series>+, [sgmltag]+<r:legend>+, [sgmltag]+<r:xaxis>+, [sgmltag]+<r:yaxis>+ and [sgmltag]+<r:point>+. Each of them customizes a part of chart. All of them are optional except at least one [sgmltag]+<r:series>+ tag is required. It allows to handle fired events using client-side JavaScript or server-side listener.
 
+[[figu-Component_Reference-chart-chart_component]]
+
+.r:chart component
+image::figu-Component_Reference-chart-chart_component.png[]
+
+
 [[sect-Component_Reference-chart-Basic_usage]]
 
 ==== Basic usage
@@ -6548,9 +6554,20 @@ The [sgmltag]+<r:chart>+ component allows the user to plot data and to create li
 The [sgmltag]+<r:chart>+ tag encapsulate children tags which customizes the chart. The chart type is selected by [sgmltag]+<r:series>+ attribute. The chart has many attributes which can customize its look all of them are optional. Only requirements to use the [sgmltag]+<r:chart>+ are selection of chart type and pass at least one series of data - explained below.
 
 
-[[exam-Component_Reference-chart_example]]
 
-.r:chart example
+[[sect-Component_Reference-chart-Data_input]]
+
+==== Data input
+
+The [sgmltag]+<r:chart>+ component offers two ways how to pass a data into it - facelet iteration and creating data model object.
+
+===== Facelet iteration
+
+Use [sgmltag]+<r:repeat>+ and a collection of objects inside the [sgmltag]+<r:series>+ tag and specify what you want to be plotted on x and y axis using [sgmltag]+<r:point>+ tag. The [sgmltag]+<r:repeat>+ approach can be used also at [sgmltag]+<r:series>+ level.
+
+[[exam-Component_Reference-chart_facelet_iteration_example]]
+
+.r:chart facelet iteration example
 ====
 
 [source, XML]
@@ -6568,18 +6585,33 @@ The [sgmltag]+<r:chart>+ tag encapsulate children tags which customizes the char
 
 ====
 
-[[sect-Component_Reference-chart-Data_input]]
-
-==== Data input
-
-The [sgmltag]+<r:chart>+ component offers two ways how to pass a data into it - facelet iteration and creating data model object.
-
-===== Facelet iteration
-
-Use [sgmltag]+<r:repeat>+ and a collection of objects inside the [sgmltag]+<r:series>+ tag and specify what you want to be plotted on x and y axis using [sgmltag]+<r:point>+ tag. This approach is shown in basic usage example. The [sgmltag]+<r:repeat>+ approach can be used also at [sgmltag]+<r:series>+ level.
-
 ===== Create DataModel object
 When facelet iteration is used the ChartDataModel object is created inside by ChartRenderer. The alternative way is to create ChratDataModel and pass it using [sgmltag]+<r:series>+ data attribute. Create instance one of the child classes of ChartDataModel - NumberChartDataModel, StringChartDataModel or DateChartDataModel (not fully supported). Select class according to the data type used on x-axis. Add valuest to the model using put method and pass it to the [sgmltag]+<r:series>+ using data attribute
+
+[[exam-Component_Reference-chart_datamodel_object_example]]
+
+.r:chart DataModel object example
+====
+
+[source, XML]
+----
+<r:chart id="barChart" title="Countries by vehicles per capita">
+   <r:series type="bar" data="#{bean.cars}"/>
+   <r:yaxis label="Motor vehicles per 1000 people"/>
+</r:chart>
+
+----
+
+[source,Java]
+----
+cars = new StringChartDataModel(ChartDataModel.ChartType.bar);
+cars.put("San Marino", 1263);
+cars.put("United States", 797);
+...
+
+----
+
+====
 
 
 If there is model passed using <r:series> data it is used, nested <r:point> tags are ignored. If data attribute is not used nested <r:point> tags are expected. 
