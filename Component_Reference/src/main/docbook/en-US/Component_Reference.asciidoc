@@ -6533,7 +6533,7 @@ Read this chapter for details on components that display messages and other feed
 
 === [sgmltag]+<r:chart>+
 
-The [sgmltag]+<r:chart>+ component allows the user to plot data and to create line, bar or pie charts. It might uses five children tags [sgmltag]+<r:series>+, [sgmltag]+<r:legend>+, [sgmltag]+<r:xaxis>+, [sgmltag]+<r:yaxis>+ and [sgmltag]+<r:point>+. Each of them customizes a part of chart. All of them are optional except at least one [sgmltag]+<r:series>+ tag is required. It allows to handle fired events using client-side JavaScript or server-side listener.
+The [sgmltag]+<r:chart>+ component allows the user to plot data and to create line, bar or pie charts. It uses up to five children tags [sgmltag]+<r:series>+, [sgmltag]+<r:legend>+, [sgmltag]+<r:xaxis>+, [sgmltag]+<r:yaxis>+ and [sgmltag]+<r:point>+. Each child tag customizes a particular aspect of the chart. All are optional except at least one [sgmltag]+<r:series>+ tag is required. It allows one to handle fired events using client-side JavaScript or server-side listener.
 
 [[figu-Component_Reference-chart-chart_component]]
 
@@ -6545,19 +6545,18 @@ image::figu-Component_Reference-chart-chart_component.png[]
 
 ==== Basic usage
 
-The [sgmltag]+<r:chart>+ tag encapsulate children tags which customizes the chart. The chart type is selected by [sgmltag]+<r:series>+ attribute. The chart has many attributes which can customize its look all of them are optional. Only requirements to use the [sgmltag]+<r:chart>+ are selection of chart type and pass at least one series of data - explained below.
-
+The [sgmltag]+<r:chart>+ tag and its optional children tags generate and customize the chart. The chart type is selected by a [sgmltag]+<r:series>+ attribute.  The only requirements for use of the [sgmltag]+<r:chart>+ are selection of the chart type and to pass at least one series of data - explained below.
 
 
 [[sect-Component_Reference-chart-Data_input]]
 
 ==== Data input
 
-The [sgmltag]+<r:chart>+ component offers two ways how to pass a data into it - facelet iteration and creating data model object.
+The [sgmltag]+<r:chart>+ component accepts data by two means - by facelet iteration or by creating data model object.
 
 ===== Facelet iteration
 
-Use [sgmltag]+<r:repeat>+ and a collection of objects inside the [sgmltag]+<r:series>+ tag and specify what you want to be plotted on x and y axis using [sgmltag]+<r:point>+ tag. The [sgmltag]+<r:repeat>+ approach can be used also at [sgmltag]+<r:series>+ level.
+Use [sgmltag]+<r:repeat>+ and a collection of objects inside the [sgmltag]+<r:series>+ tag and specify what you want to be plotted on the x and y axis using [sgmltag]+<r:point>+ tag. The [sgmltag]+<r:repeat>+ approach can also be used at the [sgmltag]+<r:series>+ level.
 
 [[exam-Component_Reference-chart_facelet_iteration_example]]
 
@@ -6579,8 +6578,8 @@ Use [sgmltag]+<r:repeat>+ and a collection of objects inside the [sgmltag]+<r:se
 
 ====
 
-===== Create DataModel object
-When facelet iteration is used the ChartDataModel object is created inside by ChartRenderer. The alternative way is to create ChratDataModel and pass it using [sgmltag]+<r:series>+ data attribute. Create instance one of the child classes of ChartDataModel - NumberChartDataModel, StringChartDataModel or DateChartDataModel (not fully supported). Select class according to the data type used on x-axis. Add valuest to the model using put method and pass it to the [sgmltag]+<r:series>+ using data attribute
+===== Create a DataModel object
+When facelet iteration is used the ChartDataModel object is created by the ChartRenderer. An alternative to this is to create a ChratDataModel yourself and pass it using [sgmltag]+<r:series>+ data attribute. To do this, create an instance one of the child classes of ChartDataModel - NumberChartDataModel, StringChartDataModel or DateChartDataModel (not yet fully supported). Select the class according to the data type used on the x-axis. Add values to the model using the put method and pass it to the [sgmltag]+<r:series>+ tag using the data attribute.
 
 [[exam-Component_Reference-chart_datamodel_object_example]]
 
@@ -6608,40 +6607,40 @@ cars.put("United States", 797);
 ====
 
 
-If there is model passed using <r:series> data it is used, nested <r:point> tags are ignored. If data attribute is not used nested <r:point> tags are expected. 
+If there is a model passed using the [sgmltag]+<r:series>+ data attribute, any nested [sgmltag]+<r:point>+ tags are ignored. If the data attribute is not used, then nested [sgmltag]+<r:point>+ tags are expected. 
 
 [[sect-Component_Reference-chart-Look_customization]]
 
 ==== Chart look customization
 
-The chart configuration is split into tags to make facelet code clearer. To configure axes, their min, max values and label use [sgmltag]+<r:xaxis>+ or [sgmltag]+<r:yaxis>+ tag. The [sgmltag]+<r:legend>+ allows to set up the position of legend and labels order in it.
+The chart configuration is split into multiple tags provide a more clear facelet API. To configure axes, their min/max values, and label use [sgmltag]+<r:xaxis>+ or [sgmltag]+<r:yaxis>+ tag. The [sgmltag]+<r:legend>+ allows one to set up the position of the legend and the order of the labels within it.
 
-To adjust chart component size you can use CSS class .richfaces-chart-container, to customize title use .richfaces-chart-title the placeholder. The chart itself is placed in div with class .richfaces-chart. 
+To adjust the chart component size you can use CSS class .richfaces-chart-container, to customize title use .richfaces-chart-title the placeholder. The chart itself is placed in the div with the CSS class +.richfaces-chart+. 
 
 [[sect-Component_Reference-chart-Interactivity_options]]
 
 ==== Interactivity options
 
-The <r:chart> component does not create static chart only. 
+The [sgmltag]+<r:chart>+ component does not only create static charts. 
 
-* It allows to zoom line charts when [sgmltag]+<r:chart>+ attribute zoom is set true. To reset zoom you can use JavaScript API.
-* You can also add functions to handle events fired by component. Event handlers are set up using proper <r:chart> attributes. They handle events fired by all series. If you want to handle event only fired by particular series, set up handlers using <r:series> attributes.
+* It allows the user to zoom line charts when the [sgmltag]+<r:chart>+ attribute zoom is set true. To reset zoom you can use the JavaScript API.
+* You can also add functions to handle events fired by components. Event handlers are set up using proper [sgmltag]+<r:chart>+ attributes. They handle events fired by any series. If you want to handle an event only fired by a particular series, set up handlers using the [sgmltag]+<r:series>+ attributes.
 
 [[sect-Component_Reference-chart-chart_server-side_events]]
 
 ==== [sgmltag]+<r:chart>+ server-side events
 
-* The [varname]+PlotClickEvent+ is fired when the user click a point in a chart. To set a listner use [varname]+ClickListener+ attribute.
+* The [varname]+PlotClickEvent+ is fired when the user clicks a point in the chart. To set a listner use the [varname]+ClickListener+ attribute.
 
 [[sect-Component_Reference-chart-chart_client-side_events]]
 
 ==== [sgmltag]+<r:chart>+ client-side events
 
-* The [varname]+plothover+ event points to the function to perform when mouse cursor is above the point in a chart.
-* The [varname]+plotclick+ event points to the function to perform when the user click point in a chart.
-* The [varname]+mouseout+ event points to the function to perform when the mouse cursor leaves the chart grid.
+* The [varname]+plothover+ event points to the client-side function to execute when the mouse cursor is over the chart point.
+* The [varname]+plotclick+ event points to the client-side function to execute when the user clicks the chart point.
+* The [varname]+mouseout+ event points to the cient-side function to execute when the mouse cursor leaves the chart grid.
 
-The plothover and plotclick handlers are given an event object containing data of point which fired an event.
+The plothover and plotclick handlers are given an event-object that contains the deatils of which point fired the event.
 
 [source, JavaScript]
 ----
@@ -6654,7 +6653,7 @@ function log(e){
 
 ==== JavaScript API
 
-To access the component using jQuery widget use componentID + chart
+To access the jQuery widget of the component, use the componentID + chart
 
 [function]+resetZoom()+::  display chart without scaling
 [function]+getPlotObject()+:: returns JavaScript object containing chart data and options
