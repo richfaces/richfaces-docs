@@ -1,0 +1,81 @@
+= Docs Release Process
+
+This guide lists the steps required to release the RichFaces docs for the 4.3 branch.
+
+== Procedure
+
+Clone the docs repository: https://github.com/richfaces/docs
+
+----
+$ git clone git@github.com:richfaces/richfaces-docs.git
+----
+
+Enter the docs repository and checkout the 4.3.x branch
+
+----
+cd richfaces-docs
+git checkout 4.3.x
+----
+
+Increment the version, commit, tag, and build the result
+(e.g. 4.2.0-SNAPSHOT -> 4.2.1.Final)
+----
+../build/scripts/change_version.sh -r -o {current_development_version} -n {release_version}  
+git add -A  
+git commit -m "changing to release version: {release_version}  // (e.g. 4.2.1.Final)
+git tag {tag}  // (e.g. 4.2.1.20120417-Final)
+mvn clean package  
+----
+
+Docs are built and can be uploaded (see bellow: Uploading the docs)
+
+Increment the version to the next SNAPSHOT version:
+
+----
+../build/scripts/change_version.sh -r -o {release_version} -n {next_development_version}  
+// (e.g. 4.2.1.Final -> 4.3.0-SNAPSHOT)
+git add -A  
+git commit -m "changing to next development version: {next_development_version}"  
+// (e.g. 4.3.0-SNAPSHOT)
+git push origin {tag}  
+git push origin develop:develop
+----
+
+Only in the case of a Final release do the tag the master branch:
+
+----
+git checkout master  
+git rebase {tag}  
+git push origin master:master  
+// (e.g. 4.2.1.20120417-Final)
+----
+
+== Generate the documentation for the maven-resources-plugin
+ 
+After release of core framework (only for Final releases):
+
+----
+go to cdk/maven-resources-plugin/
+run mvn site:site
+Uploaded documentation structure
+----
+
+== Uploading the Docs
+ 
+The documentation should be uploaded to release-specific directory with following structure (the artifacts to upload mentioned in second column):
+
+----
+/Component_Reference                docs/Component_Reference/target/docbook/publish (all content = en_US dir)  
+                                    command: rsync --protocol=29 --delete -av docs/Component_Reference/target/docbook/publish/ richfaces@filemgmt.jboss.org:/docs_htdocs/richfaces/4.3.X/4.3.0.Final/Component_Reference  
+  
+/Developer_Guide                    docs/Developer_Guide/target/docbook/publish (all content = en_US dir)  
+                                    command: rsync --protocol=29 --delete -av docs/Developer_Guide/target/docbook/publish/ richfaces@filemgmt.jboss.org:/docs_htdocs/richfaces/4.3.X/4.3.0.Final/Developer_Guide  
+  
+/javadoc                               (for docs, use all content of JARs excluding META-INF dir)  
+     /richfaces-components-api      components/dist/richfaces-components-api/target/richfaces-components-api-${version}-javadoc.jar   
+     /richfaces-components-ui       components/dist/richfaces-components-ui/target/richfaces-components-ui-${version}-javadoc.jar  
+     /richfaces-core-api            core/api/target/richfaces-core-api-${version}-javadoc.jar  
+     /richfaces-core-impl           core/impl/target/richfaces-core-impl-${version}-javadoc.jar  
+/vdldoc                             components/dist/richfaces-components-ui/target/richfaces-components-ui-${version}-vdldocs.jar (content of /richfaces-vdl-documentation/ dir inside JAR)  
+/maven-richfaces-resources-plugin   cdk/maven-resources-plugin/target/site
+----
