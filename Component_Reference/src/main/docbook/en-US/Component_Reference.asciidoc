@@ -1936,7 +1936,7 @@ This chapter details components for user input and interaction.
 
 The [sgmltag]+<r:autocomplete>+ component is an auto-completing input-box with built-in Ajax capabilities. It supports client-side suggestions, browser-like selection, and customization of the look and feel.
 
-The auto-complete box is a standard JSF [classname]+UIInput+ control.
+The auto-complete box is a standard JSF [classname]+UIInput+ control with added validation.
 
 [[figu-Component_Reference-autocomplete-autocomplete]]
 
@@ -1953,9 +1953,9 @@ The [varname]+value+ attribute stores the text entered by the user for the auto-
 * The [varname]+autocompleteMethod+ attribute points to a method which returns a list of suggestions according to a supplied prefix.
 
 [NOTE]
-.+client+ mode
+.+client+ and +lazyClient+ modes
 ====
-The prefix is normally ignored in +client+ mode. In this mode, the component requests the suggestion list only once, and performs filtering on the client.
+The prefix is normally ignored in +client+ and +lazyClient+ modes. In these modes, the component requests the suggestion list once only, and performs filtering on the client.
 ====
 
 * The [varname]+autocompleteList+ attribute points to a collection of suggestions.
@@ -1971,17 +1971,7 @@ Using the [varname]+autocompleteMethod+  attribute::
 [source, XML]
 ----
 <r:autocomplete value="#{bean.state}" autocompleteMethod="#{bean.autocomplete}" />
-----
-+
 
-+
-[source, Java]
-----
-public List<String> autocomplete(String prefix) {
-    ArrayList<String> result = new ArrayList<String>();
-    ...
-    return result;
-}
 ----
 +
 The [sgmltag]+<r:autocomplete>+ component uses the [methodname]+bean.autocomplete+ method to provide suggestions, based on the entered prefix.
@@ -1992,15 +1982,6 @@ Using the [varname]+autocompleteList+  attribute::
 ----
 <r:autocomplete value="#{bean.state}" autocompleteList="#{bean.suggestions}" />
 
-----
-+
-
-+
-[source, Java]
-----
-public List<String> getAutocompleteList() {
-    return Arrays.asList("Java", "JavaScript");
-}
 ----
 +
 The [sgmltag]+<r:autocomplete>+ component retrieve the suggestion list from [methodname]+bean.suggestions+.
@@ -2014,22 +1995,17 @@ Use the [varname]+mode+ attribute to determine how the suggestion list is reques
 
 * The +client+ setting pre-loads data to the client and uses the input to filter the possible suggestions.
 * The +ajax+ setting fetches suggestions with every input change using Ajax requests.
+* The +lazyClient+ setting pre-loads data to the client and uses the input to filter the possible suggestions. The filtering does not start until the input length matches a minimum value. Set the minimum value with the [varname]+minChars+ attribute.
 * The +cachedAjax+ setting pre-loads data via Ajax requests when the input length matches a minimum value. Set the minimum value with the [varname]+minChars+ attribute. All suggestions are handled on the client until the input prefix is changed, at which point a new request is made based on the new input prefix.
-
-[NOTE]
-.Selecting appropriate mode
-====
-A mode should be always selected for particular use case: if it is assumed that Autocomplete will handle tons of data, use cachedAjax or ajax mode. If it will allow to select just between few options, e.g. tens, you can use client mode. Be aware that ajax mode can overload your server with number of requests.
-====
 
 
 [[sect-Component_Reference-autocomplete-Interactivity_options]]
 
 ==== Interactivity options
 
-Users can type into the text field to enter a value, which also searches through the suggestion items in the suggestion box. By default, the first suggestion item is selected as the user types. This behavior can be deactivated by setting [code]+selectFirst="false"+.
+Users can type into the text field to enter a value, which also searches through the suggestion items in the drop-down box. By default, the first suggestion item is selected as the user types. This behavior can be deactivated by setting [code]+selectFirst="false"+.
 
-Setting [code]+autoFill="true"+ causes the suggestion box to fill the text field with a matching suggestion as the user types.
+Setting [code]+autoFill="true"+ causes the combo-box to fill the text field box with a matching suggestion as the user types.
 
 To allow users to enter multiple values separated by specific characters, use the [varname]+tokens+ attribute. As the user types, a suggestion will present as normal. When they enter a character specified as a token, this begins a new suggestion process, and the component only uses text entered after the token character for suggestions. For example, if [code]+tokens=", "+ is set, the [sgmltag]+<r:autocomplete>+ component uses both the comma and space characters as tokens to separate entries. When the user enters a comma or a space, a new suggestion process begins.
 
@@ -2078,20 +2054,26 @@ This example demonstrates how to use a custom filter with the [varname]+clientFi
 
 The [sgmltag]+<r:autocomplete>+ component can be controlled through the JavaScript API. The JavaScript API provides the following functions:
 
-[function]+search()+:: Show the pop-up list of completion values.
-[function]+close()+:: Hide the pop-up list.
-[function]+enable()+:: Enables an input field and autocompletion functionality.
-[function]+disable()+:: Disables an input field and autocompletion functionality.
-
+[function]+getValue()+:: Get the current value of the text field.
+[function]+setValue(newValue)+:: Set the value of the text field to the [parameter]+newValue+ string passed as a parameter.
+[function]+showPopup()+:: Show the pop-up list of completion values.
+[function]+hidePopup()+:: Hide the pop-up list.
 [[sect-Component_Reference-autocomplete-Reference_data]]
 
 ==== Reference data
 
-* [parameter]+component-type+: [classname]+org.richfaces.ui.Autocomplete+
-* [parameter]+component-class+: [classname]+org.richfaces.ui.input.autocomplete.UIAutocomplete+
+* [parameter]+component-type+: [classname]+org.richfaces.Autocomplete+
+* [parameter]+component-class+: [classname]+org.richfaces.component.UIAutocomplete+
 * [parameter]+component-family+: [classname]+javax.faces.Input+
-* [parameter]+renderer-type+: [classname]+org.richfaces.ui.AutocompleteRenderer+
-* [parameter]+handler-class+: [classname]+org.richfaces.ui.input.autocomplete.AutocompleteHandler+
+* [parameter]+renderer-type+: [classname]+org.richfaces.AutocompleteRenderer+
+* [parameter]+handler-class+: [classname]+org.richfaces.view.facelets.AutocompleteHandler+
+
+
+[[sect-Component_Reference-autocomplete-Style_classes_and_skin_parameters]]
+
+==== Style classes and skin parameters
+
+include::skinning/autocomplete.asciidoc[]
 
 [[sect-Component_Reference-inputs-calendar]]
 
