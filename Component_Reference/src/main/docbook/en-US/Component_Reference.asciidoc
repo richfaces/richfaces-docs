@@ -921,9 +921,9 @@ The JMS integration needs to be enabled in [code]+web.xml+ with a following conf
 The JMS instance on the back-end must be configured to work with your [sgmltag]+<a4j:push>+ components.
 
 [NOTE]
-.Configuring JMS on JBoss Application Server
+.Configuring JMS on JBoss EAP
 ====
-Refer to the *_JBoss Application Server Administration Console Guide_* for details on managing JBoss Application Server through the Administration Console.
+Refer to the *_JBoss EAP Administration and Configuration Guide_* for details on configuring JMS inJBoss EAP.
 ====
 
 [[exam-Component_Reference-push-JMS_server_configuration]]
@@ -2330,33 +2330,7 @@ There are several options to customize the style of the editor:
 
 ==== Editor skins
 
-The [sgmltag]+<rich:editor>+ is skinnable using the [code]+skin+ attribute and either of the two approaches:
-
-By default, [sgmltag]+<rich:editor>+ has a skin called [code]+richfaces+ that is optimized to match rest of the component suite look & feel and changes to match the active RichFaces skin (refer to _RichFaces Developer's Guide_ for details about _Skinning and theming_).
-
-.The skin [code]+richfaces+ of [sgmltag]+<rich:editor>+
-====
-
-[[figu-Component_Reference-editor-richfaces_skin]]
-
-image::figu-Component_Reference-editor-richfaces_skin.png[width="400"]
-
-A [sgmltag]+<rich:editor>+ with the default [code]+richfaces+ editor skin rendered against several RichFaces Skin options.
-
-====
-
-Alternatively, you can use any other CKeditor skin, either from the standard distribution, a downloaded skin, or a custom skin. In the distribution, there are three skins bundled: [code]+kama, v2, office2003+.
-
-.Examples of [sgmltag]+<rich:editor>+ skins in CKEditor distribution
-====
-
-[[figu-Component_Reference-editor-distribution_skins]]
-
-image::figu-Component_Reference-editor-distribution_skins.png[width="400"]
-
-A CKEditor distribution skins [code]+kama+, [code]+v2+ and [code]+office2003+.
-
-====
+The [sgmltag]+<rich:editor>+ is skinnable using the JavaScript API of the CKeditor.  Refer to the http://docs.ckeditor.com/#!/guide/dev_skins[CKeditor documentation on installing skins] for details on how to customize the look and feel of the editor component.
 
 [[sect-Component_Reference-editor-Advanced_configuration]]
 
@@ -2385,7 +2359,7 @@ In the above samples, the [sgmltag]+<rich:editor>+ is configured to take focus a
 [NOTE]
 ====
 
-For further configuration options, refer to link:$$http://docs.cksource.com/CKEditor_3.x/Developers_Guide/Setting_Configurations$$[CKEditor 3 Developer Guide]  and link:$$http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html$$[CKEditor 3 configuration reference].
+For further configuration options, refer to link:$$http://docs.ckeditor.com/#!/guide$$[CKEditor 4 Developer Guide]  and link:$$http://docs.ckeditor.com/#!/api/CKEDITOR.config$$[CKEditor 4 configuration reference].
 
 ====
 
@@ -3764,16 +3738,16 @@ All [sgmltag]+<rich:tabPanel>+ components should be wrapped in a form element wh
 
 [source, XML]
 ----
-<rich:togglePanel id="layout" activeItem="item1">
-   <rich:togglePanelItem id="item1">
+<rich:togglePanel id="layout" activeItem="item1">
+   <rich:togglePanelItem id="item1">
       <!--content-->
    </rich:togglePanelItem>
-   <rich:togglePanelItem id="item2">
+   <rich:togglePanelItem id="item2">
       <!--content-->
    <rich:togglePanelItem>
 </rich:togglePanel>
 <h:commandButton>
-   <rich:toggleControl targetPanel="layout"/> <!--cycles through the states-->
+   <rich:toggleControl targetPanel="layout"/> <!--cycles through the states-->
 </h:commandButton>
 
 ----
@@ -4737,7 +4711,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 
-import org.richfaces.component.UIExtendedDataTable;
+import org.richfaces.component.AbstractExtendedDataTable;
 import org.richfaces.demo.tables.model.cars.InventoryItem;
 
 @ManagedBean
@@ -4751,7 +4725,7 @@ public class ExtTableSelectionBean implements Serializable{
    private List<InventoryItem> selectionItems = new ArrayList<InventoryItem>();
 
    public void selectionListener(AjaxBehaviorEvent event){
-      UIExtendedDataTable dataTable = (UIExtendedDataTable)event.getComponent();
+      AbstractExtendedDataTable dataTable = (AbstractExtendedDataTable)event.getComponent();
       Object originalKey = dataTable.getRowKey();
       selectionItems.clear();
       for (Object selectionKey: selection) {
