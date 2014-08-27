@@ -6531,15 +6531,15 @@ Read this chapter for details on components that display messages and other feed
 
 [[sect-Component_Reference-Output_and_messages-message]]
 
-=== [sgmltag]+<r:chart>+
+=== [sgmltag]+<rich:chart>+
 
-The [sgmltag]+<r:chart>+ component allows the user to plot data and to create line, bar or pie charts. It uses up to five children tags [sgmltag]+<r:series>+, [sgmltag]+<r:legend>+, [sgmltag]+<r:xaxis>+, [sgmltag]+<r:yaxis>+ and [sgmltag]+<r:point>+. Each child tag customizes a particular aspect of the chart. All are optional except at least one [sgmltag]+<r:series>+ tag is required.
+The [sgmltag]+<rich:chart>+ component allows the user to plot data and to create line, bar or pie charts. It uses up to five children tags [sgmltag]+<r:series>+, [sgmltag]+<r:legend>+, [sgmltag]+<r:xaxis>+, [sgmltag]+<r:yaxis>+ and [sgmltag]+<r:point>+. Each child tag customizes a particular aspect of the chart. All are optional except at least one [sgmltag]+<r:series>+ tag is required.
 
-Additionally the [sgml]+<r:chart>+ component allows one to handle events using either a client-side JavaScript or using server-side listeners.
+Additionally the [sgml]+<rich:chart>+ component allows one to handle events using either a client-side JavaScript or using server-side listeners.
 
 [[figu-Component_Reference-chart-chart_component]]
 
-.r:chart component
+.rich:chart component
 image::figu-Component_Reference-chart-chart_component.png[]
 
 
@@ -6547,14 +6547,14 @@ image::figu-Component_Reference-chart-chart_component.png[]
 
 ==== Basic usage
 
-The [sgmltag]+<r:chart>+ tag and its optional children tags generate and customize the chart. The chart type is selected by a [sgmltag]+<r:series>+ attribute.  The only requirements for use of the [sgmltag]+<r:chart>+ are selection of the chart type and to pass at least one series of data - explained below.
+The [sgmltag]+<rich:chart>+ tag and its optional children tags generate and customize the chart. The chart type is selected by a [sgmltag]+<r:series>+ attribute.  The only requirements for use of the [sgmltag]+<rich:chart>+ are selection of the chart type and to pass at least one series of data - explained below.
 
 
 [[sect-Component_Reference-chart-Data_input]]
 
 ==== Data input
 
-The [sgmltag]+<r:chart>+ component accepts data by two means - by facelet iteration or by creating data model object.
+The [sgmltag]+<rich:chart>+ component accepts data by two means - by facelet iteration or by creating data model object.
 
 ===== Facelet iteration
 
@@ -6562,19 +6562,19 @@ Use [sgmltag]+<r:repeat>+ and a collection of objects inside the [sgmltag]+<r:se
 
 [[exam-Component_Reference-chart_facelet_iteration_example]]
 
-.r:chart facelet iteration example
+.rich:chart facelet iteration example
 ====
 
 [source, XML]
 ----
-<r:chart id="barChart" title="Countries by vehicles per capita">
+<rich:chart id="barChart" title="Countries by vehicles per capita">
    <r:series type="bar">
    	<r:repeat value="#{bean.records}" var="record">
           <r:point x="#{record.country}" y="#{record.count}"/>
    	</r:repeat>  
    </r:series>
    <r:yaxis label="Motor vehicles per 1000 people"/>
-</r:chart>
+</rich:chart>
 
 ----
 
@@ -6585,15 +6585,15 @@ When facelet iteration is used the ChartDataModel object is created by the Chart
 
 [[exam-Component_Reference-chart_datamodel_object_example]]
 
-.r:chart DataModel object example
+.rich:chart DataModel object example
 ====
 
 [source, XML]
 ----
-<r:chart id="barChart" title="Countries by vehicles per capita">
+<rich:chart id="barChart" title="Countries by vehicles per capita">
    <r:series type="bar" data="#{bean.cars}"/>
    <r:yaxis label="Motor vehicles per 1000 people"/>
-</r:chart>
+</rich:chart>
 
 ----
 
@@ -6623,20 +6623,20 @@ To adjust the chart component size you can use CSS class .richfaces-chart-contai
 
 ==== Interactivity options
 
-The [sgmltag]+<r:chart>+ component does not only create static charts. 
+The [sgmltag]+<rich:chart>+ component does not only create static charts. 
 
-* It allows the user to zoom line charts when the [sgmltag]+<r:chart>+ attribute zoom is set true. To reset zoom you can use the JavaScript API.
-* You can also add functions to handle events fired by components. Event handlers are set up using proper [sgmltag]+<r:chart>+ attributes. They handle events fired by any series. If you want to handle an event only fired by a particular series, set up handlers using the [sgmltag]+<r:series>+ attributes.
+* It allows the user to zoom line charts when the [sgmltag]+<rich:chart>+ attribute zoom is set true. To reset zoom you can use the JavaScript API.
+* You can also add functions to handle events fired by components. Event handlers are set up using proper [sgmltag]+<rich:chart>+ attributes. They handle events fired by any series. If you want to handle an event only fired by a particular series, set up handlers using the [sgmltag]+<r:series>+ attributes.
 
 [[sect-Component_Reference-chart-chart_server-side_events]]
 
-==== [sgmltag]+<r:chart>+ server-side events
+==== [sgmltag]+<rich:chart>+ server-side events
 
 * The [varname]+PlotClickEvent+ is fired when the user clicks a point in the chart. To set a listner use the [varname]+ClickListener+ attribute.
 
 [[sect-Component_Reference-chart-chart_client-side_events]]
 
-==== [sgmltag]+<r:chart>+ client-side events
+==== [sgmltag]+<rich:chart>+ client-side events
 
 * The [varname]+plothover+ event points to the client-side function to execute when the mouse cursor is over the chart point.
 * The [varname]+plotclick+ event points to the client-side function to execute when the user clicks the chart point.
@@ -6663,7 +6663,7 @@ To access the jQuery widget of the component, use the componentID + chart
 Example
 [source, XML]
 ----
-<r:chart id=”price”>
+<rich:chart id=”price”>
 …
 ----
 
