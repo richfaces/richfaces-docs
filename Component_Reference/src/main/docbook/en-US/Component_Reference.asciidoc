@@ -3746,7 +3746,7 @@ All [sgmltag]+<rich:tabPanel>+ components should be wrapped in a form element wh
 
 ==== Dynamic panel item generation
 
-All the switchable components ( [sgmltag]+<rich:togglePanel>+, [sgmltag]+<rich:accordion>+ component and the [sgmltag]+<rich:tabPanel>+) can leverage the [sgmltag]+<rich:repeat>+ tag to dynamically create child components. This can be useful when the definition of the panel items is determined at run-time from a backing bean list.
+All the switchable components ( [sgmltag]+<rich:togglePanel>+, [sgmltag]+<rich:accordion>+ component and the [sgmltag]+<rich:tabPanel>+) can leverage the [sgmltag]+<a4j:repeat>+ tag to dynamically create child components. This can be useful when the definition of the panel items is determined at run-time from a backing bean list.
 
 [[sect-Component_Reference-togglePanel-Toggling_between_panels]]
 
@@ -3932,21 +3932,21 @@ This chapter covers all components related to the display of tables and grids.
 
 [[sect-Component_Reference-Actions-repeat]]
 
-=== [sgmltag]+<rich:repeat>+
+=== [sgmltag]+<a4j:repeat>+
 
-The non-visual [sgmltag]+<rich:repeat>+ component is used to iterate through a data model. The component renders child content for every iteration according to the current object data.
+The non-visual [sgmltag]+<a4j:repeat>+ component is used to iterate through a data model. The component renders child content for every iteration according to the current object data.
 
-The [sgmltag]+<rich:repeat>+ component extends the standard [classname]+UIRepeat+ component to allow partial updates within iterations while sending Ajax requests. The component acts as a base for all the data iteration components detailed in this chapter.
+The [sgmltag]+<a4j:repeat>+ component extends the standard [classname]+UIRepeat+ component to allow partial updates within iterations while sending Ajax requests. The component acts as a base for all the data iteration components detailed in this chapter.
 
 [[sect-Component_Reference-repeat-Basic_usage]]
 
 ==== Basic usage
 
-The contents of the collection are determined using Expression Language ( [acronym]#EL#). The data model for the contents is specified with the [varname]+value+ attribute. The [varname]+var+ attribute names the object to use when iterating through the collection. This object is then referenced in the relevant child components. <<exam-Component_Reference-repeat-repeat_example>> shows how to use [sgmltag]+<rich:repeat>+ to maintain a simple table.
+The contents of the collection are determined using Expression Language ( [acronym]#EL#). The data model for the contents is specified with the [varname]+value+ attribute. The [varname]+var+ attribute names the object to use when iterating through the collection. This object is then referenced in the relevant child components. <<exam-Component_Reference-repeat-repeat_example>> shows how to use [sgmltag]+<a4j:repeat>+ to maintain a simple table.
 
 [[exam-Component_Reference-repeat-repeat_example]]
 
-.[sgmltag]+<rich:repeat>+ example
+.[sgmltag]+<a4j:repeat>+ example
 ====
 
 
@@ -3954,12 +3954,12 @@ The contents of the collection are determined using Expression Language ( [acron
 ----
 <table>
     <tbody>
-        <rich:repeat value="#{repeatBean.items}" var="item">
+        <a4j:repeat value="#{repeatBean.items}" var="item">
             <tr>
                 <td><h:outputText value="#{item.code}" id="item1" /></td>
                 <td><h:outputText value="#{item.price}" id="item2" /></td>
             </tr>
-        </rich:repeat>
+        </a4j:repeat>
     </tbody>
 </table>
 
@@ -3973,7 +3973,7 @@ Each row of a table contains two cells: one showing the item code, and the other
 
 ==== Limited views and partial updates
 
-The [sgmltag]+<rich:repeat>+ component uses other attributes common to iteration components, such as the [varname]+first+ attribute for specifying the first item for iteration, and the [varname]+rows+ attribute for specifying the number of rows of items to display.
+The [sgmltag]+<a4j:repeat>+ component uses other attributes common to iteration components, such as the [varname]+first+ attribute for specifying the first item for iteration, and the [varname]+rows+ attribute for specifying the number of rows of items to display.
 
 Specific cells, rows, and columns can be updated without sending Ajax requests for the entire collection. Components that cause the change can specify which part of the table to update through the [varname]+render+ attribute. The [varname]+render+ attribute specifies which part of a table to update. The updated parts relate to where the action component is placed relative to the table:
 
@@ -4112,7 +4112,7 @@ For details on filtering and sorting data tables, refer to <<sect-Component_Refe
 
 ==== Partial updates
 
-As [sgmltag]+<rich:dataTable>+ the component is based on the [sgmltag]+<rich:repeat>+ component, it can be partially updated with Ajax. Refer to <<sect-Component_Reference-repeat-Limited_views_and_partial_updates>> for details on partially updating the [sgmltag]+<rich:dataTable>+ component.
+As [sgmltag]+<rich:dataTable>+ the component is based on the [sgmltag]+<a4j:repeat>+ component, it can be partially updated with Ajax. Refer to <<sect-Component_Reference-repeat-Limited_views_and_partial_updates>> for details on partially updating the [sgmltag]+<rich:dataTable>+ component.
 
 The [sgmltag]+<rich:dataTable>+ component supports master-detail markup with collapsible sub-table sections. Refer to <<sect-Component_Reference-Tables_and_grids-collapsibleSubTable>> for full details on using the [sgmltag]+<rich:collapsibleSubTable>+ component.
 
@@ -4893,7 +4893,7 @@ ____
 
 ==== Partial updates
 
-As [sgmltag]+<rich:dataGrid>+ the component is based on the [sgmltag]+<rich:repeat>+ component, it can be partially updated with Ajax. Refer to <<sect-Component_Reference-repeat-Limited_views_and_partial_updates>> for details on partially updating the [sgmltag]+<rich:dataGrid>+ component.
+As [sgmltag]+<rich:dataGrid>+ the component is based on the [sgmltag]+<a4j:repeat>+ component, it can be partially updated with Ajax. Refer to <<sect-Component_Reference-repeat-Limited_views_and_partial_updates>> for details on partially updating the [sgmltag]+<rich:dataGrid>+ component.
 
 [[sect-Component_Reference-dataGrid-Reference_data]]
 
@@ -6506,7 +6506,7 @@ The [sgmltag]+<rich:chart>+ component accepts data by two means - by facelet ite
 
 ===== Facelet iteration
 
-Use [sgmltag]+<r:repeat>+ and a collection of objects inside the [sgmltag]+<r:series>+ tag and specify what you want to be plotted on the x and y axis using [sgmltag]+<r:point>+ tag. The [sgmltag]+<r:repeat>+ approach can also be used at the [sgmltag]+<r:series>+ level.
+Use [sgmltag]+<a4j:repeat>+ and a collection of objects inside the [sgmltag]+<r:series>+ tag and specify what you want to be plotted on the x and y axis using [sgmltag]+<r:point>+ tag. The [sgmltag]+<a4j:repeat>+ approach can also be used at the [sgmltag]+<r:series>+ level.
 
 [[exam-Component_Reference-chart_facelet_iteration_example]]
 
@@ -6517,9 +6517,9 @@ Use [sgmltag]+<r:repeat>+ and a collection of objects inside the [sgmltag]+<r:se
 ----
 <rich:chart id="barChart" title="Countries by vehicles per capita">
    <r:series type="bar">
-   	<r:repeat value="#{bean.records}" var="record">
+   	<a4j:repeat value="#{bean.records}" var="record">
           <r:point x="#{record.country}" y="#{record.count}"/>
-   	</r:repeat>  
+   	</a4j:repeat>
    </r:series>
    <r:yaxis label="Motor vehicles per 1000 people"/>
 </rich:chart>
@@ -6557,7 +6557,7 @@ cars.put("United States", 797);
 ====
 
 
-If there is a model passed using the [sgmltag]+<r:series>+ data attribute, any nested [sgmltag]+<r:point>+ tags are ignored. If the data attribute is not used, then nested [sgmltag]+<r:point>+ tags are expected. 
+If there is a model passed using the [sgmltag]+<r:series>+ data attribute, any nested [sgmltag]+<r:point>+ tags are ignored. If the data attribute is not used, then nested [sgmltag]+<r:point>+ tags are expected.
 
 [[sect-Component_Reference-chart-Look_customization]]
 
@@ -6565,13 +6565,13 @@ If there is a model passed using the [sgmltag]+<r:series>+ data attribute, any n
 
 The chart configuration is split into multiple tags provide a more clear facelet API. To configure axes, their min/max values, and label use [sgmltag]+<r:xaxis>+ or [sgmltag]+<r:yaxis>+ tag. The [sgmltag]+<r:legend>+ allows one to set up the position of the legend and the order of the labels within it.
 
-To adjust the chart component size you can use CSS class .richfaces-chart-container, to customize title use .richfaces-chart-title the placeholder. The chart itself is placed in the div with the CSS class +.richfaces-chart+. 
+To adjust the chart component size you can use CSS class .richfaces-chart-container, to customize title use .richfaces-chart-title the placeholder. The chart itself is placed in the div with the CSS class +.richfaces-chart+.
 
 [[sect-Component_Reference-chart-Interactivity_options]]
 
 ==== Interactivity options
 
-The [sgmltag]+<rich:chart>+ component does not only create static charts. 
+The [sgmltag]+<rich:chart>+ component does not only create static charts.
 
 * It allows the user to zoom line charts when the [sgmltag]+<rich:chart>+ attribute zoom is set true. To reset zoom you can use the JavaScript API.
 * You can also add functions to handle events fired by components. Event handlers are set up using proper [sgmltag]+<rich:chart>+ attributes. They handle events fired by any series. If you want to handle an event only fired by a particular series, set up handlers using the [sgmltag]+<r:series>+ attributes.
