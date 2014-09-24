@@ -6482,7 +6482,7 @@ Read this chapter for details on components that display messages and other feed
 
 === [sgmltag]+<rich:chart>+
 
-The [sgmltag]+<rich:chart>+ component allows the user to plot data and to create line, bar or pie charts. It uses up to five children tags [sgmltag]+<r:series>+, [sgmltag]+<r:legend>+, [sgmltag]+<r:xaxis>+, [sgmltag]+<r:yaxis>+ and [sgmltag]+<r:point>+. Each child tag customizes a particular aspect of the chart. All are optional except at least one [sgmltag]+<r:series>+ tag is required.
+The [sgmltag]+<rich:chart>+ component allows the user to plot data and to create line, bar or pie charts. It uses up to five children tags [sgmltag]+<rich:chartSeries>+, [sgmltag]+<rich:chartLegend>+, [sgmltag]+<rich:chartXAxis>+, [sgmltag]+<rich:chartYAxis>+ and [sgmltag]+<rich:chartPoint>+. Each child tag customizes a particular aspect of the chart. All are optional except at least one [sgmltag]+<rich:chartSeries>+ tag is required.
 
 Additionally the [sgml]+<rich:chart>+ component allows one to handle events using either a client-side JavaScript or using server-side listeners.
 
@@ -6495,7 +6495,7 @@ image::figu-Component_Reference-chart-chart_component.png[]
 
 ==== Basic usage
 
-The [sgmltag]+<rich:chart>+ tag and its optional children tags generate and customize the chart. The chart type is selected by a [sgmltag]+<r:series>+ attribute.  The only requirements for use of the [sgmltag]+<rich:chart>+ are selection of the chart type and to pass at least one series of data - explained below.
+The [sgmltag]+<rich:chart>+ tag and its optional children tags generate and customize the chart. The chart type is selected by a [sgmltag]+<rich:chartSeries>+ attribute.  The only requirements for use of the [sgmltag]+<rich:chart>+ are selection of the chart type and to pass at least one series of data - explained below.
 
 
 [[sect-Component_Reference-chart-Data_input]]
@@ -6506,7 +6506,7 @@ The [sgmltag]+<rich:chart>+ component accepts data by two means - by facelet ite
 
 ===== Facelet iteration
 
-Use [sgmltag]+<a4j:repeat>+ and a collection of objects inside the [sgmltag]+<r:series>+ tag and specify what you want to be plotted on the x and y axis using [sgmltag]+<r:point>+ tag. The [sgmltag]+<a4j:repeat>+ approach can also be used at the [sgmltag]+<r:series>+ level.
+Use [sgmltag]+<a4j:repeat>+ and a collection of objects inside the [sgmltag]+<rich:chartSeries>+ tag and specify what you want to be plotted on the x and y axis using [sgmltag]+<rich:chartPoint>+ tag. The [sgmltag]+<a4j:repeat>+ approach can also be used at the [sgmltag]+<rich:chartSeries>+ level.
 
 [[exam-Component_Reference-chart_facelet_iteration_example]]
 
@@ -6516,12 +6516,12 @@ Use [sgmltag]+<a4j:repeat>+ and a collection of objects inside the [sgmltag]+<r:
 [source, XML]
 ----
 <rich:chart id="barChart" title="Countries by vehicles per capita">
-   <r:series type="bar">
-   	<a4j:repeat value="#{bean.records}" var="record">
-          <r:point x="#{record.country}" y="#{record.count}"/>
-   	</a4j:repeat>
-   </r:series>
-   <r:yaxis label="Motor vehicles per 1000 people"/>
+    <rich:chartSeries type="bar">
+        <a4j:repeat value="#{bean.records}" var="record">
+            <rich:chartPoint x="#{record.country}" y="#{record.count}"/>
+        </a4j:repeat>
+    </rich:chartSeries>
+    <rich:chartYAxis label="Motor vehicles per 1000 people"/>
 </rich:chart>
 
 ----
@@ -6529,7 +6529,7 @@ Use [sgmltag]+<a4j:repeat>+ and a collection of objects inside the [sgmltag]+<r:
 ====
 
 ===== Create a DataModel object
-When facelet iteration is used the ChartDataModel object is created by the ChartRenderer. An alternative to this is to create a ChratDataModel yourself and pass it using [sgmltag]+<r:series>+ data attribute. To do this, create an instance one of the child classes of ChartDataModel - NumberChartDataModel, StringChartDataModel or DateChartDataModel (not yet fully supported). Select the class according to the data type used on the x-axis. Add values to the model using the put method and pass it to the [sgmltag]+<r:series>+ tag using the data attribute.
+When facelet iteration is used the ChartDataModel object is created by the ChartRenderer. An alternative to this is to create a ChratDataModel yourself and pass it using [sgmltag]+<rich:chartSeries>+ data attribute. To do this, create an instance one of the child classes of ChartDataModel - NumberChartDataModel, StringChartDataModel or DateChartDataModel (not yet fully supported). Select the class according to the data type used on the x-axis. Add values to the model using the put method and pass it to the [sgmltag]+<rich:chartSeries>+ tag using the data attribute.
 
 [[exam-Component_Reference-chart_datamodel_object_example]]
 
@@ -6539,8 +6539,8 @@ When facelet iteration is used the ChartDataModel object is created by the Chart
 [source, XML]
 ----
 <rich:chart id="barChart" title="Countries by vehicles per capita">
-   <r:series type="bar" data="#{bean.cars}"/>
-   <r:yaxis label="Motor vehicles per 1000 people"/>
+   <rich:chartSeries type="bar" data="#{bean.cars}"/>
+   <rich:chartYAxis label="Motor vehicles per 1000 people"/>
 </rich:chart>
 
 ----
@@ -6557,13 +6557,13 @@ cars.put("United States", 797);
 ====
 
 
-If there is a model passed using the [sgmltag]+<r:series>+ data attribute, any nested [sgmltag]+<r:point>+ tags are ignored. If the data attribute is not used, then nested [sgmltag]+<r:point>+ tags are expected.
+If there is a model passed using the [sgmltag]+<rich:chartSeries>+ data attribute, any nested [sgmltag]+<rich:chartPoint+ tags are ignored. If the data attribute is not used, then nested [sgmltag]+<rich:chartPoint+ tags are expected.
 
 [[sect-Component_Reference-chart-Look_customization]]
 
 ==== Chart look customization
 
-The chart configuration is split into multiple tags provide a more clear facelet API. To configure axes, their min/max values, and label use [sgmltag]+<r:xaxis>+ or [sgmltag]+<r:yaxis>+ tag. The [sgmltag]+<r:legend>+ allows one to set up the position of the legend and the order of the labels within it.
+The chart configuration is split into multiple tags provide a more clear facelet API. To configure axes, their min/max values, and label use [sgmltag]+<rich:chartXAxis>+ or [sgmltag]+<rich:chartYAxis>+ tag. The [sgmltag]+<rich:chartLegend>+ allows one to set up the position of the legend and the order of the labels within it.
 
 To adjust the chart component size you can use CSS class .richfaces-chart-container, to customize title use .richfaces-chart-title the placeholder. The chart itself is placed in the div with the CSS class +.richfaces-chart+.
 
@@ -6574,7 +6574,7 @@ To adjust the chart component size you can use CSS class .richfaces-chart-contai
 The [sgmltag]+<rich:chart>+ component does not only create static charts.
 
 * It allows the user to zoom line charts when the [sgmltag]+<rich:chart>+ attribute zoom is set true. To reset zoom you can use the JavaScript API.
-* You can also add functions to handle events fired by components. Event handlers are set up using proper [sgmltag]+<rich:chart>+ attributes. They handle events fired by any series. If you want to handle an event only fired by a particular series, set up handlers using the [sgmltag]+<r:series>+ attributes.
+* You can also add functions to handle events fired by components. Event handlers are set up using proper [sgmltag]+<rich:chart>+ attributes. They handle events fired by any series. If you want to handle an event only fired by a particular series, set up handlers using the [sgmltag]+<rich:chartSeries>+ attributes.
 
 [[sect-Component_Reference-chart-chart_server-side_events]]
 
