@@ -6567,6 +6567,49 @@ The chart configuration is split into multiple tags provide a more clear facelet
 
 To adjust the chart component size you can use CSS class .richfaces-chart-container, to customize title use .richfaces-chart-title the placeholder. The chart itself is placed in the div with the CSS class +.richfaces-chart+.
 
+[[sect-Component_Reference-chart-Advanced_customization]]
+
+==== Advanced customization
+
+The [sgmltag]+<rich:chart>+ can also be customized directly through JavaScript to allow the use of plugins or objects that are not directly supported by the component.
+
+There are two ways to define the customization: the [parameter]+hooks+ attribute or a facet named [parameter]+hooks+. The facet takes precedence over attribute when both are defined.
+
+[source, XML]
+----
+<h:outputScript>
+    var hooks = {
+        processOptions: [function(plot,options) {
+                options.xaxes[0].tickFormatter = function (value, axis) {
+                    return value.toLocaleString('en-US', {minimumFractionDigits: 2});
+                };
+        }]
+    };
+</h:outputScript>
+<rich:chart hooks="hooks" />
+
+<rich:chart>
+    <f:facet name="hooks">
+        {
+            processOptions: [function(plot,options) {
+                    options.xaxes[0].tickFormatter = function (value, axis) {
+                        return value.toLocaleString('en-US', {minimumFractionDigits: 2});
+                    };
+            }]
+        }
+    </f:chart>
+</rich:editor>
+----
+
+In the above samples, the [sgmltag]+<rich:chart>+ is configured to display the label on x-axis according to US locale (e.g. 45,324.23).
+
+[NOTE]
+====
+
+For further configuration options, refer to link:$$https://github.com/flot/flot/blob/master/API.md#hooks$$[Flot API - Hooks] and link:$$https://github.com/flot/flot/blob/master/API.md#plugins$$[Flot API - Plugins].
+
+====
+
 [[sect-Component_Reference-chart-Interactivity_options]]
 
 ==== Interactivity options
