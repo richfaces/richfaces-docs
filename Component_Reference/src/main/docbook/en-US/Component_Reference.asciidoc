@@ -2521,17 +2521,19 @@ Basic usage requires the [varname]+fileUploadListener+ attribute. Use the attrib
 
 Files are uploaded to either the temporary folder (different for each operating system) or to [acronym]#RAM# (random-access memory), depending on the value of the [parameter]+org.richfaces.fileUpload.createTempFiles+ context parameter of the [filename]+web.xml+ settings file for the project. If the parameter is set to +true+, the files are uploaded to the temporary folder.
 
-To limit the maximum size of the uploaded files, define the byte size with the [parameter]+org.richfaces.fileUpload.maxRequestSize+ context parameter of the [filename]+web.xml+ settings file for the project.
+To limit the maximum size of the uploaded files, define the byte size with the [varname]+maxfileSize+ parameter on the component or with [parameter]+org.richfaces.fileUpload.maxRequestSize+ context parameter of the [filename]+web.xml+ settings file for the project.
 
 [[sect-Component_Reference-fileUpload-Sanitizing_file_upload_input]]
 
 ==== Sanitizing file upload input
 
-Any file is accepted by rich:fileUpload component by default. There are three parameters available for limiting what can user upload to the server:
+Any file is accepted by rich:fileUpload component by default. There are several parameters available for limiting what can user upload to the server:
 
 [varname]+maxFilesQuantity+:: The [varname]+maxFilesQuantity+ parameter defines maximum number of files allowed to be uploaded. After a number of files in the list equals to the value of this attribute, "Add" button disappears and nothing could be uploaded even if you clear the whole list. In order to upload files again you should rerender the component.
 [varname]+acceptedTypes+:: The [varname]+acceptedTypes+ parameter defines comma separated list of file extensions accepted by component. The component does not provide any feedback when rejecting file. For introducing feedback for rejection, use [varname]+ontyperejected+ parameter.
 [varname]+ontyperejected+:: The [varname]+ontyperejected+ parameter defines event handler when file does not meet conditions stated by [varname]+acceptedTypes+ parameter.
+[varname]+maxFileSize+:: The [varname]+maxFileSize+ parameter defines the maximum allowed size for a file.
+[varname]+onsizerejected+:: The [varname]+onsizerejected+ parameter defines event handler when file exceeds the size defined by [varname]+maxFileSize+ parameter.
 [[sect-Component_Reference-fileUpload-Interactivity_options]]
 
 ==== Interactivity options
