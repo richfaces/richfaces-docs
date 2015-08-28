@@ -7423,6 +7423,29 @@ Use the [varname]+dragIndicator+ parameter to customize the appearance of a drag
 
 To bind data to the dragged object, use the [varname]+dragValue+ attribute. The [varname]+dragValue+ attribute specifies a server-side object, which is then bound to the parent component when it is dragged. This facilitates handling event data during a drop event.
 
+===== DragIndicator customization
+
+Use the [varname]+dragOptions+ parameter to further customize the appearance and behavior of the dragIndicator.
+
+[source, XML]
+----
+<h:outputScript>
+    opts = {
+        helper: function () {
+            return $("#indicator").clone();
+        },
+        cursorAt: {
+            left: 5,
+            top: 5
+        }
+    }
+</h:outputScript>
+
+<rich:dragSource dragOptions="opts" />
+----
+
+For full list of options see the link:$$http://api.jqueryui.com/draggable/$$[jQuery.draggable documentation].
+
 [[sect-Component_Reference-dragSource-Reference_data]]
 
 ==== Reference data
