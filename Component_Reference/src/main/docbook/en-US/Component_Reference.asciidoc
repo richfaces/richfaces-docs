@@ -5991,6 +5991,37 @@ Use the [varname]+mode+ attribute to determine how the menu requests are submitt
 * +ajax+ performs an Ajax form submission, and re-renders elements specified with the [varname]+render+ attribute.
 * +client+ causes the [varname]+action+ and [varname]+actionListener+ items to be ignored, and the behavior is fully defined by the nested components or custom JavaScript instead of responses from submissions.
 
+==== Text substitutions
+
+To avoid creating many menus in iterable components that perform the same actions but only differ in content you can create one menu and reuse it with substituting its text content.
+
+[source, XML]
+----
+<rich:contextMenu id="menu" attached="false">
+    <rich:menuItem action="#{bean.edit}">{Edit}</rich:menuItem>
+    <rich:menuItem action="#{bean.delete}">{Delete}</rich:menuItem>
+</rich:contextMenu>
+----
+
+The text will be replaced by calling the [varname]+show+ event with corresponding parameters:
+
+[source, JavaScript]
+----
+menu.show(event, { replace:
+    { Edit: "Change Photo #{photo.name}", Delete: "Remove Photo #{photo.name}"}
+});
+----
+
+[source, XML]
+----
+<rich:componentControl event="click" target="menu" operation="show">
+    <a4j:param noEscape="true" value="event" />
+    <rich:hashParam name="replace">
+        <f:param name="Edit" value="Change Photo #{photo.name}" />
+        <f:param name="Delete" value="Remove Photo #{photo.name}" />
+    </rich:hashParam>
+</rich:componentControl>
+----
 
 [[sect-Component_Reference-contextMenu-Reference_data]]
 
