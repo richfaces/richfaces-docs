@@ -5576,9 +5576,44 @@ image::exam-Component_Reference-tree-nodeType_attribute.png[]
 
 ====
 
-If the [varname]+nodeType+ attribute returns null, the node is rendered as a " _typeless_" (or default) node. The _typeless_ node is the first child [sgmltag]+<rich:treeNode>+ component with a valid [varname]+rendered+ attribute, but without a defined [varname]+type+ attribute.
+===== Default nodes
 
-If the [varname]+nodeType+ attribute is not included and there are no child [sgmltag]+<rich:treeNode>+ components, the tree constructs a default node itself.
+If the [varname]+nodeType+ attribute returns null the nodes are rendered as " _typeless_" (or default) nodes.
+Setting _useDefaultNode="true"_ the default nodes can be used to render nodes that do not match with the provided treeNodes.
+
+.Default treeNode
+====
+
+[source, XML]
+----
+<rich:tree style="width:300px" value="#{library.data}" var="item" nodeType="#{item.type}" useDefaultNode="true">
+    <rich:treeNode type="artist" iconExpanded="/images/tree/singer.png" iconCollapsed="/images/tree/singer.png">
+        <h:outputText value="#{item.name}" />
+    </rich:treeNode>
+</rich:tree>
+
+----
+
+Only type="artist" is set up, other nodes ("album" and "song") will be created using the default treeNode.
+
+[source, XML]
+----
+<rich:tree style="width:300px" value="#{library.data}" var="item" nodeType="#{item.type}" useDefaultNode="true">
+    <rich:treeNode type="artist" iconExpanded="/images/tree/singer.png" iconCollapsed="/images/tree/singer.png">
+        <h:outputText value="#{item.name}" />
+    </rich:treeNode>
+    <f:facet name="defaultNode">
+        <rich:treeNode iconExpanded="/images/tree/disc.png" iconCollapsed="/images/tree/disc.png">
+            <h:outputText value="#{item.name}" />
+        </rich:treeNode>
+    </f:facet>
+</rich:tree>
+
+----
+
+The appearance of the default treeNode can be changed by using a facet named +defaultNode+.
+
+====
 
 Icons for different nodes and node states can be defined for the whole tree using the following attributes:
 
