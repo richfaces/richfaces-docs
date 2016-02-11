@@ -8045,6 +8045,15 @@ FocusManager focusManager = ServiceTracker.getService(FocusManager.class);
 focusManager.focus("input2");
 ----
 
+If the target component is inside an iteration component such as [sgmltag]+<rich:dataTable>+ or [sgmltag]+<ui:repeat>+
+the string passed to the focus method has to include a part of the full id containing the row number, starting with a separator (by default ":")
+
+[source, Java]
+----
+focusManager.focus(":2:input");
+----
+
+
 ====
 
 [[sect-Component_Reference-focus-Reference_data]]
